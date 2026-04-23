@@ -701,6 +701,21 @@
                   </div>
       </div>
     </div>
+
+    <div class="overlay hidden" id="nameOverlay">
+      <div class="modal">
+        <h2>名前を入力</h2>
+        <p>ランキングに記録する名前を入れてください。</p>
+        <div style="margin-top:14px;">
+          <input id="nameInput" type="text" maxlength="20" placeholder="名前を入力" style="width:100%; padding:14px 16px; border-radius:14px; border:1px solid rgba(255,255,255,0.16); background:rgba(255,255,255,0.08); color:var(--text); font-size:16px; outline:none;" />
+        </div>
+        <div class="small" style="margin-top:10px;">20文字まで。空欄なら NO NAME になります。</div>
+        <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn primary" id="nameSaveBtn">保存する</button>
+          <button class="btn secondary" id="nameCancelBtn">キャンセル</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -2761,6 +2776,7 @@
     const menuOverlay = document.getElementById('menuOverlay');
     const rankingOverlay = document.getElementById('rankingOverlay');
     const resultOverlay = document.getElementById('resultOverlay');
+    const nameOverlay = document.getElementById('nameOverlay');
 
     const menuBtn = document.getElementById('menuBtn');
     const retryBtn = document.getElementById('retryBtn');
@@ -2780,6 +2796,9 @@
     const rankingScreenList = document.getElementById('rankingScreenList');
     const rankingStatus = document.getElementById('rankingStatus');
     const saveStatus = document.getElementById('saveStatus');
+    const nameInput = document.getElementById('nameInput');
+    const nameSaveBtn = document.getElementById('nameSaveBtn');
+    const nameCancelBtn = document.getElementById('nameCancelBtn');
 
     if (gameTitleEl) gameTitleEl.textContent = GAME_TITLE;
 
@@ -2850,16 +2869,7 @@
       playTone(880, 0.06, 'triangle', 0.045, 1175);
       setTimeout(() => playTone(1175, 0.06, 'triangle', 0.04, 1480), 55);
     }
-    function soundMilestoneBonus() {
-      playTone(1047, 0.08, 'triangle', 0.06, 1319);
-      setTimeout(() => playTone(1319, 0.08, 'triangle', 0.055, 1568), 70);
-      setTimeout(() => playTone(1568, 0.12, 'triangle', 0.06, 2093), 150);
-    }
     function soundWrong() { playTone(220, 0.12, 'sawtooth', 0.04, 160); }
-    function soundBomb() {
-      playTone(180, 0.16, 'square', 0.05, 80);
-      setTimeout(() => playTone(120, 0.18, 'sawtooth', 0.04, 60), 70);
-    }
     function soundCountdown() { playTone(980, 0.05, 'square', 0.025); }
     function soundGameOver() {
       playTone(523, 0.10, 'triangle', 0.04, 659);
@@ -2906,30 +2916,15 @@
     }
 
     function getMultiplier(combo) {
-      if (combo >= 50) return 15;
-      if (combo >= 30) return 10;
-      if (combo >= 20) return 7;
-      if (combo >= 10) return 5;
-      if (combo >= 5) return 3;
-      if (combo >= 2) return 2;
+      if (combo >= 100) return 12;
+      if (combo >= 75) return 9;
+      if (combo >= 50) return 7;
+      if (combo >= 30) return 5;
+      if (combo >= 20) return 4;
+      if (combo >= 10) return 3;
+      if (combo >= 5) return 2;
+      if (combo >= 3) return 1.5;
       return 1;
-    }
-
-    function getComboMilestoneBonus(combo) {
-      if (combo > 0 && combo % 50 === 0) {
-        return 100 + ((combo / 50) - 1) * 50;
-      }
-      return 0;
-    }
-
-    function showSpecialBonusPopup(text) {
-      comboPopup.classList.remove('show');
-      comboPopup.textContent = text;
-      comboPopup.style.color = '#fff7ed';
-      comboPopup.style.webkitTextStroke = '2px rgba(127, 29, 29, 0.95)';
-      comboPopup.style.textShadow = '0 0 10px rgba(255,255,255,0.4), 0 0 24px rgba(251,191,36,0.8), 0 6px 0 rgba(153,27,27,0.95), 0 12px 18px rgba(0,0,0,0.45)';
-      void comboPopup.offsetWidth;
-      comboPopup.classList.add('show');
     }
 
     function updateHud() {
@@ -2956,20 +2951,13 @@
       GAME.balloons = [];
     }
 
-    function showComboPopup(combo) {
+    function showComboPopup(combo, label = null) {
       comboPopup.classList.remove('show');
-      comboPopup.style.color = '#fff8c5';
-      comboPopup.style.webkitTextStroke = '2px rgba(120, 53, 15, 0.9)';
-      comboPopup.style.textShadow = `
-        0 0 10px rgba(255,255,255,0.35),
-        0 0 24px rgba(250,204,21,0.65),
-        0 6px 0 rgba(146,64,14,0.95),
-        0 12px 18px rgba(0,0,0,0.45)`;
-      if (combo < 2) {
+      if (combo < 2 && !label) {
         comboPopup.style.opacity = '0';
         return;
       }
-      comboPopup.textContent = `${combo} COMBO!`;
+      comboPopup.textContent = label || `${combo} COMBO!`;
       void comboPopup.offsetWidth;
       comboPopup.classList.add('show');
     }
@@ -3117,7 +3105,7 @@
       GAME.questionLocked = false;
       GAME.lastCountdownBeepSecond = null;
 
-      const distractorCount = Math.min(6, Math.max(0, words.length - 1));
+      const distractorCount = Math.min(7, Math.max(0, words.length - 1));
       const choices = shuffle([
         GAME.currentQuestion.en,
         ...getDistractors(GAME.currentQuestion.en, distractorCount)
@@ -3141,6 +3129,19 @@
       if (GAME.combo >= 5) triggerFlash();
     }
 
+    function applyComboMilestoneBonus() {
+      if (GAME.combo < 50 || GAME.combo % 50 !== 0) return 0;
+      const step = Math.floor(GAME.combo / 50);
+      const bonus = 100 + (step - 1) * 50;
+      GAME.score += bonus;
+      triggerFlash();
+      showComboPopup(GAME.combo, `${GAME.combo} COMBO! +${bonus} BONUS!`);
+      setFeedback(`Great! ${GAME.combo}コンボ達成! +${bonus}点ボーナス`, 'good');
+      soundCombo(GAME.combo);
+      setTimeout(() => soundCorrect(), 70);
+      return bonus;
+    }
+
     function handleTap(button) {
       if (!GAME.running || GAME.questionLocked) return;
 
@@ -3155,25 +3156,20 @@
         handleComboOnCorrect(now);
 
         const gained = 10 * getMultiplier(GAME.combo);
-        const milestoneBonus = getComboMilestoneBonus(GAME.combo);
-        GAME.score += gained + milestoneBonus;
+        GAME.score += gained;
         GAME.timeLeft += 2;
+        const milestoneBonus = applyComboMilestoneBonus();
 
         button.classList.add('correct-flash');
         playCorrectEffect(button);
-
-        if (milestoneBonus > 0) {
-          showSpecialBonusPopup(`${GAME.combo} COMBO BONUS! +${milestoneBonus}`);
-          setFeedback(`Legend! +${gained}点 + 節目ボーナス${milestoneBonus}点`, 'good');
-          triggerFlash();
-          setTimeout(() => triggerFlash(), 120);
-          soundMilestoneBonus();
-        } else {
-          setFeedback(`Nice! +${gained}点 / Combo x${GAME.combo}`, 'good');
-          soundCombo(GAME.combo);
-        }
-
+        setFeedback(
+          milestoneBonus > 0
+            ? `Nice! +${gained}点 / ${GAME.combo}コンボで+${milestoneBonus}点!`
+            : `Nice! +${gained}点 / Combo x${GAME.combo}`,
+          'good'
+        );
         soundCorrect();
+        soundCombo(GAME.combo);
         updateHud();
 
         setTimeout(() => {
@@ -3248,6 +3244,7 @@
       menuOverlay.classList.add('hidden');
       rankingOverlay.classList.add('hidden');
       resultOverlay.classList.add('hidden');
+      if (nameOverlay) nameOverlay.classList.add('hidden');
       if (clearOverlay) clearOverlay.classList.add('hidden');
 
       buildQuestionPool();
@@ -3369,37 +3366,80 @@
       await loadRanking(rankingMode, rankingScreenList);
     }
 
+    function askPlayerName() {
+      return new Promise((resolve) => {
+        if (!nameOverlay || !nameInput || !nameSaveBtn || !nameCancelBtn) {
+          const fallback = prompt("名前を入力してください", localStorage.getItem("speed_vocab_name") || "");
+          resolve(fallback);
+          return;
+        }
+
+        const finish = (value) => {
+          nameOverlay.classList.add('hidden');
+          nameSaveBtn.removeEventListener('click', onSave);
+          nameCancelBtn.removeEventListener('click', onCancel);
+          nameInput.removeEventListener('keydown', onKeydown);
+          resolve(value);
+        };
+
+        const onSave = () => finish(nameInput.value);
+        const onCancel = () => finish(null);
+        const onKeydown = (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            onSave();
+          } else if (e.key === 'Escape') {
+            e.preventDefault();
+            onCancel();
+          }
+        };
+
+        nameInput.value = localStorage.getItem('speed_vocab_name') || '';
+        nameOverlay.classList.remove('hidden');
+        nameSaveBtn.addEventListener('click', onSave);
+        nameCancelBtn.addEventListener('click', onCancel);
+        nameInput.addEventListener('keydown', onKeydown);
+        requestAnimationFrame(() => {
+          nameInput.focus();
+          nameInput.select();
+        });
+      });
+    }
+
     async function saveHighScore(finalScoreValue, accuracy) {
       if (!supabaseClient || GAME.scoreSavedThisRound) return;
 
-      const input = prompt("名前を入力してください", localStorage.getItem("speed_vocab_name") || "");
+      const input = await askPlayerName();
       if (input === null) {
-        saveStatus.textContent = "保存をスキップしました";
+        saveStatus.textContent = '保存をスキップしました';
         await loadRanking(currentMode, rankingList);
         return;
       }
 
-      const playerName = (input.trim() || "NO NAME").slice(0, 20);
-      localStorage.setItem("speed_vocab_name", playerName);
-      saveStatus.textContent = "保存中...";
+      const playerName = (String(input).trim() || 'NO NAME').slice(0, 20);
+      localStorage.setItem('speed_vocab_name', playerName);
+      saveStatus.textContent = '保存中...';
 
-      const { error } = await supabaseClient.rpc("save_high_score", {
-  p_player_name: playerName,
-  p_score: finalScoreValue,
-  p_max_combo: GAME.maxCombo,
-  p_accuracy: accuracy,
-  p_mode: PUBLIC_MODE
-});
+      const { error } = await supabaseClient.rpc('save_high_score', {
+        p_player_name: playerName,
+        p_score: finalScoreValue,
+        p_max_combo: GAME.maxCombo,
+        p_accuracy: accuracy,
+        p_mode: PUBLIC_MODE
+      });
 
       if (error) {
-        console.error("save error:", error);
-        saveStatus.textContent = "保存失敗: " + error.message;
+        console.error('save error:', error);
+        saveStatus.textContent = '保存失敗: ' + error.message;
       } else {
         GAME.scoreSavedThisRound = true;
         saveStatus.textContent = `${playerName} の記録を保存しました`;
       }
+
+      await loadRanking(currentMode, rankingList);
     }
     async function endPerfectClear() {
+
       ensureAudio();
       GAME.running = false;
       clearInterval(GAME.tickTimer);
