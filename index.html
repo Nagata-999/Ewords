@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>XXX英単語</title>
+  <title>スシ単</title>
   <style>
     :root {
       --bg1: #0f172a;
@@ -182,12 +182,6 @@
     .balloon.wrong-flash {
       background: linear-gradient(180deg, #fee2e2 0%, #f87171 100%);
       color: #7f1d1d;
-    }
-
-    .balloon.bomb {
-      background: linear-gradient(180deg, #ffe4e6 0%, #fb7185 100%);
-      color: #881337;
-      box-shadow: 0 10px 20px rgba(244,63,94,0.25);
     }
 
     .balloon.pop-out {
@@ -629,7 +623,7 @@
       <div class="modal">
         <h2>Ranking</h2>
         <div class="ranking-tabs">
-          <button class="ranking-tab active" id="rankingTabDefault">XXX英単語</button>
+          <button class="ranking-tab active" id="rankingTabDefault">スシ単</button>
         </div>
         <div id="rankingScreenList" class="ranking-box">
           <div class="ranking-title">🏆 Ranking</div>
@@ -1726,7 +1720,6 @@
 { jp: "哲学", en: "philosophy" },
 { jp: "愛情", en: "affection" },
 { jp: "候補", en: "candidate" },
-{ jp: "爆弾", en: "bomb" },
 { jp: "優先", en: "priority" },
 { jp: "障害", en: "obstacle" },
 { jp: "食欲", en: "appetite" },
@@ -2857,6 +2850,11 @@
       playTone(880, 0.06, 'triangle', 0.045, 1175);
       setTimeout(() => playTone(1175, 0.06, 'triangle', 0.04, 1480), 55);
     }
+    function soundMilestoneBonus() {
+      playTone(1047, 0.08, 'triangle', 0.06, 1319);
+      setTimeout(() => playTone(1319, 0.08, 'triangle', 0.055, 1568), 70);
+      setTimeout(() => playTone(1568, 0.12, 'triangle', 0.06, 2093), 150);
+    }
     function soundWrong() { playTone(220, 0.12, 'sawtooth', 0.04, 160); }
     function soundBomb() {
       playTone(180, 0.16, 'square', 0.05, 80);
@@ -2908,10 +2906,30 @@
     }
 
     function getMultiplier(combo) {
-      if (combo >= 10) return 3;
-      if (combo >= 5) return 2;
-      if (combo >= 3) return 1.5;
+      if (combo >= 50) return 15;
+      if (combo >= 30) return 10;
+      if (combo >= 20) return 7;
+      if (combo >= 10) return 5;
+      if (combo >= 5) return 3;
+      if (combo >= 2) return 2;
       return 1;
+    }
+
+    function getComboMilestoneBonus(combo) {
+      if (combo > 0 && combo % 50 === 0) {
+        return 100 + ((combo / 50) - 1) * 50;
+      }
+      return 0;
+    }
+
+    function showSpecialBonusPopup(text) {
+      comboPopup.classList.remove('show');
+      comboPopup.textContent = text;
+      comboPopup.style.color = '#fff7ed';
+      comboPopup.style.webkitTextStroke = '2px rgba(127, 29, 29, 0.95)';
+      comboPopup.style.textShadow = '0 0 10px rgba(255,255,255,0.4), 0 0 24px rgba(251,191,36,0.8), 0 6px 0 rgba(153,27,27,0.95), 0 12px 18px rgba(0,0,0,0.45)';
+      void comboPopup.offsetWidth;
+      comboPopup.classList.add('show');
     }
 
     function updateHud() {
@@ -2940,6 +2958,13 @@
 
     function showComboPopup(combo) {
       comboPopup.classList.remove('show');
+      comboPopup.style.color = '#fff8c5';
+      comboPopup.style.webkitTextStroke = '2px rgba(120, 53, 15, 0.9)';
+      comboPopup.style.textShadow = `
+        0 0 10px rgba(255,255,255,0.35),
+        0 0 24px rgba(250,204,21,0.65),
+        0 6px 0 rgba(146,64,14,0.95),
+        0 12px 18px rgba(0,0,0,0.45)`;
       if (combo < 2) {
         comboPopup.style.opacity = '0';
         return;
@@ -3002,8 +3027,8 @@
 
     function createBalloon(text, type, index, total) {
       const btn = document.createElement('button');
-      btn.className = `balloon ${type === 'bomb' ? 'bomb' : ''}`;
-      btn.textContent = type === 'bomb' ? '💣' : text;
+      btn.className = 'balloon';
+      btn.textContent = text;
       btn.dataset.type = type;
       btn.dataset.value = text;
 
@@ -3095,12 +3120,11 @@
       const distractorCount = Math.min(6, Math.max(0, words.length - 1));
       const choices = shuffle([
         GAME.currentQuestion.en,
-        ...getDistractors(GAME.currentQuestion.en, distractorCount),
-        '__BOMB__'
+        ...getDistractors(GAME.currentQuestion.en, distractorCount)
       ]);
 
       choices.forEach((choice, index) => {
-        const type = choice === '__BOMB__' ? 'bomb' : (choice === GAME.currentQuestion.en ? 'correct' : 'wrong');
+        const type = choice === GAME.currentQuestion.en ? 'correct' : 'wrong';
         createBalloon(choice, type, index, choices.length);
       });
     }
@@ -3131,38 +3155,31 @@
         handleComboOnCorrect(now);
 
         const gained = 10 * getMultiplier(GAME.combo);
-        GAME.score += gained;
+        const milestoneBonus = getComboMilestoneBonus(GAME.combo);
+        GAME.score += gained + milestoneBonus;
         GAME.timeLeft += 2;
 
         button.classList.add('correct-flash');
         playCorrectEffect(button);
-        setFeedback(`Nice! +${gained}点 / Combo x${GAME.combo}`, 'good');
+
+        if (milestoneBonus > 0) {
+          showSpecialBonusPopup(`${GAME.combo} COMBO BONUS! +${milestoneBonus}`);
+          setFeedback(`Legend! +${gained}点 + 節目ボーナス${milestoneBonus}点`, 'good');
+          triggerFlash();
+          setTimeout(() => triggerFlash(), 120);
+          soundMilestoneBonus();
+        } else {
+          setFeedback(`Nice! +${gained}点 / Combo x${GAME.combo}`, 'good');
+          soundCombo(GAME.combo);
+        }
+
         soundCorrect();
-        soundCombo(GAME.combo);
         updateHud();
 
         setTimeout(() => {
           if (!GAME.running) return;
           renderQuestion();
         }, 420);
-
-      } else if (type === 'bomb') {
-        GAME.attemptCount += 1;
-        ensureAudio();
-        GAME.combo = 0;
-        GAME.comboDeadline = null;
-        showComboPopup(0);
-
-        GAME.score = Math.max(0, GAME.score - 20);
-        GAME.timeLeft = Math.max(0, GAME.timeLeft - 5);
-
-        button.classList.add('wrong-flash');
-        playWrongEffect(button);
-        setFeedback('💣 Bomb! -20点 / -5秒', 'warn');
-        soundBomb();
-
-        removeBalloon(button);
-        updateHud();
 
       } else {
         GAME.attemptCount += 1;
