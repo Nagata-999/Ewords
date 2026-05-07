@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>スシ単｜英単語を爆速で身につける学習ゲーム</title>
-  <meta name="description" content="スシ単は、英検・IELTS・高校英語の重要語彙をゲーム感覚で鍛える英単語トレーニングです。日本語に合う英単語を素早く選び、読解に必要な語彙の瞬発力を伸ばします。" />
+  <title>スシ単｜英単語を瞬時に覚える学習ゲーム</title>
+  <meta name="description" content="スシ単は英検2級〜準1級、IELTS5.0〜6.0向けの英単語学習ゲームです。ランキングやコンボ機能を使って楽しく語彙力を鍛えられます。" />
   <style>
     :root {
       --bg1: #0f172a;
@@ -524,7 +524,7 @@
 
     .link-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 8px;
       margin-top: 12px;
     }
@@ -537,6 +537,34 @@
       background: rgba(255,255,255,0.06);
       font-weight: 800;
       cursor: pointer;
+    }
+
+    .site-footer {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .footer-link-btn {
+      border: none;
+      background: transparent;
+      color: #93c5fd;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      padding: 2px 4px;
     }
 
     .info-page {
@@ -730,7 +758,17 @@
             <button class="text-link-btn" id="showHowToBtn">遊び方</button>
             <button class="text-link-btn" id="showAboutBtn">スシ単とは</button>
             <button class="text-link-btn" id="showPrivacyBtn">ポリシー</button>
+            <button class="text-link-btn" id="showContactBtn">お問い合わせ</button>
           </div>
+
+          <footer class="site-footer">
+            <div>© スシ単</div>
+            <div class="footer-links">
+              <button class="footer-link-btn" id="footerHowToBtn">遊び方</button>
+              <button class="footer-link-btn" id="footerPrivacyBtn">ポリシー</button>
+              <button class="footer-link-btn" id="footerContactBtn">お問い合わせ</button>
+            </div>
+          </footer>
         </div>
 
         <div id="aboutPanel" class="info-page hidden">
@@ -749,10 +787,13 @@
           <h2>遊び方</h2>
           <p>表示された日本語に合う英単語をタップしてください。</p>
           <ul>
+            <li>日本語に合う英単語を選ぶと正解です。</li>
             <li>正解するとスコアが増えます。</li>
-            <li>5秒以内に連続正解するとコンボが続きます。</li>
-            <li>30秒でどれだけ高得点を取れるかを競います。</li>
+            <li>5秒以内に答えるとコンボが続きます。</li>
+            <li>コンボが高いほど高得点を狙えます。</li>
+            <li>30秒でどれだけ高得点を取れるかに挑戦します。</li>
           </ul>
+          <p>短時間で何度もくり返すことで、単語の意味をすばやく思い出す練習になります。</p>
           <div class="menu-btns"><button class="btn secondary" id="backHomeFromHowToBtn">トップへ戻る</button></div>
         </div>
 
@@ -1877,7 +1918,6 @@
 { jp: "哲学", en: "philosophy" },
 { jp: "愛情", en: "affection" },
 { jp: "候補", en: "candidate" },
-{ jp: "爆弾", en: "bomb" },
 { jp: "優先", en: "priority" },
 { jp: "障害", en: "obstacle" },
 { jp: "食欲", en: "appetite" },
@@ -2935,6 +2975,9 @@
     const showAboutBtn = document.getElementById('showAboutBtn');
     const showPrivacyBtn = document.getElementById('showPrivacyBtn');
     const showContactBtn = document.getElementById('showContactBtn');
+    const footerHowToBtn = document.getElementById('footerHowToBtn');
+    const footerPrivacyBtn = document.getElementById('footerPrivacyBtn');
+    const footerContactBtn = document.getElementById('footerContactBtn');
     const backHomeFromHowToBtn = document.getElementById('backHomeFromHowToBtn');
     const backHomeFromAboutBtn = document.getElementById('backHomeFromAboutBtn');
     const backHomeFromPrivacyBtn = document.getElementById('backHomeFromPrivacyBtn');
@@ -3625,6 +3668,9 @@
     if (showAboutBtn) showAboutBtn.addEventListener('click', () => showHomeSubPanel('about'));
     if (showPrivacyBtn) showPrivacyBtn.addEventListener('click', () => showHomeSubPanel('privacy'));
     if (showContactBtn) showContactBtn.addEventListener('click', () => showHomeSubPanel('contact'));
+    if (footerHowToBtn) footerHowToBtn.addEventListener('click', () => showHomeSubPanel('howto'));
+    if (footerPrivacyBtn) footerPrivacyBtn.addEventListener('click', () => showHomeSubPanel('privacy'));
+    if (footerContactBtn) footerContactBtn.addEventListener('click', () => showHomeSubPanel('contact'));
     if (backHomeFromHowToBtn) backHomeFromHowToBtn.addEventListener('click', () => showHomeSubPanel('home'));
     if (backHomeFromAboutBtn) backHomeFromAboutBtn.addEventListener('click', () => showHomeSubPanel('home'));
     if (backHomeFromPrivacyBtn) backHomeFromPrivacyBtn.addEventListener('click', () => showHomeSubPanel('home'));
