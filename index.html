@@ -732,6 +732,23 @@
     const PUBLIC_MODE = "core";
 
     let audioCtx = null;
+
+    // BGM: index.html と同じ階層に music.mp3 を置く
+    const bgm = new Audio("music.mp3");
+    bgm.loop = true;
+    bgm.volume = 0.5;
+
+    function playBgm() {
+      bgm.play().catch(() => {
+        // スマホやブラウザの自動再生制限で失敗してもゲームは止めない
+      });
+    }
+
+    function stopBgm(reset = true) {
+      bgm.pause();
+      if (reset) bgm.currentTime = 0;
+    }
+
     let currentMode = PUBLIC_MODE;
     let rankingMode = PUBLIC_MODE;
 
@@ -3227,6 +3244,8 @@
     function startGame(mode) {
       currentMode = mode;
       ensureAudio();
+      stopBgm(true);
+      playBgm();
       GAME.running = true;
       GAME.score = 0;
       GAME.timeLeft = 30;
@@ -3258,6 +3277,7 @@
 
     function backToMenu() {
       GAME.running = false;
+      stopBgm(true);
       clearInterval(GAME.tickTimer);
       showComboPopup(0);
       menuOverlay.classList.remove('hidden');
@@ -3442,6 +3462,7 @@
 
       ensureAudio();
       GAME.running = false;
+      stopBgm(true);
       clearInterval(GAME.tickTimer);
       GAME.comboDeadline = null;
       showComboPopup(0);
@@ -3469,6 +3490,7 @@
     async function endGame() {
       ensureAudio();
       GAME.running = false;
+      stopBgm(true);
       clearInterval(GAME.tickTimer);
       GAME.comboDeadline = null;
       showComboPopup(0);
@@ -3511,6 +3533,15 @@
 
     window.addEventListener('resize', () => {
       if (GAME.running) renderQuestion();
+    });
+
+    // タブを閉じたり非表示にしたときは停止。戻ってきてゲーム中なら再開。
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        stopBgm(false);
+      } else if (GAME.running) {
+        playBgm();
+      }
     });
 
     updateModeBadge();
