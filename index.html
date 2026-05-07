@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>スシ単</title>
+  <title>スシ単｜英単語を爆速で身につける学習ゲーム</title>
+  <meta name="description" content="スシ単は、英検・IELTS・高校英語の重要語彙をゲーム感覚で鍛える英単語トレーニングです。日本語に合う英単語を素早く選び、読解に必要な語彙の瞬発力を伸ばします。" />
   <style>
     :root {
       --bg1: #0f172a;
@@ -182,6 +183,12 @@
     .balloon.wrong-flash {
       background: linear-gradient(180deg, #fee2e2 0%, #f87171 100%);
       color: #7f1d1d;
+    }
+
+    .balloon.bomb {
+      background: linear-gradient(180deg, #ffe4e6 0%, #fb7185 100%);
+      color: #881337;
+      box-shadow: 0 10px 20px rgba(244,63,94,0.25);
     }
 
     .balloon.pop-out {
@@ -467,6 +474,105 @@
       text-align: center;
     }
 
+
+
+    .home-hero {
+      text-align: left;
+      padding: 4px 2px 0;
+    }
+
+    .home-kicker {
+      display: inline-block;
+      margin-bottom: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(37,99,235,0.28);
+      color: #bfdbfe;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+    }
+
+    .home-lead {
+      color: #e2e8f0 !important;
+      font-size: 15px;
+      text-align: left;
+    }
+
+    .home-section {
+      margin-top: 14px;
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.07);
+      text-align: left;
+    }
+
+    .home-section h2, .home-section h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      color: #f8fafc;
+    }
+
+    .home-section p {
+      text-align: left;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .home-list {
+      margin: 8px 0 0;
+      padding-left: 1.2em;
+      color: #e2e8f0;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .text-link-btn {
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 12px;
+      padding: 10px 8px;
+      color: #e0f2fe;
+      background: rgba(255,255,255,0.06);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .info-page {
+      text-align: left;
+    }
+
+    .info-page h2 {
+      margin-top: 0;
+    }
+
+    .info-page p, .info-page li {
+      color: #e2e8f0;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .info-page ul {
+      padding-left: 1.2em;
+    }
+
+    .note-box {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(250,204,21,0.10);
+      border: 1px solid rgba(250,204,21,0.25);
+      color: #fef3c7;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
     @keyframes comboPop {
       0% {
         opacity: 0;
@@ -550,6 +656,7 @@
         font-size: 42px;
         -webkit-text-stroke: 1.5px rgba(120, 53, 15, 0.9);
       }
+      .link-grid { grid-template-columns: 1fr; }
       .ranking-row {
         grid-template-columns: 28px 1fr auto;
         font-size: 13px;
@@ -609,13 +716,66 @@
 
     <div class="overlay" id="menuOverlay">
       <div class="modal">
-        <h1 id="gameTitle">スシ単</h1>
+        <div id="homePanel">
+          <div class="home-hero">
+            <span class="home-kicker">英検・IELTS・高校英語対応</span>
+            <h1 id="gameTitle">スシ単</h1>
+            <p class="home-lead">
+              英単語を瞬時に判断する学習ゲーム。<br>
+              ターゲットレベル：英検2級〜準1級／IELTS 5.0〜6.0
+            </p>
+          </div>
 
-        <div class="menu-btns">
-          <button class="btn primary" id="startPublicBtn">ゲーム開始</button>
-          <button class="btn gold" id="openRankingBtn">ランキング確認</button>
-                  </div>
+          <div class="menu-btns">
+            <button class="btn primary" id="startPublicBtn">ゲーム開始</button>
+            <button class="btn gold" id="openRankingBtn">ランキング確認</button>
+          </div>
 
+          <div class="link-grid" aria-label="サイト内メニュー">
+            <button class="text-link-btn" id="showHowToBtn">遊び方</button>
+            <button class="text-link-btn" id="showAboutBtn">スシ単とは</button>
+            <button class="text-link-btn" id="showPrivacyBtn">ポリシー</button>
+          </div>
+        </div>
+
+        <div id="aboutPanel" class="info-page hidden">
+          <h2>スシ単とは</h2>
+          <p>
+            スシ単は、英単語をすばやく判断する力を鍛えるための学習ゲームです。<br>
+            英検2級〜準1級、IELTS 5.0〜6.0程度の学習者を対象としています。
+          </p>
+          <p>
+            日本語を見て瞬時に英単語を選ぶことで、読解やリスニングに必要な「反射的な語彙力」をトレーニングできます。
+          </p>
+          <div class="menu-btns"><button class="btn secondary" id="backHomeFromAboutBtn">トップへ戻る</button></div>
+        </div>
+
+        <div id="howToPanel" class="info-page hidden">
+          <h2>遊び方</h2>
+          <p>表示された日本語に合う英単語をタップしてください。</p>
+          <ul>
+            <li>正解するとスコアが増えます。</li>
+            <li>5秒以内に連続正解するとコンボが続きます。</li>
+            <li>30秒でどれだけ高得点を取れるかを競います。</li>
+          </ul>
+          <div class="menu-btns"><button class="btn secondary" id="backHomeFromHowToBtn">トップへ戻る</button></div>
+        </div>
+
+        <div id="privacyPanel" class="info-page hidden">
+          <h2>ポリシー</h2>
+          <p>スシ単は、英語学習を目的とした教育用コンテンツです。</p>
+          <p>ランキング機能では、スコア表示のためにプレイヤー名、得点、最大コンボ、正答率を保存する場合があります。個人を特定できる情報の入力は推奨していません。</p>
+          <p>広告を表示する場合がありますが、学習体験を妨げない位置と量に配慮します。</p>
+          <p>お問い合わせ：<br><a href="mailto:sushisushitantan@gmail.com" style="color:#93c5fd; font-weight:800;">sushisushitantan@gmail.com</a></p>
+          <div class="menu-btns"><button class="btn secondary" id="backHomeFromPrivacyBtn">トップへ戻る</button></div>
+        </div>
+
+        <div id="contactPanel" class="info-page hidden">
+          <h2>お問い合わせ</h2>
+          <p>スシ単についての質問、不具合報告、掲載内容に関するご連絡はこちらへお願いします。</p>
+          <p><a href="mailto:sushisushitantan@gmail.com" style="color:#93c5fd; font-weight:800;">sushisushitantan@gmail.com</a></p>
+          <div class="menu-btns"><button class="btn secondary" id="backHomeFromContactBtn">トップへ戻る</button></div>
+        </div>
       </div>
     </div>
 
@@ -701,22 +861,9 @@
                   </div>
       </div>
     </div>
-
-    <div class="overlay hidden" id="nameOverlay">
-      <div class="modal">
-        <h2>名前を入力</h2>
-        <p>ランキングに記録する名前を入れてください。</p>
-        <div style="margin-top:14px;">
-          <input id="nameInput" type="text" maxlength="20" placeholder="名前を入力" style="width:100%; padding:14px 16px; border-radius:14px; border:1px solid rgba(255,255,255,0.16); background:rgba(255,255,255,0.08); color:var(--text); font-size:16px; outline:none;" />
-        </div>
-        <div class="small" style="margin-top:10px;">20文字まで。空欄なら NO NAME になります。</div>
-        <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
-          <button class="btn primary" id="nameSaveBtn">保存する</button>
-          <button class="btn secondary" id="nameCancelBtn">キャンセル</button>
-        </div>
-      </div>
-    </div>
   </div>
+
+  <audio id="bgm" src="music.mp3" loop preload="auto"></audio>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
@@ -732,23 +879,6 @@
     const PUBLIC_MODE = "core";
 
     let audioCtx = null;
-
-    // BGM: index.html と同じ階層に music.mp3 を置く
-    const bgm = new Audio("music.mp3");
-    bgm.loop = true;
-    bgm.volume = 0.5;
-
-    function playBgm() {
-      bgm.play().catch(() => {
-        // スマホやブラウザの自動再生制限で失敗してもゲームは止めない
-      });
-    }
-
-    function stopBgm(reset = true) {
-      bgm.pause();
-      if (reset) bgm.currentTime = 0;
-    }
-
     let currentMode = PUBLIC_MODE;
     let rankingMode = PUBLIC_MODE;
 
@@ -1752,6 +1882,7 @@
 { jp: "哲学", en: "philosophy" },
 { jp: "愛情", en: "affection" },
 { jp: "候補", en: "candidate" },
+{ jp: "爆弾", en: "bomb" },
 { jp: "優先", en: "priority" },
 { jp: "障害", en: "obstacle" },
 { jp: "食欲", en: "appetite" },
@@ -2793,7 +2924,6 @@
     const menuOverlay = document.getElementById('menuOverlay');
     const rankingOverlay = document.getElementById('rankingOverlay');
     const resultOverlay = document.getElementById('resultOverlay');
-    const nameOverlay = document.getElementById('nameOverlay');
 
     const menuBtn = document.getElementById('menuBtn');
     const retryBtn = document.getElementById('retryBtn');
@@ -2801,8 +2931,23 @@
     const openRankingBtn = document.getElementById('openRankingBtn');
     const closeRankingBtn = document.getElementById('closeRankingBtn');
     const gameTitleEl = document.getElementById('gameTitle');
+    const homePanel = document.getElementById('homePanel');
+    const howToPanel = document.getElementById('howToPanel');
+    const aboutPanel = document.getElementById('aboutPanel');
+    const privacyPanel = document.getElementById('privacyPanel');
+    const contactPanel = document.getElementById('contactPanel');
+    const showHowToBtn = document.getElementById('showHowToBtn');
+    const showAboutBtn = document.getElementById('showAboutBtn');
+    const showPrivacyBtn = document.getElementById('showPrivacyBtn');
+    const showContactBtn = document.getElementById('showContactBtn');
+    const backHomeFromHowToBtn = document.getElementById('backHomeFromHowToBtn');
+    const backHomeFromAboutBtn = document.getElementById('backHomeFromAboutBtn');
+    const backHomeFromPrivacyBtn = document.getElementById('backHomeFromPrivacyBtn');
+    const backHomeFromContactBtn = document.getElementById('backHomeFromContactBtn');
 
     const rankingTabDefault = document.getElementById('rankingTabDefault');
+    const bgm = document.getElementById('bgm');
+    if (bgm) bgm.volume = 0.35;
 
     const finalScore = document.getElementById('finalScore');
     const finalAccuracy = document.getElementById('finalAccuracy');
@@ -2813,9 +2958,6 @@
     const rankingScreenList = document.getElementById('rankingScreenList');
     const rankingStatus = document.getElementById('rankingStatus');
     const saveStatus = document.getElementById('saveStatus');
-    const nameInput = document.getElementById('nameInput');
-    const nameSaveBtn = document.getElementById('nameSaveBtn');
-    const nameCancelBtn = document.getElementById('nameCancelBtn');
 
     if (gameTitleEl) gameTitleEl.textContent = GAME_TITLE;
 
@@ -2887,6 +3029,10 @@
       setTimeout(() => playTone(1175, 0.06, 'triangle', 0.04, 1480), 55);
     }
     function soundWrong() { playTone(220, 0.12, 'sawtooth', 0.04, 160); }
+    function soundBomb() {
+      playTone(180, 0.16, 'square', 0.05, 80);
+      setTimeout(() => playTone(120, 0.18, 'sawtooth', 0.04, 60), 70);
+    }
     function soundCountdown() { playTone(980, 0.05, 'square', 0.025); }
     function soundGameOver() {
       playTone(523, 0.10, 'triangle', 0.04, 659);
@@ -2933,11 +3079,6 @@
     }
 
     function getMultiplier(combo) {
-      if (combo >= 100) return 12;
-      if (combo >= 75) return 9;
-      if (combo >= 50) return 7;
-      if (combo >= 30) return 5;
-      if (combo >= 20) return 4;
       if (combo >= 10) return 3;
       if (combo >= 5) return 2;
       if (combo >= 3) return 1.5;
@@ -2968,13 +3109,13 @@
       GAME.balloons = [];
     }
 
-    function showComboPopup(combo, label = null) {
+    function showComboPopup(combo) {
       comboPopup.classList.remove('show');
-      if (combo < 2 && !label) {
+      if (combo < 2) {
         comboPopup.style.opacity = '0';
         return;
       }
-      comboPopup.textContent = label || `${combo} COMBO!`;
+      comboPopup.textContent = `${combo} COMBO!`;
       void comboPopup.offsetWidth;
       comboPopup.classList.add('show');
     }
@@ -3032,8 +3173,8 @@
 
     function createBalloon(text, type, index, total) {
       const btn = document.createElement('button');
-      btn.className = 'balloon';
-      btn.textContent = text;
+      btn.className = `balloon ${type === 'bomb' ? 'bomb' : ''}`;
+      btn.textContent = type === 'bomb' ? '💣' : text;
       btn.dataset.type = type;
       btn.dataset.value = text;
 
@@ -3122,14 +3263,15 @@
       GAME.questionLocked = false;
       GAME.lastCountdownBeepSecond = null;
 
-      const distractorCount = Math.min(7, Math.max(0, words.length - 1));
+      const distractorCount = Math.min(6, Math.max(0, words.length - 1));
       const choices = shuffle([
         GAME.currentQuestion.en,
-        ...getDistractors(GAME.currentQuestion.en, distractorCount)
+        ...getDistractors(GAME.currentQuestion.en, distractorCount),
+        '__BOMB__'
       ]);
 
       choices.forEach((choice, index) => {
-        const type = choice === GAME.currentQuestion.en ? 'correct' : 'wrong';
+        const type = choice === '__BOMB__' ? 'bomb' : (choice === GAME.currentQuestion.en ? 'correct' : 'wrong');
         createBalloon(choice, type, index, choices.length);
       });
     }
@@ -3144,19 +3286,6 @@
       if (GAME.combo > GAME.maxCombo) GAME.maxCombo = GAME.combo;
       showComboPopup(GAME.combo);
       if (GAME.combo >= 5) triggerFlash();
-    }
-
-    function applyComboMilestoneBonus() {
-      if (GAME.combo < 50 || GAME.combo % 50 !== 0) return 0;
-      const step = Math.floor(GAME.combo / 50);
-      const bonus = 100 + (step - 1) * 50;
-      GAME.score += bonus;
-      triggerFlash();
-      showComboPopup(GAME.combo, `${GAME.combo} COMBO! +${bonus} BONUS!`);
-      setFeedback(`Great! ${GAME.combo}コンボ達成! +${bonus}点ボーナス`, 'good');
-      soundCombo(GAME.combo);
-      setTimeout(() => soundCorrect(), 70);
-      return bonus;
     }
 
     function handleTap(button) {
@@ -3175,16 +3304,10 @@
         const gained = 10 * getMultiplier(GAME.combo);
         GAME.score += gained;
         GAME.timeLeft += 2;
-        const milestoneBonus = applyComboMilestoneBonus();
 
         button.classList.add('correct-flash');
         playCorrectEffect(button);
-        setFeedback(
-          milestoneBonus > 0
-            ? `Nice! +${gained}点 / ${GAME.combo}コンボで+${milestoneBonus}点!`
-            : `Nice! +${gained}点 / Combo x${GAME.combo}`,
-          'good'
-        );
+        setFeedback(`Nice! +${gained}点 / Combo x${GAME.combo}`, 'good');
         soundCorrect();
         soundCombo(GAME.combo);
         updateHud();
@@ -3193,6 +3316,24 @@
           if (!GAME.running) return;
           renderQuestion();
         }, 420);
+
+      } else if (type === 'bomb') {
+        GAME.attemptCount += 1;
+        ensureAudio();
+        GAME.combo = 0;
+        GAME.comboDeadline = null;
+        showComboPopup(0);
+
+        GAME.score = Math.max(0, GAME.score - 20);
+        GAME.timeLeft = Math.max(0, GAME.timeLeft - 5);
+
+        button.classList.add('wrong-flash');
+        playWrongEffect(button);
+        setFeedback('💣 Bomb! -20点 / -5秒', 'warn');
+        soundBomb();
+
+        removeBalloon(button);
+        updateHud();
 
       } else {
         GAME.attemptCount += 1;
@@ -3241,11 +3382,25 @@
       updateHud();
     }
 
+
+    function startBGM() {
+      if (!bgm) return;
+      bgm.volume = 0.35;
+      bgm.play().catch(() => {
+        console.log('BGM playback was blocked until user interaction.');
+      });
+    }
+
+    function stopBGM() {
+      if (!bgm) return;
+      bgm.pause();
+      bgm.currentTime = 0;
+    }
+
     function startGame(mode) {
       currentMode = mode;
       ensureAudio();
-      stopBgm(true);
-      playBgm();
+      startBGM();
       GAME.running = true;
       GAME.score = 0;
       GAME.timeLeft = 30;
@@ -3263,7 +3418,6 @@
       menuOverlay.classList.add('hidden');
       rankingOverlay.classList.add('hidden');
       resultOverlay.classList.add('hidden');
-      if (nameOverlay) nameOverlay.classList.add('hidden');
       if (clearOverlay) clearOverlay.classList.add('hidden');
 
       buildQuestionPool();
@@ -3275,15 +3429,32 @@
       GAME.tickTimer = setInterval(tick, 100);
     }
 
+
+    function showHomeSubPanel(panelName = 'home') {
+      const panels = {
+        home: homePanel,
+        howto: howToPanel,
+        about: aboutPanel,
+        privacy: privacyPanel,
+        contact: contactPanel
+      };
+      Object.values(panels).forEach(panel => {
+        if (panel) panel.classList.add('hidden');
+      });
+      const target = panels[panelName] || homePanel;
+      if (target) target.classList.remove('hidden');
+    }
+
     function backToMenu() {
       GAME.running = false;
-      stopBgm(true);
+      stopBGM();
       clearInterval(GAME.tickTimer);
       showComboPopup(0);
       menuOverlay.classList.remove('hidden');
       rankingOverlay.classList.add('hidden');
       resultOverlay.classList.add('hidden');
       if (clearOverlay) clearOverlay.classList.add('hidden');
+      showHomeSubPanel('home');
       clearArena();
       questionText.textContent = '準備OK？';
       setFeedback('モードを選んでスタート');
@@ -3386,83 +3557,39 @@
       await loadRanking(rankingMode, rankingScreenList);
     }
 
-    function askPlayerName() {
-      return new Promise((resolve) => {
-        if (!nameOverlay || !nameInput || !nameSaveBtn || !nameCancelBtn) {
-          const fallback = prompt("名前を入力してください", localStorage.getItem("speed_vocab_name") || "");
-          resolve(fallback);
-          return;
-        }
-
-        const finish = (value) => {
-          nameOverlay.classList.add('hidden');
-          nameSaveBtn.removeEventListener('click', onSave);
-          nameCancelBtn.removeEventListener('click', onCancel);
-          nameInput.removeEventListener('keydown', onKeydown);
-          resolve(value);
-        };
-
-        const onSave = () => finish(nameInput.value);
-        const onCancel = () => finish(null);
-        const onKeydown = (e) => {
-          if (e.key === 'Enter') {
-            e.preventDefault();
-            onSave();
-          } else if (e.key === 'Escape') {
-            e.preventDefault();
-            onCancel();
-          }
-        };
-
-        nameInput.value = localStorage.getItem('speed_vocab_name') || '';
-        nameOverlay.classList.remove('hidden');
-        nameSaveBtn.addEventListener('click', onSave);
-        nameCancelBtn.addEventListener('click', onCancel);
-        nameInput.addEventListener('keydown', onKeydown);
-        requestAnimationFrame(() => {
-          nameInput.focus();
-          nameInput.select();
-        });
-      });
-    }
-
     async function saveHighScore(finalScoreValue, accuracy) {
       if (!supabaseClient || GAME.scoreSavedThisRound) return;
 
-      const input = await askPlayerName();
+      const input = prompt("名前を入力してください", localStorage.getItem("speed_vocab_name") || "");
       if (input === null) {
-        saveStatus.textContent = '保存をスキップしました';
+        saveStatus.textContent = "保存をスキップしました";
         await loadRanking(currentMode, rankingList);
         return;
       }
 
-      const playerName = (String(input).trim() || 'NO NAME').slice(0, 20);
-      localStorage.setItem('speed_vocab_name', playerName);
-      saveStatus.textContent = '保存中...';
+      const playerName = (input.trim() || "NO NAME").slice(0, 20);
+      localStorage.setItem("speed_vocab_name", playerName);
+      saveStatus.textContent = "保存中...";
 
-      const { error } = await supabaseClient.rpc('save_high_score', {
-        p_player_name: playerName,
-        p_score: finalScoreValue,
-        p_max_combo: GAME.maxCombo,
-        p_accuracy: accuracy,
-        p_mode: PUBLIC_MODE
-      });
+      const { error } = await supabaseClient.rpc("save_high_score", {
+  p_player_name: playerName,
+  p_score: finalScoreValue,
+  p_max_combo: GAME.maxCombo,
+  p_accuracy: accuracy,
+  p_mode: PUBLIC_MODE
+});
 
       if (error) {
-        console.error('save error:', error);
-        saveStatus.textContent = '保存失敗: ' + error.message;
+        console.error("save error:", error);
+        saveStatus.textContent = "保存失敗: " + error.message;
       } else {
         GAME.scoreSavedThisRound = true;
         saveStatus.textContent = `${playerName} の記録を保存しました`;
       }
-
-      await loadRanking(currentMode, rankingList);
     }
     async function endPerfectClear() {
-
       ensureAudio();
       GAME.running = false;
-      stopBgm(true);
       clearInterval(GAME.tickTimer);
       GAME.comboDeadline = null;
       showComboPopup(0);
@@ -3470,6 +3597,7 @@
       questionText.textContent = 'COMPLETE!';
       setFeedback('出題できる単語をすべて使い切りました。', 'good');
       soundGameOver();
+      stopBGM();
 
       const accuracy = GAME.attemptCount
         ? Math.round((GAME.correctCount / GAME.attemptCount) * 100)
@@ -3490,7 +3618,6 @@
     async function endGame() {
       ensureAudio();
       GAME.running = false;
-      stopBgm(true);
       clearInterval(GAME.tickTimer);
       GAME.comboDeadline = null;
       showComboPopup(0);
@@ -3498,6 +3625,7 @@
       questionText.textContent = '終了！';
       setFeedback('おつかれさま。結果を確認しよう。');
       soundGameOver();
+      stopBGM();
 
       const accuracy = GAME.attemptCount
         ? Math.round((GAME.correctCount / GAME.attemptCount) * 100)
@@ -3515,6 +3643,16 @@
       await saveHighScore(bonusScore, accuracy);
       await loadRanking(currentMode, rankingList);
     }
+
+
+    if (showHowToBtn) showHowToBtn.addEventListener('click', () => showHomeSubPanel('howto'));
+    if (showAboutBtn) showAboutBtn.addEventListener('click', () => showHomeSubPanel('about'));
+    if (showPrivacyBtn) showPrivacyBtn.addEventListener('click', () => showHomeSubPanel('privacy'));
+    if (showContactBtn) showContactBtn.addEventListener('click', () => showHomeSubPanel('contact'));
+    if (backHomeFromHowToBtn) backHomeFromHowToBtn.addEventListener('click', () => showHomeSubPanel('home'));
+    if (backHomeFromAboutBtn) backHomeFromAboutBtn.addEventListener('click', () => showHomeSubPanel('home'));
+    if (backHomeFromPrivacyBtn) backHomeFromPrivacyBtn.addEventListener('click', () => showHomeSubPanel('home'));
+    if (backHomeFromContactBtn) backHomeFromContactBtn.addEventListener('click', () => showHomeSubPanel('home'));
 
     startPublicBtn.addEventListener('click', () => startGame(PUBLIC_MODE));
 
@@ -3535,16 +3673,8 @@
       if (GAME.running) renderQuestion();
     });
 
-    // タブを閉じたり非表示にしたときは停止。戻ってきてゲーム中なら再開。
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden) {
-        stopBgm(false);
-      } else if (GAME.running) {
-        playBgm();
-      }
-    });
-
     updateModeBadge();
+    showHomeSubPanel('home');
     loadRanking(PUBLIC_MODE, rankingScreenList);
   </script>
 </body>
