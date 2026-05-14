@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>スシ単｜英単語を瞬時に覚える学習ゲーム</title>
-  <meta name="description" content="スシ単は英検2級〜準1級、IELTS5.0〜6.0向けの英単語学習ゲームです。ランキングやコンボ機能を使って楽しく語彙力を鍛えられます。" />
+  <title>すし単・しの単｜英単語とシノニムを瞬時に覚える学習ゲーム</title>
+  <meta name="description" content="すし単・しの単は英検2級〜準1級、IELTS5.0〜6.0向けの英単語・シノニム学習ゲームです。ランキングやコンボ機能を使って楽しく語彙力を鍛えられます。" />
   <style>
     :root {
       --bg1: #0f172a;
@@ -241,6 +241,46 @@
       margin-top: 14px;
     }
 
+    .mode-select-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .mode-card-btn {
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 16px;
+      padding: 14px;
+      color: #f8fafc;
+      background: rgba(255,255,255,0.08);
+      cursor: pointer;
+      text-align: left;
+      box-shadow: var(--shadow);
+    }
+
+    .mode-card-btn strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .mode-card-btn span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .mode-card-btn.sushi {
+      background: linear-gradient(180deg, rgba(37,99,235,0.45) 0%, rgba(29,78,216,0.24) 100%);
+    }
+
+    .mode-card-btn.shino {
+      background: linear-gradient(180deg, rgba(124,58,237,0.48) 0%, rgba(88,28,135,0.24) 100%);
+    }
+
+
     .overlay {
       position: absolute;
       inset: 0;
@@ -348,6 +388,142 @@
 
     .flash-effect.active {
       animation: flashAnim 0.28s ease;
+    }
+
+    .combo-milestone-effect {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 24;
+      opacity: 0;
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,0.98) 0%, rgba(253,224,71,0.9) 22%, rgba(249,115,22,0.68) 48%, rgba(59,130,246,0.30) 74%, rgba(15,23,42,0) 100%);
+      mix-blend-mode: screen;
+    }
+
+    .combo-milestone-effect.active {
+      animation: milestoneColorShift 0.72s ease-out;
+    }
+
+    .app.combo-shock {
+      animation: comboShock 0.42s ease-out;
+    }
+
+
+    .app.danger-mode {
+      background:
+        radial-gradient(circle at top, rgba(239,68,68,0.46) 0%, rgba(15,23,42,0) 44%),
+        radial-gradient(circle at bottom, rgba(249,115,22,0.28) 0%, rgba(2,6,23,0) 55%);
+      animation: dangerPulse 0.9s ease-in-out infinite alternate;
+    }
+
+    .app.awakening-mode {
+      background:
+        radial-gradient(circle at 50% 12%, rgba(255,255,255,0.42) 0%, rgba(250,204,21,0.22) 28%, rgba(99,102,241,0.18) 56%, rgba(2,6,23,0) 80%);
+    }
+
+    .app.awakening-mode .panel {
+      border-color: rgba(250,204,21,0.42);
+      box-shadow: 0 0 28px rgba(250,204,21,0.20), var(--shadow);
+    }
+
+    .app.danger-mode #timeValue {
+      color: #fecaca;
+      animation: timerPulse 0.42s ease-in-out infinite alternate;
+    }
+
+    .app.danger-mode .balloon {
+      animation: dangerWiggle 0.22s ease-in-out infinite alternate;
+    }
+
+    .app.awakening-mode .balloon {
+      box-shadow: 0 0 22px rgba(250,204,21,0.36), 0 10px 20px rgba(14,165,233,0.25);
+    }
+
+    .combo-title {
+      position: absolute;
+      top: 37%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.82);
+      font-size: clamp(38px, 9vw, 68px);
+      font-weight: 1000;
+      letter-spacing: 0.08em;
+      pointer-events: none;
+      z-index: 26;
+      opacity: 0;
+      color: #ffffff;
+      -webkit-text-stroke: 2px rgba(15,23,42,0.8);
+      text-shadow:
+        0 0 12px rgba(255,255,255,0.65),
+        0 0 30px rgba(96,165,250,0.75),
+        0 8px 18px rgba(0,0,0,0.55);
+    }
+
+    .combo-title.show {
+      animation: titleBurst 0.85s ease-out;
+    }
+
+    .combo-break {
+      position: absolute;
+      top: 42%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 27;
+      opacity: 0;
+      pointer-events: none;
+      font-size: clamp(30px, 8vw, 58px);
+      font-weight: 1000;
+      letter-spacing: 0.05em;
+      color: #fecaca;
+      -webkit-text-stroke: 2px rgba(127,29,29,0.95);
+      text-shadow: 0 0 22px rgba(239,68,68,0.6), 0 10px 18px rgba(0,0,0,0.55);
+    }
+
+    .combo-break.show {
+      animation: comboBreakAnim 0.95s ease-out;
+    }
+
+    .mistake-list {
+      margin-top: 12px;
+      padding: 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.08);
+      text-align: left;
+      max-height: 170px;
+      overflow-y: auto;
+    }
+
+    .mistake-list-title {
+      font-size: 15px;
+      font-weight: 900;
+      color: #fecaca;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .mistake-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      padding: 6px 2px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-size: 13px;
+    }
+
+    .mistake-row:last-child {
+      border-bottom: none;
+    }
+
+    .mistake-answer {
+      color: #bbf7d0;
+      font-weight: 900;
+    }
+
+    .mistake-empty {
+      text-align: center;
+      color: #bbf7d0;
+      font-size: 14px;
+      font-weight: 800;
     }
 
     .pop-burst {
@@ -616,6 +792,62 @@
       100% { opacity: 0; }
     }
 
+    @keyframes milestoneColorShift {
+      0% {
+        opacity: 1;
+        filter: hue-rotate(0deg) saturate(1.4);
+      }
+      35% {
+        opacity: 0.95;
+        filter: hue-rotate(90deg) saturate(2.2);
+      }
+      70% {
+        opacity: 0.65;
+        filter: hue-rotate(210deg) saturate(2);
+      }
+      100% {
+        opacity: 0;
+        filter: hue-rotate(320deg) saturate(1);
+      }
+    }
+
+    @keyframes comboShock {
+      0% { transform: scale(1); }
+      35% { transform: scale(1.018) rotate(-0.35deg); }
+      70% { transform: scale(1.006) rotate(0.25deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+
+    @keyframes dangerPulse {
+      0% { filter: saturate(1); }
+      100% { filter: saturate(1.35) brightness(1.04); }
+    }
+
+    @keyframes timerPulse {
+      0% { transform: scale(1); text-shadow: 0 0 0 rgba(239,68,68,0); }
+      100% { transform: scale(1.12); text-shadow: 0 0 18px rgba(239,68,68,0.9); }
+    }
+
+    @keyframes dangerWiggle {
+      0% { transform: translateX(-1px); }
+      100% { transform: translateX(1px); }
+    }
+
+    @keyframes titleBurst {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(0.35) rotate(-6deg); }
+      22% { opacity: 1; transform: translate(-50%, -50%) scale(1.18) rotate(2deg); }
+      68% { opacity: 1; transform: translate(-50%, -50%) scale(1.02) rotate(0deg); }
+      100% { opacity: 0; transform: translate(-50%, -66%) scale(1.16); }
+    }
+
+    @keyframes comboBreakAnim {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(1.25); filter: blur(2px); }
+      18% { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0); }
+      72% { opacity: 1; transform: translate(-50%, -50%) scale(0.98); }
+      100% { opacity: 0; transform: translate(-50%, -38%) scale(0.9); }
+    }
+
     @keyframes burstFly {
       0% {
         transform: translate(0, 0) scale(1);
@@ -693,7 +925,7 @@
       <div>
         <div class="stat">
           <div class="stat-label">Mode</div>
-          <div class="stat-value" style="font-size:18px;"><span class="mode-badge" id="modeBadge">スシ単</span></div>
+          <div class="stat-value" style="font-size:18px;"><span class="mode-badge" id="modeBadge">すし単</span></div>
         </div>
       </div>
       <div>
@@ -730,7 +962,10 @@
     <div class="panel arena" id="arena"></div>
 
     <div id="flashEffect" class="flash-effect"></div>
+    <div id="comboMilestoneEffect" class="combo-milestone-effect"></div>
     <div id="comboPopup" class="combo-popup">2 COMBO!</div>
+    <div id="comboTitle" class="combo-title">GOOD!</div>
+    <div id="comboBreak" class="combo-break">COMBO BREAK...</div>
 
     <div class="panel bottom">
       <button class="btn primary" id="menuBtn">Menu</button>
@@ -742,27 +977,41 @@
         <div id="homePanel">
           <div class="home-hero">
             <span class="home-kicker">英検・IELTS・高校英語対応</span>
-            <h1 id="gameTitle">スシ単</h1>
+            <h1 id="gameTitle">すし単</h1>
             <p class="home-lead">
               英単語を瞬時に判断する学習ゲーム。<br>
               ターゲットレベル：英検2級〜準1級／IELTS 5.0〜6.0
             </p>
           </div>
 
+          <div class="mode-select-grid">
+            <button class="mode-card-btn sushi" id="startSushiBtn">
+              <strong>すし単</strong>
+              <span>日本語に合う英単語を選ぶ基本モード。</span>
+            </button>
+            <button class="mode-card-btn shino" id="startShinoBtn">
+              <strong>しの単</strong>
+              <span>英単語に近い意味の synonym を選ぶ上級モード。</span>
+            </button>
+            <button class="mode-card-btn antoni" id="startAntoniBtn">
+              <strong>あんとに単</strong>
+              <span>英単語と反対の意味の antonym を選ぶ上級モード。</span>
+            </button>
+          </div>
+
           <div class="menu-btns">
-            <button class="btn primary" id="startPublicBtn">ゲーム開始</button>
             <button class="btn gold" id="openRankingBtn">ランキング確認</button>
           </div>
 
           <div class="link-grid" aria-label="サイト内メニュー">
             <button class="text-link-btn" id="showHowToBtn">遊び方</button>
-            <button class="text-link-btn" id="showAboutBtn">スシ単とは</button>
+            <button class="text-link-btn" id="showAboutBtn">すし単とは</button>
             <button class="text-link-btn" id="showPrivacyBtn">ポリシー</button>
             <button class="text-link-btn" id="showContactBtn">お問い合わせ</button>
           </div>
 
           <footer class="site-footer">
-            <div>© スシ単</div>
+            <div>© すし単</div>
             <div class="footer-links">
               <button class="footer-link-btn" id="footerHowToBtn">遊び方</button>
               <button class="footer-link-btn" id="footerPrivacyBtn">ポリシー</button>
@@ -772,22 +1021,23 @@
         </div>
 
         <div id="aboutPanel" class="info-page hidden">
-          <h2>スシ単とは</h2>
+          <h2>すし単とは</h2>
           <p>
-            スシ単は、英単語をすばやく判断する力を鍛えるための学習ゲームです。<br>
+            すし単は、英単語をすばやく判断する力を鍛えるための学習ゲームです。<br>
             英検2級〜準1級、IELTS 5.0〜6.0程度の学習者を対象としています。
           </p>
           <p>
-            日本語を見て瞬時に英単語を選ぶことで、読解やリスニングに必要な「反射的な語彙力」をトレーニングできます。
+            日本語を見て英単語を選ぶ「すし単」と、英単語から synonym を選ぶ「しの単」で、読解やリスニングに必要な「反射的な語彙力」と「言い換え力」をトレーニングできます。
           </p>
           <div class="menu-btns"><button class="btn secondary" id="backHomeFromAboutBtn">トップへ戻る</button></div>
         </div>
 
         <div id="howToPanel" class="info-page hidden">
           <h2>遊び方</h2>
-          <p>表示された日本語に合う英単語をタップしてください。</p>
+          <p>選んだモードに応じて、正しい英単語または synonym をタップしてください。</p>
           <ul>
-            <li>日本語に合う英単語を選ぶと正解です。</li>
+            <li>すし単では、日本語に合う英単語を選ぶと正解です。</li>
+            <li>しの単では、表示された英単語に近い意味の単語を選ぶと正解です。</li>
             <li>正解するとスコアが増えます。</li>
             <li>5秒以内に答えるとコンボが続きます。</li>
             <li>コンボが高いほど高得点を狙えます。</li>
@@ -799,7 +1049,7 @@
 
         <div id="privacyPanel" class="info-page hidden">
           <h2>ポリシー</h2>
-          <p>スシ単は、英語学習を目的とした教育用コンテンツです。</p>
+          <p>すし単は、英語学習を目的とした教育用コンテンツです。</p>
           <p>ランキング機能では、スコア表示のためにプレイヤー名、得点、最大コンボ、正答率を保存する場合があります。個人を特定できる情報の入力は推奨していません。</p>
           <p>広告を表示する場合がありますが、学習体験を妨げない位置と量に配慮します。</p>
           <p>お問い合わせ：<br><a href="mailto:sushisushitantan@gmail.com" style="color:#93c5fd; font-weight:800;">sushisushitantan@gmail.com</a></p>
@@ -808,7 +1058,7 @@
 
         <div id="contactPanel" class="info-page hidden">
           <h2>お問い合わせ</h2>
-          <p>スシ単についての質問、不具合報告、掲載内容に関するご連絡はこちらへお願いします。</p>
+          <p>すし単についての質問、不具合報告、掲載内容に関するご連絡はこちらへお願いします。</p>
           <p><a href="mailto:sushisushitantan@gmail.com" style="color:#93c5fd; font-weight:800;">sushisushitantan@gmail.com</a></p>
           <div class="menu-btns"><button class="btn secondary" id="backHomeFromContactBtn">トップへ戻る</button></div>
         </div>
@@ -819,7 +1069,9 @@
       <div class="modal">
         <h2>Ranking</h2>
         <div class="ranking-tabs">
-          <button class="ranking-tab active" id="rankingTabDefault">スシ単</button>
+          <button class="ranking-tab active" id="rankingTabSushi">すし単</button>
+          <button class="ranking-tab" id="rankingTabShino">しの単</button>
+          <button class="ranking-tab" id="rankingTabAntoni">あんとに単</button>
         </div>
         <div id="rankingScreenList" class="ranking-box">
           <div class="ranking-title">🏆 Ranking</div>
@@ -889,6 +1141,11 @@
           <div class="ranking-empty">まだスコアがありません</div>
         </div>
 
+        <div id="mistakeList" class="mistake-list hidden">
+          <div class="mistake-list-title">Review: 間違えた単語</div>
+          <div id="mistakeListBody"></div>
+        </div>
+
         <div class="status-line" id="saveStatus"></div>
 
         <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
@@ -911,8 +1168,32 @@
       SUPABASE_PUBLISHABLE_KEY
     );
 
-    const GAME_TITLE = "スシ単";
-    const PUBLIC_MODE = "core";
+    const GAME_TITLE = "すし単";
+    const MODE_SUSHI = "sushi";
+    const MODE_SHINO = "shino";
+    const MODE_ANTONI = "antoni";
+    const PUBLIC_MODE = MODE_SUSHI;
+
+    const MODE_CONFIG = {
+      [MODE_SUSHI]: {
+        label: "すし単",
+        questionLabel: "日本語に合う英単語をタップ",
+        startMessage: "すし単モード開始",
+        choiceCount: 8
+      },
+      [MODE_SHINO]: {
+        label: "しの単",
+        questionLabel: "英単語と意味が近い語をタップ",
+        startMessage: "しの単モード開始",
+        choiceCount: 8
+      },
+      [MODE_ANTONI]: {
+        label: "あんとに単",
+        questionLabel: "英単語と反対の意味の語をタップ",
+        startMessage: "あんとに単モード開始",
+        choiceCount: 8
+      }
+    };
 
     let audioCtx = null;
     let currentMode = PUBLIC_MODE;
@@ -2947,6 +3228,1111 @@
 { jp: "～しないように", en: "lest" }
 ];
 
+    const SHINO_WORDS = [
+      { jp: "rapid", en: "fast" },
+      { jp: "swift", en: "quick" },
+      { jp: "significant", en: "important" },
+      { jp: "crucial", en: "essential" },
+      { jp: "vital", en: "necessary" },
+      { jp: "obtain", en: "acquire" },
+      { jp: "purchase", en: "buy" },
+      { jp: "assist", en: "help" },
+      { jp: "require", en: "need" },
+      { jp: "attempt", en: "try" },
+      { jp: "commence", en: "begin" },
+      { jp: "terminate", en: "end" },
+      { jp: "construct", en: "build" },
+      { jp: "destroy", en: "ruin" },
+      { jp: "reduce", en: "decrease" },
+      { jp: "increase", en: "rise" },
+      { jp: "decline", en: "decrease" },
+      { jp: "improve", en: "enhance" },
+      { jp: "maintain", en: "keep" },
+      { jp: "preserve", en: "protect" },
+      { jp: "protect", en: "defend" },
+      { jp: "damage", en: "harm" },
+      { jp: "benefit", en: "advantage" },
+      { jp: "drawback", en: "disadvantage" },
+      { jp: "issue", en: "problem" },
+      { jp: "solution", en: "answer" },
+      { jp: "method", en: "way" },
+      { jp: "aim", en: "goal" },
+      { jp: "purpose", en: "aim" },
+      { jp: "cause", en: "reason" },
+      { jp: "result", en: "outcome" },
+      { jp: "effect", en: "impact" },
+      { jp: "influence", en: "impact" },
+      { jp: "evidence", en: "proof" },
+      { jp: "indicate", en: "show" },
+      { jp: "reveal", en: "show" },
+      { jp: "demonstrate", en: "show" },
+      { jp: "explain", en: "clarify" },
+      { jp: "describe", en: "depict" },
+      { jp: "emphasize", en: "stress" },
+      { jp: "argue", en: "claim" },
+      { jp: "claim", en: "assert" },
+      { jp: "suggest", en: "propose" },
+      { jp: "recommend", en: "advise" },
+      { jp: "predict", en: "forecast" },
+      { jp: "estimate", en: "calculate" },
+      { jp: "assess", en: "evaluate" },
+      { jp: "examine", en: "inspect" },
+      { jp: "analyze", en: "study" },
+      { jp: "investigate", en: "examine" },
+      { jp: "consider", en: "think about" },
+      { jp: "contemplate", en: "consider" },
+      { jp: "suppose", en: "assume" },
+      { jp: "recognize", en: "identify" },
+      { jp: "notice", en: "observe" },
+      { jp: "perceive", en: "notice" },
+      { jp: "understand", en: "comprehend" },
+      { jp: "comprehend", en: "understand" },
+      { jp: "recall", en: "remember" },
+      { jp: "forget", en: "overlook" },
+      { jp: "ignore", en: "disregard" },
+      { jp: "avoid", en: "evade" },
+      { jp: "prevent", en: "stop" },
+      { jp: "enable", en: "allow" },
+      { jp: "allow", en: "permit" },
+      { jp: "force", en: "compel" },
+      { jp: "encourage", en: "motivate" },
+      { jp: "persuade", en: "convince" },
+      { jp: "convince", en: "persuade" },
+      { jp: "warn", en: "alert" },
+      { jp: "inform", en: "notify" },
+      { jp: "announce", en: "declare" },
+      { jp: "publish", en: "release" },
+      { jp: "release", en: "free" },
+      { jp: "admit", en: "acknowledge" },
+      { jp: "accept", en: "receive" },
+      { jp: "reject", en: "refuse" },
+      { jp: "refuse", en: "decline" },
+      { jp: "oppose", en: "resist" },
+      { jp: "support", en: "back" },
+      { jp: "advocate", en: "support" },
+      { jp: "criticize", en: "blame" },
+      { jp: "blame", en: "accuse" },
+      { jp: "praise", en: "commend" },
+      { jp: "admire", en: "respect" },
+      { jp: "respect", en: "esteem" },
+      { jp: "trust", en: "believe" },
+      { jp: "suspect", en: "doubt" },
+      { jp: "doubt", en: "question" },
+      { jp: "regret", en: "lament" },
+      { jp: "apologize", en: "say sorry" },
+      { jp: "forgive", en: "pardon" },
+      { jp: "pardon", en: "forgive" },
+      { jp: "recover", en: "heal" },
+      { jp: "cure", en: "heal" },
+      { jp: "treat", en: "handle" },
+      { jp: "handle", en: "manage" },
+      { jp: "manage", en: "control" },
+      { jp: "operate", en: "run" },
+      { jp: "function", en: "operate" },
+      { jp: "perform", en: "carry out" },
+      { jp: "conduct", en: "carry out" },
+      { jp: "carry", en: "transport" },
+      { jp: "deliver", en: "bring" },
+      { jp: "supply", en: "provide" },
+      { jp: "provide", en: "supply" },
+      { jp: "offer", en: "provide" },
+      { jp: "contribute", en: "add" },
+      { jp: "add", en: "include" },
+      { jp: "include", en: "contain" },
+      { jp: "contain", en: "include" },
+      { jp: "consist", en: "be made up" },
+      { jp: "combine", en: "mix" },
+      { jp: "connect", en: "link" },
+      { jp: "relate", en: "connect" },
+      { jp: "associate", en: "connect" },
+      { jp: "compare", en: "contrast" },
+      { jp: "contrast", en: "difference" },
+      { jp: "differ", en: "vary" },
+      { jp: "vary", en: "differ" },
+      { jp: "change", en: "alter" },
+      { jp: "shift", en: "move" },
+      { jp: "remove", en: "take away" },
+      { jp: "replace", en: "substitute" },
+      { jp: "exchange", en: "swap" },
+      { jp: "select", en: "choose" },
+      { jp: "choose", en: "select" },
+      { jp: "prefer", en: "favor" },
+      { jp: "adopt", en: "use" },
+      { jp: "adapt", en: "adjust" },
+      { jp: "adjust", en: "adapt" },
+      { jp: "arrange", en: "organize" },
+      { jp: "organize", en: "arrange" },
+      { jp: "establish", en: "found" },
+      { jp: "found", en: "establish" },
+      { jp: "create", en: "produce" },
+      { jp: "produce", en: "generate" },
+      { jp: "generate", en: "produce" },
+      { jp: "invent", en: "create" },
+      { jp: "develop", en: "grow" },
+      { jp: "expand", en: "increase" },
+      { jp: "extend", en: "lengthen" },
+      { jp: "spread", en: "extend" },
+      { jp: "stretch", en: "extend" },
+      { jp: "raise", en: "increase" },
+      { jp: "lower", en: "reduce" },
+      { jp: "promote", en: "encourage" },
+      { jp: "boost", en: "increase" },
+      { jp: "flourish", en: "thrive" },
+      { jp: "thrive", en: "flourish" },
+      { jp: "survive", en: "remain alive" },
+      { jp: "exist", en: "be present" },
+      { jp: "remain", en: "stay" },
+      { jp: "continue", en: "keep going" },
+      { jp: "persist", en: "continue" },
+      { jp: "cease", en: "stop" },
+      { jp: "quit", en: "stop" },
+      { jp: "abandon", en: "give up" },
+      { jp: "overcome", en: "defeat" },
+      { jp: "defeat", en: "beat" },
+      { jp: "escape", en: "get away" },
+      { jp: "rush", en: "hurry" },
+      { jp: "hurry", en: "rush" },
+      { jp: "wander", en: "roam" },
+      { jp: "roam", en: "wander" },
+      { jp: "approach", en: "come near" },
+      { jp: "reach", en: "arrive at" },
+      { jp: "arrive", en: "reach" },
+      { jp: "locate", en: "find" },
+      { jp: "search", en: "look for" },
+      { jp: "seek", en: "look for" },
+      { jp: "explore", en: "investigate" },
+      { jp: "encounter", en: "meet" },
+      { jp: "participate", en: "take part" },
+      { jp: "engage", en: "take part" },
+      { jp: "involve", en: "include" },
+      { jp: "belong", en: "be a member" },
+      { jp: "possess", en: "have" },
+      { jp: "own", en: "possess" },
+      { jp: "occupy", en: "take up" },
+      { jp: "consume", en: "use up" },
+      { jp: "absorb", en: "take in" },
+      { jp: "expose", en: "reveal" },
+      { jp: "display", en: "show" },
+      { jp: "exhibit", en: "show" },
+      { jp: "express", en: "show" },
+      { jp: "represent", en: "stand for" },
+      { jp: "reflect", en: "show" },
+      { jp: "refer", en: "mention" },
+      { jp: "mention", en: "refer to" },
+      { jp: "remark", en: "comment" },
+      { jp: "comment", en: "remark" },
+      { jp: "reply", en: "respond" },
+      { jp: "respond", en: "reply" },
+      { jp: "react", en: "respond" },
+      { jp: "demand", en: "require" },
+      { jp: "request", en: "ask for" },
+      { jp: "ask", en: "inquire" },
+      { jp: "inquire", en: "ask" },
+      { jp: "complain", en: "protest" },
+      { jp: "protest", en: "object" },
+      { jp: "object", en: "oppose" },
+      { jp: "insist", en: "demand" },
+      { jp: "stress", en: "emphasize" },
+      { jp: "focus", en: "concentrate" },
+      { jp: "concentrate", en: "focus" },
+      { jp: "confuse", en: "puzzle" },
+      { jp: "puzzle", en: "confuse" },
+      { jp: "embarrass", en: "shame" },
+      { jp: "annoy", en: "irritate" },
+      { jp: "irritate", en: "annoy" },
+      { jp: "bother", en: "trouble" },
+      { jp: "disturb", en: "interrupt" },
+      { jp: "interrupt", en: "disturb" },
+      { jp: "amuse", en: "entertain" },
+      { jp: "entertain", en: "amuse" },
+      { jp: "fascinate", en: "attract" },
+      { jp: "attract", en: "draw" },
+      { jp: "appeal", en: "attract" },
+      { jp: "amaze", en: "surprise" },
+      { jp: "surprise", en: "amaze" },
+      { jp: "frighten", en: "scare" },
+      { jp: "scare", en: "frighten" },
+      { jp: "alarm", en: "frighten" },
+      { jp: "worry", en: "concern" },
+      { jp: "concern", en: "worry" },
+      { jp: "upset", en: "disturb" },
+      { jp: "satisfy", en: "please" },
+      { jp: "delight", en: "please" },
+      { jp: "disappoint", en: "let down" },
+      { jp: "hurt", en: "injure" },
+      { jp: "injure", en: "harm" },
+      { jp: "suffer", en: "endure" },
+      { jp: "endure", en: "bear" },
+      { jp: "bear", en: "endure" },
+      { jp: "tolerate", en: "endure" },
+      { jp: "struggle", en: "fight" },
+      { jp: "compete", en: "contend" },
+      { jp: "graduate", en: "finish school" },
+      { jp: "educate", en: "teach" },
+      { jp: "teach", en: "educate" },
+      { jp: "learn", en: "acquire" },
+      { jp: "acquire", en: "obtain" },
+      { jp: "master", en: "learn" },
+      { jp: "translate", en: "render" },
+      { jp: "interpret", en: "explain" },
+      { jp: "mean", en: "signify" },
+      { jp: "signify", en: "mean" },
+      { jp: "imply", en: "suggest" },
+      { jp: "infer", en: "conclude" },
+      { jp: "conclude", en: "finish" },
+      { jp: "determine", en: "decide" },
+      { jp: "decide", en: "determine" },
+      { jp: "resolve", en: "solve" },
+      { jp: "solve", en: "resolve" },
+      { jp: "prove", en: "demonstrate" },
+      { jp: "confirm", en: "verify" },
+      { jp: "verify", en: "confirm" },
+      { jp: "identify", en: "recognize" },
+      { jp: "classify", en: "categorize" },
+      { jp: "categorize", en: "classify" },
+      { jp: "define", en: "explain" },
+      { jp: "clarify", en: "explain" },
+      { jp: "simplify", en: "make easier" },
+      { jp: "complicate", en: "make difficult" },
+      { jp: "secure", en: "protect" },
+      { jp: "ensure", en: "make certain" },
+      { jp: "guarantee", en: "ensure" },
+      { jp: "threaten", en: "endanger" },
+      { jp: "endanger", en: "threaten" },
+      { jp: "risk", en: "danger" },
+      { jp: "hazard", en: "risk" },
+      { jp: "crisis", en: "emergency" },
+      { jp: "emergency", en: "crisis" },
+      { jp: "matter", en: "issue" },
+      { jp: "topic", en: "subject" },
+      { jp: "subject", en: "topic" },
+      { jp: "field", en: "area" },
+      { jp: "area", en: "region" },
+      { jp: "region", en: "area" },
+      { jp: "site", en: "place" },
+      { jp: "location", en: "place" },
+      { jp: "place", en: "location" },
+      { jp: "source", en: "origin" },
+      { jp: "origin", en: "source" },
+      { jp: "factor", en: "element" },
+      { jp: "element", en: "factor" },
+      { jp: "feature", en: "characteristic" },
+      { jp: "characteristic", en: "feature" },
+      { jp: "quality", en: "standard" },
+      { jp: "standard", en: "level" },
+      { jp: "level", en: "degree" },
+      { jp: "degree", en: "extent" },
+      { jp: "extent", en: "degree" },
+      { jp: "amount", en: "quantity" },
+      { jp: "quantity", en: "amount" },
+      { jp: "rate", en: "speed" },
+      { jp: "proportion", en: "ratio" },
+      { jp: "ratio", en: "proportion" },
+      { jp: "trend", en: "tendency" },
+      { jp: "tendency", en: "trend" },
+      { jp: "pattern", en: "model" },
+      { jp: "model", en: "example" },
+      { jp: "instance", en: "example" },
+      { jp: "example", en: "instance" },
+      { jp: "case", en: "instance" },
+      { jp: "occasion", en: "time" },
+      { jp: "opportunity", en: "chance" },
+      { jp: "chance", en: "opportunity" },
+      { jp: "advantage", en: "benefit" },
+      { jp: "disadvantage", en: "drawback" },
+      { jp: "profit", en: "gain" },
+      { jp: "gain", en: "benefit" },
+      { jp: "loss", en: "damage" },
+      { jp: "wealth", en: "riches" },
+      { jp: "income", en: "earnings" },
+      { jp: "expense", en: "cost" },
+      { jp: "cost", en: "expense" },
+      { jp: "fee", en: "charge" },
+      { jp: "charge", en: "fee" },
+      { jp: "value", en: "worth" },
+      { jp: "worth", en: "value" },
+      { jp: "property", en: "possession" },
+      { jp: "possession", en: "property" },
+      { jp: "resource", en: "asset" },
+      { jp: "asset", en: "resource" },
+      { jp: "goods", en: "products" },
+      { jp: "product", en: "goods" },
+      { jp: "material", en: "substance" },
+      { jp: "substance", en: "material" },
+      { jp: "fuel", en: "energy source" },
+      { jp: "energy", en: "power" },
+      { jp: "power", en: "strength" },
+      { jp: "strength", en: "power" },
+      { jp: "capacity", en: "ability" },
+      { jp: "ability", en: "capacity" },
+      { jp: "skill", en: "ability" },
+      { jp: "talent", en: "ability" },
+      { jp: "knowledge", en: "understanding" },
+      { jp: "understanding", en: "knowledge" },
+      { jp: "notion", en: "idea" },
+      { jp: "idea", en: "notion" },
+      { jp: "concept", en: "idea" },
+      { jp: "theory", en: "idea" },
+      { jp: "principle", en: "rule" },
+      { jp: "rule", en: "principle" },
+      { jp: "policy", en: "plan" },
+      { jp: "plan", en: "scheme" },
+      { jp: "project", en: "plan" },
+      { jp: "task", en: "job" },
+      { jp: "job", en: "task" },
+      { jp: "role", en: "function" },
+      { jp: "responsibility", en: "duty" },
+      { jp: "duty", en: "responsibility" },
+      { jp: "instruction", en: "direction" },
+      { jp: "direction", en: "instruction" },
+      { jp: "statement", en: "remark" },
+      { jp: "document", en: "paper" },
+      { jp: "paper", en: "document" },
+      { jp: "research", en: "study" },
+      { jp: "survey", en: "investigation" },
+      { jp: "investigation", en: "survey" },
+      { jp: "analysis", en: "study" },
+      { jp: "experiment", en: "test" },
+      { jp: "test", en: "experiment" },
+      { jp: "consequence", en: "result" },
+      { jp: "outcome", en: "result" },
+      { jp: "impact", en: "effect" },
+      { jp: "interaction", en: "communication" },
+      { jp: "communication", en: "exchange" },
+      { jp: "society", en: "community" },
+      { jp: "community", en: "society" },
+      { jp: "organization", en: "group" },
+      { jp: "institution", en: "organization" },
+      { jp: "agency", en: "organization" },
+      { jp: "department", en: "section" },
+      { jp: "section", en: "part" },
+      { jp: "branch", en: "division" },
+      { jp: "division", en: "section" },
+      { jp: "government", en: "administration" },
+      { jp: "administration", en: "government" },
+      { jp: "minister", en: "official" },
+      { jp: "official", en: "officer" },
+      { jp: "citizen", en: "resident" },
+      { jp: "resident", en: "inhabitant" },
+      { jp: "inhabitant", en: "resident" },
+      { jp: "individual", en: "person" },
+      { jp: "person", en: "individual" },
+      { jp: "relative", en: "relation" },
+      { jp: "colleague", en: "coworker" },
+      { jp: "coworker", en: "colleague" },
+      { jp: "stranger", en: "unknown person" },
+      { jp: "passenger", en: "traveler" },
+      { jp: "traveler", en: "passenger" },
+      { jp: "audience", en: "spectators" },
+      { jp: "spectator", en: "viewer" },
+      { jp: "athlete", en: "player" },
+      { jp: "player", en: "athlete" },
+      { jp: "youth", en: "young people" },
+      { jp: "infant", en: "baby" },
+      { jp: "baby", en: "infant" },
+      { jp: "ancestor", en: "forefather" },
+      { jp: "forefather", en: "ancestor" },
+      { jp: "generation", en: "age group" },
+      { jp: "population", en: "people" },
+      { jp: "majority", en: "most" },
+      { jp: "minority", en: "few" },
+      { jp: "common", en: "ordinary" },
+      { jp: "ordinary", en: "common" },
+      { jp: "usual", en: "normal" },
+      { jp: "normal", en: "usual" },
+      { jp: "typical", en: "representative" },
+      { jp: "particular", en: "specific" },
+      { jp: "specific", en: "particular" },
+      { jp: "general", en: "broad" },
+      { jp: "broad", en: "wide" },
+      { jp: "narrow", en: "limited" },
+      { jp: "limited", en: "restricted" },
+      { jp: "complete", en: "entire" },
+      { jp: "entire", en: "complete" },
+      { jp: "whole", en: "entire" },
+      { jp: "partial", en: "incomplete" },
+      { jp: "empty", en: "vacant" },
+      { jp: "vacant", en: "empty" },
+      { jp: "available", en: "obtainable" },
+      { jp: "obtainable", en: "available" },
+      { jp: "ready", en: "prepared" },
+      { jp: "prepared", en: "ready" },
+      { jp: "proper", en: "appropriate" },
+      { jp: "appropriate", en: "proper" },
+      { jp: "suitable", en: "appropriate" },
+      { jp: "ideal", en: "perfect" },
+      { jp: "perfect", en: "ideal" },
+      { jp: "excellent", en: "outstanding" },
+      { jp: "outstanding", en: "excellent" },
+      { jp: "remarkable", en: "extraordinary" },
+      { jp: "extraordinary", en: "remarkable" },
+      { jp: "fantastic", en: "wonderful" },
+      { jp: "wonderful", en: "fantastic" },
+      { jp: "pleasant", en: "enjoyable" },
+      { jp: "enjoyable", en: "pleasant" },
+      { jp: "comfortable", en: "pleasant" },
+      { jp: "convenient", en: "handy" },
+      { jp: "handy", en: "convenient" },
+      { jp: "efficient", en: "productive" },
+      { jp: "productive", en: "efficient" },
+      { jp: "practical", en: "useful" },
+      { jp: "useful", en: "practical" },
+      { jp: "valuable", en: "useful" },
+      { jp: "meaningful", en: "significant" },
+      { jp: "important", en: "significant" },
+      { jp: "essential", en: "necessary" },
+      { jp: "necessary", en: "essential" },
+      { jp: "fundamental", en: "basic" },
+      { jp: "basic", en: "fundamental" },
+      { jp: "principal", en: "main" },
+      { jp: "main", en: "principal" },
+      { jp: "major", en: "important" },
+      { jp: "minor", en: "small" },
+      { jp: "huge", en: "enormous" },
+      { jp: "enormous", en: "huge" },
+      { jp: "tiny", en: "very small" },
+      { jp: "small", en: "minor" },
+      { jp: "large", en: "big" },
+      { jp: "big", en: "large" },
+      { jp: "sharp", en: "sudden" },
+      { jp: "sudden", en: "abrupt" },
+      { jp: "abrupt", en: "sudden" },
+      { jp: "gradual", en: "slow" },
+      { jp: "slow", en: "gradual" },
+      { jp: "current", en: "present" },
+      { jp: "present", en: "current" },
+      { jp: "former", en: "previous" },
+      { jp: "previous", en: "former" },
+      { jp: "recent", en: "new" },
+      { jp: "ancient", en: "old" },
+      { jp: "old", en: "ancient" },
+      { jp: "modern", en: "current" },
+      { jp: "domestic", en: "home" },
+      { jp: "foreign", en: "overseas" },
+      { jp: "overseas", en: "foreign" },
+      { jp: "native", en: "local" },
+      { jp: "local", en: "native" },
+      { jp: "bilingual", en: "two-language" },
+      { jp: "global", en: "worldwide" },
+      { jp: "worldwide", en: "global" },
+      { jp: "political", en: "governmental" },
+      { jp: "governmental", en: "political" },
+      { jp: "legal", en: "lawful" },
+      { jp: "lawful", en: "legal" },
+      { jp: "civil", en: "public" },
+      { jp: "public", en: "civil" },
+      { jp: "private", en: "personal" },
+      { jp: "personal", en: "private" },
+      { jp: "social", en: "societal" },
+      { jp: "societal", en: "social" },
+      { jp: "economic", en: "financial" },
+      { jp: "financial", en: "economic" },
+      { jp: "commercial", en: "business" },
+      { jp: "business", en: "commercial" },
+      { jp: "industrial", en: "manufacturing" },
+      { jp: "medical", en: "health-related" },
+      { jp: "physical", en: "bodily" },
+      { jp: "bodily", en: "physical" },
+      { jp: "mental", en: "psychological" },
+      { jp: "psychological", en: "mental" },
+      { jp: "chemical", en: "synthetic" },
+      { jp: "artificial", en: "man-made" },
+      { jp: "natural", en: "not artificial" },
+      { jp: "environmental", en: "ecological" },
+      { jp: "ecological", en: "environmental" },
+      { jp: "nuclear", en: "atomic" },
+      { jp: "atomic", en: "nuclear" },
+      { jp: "moral", en: "ethical" },
+      { jp: "ethical", en: "moral" },
+      { jp: "negative", en: "bad" },
+      { jp: "positive", en: "good" },
+      { jp: "bad", en: "negative" },
+      { jp: "good", en: "positive" },
+      { jp: "evil", en: "wicked" },
+      { jp: "wicked", en: "evil" },
+      { jp: "serious", en: "grave" },
+      { jp: "grave", en: "serious" },
+      { jp: "terrible", en: "awful" },
+      { jp: "awful", en: "terrible" },
+      { jp: "tough", en: "difficult" },
+      { jp: "difficult", en: "hard" },
+      { jp: "hard", en: "difficult" },
+      { jp: "complex", en: "complicated" },
+      { jp: "complicated", en: "complex" },
+      { jp: "simple", en: "easy" },
+      { jp: "easy", en: "simple" },
+      { jp: "reasonable", en: "sensible" },
+      { jp: "sensible", en: "reasonable" },
+      { jp: "obvious", en: "clear" },
+      { jp: "clear", en: "obvious" },
+      { jp: "aware", en: "conscious" },
+      { jp: "conscious", en: "aware" },
+      { jp: "curious", en: "interested" },
+      { jp: "interested", en: "curious" },
+      { jp: "eager", en: "keen" },
+      { jp: "keen", en: "eager" },
+      { jp: "willing", en: "ready" },
+      { jp: "anxious", en: "worried" },
+      { jp: "worried", en: "anxious" },
+      { jp: "nervous", en: "anxious" },
+      { jp: "calm", en: "peaceful" },
+      { jp: "peaceful", en: "calm" },
+      { jp: "disturbed", en: "upset" },
+      { jp: "awake", en: "conscious" },
+      { jp: "alike", en: "similar" },
+      { jp: "similar", en: "alike" },
+      { jp: "superior", en: "better" },
+      { jp: "better", en: "superior" },
+      { jp: "inferior", en: "worse" },
+      { jp: "worse", en: "inferior" },
+      { jp: "rare", en: "uncommon" },
+      { jp: "uncommon", en: "rare" },
+      { jp: "expensive", en: "costly" },
+      { jp: "costly", en: "expensive" },
+      { jp: "cheap", en: "inexpensive" },
+      { jp: "inexpensive", en: "cheap" },
+      { jp: "considerable", en: "large" },
+      { jp: "potential", en: "possible" },
+      { jp: "possible", en: "potential" },
+      { jp: "sensitive", en: "responsive" },
+      { jp: "intellectual", en: "mental" },
+      { jp: "demographic", en: "population-related" },
+      { jp: "mighty", en: "powerful" },
+      { jp: "powerful", en: "mighty" },
+      { jp: "intact", en: "undamaged" },
+      { jp: "undamaged", en: "intact" },
+      { jp: "intent", en: "determined" },
+      { jp: "determined", en: "intent" },
+      { jp: "intriguing", en: "interesting" },
+      { jp: "interesting", en: "intriguing" },
+      { jp: "merry", en: "cheerful" },
+      { jp: "cheerful", en: "merry" },
+      { jp: "perpetual", en: "endless" },
+      { jp: "endless", en: "perpetual" },
+      { jp: "spinal", en: "backbone-related" },
+      { jp: "susceptible", en: "likely" },
+      { jp: "likely", en: "probable" },
+      { jp: "probable", en: "likely" },
+      { jp: "mandatory", en: "required" },
+      { jp: "required", en: "mandatory" },
+      { jp: "upright", en: "vertical" },
+      { jp: "vertical", en: "upright" },
+      { jp: "abruptly", en: "suddenly" },
+      { jp: "suddenly", en: "abruptly" },
+      { jp: "conversely", en: "oppositely" },
+      { jp: "predominantly", en: "mainly" },
+      { jp: "mainly", en: "predominantly" },
+      { jp: "therefore", en: "thus" },
+      { jp: "thus", en: "therefore" },
+      { jp: "nearly", en: "almost" },
+      { jp: "almost", en: "nearly" },
+      { jp: "exactly", en: "precisely" },
+      { jp: "precisely", en: "exactly" },
+      { jp: "possibly", en: "perhaps" },
+      { jp: "perhaps", en: "possibly" },
+      { jp: "occasionally", en: "sometimes" },
+      { jp: "sometimes", en: "occasionally" },
+      { jp: "seldom", en: "rarely" },
+      { jp: "rarely", en: "seldom" },
+      { jp: "somehow", en: "in some way" },
+      { jp: "throughout", en: "all over" },
+      { jp: "all over", en: "throughout" },
+      { jp: "besides", en: "in addition" },
+      { jp: "beyond", en: "past" },
+      { jp: "within", en: "inside" },
+      { jp: "contrary", en: "opposite" }
+    ];
+
+    const ANTONI_WORDS = [
+      { jp: "increase", en: "decrease" },
+      { jp: "decrease", en: "increase" },
+      { jp: "rise", en: "fall" },
+      { jp: "fall", en: "rise" },
+      { jp: "expand", en: "shrink" },
+      { jp: "shrink", en: "expand" },
+      { jp: "improve", en: "worsen" },
+      { jp: "worsen", en: "improve" },
+      { jp: "accept", en: "reject" },
+      { jp: "reject", en: "accept" },
+      { jp: "include", en: "exclude" },
+      { jp: "exclude", en: "include" },
+      { jp: "allow", en: "forbid" },
+      { jp: "forbid", en: "allow" },
+      { jp: "permit", en: "ban" },
+      { jp: "ban", en: "permit" },
+      { jp: "support", en: "oppose" },
+      { jp: "oppose", en: "support" },
+      { jp: "agree", en: "refuse" },
+      { jp: "refuse", en: "accept" },
+      { jp: "appear", en: "vanish" },
+      { jp: "vanish", en: "appear" },
+      { jp: "arrive", en: "depart" },
+      { jp: "depart", en: "arrive" },
+      { jp: "enter", en: "leave" },
+      { jp: "leave", en: "enter" },
+      { jp: "begin", en: "end" },
+      { jp: "end", en: "begin" },
+      { jp: "start", en: "finish" },
+      { jp: "finish", en: "start" },
+      { jp: "continue", en: "cease" },
+      { jp: "cease", en: "continue" },
+      { jp: "construct", en: "destroy" },
+      { jp: "destroy", en: "construct" },
+      { jp: "create", en: "ruin" },
+      { jp: "ruin", en: "create" },
+      { jp: "build", en: "demolish" },
+      { jp: "demolish", en: "build" },
+      { jp: "protect", en: "harm" },
+      { jp: "harm", en: "protect" },
+      { jp: "preserve", en: "damage" },
+      { jp: "damage", en: "preserve" },
+      { jp: "save", en: "waste" },
+      { jp: "waste", en: "save" },
+      { jp: "gain", en: "lose" },
+      { jp: "lose", en: "gain" },
+      { jp: "win", en: "lose" },
+      { jp: "succeed", en: "fail" },
+      { jp: "fail", en: "succeed" },
+      { jp: "remember", en: "forget" },
+      { jp: "forget", en: "remember" },
+      { jp: "recall", en: "ignore" },
+      { jp: "ignore", en: "notice" },
+      { jp: "notice", en: "ignore" },
+      { jp: "reveal", en: "hide" },
+      { jp: "hide", en: "reveal" },
+      { jp: "expose", en: "conceal" },
+      { jp: "conceal", en: "expose" },
+      { jp: "open", en: "close" },
+      { jp: "close", en: "open" },
+      { jp: "connect", en: "separate" },
+      { jp: "separate", en: "connect" },
+      { jp: "combine", en: "divide" },
+      { jp: "divide", en: "combine" },
+      { jp: "join", en: "split" },
+      { jp: "split", en: "join" },
+      { jp: "add", en: "remove" },
+      { jp: "remove", en: "add" },
+      { jp: "attach", en: "detach" },
+      { jp: "detach", en: "attach" },
+      { jp: "raise", en: "lower" },
+      { jp: "lower", en: "raise" },
+      { jp: "lift", en: "drop" },
+      { jp: "drop", en: "lift" },
+      { jp: "advance", en: "retreat" },
+      { jp: "retreat", en: "advance" },
+      { jp: "approach", en: "avoid" },
+      { jp: "avoid", en: "approach" },
+      { jp: "attract", en: "repel" },
+      { jp: "repel", en: "attract" },
+      { jp: "pull", en: "push" },
+      { jp: "push", en: "pull" },
+      { jp: "buy", en: "sell" },
+      { jp: "sell", en: "buy" },
+      { jp: "lend", en: "borrow" },
+      { jp: "borrow", en: "lend" },
+      { jp: "give", en: "receive" },
+      { jp: "receive", en: "give" },
+      { jp: "supply", en: "demand" },
+      { jp: "demand", en: "supply" },
+      { jp: "import", en: "export" },
+      { jp: "export", en: "import" },
+      { jp: "hire", en: "fire" },
+      { jp: "fire", en: "hire" },
+      { jp: "employ", en: "dismiss" },
+      { jp: "dismiss", en: "employ" },
+      { jp: "encourage", en: "discourage" },
+      { jp: "discourage", en: "encourage" },
+      { jp: "praise", en: "criticize" },
+      { jp: "criticize", en: "praise" },
+      { jp: "admire", en: "despise" },
+      { jp: "despise", en: "admire" },
+      { jp: "trust", en: "doubt" },
+      { jp: "doubt", en: "trust" },
+      { jp: "believe", en: "doubt" },
+      { jp: "convince", en: "confuse" },
+      { jp: "confuse", en: "clarify" },
+      { jp: "clarify", en: "confuse" },
+      { jp: "simplify", en: "complicate" },
+      { jp: "complicate", en: "simplify" },
+      { jp: "calm", en: "upset" },
+      { jp: "upset", en: "calm" },
+      { jp: "please", en: "annoy" },
+      { jp: "annoy", en: "please" },
+      { jp: "amuse", en: "bore" },
+      { jp: "bore", en: "amuse" },
+      { jp: "interest", en: "bore" },
+      { jp: "satisfy", en: "disappoint" },
+      { jp: "disappoint", en: "satisfy" },
+      { jp: "love", en: "hate" },
+      { jp: "hate", en: "love" },
+      { jp: "like", en: "hate" },
+      { jp: "fear", en: "trust" },
+      { jp: "relax", en: "worry" },
+      { jp: "worry", en: "relax" },
+      { jp: "recover", en: "decline" },
+      { jp: "heal", en: "injure" },
+      { jp: "injure", en: "heal" },
+      { jp: "cure", en: "infect" },
+      { jp: "infect", en: "cure" },
+      { jp: "live", en: "die" },
+      { jp: "die", en: "live" },
+      { jp: "survive", en: "perish" },
+      { jp: "perish", en: "survive" },
+      { jp: "freeze", en: "melt" },
+      { jp: "melt", en: "freeze" },
+      { jp: "warm", en: "cool" },
+      { jp: "cool", en: "warm" },
+      { jp: "strengthen", en: "weaken" },
+      { jp: "weaken", en: "strengthen" },
+      { jp: "enable", en: "prevent" },
+      { jp: "prevent", en: "enable" },
+      { jp: "promote", en: "hinder" },
+      { jp: "hinder", en: "promote" },
+      { jp: "assist", en: "obstruct" },
+      { jp: "obstruct", en: "assist" },
+      { jp: "help", en: "hurt" },
+      { jp: "hurt", en: "help" },
+      { jp: "lead", en: "follow" },
+      { jp: "follow", en: "lead" },
+      { jp: "attack", en: "defend" },
+      { jp: "defend", en: "attack" },
+      { jp: "withdraw", en: "advance" },
+      { jp: "active", en: "passive" },
+      { jp: "passive", en: "active" },
+      { jp: "positive", en: "negative" },
+      { jp: "negative", en: "positive" },
+      { jp: "major", en: "minor" },
+      { jp: "minor", en: "major" },
+      { jp: "significant", en: "trivial" },
+      { jp: "trivial", en: "significant" },
+      { jp: "important", en: "trivial" },
+      { jp: "essential", en: "optional" },
+      { jp: "optional", en: "essential" },
+      { jp: "necessary", en: "optional" },
+      { jp: "useful", en: "useless" },
+      { jp: "valuable", en: "worthless" },
+      { jp: "efficient", en: "wasteful" },
+      { jp: "effective", en: "weak" },
+      { jp: "practical", en: "theoretical" },
+      { jp: "proper", en: "wrong" },
+      { jp: "appropriate", en: "wrong" },
+      { jp: "safe", en: "dangerous" },
+      { jp: "dangerous", en: "safe" },
+      { jp: "secure", en: "risky" },
+      { jp: "stable", en: "shaky" },
+      { jp: "certain", en: "doubtful" },
+      { jp: "clear", en: "vague" },
+      { jp: "vague", en: "clear" },
+      { jp: "obvious", en: "hidden" },
+      { jp: "hidden", en: "obvious" },
+      { jp: "visible", en: "hidden" },
+      { jp: "available", en: "scarce" },
+      { jp: "scarce", en: "available" },
+      { jp: "possible", en: "hopeless" },
+      { jp: "likely", en: "doubtful" },
+      { jp: "capable", en: "helpless" },
+      { jp: "conscious", en: "asleep" },
+      { jp: "aware", en: "ignorant" },
+      { jp: "familiar", en: "strange" },
+      { jp: "similar", en: "different" },
+      { jp: "different", en: "similar" },
+      { jp: "alike", en: "different" },
+      { jp: "same", en: "different" },
+      { jp: "common", en: "rare" },
+      { jp: "rare", en: "common" },
+      { jp: "ordinary", en: "remarkable" },
+      { jp: "remarkable", en: "ordinary" },
+      { jp: "typical", en: "rare" },
+      { jp: "normal", en: "strange" },
+      { jp: "general", en: "specific" },
+      { jp: "specific", en: "general" },
+      { jp: "broad", en: "narrow" },
+      { jp: "narrow", en: "broad" },
+      { jp: "wide", en: "narrow" },
+      { jp: "large", en: "small" },
+      { jp: "small", en: "large" },
+      { jp: "huge", en: "tiny" },
+      { jp: "tiny", en: "huge" },
+      { jp: "enormous", en: "tiny" },
+      { jp: "full", en: "empty" },
+      { jp: "empty", en: "full" },
+      { jp: "complete", en: "partial" },
+      { jp: "partial", en: "complete" },
+      { jp: "entire", en: "partial" },
+      { jp: "whole", en: "partial" },
+      { jp: "ancient", en: "modern" },
+      { jp: "modern", en: "ancient" },
+      { jp: "old", en: "new" },
+      { jp: "new", en: "old" },
+      { jp: "former", en: "current" },
+      { jp: "current", en: "former" },
+      { jp: "previous", en: "following" },
+      { jp: "following", en: "previous" },
+      { jp: "early", en: "late" },
+      { jp: "late", en: "early" },
+      { jp: "rapid", en: "slow" },
+      { jp: "slow", en: "rapid" },
+      { jp: "fast", en: "slow" },
+      { jp: "quick", en: "slow" },
+      { jp: "gradual", en: "sudden" },
+      { jp: "sudden", en: "gradual" },
+      { jp: "sharp", en: "gradual" },
+      { jp: "temporary", en: "permanent" },
+      { jp: "permanent", en: "temporary" },
+      { jp: "brief", en: "long" },
+      { jp: "long", en: "brief" },
+      { jp: "short", en: "long" },
+      { jp: "near", en: "far" },
+      { jp: "far", en: "near" },
+      { jp: "inside", en: "outside" },
+      { jp: "outside", en: "inside" },
+      { jp: "domestic", en: "foreign" },
+      { jp: "foreign", en: "domestic" },
+      { jp: "native", en: "foreign" },
+      { jp: "local", en: "global" },
+      { jp: "global", en: "local" },
+      { jp: "public", en: "private" },
+      { jp: "private", en: "public" },
+      { jp: "personal", en: "public" },
+      { jp: "individual", en: "collective" },
+      { jp: "collective", en: "individual" },
+      { jp: "superior", en: "inferior" },
+      { jp: "inferior", en: "superior" },
+      { jp: "better", en: "worse" },
+      { jp: "worse", en: "better" },
+      { jp: "best", en: "worst" },
+      { jp: "worst", en: "best" },
+      { jp: "maximum", en: "minimum" },
+      { jp: "minimum", en: "maximum" },
+      { jp: "high", en: "low" },
+      { jp: "low", en: "high" },
+      { jp: "upper", en: "lower" },
+      { jp: "rich", en: "poor" },
+      { jp: "poor", en: "rich" },
+      { jp: "wealthy", en: "poor" },
+      { jp: "expensive", en: "cheap" },
+      { jp: "cheap", en: "expensive" },
+      { jp: "costly", en: "cheap" },
+      { jp: "profit", en: "loss" },
+      { jp: "loss", en: "profit" },
+      { jp: "advantage", en: "drawback" },
+      { jp: "drawback", en: "advantage" },
+      { jp: "benefit", en: "harm" },
+      { jp: "strength", en: "weakness" },
+      { jp: "weakness", en: "strength" },
+      { jp: "success", en: "failure" },
+      { jp: "failure", en: "success" },
+      { jp: "victory", en: "defeat" },
+      { jp: "defeat", en: "victory" },
+      { jp: "growth", en: "decline" },
+      { jp: "decline", en: "growth" },
+      { jp: "peace", en: "war" },
+      { jp: "war", en: "peace" },
+      { jp: "order", en: "chaos" },
+      { jp: "chaos", en: "order" },
+      { jp: "freedom", en: "restriction" },
+      { jp: "restriction", en: "freedom" },
+      { jp: "truth", en: "lie" },
+      { jp: "lie", en: "truth" },
+      { jp: "fact", en: "fiction" },
+      { jp: "fiction", en: "fact" },
+      { jp: "knowledge", en: "ignorance" },
+      { jp: "ignorance", en: "knowledge" },
+      { jp: "confidence", en: "doubt" },
+      { jp: "hope", en: "despair" },
+      { jp: "despair", en: "hope" },
+      { jp: "joy", en: "sorrow" },
+      { jp: "sorrow", en: "joy" },
+      { jp: "delight", en: "sadness" },
+      { jp: "sadness", en: "delight" },
+      { jp: "pleasure", en: "pain" },
+      { jp: "pain", en: "pleasure" },
+      { jp: "courage", en: "fear" },
+      { jp: "panic", en: "calm" },
+      { jp: "friend", en: "enemy" },
+      { jp: "enemy", en: "friend" },
+      { jp: "ally", en: "opponent" },
+      { jp: "opponent", en: "ally" },
+      { jp: "majority", en: "minority" },
+      { jp: "minority", en: "majority" },
+      { jp: "presence", en: "absence" },
+      { jp: "absence", en: "presence" },
+      { jp: "access", en: "barrier" },
+      { jp: "barrier", en: "access" },
+      { jp: "solution", en: "problem" },
+      { jp: "problem", en: "solution" },
+      { jp: "cause", en: "effect" },
+      { jp: "effect", en: "cause" },
+      { jp: "question", en: "answer" },
+      { jp: "answer", en: "question" },
+      { jp: "source", en: "destination" },
+      { jp: "destination", en: "source" },
+      { jp: "origin", en: "end" },
+      { jp: "surface", en: "depth" },
+      { jp: "depth", en: "surface" },
+      { jp: "top", en: "bottom" },
+      { jp: "bottom", en: "top" },
+      { jp: "beginning", en: "end" },
+      { jp: "future", en: "past" },
+      { jp: "past", en: "future" },
+      { jp: "day", en: "night" },
+      { jp: "night", en: "day" },
+      { jp: "light", en: "darkness" },
+      { jp: "darkness", en: "light" },
+      { jp: "hot", en: "cold" },
+      { jp: "cold", en: "hot" },
+      { jp: "wet", en: "dry" },
+      { jp: "dry", en: "wet" },
+      { jp: "clean", en: "dirty" },
+      { jp: "dirty", en: "clean" },
+      { jp: "pure", en: "polluted" },
+      { jp: "healthy", en: "sick" },
+      { jp: "sick", en: "healthy" },
+      { jp: "strong", en: "weak" },
+      { jp: "weak", en: "strong" },
+      { jp: "tough", en: "fragile" },
+      { jp: "fragile", en: "tough" },
+      { jp: "hard", en: "soft" },
+      { jp: "soft", en: "hard" },
+      { jp: "heavy", en: "light" },
+      { jp: "smooth", en: "rough" },
+      { jp: "rough", en: "smooth" },
+      { jp: "deep", en: "shallow" },
+      { jp: "shallow", en: "deep" },
+      { jp: "thick", en: "thin" },
+      { jp: "thin", en: "thick" },
+      { jp: "dense", en: "sparse" },
+      { jp: "sparse", en: "dense" },
+      { jp: "fresh", en: "stale" },
+      { jp: "stale", en: "fresh" },
+      { jp: "awake", en: "asleep" },
+      { jp: "asleep", en: "awake" },
+      { jp: "alive", en: "dead" },
+      { jp: "dead", en: "alive" },
+      { jp: "male", en: "female" },
+      { jp: "female", en: "male" },
+      { jp: "senior", en: "junior" },
+      { jp: "junior", en: "senior" },
+      { jp: "adult", en: "child" },
+      { jp: "child", en: "adult" },
+      { jp: "rural", en: "urban" },
+      { jp: "urban", en: "rural" },
+      { jp: "natural", en: "artificial" },
+      { jp: "artificial", en: "natural" },
+      { jp: "mental", en: "physical" },
+      { jp: "physical", en: "mental" },
+      { jp: "theoretical", en: "practical" },
+      { jp: "abstract", en: "concrete" },
+      { jp: "concrete", en: "abstract" },
+      { jp: "optimistic", en: "pessimistic" },
+      { jp: "pessimistic", en: "optimistic" },
+      { jp: "generous", en: "selfish" },
+      { jp: "selfish", en: "generous" },
+      { jp: "polite", en: "rude" },
+      { jp: "rude", en: "polite" },
+      { jp: "brave", en: "cowardly" },
+      { jp: "cowardly", en: "brave" },
+      { jp: "humble", en: "proud" },
+      { jp: "proud", en: "humble" },
+      { jp: "patient", en: "hasty" },
+      { jp: "hasty", en: "patient" },
+      { jp: "sensitive", en: "dull" },
+      { jp: "dull", en: "sensitive" },
+      { jp: "curious", en: "indifferent" },
+      { jp: "indifferent", en: "curious" },
+      { jp: "eager", en: "reluctant" },
+      { jp: "reluctant", en: "eager" },
+      { jp: "willing", en: "reluctant" },
+      { jp: "anxious", en: "calm" },
+      { jp: "nervous", en: "relaxed" },
+      { jp: "relaxed", en: "nervous" },
+      { jp: "comfortable", en: "awkward" },
+      { jp: "awkward", en: "comfortable" },
+      { jp: "pleasant", en: "harsh" },
+      { jp: "harsh", en: "pleasant" },
+      { jp: "excellent", en: "terrible" },
+      { jp: "terrible", en: "excellent" },
+      { jp: "fantastic", en: "awful" },
+      { jp: "awful", en: "fantastic" },
+      { jp: "evil", en: "good" },
+      { jp: "good", en: "evil" },
+      { jp: "innocent", en: "guilty" },
+      { jp: "guilty", en: "innocent" },
+      { jp: "gentle", en: "rough" },
+      { jp: "strict", en: "lenient" },
+      { jp: "lenient", en: "strict" },
+      { jp: "bold", en: "timid" },
+      { jp: "timid", en: "bold" },
+      { jp: "wise", en: "foolish" },
+      { jp: "foolish", en: "wise" },
+      { jp: "clever", en: "stupid" },
+      { jp: "stupid", en: "clever" },
+      { jp: "modest", en: "arrogant" },
+      { jp: "arrogant", en: "modest" },
+      { jp: "flexible", en: "rigid" },
+      { jp: "rigid", en: "flexible" },
+      { jp: "complex", en: "simple" },
+      { jp: "simple", en: "complex" },
+      { jp: "complicated", en: "simple" },
+      { jp: "reasonable", en: "absurd" },
+      { jp: "absurd", en: "reasonable" },
+      { jp: "realistic", en: "idealistic" },
+      { jp: "idealistic", en: "realistic" },
+      { jp: "reduce", en: "increase" },
+      { jp: "shortage", en: "supply" },
+      { jp: "abundant", en: "scarce" },
+      { jp: "plenty", en: "lack" },
+      { jp: "lack", en: "plenty" },
+      { jp: "sacrifice", en: "gain" },
+      { jp: "reward", en: "punishment" },
+      { jp: "punishment", en: "reward" },
+      { jp: "security", en: "danger" },
+      { jp: "danger", en: "security" },
+      { jp: "risk", en: "safety" },
+      { jp: "safety", en: "risk" },
+      { jp: "income", en: "expense" },
+      { jp: "expense", en: "income" },
+      { jp: "wealth", en: "poverty" },
+      { jp: "poverty", en: "wealth" },
+      { jp: "setback", en: "advance" },
+      { jp: "progress", en: "regress" },
+      { jp: "regress", en: "progress" },
+      { jp: "tradition", en: "innovation" },
+      { jp: "innovation", en: "tradition" },
+      { jp: "conform", en: "rebel" },
+      { jp: "rebel", en: "conform" },
+      { jp: "conventional", en: "novel" },
+      { jp: "novel", en: "conventional" },
+      { jp: "voluntary", en: "forced" },
+      { jp: "forced", en: "voluntary" },
+      { jp: "mandatory", en: "optional" },
+      { jp: "profound", en: "shallow" },
+      { jp: "genuine", en: "artificial" },
+      { jp: "fake", en: "genuine" },
+      { jp: "lasting", en: "temporary" },
+      { jp: "frequent", en: "rare" },
+      { jp: "seldom", en: "often" },
+      { jp: "often", en: "seldom" },
+      { jp: "occasionally", en: "frequently" },
+      { jp: "frequently", en: "occasionally" },
+      { jp: "nearly", en: "exactly" },
+      { jp: "exactly", en: "roughly" },
+      { jp: "roughly", en: "exactly" },
+      { jp: "possibly", en: "certainly" },
+      { jp: "certainly", en: "possibly" },
+      { jp: "before", en: "after" },
+      { jp: "after", en: "before" },
+      { jp: "above", en: "below" },
+      { jp: "below", en: "above" },
+      { jp: "within", en: "beyond" },
+      { jp: "beyond", en: "within" },
+      { jp: "throughout", en: "nowhere" },
+      { jp: "nowhere", en: "throughout" },
+      { jp: "besides", en: "except" },
+      { jp: "except", en: "besides" },
+      { jp: "contrary", en: "same" }
+    ];
+
     const scoreValue = document.getElementById('scoreValue');
     const timeValue = document.getElementById('timeValue');
     const comboValue = document.getElementById('comboValue');
@@ -2962,7 +4348,9 @@
 
     const menuBtn = document.getElementById('menuBtn');
     const retryBtn = document.getElementById('retryBtn');
-    const startPublicBtn = document.getElementById('startPublicBtn');
+    const startSushiBtn = document.getElementById('startSushiBtn');
+    const startShinoBtn = document.getElementById('startShinoBtn');
+    const startAntoniBtn = document.getElementById('startAntoniBtn');
     const openRankingBtn = document.getElementById('openRankingBtn');
     const closeRankingBtn = document.getElementById('closeRankingBtn');
     const gameTitleEl = document.getElementById('gameTitle');
@@ -2983,7 +4371,9 @@
     const backHomeFromPrivacyBtn = document.getElementById('backHomeFromPrivacyBtn');
     const backHomeFromContactBtn = document.getElementById('backHomeFromContactBtn');
 
-    const rankingTabDefault = document.getElementById('rankingTabDefault');
+    const rankingTabSushi = document.getElementById('rankingTabSushi');
+    const rankingTabShino = document.getElementById('rankingTabShino');
+    const rankingTabAntoni = document.getElementById('rankingTabAntoni');
     const bgm = document.getElementById('bgm');
     if (bgm) bgm.volume = 0.35;
 
@@ -2996,11 +4386,17 @@
     const rankingScreenList = document.getElementById('rankingScreenList');
     const rankingStatus = document.getElementById('rankingStatus');
     const saveStatus = document.getElementById('saveStatus');
+    const mistakeList = document.getElementById('mistakeList');
+    const mistakeListBody = document.getElementById('mistakeListBody');
 
     if (gameTitleEl) gameTitleEl.textContent = GAME_TITLE;
 
+    const appEl = document.querySelector('.app');
     const comboPopup = document.getElementById('comboPopup');
+    const comboTitle = document.getElementById('comboTitle');
+    const comboBreak = document.getElementById('comboBreak');
     const flashEffect = document.getElementById('flashEffect');
+    const comboMilestoneEffect = document.getElementById('comboMilestoneEffect');
 
     const playAgainBtn = document.getElementById('playAgainBtn');
     const backToMenuBtn = document.getElementById('backToMenuBtn');
@@ -3028,7 +4424,10 @@
       balloons: [],
       scoreSavedThisRound: false,
       remainingQuestions: [],
-      usedQuestions: []
+      usedQuestions: [],
+      mistakes: [],
+      dangerActive: false,
+      awakeningActive: false
     };
 
     function ensureAudio() {
@@ -3078,16 +4477,36 @@
       setTimeout(() => playTone(784, 0.14, 'triangle', 0.045, 988), 180);
     }
 
+    function getModeConfig(mode = currentMode) {
+      return MODE_CONFIG[mode] || MODE_CONFIG[PUBLIC_MODE];
+    }
+
     function getWords(mode = currentMode) {
+      if (mode === MODE_SHINO) return SHINO_WORDS;
+      if (mode === MODE_ANTONI) return ANTONI_WORDS;
       return WORDS;
     }
 
     function getModeLabel(mode = currentMode) {
-      return GAME_TITLE;
+      return getModeConfig(mode).label;
+    }
+
+    function getQuestionPrompt(question) {
+      return question ? question.jp : "";
+    }
+
+    function getAnswerValue(question) {
+      return question ? question.en : "";
+    }
+
+    function getChoiceCount(mode = currentMode) {
+      return getModeConfig(mode).choiceCount || 4;
     }
 
     function updateModeBadge() {
       modeBadge.textContent = getModeLabel();
+      const label = document.querySelector('.question-label');
+      if (label) label.textContent = getModeConfig().questionLabel;
     }
 
     function shuffle(arr) {
@@ -3111,9 +4530,20 @@
       return next;
     }
 
-    function getDistractors(correctEn, count = 6) {
+    function getDistractors(correctEn, count = 3) {
       const words = getWords();
-      return shuffle(words.filter(w => w.en !== correctEn)).slice(0, count).map(w => w.en);
+      const seen = new Set([String(correctEn).toLowerCase()]);
+      const pool = [];
+
+      shuffle(words).forEach(w => {
+        const value = String(w.en || "").trim();
+        const key = value.toLowerCase();
+        if (!value || seen.has(key)) return;
+        seen.add(key);
+        pool.push(value);
+      });
+
+      return pool.slice(0, count);
     }
 
     function getMultiplier(combo) {
@@ -3163,6 +4593,130 @@
       void flashEffect.offsetWidth;
       flashEffect.classList.add('active');
     }
+
+    function triggerComboMilestone(combo) {
+      if (!comboMilestoneEffect) return;
+
+      comboMilestoneEffect.classList.remove('active');
+      void comboMilestoneEffect.offsetWidth;
+      comboMilestoneEffect.classList.add('active');
+
+      if (appEl) {
+        appEl.classList.remove('combo-shock');
+        void appEl.offsetWidth;
+        appEl.classList.add('combo-shock');
+      }
+
+      comboPopup.textContent = `${combo} COMBO!!`;
+      comboPopup.classList.remove('show');
+      void comboPopup.offsetWidth;
+      comboPopup.classList.add('show');
+
+      playTone(523, 0.08, 'square', 0.035);
+      setTimeout(() => playTone(659, 0.09, 'square', 0.035), 70);
+      setTimeout(() => playTone(784, 0.12, 'square', 0.04), 145);
+    }
+
+    function getComboTitle(combo) {
+      if (combo >= 100) return "IMMORTAL";
+      if (combo >= 75) return "GODLIKE";
+      if (combo >= 50) return "LEGEND";
+      if (combo >= 40) return "MONSTER";
+      if (combo >= 30) return "AMAZING";
+      if (combo >= 20) return "GREAT";
+      if (combo >= 10) return "GOOD";
+      return "";
+    }
+
+    function showComboTitle(combo) {
+      if (!comboTitle) return;
+      const title = getComboTitle(combo);
+      if (!title) return;
+      comboTitle.textContent = title;
+      comboTitle.classList.remove('show');
+      void comboTitle.offsetWidth;
+      comboTitle.classList.add('show');
+    }
+
+    function triggerComboBreak(previousCombo) {
+      if (!comboBreak || previousCombo < 10) return;
+      comboBreak.textContent = previousCombo >= 50 ? "LEGEND BROKEN..." : "COMBO BREAK...";
+      comboBreak.classList.remove('show');
+      void comboBreak.offsetWidth;
+      comboBreak.classList.add('show');
+      playTone(220, 0.16, 'sawtooth', 0.035, 120);
+    }
+
+    function updateIntensityModes() {
+      if (!appEl) return;
+
+      const danger = GAME.running && GAME.timeLeft <= 10 && GAME.timeLeft > 0;
+      if (danger !== GAME.dangerActive) {
+        GAME.dangerActive = danger;
+        appEl.classList.toggle('danger-mode', danger);
+        if (bgm) {
+          try { bgm.playbackRate = danger ? 1.10 : 1.0; } catch (e) {}
+        }
+      }
+
+      const awakening = GAME.running && GAME.combo >= 50;
+      if (awakening !== GAME.awakeningActive) {
+        GAME.awakeningActive = awakening;
+        appEl.classList.toggle('awakening-mode', awakening);
+      }
+    }
+
+    function resetIntensityModes() {
+      GAME.dangerActive = false;
+      GAME.awakeningActive = false;
+      if (appEl) {
+        appEl.classList.remove('danger-mode');
+        appEl.classList.remove('awakening-mode');
+        appEl.classList.remove('combo-shock');
+      }
+      if (bgm) {
+        try { bgm.playbackRate = 1.0; } catch (e) {}
+      }
+    }
+
+    function recordMistake(button) {
+      if (!GAME.currentQuestion) return;
+      const correct = getAnswerValue(GAME.currentQuestion);
+      const picked = button ? button.dataset.value : "";
+      GAME.mistakes.push({
+        prompt: getQuestionPrompt(GAME.currentQuestion),
+        correct,
+        picked
+      });
+    }
+
+    function renderMistakeList() {
+      if (!mistakeList || !mistakeListBody) return;
+
+      if (!GAME.mistakes.length) {
+        mistakeList.classList.remove('hidden');
+        mistakeListBody.innerHTML = `<div class="mistake-empty">Perfect! 間違えた単語はありません。</div>`;
+        return;
+      }
+
+      const rows = GAME.mistakes.slice(0, 20).map(m => `
+        <div class="mistake-row">
+          <div>
+            <strong>${escapeHtml(m.prompt)}</strong><br>
+            <span class="small">your answer: ${escapeHtml(m.picked || "-")}</span>
+          </div>
+          <div class="mistake-answer">${escapeHtml(m.correct)}</div>
+        </div>
+      `).join("");
+
+      const more = GAME.mistakes.length > 20
+        ? `<div class="small" style="text-align:center; margin-top:6px;">ほか ${GAME.mistakes.length - 20} 件</div>`
+        : "";
+
+      mistakeList.classList.remove('hidden');
+      mistakeListBody.innerHTML = rows + more;
+    }
+
 
     function createBurstEffect(targetEl) {
       const rect = targetEl.getBoundingClientRect();
@@ -3297,18 +4851,27 @@
         return;
       }
 
-      questionText.textContent = GAME.currentQuestion.jp;
+      questionText.textContent = getQuestionPrompt(GAME.currentQuestion);
       GAME.questionLocked = false;
       GAME.lastCountdownBeepSecond = null;
 
-      const distractorCount = Math.min(6, Math.max(0, words.length - 1));
-      const choices = shuffle([
-        GAME.currentQuestion.en,
-        ...getDistractors(GAME.currentQuestion.en, distractorCount)
-      ]);
+      const answer = getAnswerValue(GAME.currentQuestion);
+      const distractorCount = Math.min(getChoiceCount() - 1, Math.max(0, words.length - 1));
+      const uniqueChoices = [];
+      const seenChoices = new Set();
+
+      [answer, ...getDistractors(answer, distractorCount)].forEach(choice => {
+        const value = String(choice || "").trim();
+        const key = value.toLowerCase();
+        if (!value || seenChoices.has(key)) return;
+        seenChoices.add(key);
+        uniqueChoices.push(value);
+      });
+
+      const choices = shuffle(uniqueChoices);
 
       choices.forEach((choice, index) => {
-        const type = choice === GAME.currentQuestion.en ? 'correct' : 'wrong';
+        const type = choice === answer ? 'correct' : 'wrong';
         createBalloon(choice, type, index, choices.length);
       });
     }
@@ -3322,7 +4885,13 @@
       GAME.comboDeadline = now + 5000;
       if (GAME.combo > GAME.maxCombo) GAME.maxCombo = GAME.combo;
       showComboPopup(GAME.combo);
-      if (GAME.combo >= 5) triggerFlash();
+      if (GAME.combo > 0 && GAME.combo % 10 === 0) {
+        triggerComboMilestone(GAME.combo);
+        showComboTitle(GAME.combo);
+      } else if (GAME.combo >= 5) {
+        triggerFlash();
+      }
+      updateIntensityModes();
     }
 
     function handleTap(button) {
@@ -3344,7 +4913,7 @@
 
         button.classList.add('correct-flash');
         playCorrectEffect(button);
-        setFeedback(`Nice! +${gained}点 / Combo x${GAME.combo}`, 'good');
+        setFeedback(`Nice! +${gained}点 / +2秒 / Combo x${GAME.combo}`, 'good');
         soundCorrect();
         soundCombo(GAME.combo);
         updateHud();
@@ -3357,9 +4926,13 @@
       } else {
         GAME.attemptCount += 1;
         ensureAudio();
+        recordMistake(button);
+        const brokenCombo = GAME.combo;
         GAME.combo = 0;
         GAME.comboDeadline = null;
         showComboPopup(0);
+        triggerComboBreak(brokenCombo);
+        updateIntensityModes();
 
         GAME.score = Math.max(0, GAME.score - 5);
         GAME.timeLeft = Math.max(0, GAME.timeLeft - 3);
@@ -3378,11 +4951,15 @@
       if (!GAME.running) return;
 
       GAME.timeLeft -= 0.1;
+      updateIntensityModes();
 
       if (GAME.comboDeadline && performance.now() > GAME.comboDeadline) {
+        const brokenCombo = GAME.combo;
         GAME.combo = 0;
         GAME.comboDeadline = null;
         showComboPopup(0);
+        triggerComboBreak(brokenCombo);
+        updateIntensityModes();
       }
 
       const countdownSecond = Math.ceil(GAME.timeLeft);
@@ -3431,6 +5008,10 @@
       GAME.questionLocked = false;
       GAME.lastCountdownBeepSecond = null;
       GAME.scoreSavedThisRound = false;
+      GAME.mistakes = [];
+      resetIntensityModes();
+      if (mistakeList) mistakeList.classList.add('hidden');
+      if (mistakeListBody) mistakeListBody.innerHTML = "";
       showComboPopup(0);
       saveStatus.textContent = "";
 
@@ -3440,7 +5021,7 @@
       if (clearOverlay) clearOverlay.classList.add('hidden');
 
       buildQuestionPool();
-      setFeedback(`${getModeLabel()} モード開始`, '');
+      setFeedback(getModeConfig().startMessage, '');
       renderQuestion();
       updateHud();
 
@@ -3469,6 +5050,7 @@
       stopBGM();
       clearInterval(GAME.tickTimer);
       showComboPopup(0);
+      resetIntensityModes();
       menuOverlay.classList.remove('hidden');
       rankingOverlay.classList.add('hidden');
       resultOverlay.classList.add('hidden');
@@ -3533,7 +5115,9 @@
     }
 
     function setRankingTabUI() {
-      rankingTabDefault.classList.toggle("active", true);
+      if (rankingTabSushi) rankingTabSushi.classList.toggle("active", rankingMode === MODE_SUSHI);
+      if (rankingTabShino) rankingTabShino.classList.toggle("active", rankingMode === MODE_SHINO);
+      if (rankingTabAntoni) rankingTabAntoni.classList.toggle("active", rankingMode === MODE_ANTONI);
     }
 
     async function loadRanking(mode = currentMode, target = rankingList) {
@@ -3545,7 +5129,7 @@
       const { data, error } = await supabaseClient
         .from("scores")
         .select("id, player_name, score, max_combo, accuracy, mode")
-        .eq("mode", mode)
+        .in("mode", mode === MODE_SUSHI ? [MODE_SUSHI, "core"] : [mode])
         .order("score", { ascending: false })
         .limit(200);
 
@@ -3565,7 +5149,7 @@
       return deduped;
     }
 
-    async function openRankingScreen(mode = PUBLIC_MODE) {
+    async function openRankingScreen(mode = currentMode || PUBLIC_MODE) {
       rankingMode = mode;
       setRankingTabUI();
       rankingStatus.textContent = "読み込み中...";
@@ -3595,7 +5179,7 @@
   p_score: finalScoreValue,
   p_max_combo: GAME.maxCombo,
   p_accuracy: accuracy,
-  p_mode: PUBLIC_MODE
+  p_mode: currentMode
 });
 
       if (error) {
@@ -3612,6 +5196,7 @@
       clearInterval(GAME.tickTimer);
       GAME.comboDeadline = null;
       showComboPopup(0);
+      resetIntensityModes();
       updateHud();
       questionText.textContent = 'COMPLETE!';
       setFeedback('出題できる単語をすべて使い切りました。', 'good');
@@ -3640,6 +5225,7 @@
       clearInterval(GAME.tickTimer);
       GAME.comboDeadline = null;
       showComboPopup(0);
+      resetIntensityModes();
       updateHud();
       questionText.textContent = '終了！';
       setFeedback('おつかれさま。結果を確認しよう。');
@@ -3657,6 +5243,7 @@
       finalAccuracy.textContent = `${accuracy}%`;
       finalCorrect.textContent = GAME.correctCount;
       finalMaxCombo.textContent = GAME.maxCombo;
+      renderMistakeList();
       resultOverlay.classList.remove('hidden');
 
       await saveHighScore(bonusScore, accuracy);
@@ -3676,7 +5263,9 @@
     if (backHomeFromPrivacyBtn) backHomeFromPrivacyBtn.addEventListener('click', () => showHomeSubPanel('home'));
     if (backHomeFromContactBtn) backHomeFromContactBtn.addEventListener('click', () => showHomeSubPanel('home'));
 
-    startPublicBtn.addEventListener('click', () => startGame(PUBLIC_MODE));
+    if (startSushiBtn) startSushiBtn.addEventListener('click', () => startGame(MODE_SUSHI));
+    if (startShinoBtn) startShinoBtn.addEventListener('click', () => startGame(MODE_SHINO));
+    if (startAntoniBtn) startAntoniBtn.addEventListener('click', () => startGame(MODE_ANTONI));
 
     playAgainBtn.addEventListener('click', () => startGame(currentMode));
     if (clearPlayAgainBtn) clearPlayAgainBtn.addEventListener('click', () => startGame(currentMode));
@@ -3686,10 +5275,12 @@
     backToMenuBtn.addEventListener('click', backToMenu);
     if (clearBackToMenuBtn) clearBackToMenuBtn.addEventListener('click', backToMenu);
 
-    openRankingBtn.addEventListener('click', () => openRankingScreen(PUBLIC_MODE));
+    openRankingBtn.addEventListener('click', () => openRankingScreen(currentMode || PUBLIC_MODE));
     closeRankingBtn.addEventListener('click', backToMenu);
 
-    rankingTabDefault.addEventListener('click', () => openRankingScreen(PUBLIC_MODE));
+    if (rankingTabSushi) rankingTabSushi.addEventListener('click', () => openRankingScreen(MODE_SUSHI));
+    if (rankingTabShino) rankingTabShino.addEventListener('click', () => openRankingScreen(MODE_SHINO));
+    if (rankingTabAntoni) rankingTabAntoni.addEventListener('click', () => openRankingScreen(MODE_ANTONI));
 
     window.addEventListener('resize', () => {
       if (GAME.running) renderQuestion();
