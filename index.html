@@ -551,6 +551,33 @@
       text-align: left;
     }
 
+    .ranking-scroll {
+      max-height: 420px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .ranking-row.you {
+      border-radius: 10px;
+      padding-left: 8px;
+      padding-right: 8px;
+      background: rgba(250,204,21,0.16);
+      border-bottom-color: rgba(250,204,21,0.22);
+      box-shadow: inset 0 0 0 1px rgba(250,204,21,0.24);
+    }
+
+    .you-badge {
+      display: inline-block;
+      margin-left: 6px;
+      padding: 1px 6px;
+      border-radius: 999px;
+      background: rgba(250,204,21,0.25);
+      color: #fef3c7;
+      font-size: 10px;
+      font-weight: 1000;
+      vertical-align: middle;
+    }
+
     .ranking-title {
       font-size: 16px;
       font-weight: 800;
@@ -770,6 +797,72 @@
       color: #fef3c7;
       font-size: 13px;
       line-height: 1.6;
+    }
+
+
+    .growth-card {
+      margin-top: 12px;
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      text-align: left;
+    }
+
+    .growth-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .growth-rank {
+      font-size: 20px;
+      font-weight: 1000;
+      color: #fef08a;
+    }
+
+    .growth-score {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .growth-bar {
+      width: 100%;
+      height: 12px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(15,23,42,0.65);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .growth-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #38bdf8 0%, #facc15 60%, #fb923c 100%);
+      transition: width 0.35s ease;
+    }
+
+    .growth-next {
+      margin-top: 7px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .rank-up-banner {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 14px;
+      background: rgba(250,204,21,0.14);
+      border: 1px solid rgba(250,204,21,0.35);
+      color: #fef3c7;
+      font-weight: 900;
+      text-align: center;
     }
 
     @keyframes comboPop {
@@ -1003,6 +1096,15 @@
             <button class="btn gold" id="openRankingBtn">ランキング確認</button>
           </div>
 
+          <div class="growth-card" id="homeGrowthCard">
+            <div class="growth-head">
+              <div class="growth-rank" id="homeAnimalRank">🐹 ハムスター</div>
+              <div class="growth-score" id="homeTotalScore">0</div>
+            </div>
+            <div class="growth-bar"><div class="growth-fill" id="homeGrowthFill"></div></div>
+            <div class="growth-next" id="homeGrowthNext">次の動物まであと -</div>
+          </div>
+
           <div class="link-grid" aria-label="サイト内メニュー">
             <button class="text-link-btn" id="showHowToBtn">遊び方</button>
             <button class="text-link-btn" id="showAboutBtn">すし単とは</button>
@@ -1136,6 +1238,16 @@
           </div>
         </div>
 
+        <div class="growth-card" id="resultGrowthCard">
+          <div class="growth-head">
+            <div class="growth-rank" id="resultAnimalRank">🐹 ハムスター</div>
+            <div class="growth-score" id="resultTotalScore">0</div>
+          </div>
+          <div class="growth-bar"><div class="growth-fill" id="resultGrowthFill"></div></div>
+          <div class="growth-next" id="resultGrowthNext">次の動物まであと -</div>
+          <div id="rankUpBanner" class="rank-up-banner hidden">RANK UP!</div>
+        </div>
+
         <div id="rankingList" class="ranking-box">
           <div class="ranking-title">🏆 Ranking</div>
           <div class="ranking-empty">まだスコアがありません</div>
@@ -1198,6 +1310,86 @@
     let audioCtx = null;
     let currentMode = PUBLIC_MODE;
     let rankingMode = PUBLIC_MODE;
+
+    const GROWTH_STORAGE_KEY = "sushitan_total_score_v1";
+    const GROWTH_MAX_SCORE = 1000000;
+    const ANIMAL_RANKS = [
+      { name: "ハムスター", emoji: "🐹", min: 0 },
+      { name: "うさぎ", emoji: "🐰", min: 10000 },
+      { name: "ねこ", emoji: "🐱", min: 30000 },
+      { name: "いぬ", emoji: "🐶", min: 70000 },
+      { name: "きつね", emoji: "🦊", min: 120000 },
+      { name: "オオカミ", emoji: "🐺", min: 200000 },
+      { name: "シカ", emoji: "🦌", min: 320000 },
+      { name: "ウマ", emoji: "🐴", min: 500000 },
+      { name: "ゾウ", emoji: "🐘", min: 750000 },
+      { name: "人間", emoji: "🧑", min: 1000000 }
+    ];
+
+    function formatCompactScore(num) {
+      const n = Math.max(0, Number(num) || 0);
+      const tidy = value => value.toFixed(2).replace(/\.00$/, "").replace(/(\.\d)0$/, "$1");
+
+      if (n >= 1000000) return `${tidy(n / 1000000)}M`;
+      if (n >= 1000) return `${tidy(n / 1000)}k`;
+      return `${Math.round(n)}`;
+    }
+
+    function getStoredTotalScore() {
+      return Math.max(0, Number(localStorage.getItem(GROWTH_STORAGE_KEY) || 0));
+    }
+
+    function setStoredTotalScore(score) {
+      const capped = Math.min(GROWTH_MAX_SCORE, Math.max(0, Math.round(Number(score) || 0)));
+      localStorage.setItem(GROWTH_STORAGE_KEY, String(capped));
+      return capped;
+    }
+
+    function getAnimalRank(totalScore) {
+      let rank = ANIMAL_RANKS[0];
+      let index = 0;
+      ANIMAL_RANKS.forEach((r, i) => {
+        if (totalScore >= r.min) {
+          rank = r;
+          index = i;
+        }
+      });
+      const next = ANIMAL_RANKS[index + 1] || null;
+      const prevMin = rank.min;
+      const nextMin = next ? next.min : GROWTH_MAX_SCORE;
+      const span = Math.max(1, nextMin - prevMin);
+      const progress = next ? Math.min(100, ((totalScore - prevMin) / span) * 100) : 100;
+      return { rank, index, next, progress };
+    }
+
+    function renderGrowthCard(prefix, totalScore, gained = 0) {
+      const rankEl = prefix === "home" ? homeAnimalRank : resultAnimalRank;
+      const totalEl = prefix === "home" ? homeTotalScore : resultTotalScore;
+      const fillEl = prefix === "home" ? homeGrowthFill : resultGrowthFill;
+      const nextEl = prefix === "home" ? homeGrowthNext : resultGrowthNext;
+      if (!rankEl || !totalEl || !fillEl || !nextEl) return;
+
+      const info = getAnimalRank(totalScore);
+      rankEl.textContent = `${info.rank.emoji} ${info.rank.name}`;
+      totalEl.textContent = `累計 ${formatCompactScore(totalScore)} / 1M`;
+      fillEl.style.width = `${info.progress}%`;
+
+      if (info.next) {
+        const remain = Math.max(0, info.next.min - totalScore);
+        const gainText = gained ? `今回 +${formatCompactScore(gained)}。` : "";
+        nextEl.textContent = `${gainText}次は ${info.next.emoji} ${info.next.name} まで あと ${formatCompactScore(remain)}`;
+      } else {
+        nextEl.textContent = "最高ランク到達。人間おめでとう。";
+      }
+    }
+
+    function addGrowthScore(scoreToAdd) {
+      const before = getStoredTotalScore();
+      const beforeRank = getAnimalRank(before).index;
+      const after = setStoredTotalScore(before + scoreToAdd);
+      const afterRank = getAnimalRank(after).index;
+      return { before, after, rankUp: afterRank > beforeRank };
+    }
 
       const WORDS = [
 { jp: "～の後に続く、～に従う", en: "follow" },
@@ -4388,6 +4580,15 @@
     const saveStatus = document.getElementById('saveStatus');
     const mistakeList = document.getElementById('mistakeList');
     const mistakeListBody = document.getElementById('mistakeListBody');
+    const homeAnimalRank = document.getElementById('homeAnimalRank');
+    const homeTotalScore = document.getElementById('homeTotalScore');
+    const homeGrowthFill = document.getElementById('homeGrowthFill');
+    const homeGrowthNext = document.getElementById('homeGrowthNext');
+    const resultAnimalRank = document.getElementById('resultAnimalRank');
+    const resultTotalScore = document.getElementById('resultTotalScore');
+    const resultGrowthFill = document.getElementById('resultGrowthFill');
+    const resultGrowthNext = document.getElementById('resultGrowthNext');
+    const rankUpBanner = document.getElementById('rankUpBanner');
 
     if (gameTitleEl) gameTitleEl.textContent = GAME_TITLE;
 
@@ -5012,6 +5213,7 @@
       resetIntensityModes();
       if (mistakeList) mistakeList.classList.add('hidden');
       if (mistakeListBody) mistakeListBody.innerHTML = "";
+      if (rankUpBanner) rankUpBanner.classList.add('hidden');
       showComboPopup(0);
       saveStatus.textContent = "";
 
@@ -5043,6 +5245,7 @@
       });
       const target = panels[panelName] || homePanel;
       if (target) target.classList.remove('hidden');
+      if (panelName === 'home') renderGrowthCard("home", getStoredTotalScore());
     }
 
     function backToMenu() {
@@ -5056,6 +5259,7 @@
       resultOverlay.classList.add('hidden');
       if (clearOverlay) clearOverlay.classList.add('hidden');
       showHomeSubPanel('home');
+      renderGrowthCard("home", getStoredTotalScore());
       clearArena();
       questionText.textContent = '準備OK？';
       setFeedback('モードを選んでスタート');
@@ -5071,27 +5275,44 @@
         return;
       }
 
-      const rows = data.map((d, i) => `
-        <div class="ranking-row rich">
-          <div class="ranking-rank">${i + 1}.</div>
+      const savedName = getSavedPlayerName();
+      const rows = data.map((d, i) => {
+        const playerName = (d.player_name || "NO NAME").trim();
+        const isYou = savedName && normalizePlayerNameForRank(playerName) === normalizePlayerNameForRank(savedName);
+        return `
+        <div class="ranking-row rich ${isYou ? "you" : ""}">
+          <div class="ranking-rank">${getRankDisplay(i)}</div>
           <div class="ranking-main">
-            <div class="ranking-name">${escapeHtml(d.player_name || "NO NAME")}</div>
+            <div class="ranking-name">${escapeHtml(playerName)}${isYou ? '<span class="you-badge">YOU</span>' : ""}</div>
             <div class="ranking-sub">
               Combo: ${Number(d.max_combo ?? 0)} / Acc: ${Number(d.accuracy ?? 0)}%
             </div>
           </div>
-          <div class="ranking-score">${Number(d.score ?? 0)}</div>
+          <div class="ranking-score">${formatCompactScore(Number(d.score ?? 0))}</div>
         </div>
-      `).join("");
+      `;
+      }).join("");
 
-      container.innerHTML = title + rows;
+      container.innerHTML = title + `<div class="ranking-scroll">${rows}</div>`;
+    }
+
+    function normalizePlayerNameForRank(name) {
+      return String(name || "NO NAME")
+        .normalize("NFKC")
+        .trim()
+        .replace(/\s+/g, " ")
+        .toLowerCase();
+    }
+
+    function normalizeModeForRank(mode) {
+      return mode === "core" ? MODE_SUSHI : mode;
     }
 
     function dedupeRanking(rows) {
       const bestMap = new Map();
 
       rows.forEach(row => {
-        const key = `${(row.player_name || "NO NAME").trim()}__${row.mode || ""}`;
+        const key = `${normalizePlayerNameForRank(row.player_name)}__${normalizeModeForRank(row.mode || currentMode)}`;
         const score = Number(row.score || 0);
         const prev = bestMap.get(key);
 
@@ -5102,7 +5323,7 @@
 
       return [...bestMap.values()]
         .sort((a, b) => Number(b.score || 0) - Number(a.score || 0))
-        .slice(0, 10);
+        .slice(0, 50);
     }
 
     function escapeHtml(str) {
@@ -5113,6 +5334,24 @@
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
     }
+
+    function getSavedPlayerName() {
+      return (
+        localStorage.getItem("sushitan_player_name") ||
+        localStorage.getItem("speed_vocab_name") ||
+        localStorage.getItem("player_name") ||
+        localStorage.getItem("playerName") ||
+        ""
+      ).trim();
+    }
+
+    function getRankDisplay(index) {
+      if (index === 0) return "🥇";
+      if (index === 1) return "🥈";
+      if (index === 2) return "🥉";
+      return `${index + 1}.`;
+    }
+
 
     function setRankingTabUI() {
       if (rankingTabSushi) rankingTabSushi.classList.toggle("active", rankingMode === MODE_SUSHI);
@@ -5131,7 +5370,7 @@
         .select("id, player_name, score, max_combo, accuracy, mode")
         .in("mode", mode === MODE_SUSHI ? [MODE_SUSHI, "core"] : [mode])
         .order("score", { ascending: false })
-        .limit(200);
+        .limit(500);
 
       if (error) {
         console.error("ranking load error:", error);
@@ -5144,7 +5383,7 @@
       renderRanking(target, deduped, mode);
 
       if (target === rankingScreenList) {
-        rankingStatus.textContent = `${getModeLabel(mode)} の上位 ${deduped.length} 件`;
+        rankingStatus.textContent = `${getModeLabel(mode)} の上位 ${deduped.length} 件（同名は最高点のみ表示）`;
       }
       return deduped;
     }
@@ -5170,8 +5409,9 @@
         return;
       }
 
-      const playerName = (input.trim() || "NO NAME").slice(0, 20);
+      const playerName = (input.normalize("NFKC").trim() || "NO NAME").slice(0, 20);
       localStorage.setItem("speed_vocab_name", playerName);
+      localStorage.setItem("sushitan_player_name", playerName);
       saveStatus.textContent = "保存中...";
 
       const { error } = await supabaseClient.rpc("save_high_score", {
@@ -5214,6 +5454,8 @@
       clearScore.textContent = bonusScore;
       clearAccuracy.textContent = `${accuracy}%`;
       clearMaxCombo.textContent = GAME.maxCombo;
+      addGrowthScore(bonusScore);
+      renderGrowthCard("home", getStoredTotalScore());
       if (clearOverlay) clearOverlay.classList.remove('hidden');
 
       await saveHighScore(bonusScore, accuracy);
@@ -5243,6 +5485,17 @@
       finalAccuracy.textContent = `${accuracy}%`;
       finalCorrect.textContent = GAME.correctCount;
       finalMaxCombo.textContent = GAME.maxCombo;
+
+      const growth = addGrowthScore(bonusScore);
+      renderGrowthCard("result", growth.after, bonusScore);
+      if (rankUpBanner) {
+        rankUpBanner.classList.toggle("hidden", !growth.rankUp);
+        if (growth.rankUp) {
+          const newRank = getAnimalRank(growth.after).rank;
+          rankUpBanner.textContent = `RANK UP! ${newRank.emoji} ${newRank.name}`;
+        }
+      }
+
       renderMistakeList();
       resultOverlay.classList.remove('hidden');
 
@@ -5288,6 +5541,7 @@
 
     updateModeBadge();
     showHomeSubPanel('home');
+    renderGrowthCard("home", getStoredTotalScore());
     loadRanking(PUBLIC_MODE, rankingScreenList);
   </script>
 </body>
