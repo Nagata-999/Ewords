@@ -20,25 +20,25 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;touch-action:none;back
 #road.theme-highway{background:linear-gradient(180deg,#374151,#030712)}
 #road.theme-snow{background:linear-gradient(180deg,#dbeafe,#64748b)}
 #road.theme-lava{background:linear-gradient(180deg,#7f1d1d,#1c0a0a)}
-.lane{position:absolute;top:0;width:25%;height:100%;border-left:2px solid rgba(255,255,255,.08)}
-.lane:nth-child(1){left:0}.lane:nth-child(2){left:25%}.lane:nth-child(3){left:50%}.lane:nth-child(4){left:75%}
+.lane{position:absolute;top:0;width:33.333%;height:100%;border-left:2px solid rgba(255,255,255,.08)}
+.lane:nth-child(1){left:0}.lane:nth-child(2){left:33.333%}.lane:nth-child(3){left:66.666%}.lane:nth-child(4){display:none}
 #road.theme-park .lane{background:linear-gradient(180deg,rgba(34,197,94,.12),rgba(22,101,52,.04))}
 #road.theme-city .lane{background:linear-gradient(180deg,rgba(148,163,184,.15),rgba(15,23,42,.05))}
 #road.theme-highway .lane{background:linear-gradient(180deg,rgba(250,204,21,.08),rgba(15,23,42,.04))}
 #road.theme-snow .lane{background:linear-gradient(180deg,rgba(255,255,255,.25),rgba(219,234,254,.08))}
 #road.theme-lava .lane{background:linear-gradient(180deg,rgba(249,115,22,.18),rgba(127,29,29,.08))}
 .road-line{position:absolute;width:8px;height:60px;background:rgba(255,255,255,.16);left:50%;transform:translateX(-50%);border-radius:999px}
-#trail{position:absolute;bottom:88px;width:23%;height:64px;border-radius:999px;background:linear-gradient(90deg,rgba(250,204,21,0),rgba(250,204,21,.55));z-index:7;opacity:0;transition:left .10s ease;filter:blur(8px)}
+#trail{position:absolute;bottom:88px;width:31%;height:64px;border-radius:999px;background:linear-gradient(90deg,rgba(250,204,21,0),rgba(250,204,21,.55));z-index:7;opacity:0;transition:left .10s ease;filter:blur(8px)}
 #game.fever #trail{opacity:1}
-#player{position:absolute;bottom:78px;width:23%;height:82px;border-radius:16px;background-image:url('assets/player1.png');background-size:contain;background-repeat:no-repeat;background-position:center;transition:left .10s ease,transform .12s ease;z-index:12;overflow:hidden}
+#player{position:absolute;bottom:78px;width:31%;height:82px;border-radius:16px;background-image:url('assets/player1.png');background-size:contain;background-repeat:no-repeat;background-position:center;transition:left .10s ease,transform .12s ease;z-index:12;overflow:hidden}
 #player.dash{transform:scale(1.16);filter:drop-shadow(0 0 20px #facc15)}
 #hud{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:min(92vw,560px);z-index:30;display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:8px;pointer-events:none}
 .box{background:rgba(15,23,42,.78);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:9px;text-align:center;backdrop-filter:blur(8px)}
 .label{color:#94a3b8;font-size:10px;font-weight:800}.value{font-size:23px;font-weight:1000;margin-top:3px}
 #questionBox{position:absolute;top:98px;left:50%;transform:translateX(-50%);width:min(90vw,620px);z-index:25;text-align:center;pointer-events:none}
 #question{display:inline-block;min-width:180px;padding:15px 24px;border-radius:22px;background:rgba(15,23,42,.86);border:1px solid rgba(255,255,255,.15);font-size:clamp(24px,5vw,42px);font-weight:1000;box-shadow:0 0 35px rgba(96,165,250,.25)}
-.choice{position:absolute;width:24%;min-height:104px;border-radius:18px;background:linear-gradient(180deg,#1d4ed8,#1e3a8a);border:2px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;font-weight:900;font-size:clamp(12px,2.0vw,24px);line-height:1.08;word-break:break-word;overflow-wrap:anywhere;hyphens:auto;box-shadow:0 12px 24px rgba(0,0,0,.35);z-index:8;overflow:hidden}
-.choice.long{font-size:clamp(10px,1.7vw,18px);letter-spacing:-.03em}
+.choice{position:absolute;width:31%;min-height:104px;border-radius:18px;background:linear-gradient(180deg,#1d4ed8,#1e3a8a);border:2px solid rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;text-align:center;padding:8px;font-weight:900;font-size:clamp(13px,2.2vw,26px);line-height:1.08;word-break:break-word;overflow-wrap:anywhere;hyphens:auto;box-shadow:0 12px 24px rgba(0,0,0,.35);z-index:8;overflow:hidden}
+.choice.long{font-size:clamp(10px,1.9vw,19px);letter-spacing:-.03em}
 .choice.good{background:linear-gradient(180deg,#22c55e,#15803d);box-shadow:0 0 34px rgba(34,197,94,.95);animation:explode .28s ease forwards}
 .choice.bad{background:linear-gradient(180deg,#fb7185,#be123c);box-shadow:0 0 34px rgba(251,113,133,.9);animation:crash .25s ease forwards}
 @keyframes explode{0%{transform:scale(1);opacity:1}55%{transform:scale(1.35);opacity:1}100%{transform:scale(.15);opacity:0}}
@@ -106,7 +106,7 @@ const SUPABASE_URL="https://rxyoyveykxdfrpomkltl.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY="sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7";
 const supabaseClient=window.supabase?supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY):null;
 let lane=1,distance=0,combo=0,speed=1,life=3,best=Number(localStorage.getItem('wordrush_best_distance')||0),activeChoices=[],gameRunning=false,animationFrame=null,lineOffset=0,hitLocked=false,walkFrame=0,playerState='walk',fever=0,audioCtx=null,boostHeld=false,boostEnergy=100,lastSaved=false;
-const lanePositions=[1,26,51,76];
+const lanePositions=[1,34.5,68];
 player.style.left=lanePositions[lane]+'%';trail.style.left=lanePositions[lane]+'%';
 let currentPlayerBg='';
 function setPlayerBg(src){
@@ -127,7 +127,7 @@ function pool(){return WORDS}
 function updateHUD(){document.getElementById('distance').textContent=Math.floor(distance)+'m';document.getElementById('combo').textContent=combo;document.getElementById('life').textContent='❤'.repeat(Math.max(0,life));boostFill.style.width=Math.max(0,Math.min(100,boostEnergy))+'%'}
 function startGame(){initAudio();startBgm();if(animationFrame)cancelAnimationFrame(animationFrame);document.getElementById('overlay').style.display='none';distance=0;combo=0;speed=1;life=3;lane=1;lineOffset=0;hitLocked=false;gameRunning=true;fever=0;boostHeld=false;boostEnergy=100;lastSaved=false;game.className='';road.className='';player.style.left=lanePositions[lane]+'%';trail.style.left=lanePositions[lane]+'%';playerState='walk';clearChoices();updateHUD();spawnQuestion();animate()}
 function clearChoices(){activeChoices.forEach(o=>o.el.remove());activeChoices=[];hitLocked=false}
-function spawnQuestion(){if(!gameRunning)return;clearChoices();const p=pool();const correct=p[Math.floor(Math.random()*p.length)];const distractors=shuffle(p.filter(w=>w.en!==correct.en)).slice(0,3);const answers=shuffle([correct,...distractors]);questionEl.textContent=correct.jp;answers.forEach((item,i)=>{const div=document.createElement('div');div.className='choice';if(item.en.length>10)div.classList.add('long');div.textContent=item.en;div.style.left=lanePositions[i]+'%';div.style.top='-120px';road.appendChild(div);activeChoices.push({el:div,lane:i,y:-120,correct:item.en===correct.en,hit:false})})}
+function spawnQuestion(){if(!gameRunning)return;clearChoices();const p=pool();const correct=p[Math.floor(Math.random()*p.length)];const distractors=shuffle(p.filter(w=>w.en!==correct.en)).slice(0,2);const answers=shuffle([correct,...distractors]);questionEl.textContent=correct.jp;answers.forEach((item,i)=>{const div=document.createElement('div');div.className='choice';if(item.en.length>10)div.classList.add('long');div.textContent=item.en;div.style.left=lanePositions[i]+'%';div.style.top='-120px';road.appendChild(div);activeChoices.push({el:div,lane:i,y:-120,correct:item.en===correct.en,hit:false})})}
 function updateTheme(){const themes=['theme-park','theme-city','theme-highway','theme-snow','theme-lava'];const idx=Math.floor(distance/5000)%themes.length;themes.forEach(t=>{game.classList.remove(t);road.classList.remove(t)});game.classList.add(themes[idx]);road.classList.add(themes[idx])}
 function animate(){if(!gameRunning)return;
 const boostOn=boostHeld&&boostEnergy>0;
@@ -240,7 +240,7 @@ function gameOver(){
   loadRanking();
 }
 function shuffle(arr){return[...arr].sort(()=>Math.random()-.5)}
-function move(dir){if(!gameRunning)return;const before=lane;lane=Math.max(0,Math.min(3,lane+dir));if(lane!==before)playMoveSound();player.style.left=lanePositions[lane]+'%';trail.style.left=lanePositions[lane]+'%'}
+function move(dir){if(!gameRunning)return;const before=lane;lane=Math.max(0,Math.min(2,lane+dir));if(lane!==before)playMoveSound();player.style.left=lanePositions[lane]+'%';trail.style.left=lanePositions[lane]+'%'}
 window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='a')move(-1);if(e.key==='ArrowRight'||e.key==='d')move(1);if(e.key==='ArrowUp'||e.key==='w')boostHeld=true});
 window.addEventListener('keyup',e=>{if(e.key==='ArrowUp'||e.key==='w')boostHeld=false});
 boostBtn.addEventListener('pointerdown',e=>{e.stopPropagation();boostHeld=true});
