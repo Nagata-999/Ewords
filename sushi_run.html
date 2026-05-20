@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<title>Word Lane Rush</title>
+<title>すしRUN</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050816;color:white;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -57,9 +57,9 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#050816;col
 #title{font-size:clamp(42px,8vw,72px);font-weight:1000;color:#facc15}#subtitle{color:#cbd5e1;margin-top:8px;line-height:1.6}
 button{border:none;border-radius:18px;padding:14px 18px;font-size:18px;font-weight:1000;cursor:pointer;color:white;background:linear-gradient(180deg,#2563eb,#1d4ed8);box-shadow:0 10px 24px rgba(0,0,0,.35)}
 #startBtn{margin-top:18px;padding:18px 28px;font-size:22px}#rankingBtn{margin-left:8px;background:linear-gradient(180deg,#16a34a,#15803d)}#sushitanLink{margin-top:10px;background:linear-gradient(180deg,#9333ea,#7e22ce)}
-#boostBtn{position:absolute;left:14px;bottom:82px;z-index:45;width:86px;height:86px;border-radius:999px;background:linear-gradient(180deg,#facc15,#f97316);color:#111827;border:3px solid rgba(255,255,255,.25);font-size:16px;font-weight:1000;box-shadow:0 0 26px rgba(250,204,21,.55),0 12px 24px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;text-align:center;user-select:none}
-#boostBtn.active{transform:scale(.95);filter:brightness(1.25);box-shadow:0 0 42px rgba(250,204,21,.95)}
-#boostGauge{position:absolute;left:22px;bottom:174px;width:70px;height:10px;border-radius:999px;background:rgba(15,23,42,.75);border:1px solid rgba(255,255,255,.18);overflow:hidden;z-index:45}
+#boostBtn{position:absolute;left:14px;top:50%;transform:translateY(-50%);z-index:45;width:86px;height:86px;border-radius:999px;background:linear-gradient(180deg,#facc15,#f97316);color:#111827;border:3px solid rgba(255,255,255,.25);font-size:16px;font-weight:1000;box-shadow:0 0 26px rgba(250,204,21,.55),0 12px 24px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;text-align:center;user-select:none}
+#boostBtn.active{transform:translateY(-50%) scale(.95);filter:brightness(1.25);box-shadow:0 0 42px rgba(250,204,21,.95)}
+#boostGauge{position:absolute;left:22px;top:calc(50% - 58px);width:70px;height:10px;border-radius:999px;background:rgba(15,23,42,.75);border:1px solid rgba(255,255,255,.18);overflow:hidden;z-index:45}
 #boostFill{height:100%;width:100%;background:linear-gradient(90deg,#22c55e,#facc15,#f97316)}
 .rankingBox{margin-top:16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:14px;text-align:left}
 .rankingTitle{text-align:center;color:#facc15;font-weight:1000;margin-bottom:8px}
@@ -83,7 +83,12 @@ button{border:none;border-radius:18px;padding:14px 18px;font-size:18px;font-weig
   <div id="questionBox"><div id="question"></div></div>
   <div id="hitEffect"></div><div id="comboText">10 COMBO!</div><div id="bonusText">+100m</div>
   <div id="boostGauge"><div id="boostFill"></div></div><button id="boostBtn">BOOST<br>↑</button>
-  <div id="overlay"><div id="menu"><div id="title">すしRUN</div><button id="startBtn" onclick="startGame()">START</button><button id="rankingBtn" onclick="showTopRanking()">ランキング確認</button><br><button id="sushitanLink" onclick="location.href='./index.html'">すし単へ</button></div></div>
+  <div id="overlay"><div id="menu">
+    <div id="title">すしRUN</div>
+    <button id="startBtn" onclick="startGame()">START</button>
+    <button id="rankingBtn" onclick="showTopRanking()">ランキング確認</button><br>
+    <button id="sushitanLink" onclick="location.href='index.html'">すし単へ</button>
+  </div></div>
   <audio id="bgm" src="music.mp3" loop preload="auto"></audio>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -180,7 +185,8 @@ async function showTopRanking(){
     <div id="title">RANKING</div>
     <div id="rankingList" class="rankingBox"><div class="rankingTitle">RANKING</div><div class="statusLine">読み込み中...</div></div>
     <button id="startBtn" onclick="startGame()">START</button>
-    <button onclick="showTopMenu()">トップへ戻る</button><br><button id="sushitanLink" onclick="location.href='./index.html'">すし単へ</button>
+    <button onclick="showTopMenu()">トップへ戻る</button><br>
+    <button id="sushitanLink" onclick="location.href='index.html'">すし単へ</button>
   `;
   await loadRanking();
 }
@@ -193,10 +199,9 @@ function showTopMenu(){
   document.getElementById('overlay').style.display='flex';
   document.getElementById('menu').innerHTML=`
     <div id="title">すしRUN</div>
-    
     <button id="startBtn" onclick="startGame()">START</button>
     <button id="rankingBtn" onclick="showTopRanking()">ランキング確認</button><br>
-    <button id="sushitanLink" onclick="location.href='./index.html'">すし単へ</button><br><button id="sushitanLink" onclick="location.href='./index.html'">すし単へ</button>
+    <button id="sushitanLink" onclick="location.href='index.html'">すし単へ</button>
   `;
 }
 
@@ -213,7 +218,8 @@ function gameOver(){
     <button class="saveBtn" onclick="saveRanking()">ランキングに保存</button>
     <div id="saveStatus" class="statusLine"></div>
     <button id="startBtn" onclick="startGame()">RETRY</button>
-    <button onclick="showTopMenu()">トップへ戻る</button><br><button id="sushitanLink" onclick="location.href='./index.html'">すし単へ</button>
+    <button onclick="showTopMenu()">トップへ戻る</button><br>
+    <button id="sushitanLink" onclick="location.href='index.html'">すし単へ</button>
     <div id="rankingList" class="rankingBox"><div class="rankingTitle">RANKING</div><div class="statusLine">読み込み中...</div></div>
   `;
   updateHUD();
