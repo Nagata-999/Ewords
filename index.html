@@ -1584,12 +1584,17 @@
     };
 
 
+
     function normalizeModeForDb(mode) {
       if (mode === "sushi" || mode === "words") return MODE_SUSHI;
       if (mode === "synonyms") return MODE_SHINO;
       if (mode === "antonyms") return MODE_ANTONI;
+      if (mode === "core") return MODE_SUSHI;
+      if (mode === "shino") return MODE_SHINO;
+      if (mode === "antoni") return MODE_ANTONI;
       return mode || MODE_SUSHI;
     }
+
 
     let audioCtx = null;
     let currentMode = PUBLIC_MODE;
@@ -5551,6 +5556,7 @@
     }
 
     function renderRanking(container, data, mode) {
+      mode = normalizeModeForDb(mode);
       if (!container) return;
       const title = `<div class="ranking-title">🏆 ${getModeLabel(mode)} Ranking</div>`;
 
@@ -5644,6 +5650,7 @@
     }
 
     async function loadRanking(mode = currentMode, target = rankingList) {
+      mode = normalizeModeForDb(mode);
       if (!supabaseClient) {
         renderRanking(target, [], mode);
         return [];
@@ -5711,6 +5718,7 @@
         saveStatus.textContent = "保存失敗: " + error.message;
       } else {
         GAME.scoreSavedThisRound = true;
+        rankingMode = normalizeModeForDb(currentMode);
         saveStatus.textContent = `${playerName} の記録を保存しました`;
       }
     }
