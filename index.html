@@ -1230,6 +1230,43 @@
       .utility-row { grid-template-columns: repeat(2, 1fr); }
     }
 
+  
+    /* Mobile fit fixes */
+    @media (max-width: 420px) {
+      html, body { overflow: hidden; }
+      .app { padding: 6px; gap: 5px; }
+      .topbar { padding: 7px; gap: 5px; }
+      .stat { padding: 6px 5px; border-radius: 11px; }
+      .stat-label { font-size: 10px; margin-bottom: 2px; }
+      .stat-value { font-size: 17px; }
+      .mode-badge { min-width: 60px; font-size: 10px; padding: 2px 6px; }
+      .combo-line { margin-top: 2px; font-size: 11px; }
+      .question-card { padding: 8px 9px; border-radius: 14px; }
+      .question-label { font-size: 11px; margin-bottom: 3px; }
+      .question-text { min-height: 30px; font-size: 22px; line-height: 1.15; }
+      .feedback { min-height: 18px; font-size: 12px; }
+      .arena { min-height: 210px; padding: 5px; }
+      .bottom { padding: 7px; gap: 7px; }
+      .btn { padding: 10px 11px; font-size: 14px; border-radius: 12px; }
+      .modal { max-height: 94dvh; padding: 14px; }
+      .brand-title { font-size: 44px; }
+      .brand-sub { font-size: 12px; line-height: 1.45; }
+      .compact-game-grid { gap: 6px; }
+      .compact-game { padding: 9px 8px; }
+      .growth-card { padding: 10px; margin-top: 8px; }
+      .utility-row { margin-top: 8px; gap: 6px; }
+      .quiet-seo { margin-top: 8px; padding: 9px; }
+      .site-footer { margin-top: 8px; padding-top: 8px; }
+    }
+
+    @media (max-height: 720px) {
+      .arena { min-height: 190px; }
+      .topbar { padding: 6px; }
+      .question-card { padding: 7px; }
+      .bottom { padding: 6px; }
+      .balloon { padding: 12px 14px; font-size: 16px; min-width: 106px; }
+    }
+
   </style>
 </head>
 <body>
@@ -1545,6 +1582,14 @@
         choiceCount: 8
       }
     };
+
+
+    function normalizeModeForDb(mode) {
+      if (mode === "sushi" || mode === "words") return MODE_SUSHI;
+      if (mode === "synonyms") return MODE_SHINO;
+      if (mode === "antonyms") return MODE_ANTONI;
+      return mode || MODE_SUSHI;
+    }
 
     let audioCtx = null;
     let currentMode = PUBLIC_MODE;
@@ -5658,7 +5703,7 @@
   p_score: finalScoreValue,
   p_max_combo: GAME.maxCombo,
   p_accuracy: accuracy,
-  p_mode: currentMode
+  p_mode: normalizeModeForDb(currentMode)
 });
 
       if (error) {
