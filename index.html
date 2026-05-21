@@ -4,9 +4,9 @@
   <meta name="google-adsense-account" content="ca-pub-4726251793577317">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>すし英語｜すし単・すしRUN・スシType 英語学習ゲーム集【英検・IELTS対応】</title>
+  <title>すし英語｜すし単・すしRUN・スシTypeで学ぶ無料英語ゲーム</title>
 
-  <meta name="description" content="すし英語は、すし単・しの単・あんとに単・スシType・すしRUNで楽しく学べる無料英語学習ゲーム集です。英検2級〜準1級、IELTS5.0〜6.0、高校英語に対応しています。" />
+  <meta name="description" content="すし英語は、すし単・しの単・あんとに単・スシType・すしRUNで楽しく英語を学べる無料英語ゲームサイトです。英検・IELTS・高校英語に対応。" />
 
   <meta name="keywords" content="すし英語,すし単,しの単,あんとに単,スシType,すしRUN,英単語ゲーム,英語タイピング,IELTS,英検,高校英語,無料英語学習" />
 
@@ -1087,6 +1087,149 @@
         font-size: 13px;
       }
     }
+  
+    /* Stylish portal override */
+    .modal {
+      background:
+        radial-gradient(circle at 20% 0%, rgba(59,130,246,0.22), transparent 38%),
+        radial-gradient(circle at 90% 10%, rgba(236,72,153,0.16), transparent 32%),
+        rgba(15,23,42,0.92);
+    }
+
+    .brand-hero {
+      text-align: left;
+      padding: 2px 2px 4px;
+    }
+
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: #bfdbfe;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+    }
+
+    .brand-title {
+      margin: 12px 0 4px !important;
+      font-size: clamp(42px, 12vw, 64px);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+    }
+
+    .brand-copy {
+      margin: 0 !important;
+      color: #f8fafc !important;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 0.03em;
+    }
+
+    .brand-sub {
+      margin-top: 8px !important;
+      color: var(--muted) !important;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+
+    .compact-game-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .compact-game {
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 15px;
+      padding: 11px 10px;
+      background: rgba(255,255,255,0.07);
+      color: #e2e8f0;
+      text-decoration: none;
+      font-weight: 900;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .compact-game small {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    .compact-game.blue { background: rgba(37,99,235,0.26); }
+    .compact-game.purple { background: rgba(124,58,237,0.25); }
+    .compact-game.pink { background: rgba(219,39,119,0.22); }
+    .compact-game.green { background: rgba(22,163,74,0.22); }
+    .compact-game.orange { background: rgba(249,115,22,0.24); }
+
+    .quiet-seo {
+      margin-top: 12px;
+      padding: 11px 12px;
+      border-radius: 15px;
+      background: rgba(255,255,255,0.055);
+      border: 1px solid rgba(255,255,255,0.10);
+      text-align: left;
+    }
+
+    .quiet-seo h2 {
+      margin: 0 0 5px !important;
+      font-size: 14px !important;
+      color: #e0f2fe;
+    }
+
+    .quiet-seo p {
+      margin: 0 !important;
+      color: var(--muted) !important;
+      font-size: 12px !important;
+      line-height: 1.6 !important;
+    }
+
+    .utility-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 7px;
+      margin-top: 10px;
+    }
+
+    .utility-btn {
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: 12px;
+      padding: 9px 6px;
+      color: #dbeafe;
+      background: rgba(255,255,255,0.055);
+      font-size: 12px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .ranking-quiet {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+
+    .ranking-quiet .btn {
+      padding: 11px;
+      border-radius: 14px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 420px) {
+      .hero-actions { grid-template-columns: 1fr; }
+      .compact-game-grid { grid-template-columns: repeat(2, 1fr); }
+      .utility-row { grid-template-columns: repeat(2, 1fr); }
+    }
+
   </style>
 </head>
 <body>
@@ -1145,51 +1288,39 @@
     <div class="overlay" id="menuOverlay">
       <div class="modal">
         <div id="homePanel">
-          <div class="home-hero">
-            <span class="home-kicker">英検・IELTS・高校英語対応</span>
-            <h1 id="gameTitle">すし英語</h1>
-            <p class="home-lead">
-              すし単・しの単・あんとに単・スシType・すしRUNで学ぶ無料英語学習ゲーム集。<br>
-              ターゲットレベル：英検2級〜準1級／IELTS 5.0〜6.0
+          <div class="brand-hero">
+            <span class="brand-mark">🍣 ENGLISH GAMES</span>
+            <h1 id="gameTitle" class="brand-title">すし英語</h1>
+            <p class="brand-copy">英語を、ゲームにする。</p>
+            <p class="brand-sub">
+              英検2級〜準1級・IELTS 5.0〜6.0を目指す人へ。単語、言い換え、タイピング、ランゲームで反射的な英語力を鍛える。
             </p>
           </div>
-
-          <div class="portal-section">
-            <h2>すし英語のゲーム</h2>
-            <p>まずは下のボタンから、英単語・シノニム・アントニムの瞬間判断ゲームを始められます。スシTypeとすしRUNは別ページで遊べます。</p>
-            <div class="portal-game-grid">
-              <a class="portal-game-card word" href="/words/">
-                <strong>すし単</strong>
-                <span>日本語に合う英単語を選ぶ基本モード。英検・IELTS頻出語彙を高速反復できます。</span>
-              </a>
-              <a class="portal-game-card type" href="/sushitype.html">
-                <strong>スシType</strong>
-                <span>タイピングしながら英作文・IELTS表現を練習するゲーム。表現を手で覚えます。</span>
-              </a>
-              <a class="portal-game-card run" href="/sushi_run.html">
-                <strong>すしRUN</strong>
-                <span>走りながら英単語を判断するランゲーム。反射的な英語判断力を鍛えます。</span>
-              </a>
-            </div>
-          </div>
-
-          <div class="mode-select-grid">
-            <button class="mode-card-btn sushi" id="startSushiBtn">
-              <strong>すし単</strong>
-              <span>日本語に合う英単語を選ぶ基本モード。</span>
+<div class="compact-game-grid" aria-label="すし英語のゲーム一覧">
+            <button class="compact-game blue" id="startSushiBtnAlt">
+              すし単
+              <small>英単語</small>
             </button>
-            <button class="mode-card-btn shino" id="startShinoBtn">
-              <strong>しの単</strong>
-              <span>英単語に近い意味の synonym を選ぶ上級モード。</span>
+            <button class="compact-game purple" id="startShinoBtn">
+              しの単
+              <small>synonym</small>
             </button>
-            <button class="mode-card-btn antoni" id="startAntoniBtn">
-              <strong>あんとに単</strong>
-              <span>英単語と反対の意味の antonym を選ぶ上級モード。</span>
+            <button class="compact-game pink" id="startAntoniBtn">
+              あんとに単
+              <small>antonym</small>
             </button>
-          </div>
-
-          <div class="menu-btns">
-            <button class="btn gold" id="openRankingBtn">ランキング確認</button>
+            <a class="compact-game green" href="/sushitype.html">
+              スシType
+              <small>typing</small>
+            </a>
+            <a class="compact-game orange" href="/sushi_run.html">
+              すしRUN
+              <small>run game</small>
+            </a>
+            <a class="compact-game" href="/words/">
+              単語一覧
+              <small>word list</small>
+            </a>
           </div>
 
           <div class="growth-card" id="homeGrowthCard">
@@ -1201,43 +1332,25 @@
             <div class="growth-next" id="homeGrowthNext">次の動物まであと -</div>
           </div>
 
-          <div class="link-grid" aria-label="サイト内メニュー">
-            <button class="text-link-btn" id="showHowToBtn">遊び方</button>
-            <button class="text-link-btn" id="showAboutBtn">すし単とは</button>
-            <button class="text-link-btn" id="showPrivacyBtn">ポリシー</button>
-            <button class="text-link-btn" id="showContactBtn">お問い合わせ</button>
+          <div class="ranking-quiet">
+            <button class="btn gold" id="openRankingBtn">ランキング</button>
           </div>
-          <div class="home-section">
-            <h2>英語学習コンテンツ</h2>
-          
-            <p>
-              すし英語では、英検・IELTS・高校英語でよく使われる単語や、
-              synonym（類義語）、antonym（反意語）をゲーム形式で学べます。
-              さらに、スシTypeでは英語表現をタイピングで練習し、すしRUNでは走りながら英単語を瞬時に判断します。
-            </p>
-          
-            <div class="link-grid">
-              <button class="text-link-btn" onclick="location.href='/words/'">
-                英単語一覧
-              </button>
-          
-              <button class="text-link-btn" onclick="location.href='/synonyms/'">
-                シノニム一覧
-              </button>
-          
-              <button class="text-link-btn" onclick="location.href='/antonyms/'">
-                アントニム一覧
-              </button>
 
-              <button class="text-link-btn" onclick="location.href='/sushitype.html'">
-                すしタイプ
-              </button>  
-              
-              <button class="text-link-btn" onclick="location.href='/sushi_run.html'"> 
-                すしRUN
-              </button>
-            </div>
+          <div class="utility-row" aria-label="サイト内メニュー">
+            <button class="utility-btn" id="showHowToBtn">遊び方</button>
+            <button class="utility-btn" id="showAboutBtn">すし英語とは</button>
+            <button class="utility-btn" id="showPrivacyBtn">ポリシー</button>
+            <button class="utility-btn" id="showContactBtn">連絡先</button>
           </div>
+
+          <div class="quiet-seo">
+            <h2>すし英語とは</h2>
+            <p>
+              すし英語は、すし単・しの単・あんとに単・スシType・すしRUNで学べる無料英語学習ゲーム集です。
+              英単語、synonym、antonym、英語タイピング、ランゲームを通して、楽しく英語を反復できます。
+            </p>
+          </div>
+
           <footer class="site-footer">
             <div>© すし英語</div>
             <div class="footer-links">
@@ -5669,6 +5782,16 @@
     showHomeSubPanel('home');
     renderGrowthCard("home", getStoredTotalScore());
     loadRanking(PUBLIC_MODE, rankingScreenList);
-  </script>
+  
+    // Stylish top: secondary すし単 card
+    if (document.getElementById("startSushiBtnAlt")) {
+      document.getElementById("startSushiBtnAlt").onclick = () => {
+        if (document.getElementById("startSushiBtn")) {
+          document.getElementById("startSushiBtn").click();
+        }
+      };
+    }
+
+</script>
 </body>
 </html>
