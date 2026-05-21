@@ -1,16 +1,21 @@
-すし単 語彙一覧ページ 改訂版
+すし英語トップ整理版
 
-変更点:
-- 全リストをアルファベット順に並べ替えました。
-- 冗長な「学習メモ」をやめ、例文と日本語訳に変更しました。
-- 個別単語ページは作らず、薄いページ量産にならない一覧形式にしています。
+目的:
+- index.html を「すし英語トップ専用」にする
+- 現在混ざっている「すし単ゲーム本体」をトップから分離する
+- 既存リンク構成に合わせる
 
-アップロードするもの:
-- words/
-- synonyms/
-- antonyms/
-- style.css
-- sitemap-lists.xml
+リンク:
+- すし単      -> words/
+- しの単      -> synonyms/
+- あんとに単  -> antonyms/
+- スシType    -> sushitype.html
+- すしRUN     -> sushi_run.html
 
-GitHub の index.html と同じ階層に置いてください。
-Search Console では sitemap-lists.xml を追加送信してください。
+アップロード:
+- index.html をルートの index.html と差し替え
+- sitemap.xml も差し替え
+- robots.txt は同じ内容ならそのままでもOK
+
+注意:
+現index.htmlのゲーム本体部分は消えるので、必要なら先にバックアップしてください。
