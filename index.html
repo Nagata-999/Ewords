@@ -5786,7 +5786,7 @@
     // Stylish top: すし単 start
     if (document.getElementById("startSushiBtnAlt")) {
       document.getElementById("startSushiBtnAlt").onclick = () => {
-        currentMode = "words";
+        currentMode = MODE_SUSHI;
         if (typeof startGame === "function") {
           startGame();
         }
