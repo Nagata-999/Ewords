@@ -95,17 +95,29 @@ transform:scale(.95);
 filter:brightness(1.25);
 }
 #boostBtn{
-width:128px;
-height:92px;
-font-size:24px;
-background:linear-gradient(180deg,#facc15,#f97316);
+width:112px;
+height:112px;
+border-radius:999px;
+font-size:54px;
+background:radial-gradient(circle,#fef08a 0%,#facc15 45%,#f97316 100%);
 color:#111827;
+position:relative;
+overflow:hidden;
+}
+#boostBtn.ready{
+animation:readyPulse .8s ease-in-out infinite;
+box-shadow:0 0 42px rgba(250,204,21,.95),0 12px 24px rgba(0,0,0,.4);
+}
+@keyframes readyPulse{
+0%{transform:scale(1)}
+50%{transform:scale(1.08)}
+100%{transform:scale(1)}
 }
 #boostGauge{
 position:absolute;
 left:50%;
 transform:translateX(-50%);
-top:12px;
+top:10px;
 width:220px;
 height:12px;
 border-radius:999px;
@@ -123,13 +135,31 @@ background:linear-gradient(90deg,#22c55e,#facc15,#f97316)
 #leftBtn{left:14px}
 #rightBtn{right:14px}
 #leftBtn:active,#rightBtn:active{transform:scale(.94);filter:brightness(1.3)}
-#boostBtn{position:absolute;left:14px;top:50%;transform:translateY(-50%);z-index:45;width:86px;height:86px;border-radius:999px;background:linear-gradient(180deg,#facc15,#f97316);color:#111827;border:3px solid rgba(255,255,255,.25);font-size:16px;font-weight:1000;box-shadow:0 0 26px rgba(250,204,21,.55),0 12px 24px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;text-align:center;user-select:none}
+#boostBtn{
+width:112px;
+height:112px;
+border-radius:999px;
+font-size:54px;
+background:radial-gradient(circle,#fef08a 0%,#facc15 45%,#f97316 100%);
+color:#111827;
+position:relative;
+overflow:hidden;
+}
+#boostBtn.ready{
+animation:readyPulse .8s ease-in-out infinite;
+box-shadow:0 0 42px rgba(250,204,21,.95),0 12px 24px rgba(0,0,0,.4);
+}
+@keyframes readyPulse{
+0%{transform:scale(1)}
+50%{transform:scale(1.08)}
+100%{transform:scale(1)}
+}
 #boostBtn.active{transform:translateY(-50%) scale(.95);filter:brightness(1.25);box-shadow:0 0 42px rgba(250,204,21,.95)}
 #boostGauge{
 position:absolute;
 left:50%;
 transform:translateX(-50%);
-top:12px;
+top:10px;
 width:220px;
 height:12px;
 border-radius:999px;
@@ -161,7 +191,7 @@ overflow:hidden;
   <div id="hitEffect"></div><div id="comboText">10 COMBO!</div><div id="bonusText">+100m</div>
   
   <button id="leftBtn">←</button><button id="rightBtn">→</button>
-  <div id="controlBar"><button id="leftBtn2" class="ctrlBtn">←</button><button id="boostBtn" class="ctrlBtn">BOOST</button><button id="rightBtn2" class="ctrlBtn">→</button><div id="boostGauge"><div id="boostFill"></div></div></div><div id="overlay"><div id="menu">
+  <div id="controlBar"><button id="leftBtn2" class="ctrlBtn">←</button><button id="boostBtn" class="ctrlBtn">◎</button><button id="rightBtn2" class="ctrlBtn">→</button><div id="boostGauge"><div id="boostFill"></div></div></div><div id="overlay"><div id="menu">
     <div id="title">すしRUN</div>
     <button id="startBtn" onclick="startGame()">START</button>
     <button id="rankingBtn" onclick="showTopRanking()">ランキング確認</button><br>
@@ -178,7 +208,7 @@ const playerImgs=['assets/player1.png','assets/player2.png','assets/player_miss.
 const SUPABASE_URL="https://rxyoyveykxdfrpomkltl.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY="sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7";
 const supabaseClient=window.supabase?supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY):null;
-let lane=1,distance=0,combo=0,speed=1,life=3,best=Number(localStorage.getItem('wordrush_best_distance')||0),activeChoices=[],gameRunning=false,animationFrame=null,lineOffset=0,hitLocked=false,walkFrame=0,playerState='walk',fever=0,audioCtx=null,boostHeld=false,boostEnergy=100,lastSaved=false;
+let lane=1,distance=0,combo=0,speed=1,life=3,best=Number(localStorage.getItem('wordrush_best_distance')||0),activeChoices=[],gameRunning=false,animationFrame=null,lineOffset=0,hitLocked=false,walkFrame=0,playerState='walk',fever=0,audioCtx=null,boostHeld=false,boostCharge=0,superReady=false,lastSaved=false;
 const lanePositions=[1,34.5,68];
 player.style.left=lanePositions[lane]+'%';trail.style.left=lanePositions[lane]+'%';
 let currentPlayerBg='';
@@ -197,15 +227,14 @@ function startBgm(){bgm.volume=.45;bgm.currentTime=0;bgm.play().catch(()=>{})}fu
 function setPlayerMiss(){playerState='miss';setPlayerBg('assets/player_miss.png');setTimeout(()=>{playerState='walk'},360)}
 
 function pool(){return WORDS}
-function updateHUD(){document.getElementById('distance').textContent=Math.floor(distance)+'m';document.getElementById('combo').textContent=combo;document.getElementById('life').textContent='❤'.repeat(Math.max(0,life));boostFill.style.width=Math.max(0,Math.min(100,boostEnergy))+'%'}
-function startGame(){initAudio();startBgm();if(animationFrame)cancelAnimationFrame(animationFrame);document.getElementById('overlay').style.display='none';distance=0;combo=0;speed=1;life=3;lane=1;lineOffset=0;hitLocked=false;gameRunning=true;fever=0;boostHeld=false;boostEnergy=100;lastSaved=false;game.className='';road.className='';player.style.left=lanePositions[lane]+'%';trail.style.left=lanePositions[lane]+'%';playerState='walk';clearChoices();updateHUD();spawnQuestion();animate()}
+function updateHUD(){document.getElementById('distance').textContent=Math.floor(distance)+'m';document.getElementById('combo').textContent=combo;document.getElementById('life').textContent='❤'.repeat(Math.max(0,life));boostFill.style.width=Math.max(0,Math.min(100,boostCharge))+'%';boostBtn.classList.toggle('ready',boostCharge>=100)}
+function startGame(){initAudio();startBgm();if(animationFrame)cancelAnimationFrame(animationFrame);document.getElementById('overlay').style.display='none';distance=0;combo=0;speed=1;life=3;lane=1;lineOffset=0;hitLocked=false;gameRunning=true;fever=0;boostHeld=false;boostCharge=0;superReady=false;lastSaved=false;game.className='';road.className='';player.style.left=lanePositions[lane]+'%';trail.style.left=lanePositions[lane]+'%';playerState='walk';clearChoices();updateHUD();spawnQuestion();animate()}
 function clearChoices(){activeChoices.forEach(o=>o.el.remove());activeChoices=[];hitLocked=false}
 function spawnQuestion(){if(!gameRunning)return;clearChoices();const p=pool();const correct=p[Math.floor(Math.random()*p.length)];const distractors=shuffle(p.filter(w=>w.en!==correct.en)).slice(0,2);const answers=shuffle([correct,...distractors]);questionEl.textContent=correct.jp;answers.forEach((item,i)=>{const div=document.createElement('div');div.className='choice';if(item.en.length>10)div.classList.add('long');div.textContent=item.en;div.style.left=lanePositions[i]+'%';div.style.top='-120px';road.appendChild(div);activeChoices.push({el:div,lane:i,y:-120,correct:item.en===correct.en,hit:false})})}
 function updateTheme(){const themes=['theme-park','theme-city','theme-highway','theme-snow','theme-lava'];const idx=Math.floor(distance/5000)%themes.length;themes.forEach(t=>{game.classList.remove(t);road.classList.remove(t)});game.classList.add(themes[idx]);road.classList.add(themes[idx])}
 function animate(){if(!gameRunning)return;
-const boostOn=boostHeld&&boostEnergy>0;
-if(boostOn){boostEnergy-=0.85;boostBtn.classList.add('active')}else{boostEnergy=Math.min(100,boostEnergy+0.18);boostBtn.classList.remove('active')}
-const runSpeed=speed*(boostOn?1.85:1);
+const boostOn=boostHeld;
+const runSpeed=speed*(boostOn?1.55:1);
 lineOffset+=12*runSpeed;
 distance+=runSpeed*(game.classList.contains('fever')?1.0:.5);
 updateTheme();updateHUD();document.querySelectorAll('.road-line').forEach(e=>e.remove());for(let i=-1;i<14;i++){const line=document.createElement('div');line.className='road-line';line.style.top=((i*120+lineOffset)%1600)-100+'px';road.appendChild(line)}activeChoices.forEach(obj=>{
@@ -232,7 +261,22 @@ function isColliding(a,b){
 
 function showHit(text,type){hitEffect.textContent=text;hitEffect.className='';void hitEffect.offsetWidth;hitEffect.classList.add(type==='fever'?'hitFever':type==='good'?'hitGood':'hitBad')}
 function burst(x,y,color){for(let i=0;i<18;i++){const p=document.createElement('div');p.className='particle';p.style.left=x+'px';p.style.top=y+'px';p.style.background=color;const a=Math.random()*Math.PI*2,d=45+Math.random()*80;p.style.setProperty('--dx',Math.cos(a)*d+'px');p.style.setProperty('--dy',Math.sin(a)*d+'px');game.appendChild(p);setTimeout(()=>p.remove(),500)}}
-function success(obj){playHitSound();const rect=obj.el.getBoundingClientRect();obj.el.classList.add('good');burst(rect.left+rect.width/2,rect.top+rect.height/2,'#facc15');showHit(combo>=9?'BREAK!':'HIT!','good');player.classList.add('dash');setTimeout(()=>player.classList.remove('dash'),120);distance+=(18+combo*2)*(game.classList.contains('fever')?2:1);combo++;if(combo%5===0){speed+=.18;playComboSound();comboText.textContent=combo+' COMBO!';comboText.classList.remove('comboShow');void comboText.offsetWidth;comboText.classList.add('comboShow')}if(combo>0&&combo%10===0){playFeverSound();fever=300;game.classList.add('fever');showHit('FEVER!','fever');const bonus=100+combo*10;distance+=bonus;bonusText.textContent='+'+bonus+'m BONUS!';bonusText.classList.remove('bonusShow');void bonusText.offsetWidth;bonusText.classList.add('bonusShow')}updateHUD();setTimeout(()=>spawnQuestion(),230)}
+function activateSuperBoost(){
+  if(boostCharge<100 || !gameRunning) return;
+  boostCharge=0;
+  distance+=1000;
+  playFeverSound();
+  showHit('+1000m!','fever');
+  bonusText.textContent='+1000m SUPER!';
+  bonusText.classList.remove('bonusShow');
+  void bonusText.offsetWidth;
+  bonusText.classList.add('bonusShow');
+  fever=180;
+  game.classList.add('fever');
+  updateHUD();
+}
+
+function success(obj){playHitSound();const rect=obj.el.getBoundingClientRect();obj.el.classList.add('good');burst(rect.left+rect.width/2,rect.top+rect.height/2,'#facc15');showHit(combo>=9?'BREAK!':'HIT!','good');player.classList.add('dash');setTimeout(()=>player.classList.remove('dash'),120);distance+=(18+combo*2)*(game.classList.contains('fever')?2:1);if(boostHeld){boostCharge=Math.min(100,boostCharge+4)}combo++;if(combo%5===0){speed+=.18;playComboSound();comboText.textContent=combo+' COMBO!';comboText.classList.remove('comboShow');void comboText.offsetWidth;comboText.classList.add('comboShow')}if(combo>0&&combo%10===0){playFeverSound();fever=300;game.classList.add('fever');showHit('FEVER!','fever');const bonus=100+combo*10;distance+=bonus;bonusText.textContent='+'+bonus+'m BONUS!';bonusText.classList.remove('bonusShow');void bonusText.offsetWidth;bonusText.classList.add('bonusShow')}updateHUD();setTimeout(()=>spawnQuestion(),230)}
 function fail(obj){playMissSound();if(obj)obj.el.classList.add('bad');const rect=obj?obj.el.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0};burst(rect.left+rect.width/2,rect.top+rect.height/2,'#fb7185');setPlayerMiss();showHit('CRASH!','bad');combo=0;speed=1;fever=0;game.classList.remove('fever');life--;road.classList.remove('shake');void road.offsetWidth;road.classList.add('shake');updateHUD();if(life<=0){setTimeout(gameOver,350);return}setTimeout(()=>spawnQuestion(),380)}
 
 async function loadRanking(){
@@ -335,9 +379,9 @@ function gameOver(){
 }
 function shuffle(arr){return[...arr].sort(()=>Math.random()-.5)}
 function move(dir){if(!gameRunning)return;const before=lane;lane=Math.max(0,Math.min(2,lane+dir));if(lane!==before)playMoveSound();player.style.left=lanePositions[lane]+'%';trail.style.left=lanePositions[lane]+'%'}
-window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='a')move(-1);if(e.key==='ArrowRight'||e.key==='d')move(1);if(e.key==='ArrowUp'||e.key==='w')boostHeld=true});
+window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='a')move(-1);if(e.key==='ArrowRight'||e.key==='d')move(1);if(e.key==='ArrowUp'||e.key==='w'){if(boostCharge>=100){activateSuperBoost();boostHeld=false}else boostHeld=true}});
 window.addEventListener('keyup',e=>{if(e.key==='ArrowUp'||e.key==='w')boostHeld=false});
-boostBtn.addEventListener('pointerdown',e=>{e.stopPropagation();boostHeld=true});
+boostBtn.addEventListener('pointerdown',e=>{e.stopPropagation();if(boostCharge>=100){activateSuperBoost();boostHeld=false}else{boostHeld=true}});
 boostBtn.addEventListener('pointerup',e=>{e.stopPropagation();boostHeld=false});
 boostBtn.addEventListener('pointerleave',e=>{boostHeld=false});
 boostBtn.addEventListener('pointercancel',e=>{boostHeld=false});
