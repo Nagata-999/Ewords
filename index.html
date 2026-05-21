@@ -5783,11 +5783,12 @@
     renderGrowthCard("home", getStoredTotalScore());
     loadRanking(PUBLIC_MODE, rankingScreenList);
   
-    // Stylish top: secondary すし単 card
+    // Stylish top: すし単 start
     if (document.getElementById("startSushiBtnAlt")) {
       document.getElementById("startSushiBtnAlt").onclick = () => {
-        if (document.getElementById("startSushiBtn")) {
-          document.getElementById("startSushiBtn").click();
+        currentMode = "words";
+        if (typeof startGame === "function") {
+          startGame();
         }
       };
     }
