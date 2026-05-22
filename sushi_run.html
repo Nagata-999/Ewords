@@ -272,13 +272,19 @@ function spawnQuestion(){
   nextWord=pickWord();
 }
 function updateTheme(){const themes=['theme-park','theme-city','theme-highway','theme-snow','theme-lava'];const idx=Math.floor(distance/5000)%themes.length;themes.forEach(t=>{game.classList.remove(t);road.classList.remove(t)});game.classList.add(themes[idx]);road.classList.add(themes[idx])}
+
+function isPC(){
+  return window.matchMedia('(min-width: 701px)').matches;
+}
+
 function animate(){if(!gameRunning)return;
 const boostOn=boostHeld;
 const runSpeed=speed*(boostOn?1.25:1);
 lineOffset+=12*runSpeed;
 distance+=runSpeed*(game.classList.contains('fever')?0.75:.32);
 updateTheme();updateHUD();document.querySelectorAll('.road-line').forEach(e=>e.remove());for(let i=-1;i<14;i++){const line=document.createElement('div');line.className='road-line';line.style.top=((i*120+lineOffset)%1600)-100+'px';road.appendChild(line)}activeChoices.forEach(obj=>{
-obj.y+=1.55*runSpeed;
+const choiceSpeed = isPC() ? 0.95 : 1.55;
+obj.y += choiceSpeed * runSpeed;
 obj.el.style.top=obj.y+'px';
 if(!hitLocked&&!obj.hit&&obj.lane===lane&&isColliding(obj.el,player)){
   obj.hit=true;
