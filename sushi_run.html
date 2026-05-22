@@ -283,7 +283,7 @@ const runSpeed=speed*(boostOn?1.25:1);
 lineOffset+=12*runSpeed;
 distance+=runSpeed*(game.classList.contains('fever')?0.75:.32);
 updateTheme();updateHUD();document.querySelectorAll('.road-line').forEach(e=>e.remove());for(let i=-1;i<14;i++){const line=document.createElement('div');line.className='road-line';line.style.top=((i*120+lineOffset)%1600)-100+'px';road.appendChild(line)}activeChoices.forEach(obj=>{
-const choiceSpeed = isPC() ? 1.20 : 1.55;
+const choiceSpeed = isPC() ? 1.38 : 1.55;
 obj.y += choiceSpeed * runSpeed;
 obj.el.style.top=obj.y+'px';
 if(!hitLocked&&!obj.hit&&obj.lane===lane&&isColliding(obj.el,player)){
