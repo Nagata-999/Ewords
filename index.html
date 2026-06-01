@@ -1088,6 +1088,54 @@
       }
     }
   
+
+    /* Learning navigation */
+    .site-navigator {
+      margin-top: 10px;
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.075);
+      border: 1px solid rgba(255,255,255,0.13);
+      text-align: left;
+    }
+
+    .site-navigator h2 {
+      margin: 0 0 8px !important;
+      font-size: 15px !important;
+      color: #e0f2fe;
+    }
+
+    .navigator-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 7px;
+    }
+
+    .navigator-link {
+      display: block;
+      padding: 9px 8px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.065);
+      border: 1px solid rgba(255,255,255,0.11);
+      color: #dbeafe;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.35;
+    }
+
+    .navigator-link small {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .portal-game-card.green {
+      background: linear-gradient(180deg, rgba(22,163,74,0.40) 0%, rgba(20,83,45,0.22) 100%);
+    }
+
     /* Stylish portal override */
     .modal {
       background:
@@ -1267,9 +1315,192 @@
       .balloon { padding: 12px 14px; font-size: 16px; min-width: 106px; }
     }
 
-  </style>
+  
+    @media (max-width: 420px) {
+      .navigator-grid { grid-template-columns: 1fr; }
+      .site-navigator { padding: 10px; }
+    }
+
+  
+/* hamburger navigation */
+.hamburger-btn{
+  position:fixed;
+  top:14px;
+  right:14px;
+  z-index:9999;
+  width:52px;
+  height:52px;
+  border:none;
+  border-radius:14px;
+  background:rgba(15,23,42,.88);
+  backdrop-filter:blur(8px);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:5px;
+  cursor:pointer;
+  box-shadow:0 8px 20px rgba(0,0,0,.25);
+}
+
+.hamburger-btn span{
+  width:24px;
+  height:3px;
+  border-radius:999px;
+  background:#fff;
+  display:block;
+}
+
+.side-menu{
+  position:fixed;
+  top:0;
+  right:-320px;
+  width:300px;
+  max-width:82vw;
+  height:100vh;
+  background:#0f172a;
+  color:#fff;
+  z-index:9998;
+  transition:right .28s ease;
+  padding:80px 20px 30px;
+  overflow-y:auto;
+  box-shadow:-10px 0 30px rgba(0,0,0,.35);
+}
+
+.side-menu.open{
+  right:0;
+}
+
+.side-menu h2{
+  margin:0 0 16px;
+  font-size:20px;
+  color:#f8fafc;
+}
+
+.menu-group{
+  margin-bottom:26px;
+}
+
+.menu-group-title{
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:#94a3b8;
+  margin-bottom:10px;
+  font-weight:900;
+}
+
+.menu-link{
+  display:block;
+  padding:12px 14px;
+  border-radius:12px;
+  margin-bottom:8px;
+  background:rgba(255,255,255,.06);
+  color:#fff;
+  text-decoration:none;
+  font-weight:800;
+}
+
+.menu-link small{
+  display:block;
+  margin-top:2px;
+  color:#cbd5e1;
+  font-size:11px;
+}
+
+.hamburger-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  z-index:9997;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .25s ease;
+}
+
+.hamburger-overlay.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
+</style>
 </head>
 <body>
+
+<button class="hamburger-btn" id="hamburgerBtn" aria-label="サイトメニューを開く" aria-expanded="false">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+<div class="hamburger-overlay" id="hamburgerOverlay"></div>
+
+<aside class="side-menu" id="sideMenu" aria-label="すし英語サイトメニュー">
+  <h2>🍣 すし英語</h2>
+
+  <div class="menu-group">
+    <div class="menu-group-title">Games｜ゲーム</div>
+
+    <a class="menu-link" href="/index.html">
+      すし単
+      <small>英単語ゲーム</small>
+    </a>
+
+    <a class="menu-link" href="/shinotan.html">
+      しの単
+      <small>synonym game</small>
+    </a>
+
+    <a class="menu-link" href="/antonitan.html">
+      あんとに単
+      <small>antonym game</small>
+    </a>
+
+    <a class="menu-link" href="/sushitype.html">
+      スシType
+      <small>typing game</small>
+    </a>
+
+    <a class="menu-link" href="/sushi_run.html">
+      すしRUN
+      <small>running game</small>
+    </a>
+  </div>
+
+  <div class="menu-group">
+    <div class="menu-group-title">Articles｜学習記事</div>
+
+    <a class="menu-link" href="/words/">
+      単語一覧
+      <small>word list</small>
+    </a>
+
+    <a class="menu-link" href="/writing-expressions.html">
+      ライティング表現集
+      <small>英作文で使える表現</small>
+    </a>
+
+    <a class="menu-link" href="/writing-practice.html">
+      ライティング練習問題
+      <small>英検・IELTS向け</small>
+    </a>
+  </div>
+
+  <div class="menu-group">
+    <div class="menu-group-title">Info｜サイト情報</div>
+
+    <a class="menu-link" href="/privacy.html">
+      Privacy Policy
+      <small>プライバシーポリシー</small>
+    </a>
+
+    <a class="menu-link" href="/contact.html">
+      Contact
+      <small>お問い合わせ</small>
+    </a>
+  </div>
+</aside>
+
   <div class="app">
     <div class="panel topbar">
       <div>
@@ -1378,6 +1609,30 @@
             <button class="utility-btn" id="showAboutBtn">すし英語とは</button>
             <button class="utility-btn" id="showPrivacyBtn">ポリシー</button>
             <button class="utility-btn" id="showContactBtn">連絡先</button>
+          </div>
+
+
+
+          <div class="portal-section">
+            <h2>学習記事</h2>
+            <p>
+              ゲームとは別に、英単語一覧・ライティング表現集・英作文練習問題をまとめています。
+              英語をゲームで楽しく練習しながら、記事ページで知識を整理できます。
+            </p>
+            <div class="portal-game-grid">
+              <a class="portal-game-card word" href="/words/">
+                <strong>単語一覧</strong>
+                <span>英単語を一覧で確認できます。</span>
+              </a>
+              <a class="portal-game-card word" href="/writing-expressions.html">
+                <strong>ライティング表現集</strong>
+                <span>英検・IELTSの英作文で使いやすい表現を紹介。</span>
+              </a>
+              <a class="portal-game-card green" href="/writing-practice.html">
+                <strong>英作文練習問題</strong>
+                <span>表現を使って書くための練習テーマ集。</span>
+              </a>
+            </div>
           </div>
 
           <div class="quiet-seo">
@@ -5847,5 +6102,34 @@
     }
 
 </script>
+
+<script>
+(function(){
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const sideMenu = document.getElementById('sideMenu');
+  const hamburgerOverlay = document.getElementById('hamburgerOverlay');
+
+  if (!hamburgerBtn || !sideMenu || !hamburgerOverlay) return;
+
+  function closeHamburgerMenu(){
+    sideMenu.classList.remove('open');
+    hamburgerOverlay.classList.remove('show');
+    hamburgerBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  hamburgerBtn.addEventListener('click', () => {
+    const isOpen = sideMenu.classList.toggle('open');
+    hamburgerOverlay.classList.toggle('show', isOpen);
+    hamburgerBtn.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  hamburgerOverlay.addEventListener('click', closeHamburgerMenu);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeHamburgerMenu();
+  });
+})();
+</script>
+
 </body>
 </html>
