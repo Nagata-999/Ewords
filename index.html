@@ -1425,126 +1425,282 @@
   pointer-events:auto;
 }
 
-@media (min-width: 768px) {
 
-  html, body {
-    overflow: hidden;
+
+/* =========================================
+   Gentle top page theme only
+   ゲーム画面はそのまま、トップ/メニューだけ明るくする
+========================================= */
+#menuOverlay {
+  background: #fff7ed;
+  backdrop-filter: none;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 14px;
+}
+
+#menuOverlay .home-modal {
+  width: min(100%, 520px);
+  max-height: none;
+  min-height: calc(100dvh - 28px);
+  overflow-y: visible;
+  background:
+    radial-gradient(circle at 18% 0%, rgba(251,146,60,0.16), transparent 34%),
+    radial-gradient(circle at 100% 12%, rgba(20,184,166,0.12), transparent 30%),
+    #fffaf2;
+  color: #172033;
+  border: 1px solid rgba(251,146,60,0.20);
+  box-shadow: 0 18px 50px rgba(15,23,42,0.10);
+  text-align: left;
+}
+
+#menuOverlay .brand-hero {
+  padding: 2px 0 6px;
+}
+
+#menuOverlay .brand-mark {
+  background: #fff3e2;
+  border: 1px solid #fed7aa;
+  color: #ea580c;
+}
+
+#menuOverlay .brand-title {
+  color: #1f2937;
+  letter-spacing: -0.055em;
+}
+
+#menuOverlay .brand-copy {
+  color: #0f766e !important;
+}
+
+#menuOverlay .brand-sub,
+#menuOverlay .home-lead,
+#menuOverlay .home-section p,
+#menuOverlay .portal-section p,
+#menuOverlay .quiet-seo p,
+#menuOverlay .info-page p,
+#menuOverlay .info-page li {
+  color: #475569 !important;
+}
+
+#menuOverlay .compact-game-grid {
+  gap: 10px;
+}
+
+#menuOverlay .compact-game {
+  background: #ffffff;
+  color: #1e293b;
+  border: 1px solid #f1d7bc;
+  box-shadow: 0 8px 20px rgba(15,23,42,0.05);
+}
+
+#menuOverlay .compact-game small {
+  color: #64748b;
+}
+
+#menuOverlay .compact-game.blue {
+  background: linear-gradient(180deg, #eff6ff 0%, #ffffff 100%);
+}
+
+#menuOverlay .compact-game.purple {
+  background: linear-gradient(180deg, #f5f3ff 0%, #ffffff 100%);
+}
+
+#menuOverlay .compact-game.pink {
+  background: linear-gradient(180deg, #fdf2f8 0%, #ffffff 100%);
+}
+
+#menuOverlay .compact-game.green {
+  background: linear-gradient(180deg, #ecfdf5 0%, #ffffff 100%);
+}
+
+#menuOverlay .compact-game.orange {
+  background: linear-gradient(180deg, #fff7ed 0%, #ffffff 100%);
+}
+
+#menuOverlay .growth-card,
+#menuOverlay .portal-section,
+#menuOverlay .quiet-seo,
+#menuOverlay .site-navigator,
+#menuOverlay .ranking-box,
+#menuOverlay .result-box,
+#menuOverlay .mistake-list,
+#menuOverlay .home-section,
+#menuOverlay .note-box {
+  background: #ffffff;
+  border: 1px solid #f1d7bc;
+  box-shadow: 0 8px 22px rgba(15,23,42,0.05);
+}
+
+#menuOverlay .growth-rank,
+#menuOverlay .portal-section h2,
+#menuOverlay .home-section h2,
+#menuOverlay .home-section h3,
+#menuOverlay .quiet-seo h2,
+#menuOverlay .info-page h2,
+#menuOverlay .modal h1,
+#menuOverlay .modal h2,
+#menuOverlay .modal h3 {
+  color: #172033;
+}
+
+#menuOverlay .growth-score,
+#menuOverlay .growth-next,
+#menuOverlay .small,
+#menuOverlay .site-footer {
+  color: #64748b;
+}
+
+#menuOverlay .growth-bar {
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+}
+
+#menuOverlay .portal-game-card {
+  background: #ffffff;
+  color: #172033;
+  border: 1px solid #f1d7bc;
+  box-shadow: 0 8px 20px rgba(15,23,42,0.05);
+}
+
+#menuOverlay .portal-game-card span {
+  color: #64748b;
+}
+
+#menuOverlay .utility-btn,
+#menuOverlay .text-link-btn,
+#menuOverlay .navigator-link {
+  background: #ffffff;
+  color: #0f766e;
+  border: 1px solid #f1d7bc;
+}
+
+#menuOverlay .btn.gold,
+#menuOverlay .btn.primary {
+  background: linear-gradient(180deg, #fb6a3c 0%, #f4511e 100%);
+  color: #ffffff;
+}
+
+#menuOverlay .btn.secondary {
+  background: #e2e8f0;
+  color: #172033;
+}
+
+#menuOverlay .footer-link-btn,
+#menuOverlay a {
+  color: #0f766e !important;
+}
+
+#menuOverlay .site-footer {
+  border-top-color: #ead7bf;
+}
+
+/* PCではトップを記事ページ風に広げる */
+@media (min-width: 900px) {
+  #menuOverlay {
+    position: fixed;
+    inset: 0;
+    padding: 0;
+    background: #fbf4ea;
   }
 
-  body {
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-
-  .app {
-    max-width: 860px;
+  #menuOverlay .home-modal {
     width: 100%;
-    height: min(96vh, 1100px);
-
-    padding: 18px;
-    gap: 14px;
+    min-height: 100vh;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 34px 70px 64px;
+    background:
+      radial-gradient(circle at 18% 8%, rgba(251,146,60,0.14), transparent 30%),
+      radial-gradient(circle at 86% 12%, rgba(20,184,166,0.10), transparent 28%),
+      #fbf4ea;
   }
 
-  .topbar {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    padding: 16px;
+  #menuOverlay #homePanel {
+    max-width: 1120px;
+    margin: 0 auto;
   }
 
-  .stat {
-    padding: 14px 10px;
+  #menuOverlay .brand-hero {
+    max-width: 720px;
+    padding-top: 36px;
   }
 
-  .stat-label {
-    font-size: 13px;
+  #menuOverlay .brand-title {
+    font-size: clamp(64px, 7vw, 96px);
+    line-height: 0.98;
   }
 
-  .stat-value {
+  #menuOverlay .brand-copy {
     font-size: 28px;
   }
 
-  .question-card {
+  #menuOverlay .brand-sub {
+    font-size: 16px;
+    line-height: 1.9;
+  }
+
+  #menuOverlay .compact-game-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 26px;
+  }
+
+  #menuOverlay .compact-game {
+    padding: 20px;
+    border-radius: 22px;
+    font-size: 16px;
+    transition: transform .18s ease, box-shadow .18s ease;
+  }
+
+  #menuOverlay .compact-game:hover,
+  #menuOverlay .portal-game-card:hover,
+  #menuOverlay .utility-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(15,23,42,0.09);
+  }
+
+  #menuOverlay .growth-card {
+    margin-top: 24px;
+    border-radius: 22px;
     padding: 20px;
   }
 
-  .question-text {
-    font-size: 42px;
-    min-height: 56px;
+  #menuOverlay .utility-row {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 18px;
   }
 
-  .feedback {
-    font-size: 18px;
+  #menuOverlay .portal-section,
+  #menuOverlay .quiet-seo {
+    border-radius: 24px;
+    padding: 24px;
+    margin-top: 24px;
   }
 
-  .arena {
-    min-height: 460px;
-    padding: 14px;
-  }
-
-  .balloon {
-    font-size: 24px;
-    padding: 22px 28px;
-    min-width: 160px;
-    max-width: 240px;
-  }
-
-  .bottom {
-    padding: 16px;
+  #menuOverlay .portal-game-grid {
+    grid-template-columns: repeat(3, 1fr);
     gap: 14px;
   }
 
-  .btn {
-    font-size: 18px;
-    padding: 16px;
+  #menuOverlay .site-footer {
+    margin-top: 28px;
   }
 
-  .modal {
-    width: min(92vw, 820px);
-    max-height: 92vh;
-    padding: 28px;
-  }
-
-  .compact-game-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
-
-  .portal-game-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .navigator-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .utility-row {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .brand-title {
-    font-size: 72px;
-  }
-
-  .brand-copy {
-    font-size: 24px;
-  }
-
-  .brand-sub {
-    font-size: 15px;
-    line-height: 1.8;
-  }
-
-  .ranking-scroll {
-    max-height: 520px;
-  }
-
-  .hamburger-btn {
-    top: 20px;
-    right: 20px;
+  #menuOverlay .info-page {
+    max-width: 880px;
+    margin: 60px auto 0;
+    background: #ffffff;
+    border: 1px solid #f1d7bc;
+    border-radius: 28px;
+    padding: 34px;
+    box-shadow: 0 14px 34px rgba(15,23,42,0.07);
   }
 }
-    
+
 </style>
 </head>
 <body>
@@ -1676,7 +1832,7 @@
     </div>
 
     <div class="overlay" id="menuOverlay">
-      <div class="modal">
+      <div class="modal home-modal">
         <div id="homePanel">
           <div class="brand-hero">
             <span class="brand-mark">🍣 ENGLISH GAMES</span>
