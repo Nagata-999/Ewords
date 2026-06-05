@@ -1166,7 +1166,7 @@
     }
 
     .brand-title {
-      margin: 12px 0 4px !important;
+      margin: 12px 0 18px !important;
       font-size: clamp(42px, 12vw, 64px);
       line-height: 0.95;
       letter-spacing: -0.04em;
@@ -1470,9 +1470,6 @@
   letter-spacing: -0.055em;
 }
 
-#menuOverlay .brand-copy {
-  color: #0f766e !important;
-}
 
 #menuOverlay .brand-sub,
 #menuOverlay .home-lead,
@@ -1489,6 +1486,12 @@
 }
 
 #menuOverlay .compact-game {
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  min-height:140px;
   background: #ffffff;
   color: #1e293b;
   border: 1px solid #f1d7bc;
@@ -1663,7 +1666,8 @@
   }
 
   #menuOverlay .growth-card {
-    margin-top: 24px;
+    max-width:860px;
+    margin:24px auto 0;
     border-radius: 22px;
     padding: 20px;
   }
@@ -1836,8 +1840,7 @@
         <div id="homePanel">
           <div class="brand-hero">
             <span class="brand-mark">🍣 ENGLISH GAMES</span>
-            <h1 id="gameTitle" class="brand-title">すし英語</h1>
-            <p class="brand-copy">英語を、ゲームにする。</p>
+            <h1 id="gameTitle" class="brand-title">ゲームで英語。</h1>
             <p class="brand-sub">
               英検2級〜準1級・IELTS 5.0〜6.0を目指す人へ。単語、言い換え、タイピング、ランゲームで反射的な英語力を鍛える。
             </p>
