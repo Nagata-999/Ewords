@@ -1425,6 +1425,126 @@
   pointer-events:auto;
 }
 
+@media (min-width: 768px) {
+
+  html, body {
+    overflow: hidden;
+  }
+
+  body {
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .app {
+    max-width: 860px;
+    width: 100%;
+    height: min(96vh, 1100px);
+
+    padding: 18px;
+    gap: 14px;
+  }
+
+  .topbar {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .stat {
+    padding: 14px 10px;
+  }
+
+  .stat-label {
+    font-size: 13px;
+  }
+
+  .stat-value {
+    font-size: 28px;
+  }
+
+  .question-card {
+    padding: 20px;
+  }
+
+  .question-text {
+    font-size: 42px;
+    min-height: 56px;
+  }
+
+  .feedback {
+    font-size: 18px;
+  }
+
+  .arena {
+    min-height: 460px;
+    padding: 14px;
+  }
+
+  .balloon {
+    font-size: 24px;
+    padding: 22px 28px;
+    min-width: 160px;
+    max-width: 240px;
+  }
+
+  .bottom {
+    padding: 16px;
+    gap: 14px;
+  }
+
+  .btn {
+    font-size: 18px;
+    padding: 16px;
+  }
+
+  .modal {
+    width: min(92vw, 820px);
+    max-height: 92vh;
+    padding: 28px;
+  }
+
+  .compact-game-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .portal-game-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .navigator-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .utility-row {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .brand-title {
+    font-size: 72px;
+  }
+
+  .brand-copy {
+    font-size: 24px;
+  }
+
+  .brand-sub {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .ranking-scroll {
+    max-height: 520px;
+  }
+
+  .hamburger-btn {
+    top: 20px;
+    right: 20px;
+  }
+}
+    
 </style>
 </head>
 <body>
