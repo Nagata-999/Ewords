@@ -147,12 +147,66 @@
   }
 }
 
+
+/* lightweight WebP sprite settings */
+.conversationCard .sprite,
+.sprite{
+  background-size:500% 100%!important;
+  background-repeat:no-repeat!important;
+  background-position:0% 50%!important;
+  transform:scale(1)!important;
+  transform-origin:center center!important;
+}
+.conversationCard .sprite.good,
+.sprite.good{background-position:25% 50%!important;}
+.conversationCard .sprite.bad,
+.sprite.bad{background-position:50% 50%!important;}
+.conversationCard .sprite.shock,
+.sprite.shock{background-position:75% 50%!important;}
+.conversationCard .sprite.love,
+.sprite.love{background-position:100% 50%!important;}
+
+@keyframes float{
+  0%{transform:translateY(0) scale(1)}
+  50%{transform:translateY(-3px) scale(1)}
+  100%{transform:translateY(0) scale(1)}
+}
+
+/* preload status */
+.loadingNote{
+  margin-top:10px;
+  color:#637083;
+  font-size:13px;
+  font-weight:800;
+  text-align:center;
+}
+
 </style>
 </head>
 <body>
 <div id="app"></div><div id="flash" class="flash"></div>
 <script>
-const CHARACTERS=[{id:"yuki",name:"Sushi",type:"普通の人",sheet:"assets/SL-01.png",likes:["friendly","honest","casual"],hates:["rude","too_edgy"],time:20},{id:"ally",name:"Ally",type:"ナード",sheet:"assets/SL-02.png",likes:["meme","relatable","weird"],hates:["formal","basic"],time:18},{id:"mark",name:"Mark",type:"陽キャ・オラオラ",sheet:"assets/SL-03.png",likes:["hype","bold","challenge"],hates:["cold","passive"],time:24},{id:"susie",name:"Susie",type:"ギャル",sheet:"assets/SL-04.png",likes:["hype","slang","friendly"],hates:["cold","formal"],time:14},{id:"emma",name:"Malia",type:"堅そうな人",sheet:"assets/SL-05.png",likes:["polite","honest","friendly"],hates:["rude","too_edgy","chaotic"],time:24}];
+
+const SPRITE_FILES=[
+  "assets/SL-01.webp",
+  "assets/SL-02.webp",
+  "assets/SL-03.webp",
+  "assets/SL-04.webp",
+  "assets/SL-05.webp"
+];
+
+function preloadSprites(){
+  return Promise.all(SPRITE_FILES.map(src=>{
+    return new Promise(resolve=>{
+      const img=new Image();
+      img.onload=resolve;
+      img.onerror=resolve;
+      img.src=src;
+    });
+  }));
+}
+
+const CHARACTERS=[{id:"yuki",name:"Sushi",type:"普通の人",sheet:"assets/SL-01.webp",likes:["friendly","honest","casual"],hates:["rude","too_edgy"],time:20},{id:"ally",name:"Ally",type:"ナード",sheet:"assets/SL-02.webp",likes:["meme","relatable","weird"],hates:["formal","basic"],time:18},{id:"mark",name:"Mark",type:"陽キャ・オラオラ",sheet:"assets/SL-03.webp",likes:["hype","bold","challenge"],hates:["cold","passive"],time:24},{id:"susie",name:"Susie",type:"ギャル",sheet:"assets/SL-04.webp",likes:["hype","slang","friendly"],hates:["cold","formal"],time:14},{id:"emma",name:"Malia",type:"堅そうな人",sheet:"assets/SL-05.webp",likes:["polite","honest","friendly"],hates:["rude","too_edgy","chaotic"],time:24}];
 const SCENARIOS=[
 {scene:"昼休み。相手が軽く誘ってきた。",promptEN:"Wanna grab lunch?",promptJA:"昼飯いかね？",choices:[{en:"I'm down.",ja:"のるよ／いいね",tags:["friendly","casual"],base:82},{en:"Bet.",ja:"了解／のった",tags:["slang","hype"],base:78},{en:"I can't be bothered.",ja:"めんどい",tags:["cold"],base:35},{en:"Go away.",ja:"消えろ",tags:["rude","too_edgy"],base:8}]},
 {scene:"相手が人生終了みたいな顔をしている。",promptEN:"The bus left right in front of me.",promptJA:"目の前でバス行った。",choices:[{en:"Pain.",ja:"つらすぎ",tags:["relatable","meme"],base:84},{en:"That's wild.",ja:"それやばいな",tags:["casual","relatable"],base:78},{en:"Skill issue.",ja:"実力不足だな",tags:["meme","too_edgy"],base:18},{en:"I feel you.",ja:"わかるよ",tags:["friendly","honest"],base:88}]},
@@ -230,7 +284,8 @@ const SCENARIOS=[
 ];
 const REPLIES={yuki:{worst:[["ひどすぎる。。。！","Bro, that was way too much."],["急に敵じゃん。","Why would you say that!?"],["こわ。","Okay, scary."]],mid:[["まあ普通かな。","That was alright."],["悪くはない。","Not bad."],["ちょっと迷った？","You hesitated there, huh?"]],good:[["めっちゃ自然。","That sounded smooth."],["いいね、会話しやすい。","You're easy to talk to."],["それちょうどいい。","That was the right vibe."]],best:[["お前会話うますぎる。","BRO YOU COOKED 🔥"],["親友になれるわ。","We'd get along instantly."],["それ完璧。","Perfect answer."]]},ally:{worst:[["BRO NOOO 💀","今のは終わった。"],["無理、ログアウトする。","I'm logging off."],["空気が爆散した。","The vibe just exploded."]],mid:[["まあ分かる。","Fair enough."],["ちょっと微妙。","Kinda mid tbh."],["惜しいけどズレてる。","Close, but off."]],good:[["それはセンスある。","That was actually funny."],["ネットわかってるな。","You know the internet."],["Real. かなりReal。","Real. Very real."]],best:[["LMAOOOO 💀🔥","完全に優勝。"],["BRO YOU COOKED 💀","神レスで草。"],["それミーム化したい。","That deserves to be a meme."]]},mark:{worst:[["おいおい…。","That was weak."],["テンション下げんなよ！","You killed the mood!"],["今のはナシだろ！","Nah, not that!"]],mid:[["まあそんなもんか。","Not bad, not great."],["普通だな！","Pretty average!"],["もう一声ほしいな！","Needs more energy!"]],good:[["いいじゃねえか！","NOW WE'RE TALKING 🔥"],["そのノリ好きだ！","That's energy!"],["熱くなってきたな！","Now it's getting good!"]],best:[["うおおお最高！！","THAT WAS FIRE 🔥🔥🔥"],["お前今日キレてるな！","BRO YOU'RE BUILT DIFFERENT 🔥"],["その返し、勝ち！","Huge W!"]]},susie:{worst:[["え、無理なんだけど。","BYEEE 💀"],["good bye forever 💅","一生既読無視する。"],["それは普通に終わってる。","That was not it."]],mid:[["まああり。","Kinda okay."],["普通かな〜。","Not terrible."],["ちょい惜しい。","Almost cute."]],good:[["え、ノリいいじゃん！","Okayyy I like you 💖"],["それ好き！","That's such a vibe."],["かなりわかってる。","You get the vibe."]],best:[["OMG YOU ATE THAT 💖","最高すぎる！！"],["親友確定。","We're literally besties now."],["今のは優勝。","You totally slayed that."]]},emma:{worst:[["今のは失礼です。","That was inappropriate."],["少し距離を置きます。","I need some distance now."],["言い方を考えましょう。","Please choose your words carefully."]],mid:[["普通ですね。","That was acceptable."],["悪くはありません。","Not terrible."],["少しだけ軽いですね。","A little too casual."]],good:[["自然で良い返答です。","That was thoughtful."],["落ち着いていて良いですね。","That was considerate."],["相手への配慮があります。","That showed consideration."]],best:[["とても素敵な返答です。","That was genuinely wonderful."],["かなり好印象です。","I'm honestly impressed."],["完璧に近いです。","That was almost perfect."]]}};
 let turn=0,score=0,combo=0,maxCombo=0,locked=false,currentChar=null,currentScenario=null,timer=null,timeLeft=0,totalTime=0,log=[],affinity={};const MAX_TURNS=7,app=document.getElementById("app"),flash=document.getElementById("flash");
-function initAffinity(){affinity={};for(const c of CHARACTERS)affinity[c.id]=50}function showTitle(){app.innerHTML=`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title">Sushi Talk</div><p class="lead">英語スラングを「空気」で選ぶ会話ゲーム。<br>キャラの性格を読んで、ちょうどいい返答を選ぼう。</p><button class="btn" style="width:100%;margin-top:14px" onclick="startGame()">START</button></div>`}function startGame(){turn=0;score=0;combo=0;maxCombo=0;log=[];locked=false;initAffinity();nextTurn()}function nextTurn(){clearInterval(timer);if(turn>=MAX_TURNS){showResult();return}currentChar=CHARACTERS[Math.floor(Math.random()*CHARACTERS.length)];currentScenario=SCENARIOS[Math.floor(Math.random()*SCENARIOS.length)];locked=false;renderTurn();startTimer(currentChar.time)}function renderAffinity(){return `<div class="affinityGrid">`+CHARACTERS.map(c=>`<div class="affBox"><div class="affName">${c.name}</div><div class="affHeart">❤ ${affinity[c.id]}</div><div class="affBar"><div class="affFill" style="width:${affinity[c.id]}%"></div></div></div>`).join("")+`</div>`}function renderTurn(){
+function initAffinity(){affinity={};for(const c of CHARACTERS)affinity[c.id]=50}function showTitle(){app.innerHTML=`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title">Sushi Talk</div><p class="lead">英語スラングを「空気」で選ぶ会話ゲーム。<br>キャラの性格を読んで、ちょうどいい返答を選ぼう。</p><button class="btn" style="width:100%;margin-top:14px" onclick="startGame()">START</button><div class="loadingNote">初回のみ画像を読み込みます</div></div>`}async function startGame(){
+  await preloadSprites();turn=0;score=0;combo=0;maxCombo=0;log=[];locked=false;initAffinity();nextTurn()}function nextTurn(){clearInterval(timer);if(turn>=MAX_TURNS){showResult();return}currentChar=CHARACTERS[Math.floor(Math.random()*CHARACTERS.length)];currentScenario=SCENARIOS[Math.floor(Math.random()*SCENARIOS.length)];locked=false;renderTurn();startTimer(currentChar.time)}function renderAffinity(){return `<div class="affinityGrid">`+CHARACTERS.map(c=>`<div class="affBox"><div class="affName">${c.name}</div><div class="affHeart">❤ ${affinity[c.id]}</div><div class="affBar"><div class="affFill" style="width:${affinity[c.id]}%"></div></div></div>`).join("")+`</div>`}function renderTurn(){
   const choices=shuffle(currentScenario.choices).slice(0,4);
   app.innerHTML=`
     <div class="header">
