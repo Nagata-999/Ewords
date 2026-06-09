@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Sushi Talk｜すし英語</title>
+<style>
+:root{--bg:#fffaf2;--card:#fff;--ink:#24313f;--muted:#637083;--brand:#ef6c3e;--brand2:#1f8a70;--line:#eadfce;--soft:#fff2df;--blue:#eaf4ff;--danger:#e11d48;--gold:#f59e0b}*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;min-height:100%;background:#fffaf2;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic",Meiryo,sans-serif}body{background:linear-gradient(180deg,#fff7eb 0%,#fffaf2 40%,#fff 100%)}button{font-family:inherit}#app{width:min(100vw,560px);min-height:100dvh;margin:auto;padding:12px;display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden}.header{display:flex;justify-content:space-between;align-items:center;gap:8px}.logo{font-size:22px;font-weight:900;color:var(--brand)}.smallLink{color:var(--brand2);font-weight:800;text-decoration:none;font-size:13px}.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:15px;box-shadow:0 12px 32px rgba(75,49,22,.08)}.title{font-size:48px;line-height:1;font-weight:1000;color:var(--brand);text-align:center;margin-top:24px}.lead{color:#435064;text-align:center;line-height:1.75;font-weight:700}.btn{border:none;border-radius:999px;padding:14px 18px;background:var(--brand);color:#fff;font-size:18px;font-weight:900;box-shadow:0 8px 18px rgba(239,108,62,.25)}.btn:active{transform:scale(.98)}.status{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.stat{background:#fff8ee;border:1px solid #f2dec5;border-radius:16px;padding:8px;text-align:center}.statLabel{color:var(--muted);font-size:10px;font-weight:900}.statValue{color:var(--brand);font-size:21px;font-weight:1000}.affinityGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}.affBox{background:#fff8ee;border:1px solid #f2dec5;border-radius:13px;padding:5px;text-align:center}.affName{font-size:10px;color:var(--muted);font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.affHeart{font-size:15px;font-weight:1000;color:var(--danger)}.affBar{height:5px;background:#f2dec5;border-radius:999px;overflow:hidden;margin-top:3px}.affFill{height:100%;background:linear-gradient(90deg,var(--brand),var(--gold));width:0%}.characterArea{display:grid;grid-template-columns:210px 1fr;gap:12px;align-items:center}.spriteWrap{width:210px;height:270px;overflow:hidden;border-radius:20px;background:linear-gradient(180deg,#fff8ee,#fff);border:1px solid var(--line);display:flex;align-items:flex-start;justify-content:center;position:relative}.spriteWrap::after{content:"";position:absolute;inset:auto 12px 8px;height:18px;border-radius:50%;background:rgba(0,0,0,.08);filter:blur(5px)}.sprite{width:210px;height:270px;background-image:var(--sheet);background-size:500% auto;background-repeat:no-repeat;background-position:0% 18%;transform:scale(1.35);transform-origin:center top;transition:background-position .14s ease,transform .18s ease,filter .18s ease;position:relative;z-index:2}.sprite.normal{background-position:0% 18%}.sprite.good{background-position:25% 18%;filter:drop-shadow(0 0 16px rgba(31,138,112,.25))}.sprite.bad{background-position:50% 18%;filter:drop-shadow(0 0 16px rgba(239,108,62,.25))}.sprite.shock{background-position:75% 18%;filter:drop-shadow(0 0 16px rgba(59,130,246,.25))}.sprite.love{background-position:100% 18%;filter:drop-shadow(0 0 20px rgba(244,114,182,.35))}.charName{font-size:26px;font-weight:1000;line-height:1.2}.charType{display:inline-block;margin-top:6px;background:var(--soft);color:var(--brand);border:1px solid #ffd3b8;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:900}.comboBadge{display:inline-block;margin-top:8px;background:#ecfdf5;color:#047857;border:1px solid #a7f3d0;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:1000}.timerWrap{height:10px;background:#fff3e6;border:1px solid #f2dec5;border-radius:999px;overflow:hidden}.timerFill{height:100%;width:100%;background:linear-gradient(90deg,#22c55e,#f59e0b,#ef4444);transition:width .08s linear}.scene{font-size:18px;font-weight:900;line-height:1.5}.speech{margin-top:10px;background:var(--blue);border-radius:18px;padding:12px 14px}.speech .en{font-size:22px;font-weight:1000;color:#1d3448}.speech .ja{color:#435064;margin-top:4px;font-size:14px;font-weight:700}.choices{display:grid;gap:10px}.choice{text-align:left;border:none;border-radius:20px;padding:13px 15px;background:#fff;border:1px solid var(--line);box-shadow:0 8px 18px rgba(75,49,22,.06);color:var(--ink);position:relative;overflow:hidden}.choice:active{transform:scale(.99)}.choiceEN{font-size:20px;font-weight:1000}.choiceJA{color:var(--muted);font-size:14px;margin-top:4px;font-weight:700}.choice.locked{opacity:.38;pointer-events:none}.choice.selected{opacity:1;border:2px solid var(--brand);background:#fff8ee}.feedback{min-height:128px;text-align:center;cursor:pointer}.tapNext{color:var(--brand2);font-size:12px;font-weight:1000;letter-spacing:.12em}.score{font-size:38px;font-weight:1000;margin-top:4px;color:var(--brand2)}.score.bad{color:var(--danger)}.replyEN{font-size:22px;font-weight:1000;line-height:1.35}.replyJA{color:var(--muted);margin-top:5px;font-weight:700}.resultScore{text-align:center;font-size:58px;font-weight:1000;color:var(--brand)}.log{display:grid;gap:8px}.logRow{background:#fff8ee;border:1px solid #f2dec5;border-radius:14px;padding:10px;font-size:13px;line-height:1.55}.flash{position:fixed;inset:0;pointer-events:none;z-index:50;opacity:0}.flash.good{background:rgba(34,197,94,.22);animation:flash .38s ease}.flash.bad{background:rgba(225,29,72,.25);animation:flash .38s ease}.flash.best{background:rgba(250,204,21,.28);animation:flash .55s ease}@keyframes flash{0%{opacity:0}35%{opacity:1}100%{opacity:0}}.shake{animation:shake .25s ease}@keyframes shake{0%{transform:translateX(0)}25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-5px)}100%{transform:translateX(0)}}.pop{animation:pop .25s ease}@keyframes pop{0%{transform:scale(.82);opacity:.4}100%{transform:scale(1);opacity:1}}.float{animation:float 2.2s ease-in-out infinite}@keyframes float{0%{transform:translateY(0) scale(1.35)}50%{transform:translateY(-5px) scale(1.35)}100%{transform:translateY(0) scale(1.35)}}@media(max-width:480px){#app{padding:9px}.title{font-size:40px}.characterArea{grid-template-columns:150px 1fr}.spriteWrap{width:150px;height:220px}.sprite{width:150px;height:220px}.charName{font-size:22px}.speech .en{font-size:19px}.choiceEN{font-size:18px}.card{padding:13px}.statValue{font-size:18px}}
+
+/* unified conversation UI */
+.conversationCard{position:relative;overflow:visible;padding-top:20px}
+.conversationHero{display:grid;grid-template-columns:170px 1fr;gap:14px;align-items:end}
+.conversationCard .spriteWrap{margin-top:-10px;margin-left:-2px;box-shadow:0 16px 30px rgba(75,49,22,.08)}
+.talkPanel{min-width:0;padding-bottom:4px}
+.bubble{position:relative;background:var(--blue);border-radius:20px;padding:13px 15px;margin-top:12px;color:#1d3448}
+.bubble::before{content:"";position:absolute;left:-10px;top:24px;width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-right:12px solid var(--blue)}
+.bubble .en{font-size:22px;font-weight:1000;line-height:1.35}
+.bubble .ja{color:#435064;margin-top:4px;font-size:14px;font-weight:700}
+.choiceAreaInCard{margin-top:12px;display:grid;gap:10px}
+.replyBubble{position:relative;background:#fff8ee;border:1px solid #f2dec5;border-radius:20px;padding:14px 15px;margin-top:12px;text-align:center;cursor:pointer}
+.replyBubble::before{content:"";position:absolute;left:28px;top:-10px;width:0;height:0;border-left:10px solid transparent;border-right:10px solid transparent;border-bottom:11px solid #fff8ee}
+.sceneInBubble{font-size:16px;font-weight:900;line-height:1.45;margin-bottom:8px;color:var(--ink)}
+@media(max-width:480px){
+.conversationHero{grid-template-columns:130px 1fr;gap:10px;align-items:end}
+.bubble .en{font-size:18px}.bubble{padding:11px 12px;border-radius:17px}
+.bubble::before{left:-8px;top:22px;border-top:8px solid transparent;border-bottom:8px solid transparent;border-right:10px solid var(--blue)}
+}
+
+
+/* readability fix */
+.conversationCard{
+  padding:14px!important;
+  overflow:hidden!important;
+}
+.conversationHero{
+  display:grid!important;
+  grid-template-columns:125px 1fr!important;
+  gap:12px!important;
+  align-items:start!important;
+}
+.conversationCard .spriteWrap{
+  width:125px!important;
+  height:170px!important;
+  margin:0!important;
+  border-radius:18px!important;
+}
+.conversationCard .sprite{
+  width:125px!important;
+  height:170px!important;
+  background-size:500% auto!important;
+  background-position:0% 16%!important;
+  transform:scale(1.18)!important;
+  transform-origin:center top!important;
+}
+.conversationCard .sprite.good{background-position:25% 16%!important;}
+.conversationCard .sprite.bad{background-position:50% 16%!important;}
+.conversationCard .sprite.shock{background-position:75% 16%!important;}
+.conversationCard .sprite.love{background-position:100% 16%!important;}
+.talkPanel{
+  min-width:0!important;
+  padding:0!important;
+}
+.charName{
+  font-size:24px!important;
+  line-height:1.15!important;
+  margin-top:4px!important;
+  word-break:keep-all!important;
+}
+.charType,.comboBadge{
+  font-size:11px!important;
+  padding:3px 8px!important;
+}
+.bubble{
+  margin-top:10px!important;
+  padding:12px 13px!important;
+  border-radius:18px!important;
+}
+.bubble::before{
+  left:-8px!important;
+  top:28px!important;
+  border-top:8px solid transparent!important;
+  border-bottom:8px solid transparent!important;
+  border-right:10px solid var(--blue)!important;
+}
+.sceneInBubble{
+  font-size:15px!important;
+  margin-bottom:6px!important;
+}
+.bubble .en{
+  font-size:20px!important;
+}
+.bubble .ja{
+  font-size:13px!important;
+}
+.choiceAreaInCard{
+  margin-top:12px!important;
+}
+.choice{
+  padding:12px 13px!important;
+}
+.choiceEN{
+  font-size:18px!important;
+}
+.choiceJA{
+  font-size:13px!important;
+}
+@keyframes float{
+  0%{transform:translateY(0) scale(1.18)}
+  50%{transform:translateY(-3px) scale(1.18)}
+  100%{transform:translateY(0) scale(1.18)}
+}
+@media(max-width:480px){
+  .conversationHero{
+    grid-template-columns:105px 1fr!important;
+    gap:9px!important;
+  }
+  .conversationCard .spriteWrap{
+    width:105px!important;
+    height:150px!important;
+  }
+  .conversationCard .sprite{
+    width:105px!important;
+    height:150px!important;
+    transform:scale(1.15)!important;
+  }
+  .charName{
+    font-size:21px!important;
+  }
+  .charType,.comboBadge{
+    font-size:10px!important;
+    padding:3px 7px!important;
+  }
+  .bubble{
+    padding:10px 11px!important;
+  }
+  .sceneInBubble{
+    font-size:13px!important;
+  }
+  .bubble .en{
+    font-size:17px!important;
+  }
+  .bubble .ja{
+    font-size:12px!important;
+  }
+  .choiceEN{
+    font-size:17px!important;
+  }
+}
+
+</style>
+</head>
+<body>
+<div id="app"></div><div id="flash" class="flash"></div>
+<script>
+const CHARACTERS=[{id:"yuki",name:"Sushi",type:"普通の人",sheet:"assets/SL-01.png",likes:["friendly","honest","casual"],hates:["rude","too_edgy"],time:20},{id:"ally",name:"Ally",type:"ナード",sheet:"assets/SL-02.png",likes:["meme","relatable","weird"],hates:["formal","basic"],time:18},{id:"mark",name:"Mark",type:"陽キャ・オラオラ",sheet:"assets/SL-03.png",likes:["hype","bold","challenge"],hates:["cold","passive"],time:24},{id:"susie",name:"Susie",type:"ギャル",sheet:"assets/SL-04.png",likes:["hype","slang","friendly"],hates:["cold","formal"],time:14},{id:"emma",name:"Malia",type:"堅そうな人",sheet:"assets/SL-05.png",likes:["polite","honest","friendly"],hates:["rude","too_edgy","chaotic"],time:24}];
+const SCENARIOS=[
+{scene:"昼休み。相手が軽く誘ってきた。",promptEN:"Wanna grab lunch?",promptJA:"昼飯いかね？",choices:[{en:"I'm down.",ja:"のるよ／いいね",tags:["friendly","casual"],base:82},{en:"Bet.",ja:"了解／のった",tags:["slang","hype"],base:78},{en:"I can't be bothered.",ja:"めんどい",tags:["cold"],base:35},{en:"Go away.",ja:"消えろ",tags:["rude","too_edgy"],base:8}]},
+{scene:"相手が人生終了みたいな顔をしている。",promptEN:"The bus left right in front of me.",promptJA:"目の前でバス行った。",choices:[{en:"Pain.",ja:"つらすぎ",tags:["relatable","meme"],base:84},{en:"That's wild.",ja:"それやばいな",tags:["casual","relatable"],base:78},{en:"Skill issue.",ja:"実力不足だな",tags:["meme","too_edgy"],base:18},{en:"I feel you.",ja:"わかるよ",tags:["friendly","honest"],base:88}]},
+{scene:"相手がテスト前に絶望している。",promptEN:"I studied the wrong test material all night.",promptJA:"徹夜したのに試験範囲違った。",choices:[{en:"I'm cooked.",ja:"詰んだな",tags:["meme","relatable"],base:88},{en:"That's amazing 💀",ja:"最高じゃん（煽り）",tags:["meme","too_edgy"],base:42},{en:"That hurts.",ja:"それはきつい",tags:["friendly"],base:82},{en:"Cope harder.",ja:"現実見ろ",tags:["rude","too_edgy"],base:5}]},
+{scene:"相手が自信満々に報告してきた。",promptEN:"I just won five games in a row.",promptJA:"今5連勝した。",choices:[{en:"Huge W.",ja:"デカすぎる勝利",tags:["slang","hype"],base:92},{en:"Built different.",ja:"格が違う",tags:["hype"],base:90},{en:"Touch grass.",ja:"外出ろ",tags:["rude","meme"],base:20},{en:"Fair enough.",ja:"まあそれはわかる",tags:["basic"],base:46}]},
+{scene:"相手がおすすめの食べ物を出してきた。",promptEN:"Try this ramen.",promptJA:"このラーメン食べてみ。",choices:[{en:"This is bussin'.",ja:"これうますぎ",tags:["slang","hype"],base:98},{en:"This is fire.",ja:"これ神",tags:["slang","hype"],base:92},{en:"Kinda mid.",ja:"ちょい微妙",tags:["cold"],base:28},{en:"No cap, this is good.",ja:"マジでうまい",tags:["slang","honest"],base:88}]},
+{scene:"相手が恋愛で現実を見失っている。",promptEN:"Maybe they'll text me back someday.",promptJA:"いつか返信くるかも。",choices:[{en:"Stay delulu.",ja:"妄想し続けろ",tags:["meme","weird"],base:82},{en:"Delulu.",ja:"妄想モードだな",tags:["meme"],base:76},{en:"Move on.",ja:"切り替えろ",tags:["honest","cold"],base:55},{en:"That's pathetic.",ja:"だっさ",tags:["rude","too_edgy"],base:6}]},
+{scene:"相手が雨に完全に萎えている。",promptEN:"Rainy days suck.",promptJA:"雨ほんとだるい。",choices:[{en:"I feel you.",ja:"わかるよ",tags:["friendly","honest"],base:90},{en:"Lowkey true.",ja:"ちょっとわかる",tags:["slang","relatable"],base:84},{en:"Touch grass.",ja:"外出ろ",tags:["meme","rude"],base:14},{en:"I can't be bothered to move.",ja:"動く気しない",tags:["relatable"],base:88}]},
+{scene:"相手が人間関係の揉め事を話している。",promptEN:"They're beefing again.",promptJA:"あいつらまた揉めてる。",choices:[{en:"That's wild.",ja:"それやばいな",tags:["casual"],base:74},{en:"More drama?",ja:"また面倒ごと？",tags:["casual"],base:72},{en:"I live for this.",ja:"そういうの好き",tags:["weird","meme"],base:70},{en:"Not my problem.",ja:"俺には関係ない",tags:["cold"],base:35}]},
+{scene:"相手がかなり落ち込んでいる。",promptEN:"She dumped me yesterday.",promptJA:"昨日ふられた。",choices:[{en:"That’s brutal.",ja:"それはえぐい",tags:["friendly","honest"],base:86},{en:"Delulu is the solulu.",ja:"妄想こそ解決策",tags:["meme","weird"],base:82},{en:"Move on.",ja:"切り替えろ",tags:["cold","honest"],base:52},{en:"Pathetic.",ja:"だっさ",tags:["rude","too_edgy"],base:4}]},
+{scene:"相手が完全に溶けている。",promptEN:"It’s way too hot today.",promptJA:"今日暑すぎて死ぬ。",choices:[{en:"It’s hot af.",ja:"暑すぎる",tags:["slang","relatable"],base:92},{en:"I'm melting.",ja:"溶ける",tags:["relatable"],base:90},{en:"Skill issue.",ja:"暑さ耐性不足",tags:["meme","too_edgy"],base:16},{en:"I feel you.",ja:"わかるよ",tags:["friendly","honest"],base:88}]}
+,,
+{scene:"相手がスマホを落として画面を割った。",promptEN:"I dropped my phone and cracked the screen.",promptJA:"スマホ落として画面割れた。",choices:[
+{en:"Pain.",ja:"つらすぎ",tags:["relatable","meme"],base:86},{en:"That's wild.",ja:"それやばいな",tags:["casual","relatable"],base:78},{en:"My bad.",ja:"ごめん、俺のせい",tags:["honest","friendly"],base:60},{en:"Skill issue.",ja:"実力不足だな",tags:["meme","too_edgy"],base:16}]},
+{scene:"相手が新しい服を見せてきた。",promptEN:"How do I look?",promptJA:"この服どう？",choices:[
+{en:"You ate.",ja:"完璧にキマってる",tags:["slang","friendly","hype"],base:96},{en:"You slay.",ja:"めっちゃイケてる",tags:["slang","hype"],base:98},{en:"It's giving main character energy.",ja:"主人公感ある",tags:["slang","friendly"],base:90},{en:"Kinda cringe.",ja:"ちょっと痛い",tags:["rude","too_edgy"],base:8}]},
+{scene:"相手が好きな人に話しかけたらしい。",promptEN:"I talked to my crush today.",promptJA:"今日好きな人と話した。",choices:[
+{en:"Huge W.",ja:"デカすぎる勝利",tags:["hype","slang"],base:92},{en:"You've got rizz.",ja:"モテ力あるじゃん",tags:["slang","friendly"],base:88},{en:"We're so back.",ja:"復活だ",tags:["meme","hype"],base:82},{en:"Delulu.",ja:"妄想だな",tags:["meme","too_edgy"],base:35}]},
+{scene:"相手が好きな人に既読無視された。",promptEN:"They left me on read again.",promptJA:"また既読無視された。",choices:[
+{en:"I feel you.",ja:"気持ちわかる",tags:["friendly","honest"],base:90},{en:"That's brutal.",ja:"それはえぐい",tags:["friendly"],base:84},{en:"Stay delulu.",ja:"妄想し続けろ",tags:["meme","weird"],base:72},{en:"Move on.",ja:"切り替えろ",tags:["cold","honest"],base:48}]},
+{scene:"相手が宿題を全部忘れてきた。",promptEN:"I forgot every single assignment.",promptJA:"宿題全部忘れた。",choices:[
+{en:"You're cooked.",ja:"詰んだな",tags:["meme","relatable"],base:86},{en:"No cap, that's bad.",ja:"ガチでやばい",tags:["slang","honest"],base:82},{en:"That's on you.",ja:"それは自分のせい",tags:["honest","cold"],base:50},{en:"Goodbye forever.",ja:"さようなら",tags:["too_edgy","meme"],base:20}]},
+{scene:"相手が授業中に寝落ちした。",promptEN:"I fell asleep in class.",promptJA:"授業中寝落ちした。",choices:[
+{en:"Relatable.",ja:"わかる",tags:["relatable"],base:78},{en:"I feel you.",ja:"気持ちわかる",tags:["friendly","honest"],base:86},{en:"NPC behavior.",ja:"NPCすぎる",tags:["meme","too_edgy"],base:34},{en:"Wake up.",ja:"起きろ",tags:["cold"],base:42}]},
+{scene:"相手が先生に当てられて固まった。",promptEN:"The teacher called on me and I froze.",promptJA:"先生に当てられて固まった。",choices:[
+{en:"Pain.",ja:"つらすぎ",tags:["relatable","meme"],base:84},{en:"That’s wild.",ja:"それやばいな",tags:["casual"],base:76},{en:"I would vanish.",ja:"俺なら消える",tags:["relatable","meme"],base:82},{en:"Skill issue.",ja:"実力不足",tags:["too_edgy","meme"],base:18}]},
+{scene:"相手が文化祭で大成功した。",promptEN:"Our class project was a huge success.",promptJA:"クラス企画めっちゃ成功した。",choices:[
+{en:"Huge W.",ja:"デカすぎる勝利",tags:["hype","slang"],base:94},{en:"You cooked.",ja:"やるじゃん",tags:["friendly","hype"],base:92},{en:"That's fire.",ja:"最高じゃん",tags:["slang","hype"],base:90},{en:"Fair enough.",ja:"まあそうだね",tags:["basic"],base:45}]},
+{scene:"相手が推しのライブに当選した。",promptEN:"I got tickets to my favorite artist's concert!",promptJA:"推しのライブ当たった！",choices:[
+{en:"LET'S GOOO!",ja:"うおおお！",tags:["hype"],base:96},{en:"Huge W.",ja:"大勝利",tags:["slang","hype"],base:94},{en:"I'm lowkey jealous.",ja:"ちょっと嫉妬する",tags:["slang","honest"],base:82},{en:"I don't care.",ja:"興味ない",tags:["cold","rude"],base:8}]},
+{scene:"相手が推しについて語り始めた。",promptEN:"Let me tell you why my favorite character is perfect.",promptJA:"推しが完璧な理由を語らせて。",choices:[
+{en:"Say less.",ja:"もうわかった、聞く",tags:["slang","friendly"],base:88},{en:"I’m listening.",ja:"聞こうじゃないか",tags:["friendly","honest"],base:86},{en:"Touch grass.",ja:"外出ろ",tags:["meme","rude"],base:18},{en:"You’re so delulu.",ja:"妄想激しいな",tags:["meme","too_edgy"],base:36}]},
+{scene:"相手がテストで満点を取った。",promptEN:"I got a perfect score.",promptJA:"テスト満点だった。",choices:[
+{en:"You cooked.",ja:"やるじゃん",tags:["hype","friendly"],base:94},{en:"Built different.",ja:"格が違う",tags:["hype","slang"],base:96},{en:"No cap, that's impressive.",ja:"マジですごい",tags:["honest","slang"],base:92},{en:"Must be luck.",ja:"運だろ",tags:["cold","too_edgy"],base:22}]},
+{scene:"相手がテストで赤点だった。",promptEN:"I failed the test.",promptJA:"テスト赤点だった。",choices:[
+{en:"I feel you.",ja:"気持ちわかる",tags:["friendly","honest"],base:88},{en:"You're cooked.",ja:"詰んだな",tags:["meme","relatable"],base:82},{en:"That’s rough.",ja:"それはきつい",tags:["friendly"],base:84},{en:"Cope harder.",ja:"現実見ろ",tags:["rude","too_edgy"],base:6}]},
+{scene:"相手が朝から何も食べていない。",promptEN:"I haven't eaten anything today.",promptJA:"今日まだ何も食べてない。",choices:[
+{en:"Go eat something.",ja:"なんか食べな",tags:["friendly","honest"],base:86},{en:"You're cooked.",ja:"終わるぞ",tags:["meme","relatable"],base:72},{en:"That’s not healthy.",ja:"それ健康に悪いよ",tags:["honest"],base:78},{en:"Skill issue.",ja:"自己管理不足",tags:["too_edgy","meme"],base:12}]},
+{scene:"相手が寝不足でふらふらしている。",promptEN:"I slept for two hours.",promptJA:"2時間しか寝てない。",choices:[
+{en:"I feel you.",ja:"わかるよ",tags:["friendly","honest"],base:86},{en:"Pain.",ja:"つらすぎ",tags:["relatable","meme"],base:84},{en:"I can’t be bothered to exist.",ja:"存在するのもめんどい",tags:["meme","relatable"],base:78},{en:"That's your fault.",ja:"自業自得",tags:["cold","rude"],base:18}]},
+{scene:"相手が友達とケンカした。",promptEN:"I had a fight with my friend.",promptJA:"友達とケンカした。",choices:[
+{en:"Are you two beefing?",ja:"揉めてるの？",tags:["slang","casual"],base:78},{en:"That sounds rough.",ja:"それは大変そう",tags:["friendly","honest"],base:88},{en:"Talk it out.",ja:"ちゃんと話しな",tags:["honest","friendly"],base:82},{en:"Not my problem.",ja:"俺には関係ない",tags:["cold","rude"],base:12}]},
+{scene:"相手がSNSで炎上しかけている。",promptEN:"My post is getting roasted.",promptJA:"投稿が叩かれ始めてる。",choices:[
+{en:"You're cooked.",ja:"終わったな",tags:["meme","too_edgy"],base:64},{en:"Delete it now.",ja:"今すぐ消せ",tags:["honest"],base:76},{en:"That’s wild.",ja:"それやばいな",tags:["casual"],base:72},{en:"Huge W.",ja:"大勝利",tags:["hype","chaotic"],base:20}]},
+{scene:"相手が変な夢を見たらしい。",promptEN:"I had the weirdest dream last night.",promptJA:"昨日めっちゃ変な夢見た。",choices:[
+{en:"Tell me everything.",ja:"全部聞かせて",tags:["friendly","weird"],base:86},{en:"That’s wild.",ja:"それやばそう",tags:["casual"],base:80},{en:"Straight up scary.",ja:"普通に怖い",tags:["slang","honest"],base:76},{en:"I don't care.",ja:"興味ない",tags:["cold","rude"],base:8}]},
+{scene:"相手がめちゃくちゃ良い写真を撮った。",promptEN:"I took this photo today.",promptJA:"今日この写真撮った。",choices:[
+{en:"This is fire.",ja:"これ神",tags:["slang","hype"],base:94},{en:"You ate.",ja:"完璧じゃん",tags:["slang","friendly"],base:96},{en:"It’s giving professional.",ja:"プロ感ある",tags:["slang","honest"],base:88},{en:"Kinda mid.",ja:"ちょい微妙",tags:["cold"],base:24}]},
+{scene:"相手が自分の髪型を変えた。",promptEN:"I changed my hairstyle.",promptJA:"髪型変えた。",choices:[
+{en:"You slay.",ja:"めっちゃ似合う",tags:["slang","hype","friendly"],base:96},{en:"It suits you.",ja:"似合ってる",tags:["friendly","honest"],base:90},{en:"It’s giving main character.",ja:"主人公感ある",tags:["slang","hype"],base:88},{en:"Go back.",ja:"前に戻せ",tags:["rude","cold"],base:8}]},
+{scene:"相手が全然返信していなかった。",promptEN:"My bad, I forgot to reply.",promptJA:"ごめん、返信忘れてた。",choices:[
+{en:"Fair enough.",ja:"まあわかる",tags:["honest","casual"],base:78},{en:"No worries.",ja:"大丈夫",tags:["friendly"],base:88},{en:"You were ghosting me.",ja:"既読無視してたじゃん",tags:["slang","tease"],base:62},{en:"Goodbye forever.",ja:"永遠にさよなら",tags:["too_edgy","meme"],base:24}]}
+
+,
+{scene:"相手が大事なプリントを家に忘れた。",promptEN:"I left the handout at home.",promptJA:"大事なプリント家に忘れた。",choices:[{en:"You're cooked.",ja:"詰んだな",tags:["meme","relatable"],base:82},{en:"Ask the teacher.",ja:"先生に聞きな",tags:["honest","friendly"],base:84},{en:"Pain.",ja:"つらすぎ",tags:["relatable","meme"],base:80},{en:"Skill issue.",ja:"実力不足",tags:["too_edgy","meme"],base:16}]},
+{scene:"相手が新しいスマホを買った。",promptEN:"I got a new phone.",promptJA:"新しいスマホ買った。",choices:[{en:"Huge W.",ja:"大勝利",tags:["hype","slang"],base:90},{en:"That's fire.",ja:"それ神じゃん",tags:["slang","hype"],base:88},{en:"Lowkey jealous.",ja:"ちょっと嫉妬する",tags:["slang","honest"],base:84},{en:"Who asked?",ja:"誰が聞いた？",tags:["rude","too_edgy"],base:8}]},
+{scene:"相手が体育で転んだらしい。",promptEN:"I tripped during PE.",promptJA:"体育で転んだ。",choices:[{en:"Are you okay?",ja:"大丈夫？",tags:["friendly","honest"],base:90},{en:"Pain.",ja:"つらい",tags:["relatable","meme"],base:78},{en:"That’s wild.",ja:"それやばいな",tags:["casual"],base:72},{en:"NPC behavior.",ja:"NPCすぎる",tags:["meme","too_edgy"],base:24}]},
+{scene:"相手が自分の弁当を忘れた。",promptEN:"I forgot my lunch.",promptJA:"弁当忘れた。",choices:[{en:"I feel you.",ja:"わかるよ",tags:["friendly","honest"],base:84},{en:"You're cooked.",ja:"詰んだな",tags:["meme","relatable"],base:78},{en:"Want some of mine?",ja:"少し食べる？",tags:["friendly","honest"],base:96},{en:"Not my problem.",ja:"俺には関係ない",tags:["cold","rude"],base:10}]},
+{scene:"相手が友達にドタキャンされた。",promptEN:"My friend canceled at the last minute.",promptJA:"友達にドタキャンされた。",choices:[{en:"That’s rough.",ja:"それはきつい",tags:["friendly","honest"],base:88},{en:"I feel you.",ja:"気持ちわかる",tags:["friendly"],base:86},{en:"They’re so flaky.",ja:"その人ドタキャン多いね",tags:["casual","honest"],base:76},{en:"Good for them.",ja:"相手は賢いな",tags:["rude","too_edgy"],base:6}]},
+{scene:"相手が課題をギリギリで提出した。",promptEN:"I submitted it one minute before the deadline.",promptJA:"締切1分前に出した。",choices:[{en:"You cooked.",ja:"やるじゃん",tags:["hype","friendly"],base:86},{en:"That’s wild.",ja:"それやばい",tags:["casual","relatable"],base:82},{en:"Built different.",ja:"格が違う",tags:["hype","slang"],base:84},{en:"Never do that again.",ja:"二度とやるな",tags:["honest","cold"],base:52}]},
+{scene:"相手が寝癖のまま登校した。",promptEN:"I came to school with bed hair.",promptJA:"寝癖のまま学校来た。",choices:[{en:"It’s giving chaos.",ja:"混沌感ある",tags:["slang","meme"],base:72},{en:"Honestly, it works.",ja:"正直それもあり",tags:["friendly","honest"],base:82},{en:"You slay.",ja:"逆にイケてる",tags:["slang","hype"],base:80},{en:"Cringe.",ja:"きつい",tags:["rude","too_edgy"],base:8}]},
+{scene:"相手がカラオケで高得点を出した。",promptEN:"I got 96 at karaoke.",promptJA:"カラオケ96点だった。",choices:[{en:"You ate.",ja:"完璧じゃん",tags:["slang","hype"],base:94},{en:"Built different.",ja:"格が違う",tags:["hype"],base:92},{en:"No cap, that's impressive.",ja:"マジですごい",tags:["honest","slang"],base:90},{en:"Mid.",ja:"微妙",tags:["cold","too_edgy"],base:12}]},
+{scene:"相手が好きな曲をすすめてきた。",promptEN:"Listen to this song.",promptJA:"この曲聞いてみて。",choices:[{en:"This is fire.",ja:"これ神",tags:["slang","hype"],base:90},{en:"I'm vibing with this.",ja:"めっちゃ気分いい",tags:["slang","friendly"],base:88},{en:"It’s not my thing.",ja:"自分の好みではない",tags:["honest"],base:58},{en:"My ears hurt.",ja:"耳が痛い",tags:["rude","too_edgy"],base:4}]},
+{scene:"相手が秘密を話したそうにしている。",promptEN:"I know something, but I shouldn't say it.",promptJA:"言っちゃだめな話知ってる。",choices:[{en:"Spill the tea.",ja:"暴露して",tags:["slang","meme"],base:82},{en:"Say less.",ja:"もうわかった",tags:["slang","casual"],base:76},{en:"Keep it private.",ja:"秘密にしときな",tags:["honest","polite"],base:84},{en:"Tell everyone.",ja:"全員に言え",tags:["chaotic","too_edgy"],base:12}]},
+{scene:"相手が急に真面目な相談をしてきた。",promptEN:"Can I talk to you seriously?",promptJA:"ちょっと真面目に相談していい？",choices:[{en:"Of course.",ja:"もちろん",tags:["friendly","honest","polite"],base:96},{en:"I’m listening.",ja:"聞くよ",tags:["friendly","honest"],base:94},{en:"Say less.",ja:"わかった、話して",tags:["slang","friendly"],base:78},{en:"Not now.",ja:"今無理",tags:["cold"],base:32}]},
+{scene:"相手が大事な試合に負けた。",promptEN:"We lost the final match.",promptJA:"決勝で負けた。",choices:[{en:"That’s brutal.",ja:"それはきつい",tags:["friendly","honest"],base:88},{en:"I feel you.",ja:"気持ちわかる",tags:["friendly"],base:86},{en:"You’ll bounce back.",ja:"また立ち直れるよ",tags:["friendly","honest"],base:90},{en:"Skill issue.",ja:"実力不足",tags:["too_edgy","meme"],base:8}]},
+{scene:"相手が徹夜でゲームしていた。",promptEN:"I stayed up all night gaming.",promptJA:"徹夜でゲームしてた。",choices:[{en:"Touch grass.",ja:"外出ろ",tags:["meme","too_edgy"],base:28},{en:"NPC behavior.",ja:"NPCすぎる",tags:["meme"],base:38},{en:"I feel you.",ja:"わかる",tags:["friendly","relatable"],base:76},{en:"Go sleep.",ja:"寝ろ",tags:["honest","friendly"],base:84}]},
+{scene:"相手が髪を切りすぎたらしい。",promptEN:"I cut my hair too short.",promptJA:"髪切りすぎた。",choices:[{en:"It’ll grow back.",ja:"また伸びるよ",tags:["friendly","honest"],base:82},{en:"Honestly, it suits you.",ja:"正直似合ってる",tags:["friendly","honest"],base:90},{en:"It’s giving confidence.",ja:"自信ある感じ出てる",tags:["slang","friendly"],base:78},{en:"Goodbye forever.",ja:"さようなら",tags:["too_edgy","meme"],base:10}]},
+{scene:"相手が財布を忘れた。",promptEN:"I forgot my wallet.",promptJA:"財布忘れた。",choices:[{en:"You're cooked.",ja:"詰んだな",tags:["meme","relatable"],base:76},{en:"I got you.",ja:"今回は出すよ",tags:["friendly","honest"],base:96},{en:"Pain.",ja:"つらい",tags:["relatable"],base:78},{en:"That's on you.",ja:"それは自分のせい",tags:["honest","cold"],base:44}]},
+{scene:"相手が投稿にいいねが少ないと落ち込んでいる。",promptEN:"My post got no likes.",promptJA:"投稿に全然いいねつかなかった。",choices:[{en:"I feel you.",ja:"わかるよ",tags:["friendly","honest"],base:84},{en:"The algorithm hates you.",ja:"アルゴリズムに嫌われてる",tags:["meme","tease"],base:58},{en:"That’s not your worth.",ja:"それで価値は決まらないよ",tags:["friendly","honest"],base:92},{en:"Cringe.",ja:"痛い",tags:["rude","too_edgy"],base:4}]},
+{scene:"相手が突然テンション高く入ってきた。",promptEN:"Guess what happened!",promptJA:"ねえ聞いて！",choices:[{en:"Tell me!",ja:"聞かせて！",tags:["friendly","hype"],base:90},{en:"Spill the tea.",ja:"詳しく",tags:["slang","friendly"],base:86},{en:"What now?",ja:"今度は何？",tags:["tease","cold"],base:42},{en:"I can’t be bothered.",ja:"めんどい",tags:["cold"],base:20}]},
+{scene:"相手が自分の冗談で大笑いしている。",promptEN:"That joke was so funny.",promptJA:"今の冗談めっちゃ面白かった。",choices:[{en:"I cooked.",ja:"俺キマってたな",tags:["meme","hype"],base:80},{en:"No cap.",ja:"マジで",tags:["slang","casual"],base:76},{en:"You have good taste.",ja:"センスあるね",tags:["friendly","tease"],base:82},{en:"It wasn't that funny.",ja:"そこまでじゃない",tags:["cold"],base:30}]},
+{scene:"相手が英語の発音を褒められた。",promptEN:"My teacher said my pronunciation was good.",promptJA:"先生に発音ほめられた。",choices:[{en:"Huge W.",ja:"大勝利",tags:["hype","slang"],base:88},{en:"You cooked.",ja:"やるじゃん",tags:["friendly","hype"],base:90},{en:"No cap, that's great.",ja:"マジですごい",tags:["friendly","honest"],base:92},{en:"Still not native.",ja:"まだネイティブじゃないけどな",tags:["rude","too_edgy"],base:8}]},
+{scene:"相手がゲームで味方に怒っている。",promptEN:"My teammate threw the game.",promptJA:"味方のせいで負けた。",choices:[{en:"Don’t be salty.",ja:"そんなイライラすんな",tags:["slang","tease"],base:58},{en:"That’s rough.",ja:"それはきつい",tags:["friendly"],base:82},{en:"They sold.",ja:"味方がやらかしたな",tags:["slang","meme"],base:76},{en:"Skill issue.",ja:"実力不足",tags:["meme","too_edgy"],base:22}]}
+];
+const REPLIES={yuki:{worst:[["ひどすぎる。。。！","Bro, that was way too much."],["急に敵じゃん。","Why would you say that!?"],["こわ。","Okay, scary."]],mid:[["まあ普通かな。","That was alright."],["悪くはない。","Not bad."],["ちょっと迷った？","You hesitated there, huh?"]],good:[["めっちゃ自然。","That sounded smooth."],["いいね、会話しやすい。","You're easy to talk to."],["それちょうどいい。","That was the right vibe."]],best:[["お前会話うますぎる。","BRO YOU COOKED 🔥"],["親友になれるわ。","We'd get along instantly."],["それ完璧。","Perfect answer."]]},ally:{worst:[["BRO NOOO 💀","今のは終わった。"],["無理、ログアウトする。","I'm logging off."],["空気が爆散した。","The vibe just exploded."]],mid:[["まあ分かる。","Fair enough."],["ちょっと微妙。","Kinda mid tbh."],["惜しいけどズレてる。","Close, but off."]],good:[["それはセンスある。","That was actually funny."],["ネットわかってるな。","You know the internet."],["Real. かなりReal。","Real. Very real."]],best:[["LMAOOOO 💀🔥","完全に優勝。"],["BRO YOU COOKED 💀","神レスで草。"],["それミーム化したい。","That deserves to be a meme."]]},mark:{worst:[["おいおい…。","That was weak."],["テンション下げんなよ！","You killed the mood!"],["今のはナシだろ！","Nah, not that!"]],mid:[["まあそんなもんか。","Not bad, not great."],["普通だな！","Pretty average!"],["もう一声ほしいな！","Needs more energy!"]],good:[["いいじゃねえか！","NOW WE'RE TALKING 🔥"],["そのノリ好きだ！","That's energy!"],["熱くなってきたな！","Now it's getting good!"]],best:[["うおおお最高！！","THAT WAS FIRE 🔥🔥🔥"],["お前今日キレてるな！","BRO YOU'RE BUILT DIFFERENT 🔥"],["その返し、勝ち！","Huge W!"]]},susie:{worst:[["え、無理なんだけど。","BYEEE 💀"],["good bye forever 💅","一生既読無視する。"],["それは普通に終わってる。","That was not it."]],mid:[["まああり。","Kinda okay."],["普通かな〜。","Not terrible."],["ちょい惜しい。","Almost cute."]],good:[["え、ノリいいじゃん！","Okayyy I like you 💖"],["それ好き！","That's such a vibe."],["かなりわかってる。","You get the vibe."]],best:[["OMG YOU ATE THAT 💖","最高すぎる！！"],["親友確定。","We're literally besties now."],["今のは優勝。","You totally slayed that."]]},emma:{worst:[["今のは失礼です。","That was inappropriate."],["少し距離を置きます。","I need some distance now."],["言い方を考えましょう。","Please choose your words carefully."]],mid:[["普通ですね。","That was acceptable."],["悪くはありません。","Not terrible."],["少しだけ軽いですね。","A little too casual."]],good:[["自然で良い返答です。","That was thoughtful."],["落ち着いていて良いですね。","That was considerate."],["相手への配慮があります。","That showed consideration."]],best:[["とても素敵な返答です。","That was genuinely wonderful."],["かなり好印象です。","I'm honestly impressed."],["完璧に近いです。","That was almost perfect."]]}};
+let turn=0,score=0,combo=0,maxCombo=0,locked=false,currentChar=null,currentScenario=null,timer=null,timeLeft=0,totalTime=0,log=[],affinity={};const MAX_TURNS=7,app=document.getElementById("app"),flash=document.getElementById("flash");
+function initAffinity(){affinity={};for(const c of CHARACTERS)affinity[c.id]=50}function showTitle(){app.innerHTML=`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title">Sushi Talk</div><p class="lead">英語スラングを「空気」で選ぶ会話ゲーム。<br>キャラの性格を読んで、ちょうどいい返答を選ぼう。</p><button class="btn" style="width:100%;margin-top:14px" onclick="startGame()">START</button></div>`}function startGame(){turn=0;score=0;combo=0;maxCombo=0;log=[];locked=false;initAffinity();nextTurn()}function nextTurn(){clearInterval(timer);if(turn>=MAX_TURNS){showResult();return}currentChar=CHARACTERS[Math.floor(Math.random()*CHARACTERS.length)];currentScenario=SCENARIOS[Math.floor(Math.random()*SCENARIOS.length)];locked=false;renderTurn();startTimer(currentChar.time)}function renderAffinity(){return `<div class="affinityGrid">`+CHARACTERS.map(c=>`<div class="affBox"><div class="affName">${c.name}</div><div class="affHeart">❤ ${affinity[c.id]}</div><div class="affBar"><div class="affFill" style="width:${affinity[c.id]}%"></div></div></div>`).join("")+`</div>`}function renderTurn(){
+  const choices=shuffle(currentScenario.choices).slice(0,4);
+  app.innerHTML=`
+    <div class="header">
+      <div class="logo">🍣 Sushi Talk</div>
+      <a class="smallLink" href="./index.html">すし単へ</a>
+    </div>
+
+    <div class="status">
+      <div class="stat"><div class="statLabel">TURN</div><div class="statValue">${turn+1}/${MAX_TURNS}</div></div>
+      <div class="stat"><div class="statLabel">SCORE</div><div class="statValue">${score}</div></div>
+      <div class="stat"><div class="statLabel">COMBO</div><div class="statValue">${combo}</div></div>
+    </div>
+
+    ${renderAffinity()}
+
+    <div class="timerWrap"><div class="timerFill" id="timerFill"></div></div>
+
+    <div class="card conversationCard" id="characterCard">
+      <div class="conversationHero">
+        <div class="spriteWrap">
+          <div class="sprite normal float" id="sprite" style="--sheet:url('${currentChar.sheet}')"></div>
+        </div>
+
+        <div class="talkPanel">
+          <div class="charName">${currentChar.name}</div>
+          <span class="charType">${currentChar.type}</span>
+          <div class="comboBadge">${combo>1 ? combo+" COMBO" : "VIBE CHECK"}</div>
+
+          <div class="bubble">
+            <div class="sceneInBubble">${currentScenario.scene}</div>
+            <div class="en">${currentScenario.promptEN}</div>
+            <div class="ja">${currentScenario.promptJA}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="choiceAreaInCard">
+        ${choices.map((c,i)=>`
+          <button class="choice" onclick="choose(${i})" data-index="${i}">
+            <div class="choiceEN">${c.en}</div>
+            <div class="choiceJA">${c.ja}</div>
+          </button>
+        `).join("")}
+      </div>
+
+      <div class="replyBubble hidden" id="feedback">選択してください</div>
+    </div>
+  `;
+  window.currentChoices=choices;
+}
+function startTimer(sec){totalTime=sec;timeLeft=sec;const fill=()=>{const el=document.getElementById("timerFill");if(el)el.style.width=Math.max(0,(timeLeft/totalTime)*100)+"%"};fill();timer=setInterval(()=>{if(locked)return;timeLeft-=.1;fill();if(timeLeft<=0)timeoutChoose()},100)}function timeoutChoose(){if(locked)return;locked=true;clearInterval(timer);combo=0;applyResult(null,{score:0,tier:"worst",expression:"shock",reply:["時間切れ。。。！","Too late! The vibe is gone."],affinityDelta:-8},true)}function choose(index){if(locked)return;locked=true;clearInterval(timer);const choice=window.currentChoices[index],result=evaluate(currentChar,choice);applyResult(choice,result,false,index)}function applyResult(choice,result,isTimeout,index){score+=result.score;affinity[currentChar.id]=Math.max(0,Math.min(100,affinity[currentChar.id]+result.affinityDelta));if(result.score>=70)combo++;else combo=0;maxCombo=Math.max(maxCombo,combo);log.push({turn:turn+1,char:currentChar.name,scene:currentScenario.promptJA,choice:choice?choice.en:"TIME OUT",ja:choice?choice.ja:"時間切れ",score:result.score,reply:result.reply[0],replyJA:result.reply[1],combo});document.querySelectorAll(".choice").forEach((btn,i)=>{btn.classList.add("locked");if(i===index)btn.classList.add("selected")});const sprite=document.getElementById("sprite");sprite.className="sprite "+result.expression+" pop";const card=document.getElementById("characterCard");if(result.score<=20)card.classList.add("shake");triggerFlash(result.score>=100?"best":result.score>=70?"good":result.score<=20?"bad":"good");const feedback=document.getElementById("feedback");feedback.classList.remove("hidden");feedback.innerHTML=`<div class="tapNext">TAP TO CONTINUE</div><div class="score ${result.score<30?'bad':''}">+${result.score}</div><div class="replyEN">${result.reply[0]}</div><div class="replyJA">${result.reply[1]}</div>`;feedback.onclick=()=>{turn++;nextTurn()}}
+function evaluate(char,choice){let s=choice.base;for(const tag of choice.tags){if(char.likes.includes(tag))s+=16;if(char.hates.includes(tag))s-=24}const speedBonus=timeLeft>totalTime*.65?8:timeLeft>totalTime*.35?4:0;s+=speedBonus;if(combo>=2)s+=Math.min(8,combo*2);s=Math.max(0,Math.min(110,s));let tier="mid",expression="shock",affinityDelta=0;if(s<=20){tier="worst";expression="bad";affinityDelta=-10}else if(s<=60){tier="mid";expression="shock";affinityDelta=0}else if(s<100){tier="good";expression="good";affinityDelta=5}else{tier="best";expression="love";affinityDelta=10}const pool=REPLIES[char.id][tier],reply=pool[Math.floor(Math.random()*pool.length)];return{score:s,tier,expression,reply,affinityDelta}}function triggerFlash(type){flash.className="flash "+type;setTimeout(()=>flash.className="flash",600)}function showResult(){clearInterval(timer);let rank="Kinda awkward";if(score>=720)rank="Perfect Vibes";else if(score>=600)rank="Great Vibes";else if(score>=470)rank="Pretty Good";else if(score>=330)rank="Not Bad";const topAffinity=[...CHARACTERS].sort((a,b)=>affinity[b.id]-affinity[a.id])[0];app.innerHTML=`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title">RESULT</div><div class="resultScore">${score}</div><p class="lead">評価：${rank}<br>MAX COMBO：${maxCombo}<br>ベスト相性：${topAffinity.name} ❤ ${affinity[topAffinity.id]}</p><button class="btn" style="width:100%" onclick="startGame()">もう一回</button></div><div class="card"><b>キャラ好感度</b>${renderAffinity()}</div><div class="card"><b>会話ログ</b><div class="log">${log.map(l=>`<div class="logRow"><b>${l.turn}. ${l.char}</b>：${l.scene}<br>${l.choice}（${l.ja}） <b>+${l.score}</b><br>${l.reply}<br><span style="color:var(--muted)">${l.replyJA}</span></div>`).join("")}</div></div>`}function shuffle(arr){return[...arr].sort(()=>Math.random()-.5)}showTitle();
+</script>
+</body>
+</html>
