@@ -51,6 +51,8 @@
   .stat-value { font-size:24px; font-weight:800; word-break:break-word; }
   .layout { display:grid; grid-template-columns:1.45fr .9fr; gap:14px; }
   .card { padding:18px; }
+  #mainCard { position:relative; }
+  .normal-countdown { border-radius:18px; }
   .section-title { font-size:18px; font-weight:800; color:var(--warn); margin-bottom:12px; }
   #battleArena {
   display:none;
@@ -278,6 +280,7 @@
           </div>
         </div>
       </div>
+      <div class="countdown normal-countdown" id="normalCountdownOverlay">3</div>
       <div id="promptBox" tabindex="0" aria-label="typing target"></div>
       <textarea id="hiddenInput" class="hidden-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"></textarea>
       <div class="mini-progress"><div class="mini-top"><span id="progressLabel">Segment Progress</span><span><span id="progressText">0</span>%</span></div><div class="bar"><div class="fill" id="progressFill"></div></div></div>
@@ -735,10 +738,10 @@ function normalizePromptKey(text){return String(text||"").toLowerCase().replace(
 function getJapaneseTranslation(text){return japaneseTranslations[normalizePromptKey(text)]||""}
 const imageNameAliases={stand1:["stand1","立ち絵1"],stand2:["stand2","立ち絵2"],damage1:["damage1","damage"],defeated:["defeated","defieated","敗北"],taunt:["taunt","煽り"]};
 const $=id=>document.getElementById(id);
-const promptBox=$("promptBox"),hiddenInput=$("hiddenInput"),modeLabel=$("modeLabel"),timeValue=$("timeValue"),accuracyValue=$("accuracyValue"),clearedValue=$("clearedValue"),scoreValue=$("scoreValue"),bestValue=$("bestValue"),progressText=$("progressText"),progressFill=$("progressFill"),progressLabel=$("progressLabel"),resultText=$("resultText"),queueList=$("queueList"),rankingList=$("rankingList"),mainCard=$("mainCard"),sectionTitle=$("sectionTitle"),hintText=$("hintText"),modeDescription=$("modeDescription"),playerNameInput=$("playerNameInput"),saveScoreBtn=$("saveScoreBtn"),saveStatus=$("saveStatus"),battleArena=$("battleArena"),battleStartBtn=$("battleStartBtn"),focusBtn=$("focusBtn"),resetBtn=$("resetBtn"),skipBtn=$("skipBtn"),queueTitle=$("queueTitle"),countdownOverlay=$("countdownOverlay"),enemyHpFill=$("enemyHpFill"),enemyHpText=$("enemyHpText"),enemyNameLabel=$("enemyNameLabel"),enemySpriteLabel=$("enemySpriteLabel"),enemySpriteWrap=$("enemySpriteWrap"),battleTimeText=$("battleTimeText"),battleTimeFill=$("battleTimeFill"),enemyImage=$("enemyImage"),enemyFallback=$("enemyFallback");
+const promptBox=$("promptBox"),hiddenInput=$("hiddenInput"),modeLabel=$("modeLabel"),timeValue=$("timeValue"),accuracyValue=$("accuracyValue"),clearedValue=$("clearedValue"),scoreValue=$("scoreValue"),bestValue=$("bestValue"),progressText=$("progressText"),progressFill=$("progressFill"),progressLabel=$("progressLabel"),resultText=$("resultText"),queueList=$("queueList"),rankingList=$("rankingList"),mainCard=$("mainCard"),sectionTitle=$("sectionTitle"),hintText=$("hintText"),modeDescription=$("modeDescription"),playerNameInput=$("playerNameInput"),saveScoreBtn=$("saveScoreBtn"),saveStatus=$("saveStatus"),battleArena=$("battleArena"),battleStartBtn=$("battleStartBtn"),focusBtn=$("focusBtn"),resetBtn=$("resetBtn"),skipBtn=$("skipBtn"),queueTitle=$("queueTitle"),countdownOverlay=$("countdownOverlay"),normalCountdownOverlay=$("normalCountdownOverlay"),enemyHpFill=$("enemyHpFill"),enemyHpText=$("enemyHpText"),enemyNameLabel=$("enemyNameLabel"),enemySpriteLabel=$("enemySpriteLabel"),enemySpriteWrap=$("enemySpriteWrap"),battleTimeText=$("battleTimeText"),battleTimeFill=$("battleTimeFill"),enemyImage=$("enemyImage"),enemyFallback=$("enemyFallback");
 const modeButtons=[...document.querySelectorAll(".mode-btn[data-mode]")],datasetButtons=[...document.querySelectorAll(".mode-btn[data-dataset]")];
 let currentDatasetKey="essayTemplate",currentDataset=datasets[currentDatasetKey];
-const state={mode:"timeAttack",started:false,finished:false,currentPrompt:"",queue:[],cleared:0,score:0,totalKeystrokes:0,correctKeystrokes:0,typedBuffer:"",timerId:null,startStamp:null,timeLeft:60,elapsed:0,audioCtx:null,battleStageIndex:0,battleActive:false,battleCountdown:false,enemyHp:0,enemyMaxHp:0,enemyName:"???",enemyKey:"",promptCycle:[],maxCombo:0,combo:0,idleTimer:null,idleFrame:1,currentImageKind:"stand1"};
+const state={mode:"timeAttack",started:false,finished:false,currentPrompt:"",queue:[],cleared:0,score:0,totalKeystrokes:0,correctKeystrokes:0,typedBuffer:"",timerId:null,startStamp:null,timeLeft:60,elapsed:0,audioCtx:null,battleStageIndex:0,battleActive:false,battleCountdown:false,enemyHp:0,enemyMaxHp:0,enemyName:"???",enemyKey:"",promptCycle:[],maxCombo:0,combo:0,idleTimer:null,idleFrame:1,currentImageKind:"stand1",normalCountdown:false};
 function splitIntoSegments(text){return text.split(/\n+/).flatMap(p=>p.match(/[^.!?]+[.!?]/g)||[p]).map(s=>s.replace(/\s+/g," ").trim()).filter(Boolean)}
 function buildWordPool(text){return[...new Set((text.toLowerCase().match(/[a-z']+/g)||[]).filter(w=>w.length>=4))]}
 function shuffle(arr){const c=[...arr];for(let i=c.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[c[i],c[j]]=[c[j],c[i]]}return c}
@@ -797,6 +800,37 @@ function updateBattleBars(){
   enemySpriteLabel.textContent=state.enemyName;
 }
 function setupBattleStage(autoStart=false){clearInterval(state.timerId);stopIdleAnimation();const st=battleStages[state.battleStageIndex];state.battleActive=false;state.finished=false;state.started=false;state.battleCountdown=false;state.enemyMaxHp=st.hp;state.enemyHp=st.hp;state.enemyName=st.name;state.enemyKey=st.key;state.timeLeft=st.time;state.elapsed=0;state.typedBuffer="";hiddenInput.value="";state.promptCycle=shuffle(currentWords());state.currentPrompt=state.promptCycle.shift()||"type";battleStartBtn.disabled=autoStart;resetBtn.disabled=false;resultText.textContent=autoStart?`Stage ${state.battleStageIndex+1}. Get ready...`:`Stage ${state.battleStageIndex+1}. Press Start Battle.`;setEnemyImage("stand1");updateBattleBars();renderQueue();renderPrompt();updateHud();if(autoStart){setTimeout(startBattleCountdown,500)}}
+function startNormalCountdown(){
+  if(state.mode==="battle")return;
+  if(state.started||state.finished||state.normalCountdown)return;
+  initAudio();
+  state.normalCountdown=true;
+  focusBtn.disabled=true;
+  resetBtn.disabled=true;
+  skipBtn.disabled=true;
+  resultText.textContent="Ready...";
+  let count=3;
+  normalCountdownOverlay.style.display="flex";
+  normalCountdownOverlay.textContent=count;
+  const cd=setInterval(()=>{
+    count--;
+    if(count>0){
+      normalCountdownOverlay.textContent=count;
+    }else if(count===0){
+      normalCountdownOverlay.textContent="GO!";
+    }else{
+      clearInterval(cd);
+      normalCountdownOverlay.style.display="none";
+      state.normalCountdown=false;
+      focusBtn.disabled=false;
+      resetBtn.disabled=false;
+      skipBtn.disabled=false;
+      focusInput();
+      startRunIfNeeded();
+      resultText.textContent=state.mode==="timeAttack"?"スタート！制限時間内に打ち切ろう。":"スタート！そのまま入力してください。";
+    }
+  },700);
+}
 function startBattleCountdown(){if(state.mode!=="battle"||state.battleActive||state.finished)return;initAudio();battleStartBtn.disabled=true;resetBtn.disabled=true;let count=3;countdownOverlay.style.display="flex";countdownOverlay.textContent=count;const cd=setInterval(()=>{count--;if(count>0)countdownOverlay.textContent=count;else if(count===0)countdownOverlay.textContent="GO!";else{clearInterval(cd);countdownOverlay.style.display="none";startBattle()}},850)}
 function startBattle(){state.battleActive=true;state.started=true;state.startStamp=performance.now();resetBtn.disabled=false;resultText.textContent=`${state.enemyName} appeared!`;startIdleAnimation();updateBattleBars();renderQueue();focusInput();state.timerId=setInterval(()=>{if(!state.battleActive)return;state.elapsed=(performance.now()-state.startStamp)/1000;state.timeLeft=Math.max(0,battleStages[state.battleStageIndex].time-state.elapsed);if(state.timeLeft<=0)loseBattle("Time up!");updateBattleBars();updateHud()},50)}
 function calcBattleDamage(){const acc=getAccuracy();let base=20+state.battleStageIndex*7;if(acc>=98)base*=2.15;else if(acc>=95)base*=1.85;else if(acc>=90)base*=1.45;else if(acc>=85)base*=1.15;else base*=.68;base*=1+Math.min(state.combo,12)*.055;return Math.max(5,Math.round(base))}
@@ -805,7 +839,7 @@ function nextBattlePrompt(){state.typedBuffer="";hiddenInput.value="";if(state.p
 function winBattleStage(){state.battleActive=false;stopIdleAnimation();clearInterval(state.timerId);hiddenInput.blur();setEnemyImage("defeated");resultText.textContent=`${state.enemyName} defeated!`;state.battleStageIndex++;battleStartBtn.disabled=true;resetBtn.disabled=true;renderQueue();popCard();if(state.battleStageIndex>=battleStages.length){state.finished=true;resultText.textContent=`ALL CLEAR! Final Score ${state.score} | Accuracy ${getAccuracy().toFixed(1)}%`;battleStartBtn.disabled=true;resetBtn.disabled=false;return}setTimeout(()=>setupBattleStage(true),1200)}
 function loseBattle(msg){state.battleActive=false;state.finished=true;stopIdleAnimation();clearInterval(state.timerId);hiddenInput.blur();setEnemyImage("taunt");resultText.textContent=`${msg} Stage ${state.battleStageIndex+1} failed. Score ${state.score}`;battleStartBtn.disabled=true;updateBattleBars();popCard()}
 function resetMode(){clearInterval(state.timerId);stopIdleAnimation();const cfg=modeConfigs[state.mode];state.started=false;state.finished=false;state.battleActive=false;state.cleared=0;state.score=0;state.totalKeystrokes=0;state.correctKeystrokes=0;state.typedBuffer="";state.timeLeft=cfg.timeLimit??0;state.elapsed=0;state.startStamp=null;state.timerId=null;state.maxCombo=0;state.combo=0;hiddenInput.value="";saveStatus.textContent="まずプレイしてからスコアを保存できます。";applyModeUI();if(state.mode==="battle"){state.battleStageIndex=0;battleStartBtn.disabled=false;resetBtn.disabled=false;setupBattleStage()}else{state.queue=buildQueueForMode(state.mode);state.currentPrompt=state.queue.shift()||"";renderPrompt();renderQueue();updateHud();resultText.textContent=""}}
-function handleKeyDown(e){if(state.mode==="battle"&&(!state.battleActive||state.finished))return;if(state.finished&&state.mode==="timeAttack")return;const controls=["Shift","Control","Alt","Meta","CapsLock","Escape","ArrowLeft","ArrowRight","ArrowUp","ArrowDown"];if(controls.includes(e.key))return;if(e.key==="Tab"){e.preventDefault();return}if(e.key==="Backspace"){e.preventDefault();if(state.typedBuffer.length>0){state.typedBuffer=state.typedBuffer.slice(0,-1);hiddenInput.value=state.typedBuffer;renderPrompt()}return}if(e.key.length!==1&&e.key!=="Enter")return;e.preventDefault();startRunIfNeeded();const expected=state.currentPrompt[state.typedBuffer.length],input=e.key==="Enter"?"\n":e.key;state.totalKeystrokes++;if(input===expected){state.correctKeystrokes++;state.typedBuffer+=input;hiddenInput.value=state.typedBuffer;playTypeSound();updateHud();renderPrompt();if(state.typedBuffer===state.currentPrompt){if(state.mode==="battle")battleHit();else advancePrompt(false)}}else{state.combo=0;playErrorSound();flashError();updateHud();showImmediateError()}}
+function handleKeyDown(e){if(state.normalCountdown)return;if(state.mode==="battle"&&(!state.battleActive||state.finished))return;if(state.finished&&state.mode==="timeAttack")return;const controls=["Shift","Control","Alt","Meta","CapsLock","Escape","ArrowLeft","ArrowRight","ArrowUp","ArrowDown"];if(controls.includes(e.key))return;if(e.key==="Tab"){e.preventDefault();return}if(e.key==="Backspace"){e.preventDefault();if(state.typedBuffer.length>0){state.typedBuffer=state.typedBuffer.slice(0,-1);hiddenInput.value=state.typedBuffer;renderPrompt()}return}if(e.key.length!==1&&e.key!=="Enter")return;e.preventDefault();startRunIfNeeded();const expected=state.currentPrompt[state.typedBuffer.length],input=e.key==="Enter"?"\n":e.key;state.totalKeystrokes++;if(input===expected){state.correctKeystrokes++;state.typedBuffer+=input;hiddenInput.value=state.typedBuffer;playTypeSound();updateHud();renderPrompt();if(state.typedBuffer===state.currentPrompt){if(state.mode==="battle")battleHit();else advancePrompt(false)}}else{state.combo=0;playErrorSound();flashError();updateHud();showImmediateError()}}
 async function saveScore(){const name=playerNameInput.value.trim()||"anonymous";if(state.score<=0){saveStatus.textContent="Score is still 0. Play first.";return}saveScoreBtn.disabled=true;saveStatus.textContent="Saving...";const {error}=await supabaseClient.rpc("save_high_score",{p_player_name:name,p_score:state.score,p_max_combo:state.maxCombo||state.cleared,p_accuracy:Math.round(getAccuracy()),p_mode:getScoreMode()});saveScoreBtn.disabled=false;if(error){console.error(error);saveStatus.textContent="Save failed. Check Supabase RPC / RLS settings.";return}saveStatus.textContent=`Saved as ${name}.`;await loadRanking()}
 async function loadRanking(){rankingList.textContent="Loading...";bestValue.textContent="-";const {data,error}=await supabaseClient.from("scores").select("id, player_name, score, max_combo, accuracy, mode").eq("mode",getScoreMode()).order("score",{ascending:false}).limit(20);if(error){console.error(error);rankingList.textContent="Ranking load failed.";return}if(!data||data.length===0){rankingList.textContent="No scores yet.";return}bestValue.textContent=data[0].score;rankingList.innerHTML=`<div class="ranking-row header"><div>#</div><div>Name</div><div>Score</div><div>Acc</div></div>${data.map((r,i)=>`<div class="ranking-row"><div>${i+1}</div><div>${escapeHtml(r.player_name||"anonymous")}</div><div>${r.score}</div><div>${Number(r.accuracy||0).toFixed(0)}%</div></div>`).join("")}`}
 function escapeHtml(str){return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;")}
@@ -813,6 +847,7 @@ hiddenInput.addEventListener("keydown",handleKeyDown);
 promptBox.addEventListener("click",focusInput);
 mainCard.addEventListener("click",e=>{if(e.target.tagName!=="BUTTON"&&e.target.tagName!=="INPUT")focusInput()});
 window.addEventListener("keydown",e=>{
+  if(state.normalCountdown)return;
   if(e.target===playerNameInput||e.target===hiddenInput)return;
   if(e.key.length===1||e.key==="Backspace"||e.key==="Enter"||e.key==="Tab"||e.key===" "){
     focusInput();
@@ -822,10 +857,8 @@ window.addEventListener("keydown",e=>{
 modeButtons.forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.mode)));
 datasetButtons.forEach(b=>b.addEventListener("click",()=>{if(state.mode==="battle")return;setDataset(b.dataset.dataset)}));
 focusBtn.addEventListener("click",()=>{
-  focusInput();
   if(state.mode!=="battle"){
-    startRunIfNeeded();
-    resultText.textContent="スタート！そのまま入力してください。";
+    startNormalCountdown();
   }
 });
 resetBtn.addEventListener("click",resetMode);
