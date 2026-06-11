@@ -791,7 +791,30 @@ function handleKeyDown(e){if(state.mode==="battle"&&(!state.battleActive||state.
 async function saveScore(){const name=playerNameInput.value.trim()||"anonymous";if(state.score<=0){saveStatus.textContent="Score is still 0. Play first.";return}saveScoreBtn.disabled=true;saveStatus.textContent="Saving...";const {error}=await supabaseClient.rpc("save_high_score",{p_player_name:name,p_score:state.score,p_max_combo:state.maxCombo||state.cleared,p_accuracy:Math.round(getAccuracy()),p_mode:getScoreMode()});saveScoreBtn.disabled=false;if(error){console.error(error);saveStatus.textContent="Save failed. Check Supabase RPC / RLS settings.";return}saveStatus.textContent=`Saved as ${name}.`;await loadRanking()}
 async function loadRanking(){rankingList.textContent="Loading...";bestValue.textContent="-";const {data,error}=await supabaseClient.from("scores").select("id, player_name, score, max_combo, accuracy, mode").eq("mode",getScoreMode()).order("score",{ascending:false}).limit(20);if(error){console.error(error);rankingList.textContent="Ranking load failed.";return}if(!data||data.length===0){rankingList.textContent="No scores yet.";return}bestValue.textContent=data[0].score;rankingList.innerHTML=`<div class="ranking-row header"><div>#</div><div>Name</div><div>Score</div><div>Acc</div></div>${data.map((r,i)=>`<div class="ranking-row"><div>${i+1}</div><div>${escapeHtml(r.player_name||"anonymous")}</div><div>${r.score}</div><div>${Number(r.accuracy||0).toFixed(0)}%</div></div>`).join("")}`}
 function escapeHtml(str){return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;")}
-hiddenInput.addEventListener("keydown",handleKeyDown);promptBox.addEventListener("click",focusInput);mainCard.addEventListener("click",e=>{if(e.target.tagName!=="BUTTON"&&e.target.tagName!=="INPUT")focusInput()});window.addEventListener("keydown",e=>{if(e.target===playerNameInput)return;if(e.key.length===1||e.key==="Backspace"||e.key==="Enter"||e.key==="Tab"||e.key===" ")focusInput()});modeButtons.forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.mode)));datasetButtons.forEach(b=>b.addEventListener("click",()=>{if(state.mode==="battle")return;setDataset(b.dataset.dataset)}));focusBtn.addEventListener("click",focusInput);resetBtn.addEventListener("click",resetMode);skipBtn.addEventListener("click",()=>{if(state.finished||!state.currentPrompt)return;startRunIfNeeded();advancePrompt(true);focusInput()});battleStartBtn.addEventListener("click",startBattleCountdown);saveScoreBtn.addEventListener("click",saveScore);playerNameInput.addEventListener("keydown",e=>{if(e.key==="Enter")saveScore()});
+hiddenInput.addEventListener("keydown",handleKeyDown);
+promptBox.addEventListener("click",focusInput);
+mainCard.addEventListener("click",e=>{if(e.target.tagName!=="BUTTON"&&e.target.tagName!=="INPUT")focusInput()});
+window.addEventListener("keydown",e=>{
+  if(e.target===playerNameInput||e.target===hiddenInput)return;
+  if(e.key.length===1||e.key==="Backspace"||e.key==="Enter"||e.key==="Tab"||e.key===" "){
+    focusInput();
+    handleKeyDown(e); // フォーカス前の最初の1文字も拾う
+  }
+});
+modeButtons.forEach(b=>b.addEventListener("click",()=>setMode(b.dataset.mode)));
+datasetButtons.forEach(b=>b.addEventListener("click",()=>{if(state.mode==="battle")return;setDataset(b.dataset.dataset)}));
+focusBtn.addEventListener("click",()=>{
+  focusInput();
+  if(state.mode!=="battle"){
+    startRunIfNeeded();
+    resultText.textContent="スタート！そのまま入力してください。";
+  }
+});
+resetBtn.addEventListener("click",resetMode);
+skipBtn.addEventListener("click",()=>{if(state.finished||!state.currentPrompt)return;startRunIfNeeded();advancePrompt(true);focusInput()});
+battleStartBtn.addEventListener("click",startBattleCountdown);
+saveScoreBtn.addEventListener("click",saveScore);
+playerNameInput.addEventListener("keydown",e=>{if(e.key==="Enter")saveScore()});
 resetMode();loadRanking();
 </script>
 </body>
