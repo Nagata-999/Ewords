@@ -17,6 +17,23 @@
   .title-box { text-align:center; margin-bottom:16px; }
   .title-box h1 { margin:0; font-size:44px; color:#92ecff; letter-spacing:3px; text-shadow:0 0 18px rgba(146,236,255,.35); }
   .title-box p { margin:8px 0 0; color:#d9e3ff; font-size:15px; }
+
+  .home-btn{
+    display:inline-block;
+    margin-top:10px;
+    padding:10px 18px;
+    border-radius:999px;
+    text-decoration:none;
+    color:white;
+    font-weight:700;
+    background:linear-gradient(90deg,#00d9f5,#7c4dff);
+    box-shadow:0 4px 12px rgba(0,0,0,.25);
+    transition:.15s;
+  }
+  .home-btn:hover{
+    transform:translateY(-1px);
+    opacity:.95;
+  }
   .mode-bar,.hud,.card { background:var(--panel); border:1px solid var(--border); border-radius:18px; box-shadow:0 10px 28px rgba(0,0,0,.26); backdrop-filter:blur(10px); }
   .mode-bar { padding:12px; margin-bottom:14px; display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:center; }
   .mode-btn,.sub-btn,.save-btn { border:none; color:white; font-weight:700; cursor:pointer; border-radius:999px; padding:11px 18px; font-family:inherit; transition:.12s; }
@@ -220,6 +237,7 @@
   <div class="title-box">
     <h1>すしタイプ</h1>
     <p>テンプレート、表現、単語をタイムアタック・練習・ボスバトルで反復。</p>
+    <p><a href="index.html" class="home-btn">← すし単トップへ戻る</a></p>
   </div>
   <div class="mode-bar">
     <button class="mode-btn active" data-dataset="essayTemplate">テンプレート</button>
