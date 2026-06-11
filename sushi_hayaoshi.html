@@ -426,6 +426,21 @@
       color:#24313f;
     }
 
+
+    .hayaoshi-ranking-box{margin-top:16px;padding:14px;border-radius:18px;background:#fff;border:1px solid var(--line);box-shadow:0 8px 18px rgba(36,49,63,.08);text-align:left;}
+    .hayaoshi-ranking-title{text-align:center;font-weight:1000;color:#c47a00;margin-bottom:10px;font-size:18px;}
+    .hayaoshi-ranking-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;justify-content:center;}
+    .hayaoshi-rank-tab{border:1px solid var(--line);background:#fffaf0;border-radius:999px;padding:8px 12px;font-weight:950;font-size:13px;}
+    .hayaoshi-rank-tab.active{background:linear-gradient(135deg,#ffca66,#f59f31);}
+    .hayaoshi-ranking-row{display:grid;grid-template-columns:38px 1fr auto;gap:10px;align-items:center;padding:8px 4px;border-bottom:1px solid rgba(36,49,63,.10);font-size:14px;}
+    .hayaoshi-ranking-row:last-child{border-bottom:0;}
+    .hayaoshi-rank-num{font-weight:1000;color:#42a5f5;}
+    .hayaoshi-rank-name{font-weight:950;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .hayaoshi-rank-sub{font-size:12px;color:var(--muted);margin-top:2px;}
+    .hayaoshi-rank-score{font-weight:1000;font-size:18px;}
+    .hayaoshi-status{margin-top:10px;min-height:18px;font-size:13px;color:var(--muted);text-align:center;font-weight:800;}
+    .hayaoshi-save-btn{margin-top:12px;padding:12px 20px;border-radius:999px;background:linear-gradient(135deg,#ffca66,#f59f31);font-weight:1000;font-size:16px;}
+
   </style>
 </head>
 <body>
@@ -451,6 +466,17 @@
 
       <button class="start-btn" id="startBtn">START</button>
       <div class="small-note">大型タッチスクリーンでは VS Battle 推奨。定義は中央から左右に広がるように1単語ずつ表示されます。1ラウンド10問。お手付きは1回で6秒ロック。</div>
+      <div class="hayaoshi-ranking-box" id="homeRankingBox">
+        <div class="hayaoshi-ranking-title">🏆 Solo Ranking</div>
+        <div class="hayaoshi-ranking-tabs">
+          <button class="hayaoshi-rank-tab active" data-rank-level="beginner">Beginner</button>
+          <button class="hayaoshi-rank-tab" data-rank-level="intermediate">Intermediate</button>
+          <button class="hayaoshi-rank-tab" data-rank-level="advanced">Advanced</button>
+        </div>
+        <div id="homeRankingList"><div class="hayaoshi-status">読み込み中...</div></div>
+        <div class="hayaoshi-status" id="homeRankingStatus"></div>
+      </div>
+
     </div>
   </main>
 
@@ -513,13 +539,16 @@
     <div class="result-card">
       <div class="result-title" id="resultTitle">Correct!</div>
       <div class="result-sub" id="resultSub"></div>
+      <div class="hayaoshi-status" id="saveStatus"></div>
       <div class="final-actions" id="finalActions" style="display:none;">
         <button class="primary" id="againBtn">もう一度</button>
+        <button class="hayaoshi-save-btn" id="saveSoloScoreBtn" style="display:none;">ランキングに保存</button>
         <button id="menuBtn">メニューへ</button>
       </div>
     </div>
   </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const WORDS = {
   beginner: [
@@ -726,6 +755,71 @@ let nextTimer = null;
 
 const $ = id => document.getElementById(id);
 
+const SUPABASE_URL = "https://rxyoyveykxdfrpomkltl.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7";
+const supabaseClient = window.supabase ? supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY) : null;
+const HAYAOSHI_MODE_PREFIX = "hayaoshi";
+let rankingLevel = "beginner";
+let lastSoloResult = null;
+
+function getHayaoshiMode(level){ return `${HAYAOSHI_MODE_PREFIX}_${level || selectedLevel || 'beginner'}`; }
+function escapeHtml(str){ return String(str ?? "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;"); }
+function rankMark(i){ return i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : `${i+1}`; }
+function getSavedPlayerName(){ return localStorage.getItem("sushitan_player_name") || localStorage.getItem("speed_vocab_name") || ""; }
+function setRankingTabUI(){ document.querySelectorAll('[data-rank-level]').forEach(btn=>btn.classList.toggle('active', btn.dataset.rankLevel === rankingLevel)); }
+
+function renderHayaoshiRanking(container, data){
+  if(!container) return;
+  if(!data || data.length === 0){ container.innerHTML = '<div class="hayaoshi-status">まだスコアがありません</div>'; return; }
+  const saved = getSavedPlayerName().normalize("NFKC").trim().toLowerCase();
+  container.innerHTML = data.slice(0,10).map((d,i)=>{
+    const name = (d.player_name || "NO NAME").trim();
+    const isYou = saved && name.normalize("NFKC").trim().toLowerCase() === saved;
+    return `<div class="hayaoshi-ranking-row" style="${isYou ? 'background:rgba(250,204,21,.14);border-radius:10px;' : ''}">
+      <div class="hayaoshi-rank-num">${rankMark(i)}</div>
+      <div><div class="hayaoshi-rank-name">${escapeHtml(name)}${isYou ? ' <span style="color:#c47a00;">YOU</span>' : ''}</div>
+      <div class="hayaoshi-rank-sub">Acc: ${Number(d.accuracy ?? 0)}% / ${escapeHtml((d.mode || '').replace('hayaoshi_',''))}</div></div>
+      <div class="hayaoshi-rank-score">${Number(d.score ?? 0)}</div>
+    </div>`;
+  }).join("");
+}
+
+async function loadHayaoshiRanking(level = rankingLevel){
+  const list = $('homeRankingList'), status = $('homeRankingStatus');
+  if(!supabaseClient){ if(list) list.innerHTML = '<div class="hayaoshi-status">ランキング機能はオフラインです</div>'; return; }
+  if(status) status.textContent = "読み込み中...";
+  const mode = getHayaoshiMode(level);
+  const { data, error } = await supabaseClient.from("scores").select("id, player_name, score, max_combo, accuracy, mode").eq("mode", mode).order("score", { ascending:false }).limit(100);
+  if(error){ console.error("hayaoshi ranking load error:", error); if(status) status.textContent = "ランキング取得失敗: " + error.message; if(list) list.innerHTML = '<div class="hayaoshi-status">取得できませんでした</div>'; return; }
+  const best = new Map();
+  (data || []).forEach(row=>{ const key = String(row.player_name || "NO NAME").normalize("NFKC").trim().toLowerCase(); if(!best.has(key) || Number(row.score) > Number(best.get(key).score)) best.set(key,row); });
+  const rows = [...best.values()].sort((a,b)=>Number(b.score)-Number(a.score)).slice(0,10);
+  renderHayaoshiRanking(list, rows);
+  if(status) status.textContent = `${SETTINGS[level].label} 上位 ${rows.length} 件`;
+}
+
+async function saveSoloScore(){
+  if(!supabaseClient || !lastSoloResult) return;
+  const input = prompt("名前を入力してください", getSavedPlayerName());
+  if(input === null){ $('saveStatus').textContent = "保存をスキップしました"; return; }
+  const playerName = (input.normalize("NFKC").trim() || "NO NAME").slice(0,20);
+  localStorage.setItem("sushitan_player_name", playerName);
+  localStorage.setItem("speed_vocab_name", playerName);
+  $('saveStatus').textContent = "保存中...";
+  const { error } = await supabaseClient.rpc("save_high_score", {
+    p_player_name: playerName,
+    p_score: lastSoloResult.score,
+    p_max_combo: lastSoloResult.correct,
+    p_accuracy: lastSoloResult.accuracy,
+    p_mode: getHayaoshiMode(lastSoloResult.level)
+  });
+  if(error){ console.error("hayaoshi save error:", error); $('saveStatus').textContent = "保存失敗: " + error.message; return; }
+  $('saveStatus').textContent = `${playerName} の記録を保存しました`;
+  const btn = $('saveSoloScoreBtn'); if(btn) btn.style.display = "none";
+  rankingLevel = lastSoloResult.level; setRankingTabUI(); await loadHayaoshiRanking(rankingLevel);
+}
+
+
 function shuffle(arr){
   const a = [...arr];
   for(let i=a.length-1;i>0;i--){
@@ -759,6 +853,13 @@ $('startBtn').addEventListener('click', startGame);
 $('quitBtn').addEventListener('click', showMenu);
 $('againBtn').addEventListener('click', startGame);
 $('menuBtn').addEventListener('click', showMenu);
+
+document.querySelectorAll('[data-rank-level]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{ rankingLevel = btn.dataset.rankLevel; setRankingTabUI(); loadHayaoshiRanking(rankingLevel); });
+});
+if($('saveSoloScoreBtn')) $('saveSoloScoreBtn').addEventListener('click', saveSoloScore);
+loadHayaoshiRanking(rankingLevel);
+
 $('reviewOverlay').addEventListener('click', proceedFromReview);
 
 
@@ -789,6 +890,8 @@ function startGame(){
     blueScore:0,
     redMiss:0,
     blueMiss:0,
+    redTotalMiss:0,
+    blueTotalMiss:0,
     locked:false,
     waitingReview:false,
     redLockTimer:null,
@@ -805,6 +908,10 @@ function startGame(){
   $('gameScreen').classList.add('active');
   $('resultOverlay').classList.remove('show');
   $('finalActions').style.display='none';
+  if($('saveStatus')) $('saveStatus').textContent = '';
+  const saveBtn = $('saveSoloScoreBtn');
+  if(saveBtn) saveBtn.style.display = 'none';
+  lastSoloResult = null;
   startBgm();
   $('levelPill').textContent = SETTINGS[selectedLevel].label;
   $('redLabel').textContent = selectedMode === 'solo' ? 'SOLO' : 'RED';
@@ -1001,8 +1108,8 @@ function handleTap(team, word, btn){
     }, 900);
   }else{
     btn.classList.add('wrong');
-    if(team === 'red') state.redMiss++;
-    if(team === 'blue') state.blueMiss++;
+    if(team === 'red'){ state.redMiss++; state.redTotalMiss++; }
+    if(team === 'blue'){ state.blueMiss++; state.blueTotalMiss++; }
     updateScore();
 
     // v7: 1回のお手付きで即6秒ロック。でたらめ連打を防ぐ。
@@ -1058,6 +1165,20 @@ function endGame(){
   }
   $('resultTitle').textContent = title;
   $('resultSub').textContent = sub;
+
+  const saveBtn = $('saveSoloScoreBtn');
+  if($('saveStatus')) $('saveStatus').textContent = '';
+  if(saveBtn) saveBtn.style.display = 'none';
+
+  if(state.mode === 'solo'){
+    const correct = TOTAL;
+    const totalAttempts = Math.max(1, TOTAL + Number(state.redTotalMiss || 0));
+    const accuracy = Math.round((correct / totalAttempts) * 100);
+    lastSoloResult = { score:Number(state.redScore || 0), correct, accuracy, level:state.level };
+    $('resultSub').textContent = `${state.redScore} points / Acc ${accuracy}%`;
+    if(saveBtn) saveBtn.style.display = 'inline-block';
+  }
+
   $('finalActions').style.display = 'flex';
   $('resultOverlay').classList.add('show');
 }
