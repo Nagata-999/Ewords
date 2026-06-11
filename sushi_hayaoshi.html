@@ -339,10 +339,97 @@
       color:#7f1d1d;
     }
 
+
+    .countdown-overlay,.review-overlay{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(36,49,63,.28);
+      backdrop-filter:blur(3px);
+      z-index:30;
+      padding:20px;
+    }
+    .countdown-overlay.show,.review-overlay.show{display:flex;}
+    .countdown-card{
+      width:min(520px,92vw);
+      min-height:240px;
+      border-radius:32px;
+      background:#fffaf0;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      text-align:center;
+    }
+    .countdown-number{
+      font-size:clamp(82px,14vw,150px);
+      line-height:1;
+      font-weight:1000;
+      color:#f59f31;
+    }
+    .countdown-sub{
+      margin-top:8px;
+      color:var(--muted);
+      font-size:clamp(18px,2.5vw,28px);
+      font-weight:900;
+    }
+    .review-card{
+      width:min(760px,94vw);
+      border-radius:30px;
+      background:#fffaf0;
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+      padding:26px;
+      text-align:center;
+    }
+    .review-label{
+      color:var(--muted);
+      font-weight:900;
+      letter-spacing:.08em;
+      font-size:14px;
+      text-transform:uppercase;
+    }
+    .review-word{
+      margin-top:8px;
+      font-size:clamp(44px,7vw,82px);
+      font-weight:1000;
+      text-transform:uppercase;
+      color:#24313f;
+      line-height:1;
+    }
+    .review-jp{
+      margin-top:12px;
+      font-size:clamp(24px,3.5vw,42px);
+      font-weight:950;
+      color:#c47a00;
+    }
+    .review-def{
+      margin:18px auto 0;
+      max-width:680px;
+      font-size:clamp(18px,2.3vw,30px);
+      line-height:1.35;
+      font-weight:850;
+      color:#3d4852;
+    }
+    .review-next{
+      margin-top:22px;
+      display:inline-block;
+      padding:13px 24px;
+      border-radius:999px;
+      background:linear-gradient(135deg,#ffca66,#f59f31);
+      font-size:clamp(18px,2.3vw,28px);
+      font-weight:1000;
+      color:#24313f;
+    }
+
   </style>
 </head>
 <body>
-  <audio id="bgm" src="music-def.mp3" loop preload="auto"></audio>
+  <audio id="bgm" src="music-dif.mp3" loop preload="auto"></audio>
   <a class="sushi-home-link" href="/index.html">🍣 すし英語トップ</a>
   <main id="titleScreen" class="screen active">
     <div class="title-card">
@@ -404,6 +491,24 @@
     </section>
   </main>
 
+
+  <div class="countdown-overlay" id="countdownOverlay">
+    <div class="countdown-card">
+      <div class="countdown-number" id="countdownNumber">3</div>
+      <div class="countdown-sub">Get ready...</div>
+    </div>
+  </div>
+
+  <div class="review-overlay" id="reviewOverlay">
+    <div class="review-card" id="reviewCard">
+      <div class="review-label">Review</div>
+      <div class="review-word" id="reviewWord"></div>
+      <div class="review-jp" id="reviewJp"></div>
+      <div class="review-def" id="reviewDef"></div>
+      <div class="review-next" id="reviewNext">タップで次の問題へ</div>
+    </div>
+  </div>
+
   <div class="result-overlay" id="resultOverlay">
     <div class="result-card">
       <div class="result-title" id="resultTitle">Correct!</div>
@@ -418,190 +523,190 @@
 <script>
 const WORDS = {
   beginner: [
-    {word:'school', definition:'a place where students learn'},
-    {word:'library', definition:'a place where people read or borrow books'},
-    {word:'hospital', definition:'a place where sick or injured people are treated'},
-    {word:'restaurant', definition:'a place where people buy and eat meals'},
-    {word:'station', definition:'a place where trains or buses stop'},
-    {word:'airport', definition:'a place where planes take off and land'},
-    {word:'travel', definition:'to go from one place to another'},
-    {word:'arrive', definition:'to reach a place'},
-    {word:'return', definition:'to go or come back'},
-    {word:'borrow', definition:'to take something and return it later'},
-    {word:'lend', definition:'to give something to someone for a short time'},
-    {word:'invite', definition:'to ask someone to come somewhere'},
-    {word:'practice', definition:'to do something many times to get better'},
-    {word:'study', definition:'to learn about a subject'},
-    {word:'learn', definition:'to get knowledge or a skill'},
-    {word:'teach', definition:'to help someone learn something'},
-    {word:'choose', definition:'to decide which thing you want'},
-    {word:'decide', definition:'to choose something after thinking'},
-    {word:'enjoy', definition:'to get pleasure from something'},
-    {word:'finish', definition:'to complete something'},
-    {word:'start', definition:'to begin doing something'},
-    {word:'wait', definition:'to stay until something happens'},
-    {word:'answer', definition:'something you say or write in reply'},
-    {word:'question', definition:'something you ask'},
-    {word:'reason', definition:'why something happens'},
-    {word:'future', definition:'the time that will come after now'},
-    {word:'past', definition:'the time before now'},
-    {word:'important', definition:'having great value or meaning'},
-    {word:'different', definition:'not the same'},
-    {word:'similar', definition:'almost the same'},
-    {word:'famous', definition:'known by many people'},
-    {word:'popular', definition:'liked by many people'},
-    {word:'favorite', definition:'liked more than others'},
-    {word:'healthy', definition:'having good health'},
-    {word:'dangerous', definition:'able to hurt people or cause damage'},
-    {word:'safe', definition:'not dangerous'},
-    {word:'expensive', definition:'costing a lot of money'},
-    {word:'cheap', definition:'costing little money'},
-    {word:'busy', definition:'having a lot of things to do'},
-    {word:'free', definition:'not busy or not costing money'},
-    {word:'careful', definition:'trying not to make mistakes'},
-    {word:'kind', definition:'friendly and helpful'},
-    {word:'quiet', definition:'making little or no noise'},
-    {word:'loud', definition:'making a lot of noise'},
-    {word:'clean', definition:'not dirty'},
-    {word:'dirty', definition:'not clean'},
-    {word:'simple', definition:'easy to understand or do'},
-    {word:'difficult', definition:'not easy'},
-    {word:'useful', definition:'helping you do something'},
-    {word:'strange', definition:'unusual or surprising'},
-    {word:'weather', definition:'the condition of the air outside'},
-    {word:'season', definition:'one of the four parts of the year'},
-    {word:'hobby', definition:'something you enjoy doing in your free time'},
-    {word:'holiday', definition:'a day when people do not go to school or work'},
-    {word:'message', definition:'written or spoken information sent to someone'},
-    {word:'promise', definition:'to say that you will certainly do something'},
-    {word:'mistake', definition:'something that is wrong'},
-    {word:'dream', definition:'something you hope to do in the future'},
-    {word:'problem', definition:'something difficult that must be solved'},
-    {word:'chance', definition:'an opportunity to do something'}
+    {word:'school', jp:'学校', definition:'a place where students learn'},
+    {word:'library', jp:'図書館', definition:'a place where people read or borrow books'},
+    {word:'hospital', jp:'病院', definition:'a place where sick or injured people are treated'},
+    {word:'restaurant', jp:'レストラン', definition:'a place where people buy and eat meals'},
+    {word:'station', jp:'駅', definition:'a place where trains or buses stop'},
+    {word:'airport', jp:'空港', definition:'a place where planes take off and land'},
+    {word:'travel', jp:'旅行する／移動する', definition:'to go from one place to another'},
+    {word:'arrive', jp:'到着する', definition:'to reach a place'},
+    {word:'return', jp:'戻る', definition:'to go or come back'},
+    {word:'borrow', jp:'借りる', definition:'to take something and return it later'},
+    {word:'lend', jp:'貸す', definition:'to give something to someone for a short time'},
+    {word:'invite', jp:'招待する', definition:'to ask someone to come somewhere'},
+    {word:'practice', jp:'練習する', definition:'to do something many times to get better'},
+    {word:'study', jp:'勉強する', definition:'to learn about a subject'},
+    {word:'learn', jp:'学ぶ', definition:'to get knowledge or a skill'},
+    {word:'teach', jp:'教える', definition:'to help someone learn something'},
+    {word:'choose', jp:'選ぶ', definition:'to decide which thing you want'},
+    {word:'decide', jp:'決める', definition:'to choose something after thinking'},
+    {word:'enjoy', jp:'楽しむ', definition:'to get pleasure from something'},
+    {word:'finish', jp:'終える', definition:'to complete something'},
+    {word:'start', jp:'始める', definition:'to begin doing something'},
+    {word:'wait', jp:'待つ', definition:'to stay until something happens'},
+    {word:'answer', jp:'答え', definition:'something you say or write in reply'},
+    {word:'question', jp:'質問', definition:'something you ask'},
+    {word:'reason', jp:'理由', definition:'why something happens'},
+    {word:'future', jp:'未来', definition:'the time that will come after now'},
+    {word:'past', jp:'過去', definition:'the time before now'},
+    {word:'important', jp:'重要な', definition:'having great value or meaning'},
+    {word:'different', jp:'異なる', definition:'not the same'},
+    {word:'similar', jp:'似ている', definition:'almost the same'},
+    {word:'famous', jp:'有名な', definition:'known by many people'},
+    {word:'popular', jp:'人気のある', definition:'liked by many people'},
+    {word:'favorite', jp:'お気に入りの', definition:'liked more than others'},
+    {word:'healthy', jp:'健康な', definition:'having good health'},
+    {word:'dangerous', jp:'危険な', definition:'able to hurt people or cause damage'},
+    {word:'safe', jp:'安全な', definition:'not dangerous'},
+    {word:'expensive', jp:'高価な', definition:'costing a lot of money'},
+    {word:'cheap', jp:'安い', definition:'costing little money'},
+    {word:'busy', jp:'忙しい', definition:'having a lot of things to do'},
+    {word:'free', jp:'暇な／無料の', definition:'not busy or not costing money'},
+    {word:'careful', jp:'注意深い', definition:'trying not to make mistakes'},
+    {word:'kind', jp:'親切な', definition:'friendly and helpful'},
+    {word:'quiet', jp:'静かな', definition:'making little or no noise'},
+    {word:'loud', jp:'うるさい', definition:'making a lot of noise'},
+    {word:'clean', jp:'きれいな', definition:'not dirty'},
+    {word:'dirty', jp:'汚い', definition:'not clean'},
+    {word:'simple', jp:'簡単な', definition:'easy to understand or do'},
+    {word:'difficult', jp:'難しい', definition:'not easy'},
+    {word:'useful', jp:'役に立つ', definition:'helping you do something'},
+    {word:'strange', jp:'奇妙な', definition:'unusual or surprising'},
+    {word:'weather', jp:'天気', definition:'the condition of the air outside'},
+    {word:'season', jp:'季節', definition:'one of the four parts of the year'},
+    {word:'hobby', jp:'趣味', definition:'something you enjoy doing in your free time'},
+    {word:'holiday', jp:'休日', definition:'a day when people do not go to school or work'},
+    {word:'message', jp:'メッセージ', definition:'written or spoken information sent to someone'},
+    {word:'promise', jp:'約束する', definition:'to say that you will certainly do something'},
+    {word:'mistake', jp:'間違い', definition:'something that is wrong'},
+    {word:'dream', jp:'夢', definition:'something you hope to do in the future'},
+    {word:'problem', jp:'問題', definition:'something difficult that must be solved'},
+    {word:'chance', jp:'機会', definition:'an opportunity to do something'}
   ],
   intermediate: [
-    {word:'improve', definition:'to make something better'},
-    {word:'achieve', definition:'to succeed in doing something'},
-    {word:'compare', definition:'to examine similarities and differences'},
-    {word:'influence', definition:'the power to affect people or things'},
-    {word:'contribute', definition:'to give something in order to help'},
-    {word:'encourage', definition:'to give someone confidence or hope'},
-    {word:'relationship', definition:'the way people are connected'},
-    {word:'opportunity', definition:'a chance to do something'},
-    {word:'responsibility', definition:'a duty to take care of something'},
-    {word:'environment', definition:'the natural world around us'},
-    {word:'solution', definition:'a way to solve a problem'},
-    {word:'evidence', definition:'facts that show something is true'},
-    {word:'benefit', definition:'a good effect or advantage'},
-    {word:'challenge', definition:'something difficult that tests your ability'},
-    {word:'reduce', definition:'to make something smaller or less'},
-    {word:'increase', definition:'to become larger in amount or number'},
-    {word:'support', definition:'to help someone or something'},
-    {word:'prevent', definition:'to stop something from happening'},
-    {word:'develop', definition:'to grow or become more advanced'},
-    {word:'require', definition:'to need something'},
-    {word:'provide', definition:'to give something that is needed'},
-    {word:'suggest', definition:'to tell someone an idea or plan'},
-    {word:'depend', definition:'to be decided by something else'},
-    {word:'involve', definition:'to include someone or something'},
-    {word:'consider', definition:'to think carefully about something'},
-    {word:'explain', definition:'to make something clear or easy to understand'},
-    {word:'describe', definition:'to say what something is like'},
-    {word:'express', definition:'to show a feeling or idea in words or actions'},
-    {word:'communicate', definition:'to share information or ideas with others'},
-    {word:'realize', definition:'to understand something clearly'},
-    {word:'recognize', definition:'to know someone or something because you have seen it before'},
-    {word:'connect', definition:'to join two or more things together'},
-    {word:'protect', definition:'to keep someone or something safe'},
-    {word:'create', definition:'to make something new'},
-    {word:'produce', definition:'to make or grow something'},
-    {word:'accept', definition:'to agree to take or receive something'},
-    {word:'refuse', definition:'to say that you will not do or accept something'},
-    {word:'avoid', definition:'to stay away from something'},
-    {word:'allow', definition:'to let someone do something'},
-    {word:'force', definition:'to make someone do something'},
-    {word:'include', definition:'to have something as part of a group'},
-    {word:'remain', definition:'to stay in the same place or condition'},
-    {word:'appear', definition:'to start to be seen'},
-    {word:'disappear', definition:'to stop being seen'},
-    {word:'raise', definition:'to lift something or increase an amount'},
-    {word:'lower', definition:'to move something down or reduce an amount'},
-    {word:'spread', definition:'to move over a larger area'},
-    {word:'receive', definition:'to get something from someone'},
-    {word:'suffer', definition:'to experience pain or difficulty'},
-    {word:'survive', definition:'to continue living after danger'},
-    {word:'cause', definition:'to make something happen'},
-    {word:'effect', definition:'a change caused by something'},
-    {word:'advantage', definition:'something that helps you succeed'},
-    {word:'disadvantage', definition:'something that makes success harder'},
-    {word:'quality', definition:'how good or bad something is'},
-    {word:'quantity', definition:'an amount or number of something'},
-    {word:'method', definition:'a way of doing something'},
-    {word:'purpose', definition:'the reason for doing something'},
-    {word:'attitude', definition:'the way you think or feel about something'},
-    {word:'behavior', definition:'the way a person acts'}
+    {word:'improve', jp:'改善する', definition:'to make something better'},
+    {word:'achieve', jp:'達成する', definition:'to succeed in doing something'},
+    {word:'compare', jp:'比較する', definition:'to examine similarities and differences'},
+    {word:'influence', jp:'影響', definition:'the power to affect people or things'},
+    {word:'contribute', jp:'貢献する', definition:'to give something in order to help'},
+    {word:'encourage', jp:'励ます', definition:'to give someone confidence or hope'},
+    {word:'relationship', jp:'関係', definition:'the way people are connected'},
+    {word:'opportunity', jp:'機会', definition:'a chance to do something'},
+    {word:'responsibility', jp:'責任', definition:'a duty to take care of something'},
+    {word:'environment', jp:'環境', definition:'the natural world around us'},
+    {word:'solution', jp:'解決策', definition:'a way to solve a problem'},
+    {word:'evidence', jp:'証拠', definition:'facts that show something is true'},
+    {word:'benefit', jp:'利益／利点', definition:'a good effect or advantage'},
+    {word:'challenge', jp:'課題', definition:'something difficult that tests your ability'},
+    {word:'reduce', jp:'減らす', definition:'to make something smaller or less'},
+    {word:'increase', jp:'増える／増やす', definition:'to become larger in amount or number'},
+    {word:'support', jp:'支える', definition:'to help someone or something'},
+    {word:'prevent', jp:'防ぐ', definition:'to stop something from happening'},
+    {word:'develop', jp:'発展する', definition:'to grow or become more advanced'},
+    {word:'require', jp:'必要とする', definition:'to need something'},
+    {word:'provide', jp:'提供する', definition:'to give something that is needed'},
+    {word:'suggest', jp:'提案する', definition:'to tell someone an idea or plan'},
+    {word:'depend', jp:'依存する／左右される', definition:'to be decided by something else'},
+    {word:'involve', jp:'含む／関わらせる', definition:'to include someone or something'},
+    {word:'consider', jp:'よく考える', definition:'to think carefully about something'},
+    {word:'explain', jp:'説明する', definition:'to make something clear or easy to understand'},
+    {word:'describe', jp:'描写する', definition:'to say what something is like'},
+    {word:'express', jp:'表現する', definition:'to show a feeling or idea in words or actions'},
+    {word:'communicate', jp:'伝える', definition:'to share information or ideas with others'},
+    {word:'realize', jp:'気づく', definition:'to understand something clearly'},
+    {word:'recognize', jp:'認識する', definition:'to know someone or something because you have seen it before'},
+    {word:'connect', jp:'つなぐ', definition:'to join two or more things together'},
+    {word:'protect', jp:'守る', definition:'to keep someone or something safe'},
+    {word:'create', jp:'作る', definition:'to make something new'},
+    {word:'produce', jp:'生産する', definition:'to make or grow something'},
+    {word:'accept', jp:'受け入れる', definition:'to agree to take or receive something'},
+    {word:'refuse', jp:'拒否する', definition:'to say that you will not do or accept something'},
+    {word:'avoid', jp:'避ける', definition:'to stay away from something'},
+    {word:'allow', jp:'許す', definition:'to let someone do something'},
+    {word:'force', jp:'強制する', definition:'to make someone do something'},
+    {word:'include', jp:'含む', definition:'to have something as part of a group'},
+    {word:'remain', jp:'残る', definition:'to stay in the same place or condition'},
+    {word:'appear', jp:'現れる', definition:'to start to be seen'},
+    {word:'disappear', jp:'消える', definition:'to stop being seen'},
+    {word:'raise', jp:'上げる', definition:'to lift something or increase an amount'},
+    {word:'lower', jp:'下げる', definition:'to move something down or reduce an amount'},
+    {word:'spread', jp:'広がる', definition:'to move over a larger area'},
+    {word:'receive', jp:'受け取る', definition:'to get something from someone'},
+    {word:'suffer', jp:'苦しむ', definition:'to experience pain or difficulty'},
+    {word:'survive', jp:'生き残る', definition:'to continue living after danger'},
+    {word:'cause', jp:'引き起こす', definition:'to make something happen'},
+    {word:'effect', jp:'影響／効果', definition:'a change caused by something'},
+    {word:'advantage', jp:'利点', definition:'something that helps you succeed'},
+    {word:'disadvantage', jp:'欠点', definition:'something that makes success harder'},
+    {word:'quality', jp:'質', definition:'how good or bad something is'},
+    {word:'quantity', jp:'量', definition:'an amount or number of something'},
+    {word:'method', jp:'方法', definition:'a way of doing something'},
+    {word:'purpose', jp:'目的', definition:'the reason for doing something'},
+    {word:'attitude', jp:'態度', definition:'the way you think or feel about something'},
+    {word:'behavior', jp:'行動', definition:'the way a person acts'}
   ],
   advanced: [
-    {word:'wane', definition:'to gradually become weaker or less important'},
-    {word:'eschew', definition:'to deliberately avoid something'},
-    {word:'grim', definition:'very serious and worrying'},
-    {word:'bribe', definition:'to persuade someone with money unfairly'},
-    {word:'facilitate', definition:'to make something easier'},
-    {word:'allocate', definition:'to officially give something for a particular purpose'},
-    {word:'undertake', definition:'to agree to do or begin a task'},
-    {word:'compensate', definition:'to pay someone for loss or damage'},
-    {word:'attribute', definition:'to regard something as caused by something else'},
-    {word:'constrain', definition:'to limit what someone can do'},
-    {word:'foster', definition:'to encourage the development of something'},
-    {word:'hinder', definition:'to make progress difficult'},
-    {word:'sustain', definition:'to keep something going over time'},
-    {word:'advocate', definition:'to publicly support an idea'},
-    {word:'comply', definition:'to obey a rule or request'},
-    {word:'neglect', definition:'to fail to take care of something'},
-    {word:'perceive', definition:'to notice or understand something'},
-    {word:'impose', definition:'to force something on someone'},
-    {word:'enhance', definition:'to improve the quality of something'},
-    {word:'emerge', definition:'to appear or become known'},
-    {word:'acquire', definition:'to get or gain something'},
-    {word:'reinforce', definition:'to make an idea or structure stronger'},
-    {word:'assess', definition:'to judge the value or quality of something'},
-    {word:'derive', definition:'to get something from a particular source'},
-    {word:'encounter', definition:'to meet or experience something unexpectedly'},
-    {word:'implement', definition:'to put a plan into action'},
-    {word:'alleviate', definition:'to make pain or a problem less severe'},
-    {word:'deteriorate', definition:'to become worse'},
-    {word:'fluctuate', definition:'to change frequently in amount or level'},
-    {word:'eliminate', definition:'to remove something completely'},
-    {word:'substitute', definition:'to use one thing instead of another'},
-    {word:'contradict', definition:'to say the opposite of something'},
-    {word:'justify', definition:'to show that something is reasonable or right'},
-    {word:'clarify', definition:'to make something easier to understand'},
-    {word:'scrutinize', definition:'to examine something very carefully'},
-    {word:'verify', definition:'to check that something is true or accurate'},
-    {word:'undermine', definition:'to make something weaker or less effective'},
-    {word:'exacerbate', definition:'to make a problem worse'},
-    {word:'mitigate', definition:'to make something less harmful or serious'},
-    {word:'prevalent', definition:'common in a particular place or time'},
-    {word:'obsolete', definition:'no longer useful because something newer exists'},
-    {word:'plausible', definition:'seeming likely to be true'},
-    {word:'ambiguous', definition:'having more than one possible meaning'},
-    {word:'subtle', definition:'not obvious and therefore difficult to notice'},
-    {word:'crucial', definition:'extremely important'},
-    {word:'inevitable', definition:'certain to happen and impossible to avoid'},
-    {word:'profound', definition:'very great, deep, or serious'},
-    {word:'skeptical', definition:'doubting that something is true'},
-    {word:'vulnerable', definition:'easily hurt or affected'},
-    {word:'resilient', definition:'able to recover quickly after difficulty'},
-    {word:'controversial', definition:'causing public disagreement'},
-    {word:'feasible', definition:'possible and practical to do'},
-    {word:'coherent', definition:'logical and easy to understand'},
-    {word:'arbitrary', definition:'based on chance or personal choice rather than reason'},
-    {word:'comprehensive', definition:'including almost everything needed'},
-    {word:'conventional', definition:'usual and traditional'},
-    {word:'empirical', definition:'based on observation or experience'},
-    {word:'integral', definition:'necessary and important as part of a whole'},
-    {word:'marginal', definition:'small and not very important'},
-    {word:'tentative', definition:'not certain or not final'}
+    {word:'wane', jp:'衰える', definition:'to gradually become weaker or less important'},
+    {word:'eschew', jp:'避ける', definition:'to deliberately avoid something'},
+    {word:'grim', jp:'厳しい／深刻な', definition:'very serious and worrying'},
+    {word:'bribe', jp:'賄賂を渡す', definition:'to persuade someone with money unfairly'},
+    {word:'facilitate', jp:'促進する／容易にする', definition:'to make something easier'},
+    {word:'allocate', jp:'割り当てる', definition:'to officially give something for a particular purpose'},
+    {word:'undertake', jp:'引き受ける', definition:'to agree to do or begin a task'},
+    {word:'compensate', jp:'補償する', definition:'to pay someone for loss or damage'},
+    {word:'attribute', jp:'〜に起因すると考える', definition:'to regard something as caused by something else'},
+    {word:'constrain', jp:'制限する', definition:'to limit what someone can do'},
+    {word:'foster', jp:'育成する／促進する', definition:'to encourage the development of something'},
+    {word:'hinder', jp:'妨げる', definition:'to make progress difficult'},
+    {word:'sustain', jp:'維持する', definition:'to keep something going over time'},
+    {word:'advocate', jp:'主張する／支持する', definition:'to publicly support an idea'},
+    {word:'comply', jp:'従う', definition:'to obey a rule or request'},
+    {word:'neglect', jp:'怠る', definition:'to fail to take care of something'},
+    {word:'perceive', jp:'認識する', definition:'to notice or understand something'},
+    {word:'impose', jp:'課す', definition:'to force something on someone'},
+    {word:'enhance', jp:'高める', definition:'to improve the quality of something'},
+    {word:'emerge', jp:'現れる', definition:'to appear or become known'},
+    {word:'acquire', jp:'獲得する', definition:'to get or gain something'},
+    {word:'reinforce', jp:'強化する', definition:'to make an idea or structure stronger'},
+    {word:'assess', jp:'評価する', definition:'to judge the value or quality of something'},
+    {word:'derive', jp:'得る／由来する', definition:'to get something from a particular source'},
+    {word:'encounter', jp:'遭遇する', definition:'to meet or experience something unexpectedly'},
+    {word:'implement', jp:'実行する', definition:'to put a plan into action'},
+    {word:'alleviate', jp:'軽減する', definition:'to make pain or a problem less severe'},
+    {word:'deteriorate', jp:'悪化する', definition:'to become worse'},
+    {word:'fluctuate', jp:'変動する', definition:'to change frequently in amount or level'},
+    {word:'eliminate', jp:'除去する', definition:'to remove something completely'},
+    {word:'substitute', jp:'代用する', definition:'to use one thing instead of another'},
+    {word:'contradict', jp:'矛盾する', definition:'to say the opposite of something'},
+    {word:'justify', jp:'正当化する', definition:'to show that something is reasonable or right'},
+    {word:'clarify', jp:'明確にする', definition:'to make something easier to understand'},
+    {word:'scrutinize', jp:'精査する', definition:'to examine something very carefully'},
+    {word:'verify', jp:'確認する', definition:'to check that something is true or accurate'},
+    {word:'undermine', jp:'弱体化させる', definition:'to make something weaker or less effective'},
+    {word:'exacerbate', jp:'悪化させる', definition:'to make a problem worse'},
+    {word:'mitigate', jp:'和らげる', definition:'to make something less harmful or serious'},
+    {word:'prevalent', jp:'広く行き渡った', definition:'common in a particular place or time'},
+    {word:'obsolete', jp:'時代遅れの', definition:'no longer useful because something newer exists'},
+    {word:'plausible', jp:'もっともらしい', definition:'seeming likely to be true'},
+    {word:'ambiguous', jp:'曖昧な', definition:'having more than one possible meaning'},
+    {word:'subtle', jp:'微妙な', definition:'not obvious and therefore difficult to notice'},
+    {word:'crucial', jp:'極めて重要な', definition:'extremely important'},
+    {word:'inevitable', jp:'避けられない', definition:'certain to happen and impossible to avoid'},
+    {word:'profound', jp:'深い／重大な', definition:'very great, deep, or serious'},
+    {word:'skeptical', jp:'懐疑的な', definition:'doubting that something is true'},
+    {word:'vulnerable', jp:'傷つきやすい', definition:'easily hurt or affected'},
+    {word:'resilient', jp:'回復力のある', definition:'able to recover quickly after difficulty'},
+    {word:'controversial', jp:'論争を呼ぶ', definition:'causing public disagreement'},
+    {word:'feasible', jp:'実行可能な', definition:'possible and practical to do'},
+    {word:'coherent', jp:'一貫した', definition:'logical and easy to understand'},
+    {word:'arbitrary', jp:'恣意的な', definition:'based on chance or personal choice rather than reason'},
+    {word:'comprehensive', jp:'包括的な', definition:'including almost everything needed'},
+    {word:'conventional', jp:'従来の', definition:'usual and traditional'},
+    {word:'empirical', jp:'経験的な', definition:'based on observation or experience'},
+    {word:'integral', jp:'不可欠な', definition:'necessary and important as part of a whole'},
+    {word:'marginal', jp:'わずかな／周辺的な', definition:'small and not very important'},
+    {word:'tentative', jp:'暫定的な', definition:'not certain or not final'}
   ]
 };
 
@@ -654,6 +759,7 @@ $('startBtn').addEventListener('click', startGame);
 $('quitBtn').addEventListener('click', showMenu);
 $('againBtn').addEventListener('click', startGame);
 $('menuBtn').addEventListener('click', showMenu);
+$('reviewOverlay').addEventListener('click', proceedFromReview);
 
 
 function startBgm(){
@@ -684,6 +790,7 @@ function startGame(){
     redMiss:0,
     blueMiss:0,
     locked:false,
+    waitingReview:false,
     redLockTimer:null,
     blueLockTimer:null,
     redLockInterval:null,
@@ -705,7 +812,7 @@ function startGame(){
   $('blueScoreBox').style.visibility = selectedMode === 'solo' ? 'hidden' : 'visible';
   $('bluePanel').style.display = selectedMode === 'solo' ? 'none' : 'flex';
   $('redPanel').classList.toggle('solo', selectedMode === 'solo');
-  nextQuestion();
+  startRoundCountdown(nextQuestion);
 }
 
 function showMenu(){
@@ -722,8 +829,52 @@ function clearTimers(){
   if(nextTimer) clearTimeout(nextTimer);
 }
 
+
+function startRoundCountdown(callback){
+  const overlay = $('countdownOverlay');
+  const number = $('countdownNumber');
+  if(!overlay || !number){
+    callback();
+    return;
+  }
+  state.locked = true;
+  overlay.classList.add('show');
+  let n = 3;
+  number.textContent = n;
+  const cd = setInterval(()=>{
+    n -= 1;
+    if(n > 0){
+      number.textContent = n;
+    }else{
+      clearInterval(cd);
+      overlay.classList.remove('show');
+      state.locked = false;
+      callback();
+    }
+  }, 850);
+}
+
+function showReviewCard(){
+  state.waitingReview = true;
+  const item = state.current;
+  $('reviewWord').textContent = item.word || '';
+  $('reviewJp').textContent = item.jp || '';
+  $('reviewDef').textContent = item.definition || '';
+  $('reviewOverlay').classList.add('show');
+}
+
+function proceedFromReview(){
+  if(!state.waitingReview) return;
+  $('reviewOverlay').classList.remove('show');
+  state.waitingReview = false;
+  state.questionIndex++;
+  startRoundCountdown(nextQuestion);
+}
+
 function nextQuestion(){
   clearTimers();
+  state.waitingReview = false;
+  $('reviewOverlay').classList.remove('show');
   if(state.questionIndex >= TOTAL){ return endGame(); }
   clearTeamLocks();
   state.redMiss = 0;
@@ -846,9 +997,8 @@ function handleTap(team, word, btn){
     showResult(team, points);
     nextTimer = setTimeout(()=>{
       $('resultOverlay').classList.remove('show');
-      state.questionIndex++;
-      nextQuestion();
-    }, 1200);
+      showReviewCard();
+    }, 900);
   }else{
     btn.classList.add('wrong');
     if(team === 'red') state.redMiss++;
