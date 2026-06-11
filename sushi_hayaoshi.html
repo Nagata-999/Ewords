@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>すし早押し｜英英定義タッチ対戦ゲーム｜すし英語</title>
+  <style>
+    :root{
+      --bg:#f7f3ea;
+      --card:#fffaf0;
+      --ink:#24313f;
+      --muted:#6f7b86;
+      --accent:#f2b84b;
+      --red:#ef5350;
+      --blue:#42a5f5;
+      --good:#2e7d32;
+      --bad:#c62828;
+      --line:rgba(36,49,63,.14);
+      --shadow:0 14px 30px rgba(36,49,63,.12);
+    }
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--ink);
+      background:radial-gradient(circle at top, #fff5d9 0, var(--bg) 48%, #f1eadf 100%);
+      min-height:100svh;
+      overflow:hidden;
+    }
+    button{
+      font:inherit;
+      border:0;
+      cursor:pointer;
+      color:inherit;
+    }
+    .screen{display:none; min-height:100svh; padding:18px;}
+    .screen.active{display:flex;}
+    #titleScreen{
+      align-items:center;
+      justify-content:center;
+    }
+    .title-card{
+      width:min(980px, 100%);
+      background:rgba(255,250,240,.92);
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:30px;
+      text-align:center;
+    }
+    h1{font-size:clamp(40px,7vw,76px); margin:8px 0 0; letter-spacing:.02em;}
+    .subtitle{font-size:clamp(16px,2vw,22px); color:var(--muted); margin:8px 0 26px;}
+    .section-title{font-weight:800; margin:22px 0 12px; color:#3d4852;}
+    .grid{display:grid; gap:14px;}
+    .levels{grid-template-columns:repeat(3,1fr);}
+    .modes{grid-template-columns:repeat(2,1fr); max-width:620px; margin:0 auto;}
+    .choice-btn{
+      background:#fff;
+      border:2px solid transparent;
+      border-radius:20px;
+      padding:18px 14px;
+      box-shadow:0 8px 18px rgba(36,49,63,.08);
+      transition:.12s transform,.12s border-color,.12s background;
+      min-height:88px;
+    }
+    .choice-btn:active{transform:scale(.97);}
+    .choice-btn.selected{border-color:var(--accent); background:#fff4d7;}
+    .choice-main{display:block; font-size:clamp(20px,2.4vw,30px); font-weight:900;}
+    .choice-sub{display:block; color:var(--muted); margin-top:4px; font-size:clamp(12px,1.5vw,16px);}
+    .start-btn{
+      margin-top:24px;
+      padding:18px 46px;
+      border-radius:999px;
+      background:linear-gradient(135deg,#ffca66,#f59f31);
+      font-size:clamp(22px,2.8vw,34px);
+      font-weight:950;
+      box-shadow:0 12px 22px rgba(245,159,49,.32);
+    }
+    .small-note{margin-top:16px; color:var(--muted); font-size:14px;}
+
+    #gameScreen{
+      flex-direction:column;
+      gap:12px;
+      padding:12px;
+    }
+    .topbar{
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      gap:12px;
+      align-items:center;
+    }
+    .scorebox{
+      background:rgba(255,255,255,.85);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:10px 14px;
+      box-shadow:0 6px 16px rgba(36,49,63,.08);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      font-weight:900;
+    }
+    .scorebox.red{border-left:10px solid var(--red);}
+    .scorebox.blue{border-left:10px solid var(--blue);}
+    .score-num{font-size:clamp(26px,3vw,42px);}
+    .center-status{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      justify-content:center;
+    }
+    .pill{
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line);
+      padding:8px 14px;
+      font-weight:800;
+      white-space:nowrap;
+    }
+    .quit-btn{background:#fff; border:1px solid var(--line); border-radius:999px; padding:8px 14px; font-weight:800;}
+    .definition-card{
+      background:rgba(255,250,240,.96);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:16px 20px;
+      min-height:116px;
+      box-shadow:var(--shadow);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      overflow:hidden;
+    }
+    .definition-label{font-size:14px; color:var(--muted); font-weight:900; letter-spacing:.08em; text-transform:uppercase;}
+    .definition-text{
+      width:100%;
+      min-height:clamp(64px,7vw,92px);
+      line-height:1.18;
+      font-size:clamp(26px,4vw,52px);
+      font-weight:950;
+      margin-top:6px;
+      overflow:hidden;
+      white-space:normal;
+      position:relative;
+      text-align:center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:0 12px;
+    }
+    .definition-stream{
+      display:inline-block;
+      white-space:normal;
+      overflow-wrap:anywhere;
+      line-height:1.15;
+      vertical-align:middle;
+    }
+    .definition-cursor{
+      display:inline-block;
+      margin-left:4px;
+      animation:blink .8s steps(1) infinite;
+    }
+    @keyframes blink{50%{opacity:0;}}
+    .center-reveal{
+      display:inline-block;
+      transform-origin:center center;
+      animation:centerGrow .18s ease-out;
+    }
+    @keyframes centerGrow{
+      from{transform:scaleX(.92); opacity:.82;}
+      to{transform:scaleX(1); opacity:1;}
+    }
+
+    .answer-reveal{font-size:clamp(18px,2vw,28px); font-weight:900; color:var(--good); margin-top:6px; min-height:1.2em;}
+    .battle-area{
+      flex:1;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      min-height:0;
+    }
+    .team-panel{
+      background:rgba(255,255,255,.7);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:12px;
+      box-shadow:0 8px 20px rgba(36,49,63,.08);
+      display:flex;
+      flex-direction:column;
+      min-height:0;
+      position:relative;
+      overflow:hidden;
+    }
+    .team-panel.solo{grid-column:1 / -1; max-width:920px; width:100%; margin:0 auto;}
+    .team-heading{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      padding:0 4px 10px;
+      font-weight:950;
+      font-size:clamp(20px,2.2vw,34px);
+    }
+    .misses{font-size:clamp(14px,1.5vw,20px); color:var(--muted);}
+    .word-grid{
+      flex:1;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      min-height:0;
+    }
+    .word-btn{
+      background:#fffef9;
+      border:2px solid rgba(36,49,63,.12);
+      border-radius:18px;
+      font-size:clamp(18px,2.1vw,34px);
+      font-weight:950;
+      text-transform:uppercase;
+      box-shadow:0 6px 12px rgba(36,49,63,.06);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:56px;
+      padding:6px;
+    }
+    .word-btn:active{transform:scale(.97);}
+    .word-btn.correct{background:#e7f6e8; border-color:var(--good); color:var(--good);}
+    .word-btn.wrong{background:#ffebee; border-color:var(--bad); color:var(--bad);}
+    .team-panel.locked::after{
+      content:"";
+      display:none;
+    }
+    .result-overlay{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(36,49,63,.28);
+      backdrop-filter: blur(3px);
+      z-index:20;
+    }
+    .result-overlay.show{display:flex;}
+    .result-card{
+      background:#fffaf0;
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:28px 38px;
+      text-align:center;
+      min-width:min(520px,92vw);
+      border:1px solid var(--line);
+    }
+    .result-title{font-size:clamp(34px,5vw,66px); font-weight:1000; margin-bottom:8px;}
+    .result-sub{font-size:clamp(20px,2.6vw,34px); font-weight:900; color:var(--muted);}
+    .final-actions{margin-top:22px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
+    .final-actions button{padding:12px 20px; border-radius:999px; background:#fff; border:1px solid var(--line); font-weight:900;}
+    .final-actions .primary{background:linear-gradient(135deg,#ffca66,#f59f31); border:0;}
+    @media (max-width:760px){
+      body{overflow:auto;}
+      .screen{min-height:100svh;}
+      .levels,.modes{grid-template-columns:1fr;}
+      #gameScreen{overflow:auto; min-height:100svh;}
+      .topbar{grid-template-columns:1fr;}
+      .battle-area{grid-template-columns:1fr;}
+      .definition-text{font-size:28px;}
+    }
+
+    .sushi-home-link{
+      position:fixed;
+      top:14px;
+      left:14px;
+      z-index:50;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,250,240,.92);
+      border:1px solid rgba(36,49,63,.14);
+      box-shadow:0 8px 20px rgba(36,49,63,.12);
+      color:#24313f;
+      text-decoration:none;
+      font-weight:950;
+      font-size:14px;
+    }
+    .sushi-home-link:active{transform:scale(.97);}
+    .sushi-mini-nav{
+      display:flex;
+      gap:8px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .sushi-mini-nav a{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line);
+      color:#24313f;
+      text-decoration:none;
+      font-size:13px;
+      font-weight:900;
+    }
+    @media (max-width:760px){
+      .sushi-home-link{
+        top:8px;
+        left:8px;
+        padding:8px 11px;
+        font-size:12px;
+      }
+      .title-card{padding-top:52px;}
+    }
+
+
+    .lock-countdown{
+      position:absolute;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      gap:8px;
+      background:rgba(255,255,255,.78);
+      z-index:6;
+      font-weight:1000;
+      color:var(--bad);
+      text-align:center;
+      pointer-events:none;
+    }
+    .team-panel.locked .lock-countdown{display:flex;}
+    .lock-countdown-main{
+      font-size:clamp(34px,5vw,70px);
+      letter-spacing:.04em;
+    }
+    .lock-countdown-sec{
+      font-size:clamp(24px,4vw,56px);
+      color:#7f1d1d;
+    }
+
+  </style>
+</head>
+<body>
+  <audio id="bgm" src="music-dif.mp3" loop preload="auto"></audio>
+  <a class="sushi-home-link" href="/index.html">🍣 すし英語トップ</a>
+  <main id="titleScreen" class="screen active">
+    <div class="title-card">
+      <h1>すし早押し</h1>
+      <div class="subtitle">英英定義を見て、正しい単語を先にタップ！</div>
+
+      <div class="section-title">LEVEL</div>
+      <div class="grid levels" id="levelButtons">
+        <button class="choice-btn selected" data-level="beginner"><span class="choice-main">Beginner</span><span class="choice-sub">英検3級程度・6択</span></button>
+        <button class="choice-btn" data-level="intermediate"><span class="choice-main">Intermediate</span><span class="choice-sub">英検2級程度・9択</span></button>
+        <button class="choice-btn" data-level="advanced"><span class="choice-main">Advanced</span><span class="choice-sub">英検準1級程度・12択</span></button>
+      </div>
+
+      <div class="section-title">MODE</div>
+      <div class="grid modes" id="modeButtons">
+        <button class="choice-btn selected" data-mode="solo"><span class="choice-main">Solo Play</span><span class="choice-sub">一人でスコアアタック</span></button>
+        <button class="choice-btn" data-mode="vs"><span class="choice-main">VS Battle</span><span class="choice-sub">左右チーム対戦</span></button>
+      </div>
+
+      <button class="start-btn" id="startBtn">START</button>
+      <div class="small-note">大型タッチスクリーンでは VS Battle 推奨。定義は中央から左右に広がるように1単語ずつ表示されます。1ラウンド10問。お手付きは1回で6秒ロック。</div>
+    </div>
+  </main>
+
+  <main id="gameScreen" class="screen">
+    <div class="topbar">
+      <div class="scorebox red" id="redScoreBox"><span id="redLabel">SOLO</span><span class="score-num" id="redScore">0</span></div>
+      <div class="center-status">
+        <span class="pill" id="levelPill">Beginner</span>
+        <span class="pill" id="qPill">1 / 20</span>
+        <button class="quit-btn" id="quitBtn">MENU</button>
+      </div>
+      <div class="scorebox blue" id="blueScoreBox"><span>BLUE</span><span class="score-num" id="blueScore">0</span></div>
+    </div>
+
+    <section class="definition-card">
+      <div class="definition-label">Definition <span style="font-size:12px;color:#c47a00;">すし早押し v1 / 1 MISS LOCK 6s</span></div>
+      <div class="definition-text" id="definitionText"></div>
+      <div class="answer-reveal" id="answerReveal"></div>
+    </section>
+
+    <section class="battle-area" id="battleArea">
+      <div class="team-panel" id="redPanel">
+        <div class="team-heading"><span id="redPanelTitle">SOLO</span><span class="misses" id="redMisses">Miss 0/1</span></div>
+        <div class="word-grid" id="redWords"></div>
+        <div class="lock-countdown" id="redLockCountdown">
+          <div class="lock-countdown-main">LOCKED</div>
+          <div class="lock-countdown-sec" id="redLockSec">6</div>
+        </div>
+      </div>
+      <div class="team-panel" id="bluePanel">
+        <div class="team-heading"><span>BLUE TEAM</span><span class="misses" id="blueMisses">Miss 0/1</span></div>
+        <div class="word-grid" id="blueWords"></div>
+        <div class="lock-countdown" id="blueLockCountdown">
+          <div class="lock-countdown-main">LOCKED</div>
+          <div class="lock-countdown-sec" id="blueLockSec">6</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="result-overlay" id="resultOverlay">
+    <div class="result-card">
+      <div class="result-title" id="resultTitle">Correct!</div>
+      <div class="result-sub" id="resultSub"></div>
+      <div class="final-actions" id="finalActions" style="display:none;">
+        <button class="primary" id="againBtn">もう一度</button>
+        <button id="menuBtn">メニューへ</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+const WORDS = {
+  beginner: [
+    {word:'school', definition:'a place where students learn'},
+    {word:'library', definition:'a place where people read or borrow books'},
+    {word:'hospital', definition:'a place where sick or injured people are treated'},
+    {word:'restaurant', definition:'a place where people buy and eat meals'},
+    {word:'station', definition:'a place where trains or buses stop'},
+    {word:'airport', definition:'a place where planes take off and land'},
+    {word:'travel', definition:'to go from one place to another'},
+    {word:'arrive', definition:'to reach a place'},
+    {word:'return', definition:'to go or come back'},
+    {word:'borrow', definition:'to take something and return it later'},
+    {word:'lend', definition:'to give something to someone for a short time'},
+    {word:'invite', definition:'to ask someone to come somewhere'},
+    {word:'practice', definition:'to do something many times to get better'},
+    {word:'study', definition:'to learn about a subject'},
+    {word:'learn', definition:'to get knowledge or a skill'},
+    {word:'teach', definition:'to help someone learn something'},
+    {word:'choose', definition:'to decide which thing you want'},
+    {word:'decide', definition:'to choose something after thinking'},
+    {word:'enjoy', definition:'to get pleasure from something'},
+    {word:'finish', definition:'to complete something'},
+    {word:'start', definition:'to begin doing something'},
+    {word:'wait', definition:'to stay until something happens'},
+    {word:'answer', definition:'something you say or write in reply'},
+    {word:'question', definition:'something you ask'},
+    {word:'reason', definition:'why something happens'},
+    {word:'future', definition:'the time that will come after now'},
+    {word:'past', definition:'the time before now'},
+    {word:'important', definition:'having great value or meaning'},
+    {word:'different', definition:'not the same'},
+    {word:'similar', definition:'almost the same'},
+    {word:'famous', definition:'known by many people'},
+    {word:'popular', definition:'liked by many people'},
+    {word:'favorite', definition:'liked more than others'},
+    {word:'healthy', definition:'having good health'},
+    {word:'dangerous', definition:'able to hurt people or cause damage'},
+    {word:'safe', definition:'not dangerous'},
+    {word:'expensive', definition:'costing a lot of money'},
+    {word:'cheap', definition:'costing little money'},
+    {word:'busy', definition:'having a lot of things to do'},
+    {word:'free', definition:'not busy or not costing money'},
+    {word:'careful', definition:'trying not to make mistakes'},
+    {word:'kind', definition:'friendly and helpful'},
+    {word:'quiet', definition:'making little or no noise'},
+    {word:'loud', definition:'making a lot of noise'},
+    {word:'clean', definition:'not dirty'},
+    {word:'dirty', definition:'not clean'},
+    {word:'simple', definition:'easy to understand or do'},
+    {word:'difficult', definition:'not easy'},
+    {word:'useful', definition:'helping you do something'},
+    {word:'strange', definition:'unusual or surprising'},
+    {word:'weather', definition:'the condition of the air outside'},
+    {word:'season', definition:'one of the four parts of the year'},
+    {word:'hobby', definition:'something you enjoy doing in your free time'},
+    {word:'holiday', definition:'a day when people do not go to school or work'},
+    {word:'message', definition:'written or spoken information sent to someone'},
+    {word:'promise', definition:'to say that you will certainly do something'},
+    {word:'mistake', definition:'something that is wrong'},
+    {word:'dream', definition:'something you hope to do in the future'},
+    {word:'problem', definition:'something difficult that must be solved'},
+    {word:'chance', definition:'an opportunity to do something'}
+  ],
+  intermediate: [
+    {word:'improve', definition:'to make something better'},
+    {word:'achieve', definition:'to succeed in doing something'},
+    {word:'compare', definition:'to examine similarities and differences'},
+    {word:'influence', definition:'the power to affect people or things'},
+    {word:'contribute', definition:'to give something in order to help'},
+    {word:'encourage', definition:'to give someone confidence or hope'},
+    {word:'relationship', definition:'the way people are connected'},
+    {word:'opportunity', definition:'a chance to do something'},
+    {word:'responsibility', definition:'a duty to take care of something'},
+    {word:'environment', definition:'the natural world around us'},
+    {word:'solution', definition:'a way to solve a problem'},
+    {word:'evidence', definition:'facts that show something is true'},
+    {word:'benefit', definition:'a good effect or advantage'},
+    {word:'challenge', definition:'something difficult that tests your ability'},
+    {word:'reduce', definition:'to make something smaller or less'},
+    {word:'increase', definition:'to become larger in amount or number'},
+    {word:'support', definition:'to help someone or something'},
+    {word:'prevent', definition:'to stop something from happening'},
+    {word:'develop', definition:'to grow or become more advanced'},
+    {word:'require', definition:'to need something'},
+    {word:'provide', definition:'to give something that is needed'},
+    {word:'suggest', definition:'to tell someone an idea or plan'},
+    {word:'depend', definition:'to be decided by something else'},
+    {word:'involve', definition:'to include someone or something'},
+    {word:'consider', definition:'to think carefully about something'},
+    {word:'explain', definition:'to make something clear or easy to understand'},
+    {word:'describe', definition:'to say what something is like'},
+    {word:'express', definition:'to show a feeling or idea in words or actions'},
+    {word:'communicate', definition:'to share information or ideas with others'},
+    {word:'realize', definition:'to understand something clearly'},
+    {word:'recognize', definition:'to know someone or something because you have seen it before'},
+    {word:'connect', definition:'to join two or more things together'},
+    {word:'protect', definition:'to keep someone or something safe'},
+    {word:'create', definition:'to make something new'},
+    {word:'produce', definition:'to make or grow something'},
+    {word:'accept', definition:'to agree to take or receive something'},
+    {word:'refuse', definition:'to say that you will not do or accept something'},
+    {word:'avoid', definition:'to stay away from something'},
+    {word:'allow', definition:'to let someone do something'},
+    {word:'force', definition:'to make someone do something'},
+    {word:'include', definition:'to have something as part of a group'},
+    {word:'remain', definition:'to stay in the same place or condition'},
+    {word:'appear', definition:'to start to be seen'},
+    {word:'disappear', definition:'to stop being seen'},
+    {word:'raise', definition:'to lift something or increase an amount'},
+    {word:'lower', definition:'to move something down or reduce an amount'},
+    {word:'spread', definition:'to move over a larger area'},
+    {word:'receive', definition:'to get something from someone'},
+    {word:'suffer', definition:'to experience pain or difficulty'},
+    {word:'survive', definition:'to continue living after danger'},
+    {word:'cause', definition:'to make something happen'},
+    {word:'effect', definition:'a change caused by something'},
+    {word:'advantage', definition:'something that helps you succeed'},
+    {word:'disadvantage', definition:'something that makes success harder'},
+    {word:'quality', definition:'how good or bad something is'},
+    {word:'quantity', definition:'an amount or number of something'},
+    {word:'method', definition:'a way of doing something'},
+    {word:'purpose', definition:'the reason for doing something'},
+    {word:'attitude', definition:'the way you think or feel about something'},
+    {word:'behavior', definition:'the way a person acts'}
+  ],
+  advanced: [
+    {word:'wane', definition:'to gradually become weaker or less important'},
+    {word:'eschew', definition:'to deliberately avoid something'},
+    {word:'grim', definition:'very serious and worrying'},
+    {word:'bribe', definition:'to persuade someone with money unfairly'},
+    {word:'facilitate', definition:'to make something easier'},
+    {word:'allocate', definition:'to officially give something for a particular purpose'},
+    {word:'undertake', definition:'to agree to do or begin a task'},
+    {word:'compensate', definition:'to pay someone for loss or damage'},
+    {word:'attribute', definition:'to regard something as caused by something else'},
+    {word:'constrain', definition:'to limit what someone can do'},
+    {word:'foster', definition:'to encourage the development of something'},
+    {word:'hinder', definition:'to make progress difficult'},
+    {word:'sustain', definition:'to keep something going over time'},
+    {word:'advocate', definition:'to publicly support an idea'},
+    {word:'comply', definition:'to obey a rule or request'},
+    {word:'neglect', definition:'to fail to take care of something'},
+    {word:'perceive', definition:'to notice or understand something'},
+    {word:'impose', definition:'to force something on someone'},
+    {word:'enhance', definition:'to improve the quality of something'},
+    {word:'emerge', definition:'to appear or become known'},
+    {word:'acquire', definition:'to get or gain something'},
+    {word:'reinforce', definition:'to make an idea or structure stronger'},
+    {word:'assess', definition:'to judge the value or quality of something'},
+    {word:'derive', definition:'to get something from a particular source'},
+    {word:'encounter', definition:'to meet or experience something unexpectedly'},
+    {word:'implement', definition:'to put a plan into action'},
+    {word:'alleviate', definition:'to make pain or a problem less severe'},
+    {word:'deteriorate', definition:'to become worse'},
+    {word:'fluctuate', definition:'to change frequently in amount or level'},
+    {word:'eliminate', definition:'to remove something completely'},
+    {word:'substitute', definition:'to use one thing instead of another'},
+    {word:'contradict', definition:'to say the opposite of something'},
+    {word:'justify', definition:'to show that something is reasonable or right'},
+    {word:'clarify', definition:'to make something easier to understand'},
+    {word:'scrutinize', definition:'to examine something very carefully'},
+    {word:'verify', definition:'to check that something is true or accurate'},
+    {word:'undermine', definition:'to make something weaker or less effective'},
+    {word:'exacerbate', definition:'to make a problem worse'},
+    {word:'mitigate', definition:'to make something less harmful or serious'},
+    {word:'prevalent', definition:'common in a particular place or time'},
+    {word:'obsolete', definition:'no longer useful because something newer exists'},
+    {word:'plausible', definition:'seeming likely to be true'},
+    {word:'ambiguous', definition:'having more than one possible meaning'},
+    {word:'subtle', definition:'not obvious and therefore difficult to notice'},
+    {word:'crucial', definition:'extremely important'},
+    {word:'inevitable', definition:'certain to happen and impossible to avoid'},
+    {word:'profound', definition:'very great, deep, or serious'},
+    {word:'skeptical', definition:'doubting that something is true'},
+    {word:'vulnerable', definition:'easily hurt or affected'},
+    {word:'resilient', definition:'able to recover quickly after difficulty'},
+    {word:'controversial', definition:'causing public disagreement'},
+    {word:'feasible', definition:'possible and practical to do'},
+    {word:'coherent', definition:'logical and easy to understand'},
+    {word:'arbitrary', definition:'based on chance or personal choice rather than reason'},
+    {word:'comprehensive', definition:'including almost everything needed'},
+    {word:'conventional', definition:'usual and traditional'},
+    {word:'empirical', definition:'based on observation or experience'},
+    {word:'integral', definition:'necessary and important as part of a whole'},
+    {word:'marginal', definition:'small and not very important'},
+    {word:'tentative', definition:'not certain or not final'}
+  ]
+};
+
+const SETTINGS = {
+  beginner:{label:'Beginner', choices:6, speed:2000},
+  intermediate:{label:'Intermediate', choices:9, speed:2000},
+  advanced:{label:'Advanced', choices:12, speed:2000}
+};
+const TOTAL = 10;
+const LOCK_TIME = 6000;
+const MAX_MISS = 1;
+let selectedLevel = 'beginner';
+let selectedMode = 'solo';
+let state = {};
+let revealTimer = null;
+let nextTimer = null;
+
+const $ = id => document.getElementById(id);
+
+function shuffle(arr){
+  const a = [...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function sample(arr, n){return shuffle(arr).slice(0,n);}
+
+function setSelected(containerId, key, value){
+  document.querySelectorAll(`#${containerId} .choice-btn`).forEach(btn=>{
+    btn.classList.toggle('selected', btn.dataset[key] === value);
+  });
+}
+
+$('levelButtons').addEventListener('click', e=>{
+  const btn = e.target.closest('button[data-level]');
+  if(!btn) return;
+  selectedLevel = btn.dataset.level;
+  setSelected('levelButtons','level',selectedLevel);
+});
+$('modeButtons').addEventListener('click', e=>{
+  const btn = e.target.closest('button[data-mode]');
+  if(!btn) return;
+  selectedMode = btn.dataset.mode;
+  setSelected('modeButtons','mode',selectedMode);
+});
+$('startBtn').addEventListener('click', startGame);
+$('quitBtn').addEventListener('click', showMenu);
+$('againBtn').addEventListener('click', startGame);
+$('menuBtn').addEventListener('click', showMenu);
+
+
+function startBgm(){
+  const bgm = $('bgm');
+  if(!bgm) return;
+  bgm.volume = 0.45;
+  const p = bgm.play();
+  if(p && typeof p.catch === 'function'){
+    p.catch(()=>{});
+  }
+}
+
+function stopBgm(){
+  const bgm = $('bgm');
+  if(!bgm) return;
+  bgm.pause();
+  bgm.currentTime = 0;
+}
+
+function startGame(){
+  clearTimers();
+  state = {
+    level:selectedLevel,
+    mode:selectedMode,
+    questionIndex:0,
+    redScore:0,
+    blueScore:0,
+    redMiss:0,
+    blueMiss:0,
+    locked:false,
+    redLockTimer:null,
+    blueLockTimer:null,
+    redLockInterval:null,
+    blueLockInterval:null,
+    startTime:0,
+    current:null,
+    choices:[],
+    used:shuffle(WORDS[selectedLevel]).slice(0,TOTAL)
+  };
+  while(state.used.length < TOTAL){ state.used.push(...shuffle(WORDS[selectedLevel])); }
+  $('titleScreen').classList.remove('active');
+  $('gameScreen').classList.add('active');
+  $('resultOverlay').classList.remove('show');
+  $('finalActions').style.display='none';
+  startBgm();
+  $('levelPill').textContent = SETTINGS[selectedLevel].label;
+  $('redLabel').textContent = selectedMode === 'solo' ? 'SOLO' : 'RED';
+  $('redPanelTitle').textContent = selectedMode === 'solo' ? 'SOLO PLAY' : 'RED TEAM';
+  $('blueScoreBox').style.visibility = selectedMode === 'solo' ? 'hidden' : 'visible';
+  $('bluePanel').style.display = selectedMode === 'solo' ? 'none' : 'flex';
+  $('redPanel').classList.toggle('solo', selectedMode === 'solo');
+  nextQuestion();
+}
+
+function showMenu(){
+  clearTimers();
+  stopBgm();
+  clearTeamLocks();
+  $('gameScreen').classList.remove('active');
+  $('titleScreen').classList.add('active');
+  $('resultOverlay').classList.remove('show');
+}
+
+function clearTimers(){
+  if(revealTimer) clearInterval(revealTimer);
+  if(nextTimer) clearTimeout(nextTimer);
+}
+
+function nextQuestion(){
+  clearTimers();
+  if(state.questionIndex >= TOTAL){ return endGame(); }
+  clearTeamLocks();
+  state.redMiss = 0;
+  state.blueMiss = 0;
+  state.locked = false;
+  $('redPanel').classList.remove('locked');
+  $('bluePanel').classList.remove('locked');
+  $('answerReveal').textContent = '';
+  updateScore();
+
+  const correct = state.used[state.questionIndex];
+  state.current = correct;
+  const count = SETTINGS[state.level].choices;
+  const distractors = sample(WORDS[state.level].filter(x=>x.word!==correct.word), count-1);
+  state.choices = shuffle([correct, ...distractors]);
+  $('qPill').textContent = `${state.questionIndex+1} / ${TOTAL}`;
+  renderWords('red');
+  renderWords('blue');
+  revealDefinition(correct.definition);
+  state.startTime = Date.now();
+}
+
+function revealDefinition(text){
+  const box = $('definitionText');
+  if(revealTimer) clearInterval(revealTimer);
+  box.textContent = '';
+  box.style.textAlign = 'center';
+
+  // WORD REVEAL v6:
+  // 中央配置で、1単語ずつ左右に広がるように見せる。
+  const words = text.trim().split(/\s+/);
+  let i = 0;
+  const interval = SETTINGS[state.level].speed || 2000;
+
+  function showNextWord(){
+    if(i < words.length){
+      i += 1;
+      const shown = words.slice(0, i).join(' ');
+      const cursor = i < words.length ? ' ▌' : '';
+      box.innerHTML = `<span class="center-reveal">${shown}${cursor}</span>`;
+    }else{
+      clearInterval(revealTimer);
+      revealTimer = null;
+      box.innerHTML = `<span class="center-reveal">${text}</span>`;
+    }
+  }
+
+  showNextWord();
+  revealTimer = setInterval(showNextWord, interval);
+}
+
+function renderWords(team){
+  const box = $(team+'Words');
+  box.innerHTML = '';
+  state.choices.forEach(item=>{
+    const btn = document.createElement('button');
+    btn.className = 'word-btn';
+    btn.textContent = item.word;
+    btn.dataset.word = item.word;
+    btn.addEventListener('click', ()=>handleTap(team, item.word, btn));
+    box.appendChild(btn);
+  });
+}
+
+
+function clearTeamLocks(){
+  ['red','blue'].forEach(team=>{
+    const timerKey = team + 'LockTimer';
+    const intervalKey = team + 'LockInterval';
+    if(state[timerKey]) clearTimeout(state[timerKey]);
+    if(state[intervalKey]) clearInterval(state[intervalKey]);
+    state[timerKey] = null;
+    state[intervalKey] = null;
+    const panel = $(team+'Panel');
+    if(panel) panel.classList.remove('locked');
+    const sec = $(team+'LockSec');
+    if(sec) sec.textContent = Math.ceil(LOCK_TIME/1000);
+  });
+}
+
+function lockTeam(team){
+  const panel = $(team+'Panel');
+  const sec = $(team+'LockSec');
+  if(!panel) return;
+  panel.classList.add('locked');
+  let remaining = Math.ceil(LOCK_TIME / 1000);
+  if(sec) sec.textContent = remaining;
+
+  const timerKey = team + 'LockTimer';
+  const intervalKey = team + 'LockInterval';
+  if(state[timerKey]) clearTimeout(state[timerKey]);
+  if(state[intervalKey]) clearInterval(state[intervalKey]);
+
+  state[intervalKey] = setInterval(()=>{
+    remaining -= 1;
+    if(sec) sec.textContent = Math.max(0, remaining);
+  }, 1000);
+
+  state[timerKey] = setTimeout(()=>{
+    panel.classList.remove('locked');
+    if(state[intervalKey]) clearInterval(state[intervalKey]);
+    state[timerKey] = null;
+    state[intervalKey] = null;
+    if(sec) sec.textContent = Math.ceil(LOCK_TIME/1000);
+  }, LOCK_TIME);
+}
+
+function handleTap(team, word, btn){
+  if(state.locked) return;
+  if($(team+'Panel').classList.contains('locked')) return;
+
+  if(word === state.current.word){
+    state.locked = true;
+    clearTimers();
+    btn.classList.add('correct');
+    const points = calcPoints(team);
+    if(team === 'red') state.redScore += points;
+    if(team === 'blue') state.blueScore += points;
+    updateScore();
+    showResult(team, points);
+    nextTimer = setTimeout(()=>{
+      $('resultOverlay').classList.remove('show');
+      state.questionIndex++;
+      nextQuestion();
+    }, 1200);
+  }else{
+    btn.classList.add('wrong');
+    if(team === 'red') state.redMiss++;
+    if(team === 'blue') state.blueMiss++;
+    updateScore();
+
+    // v7: 1回のお手付きで即6秒ロック。でたらめ連打を防ぐ。
+    if((team === 'red' && state.redMiss >= MAX_MISS) || (team === 'blue' && state.blueMiss >= MAX_MISS)){
+      lockTeam(team);
+    }
+  }
+}
+
+function calcPoints(team){
+  const sec = (Date.now() - state.startTime)/1000;
+  let points = 100;
+  if(sec <= 3) points += 50;
+  else if(sec <= 5) points += 30;
+  else if(sec <= 10) points += 10;
+  const miss = team === 'red' ? state.redMiss : state.blueMiss;
+  points -= miss * 20;
+  return Math.max(20, points);
+}
+
+function showResult(team, points){
+  const title = state.mode === 'solo' ? '✅ Correct!' : (team === 'red' ? '✅ RED TEAM!' : '✅ BLUE TEAM!');
+  $('resultTitle').textContent = title;
+  $('resultSub').innerHTML = `+${points}<br>Answer: ${state.current.word.toUpperCase()}`;
+  $('answerReveal').textContent = `Answer: ${state.current.word.toUpperCase()}`;
+  $('resultOverlay').classList.add('show');
+}
+
+function updateScore(){
+  $('redScore').textContent = state.redScore ?? 0;
+  $('blueScore').textContent = state.blueScore ?? 0;
+  $('redMisses').textContent = `Miss ${state.redMiss ?? 0}/1`;
+  $('blueMisses').textContent = `Miss ${state.blueMiss ?? 0}/1`;
+}
+
+function endGame(){
+  stopBgm();
+  state.locked = true;
+  let title = 'FINISH!';
+  let sub = '';
+  if(state.mode === 'solo'){
+    title = 'SCORE';
+    sub = `${state.redScore} points`;
+  }else if(state.redScore > state.blueScore){
+    title = 'RED WINS!';
+    sub = `${state.redScore} - ${state.blueScore}`;
+  }else if(state.blueScore > state.redScore){
+    title = 'BLUE WINS!';
+    sub = `${state.redScore} - ${state.blueScore}`;
+  }else{
+    title = 'DRAW!';
+    sub = `${state.redScore} - ${state.blueScore}`;
+  }
+  $('resultTitle').textContent = title;
+  $('resultSub').textContent = sub;
+  $('finalActions').style.display = 'flex';
+  $('resultOverlay').classList.add('show');
+}
+</script>
+</body>
+</html>
