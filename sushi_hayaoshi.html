@@ -441,6 +441,71 @@
     .hayaoshi-status{margin-top:10px;min-height:18px;font-size:13px;color:var(--muted);text-align:center;font-weight:800;}
     .hayaoshi-save-btn{margin-top:12px;padding:12px 20px;border-radius:999px;background:linear-gradient(135deg,#ffca66,#f59f31);font-weight:1000;font-size:16px;}
 
+
+    .battle-combo-overlay{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      pointer-events:none;
+      z-index:45;
+      background:
+        radial-gradient(circle at center, rgba(255,255,255,.95) 0%, rgba(250,204,21,.75) 18%, rgba(239,83,80,.32) 45%, rgba(66,165,245,.26) 70%, rgba(0,0,0,0) 100%);
+      mix-blend-mode:screen;
+      animation:battleFlash .9s ease-out forwards;
+    }
+    .battle-combo-overlay.show{display:flex;}
+    .battle-combo-text{
+      font-size:clamp(48px,9vw,110px);
+      font-weight:1000;
+      color:#fff8c5;
+      -webkit-text-stroke:3px rgba(36,49,63,.85);
+      text-shadow:
+        0 0 18px rgba(255,255,255,.9),
+        0 0 34px rgba(250,204,21,.95),
+        0 10px 0 rgba(146,64,14,.95),
+        0 22px 28px rgba(0,0,0,.42);
+      transform:scale(.4) rotate(-7deg);
+      animation:battleTextPop .9s ease-out forwards;
+      text-align:center;
+      line-height:1.05;
+    }
+    .battle-combo-text.red{
+      text-shadow:
+        0 0 18px rgba(255,255,255,.9),
+        0 0 36px rgba(239,83,80,.95),
+        0 10px 0 rgba(127,29,29,.95),
+        0 22px 28px rgba(0,0,0,.42);
+    }
+    .battle-combo-text.blue{
+      text-shadow:
+        0 0 18px rgba(255,255,255,.9),
+        0 0 36px rgba(66,165,245,.95),
+        0 10px 0 rgba(30,64,175,.95),
+        0 22px 28px rgba(0,0,0,.42);
+    }
+    .combo-shake{animation:battleShake .45s ease-out;}
+    @keyframes battleFlash{
+      0%{opacity:0;}
+      15%{opacity:1;}
+      100%{opacity:0;}
+    }
+    @keyframes battleTextPop{
+      0%{opacity:0; transform:scale(.35) rotate(-8deg);}
+      35%{opacity:1; transform:scale(1.18) rotate(3deg);}
+      70%{opacity:1; transform:scale(1.0) rotate(0deg);}
+      100%{opacity:0; transform:scale(1.08) translateY(-34px);}
+    }
+    @keyframes battleShake{
+      0%{transform:translate(0,0);}
+      20%{transform:translate(-8px,4px);}
+      40%{transform:translate(7px,-3px);}
+      60%{transform:translate(-5px,2px);}
+      80%{transform:translate(4px,-2px);}
+      100%{transform:translate(0,0);}
+    }
+
   </style>
 </head>
 <body>
@@ -533,6 +598,11 @@
       <div class="review-def" id="reviewDef"></div>
       <div class="review-next" id="reviewNext">タップで次の問題へ</div>
     </div>
+  </div>
+
+
+  <div class="battle-combo-overlay" id="battleComboOverlay">
+    <div class="battle-combo-text" id="battleComboText">3 COMBO!</div>
   </div>
 
   <div class="result-overlay" id="resultOverlay">
@@ -892,6 +962,8 @@ function startGame(){
     blueMiss:0,
     redTotalMiss:0,
     blueTotalMiss:0,
+    redStreak:0,
+    blueStreak:0,
     locked:false,
     waitingReview:false,
     redLockTimer:null,
@@ -1098,9 +1170,18 @@ function handleTap(team, word, btn){
     clearTimers();
     btn.classList.add('correct');
     const points = calcPoints(team);
-    if(team === 'red') state.redScore += points;
-    if(team === 'blue') state.blueScore += points;
+    if(team === 'red'){
+      state.redScore += points;
+      state.redStreak++;
+      state.blueStreak = 0;
+    }
+    if(team === 'blue'){
+      state.blueScore += points;
+      state.blueStreak++;
+      state.redStreak = 0;
+    }
     updateScore();
+    showBattleComboEffect(team, team === 'red' ? state.redStreak : state.blueStreak);
     showResult(team, points);
     nextTimer = setTimeout(()=>{
       $('resultOverlay').classList.remove('show');
@@ -1128,6 +1209,31 @@ function calcPoints(team){
   const miss = team === 'red' ? state.redMiss : state.blueMiss;
   points -= miss * 20;
   return Math.max(20, points);
+}
+
+
+function showBattleComboEffect(team, streak){
+  if(state.mode !== 'vs' || streak < 3) return;
+  const overlay = $('battleComboOverlay');
+  const text = $('battleComboText');
+  if(!overlay || !text) return;
+
+  text.classList.remove('red','blue');
+  text.classList.add(team);
+  const teamName = team === 'red' ? 'RED' : 'BLUE';
+  const label = streak >= 5 ? '🔥 GODLIKE!' : streak >= 4 ? '⚡ MEGA COMBO!' : '💥 3 COMBO!';
+  text.innerHTML = `${teamName}<br>${label}`;
+
+  overlay.classList.remove('show');
+  document.body.classList.remove('combo-shake');
+  void overlay.offsetWidth;
+  overlay.classList.add('show');
+  document.body.classList.add('combo-shake');
+
+  setTimeout(()=>{
+    overlay.classList.remove('show');
+    document.body.classList.remove('combo-shake');
+  }, 950);
 }
 
 function showResult(team, points){
