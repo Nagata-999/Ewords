@@ -19,13 +19,19 @@
       --shadow:0 14px 30px rgba(36,49,63,.12);
     }
     *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+    html{
+      min-height:100%;
+      overflow-y:auto;
+      overflow-x:hidden;
+    }
     body{
       margin:0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color:var(--ink);
       background:radial-gradient(circle at top, #fff5d9 0, var(--bg) 48%, #f1eadf 100%);
       min-height:100svh;
-      overflow:hidden;
+      overflow-y:auto;
+      overflow-x:hidden;
     }
     button{
       font:inherit;
@@ -33,11 +39,13 @@
       cursor:pointer;
       color:inherit;
     }
-    .screen{display:none; min-height:100svh; padding:18px;}
+    .screen{display:none; min-height:100svh; padding:18px; overflow-y:auto; overflow-x:hidden;}
     .screen.active{display:flex;}
     #titleScreen{
-      align-items:center;
+      align-items:flex-start;
       justify-content:center;
+      overflow-y:auto;
+      padding:20px 12px 110px;
     }
     .title-card{
       width:min(980px, 100%);
@@ -47,13 +55,14 @@
       box-shadow:var(--shadow);
       padding:30px;
       text-align:center;
+      margin:0 auto;
     }
     h1{font-size:clamp(40px,7vw,76px); margin:8px 0 0; letter-spacing:.02em;}
     .subtitle{font-size:clamp(16px,2vw,22px); color:var(--muted); margin:8px 0 26px;}
     .section-title{font-weight:800; margin:22px 0 12px; color:#3d4852;}
     .grid{display:grid; gap:14px;}
     .levels{grid-template-columns:repeat(3,1fr);}
-    .modes{grid-template-columns:repeat(2,1fr); max-width:620px; margin:0 auto;}
+    .modes{grid-template-columns:repeat(3,1fr); max-width:900px; margin:0 auto;}
     .choice-btn{
       background:#fff;
       border:2px solid transparent;
@@ -67,6 +76,136 @@
     .choice-btn.selected{border-color:var(--accent); background:#fff4d7;}
     .choice-main{display:block; font-size:clamp(20px,2.4vw,30px); font-weight:900;}
     .choice-sub{display:block; color:var(--muted); margin-top:4px; font-size:clamp(12px,1.5vw,16px);}
+
+    .team-entry-box{
+      display:none;
+      margin:18px auto 0;
+      max-width:820px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:16px;
+      box-shadow:0 8px 18px rgba(36,49,63,.08);
+      text-align:left;
+    }
+    .team-entry-box.show{display:block;}
+    .team-entry-title{
+      text-align:center;
+      font-weight:1000;
+      color:#c47a00;
+      margin-bottom:12px;
+    }
+    .team-entry-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+    .team-entry-col{
+      border:1px solid rgba(36,49,63,.12);
+      border-radius:18px;
+      padding:12px;
+      background:#fffaf0;
+    }
+    .team-entry-head{
+      font-weight:1000;
+      margin-bottom:10px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+    .team-entry-head.red{color:var(--red);}
+    .team-entry-head.blue{color:var(--blue);}
+    .team-name-list{display:grid;gap:7px;}
+    .team-name-input{
+      width:100%;
+      border:1px solid rgba(36,49,63,.18);
+      border-radius:12px;
+      padding:9px 10px;
+      font:inherit;
+      font-weight:800;
+      background:#fff;
+      color:var(--ink);
+    }
+    .team-score-detail{
+      display:block;
+      margin-top:3px;
+      font-size:12px;
+      color:var(--muted);
+      font-weight:800;
+    }
+    .current-player-badge{
+      display:inline-block;
+      margin-left:8px;
+      padding:4px 8px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line);
+      font-size:12px;
+      font-weight:1000;
+      color:#c47a00;
+    }
+
+
+    .current-match-card{
+      display:none;
+      align-items:center;
+      justify-content:center;
+      gap:14px;
+      background:rgba(255,250,240,.98);
+      border:2px solid rgba(242,184,75,.55);
+      border-radius:22px;
+      box-shadow:0 10px 22px rgba(36,49,63,.10);
+      padding:12px 16px;
+      text-align:center;
+    }
+    .current-match-card.show{display:flex;}
+    .current-side{
+      flex:1;
+      min-width:0;
+      border-radius:18px;
+      padding:10px 12px;
+      background:#fff;
+      border:1px solid var(--line);
+    }
+    .current-side.red{border-left:10px solid var(--red);}
+    .current-side.blue{border-left:10px solid var(--blue);}
+    .current-team-label{
+      font-size:clamp(13px,1.3vw,18px);
+      font-weight:1000;
+      letter-spacing:.06em;
+      color:var(--muted);
+    }
+    .current-player-name{
+      margin-top:2px;
+      font-size:clamp(28px,4.2vw,56px);
+      line-height:1.02;
+      font-weight:1000;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+    .current-vs{
+      font-size:clamp(24px,3.2vw,44px);
+      font-weight:1000;
+      color:#c47a00;
+      text-shadow:0 2px 0 rgba(255,255,255,.9);
+    }
+    .active-player-panel{
+      outline:4px solid rgba(242,184,75,.7);
+      box-shadow:0 0 0 8px rgba(242,184,75,.14), 0 12px 26px rgba(36,49,63,.12);
+    }
+    .current-player-badge{
+      font-size:clamp(15px,1.6vw,22px);
+      padding:6px 12px;
+      background:#fff4d7;
+      border-color:rgba(242,184,75,.75);
+    }
+    @media (max-width:760px){
+      .current-match-card{flex-direction:column;gap:8px;padding:10px;}
+      .current-side{width:100%;}
+      .current-player-name{font-size:32px;}
+    }
+
     .start-btn{
       margin-top:24px;
       padding:18px 46px;
@@ -81,7 +220,8 @@
     #gameScreen{
       flex-direction:column;
       gap:12px;
-      padding:12px;
+      padding:12px 12px 80px;
+      overflow-y:auto;
     }
     .topbar{
       display:grid;
@@ -260,6 +400,7 @@
       body{overflow:auto;}
       .screen{min-height:100svh;}
       .levels,.modes{grid-template-columns:1fr;}
+      .team-entry-grid{grid-template-columns:1fr;}
       #gameScreen{overflow:auto; min-height:100svh;}
       .topbar{grid-template-columns:1fr;}
       .battle-area{grid-template-columns:1fr;}
@@ -527,6 +668,21 @@
       <div class="grid modes" id="modeButtons">
         <button class="choice-btn selected" data-mode="solo"><span class="choice-main">Solo Play</span><span class="choice-sub">一人でスコアアタック</span></button>
         <button class="choice-btn" data-mode="vs"><span class="choice-main">VS Battle</span><span class="choice-sub">左右チーム対戦</span></button>
+        <button class="choice-btn" data-mode="team"><span class="choice-main">Team Battle</span><span class="choice-sub">最大10人×2チーム</span></button>
+      </div>
+
+      <div class="team-entry-box" id="teamEntryBox">
+        <div class="team-entry-title">TEAM BATTLE ENTRY（空欄は自動でスキップ）</div>
+        <div class="team-entry-grid">
+          <div class="team-entry-col">
+            <div class="team-entry-head red">RED TEAM <span>最大10人</span></div>
+            <div class="team-name-list" id="redNameList"></div>
+          </div>
+          <div class="team-entry-col">
+            <div class="team-entry-head blue">BLUE TEAM <span>最大10人</span></div>
+            <div class="team-name-list" id="blueNameList"></div>
+          </div>
+        </div>
       </div>
 
       <button class="start-btn" id="startBtn">START</button>
@@ -547,14 +703,27 @@
 
   <main id="gameScreen" class="screen">
     <div class="topbar">
-      <div class="scorebox red" id="redScoreBox"><span id="redLabel">SOLO</span><span class="score-num" id="redScore">0</span></div>
+      <div class="scorebox red" id="redScoreBox"><span><span id="redLabel">SOLO</span><span class="team-score-detail" id="redScoreDetail"></span></span><span class="score-num" id="redScore">0</span></div>
       <div class="center-status">
         <span class="pill" id="levelPill">Beginner</span>
         <span class="pill" id="qPill">1 / 20</span>
         <button class="quit-btn" id="quitBtn">MENU</button>
       </div>
-      <div class="scorebox blue" id="blueScoreBox"><span>BLUE</span><span class="score-num" id="blueScore">0</span></div>
+      <div class="scorebox blue" id="blueScoreBox"><span><span id="blueLabel">BLUE</span><span class="team-score-detail" id="blueScoreDetail"></span></span><span class="score-num" id="blueScore">0</span></div>
     </div>
+
+
+    <section class="current-match-card" id="currentMatchCard" aria-live="polite">
+      <div class="current-side red">
+        <div class="current-team-label">RED NOW</div>
+        <div class="current-player-name" id="currentRedPlayer">RED</div>
+      </div>
+      <div class="current-vs">VS</div>
+      <div class="current-side blue">
+        <div class="current-team-label">BLUE NOW</div>
+        <div class="current-player-name" id="currentBluePlayer">BLUE</div>
+      </div>
+    </section>
 
     <section class="definition-card">
       <div class="definition-label">Definition <span style="font-size:12px;color:#c47a00;">すし早押し v1 / 1 MISS LOCK 6s</span></div>
@@ -1058,6 +1227,7 @@ const LOCK_TIME = 6000;
 const MAX_MISS = 1;
 let selectedLevel = 'beginner';
 let selectedMode = 'solo';
+let teamEntriesReady = false;
 let state = {};
 let revealTimer = null;
 let nextTimer = null;
@@ -1126,6 +1296,8 @@ async function saveSoloScore(){
   $('saveStatus').textContent = `${playerName} の記録を保存しました`;
   const btn = $('saveSoloScoreBtn'); if(btn) btn.style.display = "none";
   rankingLevel = lastSoloResult.level; setRankingTabUI(); await loadHayaoshiRanking(rankingLevel);
+initTeamEntryInputs();
+toggleTeamEntryBox();
 }
 
 
@@ -1146,6 +1318,55 @@ function setSelected(containerId, key, value){
   });
 }
 
+function initTeamEntryInputs(){
+  if(teamEntriesReady) return;
+  ['red','blue'].forEach(team=>{
+    const box = $(team+'NameList');
+    if(!box) return;
+    box.innerHTML = '';
+    for(let i=1;i<=10;i++){
+      const input = document.createElement('input');
+      input.className = 'team-name-input';
+      input.maxLength = 18;
+      input.placeholder = `${i}. ${team.toUpperCase()} player`;
+      input.dataset.teamName = team;
+      input.dataset.index = i;
+      input.value = localStorage.getItem(`sushihayaoshi_${team}_member_${i}`) || '';
+      input.addEventListener('change', ()=>localStorage.setItem(`sushihayaoshi_${team}_member_${i}`, input.value.trim()));
+      box.appendChild(input);
+    }
+  });
+  teamEntriesReady = true;
+}
+
+function toggleTeamEntryBox(){
+  initTeamEntryInputs();
+  const box = $('teamEntryBox');
+  if(box) box.classList.toggle('show', selectedMode === 'team');
+}
+
+function getTeamMembers(team){
+  initTeamEntryInputs();
+  const names = [...document.querySelectorAll(`input[data-team-name="${team}"]`)]
+    .map(x=>x.value.normalize('NFKC').trim())
+    .filter(Boolean)
+    .slice(0,10);
+  return names.length ? names : [team === 'red' ? 'RED PLAYER' : 'BLUE PLAYER'];
+}
+
+function getCurrentPlayer(team){
+  const list = state[team + 'Members'] || [];
+  if(!list.length) return team.toUpperCase();
+  return list[state.questionIndex % list.length];
+}
+
+function getPlayerScoresText(team){
+  if(state.mode !== 'team') return '';
+  const list = state[team + 'Members'] || [];
+  const scores = state[team + 'PlayerScores'] || {};
+  return list.map(name=>`${name}:${scores[name] || 0}`).join(' / ');
+}
+
 $('levelButtons').addEventListener('click', e=>{
   const btn = e.target.closest('button[data-level]');
   if(!btn) return;
@@ -1157,6 +1378,7 @@ $('modeButtons').addEventListener('click', e=>{
   if(!btn) return;
   selectedMode = btn.dataset.mode;
   setSelected('modeButtons','mode',selectedMode);
+  toggleTeamEntryBox();
 });
 $('startBtn').addEventListener('click', startGame);
 $('quitBtn').addEventListener('click', showMenu);
@@ -1164,10 +1386,14 @@ $('againBtn').addEventListener('click', startGame);
 $('menuBtn').addEventListener('click', showMenu);
 
 document.querySelectorAll('[data-rank-level]').forEach(btn=>{
-  btn.addEventListener('click', ()=>{ rankingLevel = btn.dataset.rankLevel; setRankingTabUI(); loadHayaoshiRanking(rankingLevel); });
+  btn.addEventListener('click', ()=>{ rankingLevel = btn.dataset.rankLevel; setRankingTabUI(); loadHayaoshiRanking(rankingLevel);
+initTeamEntryInputs();
+toggleTeamEntryBox(); });
 });
 if($('saveSoloScoreBtn')) $('saveSoloScoreBtn').addEventListener('click', saveSoloScore);
 loadHayaoshiRanking(rankingLevel);
+initTeamEntryInputs();
+toggleTeamEntryBox();
 
 $('reviewOverlay').addEventListener('click', proceedFromReview);
 
@@ -1203,6 +1429,10 @@ function startGame(){
     blueTotalMiss:0,
     redStreak:0,
     blueStreak:0,
+    redMembers:selectedMode === 'team' ? getTeamMembers('red') : ['RED'],
+    blueMembers:selectedMode === 'team' ? getTeamMembers('blue') : ['BLUE'],
+    redPlayerScores:{},
+    bluePlayerScores:{},
     locked:false,
     waitingReview:false,
     redLockTimer:null,
@@ -1215,6 +1445,8 @@ function startGame(){
     used:shuffle(WORDS[selectedLevel]).slice(0,TOTAL)
   };
   while(state.used.length < TOTAL){ state.used.push(...shuffle(WORDS[selectedLevel])); }
+  state.redMembers.forEach(name=>state.redPlayerScores[name]=0);
+  state.blueMembers.forEach(name=>state.bluePlayerScores[name]=0);
   $('titleScreen').classList.remove('active');
   $('gameScreen').classList.add('active');
   $('resultOverlay').classList.remove('show');
@@ -1226,10 +1458,12 @@ function startGame(){
   startBgm();
   $('levelPill').textContent = SETTINGS[selectedLevel].label;
   $('redLabel').textContent = selectedMode === 'solo' ? 'SOLO' : 'RED';
-  $('redPanelTitle').textContent = selectedMode === 'solo' ? 'SOLO PLAY' : 'RED TEAM';
+  if($('blueLabel')) $('blueLabel').textContent = selectedMode === 'team' ? 'BLUE' : 'BLUE';
+  $('redPanelTitle').textContent = selectedMode === 'solo' ? 'SOLO PLAY' : (selectedMode === 'team' ? 'RED TEAM' : 'RED TEAM');
   $('blueScoreBox').style.visibility = selectedMode === 'solo' ? 'hidden' : 'visible';
   $('bluePanel').style.display = selectedMode === 'solo' ? 'none' : 'flex';
   $('redPanel').classList.toggle('solo', selectedMode === 'solo');
+  if($('currentMatchCard')) $('currentMatchCard').classList.toggle('show', selectedMode !== 'solo');
   startRoundCountdown(nextQuestion);
 }
 
@@ -1240,6 +1474,8 @@ function showMenu(){
   $('gameScreen').classList.remove('active');
   $('titleScreen').classList.add('active');
   $('resultOverlay').classList.remove('show');
+  if($('currentMatchCard')) $('currentMatchCard').classList.remove('show');
+  ['redPanel','bluePanel'].forEach(id=>{ const el=$(id); if(el) el.classList.remove('active-player-panel'); });
 }
 
 function clearTimers(){
@@ -1289,6 +1525,34 @@ function proceedFromReview(){
   startRoundCountdown(nextQuestion);
 }
 
+function updateCurrentMatchDisplay(){
+  const card = $('currentMatchCard');
+  if(!card) return;
+  const show = state.mode === 'team' || state.mode === 'vs';
+  card.classList.toggle('show', show);
+  if(!show) return;
+  const redName = state.mode === 'team' ? getCurrentPlayer('red') : 'RED TEAM';
+  const blueName = state.mode === 'team' ? getCurrentPlayer('blue') : 'BLUE TEAM';
+  if($('currentRedPlayer')) $('currentRedPlayer').textContent = redName;
+  if($('currentBluePlayer')) $('currentBluePlayer').textContent = blueName;
+  const redPanel = $('redPanel');
+  const bluePanel = $('bluePanel');
+  if(redPanel) redPanel.classList.add('active-player-panel');
+  if(bluePanel) bluePanel.classList.add('active-player-panel');
+}
+
+function setMatchHeading(){
+  const blueHead = document.querySelector('#bluePanel .team-heading span:first-child');
+  if(state.mode === 'team'){
+    $('redPanelTitle').innerHTML = `RED TEAM <span class="current-player-badge">${escapeHtml(getCurrentPlayer('red'))}</span>`;
+    if(blueHead) blueHead.innerHTML = `BLUE TEAM <span class="current-player-badge">${escapeHtml(getCurrentPlayer('blue'))}</span>`;
+  }else{
+    $('redPanelTitle').textContent = state.mode === 'solo' ? 'SOLO PLAY' : 'RED TEAM';
+    if(blueHead) blueHead.textContent = 'BLUE TEAM';
+  }
+  updateCurrentMatchDisplay();
+}
+
 function nextQuestion(){
   clearTimers();
   state.waitingReview = false;
@@ -1305,6 +1569,7 @@ function nextQuestion(){
 
   const correct = state.used[state.questionIndex];
   state.current = correct;
+  setMatchHeading();
   const count = SETTINGS[state.level].choices;
   const distractors = sample(WORDS[state.level].filter(x=>x.word!==correct.word), count-1);
   state.choices = shuffle([correct, ...distractors]);
@@ -1413,11 +1678,13 @@ function handleTap(team, word, btn){
       state.redScore += points;
       state.redStreak++;
       state.blueStreak = 0;
+      if(state.mode === 'team'){ const p = getCurrentPlayer('red'); state.redPlayerScores[p] = (state.redPlayerScores[p] || 0) + points; }
     }
     if(team === 'blue'){
       state.blueScore += points;
       state.blueStreak++;
       state.redStreak = 0;
+      if(state.mode === 'team'){ const p = getCurrentPlayer('blue'); state.bluePlayerScores[p] = (state.bluePlayerScores[p] || 0) + points; }
     }
     updateScore();
     showBattleComboEffect(team, team === 'red' ? state.redStreak : state.blueStreak);
@@ -1428,8 +1695,8 @@ function handleTap(team, word, btn){
     }, 900);
   }else{
     btn.classList.add('wrong');
-    if(team === 'red'){ state.redMiss++; state.redTotalMiss++; }
-    if(team === 'blue'){ state.blueMiss++; state.blueTotalMiss++; }
+    if(team === 'red'){ state.redMiss++; state.redTotalMiss++; state.redStreak = 0; }
+    if(team === 'blue'){ state.blueMiss++; state.blueTotalMiss++; state.blueStreak = 0; }
     updateScore();
 
     // v7: 1回のお手付きで即6秒ロック。でたらめ連打を防ぐ。
@@ -1452,14 +1719,14 @@ function calcPoints(team){
 
 
 function showBattleComboEffect(team, streak){
-  if(state.mode !== 'vs' || streak < 3) return;
+  if(state.mode === 'solo' || streak < 3) return;
   const overlay = $('battleComboOverlay');
   const text = $('battleComboText');
   if(!overlay || !text) return;
 
   text.classList.remove('red','blue');
   text.classList.add(team);
-  const teamName = team === 'red' ? 'RED' : 'BLUE';
+  const teamName = state.mode === 'team' ? escapeHtml(getCurrentPlayer(team)) : (team === 'red' ? 'RED' : 'BLUE');
   const label = streak >= 5 ? '🔥 GODLIKE!' : streak >= 4 ? '⚡ MEGA COMBO!' : '💥 3 COMBO!';
   text.innerHTML = `${teamName}<br>${label}`;
 
@@ -1478,7 +1745,8 @@ function showBattleComboEffect(team, streak){
 function showResult(team, points){
   const title = state.mode === 'solo' ? '✅ Correct!' : (team === 'red' ? '✅ RED TEAM!' : '✅ BLUE TEAM!');
   $('resultTitle').textContent = title;
-  $('resultSub').innerHTML = `+${points}<br>Answer: ${state.current.word.toUpperCase()}`;
+  const playerLine = state.mode === 'team' ? `${escapeHtml(getCurrentPlayer(team))}<br>` : '';
+  $('resultSub').innerHTML = `${playerLine}+${points}<br>Answer: ${state.current.word.toUpperCase()}`;
   $('answerReveal').textContent = `Answer: ${state.current.word.toUpperCase()}`;
   $('resultOverlay').classList.add('show');
 }
@@ -1488,7 +1756,10 @@ function updateScore(){
   $('blueScore').textContent = state.blueScore ?? 0;
   $('redMisses').textContent = `Miss ${state.redMiss ?? 0}/1`;
   $('blueMisses').textContent = `Miss ${state.blueMiss ?? 0}/1`;
+  if($('redScoreDetail')) $('redScoreDetail').textContent = getPlayerScoresText('red');
+  if($('blueScoreDetail')) $('blueScoreDetail').textContent = getPlayerScoresText('blue');
 }
+
 
 function endGame(){
   stopBgm();
@@ -1509,7 +1780,13 @@ function endGame(){
     sub = `${state.redScore} - ${state.blueScore}`;
   }
   $('resultTitle').textContent = title;
-  $('resultSub').textContent = sub;
+  if(state.mode === 'team'){
+    const redDetails = getPlayerScoresText('red');
+    const blueDetails = getPlayerScoresText('blue');
+    $('resultSub').innerHTML = `${sub}<br><span style="font-size:.6em;color:#ef5350;">RED: ${escapeHtml(redDetails)}</span><br><span style="font-size:.6em;color:#42a5f5;">BLUE: ${escapeHtml(blueDetails)}</span>`;
+  }else{
+    $('resultSub').textContent = sub;
+  }
 
   const saveBtn = $('saveSoloScoreBtn');
   if($('saveStatus')) $('saveStatus').textContent = '';
