@@ -4,40 +4,38 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ライティング練習問題｜すし英語</title>
-  <meta name="description" content="英検・IELTSなどの英作文練習に使える問題集です。使いまわせる表現を使って、楽しく英作文を練習しましょう。">
+  <meta name="description" content="英検・IELTSなどの英作文練習に使える体験型問題集です。使いまわせる表現を選び、お題に合わせた文の作り方を学べます。">
   <style>
-    :root{
-      --bg:#fffaf2;--card:#ffffff;--ink:#24313f;--muted:#637083;--brand:#ef6c3e;--brand2:#1f8a70;--line:#eadfce;--soft:#fff2df;--blue:#eaf4ff;
-    }
+    :root{--bg:#fffaf2;--card:#ffffff;--ink:#24313f;--muted:#637083;--brand:#ef6c3e;--brand2:#1f8a70;--line:#eadfce;--soft:#fff2df;--blue:#eaf4ff;--green:#eaf7f3;--dark:#1f2937;--yellow:#fff7d6;}
     *{box-sizing:border-box}
     body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:var(--ink);background:linear-gradient(180deg,#fff7eb 0%,#fffaf2 35%,#ffffff 100%);line-height:1.85}
     a{color:var(--brand2);text-decoration:none;font-weight:700}a:hover{text-decoration:underline}
     header{position:sticky;top:0;z-index:10;background:rgba(255,250,242,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-    .nav{max-width:1080px;margin:auto;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+    .nav{max-width:1120px;margin:auto;padding:12px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px}
     .logo{font-size:20px;font-weight:900;letter-spacing:.04em;color:var(--brand)}
     .navlinks{display:flex;gap:14px;flex-wrap:wrap;font-size:14px}
-    .hero{max-width:1080px;margin:0 auto;padding:54px 18px 32px;display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+    .hero{max-width:1120px;margin:0 auto;padding:54px 18px 32px;display:grid;grid-template-columns:1.18fr .82fr;gap:28px;align-items:center}
     .badge{display:inline-block;background:var(--soft);color:var(--brand);border:1px solid #ffd3b8;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:800}
     h1{font-size:clamp(32px,5vw,56px);line-height:1.16;margin:16px 0 14px;letter-spacing:.02em}
     .lead{font-size:18px;color:#435064;margin:0 0 22px}
-    .heroCard,.question{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:0 16px 40px rgba(75,49,22,.08)}
+    .heroCard,.question,.note,.builder,.bankCard{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:22px;box-shadow:0 16px 40px rgba(75,49,22,.08)}
     .heroCard h2{margin-top:0;font-size:22px}
     .quick{display:grid;gap:10px;margin:16px 0 0;padding:0;list-style:none}
     .quick li{background:#fff8ee;border:1px solid #f2dec5;border-radius:14px;padding:10px 12px;font-weight:700}
-    main{max-width:1080px;margin:auto;padding:0 18px 56px}
-    section{margin:30px 0}
-    .sectionTitle{font-size:30px;line-height:1.25;margin:0 0 10px}
-    .note{background:#fff;border:1px solid var(--line);border-left:6px solid var(--brand2);padding:18px 20px;border-radius:18px;color:#344255}
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-    .question h3{font-size:21px;line-height:1.35;margin:0 0 10px;color:#182432}
-    .qnum{font-size:12px;font-weight:900;color:#fff;background:var(--brand);display:inline-block;border-radius:999px;padding:3px 9px;margin-bottom:10px}
-    .topic{background:var(--blue);border-radius:14px;padding:12px 14px;margin:12px 0;color:#1d3448;font-weight:800}
-    .points{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
-    .point{font-size:12px;background:#f5f7fa;border:1px solid #dfe5ec;border-radius:999px;padding:3px 9px;color:#526070;font-weight:700}
-    .cta{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;background:linear-gradient(135deg,#fff2df,#eaf7f3);border:1px solid var(--line);border-radius:26px;padding:24px;margin-top:34px}
-    .btn{display:inline-block;background:var(--brand);color:#fff;border-radius:999px;padding:12px 18px;font-weight:900;box-shadow:0 8px 18px rgba(239,108,62,.25)}
-    footer{border-top:1px solid var(--line);background:#fff;padding:28px 18px;color:var(--muted);font-size:13px}.footInner{max-width:1080px;margin:auto}
-    @media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:34px}.grid{grid-template-columns:1fr}.cta{grid-template-columns:1fr}.nav{align-items:flex-start;flex-direction:column}.navlinks{gap:10px}h1{font-size:34px}.lead{font-size:16px}}
+    main{max-width:1120px;margin:auto;padding:0 18px 56px}
+    section{margin:30px 0}.sectionTitle{font-size:30px;line-height:1.25;margin:0 0 10px}
+    .note{border-left:6px solid var(--brand2);color:#344255}.note p{margin:0 0 10px}.note p:last-child{margin-bottom:0}
+    .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}.flow div{background:#fff8ee;border:1px solid #f2dec5;border-radius:16px;padding:12px;font-weight:800}.flow span{display:block;color:var(--brand);font-size:12px}
+    .builder{display:grid;grid-template-columns:1fr;gap:18px}.builderTop{display:grid;grid-template-columns:1fr 1fr;gap:16px}.control{background:#fff8ee;border:1px solid #f2dec5;border-radius:18px;padding:16px}.control label{display:block;font-weight:900;margin-bottom:8px}.control select{width:100%;font-size:16px;padding:10px;border:1px solid #d7c8b7;border-radius:12px;background:#fff;color:var(--ink)}
+    .topicBox{background:var(--blue);border-radius:16px;padding:15px 16px;font-weight:900;color:#18364f}.hintBox{background:var(--yellow);border:1px solid #f0dd93;border-radius:16px;padding:14px 16px;color:#4d4320}
+    .phraseButtons{display:flex;flex-wrap:wrap;gap:9px}.phraseBtn{border:1px solid #ffd3b8;background:#fff;border-radius:999px;padding:9px 12px;font-weight:900;color:#39475a;cursor:pointer}.phraseBtn:hover,.phraseBtn.active{background:var(--brand);color:#fff;border-color:var(--brand)}.phraseBtn.recommended{border-color:var(--brand2);box-shadow:0 0 0 2px rgba(31,138,112,.12)}.phraseBtn.caution{border-color:#f0dd93;background:#fffdf4}.phraseBtn.avoid{opacity:.55}.recGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.recCard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px}.recCard strong{display:inline-block;background:var(--brand2);color:#fff;border-radius:999px;padding:2px 8px;font-size:12px;margin-bottom:6px}.recCard p{margin:6px 0;color:#536173;font-size:14px}.recCard button{border:0;background:var(--brand);color:#fff;border-radius:999px;padding:7px 10px;font-weight:900;cursor:pointer}.fit{display:inline-block;border-radius:999px;padding:3px 9px;font-size:12px;font-weight:900;margin:0 0 8px;background:#eefbf6;color:#11644f;border:1px solid #c7eadf}.fit.low{background:#fff7d6;color:#6b5310;border-color:#f0dd93}.exampleList{margin:10px 0 0;padding-left:18px;color:#1d3448}.exampleList li{margin:4px 0}.exampleBox{background:#fff8ee;border:1px solid #f2dec5;border-radius:14px;padding:12px 14px;margin-top:10px}
+    .outputGrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px}.panel h3{margin:0 0 8px;font-size:18px}.phraseLabel{display:inline-block;background:var(--brand2);color:#fff;border-radius:999px;padding:3px 9px;font-size:12px;font-weight:900;margin-bottom:8px}.generated{background:#f8fafc;border:1px solid #dfe5ec;border-radius:14px;padding:13px 14px;font-weight:800;color:#1d3448}.explain{color:#536173;margin-top:10px}.miniEssay{white-space:pre-wrap;background:var(--dark);color:#f8fafc;border-radius:18px;padding:18px;min-height:210px}.miniEssay strong{color:#ffd28a}.copyArea{width:100%;min-height:170px;border:1px solid #dfe5ec;border-radius:16px;padding:14px;font-size:15px;line-height:1.7;font-family:inherit;color:var(--ink)}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}.question h3{font-size:21px;line-height:1.35;margin:0 0 10px;color:#182432}.qnum{font-size:12px;font-weight:900;color:#fff;background:var(--brand);display:inline-block;border-radius:999px;padding:3px 9px;margin-bottom:10px}.topic{background:var(--blue);border-radius:14px;padding:12px 14px;margin:12px 0;color:#1d3448;font-weight:800}.points{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.point{font-size:12px;background:#f5f7fa;border:1px solid #dfe5ec;border-radius:999px;padding:3px 9px;color:#526070;font-weight:700}.tryBtn{display:inline-block;margin-top:14px;border:0;background:var(--brand2);color:#fff;border-radius:999px;padding:9px 13px;font-weight:900;cursor:pointer}
+    .bank{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.bankCard{padding:16px;box-shadow:none}.bankCard h3{font-size:17px;margin:0 0 8px}.bankCard code{display:block;background:#f8fafc;border:1px solid #e5e7eb;border-radius:10px;padding:9px;white-space:normal;color:#1d3448;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.bankCard p{margin:8px 0 0;color:#536173;font-size:14px}
+    .cta{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;background:linear-gradient(135deg,#fff2df,#eaf7f3);border:1px solid var(--line);border-radius:26px;padding:24px;margin-top:34px}.btn{display:inline-block;background:var(--brand);color:#fff;border-radius:999px;padding:12px 18px;font-weight:900;box-shadow:0 8px 18px rgba(239,108,62,.25);border:0;cursor:pointer}.btn.secondary{background:var(--brand2)}
+    footer{border-top:1px solid var(--line);background:#fff;padding:28px 18px;color:var(--muted);font-size:13px}.footInner{max-width:1120px;margin:auto}
+    @media(max-width:860px){.hero,.builderTop,.outputGrid{grid-template-columns:1fr}.flow{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.bank,.recGrid{grid-template-columns:1fr}.cta{grid-template-columns:1fr}.nav{align-items:flex-start;flex-direction:column}.navlinks{gap:10px}h1{font-size:34px}.lead{font-size:16px}}
+    @media(max-width:520px){.flow{grid-template-columns:1fr}.phraseBtn{width:100%;text-align:left}.hero{padding-top:34px}}
   </style>
 </head>
 <body>
@@ -45,7 +43,7 @@
   <div class="nav">
     <div class="logo">🍣 すし英語</div>
     <nav class="navlinks" aria-label="主要メニュー">
-      <a href="/">トップ</a><a href="/index.html">すし単</a><a href="/shinotan.html">しの単</a><a href="/sushitype.html">スシタイプ</a><a href="/privacy.html">Privacy</a><a href="/contact.html">Contact</a>
+      <a href="/">トップ</a><a href="/index.html">すし単</a><a href="/shinotan.html">しの単</a><a href="/sushitype.html">スシタイプ</a><a href="/writing-expressions.html">表現一覧</a><a href="/privacy.html">Privacy</a><a href="/contact.html">Contact</a>
     </nav>
   </div>
 </header>
@@ -54,46 +52,105 @@
   <div>
     <span class="badge">英検・IELTS・英作文</span>
     <h1>ライティング練習問題</h1>
-    <p class="lead">覚えた表現は、実際に使って初めて武器になります。このページでは、英検・IELTSで出やすいテーマをもとに、練習しやすい問題をまとめました。</p>
-    <a class="btn" href="#questions">問題を見る</a>
+    <p class="lead">英作文は、毎回ゼロから考える必要はありません。お題を見て、使いまわせるフレーズを選び、少し言葉を入れ替える。ここでは、その感覚を体験しながら練習できます。</p>
+    <a class="btn" href="#builder">フレーズを試す</a>
   </div>
   <aside class="heroCard">
-    <h2>練習のコツ</h2>
-    <p>まずは完璧を目指さず、覚えた表現を2つ以上入れることを目標にしましょう。</p>
+    <h2>このページでやること</h2>
+    <p>問題を選び、フレーズを押すと、そのお題に合わせた英文が出ます。最後に文を組み合わせて、短い作文の形まで作れます。</p>
     <ul class="quick">
-      <li>80〜150語で書く</li>
-      <li>万能表現を2つ使う</li>
-      <li>理由と具体例を入れる</li>
+      <li>お題を選ぶ</li>
+      <li>使うフレーズを選ぶ</li>
+      <li>文がどう変わるか見る</li>
+      <li>自分で書き直す</li>
     </ul>
   </aside>
 </div>
 
 <main>
   <section>
-    <h2 class="sectionTitle">使い方</h2>
+    <h2 class="sectionTitle">英作文は「知っている英文に寄せる」</h2>
     <div class="note">
-      <p>各問題には POINTS をつけています。英検形式の練習として、POINTSから2つ選んで理由を作ってみましょう。IELTS形式で練習する場合は、POINTSをヒントとして使えばOKです。</p>
+      <p>難しい日本語の意見をそのまま英語にしようとすると、文法も語彙も苦しくなります。まずは、すでに知っている使いまわせるフレーズに、お題を近づけて考えましょう。</p>
+      <div class="flow">
+        <div><span>STEP 1</span>お題を見る</div>
+        <div><span>STEP 2</span>使えそうなフレーズを選ぶ</div>
+        <div><span>STEP 3</span>AやBを入れ替える</div>
+        <div><span>STEP 4</span>理由と具体例を足す</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="builder">
+    <h2 class="sectionTitle">体験：このフレーズを入れるとどうなる？</h2>
+    <div class="builder">
+      <div class="builderTop">
+        <div class="control">
+          <label for="topicSelect">お題を選ぶ</label>
+          <select id="topicSelect"></select>
+        </div>
+        <div class="control">
+          <label>POINTS</label>
+          <div id="pointList" class="points"></div>
+        </div>
+      </div>
+      <div class="topicBox" id="topicText"></div>
+      <div class="hintBox" id="topicHint"></div>
+      <div>
+        <h3 style="margin:0 0 10px">このお題で使いやすいフレーズ</h3>
+        <div id="recommendedGrid" class="recGrid"></div>
+      </div>
+      <div>
+        <h3 style="margin:0 0 10px">使いたいフレーズを押す</h3>
+        <p class="explain" style="margin:0 0 8px">緑枠＝おすすめ、薄い黄色＝使えるが注意、薄い表示＝無理に使わない方がよい表現です。</p><div class="phraseButtons" id="phraseButtons"></div>
+      </div>
+      <div class="outputGrid">
+        <div class="panel">
+          <h3>このフレーズを入れるとこうなる</h3>
+          <div id="phraseLabel" class="phraseLabel">Phrase</div>
+          <div id="fitLabel" class="fit">おすすめ度</div>
+          <div id="generatedSentence" class="generated">上のボタンを押してください。</div>
+          <div id="exampleBox" class="exampleBox"></div>
+          <div id="phraseExplain" class="explain"></div>
+        </div>
+        <div class="panel">
+          <h3>ミニ作文にすると</h3>
+          <div id="miniEssay" class="miniEssay"></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>自分で書き直してみよう</h3>
+        <p class="explain">下の文をベースに、単語を足したり、具体例を入れたりして自分の作文にしてください。</p>
+        <textarea id="draftArea" class="copyArea"></textarea>
+        <button class="btn secondary" id="resetDraft" type="button">例文をもう一度入れる</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sectionTitle">よく使うフレーズ早見表</h2>
+    <div class="bank">
+      <article class="bankCard"><h3>良い影響</h3><code>A has a positive effect on B.</code><p>健康、教育、社会、経済などにつなげやすい。</p></article>
+      <article class="bankCard"><h3>できるようにする</h3><code>A enables people to V.</code><p>学ぶ、交流する、理解する、節約するなどに使える。</p></article>
+      <article class="bankCard"><h3>意識を高める</h3><code>A contributes to raising awareness of B.</code><p>環境、健康、社会問題に強い。</p></article>
+      <article class="bankCard"><h3>利点が上回る</h3><code>The advantages outweigh the disadvantages.</code><p>反対意見を認めてから自分の意見を強められる。</p></article>
+      <article class="bankCard"><h3>重要な役割</h3><code>A plays an important role in B.</code><p>結論や理由のまとめに使いやすい。</p></article>
+      <article class="bankCard"><h3>機会を与える</h3><code>A gives people opportunities to V.</code><p>communication skills, teamwork, critical thinking skills と相性がよい。</p></article>
+      <article class="bankCard"><h3>視野を広げる</h3><code>A broadens people's perspectives.</code><p>留学、読書、SNS、旅行、芸術などに使える。</p></article>
+      <article class="bankCard"><h3>時間と労力</h3><code>A saves time and effort.</code><p>AI、インターネット、オンラインサービスに強い。</p></article>
+      <article class="bankCard"><h3>経済</h3><code>A stimulates markets and consumption.</code><p>観光、イベント、技術、産業などに使える。</p></article>
     </div>
   </section>
 
   <section id="questions">
     <h2 class="sectionTitle">練習問題</h2>
-    <div class="grid">
-      <article class="question"><span class="qnum">Question 1</span><h3>Social Media</h3><div class="topic">Do you think social media has a positive effect on society?</div><div class="points"><span class="point">Communication</span><span class="point">Education</span><span class="point">Privacy</span><span class="point">Technology</span></div></article>
-      <article class="question"><span class="qnum">Question 2</span><h3>Studying Abroad</h3><div class="topic">Should Japanese schools encourage students to study abroad?</div><div class="points"><span class="point">Globalization</span><span class="point">Culture</span><span class="point">Costs</span><span class="point">Communication</span></div></article>
-      <article class="question"><span class="qnum">Question 3</span><h3>Artificial Intelligence</h3><div class="topic">Do the advantages of AI outweigh the disadvantages?</div><div class="points"><span class="point">Efficiency</span><span class="point">Education</span><span class="point">Employment</span><span class="point">Risks</span></div></article>
-      <article class="question"><span class="qnum">Question 4</span><h3>Environment</h3><div class="topic">Should governments invest more money in environmental protection?</div><div class="points"><span class="point">Global warming</span><span class="point">Costs</span><span class="point">Future generations</span><span class="point">Energy</span></div></article>
-      <article class="question"><span class="qnum">Question 5</span><h3>Volunteer Activities</h3><div class="topic">Do you think volunteer activities are important for students?</div><div class="points"><span class="point">Teamwork</span><span class="point">Experience</span><span class="point">Society</span><span class="point">Communication</span></div></article>
-      <article class="question"><span class="qnum">Question 6</span><h3>Renewable Energy</h3><div class="topic">Should renewable energy be used more widely?</div><div class="points"><span class="point">Environment</span><span class="point">Costs</span><span class="point">Technology</span><span class="point">Future</span></div></article>
-      <article class="question"><span class="qnum">Question 7</span><h3>Reading Books</h3><div class="topic">Do you think young people should read more books?</div><div class="points"><span class="point">Critical thinking</span><span class="point">Education</span><span class="point">Entertainment</span><span class="point">Time</span></div></article>
-      <article class="question"><span class="qnum">Question 8</span><h3>Foreign Workers</h3><div class="topic">Should Japanese companies hire more foreign workers?</div><div class="points"><span class="point">Aging population</span><span class="point">Globalization</span><span class="point">Cultural differences</span><span class="point">Economy</span></div></article>
-    </div>
+    <div class="grid" id="questionGrid"></div>
   </section>
 
   <section class="cta">
     <div>
-      <h2 class="sectionTitle" style="margin-bottom:6px">表現一覧を見ながら書こう</h2>
-      <p style="margin:0;color:#4d5a68">問題を解く前に、使えそうな表現を2つ決めてから書くと安定します。</p>
+      <h2 class="sectionTitle" style="margin-bottom:6px">表現一覧も見ながら書こう</h2>
+      <p style="margin:0;color:#4d5a68">表現ページでフレーズを確認して、このページで実際にお題へ当てはめてみましょう。</p>
     </div>
     <a class="btn" href="/writing-expressions.html">表現一覧へ</a>
   </section>
@@ -105,5 +162,167 @@
     <p>本ページは英語学習を目的とした独自教材です。「英検」は公益財団法人 日本英語検定協会の登録商標です。本サイトは同協会の承認・推奨を受けたものではありません。</p>
   </div>
 </footer>
+
+<script>
+const topics = [
+  {title:'Social Media', question:'Do you think social media has a positive effect on society?', stance:'I agree with the idea that social media has a positive effect on society for the following two reasons.', points:['Communication','Education','Privacy','Technology'], hint:'SNSは「交流」「情報」「視野」「リスク」に寄せやすい。positive effect, perspectives, potential risks が使いやすい。', subject:'social media', people:'people', target:'society', benefit:'communication and education', skill:'communication skills and critical thinking skills', issue:'privacy problems and misinformation', cost:'privacy risks', example:'users can learn different opinions and communicate with people around the world', specific:['For example, students can follow educational accounts and learn about current events.','For instance, users can exchange ideas with people who live in other countries.'], recommend:['positive','perspectives','outweigh','enable']},
+  {title:'Studying Abroad', question:'Should Japanese schools encourage students to study abroad?', stance:'I agree with the idea that Japanese schools should encourage students to study abroad for the following two reasons.', points:['Globalization','Culture','Costs','Communication'], hint:'留学は「グローバル化」「文化背景」「コミュニケーション」「視野」に一直線。かなり書きやすいテーマ。', subject:'studying abroad', people:'students', target:'students\' future', benefit:'global understanding', skill:'communication skills and cultural awareness', issue:'high costs and safety concerns', cost:'the costs', example:'students can communicate with people from various cultural backgrounds', specific:['For example, students can use English in real situations, not only in classrooms.','For instance, they can experience different customs and ways of thinking.'], recommend:['perspectives','opportunities','enable','outweigh']},
+  {title:'Artificial Intelligence', question:'Do the advantages of AI outweigh the disadvantages?', stance:'I believe the advantages of AI outweigh the disadvantages for the following two reasons.', points:['Efficiency','Education','Employment','Risks'], hint:'AIは「効率」「時間と労力」「教育」「潜在的リスク」に寄せる。outweigh と save time が特に使いやすい。', subject:'AI technology', people:'people', target:'education and work', benefit:'efficiency and productivity', skill:'digital literacy and critical thinking skills', issue:'job losses and privacy problems', cost:'the potential risks', example:'AI can help people learn more efficiently and save time', specific:['For example, AI can check grammar and suggest better expressions.','For instance, workers can use AI to finish routine tasks more quickly.'], recommend:['save','outweigh','positive','enable']},
+  {title:'Environment', question:'Should governments invest more money in environmental protection?', stance:'I agree with the idea that governments should invest more money in environmental protection for the following two reasons.', points:['Global warming','Costs','Future generations','Energy'], hint:'環境は「意識を高める」「将来世代」「再生可能エネルギー」「対策を取る」に寄せる。', subject:'environmental protection', people:'people', target:'future generations', benefit:'a sustainable society', skill:'awareness of global issues', issue:'global warming and pollution', cost:'financial costs', example:'clean energy can reduce pollution and protect the ecosystem', specific:['For example, governments can support solar power and wind power.','For instance, reducing air pollution can protect people\'s health.'], recommend:['awareness','role','outweigh','positive']},
+  {title:'Volunteer Activities', question:'Do you think volunteer activities are important for students?', stance:'I agree with the idea that volunteer activities are important for students for the following two reasons.', points:['Teamwork','Experience','Society','Communication'], hint:'ボランティアは万能。teamwork, communication skills, patience, perspectives を全部入れやすい。', subject:'volunteer activities', people:'students', target:'students\' personal growth', benefit:'valuable experience', skill:'teamwork, communication skills, and patience', issue:'lack of time', cost:'the time they spend', example:'students can work with others and support people in need', specific:['For example, students can help elderly people or clean local parks.','For instance, they can learn how to cooperate with people outside their usual group.'], recommend:['opportunities','positive','perspectives','role']},
+  {title:'Renewable Energy', question:'Should renewable energy be used more widely?', stance:'I agree with the idea that renewable energy should be used more widely for the following two reasons.', points:['Environment','Costs','Technology','Future'], hint:'再生可能エネルギーは「環境」「技術」「将来」「コストを上回る」に寄せる。', subject:'renewable energy', people:'people', target:'the environment', benefit:'a sustainable future', skill:'awareness of environmental issues', issue:'high costs and unstable energy supply', cost:'the costs', example:'solar power and wind power can reduce the use of fossil fuels', specific:['For example, solar power and wind power do not emit as much CO2 as fossil fuels.','For instance, better technology can make renewable energy cheaper and more stable.'], recommend:['positive','outweigh','role','awareness']},
+  {title:'Reading Books', question:'Do you think young people should read more books?', stance:'I agree with the idea that young people should read more books for the following two reasons.', points:['Critical thinking','Education','Entertainment','Time'], hint:'読書は「視野」「critical thinking」「教育」「想像力」に寄せる。きれいに書きやすい。', subject:'reading books', people:'young people', target:'young people\'s education', benefit:'knowledge and imagination', skill:'critical thinking skills and broad perspectives', issue:'lack of time', cost:'the time needed for reading', example:'books allow young people to experience different viewpoints', specific:['For example, novels help readers imagine other people\'s feelings.','For instance, non-fiction books give young people knowledge about society and history.'], recommend:['perspectives','opportunities','positive','enable']},
+  {title:'Foreign Workers', question:'Should Japanese companies hire more foreign workers?', stance:'I agree with the idea that Japanese companies should hire more foreign workers for the following two reasons.', points:['Aging population','Globalization','Cultural differences','Economy'], hint:'外国人労働者は「高齢化」「労働力不足」「グローバル化」「経済」に寄せる。', subject:'hiring foreign workers', people:'Japanese companies', target:'the Japanese economy', benefit:'a larger workforce and cultural diversity', skill:'communication skills and global viewpoints', issue:'cultural differences', cost:'communication problems', example:'foreign workers can help solve the workforce shortage', specific:['For example, foreign workers can support industries that face serious labor shortages.','For instance, working with foreign people can help Japanese employees learn different business customs.'], recommend:['economy','role','perspectives','outweigh']},
+  {title:'School Breakfast', question:'Should schools provide breakfast for children?', stance:'I agree with the idea that schools should provide breakfast for children for the following two reasons.', points:['Health','Education','Costs','Communication'], hint:'朝食は「健康」「学力」「学校での交流」「教育コスト」に寄せる。普通のテーマに見えて、万能表現をかなり入れられる。', subject:'school breakfast programs', people:'children', target:'children\'s health and education', benefit:'better health and concentration', skill:'communication skills and teamwork', issue:'educational costs', cost:'the costs', example:'children can interact with classmates and teachers during breakfast time', specific:['For example, children from busy or low-income families can start the day with enough energy.','For instance, eating together gives children a chance to talk with classmates and teachers.'], recommend:['positive','opportunities','role','outweigh']}
+];
+const phrases = [
+  {id:'positive', name:'positive effect', label:'Phrase 1', goodFor:'健康・教育・社会・経済', template:t=>`${cap(t.subject)} can have a positive effect on ${t.target} because it supports ${t.benefit}.`, examples:t=>[t.specific[0],`${cap(t.subject)} supports ${t.benefit}, so it can improve ${t.target}.`], explain:'A has a positive effect on B. の形。Bには health, education, society, economy などを入れると使いやすい。'},
+  {id:'enable', name:'enable people to V', label:'Phrase 2', goodFor:'学習・交流・理解', template:t=>`${cap(t.subject)} enables ${t.people} to learn important things such as ${t.skill}.`, examples:t=>[`${cap(t.subject)} enables ${t.people} to understand different viewpoints.`,t.specific[1]], explain:'A enables people to V. の形。learn, communicate, understand, save などにつなげる。'},
+  {id:'awareness', name:'raise awareness', label:'Phrase 3', goodFor:'環境・健康・社会問題', template:t=>`${cap(t.subject)} can contribute to raising people's awareness of ${t.benefit}.`, examples:t=>[`For example, this can make people think more seriously about ${t.benefit}.`,t.specific[0]], explain:'contribute to raising awareness of B. の形。環境、健康、社会問題、文化理解に強い。'},
+  {id:'outweigh', name:'outweigh risks', label:'Phrase 4', goodFor:'賛否が割れる話題', template:t=>`Some people might say that ${t.subject} has some problems, such as ${t.issue}, but I believe the advantages outweigh ${t.cost}.`, examples:t=>[`For example, even if ${t.subject} has problems, education and technology can help reduce them.`,t.specific[0]], explain:'反対意見を一度認めてから、自分の立場を強める形。英検・IELTSどちらでも使いやすい。'},
+  {id:'role', name:'play an important role', label:'Phrase 5', goodFor:'結論・重要性', template:t=>`${cap(t.subject)} will play an important role in improving ${t.target}.`, examples:t=>[`For example, it can support ${t.benefit} in the long run.`,t.specific[0]], explain:'A plays an important role in B. の形。結論にも理由にも使える。'},
+  {id:'opportunities', name:'give opportunities', label:'Phrase 6', goodFor:'経験・スキル', template:t=>`${cap(t.subject)} gives ${t.people} many opportunities to develop ${t.skill}.`, examples:t=>[t.specific[1],`For example, ${t.people} can learn ${t.skill} through real experiences.`], explain:'opportunities to V の形。communication skills, teamwork, critical thinking skills と相性がよい。'},
+  {id:'perspectives', name:'broaden perspectives', label:'Phrase 7', goodFor:'視野・異文化・読書', template:t=>`${cap(t.subject)} can broaden people's perspectives because ${t.example}.`, examples:t=>[t.specific[1],`For example, ${t.subject} helps people see things from different viewpoints.`], explain:'視野を広げる表現。留学、読書、SNS、旅行、芸術、ボランティアなどに強い。'},
+  {id:'save', name:'save time and effort', label:'Phrase 8', goodFor:'便利さ・効率', template:t=>`${cap(t.subject)} can save time and effort, so the saved time can be used for other beneficial things.`, examples:t=>[`For example, people can use the saved time for studying, exercising, or spending time with family.`,t.specific[0]], explain:'便利さを主張する表現。AI、オンライン学習、インターネット、電子書籍などに使いやすい。'},
+  {id:'economy', name:'stimulate economy', label:'Phrase 9', goodFor:'経済・観光・雇用', template:t=>`${cap(t.subject)} can stimulate markets and consumption, so it has a positive effect on the economy.`, examples:t=>[`For example, it can create new demand, jobs, and business opportunities.`,t.specific[0]], explain:'経済効果に寄せる形。観光、イベント、技術、外国人労働者などで使いやすい。'}
+
+];
+const compatibility = {
+  'Social Media': {
+    ok:['awareness','role','economy'],
+    avoid:['save'],
+    avoidReasons:{save:'SNSは「時間を節約する」より、時間を奪う・使いすぎるという反論が出やすいので、主張としては弱くなりがちです。使うなら「情報収集が速くなる」に限定しましょう。'}
+  },
+  'Studying Abroad': {
+    ok:['positive','role','awareness'],
+    avoid:['save','economy'],
+    avoidReasons:{save:'留学は時間と労力を節約する活動ではなく、むしろ時間と費用をかけて経験を得る活動です。',economy:'留学を経済効果に寄せることは可能ですが、学生個人の成長という本筋から少し外れやすいです。'}
+  },
+  'Artificial Intelligence': {
+    ok:['role','perspectives','awareness','economy'],
+    avoid:['opportunities'],
+    avoidReasons:{opportunities:'AIでも opportunities は使えますが、AIの強みはまず効率・時間短縮・リスクとの比較です。スキル学習に寄せるなら具体例が必要です。'}
+  },
+  'Environment': {
+    ok:['awareness','role','outweigh','positive','economy'],
+    avoid:['save','opportunities','perspectives','enable'],
+    avoidReasons:{save:'環境保護は「時間と労力を節約する」より、コストや努力をかけて将来を守る話にした方が自然です。',opportunities:'環境保護からスキルを学ぶ話も可能ですが、投資すべきかという問題では本筋からずれやすいです。',perspectives:'視野を広げるより、地球温暖化・将来世代・エネルギーに寄せた方が強いです。',enable:'enable も使えますが、具体的に何を可能にするのかを明確にしないと弱くなります。'}
+  },
+  'Volunteer Activities': {
+    ok:['enable','awareness','outweigh'],
+    avoid:['save','economy'],
+    avoidReasons:{save:'ボランティアは時間と労力を節約するものではなく、時間と労力を使って経験や社会貢献を得る活動です。ここで save time はかなり相性が悪いです。',economy:'ボランティアを経済効果に寄せると不自然になりやすいです。teamwork, communication skills, patience に寄せる方が安全です。'}
+  },
+  'Renewable Energy': {
+    ok:['economy','enable'],
+    avoid:['save','opportunities','perspectives'],
+    avoidReasons:{save:'再生可能エネルギーは時間短縮ではなく、環境・技術・将来世代・コストとの比較で書く方が自然です。',opportunities:'スキル学習の話にすると、エネルギー政策というお題からずれやすいです。',perspectives:'視野の話より、環境負荷や将来のエネルギー供給に寄せた方が強いです。'}
+  },
+  'Reading Books': {
+    ok:['role','awareness'],
+    avoid:['save','economy','outweigh'],
+    avoidReasons:{save:'読書は時間を節約する活動ではありません。むしろ時間を使って知識や思考力を得る活動です。',economy:'読書を経済に寄せるより、教育・視野・critical thinking に寄せる方が自然です。',outweigh:'賛否が強く分かれるテーマではないので、outweigh は必要性が低いです。'}
+  },
+  'Foreign Workers': {
+    ok:['positive','enable','opportunities','awareness'],
+    avoid:['save'],
+    avoidReasons:{save:'外国人労働者の話は時間短縮より、労働力不足・経済・グローバル化・文化交流に寄せる方が自然です。'}
+  },
+  'School Breakfast': {
+    ok:['awareness','enable','perspectives'],
+    avoid:['save','economy'],
+    avoidReasons:{save:'学校の朝食提供は時間短縮ではなく、健康・集中力・交流・教育格差の話にした方が自然です。',economy:'朝食提供を経済効果に寄せるとかなり遠回りです。教育・健康に寄せる方が安全です。'}
+  }
+};
+function capfunction cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}
+const topicSelect=document.getElementById('topicSelect');
+const pointList=document.getElementById('pointList');
+const topicText=document.getElementById('topicText');
+const topicHint=document.getElementById('topicHint');
+const phraseButtons=document.getElementById('phraseButtons');
+const phraseLabel=document.getElementById('phraseLabel');
+const fitLabel=document.getElementById('fitLabel');
+const generatedSentence=document.getElementById('generatedSentence');
+const exampleBox=document.getElementById('exampleBox');
+const phraseExplain=document.getElementById('phraseExplain');
+const miniEssay=document.getElementById('miniEssay');
+const draftArea=document.getElementById('draftArea');
+const recommendedGrid=document.getElementById('recommendedGrid');
+let currentTopic=topics[0];let selectedPhrase=phrases[0];
+function init(){
+  topics.forEach((t,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${i+1}. ${t.title}`;topicSelect.appendChild(o)});
+  phrases.forEach((p)=>{const b=document.createElement('button');b.className='phraseBtn';b.type='button';b.textContent=p.name;b.dataset.id=p.id;b.addEventListener('click',()=>selectPhrase(p.id));phraseButtons.appendChild(b)});
+  topicSelect.addEventListener('change',()=>{currentTopic=topics[Number(topicSelect.value)];const first=currentTopic.recommend[0];selectedPhrase=phrases.find(p=>p.id===first)||phrases[0];renderAll();selectPhrase(first)});
+  document.getElementById('resetDraft').addEventListener('click',()=>{draftArea.value=buildEssay(currentTopic)});
+  renderQuestions();renderAll();selectPhrase('positive');
+}
+function phraseStatus(topic,id){
+  const c=compatibility[topic.title]||{};
+  if(topic.recommend.includes(id)) return 'strong';
+  if((c.ok||[]).includes(id)) return 'ok';
+  if((c.avoid||[]).includes(id)) return 'avoid';
+  return 'ok';
+}
+function selectPhrase(id){
+  selectedPhrase=phrases.find(p=>p.id===id)||phrases[0];
+  document.querySelectorAll('.phraseBtn').forEach(b=>{
+    const st=phraseStatus(currentTopic,b.dataset.id);
+    b.classList.toggle('active',b.dataset.id===id);
+    b.classList.toggle('recommended',st==='strong');
+    b.classList.toggle('caution',st==='ok');
+    b.classList.toggle('avoid',st==='avoid');
+  });
+  renderPhrase();
+}
+function renderAll(){
+  topicText.textContent=currentTopic.question;topicHint.textContent=currentTopic.hint;
+  pointList.innerHTML=currentTopic.points.map(p=>`<span class="point">${p}</span>`).join('');
+  renderRecommended();
+  document.querySelectorAll('.phraseBtn').forEach(b=>{const st=phraseStatus(currentTopic,b.dataset.id);b.classList.toggle('recommended',st==='strong');b.classList.toggle('caution',st==='ok');b.classList.toggle('avoid',st==='avoid');});
+  renderPhrase();miniEssay.innerHTML=buildEssay(currentTopic).replace(/(I agree|I believe|The first reason|Another reason|Some people|In conclusion|For example)/g,'<strong>$1</strong>');draftArea.value=buildEssay(currentTopic);
+}
+function renderRecommended(){
+  recommendedGrid.innerHTML=currentTopic.recommend.slice(0,4).map(id=>{const p=phrases.find(x=>x.id===id);return `<article class="recCard"><strong>${p.label}</strong><h3 style="margin:0 0 4px;font-size:17px">${p.name}</h3><p>使いやすい理由：${p.goodFor}</p><p>${p.template(currentTopic)}</p><button type="button" onclick="selectPhrase('${p.id}')">これを試す</button></article>`}).join('');
+}
+function renderPhrase(){
+  const status=phraseStatus(currentTopic, selectedPhrase.id);
+  const c=compatibility[currentTopic.title]||{};
+  phraseLabel.textContent=`${selectedPhrase.label}: ${selectedPhrase.name}`;
+  if(status==='strong'){
+    fitLabel.textContent='◎ このお題でかなり使いやすい';
+    fitLabel.className='fit';
+    generatedSentence.textContent=selectedPhrase.template(currentTopic);
+    exampleBox.innerHTML='<strong>具体例を足すなら：</strong><ul class="exampleList">'+selectedPhrase.examples(currentTopic).map(e=>`<li>${e}</li>`).join('')+'</ul>';
+    phraseExplain.textContent=selectedPhrase.explain;
+  }else if(status==='ok'){
+    fitLabel.textContent='○ 使えるが、具体例で支える';
+    fitLabel.className='fit low';
+    generatedSentence.textContent=selectedPhrase.template(currentTopic);
+    exampleBox.innerHTML='<strong>具体例を足すなら：</strong><ul class="exampleList">'+selectedPhrase.examples(currentTopic).map(e=>`<li>${e}</li>`).join('')+'</ul><p style="margin:8px 0 0"><strong>注意：</strong>このフレーズは使えるが、理由や具体例が弱いとこじつけに見えます。</p>';
+    phraseExplain.textContent=selectedPhrase.explain;
+  }else{
+    fitLabel.textContent='△ このお題では無理に使わない';
+    fitLabel.className='fit low';
+    const better=currentTopic.recommend.slice(0,3).map(id=>phrases.find(p=>p.id===id).name).join(' / ');
+    generatedSentence.textContent=`${selectedPhrase.name} はこのお題では相性が弱いです。無理に入れるより、${better} を使う方が自然です。`;
+    const reason=(c.avoidReasons&&c.avoidReasons[selectedPhrase.id])||'このフレーズを使うと、お題の中心から少し外れやすくなります。';
+    exampleBox.innerHTML=`<strong>なぜ弱い？</strong><p style="margin:6px 0 0">${reason}</p><strong>代わりに使うなら：</strong><ul class="exampleList">${currentTopic.recommend.slice(0,2).map(id=>{const p=phrases.find(x=>x.id===id);return `<li>${p.template(currentTopic)}</li>`}).join('')}</ul>`;
+    phraseExplain.textContent='フレーズは多ければよいわけではありません。お題に合うものを選ぶことが大事です。';
+  }
+}
+function buildEssay(t){
+ const p1=phrases.find(p=>p.id===t.recommend[0]);
+ const p2=phrases.find(p=>p.id===t.recommend[1]);
+ const p3=phrases.find(p=>p.id===t.recommend[2]);
+ const p4=phrases.find(p=>p.id===t.recommend[3]);
+return `${t.stance}\n\nThe first reason is that ${p1.template(t).replace(/^./,c=>c.toLowerCase())} For example, ${t.specific[0].replace(/^For example, /,'').replace(/^For instance, /,'')}\n\nAnother reason is that ${p2.template(t).replace(/^./,c=>c.toLowerCase())} For instance, ${t.specific[1].replace(/^For example, /,'').replace(/^For instance, /,'')}\n\n${p4.template(t)}\n\nIn conclusion, for the reasons mentioned above, I believe ${t.subject} will play an important role in ${t.target}.`;
+}
+function renderQuestions(){
+  const grid=document.getElementById('questionGrid');
+  grid.innerHTML=topics.map((t,i)=>`<article class="question"><span class="qnum">Question ${i+1}</span><h3>${t.title}</h3><div class="topic">${t.question}</div><div class="points">${t.points.map(p=>`<span class="point">${p}</span>`).join('')}</div><p class="explain"><strong>おすすめ：</strong>${t.recommend.map(id=>phrases.find(p=>p.id===id).name).join(' / ')}</p><button class="tryBtn" type="button" onclick="jumpTopic(${i})">この問題で試す</button></article>`).join('');
+}
+function jumpTopic(i){topicSelect.value=i;currentTopic=topics[i];const first=currentTopic.recommend[0];selectedPhrase=phrases.find(p=>p.id===first)||phrases[0];renderAll();selectPhrase(first);document.getElementById('builder').scrollIntoView({behavior:'smooth',block:'start'});}
+window.jumpTopic=jumpTopic;window.selectPhrase=selectPhrase;init();
+</script>
 </body>
 </html>
