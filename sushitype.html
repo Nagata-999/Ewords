@@ -419,16 +419,17 @@ A balanced approach is needed to protect both freedom and safety.`},
 const modeConfigs={
   timeAttack:{label:"タイムアタック",timeLimit:60,title:"短文チャレンジ",hint:"制限時間内にできるだけ多く打ち切ろう。",description:"短い英文が1つずつ出ます。時間切れまでにできるだけ多くクリアするモードです。"},
   endless:{label:"無限練習",timeLimit:null,title:"練習セグメント",hint:"時間制限なし。落ち着いて続けよう。",description:"時間制限なしで、教材を短いかたまりごとに練習できます。"},
-  battle:{label:"バトルモード",timeLimit:null,title:"ボスバトル",hint:"汎用表現・TASK1表現・英検表現で戦います。Start Battleを押して、時間内にボスを倒そう。",description:"汎用表現・TASK1表現・英検表現からランダムに出題されます。速さと正確さでダメージが変わります。"}
+  battle:{label:"バトルモード",timeLimit:null,title:"ボスバトル",hint:"汎用表現・TASK1表現・英検表現で戦います。Start Battleを押して、時間内にボスを倒そう。",description:"汎用表現・TASK1表現・英検表現からランダムに出題されます。正解1文字ごとにダメージが入ります。"}
 };
 const battleStages=[
-  // ★高難度設定。Stage2のJeffから普通に苦戦するバランス。
+  // ★一文字ごとの小ダメージ前提。前半は練習しやすく、後半は高難度。
   {name:"Yasushi",key:"yasushi",hp:90,time:100},
-  {name:"Jeff",key:"jeff",hp:150,time:135},
-  {name:"Shallion",key:"shallion",hp:200,time:150},
+  {name:"Jeff",key:"jeff",hp:150,time:100},
+  {name:"Shallion",key:"shallion",hp:200,time:120},
   {name:"Allyson",key:"allyson",hp:500,time:50},
   {name:"Malia",key:"malia",hp:750,time:50}
 ];
+const BATTLE_CHAR_DAMAGE = 1;
 
 const stage2Phrases = [
   "account for","level off","rise sharply","fall gradually","increase steadily",
@@ -853,13 +854,81 @@ function startNormalCountdown(){
 }
 function startBattleCountdown(){if(state.mode!=="battle"||state.battleActive||state.finished)return;initAudio();battleStartBtn.disabled=true;resetBtn.disabled=true;let count=3;countdownOverlay.style.display="flex";countdownOverlay.textContent=count;const cd=setInterval(()=>{count--;if(count>0)countdownOverlay.textContent=count;else if(count===0)countdownOverlay.textContent="GO!";else{clearInterval(cd);countdownOverlay.style.display="none";startBattle()}},850)}
 function startBattle(){state.battleActive=true;state.started=true;state.startStamp=performance.now();resetBtn.disabled=false;resultText.textContent=`${state.enemyName} appeared!`;startIdleAnimation();updateBattleBars();renderQueue();focusInput();state.timerId=setInterval(()=>{if(!state.battleActive)return;state.elapsed=(performance.now()-state.startStamp)/1000;state.timeLeft=Math.max(0,battleStages[state.battleStageIndex].time-state.elapsed);if(state.timeLeft<=0)loseBattle("Time up!");updateBattleBars();updateHud()},50)}
-function calcBattleDamage(){const acc=getAccuracy();let base=20+state.battleStageIndex*7;if(acc>=98)base*=2.15;else if(acc>=95)base*=1.85;else if(acc>=90)base*=1.45;else if(acc>=85)base*=1.15;else base*=.68;base*=1+Math.min(state.combo,12)*.055;return Math.max(5,Math.round(base))}
-function battleHit(){const dmg=calcBattleDamage();state.enemyHp-=dmg;flashBar(enemyHpFill);state.cleared++;state.combo++;state.maxCombo=Math.max(state.maxCombo,state.combo);state.score+=50;stopIdleAnimation();setEnemyImage("damage1");setTimeout(()=>{if(state.battleActive)startIdleAnimation()},260);enemySpriteWrap.classList.remove("hurt","attack-zoom");void enemySpriteWrap.offsetWidth;enemySpriteWrap.classList.add("hurt","attack-zoom");setTimeout(()=>enemySpriteWrap.classList.remove("attack-zoom"),170);const hit=document.createElement("div");hit.className="hit-effect";hit.textContent=`-${dmg}`;battleArena.appendChild(hit);setTimeout(()=>hit.remove(),560);playClearSound();updateBattleBars();updateHud();if(state.enemyHp<=0)winBattleStage();else nextBattlePrompt()}
+function battleCharHit(){
+  if(state.mode!=="battle"||!state.battleActive||state.finished)return false;
+  state.enemyHp=Math.max(0,state.enemyHp-BATTLE_CHAR_DAMAGE);
+  flashBar(enemyHpFill);
+  enemySpriteWrap.classList.remove("hurt");
+  void enemySpriteWrap.offsetWidth;
+  enemySpriteWrap.classList.add("hurt");
+  setEnemyImage("damage1");
+  setTimeout(()=>{if(state.battleActive) setEnemyImage(`stand${state.idleFrame||1}`)},120);
+  const hit=document.createElement("div");
+  hit.className="hit-effect";
+  hit.style.fontSize="18px";
+  hit.style.top="118px";
+  hit.textContent=`-${BATTLE_CHAR_DAMAGE}`;
+  battleArena.appendChild(hit);
+  setTimeout(()=>hit.remove(),380);
+  updateBattleBars();
+  updateHud();
+  if(state.enemyHp<=0){winBattleStage();return true;}
+  return false;
+}
+function battleHit(){
+  state.cleared++;
+  state.combo++;
+  state.maxCombo=Math.max(state.maxCombo,state.combo);
+  playClearSound();
+  updateHud();
+  nextBattlePrompt();
+}
 function nextBattlePrompt(){state.typedBuffer="";hiddenInput.value="";if(state.promptCycle.length<5)state.promptCycle.push(...shuffle(currentWords()));state.currentPrompt=state.promptCycle.shift()||"type";renderPrompt();renderQueue()}
 function winBattleStage(){state.battleActive=false;stopIdleAnimation();clearInterval(state.timerId);hiddenInput.blur();setEnemyImage("defeated");resultText.textContent=`${state.enemyName} defeated!`;state.battleStageIndex++;battleStartBtn.disabled=true;resetBtn.disabled=true;renderQueue();popCard();if(state.battleStageIndex>=battleStages.length){state.finished=true;resultText.textContent=`ALL CLEAR! Final Score ${state.score} | Accuracy ${getAccuracy().toFixed(1)}%`;battleStartBtn.disabled=true;resetBtn.disabled=false;return}setTimeout(()=>setupBattleStage(true),1200)}
 function loseBattle(msg){state.battleActive=false;state.finished=true;stopIdleAnimation();clearInterval(state.timerId);hiddenInput.blur();setEnemyImage("taunt");resultText.textContent=`${msg} Stage ${state.battleStageIndex+1} failed. Score ${state.score}`;battleStartBtn.disabled=true;updateBattleBars();popCard()}
 function resetMode(){clearInterval(state.timerId);stopIdleAnimation();const cfg=modeConfigs[state.mode];state.started=false;state.finished=false;state.battleActive=false;state.cleared=0;state.score=0;state.totalKeystrokes=0;state.correctKeystrokes=0;state.typedBuffer="";state.timeLeft=cfg.timeLimit??0;state.elapsed=0;state.startStamp=null;state.timerId=null;state.maxCombo=0;state.combo=0;hiddenInput.value="";saveStatus.textContent="まずプレイしてからスコアを保存できます。";applyModeUI();if(state.mode==="battle"){state.battleStageIndex=0;battleStartBtn.disabled=false;resetBtn.disabled=false;setupBattleStage()}else{state.queue=buildQueueForMode(state.mode);state.currentPrompt=state.queue.shift()||"";renderPrompt();renderQueue();updateHud();resultText.textContent=""}}
-function handleKeyDown(e){if(state.normalCountdown)return;if(state.mode==="battle"&&(!state.battleActive||state.finished))return;if(state.finished&&state.mode==="timeAttack")return;const controls=["Shift","Control","Alt","Meta","CapsLock","Escape","ArrowLeft","ArrowRight","ArrowUp","ArrowDown"];if(controls.includes(e.key))return;if(e.key==="Tab"){e.preventDefault();return}if(e.key==="Backspace"){e.preventDefault();if(state.typedBuffer.length>0){state.typedBuffer=state.typedBuffer.slice(0,-1);hiddenInput.value=state.typedBuffer;renderPrompt()}return}if(e.key.length!==1&&e.key!=="Enter")return;e.preventDefault();startRunIfNeeded();const expected=state.currentPrompt[state.typedBuffer.length],input=e.key==="Enter"?"\n":e.key;state.totalKeystrokes++;if(input===expected){state.correctKeystrokes++;state.score+=10;state.typedBuffer+=input;hiddenInput.value=state.typedBuffer;playTypeSound();updateHud();renderPrompt();if(state.typedBuffer===state.currentPrompt){if(state.mode==="battle")battleHit();else advancePrompt(false)}}else{state.combo=0;playErrorSound();flashError();updateHud();showImmediateError()}}
+function handleKeyDown(e){
+  if(state.normalCountdown)return;
+  if(state.mode==="battle"&&(!state.battleActive||state.finished))return;
+  if(state.finished&&state.mode==="timeAttack")return;
+  const controls=["Shift","Control","Alt","Meta","CapsLock","Escape","ArrowLeft","ArrowRight","ArrowUp","ArrowDown"];
+  if(controls.includes(e.key))return;
+  if(e.key==="Tab"){e.preventDefault();return}
+  if(e.key==="Backspace"){
+    e.preventDefault();
+    if(state.typedBuffer.length>0){
+      state.typedBuffer=state.typedBuffer.slice(0,-1);
+      hiddenInput.value=state.typedBuffer;
+      renderPrompt();
+    }
+    return;
+  }
+  if(e.key.length!==1&&e.key!=="Enter")return;
+  e.preventDefault();
+  startRunIfNeeded();
+  const expected=state.currentPrompt[state.typedBuffer.length],input=e.key==="Enter"?"\n":e.key;
+  state.totalKeystrokes++;
+  if(input===expected){
+    state.correctKeystrokes++;
+    state.score+=10;
+    state.typedBuffer+=input;
+    hiddenInput.value=state.typedBuffer;
+    playTypeSound();
+    if(state.mode==="battle"&&battleCharHit())return;
+    updateHud();
+    renderPrompt();
+    if(state.typedBuffer===state.currentPrompt){
+      if(state.mode==="battle")battleHit();
+      else advancePrompt(false);
+    }
+  }else{
+    state.combo=0;
+    playErrorSound();
+    flashError();
+    updateHud();
+    showImmediateError();
+  }
+}
 async function saveScore(){const name=playerNameInput.value.trim()||"anonymous";if(state.score<=0){saveStatus.textContent="Score is still 0. Play first.";return}saveScoreBtn.disabled=true;saveStatus.textContent="Saving...";const {error}=await supabaseClient.rpc("save_high_score",{p_player_name:name,p_score:state.score,p_max_combo:state.maxCombo||state.cleared,p_accuracy:Math.round(getAccuracy()),p_mode:getScoreMode()});saveScoreBtn.disabled=false;if(error){console.error(error);saveStatus.textContent="Save failed. Check Supabase RPC / RLS settings.";return}saveStatus.textContent=`Saved as ${name}.`;await loadRanking()}
 async function loadRanking(){rankingList.textContent="Loading...";bestValue.textContent="-";const {data,error}=await supabaseClient.from("scores").select("id, player_name, score, max_combo, accuracy, mode").eq("mode",getScoreMode()).order("score",{ascending:false}).limit(20);if(error){console.error(error);rankingList.textContent="Ranking load failed.";return}if(!data||data.length===0){rankingList.textContent="No scores yet.";return}bestValue.textContent=data[0].score;rankingList.innerHTML=`<div class="ranking-row header"><div>#</div><div>Name</div><div>Score</div><div>Acc</div></div>${data.map((r,i)=>`<div class="ranking-row"><div>${i+1}</div><div>${escapeHtml(r.player_name||"anonymous")}</div><div>${r.score}</div><div>${Number(r.accuracy||0).toFixed(0)}%</div></div>`).join("")}`}
 function escapeHtml(str){return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/\"/g,"&quot;").replace(/'/g,"&#039;")}
