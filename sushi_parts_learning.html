@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>英単語の部品を学ぶ｜すしParts</title>
+<style>
+:root{--bg:#fff8ec;--ink:#253238;--muted:#66757f;--card:#fff;--line:#eadcc8;--red:#ff6b6b;--blue:#3b82f6;--green:#22a06b;--gold:#f2b705;--purple:#8b5cf6;--shadow:0 14px 34px rgba(70,45,20,.12)}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(180deg,#fff8ec,#fffef9);color:var(--ink);line-height:1.75}.wrap{max-width:1100px;margin:auto;padding:22px}.hero{border-radius:28px;background:linear-gradient(135deg,#fff,#ffe7bf);padding:34px;box-shadow:var(--shadow);position:relative;overflow:hidden}.hero:after{content:"🍣";position:absolute;right:24px;top:8px;font-size:98px;opacity:.18}h1{margin:0 0 10px;font-size:clamp(30px,5vw,56px);line-height:1.05}.lead{font-size:18px;max-width:760px}.badge{display:inline-block;background:#253238;color:white;border-radius:999px;padding:6px 13px;font-weight:800;margin-bottom:12px}.nav{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}.nav a,.btn{border:0;border-radius:999px;padding:10px 15px;background:#253238;color:#fff;text-decoration:none;font-weight:800;cursor:pointer;box-shadow:0 6px 12px rgba(0,0,0,.08)}.btn.light{background:#fff;color:#253238;border:1px solid var(--line)}section{margin:28px 0;padding:24px;border-radius:24px;background:rgba(255,255,255,.78);box-shadow:var(--shadow);border:1px solid var(--line)}h2{margin-top:0;font-size:30px}h3{margin-bottom:6px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}.part{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:16px;cursor:pointer;transition:.16s}.part:hover{transform:translateY(-3px);box-shadow:var(--shadow)}.part b{display:block;font-size:28px}.part small{color:var(--muted);font-weight:700}.prefix{border-color:#9cc4ff}.root{border-color:#95dfba}.suffix{border-color:#d3b5ff}.rare{border-color:#f2b705;box-shadow:0 0 18px rgba(242,183,5,.28)}.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px}.builder{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.slot{min-width:110px;text-align:center;background:#fff;border:2px dashed #cdbb9e;border-radius:16px;padding:14px;font-weight:900}.word{font-size:34px;font-weight:1000;letter-spacing:.03em}.meaning{font-size:20px;color:#3f4e55}.cards{display:flex;flex-wrap:wrap;gap:10px}.chip{padding:11px 14px;border-radius:14px;background:#fff;border:2px solid var(--line);font-weight:900;cursor:pointer}.chip.sel{background:#253238;color:#fff}.result{margin-top:15px;padding:16px;border-radius:18px;background:#fff7df;border:1px solid #f0d28b;min-height:66px}.table{width:100%;border-collapse:collapse;background:#fff;border-radius:16px;overflow:hidden}.table th,.table td{border-bottom:1px solid var(--line);padding:10px;text-align:left}.table th{background:#fff0d0}.flash{min-height:210px;display:flex;align-items:center;justify-content:center;text-align:center;flex-direction:column}.flash .big{font-size:46px;font-weight:1000}.quiz-option{display:block;width:100%;margin:8px 0;text-align:left;background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px;font-weight:800;cursor:pointer}.ok{border-color:#22a06b!important;background:#e9fff4!important}.ng{border-color:#ff6b6b!important;background:#fff0f0!important}.bar{height:12px;background:#efe2ce;border-radius:999px;overflow:hidden}.bar span{display:block;height:100%;background:linear-gradient(90deg,#ff6b6b,#f2b705,#22a06b);width:0;transition:.3s}.mini{color:var(--muted);font-size:14px}.callout{border-left:8px solid var(--gold);background:#fff8df;border-radius:16px;padding:16px}.footer{text-align:center;color:var(--muted);padding:30px}@media(max-width:650px){.hero{padding:24px}.slot{min-width:80px}.word{font-size:27px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <span class="badge">すしParts 学習記事</span>
+  <h1>英単語は「部品」で覚える</h1>
+  <p class="lead">英単語は丸暗記だけでなく、<b>接頭辞・語根・接尾辞</b>に分けると一気に覚えやすくなる。ここでは、ゲームで使う部品を押しながら学べる。</p>
+</header>
+<nav class="nav">
+  <a href="#basic">基本</a><a href="#prefix">接頭辞</a><a href="#roots">語根</a><a href="#suffix">接尾辞</a><a href="#builder">組み立て</a><a href="#quiz">確認クイズ</a>
+</nav>
+
+<section id="basic">
+<h2>1. 英単語の3つの部品</h2>
+<div class="grid">
+  <div class="part prefix"><small>Prefix</small><b>接頭辞</b><p>単語の前につく。「外へ」「再び」「反対」など、方向や否定を足す。</p></div>
+  <div class="part root"><small>Root</small><b>語根</b><p>単語の中心。「見る」「運ぶ」「書く」など、意味の核になる。</p></div>
+  <div class="part suffix"><small>Suffix</small><b>接尾辞</b><p>単語の後ろにつく。名詞・形容詞・人など、品詞や意味を変える。</p></div>
+</div>
+<div class="callout"><b>コツ：</b>まず語根を覚える。語根が分かると、知らない単語でも意味を推測できる。</div>
+</section>
+
+<section id="prefix">
+<h2>2. 接頭辞カード</h2>
+<p>カードを押すと、代表語とイメージが出る。</p>
+<div class="grid" id="prefixGrid"></div>
+<div class="result" id="prefixInfo">接頭辞カードを押してみよう。</div>
+</section>
+
+<section id="roots">
+<h2>3. 語根カード</h2>
+<p>語根は「単語の心臓」。同じ語根から大量の単語が作れる。</p>
+<div class="grid" id="rootGrid"></div>
+<div class="result" id="rootInfo">語根カードを押してみよう。</div>
+</section>
+
+<section id="suffix">
+<h2>4. 接尾辞カード</h2>
+<div class="grid" id="suffixGrid"></div>
+<div class="result" id="suffixInfo">接尾辞カードを押してみよう。</div>
+</section>
+
+<section id="builder">
+<h2>5. 部品を組み立ててみる</h2>
+<p>下のカードを押して、単語を完成させよう。正解候補：report / export / transport / describe / description / subscribe / subscription / invisible / construction / information</p>
+<div class="builder"><div class="slot" id="s1">?</div><div class="slot" id="s2">?</div><div class="slot" id="s3">?</div><div class="slot" id="s4">?</div></div>
+<div class="cards" id="buildCards" style="margin-top:16px"></div>
+<p><button class="btn" onclick="checkBuild()">組み立てる</button> <button class="btn light" onclick="clearBuild()">リセット</button></p>
+<div class="result" id="buildResult">例：<b>sub + scribe + tion</b> → subscription</div>
+</section>
+
+<section>
+<h2>6. 派生語の考え方</h2>
+<div class="panel">
+  <div class="word">subscribe → subscription → subscriber</div>
+  <p class="meaning">subscribe は「下に書く」から「署名する・登録する」。そこに <b>-tion</b> がつくと「登録」、<b>-er</b> がつくと「登録者」。</p>
+</div>
+<table class="table" style="margin-top:14px"><thead><tr><th>部品</th><th>単語</th><th>意味</th></tr></thead><tbody>
+<tr><td>de + scribe</td><td>describe</td><td>描写する</td></tr>
+<tr><td>de + scribe + tion</td><td>description</td><td>描写・説明</td></tr>
+<tr><td>in + visible</td><td>invisible</td><td>見えない</td></tr>
+<tr><td>con + struct + tion</td><td>construction</td><td>建設</td></tr>
+<tr><td>in + form + ation</td><td>information</td><td>情報</td></tr>
+</tbody></table>
+</section>
+
+<section>
+<h2>7. フラッシュカード</h2>
+<div class="panel flash" id="flash"><div class="big">port</div><div>運ぶ</div><p>import / export / transport / portable</p></div>
+<p><button class="btn" onclick="nextFlash()">次のカード</button></p>
+</section>
+
+<section id="quiz">
+<h2>8. 確認クイズ</h2>
+<p>正解すると理解度ゲージが伸びる。</p>
+<div class="bar"><span id="bar"></span></div>
+<div class="panel" style="margin-top:16px"><h3 id="qText"></h3><div id="qOpts"></div><div id="qMsg" class="result"></div></div>
+</section>
+
+<section>
+<h2>9. まず覚えたい部品リスト</h2>
+<table class="table"><thead><tr><th>種類</th><th>部品</th><th>意味</th><th>例</th></tr></thead><tbody id="listBody"></tbody></table>
+</section>
+
+<div class="footer">🍣 すしParts：単語を丸暗記から発見へ</div>
+</div>
+<script>
+const prefixes=[['re','再び・後ろ','report, rebuild, review'],['ex','外へ','export, exit, exclude'],['im/in','中へ・否定','import, invisible, impossible'],['trans','越えて','transport, translate'],['sub','下に','subscribe, subway'],['pre','前に','predict, preview'],['de','下へ・離れて','describe, decrease'],['con/com','共に','connect, construct, combine'],['dis','離れて・否定','dislike, disappear'],['anti','反対','antibiotic, antiwar']];
+const roots=[['port','運ぶ','import, export, transport, portable'],['spect','見る','respect, inspect, suspect, prospect'],['scribe/script','書く','describe, subscribe, manuscript'],['dict','言う','predict, dictionary, contradict'],['form','形づくる','inform, transform, uniform'],['struct','組み立てる','construct, structure, instruction'],['vis/vid','見る','visible, invisible, video'],['graph','書く・描く','autograph, biography, paragraph'],['press','押す','express, compress, pressure'],['mit/miss','送る','submit, admit, mission']];
+const suffixes=[['tion/sion','こと・状態','description, expression'],['ation','こと・状態','information, transportation'],['able/ible','できる','portable, visible'],['er/or','人・もの','teacher, actor, subscriber'],['ive','性質を持つ','active, creative'],['al','〜の','personal, cultural'],['less','〜がない','careless, useless'],['ful','〜に満ちた','useful, respectful']];
+function makeGrid(id,data,cls,infoId){const el=document.getElementById(id);data.forEach(x=>{const d=document.createElement('div');d.className='part '+cls;d.innerHTML=`<small>${cls}</small><b>${x[0]}</b><p>${x[1]}</p>`;d.onclick=()=>document.getElementById(infoId).innerHTML=`<b>${x[0]}</b> = ${x[1]}<br>例：${x[2]}`;el.appendChild(d)})}
+makeGrid('prefixGrid',prefixes,'prefix','prefixInfo');makeGrid('rootGrid',roots,'root','rootInfo');makeGrid('suffixGrid',suffixes,'suffix','suffixInfo');
+const valid={
+'re+port': ['report','報告する','re=後ろへ / port=運ぶ → 持ち帰って知らせる'],
+'ex+port':['export','輸出する','ex=外へ / port=運ぶ'],
+'trans+port':['transport','輸送する','trans=越えて / port=運ぶ'],
+'de+scribe':['describe','描写する','de=下へ / scribe=書く'],
+'de+scribe+tion':['description','描写・説明','describe + tion=こと'],
+'sub+scribe':['subscribe','登録する','sub=下に / scribe=書く'],
+'sub+scribe+tion':['subscription','登録・購読','subscribe + tion=こと'],
+'in+visible':['invisible','見えない','in=否定 / vis=見る / ible=できる'],
+'con+struct+tion':['construction','建設','con=共に / struct=組み立てる / tion=こと'],
+'in+form+ation':['information','情報','in=中へ / form=形づくる / ation=こと']
+};
+const buildParts=['re','ex','trans','de','sub','in','con','port','scribe','visible','struct','form','tion','ation'];let chosen=[];
+function renderBuild(){document.querySelectorAll('.slot').forEach((s,i)=>s.textContent=chosen[i]||'?');const box=document.getElementById('buildCards');box.innerHTML='';buildParts.forEach(p=>{const c=document.createElement('button');c.className='chip'+(chosen.includes(p)?' sel':'');c.textContent=p;c.onclick=()=>{if(chosen.includes(p)){chosen=chosen.filter(x=>x!==p)}else if(chosen.length<4)chosen.push(p);renderBuild()};box.appendChild(c)})}
+function checkBuild(){const key=chosen.join('+'),r=valid[key];document.getElementById('buildResult').innerHTML=r?`✨ <b>${r[0]}</b><br>${r[1]}<br><span class="mini">${r[2]}</span>`:`❌ まだ登録されていない組み合わせ。部品の意味から別の組み合わせを試してみよう。`}
+function clearBuild(){chosen=[];renderBuild();document.getElementById('buildResult').textContent='例：sub + scribe + tion → subscription'}renderBuild();
+const flash=[...prefixes,...roots,...suffixes];let fi=0;function nextFlash(){fi=(fi+1)%flash.length;const x=flash[fi];document.getElementById('flash').innerHTML=`<div class="big">${x[0]}</div><div>${x[1]}</div><p>${x[2]}</p>`}
+const quiz=[['port の中心イメージは？',['運ぶ','見る','書く'],0],['「見えない」はどれ？',['invisible','export','dictionary'],0],['-tion の働きは？',['名詞を作る','反対にする','外へ出す'],0],['sub + scribe + tion でできる単語は？',['subscription','transportation','construction'],0],['spect の意味は？',['見る','押す','時間'],0]];let qi=0,score=0;
+function showQ(){const q=quiz[qi%quiz.length];document.getElementById('qText').textContent=q[0];const o=document.getElementById('qOpts');o.innerHTML='';q[1].forEach((t,i)=>{const b=document.createElement('button');b.className='quiz-option';b.textContent=t;b.onclick=()=>{b.classList.add(i===q[2]?'ok':'ng');document.getElementById('qMsg').textContent=i===q[2]?'正解！':'惜しい。もう一度部品の意味を確認しよう。';if(i===q[2])score++;document.getElementById('bar').style.width=Math.min(100,score*20)+'%';setTimeout(()=>{qi++;showQ()},900)};o.appendChild(b)})}showQ();
+const list=[...prefixes.map(x=>['接頭辞',...x]),...roots.map(x=>['語根',...x]),...suffixes.map(x=>['接尾辞',...x])];document.getElementById('listBody').innerHTML=list.map(x=>`<tr><td>${x[0]}</td><td><b>${x[1]}</b></td><td>${x[2]}</td><td>${x[3]}</td></tr>`).join('');
+</script>
+</body></html>
