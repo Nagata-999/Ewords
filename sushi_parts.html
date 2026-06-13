@@ -1118,7 +1118,7 @@ function cardShopHtml(it,i){const r=rarityOf(it.p.id);return `<div class="shopIt
 function renderShopChoices(choices){$('shopItems').innerHTML=choices.map((it,i)=>it.kind==='card'?cardShopHtml(it,i):it.kind==='joker'?`<div class="shopItem ${it.j.rarity||'common'}" onclick="takeShop(${i})"><b><span class="jokerIcon">${it.j.icon||'🃏'}</span>ジョーカー：${it.j.name}</b> <span class="rarity ${it.j.rarity||'common'}">${rarityLabel(it.j.rarity||'common')}</span><br><span class="small">${it.j.desc}</span></div>`:it.kind==='research'?`<div class="shopItem ${rarityOf(it.p.id)}" onclick="takeShop(${i})"><b>カード：${it.p.text} ×2</b> <span class="rarity ${rarityOf(it.p.id)}">${rarityLabel(rarityOf(it.p.id))}</span><br><span class="small">デッキに2枚追加。</span></div>`:`<div class="shopItem" onclick="takeShop(${i})"><b>${it.name}</b><br><span class="small">${it.desc}</span></div>`).join('');window.__shopChoices=choices}
 function openShop(){shopOpen=true;$('shopTitle').textContent='ショップ：報酬を1つ選ぶ';$('shopHelp').textContent='カードを増やすか、ジョーカーでルールを書き換えよう。レア色のカードは得点倍率が高い。';const unused=JOKER_POOL.filter(j=>!jokers.some(x=>x.id===j.id));const weighted=shuffle(PARTS).sort((a,b)=>rarityMult(rarityOf(a.id))-rarityMult(rarityOf(b.id))+Math.random()*.8);const choices=[...weighted.slice(-2).map(p=>({kind:'card',p})),{kind:'joker',j:rand(unused.length?unused:JOKER_POOL)}];if(rp>=3)choices.push({kind:'research',cost:3,p:rand(PARTS)});renderShopChoices(choices);$('shop').classList.remove('hidden')}
 function openLab(){shopOpen=true;$('shopTitle').textContent='';$('shopHelp').textContent=`手札補充ができます。`;const choices=[{kind:'labDraw',name:'手札を2枚ドロー',desc:'手札を戻す。',cost:2},{kind:'labFull',name:'手札を最大まで補充',desc:'危ない時の立て直し。',cost:6},...shuffle(PARTS).slice(0,3).map(p=>({kind:'research',cost:4+(rarityOf(p.id)==="rare"?2:rarityOf(p.id)==="epic"?5:rarityOf(p.id)==="legendary"?9:0),p}))];renderShopChoices(choices);$('shop').classList.remove('hidden')}
-function takeShop(i){const it=window.__shopChoices[i];const isLab=$('shopTitle').textContent.includes('');if(it.kind==='card')deck.push(it.p.id);else if(it.kind==='joker')jokers.push(it.j);else if(it.kind==='labDraw'){if(rp<it.cost)return;rp-=it.cost;drawCards(2)}else if(it.kind==='labFull'){if(rp<it.cost)return;rp-=it.cost;drawCards(MAX_HAND)}else{if(rp<it.cost)return;rp-=it.cost;deck.push(it.p.id,it.p.id)}if(!isLab){round++;roundScore=0;energy=Math.min(maxEnergy,energy+2)}shopOpen=false;$('shop').classList.add('hidden');render()}
+function takeShop(i){const it=window.__shopChoices[i];const isLab=$('shopTitle').textContent.includes('研究所');if(it.kind==='card')deck.push(it.p.id);else if(it.kind==='joker')jokers.push(it.j);else if(it.kind==='labDraw'){if(rp<it.cost)return;rp-=it.cost;drawCards(2)}else if(it.kind==='labFull'){if(rp<it.cost)return;rp-=it.cost;drawCards(MAX_HAND)}else{if(rp<it.cost)return;rp-=it.cost;deck.push(it.p.id,it.p.id)}if(!isLab){round++;roundScore=0;energy=Math.min(maxEnergy,energy+2)}shopOpen=false;$('shop').classList.add('hidden');render()}
 function saveRunState(){if(!player)return;localStorage.setItem(RUN_KEY,JSON.stringify({player,score,round,roundScore,hand,energy,maxEnergy,rp,wordCounts,deck,jokers,log:$('log').innerHTML}))} function loadRunState(){try{const s=JSON.parse(localStorage.getItem(RUN_KEY)||'null');if(!s||!s.player)return false;player=s.player;score=s.score||0;round=s.round||1;roundScore=s.roundScore||0;selected=[];hand=s.hand||[];energy=s.energy??3;maxEnergy=s.maxEnergy||3;rp=s.rp||0;wordCounts=s.wordCounts||{};deck=s.deck&&s.deck.length?s.deck:[];jokers=(s.jokers||[]).map(j=>JOKER_POOL.find(x=>x.id===j.id)||j);$('log').innerHTML=s.log||'';if(!deck.length)initDeck();return hand.length>0}catch(e){return false}}
 function start(fresh=true){player=$('playerName').value.trim()||'guest';localStorage.setItem(PLAYER_KEY,player);if(fresh){score=0;round=1;roundScore=0;selected=[];wordCounts={};energy=3;maxEnergy=3;rp=0;jokers=[];initDeck();dealOpeningHand();localStorage.removeItem(RUN_KEY);$('log').innerHTML=''}$('startPanel').classList.add('hidden');$('game').classList.remove('hidden');$('cookedScreen')?.classList.add('hidden');render()}
 function cookedComment(){if(score>=10000)return 'Bro is fluent.';if(score>=5000)return 'Actually cracked.';if(score>=2000)return 'No cap.';if(score>=700)return 'Not bad.';return "Nah, I'd fail."}
@@ -1371,7 +1371,7 @@ renderShopChoices = function(choices){
 
 takeShop = function(i){
   const it=window.__shopChoices[i];
-  const isLab=$("shopTitle").textContent.includes("");
+  const isLab=$("shopTitle").textContent.includes("研究所");
   if(!it) return;
   if(it.kind==="unlock"){
     addUnlocked(it.id,it.copies||2);
@@ -3579,5 +3579,29 @@ window.addEventListener('load',()=>{const savedName=localStorage.getItem(PLAYER_
 // ===== end v6.3 =====
 </script>
 
+
+<script>
+// ===== v6.4 Round progression safety patch =====
+(function(){
+  const oldTakeShop = window.takeShop;
+  if(typeof oldTakeShop === 'function'){
+    window.takeShop = function(i){
+      const beforeRound = (typeof round !== 'undefined') ? round : null;
+      const beforeShopTitle = document.getElementById('shopTitle')?.textContent || '';
+      oldTakeShop(i);
+      // If this was a normal reward shop and the old handler failed to advance the round, force it.
+      const isLab = beforeShopTitle.includes('研究所');
+      if(!isLab && typeof round !== 'undefined' && beforeRound !== null && round === beforeRound){
+        round++;
+        if(typeof roundScore !== 'undefined') roundScore = 0;
+        if(typeof energy !== 'undefined' && typeof maxEnergy !== 'undefined') energy = Math.min(maxEnergy, energy + 2);
+        if(typeof shopOpen !== 'undefined') shopOpen = false;
+        document.getElementById('shop')?.classList.add('hidden');
+        if(typeof render === 'function') render();
+      }
+    };
+  }
+})();
+</script>
 </body>
 </html>
