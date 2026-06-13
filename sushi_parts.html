@@ -761,7 +761,7 @@
 <div class="wrap">
  <div class="top"><div class="brand" id="brandHome" title="すし単トップへ戻る">🍣 すし<span>Parts Rogue</span></div></div>
  <section id="startPanel" class="panel start"><h2>プレイヤー名</h2><input id="playerName" placeholder="名前を入力" maxlength="20" /><button id="startBtn">新しくゲーム開始</button><button id="startLeaderBtn" class="secondary">🏆ランキングを見る</button><button id="topBtn" class="secondary homeButton">🏠すし単トップへ戻る</button><div id="resumeBox" class="hidden"><button id="resumeBtn" class="secondary">前回の続きから始める</button></div><div class="small">カードを組み合わせて英単語を作ろう。正解すると攻撃、ステージクリアで新しい部品が手に入ります。</div></section>
- <div id="game" class="grid hidden"><main class="panel"><div class="stats"><div class="stat">Score<b id="score">0</b></div><div class="stat">Round<b id="round">1</b></div><div class="stat hidden" id="goalStat">Goal<b id="goal">0/120</b></div><div class="stat">Energy<b id="energy">3/3</b></div><div class="stat hidden" id="rpStat">RP<b id="rp">0</b></div><div class="stat">Hand<b id="handCount">0/16</b></div></div><hr style="border:0;border-top:1px solid var(--line);margin:14px 0"><div class="enemy"><div class="monster" id="monster">👹</div><div style="flex:1"><b id="enemyName">Word Goblin</b><div class="hpbar"><div class="hp" id="hp"></div></div><div class="small"><span id="hpText"></span></div></div></div><hr style="border:0;border-top:1px solid var(--line);margin:14px 0"><div class="stageTitle" id="stageTitle">カードを2〜4枚選んでSUBMIT</div><div class="build" id="build"></div><div class="cards" id="cards"></div><div class="actions"><button id="submitBtn" disabled>SUBMIT</button><button id="drawBtn" class="secondary">1枚ドロー（Energy 1）</button><button id="labBtn" class="secondary hidden">🧪研究所</button><button id="dexBtn" class="secondary">📘図鑑</button><button id="leaderBtn" class="secondary">🏆ランキング</button><button id="homeBtn" class="secondary homeButton">🏠トップ</button><button id="clearBtn" class="secondary hidden">選び直す</button><button id="endBtn" class="secondary">🔥 I'm Cooked</button></div><div id="msg" class="msg"></div><div id="result" class="result hidden"></div></main><aside class="panel"><h3>ジョーカー</h3><div id="jokers" class="log"></div><h3>ログ</h3><div id="log" class="log"></div></aside></div>
+ <div id="game" class="grid hidden"><main class="panel"><div class="stats"><div class="stat">Score<b id="score">0</b></div><div class="stat">Round<b id="round">1</b></div><div class="stat hidden" id="goalStat">Goal<b id="goal">0/120</b></div><div class="stat">Energy<b id="energy">3/3</b></div><div class="stat hidden" id="rpStat">RP<b id="rp">0</b></div><div class="stat">Hand<b id="handCount">0/16</b></div></div><hr style="border:0;border-top:1px solid var(--line);margin:14px 0"><div class="enemy"><div class="monster" id="monster">👹</div><div style="flex:1"><b id="enemyName">Word Goblin</b><div class="hpbar"><div class="hp" id="hp"></div></div><div class="small"><span id="hpText"></span></div></div></div><hr style="border:0;border-top:1px solid var(--line);margin:14px 0"><div class="stageTitle" id="stageTitle">カードを2〜4枚選んでSUBMIT</div><div class="build" id="build"></div><div class="cards" id="cards"></div><div class="actions"><button id="submitBtn" disabled>SUBMIT</button><button id="drawBtn" class="secondary">1枚ドロー（Energy 1）</button><button id="labBtn" class="secondary hidden">🧪</button><button id="dexBtn" class="secondary">📘図鑑</button><button id="leaderBtn" class="secondary">🏆ランキング</button><button id="homeBtn" class="secondary homeButton">🏠トップ</button><button id="clearBtn" class="secondary hidden">選び直す</button><button id="endBtn" class="secondary">🔥 I'm Cooked</button></div><div id="msg" class="msg"></div><div id="result" class="result hidden"></div></main><aside class="panel"><h3>ジョーカー</h3><div id="jokers" class="log"></div><h3>ログ</h3><div id="log" class="log"></div></aside></div>
 </div>
 <div id="shop" class="overlay hidden"><div class="modal"><h2 id="shopTitle">ショップ：報酬を1つ選ぶ</h2><p id="shopHelp" class="small">カードを増やすか、ジョーカーでルールを書き換えよう。</p><div id="shopItems" class="shopGrid"></div><div class="actions"><button id="shopCloseBtn" class="secondary">閉じる</button></div></div></div>
 
@@ -1050,7 +1050,7 @@ function lookupWordByIds(ids){return WORD_MAP.get(ids.join("|"))||null}
 const JOKER_POOL=[
  {id:"prefix",name:"Prefix Lover",icon:"🧢",rarity:"common",desc:"接頭辞1枚につき +20",apply:c=>{c.add+=20*c.prefixes}},
  {id:"suffix",name:"Suffix Master",icon:"🔚",rarity:"common",desc:"接尾辞を使うと +50",apply:c=>{if(c.hasSuffix)c.add+=50}},
- {id:"explorer",name:"Explorer",icon:"🧪",rarity:"common",desc:"失敗時RP+1",applyFail:c=>{c.rp+=1}},
+ {id:"collector",name:"Collector",icon:"📘",rarity:"common",desc:"NEW単語なら +100",apply:c=>{if(c.isNew)c.add+=100}},
  {id:"long",name:"Long Word",icon:"📚",rarity:"rare",desc:"3パーツ以上なら ×2",apply:c=>{if(c.len>=3)c.mult*=2}},
  {id:"scholar",name:"Scholar",icon:"🎓",rarity:"rare",desc:"NEW単語なら ×2",apply:c=>{if(c.isNew)c.mult*=2}},
  {id:"fresh",name:"Fresh Mind",icon:"🌱",rarity:"rare",desc:"疲労を最低50%にする",apply:c=>{c.fatigue=Math.max(c.fatigue,.5)}},
@@ -1102,11 +1102,11 @@ function calcScore(w,realIsNew){const len=w.parts.length,count=wordCounts[w.word
 function consumeSelected(replenish=true){const usedUids=new Set(selected.map(x=>x.uid));const usedCount=selected.length;hand=hand.filter(c=>!usedUids.has(c.uid));if(replenish)drawCards(usedCount);selected=[]}
 async function submitWord(){if(selected.length<2)return;const w=currentWord();if(w){const isNew=!knownWords().includes(w.word);const sc=calcScore(w,isNew);await registerNewWord(w,sc.total);score+=sc.total;roundScore+=sc.total;wordCounts[w.word]=(wordCounts[w.word]||0)+1;const gain=(w.parts.length>=3?1:0)+(w.parts.length>=4?1:0);energy=Math.min(maxEnergy,energy+gain);showDamage('+'+sc.total,'good');showSuccess(w,sc,isNew,gain);addLog(`<b>${isNew?'🆕 ':''}${w.word}</b> <span class="badge">+${sc.total}</span><br><span>${w.ja}</span><br><span class="small">${w.parts.join(' + ')} / ${wordCounts[w.word]}回目</span>`);consumeSelected(true);if(roundScore>=goal)setTimeout(openStageClear,650);render();return}
  failAttempt();}
-function failAttempt(){let ctx={rp:1};jokers.forEach(j=>j.applyFail&&j.applyFail(ctx));rp+=ctx.rp;const near=findNearMiss(selectedIds());showDamage('MISS','bad');showFail(near,ctx.rp);addLog(`<b>❌ 失敗</b> <span class="badge">MISS</span><br><span class="small">${selectedIds().join(' + ')}</span>${near?`<br><span class="small">近い単語：${near.word}</span>`:''}`);consumeSelected(false);if(hand.length<2){setMsg('カードが足りない。1枚ドローするか、終了して再挑戦。','bad');$('cards').classList.add('emptyWarn')}render()}
+function failAttempt(){const near=findNearMiss(selectedIds());showDamage('MISS','bad');showFail(near);addLog(`<b>❌ 失敗</b> <span class="badge">MISS</span><br><span class="small">${selectedIds().join(' + ')}</span>${near?`<br><span class="small">近い単語：${near.word}</span>`:''}`);consumeSelected(false);if(hand.length<2){setMsg('カードが足りない。1枚ドローするか、終了して再挑戦。','bad');$('cards').classList.add('emptyWarn')}render()}
 function findNearMiss(ids){let best=null,bestScore=0;for(const w of WORDS){let common=ids.filter(id=>w.parts.includes(id)).length;let orderBonus=w.parts.join('|').includes(ids.slice(-1)[0]||'')?0.2:0;if(common+orderBonus>bestScore&&common>=1){best=w;bestScore=common+orderBonus}}return bestScore>=1.2?best:null}
 function breakdown(w){return w.parts.map(id=>{const p=part(id);return `<div class="line"><b>${p.text}</b> <span class="rarity ${p.rarity}">${rarityLabel(p.rarity)}</span> = ${p.meaning}</div>`}).join('')}
 function showSuccess(w,sc,isNew,gain){const wordClass=sc.topRarity==="legendary"?"word legendWord":"word";$('result').innerHTML=`${isNew?'<div class="new">NEW WORD!</div>':''}<div class="${wordClass}">${w.word}</div><div class="ja">${w.ja}</div><div class="small">語源イメージ：${w.image}</div><div class="breakdown">${breakdown(w)}</div><div class="msg ok">+${sc.total}点 <span class="rarity ${sc.topRarity}">${rarityLabel(sc.topRarity)}</span> <span class="rareScore">レア倍率×${sc.rareMult.toFixed(2)}</span> ${sc.mult>sc.rareMult?`/ 合計倍率×${sc.mult.toFixed(2)}`:''} / 疲労${Math.round(sc.fatigue*100)}%${gain?` / Energy +${gain}`:''}</div>`;$('result').classList.remove('hidden');pulseMain('successPulse');if(w.parts.length>=3)comboBanner(w.parts.length+' PARTS COMBO!');if(sc.topRarity==="legendary")comboBanner('LEGENDARY WORD!')}
-function showFail(near,rpgain){let html=`<div class="word" style="color:#1565c0">No Word</div><div class="ja">登録単語なし</div><div class="small">この組み合わせは通りません。使ったカードは消費されます。</div><div class="msg warn">Research Point +${rpgain}</div>`;if(near){html+=`<hr style="border:0;border-top:1px solid var(--line)"><div class="new" style="color:#f57c00">NEAR MISS!</div><div class="word">${near.word}</div><div class="ja">${near.ja}</div><div class="small">近い語源コンボ：${near.image}</div><div class="breakdown">${breakdown(near)}</div>`}$('result').innerHTML=html;$('result').classList.remove('hidden');pulseMain('shake')}
+function showFail(near){let html=`<div class="word" style="color:#1565c0">No Word</div><div class="ja">登録単語なし</div><div class="small">この組み合わせは通りません。使ったカードは消費されます。</div>`;if(near){html+=`<hr style="border:0;border-top:1px solid var(--line)"><div class="new" style="color:#f57c00">NEAR MISS!</div><div class="word">${near.word}</div><div class="ja">${near.ja}</div><div class="small">近い語源コンボ：${near.image}</div><div class="breakdown">${breakdown(near)}</div>`}$('result').innerHTML=html;$('result').classList.remove('hidden');pulseMain('shake')}
 function addLog(html){$('log').insertAdjacentHTML('afterbegin',`<div class="logItem">${html}</div>`)} function showDamage(t,cls){const d=document.createElement('div');d.className='damage '+cls;d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),800)}
 function flash(){const f=document.createElement('div');f.className='screenFlash';document.body.appendChild(f);setTimeout(()=>f.remove(),760)}
 function comboBanner(t){const b=document.createElement('div');b.className='comboBanner';b.textContent=t;document.body.appendChild(b);setTimeout(()=>b.remove(),950)}
@@ -1117,8 +1117,8 @@ function drawExtra(){if(energy<1){setMsg('Energyが足りない。3枚以上の�
 function cardShopHtml(it,i){const r=rarityOf(it.p.id);return `<div class="shopItem ${r}" onclick="takeShop(${i})"><b>カード追加：${it.p.text}</b> <span class="rarity ${r}">${rarityLabel(r)}</span><br><span class="small">${typeLabel(it.p.type)} / ${it.p.meaning}<br>デッキに入り、今後ドローされます。</span></div>`}
 function renderShopChoices(choices){$('shopItems').innerHTML=choices.map((it,i)=>it.kind==='card'?cardShopHtml(it,i):it.kind==='joker'?`<div class="shopItem ${it.j.rarity||'common'}" onclick="takeShop(${i})"><b><span class="jokerIcon">${it.j.icon||'🃏'}</span>ジョーカー：${it.j.name}</b> <span class="rarity ${it.j.rarity||'common'}">${rarityLabel(it.j.rarity||'common')}</span><br><span class="small">${it.j.desc}</span></div>`:it.kind==='research'?`<div class="shopItem ${rarityOf(it.p.id)}" onclick="takeShop(${i})"><b>カード：${it.p.text} ×2</b> <span class="rarity ${rarityOf(it.p.id)}">${rarityLabel(rarityOf(it.p.id))}</span><br><span class="small">デッキに2枚追加。</span></div>`:`<div class="shopItem" onclick="takeShop(${i})"><b>${it.name}</b><br><span class="small">${it.desc}</span></div>`).join('');window.__shopChoices=choices}
 function openShop(){shopOpen=true;$('shopTitle').textContent='ショップ：報酬を1つ選ぶ';$('shopHelp').textContent='カードを増やすか、ジョーカーでルールを書き換えよう。レア色のカードは得点倍率が高い。';const unused=JOKER_POOL.filter(j=>!jokers.some(x=>x.id===j.id));const weighted=shuffle(PARTS).sort((a,b)=>rarityMult(rarityOf(a.id))-rarityMult(rarityOf(b.id))+Math.random()*.8);const choices=[...weighted.slice(-2).map(p=>({kind:'card',p})),{kind:'joker',j:rand(unused.length?unused:JOKER_POOL)}];if(rp>=3)choices.push({kind:'research',cost:3,p:rand(PARTS)});renderShopChoices(choices);$('shop').classList.remove('hidden')}
-function openLab(){shopOpen=true;$('shopTitle').textContent='研究所';$('shopHelp').textContent=`手札補充ができます。`;const choices=[{kind:'labDraw',name:'手札を2枚ドロー',desc:'手札を戻す。',cost:2},{kind:'labFull',name:'手札を最大まで補充',desc:'危ない時の立て直し。',cost:6},...shuffle(PARTS).slice(0,3).map(p=>({kind:'research',cost:4+(rarityOf(p.id)==="rare"?2:rarityOf(p.id)==="epic"?5:rarityOf(p.id)==="legendary"?9:0),p}))];renderShopChoices(choices);$('shop').classList.remove('hidden')}
-function takeShop(i){const it=window.__shopChoices[i];const isLab=$('shopTitle').textContent.includes('研究所');if(it.kind==='card')deck.push(it.p.id);else if(it.kind==='joker')jokers.push(it.j);else if(it.kind==='labDraw'){if(rp<it.cost)return;rp-=it.cost;drawCards(2)}else if(it.kind==='labFull'){if(rp<it.cost)return;rp-=it.cost;drawCards(MAX_HAND)}else{if(rp<it.cost)return;rp-=it.cost;deck.push(it.p.id,it.p.id)}if(!isLab){round++;roundScore=0;energy=Math.min(maxEnergy,energy+2)}shopOpen=false;$('shop').classList.add('hidden');render()}
+function openLab(){shopOpen=true;$('shopTitle').textContent='';$('shopHelp').textContent=`手札補充ができます。`;const choices=[{kind:'labDraw',name:'手札を2枚ドロー',desc:'手札を戻す。',cost:2},{kind:'labFull',name:'手札を最大まで補充',desc:'危ない時の立て直し。',cost:6},...shuffle(PARTS).slice(0,3).map(p=>({kind:'research',cost:4+(rarityOf(p.id)==="rare"?2:rarityOf(p.id)==="epic"?5:rarityOf(p.id)==="legendary"?9:0),p}))];renderShopChoices(choices);$('shop').classList.remove('hidden')}
+function takeShop(i){const it=window.__shopChoices[i];const isLab=$('shopTitle').textContent.includes('');if(it.kind==='card')deck.push(it.p.id);else if(it.kind==='joker')jokers.push(it.j);else if(it.kind==='labDraw'){if(rp<it.cost)return;rp-=it.cost;drawCards(2)}else if(it.kind==='labFull'){if(rp<it.cost)return;rp-=it.cost;drawCards(MAX_HAND)}else{if(rp<it.cost)return;rp-=it.cost;deck.push(it.p.id,it.p.id)}if(!isLab){round++;roundScore=0;energy=Math.min(maxEnergy,energy+2)}shopOpen=false;$('shop').classList.add('hidden');render()}
 function saveRunState(){if(!player)return;localStorage.setItem(RUN_KEY,JSON.stringify({player,score,round,roundScore,hand,energy,maxEnergy,rp,wordCounts,deck,jokers,log:$('log').innerHTML}))} function loadRunState(){try{const s=JSON.parse(localStorage.getItem(RUN_KEY)||'null');if(!s||!s.player)return false;player=s.player;score=s.score||0;round=s.round||1;roundScore=s.roundScore||0;selected=[];hand=s.hand||[];energy=s.energy??3;maxEnergy=s.maxEnergy||3;rp=s.rp||0;wordCounts=s.wordCounts||{};deck=s.deck&&s.deck.length?s.deck:[];jokers=(s.jokers||[]).map(j=>JOKER_POOL.find(x=>x.id===j.id)||j);$('log').innerHTML=s.log||'';if(!deck.length)initDeck();return hand.length>0}catch(e){return false}}
 function start(fresh=true){player=$('playerName').value.trim()||'guest';localStorage.setItem(PLAYER_KEY,player);if(fresh){score=0;round=1;roundScore=0;selected=[];wordCounts={};energy=3;maxEnergy=3;rp=0;jokers=[];initDeck();dealOpeningHand();localStorage.removeItem(RUN_KEY);$('log').innerHTML=''}$('startPanel').classList.add('hidden');$('game').classList.remove('hidden');$('cookedScreen')?.classList.add('hidden');render()}
 function cookedComment(){if(score>=10000)return 'Bro is fluent.';if(score>=5000)return 'Actually cracked.';if(score>=2000)return 'No cap.';if(score>=700)return 'Not bad.';return "Nah, I'd fail."}
@@ -1308,13 +1308,9 @@ findNearMiss = function(ids){
 
 const originalFailAttemptV3 = failAttempt;
 failAttempt = function(){
-  let ctx={rp:1};
-  jokers.forEach(j=>j.applyFail&&j.applyFail(ctx));
   const near=findNearMiss(selectedIds());
-  if(near) ctx.rp += 1;
-  rp+=ctx.rp;
   showDamage(near?'惜しい!':'MISS','bad');
-  showFail(near,ctx.rp);
+  showFail(near);
   addLog(`<b>❌ 失敗</b> <span class="badge">MISS</span><br><span class="small">${selectedIds().join(' + ')}</span>${near?`<br><span class="small">惜しい：${near.word}</span>`:''}`);
   consumeSelected(false);
   if(hand.length<2){setMsg('カードが足りない。1枚ドローするか、終了して再挑戦。','bad');$('cards').classList.add('emptyWarn')}
@@ -1339,17 +1335,13 @@ openShop = function(){
   const choices=[...roots.slice(0,3)];
   if(others.length) choices.push(rand(others));
   choices.push({kind:"joker",j:rand(unused.length?unused:JOKER_POOL)});
-  if(rp>=3){
-    const c=unlockCandidates(null,1)[0] || rand(availablePartIds());
-    choices.push({kind:"researchUnlock",cost:3,id:c,copies:2});
-  }
   renderShopChoices(choices);
   $("shop").classList.remove("hidden");
 };
 
 openLab = function(){
   shopOpen=true;
-  $("shopTitle").textContent='研究所';
+  $("shopTitle").textContent='';
   $("shopHelp").textContent=`手札補充ができます。`;
   const unlocks=unlockCandidates(null,3).map(id=>({kind:"researchUnlock",cost:4+(rarityOf(id)==="rare"?1:rarityOf(id)==="epic"?3:rarityOf(id)==="legendary"?6:0),id,copies:2}));
   const choices=[
@@ -1367,7 +1359,7 @@ renderShopChoices = function(choices){
     if(it.kind==="unlock") return unlockShopHtml(it,i);
     if(it.kind==="researchUnlock"){
       const p=part(it.id), r=rarityOf(it.id);
-      return `<div class="shopItem ${r}" onclick="takeShop(${i})"><b>カード：${p.text} ×2</b> <span class="rarity ${r}">${rarityLabel(r)}</span><br><span class="small">RP ${it.cost}消費。${typeLabel(p.type)} / ${p.meaning}</span></div>`;
+      return `<div class="shopItem ${r}" onclick="takeShop(${i})"><b>カード：${p.text} ×2</b> <span class="rarity ${r}">${rarityLabel(r)}</span><br><span class="small">${typeLabel(p.type)} / ${p.meaning}</span></div>`;
     }
     if(it.kind==='card') return cardShopHtml(it,i);
     if(it.kind==='joker') return `<div class="shopItem ${it.j.rarity||'common'}" onclick="takeShop(${i})"><b><span class="jokerIcon">${it.j.icon||'🃏'}</span>ジョーカー：${it.j.name}</b> <span class="rarity ${it.j.rarity||'common'}">${rarityLabel(it.j.rarity||'common')}</span><br><span class="small">${it.j.desc}</span></div>`;
@@ -1379,7 +1371,7 @@ renderShopChoices = function(choices){
 
 takeShop = function(i){
   const it=window.__shopChoices[i];
-  const isLab=$("shopTitle").textContent.includes("研究所");
+  const isLab=$("shopTitle").textContent.includes("");
   if(!it) return;
   if(it.kind==="unlock"){
     addUnlocked(it.id,it.copies||2);
@@ -3376,6 +3368,30 @@ window.addEventListener('load',()=>{const savedName=localStorage.getItem(PLAYER_
 // ===== end v6.0 =====
 
 
+</script>
+
+<script>
+// ===== v6.2 RP removal safety =====
+(function(){
+  function scrubRpJokers(){
+    try{
+      if(Array.isArray(window.jokers)){
+        window.jokers = window.jokers.filter(j=>!(j&&(/RP|Research|研究/.test(String(j.name||'')+String(j.desc||''))||j.id==='explorer')));
+      }
+      if(Array.isArray(window.JOKER_POOL)){
+        for(let i=window.JOKER_POOL.length-1;i>=0;i--){
+          const j=window.JOKER_POOL[i];
+          if(j && (/RP|Research|研究/.test(String(j.name||'')+String(j.desc||''))||j.id==='explorer')) window.JOKER_POOL.splice(i,1);
+        }
+      }
+    }catch(e){}
+  }
+  const oldRender = window.render;
+  window.render = function(){ scrubRpJokers(); return oldRender && oldRender.apply(this, arguments); };
+  document.addEventListener('DOMContentLoaded', scrubRpJokers);
+  window.addEventListener('load', scrubRpJokers);
+})();
+// ===== end v6.2 =====
 </script>
 </body>
 </html>
