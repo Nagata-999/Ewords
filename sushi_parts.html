@@ -621,6 +621,140 @@
   .scoreWordLabel{font-size:14px;max-width:88vw;white-space:normal}
 }
 
+
+/* ===== v6.0 Word Fusion Burst ===== */
+.wordFusionBurst{
+  position:fixed;
+  inset:0;
+  z-index:130;
+  pointer-events:none;
+  display:grid;
+  place-items:center;
+  background:rgba(255,248,239,.10);
+  animation:fusionWhole 4.6s ease both;
+}
+.fusionBox{
+  position:relative;
+  width:min(92vw,680px);
+  padding:28px 18px 30px;
+  border-radius:34px;
+  text-align:center;
+  background:radial-gradient(circle at top,#fff8d7,#fff 52%,#fff1e3);
+  border:4px solid #ffd36b;
+  box-shadow:0 24px 70px rgba(80,45,20,.28);
+  overflow:hidden;
+  animation:fusionBoxPop 4.35s ease both;
+}
+.fusionBox::before{
+  content:'';
+  position:absolute;
+  inset:-40%;
+  background:conic-gradient(from 0deg, transparent, rgba(255,112,67,.25), transparent, rgba(77,182,172,.22), transparent);
+  animation:fusionSpin 1.4s linear infinite;
+}
+.fusionInner{position:relative;z-index:2}
+.fusionLabel{
+  display:inline-block;
+  padding:7px 15px;
+  border-radius:999px;
+  background:#263238;
+  color:#fff7d7;
+  font-weight:1000;
+  letter-spacing:.04em;
+  box-shadow:0 8px 18px rgba(0,0,0,.16);
+}
+.fusionParts{
+  margin:18px auto 10px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.fusionPart{
+  display:inline-grid;
+  place-items:center;
+  min-width:76px;
+  padding:12px 15px;
+  border-radius:18px;
+  background:#fff;
+  border:2px solid #ffd0bd;
+  color:#e65100;
+  font-size:clamp(24px,6vw,42px);
+  font-weight:1000;
+  box-shadow:0 10px 22px rgba(80,45,20,.12);
+  animation:fusionPartIn .7s ease both, fusionPartJoin .9s ease 1.05s both;
+  animation-delay:calc(var(--i) * .18s), calc(1.05s + var(--i) * .08s);
+}
+.fusionPlus{
+  font-size:clamp(22px,5vw,36px);
+  font-weight:1000;
+  color:#ff7043;
+  animation:fusionPlusFade 1.55s ease both;
+}
+.fusionWord{
+  margin-top:8px;
+  font-size:clamp(46px,12vw,88px);
+  line-height:1;
+  font-weight:1000;
+  color:#d84315;
+  text-shadow:0 5px 0 #fff,0 14px 28px rgba(216,67,21,.24);
+  opacity:0;
+  animation:fusionWordBang 1.05s ease 1.75s both;
+}
+.fusionMeaning{
+  margin-top:10px;
+  display:inline-block;
+  background:#fff;
+  border:2px solid #ffd0bd;
+  border-radius:999px;
+  padding:7px 14px;
+  color:#687782;
+  font-weight:1000;
+  opacity:0;
+  animation:fusionMeaningIn .55s ease 2.15s both;
+}
+.fusionScore{
+  margin-top:12px;
+  opacity:0;
+  animation:fusionScoreIn .75s ease 2.55s both;
+}
+.fusionScore .plus{
+  font-size:clamp(38px,9vw,68px);
+  font-weight:1000;
+  color:#ff5a2f;
+  text-shadow:0 4px 0 #fff;
+}
+.fusionScore .count{
+  margin-top:2px;
+  font-size:clamp(26px,7vw,48px);
+  font-weight:1000;
+  color:#263238;
+}
+.fusionScore .count b{color:#d84315}
+.fusionParticle{
+  position:absolute;
+  z-index:3;
+  font-size:28px;
+  animation:fusionParticleFly 2.3s ease 1.65s both;
+}
+@keyframes fusionWhole{0%{opacity:0}6%{opacity:1}90%{opacity:1}100%{opacity:0}}
+@keyframes fusionBoxPop{0%{transform:scale(.78) rotate(-1.5deg)}12%{transform:scale(1.03) rotate(.8deg)}24%{transform:scale(.99) rotate(0)}78%{transform:scale(1)}100%{transform:scale(.98)}}
+@keyframes fusionSpin{to{transform:rotate(360deg)}}
+@keyframes fusionPartIn{0%{opacity:0;transform:translateY(18px) scale(.72)}100%{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes fusionPartJoin{0%{filter:brightness(1)}55%{transform:translateY(-8px) scale(1.08);filter:brightness(1.22)}100%{transform:translateY(0) scale(.25);opacity:0}}
+@keyframes fusionPlusFade{0%,55%{opacity:1}100%{opacity:0;transform:scale(.4)}}
+@keyframes fusionWordBang{0%{opacity:0;transform:scale(.45) rotate(-2deg);filter:blur(2px)}55%{opacity:1;transform:scale(1.16) rotate(1deg);filter:blur(0)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes fusionMeaningIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fusionScoreIn{from{opacity:0;transform:translateY(14px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes fusionParticleFly{0%{opacity:0;transform:translate(0,0) scale(.3)}20%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) rotate(360deg) scale(1.25)}}
+@media(max-width:720px){
+  .fusionBox{width:94vw;padding:24px 12px 26px;border-radius:28px}
+  .fusionParts{gap:7px}
+  .fusionPart{min-width:62px;padding:10px 12px;border-radius:16px}
+  .fusionMeaning{font-size:14px;max-width:88vw;white-space:normal}
+}
+
 </style>
 </head>
 <body>
@@ -2774,6 +2908,154 @@ window.addEventListener('load',()=>{const savedName=localStorage.getItem(PLAYER_
   .card .txt{font-size:20px;}
   .dexWord,.dexUnknown,.dexWordMore{font-size:12px;padding:6px 8px;}
 }
+
+/* ===== v6.0 Word Fusion Burst ===== */
+.wordFusionBurst{
+  position:fixed;
+  inset:0;
+  z-index:130;
+  pointer-events:none;
+  display:grid;
+  place-items:center;
+  background:rgba(255,248,239,.10);
+  animation:fusionWhole 4.6s ease both;
+}
+.fusionBox{
+  position:relative;
+  width:min(92vw,680px);
+  padding:28px 18px 30px;
+  border-radius:34px;
+  text-align:center;
+  background:radial-gradient(circle at top,#fff8d7,#fff 52%,#fff1e3);
+  border:4px solid #ffd36b;
+  box-shadow:0 24px 70px rgba(80,45,20,.28);
+  overflow:hidden;
+  animation:fusionBoxPop 4.35s ease both;
+}
+.fusionBox::before{
+  content:'';
+  position:absolute;
+  inset:-40%;
+  background:conic-gradient(from 0deg, transparent, rgba(255,112,67,.25), transparent, rgba(77,182,172,.22), transparent);
+  animation:fusionSpin 1.4s linear infinite;
+}
+.fusionInner{position:relative;z-index:2}
+.fusionLabel{
+  display:inline-block;
+  padding:7px 15px;
+  border-radius:999px;
+  background:#263238;
+  color:#fff7d7;
+  font-weight:1000;
+  letter-spacing:.04em;
+  box-shadow:0 8px 18px rgba(0,0,0,.16);
+}
+.fusionParts{
+  margin:18px auto 10px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.fusionPart{
+  display:inline-grid;
+  place-items:center;
+  min-width:76px;
+  padding:12px 15px;
+  border-radius:18px;
+  background:#fff;
+  border:2px solid #ffd0bd;
+  color:#e65100;
+  font-size:clamp(24px,6vw,42px);
+  font-weight:1000;
+  box-shadow:0 10px 22px rgba(80,45,20,.12);
+  animation:fusionPartIn .7s ease both, fusionPartJoin .9s ease 1.05s both;
+  animation-delay:calc(var(--i) * .18s), calc(1.05s + var(--i) * .08s);
+}
+.fusionPlus{
+  font-size:clamp(22px,5vw,36px);
+  font-weight:1000;
+  color:#ff7043;
+  animation:fusionPlusFade 1.55s ease both;
+}
+.fusionWord{
+  margin-top:8px;
+  font-size:clamp(46px,12vw,88px);
+  line-height:1;
+  font-weight:1000;
+  color:#d84315;
+  text-shadow:0 5px 0 #fff,0 14px 28px rgba(216,67,21,.24);
+  opacity:0;
+  animation:fusionWordBang 1.05s ease 1.75s both;
+}
+.fusionMeaning{
+  margin-top:10px;
+  display:inline-block;
+  background:#fff;
+  border:2px solid #ffd0bd;
+  border-radius:999px;
+  padding:7px 14px;
+  color:#687782;
+  font-weight:1000;
+  opacity:0;
+  animation:fusionMeaningIn .55s ease 2.15s both;
+}
+.fusionScore{
+  margin-top:12px;
+  opacity:0;
+  animation:fusionScoreIn .75s ease 2.55s both;
+}
+.fusionScore .plus{
+  font-size:clamp(38px,9vw,68px);
+  font-weight:1000;
+  color:#ff5a2f;
+  text-shadow:0 4px 0 #fff;
+}
+.fusionScore .count{
+  margin-top:2px;
+  font-size:clamp(26px,7vw,48px);
+  font-weight:1000;
+  color:#263238;
+}
+.fusionScore .count b{color:#d84315}
+.fusionParticle{
+  position:absolute;
+  z-index:3;
+  font-size:28px;
+  animation:fusionParticleFly 2.3s ease 1.65s both;
+}
+@keyframes fusionWhole{0%{opacity:0}6%{opacity:1}90%{opacity:1}100%{opacity:0}}
+@keyframes fusionBoxPop{0%{transform:scale(.78) rotate(-1.5deg)}12%{transform:scale(1.03) rotate(.8deg)}24%{transform:scale(.99) rotate(0)}78%{transform:scale(1)}100%{transform:scale(.98)}}
+@keyframes fusionSpin{to{transform:rotate(360deg)}}
+@keyframes fusionPartIn{0%{opacity:0;transform:translateY(18px) scale(.72)}100%{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes fusionPartJoin{0%{filter:brightness(1)}55%{transform:translateY(-8px) scale(1.08);filter:brightness(1.22)}100%{transform:translateY(0) scale(.25);opacity:0}}
+@keyframes fusionPlusFade{0%,55%{opacity:1}100%{opacity:0;transform:scale(.4)}}
+@keyframes fusionWordBang{0%{opacity:0;transform:scale(.45) rotate(-2deg);filter:blur(2px)}55%{opacity:1;transform:scale(1.16) rotate(1deg);filter:blur(0)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes fusionMeaningIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fusionScoreIn{from{opacity:0;transform:translateY(14px) scale(.9)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes fusionParticleFly{0%{opacity:0;transform:translate(0,0) scale(.3)}20%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) rotate(360deg) scale(1.25)}}
+@media(max-width:720px){
+  .fusionBox{width:94vw;padding:24px 12px 26px;border-radius:28px}
+  .fusionParts{gap:7px}
+  .fusionPart{min-width:62px;padding:10px 12px;border-radius:16px}
+  .fusionMeaning{font-size:14px;max-width:88vw;white-space:normal}
+}
+
+
+/* ===== v6.1 Word Fusion Timing Patch ===== */
+.fusionFinalLabel{
+  margin-top:6px;
+  display:inline-block;
+  padding:4px 12px;
+  border-radius:999px;
+  background:#263238;
+  color:#fff7d7;
+  font-size:13px;
+  letter-spacing:.12em;
+  font-weight:1000;
+  opacity:.92;
+}
 </style>
 <script id="dex-scroll-fix-js-v52">
 (function(){
@@ -3009,6 +3291,90 @@ window.addEventListener('load',()=>{const savedName=localStorage.getItem(PLAYER_
   setTimeout(wireSubmitToLatest,1000);
 })();
 // ===== end v5.9 =====
+
+// ===== v6.0 Word Fusion Burst: parts combine into the completed word =====
+(function(){
+  function q(id){ return document.getElementById(id); }
+  function fmt(n){ return Number(n||0).toLocaleString(); }
+  function esc(v){ return String(v ?? '').replace(/[&<>\"]/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;','"':'&quot;'}[m])); }
+  function wordObj(word){
+    try{ return (WORDS||[]).find(w=>w.word===word); }catch(e){ return null; }
+  }
+  function partText(id){
+    try{
+      const p=(PARTS||[]).find(x=>x.id===id || x.text===id);
+      return p?.text || id;
+    }catch(e){ return id; }
+  }
+  window.showScoreCenterBurst = function(before, after, word, isNew){
+    before=Number(before)||0; after=Number(after)||0;
+    const gain=after-before;
+    if(gain<=0) return;
+    document.querySelectorAll('.scoreCenterBurst,.wordFusionBurst').forEach(x=>x.remove());
+
+    const w=wordObj(word);
+    const parts=(w?.parts||[]).map(partText).filter(Boolean);
+    const ja=w?.ja || w?.meaning || '';
+    const freq=String(w?.freq||'').toUpperCase();
+    const isLegend=freq==='S' || freq==='LEGENDARY';
+    const isRare=freq==='A' || isLegend;
+
+    const div=document.createElement('div');
+    div.className='wordFusionBurst';
+    const partHtml=(parts.length?parts:[word||'WORD']).map((p,i)=>`<span class="fusionPart" style="--i:${i}">${esc(p)}</span>${i<(parts.length?parts.length:1)-1?'<span class="fusionPlus">+</span>':''}`).join('');
+    const badge = isLegend ? '⭐ LEGENDARY WORD ⭐' : (isRare ? '💎 RARE WORD' : (isNew ? '📘 NEW DISCOVERY!' : 'WORD FUSION'));
+    div.innerHTML=`
+      <div class="fusionBox">
+        <span class="fusionParticle" style="--x:-210px;--y:-150px;left:18%;top:22%">🍣</span>
+        <span class="fusionParticle" style="--x:210px;--y:-145px;right:18%;top:20%">✨</span>
+        <span class="fusionParticle" style="--x:-165px;--y:145px;left:24%;bottom:18%">⭐</span>
+        <span class="fusionParticle" style="--x:180px;--y:140px;right:22%;bottom:16%">💥</span>
+        <div class="fusionInner">
+          <div class="fusionLabel">${badge}</div>
+          <div class="fusionParts">${partHtml}</div>
+          <div class="fusionWord">${esc(word||'')}</div>
+          ${ja?`<div class="fusionMeaning">${esc(ja)}</div>`:''}
+          <div class="fusionScore">
+            <div class="plus">+${fmt(gain)}</div>
+            <div class="count"><span>${fmt(before)}</span> → <b id="fusionScoreCount">${fmt(before)}</b></div>
+            <div class="fusionFinalLabel">SCORE</div>
+          </div>
+        </div>
+      </div>`;
+    document.body.appendChild(div);
+
+    const center=q('fusionScoreCount');
+    const top=q('score');
+    const lockedButtons=['submitBtn','drawBtn','endBtn','dexBtn','leaderBtn'].map(q).filter(Boolean);
+    const oldDisabled=lockedButtons.map(b=>b.disabled);
+    lockedButtons.forEach(b=>b.disabled=true);
+
+    const duration=1250;
+    const delay=2700;
+    function ease(t){ return 1-Math.pow(1-t,3); }
+    setTimeout(()=>{
+      const start=performance.now();
+      function tick(now){
+        const t=Math.min(1,(now-start)/duration);
+        const val=Math.round(before+(after-before)*ease(t));
+        if(center) center.textContent=fmt(val);
+        if(top) top.textContent=val;
+        if(t<1) requestAnimationFrame(tick);
+        else{
+          if(center){ center.textContent=fmt(after); center.classList.add('scoreFinalBang'); }
+          if(top){ top.textContent=after; top.classList.remove('scorePop'); void top.offsetWidth; top.classList.add('scorePop'); }
+        }
+      }
+      requestAnimationFrame(tick);
+    }, delay);
+
+    setTimeout(()=>{
+      lockedButtons.forEach((b,i)=>b.disabled=oldDisabled[i]);
+      div.remove();
+    },4700);
+  };})();
+// ===== end v6.0 =====
+
 
 </script>
 </body>
