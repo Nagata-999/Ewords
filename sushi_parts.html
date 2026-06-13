@@ -2551,6 +2551,130 @@ window.addEventListener('load',()=>{const savedName=localStorage.getItem(PLAYER_
   #dexModal .dexStatsGrid{grid-template-columns:repeat(2,1fr) !important;}
   #dexModal .dexMilestone{min-width:calc(50% - 6px) !important;}
 }
+
+
+/* ===== v5.7 mobile usability: full-screen modals / one-scroll dex / sticky controls ===== */
+@media(max-width:768px){
+  html,body{width:100%;overflow-x:hidden;}
+  .wrap{padding:10px 8px 92px;}
+  .top{align-items:flex-start;gap:8px;margin-bottom:10px;}
+  .brand{font-size:22px;line-height:1.15;}
+  .pill{display:none!important;}
+  .panel{padding:12px;border-radius:18px;}
+  .start{margin:8px auto;gap:10px;}
+  .start button{width:100%;}
+
+  .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;}
+  .stat,.stat:first-child{min-width:0!important;padding:7px 4px;border-radius:13px;font-size:12px;}
+  .stat b,.stat:first-child b,.stat:nth-child(3) b{font-size:22px!important;line-height:1.05;}
+
+  .enemy{gap:8px;}
+  .monster{font-size:44px;}
+  .stageTitle{font-size:14px;}
+  .build{min-height:66px;padding:9px;}
+  .partChip{padding:8px 10px;}
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;}
+  .card{min-height:82px;padding:12px;border-radius:16px;}
+  .card .txt{font-size:22px;line-height:1.05;}
+  .card .meaning{font-size:13px;}
+
+  #game main>.actions{
+    position:sticky;
+    bottom:0;
+    z-index:22;
+    margin-left:-12px;
+    margin-right:-12px;
+    margin-bottom:-12px;
+    padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+    background:rgba(255,250,242,.96);
+    border-top:1px solid var(--line);
+    backdrop-filter:blur(8px);
+  }
+  #game main>.actions button{flex:1 1 calc(50% - 8px);padding:11px 8px;font-size:14px;border-radius:14px;}
+  #submitBtn{flex-basis:100%!important;font-size:17px!important;}
+
+  .overlay{padding:0;align-items:stretch;justify-items:stretch;}
+  #dexModal .modal,#leaderModal .modal{
+    width:100vw!important;
+    height:100dvh!important;
+    max-width:none!important;
+    max-height:100dvh!important;
+    border-radius:0!important;
+    padding:12px!important;
+    overflow-y:auto!important;
+    overflow-x:hidden!important;
+    -webkit-overflow-scrolling:touch;
+    display:flex!important;
+    flex-direction:column!important;
+  }
+  #dexModal h2,#leaderModal h2{order:1;margin:2px 0 6px;font-size:22px;line-height:1.15;}
+  #dexModal .actions,#leaderModal .actions{
+    order:2;
+    position:sticky;
+    top:0;
+    z-index:80;
+    flex:0 0 auto!important;
+    margin:0 -12px 10px!important;
+    padding:8px 12px!important;
+    background:rgba(255,250,242,.98);
+    border-top:1px solid rgba(255,255,255,.8);
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(8px);
+  }
+  #dexModal .actions button,#leaderModal .actions button{flex:1 1 auto;padding:10px 8px;font-size:14px;border-radius:14px;}
+  #dexSummary,#leaderSummary{order:3;flex:0 0 auto!important;margin:0 0 10px!important;}
+  #dexList,#leaderList{
+    order:4;
+    flex:0 0 auto!important;
+    min-height:auto!important;
+    max-height:none!important;
+    overflow:visible!important;
+    padding-right:0!important;
+    -webkit-overflow-scrolling:auto!important;
+  }
+  .dexHero{padding:12px;border-radius:18px;margin-bottom:10px;}
+  .dexTitleBig{font-size:24px;}
+  .dexRank{font-size:13px;padding:7px 10px;}
+  .dexStatsGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;}
+  .dexStat{padding:8px;border-radius:14px;}
+  .dexStat b{font-size:22px;}
+  .dexMilestones{gap:6px;}
+  .dexMilestone{min-width:calc(50% - 6px);padding:8px;border-radius:14px;font-size:13px;}
+  .dexMilestone .icon{font-size:20px;margin-bottom:2px;}
+  .dexTrophyShelf{gap:6px;}
+  .dexTrophy{font-size:11px;padding:5px 8px;}
+  .dexQuest{padding:10px 12px;border-radius:16px;font-size:13px;}
+  .dexRootGrid{display:grid!important;grid-template-columns:1fr!important;gap:10px!important;}
+  .dexRoot{padding:11px;border-radius:18px;overflow:hidden;}
+  .dexRootName{font-size:19px;}
+  .dexWord,.dexUnknown,.dexWordMore{font-size:13px;padding:7px 10px;border-radius:999px;}
+  .dexWord small{font-size:11px;}
+
+  .leaderTabs{order:2;position:sticky;top:0;z-index:81;background:rgba(255,250,242,.98);margin:0 -12px 0!important;padding:8px 12px 4px!important;border-bottom:1px solid var(--line);}
+  #leaderModal .actions{order:3;top:42px;margin-bottom:10px!important;}
+  #leaderSummary{order:4;}
+  #leaderList{order:5;}
+  .leaderRow{grid-template-columns:38px 1fr 72px;gap:6px;padding:9px;border-radius:16px;}
+  .leaderRank{font-size:20px;}
+  .leaderName{font-size:15px;}
+  .leaderMetric{font-size:12px;}
+  .leaderMetric b{font-size:18px;}
+  .leaderTotal{grid-column:1/-1;padding:7px;}
+
+  #cookedScreen .modal,#stageClear .modal,#shop .modal{
+    width:calc(100vw - 16px);
+    max-height:92dvh;
+    overflow:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+}
+
+@media(max-width:390px){
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr));}
+  #game main>.actions button{flex-basis:100%;}
+  .card .txt{font-size:20px;}
+  .dexWord,.dexUnknown,.dexWordMore{font-size:12px;padding:6px 8px;}
+}
 </style>
 <script id="dex-scroll-fix-js-v52">
 (function(){
