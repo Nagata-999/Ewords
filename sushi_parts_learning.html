@@ -3,122 +3,212 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>英単語の部品を学ぶ｜すしParts</title>
+<title>英単語の語源図鑑｜すしParts</title>
 <style>
-:root{--bg:#fff8ec;--ink:#253238;--muted:#66757f;--card:#fff;--line:#eadcc8;--red:#ff6b6b;--blue:#3b82f6;--green:#22a06b;--gold:#f2b705;--purple:#8b5cf6;--shadow:0 14px 34px rgba(70,45,20,.12)}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(180deg,#fff8ec,#fffef9);color:var(--ink);line-height:1.75}.wrap{max-width:1100px;margin:auto;padding:22px}.hero{border-radius:28px;background:linear-gradient(135deg,#fff,#ffe7bf);padding:34px;box-shadow:var(--shadow);position:relative;overflow:hidden}.hero:after{content:"🍣";position:absolute;right:24px;top:8px;font-size:98px;opacity:.18}h1{margin:0 0 10px;font-size:clamp(30px,5vw,56px);line-height:1.05}.lead{font-size:18px;max-width:760px}.badge{display:inline-block;background:#253238;color:white;border-radius:999px;padding:6px 13px;font-weight:800;margin-bottom:12px}.nav{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}.nav a,.btn{border:0;border-radius:999px;padding:10px 15px;background:#253238;color:#fff;text-decoration:none;font-weight:800;cursor:pointer;box-shadow:0 6px 12px rgba(0,0,0,.08)}.btn.light{background:#fff;color:#253238;border:1px solid var(--line)}section{margin:28px 0;padding:24px;border-radius:24px;background:rgba(255,255,255,.78);box-shadow:var(--shadow);border:1px solid var(--line)}h2{margin-top:0;font-size:30px}h3{margin-bottom:6px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}.part{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:16px;cursor:pointer;transition:.16s}.part:hover{transform:translateY(-3px);box-shadow:var(--shadow)}.part b{display:block;font-size:28px}.part small{color:var(--muted);font-weight:700}.prefix{border-color:#9cc4ff}.root{border-color:#95dfba}.suffix{border-color:#d3b5ff}.rare{border-color:#f2b705;box-shadow:0 0 18px rgba(242,183,5,.28)}.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px}.builder{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.slot{min-width:110px;text-align:center;background:#fff;border:2px dashed #cdbb9e;border-radius:16px;padding:14px;font-weight:900}.word{font-size:34px;font-weight:1000;letter-spacing:.03em}.meaning{font-size:20px;color:#3f4e55}.cards{display:flex;flex-wrap:wrap;gap:10px}.chip{padding:11px 14px;border-radius:14px;background:#fff;border:2px solid var(--line);font-weight:900;cursor:pointer}.chip.sel{background:#253238;color:#fff}.result{margin-top:15px;padding:16px;border-radius:18px;background:#fff7df;border:1px solid #f0d28b;min-height:66px}.table{width:100%;border-collapse:collapse;background:#fff;border-radius:16px;overflow:hidden}.table th,.table td{border-bottom:1px solid var(--line);padding:10px;text-align:left}.table th{background:#fff0d0}.flash{min-height:210px;display:flex;align-items:center;justify-content:center;text-align:center;flex-direction:column}.flash .big{font-size:46px;font-weight:1000}.quiz-option{display:block;width:100%;margin:8px 0;text-align:left;background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px;font-weight:800;cursor:pointer}.ok{border-color:#22a06b!important;background:#e9fff4!important}.ng{border-color:#ff6b6b!important;background:#fff0f0!important}.bar{height:12px;background:#efe2ce;border-radius:999px;overflow:hidden}.bar span{display:block;height:100%;background:linear-gradient(90deg,#ff6b6b,#f2b705,#22a06b);width:0;transition:.3s}.mini{color:var(--muted);font-size:14px}.callout{border-left:8px solid var(--gold);background:#fff8df;border-radius:16px;padding:16px}.footer{text-align:center;color:var(--muted);padding:30px}@media(max-width:650px){.hero{padding:24px}.slot{min-width:80px}.word{font-size:27px}}
+:root{
+  --bg:#fff8ec;--ink:#253238;--muted:#66757f;--card:#fff;--line:#eadcc8;
+  --prefix:#3b82f6;--root:#22a06b;--suffix:#8b5cf6;--rare:#f2b705;--ultra:#ef4444;
+  --shadow:0 14px 34px rgba(70,45,20,.12)
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(180deg,#fff8ec,#fffef9);color:var(--ink);line-height:1.65}
+.wrap{max-width:1120px;margin:auto;padding:18px 14px 44px}
+.hero{border-radius:28px;background:radial-gradient(circle at 88% 16%,rgba(255,255,255,.95),transparent 30%),linear-gradient(135deg,#fff,#ffe7bf);padding:32px;box-shadow:var(--shadow);position:relative;overflow:hidden;border:1px solid var(--line)}
+.hero:after{content:"🍣";position:absolute;right:20px;top:0;font-size:105px;opacity:.16;transform:rotate(8deg)}
+h1{margin:0 0 10px;font-size:clamp(31px,6vw,58px);line-height:1.05;letter-spacing:-.04em}.lead{font-size:18px;max-width:790px}.badge{display:inline-block;background:#253238;color:white;border-radius:999px;padding:6px 13px;font-weight:900;margin-bottom:12px}.nav{position:sticky;top:0;z-index:10;background:rgba(255,248,236,.88);backdrop-filter:blur(10px);display:flex;flex-wrap:wrap;gap:8px;margin:14px -14px 20px;padding:10px 14px;border-bottom:1px solid rgba(234,220,200,.8)}
+.nav a,.btn{border:0;border-radius:999px;padding:10px 14px;background:#253238;color:#fff;text-decoration:none;font-weight:900;cursor:pointer;box-shadow:0 6px 12px rgba(0,0,0,.08);font-size:14px}.btn.light{background:#fff;color:#253238;border:1px solid var(--line)}
+section{margin:22px 0;padding:20px;border-radius:24px;background:rgba(255,255,255,.82);box-shadow:var(--shadow);border:1px solid var(--line)}
+h2{margin:0 0 6px;font-size:clamp(25px,4vw,34px);letter-spacing:-.03em}.sub{margin-top:0;color:var(--muted);font-weight:700}.callout{border-left:8px solid var(--rare);background:#fff8df;border-radius:16px;padding:14px;margin:14px 0;font-weight:800}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.tab{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:8px 12px;font-weight:900;cursor:pointer}.tab.active{background:#253238;color:#fff}.tools{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.search{flex:1;min-width:210px;border:2px solid var(--line);border-radius:999px;padding:11px 14px;font-size:16px;background:#fff}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:14px}.part{background:var(--card);border:2px solid var(--line);border-radius:22px;padding:15px;cursor:pointer;transition:.16s;position:relative;overflow:hidden;min-height:205px}.part:hover{transform:translateY(-2px);box-shadow:var(--shadow)}.part.open{box-shadow:var(--shadow);transform:translateY(-2px)}.part:before{content:"";position:absolute;inset:0 0 auto 0;height:7px;background:var(--line)}.part.prefix:before{background:linear-gradient(90deg,#93c5fd,var(--prefix))}.part.root:before{background:linear-gradient(90deg,#86efac,var(--root))}.part.suffix:before{background:linear-gradient(90deg,#ddd6fe,var(--suffix))}.part.rare:before{background:linear-gradient(90deg,#fff1a6,#f2b705,#ff8a00)}.part.ultra:before{background:linear-gradient(90deg,#ef4444,#f2b705,#8b5cf6)}.part.rare,.part.ultra{border-color:#f2b705;background:linear-gradient(180deg,#fffdf0,#fff)}.part.ultra{border-color:#ef4444}.topline{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.tag{font-size:11px;font-weight:1000;border-radius:999px;padding:4px 8px;border:1px solid var(--line);background:#fff;color:var(--muted);white-space:nowrap}.tag.rare{background:#fff7ca;color:#9a6b00;border-color:#f2b705}.tag.ultra{background:#fff0f0;color:#b91c1c;border-color:#ef4444}.part b.term{display:block;font-size:34px;line-height:1.05;letter-spacing:-.04em}.meaning{font-weight:900;margin:6px 0 10px;color:#37474f}.stars{font-size:13px;color:#b8860b;font-weight:900}.examples{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.exword{background:#f8fafc;border:1px solid #e5e7eb;border-radius:12px;padding:6px 8px;font-size:12px;font-weight:850;line-height:1.28}.exword small{display:block;color:#697780;font-weight:750}.wordLine{display:block}.morph{border-bottom:2px dotted #f2b705;cursor:help;border-radius:5px;padding:0 1px}.morph:hover,.morph:focus{background:#fff3cd;outline:none}.tip{position:fixed;z-index:99;background:#263238;color:#fff;border-radius:12px;padding:8px 10px;font-size:13px;font-weight:900;box-shadow:0 10px 24px rgba(0,0,0,.2);max-width:220px;pointer-events:none;opacity:0;transform:translateY(4px);transition:.12s}.tip.show{opacity:1;transform:translateY(0)}.more{display:none;margin-top:12px;border-top:1px dashed var(--line);padding-top:10px}.part.open .more{display:block;animation:fade .18s ease both}.note{background:#fff8ef;border:1px solid #ffd0bd;border-radius:14px;padding:9px 10px;font-size:13px;font-weight:800}.miniTitle{font-size:12px;color:var(--muted);font-weight:1000;margin:0 0 6px}.pillList{display:flex;gap:6px;flex-wrap:wrap}.pillList span{font-size:12px;background:#263238;color:#fff;border-radius:999px;padding:4px 8px;font-weight:900}.typeLabel{font-size:12px;color:var(--muted);font-weight:900}.count{position:absolute;right:14px;bottom:12px;color:#a3a3a3;font-weight:900;font-size:12px}.listGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}.wordCard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px}.wordCard b{font-size:20px}.wordCard small{display:block;color:var(--muted);font-weight:800}.wordCard .parts{margin-top:7px;font-size:12px;font-weight:900;color:#8a5a00;background:#fff8df;border-radius:999px;padding:4px 8px;display:inline-block}.gameBox{background:radial-gradient(circle at top,#fff7c2,#fff 50%,#fff1e3);border:3px solid #ffd36b;text-align:center}.gameBox h2{font-size:34px}.gameBtn{display:inline-block;background:#e65100;color:#fff;text-decoration:none;font-weight:1000;border-radius:999px;padding:14px 22px;box-shadow:0 10px 18px rgba(230,81,0,.2);margin-top:10px}.footer{text-align:center;color:var(--muted);padding:24px}.hiddenByFilter{display:none!important}@keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}@media(max-width:650px){.wrap{padding:12px 10px 36px}.hero{padding:24px}.hero:after{font-size:80px}.grid{grid-template-columns:1fr;gap:12px}.part{min-height:0}.part b.term{font-size:33px}.examples{max-height:none}.exword{font-size:12px;padding:5px 7px}.nav{margin-left:-10px;margin-right:-10px;padding-left:10px}.nav a{font-size:13px;padding:8px 10px}section{padding:16px}}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header class="hero">
-  <span class="badge">すしParts 学習記事</span>
-  <h1>英単語は「部品」で覚える</h1>
-  <p class="lead">英単語は丸暗記だけでなく、<b>接頭辞・語根・接尾辞</b>に分けると一気に覚えやすくなる。ここでは、ゲームで使う部品を押しながら学べる。</p>
+  <span class="badge">🍣 すしParts 語源図鑑</span>
+  <h1>部品で覚える英単語</h1>
 </header>
 <nav class="nav">
-  <a href="#basic">基本</a><a href="#prefix">接頭辞</a><a href="#roots">語根</a><a href="#suffix">接尾辞</a><a href="#builder">組み立て</a><a href="#quiz">確認クイズ</a>
+  <a href="#prefix">接頭辞</a><a href="#roots">語根</a><a href="#suffix">接尾辞</a><a href="#rare">レア語源</a><a href="#wordlist">語源単語リスト</a><a href="#game">ゲームへ</a>
 </nav>
-
-<section id="basic">
-<h2>1. 英単語の3つの部品</h2>
-<div class="grid">
-  <div class="part prefix"><small>Prefix</small><b>接頭辞</b><p>単語の前につく。「外へ」「再び」「反対」など、方向や否定を足す。</p></div>
-  <div class="part root"><small>Root</small><b>語根</b><p>単語の中心。「見る」「運ぶ」「書く」など、意味の核になる。</p></div>
-  <div class="part suffix"><small>Suffix</small><b>接尾辞</b><p>単語の後ろにつく。名詞・形容詞・人など、品詞や意味を変える。</p></div>
-</div>
-<div class="callout"><b>コツ：</b>まず語根を覚える。語根が分かると、知らない単語でも意味を推測できる。</div>
+<section>
+  <h2>読み方</h2>
+  <p class="sub">カード上に例語をたっぷり載せています。スマホでは、気になるカードを押すだけでその場に語源メモが開きます。</p>
+  <div class="callout">コツ：最初から全部覚えなくていい。<b>ex = 外へ</b>、<b>spect = 見る</b>、<b>-tion = こと</b>のように、1つのイメージで大量の単語をつなげる。</div>
+  <div class="tools"><input id="search" class="search" placeholder="検索：pseudo / 戦争 / export など"><button class="btn light" id="openAll">全部開く</button><button class="btn light" id="closeAll">全部閉じる</button></div>
 </section>
-
 <section id="prefix">
-<h2>2. 接頭辞カード</h2>
-<p>カードを押すと、代表語とイメージが出る。</p>
-<div class="grid" id="prefixGrid"></div>
-<div class="result" id="prefixInfo">接頭辞カードを押してみよう。</div>
+  <h2>接頭辞カード</h2>
+  <p class="sub">単語の前につく部品。方向・否定・程度を決める。</p>
+  <div class="grid" id="prefixGrid"></div>
 </section>
-
 <section id="roots">
-<h2>3. 語根カード</h2>
-<p>語根は「単語の心臓」。同じ語根から大量の単語が作れる。</p>
-<div class="grid" id="rootGrid"></div>
-<div class="result" id="rootInfo">語根カードを押してみよう。</div>
+  <h2>語根カード</h2>
+  <p class="sub">単語の中心。ここが分かると、知らない単語でも意味を推測しやすい。</p>
+  <div class="grid" id="rootGrid"></div>
 </section>
-
 <section id="suffix">
-<h2>4. 接尾辞カード</h2>
-<div class="grid" id="suffixGrid"></div>
-<div class="result" id="suffixInfo">接尾辞カードを押してみよう。</div>
+  <h2>接尾辞カード</h2>
+  <p class="sub">単語の後ろにつく部品。品詞やニュアンスを変える。</p>
+  <div class="grid" id="suffixGrid"></div>
 </section>
-
-<section id="builder">
-<h2>5. 部品を組み立ててみる</h2>
-<p>下のカードを押して、単語を完成させよう。正解候補：report / export / transport / describe / description / subscribe / subscription / invisible / construction / information</p>
-<div class="builder"><div class="slot" id="s1">?</div><div class="slot" id="s2">?</div><div class="slot" id="s3">?</div><div class="slot" id="s4">?</div></div>
-<div class="cards" id="buildCards" style="margin-top:16px"></div>
-<p><button class="btn" onclick="checkBuild()">組み立てる</button> <button class="btn light" onclick="clearBuild()">リセット</button></p>
-<div class="result" id="buildResult">例：<b>sub + scribe + tion</b> → subscription</div>
+<section id="rare">
+  <h2>レア語源カード</h2>
+  <p class="sub">belli、pseudo、xen、luc など、知っていると一気に語彙が楽しくなる語源。レア色カードです。</p>
+  <div class="grid" id="rareGrid"></div>
 </section>
-
-<section>
-<h2>6. 派生語の考え方</h2>
-<div class="panel">
-  <div class="word">subscribe → subscription → subscriber</div>
-  <p class="meaning">subscribe は「下に書く」から「署名する・登録する」。そこに <b>-tion</b> がつくと「登録」、<b>-er</b> がつくと「登録者」。</p>
-</div>
-<table class="table" style="margin-top:14px"><thead><tr><th>部品</th><th>単語</th><th>意味</th></tr></thead><tbody>
-<tr><td>de + scribe</td><td>describe</td><td>描写する</td></tr>
-<tr><td>de + scribe + tion</td><td>description</td><td>描写・説明</td></tr>
-<tr><td>in + visible</td><td>invisible</td><td>見えない</td></tr>
-<tr><td>con + struct + tion</td><td>construction</td><td>建設</td></tr>
-<tr><td>in + form + ation</td><td>information</td><td>情報</td></tr>
-</tbody></table>
+<section id="wordlist">
+  <h2>語源をたっぷり使った単語リスト</h2>
+  <div class="listGrid" id="wordList"></div>
 </section>
-
-<section>
-<h2>7. フラッシュカード</h2>
-<div class="panel flash" id="flash"><div class="big">port</div><div>運ぶ</div><p>import / export / transport / portable</p></div>
-<p><button class="btn" onclick="nextFlash()">次のカード</button></p>
+<section id="game" class="gameBox">
+  <h2>語源を覚えたら挑戦</h2>
+  <p><b>🍣 すしParts Rogue</b><br>学んだ部品を実際に組み合わせて、単語を作るゲームです。</p>
+  <a class="gameBtn" href="sushi_parts_rogue_supabase_dex_v4_9_leaderboard.html">ゲームを始める</a>
 </section>
-
-<section id="quiz">
-<h2>8. 確認クイズ</h2>
-<p>正解すると理解度ゲージが伸びる。</p>
-<div class="bar"><span id="bar"></span></div>
-<div class="panel" style="margin-top:16px"><h3 id="qText"></h3><div id="qOpts"></div><div id="qMsg" class="result"></div></div>
-</section>
-
-<section>
-<h2>9. まず覚えたい部品リスト</h2>
-<table class="table"><thead><tr><th>種類</th><th>部品</th><th>意味</th><th>例</th></tr></thead><tbody id="listBody"></tbody></table>
-</section>
-
-<div class="footer">🍣 すしParts：単語を丸暗記から発見へ</div>
+<div class="footer">🍣 すしParts：丸暗記から、発見へ。</div>
 </div>
 <script>
-const prefixes=[['re','再び・後ろ','report, rebuild, review'],['ex','外へ','export, exit, exclude'],['im/in','中へ・否定','import, invisible, impossible'],['trans','越えて','transport, translate'],['sub','下に','subscribe, subway'],['pre','前に','predict, preview'],['de','下へ・離れて','describe, decrease'],['con/com','共に','connect, construct, combine'],['dis','離れて・否定','dislike, disappear'],['anti','反対','antibiotic, antiwar']];
-const roots=[['port','運ぶ','import, export, transport, portable'],['spect','見る','respect, inspect, suspect, prospect'],['scribe/script','書く','describe, subscribe, manuscript'],['dict','言う','predict, dictionary, contradict'],['form','形づくる','inform, transform, uniform'],['struct','組み立てる','construct, structure, instruction'],['vis/vid','見る','visible, invisible, video'],['graph','書く・描く','autograph, biography, paragraph'],['press','押す','express, compress, pressure'],['mit/miss','送る','submit, admit, mission']];
-const suffixes=[['tion/sion','こと・状態','description, expression'],['ation','こと・状態','information, transportation'],['able/ible','できる','portable, visible'],['er/or','人・もの','teacher, actor, subscriber'],['ive','性質を持つ','active, creative'],['al','〜の','personal, cultural'],['less','〜がない','careless, useless'],['ful','〜に満ちた','useful, respectful']];
-function makeGrid(id,data,cls,infoId){const el=document.getElementById(id);data.forEach(x=>{const d=document.createElement('div');d.className='part '+cls;d.innerHTML=`<small>${cls}</small><b>${x[0]}</b><p>${x[1]}</p>`;d.onclick=()=>document.getElementById(infoId).innerHTML=`<b>${x[0]}</b> = ${x[1]}<br>例：${x[2]}`;el.appendChild(d)})}
-makeGrid('prefixGrid',prefixes,'prefix','prefixInfo');makeGrid('rootGrid',roots,'root','rootInfo');makeGrid('suffixGrid',suffixes,'suffix','suffixInfo');
-const valid={
-'re+port': ['report','報告する','re=後ろへ / port=運ぶ → 持ち帰って知らせる'],
-'ex+port':['export','輸出する','ex=外へ / port=運ぶ'],
-'trans+port':['transport','輸送する','trans=越えて / port=運ぶ'],
-'de+scribe':['describe','描写する','de=下へ / scribe=書く'],
-'de+scribe+tion':['description','描写・説明','describe + tion=こと'],
-'sub+scribe':['subscribe','登録する','sub=下に / scribe=書く'],
-'sub+scribe+tion':['subscription','登録・購読','subscribe + tion=こと'],
-'in+visible':['invisible','見えない','in=否定 / vis=見る / ible=できる'],
-'con+struct+tion':['construction','建設','con=共に / struct=組み立てる / tion=こと'],
-'in+form+ation':['information','情報','in=中へ / form=形づくる / ation=こと']
+const DATA={
+ prefix:[
+  {t:'re',m:'再び・後ろへ',lv:'★☆☆☆☆',ex:[['review','復習する'],['rewrite','書き直す'],['return','戻る'],['rebuild','再建する'],['recover','回復する'],['revise','改訂する'],['retell','語り直す'],['replay','再生する']],note:'re は「もう一度」のイメージが強いが、report のように「後ろへ持ち帰る」感覚で説明できるものもある。'},
+  {t:'ex',m:'外へ',lv:'★★☆☆☆',ex:[['export','輸出する'],['exclude','除外する'],['exit','出口・出る'],['expel','追放する'],['extract','抜き出す'],['external','外部の'],['express','表現する'],['expose','さらす']],note:'ex は「外へ」。ここでは e などの変化形は出さず、まず ex だけで覚える。'},
+  {t:'in / im',m:'中へ・否定',lv:'★★☆☆☆',ex:[['import','輸入する'],['inside','内側'],['inject','注入する'],['invisible','見えない'],['impossible','不可能な'],['immortal','不死の'],['inactive','活動していない'],['incorrect','正しくない']],note:'in は「中へ」と「否定」の両方がある。im は p/b/m の前で出やすい形。'},
+  {t:'trans',m:'越えて・向こうへ',lv:'★★★☆☆',ex:[['transport','輸送する'],['translate','翻訳する'],['transform','変形する'],['transmit','送信する'],['transfer','移す'],['transparent','透明な'],['transcontinental','大陸横断の'],['transplant','移植する']],note:'trans は「境界を越える」。transport は場所を越える、translate は言語を越える。'},
+  {t:'sub',m:'下に・下から',lv:'★★☆☆☆',ex:[['subway','地下鉄'],['submarine','潜水艦'],['subscribe','購読する'],['subject','主題・従属させる'],['submerge','沈める'],['subconscious','潜在意識の'],['subordinate','下位の'],['subtitle','字幕']],note:'sub は「下」。subscribe はもともと「下に名前を書く」イメージ。'},
+  {t:'pre',m:'前に',lv:'★☆☆☆☆',ex:[['preview','下見する'],['predict','予測する'],['prepare','準備する'],['previous','前の'],['preschool','就学前の'],['prefix','接頭辞'],['prewar','戦前の'],['prevent','防ぐ']],note:'pre は時間的にも位置的にも「前」。predict は「前もって言う」。'},
+  {t:'de',m:'下へ・離れて・強調',lv:'★★★☆☆',ex:[['decrease','減少する'],['depart','出発する'],['describe','描写する'],['decline','低下する'],['detach','切り離す'],['devalue','価値を下げる'],['decode','解読する'],['depress','落ち込ませる']],note:'de は「下へ」「離れて」。describe は「書き下ろす」から描写する。'},
+  {t:'con / com',m:'共に・完全に',lv:'★★☆☆☆',ex:[['connect','つなぐ'],['combine','結合する'],['construct','建設する'],['communicate','伝達する'],['compare','比較する'],['compile','編集する'],['compress','圧縮する'],['conclude','結論づける']],note:'con/com は「一緒に」。construct は部品を一緒に積む感じ。'},
+  {t:'anti',m:'反対・対抗',lv:'★★☆☆☆',ex:[['antibiotic','抗生物質'],['antiwar','反戦の'],['antibody','抗体'],['antithesis','対立命題'],['antisocial','反社会的な'],['antifreeze','不凍液'],['antivirus','ウイルス対策'],['antidote','解毒剤']],note:'anti は「反対」。英語でも理科・社会・医療でよく出る。'},
+  {t:'inter',m:'間に・相互に',lv:'★★☆☆☆',ex:[['international','国際的な'],['interview','面接'],['interact','相互作用する'],['interrupt','遮る'],['intermediate','中間の'],['internet','インターネット'],['interpersonal','対人の'],['intersection','交差点']],note:'inter は「間」。international は nation の間、interview は互いに見る。'},
+  {t:'pro',m:'前へ・賛成して',lv:'★★★☆☆',ex:[['progress','進歩'],['project','計画・投影する'],['promote','促進する'],['produce','生産する'],['protect','守る'],['proceed','進む'],['propose','提案する'],['proactive','積極的な']],note:'pro は「前へ」。賛成派の pro も「前に出て支持する」感じ。'},
+  {t:'contra / counter',m:'反対に',lv:'★★★☆☆',ex:[['contradict','矛盾する'],['contrast','対比'],['contrary','反対の'],['counterattack','反撃'],['counterpart','対応する人・物'],['counterargument','反論'],['counterfeit','偽造の'],['controversy','論争']],note:'contra/counter は「向かい合う」。argument 系と相性がよい。'}
+ ],
+ root:[
+  {t:'port',m:'運ぶ',lv:'★☆☆☆☆',ex:[['import','輸入する'],['export','輸出する'],['transport','輸送する'],['portable','持ち運べる'],['report','報告する'],['support','支える'],['portfolio','作品集'],['porter','運搬人']],note:'port は「運ぶ」。report は「持ち帰って知らせる」と考えると覚えやすい。'},
+  {t:'spect',m:'見る',lv:'★★☆☆☆',ex:[['inspect','調査する'],['respect','尊敬する'],['suspect','疑う'],['prospect','見込み'],['spectator','観客'],['spectacle','光景'],['spectacular','壮観な'],['retrospect','回顧']],note:'spect は「見る」。respect は「振り返って見る」から、相手を重んじる。'},
+  {t:'scribe / script',m:'書く',lv:'★★☆☆☆',ex:[['describe','描写する'],['subscribe','購読する'],['prescribe','処方する'],['manuscript','原稿'],['script','台本'],['inscription','碑文'],['transcribe','書き写す'],['scribble','走り書きする']],note:'scribe/script は「書く」。manuscript は manu=手 + script=書かれたもの。'},
+  {t:'dict',m:'言う',lv:'★★☆☆☆',ex:[['predict','予測する'],['dictionary','辞書'],['contradict','矛盾する'],['dictate','口述する・命令する'],['verdict','評決'],['addict','中毒者'],['edict','布告'],['benediction','祝福']],note:'dict は「言う」。predict は「前もって言う」。'},
+  {t:'form',m:'形づくる',lv:'★☆☆☆☆',ex:[['form','形'],['inform','知らせる'],['transform','変える'],['uniform','制服'],['perform','実行する'],['reform','改革する'],['formula','公式'],['formation','形成']],note:'form は「形」。information は「心の中に形を作るもの」と考えると面白い。'},
+  {t:'struct',m:'積む・組み立てる',lv:'★★☆☆☆',ex:[['construct','建設する'],['structure','構造'],['instruction','指示'],['destroy','破壊する'],['obstruct','妨げる'],['infrastructure','インフラ'],['reconstruct','再建する'],['instrument','道具']],note:'struct は「積み上げる」。construct は共に積む、obstruct は前に積んで邪魔する。'},
+  {t:'vis / vid',m:'見る',lv:'★★☆☆☆',ex:[['visible','見える'],['invisible','見えない'],['vision','視力・構想'],['video','映像'],['evidence','証拠'],['revise','改訂する'],['supervise','監督する'],['visual','視覚の']],note:'vis/vid も「見る」。video と evidence が同じ仲間だと分かると強い。'},
+  {t:'mit / miss',m:'送る',lv:'★★★☆☆',ex:[['submit','提出する'],['transmit','送信する'],['admit','認める'],['permit','許可する'],['mission','任務'],['message','メッセージ'],['dismiss','解散させる'],['commit','約束する']],note:'mit/miss は「送る」。submit は下に送る、transmit は向こうへ送る。'},
+  {t:'ject',m:'投げる',lv:'★★★☆☆',ex:[['project','投げ出す・計画'],['reject','拒絶する'],['inject','注入する'],['object','物体・反対する'],['subject','主題'],['eject','追い出す'],['trajectory','軌道'],['conjecture','推測']],note:'ject は「投げる」。project は前へ投げる、reject は投げ返す。'},
+  {t:'press',m:'押す',lv:'★★☆☆☆',ex:[['press','押す'],['express','表現する'],['compress','圧縮する'],['depress','落ち込ませる'],['impress','印象づける'],['oppress','抑圧する'],['pressure','圧力'],['suppress','抑える']],note:'press は「押す」。express は外へ押し出す＝表現する。'},
+  {t:'duc / duct',m:'導く',lv:'★★★☆☆',ex:[['produce','生産する'],['introduce','紹介する'],['reduce','減らす'],['conduct','行う・導く'],['education','教育'],['deduct','差し引く'],['induce','誘導する'],['aqueduct','水道橋']],note:'duc/duct は「導く」。education は能力を外へ導き出すイメージ。'},
+  {t:'tract',m:'引く',lv:'★★★☆☆',ex:[['attract','引きつける'],['extract','抜き出す'],['contract','契約・縮む'],['subtract','引き算する'],['distract','注意をそらす'],['tractor','トラクター'],['abstract','抽象的な'],['retreat','退く']],note:'tract は「引く」。extract は外へ引き出す。'}
+ ],
+ suffix:[
+  {t:'-tion / -sion',m:'こと・状態',lv:'★☆☆☆☆',ex:[['description','描写'],['expression','表現'],['construction','建設'],['decision','決定'],['discussion','議論'],['permission','許可'],['education','教育'],['connection','接続']],note:'動詞を名詞にする代表格。「〜すること」と考えると強い。'},
+  {t:'-able / -ible',m:'できる・されうる',lv:'★☆☆☆☆',ex:[['portable','持ち運べる'],['visible','見える'],['possible','可能な'],['readable','読みやすい'],['reliable','信頼できる'],['flexible','柔軟な'],['edible','食べられる'],['credible','信じられる']],note:'able/ible は「できる」。credible は cred=信じる + ible=できる。'},
+  {t:'-er / -or',m:'人・もの',lv:'★☆☆☆☆',ex:[['teacher','教師'],['actor','俳優'],['visitor','訪問者'],['subscriber','購読者'],['creator','創造者'],['collector','収集家'],['speaker','話し手'],['director','監督']],note:'「〜する人・もの」。ゲームの図鑑名と相性がよい。'},
+  {t:'-ive',m:'性質を持つ',lv:'★★☆☆☆',ex:[['active','活動的な'],['creative','創造的な'],['effective','効果的な'],['attractive','魅力的な'],['sensitive','敏感な'],['productive','生産的な'],['aggressive','攻撃的な'],['massive','巨大な']],note:'形容詞を作る。act + ive で「動く性質を持つ」。'},
+  {t:'-al',m:'〜の・〜に関する',lv:'★☆☆☆☆',ex:[['personal','個人の'],['cultural','文化の'],['natural','自然の'],['visual','視覚の'],['global','地球規模の'],['medical','医療の'],['logical','論理的な'],['annual','年一回の']],note:'名詞を形容詞にすることが多い。culture → cultural。'},
+  {t:'-less',m:'〜がない',lv:'★☆☆☆☆',ex:[['careless','不注意な'],['useless','役に立たない'],['homeless','家のない'],['endless','終わりのない'],['hopeless','希望のない'],['fearless','恐れを知らない'],['meaningless','無意味な'],['wireless','無線の']],note:'less は「少ない・ない」。hopeless は希望がない。'},
+  {t:'-ful',m:'〜に満ちた',lv:'★☆☆☆☆',ex:[['useful','役に立つ'],['careful','注意深い'],['hopeful','希望に満ちた'],['powerful','力強い'],['beautiful','美しい'],['respectful','敬意ある'],['successful','成功した'],['thoughtful','思いやりのある']],note:'full と同じ感覚。「〜でいっぱい」。'},
+  {t:'-ity',m:'性質・状態',lv:'★★☆☆☆',ex:[['activity','活動'],['ability','能力'],['reality','現実'],['quality','質'],['security','安全'],['diversity','多様性'],['identity','正体・同一性'],['responsibility','責任']],note:'形容詞などを名詞にする。active → activity、possible → possibility。'}
+ ],
+ rare:[
+  {t:'pseudo',m:'偽の・疑似の',lv:'👑 超レア',kind:'ultra',ex:[['pseudonym','偽名・筆名'],['pseudoscience','疑似科学'],['pseudo-intellectual','知識人ぶった人'],['pseudocode','疑似コード'],['pseudoclassic','古典風の'],['pseudomorphic','仮晶の']],note:'ギリシャ語系で「false」。pseudo が見えたら「本物っぽいが本物ではない」と考える。'},
+  {t:'belli',m:'戦争',lv:'👑 超レア',kind:'ultra',ex:[['belligerent','好戦的な'],['bellicose','好戦的な'],['antebellum','戦前の'],['postbellum','戦後の'],['bellipotent','戦力のある'],['rebellion','反乱 ※別系統と絡む']],note:'ラテン語 bellum = 戦争。beautiful の bel とは無関係。ここがマニアックで面白い。'},
+  {t:'luc / lum',m:'光',lv:'★★★★☆',ex:[['lucid','明快な'],['translucent','半透明の'],['elucidate','明らかにする'],['luminous','光る'],['illuminate','照らす'],['lucifer','明けの明星・光をもたらす者'],['luminary','著名人・発光体'],['luminescent','発光する']],note:'光が当たると「分かる」。elucidate は「明らかにする」で論説文に便利。'},
+  {t:'mort',m:'死',lv:'★★★★☆',ex:[['mortality','死亡率・死すべき運命'],['immortal','不死の'],['mortal','死すべき'],['mortgage','抵当・住宅ローン'],['postmortem','死後の'],['mortician','葬儀屋'],['mortify','恥をかかせる'],['moribund','瀕死の']],note:'mort は「死」。immortal は in=否定 + mortal=死すべき。'},
+  {t:'viv / vit',m:'生きる・生命',lv:'★★★★☆',ex:[['vivid','生き生きした'],['revive','復活する'],['survive','生き残る'],['vital','生命の・重要な'],['vitamin','ビタミン'],['vivacious','快活な'],['convivial','陽気な'],['vivisection','生体解剖']],note:'viv/vit は生命感。vivid は「生きているように鮮やか」。'},
+  {t:'phil',m:'愛する',lv:'★★★☆☆',ex:[['philosophy','哲学'],['philanthropy','慈善'],['philology','文献学'],['bibliophile','愛書家'],['Anglophile','英国好き'],['Philadelphia','友愛の町'],['philately','切手収集'],['philharmonic','音楽愛好の']],note:'philo = 愛する。philosophy は sophia=知恵を愛する。'},
+  {t:'soph',m:'知恵',lv:'★★★★☆',ex:[['philosophy','哲学'],['sophisticated','洗練された'],['sophomore','大学2年生'],['sophistry','詭弁'],['sophist','詭弁家・賢者'],['theosophy','神智学']],note:'soph は「知恵」。sophisticated は単純ではなく、知恵で加工された感じ。'},
+  {t:'xen',m:'外国・異質なもの',lv:'★★★★☆',ex:[['xenophobia','外国人嫌悪'],['xenophile','外国好き'],['xenon','キセノン'],['xenogenesis','異種発生'],['xenolith','捕獲岩'],['xenotransplant','異種移植']],note:'xen は「見知らぬもの」。国際系・社会問題の語彙で刺さる。'},
+  {t:'path',m:'感情・苦しみ',lv:'★★★☆☆',ex:[['sympathy','同情'],['empathy','共感'],['apathy','無関心'],['pathology','病理学'],['pathetic','哀れな'],['telepathy','テレパシー'],['antipathy','反感'],['psychopath','精神病質者']],note:'path は「感じる・苦しむ」。empathy/sympathy/apathy を一気に整理できる。'},
+  {t:'cred',m:'信じる',lv:'★★★☆☆',ex:[['credit','信用・単位'],['credible','信頼できる'],['incredible','信じられない'],['creed','信条'],['credential','資格証明'],['credulous','だまされやすい'],['accredit','認定する'],['discredit','信用を落とす']],note:'cred は「信じる」。credit card は信用で払うカード。'},
+  {t:'man / manu',m:'手',lv:'★★★★☆',ex:[['manual','手の・手引き'],['manufacture','製造する'],['manuscript','原稿'],['manipulate','操作する'],['maneuver','巧みに動かす'],['emancipate','解放する'],['manacle','手かせ'],['manicure','マニキュア']],note:'manu は「手」。manufacture はもともと手で作ること。'},
+  {t:'carn',m:'肉',lv:'★★★★☆',ex:[['carnivore','肉食動物'],['carnival','カーニバル'],['carnal','肉体の'],['incarnate','肉体を持った'],['reincarnation','輪廻転生'],['carnage','大虐殺'],['carnation','カーネーション'],['chili con carne','肉入りチリ']],note:'carn は「肉」。incarnate は in=中に + carn=肉、つまり肉体化する。'},
+  {t:'crypt',m:'隠す',lv:'★★★★☆',ex:[['cryptic','謎めいた'],['encrypt','暗号化する'],['cryptography','暗号学'],['cryptocurrency','暗号資産'],['apocryphal','真偽不明の'],['crypt','地下室・納骨堂'],['decrypt','復号する'],['cryptozoic','隠生代の']],note:'crypt は「隠す」。crypto は今の時代に強い語源。'},
+  {t:'omni',m:'すべて',lv:'★★★☆☆',ex:[['omnibus','乗合バス・総集編'],['omnivore','雑食動物'],['omniscient','全知の'],['omnipotent','全能の'],['omnipresent','遍在する'],['omnilingual','全言語対応の'],['omnidirectional','全方向性の'],['omniverse','全宇宙']],note:'omni は「全部」。ゲームのレア接頭辞としてもかなり映える。'},
+  {t:'bene / mal',m:'善・悪',lv:'★★★☆☆',ex:[['benefit','利益'],['benevolent','慈悲深い'],['benediction','祝福'],['malfunction','故障'],['malice','悪意'],['malnutrition','栄養失調'],['malpractice','医療過誤'],['malignant','悪性の']],note:'bene は善、mal は悪。対で覚えると一気に強い。'},
+  {t:'chron',m:'時間',lv:'★★★☆☆',ex:[['chronology','年表'],['chronicle','年代記'],['synchronize','同期する'],['chronic','慢性的な'],['anachronism','時代錯誤'],['chronometer','精密時計'],['chronological','年代順の'],['chronophage','時間泥棒']],note:'chron は「時間」。chronic disease は長い時間続く病気。'},
+  {t:'astro',m:'星',lv:'★★★☆☆',ex:[['astronomy','天文学'],['astronaut','宇宙飛行士'],['astrology','占星術'],['asteroid','小惑星'],['disaster','災害'],['astral','星の'],['astrophysics','天体物理学'],['asterisk','星印']],note:'astro は「星」。disaster はもとは星回りの悪さ、という語源話が面白い。'}
+ ]
 };
-const buildParts=['re','ex','trans','de','sub','in','con','port','scribe','visible','struct','form','tion','ation'];let chosen=[];
-function renderBuild(){document.querySelectorAll('.slot').forEach((s,i)=>s.textContent=chosen[i]||'?');const box=document.getElementById('buildCards');box.innerHTML='';buildParts.forEach(p=>{const c=document.createElement('button');c.className='chip'+(chosen.includes(p)?' sel':'');c.textContent=p;c.onclick=()=>{if(chosen.includes(p)){chosen=chosen.filter(x=>x!==p)}else if(chosen.length<4)chosen.push(p);renderBuild()};box.appendChild(c)})}
-function checkBuild(){const key=chosen.join('+'),r=valid[key];document.getElementById('buildResult').innerHTML=r?`✨ <b>${r[0]}</b><br>${r[1]}<br><span class="mini">${r[2]}</span>`:`❌ まだ登録されていない組み合わせ。部品の意味から別の組み合わせを試してみよう。`}
-function clearBuild(){chosen=[];renderBuild();document.getElementById('buildResult').textContent='例：sub + scribe + tion → subscription'}renderBuild();
-const flash=[...prefixes,...roots,...suffixes];let fi=0;function nextFlash(){fi=(fi+1)%flash.length;const x=flash[fi];document.getElementById('flash').innerHTML=`<div class="big">${x[0]}</div><div>${x[1]}</div><p>${x[2]}</p>`}
-const quiz=[['port の中心イメージは？',['運ぶ','見る','書く'],0],['「見えない」はどれ？',['invisible','export','dictionary'],0],['-tion の働きは？',['名詞を作る','反対にする','外へ出す'],0],['sub + scribe + tion でできる単語は？',['subscription','transportation','construction'],0],['spect の意味は？',['見る','押す','時間'],0]];let qi=0,score=0;
-function showQ(){const q=quiz[qi%quiz.length];document.getElementById('qText').textContent=q[0];const o=document.getElementById('qOpts');o.innerHTML='';q[1].forEach((t,i)=>{const b=document.createElement('button');b.className='quiz-option';b.textContent=t;b.onclick=()=>{b.classList.add(i===q[2]?'ok':'ng');document.getElementById('qMsg').textContent=i===q[2]?'正解！':'惜しい。もう一度部品の意味を確認しよう。';if(i===q[2])score++;document.getElementById('bar').style.width=Math.min(100,score*20)+'%';setTimeout(()=>{qi++;showQ()},900)};o.appendChild(b)})}showQ();
-const list=[...prefixes.map(x=>['接頭辞',...x]),...roots.map(x=>['語根',...x]),...suffixes.map(x=>['接尾辞',...x])];document.getElementById('listBody').innerHTML=list.map(x=>`<tr><td>${x[0]}</td><td><b>${x[1]}</b></td><td>${x[2]}</td><td>${x[3]}</td></tr>`).join('');
+const WORDS=[
+ ['transportation','trans + port + ation','輸送'],['subscription','sub + script + ion','購読・登録'],['invisible','in + vis + ible','見えない'],['construction','con + struct + ion','建設'],['description','de + script + ion','描写'],['prediction','pre + dict + ion','予測'],['contradiction','contra + dict + ion','矛盾'],['inspection','in + spect + ion','検査'],['respectful','re + spect + ful','敬意ある'],['spectator','spect + ator','観客'],['manuscript','manu + script','原稿'],['prescription','pre + script + ion','処方箋'],['transmission','trans + miss + ion','送信'],['permission','per + miss + ion','許可'],['rejection','re + ject + ion','拒絶'],['injection','in + ject + ion','注射'],['projection','pro + ject + ion','投影・計画'],['expression','ex + press + ion','表現'],['impression','im + press + ion','印象'],['compression','com + press + ion','圧縮'],['production','pro + duc + tion','生産'],['introduction','intro + duc + tion','紹介'],['education','e + duc + ation','教育'],['attraction','at + tract + ion','魅力'],['extraction','ex + tract + ion','抽出'],['subtraction','sub + tract + ion','引き算'],['transformation','trans + form + ation','変形'],['information','in + form + ation','情報'],['reformation','re + form + ation','改革'],['pseudoscience','pseudo + science','疑似科学'],['pseudonym','pseudo + nym','偽名・筆名'],['belligerent','belli + gerent','好戦的な'],['antebellum','ante + bellum','戦前の'],['elucidate','e + luc + id + ate','明らかにする'],['translucent','trans + luc + ent','半透明の'],['immortal','im + mort + al','不死の'],['mortality','mort + al + ity','死亡率・死すべき運命'],['revive','re + viv + e','復活する'],['survive','sur + viv + e','生き残る'],['philosophy','phil + soph + y','哲学'],['philanthropy','phil + anthrop + y','慈善'],['xenophobia','xeno + phobia','外国人嫌悪'],['xenophile','xeno + phil + e','外国好き'],['sympathy','sym + path + y','同情'],['empathy','em + path + y','共感'],['apathy','a + path + y','無関心'],['credible','cred + ible','信頼できる'],['credential','cred + ential','資格証明'],['manufacture','manu + fact + ure','製造'],['manipulate','manu + pul + ate','操作する'],['carnivore','carni + vore','肉食動物'],['incarnation','in + carn + ation','肉体化・化身'],['cryptography','crypto + graph + y','暗号学'],['encryption','en + crypt + ion','暗号化'],['omniscient','omni + scient','全知の'],['omnipresent','omni + present','遍在する'],['benevolent','bene + vol + ent','慈悲深い'],['malfunction','mal + function','故障する'],['chronology','chrono + logy','年表・年代学'],['synchronize','syn + chron + ize','同期する'],['astronomy','astro + nomy','天文学'],['astronaut','astro + naut','宇宙飛行士']
+];
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+const MORPHEMES={
+ re:'再び・後ろへ',ex:'外へ',in:'中へ・否定',im:'否定・中へ',trans:'越えて',sub:'下に',pre:'前に',de:'下へ・離れて',con:'共に',com:'共に',anti:'反対',inter:'間に',pro:'前へ',contra:'反対',counter:'反対',
+ port:'運ぶ',spect:'見る',scribe:'書く',script:'書く',dict:'言う',form:'形づくる',struct:'組み立てる',vis:'見る',vid:'見る',mit:'送る',miss:'送る',ject:'投げる',press:'押す',duc:'導く',duct:'導く',tract:'引く',
+ tion:'こと・状態',sion:'こと・状態',ion:'こと・状態',ation:'こと・状態',able:'できる',ible:'できる',er:'人・もの',or:'人・もの',ive:'性質を持つ',al:'〜の',less:'〜がない',ful:'〜に満ちた',ity:'性質・状態',
+ pseudo:'偽の',belli:'戦争',bellum:'戦争',luc:'光',lum:'光',mort:'死',viv:'生きる',vit:'生命',phil:'愛する',soph:'知恵',xeno:'外国・異質',xen:'外国・異質',path:'感情・苦しみ',cred:'信じる',manu:'手',man:'手',carn:'肉',carni:'肉',crypt:'隠す',crypto:'隠す',omni:'すべて',bene:'善',mal:'悪',chron:'時間',chrono:'時間',astro:'星',graph:'書く',logy:'学問',anthrop:'人間',phobia:'恐れ・嫌悪',phile:'愛好家',vore:'食べるもの',naut:'船乗り',nym:'名前',science:'科学',fact:'作る',ure:'こと・もの',ent:'〜する性質',entail:'',ent:'〜の性質',id:'性質',ate:'〜にする',ent:'〜の性質',y:'こと'};
+const EX_PARTS={
+ review:['re','view'],rewrite:['re','write'],return:['re','turn'],rebuild:['re','build'],recover:['re','cover'],revise:['re','vis','e'],retell:['re','tell'],replay:['re','play'],
+ export:['ex','port'],exclude:['ex','clude'],exit:['ex','it'],expel:['ex','pel'],extract:['ex','tract'],external:['ex','tern','al'],express:['ex','press'],expose:['ex','pose'],
+ import:['im','port'],inside:['in','side'],inject:['in','ject'],invisible:['in','vis','ible'],impossible:['im','possible'],immortal:['im','mort','al'],inactive:['in','act','ive'],incorrect:['in','correct'],
+ transport:['trans','port'],translate:['trans','late'],transform:['trans','form'],transmit:['trans','mit'],transfer:['trans','fer'],transparent:['trans','parent'],transcontinental:['trans','continental'],transplant:['trans','plant'],
+ subway:['sub','way'],submarine:['sub','marine'],subscribe:['sub','scribe'],subject:['sub','ject'],submerge:['sub','merge'],subconscious:['sub','conscious'],subordinate:['sub','ordinate'],subtitle:['sub','title'],
+ preview:['pre','view'],predict:['pre','dict'],prepare:['pre','pare'],previous:['pre','vious'],preschool:['pre','school'],prefix:['pre','fix'],prewar:['pre','war'],prevent:['pre','vent'],
+ decrease:['de','crease'],depart:['de','part'],describe:['de','scribe'],decline:['de','cline'],detach:['de','tach'],devalue:['de','value'],decode:['de','code'],depress:['de','press'],
+ connect:['con','nect'],combine:['com','bine'],construct:['con','struct'],communicate:['com','municate'],compare:['com','pare'],compile:['com','pile'],compress:['com','press'],conclude:['con','clude'],
+ antibiotic:['anti','biotic'],antiwar:['anti','war'],antibody:['anti','body'],antithesis:['anti','thesis'],antisocial:['anti','social'],antifreeze:['anti','freeze'],antivirus:['anti','virus'],antidote:['anti','dote'],
+ international:['inter','nation','al'],interview:['inter','view'],interact:['inter','act'],interrupt:['inter','rupt'],intermediate:['inter','medi','ate'],internet:['inter','net'],interpersonal:['inter','person','al'],intersection:['inter','sect','ion'],
+ progress:['pro','gress'],project:['pro','ject'],promote:['pro','mote'],produce:['pro','duc','e'],protect:['pro','tect'],proceed:['pro','ceed'],propose:['pro','pose'],proactive:['pro','act','ive'],
+ contradict:['contra','dict'],contrast:['contra','st'],contrary:['contra','ry'],counterattack:['counter','attack'],counterpart:['counter','part'],counterargument:['counter','argument'],counterfeit:['counter','feit'],controversy:['contra','versy'],
+ portable:['port','able'],report:['re','port'],support:['sub','port'],portfolio:['port','folio'],porter:['port','er'],
+ inspect:['in','spect'],respect:['re','spect'],suspect:['sub','spect'],prospect:['pro','spect'],spectator:['spect','ator'],spectacle:['spect','acle'],spectacular:['spect','acular'],retrospect:['retro','spect'],
+ prescribe:['pre','scribe'],manuscript:['manu','script'],script:['script'],inscription:['in','script','ion'],transcribe:['trans','scribe'],scribble:['scribble'],dictionary:['dict','ion','ary'],dictate:['dict','ate'],verdict:['ver','dict'],addict:['ad','dict'],edict:['e','dict'],benediction:['bene','dict','ion'],
+ visible:['vis','ible'],vision:['vis','ion'],video:['vid','eo'],evidence:['e','vid','ence'],supervise:['super','vis','e'],visual:['vis','ual'],submit:['sub','mit'],admit:['ad','mit'],permit:['per','mit'],mission:['miss','ion'],message:['mess','age'],dismiss:['dis','miss'],commit:['com','mit'],
+ reject:['re','ject'],object:['ob','ject'],eject:['e','ject'],trajectory:['tra','ject','ory'],conjecture:['con','ject','ure'],pressure:['press','ure'],impress:['im','press'],oppress:['op','press'],suppress:['sub','press'],
+ introduce:['intro','duc','e'],reduce:['re','duc','e'],conduct:['con','duct'],education:['e','duc','ation'],deduct:['de','duct'],induce:['in','duc','e'],aqueduct:['aque','duct'],
+ attract:['at','tract'],contract:['con','tract'],subtract:['sub','tract'],distract:['dis','tract'],tractor:['tract','or'],abstract:['abs','tract'],retreat:['re','treat'],
+ description:['de','script','ion'],expression:['ex','press','ion'],construction:['con','struct','ion'],decision:['de','cis','ion'],discussion:['dis','cuss','ion'],permission:['per','miss','ion'],connection:['con','nect','ion'],readable:['read','able'],reliable:['rely','able'],flexible:['flex','ible'],edible:['ed','ible'],credible:['cred','ible'],teacher:['teach','er'],actor:['act','or'],visitor:['vis','it','or'],subscriber:['sub','scribe','er'],creator:['create','or'],collector:['collect','or'],speaker:['speak','er'],director:['direct','or'],active:['act','ive'],creative:['create','ive'],effective:['effect','ive'],attractive:['at','tract','ive'],sensitive:['sense','itive'],productive:['pro','duct','ive'],aggressive:['aggress','ive'],massive:['mass','ive'],personal:['person','al'],cultural:['culture','al'],natural:['nature','al'],global:['glob','al'],medical:['medic','al'],logical:['logic','al'],annual:['annu','al'],careless:['care','less'],useless:['use','less'],homeless:['home','less'],endless:['end','less'],hopeless:['hope','less'],fearless:['fear','less'],meaningless:['meaning','less'],wireless:['wire','less'],useful:['use','ful'],careful:['care','ful'],hopeful:['hope','ful'],powerful:['power','ful'],beautiful:['beauty','ful'],respectful:['re','spect','ful'],successful:['success','ful'],thoughtful:['thought','ful'],activity:['act','ive','ity'],ability:['able','ity'],reality:['real','ity'],quality:['qual','ity'],security:['secure','ity'],diversity:['diverse','ity'],identity:['ident','ity'],responsibility:['response','ible','ity'],
+ pseudonym:['pseudo','nym'],pseudoscience:['pseudo','science'],'pseudo-intellectual':['pseudo','intellectual'],pseudocode:['pseudo','code'],pseudoclassic:['pseudo','classic'],pseudomorphic:['pseudo','morphic'],belligerent:['belli','gerent'],bellicose:['belli','cose'],antebellum:['ante','bellum'],postbellum:['post','bellum'],bellipotent:['belli','potent'],rebellion:['re','bell','ion'],lucid:['luc','id'],translucent:['trans','luc','ent'],elucidate:['e','luc','id','ate'],luminous:['lum','in','ous'],illuminate:['il','lum','in','ate'],lucifer:['luc','ifer'],luminary:['lum','in','ary'],luminescent:['lum','in','escent'],mortality:['mort','al','ity'],mortal:['mort','al'],mortgage:['mort','gage'],postmortem:['post','mort','em'],mortician:['mort','ician'],mortify:['mort','ify'],moribund:['mori','bund'],vivid:['viv','id'],revive:['re','viv','e'],survive:['sur','viv','e'],vital:['vit','al'],vitamin:['vit','amin'],vivacious:['viv','acious'],convivial:['con','viv','ial'],vivisection:['vivi','sect','ion'],philosophy:['phil','soph','y'],philanthropy:['phil','anthrop','y'],philology:['phil','logy'],bibliophile:['biblio','phile'],anglophile:['anglo','phile'],philadelphia:['phil','adelph','ia'],philately:['phil','ately'],philharmonic:['phil','harmonic'],sophisticated:['soph','istic','ated'],sophomore:['soph','omore'],sophistry:['soph','istry'],sophist:['soph','ist'],theosophy:['theo','soph','y'],xenophobia:['xeno','phobia'],xenophile:['xeno','phile'],xenon:['xen','on'],xenogenesis:['xeno','genesis'],xenolith:['xeno','lith'],xenotransplant:['xeno','transplant'],sympathy:['sym','path','y'],empathy:['em','path','y'],apathy:['a','path','y'],pathology:['path','logy'],pathetic:['path','etic'],telepathy:['tele','path','y'],antipathy:['anti','path','y'],psychopath:['psycho','path'],credit:['cred','it'],incredible:['in','cred','ible'],creed:['creed'],credential:['cred','ential'],credulous:['cred','ulous'],accredit:['ac','cred','it'],discredit:['dis','cred','it'],manual:['manu','al'],manufacture:['manu','fact','ure'],manipulate:['manu','pul','ate'],maneuver:['manu','ever'],emancipate:['e','man','cip','ate'],manacle:['man','acle'],manicure:['manu','cure'],carnivore:['carni','vore'],carnival:['carn','ival'],carnal:['carn','al'],incarnate:['in','carn','ate'],reincarnation:['re','in','carn','ation'],carnage:['carn','age'],carnation:['carn','ation'],'chili con carne':['carne'],cryptic:['crypt','ic'],encrypt:['en','crypt'],cryptography:['crypto','graph','y'],cryptocurrency:['crypto','currency'],apocryphal:['apo','crypt','al'],crypt:['crypt'],decrypt:['de','crypt'],cryptozoic:['crypto','zoic'],omnibus:['omni','bus'],omnivore:['omni','vore'],omniscient:['omni','scient'],omnipotent:['omni','potent'],omnipresent:['omni','present'],omnilingual:['omni','lingual'],omnidirectional:['omni','directional'],omniverse:['omni','verse'],benefit:['bene','fit'],benevolent:['bene','vol','ent'],malfunction:['mal','function'],malice:['mal','ice'],malnutrition:['mal','nutrition'],malpractice:['mal','practice'],malignant:['mal','ignant'],chronology:['chrono','logy'],chronicle:['chron','icle'],synchronize:['syn','chron','ize'],chronic:['chron','ic'],anachronism:['ana','chron','ism'],chronometer:['chrono','meter'],chronological:['chrono','log','ical'],chronophage:['chrono','phage'],astronomy:['astro','nomy'],astronaut:['astro','naut'],astrology:['astro','logy'],asteroid:['aster','oid'],disaster:['dis','aster'],astral:['astr','al'],astrophysics:['astro','physics'],asterisk:['aster','isk']
+};
+function partHtml(word){
+ const key=String(word).toLowerCase(); const parts=EX_PARTS[key];
+ if(!parts) return esc(word);
+ return parts.map(p=>{const clean=p.replace(/^-/,''), tip=MORPHEMES[clean.toLowerCase()]; return tip?`<span class="morph" tabindex="0" data-tip="${esc(clean)} = ${esc(tip)}">${esc(p)}</span>`:esc(p)}).join('');
+}
+function renderCard(x,type){
+ const kind=x.kind||type;
+ const tag=kind==='ultra'?'ultra':(type==='rare'?'rare':'');
+ const examples=x.ex.map(([w,j])=>`<span class="exword"><span class="wordLine">${partHtml(w)}</span><small>${esc(j)}</small></span>`).join('');
+ return `<article class="part ${type} ${tag}" data-search="${esc((x.t+' '+x.m+' '+x.ex.map(e=>e.join(' ')).join(' ')+' '+x.note).toLowerCase())}">
+  <div class="topline"><div><span class="typeLabel">${type==='prefix'?'Prefix':type==='root'?'Root':type==='suffix'?'Suffix':'Rare root'}</span><b class="term">${esc(x.t)}</b></div><span class="tag ${tag}">${esc(x.lv)}</span></div>
+  <div class="meaning">${esc(x.m)}</div><div class="examples">${examples}</div>
+  <div class="more"><p class="miniTitle">語源メモ</p><div class="note">${esc(x.note)}</div></div>
+  <div class="count">${x.ex.length} words</div>
+ </article>`;
+}
+function render(){
+ document.getElementById('prefixGrid').innerHTML=DATA.prefix.map(x=>renderCard(x,'prefix')).join('');
+ document.getElementById('rootGrid').innerHTML=DATA.root.map(x=>renderCard(x,'root')).join('');
+ document.getElementById('suffixGrid').innerHTML=DATA.suffix.map(x=>renderCard(x,'suffix')).join('');
+ document.getElementById('rareGrid').innerHTML=DATA.rare.map(x=>renderCard(x,'rare')).join('');
+ document.getElementById('wordList').innerHTML=WORDS.map(([w,p,j])=>`<div class="wordCard" data-search="${esc((w+' '+p+' '+j).toLowerCase())}"><b>${esc(w)}</b><small>${esc(j)}</small><span class="parts">${esc(p)}</span></div>`).join('');
+ document.querySelectorAll('.part').forEach(card=>card.addEventListener('click',()=>card.classList.toggle('open')));
+}
+render();
+document.getElementById('openAll').onclick=()=>document.querySelectorAll('.part').forEach(c=>c.classList.add('open'));
+document.getElementById('closeAll').onclick=()=>document.querySelectorAll('.part').forEach(c=>c.classList.remove('open'));
+document.getElementById('search').addEventListener('input',e=>{
+ const q=e.target.value.trim().toLowerCase();
+ document.querySelectorAll('[data-search]').forEach(el=>{el.classList.toggle('hiddenByFilter',q && !el.dataset.search.includes(q));});
+});
+
+const tip=document.createElement('div');tip.className='tip';document.body.appendChild(tip);
+function showTip(el){
+ const txt=el.dataset.tip;if(!txt)return;
+ tip.textContent=txt;tip.classList.add('show');
+ const r=el.getBoundingClientRect();
+ let left=Math.min(window.innerWidth-235,Math.max(8,r.left));
+ let top=r.bottom+8;
+ if(top>window.innerHeight-60) top=r.top-46;
+ tip.style.left=left+'px';tip.style.top=top+'px';
+}
+function hideTip(){tip.classList.remove('show');}
+document.addEventListener('pointerover',e=>{const m=e.target.closest('.morph');if(m)showTip(m);});
+document.addEventListener('pointerout',e=>{if(e.target.closest('.morph'))hideTip();});
+document.addEventListener('focusin',e=>{const m=e.target.closest('.morph');if(m)showTip(m);});
+document.addEventListener('focusout',e=>{if(e.target.closest('.morph'))hideTip();});
+document.addEventListener('click',e=>{const m=e.target.closest('.morph');if(m){e.stopPropagation();showTip(m);setTimeout(hideTip,1600);}});
+
 </script>
-</body></html>
+</body>
+</html>
