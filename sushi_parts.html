@@ -1053,7 +1053,7 @@ const JOKER_POOL=[
  {id:"collector",name:"Collector",icon:"📘",rarity:"common",desc:"NEW単語なら +100",apply:c=>{if(c.isNew)c.add+=100}},
  {id:"long",name:"Long Word",icon:"📚",rarity:"rare",desc:"3パーツ以上なら ×2",apply:c=>{if(c.len>=3)c.mult*=2}},
  {id:"scholar",name:"Scholar",icon:"🎓",rarity:"rare",desc:"NEW単語なら ×2",apply:c=>{if(c.isNew)c.mult*=2}},
- {id:"fresh",name:"Fresh Mind",icon:"🌱",rarity:"rare",desc:"疲労を最低50%にする",apply:c=>{c.fatigue=Math.max(c.fatigue,.5)}},
+ {id:"wordmagnet",name:"Word Magnet",icon:"🧲",rarity:"rare",desc:"3パーツ以上の単語なら +120",apply:c=>{if(c.len>=3)c.add+=120}},
  {id:"four",name:"Four Parts Fever",icon:"🔥",rarity:"epic",desc:"4パーツ単語なら ×3",apply:c=>{if(c.len>=4)c.mult*=3}},
  {id:"rareboost",name:"Rare Hunter",icon:"💎",rarity:"epic",desc:"Rare以上の部品を含む単語 ×1.7",apply:c=>{if(c.topRarity==='rare'||c.topRarity==='epic'||c.topRarity==='legendary')c.mult*=1.7}},
  {id:"legend",name:"Golden Etymologist",icon:"👑",rarity:"legendary",desc:"Legendary部品を含む単語 ×4",apply:c=>{if(c.topRarity==='legendary')c.mult*=4}}
@@ -1105,7 +1105,7 @@ async function submitWord(){if(selected.length<2)return;const w=currentWord();if
 function failAttempt(){const near=findNearMiss(selectedIds());showDamage('MISS','bad');showFail(near);addLog(`<b>❌ 失敗</b> <span class="badge">MISS</span><br><span class="small">${selectedIds().join(' + ')}</span>${near?`<br><span class="small">近い単語：${near.word}</span>`:''}`);consumeSelected(false);if(hand.length<2){setMsg('カードが足りない。1枚ドローするか、終了して再挑戦。','bad');$('cards').classList.add('emptyWarn')}render()}
 function findNearMiss(ids){let best=null,bestScore=0;for(const w of WORDS){let common=ids.filter(id=>w.parts.includes(id)).length;let orderBonus=w.parts.join('|').includes(ids.slice(-1)[0]||'')?0.2:0;if(common+orderBonus>bestScore&&common>=1){best=w;bestScore=common+orderBonus}}return bestScore>=1.2?best:null}
 function breakdown(w){return w.parts.map(id=>{const p=part(id);return `<div class="line"><b>${p.text}</b> <span class="rarity ${p.rarity}">${rarityLabel(p.rarity)}</span> = ${p.meaning}</div>`}).join('')}
-function showSuccess(w,sc,isNew,gain){const wordClass=sc.topRarity==="legendary"?"word legendWord":"word";$('result').innerHTML=`${isNew?'<div class="new">NEW WORD!</div>':''}<div class="${wordClass}">${w.word}</div><div class="ja">${w.ja}</div><div class="small">語源イメージ：${w.image}</div><div class="breakdown">${breakdown(w)}</div><div class="msg ok">+${sc.total}点 <span class="rarity ${sc.topRarity}">${rarityLabel(sc.topRarity)}</span> <span class="rareScore">レア倍率×${sc.rareMult.toFixed(2)}</span> ${sc.mult>sc.rareMult?`/ 合計倍率×${sc.mult.toFixed(2)}`:''} / 疲労${Math.round(sc.fatigue*100)}%${gain?` / Energy +${gain}`:''}</div>`;$('result').classList.remove('hidden');pulseMain('successPulse');if(w.parts.length>=3)comboBanner(w.parts.length+' PARTS COMBO!');if(sc.topRarity==="legendary")comboBanner('LEGENDARY WORD!')}
+function showSuccess(w,sc,isNew,gain){const wordClass=sc.topRarity==="legendary"?"word legendWord":"word";$('result').innerHTML=`${isNew?'<div class="new">NEW WORD!</div>':''}<div class="${wordClass}">${w.word}</div><div class="ja">${w.ja}</div><div class="small">語源イメージ：${w.image}</div><div class="breakdown">${breakdown(w)}</div><div class="msg ok">+${sc.total}点 <span class="rarity ${sc.topRarity}">${rarityLabel(sc.topRarity)}</span> <span class="rareScore">レア倍率×${sc.rareMult.toFixed(2)}</span> ${sc.mult>sc.rareMult?`/ 合計倍率×${sc.mult.toFixed(2)}`:''} / 連発補正${Math.round(sc.fatigue*100)}%${gain?` / Energy +${gain}`:''}</div>`;$('result').classList.remove('hidden');pulseMain('successPulse');if(w.parts.length>=3)comboBanner(w.parts.length+' PARTS COMBO!');if(sc.topRarity==="legendary")comboBanner('LEGENDARY WORD!')}
 function showFail(near){let html=`<div class="word" style="color:#1565c0">No Word</div><div class="ja">登録単語なし</div><div class="small">この組み合わせは通りません。使ったカードは消費されます。</div>`;if(near){html+=`<hr style="border:0;border-top:1px solid var(--line)"><div class="new" style="color:#f57c00">NEAR MISS!</div><div class="word">${near.word}</div><div class="ja">${near.ja}</div><div class="small">近い語源コンボ：${near.image}</div><div class="breakdown">${breakdown(near)}</div>`}$('result').innerHTML=html;$('result').classList.remove('hidden');pulseMain('shake')}
 function addLog(html){$('log').insertAdjacentHTML('afterbegin',`<div class="logItem">${html}</div>`)} function showDamage(t,cls){const d=document.createElement('div');d.className='damage '+cls;d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),800)}
 function flash(){const f=document.createElement('div');f.className='screenFlash';document.body.appendChild(f);setTimeout(()=>f.remove(),760)}
@@ -3314,7 +3314,7 @@ window.addEventListener('load',()=>{const savedName=localStorage.getItem(PLAYER_
     const div=document.createElement('div');
     div.className='wordFusionBurst';
     const partHtml=(parts.length?parts:[word||'WORD']).map((p,i)=>`<span class="fusionPart" style="--i:${i}">${esc(p)}</span>${i<(parts.length?parts.length:1)-1?'<span class="fusionPlus">+</span>':''}`).join('');
-    const badge = isLegend ? '⭐ LEGENDARY WORD ⭐' : (isRare ? '💎 RARE WORD' : (isNew ? '📘 NEW DISCOVERY!' : 'WORD FUSION'));
+    const badge = isNew ? '📘 NEW DISCOVERY!' : (isLegend ? '⭐ LEGENDARY WORD ⭐' : (isRare ? '💎 RARE WORD' : 'WORD FUSION'));
     div.innerHTML=`
       <div class="fusionBox">
         <span class="fusionParticle" style="--x:-210px;--y:-150px;left:18%;top:22%">🍣</span>
@@ -3393,5 +3393,191 @@ window.addEventListener('load',()=>{const savedName=localStorage.getItem(PLAYER_
 })();
 // ===== end v6.2 =====
 </script>
+
+<script>
+// ===== v6.3 Explorer / Discovery Patch =====
+// 目的：未発見語が出やすい手札にする / composable追加 / NEW DISCOVERY優先表示 / 疲労系ジョーカー除去
+(function(){
+  function safe(fn, fallback){ try{return fn();}catch(e){return fallback;} }
+  function q(id){ return document.getElementById(id); }
+  function unique(arr){ return [...new Set(arr.filter(Boolean))]; }
+  function pObj(id){ return safe(()=>part(id), (PARTS||[]).find(p=>p.id===id)||null); }
+  function knownSet(){ return new Set(safe(()=>knownWords(), [])); }
+  function availableSet(){
+    return new Set(safe(()=>availablePartIds(), safe(()=>deck, []).filter(id=>safe(()=>isUnlockablePartId(id), true))));
+  }
+  function wordRoot(w){
+    const parts = Array.isArray(w?.parts) ? w.parts : [];
+    return parts.find(id=>pObj(id)?.type==='root') || parts[1] || parts[0] || '';
+  }
+  function addWordIfMissing(w){
+    if(!Array.isArray(window.WORDS) && typeof WORDS==='undefined') return;
+    const list = WORDS;
+    if(list.some(x=>x.word===w.word)) return;
+    list.push(w);
+    try{ if(typeof addAliasKeys==='function' && typeof WORD_MAP!=='undefined') addAliasKeys(WORD_MAP,w); }catch(e){}
+  }
+
+  addWordIfMissing({
+    word:'composable',
+    ja:'組み立て可能な・再利用可能な',
+    parts:['com','pose','able'],
+    image:'com + pose + able → composable',
+    freq:'A'
+  });
+
+  function removeBadJokers(){
+    try{
+      if(Array.isArray(JOKER_POOL)){
+        for(let i=JOKER_POOL.length-1;i>=0;i--){
+          const j=JOKER_POOL[i];
+          const text=String(j?.id||'')+' '+String(j?.name||'')+' '+String(j?.desc||'');
+          if(/RP|Research|研究|疲労|fatigue/i.test(text)) JOKER_POOL.splice(i,1);
+        }
+        if(!JOKER_POOL.some(j=>j.id==='wordmagnet')){
+          JOKER_POOL.push({id:'wordmagnet',name:'Word Magnet',icon:'🧲',rarity:'rare',desc:'3パーツ以上の単語なら +120',apply:c=>{if(c.len>=3)c.add+=120}});
+        }
+      }
+      if(Array.isArray(jokers)){
+        jokers = jokers.filter(j=>!/RP|Research|研究|疲労|fatigue/i.test(String(j?.id||'')+' '+String(j?.name||'')+' '+String(j?.desc||'')));
+      }
+    }catch(e){}
+  }
+
+  function canUseWord(w, avail){
+    return w && Array.isArray(w.parts) && w.parts.length>=2 && w.parts.length<=4 && w.parts.every(id=>avail.has(id));
+  }
+  function makeWeightedPool(){
+    const avail=availableSet();
+    const known=knownSet();
+    const words=(WORDS||[]).filter(w=>canUseWord(w,avail));
+    const unknown=words.filter(w=>!known.has(w.word));
+    const knownRoots=new Set(words.filter(w=>known.has(w.word)).map(wordRoot));
+    const unknownRoots=new Set(unknown.map(wordRoot));
+    const partScores=new Map();
+    function add(id, n){ partScores.set(id,(partScores.get(id)||0)+n); }
+    unknown.forEach(w=>{
+      const root=wordRoot(w);
+      w.parts.forEach(id=>add(id, root && !knownRoots.has(root) ? 5 : 3));
+      if(w.parts.length>=3) w.parts.forEach(id=>add(id,1));
+    });
+    return {avail, known, words, unknown, knownRoots, unknownRoots, partScores};
+  }
+  function weightedPick(ids, scoreMap){
+    const bag=[];
+    ids.forEach(id=>{
+      const base=1;
+      const bonus=scoreMap.get(id)||0;
+      const rarity = safe(()=>rarityOf(id),'common');
+      const rareBonus = rarity==='legendary'?3:rarity==='epic'?2:rarity==='rare'?1:0;
+      const w=Math.max(1, Math.min(12, base+bonus+rareBonus));
+      for(let i=0;i<w;i++) bag.push(id);
+    });
+    return bag.length ? bag[Math.floor(Math.random()*bag.length)] : ids[Math.floor(Math.random()*ids.length)];
+  }
+
+  // ドローを「未発見語につながる部品」寄りにする。ただし完全固定にはしない。
+  const oldDrawUnique = safe(()=>drawUniqueCard, null);
+  if(typeof drawUniqueCard==='function'){
+    drawUniqueCard = function(){
+      removeBadJokers();
+      const info=makeWeightedPool();
+      const inHand=new Set((hand||[]).map(c=>c.id));
+      let ids=(deck||[]).filter(id=>info.avail.has(id) && !inHand.has(id));
+      if(!ids.length) ids=(deck||[]).filter(id=>info.avail.has(id));
+      if(!ids.length && oldDrawUnique) return oldDrawUnique();
+      return makeCard(weightedPick(ids, info.partScores));
+    };
+  }
+
+  function possibleWordCount(cards){
+    const counts={}; (cards||[]).forEach(c=>counts[c.id]=(counts[c.id]||0)+1);
+    let made=0;
+    for(const w of WORDS||[]){
+      const need={}; (w.parts||[]).forEach(id=>need[id]=(need[id]||0)+1);
+      if(Object.keys(need).every(id=>(counts[id]||0)>=need[id])) made++;
+    }
+    return made;
+  }
+  function targetWordsForOpening(){
+    const info=makeWeightedPool();
+    const pool=(info.unknown.length?info.unknown:info.words)
+      .filter(w=>w.parts.length<=3)
+      .sort(()=>Math.random()-.5)
+      .sort((a,b)=>{
+        const ar=info.knownRoots.has(wordRoot(a))?0:1;
+        const br=info.knownRoots.has(wordRoot(b))?0:1;
+        return br-ar;
+      });
+    const targets=[]; const usedParts=new Set(); const usedRoots=new Set();
+    for(const w of pool){
+      const root=wordRoot(w);
+      const newParts=w.parts.filter(id=>!usedParts.has(id)).length;
+      if(targets.length<4 && (!usedRoots.has(root) || Math.random()<.35) && usedParts.size+newParts<=HAND_SIZE){
+        targets.push(w); w.parts.forEach(id=>usedParts.add(id)); if(root) usedRoots.add(root);
+      }
+      if(targets.length>=4 || usedParts.size>=10) break;
+    }
+    return targets;
+  }
+
+  const oldDeal = safe(()=>dealOpeningHand, null);
+  if(typeof dealOpeningHand==='function'){
+    dealOpeningHand = function(){
+      removeBadJokers();
+      hand=[];
+      for(let attempt=0; attempt<30; attempt++){
+        const targets=targetWordsForOpening();
+        const ids=unique(targets.flatMap(w=>w.parts));
+        hand=ids.map(makeCard);
+        while(hand.length<HAND_SIZE){
+          const before=hand.length;
+          drawCards(1);
+          if(hand.length===before) break;
+        }
+        hand=unique(hand.map(c=>c.id)).map(makeCard);
+        while(hand.length<HAND_SIZE){
+          const before=hand.length;
+          drawCards(1);
+          if(hand.length===before) break;
+        }
+        hand = safe(()=>shuffle(hand), hand).slice(0,HAND_SIZE);
+        if(possibleWordCount(hand)>=4) return;
+      }
+      if(oldDeal) oldDeal();
+    };
+  }
+
+  // 手札が詰んだ時の補充も少しだけ未発見寄りにする。
+  const oldDrawCards = safe(()=>drawCards, null);
+  if(typeof drawCards==='function'){
+    drawCards = function(n){
+      removeBadJokers();
+      for(let i=0;i<n && hand.length<MAX_HAND;i++){
+        const c = (typeof drawUniqueCard==='function') ? drawUniqueCard() : null;
+        if(c) hand.push(c);
+        else if(oldDrawCards) return oldDrawCards(n-i);
+      }
+    };
+  }
+
+  // NEW DISCOVERY をレア表示より優先する保険。
+  const oldBurst = window.showScoreCenterBurst;
+  window.showScoreCenterBurst = function(before, after, word, isNew){
+    try{ if(isNew && word) setTimeout(()=>comboBanner('📘 NEW DISCOVERY!'), 350); }catch(e){}
+    return oldBurst ? oldBurst(before, after, word, isNew) : undefined;
+  };
+
+  const oldRender = safe(()=>render, null);
+  if(typeof render==='function'){
+    render = function(){ removeBadJokers(); return oldRender && oldRender.apply(this, arguments); };
+  }
+
+  document.addEventListener('DOMContentLoaded', removeBadJokers);
+  window.addEventListener('load', removeBadJokers);
+})();
+// ===== end v6.3 =====
+</script>
+
 </body>
 </html>
