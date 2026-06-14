@@ -99,7 +99,7 @@
       const hidden=Math.max(0,Math.min(8,(totalRoot||arr.length+4)-arr.length));
       const unknown=Array.from({length:hidden}).map((_,i)=>`<span class="dexUnknown ${i===0?'hintSlot':'secretSlot'}">${i===0?'NEXT?':'???'}</span>`).join('');
       const more=arr.length>24?`<span class="dexWordMore">+${arr.length-24} more</span>`:'';
-      return `<div class="dexRoot ${totalRoot&&arr.length>=totalRoot?'complete':''} ${hot?'hot':''}"><div class="dexRootTitle"><div class="dexRootHeader"><span class="dexRootIcon">${rootIcon(root,arr.length,totalRoot)}</span><div><div class="dexRootName">${esc(root.toUpperCase())} ${totalRoot&&arr.length>=totalRoot?'<span class="dexCompleteBadge">COMPLETE</span>':''}</div><div class="dexRootMeaning">${esc(pObj(root)?.meaning||'語根')}</div><div class="dexRootMeta">${hot?'あと少しで宝箱感あり。掘れ。':'Word Tree'}</div></div></div><div>${arr.length}/${totalRoot||'?'}</div></div><div class="dexMiniBar"><div class="dexMiniFill" style="width:${miniPct}%"></div></div><div class="dexWords">${known}${more}${unknown}</div></div>`;
+      return `<div class="dexRoot ${totalRoot&&arr.length>=totalRoot?'complete':''} ${hot?'hot':''}"><div class="dexRootTitle"><div class="dexRootHeader"><span class="dexRootIcon">${rootIcon(root,arr.length,totalRoot)}</span><div><div class="dexRootName">${esc(root.toUpperCase())} ${totalRoot&&arr.length>=totalRoot?'<span class="dexCompleteBadge">🏆 MASTER</span>':''}</div><div class="dexRootMeaning">${esc(pObj(root)?.meaning||'語根')}</div><div class="dexRootMeta">Word Tree</div></div></div><div>${arr.length}/${totalRoot||'?'}</div></div><div class="dexMiniBar"><div class="dexMiniFill" style="width:${miniPct}%"></div></div><div class="dexWords">${known}${more}${unknown}</div></div>`;
     }).join('');
   };
   window.loadCollection=async function(){
@@ -2026,7 +2026,7 @@ function renderDex(items, summaryText){
     return `<div class="dexRoot ${isComplete?'complete':''} ${rareRoot?'rareRoot':''}">
       <div class="dexRootTitle">
         <div>
-          <div class="dexRootName">${root.toUpperCase()} ${isComplete?'<span class="dexCompleteBadge">COMPLETE</span>':''}</div>
+          <div class="dexRootName">${root.toUpperCase()} ${isComplete?'<span class="dexCompleteBadge">🏆 MASTER</span>':''}</div>
           <div class="dexRootMeaning">${p?.meaning || "語根"}</div>
         </div>
         <div>${arr.length}/${total||"?"}</div>
@@ -2436,7 +2436,7 @@ window.addEventListener('load',()=>{const savedName=localStorage.getItem(PLAYER_
       const unknownN = Math.max(0, Math.min(6, (rootTotal || arr.length+3) - arr.length));
       const known = arr.slice(0,24).map(w=>`<span class="dexWord">${esc(w.word)}<br><small>${esc(w.meaning)}</small></span>`).join('');
       const unknown = Array.from({length:unknownN}).map(()=>`<span class="dexUnknown">???</span>`).join('');
-      return `<div class="dexRoot ${rootTotal && arr.length>=rootTotal?'complete':''}"><div class="dexRootTitle"><div><div class="dexRootName">${esc(root.toUpperCase())} ${rootTotal && arr.length>=rootTotal?'<span class="dexCompleteBadge">COMPLETE</span>':''}</div><div class="dexRootMeaning">${esc(partMeaning(root))}</div></div><div>${arr.length}/${rootTotal||'?'}</div></div><div class="dexMiniBar"><div class="dexMiniFill" style="width:${miniPct}%"></div></div><div class="dexWords">${known}${unknown}</div></div>`;
+      return `<div class="dexRoot ${rootTotal && arr.length>=rootTotal?'complete':''}"><div class="dexRootTitle"><div><div class="dexRootName">${esc(root.toUpperCase())} ${rootTotal && arr.length>=rootTotal?'<span class="dexCompleteBadge">🏆 MASTER</span>':''}</div><div class="dexRootMeaning">${esc(partMeaning(root))}</div></div><div>${arr.length}/${rootTotal||'?'}</div></div><div class="dexMiniBar"><div class="dexMiniFill" style="width:${miniPct}%"></div></div><div class="dexWords">${known}${unknown}</div></div>`;
     }).join('');
   };
   window.loadCollection = async function(){
@@ -2567,7 +2567,7 @@ window.addEventListener('load',()=>{const savedName=localStorage.getItem(PLAYER_
       const hidden=Math.max(0,Math.min(8,(totalRoot||arr.length+4)-arr.length));
       const unknown=Array.from({length:hidden}).map((_,i)=>`<span class="dexUnknown ${i===0?'hintSlot':'secretSlot'}">${i===0?'NEXT?':'???'}</span>`).join('');
       const more=arr.length>24?`<span class="dexWordMore">+${arr.length-24} more</span>`:'';
-      return `<div class="dexRoot ${totalRoot&&arr.length>=totalRoot?'complete':''} ${hot?'hot':''}"><div class="dexRootTitle"><div class="dexRootHeader"><span class="dexRootIcon">${rootIcon(root,arr.length,totalRoot)}</span><div><div class="dexRootName">${esc(root.toUpperCase())} ${totalRoot&&arr.length>=totalRoot?'<span class="dexCompleteBadge">COMPLETE</span>':''}</div><div class="dexRootMeaning">${esc(pObj(root)?.meaning||'語根')}</div><div class="dexRootMeta">${hot?'あと少しで宝箱感あり。掘れ。':'Word Tree'}</div></div></div><div>${arr.length}/${totalRoot||'?'}</div></div><div class="dexMiniBar"><div class="dexMiniFill" style="width:${miniPct}%"></div></div><div class="dexWords">${known}${more}${unknown}</div></div>`;
+      return `<div class="dexRoot ${totalRoot&&arr.length>=totalRoot?'complete':''} ${hot?'hot':''}"><div class="dexRootTitle"><div class="dexRootHeader"><span class="dexRootIcon">${rootIcon(root,arr.length,totalRoot)}</span><div><div class="dexRootName">${esc(root.toUpperCase())} ${totalRoot&&arr.length>=totalRoot?'<span class="dexCompleteBadge">🏆 MASTER</span>':''}</div><div class="dexRootMeaning">${esc(pObj(root)?.meaning||'語根')}</div><div class="dexRootMeta">Word Tree</div></div></div><div>${arr.length}/${totalRoot||'?'}</div></div><div class="dexMiniBar"><div class="dexMiniFill" style="width:${miniPct}%"></div></div><div class="dexWords">${known}${more}${unknown}</div></div>`;
     }).join('');
   };
   window.loadCollection=async function(){
@@ -3603,5 +3603,178 @@ window.addEventListener('load',()=>{const savedName=localStorage.getItem(PLAYER_
   }
 })();
 </script>
+
+
+<script>
+// ===== v6.5 Vocabulary + Pokédex-style Dex Patch =====
+// 目的：語彙追加 / 図鑑のシルエット化 / 図鑑文言整理
+(function(){
+  function safe(fn, fallback){ try{return fn();}catch(e){return fallback;} }
+  function q(id){ return document.getElementById(id); }
+  function esc(v){ return String(v ?? '').replace(/[&<>\"]/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[m])); }
+  function addPartIfMissing(p){
+    try{
+      if(typeof PARTS==='undefined' || !Array.isArray(PARTS)) return;
+      if(!PARTS.some(x=>x.id===p.id)) PARTS.push(p);
+    }catch(e){}
+  }
+  function addWordIfMissing(w, aliases){
+    try{
+      if(typeof WORDS==='undefined' || !Array.isArray(WORDS)) return;
+      let item = WORDS.find(x=>x.word===w.word);
+      if(!item){ WORDS.push(w); item=w; }
+      else{
+        // 既存語は今回の部品分解を優先して更新。ただし余計な情報は残す。
+        Object.assign(item, w);
+      }
+      if(typeof addAliasKeys==='function' && typeof WORD_MAP!=='undefined') addAliasKeys(WORD_MAP,item);
+      if(typeof WORD_MAP!=='undefined' && Array.isArray(aliases)){
+        aliases.forEach(ids=>WORD_MAP.set(ids.join('|'), item));
+      }
+    }catch(e){ console.warn('v6.5 addWord failed', w?.word, e); }
+  }
+
+  addPartIfMissing({id:'move', type:'root', text:'move', meaning:'動く・動かす'});
+
+  [
+    {word:'composable', ja:'組み立て可能な・再利用可能な', parts:['com','pose','able'], image:'com + pose + able → composable', freq:'A'},
+    {word:'preposition', ja:'前置詞', parts:['pre','pose','ition'], image:'pre + pose + ition → preposition', freq:'S', aliases:[['pre','pose','tion']]},
+    {word:'portability', ja:'携帯性', parts:['port','able','ity'], image:'port + able + ity → portability', freq:'A', aliases:[['port','ability']]},
+    {word:'movable', ja:'動かせる・可動の', parts:['move','able'], image:'move + able → movable', freq:'B'},
+    {word:'reviewer', ja:'査読者・批評家', parts:['re','view','er'], image:'re + view + er → reviewer', freq:'A'},
+    {word:'reviewable', ja:'再検討可能な', parts:['re','view','able'], image:'re + view + able → reviewable', freq:'B'},
+    {word:'exportable', ja:'輸出可能な', parts:['ex','port','able'], image:'ex + port + able → exportable', freq:'B'},
+    {word:'reactor', ja:'原子炉・反応装置', parts:['re','act','or'], image:'re + act + or → reactor', freq:'A'},
+    {word:'exporter', ja:'輸出業者', parts:['ex','port','er'], image:'ex + port + er → exporter', freq:'A'},
+    {word:'importer', ja:'輸入業者', parts:['im','port','er'], image:'im + port + er → importer', freq:'A'},
+    {word:'reporter', ja:'記者・報告者', parts:['re','port','er'], image:'re + port + er → reporter', freq:'S'},
+    {word:'prediction', ja:'予測', parts:['pre','dict','tion'], image:'pre + dict + tion → prediction', freq:'S', aliases:[['pre','dict','ion']]},
+    {word:'predictable', ja:'予測可能な', parts:['pre','dict','able'], image:'pre + dict + able → predictable', freq:'B'},
+    {word:'inspection', ja:'検査・点検', parts:['in','spect','ion'], image:'in + spect + ion → inspection', freq:'A'}
+  ].forEach(w=>{ const aliases=w.aliases||[]; delete w.aliases; addWordIfMissing(w, aliases); });
+
+  function pObj(id){ return safe(()=>part(id), (typeof PARTS!=='undefined' ? PARTS.find(p=>p.id===id) : null) || null); }
+  function wObj(word){ return safe(()=>WORDS.find(w=>w.word===word), null); }
+  function rootOf(obj){
+    if(!obj) return 'unknown';
+    const parts=Array.isArray(obj.parts)?obj.parts:[];
+    return parts.find(x=>pObj(x)?.type==='root') || parts[1] || parts[0] || obj.root || 'unknown';
+  }
+  function localWords(){
+    try{ const a=knownWords(); if(Array.isArray(a)) return a; }catch(e){}
+    try{ const name=localStorage.getItem('sushi_parts_player_name')||q('playerName')?.value||'guest'; return JSON.parse(localStorage.getItem('sushi_parts_words_'+name)||'[]'); }catch(e){ return []; }
+  }
+  function normalize(raw){
+    const seen=new Set();
+    return (Array.isArray(raw)?raw:[]).map(x=>{
+      if(typeof x==='string'){
+        const o=wObj(x);
+        return {word:x, meaning:o?.ja||'', root:rootOf(o), parts:o?.parts||[], freq:o?.freq||''};
+      }
+      const o=wObj(x.word);
+      return {word:x.word, meaning:x.meaning||x.ja||o?.ja||'', root:x.root||rootOf(o||x), parts:x.parts||o?.parts||[], freq:x.freq||o?.freq||''};
+    }).filter(x=>x.word && !seen.has(x.word) && seen.add(x.word));
+  }
+  function rank(n,pct){
+    if(pct>=100) return '🍣 SUSHI LEGEND';
+    if(n>=150) return '👑 WORD EMPEROR';
+    if(n>=100) return '🔥 SUSHI MASTER';
+    if(n>=60) return '🧭 WORD HUNTER';
+    if(n>=30) return '📚 COLLECTOR';
+    if(n>=10) return '🌱 ROOKIE';
+    return '🥚 STARTER';
+  }
+  function rootIcon(root,count,total){
+    if(total && count>=total) return '🏆';
+    if(count>=10) return '💎';
+    if(['dict','spect','port','ject','press','tract','duc','form','mit','vis'].includes(root)) return '⭐';
+    if(count>=5) return '🔥';
+    return '🌿';
+  }
+  function rarityClass(word){
+    const o=wObj(word); const f=(o?.freq||'').toUpperCase();
+    if(f==='S') return 'legendWordDex';
+    if(f==='A') return 'rareWord';
+    return '';
+  }
+  function trophy(found, roots, completed, rare){
+    const defs=[['🔰','10語発見',found>=10],['🌳','語根10種',roots>=10],['🏆','語根完成',completed>=1],['💎','S/A語10',rare>=10],['🍣','100語発見',found>=100]];
+    return '<div class="dexTrophyShelf">'+defs.map(d=>`<span class="dexTrophy ${d[2]?'':'locked'}">${d[0]} ${d[1]}</span>`).join('')+'</div>';
+  }
+  function nextQuest(data){
+    const known=new Set(data.map(x=>x.word));
+    const candidates=(WORDS||[]).filter(w=>!known.has(w.word) && Array.isArray(w.parts));
+    const byRoot={}; data.forEach(x=>{ byRoot[x.root]=(byRoot[x.root]||0)+1; });
+    const roots=Object.keys(byRoot).sort((a,b)=>byRoot[b]-byRoot[a]);
+    let target=null;
+    for(const r of roots){ target=candidates.find(w=>w.parts.includes(r)); if(target) break; }
+    target=target||candidates[0];
+    if(!target) return `<div class="dexQuest"><span>🎉 <b>完全制覇！</b></span><span class="hint">もう図鑑に載せる語がない。すごすぎる。</span></div>`;
+    const masked=target.parts.map((p,i)=>i===0?p:'???').join(' + ');
+    return `<div class="dexQuest"><span>🎯 次の狙い：<b>${esc(masked)}</b></span><span class="hint">ヒント：${esc(target.ja||target.meaning||'未発見語')}</span></div>`;
+  }
+  function milestoneHtml(found){
+    const ms=[5,10,25,50,100,150];
+    return '<div class="dexMilestones">'+ms.map(n=>`<div class="dexMilestone ${found>=n?'done':'locked'}"><span class="icon">${found>=n?'✨':'🔒'}</span>${n}語<small>${found>=n?'達成！':'あと'+Math.max(0,n-found)+'語'}</small></div>`).join('')+'</div>';
+  }
+  function silhouette(word){
+    if(!word) return 'NEXT?';
+    if(word.length<=4) return word[0] + '_'.repeat(Math.max(1,word.length-1));
+    return word.slice(0,3) + '_'.repeat(Math.min(8, word.length-3));
+  }
+
+  window.renderDexHard = function(raw,status){
+    const dexList=q('dexList'), dexSummary=q('dexSummary'); if(!dexList||!dexSummary) return;
+    const data=normalize(raw);
+    const found=data.length, total=(WORDS&&WORDS.length)||Math.max(found,1), pct=Math.min(100,Math.round(found/total*1000)/10);
+    const byRoot={}; data.forEach(x=>{ (byRoot[x.root]||(byRoot[x.root]=[])).push(x); });
+    const roots=Object.keys(byRoot).sort((a,b)=>byRoot[b].length-byRoot[a].length || a.localeCompare(b));
+    let completed=0;
+    roots.forEach(r=>{ const t=(WORDS||[]).filter(w=>Array.isArray(w.parts)&&w.parts.includes(r)).length; if(t&&byRoot[r].length>=t) completed++; });
+    const rare=data.filter(x=>['A','S'].includes(String(x.freq||wObj(x.word)?.freq||'').toUpperCase())).length;
+    dexSummary.innerHTML=`<div class="dexHero"><div class="dexHeroTop"><div><div class="dexTitleBig">📘 Word Tree 図鑑</div></div><div class="dexRank">${esc(rank(found,pct))}</div></div><div class="dexProgressBar"><div class="dexProgressFill" style="width:${pct}%"></div></div><div class="dexStatsGrid"><div class="dexStat">発見語<b>${found}</b></div><div class="dexStat">完成率<b>${pct}%</b></div><div class="dexStat">語根数<b>${roots.length}</b></div><div class="dexStat">完成語根<b>${completed}</b></div></div>${milestoneHtml(found)}${trophy(found,roots.length,completed,rare)}${nextQuest(data)}</div>`;
+    dexList.className=roots.length?'dexRootGrid':'log';
+    if(!roots.length){ dexList.innerHTML=`<div class="dexEmpty"><h3>まだ図鑑は空です</h3><p class="small">単語を作ると、ここに登録されます。まずは re + view、act + ive、port + able などを狙おう。</p></div>`; return; }
+    const recent=new Set(data.slice(0,3).map(x=>x.word));
+    dexList.innerHTML=roots.map(root=>{
+      const arr=byRoot[root];
+      const knownSet=new Set(arr.map(a=>a.word));
+      const rootWords=(WORDS||[]).filter(w=>Array.isArray(w.parts)&&w.parts.includes(root));
+      const totalRoot=rootWords.length;
+      const candidates=rootWords.filter(w=>!knownSet.has(w.word));
+      const miniPct=totalRoot?Math.min(100,Math.round(arr.length/totalRoot*100)):100;
+      const known=arr.slice(0,24).map(w=>`<span class="dexWord ${recent.has(w.word)?'newish':''} ${rarityClass(w.word)}">${esc(w.word)}<br><small>${esc(w.meaning)}</small></span>`).join('');
+      const hidden=Math.max(0,Math.min(20,(totalRoot||arr.length+4)-arr.length));
+      const unknown=Array.from({length:hidden}).map((_,i)=>{
+        const hint = i===0 ? silhouette(candidates[0]?.word) : '???';
+        return `<span class="dexUnknown ${i===0?'hintSlot':'secretSlot'}">${esc(hint)}</span>`;
+      }).join('');
+      const more=arr.length>24?`<span class="dexWordMore">+${arr.length-24} more</span>`:'';
+      const complete = totalRoot && arr.length>=totalRoot;
+      return `<div class="dexRoot ${complete?'complete':''} ${!complete&&arr.length>=3?'hot':''}"><div class="dexRootTitle"><div class="dexRootHeader"><span class="dexRootIcon">${rootIcon(root,arr.length,totalRoot)}</span><div><div class="dexRootName">${esc(root.toUpperCase())} ${complete?'<span class="dexCompleteBadge">🏆 MASTER</span>':''}</div><div class="dexRootMeaning">${esc(pObj(root)?.meaning||'語根')}</div><div class="dexRootMeta">Word Tree</div></div></div><div>${arr.length}/${totalRoot||'?'}</div></div><div class="dexMiniBar"><div class="dexMiniFill" style="width:${miniPct}%"></div></div><div class="dexWords">${known}${more}${unknown}</div></div>`;
+    }).join('');
+  };
+
+  window.loadCollection = async function(){
+    window.renderDexHard(normalize(localWords()),'保存データを確認中...');
+    if(typeof supabaseClient==='undefined'||!supabaseClient) return;
+    const pid=safe(()=>getPlayerId(), localStorage.getItem('sushi_parts_player_id')||'local');
+    const tables=(typeof COLLECTION_TABLES!=='undefined'&&COLLECTION_TABLES.length)?COLLECTION_TABLES:['sushi_parts_collection'];
+    for(const table of tables){
+      try{
+        const p=supabaseClient.from(table).select('*').eq('player_id',pid);
+        const res=await Promise.race([p,new Promise(r=>setTimeout(()=>r({error:{message:'timeout'}}),2600))]);
+        if(!res.error){ const db=normalize(res.data||[]); if(db.length) window.renderDexHard(db,`発見 ${db.length}語`); return; }
+      }catch(e){}
+    }
+  };
+  window.openDex = function(){ const m=q('dexModal'); if(m) m.classList.remove('hidden'); window.loadCollection(); };
+  window.closeDex = function(){ const m=q('dexModal'); if(m) m.classList.add('hidden'); };
+  function wire(){ if(q('dexBtn')) q('dexBtn').onclick=window.openDex; if(q('dexRefreshBtn')) q('dexRefreshBtn').onclick=window.loadCollection; if(q('dexCloseBtn')) q('dexCloseBtn').onclick=window.closeDex; }
+  wire(); document.addEventListener('DOMContentLoaded',wire); window.addEventListener('load',wire);
+})();
+// ===== end v6.5 =====
+</script>
+
 </body>
 </html>
