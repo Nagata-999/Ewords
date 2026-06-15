@@ -4154,6 +4154,8 @@ window.addEventListener('load',()=>{const savedName=localStorage.getItem(PLAYER_
 
   // "remove + al" でも "re + mov + al" でも removal を作れるようにする。
   addPartIfMissing({id:'remove', type:'root', text:'remove', meaning:'取り除く'});
+  try{ if(Array.isArray(STARTER_PARTS) && !STARTER_PARTS.includes('remove')) STARTER_PARTS.push('remove'); }catch(e){}
+  try{ if(typeof unlockedParts!=='undefined' && unlockedParts instanceof Set) unlockedParts.add('remove'); }catch(e){}
   addToStarter('remove');
   addWordRoute({word:'removal', ja:'除去', parts:['remove','al'], image:'remove + al → removal', freq:'A'});
   addWordRoute({word:'removable', ja:'取り外し可能な', parts:['remove','able'], image:'remove + able → removable', freq:'B'});
@@ -4169,9 +4171,12 @@ window.addEventListener('load',()=>{const savedName=localStorage.getItem(PLAYER_
         hand=ids.map(make);
         hand=safe(()=>shuffle(hand), hand);
         try{ setTimeout(()=>setMsg('今回の初手テーマ：'+pack.label+'。毎回少し散らして出します。','ok'), 80); }catch(e){}
-        if(possibleWordCount(hand)>=4 || possibleCount(ids)>=4) return;
+        const localPossible = (typeof possibleWordCount==='function') ? possibleWordCount(hand) : possibleCount(ids);
+        if(localPossible>=3 || possibleCount(ids)>=3) return;
       }
       if(previousDeal) return previousDeal();
+      const fallback=['re','remove','mov','al','able','ity','view','er','form','act','ion','ive'];
+      hand=fallback.filter(id=>hasPart(id)).map(make).slice(0,HAND_SIZE);
     };
   }
 })();
