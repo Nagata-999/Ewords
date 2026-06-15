@@ -14,82 +14,141 @@
 const SPRITE_FILES=["assets/SL-01.webp","assets/SL-02.webp","assets/SL-03.webp","assets/SL-04.webp","assets/SL-05.webp"];
 function preloadSprites(){return Promise.all(SPRITE_FILES.map(src=>new Promise(resolve=>{const img=new Image();img.onload=resolve;img.onerror=resolve;img.src=src;})));}
 const CHARACTERS=[
-{id:"sushi",name:"Sushi",type:"普通の人",sheet:"assets/SL-01.webp",best:"共感・自然な返答",worst:"攻撃的・冷たい返答",time:20,profile:"一番ふつう。相手に寄り添う返事が強い。"},
-{id:"ally",name:"Ally",type:"ナード",sheet:"assets/SL-02.webp",best:"ミーム・ネット感",worst:"堅すぎる返答",time:18,profile:"変なノリやネット語に反応する。真面目すぎると刺さらない。"},
-{id:"mark",name:"Mark",type:"陽キャ・オラオラ",sheet:"assets/SL-03.webp",best:"強気・テンション高め",worst:"冷めた返答",time:22,profile:"盛り上げれば勝ち。弱気・低温だと一気に下がる。"},
-{id:"susie",name:"Susie",type:"ギャル",sheet:"assets/SL-04.webp",best:"スラング・ノリの良さ",worst:"堅い返答・上から目線",time:14,profile:"slay / ate / fire みたいなノリが好き。真面目すぎると距離を置く。"},
-{id:"malia",name:"Malia",type:"堅そうな人",sheet:"assets/SL-05.webp",best:"丁寧・誠実・配慮",worst:"スラング・失礼な返答",time:24,profile:"相手への配慮を見ている。雑なスラングはだいたい危険。"}
+{id:"sushi",name:"Sushi",type:"普通の人",sheet:"assets/SL-01.webp",likes:["friendly","empathy","casual"],hates:["rude","cold","too_edgy"],best:"共感・自然な返答",worst:"攻撃的・冷たい返答",time:20,profile:"一番ふつう。相手に寄り添う返事が強い。"},
+{id:"ally",name:"Ally",type:"ナード",sheet:"assets/SL-02.webp",likes:["meme","weird","relatable"],hates:["formal","basic","cold"],best:"ミーム・ネット感",worst:"堅すぎる返答",time:18,profile:"変なノリやネット語に反応する。真面目すぎると刺さらない。"},
+{id:"mark",name:"Mark",type:"陽キャ・オラオラ",sheet:"assets/SL-03.webp",likes:["hype","bold","challenge"],hates:["cold","passive","formal"],best:"強気・テンション高め",worst:"冷めた返答",time:22,profile:"盛り上げれば勝ち。弱気・低温だと一気に下がる。"},
+{id:"susie",name:"Susie",type:"ギャル",sheet:"assets/SL-04.webp",likes:["slang","hype","friendly"],hates:["formal","rude","lecture"],best:"スラング・ノリの良さ",worst:"堅い返答・上から目線",time:14,profile:"slay / ate / fire みたいなノリが好き。真面目すぎると距離を置く。"},
+{id:"malia",name:"Malia",type:"堅そうな人",sheet:"assets/SL-05.webp",likes:["polite","honest","empathy"],hates:["slang","rude","too_edgy","chaotic"],best:"丁寧・誠実・配慮",worst:"スラング・失礼な返答",time:24,profile:"相手への配慮を見ている。雑なスラングはだいたい危険。"}
 ];
-const ROUTES={
-susie:[
-{scene:"Susieが新しい髪型を見せてきた。",promptEN:"How do I look?",promptJA:"この髪型どう？",choices:[c("You slay.","めっちゃ似合う",3),c("It suits you.","似合ってる",1),c("Looks okay.","まあ普通",0),c("Go back.","前に戻せ",-3)]},
-{scene:"Susieがライブ当選で大騒ぎしている。",promptEN:"I got tickets to my favorite artist's concert!",promptJA:"推しのライブ当たった！",choices:[c("LET'S GOOO!","うおおお！",3),c("That's great.","よかったね",1),c("Nice.","いいね",0),c("I don't care.","興味ない",-3)]},
-{scene:"Susieが写真を見せてきた。",promptEN:"I took this photo today.",promptJA:"今日この写真撮った。",choices:[c("You ate.","完璧じゃん",3),c("This is nice.","いい写真だね",1),c("It's fine.","まあいいんじゃない",0),c("Kinda mid.","ちょい微妙",-3)]},
-{scene:"Susieが好きな人に話しかけたらしい。",promptEN:"I talked to my crush today.",promptJA:"今日好きな人と話した。",choices:[c("Huge W.","大勝利",3),c("That's a big step.","大きな一歩だね",1),c("Okay.","そうなんだ",0),c("Delulu.","妄想だな",-3)]},
-{scene:"Susieがテンション高く入ってきた。",promptEN:"Guess what happened!",promptJA:"ねえ聞いて！",choices:[c("Spill the tea.","詳しく！",3),c("Tell me!","聞かせて！",1),c("What?","何？",0),c("I can't be bothered.","めんどい",-3)]},
-{scene:"Susieが服を見せてきた。",promptEN:"Is this outfit cute?",promptJA:"この服かわいい？",choices:[c("It's giving main character.","主人公感ある",3),c("Yeah, it's cute.","うん、かわいい",1),c("Maybe.","たぶん",0),c("Kinda cringe.","ちょっと痛い",-3)]},
-{scene:"Susieが最後に聞いてきた。",promptEN:"So, are we friends now?",promptJA:"で、もう友達ってことでいい？",choices:[c("Besties, no cap.","親友でしょ、ガチで",3),c("Yeah, friends.","うん、友達だね",1),c("I guess.","まあね",0),c("Not really.","別に",-3)]}
-],
-malia:[
-{scene:"Maliaが真面目な相談をしてきた。",promptEN:"Can I talk to you seriously?",promptJA:"少し真面目に相談してもいいですか？",choices:[c("Of course. I'm listening.","もちろん。聞くよ",3),c("Sure, what's up?","いいよ、どうしたの？",1),c("Say less.","わかった",0),c("Not now.","今無理",-3)]},
-{scene:"Maliaがテストで満点だった。",promptEN:"I got a perfect score.",promptJA:"テストで満点を取りました。",choices:[c("That's genuinely impressive.","本当にすごいね",3),c("Good job.","よくやったね",1),c("Nice.","いいね",0),c("Must be luck.","運でしょ",-3)]},
-{scene:"Maliaが秘密を守るべきか迷っている。",promptEN:"I know something, but I shouldn't say it.",promptJA:"知っていることがありますが、言うべきではないかもしれません。",choices:[c("Keep it private.","秘密にしておこう",3),c("Be careful with it.","慎重にね",1),c("Say less.","なるほど",0),c("Tell everyone.","全員に言え",-3)]},
-{scene:"Maliaが落ち込んでいる。",promptEN:"I failed the test.",promptJA:"テストで失敗しました。",choices:[c("That must be hard. You'll recover.","つらいね。でも立て直せるよ",3),c("That’s rough.","それはきついね",1),c("You're cooked.","詰んだね",0),c("Cope harder.","現実見ろ",-3)]},
-{scene:"Maliaが新しい曲をすすめてきた。",promptEN:"Would you listen to this song?",promptJA:"この曲を聞いてもらえますか？",choices:[c("Sure. I'd like to hear it.","もちろん。聞いてみたい",3),c("Okay, I'll try it.","聞いてみるよ",1),c("Maybe later.","あとでね",0),c("My ears hurt.","耳が痛い",-3)]},
-{scene:"Maliaが発音を褒められた。",promptEN:"My teacher said my pronunciation was good.",promptJA:"先生に発音を褒められました。",choices:[c("You earned that. Great work.","努力の成果だね。すごい",3),c("That's great.","よかったね",1),c("Huge W.","大勝利",0),c("Still not native.","まだネイティブじゃないけど",-3)]},
-{scene:"Maliaが最後に感想を聞いてきた。",promptEN:"Was I easy to talk to?",promptJA:"私と話しやすかったですか？",choices:[c("Yes. You were thoughtful and kind.","うん。思いやりがあって素敵だった",3),c("Yes, I enjoyed it.","うん、楽しかった",1),c("It was okay.","まあ普通",0),c("Too serious.","真面目すぎ",-3)]}
-],
-mark:[
-{scene:"Markが5連勝したと自慢してきた。",promptEN:"I just won five games in a row.",promptJA:"今5連勝した。",choices:[c("Built different!","格が違う！",3),c("Good job.","やるじゃん",1),c("Fair enough.","まあそうだね",0),c("Touch grass.","外出ろ",-3)]},
-{scene:"Markが文化祭の成功を語っている。",promptEN:"Our class project was a huge success.",promptJA:"クラス企画めっちゃ成功した。",choices:[c("Huge W!","大勝利！",3),c("That's great.","よかったね",1),c("Nice.","いいね",0),c("Whatever.","どうでもいい",-3)]},
-{scene:"Markがカラオケで高得点を出した。",promptEN:"I got 96 at karaoke.",promptJA:"カラオケ96点だった。",choices:[c("You ate that!","完璧じゃん！",3),c("That's impressive.","すごいね",1),c("Not bad.","悪くない",0),c("Mid.","微妙",-3)]},
-{scene:"Markが決勝で負けた。",promptEN:"We lost the final match.",promptJA:"決勝で負けた。",choices:[c("You'll bounce back stronger.","もっと強くなって戻れる",3),c("That’s brutal.","それはきつい",1),c("Okay.","そうか",0),c("Skill issue.","実力不足",-3)]},
-{scene:"Markが課題を締切1分前に出した。",promptEN:"I submitted it one minute before the deadline.",promptJA:"締切1分前に出した。",choices:[c("You cooked!","やるじゃん！",3),c("That’s wild.","それやばい",1),c("Don't do that again.","次はやめな",0),c("Irresponsible.","無責任だな",-3)]},
-{scene:"Markが新しいスマホを買った。",promptEN:"I got a new phone.",promptJA:"新しいスマホ買った。",choices:[c("That's fire!","それ神じゃん！",3),c("Nice phone.","いいスマホだね",1),c("Cool.","へえ",0),c("Who asked?","誰が聞いた？",-3)]},
-{scene:"Markが最後に聞いてきた。",promptEN:"You got my vibe, right?",promptJA:"俺のノリ、わかっただろ？",choices:[c("Absolutely. Huge energy.","もちろん。テンション最高",3),c("Yeah, I get it.","うん、わかった",1),c("Maybe.","たぶん",0),c("Too loud.","うるさい",-3)]}
-],
-ally:[
-{scene:"Allyがバスに置いていかれた。",promptEN:"The bus left right in front of me.",promptJA:"目の前でバス行った。",choices:[c("Pain.","つらすぎ",3),c("That’s rough.","それはきつい",1),c("Oh no.","あらら",0),c("Skill issue.","実力不足",-3)]},
-{scene:"Allyが変な夢を見た。",promptEN:"I had the weirdest dream last night.",promptJA:"昨日めっちゃ変な夢見た。",choices:[c("Tell me everything.","全部聞かせて",3),c("Sounds interesting.","面白そう",1),c("Okay.","そうなんだ",0),c("I don't care.","興味ない",-3)]},
-{scene:"Allyが試験範囲を間違えた。",promptEN:"I studied the wrong material all night.",promptJA:"徹夜したのに試験範囲違った。",choices:[c("I'm cooked.","詰んだな",3),c("That hurts.","それはきつい",1),c("Bad luck.","運が悪いね",0),c("Cope harder.","現実見ろ",-3)]},
-{scene:"Allyが人間関係の揉め事を見つけた。",promptEN:"They're beefing again.",promptJA:"あいつらまた揉めてる。",choices:[c("More drama?","またドラマ？",3),c("That’s wild.","それやばいな",1),c("I see.","なるほど",0),c("Not my problem.","俺には関係ない",-3)]},
-{scene:"Allyが授業中に寝落ちした。",promptEN:"I fell asleep in class.",promptJA:"授業中寝落ちした。",choices:[c("Relatable.","わかる",3),c("I feel you.","気持ちわかる",1),c("Wake up.","起きな",0),c("NPC behavior.","NPCすぎる",-3)]},
-{scene:"Allyが投稿にいいねがつかなかった。",promptEN:"My post got no likes.",promptJA:"投稿に全然いいねつかなかった。",choices:[c("The algorithm hates you.","アルゴリズムに嫌われてる",3),c("That’s not your worth.","それで価値は決まらないよ",1),c("I see.","そうなんだ",0),c("Cringe.","痛い",-3)]},
-{scene:"Allyが最後に聞いてきた。",promptEN:"Do you speak meme?",promptJA:"ミーム語、わかる？",choices:[c("Fluently.","ペラペラです",3),c("A little.","少しなら",1),c("Not really.","あまり",0),c("Memes are childish.","ミームは子どもっぽい",-3)]}
-],
-sushi:[
-{scene:"Sushiが昼飯に誘ってきた。",promptEN:"Wanna grab lunch?",promptJA:"昼飯いかね？",choices:[c("I'm down.","のるよ",3),c("Sure.","いいよ",1),c("Maybe.","たぶん",0),c("Go away.","消えろ",-3)]},
-{scene:"Sushiがスマホを割った。",promptEN:"I dropped my phone and cracked the screen.",promptJA:"スマホ落として画面割れた。",choices:[c("Pain. Are you okay?","つらすぎ。大丈夫？",3),c("That’s rough.","それはきつい",1),c("Oh.","へえ",0),c("Skill issue.","実力不足",-3)]},
-{scene:"Sushiが弁当を忘れた。",promptEN:"I forgot my lunch.",promptJA:"弁当忘れた。",choices:[c("Want some of mine?","少し食べる？",3),c("I feel you.","わかるよ",1),c("You're cooked.","詰んだね",0),c("Not my problem.","俺には関係ない",-3)]},
-{scene:"Sushiが雨に萎えている。",promptEN:"Rainy days suck.",promptJA:"雨ほんとだるい。",choices:[c("I feel you.","わかるよ",3),c("Lowkey true.","ちょっとわかる",1),c("Yeah.","うん",0),c("Touch grass.","外出ろ",-3)]},
-{scene:"Sushiが友達にドタキャンされた。",promptEN:"My friend canceled at the last minute.",promptJA:"友達にドタキャンされた。",choices:[c("That’s rough.","それはきつい",3),c("They’re so flaky.","その人ドタキャン多いね",1),c("Okay.","そうなんだ",0),c("Good for them.","相手は賢いな",-3)]},
-{scene:"Sushiが暑さで溶けている。",promptEN:"It’s way too hot today.",promptJA:"今日暑すぎて死ぬ。",choices:[c("I'm melting too.","こっちも溶ける",3),c("I feel you.","わかるよ",1),c("Hot.","暑いね",0),c("Skill issue.","暑さ耐性不足",-3)]},
-{scene:"Sushiが最後に聞いてきた。",promptEN:"Was that a good talk?",promptJA:"今の会話よかった？",choices:[c("Yeah, it felt natural.","うん、自然でよかった",3),c("Yeah, it was nice.","うん、よかった",1),c("It was okay.","まあ普通",0),c("Nope.","いや",-3)]}
-]
+const SCENARIOS=[
+{s:"髪型を変えた相手が反応を待っている。",en:"I changed my hairstyle.",ja:"髪型変えた。",cat:"praise"},
+{s:"新しい服を見せてきた。",en:"How do I look?",ja:"この服どう？",cat:"praise"},
+{s:"良い写真を見せてきた。",en:"I took this photo today.",ja:"今日この写真撮った。",cat:"praise"},
+{s:"カラオケで高得点を出した。",en:"I got 96 at karaoke.",ja:"カラオケ96点だった。",cat:"praise"},
+{s:"テストで満点を取った。",en:"I got a perfect score.",ja:"テスト満点だった。",cat:"praise"},
+{s:"英語の発音を褒められたらしい。",en:"My teacher said my pronunciation was good.",ja:"先生に発音ほめられた。",cat:"praise"},
+{s:"文化祭の企画が成功した。",en:"Our class project was a huge success.",ja:"クラス企画めっちゃ成功した。",cat:"praise"},
+{s:"好きな人に話しかけたと報告してきた。",en:"I talked to my crush today.",ja:"今日好きな人と話した。",cat:"praise"},
+{s:"推しのライブに当選して大喜びしている。",en:"I got tickets to my favorite artist's concert!",ja:"推しのライブ当たった！",cat:"praise"},
+{s:"新しいスマホを買った。",en:"I got a new phone.",ja:"新しいスマホ買った。",cat:"praise"},
+{s:"目の前でバスに行かれた。",en:"The bus left right in front of me.",ja:"目の前でバス行った。",cat:"trouble"},
+{s:"スマホを落として画面を割った。",en:"I dropped my phone and cracked the screen.",ja:"スマホ落として画面割れた。",cat:"trouble"},
+{s:"テスト範囲を間違えて勉強していた。",en:"I studied the wrong material all night.",ja:"徹夜したのに試験範囲違った。",cat:"trouble"},
+{s:"テストで赤点だった。",en:"I failed the test.",ja:"テスト赤点だった。",cat:"trouble"},
+{s:"友達にドタキャンされた。",en:"My friend canceled at the last minute.",ja:"友達にドタキャンされた。",cat:"trouble"},
+{s:"決勝で負けた。",en:"We lost the final match.",ja:"決勝で負けた。",cat:"trouble"},
+{s:"大事なプリントを忘れた。",en:"I left the handout at home.",ja:"大事なプリント家に忘れた。",cat:"trouble"},
+{s:"財布を忘れた。",en:"I forgot my wallet.",ja:"財布忘れた。",cat:"trouble"},
+{s:"弁当を忘れた。",en:"I forgot my lunch.",ja:"弁当忘れた。",cat:"trouble"},
+{s:"授業中に寝落ちした。",en:"I fell asleep in class.",ja:"授業中寝落ちした。",cat:"trouble"},
+{s:"昼ごはんに誘ってきた。",en:"Wanna grab lunch?",ja:"昼飯いかね？",cat:"invite"},
+{s:"真面目な相談をしてきた。",en:"Can I talk to you seriously?",ja:"ちょっと真面目に相談していい？",cat:"serious"},
+{s:"秘密を言いたそうにしている。",en:"I know something, but I shouldn't say it.",ja:"言っちゃだめな話知ってる。",cat:"secret"},
+{s:"好きな曲をすすめてきた。",en:"Listen to this song.",ja:"この曲聞いてみて。",cat:"recommend"},
+{s:"推しについて語り始めた。",en:"Let me tell you why my favorite character is perfect.",ja:"推しが完璧な理由を語らせて。",cat:"listen"},
+{s:"急にテンション高く入ってきた。",en:"Guess what happened!",ja:"ねえ聞いて！",cat:"listen"},
+{s:"雨でかなり萎えている。",en:"Rainy days suck.",ja:"雨ほんとだるい。",cat:"relate"},
+{s:"暑さで溶けている。",en:"It's way too hot today.",ja:"今日暑すぎて死ぬ。",cat:"relate"},
+{s:"寝不足でふらふらしている。",en:"I slept for two hours.",ja:"2時間しか寝てない。",cat:"relate"},
+{s:"朝から何も食べていない。",en:"I haven't eaten anything today.",ja:"今日まだ何も食べてない。",cat:"care"},
+{s:"友達とケンカした。",en:"I had a fight with my friend.",ja:"友達とケンカした。",cat:"care"},
+{s:"好きな人に既読無視された。",en:"They left me on read again.",ja:"また既読無視された。",cat:"care"},
+{s:"変な夢を見たらしい。",en:"I had the weirdest dream last night.",ja:"昨日めっちゃ変な夢見た。",cat:"weird"},
+{s:"SNS投稿が叩かれ始めている。",en:"My post is getting roasted.",ja:"投稿が叩かれ始めてる。",cat:"trouble"},
+{s:"投稿にいいねが少ないと落ち込んでいる。",en:"My post got no likes.",ja:"投稿に全然いいねつかなかった。",cat:"care"},
+{s:"ゲームで味方に怒っている。",en:"My teammate threw the game.",ja:"味方のせいで負けた。",cat:"relate"},
+{s:"自分の冗談で大笑いしている。",en:"That joke was so funny.",ja:"今の冗談めっちゃ面白かった。",cat:"joke"},
+{s:"課題を締切1分前に提出した。",en:"I submitted it one minute before the deadline.",ja:"締切1分前に出した。",cat:"praise"},
+{s:"寝癖のまま登校した。",en:"I came to school with bed hair.",ja:"寝癖のまま学校来た。",cat:"joke"},
+{s:"髪を切りすぎたらしい。",en:"I cut my hair too short.",ja:"髪切りすぎた。",cat:"care"}
+];
+const ANSWERS={
+praise:{
+slang:[a("You ate.","完璧じゃん",["slang","hype","friendly"]),a("You slay.","めっちゃイケてる",["slang","hype","friendly"]),a("That's fire.","それ神",["slang","hype"]),a("Huge W.","大勝利",["slang","hype"]),a("Built different.","格が違う",["slang","hype","bold"])],
+polite:[a("That's genuinely impressive.","本当にすごいね",["polite","honest"]),a("You earned that. Great work.","努力の成果だね。すごい",["polite","honest"]),a("It suits you very well.","とても似合っているよ",["polite","honest","friendly"]),a("I'm happy for you.","よかったね",["polite","empathy"])],
+friendly:[a("That's awesome!","最高じゃん",["friendly","hype"]),a("Good job!","やるじゃん",["friendly"]),a("I'm proud of you.","誇らしいよ",["friendly","empathy"]),a("You did great.","よくやったね",["friendly","honest"])],
+meme:[a("You cooked.","やるじゃん",["meme","hype"]),a("Main character energy.","主人公感ある",["meme","slang","hype"]),a("Certified W.","認定勝利",["meme","hype"])]},
+trouble:{
+slang:[a("You're cooked.","詰んだな",["slang","meme","relatable"]),a("Pain.","つらすぎ",["meme","relatable"]),a("That's wild.","それやばいな",["slang","casual","relatable"])],
+polite:[a("That must be really frustrating.","それは本当に困るね",["polite","empathy"]),a("I'm sorry that happened.","それは大変だったね",["polite","empathy"]),a("Let's think about what you can do now.","今できることを考えよう",["polite","honest"])],
+friendly:[a("That’s rough.","それはきつい",["friendly","empathy"]),a("I feel you.","気持ちわかる",["friendly","empathy"]),a("Are you okay?","大丈夫？",["friendly","empathy"])],
+meme:[a("F in the chat.","ご愁傷さま",["meme","relatable"]),a("NPC moment.","NPCみたいな瞬間",["meme","weird"]),a("The universe said no.","宇宙に拒否された",["meme","weird"])]},
+care:{
+slang:[a("No cap, I feel you.","ガチでわかる",["slang","friendly","empathy"]),a("That's brutal.","それはえぐい",["slang","friendly"]),a("Lowkey, take care of yourself.","ちょっと自分を大事にして",["slang","friendly"])],
+polite:[a("I'm here if you want to talk.","話したければ聞くよ",["polite","empathy"]),a("Please don't be too hard on yourself.","自分を責めすぎないで",["polite","empathy"]),a("That sounds difficult. Are you alright?","大変そうだね。大丈夫？",["polite","empathy"])],
+friendly:[a("I got you.","助けるよ",["friendly","empathy"]),a("Want some help?","手伝おうか？",["friendly","empathy"]),a("You’ll be okay.","大丈夫だよ",["friendly","empathy"])],
+meme:[a("Emotional damage.","心にダメージ",["meme","relatable"]),a("That is tragic lore.","悲しき設定だ",["meme","weird"]),a("Plot twist gone wrong.","悪い方向の急展開",["meme","weird"])]},
+listen:{
+slang:[a("Spill the tea.","詳しく聞かせて",["slang","friendly"]),a("Say less, I'm listening.","わかった、聞く",["slang","friendly"]),a("Go off!","語って！",["slang","hype","friendly"])],
+polite:[a("Of course. I'm listening.","もちろん。聞くよ",["polite","empathy"]),a("Please tell me about it.","ぜひ聞かせて",["polite","friendly"]),a("I'd like to hear more.","もっと聞きたい",["polite","friendly"])],
+friendly:[a("Tell me everything.","全部聞かせて",["friendly","hype"]),a("What happened?","何があったの？",["friendly"]),a("I'm listening.","聞くよ",["friendly","empathy"])],
+meme:[a("Lore drop incoming.","設定語り来た",["meme","weird"]),a("I am seated.","聞く準備できた",["meme","friendly"]),a("Begin the TED Talk.","講演どうぞ",["meme","weird"])]},
+relate:{
+slang:[a("Lowkey true.","ちょっとわかる",["slang","relatable"]),a("Real.","それな",["slang","relatable"]),a("It’s hot af.","暑すぎる",["slang","relatable"])],
+polite:[a("I understand how you feel.","その気持ちはわかるよ",["polite","empathy"]),a("That sounds exhausting.","かなり疲れそうだね",["polite","empathy"]),a("Please take it easy.","無理しないでね",["polite","empathy"])],
+friendly:[a("Same here.","こっちも同じ",["friendly","relatable"]),a("I feel you.","わかるよ",["friendly","empathy"]),a("I'm melting too.","こっちも溶ける",["friendly","relatable"])],
+meme:[a("Mood.","それな",["meme","relatable"]),a("I can't be bothered to exist.","存在するのもだるい",["meme","relatable"]),a("We are cooked.","我々は詰んだ",["meme","relatable"])]},
+invite:{
+slang:[a("I'm down.","のるよ",["slang","friendly"]),a("Bet.","了解／のった",["slang","hype"]),a("Say less.","言われなくても行く",["slang","friendly"])],
+polite:[a("Sure, I'd like that.","うん、行きたい",["polite","friendly"]),a("Thank you for inviting me.","誘ってくれてありがとう",["polite","friendly"]),a("That sounds nice.","いいね",["polite","friendly"])],
+friendly:[a("Yeah, let's go.","うん、行こう",["friendly","casual"]),a("Sounds good.","いいね",["friendly","casual"]),a("I'm in.","参加する",["friendly","casual"])],
+meme:[a("Lunch arc begins.","昼飯編、開始",["meme","weird"]),a("Quest accepted.","クエスト受注",["meme","weird"]),a("We ride.","出陣だ",["meme","hype"])]},
+serious:{
+slang:[a("I got you.","任せて",["slang","friendly"]),a("No cap, I'm listening.","ガチで聞くよ",["slang","friendly","empathy"])],
+polite:[a("Of course. Take your time.","もちろん。ゆっくり話して",["polite","empathy"]),a("I'm here to listen.","聞くためにいるよ",["polite","empathy"]),a("You can trust me.","信頼していいよ",["polite","empathy"])],
+friendly:[a("Of course. What happened?","もちろん。何があった？",["friendly","empathy"]),a("I'm listening.","聞くよ",["friendly","empathy"]),a("Talk to me.","話して",["friendly","empathy"])],
+meme:[a("Serious mode: on.","真面目モード起動",["meme","friendly"]),a("I will pause the memes.","ミームはいったん止める",["meme","friendly"])]},
+secret:{
+slang:[a("Spill the tea.","暴露して",["slang","chaotic"]),a("No way, tell me.","うそ、教えて",["slang","friendly"]),a("I'm invested.","気になりすぎる",["slang","friendly"])],
+polite:[a("Keep it private.","秘密にしておこう",["polite","honest"]),a("Be careful with it.","慎重に扱おう",["polite","honest"]),a("If it's private, don't share it.","秘密なら言わない方がいい",["polite","honest"])],
+friendly:[a("Only say it if it's okay.","言って大丈夫なことだけでいいよ",["friendly","honest"]),a("You don't have to tell me.","無理に言わなくていいよ",["friendly","empathy"]),a("Careful, that sounds private.","それ秘密っぽいね",["friendly","honest"])],
+meme:[a("Forbidden lore.","禁断の設定",["meme","weird"]),a("The tea is dangerous.","その茶は危険",["meme","weird"])]},
+recommend:{
+slang:[a("This is fire.","これ神",["slang","hype"]),a("I'm vibing with this.","めっちゃいい感じ",["slang","friendly"]),a("No cap, this is good.","ガチでいい",["slang","honest"])],
+polite:[a("Thanks. I'll listen carefully.","ありがとう。ちゃんと聞くね",["polite","friendly"]),a("I can see why you like it.","好きな理由がわかるよ",["polite","honest"]),a("It's not my usual style, but I like it.","普段の好みとは違うけどいいね",["polite","honest"])],
+friendly:[a("Nice, I like it.","いいね、好き",["friendly","honest"]),a("Thanks for sharing.","教えてくれてありがとう",["friendly"]),a("This has a good vibe.","雰囲気いいね",["friendly","casual"])],
+meme:[a("Certified banger.","名曲認定",["meme","hype"]),a("My ears have been blessed.","耳が祝福された",["meme","weird"])]},
+weird:{
+slang:[a("That's wild.","それやばい",["slang","relatable"]),a("No way, tell me more.","うそ、もっと聞かせて",["slang","friendly"]),a("I'm invested.","気になりすぎる",["slang","friendly"])],
+polite:[a("That sounds unusual. What happened?","珍しいね。何があったの？",["polite","friendly"]),a("I'd like to hear it.","聞いてみたい",["polite","friendly"]),a("That must have been surprising.","驚いただろうね",["polite","empathy"])],
+friendly:[a("Tell me everything.","全部聞かせて",["friendly","hype"]),a("Sounds interesting.","面白そう",["friendly"]),a("What happened next?","それでどうなったの？",["friendly"])] ,
+meme:[a("Dream lore unlocked.","夢設定解放",["meme","weird"]),a("That is cursed.","それ呪われてる",["meme","weird"]),a("New side quest.","新サブクエスト発生",["meme","weird"])]},
+joke:{
+slang:[a("You ate.","キマってた",["slang","hype"]),a("It's giving chaos.","混沌感ある",["slang","meme"]),a("No cap, that's funny.","ガチでおもろい",["slang","friendly"])],
+polite:[a("That was actually funny.","今のは本当に面白かった",["polite","honest"]),a("I like your sense of humor.","ユーモアのセンスいいね",["polite","friendly"]),a("Honestly, it works.","正直それもあり",["polite","honest"])],
+friendly:[a("That was funny.","今の面白かった",["friendly"]),a("You have good taste.","センスあるね",["friendly"]),a("I like that.","それ好き",["friendly"])],
+meme:[a("Comedy arc unlocked.","お笑い編解放",["meme","weird"]),a("Peak content.","最高コンテンツ",["meme","hype"]),a("NPC behavior, but funny.","NPCっぽいけど面白い",["meme","weird"])]}
 };
-const REPLIES={
-best:{en:["Perfect vibe!","You nailed it!","That was exactly right!"],ja:["最高。完全に刺さった。","これは大当たり。","空気読み、完璧。"]},
-good:{en:["Nice answer.","That works.","Pretty good."],ja:["いい返答。","悪くない。","ちゃんと伝わった。"]},
-zero:{en:["Hmm. Okay.","Not bad, not great.","I guess that works."],ja:["まあ普通。","刺さりはしない。","会話は続くけど弱い。"]},
-bad:{en:["That was not it.","Ouch.","Nope."],ja:["それは地雷。","空気が死んだ。","かなり印象ダウン。"]},
-time:{en:"Too late!",ja:"時間切れ。空気が流れた。"}
-};
+const BAD_ANSWERS=[a("Who asked?","誰が聞いた？",["rude","too_edgy"]),a("I don't care.","興味ない",["cold","rude"]),a("Skill issue.","実力不足",["meme","too_edgy","rude"]),a("Cope harder.","現実見ろ",["rude","too_edgy"]),a("That's your fault.","自業自得",["cold","rude"]),a("Not my problem.","俺には関係ない",["cold","rude"]),a("Cringe.","きつい",["rude","too_edgy"]),a("Go away.","消えろ",["rude","too_edgy"]),a("Too serious.","真面目すぎ",["rude","cold"]),a("Goodbye forever.","永遠にさよなら",["too_edgy","chaotic"]),a("Tell everyone.","全員に言え",["chaotic","too_edgy"]),a("My ears hurt.","耳が痛い",["rude","too_edgy"]),a("Touch grass.","外出ろ",["meme","too_edgy","rude"]),a("Still not native.","まだネイティブじゃないけど",["rude","too_edgy"]),a("Move on.","切り替えろ",["cold","honest"]),a("Must be luck.","運でしょ",["cold","rude"]),a("Kinda mid.","ちょい微妙",["cold","too_edgy"]),a("Whatever.","どうでもいい",["cold","rude"])];
+const ZERO_ANSWERS=[a("Okay.","そうなんだ",["basic"]),a("Nice.","いいね",["basic"]),a("Maybe.","たぶん",["passive"]),a("I see.","なるほど",["basic"]),a("Cool.","へえ",["basic"]),a("Fair enough.","まあそうだね",["basic"]),a("Not bad.","悪くない",["basic"]),a("That's something.","それは何かだね",["basic","weird"]),a("Hmm.","うーん",["passive"]),a("Sure.","うん",["basic"]),a("It happens.","そういうこともある",["basic"]),a("Good to know.","知れてよかった",["basic"]),a("Maybe later.","あとでね",["passive"]),a("Sounds normal.","普通だね",["basic"]),a("I guess.","まあね",["passive"]),a("Alright.","了解",["basic"]),a("That's okay.","まあ大丈夫",["basic"]),a("Interesting.","興味深いね",["formal","basic"])];
+const FINAL_PROMPTS=[
+{s:"最後に相手が聞いてきた。",en:"So, how was talking with me?",ja:"で、私と話してみてどうだった？",cat:"listen"},
+{s:"最後に相手が笑って聞いてきた。",en:"You get my vibe, right?",ja:"私のノリ、わかったでしょ？",cat:"praise"},
+{s:"最後にもう一度誘ってきた。",en:"Want to talk again sometime?",ja:"また今度話す？",cat:"invite"}
+];
+const REPLIES={best:{en:["Perfect vibe!","You nailed it!","That was exactly right!","That landed perfectly."],ja:["最高。完全に刺さった。","これは大当たり。","空気読み、完璧。","相手の好みにかなり合った。"]},good:{en:["Nice answer.","That works.","Pretty good.","Good enough."],ja:["いい返答。","悪くない。","ちゃんと伝わった。","会話はかなり自然。"]},zero:{en:["Hmm. Okay.","Not bad, not great.","I guess that works.","A little plain."],ja:["まあ普通。","刺さりはしない。","会話は続くけど弱い。","無難だが決め手に欠ける。"]},bad:{en:["That was not it.","Ouch.","Nope.","Wrong vibe."],ja:["それは地雷。","空気が死んだ。","かなり印象ダウン。","相手の嫌いなノリを踏んだ。"]},time:{en:"Too late!",ja:"時間切れ。空気が流れた。"}};
 let selectedChar=null,route=[],turn=0,heart=5,combo=0,maxCombo=0,locked=false,timer=null,timeLeft=0,totalTime=0,log=[];const MAX_HEART=15,MIN_HEART=0,app=document.getElementById("app"),flash=document.getElementById("flash");
-function c(en,ja,delta){return{en,ja,delta};}
+function a(en,ja,tags){return{en,ja,tags};}
 function esc(s){return String(s).replace(/[&<>'"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;","\"":"&quot;"}[m]));}
-function showTitle(){app.innerHTML=`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title">Sushi Talk</div><p class="lead">キャラの性格を読んで、英語の返答を選ぶ会話攻略ゲーム。<br>4択は「大当たり・普通・ゼロ・地雷」が1つずつ。</p><button class="btn" style="width:100%;margin-top:14px" onclick="showCharacterSelect()">START</button><div class="loadingNote">初回のみ画像を読み込みます</div></div>`;}
-async function showCharacterSelect(){await preloadSprites();app.innerHTML=`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title" style="font-size:36px;margin-top:4px">誰と話す？</div><p class="lead">攻略する相手を選ぼう。全員の好感度は見えない。相手のノリだけがヒント。</p></div><div class="characterList">${CHARACTERS.map(ch=>`<button class="characterSelect" onclick="startRoute('${ch.id}')"><div class="miniSpriteWrap"><div class="miniSprite" style="--sheet:url('${ch.sheet}')"></div></div><div><div class="selectName">${ch.name}</div><span class="selectType">${ch.type}</span><div class="ruleGrid"><div class="ruleBox good">👍 最高<br>${ch.best}</div><div class="ruleBox bad">👎 マイナス<br>${ch.worst}</div></div><div style="margin-top:6px;color:var(--muted);font-size:12px;font-weight:800;line-height:1.45">${ch.profile}</div></div></button>`).join("")}</div>`;}
-function startRoute(id){selectedChar=CHARACTERS.find(c=>c.id===id);route=shuffle(ROUTES[id]).slice(0,7);turn=0;heart=5;combo=0;maxCombo=0;locked=false;log=[];nextTurn();}
+function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+function sample(arr,n){return shuffle(arr).slice(0,n);}
+function showTitle(){app.innerHTML=`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title">Sushi Talk</div><p class="lead">キャラの性格を読んで、英語の返答を選ぶ会話攻略ゲーム。<br>選択肢は毎回シャッフル＆生成。暗記より「空気読み」。</p><button class="btn" style="width:100%;margin-top:14px" onclick="showCharacterSelect()">START</button><div class="loadingNote">初回のみ画像を読み込みます</div></div>`;}
+async function showCharacterSelect(){await preloadSprites();app.innerHTML=`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title" style="font-size:36px;margin-top:4px">誰と話す？</div><p class="lead">攻略する相手を選ぼう。ヒントは相手のノリだけ。答えの丸暗記では勝ちにくい。</p></div><div class="characterList">${CHARACTERS.map(ch=>`<button class="characterSelect" onclick="startRoute('${ch.id}')"><div class="miniSpriteWrap"><div class="miniSprite" style="--sheet:url('${ch.sheet}')"></div></div><div><div class="selectName">${ch.name}</div><span class="selectType">${ch.type}</span><div class="ruleGrid"><div class="ruleBox good">👍 最高<br>${ch.best}</div><div class="ruleBox bad">👎 マイナス<br>${ch.worst}</div></div><div style="margin-top:6px;color:var(--muted);font-size:12px;font-weight:800;line-height:1.45">${ch.profile}</div></div></button>`).join("")}</div>`;}
+function startRoute(id){selectedChar=CHARACTERS.find(c=>c.id===id);route=sample(SCENARIOS,6);route.push(pick(FINAL_PROMPTS));turn=0;heart=5;combo=0;maxCombo=0;locked=false;log=[];nextTurn();}
 function nextTurn(){clearInterval(timer);if(turn>=route.length||heart<=0){showResult();return;}locked=false;renderTurn();startTimer(selectedChar.time);}
 function renderHearts(){let full=Math.max(0,Math.min(MAX_HEART,heart));return "❤️".repeat(full)+"🤍".repeat(Math.max(0,10-full));}
-function renderTurn(){const sc=route[turn];const choices=shuffle(sc.choices);window.currentChoices=choices;app.innerHTML=`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="status"><div class="stat"><div class="statLabel">TURN</div><div class="statValue">${turn+1}/${route.length}</div></div><div class="stat"><div class="statLabel">TARGET</div><div class="statValue" style="font-size:17px">${selectedChar.name}</div></div><div class="stat"><div class="statLabel">COMBO</div><div class="statValue">${combo}</div></div></div><div class="card"><div class="heartLine">${renderHearts()}</div><div class="heartHint">好感度：数字は見えない。反応で読め。</div></div><div class="timerWrap"><div class="timerFill" id="timerFill"></div></div><div class="card conversationCard" id="characterCard"><div class="conversationHero"><div class="spriteWrap"><div class="sprite normal float" id="sprite" style="--sheet:url('${selectedChar.sheet}')"></div></div><div><div class="charName">${selectedChar.name}</div><span class="charType">${selectedChar.type}</span><div class="comboBadge">${combo>1?combo+" COMBO":"VIBE CHECK"}</div><div class="bubble"><div class="sceneInBubble">${esc(sc.scene)}</div><div class="en">${esc(sc.promptEN)}</div><div class="ja">${esc(sc.promptJA)}</div></div></div></div><div class="choiceAreaInCard">${choices.map((choice,i)=>`<button class="choice" onclick="choose(${i})"><div class="choiceEN">${esc(choice.en)}</div><div class="choiceJA">${esc(choice.ja)}</div></button>`).join("")}</div><div class="replyBubble hidden" id="feedback"></div></div>`;}
+function getPoolForChar(cat,char){const pools=ANSWERS[cat]||ANSWERS.relate; if(char.id==="susie")return pools.slang.concat(pools.friendly||[]); if(char.id==="malia")return pools.polite.concat(pools.friendly||[]); if(char.id==="ally")return pools.meme.concat(pools.slang||[]); if(char.id==="mark")return pools.slang.concat(pools.friendly||[],pools.meme||[]); return pools.friendly.concat(pools.polite||[],pools.slang||[]);}
+function scoreAnswer(char,ans){let s=0;for(const t of ans.tags||[]){if(char.likes.includes(t))s+=2;if(char.hates.includes(t))s-=3;}if((ans.tags||[]).includes("rude"))s-=2;if((ans.tags||[]).includes("cold"))s-=1;if((ans.tags||[]).includes("empathy"))s+=1;return s;}
+function uniqueChoices(list){const seen=new Set(),out=[];for(const x of list){if(!seen.has(x.en)){seen.add(x.en);out.push(x);}}return out;}
+function buildChoices(sc,char){let candidates=uniqueChoices(getPoolForChar(sc.cat,char));candidates.sort((x,y)=>scoreAnswer(char,y)-scoreAnswer(char,x));let best=candidates.find(x=>scoreAnswer(char,x)>=3)||candidates[0]||pick(ZERO_ANSWERS);let good=candidates.find(x=>x.en!==best.en&&scoreAnswer(char,x)>=1)||pick(ZERO_ANSWERS);let zero=pick(ZERO_ANSWERS.filter(x=>x.en!==best.en&&x.en!==good.en));let bads=uniqueChoices(BAD_ANSWERS.slice().sort((x,y)=>scoreAnswer(char,x)-scoreAnswer(char,y)));let bad=bads.find(x=>x.en!==best.en&&x.en!==good.en&&x.en!==zero.en)||pick(BAD_ANSWERS);return shuffle([{...best,delta:3,role:"best"},{...good,delta:1,role:"good"},{...zero,delta:0,role:"zero"},{...bad,delta:-3,role:"bad"}]);}
+function renderTurn(){const sc=route[turn];const choices=buildChoices(sc,selectedChar);window.currentChoices=choices;app.innerHTML=`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="status"><div class="stat"><div class="statLabel">TURN</div><div class="statValue">${turn+1}/${route.length}</div></div><div class="stat"><div class="statLabel">TARGET</div><div class="statValue" style="font-size:17px">${selectedChar.name}</div></div><div class="stat"><div class="statLabel">COMBO</div><div class="statValue">${combo}</div></div></div><div class="card"><div class="heartLine">${renderHearts()}</div><div class="heartHint">好感度：数字は見えない。反応で読め。</div></div><div class="timerWrap"><div class="timerFill" id="timerFill"></div></div><div class="card conversationCard" id="characterCard"><div class="conversationHero"><div class="spriteWrap"><div class="sprite normal float" id="sprite" style="--sheet:url('${selectedChar.sheet}')"></div></div><div><div class="charName">${selectedChar.name}</div><span class="charType">${selectedChar.type}</span><div class="comboBadge">${combo>1?combo+" COMBO":"VIBE CHECK"}</div><div class="bubble"><div class="sceneInBubble">${esc(sc.s)}</div><div class="en">${esc(sc.en)}</div><div class="ja">${esc(sc.ja)}</div></div></div></div><div class="choiceAreaInCard">${choices.map((choice,i)=>`<button class="choice" onclick="choose(${i})"><div class="choiceEN">${esc(choice.en)}</div><div class="choiceJA">${esc(choice.ja)}</div></button>`).join("")}</div><div class="replyBubble hidden" id="feedback"></div></div>`;}
 function startTimer(sec){totalTime=sec;timeLeft=sec;const fill=()=>{const el=document.getElementById("timerFill");if(el)el.style.width=Math.max(0,(timeLeft/totalTime)*100)+"%";};fill();timer=setInterval(()=>{if(locked)return;timeLeft-=.1;fill();if(timeLeft<=0)timeoutChoose();},100);}
 function choose(index){if(locked)return;locked=true;clearInterval(timer);const choice=window.currentChoices[index];applyResult(choice,choice.delta,index,false);}
-function timeoutChoose(){if(locked)return;locked=true;clearInterval(timer);applyResult({en:"TIME OUT",ja:"時間切れ",delta:-3},-3,null,true);}
-function applyResult(choice,delta,index,isTimeout){heart=Math.max(MIN_HEART,Math.min(MAX_HEART,heart+delta));if(delta===3){combo++;}else{combo=0;}maxCombo=Math.max(maxCombo,combo);const tier=isTimeout?"time":delta===3?"best":delta===1?"good":delta===0?"zero":"bad";const expression=delta===3?"love":delta===1?"good":delta===0?"shock":"bad";const reply=getReply(tier);log.push({turn:turn+1,scene:route[turn].promptJA,choice:choice.en,ja:choice.ja,delta,replyEN:reply.en,replyJA:reply.ja});document.querySelectorAll(".choice").forEach((btn,i)=>{btn.classList.add("locked");if(i===index)btn.classList.add("selected");});const sprite=document.getElementById("sprite");sprite.className="sprite "+expression+" pop";const card=document.getElementById("characterCard");if(delta<0)card.classList.add("shake");triggerFlash(delta===3?"best":delta<0?"bad":"good");const feedback=document.getElementById("feedback");feedback.classList.remove("hidden");feedback.innerHTML=`<div class="tapNext">TAP TO CONTINUE</div><div class="delta ${delta<0?'bad':''}">${delta>0?"+"+delta:delta}</div><div class="replyEN">${esc(reply.en)}</div><div class="replyJA">${esc(reply.ja)}</div><div class="heartLine" style="font-size:23px;margin-top:8px">${renderHearts()}</div>`;feedback.onclick=()=>{turn++;nextTurn();};}
+function timeoutChoose(){if(locked)return;locked=true;clearInterval(timer);applyResult({en:"TIME OUT",ja:"時間切れ",delta:-3,role:"bad"},-3,null,true);}
+function applyResult(choice,delta,index,isTimeout){heart=Math.max(MIN_HEART,Math.min(MAX_HEART,heart+delta));if(delta===3){combo++;}else{combo=0;}maxCombo=Math.max(maxCombo,combo);const tier=isTimeout?"time":delta===3?"best":delta===1?"good":delta===0?"zero":"bad";const expression=delta===3?"love":delta===1?"good":delta===0?"shock":"bad";const reply=getReply(tier);log.push({turn:turn+1,scene:route[turn].ja,choice:choice.en,ja:choice.ja,delta,replyEN:reply.en,replyJA:reply.ja,role:choice.role||tier});document.querySelectorAll(".choice").forEach((btn,i)=>{btn.classList.add("locked");if(i===index)btn.classList.add("selected");});const sprite=document.getElementById("sprite");sprite.className="sprite "+expression+" pop";const card=document.getElementById("characterCard");if(delta<0)card.classList.add("shake");triggerFlash(delta===3?"best":delta<0?"bad":"good");const feedback=document.getElementById("feedback");feedback.classList.remove("hidden");feedback.innerHTML=`<div class="tapNext">TAP TO CONTINUE</div><div class="delta ${delta<0?'bad':''}">${delta>0?"+"+delta:delta}</div><div class="replyEN">${esc(reply.en)}</div><div class="replyJA">${esc(reply.ja)}</div><div class="heartLine" style="font-size:23px;margin-top:8px">${renderHearts()}</div>`;feedback.onclick=()=>{turn++;nextTurn();};}
 function getReply(tier){if(tier==="time")return REPLIES.time;const pool=REPLIES[tier];const i=Math.floor(Math.random()*pool.en.length);return{en:pool.en[i],ja:pool.ja[i]};}
 function triggerFlash(type){flash.className="flash "+type;setTimeout(()=>flash.className="flash",600);}
-function showResult(){clearInterval(timer);let rank="CLASSMATE";let comment="会話は成立した。でも攻略にはまだ遠い。";if(heart>=13){rank="BEST FRIEND";comment="完全攻略。相手のノリを読み切った。";}else if(heart>=10){rank="GOOD FRIEND";comment="かなり好印象。あと一歩で親友。";}else if(heart>=7){rank="FRIEND";comment="悪くない。空気はだいたい読めている。";}else if(heart>=4){rank="AWKWARD";comment="少し気まずい。地雷を踏みすぎた。";}else{rank="GAME OVER";comment="空気が崩壊した。相手の嫌いな返答を確認しよう。";}app.innerHTML=`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title" style="font-size:36px;margin-top:4px">RESULT</div><div class="resultRank">${rank}</div><div class="heartLine" style="margin-top:10px">${renderHearts()}</div><p class="lead">${selectedChar.name}：${comment}<br>MAX COMBO：${maxCombo}</p><button class="btn" style="width:100%" onclick="startRoute('${selectedChar.id}')">同じ相手でもう一回</button><button class="btn secondary" style="width:100%;margin-top:10px" onclick="showCharacterSelect()">相手を変える</button></div><div class="card"><b>会話ログ</b><div class="log">${log.map(l=>`<div class="logRow"><b>${l.turn}. ${selectedChar.name}</b>：${esc(l.scene)}<br>${esc(l.choice)}（${esc(l.ja)}） <b>${l.delta>0?"+"+l.delta:l.delta}</b><br>${esc(l.replyEN)}<br><span style="color:var(--muted)">${esc(l.replyJA)}</span></div>`).join("")}</div></div>`;}
+function showResult(){clearInterval(timer);let rank="CLASSMATE",comment="会話は成立した。でも攻略にはまだ遠い。";if(heart>=13){rank="BEST FRIEND";comment="完全攻略。相手のノリを読み切った。";}else if(heart>=10){rank="GOOD FRIEND";comment="かなり好印象。あと一歩で親友。";}else if(heart>=7){rank="FRIEND";comment="悪くない。空気はだいたい読めている。";}else if(heart>=4){rank="AWKWARD";comment="少し気まずい。地雷を踏みすぎた。";}else{rank="GAME OVER";comment="空気が崩壊した。相手の嫌いな返答を確認しよう。";}app.innerHTML=`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title" style="font-size:36px;margin-top:4px">RESULT</div><div class="resultRank">${rank}</div><div class="heartLine" style="margin-top:10px">${renderHearts()}</div><p class="lead">${selectedChar.name}：${comment}<br>MAX COMBO：${maxCombo}</p><button class="btn" style="width:100%" onclick="startRoute('${selectedChar.id}')">同じ相手でもう一回</button><button class="btn secondary" style="width:100%;margin-top:10px" onclick="showCharacterSelect()">相手を変える</button></div><div class="card"><b>会話ログ</b><div class="log">${log.map(l=>`<div class="logRow"><b>${l.turn}. ${selectedChar.name}</b>：${esc(l.scene)}<br>${esc(l.choice)}（${esc(l.ja)}） <b>${l.delta>0?"+"+l.delta:l.delta}</b><br>${esc(l.replyEN)}<br><span style="color:var(--muted)">${esc(l.replyJA)}</span></div>`).join("")}</div></div>`;}
 function shuffle(arr){return[...arr].sort(()=>Math.random()-.5);}
 showTitle();
 </script>
