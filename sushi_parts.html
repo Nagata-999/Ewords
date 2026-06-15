@@ -55355,6 +55355,149 @@ coburg`;
   window.wordfreqCandidateSpellings = wordfreqCandidateSpellings;
   window.wordfreqDerivedSpellings = wordfreqDerivedSpellings;
 })();
+
+
+// ===== v6.20 Part-only card safety patch =====
+// Rule: cards must be word parts only. Completed words such as extract/contract
+// are kept in WORDS/WORD_MAP as valid answers, but removed from PARTS, starter,
+// deck, hand, rewards, and saved state.
+(function(){
+  function isArray(v){ return Array.isArray(v); }
+  function partIdsOfWord(w){ return isArray(w && w.parts) ? w.parts.map(String) : []; }
+  function isDecomposedWord(w){
+    const ids = partIdsOfWord(w);
+    if(!w || !w.word || ids.length < 2) return false;
+    return !(ids.length === 1 && ids[0] === String(w.word));
+  }
+  function buildCompletedWordSet(){
+    const explicit = [
+      'respect','conject','deport','transport','propose','compose','oppose','expose',
+      'contract','extract','attract','retract',
+      'project','reject','inject','object','inspect','suspect','prospect',
+      'react','remove','review','reuse','predict','describe','active','inactive','activate'
+    ];
+    const s = new Set(explicit.map(String));
+    try{
+      if(isArray(WORDS)){
+        WORDS.forEach(w=>{
+          if(isDecomposedWord(w)) s.add(String(w.word));
+        });
+      }
+    }catch(e){}
+    // Never remove genuine small components even if they are English words.
+    ['act','port','pose','tract','spect','ject','dict','duc','fer','tain','move','read','view','form','press','mit','vis','ceive','cept','scribe','scribe'].forEach(id=>s.delete(id));
+    return s;
+  }
+  function removeIdsFromArray(arr, bad){
+    if(!isArray(arr)) return 0;
+    let n = 0;
+    for(let i=arr.length-1;i>=0;i--){
+      const v = arr[i];
+      const id = typeof v === 'string' ? v : (v && v.id);
+      if(bad.has(String(id))){ arr.splice(i,1); n++; }
+    }
+    return n;
+  }
+  function makeAlias(word, routes){
+    try{
+      const item = isArray(WORDS) ? WORDS.find(w=>w && w.word===word) : null;
+      if(!item || typeof WORD_MAP==='undefined' || !WORD_MAP) return;
+      routes.forEach(r=>{ if(isArray(r)) WORD_MAP.set(r.join('|'), item); });
+    }catch(e){}
+  }
+  window.stripCompletedWordCards = function(){
+    const bad = buildCompletedWordSet();
+
+    // Keep answer routes alive through WORD_MAP. These are answers, not cards.
+    [
+      ['contract', [['con','tract']]],
+      ['contraction', [['con','tract','tion'],['con','tract','ion']]],
+      ['contractor', [['con','tract','or']]],
+      ['extract', [['ex','tract']]],
+      ['extraction', [['ex','tract','tion'],['ex','tract','ion']]],
+      ['attract', [['at','tract']]],
+      ['attractive', [['at','tract','ive']]],
+      ['retract', [['re','tract']]],
+      ['retraction', [['re','tract','tion'],['re','tract','ion']]],
+      ['respect', [['re','spect']]],
+      ['respectful', [['re','spect','ful']]],
+      ['inspect', [['in','spect']]],
+      ['inspection', [['in','spect','ion'],['in','spect','tion']]],
+      ['suspect', [['sus','spect']]],
+      ['prospect', [['pro','spect']]],
+      ['project', [['pro','ject']]],
+      ['projection', [['pro','ject','ion'],['pro','ject','tion']]],
+      ['reject', [['re','ject']]],
+      ['rejection', [['re','ject','ion'],['re','ject','tion']]],
+      ['inject', [['in','ject']]],
+      ['injection', [['in','ject','ion'],['in','ject','tion']]],
+      ['object', [['ob','ject']]],
+      ['transport', [['trans','port']]],
+      ['transportation', [['trans','port','ation'],['trans','port','tion']]],
+      ['deport', [['de','port']]],
+      ['deportable', [['de','port','able']]],
+      ['propose', [['pro','pose']]],
+      ['proposal', [['pro','pose','al']]],
+      ['exposition', [['ex','pose','tion']]],
+      ['compose', [['com','pose']]],
+      ['composition', [['com','pose','tion'],['com','posit','ion']]],
+      ['oppose', [['op','pose'],['ob','pose']]],
+      ['opposition', [['op','pose','tion'],['op','posit','ion']]]
+    ].forEach(x=>makeAlias(x[0],x[1]));
+
+    try{ removeIdsFromArray(PARTS, bad); }catch(e){}
+    try{ removeIdsFromArray(STARTER_PARTS, bad); }catch(e){}
+    try{ removeIdsFromArray(deck, bad); }catch(e){}
+    try{ removeIdsFromArray(hand, bad); }catch(e){}
+    try{ removeIdsFromArray(selected, bad); }catch(e){}
+    try{ if(typeof unlockedParts!=='undefined' && unlockedParts && unlockedParts.delete) bad.forEach(id=>unlockedParts.delete(id)); }catch(e){}
+
+    // Clean saved resume data so old broken cards do not reappear.
+    try{
+      const raw = localStorage.getItem(RUN_KEY);
+      if(raw){
+        const s = JSON.parse(raw);
+        if(s){
+          removeIdsFromArray(s.deck, bad);
+          removeIdsFromArray(s.hand, bad);
+          if(isArray(s.unlockedParts)) removeIdsFromArray(s.unlockedParts, bad);
+          localStorage.setItem(RUN_KEY, JSON.stringify(s));
+        }
+      }
+    }catch(e){}
+
+    return bad;
+  };
+
+  try{ window.stripCompletedWordCards(); }catch(e){ console.warn('stripCompletedWordCards failed', e); }
+
+  // If resume loads old data later, strip again immediately after loading.
+  try{
+    if(typeof loadRunState === 'function' && !loadRunState.__partOnlyPatched){
+      const prevLoadRunState = loadRunState;
+      loadRunState = function(){
+        const ok = prevLoadRunState.apply(this, arguments);
+        try{ window.stripCompletedWordCards(); }catch(e){}
+        return ok;
+      };
+      loadRunState.__partOnlyPatched = true;
+    }
+  }catch(e){}
+
+  // If any later reward/start routine reintroduces a completed word, strip before render.
+  try{
+    if(typeof render === 'function' && !render.__partOnlyPatched){
+      const prevRender = render;
+      render = function(){
+        try{ window.stripCompletedWordCards(); }catch(e){}
+        return prevRender.apply(this, arguments);
+      };
+      render.__partOnlyPatched = true;
+    }
+  }catch(e){}
+})();
+// ===== end v6.20 =====
+
 </script>
 
 </body>
