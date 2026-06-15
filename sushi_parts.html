@@ -4059,5 +4059,124 @@ window.addEventListener('load',()=>{const savedName=localStorage.getItem(PLAYER_
 @media(max-width:720px){.stageQuestMilestones{grid-template-columns:1fr}.stageQuestRemain{font-size:20px}.stageQuestTop b{font-size:16px}}
 </style>
 
+
+<script>
+// ===== v6.8 removal route + opening shuffle patch =====
+(function(){
+  function safe(fn, fallback){ try{return fn();}catch(e){return fallback;} }
+  function uniq(arr){ return [...new Set((arr||[]).filter(Boolean))]; }
+  function hasPart(id){ return Array.isArray(PARTS) && PARTS.some(p=>p.id===id); }
+  function addPartIfMissing(p){
+    if(!Array.isArray(PARTS) || !p || !p.id || hasPart(p.id)) return false;
+    PARTS.push(p);
+    return true;
+  }
+  function addWordRoute(w){
+    if(!Array.isArray(WORDS) || !w || !w.word || !Array.isArray(w.parts)) return;
+    const same = WORDS.find(x=>x.word===w.word && Array.isArray(x.parts) && x.parts.join('|')===w.parts.join('|'));
+    if(same) return;
+    WORDS.push(w);
+    try{ if(typeof addAliasKeys==='function' && typeof WORD_MAP!=='undefined') addAliasKeys(WORD_MAP,w); }catch(e){}
+  }
+  function addToStarter(id){
+    try{ if(typeof unlockedParts!=='undefined' && unlockedParts instanceof Set) unlockedParts.add(id); }catch(e){}
+    try{ if(Array.isArray(deck) && !deck.includes(id)) deck.push(id); }catch(e){}
+  }
+  function pType(id){ return safe(()=>part(id).type, (PARTS.find(p=>p.id===id)||{}).type||'root'); }
+  function make(id){ return typeof makeCard==='function' ? makeCard(id) : {id, uid:String(Date.now()+Math.random())+'_'+id, ...(PARTS.find(p=>p.id===id)||{})}; }
+  function canMakeWordFromIds(w, ids){
+    const have={}; ids.forEach(id=>have[id]=(have[id]||0)+1);
+    const need={}; (w.parts||[]).forEach(id=>need[id]=(need[id]||0)+1);
+    return Object.keys(need).every(id=>(have[id]||0)>=need[id]);
+  }
+  function possibleCount(ids){
+    let n=0;
+    for(const w of WORDS||[]){ if(canMakeWordFromIds(w, ids)){ n++; if(n>=5) return n; } }
+    return n;
+  }
+  function known(){ return new Set(safe(()=>knownWords(), [])); }
+  function liveIds(){
+    const avail=safe(()=>availablePartIds(), []);
+    if(Array.isArray(avail) && avail.length) return new Set(avail);
+    return new Set(safe(()=>deck, []).length ? deck : (PARTS||[]).map(p=>p.id));
+  }
+  function enoughUnlocked(w, avail){ return w && w.parts && w.parts.every(id=>avail.has(id)); }
+  function rootOf(w){
+    const ps=w.parts||[];
+    return ps.find(id=>pType(id)==='root') || ps[1] || ps[0] || '';
+  }
+  function choosePack(){
+    const k=known(), avail=liveIds();
+    const packs=[
+      {id:'remove', label:'remove family', words:['remove','removal','movable','movability']},
+      {id:'view', label:'view family', words:['review','reviewer','reviewable']},
+      {id:'form', label:'form family', words:['form','formation','formable','formal']},
+      {id:'act', label:'act family', words:['action','active','activity','actor','react','reactor','reactive']},
+      {id:'pose', label:'pose family', words:['compose','composable','composition','expose']},
+      {id:'dict', label:'dict family', words:['predict','prediction','predictable','predictability']},
+      {id:'port', label:'port family', words:['export','exporter','exportable','portable','portability']}
+    ].map(pack=>{
+      const words=pack.words.map(name=>(WORDS||[]).find(w=>w.word===name)).filter(w=>enoughUnlocked(w, avail));
+      const unknown=words.filter(w=>!k.has(w.word)).length;
+      const ids=uniq(words.flatMap(w=>w.parts));
+      return {...pack, words, unknown, ids, possible:possibleCount(ids)};
+    }).filter(pack=>pack.words.length>=2 && pack.ids.length<=10);
+    if(!packs.length) return null;
+    let recent=[]; try{ recent=JSON.parse(localStorage.getItem('sushi_parts_recent_opening_packs')||'[]'); }catch(e){}
+    const fresh=packs.filter(p=>!recent.includes(p.id));
+    const pool=(fresh.length?fresh:packs).flatMap(p=>Array(Math.max(1, 2+p.unknown+p.possible)).fill(p));
+    const chosen=pool[Math.floor(Math.random()*pool.length)] || packs[Math.floor(Math.random()*packs.length)];
+    try{ localStorage.setItem('sushi_parts_recent_opening_packs', JSON.stringify([chosen.id, ...recent.filter(x=>x!==chosen.id)].slice(0,4))); }catch(e){}
+    return chosen;
+  }
+  function fillOpening(ids){
+    const avail=[...liveIds()].filter(id=>safe(()=>isUnlockablePartId(id), true));
+    const have=new Set(ids);
+    const byType={prefix:[],root:[],suffix:[]};
+    avail.forEach(id=>{ const t=pType(id); (byType[t]||(byType[t]=[])).push(id); });
+    const want={prefix:3,root:5,suffix:4};
+    for(const t of ['prefix','root','suffix']){
+      while(ids.filter(id=>pType(id)===t).length<want[t] && byType[t]?.length){
+        const pool=byType[t].filter(id=>!have.has(id));
+        if(!pool.length) break;
+        const id=pool[Math.floor(Math.random()*pool.length)];
+        ids.push(id); have.add(id);
+      }
+    }
+    while(ids.length<HAND_SIZE){
+      const pool=avail.filter(id=>!have.has(id));
+      if(!pool.length) break;
+      const id=pool[Math.floor(Math.random()*pool.length)];
+      ids.push(id); have.add(id);
+    }
+    return uniq(ids).slice(0,HAND_SIZE);
+  }
+
+  // "remove + al" でも "re + mov + al" でも removal を作れるようにする。
+  addPartIfMissing({id:'remove', type:'root', text:'remove', meaning:'取り除く'});
+  addToStarter('remove');
+  addWordRoute({word:'removal', ja:'除去', parts:['remove','al'], image:'remove + al → removal', freq:'A'});
+  addWordRoute({word:'removable', ja:'取り外し可能な', parts:['remove','able'], image:'remove + able → removable', freq:'B'});
+  addWordRoute({word:'removability', ja:'取り外しやすさ', parts:['remove','ability'], image:'remove + ability → removability', freq:'B'});
+  addWordRoute({word:'reactor', ja:'反応炉・反応するもの', parts:['re','act','or'], image:'re + act + or → reactor', freq:'A'});
+
+  const previousDeal = safe(()=>dealOpeningHand, null);
+  if(typeof dealOpeningHand==='function'){
+    dealOpeningHand=function(){
+      const pack=choosePack();
+      if(pack){
+        let ids=fillOpening(pack.ids);
+        hand=ids.map(make);
+        hand=safe(()=>shuffle(hand), hand);
+        try{ setTimeout(()=>setMsg('今回の初手テーマ：'+pack.label+'。毎回少し散らして出します。','ok'), 80); }catch(e){}
+        if(possibleWordCount(hand)>=4 || possibleCount(ids)>=4) return;
+      }
+      if(previousDeal) return previousDeal();
+    };
+  }
+})();
+// ===== end v6.8 =====
+</script>
+
 </body>
 </html>
