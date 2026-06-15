@@ -10,146 +10,237 @@
 </head>
 <body>
 <div id="app"></div><div id="flash" class="flash"></div>
+
 <script>
 const SPRITE_FILES=["assets/SL-01.webp","assets/SL-02.webp","assets/SL-03.webp","assets/SL-04.webp","assets/SL-05.webp"];
 function preloadSprites(){return Promise.all(SPRITE_FILES.map(src=>new Promise(resolve=>{const img=new Image();img.onload=resolve;img.onerror=resolve;img.src=src;})));}
+function a(en,ja,tags){return{en,ja,tags};}
+function esc(s){return String(s).replace(/[&<>'"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;","\"":"&quot;"}[m]));}
+function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+function shuffle(arr){return[...arr].sort(()=>Math.random()-.5);}
+function sample(arr,n){return shuffle(arr).slice(0,n);}
+function uniqueChoices(list){const seen=new Set(),out=[];for(const x of list){if(x&&!seen.has(x.en)){seen.add(x.en);out.push(x);}}return out;}
+
 const CHARACTERS=[
-{id:"sushi",name:"Sushi",type:"普通の人",sheet:"assets/SL-01.webp",likes:["friendly","empathy","casual"],hates:["rude","cold","too_edgy"],best:"共感・自然な返答",worst:"攻撃的・冷たい返答",time:20,profile:"一番ふつう。相手に寄り添う返事が強い。"},
-{id:"ally",name:"Ally",type:"ナード",sheet:"assets/SL-02.webp",likes:["meme","weird","relatable"],hates:["formal","basic","cold"],best:"ミーム・ネット感",worst:"堅すぎる返答",time:18,profile:"変なノリやネット語に反応する。真面目すぎると刺さらない。"},
-{id:"mark",name:"Mark",type:"陽キャ・オラオラ",sheet:"assets/SL-03.webp",likes:["hype","bold","challenge"],hates:["cold","passive","formal"],best:"強気・テンション高め",worst:"冷めた返答",time:22,profile:"盛り上げれば勝ち。弱気・低温だと一気に下がる。"},
-{id:"susie",name:"Susie",type:"ギャル",sheet:"assets/SL-04.webp",likes:["slang","hype","friendly"],hates:["formal","rude","lecture"],best:"スラング・ノリの良さ",worst:"堅い返答・上から目線",time:14,profile:"slay / ate / fire みたいなノリが好き。真面目すぎると距離を置く。"},
-{id:"malia",name:"Malia",type:"堅そうな人",sheet:"assets/SL-05.webp",likes:["polite","honest","empathy"],hates:["slang","rude","too_edgy","chaotic"],best:"丁寧・誠実・配慮",worst:"スラング・失礼な返答",time:24,profile:"相手への配慮を見ている。雑なスラングはだいたい危険。"}
+{id:"sushi",name:"Sushi",type:"普通の人",sheet:"assets/SL-01.webp",likes:["friendly","honest","empathy","casual"],hates:["rude","too_edgy","chaotic"],best:"共感・自然な返答",worst:"攻撃的・雑すぎる返答",time:20,profile:"普通に優しい返答が強い。スラングも軽めならOK。"},
+{id:"ally",name:"Ally",type:"ネット民",sheet:"assets/SL-02.webp",likes:["meme","weird","relatable","slang"],hates:["formal","lecture","basic"],best:"ミーム・ネット感・共感",worst:"堅すぎる返答・説教",time:18,profile:"Pain / cooked / lore / NPC みたいなネット感が刺さる。"},
+{id:"mark",name:"Mark",type:"陽キャ・オラオラ",sheet:"assets/SL-03.webp",likes:["hype","bold","slang","challenge"],hates:["passive","cold","formal"],best:"盛り上げ・強気・テンション",worst:"冷たい返答・弱い返答",time:22,profile:"Huge W / Built different / LET'S GOOO系が強い。"},
+{id:"susie",name:"Susie",type:"ギャル",sheet:"assets/SL-04.webp",likes:["slang","hype","friendly","tease"],hates:["formal","rude","lecture"],best:"スラング・ノリの良さ",worst:"堅い返答・上から目線",time:14,profile:"slay / ate / fire / rizz みたいなノリが好き。"},
+{id:"malia",name:"Malia",type:"堅そうな人",sheet:"assets/SL-05.webp",likes:["polite","honest","empathy","careful"],hates:["slang","rude","too_edgy","chaotic"],best:"丁寧・誠実・配慮",worst:"スラング・失礼な返答",time:24,profile:"相手への配慮を見ている。雑なスラングはだいたい危険。"}
 ];
+
 const SCENARIOS=[
-{s:"髪型を変えた相手が反応を待っている。",en:"I changed my hairstyle.",ja:"髪型変えた。",cat:"praise"},
-{s:"新しい服を見せてきた。",en:"How do I look?",ja:"この服どう？",cat:"praise"},
-{s:"良い写真を見せてきた。",en:"I took this photo today.",ja:"今日この写真撮った。",cat:"praise"},
-{s:"カラオケで高得点を出した。",en:"I got 96 at karaoke.",ja:"カラオケ96点だった。",cat:"praise"},
-{s:"テストで満点を取った。",en:"I got a perfect score.",ja:"テスト満点だった。",cat:"praise"},
-{s:"英語の発音を褒められたらしい。",en:"My teacher said my pronunciation was good.",ja:"先生に発音ほめられた。",cat:"praise"},
-{s:"文化祭の企画が成功した。",en:"Our class project was a huge success.",ja:"クラス企画めっちゃ成功した。",cat:"praise"},
-{s:"好きな人に話しかけたと報告してきた。",en:"I talked to my crush today.",ja:"今日好きな人と話した。",cat:"praise"},
-{s:"推しのライブに当選して大喜びしている。",en:"I got tickets to my favorite artist's concert!",ja:"推しのライブ当たった！",cat:"praise"},
-{s:"新しいスマホを買った。",en:"I got a new phone.",ja:"新しいスマホ買った。",cat:"praise"},
-{s:"目の前でバスに行かれた。",en:"The bus left right in front of me.",ja:"目の前でバス行った。",cat:"trouble"},
-{s:"スマホを落として画面を割った。",en:"I dropped my phone and cracked the screen.",ja:"スマホ落として画面割れた。",cat:"trouble"},
-{s:"テスト範囲を間違えて勉強していた。",en:"I studied the wrong material all night.",ja:"徹夜したのに試験範囲違った。",cat:"trouble"},
-{s:"テストで赤点だった。",en:"I failed the test.",ja:"テスト赤点だった。",cat:"trouble"},
-{s:"友達にドタキャンされた。",en:"My friend canceled at the last minute.",ja:"友達にドタキャンされた。",cat:"trouble"},
-{s:"決勝で負けた。",en:"We lost the final match.",ja:"決勝で負けた。",cat:"trouble"},
-{s:"大事なプリントを忘れた。",en:"I left the handout at home.",ja:"大事なプリント家に忘れた。",cat:"trouble"},
-{s:"財布を忘れた。",en:"I forgot my wallet.",ja:"財布忘れた。",cat:"trouble"},
-{s:"弁当を忘れた。",en:"I forgot my lunch.",ja:"弁当忘れた。",cat:"trouble"},
-{s:"授業中に寝落ちした。",en:"I fell asleep in class.",ja:"授業中寝落ちした。",cat:"trouble"},
+{s:"髪型を変えた相手が反応を待っている。",en:"I changed my hairstyle.",ja:"髪型変えた。",cat:"appearance"},
+{s:"新しい服を見せてきた。",en:"How do I look?",ja:"この服どう？",cat:"appearance"},
+{s:"良い写真を見せてきた。",en:"I took this photo today.",ja:"今日この写真撮った。",cat:"creative"},
+{s:"自作の動画を見せてきた。",en:"I edited this video myself.",ja:"この動画、自分で編集した。",cat:"creative"},
+{s:"カラオケで高得点を出した。",en:"I got 96 at karaoke.",ja:"カラオケ96点だった。",cat:"win"},
+{s:"テストで満点を取った。",en:"I got a perfect score.",ja:"テスト満点だった。",cat:"win"},
+{s:"英語の発音を褒められたらしい。",en:"My teacher said my pronunciation was good.",ja:"先生に発音ほめられた。",cat:"win"},
+{s:"文化祭の企画が成功した。",en:"Our class project was a huge success.",ja:"クラス企画めっちゃ成功した。",cat:"win"},
+{s:"好きな人に話しかけたと報告してきた。",en:"I talked to my crush today.",ja:"今日好きな人と話した。",cat:"crush_win"},
+{s:"推しのライブに当選して大喜びしている。",en:"I got tickets to my favorite artist's concert!",ja:"推しのライブ当たった！",cat:"hype_news"},
+{s:"新しいスマホを買った。",en:"I got a new phone.",ja:"新しいスマホ買った。",cat:"hype_news"},
+{s:"ゲームで5連勝したらしい。",en:"I just won five games in a row.",ja:"今5連勝した。",cat:"win"},
+{s:"目の前でバスに行かれた。",en:"The bus left right in front of me.",ja:"目の前でバス行った。",cat:"minor_fail"},
+{s:"スマホを落として画面を割った。",en:"I dropped my phone and cracked the screen.",ja:"スマホ落として画面割れた。",cat:"minor_fail"},
+{s:"テスト範囲を間違えて勉強していた。",en:"I studied the wrong material all night.",ja:"徹夜したのに試験範囲違った。",cat:"minor_fail"},
+{s:"テストで赤点だった。",en:"I failed the test.",ja:"テスト赤点だった。",cat:"serious_fail"},
+{s:"友達にドタキャンされた。",en:"My friend canceled at the last minute.",ja:"友達にドタキャンされた。",cat:"serious_fail"},
+{s:"決勝で負けた。",en:"We lost the final match.",ja:"決勝で負けた。",cat:"serious_fail"},
+{s:"大事なプリントを忘れた。",en:"I left the handout at home.",ja:"大事なプリント家に忘れた。",cat:"minor_fail"},
+{s:"財布を忘れた。",en:"I forgot my wallet.",ja:"財布忘れた。",cat:"help"},
+{s:"弁当を忘れた。",en:"I forgot my lunch.",ja:"弁当忘れた。",cat:"help"},
+{s:"授業中に寝落ちした。",en:"I fell asleep in class.",ja:"授業中寝落ちした。",cat:"minor_fail"},
 {s:"昼ごはんに誘ってきた。",en:"Wanna grab lunch?",ja:"昼飯いかね？",cat:"invite"},
+{s:"放課後に一緒に勉強しないか聞いてきた。",en:"Want to study after school?",ja:"放課後一緒に勉強しない？",cat:"invite"},
 {s:"真面目な相談をしてきた。",en:"Can I talk to you seriously?",ja:"ちょっと真面目に相談していい？",cat:"serious"},
 {s:"秘密を言いたそうにしている。",en:"I know something, but I shouldn't say it.",ja:"言っちゃだめな話知ってる。",cat:"secret"},
 {s:"好きな曲をすすめてきた。",en:"Listen to this song.",ja:"この曲聞いてみて。",cat:"recommend"},
+{s:"映画をすすめてきた。",en:"You have to watch this movie.",ja:"この映画絶対見て。",cat:"recommend"},
 {s:"推しについて語り始めた。",en:"Let me tell you why my favorite character is perfect.",ja:"推しが完璧な理由を語らせて。",cat:"listen"},
 {s:"急にテンション高く入ってきた。",en:"Guess what happened!",ja:"ねえ聞いて！",cat:"listen"},
 {s:"雨でかなり萎えている。",en:"Rainy days suck.",ja:"雨ほんとだるい。",cat:"relate"},
 {s:"暑さで溶けている。",en:"It's way too hot today.",ja:"今日暑すぎて死ぬ。",cat:"relate"},
-{s:"寝不足でふらふらしている。",en:"I slept for two hours.",ja:"2時間しか寝てない。",cat:"relate"},
+{s:"寝不足でふらふらしている。",en:"I slept for two hours.",ja:"2時間しか寝てない。",cat:"tired"},
 {s:"朝から何も食べていない。",en:"I haven't eaten anything today.",ja:"今日まだ何も食べてない。",cat:"care"},
 {s:"友達とケンカした。",en:"I had a fight with my friend.",ja:"友達とケンカした。",cat:"care"},
-{s:"好きな人に既読無視された。",en:"They left me on read again.",ja:"また既読無視された。",cat:"care"},
+{s:"好きな人に既読無視された。",en:"They left me on read again.",ja:"また既読無視された。",cat:"crush_fail"},
 {s:"変な夢を見たらしい。",en:"I had the weirdest dream last night.",ja:"昨日めっちゃ変な夢見た。",cat:"weird"},
-{s:"SNS投稿が叩かれ始めている。",en:"My post is getting roasted.",ja:"投稿が叩かれ始めてる。",cat:"trouble"},
+{s:"SNS投稿が叩かれ始めている。",en:"My post is getting roasted.",ja:"投稿が叩かれ始めてる。",cat:"drama"},
 {s:"投稿にいいねが少ないと落ち込んでいる。",en:"My post got no likes.",ja:"投稿に全然いいねつかなかった。",cat:"care"},
-{s:"ゲームで味方に怒っている。",en:"My teammate threw the game.",ja:"味方のせいで負けた。",cat:"relate"},
+{s:"ゲームで味方に怒っている。",en:"My teammate threw the game.",ja:"味方のせいで負けた。",cat:"game_rage"},
 {s:"自分の冗談で大笑いしている。",en:"That joke was so funny.",ja:"今の冗談めっちゃ面白かった。",cat:"joke"},
-{s:"課題を締切1分前に提出した。",en:"I submitted it one minute before the deadline.",ja:"締切1分前に出した。",cat:"praise"},
+{s:"課題を締切1分前に提出した。",en:"I submitted it one minute before the deadline.",ja:"締切1分前に出した。",cat:"risky_win"},
 {s:"寝癖のまま登校した。",en:"I came to school with bed hair.",ja:"寝癖のまま学校来た。",cat:"joke"},
-{s:"髪を切りすぎたらしい。",en:"I cut my hair too short.",ja:"髪切りすぎた。",cat:"care"}
+{s:"髪を切りすぎたらしい。",en:"I cut my hair too short.",ja:"髪切りすぎた。",cat:"appearance_fail"},
+{s:"宿題を全部忘れた。",en:"I forgot every single assignment.",ja:"宿題全部忘れた。",cat:"minor_fail"},
+{s:"先生に当てられて固まった。",en:"The teacher called on me and I froze.",ja:"先生に当てられて固まった。",cat:"minor_fail"},
+{s:"恋愛で現実を見失っている。",en:"Maybe they'll text me back someday.",ja:"いつか返信くるかも。",cat:"crush_fail"},
+{s:"友達同士がまた揉めている。",en:"They're beefing again.",ja:"あいつらまた揉めてる。",cat:"drama"},
+{s:"大切な発表前で緊張している。",en:"I'm nervous about my presentation.",ja:"発表めっちゃ緊張する。",cat:"support"},
+{s:"面接前で不安になっている。",en:"I'm scared I'll mess up the interview.",ja:"面接ミスりそうで怖い。",cat:"support"},
+{s:"部活でレギュラーを取った。",en:"I made the starting lineup.",ja:"レギュラー取れた。",cat:"win"},
+{s:"新しいことに挑戦するか迷っている。",en:"I want to try it, but I'm scared.",ja:"やってみたいけど怖い。",cat:"support"},
+{s:"相手が軽く自慢してきた。",en:"Not to brag, but I did pretty well.",ja:"自慢じゃないけど結構うまくいった。",cat:"win"},
+{s:"相手が自分のミスを笑い話にしている。",en:"I just embarrassed myself so badly.",ja:"今めちゃくちゃ恥ずかしいことした。",cat:"joke"}
 ];
-const ANSWERS={
-praise:{
-slang:[a("You ate.","完璧じゃん",["slang","hype","friendly"]),a("You slay.","めっちゃイケてる",["slang","hype","friendly"]),a("That's fire.","それ神",["slang","hype"]),a("Huge W.","大勝利",["slang","hype"]),a("Built different.","格が違う",["slang","hype","bold"])],
-polite:[a("That's genuinely impressive.","本当にすごいね",["polite","honest"]),a("You earned that. Great work.","努力の成果だね。すごい",["polite","honest"]),a("It suits you very well.","とても似合っているよ",["polite","honest","friendly"]),a("I'm happy for you.","よかったね",["polite","empathy"])],
+
+const B={
+appearance:{
+slang:[a("You slay.","めっちゃ似合う",["slang","hype","friendly"]),a("You ate.","完璧じゃん",["slang","hype","friendly"]),a("It's giving main character.","主人公感ある",["slang","hype"]),a("That fit goes hard.","その服かなりキマってる",["slang","hype"]),a("The glow-up is real.","めっちゃ垢抜けた",["slang","hype","friendly"]),a("You're serving looks.","ビジュ強い",["slang","hype","friendly"])],
+polite:[a("It suits you very well.","とても似合っているよ",["polite","honest","friendly"]),a("You look really nice.","とても素敵だよ",["polite","friendly"]),a("That style fits you.","その雰囲気に合っているよ",["polite","honest"]),a("I like how it looks on you.","似合っていていいと思う",["polite","honest","friendly"])],
+friendly:[a("Looks great!","めっちゃいいじゃん",["friendly","hype"]),a("It really suits you.","すごく似合ってる",["friendly","honest"]),a("Honestly, I like it.","正直好き",["friendly","honest"]),a("Nice choice.","いいチョイス",["friendly","casual"])],
+meme:[a("Main character energy.","主人公感ある",["meme","slang","hype"]),a("New skin unlocked.","新スキン解放",["meme","weird"]),a("Character design upgraded.","キャラデザ強化",["meme","weird","friendly"])]},
+creative:{
+slang:[a("This is fire.","これ神",["slang","hype"]),a("You cooked.","やるじゃん",["slang","hype"]),a("No cap, this is clean.","ガチで完成度高い",["slang","honest","hype"]),a("This goes hard.","これかなりいい",["slang","hype"]),a("Lowkey professional.","ちょっとプロっぽい",["slang","honest"])],
+polite:[a("This is very well made.","とてもよくできているね",["polite","honest"]),a("I can see how much effort you put in.","努力が伝わるよ",["polite","honest","empathy"]),a("The quality is impressive.","完成度が高くてすごい",["polite","honest"]),a("I like the details.","細かいところがいいね",["polite","honest"])],
+friendly:[a("That's awesome!","最高じゃん",["friendly","hype"]),a("I love this.","これ好き",["friendly","honest"]),a("You did great.","よくできてる",["friendly","honest"]),a("This is actually really good.","普通にかなりいい",["friendly","honest"])],
+meme:[a("Art department cooked.","制作班がやった",["meme","hype"]),a("Certified banger.","名作認定",["meme","hype"]),a("This has lore.","設定が深い",["meme","weird"])]},
+win:{
+slang:[a("Huge W.","大勝利",["slang","hype"]),a("Built different.","格が違う",["slang","hype","bold"]),a("You cooked.","やるじゃん",["slang","hype"]),a("That's a W.","それは勝ち",["slang","hype"]),a("No cap, that's impressive.","ガチですごい",["slang","honest"]),a("You're him.","主人公じゃん",["slang","hype","bold"])],
+polite:[a("That's genuinely impressive.","本当にすごいね",["polite","honest"]),a("You earned that.","努力の成果だね",["polite","honest"]),a("I'm happy for you.","よかったね",["polite","empathy"]),a("You should be proud.","誇っていいと思う",["polite","honest","empathy"])],
 friendly:[a("That's awesome!","最高じゃん",["friendly","hype"]),a("Good job!","やるじゃん",["friendly"]),a("I'm proud of you.","誇らしいよ",["friendly","empathy"]),a("You did great.","よくやったね",["friendly","honest"])],
-meme:[a("You cooked.","やるじゃん",["meme","hype"]),a("Main character energy.","主人公感ある",["meme","slang","hype"]),a("Certified W.","認定勝利",["meme","hype"])]},
-trouble:{
-slang:[a("You're cooked.","詰んだな",["slang","meme","relatable"]),a("Pain.","つらすぎ",["meme","relatable"]),a("That's wild.","それやばいな",["slang","casual","relatable"])],
-polite:[a("That must be really frustrating.","それは本当に困るね",["polite","empathy"]),a("I'm sorry that happened.","それは大変だったね",["polite","empathy"]),a("Let's think about what you can do now.","今できることを考えよう",["polite","honest"])],
-friendly:[a("That’s rough.","それはきつい",["friendly","empathy"]),a("I feel you.","気持ちわかる",["friendly","empathy"]),a("Are you okay?","大丈夫？",["friendly","empathy"])],
-meme:[a("F in the chat.","ご愁傷さま",["meme","relatable"]),a("NPC moment.","NPCみたいな瞬間",["meme","weird"]),a("The universe said no.","宇宙に拒否された",["meme","weird"])]},
-care:{
-slang:[a("No cap, I feel you.","ガチでわかる",["slang","friendly","empathy"]),a("That's brutal.","それはえぐい",["slang","friendly"]),a("Lowkey, take care of yourself.","ちょっと自分を大事にして",["slang","friendly"])],
-polite:[a("I'm here if you want to talk.","話したければ聞くよ",["polite","empathy"]),a("Please don't be too hard on yourself.","自分を責めすぎないで",["polite","empathy"]),a("That sounds difficult. Are you alright?","大変そうだね。大丈夫？",["polite","empathy"])],
-friendly:[a("I got you.","助けるよ",["friendly","empathy"]),a("Want some help?","手伝おうか？",["friendly","empathy"]),a("You’ll be okay.","大丈夫だよ",["friendly","empathy"])],
-meme:[a("Emotional damage.","心にダメージ",["meme","relatable"]),a("That is tragic lore.","悲しき設定だ",["meme","weird"]),a("Plot twist gone wrong.","悪い方向の急展開",["meme","weird"])]},
-listen:{
-slang:[a("Spill the tea.","詳しく聞かせて",["slang","friendly"]),a("Say less, I'm listening.","わかった、聞く",["slang","friendly"]),a("Go off!","語って！",["slang","hype","friendly"])],
-polite:[a("Of course. I'm listening.","もちろん。聞くよ",["polite","empathy"]),a("Please tell me about it.","ぜひ聞かせて",["polite","friendly"]),a("I'd like to hear more.","もっと聞きたい",["polite","friendly"])],
-friendly:[a("Tell me everything.","全部聞かせて",["friendly","hype"]),a("What happened?","何があったの？",["friendly"]),a("I'm listening.","聞くよ",["friendly","empathy"])],
-meme:[a("Lore drop incoming.","設定語り来た",["meme","weird"]),a("I am seated.","聞く準備できた",["meme","friendly"]),a("Begin the TED Talk.","講演どうぞ",["meme","weird"])]},
-relate:{
-slang:[a("Lowkey true.","ちょっとわかる",["slang","relatable"]),a("Real.","それな",["slang","relatable"]),a("It’s hot af.","暑すぎる",["slang","relatable"])],
-polite:[a("I understand how you feel.","その気持ちはわかるよ",["polite","empathy"]),a("That sounds exhausting.","かなり疲れそうだね",["polite","empathy"]),a("Please take it easy.","無理しないでね",["polite","empathy"])],
-friendly:[a("Same here.","こっちも同じ",["friendly","relatable"]),a("I feel you.","わかるよ",["friendly","empathy"]),a("I'm melting too.","こっちも溶ける",["friendly","relatable"])],
-meme:[a("Mood.","それな",["meme","relatable"]),a("I can't be bothered to exist.","存在するのもだるい",["meme","relatable"]),a("We are cooked.","我々は詰んだ",["meme","relatable"])]},
+meme:[a("Victory royale.","優勝",["meme","hype"]),a("Boss fight cleared.","ボス戦クリア",["meme","hype"]),a("Achievement unlocked.","実績解除",["meme","weird"])]},
+crush_win:{
+slang:[a("Huge W.","大勝利",["slang","hype"]),a("You've got rizz.","モテ力あるじゃん",["slang","tease","friendly"]),a("We're so back.","流れ来てる",["slang","meme","hype"]),a("Main character moment.","主人公展開",["slang","meme","hype"]),a("No cap, that's big.","ガチで大きい",["slang","hype"])],
+polite:[a("That's a nice step forward.","いい一歩だね",["polite","honest"]),a("I'm glad you had the courage.","勇気を出せてよかったね",["polite","empathy"]),a("That must have felt good.","嬉しかっただろうね",["polite","empathy"]),a("I'm happy for you.","よかったね",["polite","empathy"])],
+friendly:[a("Let's go!","やったじゃん",["friendly","hype"]),a("That's great!","いいじゃん",["friendly","hype"]),a("You did it!","やったね",["friendly","hype"]),a("I'm rooting for you.","応援してる",["friendly","empathy"])],
+meme:[a("Rizz arc begins.","恋愛編開始",["meme","slang","hype"]),a("The ship is sailing.","船が出た",["meme","weird"]),a("Romance route unlocked.","恋愛ルート解放",["meme","weird"])]},
+hype_news:{
+slang:[a("LET'S GOOO!","うおおお！",["slang","hype"]),a("That's fire.","それ神じゃん",["slang","hype"]),a("Huge W.","大勝利",["slang","hype"]),a("I'm lowkey jealous.","ちょっと嫉妬する",["slang","honest","friendly"]),a("You won today.","今日は勝ち",["slang","hype"])],
+polite:[a("That's wonderful news.","それは素晴らしいね",["polite","honest"]),a("I'm really happy for you.","本当によかったね",["polite","empathy"]),a("That sounds exciting.","楽しそうだね",["polite","friendly"]),a("I hope you enjoy it.","楽しんできてね",["polite","friendly"])],
+friendly:[a("That's amazing!","すごいじゃん",["friendly","hype"]),a("I'm happy for you!","よかったね",["friendly","empathy"]),a("Nice!","いいね！",["friendly","hype"]),a("Tell me about it later.","あとで話聞かせて",["friendly"])],
+meme:[a("The chosen one.","選ばれし者",["meme","hype"]),a("Luck stat maxed.","運ステータス最大",["meme","weird"]),a("Today is your episode.","今日は君回",["meme","hype"])]},
+minor_fail:{
+slang:[a("Pain.","つらすぎ",["slang","meme","relatable"]),a("You're cooked.","詰んだな",["slang","meme","relatable"]),a("That's wild.","それやばいな",["slang","casual","relatable"]),a("RIP.","ご愁傷さま",["slang","meme"]),a("Lowkey tragic.","地味に悲劇",["slang","relatable"])],
+polite:[a("That must be frustrating.","それは困るね",["polite","empathy"]),a("I'm sorry that happened.","それは大変だったね",["polite","empathy"]),a("Let's think about what you can do now.","今できることを考えよう",["polite","honest"]),a("I hope it works out.","なんとかなるといいね",["polite","empathy"])],
+friendly:[a("That’s rough.","それはきつい",["friendly","empathy"]),a("I feel you.","気持ちわかる",["friendly","empathy"]),a("Are you okay?","大丈夫？",["friendly","empathy"]),a("That sucks.","それはだるいね",["friendly","casual"])],
+meme:[a("F in the chat.","ご愁傷さま",["meme","relatable"]),a("NPC moment.","NPCみたいな瞬間",["meme","weird"]),a("The universe said no.","宇宙に拒否された",["meme","weird"]),a("Side quest failed.","サブクエ失敗",["meme","weird"])]},
+serious_fail:{
+slang:[a("That's brutal.","それはえぐい",["slang","friendly","empathy"]),a("No cap, that's rough.","ガチできつい",["slang","empathy"]),a("You're not done yet.","まだ終わってない",["slang","friendly"]),a("Lowkey, take a breath.","いったん落ち着こう",["slang","friendly","empathy"])],
+polite:[a("I'm sorry. That must hurt.","それはつらいね",["polite","empathy"]),a("Please don't blame yourself too much.","自分を責めすぎないで",["polite","empathy"]),a("You can recover from this.","ここから立て直せるよ",["polite","honest","empathy"]),a("I'm here if you need support.","必要なら支えるよ",["polite","empathy"])],
+friendly:[a("That’s really rough.","それは本当にきつい",["friendly","empathy"]),a("I’m here for you.","そばにいるよ",["friendly","empathy"]),a("You’ll bounce back.","また立て直せるよ",["friendly","empathy"]),a("Want to talk about it?","話す？",["friendly","empathy"])],
+meme:[a("Emotional damage.","心にダメージ",["meme","relatable"]),a("The bad ending appeared.","バッドエンド出た",["meme","weird"]),a("This arc is painful.","この回つらい",["meme","relatable"])]},
+help:{
+slang:[a("I got you.","今回は出すよ",["slang","friendly","empathy"]),a("Say less, I’ll help.","任せて、助ける",["slang","friendly"]),a("You're cooked, but I got you.","詰んでるけど助ける",["slang","meme","friendly"]),a("No worries, I got you.","大丈夫、任せて",["slang","friendly"])],
+polite:[a("I can help if you need it.","必要なら手伝うよ",["polite","empathy"]),a("Would you like some help?","手伝おうか？",["polite","empathy"]),a("Let's find a solution.","解決策を考えよう",["polite","honest"]),a("Please don't worry too much.","あまり心配しすぎないで",["polite","empathy"])],
+friendly:[a("Want some of mine?","少し食べる？",["friendly","empathy"]),a("I can lend you some.","少し貸せるよ",["friendly","empathy"]),a("I got you.","助けるよ",["friendly","empathy"]),a("Let's figure it out.","なんとかしよう",["friendly","honest"])],
+meme:[a("Support character has arrived.","支援キャラ登場",["meme","friendly"]),a("Inventory sharing time.","アイテム共有タイム",["meme","weird"]),a("Emergency quest accepted.","緊急クエスト受注",["meme","weird"])]},
 invite:{
-slang:[a("I'm down.","のるよ",["slang","friendly"]),a("Bet.","了解／のった",["slang","hype"]),a("Say less.","言われなくても行く",["slang","friendly"])],
-polite:[a("Sure, I'd like that.","うん、行きたい",["polite","friendly"]),a("Thank you for inviting me.","誘ってくれてありがとう",["polite","friendly"]),a("That sounds nice.","いいね",["polite","friendly"])],
-friendly:[a("Yeah, let's go.","うん、行こう",["friendly","casual"]),a("Sounds good.","いいね",["friendly","casual"]),a("I'm in.","参加する",["friendly","casual"])],
-meme:[a("Lunch arc begins.","昼飯編、開始",["meme","weird"]),a("Quest accepted.","クエスト受注",["meme","weird"]),a("We ride.","出陣だ",["meme","hype"])]},
+slang:[a("I'm down.","のるよ",["slang","friendly"]),a("Bet.","了解／のった",["slang","hype"]),a("Say less.","言われなくても行く",["slang","friendly"]),a("I'm in.","参加する",["slang","friendly"]),a("Let's run it.","行こうぜ",["slang","hype"])],
+polite:[a("Sure, I'd like that.","うん、行きたい",["polite","friendly"]),a("Thank you for inviting me.","誘ってくれてありがとう",["polite","friendly"]),a("That sounds nice.","いいね",["polite","friendly"]),a("I'd be happy to.","喜んで",["polite","friendly"])],
+friendly:[a("Yeah, let's go.","うん、行こう",["friendly","casual"]),a("Sounds good.","いいね",["friendly","casual"]),a("Sure!","もちろん",["friendly"]),a("Let’s do it.","やろう",["friendly","hype"])],
+meme:[a("Quest accepted.","クエスト受注",["meme","weird"]),a("We ride.","出陣だ",["meme","hype"]),a("Party formed.","パーティ結成",["meme","weird"])]},
 serious:{
-slang:[a("I got you.","任せて",["slang","friendly"]),a("No cap, I'm listening.","ガチで聞くよ",["slang","friendly","empathy"])],
-polite:[a("Of course. Take your time.","もちろん。ゆっくり話して",["polite","empathy"]),a("I'm here to listen.","聞くためにいるよ",["polite","empathy"]),a("You can trust me.","信頼していいよ",["polite","empathy"])],
-friendly:[a("Of course. What happened?","もちろん。何があった？",["friendly","empathy"]),a("I'm listening.","聞くよ",["friendly","empathy"]),a("Talk to me.","話して",["friendly","empathy"])],
+slang:[a("I got you.","任せて",["slang","friendly"]),a("No cap, I'm listening.","ガチで聞くよ",["slang","friendly","empathy"]),a("Say less. Talk to me.","わかった。話して",["slang","friendly"])],
+polite:[a("Of course. Take your time.","もちろん。ゆっくり話して",["polite","empathy"]),a("I'm here to listen.","聞くためにいるよ",["polite","empathy"]),a("You can trust me.","信頼していいよ",["polite","empathy"]),a("I’ll listen carefully.","ちゃんと聞くよ",["polite","empathy"])],
+friendly:[a("Of course. What happened?","もちろん。何があった？",["friendly","empathy"]),a("I'm listening.","聞くよ",["friendly","empathy"]),a("Talk to me.","話して",["friendly","empathy"]),a("You don't have to handle it alone.","一人で抱えなくていいよ",["friendly","empathy"])],
 meme:[a("Serious mode: on.","真面目モード起動",["meme","friendly"]),a("I will pause the memes.","ミームはいったん止める",["meme","friendly"])]},
 secret:{
-slang:[a("Spill the tea.","暴露して",["slang","chaotic"]),a("No way, tell me.","うそ、教えて",["slang","friendly"]),a("I'm invested.","気になりすぎる",["slang","friendly"])],
-polite:[a("Keep it private.","秘密にしておこう",["polite","honest"]),a("Be careful with it.","慎重に扱おう",["polite","honest"]),a("If it's private, don't share it.","秘密なら言わない方がいい",["polite","honest"])],
-friendly:[a("Only say it if it's okay.","言って大丈夫なことだけでいいよ",["friendly","honest"]),a("You don't have to tell me.","無理に言わなくていいよ",["friendly","empathy"]),a("Careful, that sounds private.","それ秘密っぽいね",["friendly","honest"])],
-meme:[a("Forbidden lore.","禁断の設定",["meme","weird"]),a("The tea is dangerous.","その茶は危険",["meme","weird"])]},
+slang:[a("Spill the tea.","暴露して",["slang","chaotic"]),a("No way, tell me.","うそ、教えて",["slang","friendly"]),a("I'm invested.","気になりすぎる",["slang","friendly"]),a("The tea is hot.","話が熱そう",["slang","meme"])],
+polite:[a("Keep it private.","秘密にしておこう",["polite","honest","careful"]),a("Be careful with it.","慎重に扱おう",["polite","honest","careful"]),a("If it's private, don't share it.","秘密なら言わない方がいい",["polite","honest","careful"]),a("You don't need to tell me.","無理に言わなくていいよ",["polite","empathy"])],
+friendly:[a("Only say it if it's okay.","言って大丈夫なことだけでいいよ",["friendly","honest"]),a("You don't have to tell me.","無理に言わなくていいよ",["friendly","empathy"]),a("Careful, that sounds private.","それ秘密っぽいね",["friendly","honest"]),a("I won't push you.","無理には聞かないよ",["friendly","empathy"])],
+meme:[a("Forbidden lore.","禁断の設定",["meme","weird"]),a("The tea is dangerous.","その茶は危険",["meme","weird"]),a("Classified information.","機密情報",["meme","weird"])]},
 recommend:{
-slang:[a("This is fire.","これ神",["slang","hype"]),a("I'm vibing with this.","めっちゃいい感じ",["slang","friendly"]),a("No cap, this is good.","ガチでいい",["slang","honest"])],
-polite:[a("Thanks. I'll listen carefully.","ありがとう。ちゃんと聞くね",["polite","friendly"]),a("I can see why you like it.","好きな理由がわかるよ",["polite","honest"]),a("It's not my usual style, but I like it.","普段の好みとは違うけどいいね",["polite","honest"])],
-friendly:[a("Nice, I like it.","いいね、好き",["friendly","honest"]),a("Thanks for sharing.","教えてくれてありがとう",["friendly"]),a("This has a good vibe.","雰囲気いいね",["friendly","casual"])],
-meme:[a("Certified banger.","名曲認定",["meme","hype"]),a("My ears have been blessed.","耳が祝福された",["meme","weird"])]},
+slang:[a("This is fire.","これ神",["slang","hype"]),a("I'm vibing with this.","めっちゃいい感じ",["slang","friendly"]),a("No cap, this is good.","ガチでいい",["slang","honest"]),a("This is a banger.","これは名曲",["slang","hype"]),a("It’s not my usual vibe, but I like it.","普段の好みと違うけど好き",["slang","honest"])],
+polite:[a("Thanks. I'll check it out.","ありがとう。見てみるね",["polite","friendly"]),a("I can see why you like it.","好きな理由がわかるよ",["polite","honest"]),a("It's not my usual style, but I like it.","普段の好みとは違うけどいいね",["polite","honest"]),a("Thank you for sharing it with me.","教えてくれてありがとう",["polite","friendly"])],
+friendly:[a("Nice, I like it.","いいね、好き",["friendly","honest"]),a("Thanks for sharing.","教えてくれてありがとう",["friendly"]),a("This is good.","これいいね",["friendly","honest"]),a("Send me more later.","あとで他のも送って",["friendly"])],
+meme:[a("Playlist upgraded.","プレイリスト強化",["meme","hype"]),a("New obsession unlocked.","新しい沼解放",["meme","weird"]),a("Certified banger.","名曲認定",["meme","hype"])]},
+listen:{
+slang:[a("Spill the tea.","詳しく聞かせて",["slang","friendly"]),a("Say less, I'm listening.","わかった、聞く",["slang","friendly"]),a("Go off!","語って！",["slang","hype","friendly"]),a("I'm seated.","聞く準備できた",["slang","meme","friendly"]),a("Drop the lore.","設定語って",["slang","meme","weird"])],
+polite:[a("Of course. I'm listening.","もちろん。聞くよ",["polite","empathy"]),a("Please tell me about it.","ぜひ聞かせて",["polite","friendly"]),a("I'd like to hear more.","もっと聞きたい",["polite","friendly"]),a("Take your time.","ゆっくり話して",["polite","empathy"])],
+friendly:[a("Tell me everything.","全部聞かせて",["friendly","hype"]),a("What happened?","何があったの？",["friendly"]),a("I'm listening.","聞くよ",["friendly","empathy"]),a("I want to hear it.","それ聞きたい",["friendly"])],
+meme:[a("Lore drop incoming.","設定語り来た",["meme","weird"]),a("I am seated.","聞く準備できた",["meme","friendly"]),a("Begin the TED Talk.","講演どうぞ",["meme","weird"]),a("Cutscene started.","ムービー始まった",["meme","weird"])]},
+relate:{
+slang:[a("Lowkey true.","ちょっとわかる",["slang","relatable"]),a("Real.","それな",["slang","relatable"]),a("Mood.","わかりすぎる",["slang","relatable"]),a("That's so real.","めっちゃわかる",["slang","relatable"]),a("I'm cooked too.","こっちも詰んでる",["slang","meme","relatable"])],
+polite:[a("I understand how you feel.","その気持ちはわかるよ",["polite","empathy"]),a("That sounds exhausting.","かなり疲れそうだね",["polite","empathy"]),a("Please take it easy.","無理しないでね",["polite","empathy"]),a("I hope your day gets better.","少しでもよくなるといいね",["polite","empathy"])],
+friendly:[a("Same here.","こっちも同じ",["friendly","relatable"]),a("I feel you.","わかるよ",["friendly","empathy"]),a("I'm melting too.","こっちも溶ける",["friendly","relatable"]),a("Yeah, today is rough.","今日はきついね",["friendly","relatable"])],
+meme:[a("We are cooked.","我々は詰んだ",["meme","relatable"]),a("The weather is the final boss.","天気がラスボス",["meme","weird"]),a("Existence debuff.","存在デバフ",["meme","weird"])]},
+tired:{
+slang:[a("You're cooked.","詰んでる",["slang","meme","relatable"]),a("No cap, go sleep.","ガチで寝な",["slang","honest","friendly"]),a("That's rough.","それきつい",["slang","friendly"]),a("Lowkey same.","ちょっと同じ",["slang","relatable"])],
+polite:[a("Please get some rest.","少し休んでね",["polite","empathy"]),a("That sounds exhausting.","かなり疲れそうだね",["polite","empathy"]),a("Don't push yourself too hard.","無理しすぎないで",["polite","empathy"]),a("Your health comes first.","健康が一番だよ",["polite","honest","empathy"])],
+friendly:[a("Go sleep.","寝な",["friendly","honest"]),a("I feel you.","わかる",["friendly","empathy"]),a("Take a nap if you can.","できたら昼寝しな",["friendly","empathy"]),a("You need rest.","休んだ方がいいよ",["friendly","honest"])],
+meme:[a("Sleep stat: zero.","睡眠ステータス0",["meme","weird"]),a("Human battery low.","人間の電池切れ",["meme","weird"]),a("You're in zombie mode.","ゾンビモード",["meme","weird"])]},
+care:{
+slang:[a("No cap, I feel you.","ガチでわかる",["slang","friendly","empathy"]),a("That's brutal.","それはえぐい",["slang","friendly"]),a("Lowkey, take care of yourself.","ちょっと自分を大事にして",["slang","friendly"]),a("I got you.","助けるよ",["slang","friendly","empathy"])],
+polite:[a("I'm here if you want to talk.","話したければ聞くよ",["polite","empathy"]),a("Please don't be too hard on yourself.","自分を責めすぎないで",["polite","empathy"]),a("That sounds difficult. Are you alright?","大変そうだね。大丈夫？",["polite","empathy"]),a("You don't have to go through it alone.","一人で抱えなくていいよ",["polite","empathy"])],
+friendly:[a("Want some help?","手伝おうか？",["friendly","empathy"]),a("You’ll be okay.","大丈夫だよ",["friendly","empathy"]),a("I'm here for you.","そばにいるよ",["friendly","empathy"]),a("Tell me what you need.","必要なこと言って",["friendly","empathy"])],
+meme:[a("That is tragic lore.","悲しき設定だ",["meme","weird"]),a("Plot twist gone wrong.","悪い方向の急展開",["meme","weird"]),a("This episode hurts.","この回つらい",["meme","relatable"])]},
+crush_fail:{
+slang:[a("That's brutal.","それはえぐい",["slang","friendly"]),a("Stay delulu.","妄想し続けろ",["slang","meme","weird"]),a("Delulu is the solulu.","妄想こそ解決策",["slang","meme","weird"]),a("Lowkey, move on.","ちょっと切り替えよう",["slang","honest"]),a("No cap, you deserve better.","ガチでもっと大事にされていい",["slang","friendly","empathy"])],
+polite:[a("I'm sorry. That must hurt.","それはつらいね",["polite","empathy"]),a("Please don't measure your worth by that.","それで自分の価値は決まらないよ",["polite","empathy"]),a("Give yourself some time.","少し時間をあげよう",["polite","empathy"]),a("You deserve respect.","大切にされるべきだよ",["polite","honest","empathy"])],
+friendly:[a("I feel you.","気持ちわかる",["friendly","empathy"]),a("That hurts.","それはきつい",["friendly","empathy"]),a("Want to talk about it?","話す？",["friendly","empathy"]),a("I'm on your side.","味方だよ",["friendly","empathy"])],
+meme:[a("Romance route denied.","恋愛ルート拒否",["meme","weird"]),a("The delulu arc continues.","妄想編継続",["meme","weird"]),a("Heart got nerfed.","心が弱体化",["meme","weird"])]},
 weird:{
-slang:[a("That's wild.","それやばい",["slang","relatable"]),a("No way, tell me more.","うそ、もっと聞かせて",["slang","friendly"]),a("I'm invested.","気になりすぎる",["slang","friendly"])],
-polite:[a("That sounds unusual. What happened?","珍しいね。何があったの？",["polite","friendly"]),a("I'd like to hear it.","聞いてみたい",["polite","friendly"]),a("That must have been surprising.","驚いただろうね",["polite","empathy"])],
-friendly:[a("Tell me everything.","全部聞かせて",["friendly","hype"]),a("Sounds interesting.","面白そう",["friendly"]),a("What happened next?","それでどうなったの？",["friendly"])] ,
-meme:[a("Dream lore unlocked.","夢設定解放",["meme","weird"]),a("That is cursed.","それ呪われてる",["meme","weird"]),a("New side quest.","新サブクエスト発生",["meme","weird"])]},
+slang:[a("That's wild.","それやばいな",["slang","friendly"]),a("No way, tell me more.","うそ、もっと聞かせて",["slang","friendly"]),a("That’s unhinged.","ぶっ飛んでる",["slang","weird"]),a("I'm invested.","気になりすぎる",["slang","friendly"])],
+polite:[a("That sounds unusual.","それは珍しいね",["polite","honest"]),a("I'd like to hear more.","もっと聞きたい",["polite","friendly"]),a("Dreams can be strange.","夢って不思議だよね",["polite","honest"]),a("That must have surprised you.","それは驚いたね",["polite","empathy"])],
+friendly:[a("Tell me everything.","全部聞かせて",["friendly","hype"]),a("That sounds funny.","面白そう",["friendly"]),a("What happened next?","続きは？",["friendly"]),a("I need the details.","詳細が必要",["friendly","hype"])],
+meme:[a("Lore unlocked.","設定解放",["meme","weird"]),a("Dream DLC dropped.","夢DLC配信",["meme","weird"]),a("Brain wrote fan fiction.","脳が二次創作した",["meme","weird"])]},
+drama:{
+slang:[a("They're beefing again?","また揉めてるの？",["slang","casual"]),a("That's wild.","それやばいな",["slang","casual"]),a("The tea is hot.","話が熱い",["slang","meme"]),a("Messy.","ごちゃごちゃしてるね",["slang","casual"]),a("Not the drama again.","またその揉め事か",["slang","casual"])],
+polite:[a("I hope they can talk it out.","話し合えるといいね",["polite","honest"]),a("It's better not to spread it.","広めない方がいいね",["polite","careful"]),a("That sounds complicated.","複雑そうだね",["polite","empathy"]),a("Let's be careful with rumors.","噂には気をつけよう",["polite","careful"])],
+friendly:[a("What happened?","何があったの？",["friendly"]),a("That sounds messy.","面倒そうだね",["friendly","honest"]),a("Hope it calms down.","落ち着くといいね",["friendly","empathy"]),a("Let's not make it worse.","悪化させないようにしよう",["friendly","honest"])],
+meme:[a("Drama arc started.","揉め事編開始",["meme","weird"]),a("The lore thickens.","設定が濃くなった",["meme","weird"]),a("Classroom season finale.","教室ドラマ最終回",["meme","weird"])]},
+game_rage:{
+slang:[a("They sold.","味方がやらかしたな",["slang","meme"]),a("Don't be salty.","イライラしすぎるな",["slang","tease"]),a("That's rough.","それはきつい",["slang","friendly"]),a("Queue again.","もう一回いこう",["slang","challenge"]),a("Skill issue?","実力不足？",["slang","tease","too_edgy"])],
+polite:[a("That sounds frustrating.","それはイライラするね",["polite","empathy"]),a("Maybe take a short break.","少し休憩してもいいかも",["polite","honest"]),a("Try not to let it ruin your mood.","気分を崩しすぎないで",["polite","empathy"]),a("It happens sometimes.","そういう時もあるよ",["polite","empathy"])],
+friendly:[a("That’s rough.","それはきつい",["friendly","empathy"]),a("Take a break.","休憩しよ",["friendly","honest"]),a("Next game, you got this.","次はいける",["friendly","hype"]),a("Don't tilt too hard.","キレすぎないで",["friendly","tease"])],
+meme:[a("Ranked moment.","ランクあるある",["meme","relatable"]),a("The teammate became the boss.","味方がボスになった",["meme","weird"]),a("Controller damage incoming.","コントローラー破壊注意",["meme","weird"])]},
 joke:{
-slang:[a("You ate.","キマってた",["slang","hype"]),a("It's giving chaos.","混沌感ある",["slang","meme"]),a("No cap, that's funny.","ガチでおもろい",["slang","friendly"])],
-polite:[a("That was actually funny.","今のは本当に面白かった",["polite","honest"]),a("I like your sense of humor.","ユーモアのセンスいいね",["polite","friendly"]),a("Honestly, it works.","正直それもあり",["polite","honest"])],
-friendly:[a("That was funny.","今の面白かった",["friendly"]),a("You have good taste.","センスあるね",["friendly"]),a("I like that.","それ好き",["friendly"])],
-meme:[a("Comedy arc unlocked.","お笑い編解放",["meme","weird"]),a("Peak content.","最高コンテンツ",["meme","hype"]),a("NPC behavior, but funny.","NPCっぽいけど面白い",["meme","weird"])]}
+slang:[a("I'm dead.","笑い死ぬ",["slang","meme","friendly"]),a("That sent me.","吹いた",["slang","meme"]),a("You cooked.","キマってた",["slang","hype"]),a("No cap, that was funny.","ガチで面白かった",["slang","honest"]),a("You’re so unserious.","ふざけすぎ",["slang","tease","friendly"])],
+polite:[a("That was funny.","面白かったよ",["polite","honest"]),a("You have a good sense of humor.","ユーモアのセンスがあるね",["polite","honest"]),a("I enjoyed that.","楽しかったよ",["polite","friendly"]),a("That made me laugh.","笑ったよ",["polite","honest"])],
+friendly:[a("That was hilarious.","めっちゃ面白い",["friendly","hype"]),a("You have good taste.","センスあるね",["friendly","tease"]),a("I laughed.","笑った",["friendly","honest"]),a("Okay, that was good.","今のは良かった",["friendly","honest"])],
+meme:[a("Comedy stat maxed.","お笑いステータス最大",["meme","hype"]),a("Clown arc but good.","いい意味でピエロ編",["meme","weird"]),a("Peak cinema.","名シーン",["meme","weird"])]},
+risky_win:{
+slang:[a("You cooked.","やるじゃん",["slang","hype"]),a("Built different.","格が違う",["slang","hype"]),a("Clutch.","ギリ勝ち",["slang","hype"]),a("That was a save.","救済プレイ",["slang","hype"]),a("Deadline demon.","締切の悪魔",["slang","meme","hype"])],
+polite:[a("I'm glad you made it.","間に合ってよかったね",["polite","empathy"]),a("That was close. Be careful next time.","危なかったね。次は気をつけよう",["polite","honest"]),a("Good job submitting it.","提出できてよかった",["polite","honest"]),a("You handled the pressure.","プレッシャーに対応できたね",["polite","honest"])],
+friendly:[a("That was close!","危なかった！",["friendly","hype"]),a("Nice save.","ナイスセーブ",["friendly","hype"]),a("You made it!","間に合ったじゃん",["friendly","hype"]),a("Don't scare me like that.","ヒヤヒヤさせるな",["friendly","tease"])],
+meme:[a("Clutch god.","ギリギリ神",["meme","hype"]),a("Deadline boss defeated.","締切ボス撃破",["meme","hype"]),a("One HP victory.","HP1勝利",["meme","weird"])]},
+appearance_fail:{
+slang:[a("Lowkey, it still works.","ちょっと、それでもあり",["slang","friendly"]),a("It’ll grow back.","また伸びる",["slang","friendly"]),a("New era, I guess.","新時代ってことで",["slang","tease","friendly"]),a("You can still rock it.","それでもいける",["slang","hype","friendly"])],
+polite:[a("It still suits you.","それでも似合っているよ",["polite","honest","friendly"]),a("It will grow back soon.","すぐ伸びるよ",["polite","empathy"]),a("I don't think it looks bad.","悪くないと思うよ",["polite","honest"]),a("You look fine, don't worry.","大丈夫、変じゃないよ",["polite","empathy"])],
+friendly:[a("Honestly, it suits you.","正直似合ってる",["friendly","honest"]),a("It’s not bad!","悪くないよ",["friendly","honest"]),a("You still look good.","それでもいい感じ",["friendly"]),a("Don't worry, it works.","大丈夫、ありだよ",["friendly","empathy"])],
+meme:[a("New character arc.","新キャラ編",["meme","weird"]),a("Hair DLC installed.","髪型DLC導入",["meme","weird"]),a("Unexpected redesign.","予想外のリデザイン",["meme","weird"])]},
+support:{
+slang:[a("You got this.","いけるよ",["slang","friendly","hype"]),a("No cap, you'll be fine.","ガチで大丈夫",["slang","friendly","empathy"]),a("Lock in.","集中しよう",["slang","challenge"]),a("This is your moment.","君の出番だ",["slang","hype"]),a("I'm rooting for you.","応援してる",["slang","friendly"])],
+polite:[a("I believe in you.","信じているよ",["polite","empathy"]),a("Prepare calmly, and you'll do well.","落ち着いて準備すれば大丈夫",["polite","honest","empathy"]),a("It's natural to feel nervous.","緊張するのは自然だよ",["polite","empathy"]),a("You have worked hard for this.","ここまで頑張ってきたよ",["polite","empathy"])],
+friendly:[a("You can do it.","できるよ",["friendly","empathy"]),a("I’m with you.","味方だよ",["friendly","empathy"]),a("Take a breath.","深呼吸しよう",["friendly","empathy"]),a("You'll be okay.","大丈夫だよ",["friendly","empathy"])],
+meme:[a("Protagonist moment.","主人公の出番",["meme","hype"]),a("Boss fight time.","ボス戦開始",["meme","challenge"]),a("Confidence buff activated.","自信バフ発動",["meme","weird"])]}
 };
-const BAD_ANSWERS=[a("Who asked?","誰が聞いた？",["rude","too_edgy"]),a("I don't care.","興味ない",["cold","rude"]),a("Skill issue.","実力不足",["meme","too_edgy","rude"]),a("Cope harder.","現実見ろ",["rude","too_edgy"]),a("That's your fault.","自業自得",["cold","rude"]),a("Not my problem.","俺には関係ない",["cold","rude"]),a("Cringe.","きつい",["rude","too_edgy"]),a("Go away.","消えろ",["rude","too_edgy"]),a("Too serious.","真面目すぎ",["rude","cold"]),a("Goodbye forever.","永遠にさよなら",["too_edgy","chaotic"]),a("Tell everyone.","全員に言え",["chaotic","too_edgy"]),a("My ears hurt.","耳が痛い",["rude","too_edgy"]),a("Touch grass.","外出ろ",["meme","too_edgy","rude"]),a("Still not native.","まだネイティブじゃないけど",["rude","too_edgy"]),a("Move on.","切り替えろ",["cold","honest"]),a("Must be luck.","運でしょ",["cold","rude"]),a("Kinda mid.","ちょい微妙",["cold","too_edgy"]),a("Whatever.","どうでもいい",["cold","rude"])];
-const ZERO_ANSWERS=[a("Okay.","そうなんだ",["basic"]),a("Nice.","いいね",["basic"]),a("Maybe.","たぶん",["passive"]),a("I see.","なるほど",["basic"]),a("Cool.","へえ",["basic"]),a("Fair enough.","まあそうだね",["basic"]),a("Not bad.","悪くない",["basic"]),a("That's something.","それは何かだね",["basic","weird"]),a("Hmm.","うーん",["passive"]),a("Sure.","うん",["basic"]),a("It happens.","そういうこともある",["basic"]),a("Good to know.","知れてよかった",["basic"]),a("Maybe later.","あとでね",["passive"]),a("Sounds normal.","普通だね",["basic"]),a("I guess.","まあね",["passive"]),a("Alright.","了解",["basic"]),a("That's okay.","まあ大丈夫",["basic"]),a("Interesting.","興味深いね",["formal","basic"])];
+
+const BAD_ANSWERS=[
+a("Who asked?","誰が聞いた？",["rude","too_edgy","cold"]),a("I don't care.","興味ない",["rude","cold"]),a("Skill issue.","実力不足",["meme","too_edgy","rude"]),a("Kinda cringe.","ちょっと痛い",["rude","too_edgy"]),a("Good for you, I guess.","まあよかったね",["passive","cold"]),a("That's your fault.","自業自得",["cold","rude"]),a("Cope harder.","現実見ろ",["rude","too_edgy"]),a("Touch grass.","外出ろ",["meme","rude","too_edgy"]),a("Not my problem.","俺には関係ない",["cold","rude"]),a("Mid.","微妙",["slang","cold","rude"]),a("Pathetic.","だっさ",["rude","too_edgy"]),a("Nobody cares.","誰も気にしてない",["rude","too_edgy"]),a("You're being dramatic.","大げさすぎ",["cold","rude"]),a("Anyway...","で？",["cold","rude"]),a("Must be luck.","運だろ",["cold","rude"]),a("Go back.","前に戻せ",["rude","cold"]),a("That's embarrassing.","それ恥ずかしいね",["rude","too_edgy"]),a("Cry about it.","泣いてろ",["rude","too_edgy"])
+];
+const ZERO_ANSWERS=[a("Okay.","そうなんだ",["basic"]),a("I see.","なるほど",["basic"]),a("Maybe.","たぶんね",["passive"]),a("Sounds normal.","普通だね",["basic"]),a("I guess.","まあね",["passive"]),a("Alright.","了解",["basic"]),a("That's okay.","まあ大丈夫",["basic"]),a("Interesting.","興味深いね",["formal","basic"]),a("Cool.","へえ、いいね",["basic","casual"]),a("Hmm.","ふーん",["basic","passive"]),a("Not bad.","悪くない",["basic"]),a("Fair enough.","まあわかる",["basic","casual"]),a("I suppose so.","そうかもね",["formal","passive"]),a("That's something.","それは何かだね",["basic","weird"]),a("Good to know.","知れてよかった",["formal","basic"])
+];
 const FINAL_PROMPTS=[
 {s:"最後に相手が聞いてきた。",en:"So, how was talking with me?",ja:"で、私と話してみてどうだった？",cat:"listen"},
-{s:"最後に相手が笑って聞いてきた。",en:"You get my vibe, right?",ja:"私のノリ、わかったでしょ？",cat:"praise"},
-{s:"最後にもう一度誘ってきた。",en:"Want to talk again sometime?",ja:"また今度話す？",cat:"invite"}
+{s:"最後に相手が笑って聞いてきた。",en:"You get my vibe, right?",ja:"私のノリ、わかったでしょ？",cat:"appearance"},
+{s:"最後にもう一度誘ってきた。",en:"Want to talk again sometime?",ja:"また今度話す？",cat:"invite"},
+{s:"最後に少し真面目に聞いてきた。",en:"Do you think I can trust you?",ja:"君のこと信頼していい？",cat:"serious"}
 ];
-const REPLIES={best:{en:["Perfect vibe!","You nailed it!","That was exactly right!","That landed perfectly."],ja:["最高。完全に刺さった。","これは大当たり。","空気読み、完璧。","相手の好みにかなり合った。"]},good:{en:["Nice answer.","That works.","Pretty good.","Good enough."],ja:["いい返答。","悪くない。","ちゃんと伝わった。","会話はかなり自然。"]},zero:{en:["Hmm. Okay.","Not bad, not great.","I guess that works.","A little plain."],ja:["まあ普通。","刺さりはしない。","会話は続くけど弱い。","無難だが決め手に欠ける。"]},bad:{en:["That was not it.","Ouch.","Nope.","Wrong vibe."],ja:["それは地雷。","空気が死んだ。","かなり印象ダウン。","相手の嫌いなノリを踏んだ。"]},time:{en:"Too late!",ja:"時間切れ。空気が流れた。"}};
-let selectedChar=null,route=[],turn=0,heart=5,combo=0,maxCombo=0,locked=false,timer=null,timeLeft=0,totalTime=0,log=[];const MAX_HEART=15,MIN_HEART=0,app=document.getElementById("app"),flash=document.getElementById("flash");
-function a(en,ja,tags){return{en,ja,tags};}
-function esc(s){return String(s).replace(/[&<>'"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;","\"":"&quot;"}[m]));}
-function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
-function sample(arr,n){return shuffle(arr).slice(0,n);}
+const REPLIES={best:{en:["Perfect vibe!","You nailed it!","That was exactly right!","That landed perfectly.","You read the room perfectly."],ja:["最高。完全に刺さった。","これは大当たり。","空気読み、完璧。","相手の好みにかなり合った。","そのキャラにはかなり強い返答。"]},good:{en:["Nice answer.","That works.","Pretty good.","Good enough.","That was natural."],ja:["いい返答。","悪くない。","ちゃんと伝わった。","会話はかなり自然。","無難に好印象。"]},zero:{en:["Hmm. Okay.","Not bad, not great.","I guess that works.","A little plain.","Safe, but weak."],ja:["まあ普通。","刺さりはしない。","会話は続くけど弱い。","無難だが決め手に欠ける。","安全だが攻略力は低い。"]},bad:{en:["That was not it.","Ouch.","Nope.","Wrong vibe.","You missed the vibe."],ja:["それは地雷。","空気が死んだ。","かなり印象ダウン。","相手の嫌いなノリを踏んだ。","キャラ読み失敗。"]},time:{en:"Too late!",ja:"時間切れ。空気が流れた。"}};
+let selectedChar=null,route=[],turn=0,heart=5,combo=0,maxCombo=0,locked=false,timer=null,timeLeft=0,totalTime=0,log=[],recentAnswers=[];
+const MAX_HEART=15,MIN_HEART=0,app=document.getElementById("app"),flash=document.getElementById("flash");
 function showTitle(){app.innerHTML=`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title">Sushi Talk</div><button class="btn" style="width:100%;margin-top:18px" onclick="showCharacterSelect()">START</button></div>`;}
 async function showCharacterSelect(){await preloadSprites();app.innerHTML=`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title" style="font-size:36px;margin-top:4px">誰と話す？</div></div><div class="characterList">${CHARACTERS.map(ch=>`<button class="characterSelect" onclick="startRoute('${ch.id}')"><div class="miniSpriteWrap"><div class="miniSprite" style="--sheet:url('${ch.sheet}')"></div></div><div><div class="selectName">${ch.name}</div><span class="selectType">${ch.type}</span><div class="ruleGrid"><div class="ruleBox good">👍 最高<br>${ch.best}</div><div class="ruleBox bad">👎 マイナス<br>${ch.worst}</div></div><div style="margin-top:6px;color:var(--muted);font-size:12px;font-weight:800;line-height:1.45">${ch.profile}</div></div></button>`).join("")}</div>`;}
-function startRoute(id){selectedChar=CHARACTERS.find(c=>c.id===id);route=sample(SCENARIOS,6);route.push(pick(FINAL_PROMPTS));turn=0;heart=5;combo=0;maxCombo=0;locked=false;log=[];nextTurn();}
+function startRoute(id){selectedChar=CHARACTERS.find(c=>c.id===id);route=sample(SCENARIOS,8);route.push(pick(FINAL_PROMPTS));turn=0;heart=5;combo=0;maxCombo=0;locked=false;log=[];recentAnswers=[];nextTurn();}
 function nextTurn(){clearInterval(timer);if(turn>=route.length||heart<=0){showResult();return;}locked=false;renderTurn();startTimer(selectedChar.time);}
 function renderHearts(){let full=Math.max(0,Math.min(MAX_HEART,heart));return "❤️".repeat(full)+"🤍".repeat(Math.max(0,10-full));}
-function getPoolForChar(cat,char){const pools=ANSWERS[cat]||ANSWERS.relate; if(char.id==="susie")return pools.slang.concat(pools.friendly||[]); if(char.id==="malia")return pools.polite.concat(pools.friendly||[]); if(char.id==="ally")return pools.meme.concat(pools.slang||[]); if(char.id==="mark")return pools.slang.concat(pools.friendly||[],pools.meme||[]); return pools.friendly.concat(pools.polite||[],pools.slang||[]);}
-function scoreAnswer(char,ans){let s=0;for(const t of ans.tags||[]){if(char.likes.includes(t))s+=2;if(char.hates.includes(t))s-=3;}if((ans.tags||[]).includes("rude"))s-=2;if((ans.tags||[]).includes("cold"))s-=1;if((ans.tags||[]).includes("empathy"))s+=1;return s;}
-function uniqueChoices(list){const seen=new Set(),out=[];for(const x of list){if(!seen.has(x.en)){seen.add(x.en);out.push(x);}}return out;}
-function buildChoices(sc,char){let candidates=uniqueChoices(getPoolForChar(sc.cat,char));candidates.sort((x,y)=>scoreAnswer(char,y)-scoreAnswer(char,x));let best=candidates.find(x=>scoreAnswer(char,x)>=3)||candidates[0]||pick(ZERO_ANSWERS);let good=candidates.find(x=>x.en!==best.en&&scoreAnswer(char,x)>=1)||pick(ZERO_ANSWERS);let zero=pick(ZERO_ANSWERS.filter(x=>x.en!==best.en&&x.en!==good.en));let bads=uniqueChoices(BAD_ANSWERS.slice().sort((x,y)=>scoreAnswer(char,x)-scoreAnswer(char,y)));let bad=bads.find(x=>x.en!==best.en&&x.en!==good.en&&x.en!==zero.en)||pick(BAD_ANSWERS);return shuffle([{...best,delta:3,role:"best"},{...good,delta:1,role:"good"},{...zero,delta:0,role:"zero"},{...bad,delta:-3,role:"bad"}]);}
+function scoreAnswer(char,ans){let s=0;for(const t of ans.tags||[]){if(char.likes.includes(t))s+=2;if(char.hates.includes(t))s-=3;}if((ans.tags||[]).includes("rude"))s-=3;if((ans.tags||[]).includes("too_edgy"))s-=2;if((ans.tags||[]).includes("cold"))s-=2;if((ans.tags||[]).includes("empathy"))s+=1;if((ans.tags||[]).includes("honest"))s+=.5;return s;}
+function poolsFor(cat){return B[cat]||B.relate;}
+function getPoolForChar(cat,char){const p=poolsFor(cat);let list=[]; if(char.id==="susie")list=[...(p.slang||[]),...(p.friendly||[]),...(p.meme||[])]; else if(char.id==="malia")list=[...(p.polite||[]),...(p.friendly||[])]; else if(char.id==="ally")list=[...(p.meme||[]),...(p.slang||[]),...(p.friendly||[])]; else if(char.id==="mark")list=[...(p.slang||[]),...(p.meme||[]),...(p.friendly||[])]; else list=[...(p.friendly||[]),...(p.polite||[]),...(p.slang||[]),...(p.meme||[])]; return uniqueChoices(list).filter(x=>!recentAnswers.includes(x.en));}
+function chooseByScore(list,char,min,max,exclude){let cands=uniqueChoices(list).filter(x=>!exclude.has(x.en));cands=cands.map(x=>({x,score:scoreAnswer(char,x)})).filter(o=>o.score>=min&&o.score<=max);if(!cands.length)return null;const top=cands.sort((a,b)=>b.score-a.score).slice(0,Math.min(8,cands.length));return pick(top).x;}
+function buildChoices(sc,char){let all=getPoolForChar(sc.cat,char); if(all.length<10) all=uniqueChoices([...(all||[]),...Object.values(poolsFor(sc.cat)).flat(),...Object.values(B.relates||{}).flat()].filter(Boolean)); const used=new Set(); let best=chooseByScore(all,char,3,99,used)||pick(uniqueChoices(all)); used.add(best.en); let good=chooseByScore(all,char,1,2.9,used)||chooseByScore(all,char,0,99,used)||pick(ZERO_ANSWERS); used.add(good.en); let zero=pick(ZERO_ANSWERS.filter(x=>!used.has(x.en)&&!recentAnswers.includes(x.en))||ZERO_ANSWERS); used.add(zero.en); let badPool=uniqueChoices([...BAD_ANSWERS,...Object.values(poolsFor(sc.cat)).flat()]).filter(x=>!used.has(x.en)&&!recentAnswers.includes(x.en)); let bad=chooseByScore(badPool,char,-99,-1,used)||pick(BAD_ANSWERS.filter(x=>!used.has(x.en))||BAD_ANSWERS); return shuffle([{...best,delta:3,role:"best"},{...good,delta:1,role:"good"},{...zero,delta:0,role:"zero"},{...bad,delta:-3,role:"bad"}]);}
 function renderTurn(){const sc=route[turn];const choices=buildChoices(sc,selectedChar);window.currentChoices=choices;app.innerHTML=`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="status"><div class="stat"><div class="statLabel">TURN</div><div class="statValue">${turn+1}/${route.length}</div></div><div class="stat"><div class="statLabel">TARGET</div><div class="statValue" style="font-size:17px">${selectedChar.name}</div></div><div class="stat"><div class="statLabel">COMBO</div><div class="statValue">${combo}</div></div></div><div class="card"><div class="heartLine">${renderHearts()}</div><div class="heartHint">好感度：数字は見えない。反応で読め。</div></div><div class="timerWrap"><div class="timerFill" id="timerFill"></div></div><div class="card conversationCard" id="characterCard"><div class="conversationHero"><div class="spriteWrap"><div class="sprite normal float" id="sprite" style="--sheet:url('${selectedChar.sheet}')"></div></div><div><div class="charName">${selectedChar.name}</div><span class="charType">${selectedChar.type}</span><div class="comboBadge">${combo>1?combo+" COMBO":"VIBE CHECK"}</div><div class="bubble"><div class="sceneInBubble">${esc(sc.s)}</div><div class="en">${esc(sc.en)}</div><div class="ja">${esc(sc.ja)}</div></div></div></div><div class="choiceAreaInCard">${choices.map((choice,i)=>`<button class="choice" onclick="choose(${i})"><div class="choiceEN">${esc(choice.en)}</div><div class="choiceJA">${esc(choice.ja)}</div></button>`).join("")}</div><div class="replyBubble hidden" id="feedback"></div></div>`;}
 function startTimer(sec){totalTime=sec;timeLeft=sec;const fill=()=>{const el=document.getElementById("timerFill");if(el)el.style.width=Math.max(0,(timeLeft/totalTime)*100)+"%";};fill();timer=setInterval(()=>{if(locked)return;timeLeft-=.1;fill();if(timeLeft<=0)timeoutChoose();},100);}
 function choose(index){if(locked)return;locked=true;clearInterval(timer);const choice=window.currentChoices[index];applyResult(choice,choice.delta,index,false);}
 function timeoutChoose(){if(locked)return;locked=true;clearInterval(timer);applyResult({en:"TIME OUT",ja:"時間切れ",delta:-3,role:"bad"},-3,null,true);}
-function applyResult(choice,delta,index,isTimeout){heart=Math.max(MIN_HEART,Math.min(MAX_HEART,heart+delta));if(delta===3){combo++;}else{combo=0;}maxCombo=Math.max(maxCombo,combo);const tier=isTimeout?"time":delta===3?"best":delta===1?"good":delta===0?"zero":"bad";const expression=delta===3?"love":delta===1?"good":delta===0?"shock":"bad";const reply=getReply(tier);log.push({turn:turn+1,scene:route[turn].ja,choice:choice.en,ja:choice.ja,delta,replyEN:reply.en,replyJA:reply.ja,role:choice.role||tier});document.querySelectorAll(".choice").forEach((btn,i)=>{btn.classList.add("locked");if(i===index)btn.classList.add("selected");});const sprite=document.getElementById("sprite");sprite.className="sprite "+expression+" pop";const card=document.getElementById("characterCard");if(delta<0)card.classList.add("shake");triggerFlash(delta===3?"best":delta<0?"bad":"good");const feedback=document.getElementById("feedback");feedback.classList.remove("hidden");feedback.innerHTML=`<div class="tapNext">TAP TO CONTINUE</div><div class="delta ${delta<0?'bad':''}">${delta>0?"+"+delta:delta}</div><div class="replyEN">${esc(reply.en)}</div><div class="replyJA">${esc(reply.ja)}</div><div class="heartLine" style="font-size:23px;margin-top:8px">${renderHearts()}</div>`;feedback.onclick=()=>{turn++;nextTurn();};}
+function applyResult(choice,delta,index,isTimeout){heart=Math.max(MIN_HEART,Math.min(MAX_HEART,heart+delta));if(delta===3){combo++;}else{combo=0;}maxCombo=Math.max(maxCombo,combo);const tier=isTimeout?"time":delta===3?"best":delta===1?"good":delta===0?"zero":"bad";const expression=delta===3?"love":delta===1?"good":delta===0?"shock":"bad";const reply=getReply(tier);log.push({turn:turn+1,scene:route[turn].ja,choice:choice.en,ja:choice.ja,delta,replyEN:reply.en,replyJA:reply.ja,role:choice.role||tier});if(choice.en!=="TIME OUT"){recentAnswers.push(choice.en);recentAnswers=recentAnswers.slice(-14);}document.querySelectorAll(".choice").forEach((btn,i)=>{btn.classList.add("locked");if(i===index)btn.classList.add("selected");});const sprite=document.getElementById("sprite");sprite.className="sprite "+expression+" pop";const card=document.getElementById("characterCard");if(delta<0)card.classList.add("shake");triggerFlash(delta===3?"best":delta<0?"bad":"good");const feedback=document.getElementById("feedback");feedback.classList.remove("hidden");feedback.innerHTML=`<div class="tapNext">TAP TO CONTINUE</div><div class="delta ${delta<0?'bad':''}">${delta>0?"+"+delta:delta}</div><div class="replyEN">${esc(reply.en)}</div><div class="replyJA">${esc(reply.ja)}</div><div class="heartLine" style="font-size:23px;margin-top:8px">${renderHearts()}</div>`;feedback.onclick=()=>{turn++;nextTurn();};}
 function getReply(tier){if(tier==="time")return REPLIES.time;const pool=REPLIES[tier];const i=Math.floor(Math.random()*pool.en.length);return{en:pool.en[i],ja:pool.ja[i]};}
 function triggerFlash(type){flash.className="flash "+type;setTimeout(()=>flash.className="flash",600);}
 function showResult(){clearInterval(timer);let rank="CLASSMATE",comment="会話は成立した。でも攻略にはまだ遠い。";if(heart>=13){rank="BEST FRIEND";comment="完全攻略。相手のノリを読み切った。";}else if(heart>=10){rank="GOOD FRIEND";comment="かなり好印象。あと一歩で親友。";}else if(heart>=7){rank="FRIEND";comment="悪くない。空気はだいたい読めている。";}else if(heart>=4){rank="AWKWARD";comment="少し気まずい。地雷を踏みすぎた。";}else{rank="GAME OVER";comment="空気が崩壊した。相手の嫌いな返答を確認しよう。";}app.innerHTML=`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title" style="font-size:36px;margin-top:4px">RESULT</div><div class="resultRank">${rank}</div><div class="heartLine" style="margin-top:10px">${renderHearts()}</div><p class="lead">${selectedChar.name}：${comment}<br>MAX COMBO：${maxCombo}</p><button class="btn" style="width:100%" onclick="startRoute('${selectedChar.id}')">同じ相手でもう一回</button><button class="btn secondary" style="width:100%;margin-top:10px" onclick="showCharacterSelect()">相手を変える</button></div><div class="card"><b>会話ログ</b><div class="log">${log.map(l=>`<div class="logRow"><b>${l.turn}. ${selectedChar.name}</b>：${esc(l.scene)}<br>${esc(l.choice)}（${esc(l.ja)}） <b>${l.delta>0?"+"+l.delta:l.delta}</b><br>${esc(l.replyEN)}<br><span style="color:var(--muted)">${esc(l.replyJA)}</span></div>`).join("")}</div></div>`;}
-function shuffle(arr){return[...arr].sort(()=>Math.random()-.5);}
 showTitle();
 </script>
 </body>
