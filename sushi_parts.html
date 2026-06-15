@@ -4798,5 +4798,255 @@ window.addEventListener('load',()=>{const savedName=localStorage.getItem(PLAYER_
 })();
 </script>
 
+
+
+<!-- ===== v6.14 prefix + base-word relaxation: re+use => reuse ===== -->
+<script>
+(function(){
+  function safe(fn, fallback){ try{return fn();}catch(e){return fallback;} }
+  function hasPart(id){ return Array.isArray(PARTS) && PARTS.some(p=>p && p.id===id); }
+  function addPart(p){ if(!p || !p.id || hasPart(p.id)) return; try{ PARTS.push(p); }catch(e){} }
+  function getWord(word){ return safe(()=>WORDS.find(w=>w.word===word), null); }
+  function addWord(w){
+    if(!w || !w.word || !Array.isArray(w.parts) || !Array.isArray(WORDS)) return;
+    const key=w.parts.join('|');
+    let item=WORDS.find(x=>x.word===w.word && Array.isArray(x.parts) && x.parts.join('|')===key)
+          || WORDS.find(x=>Array.isArray(x.parts) && x.parts.join('|')===key)
+          || WORDS.find(x=>x.word===w.word);
+    if(item){ Object.assign(item,w); }
+    else { WORDS.push(w); item=w; }
+    try{
+      if(typeof WORD_MAP!=='undefined'){
+        WORD_MAP.set(key,item);
+        if(Array.isArray(w.aliases)) w.aliases.forEach(a=>Array.isArray(a)&&WORD_MAP.set(a.join('|'), item));
+      }
+    }catch(e){}
+  }
+  function alias(word, routes){
+    const item=getWord(word); if(!item) return;
+    try{ if(typeof WORD_MAP!=='undefined') routes.forEach(r=>Array.isArray(r)&&WORD_MAP.set(r.join('|'), item)); }catch(e){}
+  }
+
+  // Prefix + familiar base-word routes. These are intentionally player-friendly.
+  [
+    {id:'make',type:'root',text:'make',meaning:'作る'},
+    {id:'write',type:'root',text:'write',meaning:'書く'},
+    {id:'spell',type:'root',text:'spell',meaning:'つづる'},
+    {id:'do',type:'root',text:'do',meaning:'する'},
+    {id:'build',type:'root',text:'build',meaning:'建てる'}
+  ].forEach(addPart);
+
+  [
+    {word:'reuse',ja:'再利用する',parts:['re','use'],image:'re + use → reuse',freq:'S',aliases:[['reuse']]},
+    {word:'reusable',ja:'再利用できる',parts:['re','use','able'],image:'re + use + able → reusable',freq:'A',aliases:[['reuse','able']]},
+    {word:'reusability',ja:'再利用しやすさ',parts:['re','use','able','ity'],image:'re + use + able + ity → reusability',freq:'B',aliases:[['reuse','ability'],['reusable','ity']]},
+    {word:'misuse',ja:'誤用する・悪用する',parts:['mis','use'],image:'mis + use → misuse',freq:'A',aliases:[['misuse']]},
+    {word:'remake',ja:'作り直す',parts:['re','make'],image:'re + make → remake',freq:'A',aliases:[['remake']]},
+    {word:'rewrite',ja:'書き直す',parts:['re','write'],image:'re + write → rewrite',freq:'A',aliases:[['rewrite']]},
+    {word:'redo',ja:'やり直す',parts:['re','do'],image:'re + do → redo',freq:'B',aliases:[['redo']]},
+    {word:'rebuild',ja:'再建する',parts:['re','build'],image:'re + build → rebuild',freq:'A',aliases:[['rebuild']]},
+    {word:'misspell',ja:'つづりを間違える',parts:['mis','spell'],image:'mis + spell → misspell',freq:'B',aliases:[['misspell']]}
+  ].forEach(addWord);
+
+  [
+    ['reuse', [['re','use']]],
+    ['reusable', [['reuse','able'],['re','use','able']]],
+    ['reusability', [['reuse','ability'],['reusable','ity'],['re','use','able','ity']]],
+    ['misuse', [['mis','use']]],
+    ['remake', [['re','make']]],
+    ['rewrite', [['re','write']]],
+    ['redo', [['re','do']]],
+    ['rebuild', [['re','build']]],
+    ['misspell', [['mis','spell']]]
+  ].forEach(([w,r])=>alias(w,r));
+
+  // Make the opening/deck system aware of the newly useful base cards without forcing them every run.
+  try{
+    if(typeof addStarter==='function') addStarter(['use','make','write','spell','do','build','re','mis','able','ity']);
+  }catch(e){}
+})();
+</script>
+
+
+
+<!-- ===== v6.15 rescue recipe pack: player-friendly recipes through respectful/conject/deport ===== -->
+<script>
+(function(){
+  function safe(fn, fallback){ try{return fn();}catch(e){return fallback;} }
+  function hasPart(id){ return Array.isArray(PARTS) && PARTS.some(p=>p && p.id===id); }
+  function addPart(p){ if(!p || !p.id || hasPart(p.id)) return; try{ PARTS.push(p); }catch(e){} }
+  function getWord(word){ return safe(()=>WORDS.find(w=>w.word===word), null); }
+  function addWord(w){
+    if(!w || !w.word || !Array.isArray(w.parts) || !Array.isArray(WORDS)) return;
+    const key=w.parts.join('|');
+    let item=WORDS.find(x=>x.word===w.word && Array.isArray(x.parts) && x.parts.join('|')===key)
+          || WORDS.find(x=>Array.isArray(x.parts) && x.parts.join('|')===key)
+          || WORDS.find(x=>x.word===w.word);
+    if(item){
+      // Keep the existing object, but enrich it with the new friendly route and metadata.
+      Object.assign(item, w);
+    }else{
+      WORDS.push(w);
+      item=w;
+    }
+    try{
+      if(typeof WORD_MAP!=='undefined'){
+        WORD_MAP.set(key,item);
+        if(Array.isArray(w.aliases)){
+          w.aliases.forEach(a=>{ if(Array.isArray(a)) WORD_MAP.set(a.join('|'), item); });
+        }
+      }
+    }catch(e){}
+  }
+  function alias(word, routes){
+    const item=getWord(word); if(!item) return;
+    try{
+      if(typeof WORD_MAP!=='undefined'){
+        routes.forEach(r=>{ if(Array.isArray(r)) WORD_MAP.set(r.join('|'), item); });
+      }
+    }catch(e){}
+  }
+  function addToStarter(ids){
+    try{ if(typeof addStarter==='function') addStarter(ids); }catch(e){}
+    try{ if(Array.isArray(STARTER_PARTS)) ids.forEach(id=>{ if(hasPart(id) && !STARTER_PARTS.includes(id)) STARTER_PARTS.push(id); }); }catch(e){}
+  }
+
+  // Useful base-word cards for player recipes like respect + ful, propose + al, transport + ation.
+  [
+    {id:'respect',type:'root',text:'respect',meaning:'尊重する'},
+    {id:'conject',type:'root',text:'conject',meaning:'推測する'},
+    {id:'deport',type:'root',text:'deport',meaning:'国外退去させる'},
+    {id:'transport',type:'root',text:'transport',meaning:'輸送する'},
+    {id:'propose',type:'root',text:'propose',meaning:'提案する'},
+    {id:'compose',type:'root',text:'compose',meaning:'構成する・作曲する'},
+    {id:'oppose',type:'root',text:'oppose',meaning:'反対する'},
+    {id:'contract',type:'root',text:'contract',meaning:'契約する・縮む'},
+    {id:'extract',type:'root',text:'extract',meaning:'取り出す'},
+    {id:'attract',type:'root',text:'attract',meaning:'引きつける'},
+    {id:'retract',type:'root',text:'retract',meaning:'撤回する'},
+    {id:'project',type:'root',text:'project',meaning:'計画・投影する'},
+    {id:'reject',type:'root',text:'reject',meaning:'拒絶する'},
+    {id:'inject',type:'root',text:'inject',meaning:'注入する'},
+    {id:'object',type:'root',text:'object',meaning:'物体・反対する'},
+    {id:'expose',type:'root',text:'expose',meaning:'さらす'},
+    {id:'inspect',type:'root',text:'inspect',meaning:'調査する'},
+    {id:'suspect',type:'root',text:'suspect',meaning:'疑う'},
+    {id:'prospect',type:'root',text:'prospect',meaning:'見込み'},
+    {id:'ful',type:'suffix',text:'ful',meaning:'〜に満ちた'},
+    {id:'fully',type:'suffix',text:'fully',meaning:'〜に満ちて'},
+    {id:'al',type:'suffix',text:'al',meaning:'〜の・こと'},
+    {id:'ure',type:'suffix',text:'ure',meaning:'状態・結果'},
+    {id:'tion',type:'suffix',text:'tion',meaning:'こと・状態'},
+    {id:'ation',type:'suffix',text:'ation',meaning:'こと・状態'},
+    {id:'ion',type:'suffix',text:'ion',meaning:'こと・状態'},
+    {id:'or',type:'suffix',text:'or',meaning:'人・もの'},
+    {id:'er',type:'suffix',text:'er',meaning:'人・もの'},
+    {id:'ive',type:'suffix',text:'ive',meaning:'性質の'},
+    {id:'able',type:'suffix',text:'able',meaning:'できる'}
+  ].forEach(addPart);
+
+  // Here we choose the player-intuitive route as the display route, then register etymological routes as aliases.
+  [
+    {word:'respect',ja:'尊重する',parts:['re','spect'],image:'re + spect → respect',freq:'S',aliases:[['respect']]},
+    {word:'respectful',ja:'敬意のある・丁寧な',parts:['re','spect','ful'],image:'re + spect + ful → respectful',freq:'A',aliases:[['respect','ful'],['respectful']]},
+    {word:'respectfully',ja:'敬意をもって・丁寧に',parts:['re','spect','ful','ly'],image:'re + spect + ful + ly → respectfully',freq:'B',aliases:[['respect','fully'],['respectful','ly'],['respectfully']]},
+
+    {word:'inspect',ja:'調査する・検査する',parts:['in','spect'],image:'in + spect → inspect',freq:'A',aliases:[['inspect']]},
+    {word:'inspection',ja:'調査・検査',parts:['in','spect','ion'],image:'in + spect + ion → inspection',freq:'A',aliases:[['inspect','ion'],['inspect','tion'],['inspection']]},
+    {word:'suspect',ja:'疑う・容疑者',parts:['sus','spect'],image:'sus + spect → suspect',freq:'A',aliases:[['suspect']]},
+    {word:'prospect',ja:'見込み・展望',parts:['pro','spect'],image:'pro + spect → prospect',freq:'A',aliases:[['prospect']]},
+    {word:'prospective',ja:'見込みのある・将来の',parts:['pro','spect','ive'],image:'pro + spect + ive → prospective',freq:'B',aliases:[['prospect','ive'],['prospective']]},
+
+    {word:'conject',ja:'推測する',parts:['con','ject'],image:'con + ject → conject',freq:'B',aliases:[['conject']]},
+    {word:'conjecture',ja:'推測・憶測',parts:['con','ject','ure'],image:'con + ject + ure → conjecture',freq:'B',aliases:[['conject','ure'],['conjecture']]},
+    {word:'project',ja:'計画・投影する',parts:['pro','ject'],image:'pro + ject → project',freq:'S',aliases:[['project']]},
+    {word:'projection',ja:'投影・予測',parts:['pro','ject','ion'],image:'pro + ject + ion → projection',freq:'B',aliases:[['project','ion'],['project','tion'],['projection']]},
+    {word:'reject',ja:'拒絶する',parts:['re','ject'],image:'re + ject → reject',freq:'S',aliases:[['reject']]},
+    {word:'rejection',ja:'拒絶',parts:['re','ject','ion'],image:'re + ject + ion → rejection',freq:'B',aliases:[['reject','ion'],['reject','tion'],['rejection']]},
+    {word:'inject',ja:'注入する',parts:['in','ject'],image:'in + ject → inject',freq:'A',aliases:[['inject']]},
+    {word:'injection',ja:'注射・注入',parts:['in','ject','ion'],image:'in + ject + ion → injection',freq:'B',aliases:[['inject','ion'],['inject','tion'],['injection']]},
+    {word:'object',ja:'物体・反対する',parts:['ob','ject'],image:'ob + ject → object',freq:'S',aliases:[['object']]},
+
+    {word:'deport',ja:'国外退去させる',parts:['de','port'],image:'de + port → deport',freq:'B',aliases:[['deport']]},
+    {word:'deportable',ja:'国外退去の対象となる',parts:['de','port','able'],image:'de + port + able → deportable',freq:'B',aliases:[['deport','able'],['deportable']]},
+    {word:'transport',ja:'輸送する',parts:['trans','port'],image:'trans + port → transport',freq:'S',aliases:[['transport']]},
+    {word:'transportation',ja:'輸送・交通',parts:['trans','port','ation'],image:'trans + port + ation → transportation',freq:'A',aliases:[['transport','ation'],['transport','tion'],['transportation']]},
+    {word:'transporter',ja:'輸送者・輸送機',parts:['trans','port','er'],image:'trans + port + er → transporter',freq:'B',aliases:[['transport','er'],['transporter']]},
+    {word:'exportable',ja:'輸出できる',parts:['ex','port','able'],image:'ex + port + able → exportable',freq:'A',aliases:[['export','able'],['exportable']]},
+    {word:'importer',ja:'輸入業者',parts:['im','port','er'],image:'im + port + er → importer',freq:'B',aliases:[['import','er'],['importer']]},
+
+    {word:'propose',ja:'提案する',parts:['pro','pose'],image:'pro + pose → propose',freq:'S',aliases:[['propose']]},
+    {word:'proposal',ja:'提案',parts:['pro','pose','al'],image:'pro + pose + al → proposal',freq:'A',aliases:[['propose','al'],['proposal']]},
+    {word:'proposition',ja:'提案・命題',parts:['pro','pose','tion'],image:'pro + pose + tion → proposition',freq:'B',aliases:[['pro','posit','ion'],['propose','tion'],['propose','sion'],['proposition']]},
+    {word:'compose',ja:'構成する・作曲する',parts:['com','pose'],image:'com + pose → compose',freq:'S',aliases:[['compose']]},
+    {word:'composer',ja:'作曲家',parts:['com','pose','er'],image:'com + pose + er → composer',freq:'A',aliases:[['compose','er'],['composer']]},
+    {word:'composition',ja:'構成・作文・作品',parts:['com','pose','tion'],image:'com + pose + tion → composition',freq:'A',aliases:[['com','posit','ion'],['compose','tion'],['compose','sion'],['composition']]},
+    {word:'oppose',ja:'反対する',parts:['op','pose'],image:'op + pose → oppose',freq:'S',aliases:[['ob','pose'],['oppose']]},
+    {word:'opposition',ja:'反対・対立',parts:['op','pose','tion'],image:'op + pose + tion → opposition',freq:'A',aliases:[['op','posit','ion'],['ob','pose','tion'],['oppose','tion'],['oppose','sion'],['opposition']]},
+    {word:'opponent',ja:'相手・反対者',parts:['op','pon','ent'],image:'op + pon + ent → opponent',freq:'A',aliases:[['opponent']]},
+    {word:'expose',ja:'さらす・露出する',parts:['ex','pose'],image:'ex + pose → expose',freq:'S',aliases:[['expose']]},
+    {word:'exposure',ja:'露出・接触',parts:['ex','pose','ure'],image:'ex + pose + ure → exposure',freq:'A',aliases:[['expose','ure'],['exposure']]},
+    {word:'exposition',ja:'説明・解説・博覧会',parts:['ex','pose','tion'],image:'ex + pose + tion → exposition',freq:'B',aliases:[['ex','posit','ion'],['expose','tion'],['exposition']]},
+
+    {word:'contract',ja:'契約する・縮む',parts:['con','tract'],image:'con + tract → contract',freq:'S',aliases:[['contract']]},
+    {word:'contractor',ja:'契約業者',parts:['con','tract','or'],image:'con + tract + or → contractor',freq:'B',aliases:[['contract','or'],['contractor']]},
+    {word:'extract',ja:'取り出す・抽出する',parts:['ex','tract'],image:'ex + tract → extract',freq:'S',aliases:[['extract']]},
+    {word:'extraction',ja:'抽出・取り出し',parts:['ex','tract','ion'],image:'ex + tract + ion → extraction',freq:'B',aliases:[['extract','ion'],['extract','tion'],['extraction']]},
+    {word:'attract',ja:'引きつける',parts:['at','tract'],image:'at + tract → attract',freq:'S',aliases:[['attract']]},
+    {word:'attractive',ja:'魅力的な',parts:['at','tract','ive'],image:'at + tract + ive → attractive',freq:'A',aliases:[['attract','ive'],['attractive']]},
+    {word:'retract',ja:'撤回する・引っ込める',parts:['re','tract'],image:'re + tract → retract',freq:'B',aliases:[['retract']]},
+    {word:'retraction',ja:'撤回',parts:['re','tract','ion'],image:'re + tract + ion → retraction',freq:'B',aliases:[['retract','ion'],['retract','tion'],['retraction']]}
+  ].forEach(addWord);
+
+  [
+    ['respect', [['re','spect'],['respect']]],
+    ['respectful', [['re','spect','ful'],['respect','ful'],['respectful']]],
+    ['respectfully', [['re','spect','ful','ly'],['respect','fully'],['respectful','ly'],['respectfully']]],
+    ['conject', [['con','ject'],['conject']]],
+    ['conjecture', [['con','ject','ure'],['conject','ure'],['conjecture']]],
+    ['deport', [['de','port'],['deport']]],
+    ['deportable', [['de','port','able'],['deport','able'],['deportable']]],
+    ['transportation', [['trans','port','ation'],['transport','ation'],['transport','tion'],['transportation']]],
+    ['proposal', [['pro','pose','al'],['propose','al'],['proposal']]],
+    ['composition', [['com','pose','tion'],['com','posit','ion'],['compose','tion'],['compose','sion'],['composition']]],
+    ['opposition', [['op','pose','tion'],['op','posit','ion'],['oppose','tion'],['oppose','sion'],['opposition']]],
+    ['contractor', [['con','tract','or'],['contract','or'],['contractor']]],
+    ['extraction', [['ex','tract','ion'],['extract','ion'],['extract','tion'],['extraction']]],
+    ['attractive', [['at','tract','ive'],['attract','ive'],['attractive']]],
+    ['retraction', [['re','tract','ion'],['retract','ion'],['retract','tion'],['retraction']]],
+    ['project', [['pro','ject'],['project']]],
+    ['projection', [['pro','ject','ion'],['project','ion'],['project','tion'],['projection']]],
+    ['reject', [['re','ject'],['reject']]],
+    ['rejection', [['re','ject','ion'],['reject','ion'],['reject','tion'],['rejection']]],
+    ['inject', [['in','ject'],['inject']]],
+    ['injection', [['in','ject','ion'],['inject','ion'],['inject','tion'],['injection']]],
+    ['inspection', [['in','spect','ion'],['inspect','ion'],['inspect','tion'],['inspection']]],
+    ['prospective', [['pro','spect','ive'],['prospect','ive'],['prospective']]],
+    ['exportable', [['ex','port','able'],['export','able'],['exportable']]],
+    ['importer', [['im','port','er'],['import','er'],['importer']]]
+  ].forEach(([w,r])=>alias(w,r));
+
+  // Let these families appear naturally in starts/rewards, without making the opening hand fixed.
+  addToStarter([
+    're','con','de','trans','pro','com','op','ex','at','in','im','sus',
+    'spect','ject','port','pose','tract','ful','fully','al','ure','tion','ation','ion','able','er','or','ive',
+    'respect','conject','deport','transport','propose','compose','oppose','contract','extract','attract','retract'
+  ]);
+
+  // If a previous patch rebuilt WORD_MAP before these aliases were added, make near-miss also check raw joined spelling.
+  try{
+    const prevNear = typeof findNearMiss==='function' ? findNearMiss : null;
+    findNearMiss = function(ids){
+      const w = (typeof lookupWordByIds==='function') ? lookupWordByIds(ids) : null;
+      if(w) return w;
+      const joined = (ids||[]).join('').toLowerCase();
+      const exact = Array.isArray(WORDS) ? WORDS.find(x=>String(x.word||'').toLowerCase()===joined) : null;
+      if(exact) return exact;
+      return prevNear ? prevNear(ids) : null;
+    };
+  }catch(e){}
+})();
+</script>
+
 </body>
 </html>
