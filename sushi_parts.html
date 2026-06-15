@@ -4108,7 +4108,7 @@ window.addEventListener('load',()=>{const savedName=localStorage.getItem(PLAYER_
   function choosePack(){
     const k=known(), avail=liveIds();
     const packs=[
-      {id:'remove', label:'remove family', words:['remove','removal','movable','movability']},
+      {id:'removal', label:'removal family', words:['removal','movable','movability','removable']},
       {id:'view', label:'view family', words:['review','reviewer','reviewable']},
       {id:'form', label:'form family', words:['form','formation','formable','formal']},
       {id:'act', label:'act family', words:['action','active','activity','actor','react','reactor','reactive']},
@@ -4152,14 +4152,10 @@ window.addEventListener('load',()=>{const savedName=localStorage.getItem(PLAYER_
     return uniq(ids).slice(0,HAND_SIZE);
   }
 
-  // "remove + al" でも "re + mov + al" でも removal を作れるようにする。
-  addPartIfMissing({id:'remove', type:'root', text:'remove', meaning:'取り除く'});
-  try{ if(Array.isArray(STARTER_PARTS) && !STARTER_PARTS.includes('remove')) STARTER_PARTS.push('remove'); }catch(e){}
-  try{ if(typeof unlockedParts!=='undefined' && unlockedParts instanceof Set) unlockedParts.add('remove'); }catch(e){}
-  addToStarter('remove');
-  addWordRoute({word:'removal', ja:'除去', parts:['remove','al'], image:'remove + al → removal', freq:'A'});
-  addWordRoute({word:'removable', ja:'取り外し可能な', parts:['remove','able'], image:'remove + able → removable', freq:'B'});
-  addWordRoute({word:'removability', ja:'取り外しやすさ', parts:['remove','ability'], image:'remove + ability → removability', freq:'B'});
+  // remove を単体カードにはしない。removal 系は re + mov + al で作らせる。
+  addWordRoute({word:'removal', ja:'除去', parts:['re','mov','al'], image:'re + mov + al → removal', freq:'A'});
+  addWordRoute({word:'removable', ja:'取り外し可能な', parts:['re','mov','able'], image:'re + mov + able → removable', freq:'B'});
+  addWordRoute({word:'removability', ja:'取り外しやすさ', parts:['re','mov','ability'], image:'re + mov + ability → removability', freq:'B'});
   addWordRoute({word:'reactor', ja:'反応炉・反応するもの', parts:['re','act','or'], image:'re + act + or → reactor', freq:'A'});
 
   const previousDeal = safe(()=>dealOpeningHand, null);
@@ -4175,12 +4171,44 @@ window.addEventListener('load',()=>{const savedName=localStorage.getItem(PLAYER_
         if(localPossible>=3 || possibleCount(ids)>=3) return;
       }
       if(previousDeal) return previousDeal();
-      const fallback=['re','remove','mov','al','able','ity','view','er','form','act','ion','ive'];
+      const fallback=['re','mov','al','able','ity','view','er','form','act','ion','ive','port'];
       hand=fallback.filter(id=>hasPart(id)).map(make).slice(0,HAND_SIZE);
     };
   }
 })();
 // ===== end v6.8 =====
+
+// ===== v6.10 remove card sanitizer =====
+(function(){
+  function stripRemoveCard(){
+    try{
+      if(Array.isArray(PARTS)){
+        for(let i=PARTS.length-1;i>=0;i--){ if(PARTS[i]&&PARTS[i].id==='remove') PARTS.splice(i,1); }
+      }
+      if(Array.isArray(STARTER_PARTS)){
+        for(let i=STARTER_PARTS.length-1;i>=0;i--){ if(STARTER_PARTS[i]==='remove') STARTER_PARTS.splice(i,1); }
+      }
+      if(typeof unlockedParts!=='undefined' && unlockedParts && typeof unlockedParts.delete==='function') unlockedParts.delete('remove');
+      if(Array.isArray(deck)){ for(let i=deck.length-1;i>=0;i--){ if(deck[i]&&deck[i].id==='remove') deck.splice(i,1); } }
+      if(Array.isArray(hand)){ for(let i=hand.length-1;i>=0;i--){ if(hand[i]&&hand[i].id==='remove') hand.splice(i,1); } }
+    }catch(e){}
+  }
+  stripRemoveCard();
+  if(typeof initDeck==='function'){
+    const oldInitDeck=initDeck;
+    initDeck=function(){ const r=oldInitDeck.apply(this,arguments); stripRemoveCard(); return r; };
+  }
+  if(typeof dealOpeningHand==='function'){
+    const oldDealOpeningHand=dealOpeningHand;
+    dealOpeningHand=function(){ const r=oldDealOpeningHand.apply(this,arguments); stripRemoveCard(); return r; };
+  }
+  if(typeof openShop==='function'){
+    const oldOpenShop=openShop;
+    openShop=function(){ stripRemoveCard(); return oldOpenShop.apply(this,arguments); };
+  }
+})();
+// ===== end v6.10 =====
+
 </script>
 
 </body>
