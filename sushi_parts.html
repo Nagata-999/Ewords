@@ -4345,5 +4345,315 @@ window.addEventListener('load',()=>{const savedName=localStorage.getItem(PLAYER_
 // ===== end v6.11 =====
 </script>
 
+
+<script>
+// ===== v6.12 opening scatter / score chest / root-family growth patch =====
+// 目的：初手の固定感を減らし、スコアが報酬候補数に直結するようにし、語根ファミリーを増やす。
+(function(){
+  function safe(fn, fallback){ try{return fn();}catch(e){return fallback;} }
+  function q(id){ return document.getElementById(id); }
+  function hasPart(id){ return Array.isArray(PARTS) && PARTS.some(p=>p && p.id===id); }
+  function partObj(id){ return safe(()=>PARTS.find(p=>p.id===id), null); }
+  function uniq(arr){ return [...new Set((arr||[]).filter(Boolean))]; }
+  function addPart(p){ if(!p || !p.id || hasPart(p.id)) return; try{ PARTS.push(p); }catch(e){} }
+  function addStarter(ids){ try{ if(Array.isArray(STARTER_PARTS)) ids.forEach(id=>{ if(hasPart(id) && !STARTER_PARTS.includes(id)) STARTER_PARTS.push(id); }); }catch(e){} }
+  function addWord(w){
+    if(!w || !w.word || !Array.isArray(w.parts) || !Array.isArray(WORDS)) return;
+    try{
+      const key=w.parts.join('|');
+      const same=WORDS.find(x=>Array.isArray(x.parts) && x.parts.join('|')===key);
+      if(same){ Object.assign(same,w); }
+      else{
+        const sameWord=WORDS.find(x=>x.word===w.word && Array.isArray(x.parts) && x.parts.join('|')===key);
+        if(!sameWord) WORDS.push(w);
+      }
+      const item=WORDS.find(x=>Array.isArray(x.parts) && x.parts.join('|')===key) || WORDS.find(x=>x.word===w.word);
+      if(item && typeof WORD_MAP!=='undefined'){
+        WORD_MAP.set(key,item);
+        if(Array.isArray(w.aliases)) w.aliases.forEach(a=>Array.isArray(a)&&WORD_MAP.set(a.join('|'),item));
+      }
+    }catch(e){ console.warn('v6.12 addWord failed', w.word, e); }
+  }
+  function alias(word, routes){
+    try{
+      const item=(WORDS||[]).find(w=>w.word===word);
+      if(!item || typeof WORD_MAP==='undefined') return;
+      routes.forEach(r=>{ if(Array.isArray(r)) WORD_MAP.set(r.join('|'), item); });
+    }catch(e){}
+  }
+  function make(id){ return (typeof makeCard==='function') ? makeCard(id) : {id}; }
+  function pType(id){ const p=partObj(id); return p ? p.type : ''; }
+  function live(id){ return hasPart(id) && safe(()=>isUnlockablePartId(id), true) && id!=='remove'; }
+  function availableIds(){
+    const s=new Set();
+    try{ if(unlockedParts && typeof unlockedParts.forEach==='function') unlockedParts.forEach(id=>{ if(live(id)) s.add(id); }); }catch(e){}
+    try{ (deck||[]).forEach(id=>{ const v=(typeof id==='string')?id:id?.id; if(live(v)) s.add(v); }); }catch(e){}
+    try{ (STARTER_PARTS||[]).forEach(id=>{ if(live(id)) s.add(id); }); }catch(e){}
+    return s;
+  }
+  function canMakeWith(ids, w){
+    if(!w || !Array.isArray(w.parts)) return false;
+    const c={}; ids.forEach(id=>c[id]=(c[id]||0)+1);
+    const need={}; w.parts.forEach(id=>need[id]=(need[id]||0)+1);
+    return Object.keys(need).every(id=>(c[id]||0)>=need[id]);
+  }
+  function possibleCount(ids){ return safe(()=> (WORDS||[]).filter(w=>canMakeWith(ids,w)).length, 0); }
+  function knownSet(){ return new Set(safe(()=>knownWords(), [])); }
+  function wordRoot(w){
+    return safe(()=>{
+      const roots=(w.parts||[]).filter(id=>pType(id)==='root');
+      return roots[0] || (w.parts||[])[1] || (w.parts||[])[0] || '';
+    }, '');
+  }
+
+  // 語根ファミリー増殖：部品を追加。序盤で使いたいものはスターター候補にも入れる。
+  [
+    {id:'use',type:'root',text:'use',meaning:'使う'},
+    {id:'cover',type:'root',text:'cover',meaning:'覆う'},
+    {id:'place',type:'root',text:'place',meaning:'置く'},
+    {id:'teach',type:'root',text:'teach',meaning:'教える'},
+    {id:'count',type:'root',text:'count',meaning:'数える'},
+    {id:'wash',type:'root',text:'wash',meaning:'洗う'},
+    {id:'afford',type:'root',text:'afford',meaning:'余裕がある'},
+    {id:'pand',type:'root',text:'pand',meaning:'広げる'},
+    {id:'ject',type:'root',text:'ject',meaning:'投げる'},
+    {id:'spect',type:'root',text:'spect',meaning:'見る'},
+    {id:'tract',type:'root',text:'tract',meaning:'引く'},
+    {id:'duc',type:'root',text:'duc',meaning:'導く'},
+    {id:'press',type:'root',text:'press',meaning:'押す'},
+    {id:'ment',type:'suffix',text:'ment',meaning:'名詞化'},
+    {id:'ive',type:'suffix',text:'ive',meaning:'〜の性質を持つ'},
+    {id:'less',type:'suffix',text:'less',meaning:'〜がない'},
+    {id:'ful',type:'suffix',text:'ful',meaning:'〜に満ちた'},
+    {id:'ible',type:'suffix',text:'ible',meaning:'〜できる'},
+    {id:'ity',type:'suffix',text:'ity',meaning:'性質・状態'},
+    {id:'ify',type:'suffix',text:'ify',meaning:'〜化する'},
+    {id:'ist',type:'suffix',text:'ist',meaning:'人'},
+    {id:'ist',type:'suffix',text:'ist',meaning:'人'}
+  ].forEach(addPart);
+  addStarter(['re','pre','ex','de','com','con','in','un','sub','use','view','act','form','port','dict','move','mov','read','pose','spect','ject','press','able','ible','ity','er','or','ive','ion','tion','al','ment']);
+
+  // 単語をファミリー単位で増やす。短い語→able→ity の枝が伸びるようにする。
+  [
+    {word:'usable',ja:'使える',parts:['use','able'],image:'use + able → usable',freq:'S'},
+    {word:'usability',ja:'使いやすさ',parts:['use','able','ity'],image:'use + able + ity → usability',freq:'A',aliases:[['usable','ity'],['use','ability']]},
+    {word:'reusable',ja:'再利用できる',parts:['re','use','able'],image:'re + use + able → reusable',freq:'A'},
+    {word:'reusability',ja:'再利用しやすさ',parts:['re','use','able','ity'],image:'re + use + able + ity → reusability',freq:'B',aliases:[['reusable','ity']]},
+    {word:'useful',ja:'役に立つ',parts:['use','ful'],image:'use + ful → useful',freq:'S'},
+    {word:'useless',ja:'役に立たない',parts:['use','less'],image:'use + less → useless',freq:'A'},
+
+    {word:'recover',ja:'回復する・取り戻す',parts:['re','cover'],image:'re + cover → recover',freq:'S'},
+    {word:'recoverable',ja:'回復可能な',parts:['re','cover','able'],image:'re + cover + able → recoverable',freq:'B',aliases:[['recover','able']]},
+    {word:'recovery',ja:'回復',parts:['re','cover','y'],image:'re + cover + y → recovery',freq:'S'},
+
+    {word:'replace',ja:'置き換える',parts:['re','place'],image:'re + place → replace',freq:'S'},
+    {word:'replaceable',ja:'交換可能な',parts:['re','place','able'],image:'re + place + able → replaceable',freq:'A',aliases:[['replace','able']]},
+    {word:'replacement',ja:'交換・代替物',parts:['re','place','ment'],image:'re + place + ment → replacement',freq:'A',aliases:[['replace','ment']]},
+
+    {word:'teachable',ja:'教えられる・素直に学ぶ',parts:['teach','able'],image:'teach + able → teachable',freq:'B'},
+    {word:'countable',ja:'数えられる',parts:['count','able'],image:'count + able → countable',freq:'B'},
+    {word:'washable',ja:'洗える',parts:['wash','able'],image:'wash + able → washable',freq:'B'},
+    {word:'affordable',ja:'手頃な価格の',parts:['afford','able'],image:'afford + able → affordable',freq:'A'},
+    {word:'affordability',ja:'手頃さ',parts:['afford','able','ity'],image:'afford + able + ity → affordability',freq:'B',aliases:[['affordable','ity']]},
+
+    {word:'expand',ja:'拡大する',parts:['ex','pand'],image:'ex + pand → expand',freq:'S'},
+    {word:'expandable',ja:'拡張可能な',parts:['ex','pand','able'],image:'ex + pand + able → expandable',freq:'A',aliases:[['expand','able']]},
+    {word:'expansion',ja:'拡大・拡張',parts:['ex','pand','ion'],image:'ex + pand + ion → expansion',freq:'A'},
+
+    {word:'project',ja:'投げ出す・計画する',parts:['pro','ject'],image:'pro + ject → project',freq:'S'},
+    {word:'projector',ja:'投影機',parts:['pro','ject','or'],image:'pro + ject + or → projector',freq:'A',aliases:[['project','or']]},
+    {word:'projection',ja:'投影・予測',parts:['pro','ject','ion'],image:'pro + ject + ion → projection',freq:'A',aliases:[['project','ion']]},
+    {word:'reject',ja:'拒絶する',parts:['re','ject'],image:'re + ject → reject',freq:'S'},
+    {word:'rejection',ja:'拒絶',parts:['re','ject','ion'],image:'re + ject + ion → rejection',freq:'A',aliases:[['reject','ion']]},
+    {word:'eject',ja:'外へ投げ出す',parts:['e','ject'],image:'e + ject → eject',freq:'B'},
+    {word:'inject',ja:'注入する',parts:['in','ject'],image:'in + ject → inject',freq:'A'},
+
+    {word:'inspect',ja:'検査する',parts:['in','spect'],image:'in + spect → inspect',freq:'S'},
+    {word:'inspection',ja:'検査',parts:['in','spect','ion'],image:'in + spect + ion → inspection',freq:'A',aliases:[['inspect','ion']]},
+    {word:'inspector',ja:'検査官',parts:['in','spect','or'],image:'in + spect + or → inspector',freq:'A',aliases:[['inspect','or']]},
+    {word:'respect',ja:'尊敬する',parts:['re','spect'],image:'re + spect → respect',freq:'S'},
+    {word:'respectable',ja:'立派な',parts:['re','spect','able'],image:'re + spect + able → respectable',freq:'A',aliases:[['respect','able']]},
+    {word:'perspective',ja:'視点・見方',parts:['per','spect','ive'],image:'per + spect + ive → perspective',freq:'S'},
+
+    {word:'attract',ja:'引きつける',parts:['at','tract'],image:'at + tract → attract',freq:'S'},
+    {word:'attractive',ja:'魅力的な',parts:['at','tract','ive'],image:'at + tract + ive → attractive',freq:'S',aliases:[['attract','ive']]},
+    {word:'attraction',ja:'魅力・引力',parts:['at','tract','ion'],image:'at + tract + ion → attraction',freq:'A',aliases:[['attract','ion']]},
+    {word:'extract',ja:'抜き出す',parts:['ex','tract'],image:'ex + tract → extract',freq:'A'},
+    {word:'extractable',ja:'抽出可能な',parts:['ex','tract','able'],image:'ex + tract + able → extractable',freq:'B',aliases:[['extract','able']]},
+
+    {word:'produce',ja:'生産する',parts:['pro','duc','e'],image:'pro + duc + e → produce',freq:'S'},
+    {word:'producer',ja:'生産者・制作者',parts:['pro','duc','er'],image:'pro + duc + er → producer',freq:'S',aliases:[['produce','er']]},
+    {word:'production',ja:'生産・制作',parts:['pro','duc','tion'],image:'pro + duc + tion → production',freq:'S',aliases:[['produce','tion']]},
+    {word:'productive',ja:'生産的な',parts:['pro','duc','tive'],image:'pro + duc + tive → productive',freq:'A'},
+    {word:'reduce',ja:'減らす',parts:['re','duc','e'],image:'re + duc + e → reduce',freq:'S'},
+    {word:'reduction',ja:'削減',parts:['re','duc','tion'],image:'re + duc + tion → reduction',freq:'S',aliases:[['reduce','tion']]},
+    {word:'reducible',ja:'減らせる',parts:['re','duc','ible'],image:'re + duc + ible → reducible',freq:'B'},
+
+    {word:'compress',ja:'圧縮する',parts:['com','press'],image:'com + press → compress',freq:'A'},
+    {word:'compressible',ja:'圧縮可能な',parts:['com','press','ible'],image:'com + press + ible → compressible',freq:'B',aliases:[['compress','ible']]},
+    {word:'compression',ja:'圧縮',parts:['com','press','ion'],image:'com + press + ion → compression',freq:'A',aliases:[['compress','ion']]},
+    {word:'express',ja:'表現する',parts:['ex','press'],image:'ex + press → express',freq:'S'},
+    {word:'expression',ja:'表現',parts:['ex','press','ion'],image:'ex + press + ion → expression',freq:'S',aliases:[['express','ion']]},
+    {word:'impressive',ja:'印象的な',parts:['im','press','ive'],image:'im + press + ive → impressive',freq:'S'}
+  ].forEach(addWord);
+
+  // 完成語素材の救済ルート。カードが出た場合は派生へ進める。
+  [
+    ['usability', [['usable','ity']]], ['reusability', [['reusable','ity']]], ['recoverable', [['recover','able']]],
+    ['replaceable', [['replace','able']]], ['replacement', [['replace','ment']]], ['expandable', [['expand','able']]],
+    ['projector', [['project','or']]], ['projection', [['project','ion']]], ['rejection', [['reject','ion']]],
+    ['inspection', [['inspect','ion']]], ['inspector', [['inspect','or']]], ['respectable', [['respect','able']]],
+    ['attractive', [['attract','ive']]], ['attraction', [['attract','ion']]], ['extractable', [['extract','able']]],
+    ['producer', [['produce','er']]], ['production', [['produce','tion']]], ['reduction', [['reduce','tion']]],
+    ['compressible', [['compress','ible']]], ['compression', [['compress','ion']]], ['expression', [['express','ion']]]
+  ].forEach(([w,r])=>alias(w,r));
+
+  // ② 初手の散らし強化：テーマ候補を増やし、直近4回と被りにくくする。
+  function packScore(pack, avail, known){
+    const words=pack.words.map(name=>(WORDS||[]).find(w=>w.word===name)).filter(Boolean);
+    const possible=words.filter(w=>w.parts.every(id=>avail.has(id) || live(id)));
+    const unknown=possible.filter(w=>!known.has(w.word)).length;
+    const ids=uniq(possible.flatMap(w=>w.parts)).filter(live);
+    return {...pack, words:possible, ids, unknown, possibleCount:possibleCount(ids)};
+  }
+  function chooseOpeningPack(){
+    const avail=availableIds(); const known=knownSet();
+    const packs=[
+      {id:'move',label:'MOVE / removal',words:['movable','movability','removal','removable','removability']},
+      {id:'view',label:'VIEW / review',words:['review','reviewer','reviewable']},
+      {id:'act',label:'ACT / react',words:['active','activity','actor','react','reactor','reactive']},
+      {id:'port',label:'PORT / export',words:['portable','portability','export','exporter','exportable']},
+      {id:'dict',label:'DICT / predict',words:['predict','prediction','predictable','predictability']},
+      {id:'use',label:'USE / usable',words:['usable','usability','reusable','useful','useless']},
+      {id:'place',label:'PLACE / replace',words:['replace','replaceable','replacement']},
+      {id:'ject',label:'JECT / project',words:['project','projector','projection','reject','rejection','inject']},
+      {id:'spect',label:'SPECT / inspect',words:['inspect','inspection','inspector','respect','respectable']},
+      {id:'tract',label:'TRACT / attract',words:['attract','attractive','attraction','extract','extractable']},
+      {id:'duc',label:'DUC / produce',words:['produce','producer','production','reduce','reduction','reducible']},
+      {id:'press',label:'PRESS / express',words:['compress','compressible','compression','express','expression','impressive']}
+    ].map(p=>packScore(p, avail, known)).filter(p=>p.ids.length>=5 && p.words.length>=2);
+    if(!packs.length) return null;
+    let recent=[]; try{ recent=JSON.parse(localStorage.getItem('sushi_parts_recent_opening_packs_v612')||'[]'); }catch(e){}
+    const fresh=packs.filter(p=>!recent.includes(p.id));
+    const pool=(fresh.length?fresh:packs).flatMap(p=>Array(Math.max(1, 2+p.unknown+p.possibleCount)).fill(p));
+    const chosen=pool[Math.floor(Math.random()*pool.length)] || packs[0];
+    try{ localStorage.setItem('sushi_parts_recent_opening_packs_v612', JSON.stringify([chosen.id,...recent.filter(x=>x!==chosen.id)].slice(0,4))); }catch(e){}
+    return chosen;
+  }
+  function completeHand(ids){
+    ids=uniq(ids).filter(live);
+    const have=new Set(ids);
+    const avail=[...availableIds()].filter(live);
+    const byType={prefix:[],root:[],suffix:[]};
+    avail.forEach(id=>{ const t=pType(id); if(byType[t]) byType[t].push(id); });
+    const minimum={prefix:3,root:5,suffix:4};
+    ['prefix','root','suffix'].forEach(t=>{
+      while(ids.filter(id=>pType(id)===t).length<minimum[t]){
+        const pool=byType[t].filter(id=>!have.has(id));
+        if(!pool.length) break;
+        const id=pool[Math.floor(Math.random()*pool.length)]; ids.push(id); have.add(id);
+      }
+    });
+    while(ids.length<HAND_SIZE){
+      const pool=avail.filter(id=>!have.has(id));
+      if(!pool.length) break;
+      const id=pool[Math.floor(Math.random()*pool.length)]; ids.push(id); have.add(id);
+    }
+    return uniq(ids).slice(0,HAND_SIZE);
+  }
+
+  const oldInitDeck = safe(()=>initDeck, null);
+  if(typeof initDeck==='function'){
+    initDeck=function(){
+      const r=oldInitDeck ? oldInitDeck.apply(this,arguments) : undefined;
+      // スターター候補は増やすが、手札は毎回12枚だけ。デッキを厚くして初手固定を崩す。
+      const core=['re','pre','ex','de','com','con','in','un','use','view','act','form','port','dict','move','mov','read','pose','spect','ject','press','able','ible','ity','er','or','ive','ion','tion','al','ment'];
+      core.forEach(id=>{ if(live(id)){ try{ unlockedParts.add(id); }catch(e){} if(Array.isArray(deck) && !deck.includes(id)) deck.push(id); } });
+      return r;
+    };
+  }
+
+  const oldDeal = safe(()=>dealOpeningHand, null);
+  if(typeof dealOpeningHand==='function'){
+    dealOpeningHand=function(){
+      const pack=chooseOpeningPack();
+      if(pack){
+        let ids=completeHand(pack.ids);
+        if(possibleCount(ids)>=3){
+          hand=ids.map(make);
+          try{ hand=shuffle(hand); }catch(e){}
+          setTimeout(()=>{ try{ setMsg('初手テーマ：'+pack.label+'。今回はここから掘れる。','ok'); }catch(e){} },80);
+          return;
+        }
+      }
+      if(oldDeal) return oldDeal.apply(this,arguments);
+    };
+  }
+
+  // ③ スコア報酬ゲージ：クリア超過で報酬候補数が増える。
+  function rewardTier(){
+    const g=Math.max(1, Number(goal)||1), rs=Number(roundScore)||0;
+    if(rs>=g*1.7) return 3;   // Gold
+    if(rs>=g*1.35) return 2;  // Silver
+    if(rs>=g) return 1;       // Bronze
+    return 0;
+  }
+  function tierName(t){ return t>=3?'GOLD報酬':t>=2?'SILVER報酬':t>=1?'BRONZE報酬':'報酬未到達'; }
+  function nextTierText(){
+    const g=Math.max(1,Number(goal)||1), rs=Number(roundScore)||0;
+    const targets=[g, Math.ceil(g*1.35), Math.ceil(g*1.7)];
+    const labels=['BRONZE','SILVER','GOLD'];
+    for(let i=0;i<targets.length;i++) if(rs<targets[i]) return `${labels[i]}まであと${(targets[i]-rs).toLocaleString()}点`;
+    return 'GOLD到達！報酬候補＋2';
+  }
+  const oldGauge=safe(()=>window.updateStageQuestGauge,null);
+  window.updateStageQuestGauge=function(){
+    if(oldGauge) oldGauge();
+    try{
+      const reward=q('stageQuestReward'); if(reward) reward.textContent = `${tierName(rewardTier())} / ${nextTierText()}`;
+      const hint=q('stageQuestHint'); if(hint) hint.textContent = rewardTier()>=3 ? 'GOLD。報酬候補が増える。高得点語を作った意味がある。' : hint.textContent + ' / ' + nextTierText();
+    }catch(e){}
+  };
+  const oldOpenShop=safe(()=>openShop,null);
+  if(typeof openShop==='function'){
+    openShop=function(){
+      const tier=rewardTier();
+      const r=oldOpenShop ? oldOpenShop.apply(this,arguments) : undefined;
+      try{
+        const title=q('shopTitle');
+        if(title && title.textContent.includes('報酬')){
+          title.textContent = `${tierName(tier)}：新しい部品を解放`;
+          let choices=Array.isArray(window.__shopChoices)?window.__shopChoices.slice():[];
+          const existing=new Set(choices.map(x=>x.id||x.j?.id||x.name));
+          const extraCount = tier>=3 ? 2 : tier>=2 ? 1 : 0;
+          if(extraCount>0 && typeof unlockCandidates==='function'){
+            unlockCandidates(null, extraCount+2).forEach(id=>{
+              if(!existing.has(id) && choices.length<7){ choices.push({kind:'unlock',id,copies:tier>=3?3:2}); existing.add(id); }
+            });
+          }
+          const help=q('shopHelp'); if(help) help.textContent = tier>=3 ? 'GOLD到達。報酬候補が増え、カード追加枚数も少し多い。' : tier>=2 ? 'SILVER到達。報酬候補が1つ増えた。' : 'BRONZE到達。次はオーバーキルで報酬候補を増やそう。';
+          if(typeof renderShopChoices==='function') renderShopChoices(choices);
+        }
+      }catch(e){}
+      return r;
+    };
+  }
+
+  // renderラップ。既存のv6.7ラップ後でもゲージ文言を更新する。
+  const oldRender=safe(()=>render,null);
+  if(typeof render==='function'){
+    render=function(){ const r=oldRender.apply(this,arguments); try{ window.updateStageQuestGauge(); }catch(e){} return r; };
+  }
+})();
+// ===== end v6.12 =====
+</script>
+
+<style>
+/* ===== v6.12 Score Chest UI ===== */
+#stageQuestReward{font-weight:1000;color:#8a5a00}.stageQuestPanel.cleared #stageQuestReward{color:#00796b}
+#shopTitle::after{content:'';}
+.shopItem{position:relative}.shopItem::after{content:'選べる';position:absolute;right:10px;top:10px;font-size:11px;font-weight:1000;color:#9ca3af;background:#f5f5f5;border-radius:999px;padding:3px 7px}.shopItem:hover::after{color:#d84315;background:#fff3cd}
+</style>
+
 </body>
 </html>
