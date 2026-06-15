@@ -757,7 +757,7 @@
 
 
 
-/* ===== v6.18 type-readable cards + tiny wordfreq dev mark ===== */
+/* ===== v6.19 type-readable cards + tiny wordfreq/wf+ dev mark ===== */
 .card,.partChip{position:relative;overflow:hidden}
 .card::before,.partChip::before{content:'';position:absolute;left:0;top:0;bottom:0;width:8px;border-radius:18px 0 0 18px;opacity:.95}
 .card.prefix,.partChip.prefix{background:linear-gradient(135deg,#eefcf9,#fff 58%)}
@@ -55241,15 +55241,67 @@ coburg`;
     return [...out].filter(w=>w.length>=2 && w.length<=32);
   }
 
-  function makeWordfreqWord(word, ids){
+  function wordfreqDerivedSpellings(base){
+    base = clean(base);
+    if(!base || base.length < 3) return [];
+    const out = new Set();
+    const add = v => { v = clean(v); if(v && v.length >= 3 && v.length <= 36) out.add(v); };
+
+    // Safe suffix-derived lookup only. This is not fuzzy matching.
+    // Example: protract is accepted if protracted exists in wordfreq.
+    add(base + 's');
+    add(base + 'es');
+    add(base + 'ed');
+    add(base + 'ing');
+    add(base + 'er');
+    add(base + 'or');
+    add(base + 'ion');
+    add(base + 'tion');
+    add(base + 'ation');
+    add(base + 'ive');
+    add(base + 'ively');
+    add(base + 'able');
+    add(base + 'ible');
+    add(base + 'ability');
+    add(base + 'ibility');
+    add(base + 'al');
+    add(base + 'ally');
+    add(base + 'ment');
+    add(base + 'ness');
+
+    // Final-e drop: create -> created / creating / creation / creative.
+    if(base.endsWith('e') && base.length > 3){
+      const stem = base.slice(0,-1);
+      ['ed','ing','ion','ive','ively','able','ability','al','ally'].forEach(s=>add(stem+s));
+    }
+
+    // consonant + y -> i: apply -> applied / application-ish is NOT guessed here.
+    if(/[bcdfghjklmnpqrstvwxyz]y$/.test(base)){
+      const stem = base.slice(0,-1) + 'i';
+      ['ed','er','es','able','ability','al','ally'].forEach(s=>add(stem+s));
+    }
+
+    // Light consonant doubling: permit / commit / occur style; limited to common endings.
+    if(/[bcdfghjklmnpqrstvwxyz][aeiou][bcdfghjklmnpqrstvwxyz]$/.test(base) && !/(w|x|y)$/.test(base)){
+      const doubled = base + base.slice(-1);
+      ['ed','ing','er'].forEach(s=>add(doubled+s));
+    }
+
+    return [...out];
+  }
+
+  function makeWordfreqWord(word, ids, matchedWord){
     const labels = ids.map(pLabel);
+    const derived = matchedWord && matchedWord !== word;
     return {
       word,
-      ja:'wordfreq辞書で確認された実在語',
+      matchedWord: derived ? matchedWord : '',
+      ja: derived ? `wordfreq派生語で確認：${matchedWord}` : 'wordfreq辞書で確認された実在語',
       parts:[...ids],
-      image:`${labels.join(' + ')} → ${word}`,
+      image: derived ? `${labels.join(' + ')} → ${word}（${matchedWord} で確認）` : `${labels.join(' + ')} → ${word}`,
       freq:'B',
-      fallback:true
+      fallback:true,
+      fallbackDerived:!!derived
     };
   }
 
@@ -55259,8 +55311,18 @@ coburg`;
     if(exact) return exact;
     if(!Array.isArray(ids) || ids.length < 2 || ids.length > 5) return null;
     const candidates = wordfreqCandidateSpellings(ids);
+
+    // 1) Exact wordfreq hit: highest confidence.
     for(const cand of candidates){
       if(WORDFREQ_SET.has(cand)) return makeWordfreqWord(cand, ids);
+    }
+
+    // 2) Safe suffix-derived hit: accept base if a normal derived form exists.
+    //    This intentionally avoids edit-distance fuzzy matching.
+    for(const cand of candidates){
+      for(const derived of wordfreqDerivedSpellings(cand)){
+        if(WORDFREQ_SET.has(derived)) return makeWordfreqWord(cand, ids, derived);
+      }
     }
     return null;
   };
@@ -55272,7 +55334,7 @@ coburg`;
       if(w && w.fallback){
         const result = document.getElementById('result');
         if(result){
-          result.insertAdjacentHTML('beforeend','<div class="wfDevNote" title="WORDS未登録 → wordfreq 50k fallback">wf</div>');
+          result.insertAdjacentHTML('beforeend','<div class="wfDevNote" title="WORDS未登録 → wordfreq 50k fallback">'+(w.fallbackDerived?'wf+':'wf')+'</div>');
         }
       }
     };
@@ -55282,14 +55344,16 @@ coburg`;
   const prevAddLogWordfreq = (typeof addLog === 'function') ? addLog : null;
   if(prevAddLogWordfreq){
     addLog = function(html){
-      if(typeof html === 'string' && html.includes('wordfreq辞書で確認された実在語') && !html.includes('wfMini')){
-        html = html.replace('<span class="badge">','<span class="wfMini" title="wordfreq fallback">wf</span> <span class="badge">');
+      if(typeof html === 'string' && (html.includes('wordfreq辞書で確認された実在語') || html.includes('wordfreq派生語で確認')) && !html.includes('wfMini')){
+        const mark = html.includes('wordfreq派生語で確認') ? 'wf+' : 'wf';
+        html = html.replace('<span class="badge">',`<span class="wfMini" title="wordfreq fallback">${mark}</span> <span class="badge">`);
       }
       return prevAddLogWordfreq(html);
     };
   }
   window.WORDFREQ_SET = WORDFREQ_SET;
   window.wordfreqCandidateSpellings = wordfreqCandidateSpellings;
+  window.wordfreqDerivedSpellings = wordfreqDerivedSpellings;
 })();
 </script>
 
