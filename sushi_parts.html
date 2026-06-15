@@ -3776,5 +3776,288 @@ window.addEventListener('load',()=>{const savedName=localStorage.getItem(PLAYER_
 // ===== end v6.5 =====
 </script>
 
+
+<script>
+// ===== v6.6 able / ible family reinforcement patch =====
+// 目的：-able / -ible 系統を、語根ごとの派生ネットワークとして増強する。
+(function(){
+  function addPartIfMissing(p){
+    try{
+      if(typeof PARTS==='undefined' || !Array.isArray(PARTS)) return;
+      if(!PARTS.some(x=>x.id===p.id)) PARTS.push(p);
+    }catch(e){}
+  }
+  function addWordIfMissing(w, aliases){
+    try{
+      if(typeof WORDS==='undefined' || !Array.isArray(WORDS)) return;
+      let item = WORDS.find(x=>x.word===w.word);
+      if(!item){ WORDS.push(w); item=w; }
+      else{ Object.assign(item, w); }
+      if(typeof addAliasKeys==='function' && typeof WORD_MAP!=='undefined') addAliasKeys(WORD_MAP,item);
+      if(typeof WORD_MAP!=='undefined' && Array.isArray(aliases)) aliases.forEach(ids=>WORD_MAP.set(ids.join('|'), item));
+    }catch(e){ console.warn('v6.6 able family add failed', w && w.word, e); }
+  }
+  function pushUnique(arr, ids){
+    if(!Array.isArray(arr)) return;
+    ids.forEach(id=>{ if(!arr.includes(id)) arr.push(id); });
+  }
+
+  [
+    {id:'move',type:'root',text:'move',meaning:'動く・動かす'},
+    {id:'read',type:'root',text:'read',meaning:'読む'},
+    {id:'break',type:'root',text:'break',meaning:'壊す・破る'},
+    {id:'value',type:'root',text:'value',meaning:'価値'},
+    {id:'depend',type:'root',text:'depend',meaning:'頼る'},
+    {id:'access',type:'root',text:'access',meaning:'近づく・利用する'},
+    {id:'flex',type:'root',text:'flex',meaning:'曲げる'},
+    {id:'place',type:'root',text:'place',meaning:'置く・場所'},
+    {id:'cover',type:'root',text:'cover',meaning:'覆う・回復する'},
+    {id:'void',type:'root',text:'void',meaning:'空にする・避ける'},
+    {id:'notice',type:'root',text:'notice',meaning:'気づく'},
+    {id:'apt',type:'root',text:'apt',meaning:'合う・適する'}
+  ].forEach(addPartIfMissing);
+
+  const pack = [
+    // move / mov family
+    {word:'move',ja:'動く・動かす',parts:['move'],image:'move → move',freq:'S',aliases:[['mov']]},
+    {word:'movable',ja:'動かせる・可動の',parts:['move','able'],image:'move + able → movable',freq:'A',aliases:[['mov','able']]},
+    {word:'movability',ja:'可動性',parts:['move','able','ity'],image:'move + able + ity → movability',freq:'B',aliases:[['mov','ability'],['mov','able','ity'],['move','ability']]},
+    {word:'movement',ja:'動き・運動',parts:['move','ment'],image:'move + ment → movement',freq:'S',aliases:[['mov','ment']]},
+
+    // form family
+    {word:'formable',ja:'形作ることができる',parts:['form','able'],image:'form + able → formable',freq:'B'},
+    {word:'reformable',ja:'改革可能な',parts:['re','form','able'],image:'re + form + able → reformable',freq:'B'},
+    {word:'deformable',ja:'変形可能な',parts:['de','form','able'],image:'de + form + able → deformable',freq:'B'},
+    {word:'transformable',ja:'変形・変換可能な',parts:['trans','form','able'],image:'trans + form + able → transformable',freq:'A'},
+
+    // read family
+    {word:'read',ja:'読む',parts:['read'],image:'read → read',freq:'S'},
+    {word:'reader',ja:'読者',parts:['read','er'],image:'read + er → reader',freq:'S'},
+    {word:'readable',ja:'読みやすい・読める',parts:['read','able'],image:'read + able → readable',freq:'A'},
+    {word:'readability',ja:'読みやすさ',parts:['read','able','ity'],image:'read + able + ity → readability',freq:'A',aliases:[['read','ability']]},
+    {word:'unreadable',ja:'読みにくい・判読不能な',parts:['un','read','able'],image:'un + read + able → unreadable',freq:'B'},
+
+    // break family
+    {word:'break',ja:'壊す・破る',parts:['break'],image:'break → break',freq:'S'},
+    {word:'breaker',ja:'壊す人・遮断器',parts:['break','er'],image:'break + er → breaker',freq:'A'},
+    {word:'breakable',ja:'壊れやすい・壊せる',parts:['break','able'],image:'break + able → breakable',freq:'A'},
+    {word:'unbreakable',ja:'壊れない',parts:['un','break','able'],image:'un + break + able → unbreakable',freq:'B'},
+
+    // value family
+    {word:'value',ja:'価値・評価する',parts:['value'],image:'value → value',freq:'S'},
+    {word:'valuable',ja:'価値のある',parts:['value','able'],image:'value + able → valuable',freq:'S'},
+    {word:'invaluable',ja:'非常に貴重な',parts:['in','value','able'],image:'in + value + able → invaluable',freq:'A'},
+
+    // depend family
+    {word:'depend',ja:'頼る・依存する',parts:['depend'],image:'depend → depend',freq:'S'},
+    {word:'dependent',ja:'依存している',parts:['depend','ent'],image:'depend + ent → dependent',freq:'A'},
+    {word:'dependable',ja:'信頼できる',parts:['depend','able'],image:'depend + able → dependable',freq:'A'},
+    {word:'dependability',ja:'信頼性',parts:['depend','able','ity'],image:'depend + able + ity → dependability',freq:'B',aliases:[['depend','ability']]},
+
+    // review / export / react rescue
+    {word:'review',ja:'復習する・再検討する',parts:['re','view'],image:'re + view → review',freq:'S'},
+    {word:'reviewer',ja:'査読者・批評家',parts:['re','view','er'],image:'re + view + er → reviewer',freq:'A'},
+    {word:'reviewable',ja:'再検討可能な',parts:['re','view','able'],image:'re + view + able → reviewable',freq:'A'},
+    {word:'exportable',ja:'輸出可能な',parts:['ex','port','able'],image:'ex + port + able → exportable',freq:'A'},
+    {word:'reactor',ja:'原子炉・反応装置',parts:['re','act','or'],image:'re + act + or → reactor',freq:'A'},
+    {word:'reactivate',ja:'再び活性化する',parts:['re','act','ive','ate'],image:'re + act + ive + ate → reactivate',freq:'B'},
+
+    // access / ible family
+    {word:'access',ja:'利用する・近づく',parts:['access'],image:'access → access',freq:'S'},
+    {word:'accessible',ja:'利用しやすい・近づける',parts:['ac','cess','ible'],image:'ac + cess + ible → accessible',freq:'S',aliases:[['access','ible']]},
+    {word:'accessibility',ja:'利用しやすさ・アクセス性',parts:['ac','cess','ibility'],image:'ac + cess + ibility → accessibility',freq:'A',aliases:[['access','ibility'],['ac','cess','ible','ity']]},
+    {word:'inaccessible',ja:'近づけない・利用しにくい',parts:['in','ac','cess','ible'],image:'in + ac + cess + ible → inaccessible',freq:'B',aliases:[['in','access','ible']]},
+
+    // flex / ible family
+    {word:'flex',ja:'曲げる',parts:['flex'],image:'flex → flex',freq:'B'},
+    {word:'flexible',ja:'柔軟な',parts:['flex','ible'],image:'flex + ible → flexible',freq:'S'},
+    {word:'flexibility',ja:'柔軟性',parts:['flex','ibility'],image:'flex + ibility → flexibility',freq:'A',aliases:[['flex','ible','ity']]},
+    {word:'inflexible',ja:'柔軟でない',parts:['in','flex','ible'],image:'in + flex + ible → inflexible',freq:'B'},
+
+    // cept / accept family extension
+    {word:'acceptability',ja:'受け入れ可能性',parts:['ac','cept','able','ity'],image:'ac + cept + able + ity → acceptability',freq:'B',aliases:[['accept','ability']]},
+
+    // common classroom-use -able words
+    {word:'replaceable',ja:'交換可能な',parts:['re','place','able'],image:'re + place + able → replaceable',freq:'A'},
+    {word:'recoverable',ja:'回復可能な・取り戻せる',parts:['re','cover','able'],image:'re + cover + able → recoverable',freq:'B'},
+    {word:'adaptable',ja:'適応できる',parts:['ad','apt','able'],image:'ad + apt + able → adaptable',freq:'A'},
+    {word:'avoidable',ja:'避けられる',parts:['a','void','able'],image:'a + void + able → avoidable',freq:'A'},
+    {word:'noticeable',ja:'目立つ・気づきやすい',parts:['notice','able'],image:'notice + able → noticeable',freq:'A'},
+    {word:'recyclability',ja:'リサイクル可能性',parts:['re','cycle','able','ity'],image:'re + cycle + able + ity → recyclability',freq:'B',aliases:[['re','cycle','ability']]}
+  ];
+  pack.forEach(w=>{ const aliases=w.aliases||[]; delete w.aliases; addWordIfMissing(w, aliases); });
+
+  // 報酬プールにも出るようにする。序盤は move/read/break/value を少し早めに。
+  try{ if(typeof STARTER_PARTS!=='undefined') pushUnique(STARTER_PARTS, ['move','read','break','value']); }catch(e){}
+  try{
+    if(typeof UNLOCK_TIERS!=='undefined' && Array.isArray(UNLOCK_TIERS)){
+      pushUnique(UNLOCK_TIERS[0], ['move','read','break','value','depend']);
+      pushUnique(UNLOCK_TIERS[1], ['access','flex','place','cover','void','notice','apt']);
+    }
+  }catch(e){}
+
+  // 旧セーブでも新部品が候補に出るよう、デッキ初期化前後どちらでも最低限混ぜる。
+  try{
+    if(typeof deck!=='undefined' && Array.isArray(deck) && deck.length){
+      ['move','read','break','value','able','ible','ity'].forEach(id=>{
+        if(typeof isUnlockablePartId==='function' && isUnlockablePartId(id) && !deck.includes(id)) deck.push(id);
+      });
+    }
+  }catch(e){}
+})();
+// ===== end v6.6 =====
+</script>
+
+
+<script>
+// ===== v6.7 Stage Reward Gauge / Score Motivation Patch =====
+// 目的：スコアを「次のカード報酬」へ直結させ、あと何点でクリアかを常時見せる。
+(function(){
+  function q(id){ return document.getElementById(id); }
+  function fmt(n){ return Number(n||0).toLocaleString(); }
+  function esc(v){ return String(v ?? '').replace(/[&<>\"]/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
+  function pct(){
+    try{ return Math.max(0, Math.min(100, Math.round((Number(roundScore)||0)/(Number(goal)||1)*100))); }catch(e){ return 0; }
+  }
+  function remaining(){
+    try{ return Math.max(0, (Number(goal)||0) - (Number(roundScore)||0)); }catch(e){ return 0; }
+  }
+  function rewardName(){
+    try{
+      const r = Number(round)||1;
+      if(r % 5 === 0) return 'BOSS報酬：レアカード候補＋ジョーカー';
+      if(r % 3 === 0) return '報酬：新カード候補＋ジョーカー';
+      return '報酬：新しい部品カード';
+    }catch(e){ return '報酬：新しい部品カード'; }
+  }
+  function nextScoreTip(rem){
+    if(rem<=0) return 'CLEAR! 報酬を選べる。';
+    if(rem<=120) return 'あと一語で届く。3パーツ語を狙え。';
+    if(rem<=300) return '高得点語なら一撃圏内。-able / -tion / -er を探せ。';
+    return '長い単語・NEW単語・レア部品で一気に削れる。';
+  }
+  function ensureGauge(){
+    if(q('stageQuestPanel')) return q('stageQuestPanel');
+    const enemy = document.querySelector('.enemy');
+    if(!enemy || !enemy.parentNode) return null;
+    const div=document.createElement('div');
+    div.id='stageQuestPanel';
+    div.className='stageQuestPanel';
+    div.innerHTML=`
+      <div class="stageQuestTop">
+        <div><b id="stageQuestTitle">🎁 次のカード報酬まで</b><small id="stageQuestReward"></small></div>
+        <div class="stageQuestRemain" id="stageQuestRemain">あと0点</div>
+      </div>
+      <div class="stageQuestBar"><div id="stageQuestFill"></div></div>
+      <div class="stageQuestMilestones">
+        <span id="sqM1">35% 手応え</span><span id="sqM2">70% あと少し</span><span id="sqM3">100% 報酬GET</span>
+      </div>
+      <div class="stageQuestHint" id="stageQuestHint"></div>`;
+    enemy.insertAdjacentElement('afterend', div);
+    return div;
+  }
+  window.updateStageQuestGauge = function(){
+    const panel=ensureGauge(); if(!panel) return;
+    const p=pct(), rem=remaining();
+    const fill=q('stageQuestFill'); if(fill) fill.style.width=p+'%';
+    const remain=q('stageQuestRemain');
+    if(remain){
+      remain.textContent = rem<=0 ? 'CLEAR!' : `あと${fmt(rem)}点`;
+      remain.classList.toggle('near', rem>0 && rem<=180);
+      remain.classList.toggle('clear', rem<=0);
+    }
+    const reward=q('stageQuestReward'); if(reward) reward.textContent=rewardName();
+    const hint=q('stageQuestHint'); if(hint) hint.textContent=nextScoreTip(rem);
+    [['sqM1',35],['sqM2',70],['sqM3',100]].forEach(([id,n])=>{ const el=q(id); if(el) el.classList.toggle('done', p>=n); });
+    panel.classList.toggle('nearClear', rem>0 && rem<=180);
+    panel.classList.toggle('cleared', rem<=0);
+  };
+
+  const __oldRenderV67 = render;
+  render = function(){
+    __oldRenderV67();
+    try{ updateStageQuestGauge(); }catch(e){}
+  };
+
+  const __oldOpenStageClearV67 = openStageClear;
+  openStageClear = function(){
+    __oldOpenStageClearV67();
+    try{
+      const over = Math.max(0, (Number(roundScore)||0) - (Number(goal)||0));
+      const scoreEl=q('clearScore');
+      if(scoreEl) scoreEl.innerHTML = `CLEAR! ${fmt(roundScore)} / ${fmt(goal)}${over?` <span class="overkill">+${fmt(over)} OVER</span>`:''}`;
+      const txt=q('clearText');
+      if(txt) txt.textContent = `${currentEnemy().name}撃破！ スコアが報酬に到達。新しいカードかジョーカーを選んで、次の高得点コンボを作ろう。`;
+    }catch(e){}
+  };
+
+  const __oldSubmitWordV67 = submitWord;
+  submitWord = async function(){
+    try{
+      window.__stageBurstContext = {
+        beforeRoundScore:Number(roundScore)||0,
+        beforeGoal:Number(goal)||0,
+        beforeRound:Number(round)||1
+      };
+    }catch(e){}
+    await __oldSubmitWordV67();
+    try{ updateStageQuestGauge(); }catch(e){}
+  };
+
+  const __oldShowScoreCenterBurstV67 = window.showScoreCenterBurst;
+  window.showScoreCenterBurst = function(before, after, word, isNew){
+    const ctx = window.__stageBurstContext || {};
+    const beforeStage = Number(ctx.beforeRoundScore)||0;
+    const stageGoal = Number(ctx.beforeGoal)||Number(goal)||0;
+    const gain = (Number(after)||0) - (Number(before)||0);
+    __oldShowScoreCenterBurstV67(before, after, word, isNew);
+    setTimeout(()=>{
+      try{
+        const inner=document.querySelector('.fusionInner');
+        if(!inner) return;
+        const afterStage = beforeStage + gain;
+        const rem = Math.max(0, stageGoal - afterStage);
+        const line=document.createElement('div');
+        line.className='fusionQuestLine '+(rem<=0?'clear':'');
+        line.innerHTML = rem<=0
+          ? `🎁 <b>報酬ライン突破！</b> 新カードを取りに行け。`
+          : `🎯 報酬まで <b>あと${fmt(rem)}点</b>`;
+        inner.appendChild(line);
+        if(gain>=500) comboBanner('BIG SCORE!');
+        if(rem<=0) comboBanner('REWARD UNLOCKED!');
+      }catch(e){}
+    }, 2850);
+  };
+
+  function wire(){ try{ updateStageQuestGauge(); }catch(e){} }
+  document.addEventListener('DOMContentLoaded', wire);
+  window.addEventListener('load', ()=>{ wire(); setTimeout(wire,500); });
+})();
+// ===== end v6.7 =====
+</script>
+
+<style>
+/* ===== v6.7 Stage Reward Gauge UI ===== */
+.stageQuestPanel{
+  margin:12px 0 14px;
+  padding:12px;
+  border-radius:20px;
+  background:linear-gradient(135deg,#fff8d7,#fff,#eefcf9);
+  border:2px solid #ffd36b;
+  box-shadow:0 10px 22px rgba(80,45,20,.10);
+}
+.stageQuestTop{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.stageQuestTop b{font-size:18px;color:#d84315}.stageQuestTop small{display:block;color:#687782;font-weight:900;margin-top:2px}
+.stageQuestRemain{font-size:24px;font-weight:1000;color:#e65100;background:#fff;border:2px solid #ffd0bd;border-radius:999px;padding:7px 13px;box-shadow:0 6px 14px rgba(80,45,20,.08)}
+.stageQuestRemain.near{animation:stageQuestPulse .8s ease infinite;background:#fff3cd;border-color:#ffb74d}.stageQuestRemain.clear{background:#263238;color:#ffd36b;border-color:#263238}
+.stageQuestBar{height:18px;margin-top:10px;border-radius:999px;background:#ffe6d7;border:1px solid #ffc9b7;overflow:hidden}
+#stageQuestFill{height:100%;width:0%;border-radius:999px;background:linear-gradient(90deg,#ff7043,#ffd36b,#4db6ac);transition:width .35s ease}
+.stageQuestMilestones{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}.stageQuestMilestones span{background:#fff;border:1px solid #f1d7c8;border-radius:999px;padding:5px 7px;text-align:center;font-size:12px;font-weight:1000;color:#9ca3af}.stageQuestMilestones span.done{background:#263238;color:#fff7d7;border-color:#263238}
+.stageQuestHint{margin-top:8px;color:#687782;font-size:13px;font-weight:900}.stageQuestPanel.nearClear{border-color:#ff7043;box-shadow:0 0 20px rgba(255,112,67,.25),0 10px 22px rgba(80,45,20,.10)}.stageQuestPanel.cleared{border-color:#4db6ac;background:linear-gradient(135deg,#eefcf9,#fff8d7,#fff)}
+.fusionQuestLine{margin:12px auto 0;display:inline-block;background:#fff;border:2px solid #ffd36b;border-radius:999px;padding:8px 14px;color:#d84315;font-weight:1000;box-shadow:0 8px 18px rgba(80,45,20,.10);opacity:0;animation:fusionMeaningIn .45s ease both}.fusionQuestLine.clear{background:#263238;color:#ffd36b;border-color:#263238}.overkill{display:inline-block;font-size:18px;background:#263238;color:#ffd36b;border-radius:999px;padding:4px 9px;margin-left:6px;vertical-align:middle}
+@keyframes stageQuestPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+@media(max-width:720px){.stageQuestMilestones{grid-template-columns:1fr}.stageQuestRemain{font-size:20px}.stageQuestTop b{font-size:16px}}
+</style>
+
 </body>
 </html>
