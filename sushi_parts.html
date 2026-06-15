@@ -4211,5 +4211,139 @@ window.addEventListener('load',()=>{const savedName=localStorage.getItem(PLAYER_
 
 </script>
 
+
+<script>
+// ===== v6.11 double recipe rescue patch =====
+// 目的：語源的な分解だけでなく、プレイヤーが自然に思いつく分解も正解にする。
+(function(){
+  function safe(fn, fallback){ try{return fn();}catch(e){return fallback;} }
+  function hasPart(id){ return Array.isArray(PARTS) && PARTS.some(p=>p.id===id); }
+  function addPartIfMissing(p){
+    try{
+      if(!Array.isArray(PARTS) || !p || !p.id || hasPart(p.id)) return;
+      PARTS.push(p);
+    }catch(e){}
+  }
+  function getWord(word){ return safe(()=>WORDS.find(w=>w.word===word), null); }
+  function addOrMergeWord(w){
+    if(!Array.isArray(WORDS) || !w || !w.word || !Array.isArray(w.parts)) return null;
+    let item = getWord(w.word);
+    if(item){ Object.assign(item, w); }
+    else{ WORDS.push(w); item=w; }
+    try{ if(typeof addAliasKeys==='function' && typeof WORD_MAP!=='undefined') addAliasKeys(WORD_MAP,item); }catch(e){}
+    return item;
+  }
+  function alias(word, routes){
+    try{
+      const item=getWord(word);
+      if(!item || typeof WORD_MAP==='undefined') return;
+      routes.forEach(ids=>{
+        if(Array.isArray(ids) && ids.length) WORD_MAP.set(ids.join('|'), item);
+      });
+    }catch(e){ console.warn('v6.11 alias failed', word, e); }
+  }
+  function stripPartEverywhere(id){
+    try{ if(Array.isArray(PARTS)){ for(let i=PARTS.length-1;i>=0;i--){ if(PARTS[i]?.id===id) PARTS.splice(i,1); } } }catch(e){}
+    try{ if(Array.isArray(STARTER_PARTS)){ for(let i=STARTER_PARTS.length-1;i>=0;i--){ if(STARTER_PARTS[i]===id) STARTER_PARTS.splice(i,1); } } }catch(e){}
+    try{ if(typeof unlockedParts!=='undefined' && unlockedParts && typeof unlockedParts.delete==='function') unlockedParts.delete(id); }catch(e){}
+    try{ if(Array.isArray(deck)){ for(let i=deck.length-1;i>=0;i--){ if(deck[i]===id || deck[i]?.id===id) deck.splice(i,1); } } }catch(e){}
+    try{ if(Array.isArray(hand)){ for(let i=hand.length-1;i>=0;i--){ if(hand[i]?.id===id) hand.splice(i,1); } } }catch(e){}
+  }
+
+  // remove は単体カード化しない。move / mov 経由で removal 系を救済する。
+  stripPartEverywhere('remove');
+
+  // 完成語を「素材」として再利用できる主要カード。remove は入れない。
+  [
+    {id:'review',type:'root',text:'review',meaning:'見直す・復習する'},
+    {id:'react',type:'root',text:'react',meaning:'反応する'},
+    {id:'portable',type:'root',text:'portable',meaning:'持ち運べる'},
+    {id:'movable',type:'root',text:'movable',meaning:'動かせる'},
+    {id:'readable',type:'root',text:'readable',meaning:'読める・読みやすい'},
+    {id:'predictable',type:'root',text:'predictable',meaning:'予測可能な'},
+    {id:'accessible',type:'root',text:'accessible',meaning:'利用しやすい'},
+    {id:'visible',type:'root',text:'visible',meaning:'見える'},
+    {id:'flexible',type:'root',text:'flexible',meaning:'柔軟な'}
+  ].forEach(addPartIfMissing);
+
+  // canonical を壊さず、必要語だけ補強・登録。
+  [
+    {word:'removal',ja:'除去・撤去',parts:['re','mov','al'],image:'re + mov / move + al → removal',freq:'A'},
+    {word:'removable',ja:'取り外し可能な',parts:['re','mov','able'],image:'re + mov / move + able → removable',freq:'A'},
+    {word:'removability',ja:'取り外しやすさ',parts:['re','mov','able','ity'],image:'re + mov / move + able + ity → removability',freq:'B'},
+    {word:'reviewer',ja:'査読者・批評家',parts:['re','view','er'],image:'re + view / review + er → reviewer',freq:'A'},
+    {word:'reviewable',ja:'再検討可能な',parts:['re','view','able'],image:'re + view / review + able → reviewable',freq:'A'},
+    {word:'reactor',ja:'原子炉・反応装置',parts:['re','act','or'],image:'re + act / react + or → reactor',freq:'A'},
+    {word:'reactive',ja:'反応性の・反応的な',parts:['re','act','ive'],image:'re + act / react + ive → reactive',freq:'A'},
+    {word:'portability',ja:'携帯性',parts:['port','able','ity'],image:'port + able / portable + ity → portability',freq:'A'},
+    {word:'movability',ja:'可動性',parts:['move','able','ity'],image:'move + able / movable + ity → movability',freq:'B'},
+    {word:'readability',ja:'読みやすさ',parts:['read','able','ity'],image:'read + able / readable + ity → readability',freq:'A'},
+    {word:'predictability',ja:'予測可能性',parts:['pre','dict','able','ity'],image:'pre + dict + able / predictable + ity → predictability',freq:'A'},
+    {word:'accessibility',ja:'利用しやすさ・アクセス性',parts:['ac','cess','ible','ity'],image:'ac + cess + ible / accessible + ity → accessibility',freq:'A'},
+    {word:'visibility',ja:'視認性・可視性',parts:['vis','ible','ity'],image:'vis + ible / visible + ity → visibility',freq:'A'},
+    {word:'flexibility',ja:'柔軟性',parts:['flex','ible','ity'],image:'flex + ible / flexible + ity → flexibility',freq:'A'}
+  ].forEach(addOrMergeWord);
+
+  // 二重レシピ本体。語源ルートとプレイヤールートの両方を通す。
+  alias('removal', [
+    ['re','mov','al'], ['re','move','al'], ['mov','al'], ['move','al']
+  ]);
+  alias('removable', [
+    ['re','mov','able'], ['re','move','able'], ['mov','able'], ['move','able']
+  ]);
+  alias('removability', [
+    ['re','mov','able','ity'], ['re','move','able','ity'], ['re','mov','ability'], ['re','move','ability'], ['movable','ity']
+  ]);
+  alias('reviewer', [
+    ['re','view','er'], ['review','er']
+  ]);
+  alias('reviewable', [
+    ['re','view','able'], ['review','able']
+  ]);
+  alias('reactor', [
+    ['re','act','or'], ['react','or']
+  ]);
+  alias('reactive', [
+    ['re','act','ive'], ['react','ive']
+  ]);
+  alias('portability', [
+    ['port','able','ity'], ['port','ability'], ['portable','ity']
+  ]);
+  alias('movability', [
+    ['move','able','ity'], ['move','ability'], ['movable','ity'], ['mov','able','ity'], ['mov','ability']
+  ]);
+  alias('readability', [
+    ['read','able','ity'], ['read','ability'], ['readable','ity']
+  ]);
+  alias('predictability', [
+    ['pre','dict','able','ity'], ['pre','dict','ability'], ['predictable','ity']
+  ]);
+  alias('accessibility', [
+    ['ac','cess','ible','ity'], ['ac','cess','ibility'], ['access','ible','ity'], ['access','ibility'], ['accessible','ity']
+  ]);
+  alias('visibility', [
+    ['vis','ible','ity'], ['vis','ibility'], ['visible','ity']
+  ]);
+  alias('flexibility', [
+    ['flex','ible','ity'], ['flex','ibility'], ['flexible','ity']
+  ]);
+
+  // 旧セーブ・報酬後でも remove が混ざらないように再ラップ。
+  if(typeof initDeck==='function'){
+    const old=initDeck;
+    initDeck=function(){ const r=old.apply(this,arguments); stripPartEverywhere('remove'); return r; };
+  }
+  if(typeof dealOpeningHand==='function'){
+    const old=dealOpeningHand;
+    dealOpeningHand=function(){ const r=old.apply(this,arguments); stripPartEverywhere('remove'); return r; };
+  }
+  if(typeof drawCards==='function'){
+    const old=drawCards;
+    drawCards=function(){ const r=old.apply(this,arguments); stripPartEverywhere('remove'); return r; };
+  }
+})();
+// ===== end v6.11 =====
+</script>
+
 </body>
 </html>
