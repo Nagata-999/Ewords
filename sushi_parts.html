@@ -4655,5 +4655,148 @@ window.addEventListener('load',()=>{const savedName=localStorage.getItem(PLAYER_
 .shopItem{position:relative}.shopItem::after{content:'選べる';position:absolute;right:10px;top:10px;font-size:11px;font-weight:1000;color:#9ca3af;background:#f5f5f5;border-radius:999px;padding:3px 7px}.shopItem:hover::after{color:#d84315;background:#fff3cd}
 </style>
 
+
+
+<!-- ===== v6.13 relaxed fusion rules: pose+tion / e-drop / player recipes ===== -->
+<script>
+(function(){
+  function safe(fn, fallback){ try{return fn();}catch(e){return fallback;} }
+  function hasPart(id){ return Array.isArray(PARTS) && PARTS.some(p=>p && p.id===id); }
+  function addPart(p){ if(!p || !p.id || hasPart(p.id)) return; try{ PARTS.push(p); }catch(e){} }
+  function getWord(word){ return safe(()=>WORDS.find(w=>w.word===word), null); }
+  function addWord(w){
+    if(!w || !w.word || !Array.isArray(w.parts) || !Array.isArray(WORDS)) return;
+    const key=w.parts.join('|');
+    let item=WORDS.find(x=>x.word===w.word && Array.isArray(x.parts) && x.parts.join('|')===key)
+          || WORDS.find(x=>Array.isArray(x.parts) && x.parts.join('|')===key)
+          || WORDS.find(x=>x.word===w.word);
+    if(item){ Object.assign(item,w); }
+    else { WORDS.push(w); item=w; }
+    try{
+      if(typeof WORD_MAP!=='undefined'){
+        WORD_MAP.set(key,item);
+        if(Array.isArray(w.aliases)) w.aliases.forEach(a=>Array.isArray(a)&&WORD_MAP.set(a.join('|'), item));
+      }
+    }catch(e){}
+  }
+  function alias(word, routes){
+    const item=getWord(word); if(!item) return;
+    try{ if(typeof WORD_MAP!=='undefined') routes.forEach(r=>Array.isArray(r)&&WORD_MAP.set(r.join('|'), item)); }catch(e){}
+  }
+
+  // suffix cards that may not exist in older builds
+  addPart({id:'sion',type:'suffix',text:'sion',meaning:'こと・状態'});
+
+  // pose/posit family: player can think pose + tion, while etymology is posit + ion.
+  [
+    {word:'position',ja:'位置・立場',parts:['pose','tion'],image:'pose + tion → position',freq:'S',aliases:[['posit','ion'],['pose','ion'],['position']]},
+    {word:'exposition',ja:'説明・解説・博覧会',parts:['ex','pose','tion'],image:'ex + pose + tion → exposition',freq:'B',aliases:[['ex','posit','ion'],['ex','pose','sion'],['exposition']]},
+    {word:'composition',ja:'構成・作文',parts:['com','pose','tion'],image:'com + pose + tion → composition',freq:'B',aliases:[['com','posit','ion'],['com','pose','sion'],['composition']]},
+    {word:'deposition',ja:'供述・沈殿・堆積',parts:['de','pose','tion'],image:'de + pose + tion → deposition',freq:'B',aliases:[['de','posit','ion'],['de','pose','sion'],['deposition']]},
+    {word:'proposition',ja:'提案・命題',parts:['pro','pose','tion'],image:'pro + pose + tion → proposition',freq:'B',aliases:[['pro','posit','ion'],['pro','pose','sion'],['proposition']]},
+    {word:'opposition',ja:'反対・対立',parts:['op','pose','tion'],image:'op + pose + tion → opposition',freq:'B',aliases:[['op','posit','ion'],['op','pose','sion'],['ob','pose','tion'],['opposition']]},
+    {word:'supposition',ja:'仮定・推測',parts:['sup','pose','tion'],image:'sup + pose + tion → supposition',freq:'B',aliases:[['sup','posit','ion'],['sub','pose','tion'],['supposition']]}
+  ].forEach(addWord);
+
+  // high-value player recipes: complete/base word + suffix, or full root + suffix.
+  [
+    ['removal', [['re','move','al'],['remove','al']]],
+    ['removable', [['re','move','able'],['remove','able']]],
+    ['removability', [['re','move','ability'],['removable','ity'],['remove','ability']]],
+    ['reviewer', [['review','er']]],
+    ['reviewable', [['review','able']]],
+    ['reactor', [['react','or']]],
+    ['reactive', [['react','ive']]],
+    ['portability', [['portable','ity'],['port','able','ity']]],
+    ['movability', [['movable','ity'],['move','able','ity']]],
+    ['readability', [['readable','ity'],['read','able','ity']]],
+    ['predictability', [['predictable','ity'],['pre','dict','able','ity']]],
+    ['accessibility', [['accessible','ity'],['access','ible','ity']]],
+    ['visibility', [['visible','ity'],['vis','ible','ity']]],
+    ['flexibility', [['flexible','ity'],['flex','ible','ity']]],
+    ['usable', [['use','able']]],
+    ['usage', [['use','age']]],
+    ['making', [['make','ing']]],
+    ['maker', [['make','er']]],
+    ['valuable', [['value','able']]],
+    ['valuation', [['value','ation']]],
+    ['notable', [['note','able']]],
+    ['notification', [['notice','ation'],['notify','ation']]],
+    ['lovable', [['love','able']]],
+    ['lovely', [['love','ly']]]
+  ].forEach(([word,routes])=>alias(word,routes));
+
+  function partText(id){
+    const p=safe(()=>PARTS.find(x=>x.id===id), null);
+    return (p && p.text) ? String(p.text) : String(id||'');
+  }
+  function uniq(a){ return [...new Set(a.filter(Boolean))]; }
+  function candidateSpellings(ids){
+    const raw=ids.map(String);
+    const texts=ids.map(partText);
+    const bases=uniq([raw.join(''), texts.join('')]);
+    const out=new Set(bases);
+
+    // final-e drop before common suffixes: move+al, move+able, use+able, make+ing.
+    const suffixes=['able','ible','al','age','ing','er','or','ed','ation','ion','tion','sion','ity','ive'];
+    for(const source of [raw,texts]){
+      for(let i=1;i<source.length;i++){
+        const left=source.slice(0,i).join('');
+        const right=source.slice(i).join('');
+        const firstSuffix=source[i];
+        if(left.endsWith('e') && suffixes.includes(firstSuffix)) out.add(left.slice(0,-1)+right);
+      }
+    }
+
+    // consonant + y -> i before suffix: carry+ed, try+al-ish, etc.
+    for(const source of [raw,texts]){
+      for(let i=1;i<source.length;i++){
+        const left=source.slice(0,i).join('');
+        const right=source.slice(i).join('');
+        const firstSuffix=source[i];
+        if(/[bcdfghjklmnpqrstvwxyz]y$/.test(left) && suffixes.includes(firstSuffix)) out.add(left.slice(0,-1)+'i'+right);
+      }
+    }
+
+    // pose + tion/sion/ion -> position pattern. ex + pose + tion => exposition.
+    const poseRules=(source)=>{
+      const idx=source.indexOf('pose');
+      if(idx>=0 && idx<source.length-1 && ['tion','sion','ion','ation'].includes(source[idx+1])){
+        const arr=[...source];
+        arr.splice(idx,2,'posit','ion');
+        out.add(arr.join(''));
+      }
+    };
+    poseRules(raw); poseRules(texts);
+
+    // ceive/cept, duce/duct type selected as the classroom-friendly base.
+    const transforms=[['ceive','cept'],['duce','duct'],['scribe','script'],['fer','lat'],['tain','tent'],['move','mov']];
+    for(const source of [raw,texts]){
+      transforms.forEach(([a,b])=>{
+        if(source.includes(a)){
+          const arr=source.map(x=>x===a?b:x);
+          out.add(arr.join(''));
+        }
+      });
+    }
+    return [...out];
+  }
+
+  const prevLookup = (typeof lookupWordByIds==='function') ? lookupWordByIds : null;
+  lookupWordByIds = function(ids){
+    const exact = prevLookup ? prevLookup(ids) : null;
+    if(exact) return exact;
+    const spellings=candidateSpellings(ids).map(s=>s.toLowerCase());
+    return safe(()=>WORDS.find(w=>spellings.includes(String(w.word||'').toLowerCase())), null);
+  };
+
+  const prevNear = (typeof findNearMiss==='function') ? findNearMiss : null;
+  findNearMiss = function(ids){
+    const w=lookupWordByIds(ids); if(w) return w;
+    return prevNear ? prevNear(ids) : null;
+  };
+})();
+</script>
+
 </body>
 </html>
