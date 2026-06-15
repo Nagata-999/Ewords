@@ -755,6 +755,32 @@
   .fusionMeaning{font-size:14px;max-width:88vw;white-space:normal}
 }
 
+
+
+/* ===== v6.18 type-readable cards + tiny wordfreq dev mark ===== */
+.card,.partChip{position:relative;overflow:hidden}
+.card::before,.partChip::before{content:'';position:absolute;left:0;top:0;bottom:0;width:8px;border-radius:18px 0 0 18px;opacity:.95}
+.card.prefix,.partChip.prefix{background:linear-gradient(135deg,#eefcf9,#fff 58%)}
+.card.root,.partChip.root{background:linear-gradient(135deg,#fff3e8,#fff 58%)}
+.card.suffix,.partChip.suffix{background:linear-gradient(135deg,#f5efff,#fff 58%)}
+.card.prefix::before,.partChip.prefix::before{background:#4db6ac}
+.card.root::before,.partChip.root::before{background:#ff8a65}
+.card.suffix::before,.partChip.suffix::before{background:#9575cd}
+.card.prefix{border-left-color:#4db6ac!important}
+.card.root{border-left-color:#ff8a65!important}
+.card.suffix{border-left-color:#9575cd!important}
+.card .small::first-letter{font-weight:1000}
+.card.prefix .small{color:#00796b;font-weight:1000}
+.card.root .small{color:#d84315;font-weight:1000}
+.card.suffix .small{color:#5e35b1;font-weight:1000}
+.partChip.prefix{border-color:#b2dfdb}
+.partChip.root{border-color:#ffccbc}
+.partChip.suffix{border-color:#d1c4e9}
+.wfDevNote{display:inline-block;margin-top:8px;padding:2px 6px;border-radius:999px;border:1px dashed #d7a44a;color:#b26a00;background:#fffaf0;font-size:10px;font-weight:1000;letter-spacing:.04em;opacity:.58;line-height:1;vertical-align:middle}
+.wfMini{display:inline-block;margin-right:3px;padding:1px 5px;border-radius:999px;border:1px dashed #d7a44a;color:#b26a00;background:#fffaf0;font-size:10px;font-weight:1000;opacity:.55;vertical-align:middle}
+.result{position:relative}
+@media(max-width:720px){.card::before{width:7px}.partChip::before{width:6px}}
+
 </style>
 </head>
 <body>
@@ -1093,7 +1119,7 @@ function dealOpeningHand(){
  hand=fallback.map(makeCard);
 }
 function typeLabel(t){return t==='prefix'?'接頭辞':t==='root'?'語根':'接尾辞'} function setMsg(t,cls=''){const m=$('msg');m.textContent=t;m.className=`msg ${cls}`} function canSelect(c){return !shopOpen&&!selected.some(x=>x.uid===c.uid)&&selected.length<4}
-function render(){goal=50+Math.floor((round-1)**1.45*95);$('score').textContent=score;$('round').textContent=round;$('goal').textContent=`${roundScore}/${goal}`;$('energy').textContent=`${energy}/${maxEnergy}`;$('rp').textContent=rp; if($('handCount')) $('handCount').textContent=`${hand.length}/${MAX_HAND}`;const enemy=currentEnemy();const enemyBox=document.querySelector('.enemy');enemyBox.className='enemy '+(enemy.cls||'');$('enemyName').innerHTML=`<div class="enemyNameLine"><span>${enemy.name}</span><span class="enemyTag">${enemy.tag}</span></div>`;$('monster').textContent=enemy.icon;$('hp').style.width=Math.min(100,roundScore/goal*100)+'%';$('hpText').innerHTML=`Goal ${roundScore} / ${goal}<div class="enemyDesc">${enemy.desc}</div>`;$('build').innerHTML=selected.length?selected.map(p=>`<div class="partChip ${p.rarity||rarityOf(p.id)}">${p.text}<small>${p.meaning}</small></div>`).join(''):`<span class="small">例：re + port → SUBMIT。</span>`;renderCards();renderJokers();$('submitBtn').disabled=selected.length<2||selected.length>4||shopOpen;const w=currentWord();if(w){const preview=calcScore(w,!knownWords().includes(w.word));setMsg(`完成かも：${w.word}（予想 ${preview.total}点）`,'ok')}else if(selected.length>=2)setMsg('未知の組み合わせ。SUBMITすると実験できます。','warn');else setMsg('');saveRunState()}
+function render(){goal=50+Math.floor((round-1)**1.45*95);$('score').textContent=score;$('round').textContent=round;$('goal').textContent=`${roundScore}/${goal}`;$('energy').textContent=`${energy}/${maxEnergy}`;$('rp').textContent=rp; if($('handCount')) $('handCount').textContent=`${hand.length}/${MAX_HAND}`;const enemy=currentEnemy();const enemyBox=document.querySelector('.enemy');enemyBox.className='enemy '+(enemy.cls||'');$('enemyName').innerHTML=`<div class="enemyNameLine"><span>${enemy.name}</span><span class="enemyTag">${enemy.tag}</span></div>`;$('monster').textContent=enemy.icon;$('hp').style.width=Math.min(100,roundScore/goal*100)+'%';$('hpText').innerHTML=`Goal ${roundScore} / ${goal}<div class="enemyDesc">${enemy.desc}</div>`;$('build').innerHTML=selected.length?selected.map(p=>`<div class="partChip ${p.type||part(p.id)?.type||''} ${p.rarity||rarityOf(p.id)}">${p.text}<small>${p.meaning}</small></div>`).join(''):`<span class="small">例：re + port → SUBMIT。</span>`;renderCards();renderJokers();$('submitBtn').disabled=selected.length<2||selected.length>4||shopOpen;const w=currentWord();if(w){const preview=calcScore(w,!knownWords().includes(w.word));setMsg(`完成かも：${w.word}（予想 ${preview.total}点）`,'ok')}else if(selected.length>=2)setMsg('未知の組み合わせ。SUBMITすると実験できます。','warn');else setMsg('');saveRunState()}
 function renderCards(){$('cards').innerHTML=hand.map(c=>{const sel=selected.some(x=>x.uid===c.uid);return `<div class="card ${c.type} ${c.rarity||rarityOf(c.id)} ${sel?'selected':''} drawAnim" onclick="pick('${c.uid}')"><div class="small">${typeLabel(c.type)} <span class="rarity ${c.rarity||rarityOf(c.id)}">${rarityLabel(c.rarity||rarityOf(c.id))}</span></div><div class="txt">${c.text}</div><div class="meaning">${c.meaning}</div></div>`}).join('')}
 function renderJokers(){if(!jokers.length){$('jokers').innerHTML='<div class="small">まだなし。ラウンドクリアで手に入る。</div>';return}const counts={};jokers.forEach(j=>counts[j.rarity||'common']=(counts[j.rarity||'common']||0)+1);$('jokers').innerHTML=`<div class="collectionCount">所持 ${jokers.length}枚　Common ${counts.common||0} / Rare ${counts.rare||0} / Epic ${counts.epic||0} / Legendary ${counts.legendary||0}</div>`+jokers.map(j=>`<div class="jokerCard ${j.rarity||'common'}"><b><span class="jokerIcon">${j.icon||'🃏'}</span>${j.name}</b> <span class="rarity ${j.rarity||'common'}">${rarityLabel(j.rarity||'common')}</span><br><span class="small">${j.desc}</span></div>`).join('')}
 function pick(uid){const c=hand.find(x=>x.uid===uid);if(!c)return;if(selected.some(x=>x.uid===uid)){selected=selected.filter(x=>x.uid!==uid);render();return}if(!canSelect(c))return;selected.push(c);$('result').classList.add('hidden');render()}
@@ -55246,12 +55272,22 @@ coburg`;
       if(w && w.fallback){
         const result = document.getElementById('result');
         if(result){
-          result.insertAdjacentHTML('afterbegin','<div class="new">NEW DISCOVERY!</div><div class="small" style="font-weight:900;color:#f57c00">WORDS未登録 → wordfreq 50k で実在語確認</div>');
+          result.insertAdjacentHTML('beforeend','<div class="wfDevNote" title="WORDS未登録 → wordfreq 50k fallback">wf</div>');
         }
       }
     };
   }
 
+
+  const prevAddLogWordfreq = (typeof addLog === 'function') ? addLog : null;
+  if(prevAddLogWordfreq){
+    addLog = function(html){
+      if(typeof html === 'string' && html.includes('wordfreq辞書で確認された実在語') && !html.includes('wfMini')){
+        html = html.replace('<span class="badge">','<span class="wfMini" title="wordfreq fallback">wf</span> <span class="badge">');
+      }
+      return prevAddLogWordfreq(html);
+    };
+  }
   window.WORDFREQ_SET = WORDFREQ_SET;
   window.wordfreqCandidateSpellings = wordfreqCandidateSpellings;
 })();
