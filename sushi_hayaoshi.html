@@ -1347,6 +1347,9 @@ let selectedLevel = 'beginner';
 let selectedMode = 'solo';
 let teamEntriesReady = false;
 let plannedMatchSchedule = null;
+let matchDrawTimers = [];
+let matchDrawAnimating = false;
+let startAfterDrawPending = false;
 let state = {};
 let revealTimer = null;
 let nextTimer = null;
@@ -1568,12 +1571,17 @@ function showMatchDrawAnimation(schedule){
     matchDrawTimers.push(setTimeout(()=>{
       overlay.classList.remove('show');
       matchDrawAnimating = false;
-    }, 850));
+      if(startAfterDrawPending){
+        startAfterDrawPending = false;
+        startGame();
+      }
+    }, 650));
   }, maxShow * interval + 180);
   matchDrawTimers.push(closeTimer);
 }
 
 function randomizeTeamMatches(showEffect = true){
+  startAfterDrawPending = false;
   const red = getTeamMembers('red');
   const blue = getTeamMembers('blue');
   plannedMatchSchedule = buildMatchSchedule(red, blue, getTeamRounds(), true);
@@ -1649,7 +1657,14 @@ function stopBgm(){
 }
 
 function startGame(){
-  if(matchDrawAnimating) return;
+  if(matchDrawAnimating){
+    startAfterDrawPending = true;
+    const note = $('shuffleNote');
+    if(note) note.textContent = '抽選完了後に自動スタートします';
+    return;
+  }
+  const overlay = $('shuffleOverlay');
+  if(overlay) overlay.classList.remove('show');
   clearTimers();
   const redMembersForGame = selectedMode === 'team' ? getTeamMembers('red') : ['RED'];
   const blueMembersForGame = selectedMode === 'team' ? getTeamMembers('blue') : ['BLUE'];
