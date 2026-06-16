@@ -1494,22 +1494,40 @@ function getTeamRounds(){
 function buildMatchSchedule(redMembers, blueMembers, rounds = getTeamRounds(), randomized = true){
   const redBase = redMembers && redMembers.length ? [...redMembers] : ['RED PLAYER'];
   const blueBase = blueMembers && blueMembers.length ? [...blueMembers] : ['BLUE PLAYER'];
-  const perRound = Math.max(redBase.length, blueBase.length);
+  const pairCount = Math.max(redBase.length, blueBase.length);
   const schedule = [];
-  for(let r=0; r<rounds; r++){
-    // REDもBLUEも毎セット完全シャッフル。ここが今回の修正点。
-    const redOrder = randomized ? shuffle(redBase) : [...redBase];
-    const blueOrder = randomized ? shuffle(blueBase) : [...blueBase];
-    for(let i=0; i<perRound; i++){
+
+  // 対戦カードは人数分だけ作る。各カードで指定問題数ぶん連続して戦う。
+  // 例：5 vs 5、3問設定なら、カード表示は5回、出題は A vs B を3問→次カードを3問…で合計15問。
+  const redOrder = randomized ? shuffle(redBase) : [...redBase];
+  const blueOrder = randomized ? shuffle(blueBase) : [...blueBase];
+  for(let pairIndex=0; pairIndex<pairCount; pairIndex++){
+    const red = redOrder[pairIndex % redOrder.length];
+    const blue = blueOrder[pairIndex % blueOrder.length];
+    for(let q=0; q<rounds; q++){
       schedule.push({
-        red:redOrder[i % redOrder.length],
-        blue:blueOrder[i % blueOrder.length],
-        set:r + 1,
-        match:i + 1
+        red,
+        blue,
+        pairIndex:pairIndex + 1,
+        questionInMatch:q + 1,
+        questionsPerMatch:rounds,
+        match:pairIndex + 1
       });
     }
   }
   return schedule;
+}
+
+function getUniqueMatchCards(schedule){
+  const seen = new Set();
+  const cards = [];
+  (schedule || []).forEach(m=>{
+    const key = m.pairIndex || m.match || `${m.red}-${m.blue}-${cards.length}`;
+    if(seen.has(key)) return;
+    seen.add(key);
+    cards.push(m);
+  });
+  return cards;
 }
 
 function renderMatchPreview(schedule){
@@ -1518,10 +1536,11 @@ function renderMatchPreview(schedule){
   const red = getTeamMembers('red');
   const blue = getTeamMembers('blue');
   const rounds = getTeamRounds();
-  const total = Math.max(red.length, blue.length) * rounds;
-  const list = schedule || plannedMatchSchedule;
-  const first = list && list.length ? list.slice(0, Math.min(5, list.length)).map((m,i)=>`${i+1}. ${escapeHtml(m.red)} vs ${escapeHtml(m.blue)}`).join('　') : '';
-  box.innerHTML = `<div>${red.length}対${blue.length} × ${rounds}試合ずつ = <strong>${total}問</strong></div>${first ? `<div style="margin-top:6px;color:#c47a00;">${first}${list.length>5?' ...':''}</div>` : '<div style="margin-top:6px;color:#c47a00;">🎲ボタンでRED/BLUE両方をランダム抽選</div>'}`;
+  const pairCount = Math.max(red.length, blue.length);
+  const total = pairCount * rounds;
+  const list = getUniqueMatchCards(schedule || plannedMatchSchedule);
+  const first = list && list.length ? list.slice(0, Math.min(5, list.length)).map((m,i)=>`${i+1}. ${escapeHtml(m.red)} vs ${escapeHtml(m.blue)} × ${rounds}問`).join('　') : '';
+  box.innerHTML = `<div>${red.length}対${blue.length}：対戦カード <strong>${pairCount}組</strong> × 各${rounds}問 = <strong>${total}問</strong></div>${first ? `<div style="margin-top:6px;color:#c47a00;">${first}${list.length>5?' ...':''}</div>` : '<div style="margin-top:6px;color:#c47a00;">🎲ボタンでRED/BLUE両方をランダム抽選</div>'}`;
 }
 
 function clearMatchDrawTimers(){
@@ -1543,7 +1562,8 @@ function showMatchDrawAnimation(schedule){
   const title = $('shuffleTitle');
   const round = $('shuffleRound');
   const note = $('shuffleNote');
-  if(!overlay || !schedule || !schedule.length) return;
+  const cards = getUniqueMatchCards(schedule);
+  if(!overlay || !cards || !cards.length) return;
 
   clearMatchDrawTimers();
   matchDrawAnimating = true;
@@ -1551,23 +1571,22 @@ function showMatchDrawAnimation(schedule){
   if(title) title.textContent = '🎲 MATCH DRAW!';
   if(note) note.textContent = 'REDもBLUEも完全シャッフル中...';
 
-  const maxShow = Math.min(schedule.length, 15);
-  const interval = schedule.length <= 6 ? 760 : 560;
-  for(let i=0; i<maxShow; i++){
+  const interval = cards.length <= 6 ? 820 : 620;
+  for(let i=0; i<cards.length; i++){
     const timer = setTimeout(()=>{
-      const m = schedule[i];
-      if(round) round.textContent = `ROUND ${i+1} / ${schedule.length}`;
+      const m = cards[i];
+      if(round) round.textContent = `MATCH ${i+1} / ${cards.length}`;
       setShuffleSubHtml(`<span class="draw-red">${escapeHtml(m.red)}</span> <span style="color:#c47a00;">VS</span> <span class="draw-blue">${escapeHtml(m.blue)}</span><span style="color:#c47a00;">!!!</span>`);
-      if(note) note.textContent = `${m.set}セット目・${m.match}人目`;
+      if(note) note.textContent = `このカードで${m.questionsPerMatch || getTeamRounds()}問連続バトル`;
     }, i * interval);
     matchDrawTimers.push(timer);
   }
 
   const closeTimer = setTimeout(()=>{
     if(round) round.textContent = '決定！';
-    const first = schedule[0];
+    const first = cards[0];
     setShuffleSubHtml(`<span class="draw-red">${escapeHtml(first.red)}</span> <span style="color:#c47a00;">VS</span> <span class="draw-blue">${escapeHtml(first.blue)}</span><span style="color:#c47a00;">!!!</span>`);
-    if(note) note.textContent = 'STARTでこのカードから開始';
+    if(note) note.textContent = `STARTで第1カードから開始（各${first.questionsPerMatch || getTeamRounds()}問）`;
     matchDrawTimers.push(setTimeout(()=>{
       overlay.classList.remove('show');
       matchDrawAnimating = false;
@@ -1575,8 +1594,8 @@ function showMatchDrawAnimation(schedule){
         startAfterDrawPending = false;
         startGame();
       }
-    }, 650));
-  }, maxShow * interval + 180);
+    }, 750));
+  }, cards.length * interval + 180);
   matchDrawTimers.push(closeTimer);
 }
 
@@ -1794,7 +1813,14 @@ function updateCurrentMatchDisplay(){
   if($('currentRedPlayer')) $('currentRedPlayer').textContent = redName;
   if($('currentBluePlayer')) $('currentBluePlayer').textContent = blueName;
   const vs = document.querySelector('.current-vs');
-  if(vs) vs.innerHTML = state.mode === 'team' ? `ROUND<br>${state.questionIndex+1}` : 'VS';
+  if(vs){
+    if(state.mode === 'team'){
+      const m = state.matchSchedule && state.matchSchedule[state.questionIndex];
+      vs.innerHTML = m ? `MATCH<br>${m.pairIndex}/${getUniqueMatchCards(state.matchSchedule).length}<br><span style="font-size:.55em;">Q${m.questionInMatch}/${m.questionsPerMatch}</span>` : `ROUND<br>${state.questionIndex+1}`;
+    }else{
+      vs.innerHTML = 'VS';
+    }
+  }
   const redPanel = $('redPanel');
   const bluePanel = $('bluePanel');
   if(redPanel) redPanel.classList.add('active-player-panel');
@@ -1833,7 +1859,12 @@ function nextQuestion(){
   const count = SETTINGS[state.level].choices;
   const distractors = sample(WORDS[state.level].filter(x=>x.word!==correct.word), count-1);
   state.choices = shuffle([correct, ...distractors]);
-  $('qPill').textContent = state.mode === 'team' ? `ROUND ${state.questionIndex+1} / ${state.totalQuestions || TOTAL}` : `${state.questionIndex+1} / ${state.totalQuestions || TOTAL}`;
+  if(state.mode === 'team'){
+    const m = state.matchSchedule && state.matchSchedule[state.questionIndex];
+    $('qPill').textContent = m ? `MATCH ${m.pairIndex} Q${m.questionInMatch}/${m.questionsPerMatch}｜${state.questionIndex+1}/${state.totalQuestions}` : `${state.questionIndex+1} / ${state.totalQuestions}`;
+  }else{
+    $('qPill').textContent = `${state.questionIndex+1} / ${state.totalQuestions || TOTAL}`;
+  }
   renderWords('red');
   renderWords('blue');
   revealDefinition(correct.definition);
