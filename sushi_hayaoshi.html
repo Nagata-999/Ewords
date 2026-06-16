@@ -907,7 +907,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-const WORDS = {
+let WORDS = {
   beginner: [
     {word:'school', jp:'学校', definition:'a place where students learn'},
     {word:'library', jp:'図書館', definition:'a place where people read or borrow books'},
@@ -1335,6 +1335,74 @@ const WORDS = {
   ]
 };
 
+
+// ===== 外部共通辞書読み込み v1 =====
+// GitHub / Cloudflare 上では、HTML と同じ階層に data フォルダを作り、
+// data/words_master_v1.json と data/game_sets_v1.json を置いてください。
+const VOCAB_DATA_PATHS = {
+  words: './data/words_master_v1.json',
+  sets: './data/game_sets_v1.json'
+};
+let vocabLoadPromise = null;
+let vocabLoadedFromJson = false;
+
+async function loadExternalVocab(){
+  if(vocabLoadedFromJson) return true;
+  if(vocabLoadPromise) return vocabLoadPromise;
+
+  vocabLoadPromise = (async()=>{
+    try{
+      const [wordsRes, setsRes] = await Promise.all([
+        fetch(VOCAB_DATA_PATHS.words, {cache:'no-cache'}),
+        fetch(VOCAB_DATA_PATHS.sets, {cache:'no-cache'})
+      ]);
+      if(!wordsRes.ok || !setsRes.ok) throw new Error('vocab json not found');
+
+      const [masterWords, gameSets] = await Promise.all([wordsRes.json(), setsRes.json()]);
+      const hayaoshiSets = gameSets && gameSets.sushi_hayaoshi;
+      if(!Array.isArray(masterWords) || !hayaoshiSets) throw new Error('vocab json format mismatch');
+
+      const wordMap = new Map(masterWords.map(w=>[String(w.word || '').toLowerCase(), w]));
+      const nextWords = {};
+
+      ['beginner','intermediate','advanced'].forEach(level=>{
+        const list = Array.isArray(hayaoshiSets[level]) ? hayaoshiSets[level] : [];
+        nextWords[level] = list.map(word=>{
+          const src = wordMap.get(String(word).toLowerCase());
+          if(!src) return null;
+          return {
+            word: src.word,
+            jp: src.ja || src.meaning_ja || '',
+            definition: src.definition_en || src.definition || ''
+          };
+        }).filter(x=>x && x.word && x.definition);
+
+        // JSON側に不足があった時だけ、HTML内蔵データを保険として足す。
+        if(nextWords[level].length < 10 && Array.isArray(WORDS[level])){
+          nextWords[level] = WORDS[level];
+        }
+      });
+
+      if(nextWords.beginner.length && nextWords.intermediate.length && nextWords.advanced.length){
+        WORDS = nextWords;
+        vocabLoadedFromJson = true;
+        console.info('Loaded external sushi_hayaoshi vocab:', {
+          beginner: WORDS.beginner.length,
+          intermediate: WORDS.intermediate.length,
+          advanced: WORDS.advanced.length
+        });
+        return true;
+      }
+      throw new Error('not enough hayaoshi vocab');
+    }catch(e){
+      console.warn('External vocab load failed. Fallback to embedded WORDS.', e);
+      return false;
+    }
+  })();
+
+  return vocabLoadPromise;
+}
+
 const SETTINGS = {
   beginner:{label:'Beginner', choices:6, speed:2000},
   intermediate:{label:'Intermediate', choices:9, speed:2000},
@@ -1635,6 +1703,8 @@ function getPlayerScoresText(team){
   return list.map(name=>`${name}:${scores[name] || 0}`).join(' / ');
 }
 
+loadExternalVocab();
+
 $('levelButtons').addEventListener('click', e=>{
   const btn = e.target.closest('button[data-level]');
   if(!btn) return;
@@ -1688,7 +1758,12 @@ function stopBgm(){
   bgm.currentTime = 0;
 }
 
-function startGame(){
+async function startGame(){
+  await loadExternalVocab();
+  if(!WORDS[selectedLevel] || !WORDS[selectedLevel].length){
+    alert('語彙データを読み込めませんでした。data/words_master_v1.json と data/game_sets_v1.json を確認してください。');
+    return;
+  }
   if(matchDrawAnimating){
     startAfterDrawPending = true;
     const note = $('shuffleNote');
@@ -1887,7 +1962,7 @@ function nextQuestion(){
   state.current = correct;
   setMatchHeading();
   const count = SETTINGS[state.level].choices;
-  const distractors = sample(WORDS[state.level].filter(x=>x.word!==correct.word), count-1);
+  const distractors = sample((WORDS[state.level] || []).filter(x=>x.word!==correct.word), Math.min(count-1, Math.max(0, (WORDS[state.level] || []).length-1)));
   state.choices = shuffle([correct, ...distractors]);
   if(state.mode === 'team'){
     const m = state.matchSchedule && state.matchSchedule[state.questionIndex];
