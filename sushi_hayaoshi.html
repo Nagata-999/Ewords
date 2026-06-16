@@ -905,6 +905,8 @@
     </div>
   </div>
 
+  <div id="jsonDebug" style="position:fixed;right:6px;bottom:4px;font-size:8px;opacity:.45;pointer-events:none;font-weight:900;z-index:9999;color:#24313f;background:rgba(255,250,240,.55);border-radius:999px;padding:1px 4px;">🍣LOAD</div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 let WORDS = {
@@ -1345,6 +1347,14 @@ const VOCAB_DATA_PATHS = {
 };
 let vocabLoadPromise = null;
 let vocabLoadedFromJson = false;
+const EMBEDDED_WORD_COUNT = Object.values(WORDS).reduce((sum, list)=>sum + (Array.isArray(list) ? list.length : 0), 0);
+
+function setVocabDebug(label){
+  const el = document.getElementById('jsonDebug');
+  if(el) el.textContent = `🍣${label}`;
+}
+
+setVocabDebug(`LOCAL${EMBEDDED_WORD_COUNT}`);
 
 async function loadExternalVocab(){
   if(vocabLoadedFromJson) return true;
@@ -1386,16 +1396,23 @@ async function loadExternalVocab(){
       if(nextWords.beginner.length && nextWords.intermediate.length && nextWords.advanced.length){
         WORDS = nextWords;
         vocabLoadedFromJson = true;
-        console.info('Loaded external sushi_hayaoshi vocab:', {
-          beginner: WORDS.beginner.length,
-          intermediate: WORDS.intermediate.length,
-          advanced: WORDS.advanced.length
+        setVocabDebug(`JSON${masterWords.length}`);
+        console.info('🍣 JSON vocab loaded:', {
+          source: VOCAB_DATA_PATHS,
+          masterWords: masterWords.length,
+          sushiHayaoshi: {
+            beginner: WORDS.beginner.length,
+            intermediate: WORDS.intermediate.length,
+            advanced: WORDS.advanced.length,
+            total: Object.values(WORDS).reduce((sum, list)=>sum + (Array.isArray(list) ? list.length : 0), 0)
+          }
         });
         return true;
       }
       throw new Error('not enough hayaoshi vocab');
     }catch(e){
-      console.warn('External vocab load failed. Fallback to embedded WORDS.', e);
+      setVocabDebug(`LOCAL${EMBEDDED_WORD_COUNT}`);
+      console.warn('🍣 JSON vocab load failed. Fallback to embedded WORDS.', e);
       return false;
     }
   })();
