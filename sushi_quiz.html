@@ -326,6 +326,32 @@ label{
   .home-link-row{padding:0 2px}
 }
 
+
+#buzzerQuestion{
+  font-size:clamp(38px,5.6vw,70px)!important;
+  text-align:center;
+}
+#buzzerChoices .choice{
+  font-size:clamp(24px,3.2vw,38px)!important;
+  min-height:100px!important;
+}
+#buzzerStatus{
+  font-size:clamp(20px,2.7vw,32px)!important;
+  text-align:center;
+  font-weight:1000;
+}
+.buzzer-winner{
+  font-size:clamp(30px,6vw,64px);
+  font-weight:1000;
+  text-align:center;
+  color:#16a34a;
+  text-shadow:0 4px 0 rgba(22,101,52,.18);
+}
+.buzzer-miss{
+  color:#dc2626;
+  font-weight:1000;
+}
+
 </style>
 </head>
 <body>
@@ -334,8 +360,8 @@ label{
 <div class="home-link-row"><a class="home-back-btn" href="/index.html">🍣 すし単に戻る</a></div>
 <section id="home" class="menu">
 <button class="bigbtn" onclick="showSoloSetup()">一人でプレイ<span>1ミス終了のサバイバル。</span></button>
-<button class="bigbtn" onclick="showLocalSetup()">みんなでプレイ<br>同一端末<span>1台で順番に回答する授業用。</span></button>
-<button class="bigbtn" onclick="showOnlineMenu()">みんなでプレイ<br>セッションID<span>ホスト作成・参加。Supabaseで別端末対応。</span></button>
+<button class="bigbtn" onclick="showOnlineMenu()">みんなでプレイ<span>全員回答。正解者に得点。</span></button>
+<button class="bigbtn" onclick="showBuzzerMenu()">早押しモード<span>最初に正解した人だけ得点。</span></button>
 </section>
 
 <section id="soloSetup" class="panel hidden"><span class="badge">Solo</span><h2>一人でプレイ</h2><div class="setup"><div><label>Category</label><select id="soloCat"></select></div><div><label>Start Difficulty</label><select id="soloDiff"><option>Easy</option><option>Medium</option><option>Hard</option></select></div></div><button onclick="startSolo()">Start</button><button class="secondary" onclick="home()">Back</button></section>
@@ -356,6 +382,86 @@ label{
 <section id="join" class="panel hidden"><span class="badge">Join</span><h2>参加する</h2><div class="setup"><div><label>Session ID</label><input id="joinCode" maxlength="4" placeholder="5832"></div><div><label>Name</label><input id="joinName" placeholder="Jeff"></div></div><button onclick="joinSession()">Join</button><button class="secondary" onclick="showOnlineMenu()">Back</button></section>
 <section id="playerWait" class="panel hidden"><span class="badge">Player</span><h2 id="pStatus">Waiting...</h2><p class="small">ホスト画面を見て、問題が始まるまで待ってください。</p></section>
 <section id="playerGame" class="panel hidden"><span class="badge">Choose Answer</span><h2 id="pName"></h2><div class="pad kahoot-pad"><button id="pa" onclick="submitPlayer(0)"><span class="kahoot-symbol">▲</span><span class="kahoot-letter">A</span></button><button id="pb" onclick="submitPlayer(1)"><span class="kahoot-symbol">◆</span><span class="kahoot-letter">B</span></button><button id="pc" onclick="submitPlayer(2)"><span class="kahoot-symbol">●</span><span class="kahoot-letter">C</span></button><button id="pd" onclick="submitPlayer(3)"><span class="kahoot-symbol">■</span><span class="kahoot-letter">D</span></button></div><div id="pMsg" class="notice">問題文はホスト画面を見てください。</div><div id="playerAnsweredBar" class="answered-bar"></div></section>
+
+<section id="buzzerMenu" class="panel hidden">
+  <span class="badge">Buzzer Mode</span>
+  <h2>早押しモード</h2>
+  <div class="setup">
+    <div><label>Category</label><select id="buzzerCat"></select></div>
+    <div><label>Questions</label><select id="buzzerLen"><option>5</option><option selected>10</option><option>15</option><option>20</option></select></div>
+  </div>
+  <button onclick="createBuzzerSession()">ホストになる</button>
+  <button class="blue" onclick="showBuzzerJoin()">参加する</button>
+  <button class="secondary" onclick="home()">Back</button>
+</section>
+
+<section id="buzzerLobby" class="panel hidden">
+  <span class="badge">Buzzer Host Lobby</span>
+  <h2>Session ID</h2>
+  <div id="buzzerCode" class="code"></div>
+  <h3>Players</h3>
+  <div id="buzzerPlayers" class="players"></div>
+  <button onclick="startBuzzer()">Start</button>
+  <button class="secondary" onclick="home()">End</button>
+</section>
+
+<section id="buzzerJoin" class="panel hidden">
+  <span class="badge">Buzzer Join</span>
+  <h2>参加する</h2>
+  <div class="setup">
+    <div><label>Session ID</label><input id="buzzerJoinCode" maxlength="4" placeholder="5832"></div>
+    <div><label>Name</label><input id="buzzerJoinName" placeholder="Jeff"></div>
+  </div>
+  <button onclick="joinBuzzer()">Join</button>
+  <button class="secondary" onclick="showBuzzerMenu()">Back</button>
+</section>
+
+<section id="buzzerHostGame" class="panel hidden">
+  <span id="buzzerBadge" class="badge"></span>
+  <div id="buzzerProgress" class="small"></div>
+  <div id="buzzerTimer" class="timer-ring" style="--timePct:100">20</div>
+  <div id="buzzerQuestion" class="question"></div>
+  <div id="buzzerChoices" class="choices"></div>
+  <div id="buzzerStatus" class="notice"></div>
+  <div id="buzzerAnsweredBar" class="answered-bar"></div>
+  <button onclick="finishBuzzerQuestion()">Reveal</button>
+  <button class="secondary" onclick="home()">End</button>
+</section>
+
+<section id="buzzerPlayerWait" class="panel hidden">
+  <span class="badge">Buzzer Player</span>
+  <h2 id="buzzerPlayerStatus">Waiting...</h2>
+  <p class="small">ホスト画面を見て、問題開始を待ってください。</p>
+</section>
+
+<section id="buzzerPlayerGame" class="panel hidden">
+  <span class="badge">Buzzer Answer</span>
+  <h2 id="buzzerPlayerName"></h2>
+  <div class="pad kahoot-pad">
+    <button id="ba" onclick="submitBuzzer(0)"><span class="kahoot-symbol">▲</span><span class="kahoot-letter">A</span></button>
+    <button id="bb" onclick="submitBuzzer(1)"><span class="kahoot-symbol">◆</span><span class="kahoot-letter">B</span></button>
+    <button id="bc" onclick="submitBuzzer(2)"><span class="kahoot-symbol">●</span><span class="kahoot-letter">C</span></button>
+    <button id="bd" onclick="submitBuzzer(3)"><span class="kahoot-symbol">■</span><span class="kahoot-letter">D</span></button>
+  </div>
+  <div id="buzzerPlayerMsg" class="notice">最初に正解した人だけ得点できます。</div>
+  <div id="buzzerPlayerBar" class="answered-bar"></div>
+</section>
+
+<section id="buzzerResult" class="panel hidden">
+  <span class="badge">Buzzer Result</span>
+  <div id="buzzerAnswer" class="result show"></div>
+  <div id="buzzerBreakdown" class="answer-breakdown"></div>
+  <button onclick="showBuzzerRanking()">Show Ranking</button>
+  <button class="secondary" onclick="home()">End</button>
+</section>
+
+<section id="buzzerRanking" class="panel hidden">
+  <span class="badge">Current Ranking</span>
+  <table id="buzzerRankTable" class="rank"></table>
+  <button onclick="nextBuzzer()">Next Question</button>
+  <button class="secondary" onclick="home()">End</button>
+</section>
+
 </main>
 
 <script>
@@ -364,11 +470,11 @@ const SUPABASE_URL = "https://rxyoyveykxdfrpomkltl.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7";
 const HAS_SUPABASE = !!(SUPABASE_URL && (typeof SUPABASE_ANON_KEY !== "undefined" ? SUPABASE_ANON_KEY : SUPABASE_PUBLISHABLE_KEY) && window.supabase);
 const sb = HAS_SUPABASE ? window.supabase.createClient(SUPABASE_URL, (typeof SUPABASE_ANON_KEY !== "undefined" ? SUPABASE_ANON_KEY : SUPABASE_PUBLISHABLE_KEY)) : null;
-const screens=["home","soloSetup","soloGame","soloOver","localSetup","localHost","localPad","localResult","localFinal","onlineMenu","onlineHostSetup","onlineLobby","onlineHostGame","onlineResult","onlineRanking","join","playerWait","playerGame"];
+const screens=["home","soloSetup","soloGame","soloOver","localSetup","localHost","localPad","localResult","localFinal","onlineMenu","onlineHostSetup","onlineLobby","onlineHostGame","onlineResult","onlineRanking","join","playerWait","playerGame","buzzerMenu","buzzerLobby","buzzerJoin","buzzerHostGame","buzzerPlayerWait","buzzerPlayerGame","buzzerResult","buzzerRanking"];
 const diffs={Easy:1,Medium:2,Hard:3}; let solo={}, local={players:[]}, online={}, timer=null;
-function hide(){screens.forEach(id=>document.getElementById(id).classList.add("hidden"))} function show(id){hide();document.getElementById(id).classList.remove("hidden")} function home(){stop();show("home")}
+function hide(){screens.forEach(id=>document.getElementById(id).classList.add("hidden"))} function show(id){hide();document.getElementById(id).classList.remove("hidden")} function home(){stop(); if(typeof stopBuzzerTimer==='function') stopBuzzerTimer(); show("home")}
 function shuffle(a){return [...a].sort(()=>Math.random()-.5)} function cats(){return ["Random",...Array.from(new Set(QUESTIONS.map(q=>q.cat))).sort()]}
-function setup(){["soloCat","localCat","onlineCat"].forEach(id=>{let s=document.getElementById(id);s.innerHTML="";cats().forEach(c=>{let o=document.createElement("option");o.textContent=c;s.appendChild(o)})})}
+function setup(){["soloCat","localCat","onlineCat","buzzerCat"].forEach(id=>{let s=document.getElementById(id);s.innerHTML="";cats().forEach(c=>{let o=document.createElement("option");o.textContent=c;s.appendChild(o)})})}
 function pool(cat,min=1,max=3){return QUESTIONS.filter(q=>(cat==="Random"||q.cat===cat)&&diffs[q.diff]>=min&&diffs[q.diff]<=max)} function pick(cat,l=2,used=[]){let p=pool(cat,Math.max(1,l-1),Math.min(3,l+1)).filter(q=>!used.includes(q.q)); if(!p.length)p=pool(cat); return shuffle(p)[0]}
 function code4(){return String(Math.floor(1000+Math.random()*9000))} function key(c,t){return "sq_"+c+"_"+t} function setL(c,t,o){localStorage.setItem(key(c,t),JSON.stringify(o))} function getL(c,t){try{return JSON.parse(localStorage.getItem(key(c,t))||"null")}catch(e){return null}} function stop(){if(timer)clearInterval(timer);timer=null}
 
@@ -676,6 +782,306 @@ function pollPlayer(){
   timer=setInterval(f,650);
 }
 async function submitPlayer(a){["pa","pb","pc","pd"].forEach(id=>document.getElementById(id).disabled=true);pMsg.textContent=`${["▲ A","◆ B","● C","■ D"][a]} Answered!`;if(HAS_SUPABASE)await sb.from("sushi_quiz_players").update({last_answer:a,answered_q_index:online.seen,meta:{answered_at:Date.now()}}).eq("id",online.id);else setL(online.code,"players",(getL(online.code,"players")||[]).map(p=>p.id===online.id?{...p,last_answer:a,answered_q_index:online.seen,meta:{...(p.meta||{}),answered_at:Date.now()}}:p))}
+
+let buzzer={};
+let buzzerTimerInterval=null;
+
+function showBuzzerMenu(){ show("buzzerMenu"); }
+function showBuzzerJoin(){ show("buzzerJoin"); }
+
+async function createBuzzerSession(){
+  const c=code4();
+  buzzer={role:"host",code:c,cat:buzzerCat.value,len:Number(buzzerLen.value),idx:0,used:[],players:[],winner:null,revealed:false};
+  if(HAS_SUPABASE){
+    const payload={code:c,status:"buzzer_lobby",category:buzzer.cat,length:buzzer.len,q_index:0,current_question:null};
+    const {data,error}=await sb.from("sushi_quiz_sessions").insert(payload).select().maybeSingle();
+    if(error||!data){ alert("セッション作成に失敗しました。"); console.error(error); return; }
+  }else{
+    setL(c,"session",{code:c,status:"buzzer_lobby",category:buzzer.cat,length:buzzer.len,q_index:0,current_question:null});
+    setL(c,"players",[]);
+  }
+  buzzerCode.textContent=c;
+  show("buzzerLobby");
+  pollBuzzerHost();
+}
+
+function pollBuzzerHost(){
+  stop();
+  const tick=async()=>{
+    if(HAS_SUPABASE){
+      const {data,error}=await sb.from("sushi_quiz_players").select("*").eq("session_code",buzzer.code);
+      if(error) console.error(error);
+      buzzer.players=data||[];
+    }else{
+      buzzer.players=getL(buzzer.code,"players")||[];
+    }
+    if(document.getElementById("buzzerPlayers")){
+      buzzerPlayers.innerHTML=(buzzer.players||[]).map(p=>`<div class="player">${cleanPlayerName(p.name)} ${p.score||0}</div>`).join("");
+    }
+    if(!document.getElementById("buzzerHostGame").classList.contains("hidden")){
+      renderBuzzerStatus();
+      const winner=(buzzer.players||[]).find(p=>p.meta && p.meta.buzzer_winner_q===buzzer.idx);
+      if(winner && !buzzer.revealed){
+        buzzer.winner=winner;
+        setTimeout(()=>finishBuzzerQuestion(),450);
+      }
+    }
+  };
+  tick();
+  timer=setInterval(tick,500);
+}
+
+async function joinBuzzer(){
+  const c=buzzerJoinCode.value.trim();
+  const n=cleanPlayerName(buzzerJoinName.value.trim());
+  if(!c||!n) return alert("Enter code and name");
+  buzzer={role:"player",code:c,name:n,id:crypto.randomUUID(),seen:-1,locked:false};
+  if(HAS_SUPABASE){
+    const {data:s,error:se}=await sb.from("sushi_quiz_sessions").select("*").eq("code",c).maybeSingle();
+    if(se){ console.error(se); return alert("セッション読み取りに失敗しました。");}
+    if(!s) return alert("Session not found");
+    const {data,error}=await sb.from("sushi_quiz_players")
+      .insert({session_code:c,name:n,score:0,correct:0,last_answer:null,answered_q_index:-1,meta:{current_streak:0}})
+      .select().maybeSingle();
+    if(error||!data){ console.error(error); return alert("参加に失敗しました。");}
+    buzzer.id=data.id;
+  }else{
+    const s=getL(c,"session"); if(!s) return alert("Session not found");
+    const ps=getL(c,"players")||[];
+    ps.push({id:buzzer.id,session_code:c,name:n,score:0,correct:0,last_answer:null,answered_q_index:-1,meta:{current_streak:0}});
+    setL(c,"players",ps);
+  }
+  buzzerPlayerStatus.textContent=`Joined as ${cleanPlayerName(n)}`;
+  show("buzzerPlayerWait");
+  pollBuzzerPlayer();
+}
+
+async function startBuzzer(){
+  if(!buzzer.players || buzzer.players.length<1) return alert("No players");
+  buzzer.idx=0;
+  buzzer.used=[];
+  await setBuzzerQuestion();
+  show("buzzerHostGame");
+  renderBuzzerHost();
+}
+
+async function setBuzzerQuestion(){
+  buzzer.revealed=false;
+  buzzer.winner=null;
+  const q=pick(buzzer.cat,2,buzzer.used);
+  buzzer.cur=q;
+  buzzer.used.push(q.q);
+  buzzer.start=Date.now();
+  const cq={...q, started_at:buzzer.start, mode:"buzzer"};
+  if(HAS_SUPABASE){
+    await sb.from("sushi_quiz_sessions").update({status:"buzzer_question",q_index:buzzer.idx,current_question:cq}).eq("code",buzzer.code);
+    await sb.from("sushi_quiz_players").update({last_answer:null,answered_q_index:-1,meta:{current_streak:0}}).eq("session_code",buzzer.code);
+  }else{
+    setL(buzzer.code,"session",{code:buzzer.code,status:"buzzer_question",q_index:buzzer.idx,current_question:cq});
+    setL(buzzer.code,"players",(getL(buzzer.code,"players")||[]).map(p=>({...p,last_answer:null,answered_q_index:-1,meta:{...(p.meta||{}),buzzer_locked:false,buzzer_winner_q:null}})));
+  }
+}
+
+function renderBuzzerHost(){
+  const c=buzzer.cur;
+  buzzerBadge.textContent=`${c.cat}｜${c.diff}`;
+  buzzerProgress.textContent=`Session ${buzzer.code}｜Question ${buzzer.idx+1} / ${buzzer.len}`;
+  buzzerQuestion.textContent=c.q;
+  buzzerChoices.innerHTML="";
+  c.choices.forEach((x,i)=>{
+    const d=document.createElement("div");
+    d.className="choice";
+    d.innerHTML=`<b>${answerLabel(i)}.</b> ${x}`;
+    buzzerChoices.appendChild(d);
+  });
+  renderBuzzerStatus();
+  startBuzzerTimer();
+}
+
+function startBuzzerTimer(){
+  if(buzzerTimerInterval) clearInterval(buzzerTimerInterval);
+  const tick=()=>{
+    const elapsed=(Date.now()-buzzer.start)/1000;
+    const left=Math.max(0,20-elapsed);
+    if(buzzerTimer){
+      buzzerTimer.textContent=Math.ceil(left);
+      buzzerTimer.style.setProperty("--timePct",String(Math.max(0,left*5)));
+    }
+    if(left<=0){
+      clearInterval(buzzerTimerInterval);
+      buzzerTimerInterval=null;
+      finishBuzzerQuestion();
+    }
+  };
+  tick();
+  buzzerTimerInterval=setInterval(tick,150);
+}
+
+function stopBuzzerTimer(){
+  if(buzzerTimerInterval) clearInterval(buzzerTimerInterval);
+  buzzerTimerInterval=null;
+}
+
+function renderBuzzerStatus(){
+  const ps=buzzer.players||[];
+  const answered=ps.filter(p=>Number(p.answered_q_index)===Number(buzzer.idx)).length;
+  const winner=ps.find(p=>p.meta && p.meta.buzzer_winner_q===buzzer.idx);
+  if(winner){
+    buzzerStatus.innerHTML=`<div class="buzzer-winner">🏆 ${cleanPlayerName(winner.name)} got it!</div>`;
+  }else{
+    buzzerStatus.textContent=`Buzzed: ${answered} / ${ps.length}`;
+  }
+  renderAnsweredBar("buzzerAnsweredBar",ps,buzzer.idx);
+}
+
+function pollBuzzerPlayer(){
+  stop();
+  const tick=async()=>{
+    let s,players=[];
+    if(HAS_SUPABASE){
+      const r=await sb.from("sushi_quiz_sessions").select("*").eq("code",buzzer.code).maybeSingle();
+      s=r.data;
+      const pr=await sb.from("sushi_quiz_players").select("*").eq("session_code",buzzer.code);
+      players=pr.data||[];
+    }else{
+      s=getL(buzzer.code,"session");
+      players=getL(buzzer.code,"players")||[];
+    }
+    if(!s) return;
+    renderAnsweredBar("buzzerPlayerBar",players,s.q_index);
+    const me=players.find(p=>p.id===buzzer.id);
+    const winner=players.find(p=>p.meta && p.meta.buzzer_winner_q===s.q_index);
+    if(s.status==="buzzer_question" && s.q_index!==buzzer.seen){
+      buzzer.seen=s.q_index;
+      buzzer.locked=false;
+      buzzerPlayerName.textContent=cleanPlayerName(buzzer.name);
+      ["ba","bb","bc","bd"].forEach(id=>document.getElementById(id).disabled=false);
+      buzzerPlayerMsg.textContent="早押し！最初に正解した人だけ得点。間違えるとこの問題はロック。";
+      show("buzzerPlayerGame");
+    }
+    if(winner){
+      ["ba","bb","bc","bd"].forEach(id=>document.getElementById(id).disabled=true);
+      buzzerPlayerMsg.textContent=`🏆 ${cleanPlayerName(winner.name)} answered correctly!`;
+    }else if(me && me.meta && me.meta.buzzer_locked){
+      ["ba","bb","bc","bd"].forEach(id=>document.getElementById(id).disabled=true);
+      buzzerPlayerMsg.textContent="Wrong... locked for this question.";
+    }
+    if(s.status==="buzzer_result"){
+      ["ba","bb","bc","bd"].forEach(id=>document.getElementById(id).disabled=true);
+      buzzerPlayerMsg.textContent="Result shown. Wait for next question.";
+    }
+  };
+  tick();
+  timer=setInterval(tick,450);
+}
+
+async function submitBuzzer(ans){
+  if(buzzer.locked) return;
+  buzzer.locked=true;
+  ["ba","bb","bc","bd"].forEach(id=>document.getElementById(id).disabled=true);
+  buzzerPlayerMsg.textContent=`${answerLabel(ans)} Answered!`;
+
+  let s,players=[];
+  if(HAS_SUPABASE){
+    const sr=await sb.from("sushi_quiz_sessions").select("*").eq("code",buzzer.code).maybeSingle();
+    s=sr.data;
+    const pr=await sb.from("sushi_quiz_players").select("*").eq("session_code",buzzer.code);
+    players=pr.data||[];
+  }else{
+    s=getL(buzzer.code,"session");
+    players=getL(buzzer.code,"players")||[];
+  }
+  if(!s || !s.current_question) return;
+  const q=s.current_question;
+  const alreadyWinner=players.find(p=>p.meta && p.meta.buzzer_winner_q===s.q_index);
+  const correct=Number(ans)===Number(q.ans);
+  const metaBase={answered_at:Date.now(),buzzer_answer:ans,buzzer_correct:correct};
+
+  if(alreadyWinner){
+    buzzerPlayerMsg.textContent="Too late! Someone already got it.";
+    return;
+  }
+
+  if(correct){
+    const currentPlayers=players.map(p=>{
+      if(p.id!==buzzer.id) return p;
+      const streakBefore=Number((p.meta||{}).current_streak||0);
+      const gained=pointsForAnswer(true, Date.now()-Number(q.started_at||Date.now()), streakBefore);
+      return {
+        ...p,
+        last_answer:ans,
+        answered_q_index:s.q_index,
+        score:(p.score||0)+gained,
+        correct:(p.correct||0)+1,
+        meta:{...(p.meta||{}),...metaBase,current_streak:streakBefore+1,buzzer_winner_q:s.q_index,last_gained:gained}
+      };
+    });
+    if(HAS_SUPABASE){
+      const me=currentPlayers.find(p=>p.id===buzzer.id);
+      await sb.from("sushi_quiz_players").update({last_answer:ans,answered_q_index:s.q_index,score:me.score,correct:me.correct,meta:me.meta}).eq("id",buzzer.id);
+      await sb.from("sushi_quiz_sessions").update({status:"buzzer_result"}).eq("code",buzzer.code);
+    }else{
+      setL(buzzer.code,"players",currentPlayers);
+      setL(buzzer.code,"session",{...s,status:"buzzer_result"});
+    }
+    buzzerPlayerMsg.textContent="Correct! You got the point!";
+  }else{
+    if(HAS_SUPABASE){
+      const me=players.find(p=>p.id===buzzer.id);
+      await sb.from("sushi_quiz_players").update({
+        last_answer:ans,
+        answered_q_index:s.q_index,
+        meta:{...(me?.meta||{}),...metaBase,buzzer_locked:true,current_streak:0}
+      }).eq("id",buzzer.id);
+    }else{
+      setL(buzzer.code,"players",players.map(p=>p.id===buzzer.id?{...p,last_answer:ans,answered_q_index:s.q_index,meta:{...(p.meta||{}),...metaBase,buzzer_locked:true,current_streak:0}}:p));
+    }
+    buzzerPlayerMsg.textContent="Wrong... locked for this question.";
+  }
+}
+
+async function finishBuzzerQuestion(){
+  if(buzzer.revealed) return;
+  buzzer.revealed=true;
+  stopBuzzerTimer();
+  if(HAS_SUPABASE){
+    const {data}=await sb.from("sushi_quiz_players").select("*").eq("session_code",buzzer.code);
+    buzzer.players=data||buzzer.players||[];
+    await sb.from("sushi_quiz_sessions").update({status:"buzzer_result"}).eq("code",buzzer.code);
+  }else{
+    buzzer.players=getL(buzzer.code,"players")||buzzer.players||[];
+    const s=getL(buzzer.code,"session");
+    setL(buzzer.code,"session",{...s,status:"buzzer_result"});
+  }
+  const c=buzzer.cur;
+  const winner=(buzzer.players||[]).find(p=>p.meta && p.meta.buzzer_winner_q===buzzer.idx);
+  show("buzzerResult");
+  buzzerAnswer.innerHTML=winner
+    ? `<div class="buzzer-winner">🏆 ${cleanPlayerName(winner.name)} +${winner.meta?.last_gained||0}</div><br>Correct Answer: <b>${answerLabel(c.ans)}. ${c.choices[c.ans]}</b><br>${c.exp}`
+    : `No winner this round.<br>Correct Answer: <b>${answerLabel(c.ans)}. ${c.choices[c.ans]}</b><br>${c.exp}`;
+  buzzerBreakdown.innerHTML=(buzzer.players||[]).map(p=>{
+    const meta=p.meta||{};
+    const ans=meta.buzzer_answer===undefined ? "No buzz" : answerLabel(meta.buzzer_answer);
+    const cls=meta.buzzer_winner_q===buzzer.idx ? "correct" : (meta.buzzer_correct ? "correct" : "wrong");
+    const label=meta.buzzer_winner_q===buzzer.idx ? `WIN +${meta.last_gained||0}` : (meta.buzzer_locked ? "LOCKED" : "");
+    return `<div class="answer-row ${cls}"><div>${cleanPlayerName(p.name)}</div><div class="answer-choice-pill">${ans}</div><div class="points-pill">${label}</div></div>`;
+  }).join("");
+  fireQuizEffect(winner ? "FASTEST!" : "TIME UP");
+}
+
+function showBuzzerRanking(){
+  show("buzzerRanking");
+  table("buzzerRankTable",buzzer.players||[]);
+}
+
+async function nextBuzzer(){
+  buzzer.idx++;
+  if(buzzer.idx>=buzzer.len) return alert("Quiz finished");
+  await setBuzzerQuestion();
+  show("buzzerHostGame");
+  renderBuzzerHost();
+}
+
 setup();home();
 </script>
 <div id="screenFlash" class="screen-flash"></div><div id="comboBurst" class="combo-burst">COMBO!</div>
