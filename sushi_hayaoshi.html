@@ -346,16 +346,15 @@
     .word-grid{
       flex:1;
       display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
+      grid-template-columns:repeat(3,1fr);
       gap:10px;
       min-height:0;
-      width:100%;
     }
     .word-btn{
       background:#fffef9;
       border:2px solid rgba(36,49,63,.12);
       border-radius:18px;
-      font-size:clamp(16px,2.1vw,34px);
+      font-size:clamp(18px,2.1vw,34px);
       font-weight:950;
       text-transform:uppercase;
       box-shadow:0 6px 12px rgba(36,49,63,.06);
@@ -364,43 +363,10 @@
       justify-content:center;
       min-height:56px;
       padding:6px;
-      min-width:0;
-      max-width:100%;
-      overflow-wrap:anywhere;
-      word-break:break-word;
-      line-height:1.05;
-      text-align:center;
-      hyphens:auto;
     }
     .word-btn:active{transform:scale(.97);}
     .word-btn.correct{background:#e7f6e8; border-color:var(--good); color:var(--good);}
     .word-btn.wrong{background:#ffebee; border-color:var(--bad); color:var(--bad);}
-
-    /* スマホでは長いAdvanced語彙がカード外へ出ないように圧縮 */
-    @media (max-width:760px){
-      .team-panel{padding:9px;border-radius:20px;}
-      .word-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        gap:8px;
-      }
-      .word-btn{
-        font-size:clamp(12px,3.6vw,17px);
-        min-height:48px;
-        padding:5px 4px;
-        border-radius:14px;
-        letter-spacing:-.03em;
-      }
-      #gameScreen[data-level="advanced"] .word-btn{
-        font-size:clamp(11px,3.25vw,15px);
-        letter-spacing:-.055em;
-      }
-      #gameScreen[data-level="advanced"] .word-grid{gap:7px;}
-    }
-
-    @media (max-width:390px){
-      .word-btn{font-size:clamp(10px,3.25vw,14px);}
-      #gameScreen[data-level="advanced"] .word-btn{font-size:clamp(9px,3vw,13px);}
-    }
     .team-panel.locked::after{
       content:"";
       display:none;
@@ -717,6 +683,20 @@
             <div class="team-name-list" id="blueNameList"></div>
           </div>
         </div>
+        <div class="team-battle-options">
+          <div class="team-option-row">
+            <span>同じ人が戦う回数</span>
+            <select class="team-round-select" id="teamRoundsSelect">
+              <option value="1">1試合ずつ</option>
+              <option value="2">2試合ずつ</option>
+              <option value="3" selected>3試合ずつ</option>
+              <option value="4">4試合ずつ</option>
+              <option value="5">5試合ずつ</option>
+            </select>
+            <button class="random-match-btn" id="randomMatchBtn" type="button">🎲 対戦相手をランダム決定</button>
+          </div>
+          <div class="match-preview" id="matchPreview">例：5対5で3試合ずつなら、合計15問。</div>
+        </div>
       </div>
 
       <button class="start-btn" id="startBtn">START</button>
@@ -806,6 +786,13 @@
 
   <div class="battle-combo-overlay" id="battleComboOverlay">
     <div class="battle-combo-text" id="battleComboText">3 COMBO!</div>
+  </div>
+
+  <div class="shuffle-overlay" id="shuffleOverlay">
+    <div class="shuffle-card">
+      <div class="shuffle-title">🎲 RANDOM MATCH!</div>
+      <div class="shuffle-sub" id="shuffleSub">対戦カード決定中...</div>
+    </div>
   </div>
 
   <div class="result-overlay" id="resultOverlay">
@@ -953,85 +940,7 @@ const WORDS = {
     {word:'large', jp:'大きい', definition:'big in size'},
     {word:'small', jp:'小さい', definition:'not big'},
     {word:'tired', jp:'疲れた', definition:'needing rest or sleep'},
-    {word:'young', jp:'若い', definition:'not old'},
-    {word:'morning', jp:'朝', definition:'the early part of the day'},
-    {word:'evening', jp:'夕方／晩', definition:'the later part of the day'},
-    {word:'weekend', jp:'週末', definition:'Saturday and Sunday'},
-    {word:'minute', jp:'分', definition:'a unit of time equal to sixty seconds'},
-    {word:'hour', jp:'時間', definition:'a unit of time equal to sixty minutes'},
-    {word:'food', jp:'食べ物', definition:'things that people or animals eat'},
-    {word:'water', jp:'水', definition:'a clear liquid that people drink'},
-    {word:'money', jp:'お金', definition:'coins and notes used to buy things'},
-    {word:'price', jp:'値段', definition:'the amount of money needed to buy something'},
-    {word:'shop', jp:'店', definition:'a place where people buy things'},
-    {word:'clothes', jp:'服', definition:'things people wear'},
-    {word:'shoes', jp:'靴', definition:'things worn on the feet'},
-    {word:'bag', jp:'かばん', definition:'a container used for carrying things'},
-    {word:'key', jp:'鍵', definition:'a small object used to open a lock'},
-    {word:'letter', jp:'手紙／文字', definition:'a written message or a character in the alphabet'},
-    {word:'news', jp:'ニュース', definition:'new information about recent events'},
-    {word:'story', jp:'物語', definition:'a description of events, real or imagined'},
-    {word:'music', jp:'音楽', definition:'sounds arranged in a way that people enjoy'},
-    {word:'song', jp:'歌', definition:'a short piece of music with words'},
-    {word:'movie', jp:'映画', definition:'a story shown in moving pictures'},
-    {word:'game', jp:'試合／ゲーム', definition:'an activity with rules that people play'},
-    {word:'sport', jp:'スポーツ', definition:'a physical activity done for fun or competition'},
-    {word:'team', jp:'チーム', definition:'a group of people who play or work together'},
-    {word:'rule', jp:'規則', definition:'an instruction that says what is allowed'},
-    {word:'voice', jp:'声', definition:'the sound made when a person speaks'},
-    {word:'face', jp:'顔', definition:'the front part of the head'},
-    {word:'heart', jp:'心臓／心', definition:'the part of the body that moves blood'},
-    {word:'head', jp:'頭', definition:'the part of the body above the neck'},
-    {word:'hand', jp:'手', definition:'the body part at the end of your arm'},
-    {word:'foot', jp:'足', definition:'the body part used for standing or walking'},
-    {word:'road', jp:'道路', definition:'a hard path where cars travel'},
-    {word:'map', jp:'地図', definition:'a drawing that shows places and roads'},
-    {word:'mountain', jp:'山', definition:'a very high area of land'},
-    {word:'forest', jp:'森', definition:'a large area with many trees'},
-    {word:'sea', jp:'海', definition:'a large area of salt water'},
-    {word:'sky', jp:'空', definition:'the space above the earth'},
-    {word:'star', jp:'星', definition:'a bright point in the night sky'},
-    {word:'rain', jp:'雨', definition:'water that falls from clouds'},
-    {word:'snow', jp:'雪', definition:'soft white pieces of frozen water'},
-    {word:'wind', jp:'風', definition:'moving air'},
-    {word:'flower', jp:'花', definition:'the colorful part of a plant'},
-    {word:'tree', jp:'木', definition:'a tall plant with a hard trunk'},
-    {word:'bird', jp:'鳥', definition:'an animal with wings and feathers'},
-    {word:'fish', jp:'魚', definition:'an animal that lives in water'},
-    {word:'dog', jp:'犬', definition:'a common animal kept as a pet'},
-    {word:'cat', jp:'猫', definition:'a small animal often kept as a pet'},
-    {word:'door', jp:'ドア', definition:'a thing you open to enter a room'},
-    {word:'window', jp:'窓', definition:'an opening in a wall with glass'},
-    {word:'room', jp:'部屋', definition:'a part of a building with walls'},
-    {word:'kitchen', jp:'台所', definition:'a room where people cook food'},
-    {word:'bathroom', jp:'浴室／トイレ', definition:'a room where people wash or use the toilet'},
-    {word:'bed', jp:'ベッド', definition:'a piece of furniture for sleeping'},
-    {word:'chair', jp:'椅子', definition:'a seat for one person'},
-    {word:'table', jp:'テーブル', definition:'a piece of furniture with a flat top'},
-    {word:'paper', jp:'紙', definition:'thin material used for writing on'},
-    {word:'pen', jp:'ペン', definition:'a tool used for writing'},
-    {word:'phone', jp:'電話', definition:'a device used to talk to people far away'},
-    {word:'computer', jp:'コンピュータ', definition:'an electronic machine for storing and using information'},
-    {word:'happy', jp:'幸せな', definition:'feeling good or pleased'},
-    {word:'sad', jp:'悲しい', definition:'feeling unhappy'},
-    {word:'cold', jp:'寒い／冷たい', definition:'having a low temperature'},
-    {word:'hot', jp:'暑い／熱い', definition:'having a high temperature'},
-    {word:'strong', jp:'強い', definition:'having great power'},
-    {word:'weak', jp:'弱い', definition:'not strong'},
-    {word:'fast', jp:'速い', definition:'moving quickly'},
-    {word:'slow', jp:'遅い', definition:'not fast'},
-    {word:'early', jp:'早い', definition:'before the usual time'},
-    {word:'late', jp:'遅い', definition:'after the usual time'},
-    {word:'full', jp:'満腹の／いっぱいの', definition:'containing as much as possible'},
-    {word:'empty', jp:'空の', definition:'having nothing inside'},
-    {word:'heavy', jp:'重い', definition:'weighing a lot'},
-    {word:'light', jp:'軽い／光', definition:'not heavy or not dark'},
-    {word:'near', jp:'近い', definition:'not far away'},
-    {word:'far', jp:'遠い', definition:'a long distance away'},
-    {word:'rich', jp:'裕福な', definition:'having a lot of money'},
-    {word:'poor', jp:'貧しい', definition:'having little money'},
-    {word:'true', jp:'本当の', definition:'based on facts'},
-    {word:'false', jp:'間違った', definition:'not true'}
+    {word:'young', jp:'若い', definition:'not old'}
   ],
   intermediate: [
     {word:'improve', jp:'改善する', definition:'to make something better'},
@@ -1121,6 +1030,7 @@ const WORDS = {
     {word:'technology', jp:'技術', definition:'machines, tools, and knowledge used to solve problems'},
     {word:'value', jp:'価値', definition:'how important or useful something is'},
     {word:'volunteer', jp:'ボランティア', definition:'a person who works without being paid'},
+    {word:'ability', jp:'能力', definition:'the skill or power to do something'},
     {word:'admire', jp:'尊敬する', definition:'to respect someone because of what they do'},
     {word:'affect', jp:'影響する', definition:'to cause a change in someone or something'},
     {word:'analyze', jp:'分析する', definition:'to study something carefully'},
@@ -1173,87 +1083,7 @@ const WORDS = {
     {word:'separate', jp:'分ける', definition:'to keep things apart'},
     {word:'solve', jp:'解決する', definition:'to find an answer to a problem'},
     {word:'treat', jp:'扱う／治療する', definition:'to behave toward someone in a particular way'},
-    {word:'waste', jp:'無駄にする', definition:'to use something badly or carelessly'},
-    {word:'accurate', jp:'正確な', definition:'correct and without mistakes'},
-    {word:'available', jp:'利用できる', definition:'able to be used or obtained'},
-    {word:'basic', jp:'基本的な', definition:'forming the most important part of something'},
-    {word:'common', jp:'一般的な', definition:'happening often or shared by many people'},
-    {word:'complex', jp:'複雑な', definition:'made of many connected parts'},
-    {word:'current', jp:'現在の', definition:'happening or existing now'},
-    {word:'effective', jp:'効果的な', definition:'producing the result that is wanted'},
-    {word:'efficient', jp:'効率的な', definition:'working well without wasting time or energy'},
-    {word:'essential', jp:'不可欠な', definition:'extremely important or necessary'},
-    {word:'global', jp:'世界的な', definition:'relating to the whole world'},
-    {word:'individual', jp:'個人の', definition:'relating to one person or thing'},
-    {word:'major', jp:'主要な', definition:'very important or large'},
-    {word:'minor', jp:'小さな／重要でない', definition:'not very important or serious'},
-    {word:'natural', jp:'自然な', definition:'existing in nature or seeming normal'},
-    {word:'negative', jp:'否定的な', definition:'bad or harmful'},
-    {word:'positive', jp:'前向きな／肯定的な', definition:'good or hopeful'},
-    {word:'public', jp:'公共の', definition:'relating to all people in a community'},
-    {word:'recent', jp:'最近の', definition:'happening not long ago'},
-    {word:'serious', jp:'深刻な', definition:'important and needing careful thought'},
-    {word:'specific', jp:'具体的な', definition:'clearly defined or exact'},
-    {word:'standard', jp:'標準の', definition:'usual or accepted as normal'},
-    {word:'traditional', jp:'伝統的な', definition:'following old customs or ways'},
-    {word:'various', jp:'さまざまな', definition:'several different kinds'},
-    {word:'digital', jp:'デジタルの', definition:'using computer technology'},
-    {word:'economic', jp:'経済の', definition:'relating to money, trade, and industry'},
-    {word:'social', jp:'社会の', definition:'relating to people and society'},
-    {word:'cultural', jp:'文化的な', definition:'relating to the ideas and customs of a group'},
-    {word:'physical', jp:'身体的な／物理的な', definition:'relating to the body or real objects'},
-    {word:'mental', jp:'精神的な', definition:'relating to the mind'},
-    {word:'academic', jp:'学問の', definition:'relating to school or study'},
-    {word:'career', jp:'職業', definition:'a job or series of jobs in life'},
-    {word:'citizen', jp:'市民', definition:'a person who legally belongs to a country'},
-    {word:'climate', jp:'気候', definition:'the usual weather of a place'},
-    {word:'consumer', jp:'消費者', definition:'a person who buys goods or services'},
-    {word:'demand', jp:'需要／要求', definition:'a strong need or request for something'},
-    {word:'economy', jp:'経済', definition:'the system of money, trade, and work in a country'},
-    {word:'energy', jp:'エネルギー', definition:'power used to make things work'},
-    {word:'factor', jp:'要因', definition:'one thing that helps cause a result'},
-    {word:'feature', jp:'特徴', definition:'an important part of something'},
-    {word:'figure', jp:'数字／人物', definition:'a number, shape, or important person'},
-    {word:'function', jp:'機能', definition:'the purpose or job of something'},
-    {word:'goal', jp:'目標', definition:'something you want to achieve'},
-    {word:'habit', jp:'習慣', definition:'something you do regularly'},
-    {word:'impact', jp:'影響', definition:'a strong effect on someone or something'},
-    {word:'income', jp:'収入', definition:'money that a person or organization receives'},
-    {word:'issue', jp:'問題', definition:'an important subject or problem'},
-    {word:'material', jp:'材料', definition:'a substance used to make things'},
-    {word:'media', jp:'メディア', definition:'newspapers, TV, websites, and other sources of information'},
-    {word:'policy', jp:'政策', definition:'a plan or rule used by an organization or government'},
-    {word:'principle', jp:'原則', definition:'a basic rule or belief'},
-    {word:'profit', jp:'利益', definition:'money gained from business after costs'},
-    {word:'service', jp:'サービス', definition:'work done to help people'},
-    {word:'skill', jp:'技能', definition:'an ability to do something well'},
-    {word:'strategy', jp:'戦略', definition:'a plan for achieving a goal'},
-    {word:'survey', jp:'調査', definition:'a set of questions used to collect information'},
-    {word:'trend', jp:'傾向', definition:'a general direction of change'},
-    {word:'account', jp:'説明／口座', definition:'a report, description, or record'},
-    {word:'adapt', jp:'適応する', definition:'to change to fit a new situation'},
-    {word:'advertise', jp:'広告する', definition:'to tell people about a product or service'},
-    {word:'approve', jp:'承認する', definition:'to officially agree to something'},
-    {word:'attempt', jp:'試みる', definition:'to try to do something'},
-    {word:'calculate', jp:'計算する', definition:'to find an answer using numbers'},
-    {word:'claim', jp:'主張する', definition:'to say that something is true'},
-    {word:'conduct', jp:'行う', definition:'to organize or carry out an activity'},
-    {word:'confirm', jp:'確認する', definition:'to show that something is true'},
-    {word:'consume', jp:'消費する', definition:'to use goods, energy, or time'},
-    {word:'define', jp:'定義する', definition:'to explain the exact meaning of a word or idea'},
-    {word:'emphasize', jp:'強調する', definition:'to show that something is especially important'},
-    {word:'establish', jp:'設立する／確立する', definition:'to start or create something firmly'},
-    {word:'examine', jp:'調べる', definition:'to look at something carefully'},
-    {word:'maintain', jp:'維持する', definition:'to keep something at the same level or condition'},
-    {word:'obtain', jp:'得る', definition:'to get something'},
-    {word:'occur', jp:'起こる', definition:'to happen'},
-    {word:'predict', jp:'予測する', definition:'to say what will happen in the future'},
-    {word:'promote', jp:'促進する', definition:'to help something develop or become popular'},
-    {word:'purchase', jp:'購入する', definition:'to buy something'},
-    {word:'reflect', jp:'反映する', definition:'to show or think carefully about something'},
-    {word:'reject', jp:'拒絶する', definition:'to refuse to accept something'},
-    {word:'release', jp:'発表する／解放する', definition:'to make something available or free'},
-    {word:'transfer', jp:'移す', definition:'to move something from one place to another'}
+    {word:'waste', jp:'無駄にする', definition:'to use something badly or carelessly'}
   ],
   advanced: [
     {word:'wane', jp:'衰える', definition:'to gradually become weaker or less important'},
@@ -1404,82 +1234,7 @@ const WORDS = {
     {word:'undergo', jp:'経験する', definition:'to experience a change or process'},
     {word:'valid', jp:'妥当な', definition:'based on truth or reason'},
     {word:'violate', jp:'違反する', definition:'to break a rule or law'},
-    {word:'widespread', jp:'広範囲に及ぶ', definition:'existing or happening in many places'},
-    {word:'abstract', jp:'抽象的な', definition:'based on ideas rather than physical things'},
-    {word:'acute', jp:'深刻な／鋭い', definition:'very serious or sharp'},
-    {word:'adequate', jp:'十分な', definition:'enough for a particular purpose'},
-    {word:'adjunct', jp:'補助的なもの', definition:'something added to another thing but not essential'},
-    {word:'advocacy', jp:'擁護／主張', definition:'public support for an idea or cause'},
-    {word:'affluent', jp:'裕福な', definition:'having a lot of money'},
-    {word:'agenda', jp:'議題', definition:'a list of things to be discussed or done'},
-    {word:'analogy', jp:'類推', definition:'a comparison between two similar things'},
-    {word:'anomaly', jp:'異常', definition:'something different from what is usual'},
-    {word:'autonomous', jp:'自律的な', definition:'able to act or decide independently'},
-    {word:'brevity', jp:'簡潔さ', definition:'the quality of using few words'},
-    {word:'cohesion', jp:'結束', definition:'the state of sticking or working together'},
-    {word:'commodity', jp:'商品', definition:'a product that can be bought and sold'},
-    {word:'complacent', jp:'自己満足した', definition:'too satisfied and not aware of danger'},
-    {word:'concession', jp:'譲歩', definition:'something given up to reach agreement'},
-    {word:'connotation', jp:'含意', definition:'an additional feeling or idea suggested by a word'},
-    {word:'culminate', jp:'最高潮に達する', definition:'to reach the final or highest point'},
-    {word:'cumulative', jp:'累積的な', definition:'increasing by adding one thing after another'},
-    {word:'deficit', jp:'不足／赤字', definition:'the amount by which something is less than needed'},
-    {word:'deliberate', jp:'意図的な／熟考する', definition:'done intentionally or to think carefully'},
-    {word:'demographic', jp:'人口統計上の', definition:'relating to groups in a population'},
-    {word:'deterrent', jp:'抑止力', definition:'something that discourages an action'},
-    {word:'dilemma', jp:'ジレンマ', definition:'a situation requiring a difficult choice'},
-    {word:'discern', jp:'見分ける', definition:'to notice or understand something with difficulty'},
-    {word:'discourse', jp:'言説／議論', definition:'serious spoken or written discussion'},
-    {word:'disseminate', jp:'広める', definition:'to spread information widely'},
-    {word:'domain', jp:'領域', definition:'an area of activity or knowledge'},
-    {word:'durable', jp:'耐久性のある', definition:'able to last for a long time'},
-    {word:'egalitarian', jp:'平等主義の', definition:'believing that people should have equal rights'},
-    {word:'embody', jp:'体現する', definition:'to represent an idea or quality clearly'},
-    {word:'ephemeral', jp:'短命の', definition:'lasting for only a short time'},
-    {word:'erroneous', jp:'誤った', definition:'wrong or based on false information'},
-    {word:'ethos', jp:'気風／精神', definition:'the values and beliefs of a group'},
-    {word:'evoke', jp:'呼び起こす', definition:'to bring a feeling or memory to mind'},
-    {word:'excerpt', jp:'抜粋', definition:'a short part taken from a text'},
-    {word:'exempt', jp:'免除された', definition:'not required to follow a rule or duty'},
-    {word:'futile', jp:'無駄な', definition:'having no useful result'},
-    {word:'generic', jp:'一般的な', definition:'relating to a whole group, not a specific thing'},
-    {word:'hierarchy', jp:'階層制度', definition:'a system with levels of importance'},
-    {word:'hypothesis', jp:'仮説', definition:'an idea suggested as a possible explanation'},
-    {word:'implicit', jp:'暗黙の', definition:'suggested without being directly stated'},
-    {word:'inadvertent', jp:'不注意による', definition:'done by accident, not intentionally'},
-    {word:'inclination', jp:'傾向', definition:'a feeling that makes someone want to act a certain way'},
-    {word:'indispensable', jp:'不可欠な', definition:'absolutely necessary'},
-    {word:'infrastructure', jp:'インフラ', definition:'basic systems such as roads, power, and communication'},
-    {word:'innovation', jp:'革新', definition:'a new idea, method, or product'},
-    {word:'jurisdiction', jp:'管轄権', definition:'the official power to make legal decisions'},
-    {word:'meticulous', jp:'細心の', definition:'very careful and precise'},
-    {word:'monetary', jp:'金銭の', definition:'relating to money'},
-    {word:'norm', jp:'規範', definition:'an accepted standard or way of behaving'},
-    {word:'paradigm', jp:'枠組み', definition:'a model or way of thinking'},
-    {word:'parameter', jp:'要因／制限条件', definition:'a factor that sets limits or conditions'},
-    {word:'peripheral', jp:'周辺的な', definition:'not central or main'},
-    {word:'pragmatic', jp:'実用的な', definition:'dealing with problems in a practical way'},
-    {word:'precedent', jp:'前例', definition:'an earlier event used as an example'},
-    {word:'proponent', jp:'支持者', definition:'a person who supports an idea or plan'},
-    {word:'quantify', jp:'数量化する', definition:'to express or measure something in numbers'},
-    {word:'rationale', jp:'根拠', definition:'the reason for a decision or belief'},
-    {word:'redundant', jp:'余分な', definition:'not needed because there is already enough'},
-    {word:'refute', jp:'反論する', definition:'to prove that something is wrong'},
-    {word:'regime', jp:'体制', definition:'a system or government, often one with control'},
-    {word:'render', jp:'〜にする／与える', definition:'to cause someone or something to be in a state'},
-    {word:'requisite', jp:'必要な', definition:'needed for a particular purpose'},
-    {word:'retrieve', jp:'取り戻す', definition:'to get something back'},
-    {word:'robust', jp:'頑健な', definition:'strong and able to work well under stress'},
-    {word:'salient', jp:'顕著な', definition:'most noticeable or important'},
-    {word:'sanction', jp:'制裁／認可', definition:'a penalty or official approval'},
-    {word:'scarce', jp:'乏しい', definition:'not enough or hard to find'},
-    {word:'scope', jp:'範囲', definition:'the range covered by an activity or subject'},
-    {word:'synthesis', jp:'統合', definition:'the combination of ideas into a whole'},
-    {word:'trajectory', jp:'軌道／推移', definition:'the path or development of something'},
-    {word:'transient', jp:'一時的な', definition:'lasting only for a short time'},
-    {word:'unprecedented', jp:'前例のない', definition:'never having happened before'},
-    {word:'viable', jp:'実行可能な', definition:'able to work successfully'},
-    {word:'volatile', jp:'不安定な', definition:'likely to change suddenly and unpredictably'}
+    {word:'widespread', jp:'広範囲に及ぶ', definition:'existing or happening in many places'}
   ]
 };
 
@@ -1494,6 +1249,7 @@ const MAX_MISS = 1;
 let selectedLevel = 'beginner';
 let selectedMode = 'solo';
 let teamEntriesReady = false;
+let plannedMatchSchedule = null;
 let state = {};
 let revealTimer = null;
 let nextTimer = null;
@@ -1598,7 +1354,7 @@ function initTeamEntryInputs(){
       input.dataset.teamName = team;
       input.dataset.index = i;
       input.value = localStorage.getItem(`sushihayaoshi_${team}_member_${i}`) || '';
-      input.addEventListener('change', ()=>localStorage.setItem(`sushihayaoshi_${team}_member_${i}`, input.value.trim()));
+      input.addEventListener('change', ()=>{ localStorage.setItem(`sushihayaoshi_${team}_member_${i}`, input.value.trim()); refreshTeamPreview(); });
       box.appendChild(input);
     }
   });
@@ -1621,9 +1377,71 @@ function getTeamMembers(team){
 }
 
 function getCurrentPlayer(team){
+  if(state.matchSchedule && state.matchSchedule[state.questionIndex]){
+    return state.matchSchedule[state.questionIndex][team] || team.toUpperCase();
+  }
   const list = state[team + 'Members'] || [];
   if(!list.length) return team.toUpperCase();
   return list[state.questionIndex % list.length];
+}
+
+function getTeamRounds(){
+  const sel = $('teamRoundsSelect');
+  const n = Number(sel ? sel.value : 3);
+  return Math.min(5, Math.max(1, n || 3));
+}
+
+function buildMatchSchedule(redMembers, blueMembers, rounds = getTeamRounds(), randomized = true){
+  const red = redMembers && redMembers.length ? [...redMembers] : ['RED PLAYER'];
+  const blueBase = blueMembers && blueMembers.length ? [...blueMembers] : ['BLUE PLAYER'];
+  const perRound = Math.max(red.length, blueBase.length);
+  const schedule = [];
+  for(let r=0; r<rounds; r++){
+    const blue = randomized ? shuffle(blueBase) : [...blueBase];
+    const redOrder = randomized && r > 0 ? shuffle(red) : [...red];
+    for(let i=0; i<perRound; i++){
+      schedule.push({ red:redOrder[i % redOrder.length], blue:blue[(i + r) % blue.length] });
+    }
+  }
+  return schedule;
+}
+
+function renderMatchPreview(schedule){
+  const box = $('matchPreview');
+  if(!box) return;
+  const red = getTeamMembers('red');
+  const blue = getTeamMembers('blue');
+  const rounds = getTeamRounds();
+  const total = Math.max(red.length, blue.length) * rounds;
+  const list = schedule || plannedMatchSchedule;
+  const first = list && list.length ? list.slice(0, Math.min(5, list.length)).map((m,i)=>`${i+1}. ${escapeHtml(m.red)} vs ${escapeHtml(m.blue)}`).join('　') : '';
+  box.innerHTML = `<div>${red.length}対${blue.length} × ${rounds}試合ずつ = <strong>${total}問</strong></div>${first ? `<div style="margin-top:6px;color:#c47a00;">${first}${list.length>5?' ...':''}</div>` : ''}`;
+}
+
+function randomizeTeamMatches(showEffect = true){
+  const red = getTeamMembers('red');
+  const blue = getTeamMembers('blue');
+  plannedMatchSchedule = buildMatchSchedule(red, blue, getTeamRounds(), true);
+  renderMatchPreview(plannedMatchSchedule);
+  const preview = $('matchPreview');
+  if(preview){ preview.classList.remove('spin'); void preview.offsetWidth; preview.classList.add('spin'); }
+  if(showEffect){
+    const overlay = $('shuffleOverlay');
+    const sub = $('shuffleSub');
+    if(sub){
+      const first = plannedMatchSchedule[0];
+      sub.textContent = first ? `${first.red}  vs  ${first.blue}` : '対戦カード決定！';
+    }
+    if(overlay){
+      overlay.classList.remove('show'); void overlay.offsetWidth; overlay.classList.add('show');
+      setTimeout(()=>overlay.classList.remove('show'), 950);
+    }
+  }
+}
+
+function refreshTeamPreview(){
+  plannedMatchSchedule = null;
+  renderMatchPreview(null);
 }
 
 function getPlayerScoresText(team){
@@ -1647,6 +1465,8 @@ $('modeButtons').addEventListener('click', e=>{
   toggleTeamEntryBox();
 });
 $('startBtn').addEventListener('click', startGame);
+if($('teamRoundsSelect')) $('teamRoundsSelect').addEventListener('change', ()=>{ localStorage.setItem('sushihayaoshi_team_rounds', $('teamRoundsSelect').value); refreshTeamPreview(); });
+if($('randomMatchBtn')) $('randomMatchBtn').addEventListener('click', ()=>randomizeTeamMatches(true));
 $('quitBtn').addEventListener('click', showMenu);
 $('againBtn').addEventListener('click', startGame);
 $('menuBtn').addEventListener('click', showMenu);
@@ -1659,7 +1479,10 @@ toggleTeamEntryBox(); });
 if($('saveSoloScoreBtn')) $('saveSoloScoreBtn').addEventListener('click', saveSoloScore);
 loadHayaoshiRanking(rankingLevel);
 initTeamEntryInputs();
+const savedRounds = localStorage.getItem('sushihayaoshi_team_rounds');
+if(savedRounds && $('teamRoundsSelect')) $('teamRoundsSelect').value = savedRounds;
 toggleTeamEntryBox();
+renderMatchPreview(null);
 
 $('reviewOverlay').addEventListener('click', proceedFromReview);
 
@@ -1683,6 +1506,12 @@ function stopBgm(){
 
 function startGame(){
   clearTimers();
+  const redMembersForGame = selectedMode === 'team' ? getTeamMembers('red') : ['RED'];
+  const blueMembersForGame = selectedMode === 'team' ? getTeamMembers('blue') : ['BLUE'];
+  const matchScheduleForGame = selectedMode === 'team'
+    ? (plannedMatchSchedule && plannedMatchSchedule.length ? [...plannedMatchSchedule] : buildMatchSchedule(redMembersForGame, blueMembersForGame, getTeamRounds(), true))
+    : null;
+  const totalForGame = selectedMode === 'team' ? matchScheduleForGame.length : TOTAL;
   state = {
     level:selectedLevel,
     mode:selectedMode,
@@ -1695,8 +1524,9 @@ function startGame(){
     blueTotalMiss:0,
     redStreak:0,
     blueStreak:0,
-    redMembers:selectedMode === 'team' ? getTeamMembers('red') : ['RED'],
-    blueMembers:selectedMode === 'team' ? getTeamMembers('blue') : ['BLUE'],
+    redMembers:redMembersForGame,
+    blueMembers:blueMembersForGame,
+    matchSchedule:matchScheduleForGame,
     redPlayerScores:{},
     bluePlayerScores:{},
     locked:false,
@@ -1708,15 +1538,15 @@ function startGame(){
     startTime:0,
     current:null,
     choices:[],
-    used:shuffle(WORDS[selectedLevel]).slice(0,TOTAL)
+    totalQuestions:totalForGame,
+    used:shuffle(WORDS[selectedLevel]).slice(0,totalForGame)
   };
-  while(state.used.length < TOTAL){ state.used.push(...shuffle(WORDS[selectedLevel])); }
+  while(state.used.length < totalForGame){ state.used.push(...shuffle(WORDS[selectedLevel])); }
+  state.used = state.used.slice(0,totalForGame);
   state.redMembers.forEach(name=>state.redPlayerScores[name]=0);
   state.blueMembers.forEach(name=>state.bluePlayerScores[name]=0);
   $('titleScreen').classList.remove('active');
   $('gameScreen').classList.add('active');
-  $('gameScreen').dataset.level = selectedLevel;
-  $('gameScreen').dataset.mode = selectedMode;
   $('resultOverlay').classList.remove('show');
   $('finalActions').style.display='none';
   if($('saveStatus')) $('saveStatus').textContent = '';
@@ -1825,7 +1655,7 @@ function nextQuestion(){
   clearTimers();
   state.waitingReview = false;
   $('reviewOverlay').classList.remove('show');
-  if(state.questionIndex >= TOTAL){ return endGame(); }
+  if(state.questionIndex >= (state.totalQuestions || TOTAL)){ return endGame(); }
   clearTeamLocks();
   state.redMiss = 0;
   state.blueMiss = 0;
@@ -1841,7 +1671,7 @@ function nextQuestion(){
   const count = SETTINGS[state.level].choices;
   const distractors = sample(WORDS[state.level].filter(x=>x.word!==correct.word), count-1);
   state.choices = shuffle([correct, ...distractors]);
-  $('qPill').textContent = `${state.questionIndex+1} / ${TOTAL}`;
+  $('qPill').textContent = `${state.questionIndex+1} / ${state.totalQuestions || TOTAL}`;
   renderWords('red');
   renderWords('blue');
   revealDefinition(correct.definition);
