@@ -55498,7 +55498,653 @@ coburg`;
 })();
 // ===== end v6.20 =====
 
+
+// ===== v6.21 Spelling-rule matcher patch =====
+// Goal: stop fixing every word one by one.  Cards stay as parts; spelling changes
+// such as able + ity -> ability are resolved in a rule layer before alias lookup.
+(function(){
+  function isArray(v){ return Array.isArray(v); }
+  function esc(v){ return String(v ?? ''); }
+  function getPartText(id){
+    try{
+      const p = (PARTS||[]).find(x=>x && (x.id===id || x.text===id));
+      return String((p && (p.text||p.id)) || id || '');
+    }catch(e){ return String(id||''); }
+  }
+  function wordByText(word){
+    try{ return (WORDS||[]).find(w=>w && String(w.word).toLowerCase()===String(word).toLowerCase()) || null; }
+    catch(e){ return null; }
+  }
+  function addPartIfMissing(p){
+    try{ if(isArray(PARTS) && !PARTS.some(x=>x.id===p.id)) PARTS.push(p); }catch(e){}
+  }
+  function addWordIfMissing(w, routes){
+    try{
+      if(!isArray(WORDS)) return null;
+      let item = WORDS.find(x=>x && x.word===w.word);
+      if(!item){ WORDS.push(w); item=w; }
+      else{
+        if(!isArray(item.parts) || item.parts.join('|')!==w.parts.join('|')){
+          item.aliases = item.aliases || [];
+          if(!item.aliases.some(a=>isArray(a)&&a.join('|')===w.parts.join('|'))) item.aliases.push(w.parts);
+        }
+        item.ja = item.ja || w.ja;
+        item.image = item.image || w.image;
+        item.freq = item.freq || w.freq;
+      }
+      try{ if(typeof addAliasKeys==='function' && typeof WORD_MAP!=='undefined') addAliasKeys(WORD_MAP,item); }catch(e){}
+      try{
+        if(typeof WORD_MAP!=='undefined'){
+          WORD_MAP.set(w.parts.join('|'), item);
+          (routes||[]).forEach(r=>{ if(isArray(r)) WORD_MAP.set(r.join('|'), item); });
+          if(isArray(item.aliases)) item.aliases.forEach(r=>{ if(isArray(r)) WORD_MAP.set(r.join('|'), item); });
+        }
+      }catch(e){}
+      return item;
+    }catch(e){ return null; }
+  }
+  function alias(word, routes){
+    try{
+      const item = wordByText(word);
+      if(item && typeof WORD_MAP!=='undefined') routes.forEach(r=>isArray(r)&&WORD_MAP.set(r.join('|'), item));
+    }catch(e){}
+  }
+
+  // Ensure the small parts and core answer exist.
+  addPartIfMissing({id:'ity',type:'suffix',text:'ity',meaning:'性質・状態'});
+  addPartIfMissing({id:'able',type:'suffix',text:'able',meaning:'できる'});
+  addPartIfMissing({id:'ible',type:'suffix',text:'ible',meaning:'できる'});
+  addWordIfMissing({word:'ability',ja:'能力・できること',parts:['able','ity'],image:'able + ity → ability',freq:'S'}, [['ability']]);
+
+  // Useful explicit routes that should not become cards.
+  [
+    ['ability', [['able','ity']]],
+    ['portability', [['port','able','ity'],['port','ability']]],
+    ['movability', [['move','able','ity'],['mov','able','ity'],['move','ability']]],
+    ['capability', [['cap','able','ity'],['cap','ability']]],
+    ['availability', [['avail','able','ity'],['avail','ability']]],
+    ['reliability', [['rely','able','ity'],['rely','ability'],['reli','ability']]],
+    ['possibility', [['poss','ible','ity'],['possible','ity'],['poss','ibility']]],
+    ['responsibility', [['respons','ible','ity'],['responsible','ity'],['respons','ibility']]],
+    ['activity', [['act','ive','ity'],['active','ity'],['act','ivity']]],
+    ['activation', [['act','ive','ate','ion'],['act','ivate','ion'],['act','ivation'],['activate','ion']]]
+  ].forEach(x=>alias(x[0],x[1]));
+
+  function joinTexts(ids){ return ids.map(getPartText).join('').replace(/[^a-z]/gi,'').toLowerCase(); }
+  function addCandidate(out, word, reason){
+    word=String(word||'').toLowerCase();
+    if(!word) return;
+    if(!out.some(x=>x.word===word)) out.push({word, reason:reason||'rule'});
+  }
+  window.deriveSpellingsFromParts = function(ids){
+    ids=(ids||[]).map(String);
+    const out=[];
+    const texts=ids.map(getPartText).map(x=>String(x).toLowerCase());
+    const n=texts.length;
+    const exact=joinTexts(ids);
+    addCandidate(out, exact, 'direct');
+
+    // able + ity -> ability / port + able + ity -> portability
+    if(n>=2 && texts[n-2]==='able' && texts[n-1]==='ity'){
+      const stem=texts.slice(0,n-2).join('');
+      if(!stem){
+        addCandidate(out,'ability','able+ity');
+      }else{
+        addCandidate(out, stem+'ability', 'stem+ability');
+        if(stem.endsWith('e')) addCandidate(out, stem.slice(0,-1)+'ability', 'drop-e+ability');
+        if(stem.endsWith('y')) addCandidate(out, stem.slice(0,-1)+'iability', 'y-to-i+ability');
+      }
+    }
+
+    // ible + ity -> ibility / respons + ible + ity -> responsibility
+    if(n>=2 && texts[n-2]==='ible' && texts[n-1]==='ity'){
+      const stem=texts.slice(0,n-2).join('');
+      addCandidate(out, stem ? stem+'ibility' : 'ibility', 'stem+ibility');
+      if(stem.endsWith('e')) addCandidate(out, stem.slice(0,-1)+'ibility', 'drop-e+ibility');
+      if(stem.endsWith('y')) addCandidate(out, stem.slice(0,-1)+'iibility', 'y-to-i+ibility');
+    }
+
+    // ate + ion -> ation / act + ate + ion -> actation; also supports many -ation words already in WORDS.
+    if(n>=2 && texts[n-2]==='ate' && texts[n-1]==='ion'){
+      const stem=texts.slice(0,n-2).join('');
+      addCandidate(out, stem+'ation', 'ate+ion');
+      if(stem.endsWith('e')) addCandidate(out, stem.slice(0,-1)+'ation', 'drop-e+ation');
+    }
+
+    // ive + ity -> ivity / act + ive + ity -> activity
+    if(n>=2 && texts[n-2]==='ive' && texts[n-1]==='ity'){
+      const stem=texts.slice(0,n-2).join('');
+      addCandidate(out, stem+'ivity', 'ive+ity');
+      if(stem.endsWith('e')) addCandidate(out, stem.slice(0,-1)+'ivity', 'drop-e+ivity');
+    }
+
+    // y + ness -> iness / happy + ness -> happiness
+    if(n>=2 && texts[n-1]==='ness'){
+      const stem=texts.slice(0,n-1).join('');
+      if(stem.endsWith('y')) addCandidate(out, stem.slice(0,-1)+'iness', 'y-to-i+ness');
+      if(stem.endsWith('e')) addCandidate(out, stem.slice(0,-1)+'eness', 'drop-e+ness');
+    }
+
+    // e-dropping before vowel suffixes: move + able -> movable, create + ion -> creation-ish handled by WORDS/aliases.
+    const vowelSuffixes=new Set(['able','ible','ing','ed','er','or','al','ous','ation','ion','ity']);
+    if(n>=2 && vowelSuffixes.has(texts[n-1])){
+      const stem=texts.slice(0,n-1).join('');
+      const suf=texts[n-1];
+      if(stem.endsWith('e')) addCandidate(out, stem.slice(0,-1)+suf, 'drop-e-before-vowel-suffix');
+    }
+    return out;
+  };
+
+  const prevLookup = (typeof lookupWordByIds==='function') ? lookupWordByIds : null;
+  lookupWordByIds = function(ids){
+    ids=(ids||[]).map(String);
+    const key=ids.join('|');
+    let exact=null;
+    try{ exact = prevLookup ? prevLookup(ids) : (typeof WORD_MAP!=='undefined' ? WORD_MAP.get(key) : null); }catch(e){}
+    if(exact) return exact;
+
+    const candidates = (window.deriveSpellingsFromParts ? window.deriveSpellingsFromParts(ids) : []);
+    for(const c of candidates){
+      const item = wordByText(c.word);
+      if(item){
+        try{ if(typeof WORD_MAP!=='undefined') WORD_MAP.set(key,item); }catch(e){}
+        item._ruleReason = c.reason;
+        item._lastInputParts = ids.slice();
+        return item;
+      }
+    }
+    return null;
+  };
+
+  // Make near-miss and score burst also understand rule-derived spellings.
+  try{
+    if(typeof findNearMiss==='function' && !findNearMiss.__spellingRulesPatched){
+      const prevFindNearMiss = findNearMiss;
+      findNearMiss = function(ids){
+        const made = lookupWordByIds(ids||[]);
+        if(made) return made;
+        return prevFindNearMiss.apply(this, arguments);
+      };
+      findNearMiss.__spellingRulesPatched = true;
+    }
+  }catch(e){}
+
+  try{
+    if(typeof render === 'function' && !render.__spellingRulesPatched){
+      const prevRender = render;
+      render = function(){
+        const r = prevRender.apply(this, arguments);
+        try{
+          const w = (typeof currentWord==='function') ? currentWord() : null;
+          if(w && w._ruleReason){
+            const m=document.getElementById('msg');
+            if(m && !m.textContent.includes('綴り変化')) m.textContent += '（綴り変化OK）';
+          }
+        }catch(e){}
+        return r;
+      };
+      render.__spellingRulesPatched = true;
+    }
+  }catch(e){}
+
+  // Rewire button because submitWord has already been wrapped several times.
+  try{
+    const btn=document.getElementById('submitBtn');
+    if(btn && typeof submitWord==='function') btn.onclick=submitWord;
+  }catch(e){}
+})();
+// ===== end v6.21 =====
+
+
+// ===== v6.22 Light Save + Transfer Code Patch =====
+(function(){
+  const TRANSFER_TABLE = 'sushi_parts_transfer';
+  const TRANSFER_DAYS = 30;
+  const PLAYER_ID_KEY_SAFE = (typeof PLAYER_ID_KEY !== 'undefined') ? PLAYER_ID_KEY : 'sushi_parts_player_id';
+  const RUN_KEY_SAFE = (typeof RUN_KEY !== 'undefined') ? RUN_KEY : 'sushi_parts_rogue_state_v2';
+  const PLAYER_KEY_SAFE = (typeof PLAYER_KEY !== 'undefined') ? PLAYER_KEY : 'sushi_parts_player_name';
+  function q(id){ return document.getElementById(id); }
+  function esc(v){ return String(v ?? '').replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+  function safeJson(v,fallback=null){ try{ return JSON.parse(v); }catch(e){ return fallback; } }
+  function ensurePlayerId(){
+    try{ if(typeof getPlayerId === 'function') return getPlayerId(); }catch(e){}
+    let id = localStorage.getItem(PLAYER_ID_KEY_SAFE);
+    if(!id){
+      id = (crypto && crypto.randomUUID) ? crypto.randomUUID() : 'sp_' + Date.now() + '_' + Math.random().toString(36).slice(2);
+      localStorage.setItem(PLAYER_ID_KEY_SAFE,id);
+    }
+    return id;
+  }
+  function safePlayerName(){
+    try{ return (typeof currentPlayerName === 'function' && currentPlayerName()) || q('playerName')?.value?.trim() || localStorage.getItem(PLAYER_KEY_SAFE) || 'guest'; }
+    catch(e){ return localStorage.getItem(PLAYER_KEY_SAFE) || 'guest'; }
+  }
+  function makeCode(){
+    const chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let raw='';
+    const bytes=new Uint8Array(8);
+    try{ crypto.getRandomValues(bytes); }catch(e){ for(let i=0;i<bytes.length;i++) bytes[i]=Math.floor(Math.random()*256); }
+    for(let i=0;i<12;i++) raw += chars[bytes[i%bytes.length] % chars.length];
+    return raw.slice(0,4)+'-'+raw.slice(4,8)+'-'+raw.slice(8,12);
+  }
+  function allWordStores(){
+    const out={};
+    try{
+      for(let i=0;i<localStorage.length;i++){
+        const k=localStorage.key(i);
+        if(k && k.startsWith('sushi_parts_words_')) out[k]=safeJson(localStorage.getItem(k),[]);
+      }
+    }catch(e){}
+    return out;
+  }
+  function captureSaveData(){
+    try{ if(typeof saveRunState === 'function') saveRunState(); }catch(e){}
+    const playerId=ensurePlayerId();
+    const playerName=safePlayerName();
+    return {
+      version:'v6.22-transfer',
+      exported_at:new Date().toISOString(),
+      player_id:playerId,
+      player_name:playerName,
+      run_state:safeJson(localStorage.getItem(RUN_KEY_SAFE),'') || null,
+      word_stores:allWordStores(),
+      active_words:safeJson(localStorage.getItem('sushi_parts_words_'+playerName),[]),
+      local_keys:{player:PLAYER_KEY_SAFE, player_id:PLAYER_ID_KEY_SAFE, run:RUN_KEY_SAFE}
+    };
+  }
+  function restoreSaveData(data){
+    if(!data || typeof data !== 'object') throw new Error('セーブデータ形式が不正です');
+    const name = data.player_name || data.run_state?.player || 'guest';
+    const id = data.player_id || ('sp_import_' + Date.now() + '_' + Math.random().toString(36).slice(2));
+    localStorage.setItem(PLAYER_ID_KEY_SAFE, id);
+    localStorage.setItem(PLAYER_KEY_SAFE, name);
+    if(data.run_state){
+      data.run_state.player = data.run_state.player || name;
+      localStorage.setItem(RUN_KEY_SAFE, JSON.stringify(data.run_state));
+    }
+    if(data.word_stores && typeof data.word_stores === 'object'){
+      Object.keys(data.word_stores).forEach(k=>{
+        if(k.startsWith('sushi_parts_words_')) localStorage.setItem(k, JSON.stringify(data.word_stores[k]||[]));
+      });
+    }else if(Array.isArray(data.active_words)){
+      localStorage.setItem('sushi_parts_words_'+name, JSON.stringify(data.active_words));
+    }
+    try{ if(q('playerName')) q('playerName').value=name; }catch(e){}
+    try{ if(q('resumeBox') && localStorage.getItem(RUN_KEY_SAFE)) q('resumeBox').classList.remove('hidden'); }catch(e){}
+  }
+  function setTransferMsg(html, cls=''){
+    const el=q('transferMsg'); if(!el) return;
+    el.className='transferMsg '+cls;
+    el.innerHTML=html;
+  }
+  function ensureUI(){
+    if(q('transferModal')) return;
+    const style=document.createElement('style');
+    style.textContent=`
+      .transferBox{display:grid;gap:10px;margin-top:8px}.transferCode{font-size:24px;font-weight:1000;letter-spacing:.08em;text-align:center;background:#263238;color:#fff7d7;border-radius:16px;padding:14px;user-select:all}.transferInput{width:100%;font-size:20px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;padding:12px 14px;border-radius:14px;border:1px solid var(--line)}.transferMsg{font-size:13px;color:var(--muted);line-height:1.6}.transferMsg.ok{color:var(--ok);font-weight:900}.transferMsg.bad{color:var(--bad);font-weight:900}.transferHelp{background:#fff8ef;border:1px solid var(--line);border-radius:14px;padding:10px}.transferMini{font-size:12px;color:var(--muted);line-height:1.55}`;
+    document.head.appendChild(style);
+    const modal=document.createElement('div');
+    modal.id='transferModal';
+    modal.className='overlay hidden';
+    modal.innerHTML=`<div class="modal"><h2>📦 セーブデータ引き継ぎ</h2><div class="transferBox"><div class="transferHelp"><b>ライト版セーブ</b><br><span class="transferMini">同じブラウザなら自動保存。別ブラウザ・別端末へ移す時だけ、下のコードを使います。</span></div><button id="transferExportBtn">引き継ぎコードを発行</button><div id="transferCode" class="transferCode hidden"></div><button id="transferCopyBtn" class="secondary hidden">📋 コードをコピー</button><hr style="border:0;border-top:1px solid var(--line);width:100%"><input id="transferInput" class="transferInput" placeholder="コードを入力 例 SP12-AB34-CD56"><button id="transferImportBtn" class="secondary">このブラウザに復元</button><div id="transferMsg" class="transferMsg">コードの有効期限は30日想定です。復元するとこのブラウザの現在セーブに上書きします。</div><div class="actions"><button id="transferCloseBtn" class="secondary">閉じる</button></div></div></div>`;
+    document.body.appendChild(modal);
+  }
+  function addButtons(){
+    ensureUI();
+    if(q('transferBtnStart')) return;
+    const startPanel=q('startPanel');
+    if(startPanel){
+      const btn=document.createElement('button');
+      btn.id='transferBtnStart'; btn.className='secondary'; btn.textContent='📦セーブ引き継ぎ';
+      const top=q('topBtn'); startPanel.insertBefore(btn, top || null);
+    }
+    const actions=document.querySelector('#game .actions');
+    if(actions && !q('transferBtnGame')){
+      const btn=document.createElement('button');
+      btn.id='transferBtnGame'; btn.className='secondary'; btn.textContent='📦引き継ぎ';
+      const home=q('homeBtn'); actions.insertBefore(btn, home || null);
+    }
+  }
+  function openTransfer(){ ensureUI(); q('transferModal')?.classList.remove('hidden'); setTransferMsg('コードを発行するか、別ブラウザで発行したコードを入力してください。'); }
+  function closeTransfer(){ q('transferModal')?.classList.add('hidden'); }
+  async function exportTransfer(){
+    ensureUI();
+    const code=makeCode();
+    const data=captureSaveData();
+    const expires=new Date(Date.now()+TRANSFER_DAYS*24*60*60*1000).toISOString();
+    setTransferMsg('コードを発行中...');
+    try{
+      if(!supabaseClient) throw new Error('Supabase接続が見つかりません');
+      const row={code, player_id:data.player_id, player_name:data.player_name, save_data:data, expires_at:expires};
+      const {error}=await supabaseClient.from(TRANSFER_TABLE).insert(row);
+      if(error) throw error;
+      const box=q('transferCode');
+      if(box){ box.textContent=code; box.classList.remove('hidden'); }
+      q('transferCopyBtn')?.classList.remove('hidden');
+      setTransferMsg(`発行OK。別ブラウザでこのコードを入力してください。<br><span class="transferMini">${esc(data.player_name)} / ${esc(data.run_state ? 'Stage '+(data.run_state.round||1)+' Score '+(data.run_state.score||0) : '図鑑データのみ')}</span>`,'ok');
+    }catch(e){
+      console.warn('transfer export failed',e);
+      setTransferMsg('発行失敗：'+esc(e.message||String(e))+'<br><span class="transferMini">Supabaseに sushi_parts_transfer テーブルが必要です。</span>','bad');
+    }
+  }
+  async function importTransfer(){
+    ensureUI();
+    const code=(q('transferInput')?.value||'').trim().toUpperCase().replace(/[^A-Z0-9]/g,'');
+    if(code.length<8){ setTransferMsg('コードが短すぎます。','bad'); return; }
+    const pretty=code.length===12 ? code.slice(0,4)+'-'+code.slice(4,8)+'-'+code.slice(8,12) : code;
+    setTransferMsg('復元中...');
+    try{
+      if(!supabaseClient) throw new Error('Supabase接続が見つかりません');
+      const {data,error}=await supabaseClient.from(TRANSFER_TABLE).select('*').eq('code',pretty).maybeSingle();
+      if(error) throw error;
+      if(!data) throw new Error('コードが見つかりません');
+      if(data.expires_at && new Date(data.expires_at).getTime() < Date.now()) throw new Error('コードの有効期限が切れています');
+      const saveData=data.save_data || data.payload || data.data;
+      restoreSaveData(saveData);
+      setTransferMsg('復元OK。続きから始められます。','ok');
+      try{ if(typeof loadRunState==='function' && loadRunState() && typeof start==='function') start(false); }catch(e){}
+    }catch(e){
+      console.warn('transfer import failed',e);
+      setTransferMsg('復元失敗：'+esc(e.message||String(e)),'bad');
+    }
+  }
+  async function copyCode(){
+    const code=q('transferCode')?.textContent?.trim(); if(!code) return;
+    try{ await navigator.clipboard.writeText(code); setTransferMsg('コピーしました。','ok'); }
+    catch(e){ setTransferMsg('コピーできない場合は、コード部分を長押し/選択してコピーしてください。','bad'); }
+  }
+  function wire(){
+    addButtons(); ensurePlayerId();
+    const savedName=localStorage.getItem(PLAYER_KEY_SAFE)||''; if(q('playerName') && !q('playerName').value) q('playerName').value=savedName;
+    if(q('resumeBox') && localStorage.getItem(RUN_KEY_SAFE)) q('resumeBox').classList.remove('hidden');
+    ['transferBtnStart','transferBtnGame'].forEach(id=>{ const b=q(id); if(b) b.onclick=openTransfer; });
+    const close=q('transferCloseBtn'); if(close) close.onclick=closeTransfer;
+    const exp=q('transferExportBtn'); if(exp) exp.onclick=exportTransfer;
+    const imp=q('transferImportBtn'); if(imp) imp.onclick=importTransfer;
+    const copy=q('transferCopyBtn'); if(copy) copy.onclick=copyCode;
+  }
+  wire();
+  document.addEventListener('DOMContentLoaded',wire);
+  window.addEventListener('load',wire);
+  // Expose small helpers for debugging.
+  window.sushiPartsTransfer = {captureSaveData, restoreSaveData, exportTransfer, importTransfer};
+})();
+// ===== end v6.22 =====
+
 </script>
+
+
+
+<script>
+// ===== v6.23 dis/ness + rare/epic reward balance patch =====
+// 目的：dis / ness を実際に出るようにし、報酬・ドローでRare/Epicが見える割合を上げる。
+(function(){
+  function safe(fn, fallback){ try{return fn();}catch(e){return fallback;} }
+  function hasPart(id){ return Array.isArray(PARTS) && PARTS.some(p=>p && p.id===id); }
+  function addPartLite(p){
+    if(!Array.isArray(PARTS) || !p || !p.id) return;
+    const old=PARTS.find(x=>x.id===p.id);
+    if(old){
+      old.type = old.type || p.type;
+      old.text = old.text || p.text || p.id;
+      old.meaning = (!old.meaning || /語根|接頭辞|接尾辞|語源部品/.test(old.meaning)) ? (p.meaning||old.meaning) : old.meaning;
+      return;
+    }
+    PARTS.push(p);
+  }
+  function pushUnique(arr, ids){
+    if(!Array.isArray(arr)) return;
+    ids.forEach(id=>{ if(hasPart(id) && !arr.includes(id)) arr.push(id); });
+  }
+  function addWordLite(w){
+    if(!w || !w.word || !Array.isArray(w.parts) || !Array.isArray(WORDS)) return;
+    if(!WORDS.some(x=>x.word===w.word && Array.isArray(x.parts) && x.parts.join('|')===w.parts.join('|'))){
+      WORDS.push(w);
+    }
+    const item=WORDS.find(x=>x.word===w.word && Array.isArray(x.parts) && x.parts.join('|')===w.parts.join('|')) || WORDS.find(x=>x.word===w.word);
+    safe(()=>{ if(item && typeof addAliasKeys==='function' && typeof WORD_MAP!=='undefined') addAliasKeys(WORD_MAP,item); }, null);
+    safe(()=>{ if(item && typeof WORD_MAP!=='undefined') WORD_MAP.set(w.parts.join('|'), item); }, null);
+  }
+  function currentRarity(id){ return safe(()=>rarityOf(id),'common'); }
+  function tierWeight(id){
+    const r=currentRarity(id);
+    const rd=safe(()=>Number(round)||1,1);
+    if(r==='legendary') return rd>=8 ? 2.3 : 0.8;
+    if(r==='epic') return rd>=5 ? 4.4 : rd>=3 ? 3.4 : 1.9;
+    if(r==='rare') return rd>=3 ? 5.2 : 3.5;
+    return 2.2;
+  }
+  function pickWeightedUnique(pool, count){
+    const items=[...new Set((pool||[]).filter(id=>hasPart(id) && safe(()=>isUnlockablePartId(id),true)))];
+    const out=[];
+    while(out.length<count && items.length){
+      const total=items.reduce((s,id)=>s+tierWeight(id),0);
+      let r=Math.random()*total, idx=0;
+      for(;idx<items.length;idx++){ r-=tierWeight(items[idx]); if(r<=0) break; }
+      out.push(items[idx] || items[0]);
+      items.splice(idx,1);
+    }
+    return out;
+  }
+  function possibleHigherTier(pool){
+    return (pool||[]).filter(id=>['rare','epic','legendary'].includes(currentRarity(id)) && hasPart(id) && safe(()=>isUnlockablePartId(id),true));
+  }
+
+  // dis / ness で遊べる最低セット。既存にあれば意味だけ補強。
+  [
+    {id:'dis',type:'prefix',text:'dis',meaning:'離れて・反対・否定'},
+    {id:'ness',type:'suffix',text:'ness',meaning:'〜であること'},
+    {id:'agree',type:'root',text:'agree',meaning:'同意する'},
+    {id:'appear',type:'root',text:'appear',meaning:'現れる'},
+    {id:'connect',type:'root',text:'connect',meaning:'つなぐ'},
+    {id:'honest',type:'root',text:'honest',meaning:'正直な'},
+    {id:'like',type:'root',text:'like',meaning:'好む'},
+    {id:'kind',type:'root',text:'kind',meaning:'親切な'},
+    {id:'dark',type:'root',text:'dark',meaning:'暗い'},
+    {id:'happy',type:'root',text:'happy',meaning:'幸せな'},
+    {id:'sad',type:'root',text:'sad',meaning:'悲しい'},
+    {id:'ill',type:'root',text:'ill',meaning:'病気の'}
+  ].forEach(addPartLite);
+
+  safe(()=>RARE_IDS.add('dis'),null);
+  safe(()=>RARE_IDS.add('ness'),null);
+  safe(()=>RARE_IDS.add('ful'),null);
+  safe(()=>RARE_IDS.add('less'),null);
+  safe(()=>RARE_IDS.add('ment'),null);
+  safe(()=>RARE_IDS.add('ity'),null);
+  safe(()=>RARE_IDS.add('able'),null);
+  safe(()=>RARE_IDS.add('tion'),null);
+  ['dict','port','tract','press','ject','spect','fer','mit','miss','struct','tain','duce','duct','cept','ceive','cred','sens','sent','gress','rupt','vers','vert','fract','frag','flu','agree','appear','connect','honest','kind'].forEach(id=>safe(()=>RARE_IDS.add(id),null));
+  ['trans','inter','sub','super','graph','gram','phon','chron','bio','geo','path','bene','mal','astro','therm','hydr','meter','metr','happy'].forEach(id=>safe(()=>EPIC_IDS.add(id),null));
+
+  // 序盤から見える候補を少し増やす。ただし全カード解放にはしない。
+  safe(()=>pushUnique(STARTER_PARTS, ['dis','ness','ful','less','ment','kind','happy']),null);
+  safe(()=>{
+    if(Array.isArray(UNLOCK_TIERS)){
+      UNLOCK_TIERS[0]=[...new Set([...(UNLOCK_TIERS[0]||[]),'dis','ness','ful','less','ment','agree','appear','connect','kind','happy'])];
+      UNLOCK_TIERS[1]=[...new Set([...(UNLOCK_TIERS[1]||[]),'honest','like','dark','sad','ill'])];
+    }
+  },null);
+
+  [
+    {word:'disagree',ja:'同意しない',parts:['dis','agree'],image:'dis + agree → disagree',freq:'A'},
+    {word:'disappear',ja:'消える・見えなくなる',parts:['dis','appear'],image:'dis + appear → disappear',freq:'A'},
+    {word:'disconnect',ja:'切断する',parts:['dis','connect'],image:'dis + connect → disconnect',freq:'A'},
+    {word:'dishonest',ja:'不正直な',parts:['dis','honest'],image:'dis + honest → dishonest',freq:'B'},
+    {word:'dislike',ja:'嫌う',parts:['dis','like'],image:'dis + like → dislike',freq:'B'},
+    {word:'kindness',ja:'親切さ',parts:['kind','ness'],image:'kind + ness → kindness',freq:'A'},
+    {word:'darkness',ja:'暗闇',parts:['dark','ness'],image:'dark + ness → darkness',freq:'B'},
+    {word:'happiness',ja:'幸福',parts:['happy','ness'],image:'happy + ness → happiness',freq:'A'},
+    {word:'sadness',ja:'悲しみ',parts:['sad','ness'],image:'sad + ness → sadness',freq:'B'},
+    {word:'illness',ja:'病気',parts:['ill','ness'],image:'ill + ness → illness',freq:'B'}
+  ].forEach(addWordLite);
+
+  // 新規ゲーム・報酬候補でRare/Epicが出やすいように、候補抽選を上書き。
+  if(typeof unlockCandidates==='function'){
+    const oldUnlockCandidates=unlockCandidates;
+    unlockCandidates=function(kind=null,count=3){
+      let pool=[];
+      safe(()=>{
+        const tier=UNLOCK_TIERS[Math.min(UNLOCK_TIERS.length-1, Math.max(0, Math.floor(((Number(round)||1)-1)/2)))] || [];
+        pool=[...tier, ...PARTS.filter(p=>!unlockedParts.has(p.id)).map(p=>p.id)];
+      }, null);
+      pool=[...new Set(pool)].filter(id=>{
+        if(safe(()=>unlockedParts.has(id),false)) return false;
+        if(!hasPart(id) || !safe(()=>isUnlockablePartId(id),true)) return false;
+        if(kind && safe(()=>part(id).type,'')!==kind) return false;
+        return true;
+      });
+      if(!pool.length) return oldUnlockCandidates(kind,count);
+      const out=pickWeightedUnique(pool,count);
+      const high=possibleHigherTier(pool);
+      const rd=safe(()=>Number(round)||1,1);
+      if(rd>=2 && high.length && !out.some(id=>['rare','epic','legendary'].includes(currentRarity(id)))){
+        out[out.length-1]=pickWeightedUnique(high,1)[0];
+      }
+      return [...new Set(out)].slice(0,count);
+    };
+  }
+
+  // デッキ初期化後にもスターターを反映。既存セーブにも少し混ぜる。
+  if(typeof initDeck==='function'){
+    const oldInitDeck=initDeck;
+    initDeck=function(){
+      const r=oldInitDeck.apply(this,arguments);
+      safe(()=>{
+        ['dis','ness','ful','less','ment','kind','happy'].forEach(id=>{
+          if(hasPart(id) && isUnlockablePartId(id)){
+            unlockedParts.add(id);
+            if(!deck.includes(id)) deck.push(id,id);
+          }
+        });
+      },null);
+      return r;
+    };
+  }
+  if(typeof drawCards==='function'){
+    const oldDrawCards=drawCards;
+    drawCards=function(n){
+      safe(()=>{
+        // 既存プレイ中にもRare/Epic候補がゼロにならないよう軽く混ぜる。
+        const higher=(deck||[]).filter(id=>['rare','epic','legendary'].includes(currentRarity(id)));
+        if((Number(round)||1)>=3 && higher.length && Math.random()<0.28 && hand.length<MAX_HAND){
+          hand.push(makeCard(higher[Math.floor(Math.random()*higher.length)]));
+          n=Math.max(0,(Number(n)||0)-1);
+        }
+      },null);
+      return oldDrawCards.call(this,n);
+    };
+  }
+
+  safe(()=>{ if(typeof render==='function') render(); },null);
+  console.info('v6.23: dis/ness enabled; Rare/Epic reward rate increased.');
+})();
+// ===== end v6.23 =====
+</script>
+
+
+
+<script>
+// ===== v6.24 reward hand preview =====
+// 報酬選択時に、現在の手札と解放済みカードを確認できるようにする。
+(function(){
+  function q(id){ return document.getElementById(id); }
+  function esc(v){ return String(v ?? '').replace(/[&<>\"]/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
+  function safe(fn,fallback){ try{return fn();}catch(e){return fallback;} }
+  function pObj(id){ return safe(()=>part(id), null) || (Array.isArray(PARTS)?PARTS.find(p=>p&&p.id===id):null) || {id,text:id,meaning:'',type:''}; }
+  function rOf(id){ return safe(()=>rarityOf(id),'common'); }
+  function typeName(t){ return t==='prefix'?'接頭辞':t==='root'?'語根':t==='suffix'?'接尾辞':'部品'; }
+  function idOfCard(c){ return typeof c==='string' ? c : (c && (c.id || c.partId || c.part_id || c.key)) || ''; }
+  function chipHtml(id, extra=''){
+    const p=pObj(id), r=rOf(id);
+    return `<span class="rewardHandChip ${esc(p.type||'')} ${esc(r)} ${extra}" title="${esc(typeName(p.type))} / ${esc(p.meaning||'')}"><b>${esc(p.text||id)}</b><small>${esc(typeName(p.type))}</small></span>`;
+  }
+  function counts(ids){
+    const m=new Map();
+    (ids||[]).filter(Boolean).forEach(id=>m.set(id,(m.get(id)||0)+1));
+    return [...m.entries()].sort((a,b)=>{
+      const pa=pObj(a[0]), pb=pObj(b[0]);
+      const order={prefix:0,root:1,suffix:2};
+      return (order[pa.type]??9)-(order[pb.type]??9) || String(pa.text||a[0]).localeCompare(String(pb.text||b[0]));
+    });
+  }
+  function ensureBox(){
+    let box=q('rewardHandPreview');
+    if(box) return box;
+    const help=q('shopHelp'), items=q('shopItems');
+    if(!items) return null;
+    box=document.createElement('div');
+    box.id='rewardHandPreview';
+    box.className='rewardHandPreview';
+    if(help && help.parentNode) help.insertAdjacentElement('afterend', box);
+    else items.parentNode.insertBefore(box, items);
+    return box;
+  }
+  window.renderRewardHandPreview=function(){
+    const box=ensureBox(); if(!box) return;
+    const handIds=safe(()=>hand.map(idOfCard).filter(Boolean),[]);
+    const deckIds=safe(()=>deck.slice().filter(Boolean),[]);
+    const unlockedIds=safe(()=>Array.from(unlockedParts||[]).filter(Boolean),[]);
+    const handHtml=handIds.length ? handIds.map(id=>chipHtml(id)).join('') : '<span class="rewardHandEmpty">手札なし</span>';
+    const deckCountHtml=counts(deckIds).slice(0,48).map(([id,n])=>chipHtml(id, n>1?`multi`:'') + (n>1?`<span class="rewardHandNum">×${n}</span>`:'')).join('') || '<span class="rewardHandEmpty">山札なし</span>';
+    const unlockedHtml=counts(unlockedIds).slice(0,60).map(([id])=>chipHtml(id,'unlocked')).join('') || '<span class="rewardHandEmpty">まだ少ない</span>';
+    box.innerHTML=`
+      <details class="rewardHandDetails" open>
+        <summary>🃏 手持ち確認 <span>手札 ${handIds.length}枚 / 山札 ${deckIds.length}枚 / 解放 ${unlockedIds.length}種</span></summary>
+        <div class="rewardHandSection"><b>現在の手札</b><div class="rewardHandGrid">${handHtml}</div></div>
+        <details class="rewardDeckDetails">
+          <summary>山札・解放済みカードも見る</summary>
+          <div class="rewardHandSection"><b>山札</b><div class="rewardHandGrid smallGrid">${deckCountHtml}</div></div>
+          <div class="rewardHandSection"><b>解放済み部品</b><div class="rewardHandGrid smallGrid">${unlockedHtml}</div></div>
+        </details>
+      </details>`;
+  };
+  const oldRenderShopChoices=safe(()=>renderShopChoices,null);
+  if(typeof renderShopChoices==='function'){
+    renderShopChoices=function(choices){
+      const r=oldRenderShopChoices.apply(this,arguments);
+      safe(()=>window.renderRewardHandPreview(),null);
+      return r;
+    };
+  }
+  const oldOpenShop=safe(()=>openShop,null);
+  if(typeof openShop==='function'){
+    openShop=function(){
+      const r=oldOpenShop.apply(this,arguments);
+      safe(()=>window.renderRewardHandPreview(),null);
+      return r;
+    };
+  }
+  const oldOpenLab=safe(()=>openLab,null);
+  if(typeof openLab==='function'){
+    openLab=function(){
+      const r=oldOpenLab.apply(this,arguments);
+      safe(()=>window.renderRewardHandPreview(),null);
+      return r;
+    };
+  }
+  console.info('v6.24: reward hand preview enabled.');
+})();
+// ===== end v6.24 =====
+</script>
+
+<style>
+/* ===== v6.24 reward hand preview style ===== */
+.rewardHandPreview{margin:10px 0 12px}
+.rewardHandDetails{background:#fff8ef;border:1px solid #ffd0bd;border-radius:18px;padding:10px 12px;box-shadow:0 6px 14px rgba(80,45,20,.06)}
+.rewardHandDetails>summary,.rewardDeckDetails>summary{cursor:pointer;font-weight:1000;color:#d84315;list-style:none;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.rewardHandDetails>summary::-webkit-details-marker,.rewardDeckDetails>summary::-webkit-details-marker{display:none}
+.rewardHandDetails>summary span{font-size:12px;color:#687782;font-weight:900}
+.rewardDeckDetails{margin-top:8px;background:#fff;border:1px dashed #ffd0bd;border-radius:14px;padding:8px}
+.rewardDeckDetails>summary{font-size:13px;color:#263238}
+.rewardHandSection{margin-top:8px}.rewardHandSection>b{font-size:13px;color:#263238}
+.rewardHandGrid{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;max-height:118px;overflow:auto;padding-right:2px}.rewardHandGrid.smallGrid{max-height:150px}
+.rewardHandChip{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:999px;background:#fff;border:1px solid #f1d7c8;font-size:12px;font-weight:1000;color:#263238;position:relative}
+.rewardHandChip small{font-size:10px;color:#687782;font-weight:900}.rewardHandChip.prefix{border-color:#9adfd6;background:#eefcf9}.rewardHandChip.root{border-color:#ffc9b7;background:#fff3e8}.rewardHandChip.suffix{border-color:#d8c4ff;background:#f5efff}
+.rewardHandChip.rare{box-shadow:0 0 0 2px rgba(74,144,255,.14);border-color:#4a90ff}.rewardHandChip.epic{box-shadow:0 0 0 2px rgba(168,85,247,.14);border-color:#a855f7}.rewardHandChip.legendary{box-shadow:0 0 0 2px rgba(255,215,0,.28);border-color:#ffd700}
+.rewardHandNum{display:inline-block;margin-left:-4px;margin-right:4px;background:#263238;color:#fff7d7;border-radius:999px;padding:2px 5px;font-size:10px;font-weight:1000}.rewardHandEmpty{font-size:12px;color:#687782;font-weight:900;background:#fff;border:1px dashed #d1d5db;border-radius:999px;padding:5px 8px}
+@media(max-width:650px){.rewardHandDetails>summary{display:block}.rewardHandDetails>summary span{display:block;margin-top:2px}.rewardHandGrid{max-height:98px}.rewardHandGrid.smallGrid{max-height:122px}}
+</style>
 
 </body>
 </html>
