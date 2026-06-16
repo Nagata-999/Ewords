@@ -88,15 +88,99 @@ function localReveal(){let c=local.cur;local.players.forEach(p=>{if(p.answer===c
 
 // online demo / supabase-ready
 function showOnlineMenu(){show("onlineMenu")} function showOnlineHost(){show("onlineHostSetup")} function showJoin(){show("join")}
-async function createSession(){let c=code4();online={role:"host",code:c,cat:onlineCat.value,len:Number(onlineLen.value),idx:0,used:[],players:[]};if(HAS_SUPABASE){await sb.from("sushi_quiz_sessions").insert({code:c,status:"lobby",category:online.cat,length:online.len,q_index:0})}else{setL(c,"session",{code:c,status:"lobby",category:online.cat,length:online.len,q_index:0,current_question:null});setL(c,"players",[])}code.textContent=c;show("onlineLobby");pollHost()}
-function pollHost(){stop();let f=async()=>{if(HAS_SUPABASE){let {data}=await sb.from("sushi_quiz_players").select("*").eq("session_code",online.code);online.players=data||[]}else online.players=getL(online.code,"players")||[];onlinePlayers.innerHTML="";online.players.forEach(p=>{let d=document.createElement("div");d.className="player";d.textContent=`${p.name} ${p.score||0}`;onlinePlayers.appendChild(d)});if(!onlineHostGame.classList.contains("hidden"))ohStatus.textContent=`Answers: ${online.players.filter(p=>p.answered_q_index===online.idx).length} / ${online.players.length}`};f();timer=setInterval(f,1000)}
+async function createSession(){
+  let c=code4();
+  online={role:"host",code:c,cat:onlineCat.value,len:Number(onlineLen.value),idx:0,used:[],players:[]};
+
+  if(HAS_SUPABASE){
+    const payload={code:c,status:"lobby",category:online.cat,length:online.len,q_index:0,current_question:null};
+    const {data,error}=await sb
+      .from("sushi_quiz_sessions")
+      .insert(payload)
+      .select()
+      .maybeSingle();
+
+    if(error || !data){
+      alert("セッション作成に失敗しました。テーブル名・RLS設定を確認してください。");
+      console.error("session create failed", error);
+      return;
+    }
+
+    const check=await sb
+      .from("sushi_quiz_sessions")
+      .select("code,status")
+      .eq("code",c)
+      .maybeSingle();
+
+    if(check.error || !check.data){
+      alert("セッションを作成しましたが、読み取りできません。RLSのSELECT許可を確認してください。");
+      console.error("session read check failed", check.error);
+      return;
+    }
+  }else{
+    setL(c,"session",{code:c,status:"lobby",category:online.cat,length:online.len,q_index:0,current_question:null});
+    setL(c,"players",[]);
+  }
+
+  code.textContent=c;
+  show("onlineLobby");
+  pollHost();
+}
+function pollHost(){stop();let f=async()=>{if(HAS_SUPABASE){let {data,error}=await sb.from("sushi_quiz_players").select("*").eq("session_code",online.code); if(error){console.error("player poll failed", error);} online.players=data||[]}else online.players=getL(online.code,"players")||[];onlinePlayers.innerHTML="";online.players.forEach(p=>{let d=document.createElement("div");d.className="player";d.textContent=`${p.name} ${p.score||0}`;onlinePlayers.appendChild(d)});if(!onlineHostGame.classList.contains("hidden"))ohStatus.textContent=`Answers: ${online.players.filter(p=>p.answered_q_index===online.idx).length} / ${online.players.length}`};f();timer=setInterval(f,1000)}
 async function startOnline(){if(!online.players.length)return alert("No players");online.idx=0;online.used=[];await setOnlineQ();show("onlineHostGame");renderOnlineHost()}
-async function setOnlineQ(){let q=pick(online.cat,2,online.used);online.cur=q;online.used.push(q.q);if(HAS_SUPABASE){await sb.from("sushi_quiz_sessions").update({status:"question",q_index:online.idx,current_question:q}).eq("code",online.code);await sb.from("sushi_quiz_players").update({last_answer:null,answered_q_index:-1}).eq("session_code",online.code)}else{setL(online.code,"session",{code:online.code,status:"question",q_index:online.idx,current_question:q});setL(online.code,"players",(getL(online.code,"players")||[]).map(p=>({...p,last_answer:null,answered_q_index:-1})))}}
+async function setOnlineQ(){let q=pick(online.cat,2,online.used);online.cur=q;online.used.push(q.q);if(HAS_SUPABASE){const qUpdate=await sb.from("sushi_quiz_sessions").update({status:"question",q_index:online.idx,current_question:q}).eq("code",online.code); if(qUpdate.error){alert("問題の送信に失敗しました。"); console.error(qUpdate.error); return;} const pReset=await sb.from("sushi_quiz_players").update({last_answer:null,answered_q_index:-1}).eq("session_code",online.code); if(pReset.error){console.error("player reset failed", pReset.error);}}else{setL(online.code,"session",{code:online.code,status:"question",q_index:online.idx,current_question:q});setL(online.code,"players",(getL(online.code,"players")||[]).map(p=>({...p,last_answer:null,answered_q_index:-1})))}}
 function renderOnlineHost(){let c=online.cur;ohBadge.textContent=`${c.cat}｜${c.diff}`;ohProg.textContent=`Session ${online.code}｜Question ${online.idx+1} / ${online.len}`;ohQ.textContent=c.q;ohChoices.innerHTML="";c.choices.forEach((x,i)=>{let d=document.createElement("div");d.className="choice";d.innerHTML=`<b>${"ABCD"[i]}.</b> ${x}`;ohChoices.appendChild(d)});ohStatus.textContent=`Answers: 0 / ${online.players.length}`}
 async function revealOnline(){let c=online.cur;let ps=online.players.map(p=>{let ok=p.answered_q_index===online.idx&&Number(p.last_answer)===c.ans;return {...p,score:(p.score||0)+(ok?100+(diffs[c.diff]-1)*50:0),correct:(p.correct||0)+(ok?1:0)}});if(HAS_SUPABASE){for(const p of ps)await sb.from("sushi_quiz_players").update({score:p.score,correct:p.correct}).eq("id",p.id);await sb.from("sushi_quiz_sessions").update({status:"result"}).eq("code",online.code)}else{setL(online.code,"players",ps);let s=getL(online.code,"session");setL(online.code,"session",{...s,status:"result"})}online.players=ps;show("onlineResult");onlineAns.innerHTML=`Answer: <b>${"ABCD"[c.ans]}. ${c.choices[c.ans]}</b><br>${c.exp}`;table("onlineTable",online.players)}
 async function nextOnline(){online.idx++;if(online.idx>=online.len)return alert("Quiz finished");await setOnlineQ();show("onlineHostGame");renderOnlineHost()}
-async function joinSession(){let c=joinCode.value.trim(),n=joinName.value.trim();if(!c||!n)return alert("Enter code and name");online={role:"player",code:c,name:n,id:crypto.randomUUID(),seen:-1};if(HAS_SUPABASE){let {data:s}=await sb.from("sushi_quiz_sessions").select("*").eq("code",c).single();if(!s)return alert("Session not found");let {data}=await sb.from("sushi_quiz_players").insert({session_code:c,name:n,score:0,correct:0,answered_q_index:-1}).select().single();online.id=data.id}else{let s=getL(c,"session");if(!s)return alert("Session not found");let ps=getL(c,"players")||[];ps.push({id:online.id,session_code:c,name:n,score:0,correct:0,last_answer:null,answered_q_index:-1});setL(c,"players",ps)}pStatus.textContent=`Joined as ${n}`;show("playerWait");pollPlayer()}
-function pollPlayer(){stop();let f=async()=>{let s;if(HAS_SUPABASE){let r=await sb.from("sushi_quiz_sessions").select("*").eq("code",online.code).single();s=r.data}else s=getL(online.code,"session");if(!s)return;if(s.status==="question"&&s.q_index!==online.seen){online.seen=s.q_index;pName.textContent=online.name;["pa","pb","pc","pd"].forEach(id=>document.getElementById(id).disabled=false);pMsg.textContent="問題文はホスト画面を見てください。";show("playerGame")}else if(s.status==="result"){pMsg.textContent="結果表示中。次の問題を待ってください。"}};f();timer=setInterval(f,1000)}
+async function joinSession(){
+  let c=joinCode.value.trim();
+  let n=joinName.value.trim();
+  if(!c||!n)return alert("Enter code and name");
+
+  online={role:"player",code:c,name:n,id:crypto.randomUUID(),seen:-1};
+
+  if(HAS_SUPABASE){
+    const {data:s,error:sessionError}=await sb
+      .from("sushi_quiz_sessions")
+      .select("*")
+      .eq("code",c)
+      .maybeSingle();
+
+    if(sessionError){
+      alert("セッション読み取りに失敗しました。");
+      console.error("session read failed", sessionError);
+      return;
+    }
+    if(!s){
+      alert("Session not found");
+      return;
+    }
+
+    const {data,error}=await sb
+      .from("sushi_quiz_players")
+      .insert({session_code:c,name:n,score:0,correct:0,last_answer:null,answered_q_index:-1})
+      .select()
+      .maybeSingle();
+
+    if(error || !data){
+      alert("参加に失敗しました。playersテーブルのINSERT許可を確認してください。");
+      console.error("player insert failed", error);
+      return;
+    }
+    online.id=data.id;
+  }else{
+    let s=getL(c,"session");
+    if(!s)return alert("Session not found");
+    let ps=getL(c,"players")||[];
+    ps.push({id:online.id,session_code:c,name:n,score:0,correct:0,last_answer:null,answered_q_index:-1});
+    setL(c,"players",ps);
+  }
+
+  pStatus.textContent=`Joined as ${n}`;
+  show("playerWait");
+  pollPlayer();
+}
+function pollPlayer(){stop();let f=async()=>{let s;if(HAS_SUPABASE){let r=await sb.from("sushi_quiz_sessions").select("*").eq("code",online.code).maybeSingle();s=r.data}else s=getL(online.code,"session");if(!s)return;if(s.status==="question"&&s.q_index!==online.seen){online.seen=s.q_index;pName.textContent=online.name;["pa","pb","pc","pd"].forEach(id=>document.getElementById(id).disabled=false);pMsg.textContent="問題文はホスト画面を見てください。";show("playerGame")}else if(s.status==="result"){pMsg.textContent="結果表示中。次の問題を待ってください。"}};f();timer=setInterval(f,1000)}
 async function submitPlayer(a){["pa","pb","pc","pd"].forEach(id=>document.getElementById(id).disabled=true);pMsg.textContent=`Answer submitted: ${"ABCD"[a]}`;if(HAS_SUPABASE)await sb.from("sushi_quiz_players").update({last_answer:a,answered_q_index:online.seen}).eq("id",online.id);else setL(online.code,"players",(getL(online.code,"players")||[]).map(p=>p.id===online.id?{...p,last_answer:a,answered_q_index:online.seen}:p))}
 setup();home();
 </script>
