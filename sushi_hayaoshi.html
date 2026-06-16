@@ -647,6 +647,101 @@
       100%{transform:translate(0,0);}
     }
 
+
+    .match-preview.spin{
+      animation:previewPop .45s ease-out;
+    }
+    @keyframes previewPop{
+      0%{transform:scale(.98); opacity:.72;}
+      45%{transform:scale(1.035); opacity:1;}
+      100%{transform:scale(1); opacity:1;}
+    }
+
+    .shuffle-overlay{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:60;
+      padding:20px;
+      background:rgba(36,49,63,.42);
+      backdrop-filter:blur(5px);
+    }
+    .shuffle-overlay.show{display:flex;}
+    .shuffle-card{
+      width:min(760px,94vw);
+      min-height:330px;
+      border-radius:34px;
+      background:radial-gradient(circle at top,#fff8d9 0,#fffaf0 50%,#f4e8d6 100%);
+      border:3px solid rgba(242,184,75,.75);
+      box-shadow:0 24px 60px rgba(36,49,63,.34);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      overflow:hidden;
+      position:relative;
+    }
+    .shuffle-card::before{
+      content:"";
+      position:absolute;
+      inset:-45%;
+      background:conic-gradient(from 0deg, rgba(239,83,80,.0), rgba(239,83,80,.25), rgba(66,165,245,.25), rgba(255,202,102,.35), rgba(239,83,80,.0));
+      animation:drawSpin 1.15s linear infinite;
+      opacity:.75;
+    }
+    .shuffle-card > *{position:relative; z-index:1;}
+    .shuffle-title{
+      font-size:clamp(28px,5vw,58px);
+      line-height:1;
+      font-weight:1000;
+      color:#c47a00;
+      text-shadow:0 3px 0 rgba(255,255,255,.9), 0 12px 18px rgba(36,49,63,.18);
+      animation:drawTitlePulse .72s ease-in-out infinite alternate;
+    }
+    .shuffle-round{
+      margin-top:20px;
+      font-size:clamp(26px,4.5vw,54px);
+      font-weight:1000;
+      color:#24313f;
+      letter-spacing:.04em;
+    }
+    .shuffle-sub{
+      margin-top:14px;
+      width:min(680px,88vw);
+      padding:14px 18px;
+      border-radius:22px;
+      background:#fff;
+      border:2px solid rgba(36,49,63,.12);
+      font-size:clamp(30px,6vw,76px);
+      font-weight:1000;
+      color:#24313f;
+      line-height:1.05;
+      box-shadow:0 10px 22px rgba(36,49,63,.12);
+    }
+    .shuffle-sub.pop{
+      animation:matchCardBang .55s cubic-bezier(.16,1.3,.48,1) both;
+    }
+    .shuffle-note{
+      margin-top:16px;
+      font-size:clamp(14px,1.8vw,22px);
+      color:var(--muted);
+      font-weight:900;
+    }
+    .draw-red{color:var(--red); text-shadow:0 0 16px rgba(239,83,80,.20);}
+    .draw-blue{color:var(--blue); text-shadow:0 0 16px rgba(66,165,245,.20);}
+    @keyframes drawSpin{to{transform:rotate(360deg);}}
+    @keyframes drawTitlePulse{from{transform:scale(1);}to{transform:scale(1.04);}}
+    @keyframes matchCardBang{
+      0%{opacity:0; transform:scale(.45) rotate(-7deg);}
+      45%{opacity:1; transform:scale(1.14) rotate(2deg);}
+      75%{transform:scale(.98) rotate(0deg);}
+      100%{opacity:1; transform:scale(1) rotate(0deg);}
+    }
+
+
   </style>
 </head>
 <body>
@@ -790,8 +885,10 @@
 
   <div class="shuffle-overlay" id="shuffleOverlay">
     <div class="shuffle-card">
-      <div class="shuffle-title">🎲 RANDOM MATCH!</div>
+      <div class="shuffle-title" id="shuffleTitle">🎲 RANDOM MATCH!</div>
+      <div class="shuffle-round" id="shuffleRound">DRAWING...</div>
       <div class="shuffle-sub" id="shuffleSub">対戦カード決定中...</div>
+      <div class="shuffle-note" id="shuffleNote">REDもBLUEも完全シャッフル</div>
     </div>
   </div>
 
@@ -1392,15 +1489,21 @@ function getTeamRounds(){
 }
 
 function buildMatchSchedule(redMembers, blueMembers, rounds = getTeamRounds(), randomized = true){
-  const red = redMembers && redMembers.length ? [...redMembers] : ['RED PLAYER'];
+  const redBase = redMembers && redMembers.length ? [...redMembers] : ['RED PLAYER'];
   const blueBase = blueMembers && blueMembers.length ? [...blueMembers] : ['BLUE PLAYER'];
-  const perRound = Math.max(red.length, blueBase.length);
+  const perRound = Math.max(redBase.length, blueBase.length);
   const schedule = [];
   for(let r=0; r<rounds; r++){
-    const blue = randomized ? shuffle(blueBase) : [...blueBase];
-    const redOrder = randomized && r > 0 ? shuffle(red) : [...red];
+    // REDもBLUEも毎セット完全シャッフル。ここが今回の修正点。
+    const redOrder = randomized ? shuffle(redBase) : [...redBase];
+    const blueOrder = randomized ? shuffle(blueBase) : [...blueBase];
     for(let i=0; i<perRound; i++){
-      schedule.push({ red:redOrder[i % redOrder.length], blue:blue[(i + r) % blue.length] });
+      schedule.push({
+        red:redOrder[i % redOrder.length],
+        blue:blueOrder[i % blueOrder.length],
+        set:r + 1,
+        match:i + 1
+      });
     }
   }
   return schedule;
@@ -1415,7 +1518,59 @@ function renderMatchPreview(schedule){
   const total = Math.max(red.length, blue.length) * rounds;
   const list = schedule || plannedMatchSchedule;
   const first = list && list.length ? list.slice(0, Math.min(5, list.length)).map((m,i)=>`${i+1}. ${escapeHtml(m.red)} vs ${escapeHtml(m.blue)}`).join('　') : '';
-  box.innerHTML = `<div>${red.length}対${blue.length} × ${rounds}試合ずつ = <strong>${total}問</strong></div>${first ? `<div style="margin-top:6px;color:#c47a00;">${first}${list.length>5?' ...':''}</div>` : ''}`;
+  box.innerHTML = `<div>${red.length}対${blue.length} × ${rounds}試合ずつ = <strong>${total}問</strong></div>${first ? `<div style="margin-top:6px;color:#c47a00;">${first}${list.length>5?' ...':''}</div>` : '<div style="margin-top:6px;color:#c47a00;">🎲ボタンでRED/BLUE両方をランダム抽選</div>'}`;
+}
+
+function clearMatchDrawTimers(){
+  matchDrawTimers.forEach(t=>clearTimeout(t));
+  matchDrawTimers = [];
+}
+
+function setShuffleSubHtml(html){
+  const sub = $('shuffleSub');
+  if(!sub) return;
+  sub.classList.remove('pop');
+  void sub.offsetWidth;
+  sub.innerHTML = html;
+  sub.classList.add('pop');
+}
+
+function showMatchDrawAnimation(schedule){
+  const overlay = $('shuffleOverlay');
+  const title = $('shuffleTitle');
+  const round = $('shuffleRound');
+  const note = $('shuffleNote');
+  if(!overlay || !schedule || !schedule.length) return;
+
+  clearMatchDrawTimers();
+  matchDrawAnimating = true;
+  overlay.classList.add('show');
+  if(title) title.textContent = '🎲 MATCH DRAW!';
+  if(note) note.textContent = 'REDもBLUEも完全シャッフル中...';
+
+  const maxShow = Math.min(schedule.length, 15);
+  const interval = schedule.length <= 6 ? 760 : 560;
+  for(let i=0; i<maxShow; i++){
+    const timer = setTimeout(()=>{
+      const m = schedule[i];
+      if(round) round.textContent = `ROUND ${i+1} / ${schedule.length}`;
+      setShuffleSubHtml(`<span class="draw-red">${escapeHtml(m.red)}</span> <span style="color:#c47a00;">VS</span> <span class="draw-blue">${escapeHtml(m.blue)}</span><span style="color:#c47a00;">!!!</span>`);
+      if(note) note.textContent = `${m.set}セット目・${m.match}人目`;
+    }, i * interval);
+    matchDrawTimers.push(timer);
+  }
+
+  const closeTimer = setTimeout(()=>{
+    if(round) round.textContent = '決定！';
+    const first = schedule[0];
+    setShuffleSubHtml(`<span class="draw-red">${escapeHtml(first.red)}</span> <span style="color:#c47a00;">VS</span> <span class="draw-blue">${escapeHtml(first.blue)}</span><span style="color:#c47a00;">!!!</span>`);
+    if(note) note.textContent = 'STARTでこのカードから開始';
+    matchDrawTimers.push(setTimeout(()=>{
+      overlay.classList.remove('show');
+      matchDrawAnimating = false;
+    }, 850));
+  }, maxShow * interval + 180);
+  matchDrawTimers.push(closeTimer);
 }
 
 function randomizeTeamMatches(showEffect = true){
@@ -1425,18 +1580,7 @@ function randomizeTeamMatches(showEffect = true){
   renderMatchPreview(plannedMatchSchedule);
   const preview = $('matchPreview');
   if(preview){ preview.classList.remove('spin'); void preview.offsetWidth; preview.classList.add('spin'); }
-  if(showEffect){
-    const overlay = $('shuffleOverlay');
-    const sub = $('shuffleSub');
-    if(sub){
-      const first = plannedMatchSchedule[0];
-      sub.textContent = first ? `${first.red}  vs  ${first.blue}` : '対戦カード決定！';
-    }
-    if(overlay){
-      overlay.classList.remove('show'); void overlay.offsetWidth; overlay.classList.add('show');
-      setTimeout(()=>overlay.classList.remove('show'), 950);
-    }
-  }
+  if(showEffect){ showMatchDrawAnimation(plannedMatchSchedule); }
 }
 
 function refreshTeamPreview(){
@@ -1505,6 +1649,7 @@ function stopBgm(){
 }
 
 function startGame(){
+  if(matchDrawAnimating) return;
   clearTimers();
   const redMembersForGame = selectedMode === 'team' ? getTeamMembers('red') : ['RED'];
   const blueMembersForGame = selectedMode === 'team' ? getTeamMembers('blue') : ['BLUE'];
@@ -1633,6 +1778,8 @@ function updateCurrentMatchDisplay(){
   const blueName = state.mode === 'team' ? getCurrentPlayer('blue') : 'BLUE TEAM';
   if($('currentRedPlayer')) $('currentRedPlayer').textContent = redName;
   if($('currentBluePlayer')) $('currentBluePlayer').textContent = blueName;
+  const vs = document.querySelector('.current-vs');
+  if(vs) vs.innerHTML = state.mode === 'team' ? `ROUND<br>${state.questionIndex+1}` : 'VS';
   const redPanel = $('redPanel');
   const bluePanel = $('bluePanel');
   if(redPanel) redPanel.classList.add('active-player-panel');
@@ -1671,7 +1818,7 @@ function nextQuestion(){
   const count = SETTINGS[state.level].choices;
   const distractors = sample(WORDS[state.level].filter(x=>x.word!==correct.word), count-1);
   state.choices = shuffle([correct, ...distractors]);
-  $('qPill').textContent = `${state.questionIndex+1} / ${state.totalQuestions || TOTAL}`;
+  $('qPill').textContent = state.mode === 'team' ? `ROUND ${state.questionIndex+1} / ${state.totalQuestions || TOTAL}` : `${state.questionIndex+1} / ${state.totalQuestions || TOTAL}`;
   renderWords('red');
   renderWords('blue');
   revealDefinition(correct.definition);
