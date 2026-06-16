@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>すし勘 v1.5 Deep Topics</title>
+<style>
+:root{
+  --bg:#fff8ed;--panel:#fff;--ink:#243044;--muted:#6b7280;--line:#f0d8c5;
+  --accent:#ff7957;--accent2:#ffb25b;--blue:#3182ce;--red:#e53e3e;--purple:#805ad5;--gold:#d69e2e;--green:#18a56b;
+  --shadow:0 18px 40px rgba(96,57,24,.14);
+}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);
+background:radial-gradient(circle at 12% 5%,rgba(255,121,87,.24),transparent 30%),radial-gradient(circle at 88% 0%,rgba(255,178,91,.26),transparent 28%),linear-gradient(180deg,#fffaf2,var(--bg));}
+.wrap{max-width:1160px;margin:0 auto;padding:20px 14px 44px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:60px;height:60px;border-radius:20px;background:#fff;display:grid;place-items:center;font-size:34px;box-shadow:var(--shadow);border:1px solid var(--line)}
+h1{margin:0;font-size:clamp(34px,6vw,56px);line-height:1;font-weight:1000;letter-spacing:.02em}.sub{color:var(--muted);font-weight:900;font-size:13px;margin-top:4px}
+.stats{display:flex;gap:8px;flex-wrap:wrap}.pill{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 12px;font-weight:1000;box-shadow:0 6px 16px rgba(96,57,24,.08)}
+.panel{background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:18px;backdrop-filter:blur(10px)}
+.screen{display:none}.screen.active{display:block}.hero{text-align:center;padding:34px 12px}.hero h2{font-size:clamp(30px,6vw,58px);line-height:1.1;margin:0 0 12px;font-weight:1000}.hero p{max-width:760px;margin:10px auto;color:#516071;font-weight:800;line-height:1.8}
+button{appearance:none;border:0;border-radius:18px;padding:13px 18px;font-weight:1000;font-size:16px;cursor:pointer;font-family:inherit;transition:.14s transform,.14s box-shadow,.14s opacity}
+button:hover{transform:translateY(-1px)}button:active{transform:translateY(1px)}.primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 12px 24px rgba(255,121,87,.28)}
+.secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}.buttons{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.bigRate{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;background:#fff;border:1px solid var(--line);font-weight:1000;box-shadow:0 8px 20px rgba(96,57,24,.09);margin-top:10px}
+.treeHead{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}.treeHead h2{margin:0;font-size:32px}.category{margin:16px 0 22px}
+.categoryTitle{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-radius:18px;background:#fff7ef;border:1px solid var(--line);font-weight:1000;margin-bottom:10px}.categoryTitle span:first-child{font-size:22px}
+.miniProgress{height:10px;background:#f2dfcf;border-radius:999px;overflow:hidden;width:160px;border:1px solid #ead0bd}.miniProgress>div{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.topic{min-height:154px;background:#fff;border:2px solid var(--line);border-radius:22px;padding:14px;cursor:pointer;box-shadow:0 8px 18px rgba(96,57,24,.07);position:relative;overflow:hidden;transition:.14s transform,.14s box-shadow,.14s border-color}
+.topic:hover{transform:translateY(-3px);box-shadow:0 14px 26px rgba(96,57,24,.12)}.topic:before{content:"";position:absolute;inset:auto -30px -40px auto;width:110px;height:110px;background:rgba(255,121,87,.06);border-radius:50%}
+.topicIcon{font-size:36px;margin-bottom:4px}.topic b{display:block;font-size:16px;line-height:1.25;margin-bottom:8px}.levelTag{display:inline-block;font-size:11px;color:#7c5b45;background:#fff1e8;border:1px solid #ffd0b7;border-radius:999px;padding:4px 7px;font-weight:1000}
+.starLine{font-weight:1000;margin-top:8px}.rankText{font-size:12px;color:var(--muted);font-weight:900;margin-top:4px}.deepText{font-size:12px;color:#9a6a45;font-weight:900;margin-top:4px}
+.topic.blue{border-color:var(--blue);box-shadow:0 0 0 4px rgba(49,130,206,.12)}.topic.red{border-color:var(--red);box-shadow:0 0 0 4px rgba(229,62,62,.12)}.topic.purple{border-color:var(--purple);box-shadow:0 0 0 4px rgba(128,90,213,.14)}.topic.gold{border-color:var(--gold);box-shadow:0 0 0 4px rgba(214,158,46,.16)}
+.gameTop{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:14px}.stagebar{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0}.dot{border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 11px;font-size:13px;font-weight:1000;color:var(--muted)}.dot.ok{background:rgba(24,165,107,.1);border-color:rgba(24,165,107,.3);color:#087143}.dot.now{background:#253044;color:#fff;border-color:#253044}
+.flashBox{min-height:310px;border-radius:32px;background:linear-gradient(180deg,#fff,#fff7ef);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:22px;margin-top:12px}
+.flashBox:before{content:"勘";position:absolute;right:12px;bottom:-90px;font-size:250px;color:rgba(255,121,87,.055);font-weight:1000}.word{position:relative;z-index:1;font-size:clamp(42px,9vw,88px);font-weight:1000;animation:pop .7s ease both;max-width:100%;overflow-wrap:anywhere}
+@keyframes pop{0%{opacity:0;transform:scale(.82)}20%{opacity:1;transform:scale(1.06)}76%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(.97)}}.prompt{position:relative;z-index:1;font-size:clamp(24px,5vw,42px);font-weight:1000}.prompt small{display:block;font-size:14px;color:var(--muted);margin-top:8px}
+.choices{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}.choice{background:#fff;border:2px solid #ead0bd;border-radius:22px;padding:16px;text-align:left;min-height:74px;font-size:16px;font-weight:950;line-height:1.45;color:var(--ink)}
+.choice.correct{background:rgba(24,165,107,.12);border-color:var(--green);color:#075f3c}.choice.wrong{background:rgba(225,75,75,.12);border-color:var(--red);color:#9b1c1c}.choice.disabled{pointer-events:none;opacity:.86}.feedback{text-align:center;font-size:clamp(24px,5vw,44px);font-weight:1000;min-height:56px;margin-top:12px;color:var(--accent)}
+.resultBox{text-align:center}.big{font-size:clamp(42px,8vw,78px);font-weight:1000;color:var(--accent);margin:8px 0}.learnCard{text-align:left;max-width:720px;margin:16px auto 0;background:#fff;border:1px solid var(--line);border-radius:22px;padding:16px}.learnCard h3{margin:0 0 8px}.tag{display:inline-block;background:#fff1e8;border:1px solid #ffd0b7;color:#b34b28;border-radius:999px;padding:5px 9px;font-size:13px;font-weight:1000;margin:4px}
+.discovery{position:fixed;inset:0;background:rgba(36,48,68,.56);display:none;align-items:center;justify-content:center;z-index:50;padding:18px}.discovery.show{display:flex}.discoveryCard{width:min(720px,96vw);background:linear-gradient(180deg,#fff,#fff7ef);border:2px solid #ffd0b7;border-radius:32px;box-shadow:0 24px 70px rgba(0,0,0,.25);padding:30px;text-align:center;animation:burst .22s ease-out both}@keyframes burst{from{opacity:0;transform:scale(.86)}to{opacity:1;transform:scale(1)}}.discLabel{font-size:18px;font-weight:1000;color:var(--accent);letter-spacing:.08em}.discTitle{font-size:clamp(34px,7vw,62px);font-weight:1000;margin:8px 0}
+
+.seenWords{
+  display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:12px 0 0;
+  min-height:34px;
+}
+.seenWords .seenTag{
+  display:inline-block;background:rgba(255,255,255,.72);border:1px solid #ead0bd;
+  color:#8a6b56;border-radius:999px;padding:5px 9px;font-size:13px;font-weight:900;
+  opacity:.72;
+}
+.jpQ{display:block;color:var(--muted);font-size:clamp(15px,3vw,22px);margin-bottom:8px}
+.enQ{display:block;color:var(--ink);font-size:clamp(28px,5.5vw,48px);line-height:1.15;margin-top:4px}
+
+@media(max-width:920px){.grid{grid-template-columns:repeat(2,1fr)}.choices{grid-template-columns:1fr}}@media(max-width:560px){.grid{grid-template-columns:1fr}.panel{border-radius:22px}.flashBox{min-height:240px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="brand"><div class="logo">🍣</div><div><h1>すし勘</h1><div class="sub">v1.5 Deep Topics｜5〜7語表示で推測しやすく</div></div></div>
+  <div class="stats"><div class="pill">収集 <span id="collectedTop">0</span>/20</div><div class="pill">⭐ <span id="starsTop">0</span></div><div class="pill">👑 <span id="masterTop">0</span></div></div>
+</header>
+
+<section id="home" class="screen active panel"><div class="hero">
+  <h2>ポップする英単語から<br>状況を推測しよう。</h2>
+  <p>ポップする英単語から、何の話か当てよう。</p>
+  <div class="bigRate">図鑑 <span id="homeRate">0</span>/20　⭐ <span id="homeStars">0</span></div>
+  <div class="buttons"><button class="primary" id="startBtn">スタート</button><button class="secondary" id="randomHomeBtn">ランダム挑戦</button></div>
+</div></section>
+
+<section id="dex" class="screen panel">
+  <div class="treeHead"><div><h2>Topic Tree</h2><div class="sub">青=発見 / 赤=成長 / 紫=熟練 / 王冠=Master</div></div>
+  <div class="buttons" style="margin-top:0"><button class="primary" id="randomBtn">ランダム挑戦</button><button class="secondary" id="resetBtn">Localリセット</button><button class="secondary" id="homeBtn">トップへ</button></div></div>
+  <div id="tree"></div>
+</section>
+
+<section id="game" class="screen panel">
+  <div class="gameTop"><div><h2 id="gameTitle" style="margin:0"></h2><div class="sub" id="gameSub">4問中、正解数だけスター獲得</div></div><button class="secondary" id="quitBtn">図鑑へ</button></div>
+  <div class="stagebar" id="stagebar"></div>
+  <div class="flashBox" id="flashBox"><div class="prompt">Ready?</div></div><div class="seenWords" id="seenWords"></div>
+  <div class="choices" id="choices"></div>
+  <div class="feedback" id="feedback"></div>
+</section>
+
+<section id="result" class="screen panel"><div class="resultBox">
+  <h2 id="resultTitle">CLEAR!</h2><div class="big" id="resultStars">⭐0</div><p id="resultText"></p>
+  <div class="learnCard" id="learnCard"></div>
+  <div class="buttons"><button class="primary" id="againBtn">もう一回</button><button class="secondary" id="backDexBtn">図鑑へ</button><button class="secondary" id="randomResultBtn">別トピック</button></div>
+</div></section>
+</div>
+
+<div class="discovery" id="discovery"><div class="discoveryCard"><div class="discLabel" id="discLabel">NEW TOPIC</div><div class="discTitle" id="discTitle"></div><div id="discText"></div><button class="primary" id="discBtn">OK</button></div></div>
+
+<script>
+const TOPICS=[
+{cat:"School",icon:"📚",title:"Library Problem",level:"Pre-2",learn:["borrowed = 借りた","fine = 罰金","title = 題名","due date = 返却期限"],wordSets:[["library","borrowed","lost","book"],["fine","return","late","due date"],["title","record","librarian","search"],["replacement","payment","missing","copy"],["renew","online","account","deadline"]],questionPool:[
+{q:"何が起きている？",c:["A student lost a library book.","A student bought a new book.","A student opened a library.","A student wrote a report."],a:0},
+{q:"必要な情報は？",c:["The title of the book.","The student's grade.","The library hours.","The teacher's name."],a:0},
+{q:"次に何が起きそう？",c:["The student will pay for the book.","The student will become a librarian.","The student will move away.","The library will close."],a:0},
+{q:"図書館員は何をすすめている？",c:["Renew it online.","Buy a notebook.","Take a taxi.","Join a club."],a:0},
+{q:"一番よい要約は？",c:["Someone needs help with a library book.","Someone sold books.","Someone opened a library.","Someone wrote a novel."],a:0}]},
+
+{cat:"School",icon:"💻",title:"Computer Help",level:"Pre-2",learn:["software = ソフト","assignment = 課題","restart = 再起動する","program = プログラム"],wordSets:[["software","teacher","help","computer"],["hard","program","understand","use"],["assignment","deadline","laptop","restart"],["screen","freeze","problem","homework"],["class","teacher","software","explain"]],questionPool:[
+{q:"何が起きている？",c:["A student needs help with software.","A teacher bought a computer.","A class was canceled.","Someone moved school."],a:0},
+{q:"問題は何？",c:["The software is difficult to use.","The computer is stolen.","The room is locked.","The teacher is absent."],a:0},
+{q:"なぜ困っている？",c:["Homework is due soon.","School is closing.","The laptop is stolen.","The teacher is angry."],a:0},
+{q:"次に何をする？",c:["Ask the teacher for help.","Buy a bicycle.","Return a library book.","Cancel the class."],a:0},
+{q:"一番よい要約は？",c:["Students are having trouble with computer software.","A teacher is selling computers.","A student is late for a train.","A class is visiting a museum."],a:0}]},
+
+{cat:"School",icon:"📝",title:"Homework Reminder",level:"Grade 2",learn:["deadline = 締切","backpack = リュック","submit = 提出する","remind = 思い出させる"],wordSets:[["homework","deadline","backpack","forgot"],["teacher","second time","month","warning"],["submit","report","tomorrow","class"],["bag","desk","assignment","school"],["reminder","habit","homework","morning"]],questionPool:[
+{q:"何が起きている？",c:["A student forgot homework.","A student won a prize.","A teacher lost a book.","A class went hiking."],a:0},
+{q:"問題は何？",c:["It happened more than once.","The homework was too easy.","The teacher forgot class.","The bag was too heavy."],a:0},
+{q:"先生の助言は？",c:["Put homework in the backpack right away.","Buy a new backpack.","Write less homework.","Leave school earlier."],a:0},
+{q:"なぜ注意されている？",c:["The student keeps forgetting assignments.","The student is too early.","The student reads too much.","The student broke a computer."],a:0},
+{q:"一番よい要約は？",c:["A student needs a better homework habit.","A teacher canceled homework.","A backpack was stolen.","A class changed rooms."],a:0}]},
+
+{cat:"School",icon:"🎒",title:"Backpack Choice",level:"Pre-1",learn:["waterproof = 防水の","padding = クッション","capacity = 容量","strap = ひも"],wordSets:[["waterproof","straps","padding","capacity"],["school","supplies","heavy","comfortable"],["rain","books","protect","bag"],["pockets","laptop","shoulders","weight"],["compare","features","price","durable"]],questionPool:[
+{q:"何について話している？",c:["Choosing a backpack.","Fixing a computer.","Planning a wedding.","Booking a hotel."],a:0},
+{q:"大事な特徴は？",c:["Comfort and storage capacity.","Color only.","Low temperature.","Museum hours."],a:0},
+{q:"何を比較している？",c:["Different backpack features.","Different restaurants.","Different flight times.","Different novels."],a:0},
+{q:"何を守りたい？",c:["Books and school supplies.","A garden plant.","A train ticket.","A restaurant table."],a:0},
+{q:"一番よい要約は？",c:["Someone is choosing a practical school bag.","Someone lost a bag at school.","Someone is selling books.","Someone is building a shelf."],a:0}]},
+
+{cat:"School",icon:"🎓",title:"College Application",level:"Grade 2",learn:["application = 出願","admission = 入学許可","hear back = 返事をもらう","college = 大学"],wordSets:[["college","application","hear back","admission"],["Browning","Western","applied","month"],["accepted","not sure","excellent","school"],["choice","result","wait","hope"],["campus","future","decision","student"]],questionPool:[
+{q:"何が起きている？",c:["A student is waiting for a college result.","A student is buying a uniform.","A student is cleaning a classroom.","A student is leaving a club."],a:0},
+{q:"本人の希望は？",c:["He wants to attend another college.","He wants to stop studying.","He wants to become a teacher.","He wants to travel tomorrow."],a:0},
+{q:"今何を待っている？",c:["A reply from the college.","A bus arrival.","A restaurant menu.","A museum ticket."],a:0},
+{q:"なぜまだ決めていない？",c:["He has applied to another school.","He lost his wallet.","He dislikes college.","He missed a train."],a:0},
+{q:"一番よい要約は？",c:["A student has not decided which college to attend.","A student has lost a college book.","A college is closing.","A teacher rejected homework."],a:0}]},
+
+{cat:"Work",icon:"💼",title:"Part-time Job",level:"Pre-2",learn:["apply = 応募する","experience = 経験","manager = 店長","part-time = アルバイトの"],wordSets:[["job","restaurant","apply","interview"],["hamburger","workers","boss","shop"],["experience","cook","high school","part-time"],["sign","window","looking","job"],["manager","schedule","interview","tomorrow"]],questionPool:[
+{q:"何が起きている？",c:["Someone is applying for a job.","Someone is opening a restaurant.","Someone is moving abroad.","Someone is quitting school."],a:0},
+{q:"何を聞かれている？",c:["Work experience.","Travel plans.","School grades.","Family issues."],a:0},
+{q:"次に何がありそう？",c:["An interview.","A restaurant closing.","A manager retiring.","A trip abroad."],a:0},
+{q:"どこで働きたい？",c:["At a restaurant.","At a hospital.","At a train station.","At a museum."],a:0},
+{q:"一番よい要約は？",c:["A person is applying for a job.","A person is buying food.","A person is moving house.","A person is canceling a meeting."],a:0}]},
+
+{cat:"Work",icon:"📋",title:"Job Interview",level:"Pre-1",learn:["candidate = 候補者","position = 職","qualification = 資格","requirement = 要件"],wordSets:[["interview","position","experience","candidate"],["qualification","software","requirements","application"],["resume","manager","skills","office"],["full-time","part-time","freelance","offer"],["confidence","gap","training","apply"]],questionPool:[
+{q:"何について話している？",c:["A job interview.","A museum visit.","A broken laptop.","A family trip."],a:0},
+{q:"何が評価される？",c:["Experience and qualifications.","Weather and food.","Room size.","Bus tickets."],a:0},
+{q:"問題になりそうな点は？",c:["The candidate may lack some experience.","The office is closed.","The interview room is too cold.","The manager lost a wallet."],a:0},
+{q:"それでも応募する理由は？",c:["The employer may be flexible.","The salary is impossible.","The office has no staff.","The ad is about travel."],a:0},
+{q:"一番よい要約は？",c:["A person is being considered for a job.","A person is booking a hotel.","A person is buying a plant.","A person is watching a play."],a:0}]},
+
+{cat:"Work",icon:"🏢",title:"Workplace Culture",level:"Pre-1",learn:["competitive = 競争的な","tension = 緊張","neutral = 中立の","atmosphere = 雰囲気"],wordSets:[["competitive","tension","teams","managers"],["workload","lighter","atmosphere","problem"],["stay neutral","constant tension","effort","involved"],["new company","hard","not workload","culture"],["office","teams","conflict","stress"]],questionPool:[
+{q:"何について話している？",c:["A difficult workplace atmosphere.","A fun school festival.","A relaxing vacation.","A new restaurant."],a:0},
+{q:"問題は何？",c:["The workplace is too competitive.","The salary is too high.","The office is too quiet.","The job is too easy."],a:0},
+{q:"本人はどう感じている？",c:["She feels uncomfortable.","She feels excited.","She feels relaxed.","She feels proud."],a:0},
+{q:"何に努力が必要？",c:["Staying neutral.","Cooking dinner.","Finding a bus.","Buying tickets."],a:0},
+{q:"一番よい要約は？",c:["The new company has a stressful culture.","The company is closing soon.","The manager is very kind.","The workload is impossible."],a:0}]},
+
+{cat:"Work",icon:"😫",title:"Overwork Support",level:"Pre-1",learn:["overtime = 残業","assist = 手伝う","handle = 対処する","project = 企画"],wordSets:[["overtime","tired","project","assist"],["long hours","worried","support","alone"],["manager","Parkway","great job","tired"],["handle","necessary","someone","help"],["workload","recently","too much","appreciate"]],questionPool:[
+{q:"何が起きている？",c:["A manager is worried about an employee.","A teacher lost a report.","A student bought a tablet.","A worker is taking a vacation."],a:0},
+{q:"心配していることは？",c:["The employee may be overworked.","The project is too easy.","The office is too large.","The employee wants lunch."],a:0},
+{q:"上司は何を申し出ている？",c:["Finding someone to assist.","Canceling the project.","Cutting the salary.","Changing offices."],a:0},
+{q:"部下は仕事をどう思っている？",c:["He enjoys it but it is tough.","He hates every task.","He has already quit.","He wants a new office."],a:0},
+{q:"一番よい要約は？",c:["A manager offers support to a tired worker.","A manager fires a worker.","A project is already finished.","A worker refuses all help."],a:0}]},
+
+{cat:"Work",icon:"📊",title:"Poor Work Efficiency",level:"Pre-1",learn:["spreadsheet = 表計算シート","manual = 手作業の","efficient = 効率的な","scan = スキャンする"],wordSets:[["spreadsheet","manual","scan","efficient"],["overtime","report","data","slow"],["few minutes","hours","entering","computer"],["vice president","report","worrying","talk"],["method","task","finished","quickly"]],questionPool:[
+{q:"何が問題？",c:["Someone is working inefficiently.","Someone lost a wallet.","Someone missed a bus.","Someone opened a restaurant."],a:0},
+{q:"何をしていた？",c:["Entering data manually.","Cooking dinner.","Writing a novel.","Buying tickets."],a:0},
+{q:"どうすればよかった？",c:["Scan the data.","Take a taxi.","Use brighter colors.","Call a doctor."],a:0},
+{q:"なぜ心配されている？",c:["She works long hours but accomplishes little.","She is too fast.","She refuses all reports.","She lost her office."],a:0},
+{q:"一番よい要約は？",c:["A worker needs a better method.","A report is finished perfectly.","The computer is stolen.","The meeting is canceled."],a:0}]},
+
+{cat:"Daily Life",icon:"🚌",title:"Bus Schedule",level:"Pre-2",learn:["arrival = 到着","in a few minutes = 数分で","schedule = 予定表","bus stop = バス停"],wordSets:[["bus","arrival","stop","time"],["Central Park","next bus","few minutes","watch"],["traffic","delay","route","station"],["Express Bus","missed","office","late"],["thirty minutes","boss","wait","again"]],questionPool:[
+{q:"何を知りたい？",c:["When the next bus arrives.","Where to buy a book.","How to cook pasta.","Who lost a wallet."],a:0},
+{q:"答えはどんな内容？",c:["The bus should arrive soon.","The bus was stolen.","The bus driver is sick.","The bus stop closed."],a:0},
+{q:"場面はどこ？",c:["At or near a bus stop.","At a restaurant.","In a hospital.","In a museum."],a:0},
+{q:"問題は何？",c:["The bus has already left or is delayed.","The restaurant is full.","The book is missing.","The computer froze."],a:0},
+{q:"一番よい要約は？",c:["Someone asks about a bus schedule.","Someone reserves a table.","Someone buys shoes.","Someone joins a club."],a:0}]},
+
+{cat:"Daily Life",icon:"👛",title:"Lost Wallet",level:"Pre-2",learn:["wallet = 財布","stolen = 盗まれた","look for = 探す","dropped = 落とした"],wordSets:[["wallet","lost","park","look"],["stolen","dropped","walking","sure"],["money","cards","missing","search"],["park","today","found","maybe"],["friend","help","look","wallet"]],questionPool:[
+{q:"何が起きている？",c:["Someone may have lost a wallet.","Someone bought a wallet.","Someone found a ticket.","Someone cleaned a park."],a:0},
+{q:"どこで起きたかもしれない？",c:["In the park.","At the airport.","In a classroom.","At a restaurant."],a:0},
+{q:"次に何をする？",c:["Go look for it.","Buy a museum ticket.","Call a waiter.","Start a party."],a:0},
+{q:"本人は何を心配している？",c:["The wallet may have been stolen.","The wallet is too expensive.","The park is closed.","The bus is late."],a:0},
+{q:"一番よい要約は？",c:["A person is trying to find a missing wallet.","A person is buying a new bag.","A person is planning a picnic.","A person is ordering lunch."],a:0}]},
+
+{cat:"Daily Life",icon:"🍽️",title:"Restaurant Order",level:"Pre-2",learn:["order = 注文する","recommendation = おすすめ","to go = 持ち帰り","menu = メニュー"],wordSets:[["menu","order","food","waiter"],["recommendation","chef","fish","delicious"],["sandwich","coffee","to go","minutes"],["table","wait","menu","order"],["salad","dessert","together","prepare"]],questionPool:[
+{q:"何が起きている？",c:["Someone is ordering food.","Someone is borrowing a book.","Someone is repairing a car.","Someone is checking a bag."],a:0},
+{q:"何を聞きたい？",c:["A recommendation from the chef.","The bus schedule.","The library location.","A job interview time."],a:0},
+{q:"次に何をする？",c:["Choose food from the menu.","Return a book.","Open a package.","Buy paint."],a:0},
+{q:"客は何を待っている？",c:["A table or food.","A bus to Central Park.","A library card.","A job offer."],a:0},
+{q:"一番よい要約は？",c:["A customer is deciding what to order.","A student is late for class.","A doctor is with a patient.","A train is delayed."],a:0}]},
+
+{cat:"Daily Life",icon:"🏠",title:"Moving Apartment",level:"Grade 2",learn:["apartment = アパート","moving truck = 引っ越しトラック","manager = 管理人","stairs = 階段"],wordSets:[["apartment","moving","truck","parking"],["building manager","stairs","behind","easy"],["move things","tomorrow","rent","truck"],["Apartment 409","manager","parking","building"],["boxes","furniture","truck","stairs"]],questionPool:[
+{q:"何について話している？",c:["Moving into an apartment.","Buying a concert ticket.","Cooking chili.","Applying to college."],a:0},
+{q:"何を知りたい？",c:["Where to park a moving truck.","How to cook dinner.","When the museum closes.","Who lost a dog."],a:0},
+{q:"なぜその場所がよい？",c:["It is easy to move things from there.","It is cheaper to buy food.","It is near a hospital.","It has a good view."],a:0},
+{q:"相手は誰？",c:["A building manager.","A doctor.","A waiter.","A librarian."],a:0},
+{q:"一番よい要約は？",c:["A new resident asks about parking for moving.","A tourist asks for directions.","A worker asks for time off.","A student asks about homework."],a:0}]},
+
+{cat:"Daily Life",icon:"💍",title:"Wedding Plans",level:"Grade 2",learn:["fiancée = 婚約者","honeymoon = 新婚旅行","preparation = 準備","decide = 決める"],wordSets:[["wedding","fiancee","honeymoon","busy"],["six weeks","planning","left","preparations"],["not decided","trip","honeymoon","time"],["finished","still","much","do"],["couple","busy","think","vacation"]],questionPool:[
+{q:"何について話している？",c:["Wedding preparations.","A school project.","A lost package.","A bus delay."],a:0},
+{q:"まだ決まっていないことは？",c:["Where to go for the honeymoon.","Which book to borrow.","How to repair a car.","When to wash dishes."],a:0},
+{q:"なぜ決まっていない？",c:["They have been very busy.","They forgot the date.","They lost tickets.","They dislike traveling."],a:0},
+{q:"残っていることは？",c:["There is still a lot to plan.","Only the dress is missing.","The wedding is canceled.","They have no guests."],a:0},
+{q:"一番よい要約は？",c:["A couple still has wedding planning to do.","A couple canceled a wedding.","A man bought a new apartment.","A woman is applying for college."],a:0}]},
+
+{cat:"Science",icon:"🌱",title:"Community Garden",level:"Grade 2",learn:["community = 地域","rent space = 場所を借りる","vegetable = 野菜","lesson = レッスン"],wordSets:[["garden","community","vegetables","lessons"],["rent space","free lessons","dream","no garden"],["class","plants","grow","apply"],["community center","gardening","space","vegetables"],["couple","garden","learn","weekend"]],questionPool:[
+{q:"何について話している？",c:["Joining a community garden.","Changing a flight.","Buying a dress.","Returning a library book."],a:0},
+{q:"何ができる？",c:["Rent space and grow vegetables.","Buy a computer.","Visit a doctor.","Take a taxi."],a:0},
+{q:"なぜ女性はあきらめていた？",c:["She did not have a garden.","She hated vegetables.","She moved overseas.","She lost her book."],a:0},
+{q:"何が魅力？",c:["Free lessons are offered.","It is next to an airport.","It has a famous chef.","It gives train tickets."],a:0},
+{q:"一番よい要約は？",c:["A couple may apply for a garden class.","A couple bought a new car.","A couple missed a train.","A couple opened a restaurant."],a:0}]},
+
+{cat:"Science",icon:"☀️",title:"Floating Solar Farm",level:"Grade 2",learn:["solar panel = 太陽光パネル","float = 浮く","temperature = 温度","sunlight = 日光"],wordSets:[["solar","panels","water","sunlight"],["floating","directions","move","sun"],["temperature","water","prevent","rise"],["benefit","feature","energy","farm"],["Netherlands","solar farm","panels","day"]],questionPool:[
+{q:"何について話している？",c:["Floating solar panels.","A cooking contest.","A train announcement.","A job interview."],a:0},
+{q:"どんな利点がある？",c:["They can follow the sun.","They cook food faster.","They carry passengers.","They clean books."],a:0},
+{q:"水に浮く別の利点は？",c:["It prevents overheating.","It makes them invisible.","It attracts fish.","It stops all rain."],a:0},
+{q:"どこに設置されている？",c:["On water.","Inside a classroom.","Under a train.","In a bakery."],a:0},
+{q:"一番よい要約は？",c:["Floating panels can produce energy efficiently.","Solar panels cannot move.","Water destroys all panels.","The farm is closing."],a:0}]},
+
+{cat:"Science",icon:"🌊",title:"Kelp Forests",level:"Pre-1",learn:["kelp = 海藻","habitat = 生息地","prey = 獲物","survival = 生存"],wordSets:[["kelp","salmon","habitat","prey"],["juvenile salmon","shelter","food","forest"],["herd prey","small groups","rapid growth","ocean"],["coastal","ecosystem","survive","researchers"],["marine species","carbon dioxide","habitats","support"]],questionPool:[
+{q:"何について話している？",c:["How kelp forests help salmon.","How to cook fish.","How to build a park.","How to clean a train."],a:0},
+{q:"ケルプは何を提供する？",c:["Shelter and food.","Tickets and maps.","Money and jobs.","Clothes and shoes."],a:0},
+{q:"サケにどう役立つ？",c:["It helps them catch prey.","It teaches them to swim.","It makes them larger instantly.","It keeps them on land."],a:0},
+{q:"研究者の主張は？",c:["Kelp forests are important to young salmon.","Kelp forests should be removed.","Salmon never use habitats.","Prey fish avoid all kelp."],a:0},
+{q:"一番よい要約は？",c:["Kelp forests support salmon survival.","Kelp forests harm all fish.","Salmon avoid kelp forests.","Researchers found no connection."],a:0}]},
+
+{cat:"Science",icon:"🧠",title:"E-Tattoo Safety",level:"Pre-1",learn:["fatigue = 疲労","sensor = センサー","monitor = 監視する","wireless = 無線の"],wordSets:[["pilots","fatigue","sensor","brain"],["mental exhaustion","surveys","stress","data"],["brain-wave","e-tattoo","real-time","objective"],["lightweight","disposable","wireless","forehead"],["safety","monitor","strain","device"]],questionPool:[
+{q:"何について話している？",c:["Monitoring mental fatigue.","Cooking a new dish.","Applying to college.","Replacing a battery."],a:0},
+{q:"装置の目的は？",c:["Measure mental strain in real time.","Translate languages.","Clean clothes.","Find lost pets."],a:0},
+{q:"特徴は？",c:["It is lightweight and wireless.","It is very heavy.","It needs many cables.","It is used only underwater."],a:0},
+{q:"なぜ役立つ？",c:["It gives objective data about fatigue.","It makes pilots unnecessary.","It removes all stress.","It replaces airplanes."],a:0},
+{q:"一番よい要約は？",c:["A device may help improve safety by monitoring fatigue.","A device makes pilots unnecessary.","A school bans technology.","A company sells backpacks."],a:0}]},
+
+{cat:"Science",icon:"👨‍🔬",title:"Braille Invention",level:"Pre-1",learn:["blind = 目の不自由な","dot = 点","invention = 発明","accessibility = 利用しやすさ"],wordSets:[["braille","blind","dots","reading"],["raised dots","education","accessibility","touch"],["write","fingers","code","system"],["Louis Braille","adapted","invention","language"],["books","blind people","read","write"]],questionPool:[
+{q:"何について話している？",c:["A reading system for blind people.","A new solar farm.","A lost wallet.","A restaurant order."],a:0},
+{q:"どんな仕組み？",c:["Raised dots are read by touch.","Pictures are read by sound.","Books are burned.","Letters disappear."],a:0},
+{q:"何を可能にした？",c:["Reading and writing by touch.","Flying airplanes.","Growing vegetables.","Finding bus stops."],a:0},
+{q:"なぜ重要？",c:["It improved access to written language.","It made books cheaper for everyone.","It created solar energy.","It solved train delays."],a:0},
+{q:"一番よい要約は？",c:["Braille improved access to written language.","Braille was a cooking method.","Blind people stopped reading.","Dots were used for decoration only."],a:0}]}
+];
+
+const STAGE_LABELS=["状況","問題","行動","要約"];
+let state=JSON.parse(localStorage.getItem("sushikan_v15")||"{}");
+let current=null,idx=0,earned=0,roundQuestions=[],roundWordSets=[];
+
+const $=id=>document.getElementById(id);
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function show(id){["home","dex","game","result"].forEach(x=>$(x).classList.toggle("active",x===id))}
+function topicState(title){return state[title]||{stars:0,plays:0}}
+function stars(title){return topicState(title).stars||0}
+function plays(title){return topicState(title).plays||0}
+function rank(v){return v>=25?"gold":v>=10?"purple":v>=3?"red":v>=1?"blue":""}
+function rankName(v){return v>=25?"👑 MASTER":v>=10?"🟣 熟練":v>=3?"🔴 成長":v>=1?"🔵 発見":"未発見"}
+function updateStats(){
+ const collected=TOPICS.filter(t=>stars(t.title)>0).length;
+ const totalStars=TOPICS.reduce((s,t)=>s+stars(t.title),0);
+ const masters=TOPICS.filter(t=>stars(t.title)>=25).length;
+ ["collectedTop","homeRate"].forEach(id=>$(id).textContent=collected);
+ ["starsTop","homeStars"].forEach(id=>$(id).textContent=totalStars);
+ $("masterTop").textContent=masters;
+}
+function categoryIcon(cat){return cat==="School"?"📚":cat==="Work"?"💼":cat==="Daily Life"?"🏠":"🌱"}
+
+function renderDex(){
+ updateStats();
+ const tree=$("tree"); tree.innerHTML="";
+ ["School","Work","Daily Life","Science"].forEach(cat=>{
+  const items=TOPICS.filter(t=>t.cat===cat);
+  const got=items.filter(t=>stars(t.title)>0).length;
+  const sec=document.createElement("div"); sec.className="category";
+  const head=document.createElement("div"); head.className="categoryTitle";
+  head.innerHTML=`<span>${categoryIcon(cat)} ${cat} <small>${got}/${items.length}</small></span><div class="miniProgress"><div style="width:${got/items.length*100}%"></div></div>`;
+  const grid=document.createElement("div"); grid.className="grid";
+  items.forEach(t=>{
+    const v=stars(t.title);
+    const card=document.createElement("div");
+    card.className="topic "+rank(v);
+    card.onclick=()=>startTopic(t);
+    card.innerHTML=`<div class="topicIcon">${t.icon}</div><b>${t.title}</b><span class="levelTag">${t.level}</span><div class="starLine">⭐ ${v}</div><div class="rankText">${rankName(v)}</div><div class="deepText">Play ${plays(t.title)} / Sets ${t.wordSets.length} / Q ${t.questionPool.length}</div>`;
+    grid.appendChild(card);
+  });
+  sec.appendChild(head); sec.appendChild(grid); tree.appendChild(sec);
+ });
+}
+
+function wordCountForLevel(level){
+ const lv=String(level||"").toLowerCase();
+ if(lv.includes("pre-1") || lv.includes("pre1")) return 7;
+ if(lv.includes("grade 2") || lv.includes("grade2")) return 6;
+ return 5;
+}
+function expandWords(baseWords, topic, question){
+ const pool=[...(baseWords||[])];
+ // 足りない場合は、学習カードや正解文から意味語を少し補う
+ (topic.learn||[]).forEach(x=>{
+   const w=String(x).split("=")[0].trim();
+   if(w && !pool.includes(w)) pool.push(w);
+ });
+ if(question && question.c && question.c[question.a]){
+   String(question.c[question.a]).split(/\s+/).forEach(w=>{
+     w=w.replace(/[^A-Za-z-]/g,"");
+     if(w.length>=5 && !pool.includes(w)) pool.push(w);
+   });
+ }
+ return pool;
+}
+
+
+function englishQuestion(jp){
+ const s=String(jp||"");
+ if(s.includes("何が起きて")) return "What's happening?";
+ if(s.includes("何について")) return "What is this about?";
+ if(s.includes("問題")) return "What is the problem?";
+ if(s.includes("必要な情報")) return "What information is needed?";
+ if(s.includes("次に何が起き")) return "What will probably happen next?";
+ if(s.includes("次に何を")) return "What should they do next?";
+ if(s.includes("何をする")) return "What should they do?";
+ if(s.includes("なぜ")) return "Why?";
+ if(s.includes("どこ")) return "Where is this happening?";
+ if(s.includes("だれ") || s.includes("誰")) return "Who is involved?";
+ if(s.includes("一番よい要約")) return "Choose the best summary.";
+ if(s.includes("要約")) return "Choose the best summary.";
+ if(s.includes("理由")) return "What is the reason?";
+ if(s.includes("利点")) return "What is one benefit?";
+ if(s.includes("特徴")) return "What is one feature?";
+ return "Choose the best answer.";
+}
+function renderSeenWords(words){
+ const box=document.getElementById("seenWords");
+ if(!box) return;
+ box.innerHTML=(words||[]).map(w=>`<span class="seenTag">${w}</span>`).join("");
+}
+
+function randomTopic(){startTopic(shuffle(TOPICS)[0])}
+
+function startTopic(t){
+ current=t; idx=0; earned=0;
+ roundQuestions=shuffle(t.questionPool).slice(0,4);
+ // 1プレイ中に同じ語群が続かないよう、先に4セットを重複なしで配る
+ roundWordSets=shuffle(t.wordSets).slice(0,4);
+ while(roundWordSets.length<4){
+   roundWordSets.push(shuffle(t.wordSets)[0]);
+ }
+ show("game");
+ $("gameTitle").textContent=`${t.icon} ${t.title}`;
+ $("gameSub").textContent=`語群 ${t.wordSets.length} / 設問 ${t.questionPool.length}。レベル別に5〜7語表示。語群もかぶりにくい`;
+ play();
+}
+function renderStagebar(){
+ const bar=$("stagebar"); bar.innerHTML="";
+ STAGE_LABELS.forEach((x,i)=>{
+   const d=document.createElement("div");
+   d.className="dot "+(i<idx?"ok":i===idx?"now":"");
+   d.textContent=(i+1)+" "+x;
+   bar.appendChild(d);
+ });
+}
+function play(){
+ renderStagebar();
+ $("feedback").textContent="";
+ $("choices").innerHTML="";
+ const q=roundQuestions[idx] || shuffle(current.questionPool)[0];
+ const baseSet=roundWordSets[idx] || shuffle(current.wordSets)[0];
+ const targetCount=wordCountForLevel(current.level);
+ const words=shuffle(expandWords(baseSet,current,q)).slice(0,targetCount);
+ renderSeenWords([]);
+ let k=0;
+ function flash(){
+  if(k>=words.length){ask(q, words);return}
+  $("flashBox").innerHTML=`<div class="word">${words[k++]}</div>`;
+  setTimeout(()=>{$("flashBox").innerHTML="";setTimeout(flash,90)},720);
+ }
+ flash();
+}
+function ask(q, wordsForDisplay){
+ $("flashBox").innerHTML=`<div class="prompt"><span class="jpQ">${q.q}</span><span class="enQ">${englishQuestion(q.q)}</span><small>出た単語から推測しよう</small></div>`;
+ renderSeenWords(wordsForDisplay || []);
+ $("choices").innerHTML="";
+ const order=shuffle(q.c.map((txt,i)=>({txt,i})));
+ order.forEach(o=>{
+   const b=document.createElement("button");
+   b.className="choice";
+   b.textContent=o.txt;
+   b.onclick=()=>answer(o.i===q.a,b);
+   $("choices").appendChild(b);
+ });
+}
+function answer(ok,btn){
+ const q=roundQuestions[idx] || current.questionPool[0];
+ document.querySelectorAll(".choice").forEach(b=>{
+   b.classList.add("disabled");
+   if(b.textContent===q.c[q.a]) b.classList.add("correct");
+ });
+ if(!ok) btn.classList.add("wrong");
+ if(ok){earned++; $("feedback").textContent="GOOD!"; $("feedback").style.color="var(--accent)"}
+ else{$("feedback").textContent="MISS"; $("feedback").style.color="var(--red)"}
+ setTimeout(()=>{idx++; if(idx>=4) finish(); else play();},850);
+}
+function finish(){
+ const before=stars(current.title);
+ const rec=topicState(current.title);
+ rec.stars=(rec.stars||0)+earned;
+ rec.plays=(rec.plays||0)+1;
+ state[current.title]=rec;
+ localStorage.setItem("sushikan_v15",JSON.stringify(state));
+ const after=stars(current.title);
+ show("result");
+ $("resultTitle").textContent=earned===4?"CLEAR!":"FINISH";
+ $("resultStars").textContent="⭐ "+earned;
+ $("resultText").textContent=`${current.icon} ${current.title} / 累計⭐ ${after} / ${rankName(after)} / Play ${plays(current.title)}`;
+ $("learnCard").innerHTML=`<h3>${current.icon} 学習カード</h3>${current.learn.map(x=>`<span class="tag">${x}</span>`).join("")}<h3 style="margin-top:14px">今回の出題</h3>${roundQuestions.map(q=>`<span class="tag">${q.q}</span>`).join("")}`;
+ updateStats();
+ if(before===0 && after>0) showDiscovery("✨ NEW TOPIC ✨",`${current.icon} ${current.title}`,"図鑑に新しいトピックが追加されました。");
+ else if(before<3 && after>=3) showDiscovery("🔴 UPGRADE",`${current.icon} ${current.title}`,"赤ランクに成長しました。");
+ else if(before<10 && after>=10) showDiscovery("🟣 UPGRADE",`${current.icon} ${current.title}`,"紫ランクに成長しました。");
+ else if(before<25 && after>=25) showDiscovery("👑 MASTER",`${current.icon} ${current.title}`,"完全習得です。");
+}
+function showDiscovery(label,title,text){
+ $("discLabel").textContent=label; $("discTitle").textContent=title; $("discText").textContent=text;
+ $("discovery").classList.add("show");
+}
+$("startBtn").onclick=()=>{show("dex");renderDex()};
+$("homeBtn").onclick=()=>show("home");
+$("randomHomeBtn").onclick=randomTopic;
+$("randomBtn").onclick=randomTopic;
+$("randomResultBtn").onclick=randomTopic;
+$("quitBtn").onclick=()=>{show("dex");renderDex()};
+$("backDexBtn").onclick=()=>{show("dex");renderDex()};
+$("againBtn").onclick=()=>startTopic(current);
+$("discBtn").onclick=()=>$("discovery").classList.remove("show");
+$("resetBtn").onclick=()=>{if(confirm("ローカル進捗をリセットしますか？")){state={};localStorage.setItem("sushikan_v15","{}");renderDex();updateStats()}};
+updateStats();
+</script>
+</body>
+</html>
