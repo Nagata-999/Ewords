@@ -382,7 +382,21 @@ label{
 
 <section id="soloSetup" class="panel hidden"><span class="badge">Solo</span><h2>一人でプレイ</h2><div class="setup"><div><label>Category</label><select id="soloCat"></select></div><div><label>Start Difficulty</label><select id="soloDiff"><option>Easy</option><option>Medium</option><option>Hard</option></select></div></div><button onclick="startSolo()">Start</button><button class="secondary" onclick="home()">Back</button></section>
 <section id="soloGame" class="hidden"><section class="stats"><div class="stat"><div id="streak" class="num">0</div><div class="cap">Streak</div></div><div class="stat"><div id="best" class="num">0</div><div class="cap">Best</div></div><div class="stat"><div id="level" class="num">1</div><div class="cap">Level</div></div><div class="stat"><div id="count" class="num">0</div><div class="cap">Answered</div></div></section><section class="panel"><span id="soloBadge" class="badge"></span><div id="soloQ" class="question"></div><div id="soloChoices" class="choices"></div><div id="soloRes" class="result"></div><button id="soloNext" class="hidden" onclick="nextSolo()">Next</button><button class="secondary" onclick="home()">Home</button></section></section>
-<section id="soloOver" class="panel hidden" style="text-align:center"><h2>I'm cooked... 🍣</h2><p id="soloFinal"></p><button onclick="startSolo()">Try Again</button><button class="secondary" onclick="home()">Home</button></section>
+<section id="soloOver" class="panel hidden" style="text-align:center">
+<h2>I'm cooked... 🍣</h2>
+<p id="soloFinal"></p>
+<div id="soloSaveBox">
+<input id="soloRankName" placeholder="Your name" style="max-width:300px;margin:10px auto;display:block">
+<button onclick="saveSoloScore()">Save Score</button>
+</div>
+<div id="soloRankingWrap" class="hidden">
+<h3>🏆 Solo Ranking</h3>
+<div id="soloTop3"></div>
+<table class="rank"><tbody id="soloRanking"></tbody></table>
+</div>
+<button onclick="startSolo()">Try Again</button>
+<button class="secondary" onclick="home()">Home</button>
+</section>
 
 <section id="localSetup" class="panel hidden"><span class="badge">Same-device Party</span><h2>みんなでプレイ：同一端末</h2><div class="setup"><div><label>Category</label><select id="localCat"></select></div><div><label>Questions</label><select id="localLen"><option>5</option><option selected>10</option><option>15</option><option>20</option></select></div></div><h3>Players</h3><div class="setup"><input id="localName" placeholder="Player name"><button onclick="addLocalPlayer()">Add</button></div><div id="localPlayers" class="players"></div><button onclick="startLocal()">Start</button><button class="secondary" onclick="home()">Back</button></section>
 <section id="localHost" class="panel hidden"><span id="localBadge" class="badge"></span><div id="localProg" class="small"></div><div id="localQ" class="question"></div><div id="localChoices" class="choices"></div><button class="blue" onclick="showLocalPad()">Players answer</button><button class="secondary" onclick="localReveal()">Reveal</button></section>
@@ -490,6 +504,50 @@ const screens=["home","soloSetup","soloGame","soloOver","localSetup","localHost"
 const diffs={Easy:1,Medium:2,Hard:3}; let solo={}, local={players:[]}, online={}, timer=null;
 function hide(){screens.forEach(id=>document.getElementById(id).classList.add("hidden"))} function show(id){hide();document.getElementById(id).classList.remove("hidden")} function home(){stop(); if(typeof stopBuzzerTimer==='function') stopBuzzerTimer(); show("home")}
 function shuffle(a){return [...a].sort(()=>Math.random()-.5)} function cats(){return ["Random",...Array.from(new Set(QUESTIONS.map(q=>q.cat))).sort()]}
+
+async function saveSoloScore(){
+ if(!HAS_SUPABASE){return;}
+ const name=(document.getElementById('soloRankName').value||'Anonymous').trim();
+ const streak=Number(solo.streak||0);
+
+ const {data:old}=await sb.from('scores')
+ .select('*')
+ .eq('player_name',name)
+ .eq('mode','sushi_quiz_solo')
+ .maybeSingle();
+
+ let record=false;
+ if(!old || streak>Number(old.score||0)){
+   record=true;
+   await sb.from('scores').upsert({
+     player_name:name,
+     score:streak,
+     max_combo:streak,
+     accuracy:100,
+     mode:'sushi_quiz_solo'
+   });
+ }
+
+ const {data}=await sb.from('scores')
+ .select('*')
+ .eq('mode','sushi_quiz_solo')
+ .order('score',{ascending:false})
+ .limit(20);
+
+ document.getElementById('soloTop3').innerHTML=(data||[]).slice(0,3).map((r,i)=>
+ `<div style="font-size:24px;font-weight:900">${['🥇','🥈','🥉'][i]} ${r.player_name} ${r.score}</div>`).join('');
+
+ document.getElementById('soloRanking').innerHTML=(data||[]).map((r,i)=>
+ `<tr><td>${i+1}</td><td>${r.player_name}</td><td>${r.score}</td></tr>`).join('');
+
+ if(record){
+   document.getElementById('soloFinal').innerHTML += '<br><b>🏆 NEW RECORD!</b>';
+ }
+
+ document.getElementById('soloSaveBox').classList.add('hidden');
+ document.getElementById('soloRankingWrap').classList.remove('hidden');
+}
+
 function setup(){["soloCat","localCat","onlineCat","buzzerCat"].forEach(id=>{let s=document.getElementById(id);s.innerHTML="";cats().forEach(c=>{let o=document.createElement("option");o.textContent=c;s.appendChild(o)})})}
 function pool(cat,min=1,max=3){return QUESTIONS.filter(q=>(cat==="Random"||q.cat===cat)&&diffs[q.diff]>=min&&diffs[q.diff]<=max)} function pick(cat,l=2,used=[]){let p=pool(cat,Math.max(1,l-1),Math.min(3,l+1)).filter(q=>!used.includes(q.q)); if(!p.length)p=pool(cat); return shuffle(p)[0]}
 function code4(){return String(Math.floor(1000+Math.random()*9000))} function key(c,t){return "sq_"+c+"_"+t} function setL(c,t,o){localStorage.setItem(key(c,t),JSON.stringify(o))} function getL(c,t){try{return JSON.parse(localStorage.getItem(key(c,t))||"null")}catch(e){return null}} function stop(){if(timer)clearInterval(timer);timer=null}
