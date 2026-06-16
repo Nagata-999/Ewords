@@ -26,6 +26,105 @@ input,select{width:100%;padding:12px;border-radius:14px;border:1px solid #e6c497
 .result{display:none;margin-top:14px;padding:14px;border-radius:16px;border:1px solid var(--l);background:#fffaf1;line-height:1.6}.show{display:block}.players{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.player{background:#fff0d2;border:1px solid #ffd399;border-radius:999px;padding:7px 10px;font-weight:900;color:#9a4b08}
 .code{font-size:42px;font-weight:1000;letter-spacing:.12em;background:#fff0d2;border:2px dashed #ffb15c;border-radius:18px;padding:12px;text-align:center;color:#9a4b08;margin:10px 0}
 .pad{display:grid;grid-template-columns:1fr 1fr;gap:12px}.pad button{min-height:110px;border-radius:20px;font-size:24px}.rank{width:100%;border-collapse:collapse;margin-top:10px}.rank th,.rank td{border-bottom:1px solid var(--l);padding:10px;text-align:left}.small,.notice{font-size:13px;color:var(--m);line-height:1.55}.notice{background:#eff6ff;border:1px solid #bfdbfe;color:#1e3a8a;border-radius:14px;padding:10px;margin-top:10px}
+
+.kahoot-pad button:nth-child(1){background:#e11d48;box-shadow:0 5px 0 #881337;}
+.kahoot-pad button:nth-child(2){background:#2563eb;box-shadow:0 5px 0 #1e3a8a;}
+.kahoot-pad button:nth-child(3){background:#f59e0b;box-shadow:0 5px 0 #92400e;color:#1f2937;}
+.kahoot-pad button:nth-child(4){background:#16a34a;box-shadow:0 5px 0 #166534;}
+.kahoot-symbol{display:block;font-size:42px;line-height:1;margin-bottom:4px;}
+.kahoot-letter{display:block;font-size:18px;opacity:.9;}
+
+
+.answer-breakdown{
+  margin-top:12px;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:8px;
+}
+.answer-row{
+  display:grid;
+  grid-template-columns:1fr auto auto;
+  gap:10px;
+  align-items:center;
+  padding:10px 12px;
+  border-radius:14px;
+  background:#fff8ed;
+  border:1px solid #ead6b8;
+  font-weight:900;
+}
+.answer-row.correct{background:#ecfdf5;border-color:#86efac;}
+.answer-row.wrong{background:#fef2f2;border-color:#fecaca;}
+.answer-choice-pill{
+  border-radius:999px;
+  padding:5px 9px;
+  background:#111827;
+  color:#fff;
+  font-size:13px;
+}
+.points-pill{
+  border-radius:999px;
+  padding:5px 9px;
+  background:#fef3c7;
+  color:#92400e;
+  font-size:13px;
+}
+.timer-ring{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:64px;
+  height:64px;
+  border-radius:999px;
+  background:conic-gradient(#ff7a1a calc(var(--timePct,100)*1%), #fee2c6 0);
+  color:#241912;
+  font-weight:1000;
+  font-size:24px;
+  margin:8px 0;
+  border:4px solid #fff;
+  box-shadow:0 8px 22px rgba(120,70,10,.16);
+}
+.screen-flash{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at center, rgba(255,255,255,.95), rgba(250,204,21,.45), rgba(255,255,255,0));
+  opacity:0;
+  pointer-events:none;
+  z-index:99999;
+}
+.screen-flash.show{animation:quizFlash .55s ease-out;}
+.combo-burst{
+  position:fixed;
+  left:50%;
+  top:42%;
+  transform:translate(-50%,-50%) scale(.7);
+  opacity:0;
+  z-index:99998;
+  pointer-events:none;
+  font-size:clamp(36px,9vw,76px);
+  font-weight:1000;
+  color:#fff7b8;
+  -webkit-text-stroke:2px #7c2d12;
+  text-shadow:0 8px 0 #9a3412,0 18px 30px rgba(0,0,0,.35);
+}
+.combo-burst.show{animation:comboBurst .9s ease-out;}
+.ranking-big-row{
+  font-size:18px;
+}
+.ranking-big-row:first-child{
+  background:#fff7d6;
+}
+@keyframes quizFlash{
+  0%{opacity:1;filter:hue-rotate(0deg);}
+  45%{opacity:.85;filter:hue-rotate(140deg);}
+  100%{opacity:0;filter:hue-rotate(300deg);}
+}
+@keyframes comboBurst{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.45) rotate(-8deg);}
+  25%{opacity:1;transform:translate(-50%,-50%) scale(1.18) rotate(3deg);}
+  70%{opacity:1;transform:translate(-50%,-50%) scale(1);}
+  100%{opacity:0;transform:translate(-50%,-75%) scale(1.1);}
+}
+
 </style>
 </head>
 <body>
@@ -43,18 +142,18 @@ input,select{width:100%;padding:12px;border-radius:14px;border:1px solid #e6c497
 
 <section id="localSetup" class="panel hidden"><span class="badge">Same-device Party</span><h2>みんなでプレイ：同一端末</h2><div class="setup"><div><label>Category</label><select id="localCat"></select></div><div><label>Questions</label><select id="localLen"><option>5</option><option selected>10</option><option>15</option><option>20</option></select></div></div><h3>Players</h3><div class="setup"><input id="localName" placeholder="Player name"><button onclick="addLocalPlayer()">Add</button></div><div id="localPlayers" class="players"></div><button onclick="startLocal()">Start</button><button class="secondary" onclick="home()">Back</button></section>
 <section id="localHost" class="panel hidden"><span id="localBadge" class="badge"></span><div id="localProg" class="small"></div><div id="localQ" class="question"></div><div id="localChoices" class="choices"></div><button class="blue" onclick="showLocalPad()">Players answer</button><button class="secondary" onclick="localReveal()">Reveal</button></section>
-<section id="localPad" class="panel hidden"><span class="badge">Answer Pad</span><h2 id="localTurn"></h2><div class="pad"><button onclick="submitLocal(0)">A</button><button onclick="submitLocal(1)">B</button><button onclick="submitLocal(2)">C</button><button onclick="submitLocal(3)">D</button></div></section>
+<section id="localPad" class="panel hidden"><span class="badge">Answer Pad</span><h2 id="localTurn"></h2><div class="pad kahoot-pad"><button onclick="submitLocal(0)"><span class="kahoot-symbol">▲</span><span class="kahoot-letter">A</span></button><button onclick="submitLocal(1)"><span class="kahoot-symbol">◆</span><span class="kahoot-letter">B</span></button><button onclick="submitLocal(2)"><span class="kahoot-symbol">●</span><span class="kahoot-letter">C</span></button><button onclick="submitLocal(3)"><span class="kahoot-symbol">■</span><span class="kahoot-letter">D</span></button></div></section>
 <section id="localResult" class="panel hidden"><span class="badge">Result</span><div id="localAns" class="result show"></div><table id="localTable" class="rank"></table><button onclick="nextLocal()">Next</button><button class="secondary" onclick="home()">Home</button></section>
 <section id="localFinal" class="panel hidden" style="text-align:center"><h2>Final Ranking 🍣</h2><table id="localFinalTable" class="rank"></table><button onclick="showLocalSetup()">Again</button><button class="secondary" onclick="home()">Home</button></section>
 
 <section id="onlineMenu" class="panel hidden"><span class="badge">Session ID</span><h2>みんなでプレイ：セッションID</h2><div class="notice">この版はSupabase未設定なら同一ブラウザ内デモ通信。HTML内のSUPABASE_URL / SUPABASE_ANON_KEYを入れると別端末対応にできます。</div><button onclick="showOnlineHost()">ホストになる</button><button class="blue" onclick="showJoin()">参加する</button><button class="secondary" onclick="home()">Back</button></section>
 <section id="onlineHostSetup" class="panel hidden"><span class="badge">Host</span><h2>セッション作成</h2><div class="setup"><div><label>Category</label><select id="onlineCat"></select></div><div><label>Questions</label><select id="onlineLen"><option>5</option><option selected>10</option><option>15</option><option>20</option></select></div></div><button onclick="createSession()">Create Session</button><button class="secondary" onclick="showOnlineMenu()">Back</button></section>
 <section id="onlineLobby" class="panel hidden"><span class="badge">Host Lobby</span><h2>Session ID</h2><div id="code" class="code"></div><h3>Players</h3><div id="onlinePlayers" class="players"></div><button onclick="startOnline()">Start Quiz</button></section>
-<section id="onlineHostGame" class="panel hidden"><span id="ohBadge" class="badge"></span><div id="ohProg" class="small"></div><div id="ohQ" class="question"></div><div id="ohChoices" class="choices"></div><div id="ohStatus" class="notice"></div><button onclick="revealOnline()">Reveal / Score</button><button onclick="nextOnline()">Next</button><button class="secondary" onclick="home()">End</button></section>
-<section id="onlineResult" class="panel hidden"><span class="badge">Ranking</span><div id="onlineAns" class="result show"></div><table id="onlineTable" class="rank"></table><button onclick="nextOnline()">Next Question</button><button class="secondary" onclick="home()">End</button></section>
+<section id="onlineHostGame" class="panel hidden"><span id="ohBadge" class="badge"></span><div id="ohProg" class="small"></div><div id="hostTimer" class="timer-ring" style="--timePct:100">10</div><div id="ohQ" class="question"></div><div id="ohChoices" class="choices"></div><div id="ohStatus" class="notice"></div><button onclick="revealOnline()">Reveal / Score</button><button class="secondary" onclick="home()">End</button></section>
+<section id="onlineResult" class="panel hidden"><span class="badge">Answer Check</span><div id="onlineAns" class="result show"></div><div id="onlineBreakdown" class="answer-breakdown"></div><button onclick="showOnlineRanking()">Show Ranking</button><button class="secondary" onclick="home()">End</button></section><section id="onlineRanking" class="panel hidden"><span class="badge">Current Ranking</span><table id="onlineTable" class="rank"></table><button onclick="nextOnline()">Next Question</button><button class="secondary" onclick="home()">End</button></section>
 <section id="join" class="panel hidden"><span class="badge">Join</span><h2>参加する</h2><div class="setup"><div><label>Session ID</label><input id="joinCode" maxlength="4" placeholder="5832"></div><div><label>Name</label><input id="joinName" placeholder="Jeff"></div></div><button onclick="joinSession()">Join</button><button class="secondary" onclick="showOnlineMenu()">Back</button></section>
 <section id="playerWait" class="panel hidden"><span class="badge">Player</span><h2 id="pStatus">Waiting...</h2><p class="small">ホスト画面を見て、問題が始まるまで待ってください。</p></section>
-<section id="playerGame" class="panel hidden"><span class="badge">Choose Answer</span><h2 id="pName"></h2><div class="pad"><button id="pa" onclick="submitPlayer(0)">A</button><button id="pb" onclick="submitPlayer(1)">B</button><button id="pc" onclick="submitPlayer(2)">C</button><button id="pd" onclick="submitPlayer(3)">D</button></div><div id="pMsg" class="notice">問題文はホスト画面を見てください。</div></section>
+<section id="playerGame" class="panel hidden"><span class="badge">Choose Answer</span><h2 id="pName"></h2><div class="pad kahoot-pad"><button id="pa" onclick="submitPlayer(0)"><span class="kahoot-symbol">▲</span><span class="kahoot-letter">A</span></button><button id="pb" onclick="submitPlayer(1)"><span class="kahoot-symbol">◆</span><span class="kahoot-letter">B</span></button><button id="pc" onclick="submitPlayer(2)"><span class="kahoot-symbol">●</span><span class="kahoot-letter">C</span></button><button id="pd" onclick="submitPlayer(3)"><span class="kahoot-symbol">■</span><span class="kahoot-letter">D</span></button></div><div id="pMsg" class="notice">問題文はホスト画面を見てください。</div></section>
 </main>
 
 <script>
@@ -63,28 +162,90 @@ const SUPABASE_URL = "https://rxyoyveykxdfrpomkltl.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7";
 const HAS_SUPABASE = !!(SUPABASE_URL && (typeof SUPABASE_ANON_KEY !== "undefined" ? SUPABASE_ANON_KEY : SUPABASE_PUBLISHABLE_KEY) && window.supabase);
 const sb = HAS_SUPABASE ? window.supabase.createClient(SUPABASE_URL, (typeof SUPABASE_ANON_KEY !== "undefined" ? SUPABASE_ANON_KEY : SUPABASE_PUBLISHABLE_KEY)) : null;
-const screens=["home","soloSetup","soloGame","soloOver","localSetup","localHost","localPad","localResult","localFinal","onlineMenu","onlineHostSetup","onlineLobby","onlineHostGame","onlineResult","join","playerWait","playerGame"];
+const screens=["home","soloSetup","soloGame","soloOver","localSetup","localHost","localPad","localResult","localFinal","onlineMenu","onlineHostSetup","onlineLobby","onlineHostGame","onlineResult","onlineRanking","join","playerWait","playerGame"];
 const diffs={Easy:1,Medium:2,Hard:3}; let solo={}, local={players:[]}, online={}, timer=null;
 function hide(){screens.forEach(id=>document.getElementById(id).classList.add("hidden"))} function show(id){hide();document.getElementById(id).classList.remove("hidden")} function home(){stop();show("home")}
 function shuffle(a){return [...a].sort(()=>Math.random()-.5)} function cats(){return ["Random",...Array.from(new Set(QUESTIONS.map(q=>q.cat))).sort()]}
 function setup(){["soloCat","localCat","onlineCat"].forEach(id=>{let s=document.getElementById(id);s.innerHTML="";cats().forEach(c=>{let o=document.createElement("option");o.textContent=c;s.appendChild(o)})})}
 function pool(cat,min=1,max=3){return QUESTIONS.filter(q=>(cat==="Random"||q.cat===cat)&&diffs[q.diff]>=min&&diffs[q.diff]<=max)} function pick(cat,l=2,used=[]){let p=pool(cat,Math.max(1,l-1),Math.min(3,l+1)).filter(q=>!used.includes(q.q)); if(!p.length)p=pool(cat); return shuffle(p)[0]}
 function code4(){return String(Math.floor(1000+Math.random()*9000))} function key(c,t){return "sq_"+c+"_"+t} function setL(c,t,o){localStorage.setItem(key(c,t),JSON.stringify(o))} function getL(c,t){try{return JSON.parse(localStorage.getItem(key(c,t))||"null")}catch(e){return null}} function stop(){if(timer)clearInterval(timer);timer=null}
-function table(id,ps){let r=[...ps].sort((a,b)=>(b.score||0)-(a.score||0));document.getElementById(id).innerHTML="<tr><th>Rank</th><th>Player</th><th>Score</th><th>Correct</th></tr>"+r.map((p,i)=>`<tr><td>${i+1}</td><td>${p.name}</td><td>${p.score||0}</td><td>${p.correct||0}</td></tr>`).join("")}
+
+function cleanPlayerName(name){
+  return String(name || "").replace(/\s*\[\d+\]\s*$/," ").trim();
+}
+
+
+let onlineTimerInterval=null;
+let onlineQuestionStart=0;
+function answerLabel(i){
+  return ["▲ A","◆ B","● C","■ D"][Number(i)] || "-";
+}
+function comboMultiplier(streak){
+  const s=Number(streak||0);
+  if(s < 3) return 1;
+  return Math.min(2.0, 1 + (s-2)*0.1);
+}
+function pointsForAnswer(isCorrect, elapsedMs, streakBefore){
+  if(!isCorrect) return 0;
+  const elapsedSec=Math.floor(Math.max(0, elapsedMs) / 1000);
+  const base=Math.max(0, 10 - elapsedSec);
+  const mult=comboMultiplier((streakBefore||0)+1);
+  return Math.round(base * mult);
+}
+function startHostTimer(){
+  if(onlineTimerInterval) clearInterval(onlineTimerInterval);
+  onlineQuestionStart=Date.now();
+  const el=document.getElementById("hostTimer");
+  const tick=()=>{
+    const elapsed=(Date.now()-onlineQuestionStart)/1000;
+    const left=Math.max(0, 10-elapsed);
+    if(el){
+      el.textContent=Math.ceil(left);
+      el.style.setProperty("--timePct", String(Math.max(0, left*10)));
+    }
+    if(left<=0){
+      clearInterval(onlineTimerInterval);
+      onlineTimerInterval=null;
+      revealOnline();
+    }
+  };
+  tick();
+  onlineTimerInterval=setInterval(tick,150);
+}
+function stopHostTimer(){
+  if(onlineTimerInterval) clearInterval(onlineTimerInterval);
+  onlineTimerInterval=null;
+}
+function fireQuizEffect(text){
+  const flash=document.getElementById("screenFlash");
+  const burst=document.getElementById("comboBurst");
+  if(flash){ flash.classList.remove("show"); void flash.offsetWidth; flash.classList.add("show"); }
+  if(burst){
+    burst.textContent=text || "COMBO!";
+    burst.classList.remove("show"); void burst.offsetWidth; burst.classList.add("show");
+  }
+}
+function showOnlineRanking(){
+  show("onlineRanking");
+  table("onlineTable", online.players || []);
+  document.querySelectorAll("#onlineTable tr").forEach((tr,i)=>{ if(i>0) tr.classList.add("ranking-big-row"); });
+}
+
+function table(id,ps){let r=[...ps].sort((a,b)=>(b.score||0)-(a.score||0));document.getElementById(id).innerHTML="<tr><th>Rank</th><th>Player</th><th>Score</th><th>Correct</th></tr>"+r.map((p,i)=>`<tr><td>${i+1}</td><td>${cleanPlayerName(p.name)}${(p.current_streak||0)>=3 ? " 🔥x"+comboMultiplier(p.current_streak).toFixed(1) : ""}</td><td>${p.score||0}</td><td>${p.correct||0}</td></tr>`).join("")}
 
 // solo
 function showSoloSetup(){show("soloSetup")} function startSolo(){let cat=soloCat.value,start=diffs[soloDiff.value];solo={cat,streak:0,count:0,best:Number(localStorage.getItem("sqbest_"+cat)||0),level:start,locked:false};nextSolo()}
 function soloLevel(){if(solo.streak<3)return solo.level;if(solo.streak<7)return Math.min(3,solo.level+1);return 3}
-function nextSolo(){solo.cur=pick(solo.cat,soloLevel());solo.locked=false;show("soloGame");soloRes.classList.remove("show");soloNext.classList.add("hidden");streak.textContent=solo.streak;best.textContent=solo.best;level.textContent=soloLevel();count.textContent=solo.count;soloBadge.textContent=`${solo.cur.cat}｜${solo.cur.diff}`;soloQ.textContent=solo.cur.q;soloChoices.innerHTML="";shuffle(solo.cur.choices.map((t,i)=>({t,i}))).forEach((c,idx)=>{let d=document.createElement("div");d.className="choice";d.innerHTML=`<b>${"ABCD"[idx]}.</b> ${c.t}`;d.onclick=()=>ansSolo(c.i,d);soloChoices.appendChild(d)})}
+function nextSolo(){solo.cur=pick(solo.cat,soloLevel());solo.locked=false;show("soloGame");soloRes.classList.remove("show");soloNext.classList.add("hidden");streak.textContent=solo.streak;best.textContent=solo.best;level.textContent=soloLevel();count.textContent=solo.count;soloBadge.textContent=`${solo.cur.cat}｜${solo.cur.diff}`;soloQ.textContent=solo.cur.q;soloChoices.innerHTML="";shuffle(solo.cur.choices.map((t,i)=>({t,i}))).forEach((c,idx)=>{let d=document.createElement("div");d.className="choice";d.innerHTML=`<b>${["▲ A","◆ B","● C","■ D"][idx]}.</b> ${c.t}`;d.onclick=()=>ansSolo(c.i,d);soloChoices.appendChild(d)})}
 function ansSolo(i,el){if(solo.locked)return;solo.locked=true;let c=solo.cur;[...soloChoices.children].forEach(ch=>{if(ch.textContent.includes(c.choices[c.ans]))ch.classList.add("correct")});solo.count++;if(i===c.ans){solo.streak++;if(solo.streak>solo.best){solo.best=solo.streak;localStorage.setItem("sqbest_"+solo.cat,solo.best)}soloRes.className="result show";soloRes.innerHTML=`✅ Correct!<br>${c.exp}`;soloNext.classList.remove("hidden");streak.textContent=solo.streak;best.textContent=solo.best;level.textContent=soloLevel();count.textContent=solo.count}else{el.classList.add("wrong");soloRes.className="result show";soloRes.innerHTML=`❌ Wrong!<br>Answer: <b>${c.choices[c.ans]}</b><br>${c.exp}`;setTimeout(()=>{soloFinal.innerHTML=`Your streak: <b>${solo.streak}</b><br>Best: <b>${solo.best}</b><br>Answered: <b>${solo.count}</b>`;show("soloOver")},800)}}
 
 // local party
-function showLocalSetup(){renderLocalPlayers();show("localSetup")} function addLocalPlayer(){let n=localName.value.trim();if(!n)return;local.players.push({name:n,score:0,correct:0,answer:null});localName.value="";renderLocalPlayers()} function renderLocalPlayers(){localPlayers.innerHTML="";(local.players||[]).forEach((p,i)=>{let d=document.createElement("div");d.className="player";d.textContent=p.name+" ✕";d.onclick=()=>{local.players.splice(i,1);renderLocalPlayers()};localPlayers.appendChild(d)})}
+function showLocalSetup(){renderLocalPlayers();show("localSetup")} function addLocalPlayer(){let n=cleanPlayerName(localName.value.trim());if(!n)return;local.players.push({name:n,score:0,correct:0,answer:null});localName.value="";renderLocalPlayers()} function renderLocalPlayers(){localPlayers.innerHTML="";(local.players||[]).forEach((p,i)=>{let d=document.createElement("div");d.className="player";d.textContent=cleanPlayerName(p.name)+" ✕";d.onclick=()=>{local.players.splice(i,1);renderLocalPlayers()};localPlayers.appendChild(d)})}
 function startLocal(){if(!local.players.length)return alert("Add players");local={...local,cat:localCat.value,len:Number(localLen.value),idx:0,used:[],turn:0,players:local.players.map(p=>({name:p.name,score:0,correct:0,answer:null}))};nextLocalQ()}
 function nextLocalQ(){if(local.idx>=local.len){show("localFinal");table("localFinalTable",local.players);return}local.cur=pick(local.cat,2,local.used);local.used.push(local.cur.q);local.players.forEach(p=>p.answer=null);local.turn=0;show("localHost");renderLocalHost()}
-function renderLocalHost(){let c=local.cur;localBadge.textContent=`${c.cat}｜${c.diff}`;localProg.textContent=`Question ${local.idx+1} / ${local.len}`;localQ.textContent=c.q;localChoices.innerHTML="";c.choices.forEach((x,i)=>{let d=document.createElement("div");d.className="choice";d.innerHTML=`<b>${"ABCD"[i]}.</b> ${x}`;localChoices.appendChild(d)})}
-function showLocalPad(){show("localPad");localTurn.textContent=local.players[local.turn].name+", choose your answer"} function submitLocal(a){local.players[local.turn].answer=a;local.turn++;if(local.turn>=local.players.length)localReveal();else showLocalPad()}
-function localReveal(){let c=local.cur;local.players.forEach(p=>{if(p.answer===c.ans){p.correct++;p.score+=100+(diffs[c.diff]-1)*50}});show("localResult");localAns.innerHTML=`Answer: <b>${"ABCD"[c.ans]}. ${c.choices[c.ans]}</b><br>${c.exp}`;table("localTable",local.players)} function nextLocal(){local.idx++;nextLocalQ()}
+function renderLocalHost(){let c=local.cur;localBadge.textContent=`${c.cat}｜${c.diff}`;localProg.textContent=`Question ${local.idx+1} / ${local.len}`;localQ.textContent=c.q;localChoices.innerHTML="";c.choices.forEach((x,i)=>{let d=document.createElement("div");d.className="choice";d.innerHTML=`<b>${["▲ A","◆ B","● C","■ D"][i]}.</b> ${x}`;localChoices.appendChild(d)})}
+function showLocalPad(){show("localPad");localTurn.textContent=cleanPlayerName(local.players[local.turn].name)+", choose your answer"} function submitLocal(a){local.players[local.turn].answer=a;local.turn++;if(local.turn>=local.players.length)localReveal();else showLocalPad()}
+function localReveal(){let c=local.cur;local.players.forEach(p=>{if(p.answer===c.ans){p.correct++;p.score+=100+(diffs[c.diff]-1)*50}});show("localResult");localAns.innerHTML=`Answer: <b>${["▲ A","◆ B","● C","■ D"][c.ans]}. ${c.choices[c.ans]}</b><br>${c.exp}`;table("localTable",local.players)} function nextLocal(){local.idx++;nextLocalQ()}
 
 // online demo / supabase-ready
 function showOnlineMenu(){show("onlineMenu")} function showOnlineHost(){show("onlineHostSetup")} function showJoin(){show("join")}
@@ -126,12 +287,85 @@ async function createSession(){
   show("onlineLobby");
   pollHost();
 }
-function pollHost(){stop();let f=async()=>{if(HAS_SUPABASE){let {data,error}=await sb.from("sushi_quiz_players").select("*").eq("session_code",online.code); if(error){console.error("player poll failed", error);} online.players=data||[]}else online.players=getL(online.code,"players")||[];onlinePlayers.innerHTML="";online.players.forEach(p=>{let d=document.createElement("div");d.className="player";d.textContent=`${p.name} ${p.score||0}`;onlinePlayers.appendChild(d)});if(!onlineHostGame.classList.contains("hidden"))ohStatus.textContent=`Answers: ${online.players.filter(p=>p.answered_q_index===online.idx).length} / ${online.players.length}`};f();timer=setInterval(f,1000)}
+function pollHost(){stop();let f=async()=>{if(HAS_SUPABASE){let {data,error}=await sb.from("sushi_quiz_players").select("*").eq("session_code",online.code); if(error){console.error("player poll failed", error);} online.players=data||[]}else online.players=getL(online.code,"players")||[];onlinePlayers.innerHTML="";online.players.forEach(p=>{let d=document.createElement("div");d.className="player";d.textContent=`${cleanPlayerName(p.name)} ${p.score||0}`;onlinePlayers.appendChild(d)});if(!onlineHostGame.classList.contains("hidden"))ohStatus.textContent=`Answers: ${online.players.filter(p=>p.answered_q_index===online.idx).length} / ${online.players.length}`};f();timer=setInterval(f,1000)}
 async function startOnline(){if(!online.players.length)return alert("No players");online.idx=0;online.used=[];await setOnlineQ();show("onlineHostGame");renderOnlineHost()}
-async function setOnlineQ(){let q=pick(online.cat,2,online.used);online.cur=q;online.used.push(q.q);if(HAS_SUPABASE){const qUpdate=await sb.from("sushi_quiz_sessions").update({status:"question",q_index:online.idx,current_question:q}).eq("code",online.code); if(qUpdate.error){alert("問題の送信に失敗しました。"); console.error(qUpdate.error); return;} const pReset=await sb.from("sushi_quiz_players").update({last_answer:null,answered_q_index:-1}).eq("session_code",online.code); if(pReset.error){console.error("player reset failed", pReset.error);}}else{setL(online.code,"session",{code:online.code,status:"question",q_index:online.idx,current_question:q});setL(online.code,"players",(getL(online.code,"players")||[]).map(p=>({...p,last_answer:null,answered_q_index:-1})))}}
-function renderOnlineHost(){let c=online.cur;ohBadge.textContent=`${c.cat}｜${c.diff}`;ohProg.textContent=`Session ${online.code}｜Question ${online.idx+1} / ${online.len}`;ohQ.textContent=c.q;ohChoices.innerHTML="";c.choices.forEach((x,i)=>{let d=document.createElement("div");d.className="choice";d.innerHTML=`<b>${"ABCD"[i]}.</b> ${x}`;ohChoices.appendChild(d)});ohStatus.textContent=`Answers: 0 / ${online.players.length}`}
-async function revealOnline(){let c=online.cur;let ps=online.players.map(p=>{let ok=p.answered_q_index===online.idx&&Number(p.last_answer)===c.ans;return {...p,score:(p.score||0)+(ok?100+(diffs[c.diff]-1)*50:0),correct:(p.correct||0)+(ok?1:0)}});if(HAS_SUPABASE){for(const p of ps)await sb.from("sushi_quiz_players").update({score:p.score,correct:p.correct}).eq("id",p.id);await sb.from("sushi_quiz_sessions").update({status:"result"}).eq("code",online.code)}else{setL(online.code,"players",ps);let s=getL(online.code,"session");setL(online.code,"session",{...s,status:"result"})}online.players=ps;show("onlineResult");onlineAns.innerHTML=`Answer: <b>${"ABCD"[c.ans]}. ${c.choices[c.ans]}</b><br>${c.exp}`;table("onlineTable",online.players)}
-async function nextOnline(){online.idx++;if(online.idx>=online.len)return alert("Quiz finished");await setOnlineQ();show("onlineHostGame");renderOnlineHost()}
+async function setOnlineQ(){let q=pick(online.cat,2,online.used);online.cur=q;online.used.push(q.q);onlineQuestionStart=Date.now();if(HAS_SUPABASE){const qUpdate=await sb.from("sushi_quiz_sessions").update({status:"question",q_index:online.idx,current_question:{...q, started_at:onlineQuestionStart}}).eq("code",online.code); if(qUpdate.error){alert("問題の送信に失敗しました。"); console.error(qUpdate.error); return;} const pReset=await sb.from("sushi_quiz_players").update({last_answer:null,answered_q_index:-1}).eq("session_code",online.code); if(pReset.error){console.error("player reset failed", pReset.error);}}else{setL(online.code,"session",{code:online.code,status:"question",q_index:online.idx,current_question:{...q, started_at:onlineQuestionStart}});setL(online.code,"players",(getL(online.code,"players")||[]).map(p=>({...p,last_answer:null,answered_q_index:-1})))}}
+function renderOnlineHost(){let c=online.cur; startHostTimer();ohBadge.textContent=`${c.cat}｜${c.diff}`;ohProg.textContent=`Session ${online.code}｜Question ${online.idx+1} / ${online.len}`;ohQ.textContent=c.q;ohChoices.innerHTML="";c.choices.forEach((x,i)=>{let d=document.createElement("div");d.className="choice";d.innerHTML=`<b>${["▲ A","◆ B","● C","■ D"][i]}.</b> ${x}`;ohChoices.appendChild(d)});ohStatus.textContent=`Answers: 0 / ${online.players.length}`}
+async function revealOnline(){
+  stopHostTimer();
+  let c=online.cur;
+  if(!c) return;
+
+  // refresh latest players before scoring
+  if(HAS_SUPABASE){
+    const {data,error}=await sb.from("sushi_quiz_players").select("*").eq("session_code",online.code);
+    if(error){ console.error("player refresh failed", error); }
+    online.players=data||online.players||[];
+  }else{
+    online.players=getL(online.code,"players")||online.players||[];
+  }
+
+  const now=Date.now();
+  let ps=(online.players||[]).map(p=>{
+    const answered=p.answered_q_index===online.idx;
+    const isCorrect=answered && Number(p.last_answer)===c.ans;
+    const meta=p.meta || {};
+    const answeredAt=Number(meta.answered_at || now);
+    const streakBefore=Number(p.current_streak || meta.current_streak || 0);
+    const gained=pointsForAnswer(isCorrect, answeredAt-onlineQuestionStart, streakBefore);
+    const nextStreak=isCorrect ? streakBefore+1 : 0;
+    return {
+      ...p,
+      score:(p.score||0)+gained,
+      correct:(p.correct||0)+(isCorrect?1:0),
+      current_streak:nextStreak,
+      gained:gained,
+      is_correct:isCorrect,
+      display_answer:answered ? Number(p.last_answer) : null,
+      meta:{...meta, current_streak:nextStreak, last_gained:gained, is_correct:isCorrect}
+    };
+  });
+
+  if(HAS_SUPABASE){
+    for(const p of ps){
+      await sb.from("sushi_quiz_players").update({
+        score:p.score,
+        correct:p.correct,
+        meta:p.meta
+      }).eq("id",p.id);
+    }
+    await sb.from("sushi_quiz_sessions").update({status:"result"}).eq("code",online.code);
+  }else{
+    setL(online.code,"players",ps);
+    let s=getL(online.code,"session");
+    setL(online.code,"session",{...s,status:"result"});
+  }
+
+  online.players=ps;
+  show("onlineResult");
+  onlineAns.innerHTML=`Correct Answer: <b>${answerLabel(c.ans)}. ${c.choices[c.ans]}</b><br>${c.exp}`;
+
+  const breakdown=document.getElementById("onlineBreakdown");
+  if(breakdown){
+    breakdown.innerHTML=ps.map(p=>{
+      const cls=p.is_correct ? "correct" : "wrong";
+      const ans=p.display_answer===null ? "No answer" : answerLabel(p.display_answer);
+      return `<div class="answer-row ${cls}">
+        <div>${cleanPlayerName(p.name)}</div>
+        <div class="answer-choice-pill">${ans}</div>
+        <div class="points-pill">+${p.gained}</div>
+      </div>`;
+    }).join("");
+  }
+
+  const maxStreak=Math.max(0,...ps.map(p=>Number(p.current_streak||0)));
+  if(maxStreak>=3){
+    fireQuizEffect(`${maxStreak} COMBO! x${comboMultiplier(maxStreak).toFixed(1)}`);
+  }else{
+    fireQuizEffect("ANSWER!");
+  }
+}
+async function nextOnline(){stopHostTimer();online.idx++;if(online.idx>=online.len)return alert("Quiz finished");await setOnlineQ();show("onlineHostGame");renderOnlineHost()}
 async function joinSession(){
   let c=joinCode.value.trim();
   let n=joinName.value.trim();
@@ -158,7 +392,7 @@ async function joinSession(){
 
     const {data,error}=await sb
       .from("sushi_quiz_players")
-      .insert({session_code:c,name:n,score:0,correct:0,last_answer:null,answered_q_index:-1})
+      .insert({session_code:c,name:n,score:0,correct:0,last_answer:null,answered_q_index:-1,meta:{current_streak:0}})
       .select()
       .maybeSingle();
 
@@ -176,13 +410,14 @@ async function joinSession(){
     setL(c,"players",ps);
   }
 
-  pStatus.textContent=`Joined as ${n}`;
+  pStatus.textContent=`Joined as ${cleanPlayerName(n)}`;
   show("playerWait");
   pollPlayer();
 }
-function pollPlayer(){stop();let f=async()=>{let s;if(HAS_SUPABASE){let r=await sb.from("sushi_quiz_sessions").select("*").eq("code",online.code).maybeSingle();s=r.data}else s=getL(online.code,"session");if(!s)return;if(s.status==="question"&&s.q_index!==online.seen){online.seen=s.q_index;pName.textContent=online.name;["pa","pb","pc","pd"].forEach(id=>document.getElementById(id).disabled=false);pMsg.textContent="問題文はホスト画面を見てください。";show("playerGame")}else if(s.status==="result"){pMsg.textContent="結果表示中。次の問題を待ってください。"}};f();timer=setInterval(f,1000)}
-async function submitPlayer(a){["pa","pb","pc","pd"].forEach(id=>document.getElementById(id).disabled=true);pMsg.textContent=`Answer submitted: ${"ABCD"[a]}`;if(HAS_SUPABASE)await sb.from("sushi_quiz_players").update({last_answer:a,answered_q_index:online.seen}).eq("id",online.id);else setL(online.code,"players",(getL(online.code,"players")||[]).map(p=>p.id===online.id?{...p,last_answer:a,answered_q_index:online.seen}:p))}
+function pollPlayer(){stop();let f=async()=>{let s;if(HAS_SUPABASE){let r=await sb.from("sushi_quiz_sessions").select("*").eq("code",online.code).maybeSingle();s=r.data}else s=getL(online.code,"session");if(!s)return;if(s.status==="question"&&s.q_index!==online.seen){online.seen=s.q_index;pName.textContent=cleanPlayerName(online.name);["pa","pb","pc","pd"].forEach(id=>document.getElementById(id).disabled=false);pMsg.textContent="問題文はホスト画面を見てください。";show("playerGame")}else if(s.status==="result"){pMsg.textContent="結果表示中。次の問題を待ってください。"}};f();timer=setInterval(f,1000)}
+async function submitPlayer(a){["pa","pb","pc","pd"].forEach(id=>document.getElementById(id).disabled=true);pMsg.textContent=`Answer submitted: ${["▲ A","◆ B","● C","■ D"][a]}`;if(HAS_SUPABASE)await sb.from("sushi_quiz_players").update({last_answer:a,answered_q_index:online.seen,meta:{answered_at:Date.now()}}).eq("id",online.id);else setL(online.code,"players",(getL(online.code,"players")||[]).map(p=>p.id===online.id?{...p,last_answer:a,answered_q_index:online.seen,meta:{...(p.meta||{}),answered_at:Date.now()}}:p))}
 setup();home();
 </script>
+<div id="screenFlash" class="screen-flash"></div><div id="comboBurst" class="combo-burst">COMBO!</div>
 </body>
 </html>
