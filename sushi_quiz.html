@@ -352,6 +352,22 @@ label{
   font-weight:1000;
 }
 
+
+/* v-buzzer-flow-fix */
+@media (min-width: 850px){
+  .bigbtn{font-size:clamp(22px,2.4vw,32px)!important;line-height:1.18!important;}
+  .bigbtn span{font-size:clamp(14px,1.5vw,18px)!important;}
+}
+.buzzer-correct-announce{
+  font-size:clamp(34px,6vw,72px);font-weight:1000;color:#16a34a;text-align:center;
+  text-shadow:0 5px 0 rgba(22,101,52,.20);margin:12px 0;
+}
+.buzzer-wrong-announce{
+  font-size:clamp(28px,5vw,58px);font-weight:1000;color:#dc2626;text-align:center;
+  text-shadow:0 5px 0 rgba(127,29,29,.16);margin:12px 0;
+}
+.buzzer-freeze{opacity:.55!important;filter:grayscale(.4);}
+
 </style>
 </head>
 <body>
@@ -360,8 +376,8 @@ label{
 <div class="home-link-row"><a class="home-back-btn" href="/index.html">🍣 すし単に戻る</a></div>
 <section id="home" class="menu">
 <button class="bigbtn" onclick="showSoloSetup()">一人でプレイ<span>1ミス終了のサバイバル。</span></button>
-<button class="bigbtn" onclick="showOnlineMenu()">みんなでプレイ<span>全員回答。正解者に得点。</span></button>
-<button class="bigbtn" onclick="showBuzzerMenu()">早押しモード<span>最初に正解した人だけ得点。</span></button>
+<button class="bigbtn" onclick="showOnlineMenu()">みんなでプレイ<span>全員回答モード</span></button>
+<button class="bigbtn" onclick="showBuzzerMenu()">早押し<span>最初の正解だけ得点</span></button>
 </section>
 
 <section id="soloSetup" class="panel hidden"><span class="badge">Solo</span><h2>一人でプレイ</h2><div class="setup"><div><label>Category</label><select id="soloCat"></select></div><div><label>Start Difficulty</label><select id="soloDiff"><option>Easy</option><option>Medium</option><option>Hard</option></select></div></div><button onclick="startSolo()">Start</button><button class="secondary" onclick="home()">Back</button></section>
@@ -479,7 +495,11 @@ function pool(cat,min=1,max=3){return QUESTIONS.filter(q=>(cat==="Random"||q.cat
 function code4(){return String(Math.floor(1000+Math.random()*9000))} function key(c,t){return "sq_"+c+"_"+t} function setL(c,t,o){localStorage.setItem(key(c,t),JSON.stringify(o))} function getL(c,t){try{return JSON.parse(localStorage.getItem(key(c,t))||"null")}catch(e){return null}} function stop(){if(timer)clearInterval(timer);timer=null}
 
 function cleanPlayerName(name){
-  return String(name || "").replace(/\s*\[\d+\]\s*$/," ").trim();
+  return String(name || "")
+    .replace(/\s*\[\d+\]\s*$/,"")
+    .replace(/\s+0\s*$/,"")
+    .replace(/\u3000+0\s*$/,"")
+    .trim();
 }
 
 
@@ -615,7 +635,7 @@ async function createSession(){
   show("onlineLobby");
   pollHost();
 }
-function pollHost(){stop();let f=async()=>{if(HAS_SUPABASE){let {data,error}=await sb.from("sushi_quiz_players").select("*").eq("session_code",online.code); if(error){console.error("player poll failed", error);} online.players=data||[]}else online.players=getL(online.code,"players")||[];onlinePlayers.innerHTML="";online.players.forEach(p=>{let d=document.createElement("div");d.className="player";d.textContent=`${cleanPlayerName(p.name)} ${p.score||0}`;onlinePlayers.appendChild(d)});if(!onlineHostGame.classList.contains("hidden")){
+function pollHost(){stop();let f=async()=>{if(HAS_SUPABASE){let {data,error}=await sb.from("sushi_quiz_players").select("*").eq("session_code",online.code); if(error){console.error("player poll failed", error);} online.players=data||[]}else online.players=getL(online.code,"players")||[];onlinePlayers.innerHTML="";online.players.forEach(p=>{let d=document.createElement("div");d.className="player";d.textContent=`${cleanPlayerName(p.name)}`;onlinePlayers.appendChild(d)});if(!onlineHostGame.classList.contains("hidden")){
   const answeredCount=online.players.filter(p=>Number(p.answered_q_index)===Number(online.idx)).length;
   ohStatus.textContent=`Answers: ${answeredCount} / ${online.players.length}`;
   renderAnsweredBar("hostAnsweredBar", online.players, online.idx);
@@ -789,6 +809,18 @@ let buzzerTimerInterval=null;
 function showBuzzerMenu(){ show("buzzerMenu"); }
 function showBuzzerJoin(){ show("buzzerJoin"); }
 
+
+async function refreshBuzzerPlayers(){
+  if(HAS_SUPABASE){
+    const {data,error}=await sb.from("sushi_quiz_players").select("*").eq("session_code",buzzer.code);
+    if(error) console.error("buzzer refresh failed", error);
+    buzzer.players=data||buzzer.players||[];
+  }else{
+    buzzer.players=getL(buzzer.code,"players")||buzzer.players||[];
+  }
+  return buzzer.players||[];
+}
+
 async function createBuzzerSession(){
   const c=code4();
   buzzer={role:"host",code:c,cat:buzzerCat.value,len:Number(buzzerLen.value),idx:0,used:[],players:[],winner:null,revealed:false};
@@ -808,22 +840,16 @@ async function createBuzzerSession(){
 function pollBuzzerHost(){
   stop();
   const tick=async()=>{
-    if(HAS_SUPABASE){
-      const {data,error}=await sb.from("sushi_quiz_players").select("*").eq("session_code",buzzer.code);
-      if(error) console.error(error);
-      buzzer.players=data||[];
-    }else{
-      buzzer.players=getL(buzzer.code,"players")||[];
-    }
+    await refreshBuzzerPlayers();
     if(document.getElementById("buzzerPlayers")){
-      buzzerPlayers.innerHTML=(buzzer.players||[]).map(p=>`<div class="player">${cleanPlayerName(p.name)} ${p.score||0}</div>`).join("");
+      buzzerPlayers.innerHTML=(buzzer.players||[]).map(p=>`<div class="player">${cleanPlayerName(p.name)}</div>`).join("");
     }
     if(!document.getElementById("buzzerHostGame").classList.contains("hidden")){
       renderBuzzerStatus();
-      const winner=(buzzer.players||[]).find(p=>p.meta && p.meta.buzzer_winner_q===buzzer.idx);
+      const winner=(buzzer.players||[]).find(p=>p.meta && Number(p.meta.buzzer_winner_q)===Number(buzzer.idx));
       if(winner && !buzzer.revealed){
         buzzer.winner=winner;
-        setTimeout(()=>finishBuzzerQuestion(),450);
+        setTimeout(()=>finishBuzzerQuestion(),350);
       }
     }
   };
@@ -950,21 +976,24 @@ function pollBuzzerPlayer(){
     if(!s) return;
     renderAnsweredBar("buzzerPlayerBar",players,s.q_index);
     const me=players.find(p=>p.id===buzzer.id);
-    const winner=players.find(p=>p.meta && p.meta.buzzer_winner_q===s.q_index);
+    const winner=players.find(p=>p.meta && Number(p.meta.buzzer_winner_q)===Number(s.q_index));
     if(s.status==="buzzer_question" && s.q_index!==buzzer.seen){
       buzzer.seen=s.q_index;
       buzzer.locked=false;
       buzzerPlayerName.textContent=cleanPlayerName(buzzer.name);
-      ["ba","bb","bc","bd"].forEach(id=>document.getElementById(id).disabled=false);
-      buzzerPlayerMsg.textContent="早押し！最初に正解した人だけ得点。間違えるとこの問題はロック。";
+      ["ba","bb","bc","bd"].forEach(id=>{const el=document.getElementById(id); el.disabled=false; el.classList.remove("buzzer-freeze");});
+      buzzerPlayerMsg.textContent="Buzz in! Only the first correct answer scores.";
       show("buzzerPlayerGame");
     }
     if(winner){
       ["ba","bb","bc","bd"].forEach(id=>document.getElementById(id).disabled=true);
-      buzzerPlayerMsg.textContent=`🏆 ${cleanPlayerName(winner.name)} answered correctly!`;
-    }else if(me && me.meta && me.meta.buzzer_locked){
-      ["ba","bb","bc","bd"].forEach(id=>document.getElementById(id).disabled=true);
-      buzzerPlayerMsg.textContent="Wrong... locked for this question.";
+      buzzerPlayerMsg.textContent=`${cleanPlayerName(winner.name)} is correct!`;
+    }else if(me && me.meta && me.meta.freeze_until && Date.now()<Number(me.meta.freeze_until)){
+      ["ba","bb","bc","bd"].forEach(id=>{const el=document.getElementById(id); el.disabled=true; el.classList.add("buzzer-freeze");});
+      const left=Math.ceil((Number(me.meta.freeze_until)-Date.now())/1000);
+      buzzerPlayerMsg.textContent=`Oops! ${cleanPlayerName(me.name)} is frozen for ${left} seconds!`;
+    }else if(me && me.meta && me.meta.buzzer_locked && (!me.meta.freeze_until || Date.now()>=Number(me.meta.freeze_until))){
+      ["ba","bb","bc","bd"].forEach(id=>{const el=document.getElementById(id); el.disabled=false; el.classList.remove("buzzer-freeze");});
     }
     if(s.status==="buzzer_result"){
       ["ba","bb","bc","bd"].forEach(id=>document.getElementById(id).disabled=true);
@@ -993,7 +1022,7 @@ async function submitBuzzer(ans){
   }
   if(!s || !s.current_question) return;
   const q=s.current_question;
-  const alreadyWinner=players.find(p=>p.meta && p.meta.buzzer_winner_q===s.q_index);
+  const alreadyWinner=players.find(p=>p.meta && Number(p.meta.buzzer_winner_q)===Number(s.q_index));
   const correct=Number(ans)===Number(q.ans);
   const metaBase={answered_at:Date.now(),buzzer_answer:ans,buzzer_correct:correct};
 
@@ -1026,17 +1055,28 @@ async function submitBuzzer(ans){
     }
     buzzerPlayerMsg.textContent="Correct! You got the point!";
   }else{
+    const freezeUntil=Date.now()+6000;
     if(HAS_SUPABASE){
       const me=players.find(p=>p.id===buzzer.id);
       await sb.from("sushi_quiz_players").update({
         last_answer:ans,
         answered_q_index:s.q_index,
-        meta:{...(me?.meta||{}),...metaBase,buzzer_locked:true,current_streak:0}
+        meta:{...(me?.meta||{}),...metaBase,buzzer_locked:true,freeze_until:freezeUntil,current_streak:0}
       }).eq("id",buzzer.id);
     }else{
-      setL(buzzer.code,"players",players.map(p=>p.id===buzzer.id?{...p,last_answer:ans,answered_q_index:s.q_index,meta:{...(p.meta||{}),...metaBase,buzzer_locked:true,current_streak:0}}:p));
+      setL(buzzer.code,"players",players.map(p=>p.id===buzzer.id?{...p,last_answer:ans,answered_q_index:s.q_index,meta:{...(p.meta||{}),...metaBase,buzzer_locked:true,freeze_until:freezeUntil,current_streak:0}}:p));
     }
-    buzzerPlayerMsg.textContent="Wrong... locked for this question.";
+    buzzerPlayerMsg.textContent=`Oops! ${cleanPlayerName(buzzer.name)} is frozen for 6 seconds!`;
+    ["ba","bb","bc","bd"].forEach(id=>document.getElementById(id).classList.add("buzzer-freeze"));
+    setTimeout(()=>{
+      buzzer.locked=false;
+      ["ba","bb","bc","bd"].forEach(id=>{
+        const el=document.getElementById(id);
+        el.disabled=false;
+        el.classList.remove("buzzer-freeze");
+      });
+      buzzerPlayerMsg.textContent="You are back! Try again.";
+    },6000);
   }
 }
 
@@ -1044,32 +1084,32 @@ async function finishBuzzerQuestion(){
   if(buzzer.revealed) return;
   buzzer.revealed=true;
   stopBuzzerTimer();
+  await refreshBuzzerPlayers();
   if(HAS_SUPABASE){
-    const {data}=await sb.from("sushi_quiz_players").select("*").eq("session_code",buzzer.code);
-    buzzer.players=data||buzzer.players||[];
     await sb.from("sushi_quiz_sessions").update({status:"buzzer_result"}).eq("code",buzzer.code);
   }else{
-    buzzer.players=getL(buzzer.code,"players")||buzzer.players||[];
     const s=getL(buzzer.code,"session");
     setL(buzzer.code,"session",{...s,status:"buzzer_result"});
   }
   const c=buzzer.cur;
-  const winner=(buzzer.players||[]).find(p=>p.meta && p.meta.buzzer_winner_q===buzzer.idx);
+  const winner=(buzzer.players||[]).find(p=>p.meta && Number(p.meta.buzzer_winner_q)===Number(buzzer.idx));
   show("buzzerResult");
   buzzerAnswer.innerHTML=winner
-    ? `<div class="buzzer-winner">🏆 ${cleanPlayerName(winner.name)} +${winner.meta?.last_gained||0}</div><br>Correct Answer: <b>${answerLabel(c.ans)}. ${c.choices[c.ans]}</b><br>${c.exp}`
-    : `No winner this round.<br>Correct Answer: <b>${answerLabel(c.ans)}. ${c.choices[c.ans]}</b><br>${c.exp}`;
+    ? `<div class="buzzer-correct-announce">${cleanPlayerName(winner.name)} is correct!</div>Correct Answer: <b>${answerLabel(c.ans)}. ${c.choices[c.ans]}</b><br>${c.exp}`
+    : `<div class="buzzer-wrong-announce">Time up!</div>Correct Answer: <b>${answerLabel(c.ans)}. ${c.choices[c.ans]}</b><br>${c.exp}`;
   buzzerBreakdown.innerHTML=(buzzer.players||[]).map(p=>{
     const meta=p.meta||{};
     const ans=meta.buzzer_answer===undefined ? "No buzz" : answerLabel(meta.buzzer_answer);
-    const cls=meta.buzzer_winner_q===buzzer.idx ? "correct" : (meta.buzzer_correct ? "correct" : "wrong");
-    const label=meta.buzzer_winner_q===buzzer.idx ? `WIN +${meta.last_gained||0}` : (meta.buzzer_locked ? "LOCKED" : "");
+    const isWinner=Number(meta.buzzer_winner_q)===Number(buzzer.idx);
+    const cls=isWinner ? "correct" : (meta.buzzer_answer!==undefined ? "wrong" : "");
+    const label=isWinner ? `WIN +${meta.last_gained||0}` : (meta.buzzer_answer!==undefined ? "MISS" : "");
     return `<div class="answer-row ${cls}"><div>${cleanPlayerName(p.name)}</div><div class="answer-choice-pill">${ans}</div><div class="points-pill">${label}</div></div>`;
   }).join("");
-  fireQuizEffect(winner ? "FASTEST!" : "TIME UP");
+  fireQuizEffect(winner ? "CORRECT!" : "TIME UP");
 }
 
-function showBuzzerRanking(){
+async function showBuzzerRanking(){
+  await refreshBuzzerPlayers();
   show("buzzerRanking");
   table("buzzerRankTable",buzzer.players||[]);
 }
