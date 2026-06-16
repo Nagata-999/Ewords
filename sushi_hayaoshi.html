@@ -1569,34 +1569,47 @@ function showMatchDrawAnimation(schedule){
   matchDrawAnimating = true;
   overlay.classList.add('show');
   if(title) title.textContent = '🎲 MATCH DRAW!';
-  if(note) note.textContent = 'REDもBLUEも完全シャッフル中...';
+  if(round) round.textContent = `${cards.length} MATCH CARDS SET!`;
 
-  const interval = cards.length <= 6 ? 820 : 620;
-  for(let i=0; i<cards.length; i++){
-    const timer = setTimeout(()=>{
-      const m = cards[i];
-      if(round) round.textContent = `MATCH ${i+1} / ${cards.length}`;
-      setShuffleSubHtml(`<span class="draw-red">${escapeHtml(m.red)}</span> <span style="color:#c47a00;">VS</span> <span class="draw-blue">${escapeHtml(m.blue)}</span><span style="color:#c47a00;">!!!</span>`);
-      if(note) note.textContent = `このカードで${m.questionsPerMatch || getTeamRounds()}問連続バトル`;
-    }, i * interval);
-    matchDrawTimers.push(timer);
-  }
+  // 抽選ボタンでは「全カードを1枚ずつ見せる」のをやめる。
+  // 5 vs 5ならカードは5枚だが、試合開始前に出すのは第1カードだけ。
+  // その後は各カードの指定問題数が終わったタイミングで、次カードを表示する。
+  const first = cards[0];
+  setShuffleSubHtml(`<span class="draw-red">${escapeHtml(first.red)}</span> <span style="color:#c47a00;">VS</span> <span class="draw-blue">${escapeHtml(first.blue)}</span><span style="color:#c47a00;">!!!</span>`);
+  if(note) note.textContent = `第1カード決定。このカードで${first.questionsPerMatch || getTeamRounds()}問連続バトル`;
 
   const closeTimer = setTimeout(()=>{
-    if(round) round.textContent = '決定！';
-    const first = cards[0];
-    setShuffleSubHtml(`<span class="draw-red">${escapeHtml(first.red)}</span> <span style="color:#c47a00;">VS</span> <span class="draw-blue">${escapeHtml(first.blue)}</span><span style="color:#c47a00;">!!!</span>`);
-    if(note) note.textContent = `STARTで第1カードから開始（各${first.questionsPerMatch || getTeamRounds()}問）`;
-    matchDrawTimers.push(setTimeout(()=>{
-      overlay.classList.remove('show');
-      matchDrawAnimating = false;
-      if(startAfterDrawPending){
-        startAfterDrawPending = false;
-        startGame();
-      }
-    }, 750));
-  }, cards.length * interval + 180);
+    overlay.classList.remove('show');
+    matchDrawAnimating = false;
+    if(startAfterDrawPending){
+      startAfterDrawPending = false;
+      startGame();
+    }
+  }, 1500);
   matchDrawTimers.push(closeTimer);
+}
+
+function showCurrentMatchIntro(callback){
+  const overlay = $('shuffleOverlay');
+  const title = $('shuffleTitle');
+  const round = $('shuffleRound');
+  const note = $('shuffleNote');
+  const m = state.matchSchedule && state.matchSchedule[state.questionIndex];
+  if(!overlay || !m){ callback(); return; }
+
+  clearMatchDrawTimers();
+  matchDrawAnimating = true;
+  overlay.classList.add('show');
+  if(title) title.textContent = '🔥 NEXT MATCH!';
+  if(round) round.textContent = `MATCH ${m.pairIndex} / ${getUniqueMatchCards(state.matchSchedule).length}`;
+  setShuffleSubHtml(`<span class="draw-red">${escapeHtml(m.red)}</span> <span style="color:#c47a00;">VS</span> <span class="draw-blue">${escapeHtml(m.blue)}</span><span style="color:#c47a00;">!!!</span>`);
+  if(note) note.textContent = `この2人で${m.questionsPerMatch}問連続バトル`;
+
+  matchDrawTimers.push(setTimeout(()=>{
+    overlay.classList.remove('show');
+    matchDrawAnimating = false;
+    callback();
+  }, 1450));
 }
 
 function randomizeTeamMatches(showEffect = true){
@@ -1741,7 +1754,11 @@ function startGame(){
   $('bluePanel').style.display = selectedMode === 'solo' ? 'none' : 'flex';
   $('redPanel').classList.toggle('solo', selectedMode === 'solo');
   if($('currentMatchCard')) $('currentMatchCard').classList.toggle('show', selectedMode !== 'solo');
-  startRoundCountdown(nextQuestion);
+  if(selectedMode === 'team'){
+    showCurrentMatchIntro(()=>startRoundCountdown(nextQuestion));
+  }else{
+    startRoundCountdown(nextQuestion);
+  }
 }
 
 function showMenu(){
@@ -1799,7 +1816,20 @@ function proceedFromReview(){
   $('reviewOverlay').classList.remove('show');
   state.waitingReview = false;
   state.questionIndex++;
-  startRoundCountdown(nextQuestion);
+
+  // 最終問題後は次問カウントダウンを出さず、そのまま結果へ。
+  if(state.questionIndex >= (state.totalQuestions || TOTAL)){
+    endGame();
+    return;
+  }
+
+  // Team Battleでは、同じ対戦カードの指定問題数が終わったら次カード演出を入れる。
+  const nextMatch = state.matchSchedule && state.matchSchedule[state.questionIndex];
+  if(state.mode === 'team' && nextMatch && nextMatch.questionInMatch === 1){
+    showCurrentMatchIntro(()=>startRoundCountdown(nextQuestion));
+  }else{
+    startRoundCountdown(nextQuestion);
+  }
 }
 
 function updateCurrentMatchDisplay(){
