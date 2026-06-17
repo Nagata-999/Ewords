@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IELTS Reading</title>
+<style>
+  :root{
+    --bg:#fff7ef; --panel:#ffffff; --ink:#222; --muted:#777; --line:#ead9c8;
+    --orange:#f28c28; --orange2:#ffb15e; --dark:#2b241f; --ok:#15803d; --bad:#b91c1c; --warn:#b45309;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink)}
+  header{height:64px;background:linear-gradient(90deg,#fff,#fff3e3);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 18px;position:sticky;top:0;z-index:5}
+  .brand{font-weight:900;letter-spacing:.03em}.brand span{color:var(--orange)}
+  .timer{font-size:24px;font-weight:900;background:#2b241f;color:#fff;border-radius:14px;padding:8px 16px;min-width:112px;text-align:center}.timer.danger{background:#b91c1c;animation:pulse 1s infinite}@keyframes pulse{50%{opacity:.65}}
+  .topBtns{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.btn{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 13px;font-weight:800;cursor:pointer}.btn.primary{background:var(--orange);border-color:var(--orange);color:#fff}.btn.dark{background:#2b241f;color:#fff;border-color:#2b241f}.btn.ghost{background:#fff7ef}.btn:disabled{opacity:.5;cursor:not-allowed}
+  .tabs{display:flex;gap:8px;padding:12px 18px;border-bottom:1px solid var(--line);background:#fffaf4;position:sticky;top:64px;z-index:4}.tab{border:1px solid var(--line);background:#fff;border-radius:14px;padding:10px 14px;font-weight:900;cursor:pointer}.tab.active{background:var(--orange);color:#fff;border-color:var(--orange)}.tab.done{box-shadow:inset 0 -4px 0 var(--ok)}
+  main{height:calc(100vh - 119px);display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px 18px}.pane{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 8px 24px rgba(88,52,15,.08);display:flex;flex-direction:column}.paneHead{padding:12px 14px;background:#fffaf4;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}.paneTitle{font-weight:900}.paneBody{padding:18px;overflow:auto;line-height:1.65}.passageTitle{font-size:26px;font-weight:900;text-align:center;margin:10px 0 18px}.placeholder{border:2px dashed #e7c8aa;border-radius:14px;padding:18px;background:#fffaf4;color:#6b4a2f}.placeholder h3{margin-top:0}.placeholder code{background:#fff;border:1px solid var(--line);padding:2px 5px;border-radius:5px}.qcard{border:1px solid var(--line);border-radius:16px;padding:14px;margin:0 0 12px;background:#fff}.qtop{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:8px}.qnum{font-weight:900;color:#fff;background:#2b241f;border-radius:10px;padding:4px 9px;min-width:44px;text-align:center}.qtype{font-size:12px;color:var(--muted);font-weight:800}.qtext{font-weight:700;margin:8px 0}.options{display:grid;gap:7px}.opt{display:flex;gap:8px;align-items:flex-start;border:1px solid #eee2d5;border-radius:10px;padding:8px;cursor:pointer}.opt:hover{background:#fff7ef}.textAns{width:100%;padding:11px 12px;border:1px solid #d8c8b8;border-radius:12px;font-size:16px}.flag{border:none;background:#fff1dd;color:#7c3f00;border-radius:999px;padding:6px 10px;font-weight:900;cursor:pointer}.flag.on{background:#ffca7a;color:#2b241f}.result{font-size:13px;margin-top:8px;font-weight:900}.correct{color:var(--ok)}.wrong{color:var(--bad)}.empty{color:var(--warn)}
+  .footerBar{padding:10px 14px;border-top:1px solid var(--line);background:#fffaf4;display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}.progress{font-weight:900;color:#6b4a2f}.scoreBox{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0}.metric{background:#fffaf4;border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}.metric b{font-size:24px}.vocabGrid{display:grid;grid-template-columns:1.2fr 1fr 1.2fr;gap:8px;margin-top:10px}.vocabGrid input{padding:10px;border:1px solid #d8c8b8;border-radius:10px}.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:10}.modal.show{display:flex}.modalCard{background:#fff;border-radius:20px;max-width:920px;width:min(94vw,920px);max-height:90vh;overflow:auto;padding:18px;border:1px solid var(--line)}textarea{width:100%;min-height:280px;font-family:ui-monospace,Consolas,monospace;font-size:13px;border:1px solid #d8c8b8;border-radius:12px;padding:12px}.small{font-size:12px;color:var(--muted)}.bandTable{width:100%;border-collapse:collapse}.bandTable td,.bandTable th{border:1px solid var(--line);padding:8px;text-align:center}.bandTable th{background:#fff3e3}.marker{background:linear-gradient(transparent 45%, #ffe16a 45%);border-radius:3px;padding:0 1px}.passageContent{user-select:text}.passageContent *{user-select:text}.adminGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.adminGrid input{padding:10px;border:1px solid #d8c8b8;border-radius:10px}.adminTable{width:100%;border-collapse:collapse;margin-top:10px}.adminTable th,.adminTable td{border:1px solid var(--line);padding:7px;font-size:13px}.adminTable th{background:#fff3e3}.summaryBox{background:#fffaf4;border:1px solid #ead9c8;border-radius:14px;padding:12px;margin-top:10px}.summaryBox input{width:150px;max-width:100%;padding:8px 10px;border:1px solid #d8c8b8;border-radius:10px;font-size:15px;margin:0 4px}.noCopyHint{font-size:12px;color:#9a5a15;font-weight:800}.explainBox{margin-top:8px;background:#fff7ef;border-left:4px solid var(--orange);border-radius:10px;padding:9px 10px;font-size:13px;color:#4a3320}.explainBox b{color:#2b241f}.vocabAnswer{font-weight:900;color:#15803d;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:10px}.vocabTools{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 10px}
+
+  .teacherMenu{position:relative}
+  .hamburger{font-size:20px;line-height:1;padding:8px 12px;border-radius:12px}
+  .teacherDrop{position:absolute;right:0;top:46px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 28px rgba(88,52,15,.16);padding:8px;display:none;min-width:170px;z-index:20}
+  .teacherDrop.show{display:grid;gap:6px}
+  .scaleDock{position:fixed;right:16px;bottom:16px;width:220px;background:#fff;border:1px solid #222;border-radius:12px;box-shadow:0 12px 26px rgba(0,0,0,.14);z-index:6;overflow:hidden}
+  .scaleDockHead{background:#2b241f;color:#fff;font-weight:900;padding:8px 10px;display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+  .scaleDockBody{padding:8px;background:#fff}.scaleDock.collapsed .scaleDockBody{display:none}
+  .miniBand{width:100%;border-collapse:collapse;font-size:12px}.miniBand th,.miniBand td{border:1px solid #777;padding:3px 5px;text-align:center}.miniBand th{background:#eee}.miniBand td:first-child{font-weight:800}
+.feedbackPanel{margin-top:9px;background:#fff7ef;border:1px solid #f1d1ad;border-left:5px solid var(--orange);border-radius:12px;padding:10px 12px;font-size:13px;color:#3f2b1e}
+.feedbackPanel .fbTitle{font-weight:900;color:#2b241f;margin-bottom:6px}
+.evidenceLine{background:#fff;border:1px solid #ead9c8;border-radius:10px;padding:8px 10px;margin:6px 0;font-family:Georgia,serif;line-height:1.55}
+.keywordTable{width:100%;border-collapse:collapse;margin:6px 0;background:#fff}.keywordTable th,.keywordTable td{border:1px solid #ead9c8;padding:6px 8px;text-align:left}.keywordTable th{background:#fff3e3}.tagTrue{color:#15803d;font-weight:900}.tagFalse{color:#b91c1c;font-weight:900}.tagNG{color:#b45309;font-weight:900}.miniNote{font-size:12px;color:#6b4a2f;margin-top:4px}
+
+  .startOverlay{position:fixed;inset:0;background:linear-gradient(135deg,#fff7ef,#fff);z-index:30;display:flex;align-items:center;justify-content:center;padding:18px}.startOverlay.hide{display:none}
+  .startCard{width:min(560px,96vw);background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:0 18px 50px rgba(88,52,15,.18);padding:26px}.startCard h1{margin:0 0 8px;font-size:30px}.startCard input{width:100%;padding:13px 14px;border:1px solid #d8c8b8;border-radius:14px;font-size:16px;margin:8px 0}.startCard .btn{width:100%;font-size:18px;margin-top:10px}.studentBadge{font-size:13px;font-weight:900;color:#6b4a2f;background:#fff7ef;border:1px solid var(--line);border-radius:999px;padding:7px 10px}
+
+.resultTable{width:100%;border-collapse:collapse;margin:12px 0;background:#fff}.resultTable th,.resultTable td{border:1px solid var(--line);padding:7px 8px;text-align:center;font-size:13px}.resultTable th{background:#fff3e3}.resultTable td:nth-child(3),.resultTable td:nth-child(4){text-align:left}.pill{display:inline-block;border-radius:999px;padding:3px 8px;font-weight:900;font-size:12px}.pill.ok{background:#dcfce7;color:#166534}.pill.bad{background:#fee2e2;color:#991b1b}.pill.empty{background:#ffedd5;color:#9a3412}.submitTools{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.submitText{width:100%;min-height:260px;font-family:ui-monospace,Consolas,monospace;font-size:13px;border:1px solid #d8c8b8;border-radius:12px;padding:12px;background:#fffaf4;white-space:pre-wrap}.copyNotice{font-size:13px;font-weight:900;color:#15803d;margin-left:4px}
+
+@media(max-width:900px){.scaleDock{right:8px;bottom:8px;width:180px}.studentBadge{font-size:12px}main{grid-template-columns:1fr;height:auto}.pane{min-height:70vh}.tabs{top:64px;overflow:auto}header{height:auto;min-height:64px;align-items:flex-start;gap:8px;flex-direction:column;padding:10px 12px}.tabs{top:98px}main{padding:10px}.timer{font-size:20px}.scoreBox{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">IELTS <span>Reading</span></div>
+  <div class="topBtns">
+    <div class="timer" id="timer">60:00</div>
+    <button class="btn" id="startBtn">Start</button>
+    <button class="btn ghost" id="pauseBtn">Pause</button>
+    <button class="btn dark" id="gradeAllBtn">Grade All</button>
+    <span class="studentBadge" id="studentBadge">No name</span>
+    <div class="teacherMenu">
+      <button class="btn hamburger" id="teacherMenuBtn" title="Teacher menu">☰</button>
+      <div class="teacherDrop" id="teacherDrop">
+        <button class="btn" id="adminBtn">Admin</button>
+        <button class="btn" id="settingsBtn">Teacher JSON</button>
+      </div>
+    </div>
+  </div>
+</header>
+<nav class="tabs" id="tabs"></nav>
+<div class="startOverlay" id="startOverlay">
+  <div class="startCard">
+    <h1>IELTS Reading</h1>
+    <p class="small">名前を入力してStart。</p>
+    <input id="startStudentName" placeholder="Name / 名前">
+    <input id="startClassName" placeholder="Class / Group（任意）">
+    <button class="btn primary" id="startPracticeBtn">Start Reading</button>
+  </div>
+</div>
+<div class="scaleDock" id="scaleDock">
+  <div class="scaleDockHead" id="scaleDockHead"><span>Band Scale</span><span>▾</span></div>
+  <div class="scaleDockBody" id="scaleDockBody"></div>
+</div>
+<main>
+  <section class="pane">
+    <div class="paneHead"><div><div class="paneTitle" id="passageHead">Passage</div><div class="noCopyHint">コピー不可 / マーカー可</div></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="markBtn">Marker</button><button class="btn ghost" id="clearMarkBtn">Clear Marks</button><button class="btn" id="vocabBtn">Vocabulary Mission</button></div></div>
+    <div class="paneBody" id="passageBody"></div>
+    <div class="footerBar"><span class="small"></span><span class="progress" id="sectionProgress"></span></div>
+  </section>
+  <section class="pane">
+    <div class="paneHead"><div class="paneTitle" id="questionHead">Questions</div><button class="btn primary" id="gradeSectionBtn">Grade This Passage</button></div>
+    <div class="paneBody" id="questionsBody"></div>
+    <div class="footerBar"><button class="btn" id="prevBtn">← Previous</button><span class="progress" id="answeredCount"></span><button class="btn" id="nextBtn">Next →</button></div>
+  </section>
+</main>
+<div class="modal" id="resultModal"><div class="modalCard"><h2>Result</h2><div id="resultBody"></div><div class="submitTools"><button class="btn primary" id="sendTeacherBtn">Teacherに送信</button><button class="btn" id="copyResultBtn">結果をコピー</button><button class="btn dark" onclick="closeModal('resultModal')">Close</button></div></div></div>
+<div class="modal" id="submitModal"><div class="modalCard"><h2>Submit to Teacher</h2><p class="small">DBなし運用用です。下の提出レポートをコピーしてClassroomやFormsに貼るか、TXTで保存して提出できます。</p><div class="submitTools"><button class="btn primary" id="copySubmitBtn">Copy Report</button><button class="btn" id="downloadSubmitBtn">Download TXT</button><button class="btn" id="mailSubmitBtn">Open Mail</button><button class="btn dark" onclick="closeModal('submitModal')">Close</button><span class="copyNotice" id="copyNotice"></span></div><textarea id="submitText" class="submitText" readonly></textarea></div></div>
+<div class="modal" id="vocabModal"><div class="modalCard"><h2>Vocabulary Mission</h2><p class="small">難語を見つけ、推測を書かせる欄。JSONで単語を追加できます。</p><div id="vocabBody"></div><button class="btn primary" onclick="closeModal('vocabModal')">Close</button></div></div>
+<div class="modal" id="adminModal"><div class="modalCard"><h2>Admin / Central Progress</h2><p class="small">Supabaseに接続すると、生徒の回答数・Passage別スコア・全体スコアを随時確認できます。未設定でもこの端末内の進捗は見られます。</p><div class="adminGrid"><input id="studentName" placeholder="Student name"><input id="className" placeholder="Class / group"><input id="supabaseUrl" placeholder="Supabase URL"><input id="supabaseKey" placeholder="Supabase anon key"></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn primary" id="saveStudentBtn">Save Student / DB Config</button><button class="btn" id="syncNowBtn">Sync Now</button><button class="btn" id="refreshAdminBtn">Refresh Dashboard</button><button class="btn dark" onclick="closeModal('adminModal')">Close</button></div><div id="adminBody"></div><h3>必要なテーブルSQL</h3><textarea readonly style="min-height:140px">create table public.ielts_reading_progress (
+  id bigserial primary key,
+  test_id text not null,
+  student_name text not null,
+  class_name text default '',
+  section_id text not null,
+  score int not null default 0,
+  total int not null default 0,
+  unanswered int not null default 0,
+  answered int not null default 0,
+  full_score int not null default 0,
+  full_total int not null default 40,
+  band text default '',
+  answers jsonb default '{}'::jsonb,
+  flags jsonb default '{}'::jsonb,
+  updated_at timestamptz not null default now(),
+  unique(test_id, student_name, section_id)
+);</textarea></div></div>
+<div class="modal" id="settingsModal"><div class="modalCard"><h2>Teacher JSON</h2><p>ここに教材データを入れます。本文・設問を公開配布しない場合は、左側を「本の該当ページを見てください」のままにできます。解答キーを入れると自動採点します。</p><textarea id="jsonArea"></textarea><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px"><button class="btn primary" id="applyJsonBtn">Apply JSON</button><button class="btn" id="downloadJsonBtn">Download JSON</button><button class="btn" id="resetJsonBtn">Reset Template</button><button class="btn dark" onclick="closeModal('settingsModal')">Close</button></div><p class="small">radio: 選択式 / text: 入力式 / summary: 要約穴埋め。summaryHtml内の {{12}} のような番号が入力欄になります。各問題に evidence / keyword_pairs / contradiction_pairs / not_given_reason / reason_ja を入れると、採点時に根拠文・シノニム・矛盾語・NOT GIVEN理由を丁寧に表示できます。旧形式の explanation / explanations も使用可。vocab は {"word":"...","meaning":"..."} 形式も使えます。</p></div></div>
+<script>
+const bandScale=[{min:39,max:40,band:'9.0'},{min:37,max:38,band:'8.5'},{min:35,max:36,band:'8.0'},{min:33,max:34,band:'7.5'},{min:30,max:32,band:'7.0'},{min:27,max:29,band:'6.5'},{min:23,max:26,band:'6.0'},{min:19,max:22,band:'5.5'},{min:15,max:18,band:'5.0'},{min:13,max:14,band:'4.5'},{min:10,max:12,band:'4.0'},{min:0,max:9,band:'Below 4.0'}];
+const vocabMeanings={
+'infrastructure':'社会基盤、インフラ','canopy':'樹冠、葉が作る覆い','transpiration':'蒸散。植物が水蒸気を放出すること','runoff':'雨水などの表面流出','drainage':'排水、排水設備','association':'関連、結びつき','affluent':'裕福な','compacted':'固く押し固められた','arborist':'樹木医、樹木管理の専門家','diversity':'多様性',
+'reconstruct':'再構成する、復元する','domesticated':'栽培化・家畜化された','charred':'焦げた、炭化した','starch':'でんぷん','granules':'小粒、粒子','experimental archaeology':'実験考古学','interpretation':'解釈','ritual':'儀式の、儀式','portable':'持ち運びできる','cautious':'慎重な',
+'conform':'同調する、従う','expertise':'専門知識','collaborative':'協働の','confirmation':'確認、裏付け','consensus':'合意、一致した意見','anonymous':'匿名の','incentives':'動機づけ、誘因','harmonious':'調和した','structured disagreement':'構造化された反対意見・異議申し立て'
+};
+let showVocabAnswers=false;
+function getVocabWord(v){return typeof v==='string'?v:(v.word||'');}
+function getVocabMeaning(v){if(typeof v==='object'&&v.meaning)return v.meaning;return vocabMeanings[getVocabWord(v)]||'';}
+function pairsTable(title,pairs,head1='問題文',head2='本文'){
+  if(!pairs||!pairs.length)return '';
+  return `<div class="fbTitle">${escapeHtml(title)}</div><table class="keywordTable"><tr><th>${escapeHtml(head1)}</th><th>${escapeHtml(head2)}</th></tr>`+pairs.map(p=>`<tr><td>${escapeHtml(p[0])}</td><td>${escapeHtml(p[1])}</td></tr>`).join('')+`</table>`;
+}
+function evidenceHtml(ev){
+  if(!ev)return '';
+  let arr=Array.isArray(ev)?ev:[ev];
+  return `<div class="fbTitle">根拠箇所</div>`+arr.map(x=>`<div class="evidenceLine">“${escapeHtml(x)}”</div>`).join('');
+}
+function explanationFor(q,n){
+  let custom='';
+  if(q.explanations && q.explanations[n]) custom=q.explanations[n];
+  else if(q.explanation) custom=typeof q.explanation==='string'?q.explanation:(q.explanation[n]||'');
+  const ans=answerKeyFor(q,n);
+  const user=answers[n]||'未回答';
+  const ev=(q.evidence && (typeof q.evidence==='string'?q.evidence:q.evidence[n])) || '';
+  const reason=(q.reason_ja && (typeof q.reason_ja==='string'?q.reason_ja:q.reason_ja[n])) || custom || '';
+  const keyPairs=(q.keyword_pairs && (Array.isArray(q.keyword_pairs)?q.keyword_pairs:(q.keyword_pairs[n]||[]))) || [];
+  const contraPairs=(q.contradiction_pairs && (Array.isArray(q.contradiction_pairs)?q.contradiction_pairs:(q.contradiction_pairs[n]||[]))) || [];
+  const ngReason=(q.not_given_reason && (typeof q.not_given_reason==='string'?q.not_given_reason:q.not_given_reason[n])) || '';
+  let html='<div class="feedbackPanel">';
+  const opts=(q.options||[]).join('/');
+  const isTFNG=opts.includes('TRUE')&&opts.includes('FALSE')&&opts.includes('NOT GIVEN');
+  if(isTFNG){
+    html+=`<div class="fbTitle">判定の型：<span class="${ans==='TRUE'?'tagTrue':ans==='FALSE'?'tagFalse':'tagNG'}">${escapeHtml(ans)}</span></div>`;
+  }else{
+    html+=`<div class="fbTitle">解答の根拠</div>`;
+  }
+  html+=evidenceHtml(ev);
+  if(keyPairs.length) html+=pairsTable('シノニム・対応語',keyPairs);
+  if(contraPairs.length) html+=pairsTable('矛盾している語句',contraPairs);
+  if(ngReason) html+=`<div class="fbTitle">NOT GIVENの理由</div><div>${escapeHtml(ngReason)}</div>`;
+  if(reason){
+    html+=`<div class="fbTitle">日本語解説</div><div>${escapeHtml(reason)}</div>`;
+  }else if(q.type==='summary'){
+    html+=`<div class="fbTitle">日本語解説</div><div>要約文の空所は本文中の情報を短く言い換えたものです。Q${n}は「${escapeHtml(ans)}」が本文の内容と対応します。あなたの解答は「${escapeHtml(user)}」です。</div>`;
+  }else if(q.type==='text'){
+    html+=`<div class="fbTitle">日本語解説</div><div>本文中でこの内容を表す語句は「${escapeHtml(ans)}」です。入力問題ではスペルと語数指定に注意します。あなたの解答は「${escapeHtml(user)}」です。</div>`;
+  }else if(isTFNG){
+    let auto=ans==='TRUE'?'本文と設問文が同じ内容です。多くの場合、本文の語句が設問文ではシノニムに置き換えられます。':ans==='FALSE'?'本文の内容と設問文が矛盾します。数値、比較、否定語、強い表現に注意します。':'本文には判断に必要な情報がありません。常識や推測で補うと間違えます。';
+    html+=`<div class="fbTitle">日本語解説</div><div>${auto}</div>`;
+  }else if((q.options||[]).every(x=>/^[A-Z]$/.test(x))){
+    html+=`<div class="fbTitle">日本語解説</div><div>正解は ${escapeHtml(ans)} です。その段落に設問の内容が最も直接書かれています。</div>`;
+  }else{
+    html+=`<div class="fbTitle">日本語解説</div><div>正解は「${escapeHtml(ans)}」です。本文の該当箇所の意味と一致する選択肢を選びます。</div>`;
+  }
+  html+=`<div class="miniNote">あなたの解答：${escapeHtml(user)}</div></div>`;
+  return html;
+}
+
+function q(n,type='text',options=[]){return{num:n,type,question:'',options,answer:'',accept:[],caseSensitive:false,trim:true};}
+const template={
+  title:'AI IELTS-style Reading Test 1',durationMinutes:60,
+  sections:[
+    {id:'p1',title:'Reading Passage 1',range:'Questions 1–13',source:'AI-generated original passage. IELTS-style Passage 1.',passageTitle:'The Hidden Cost of Making Cities Cooler',passageHtml:`
+<p><b>A</b> In recent years, many city governments have promoted trees, reflective roofs and pocket parks as inexpensive ways to protect residents from extreme heat. The appeal is obvious: such measures are visible, popular and often cheaper than rebuilding streets or energy systems. Yet researchers who study urban heat warn that cooling schemes can produce uneven results. A project may lower the temperature of one block while leaving nearby streets almost unchanged. In some cases, it may even make social inequalities more noticeable.</p>
+<p><b>B</b> One difficulty is that heat is not distributed evenly across a city. Dark road surfaces, wide car parks and dense buildings store warmth during the day and release it after sunset. Areas with fewer trees and older housing often remain hotter at night, when the human body needs relief. This night-time heat is linked to increased health risks, especially for older people and those with heart or breathing problems. A daytime temperature map, therefore, may not identify the neighbourhoods where the greatest danger occurs.</p>
+<p><b>C</b> Planting trees is frequently proposed as a solution, but the benefits depend on age, species and maintenance. A mature tree can cast broad shade and cool the air through transpiration, whereas a newly planted tree in a small container may do little for many years. Moreover, if a city plants only a few fashionable species, a single pest or disease can damage a large proportion of the urban forest. For this reason, some arborists argue that diversity is not an aesthetic preference but a form of risk management.</p>
+<p><b>D</b> Reflective surfaces present a different problem. Light-coloured roofs can reduce the amount of solar energy absorbed by buildings, and in many climates they lower the demand for air conditioning. However, their effect is not universally positive. In colder months, the same surfaces may reduce useful warmth, and in narrow streets reflected light can increase glare for pedestrians. The technology is therefore not a simple replacement for vegetation, which provides shade, water management and psychological benefits as well as cooling.</p>
+<p><b>E</b> The politics of cooling are equally complicated. Residents in wealthy districts may have more time to request improvements and more influence over local decisions. If officials respond mainly to complaints, funds may flow toward places that are already relatively comfortable. Some cities have started to combine satellite data with hospital records and interviews with residents. The aim is to identify not only where temperatures are high, but where heat is most likely to harm people. Still, data cannot settle every question. Residents may disagree about whether a proposed line of trees would improve a street or make it feel unsafe at night.</p>
+<p><b>F</b> A further risk is that successful cooling can raise property values. Greener and cooler neighbourhoods may become more attractive, encouraging investment but also increasing rents. In this way, an environmental improvement can contribute to displacement unless housing policy is considered at the same time. The lesson is not that cities should avoid cooling projects. Rather, such projects should be treated as part of a wider system. A cooler city is not necessarily a fairer one unless the benefits are deliberately directed toward those most exposed to heat.</p>`,vocab:[{word:'reflective',meaning:'反射する、反射性の'},{word:'uneven',meaning:'均等でない、むらのある'},{word:'distributed',meaning:'分布している'},{word:'transpiration',meaning:'蒸散'},{word:'aesthetic',meaning:'美的な'},{word:'glare',meaning:'まぶしい光、ぎらつき'},{word:'vegetation',meaning:'植物、植生'},{word:'displacement',meaning:'立ち退き、追い出し'},{word:'exposed',meaning:'危険などにさらされている'},{word:'risk management',meaning:'リスク管理'}],questions:[
+{num:1,type:'radio',question:'Cooling projects can produce benefits in one street without producing the same result nearby.',options:['TRUE','FALSE','NOT GIVEN'],answer:'TRUE',evidence:'A project may lower the temperature of one block while leaving nearby streets almost unchanged.',keyword_pairs:[['benefits in one street','lower the temperature of one block'],['without producing the same result nearby','nearby streets almost unchanged']],reason_ja:'設問の「one street」は本文の one block、「without producing the same result nearby」は nearby streets almost unchanged の言い換えです。場所によって効果が違うという内容が一致するためTRUEです。'},
+{num:2,type:'radio',question:'The neighbourhoods that are hottest in the daytime are always the ones where people face the greatest danger.',options:['TRUE','FALSE','NOT GIVEN'],answer:'FALSE',evidence:'A daytime temperature map, therefore, may not identify the neighbourhoods where the greatest danger occurs.',contradiction_pairs:[['are always the ones','may not identify'],['hottest in the daytime','daytime temperature map'],['greatest danger','greatest danger occurs']],reason_ja:'設問は「昼間に暑い地域＝常に最大リスク地域」と断定しています。しかし本文は、昼間の温度地図では最大危険地域を特定できない場合があると述べています。always が本文と矛盾するためFALSEです。'},
+{num:3,type:'radio',question:'Older residents are the only group whose health is affected by night-time heat.',options:['TRUE','FALSE','NOT GIVEN'],answer:'FALSE',evidence:'This night-time heat is linked to increased health risks, especially for older people and those with heart or breathing problems.',contradiction_pairs:[['the only group','especially for older people and those with heart or breathing problems']],reason_ja:'本文は older people を特に危険な集団として挙げていますが、heart or breathing problems のある人も挙げています。only group が本文と矛盾します。'},
+{num:4,type:'radio',question:'Urban tree diversity is recommended primarily because it makes streets more attractive.',options:['TRUE','FALSE','NOT GIVEN'],answer:'FALSE',evidence:'For this reason, some arborists argue that diversity is not an aesthetic preference but a form of risk management.',contradiction_pairs:[['makes streets more attractive','not an aesthetic preference'],['primarily because','risk management']],reason_ja:'設問は「見た目のため」としていますが、本文は not an aesthetic preference but a form of risk management と述べています。aesthetic preference と risk management の対比が根拠です。'},
+{num:5,type:'radio',question:'The cooling value of trees depends partly on how well they are looked after.',options:['TRUE','FALSE','NOT GIVEN'],answer:'TRUE',evidence:'the benefits depend on age, species and maintenance',keyword_pairs:[['cooling value','benefits'],['how well they are looked after','maintenance']],reason_ja:'how well they are looked after は maintenance の言い換えです。本文は木の効果が age, species and maintenance に左右されると述べているためTRUEです。'},
+{num:6,type:'radio',question:'Reflective surfaces can fully replace vegetation as a cooling strategy.',options:['TRUE','FALSE','NOT GIVEN'],answer:'FALSE',evidence:'The technology is therefore not a simple replacement for vegetation, which provides shade, water management and psychological benefits as well as cooling.',contradiction_pairs:[['fully replace vegetation','not a simple replacement for vegetation']],reason_ja:'設問は「完全に置き換えられる」と述べていますが、本文は not a simple replacement と否定しています。reflective surfaces は冷却以外の機能を持つ vegetation の完全な代替ではありません。'},
+{nums:[7,8,9,10],type:'summary',question:'Complete the summary. Write NO MORE THAN TWO WORDS from the passage for each answer.',summaryHtml:'Urban cooling is not simply a technical problem. Because older housing and fewer trees can leave some districts hotter at night, daytime maps may miss where the greatest {{7|Q7}} occurs. Tree planting can help, but a limited range of species creates a risk from a single {{8|Q8}}. Reflective roofs may reduce demand for {{9|Q9}}, although they do not offer all the benefits of vegetation. If cooler districts become more desirable, rising rents may cause {{10|Q10}}.',answers:{7:'danger',8:'disease',9:'air conditioning',10:'displacement'},accept:{7:['greatest danger'],8:['pest','pest or disease'],9:['air-conditioning']},evidence:{7:'A daytime temperature map... may not identify the neighbourhoods where the greatest danger occurs.',8:'a single pest or disease can damage a large proportion of the urban forest.',9:'they lower the demand for air conditioning.',10:'increasing rents... displacement.'},keyword_pairs:{7:[['greatest danger','greatest danger occurs']],8:[['single disease','single pest or disease']],9:[['reduce demand','lower the demand']],10:[['rising rents may cause','increasing rents... displacement']]},reason_ja:{7:'空欄前の greatest と本文の greatest danger occurs が対応します。本文中の語を使うので danger が入ります。',8:'limited range of species は only a few fashionable species の言い換えです。一つの pest or disease が大きな被害を出すため、disease が入ります。pest も本文上は許容できます。',9:'reduce demand は lower the demand の言い換えです。本文中の air conditioning が答えです。',10:'rising rents は increasing rents の言い換えで、その結果として displacement が起こると本文にあります。'}},
+{num:11,type:'radio',question:'Which paragraph mentions the possibility that environmental improvement may force some residents to move away?',options:['A','B','C','D','E','F'],answer:'F',evidence:'Greener and cooler neighbourhoods may become more attractive... increasing rents... displacement.',keyword_pairs:[['force some residents to move away','displacement'],['environmental improvement','Greener and cooler neighbourhoods']],reason_ja:'force residents to move away は displacement の説明です。環境改善によって家賃が上がり、立ち退きにつながる可能性があると述べているのはFです。'},
+{num:12,type:'radio',question:'Which paragraph explains why heat danger cannot be judged only from daytime measurements?',options:['A','B','C','D','E','F'],answer:'B',evidence:'A daytime temperature map, therefore, may not identify the neighbourhoods where the greatest danger occurs.',keyword_pairs:[['daytime measurements','daytime temperature map'],['cannot be judged only from','may not identify']],reason_ja:'daytime measurements は daytime temperature map の言い換えです。昼間の測定だけでは危険地域を特定できない理由を説明しているのはBです。'},
+{num:13,type:'radio',question:'Which paragraph suggests that a popular cooling method may create problems in particular seasons or street conditions?',options:['A','B','C','D','E','F'],answer:'D',evidence:'In colder months, the same surfaces may reduce useful warmth, and in narrow streets reflected light can increase glare for pedestrians.',keyword_pairs:[['particular seasons','colder months'],['street conditions','narrow streets'],['create problems','reduce useful warmth / increase glare']],reason_ja:'particular seasons は colder months、street conditions は narrow streets に対応します。反射面の問題点を具体的に説明しているのはDです。'}]},
+
+    {id:'p2',title:'Reading Passage 2',range:'Questions 14–26',source:'AI-generated original passage. IELTS-style Passage 2.',passageTitle:'When Old Maps Become Evidence',passageHtml:`
+<p><b>A</b> Historical maps are often treated as windows onto the past, but they are better understood as arguments made on paper. A mapmaker chooses what to include, what to omit and which names to print most prominently. These choices may reflect measurement, but they can also reflect politics, trade interests or the expectations of a patron. For historians, therefore, an old map is not simply a record of geographical knowledge; it is also evidence of what certain people wanted others to believe.</p>
+<p><b>B</b> In coastal regions, maps were frequently produced for practical reasons. Sailors needed information about reefs, currents and safe anchorages. Yet even navigational charts can be misleading. Some features were copied from earlier charts without being checked, while dangerous areas might be exaggerated to discourage rivals from entering profitable waters. A blank space, moreover, did not always mean ignorance. It might indicate that information was deliberately withheld.</p>
+<p><b>C</b> The problem becomes sharper when maps are used to support modern legal claims. Boundaries drawn centuries ago may be cited in disputes over land or fishing rights. But historians warn that a line on a map is not automatically a border in the modern sense. It may have marked a route, a zone of influence or an estimate made by someone who had never visited the area. Courts therefore increasingly ask specialists to explain the circumstances in which a map was made.</p>
+<p><b>D</b> Scientific techniques have improved this work. High-resolution imaging can reveal erased names or earlier sketches beneath the visible surface. Chemical analysis of ink can sometimes show whether additions were made later. Digital comparison allows researchers to trace how an error travelled from one map to another over many decades. However, technology cannot remove the need for interpretation. A hidden line may be significant, or it may be an abandoned draft.</p>
+<p><b>E</b> Maps also shaped how readers imagined distant places. A region drawn at the edge of a sheet might appear marginal even if it was central to local life. Decorative images of animals, ships or people could make a map seem authoritative while also reinforcing stereotypes. In this way, maps did not merely describe territories; they helped create expectations about them. The most elegant map may therefore be the least neutral.</p>
+<p><b>F</b> For teachers and museums, this complexity creates both difficulty and opportunity. Visitors often want a simple question answered: was the map accurate? A more useful question is: accurate for whom and for what purpose? A chart that was poor for measuring distance might be excellent evidence of trade routes. A map that distorted a coastline might reveal the ambitions of a state. Reading old maps well requires the same caution used in reading written documents: attention to source, audience and motive.</p>`,vocab:[{word:'omit',meaning:'省く、除外する'},{word:'prominently',meaning:'目立つように'},{word:'patron',meaning:'後援者、依頼主'},{word:'anchorage',meaning:'停泊地'},{word:'withheld',meaning:'隠された、差し控えられた'},{word:'legal claims',meaning:'法的主張'},{word:'circumstances',meaning:'状況、背景'},{word:'authoritative',meaning:'権威があるように見える'},{word:'stereotypes',meaning:'固定観念'},{word:'neutral',meaning:'中立の'}],questions:[
+{num:14,type:'radio',question:'The writer says old maps should be seen mainly as perfectly objective records.',options:['TRUE','FALSE','NOT GIVEN'],answer:'FALSE',evidence:'Historical maps... are better understood as arguments made on paper.',contradiction_pairs:[['perfectly objective records','arguments made on paper']],reason_ja:'本文は地図を客観的記録ではなく「紙上の主張」として読むべきだと述べています。'},
+{num:15,type:'radio',question:'Some blank spaces on charts may have resulted from intentional secrecy.',options:['TRUE','FALSE','NOT GIVEN'],answer:'TRUE',evidence:'A blank space... did not always mean ignorance. It might indicate that information was deliberately withheld.',keyword_pairs:[['intentional secrecy','deliberately withheld']],reason_ja:'intentional secrecy は deliberately withheld の言い換えです。'},
+{num:16,type:'radio',question:'Most sailors were unable to understand the symbols used on coastal charts.',options:['TRUE','FALSE','NOT GIVEN'],answer:'NOT GIVEN',evidence:'Sailors needed information about reefs, currents and safe anchorages.',not_given_reason:'本文は船乗りが必要とした情報について述べていますが、記号を理解できたかどうか、まして most sailors については述べていません。'},
+{num:17,type:'radio',question:'A historical line on a map may not correspond to a present-day border.',options:['TRUE','FALSE','NOT GIVEN'],answer:'TRUE',evidence:'a line on a map is not automatically a border in the modern sense.',keyword_pairs:[['may not correspond to','not automatically'],['present-day border','border in the modern sense']]},
+{num:18,type:'radio',question:'Courts have stopped using maps as evidence in territorial disputes.',options:['TRUE','FALSE','NOT GIVEN'],answer:'FALSE',evidence:'Courts therefore increasingly ask specialists to explain the circumstances in which a map was made.',contradiction_pairs:[['stopped using maps','increasingly ask specialists to explain maps']],reason_ja:'本文は使用をやめたとは言わず、専門家の説明を求めるようになっていると述べています。'},
+{num:19,type:'radio',question:'High-resolution imaging can reveal information not visible on the map surface.',options:['TRUE','FALSE','NOT GIVEN'],answer:'TRUE',evidence:'High-resolution imaging can reveal erased names or earlier sketches beneath the visible surface.',keyword_pairs:[['not visible on the map surface','beneath the visible surface']]},
+{nums:[20,21,22,23],type:'summary',question:'Complete the summary. Write NO MORE THAN TWO WORDS from the passage.',summaryHtml:'Old maps may reflect the intentions of a {{20|Q20}} as well as measurement. On sea charts, empty areas could show that knowledge was {{21|Q21}} rather than absent. Modern research can use chemical analysis of {{22|Q22}} to detect later changes, but all findings still require {{23|Q23}}.',answers:{20:'patron',21:'withheld',22:'ink',23:'interpretation'}},
+{num:24,type:'radio',question:'Which paragraph discusses the use of maps in present-day legal disagreements?',options:['A','B','C','D','E','F'],answer:'C',evidence:'modern legal claims... disputes over land or fishing rights'},
+{num:25,type:'radio',question:'Which paragraph says that visual beauty can hide bias?',options:['A','B','C','D','E','F'],answer:'E',evidence:'The most elegant map may therefore be the least neutral.'},
+{num:26,type:'radio',question:'The writer’s main conclusion is that old maps should be read...',options:['as exact photographs of territory','with attention to purpose and context','only by scientists using imaging tools','as less useful than written documents'],answer:'with attention to purpose and context',evidence:'attention to source, audience and motive',keyword_pairs:[['purpose and context','source, audience and motive']]}]},
+
+    {id:'p3',title:'Reading Passage 3',range:'Questions 27–40',source:'AI-generated original passage. IELTS-style Passage 3.',passageTitle:'The Problem with Measuring Curiosity',passageHtml:`
+<p><b>A</b> Curiosity is commonly praised as a driver of learning, innovation and scientific discovery. Schools say they want curious students; companies say they need curious employees. Yet when researchers try to measure curiosity, the concept becomes slippery. Is a curious person someone who asks many questions, someone who enjoys uncertainty, or someone who continues investigating after an easy answer is available? These behaviours overlap, but they are not identical.</p>
+<p><b>B</b> Early psychological studies often relied on self-report questionnaires. Participants were asked whether they liked exploring unfamiliar topics or solving difficult puzzles. Such questionnaires are efficient, but they raise an obvious problem: people may describe the kind of person they wish to be rather than the way they actually behave. In cultures where intellectual enthusiasm is admired, claiming to be curious may be socially rewarding. In other settings, the same claim may seem childish or intrusive.</p>
+<p><b>C</b> Behavioural experiments appear to offer a firmer solution. In one common design, participants choose between receiving a small amount of information immediately or waiting longer for a fuller explanation. Their choices are then treated as evidence of curiosity. However, this interpretation is not straightforward. A participant may wait because the topic is interesting, because the task feels like a test, or simply because waiting has no real cost. What looks like curiosity may partly be compliance.</p>
+<p><b>D</b> Neuroscientific studies have added another layer. Brain-imaging research suggests that curiosity activates reward-related systems, especially when people anticipate learning an answer. This finding has encouraged the idea that curiosity is a kind of appetite for information. But the comparison can be misleading. Unlike hunger, curiosity is shaped by prior knowledge: a question is often most attractive when a person knows enough to recognise a gap, but not enough to close it.</p>
+<p><b>E</b> The educational implications are important. If teachers assume curiosity is a stable personal trait, they may label some students as naturally inquisitive and others as passive. A different view treats curiosity as a response to conditions. A confusing question, a surprising result or a partially solved problem can create a knowledge gap that students want to close. On this view, the teacher’s task is not merely to reward curiosity after it appears, but to design situations in which it is likely to emerge.</p>
+<p><b>F</b> There are also ethical limits. Digital learning platforms can track which links students click, how long they remain on a page and whether they open optional materials. Such data may reveal patterns of exploration, but it can also encourage shallow activity that looks curious without involving genuine thought. A student who opens many pages quickly may be searching actively, or may be distracted. Measurement can change the behaviour it is intended to observe.</p>
+<p><b>G</b> Curiosity, then, is not useless as a research concept, but it resists simple scoring. Measures are helpful when they are linked to a clear theory of what kind of curiosity is being studied. Without that, a number may create false precision. The danger is that institutions will value what is easy to count and neglect the slower, quieter forms of inquiry from which real understanding often grows.</p>`,vocab:[{word:'slippery',meaning:'定義しにくい、つかみにくい'},{word:'overlap',meaning:'重なる'},{word:'self-report',meaning:'自己申告'},{word:'intrusive',meaning:'出しゃばった、押しつけがましい'},{word:'compliance',meaning:'従順さ、指示に従うこと'},{word:'anticipate',meaning:'予期する'},{word:'inquisitive',meaning:'知りたがる、探究心のある'},{word:'ethical',meaning:'倫理的な'},{word:'shallow',meaning:'浅い'},{word:'false precision',meaning:'見せかけの精密さ'}],questions:[
+{num:27,type:'radio',question:'What problem with curiosity is introduced in Paragraph A?',options:['It has no connection with learning.','It is difficult to define precisely.','It is always measured by schools.','It prevents innovation.'],answer:'It is difficult to define precisely.',evidence:'the concept becomes slippery',keyword_pairs:[['difficult to define precisely','slippery']]},
+{num:28,type:'radio',question:'Self-report questionnaires may be unreliable because people can answer according to an ideal self-image.',options:['TRUE','FALSE','NOT GIVEN'],answer:'TRUE',evidence:'people may describe the kind of person they wish to be rather than the way they actually behave.',keyword_pairs:[['ideal self-image','the kind of person they wish to be']]},
+{num:29,type:'radio',question:'In all cultures, saying that one is curious is socially rewarded.',options:['TRUE','FALSE','NOT GIVEN'],answer:'FALSE',evidence:'In other settings, the same claim may seem childish or intrusive.',contradiction_pairs:[['in all cultures... rewarded','in other settings... childish or intrusive']]},
+{num:30,type:'radio',question:'Waiting for information in an experiment may indicate obedience rather than curiosity.',options:['TRUE','FALSE','NOT GIVEN'],answer:'TRUE',evidence:'What looks like curiosity may partly be compliance.',keyword_pairs:[['obedience','compliance'],['rather than curiosity','what looks like curiosity may partly be']]},
+{num:31,type:'radio',question:'Participants in the experiments were paid more if they waited longer.',options:['TRUE','FALSE','NOT GIVEN'],answer:'NOT GIVEN',evidence:'waiting has no real cost',not_given_reason:'本文は待つことに本当のコストがない場合について述べていますが、報酬が増えたとは書かれていません。'},
+{num:32,type:'radio',question:'The author suggests that the appetite metaphor for curiosity has limits.',options:['TRUE','FALSE','NOT GIVEN'],answer:'TRUE',evidence:'This finding has encouraged the idea that curiosity is a kind of appetite for information. But the comparison can be misleading.',keyword_pairs:[['has limits','can be misleading']]},
+{num:33,type:'radio',question:'According to Paragraph D, curiosity is often strongest when there is a complete absence of prior knowledge.',options:['TRUE','FALSE','NOT GIVEN'],answer:'FALSE',evidence:'a question is often most attractive when a person knows enough to recognise a gap, but not enough to close it.',contradiction_pairs:[['complete absence of prior knowledge','knows enough to recognise a gap']]},
+{nums:[34,35,36,37],type:'summary',question:'Complete the summary. Write ONE WORD ONLY from the passage for each answer.',summaryHtml:'Curiosity should not be treated only as a fixed personal {{34|Q34}}. Teachers can create a {{35|Q35}} gap through questions or surprising results. Digital platforms may record patterns of {{36|Q36}}, but these records can confuse genuine thought with {{37|Q37}} activity.',answers:{34:'trait',35:'knowledge',36:'exploration',37:'shallow'}},
+{num:38,type:'radio',question:'Which paragraph questions whether a common experimental behaviour really proves curiosity?',options:['A','B','C','D','E','F','G'],answer:'C',evidence:'What looks like curiosity may partly be compliance.'},
+{num:39,type:'radio',question:'Which paragraph discusses the risk that measurement itself changes what is being measured?',options:['A','B','C','D','E','F','G'],answer:'F',evidence:'Measurement can change the behaviour it is intended to observe.'},
+{num:40,type:'radio',question:'The best title for this passage is...',options:['Why Curious Students Always Learn Faster','Curiosity: A Simple Trait with Clear Scores','Why Curiosity Is Valuable but Hard to Measure','The End of Questionnaires in Psychology'],answer:'Why Curiosity Is Valuable but Hard to Measure',evidence:'Curiosity... resists simple scoring.',keyword_pairs:[['valuable','not useless as a research concept'],['hard to measure','resists simple scoring']]}]}
+  ]
+};
+let data=loadData();let current=0;let answers=JSON.parse(localStorage.getItem('ieltsReadingAnswers')||'{}');let flags=JSON.parse(localStorage.getItem('ieltsReadingFlags')||'{}');let graded={};let remain=(data.durationMinutes||60)*60;let tick=null;let running=false;let admin=JSON.parse(localStorage.getItem('ieltsReadingAdmin')||'{}');
+function loadData(){try{return JSON.parse(localStorage.getItem('ieltsReadingData'))||structuredClone(template)}catch(e){return structuredClone(template)}}
+function save(){localStorage.setItem('ieltsReadingAnswers',JSON.stringify(answers));localStorage.setItem('ieltsReadingFlags',JSON.stringify(flags));saveLocalProgress();debouncedSync();}
+function norm(s,cs=false){s=(s??'').toString();s=s.trim().replace(/\s+/g,' ');return cs?s:s.toLowerCase();}
+function isCorrect(q,a){if(a==null||a==='')return null;let all=[q.answer,...(q.accept||[])].filter(x=>x!==undefined&&x!==null&&x!=='');return all.some(x=>norm(a,q.caseSensitive)===norm(x,q.caseSensitive));}
+function qNums(q){return q.nums? q.nums : [q.num];}
+function answerKeyFor(q,n){if(q.answers && q.answers[n]!=null)return q.answers[n];return q.answer;}
+function acceptFor(q,n){if(q.accept && !Array.isArray(q.accept) && q.accept[n])return q.accept[n];return Array.isArray(q.accept)?q.accept:[];}
+function isCorrectNum(q,n){let a=answers[n];if(a==null||a==='')return null;let all=[answerKeyFor(q,n),...acceptFor(q,n)].filter(x=>x!==undefined&&x!==null&&x!=='');return all.some(x=>norm(a,q.caseSensitive)===norm(x,q.caseSensitive));}
+function sectionPointTotal(s){return s.questions.reduce((sum,q)=>sum+qNums(q).length,0)}
+function getBand(score){return bandScale.find(r=>score>=r.min&&score<=r.max)?.band||'-'}
+function scaledBand(score,total){if(!total)return '-';return getBand(Math.round(score/total*40));}
+function bandRowsHtml(){return bandScale.filter(r=>r.min>=13).map(r=>`<tr><td>${r.band}</td><td>${r.max}-${r.min}</td></tr>`).join('');}
+function renderScaleDock(){scaleDockBody.innerHTML=`<table class="miniBand"><tr><th>Band Scores</th><th>Correct Answers</th></tr>${bandRowsHtml()}</table><div class="small" style="margin-top:6px">全40問換算。Passage別は参考値。</div>`;}
+function renderTabs(){tabs.innerHTML='';data.sections.forEach((s,i)=>{let b=document.createElement('button');b.className='tab '+(i===current?'active ':'')+(graded[s.id]?'done':'');b.textContent=s.title.replace('Reading ','');b.onclick=()=>{current=i;render()};tabs.appendChild(b)})}
+function render(){renderTabs();let s=data.sections[current];passageHead.textContent=s.title+' / '+s.range;questionHead.textContent=s.range;sectionProgress.textContent=`${current+1} / ${data.sections.length}`;let savedMark=JSON.parse(localStorage.getItem('ieltsReadingHighlights')||'{}')[s.id];let raw=(s.passageHtml? s.passageHtml : `<div class="placeholder"><h3>本文表示エリア</h3><p>${escapeHtml(s.source||'手元の教材を参照してください。')}</p><p>ここに本文を貼る場合は <code>Teacher JSON</code> の <code>passageHtml</code> に入れます。</p><p>JSONにpassageHtmlを入れると、この欄に本文が表示されます。</p></div>`);passageBody.innerHTML=`<div class="passageTitle">${escapeHtml(s.passageTitle||s.title)}</div><div class="passageContent" id="passageContent">${savedMark||raw}</div>`;protectPassage();
+questionsBody.innerHTML='';s.questions.forEach(qq=>questionsBody.appendChild(qNode(qq)));updateCounts();prevBtn.disabled=current===0;nextBtn.disabled=current===data.sections.length-1;}
+function qNode(qq){
+let box=document.createElement('div');box.className='qcard';let nums=qNums(qq);let marked=nums.some(n=>!!flags[n]);let result='';
+if(graded[data.sections[current].id]){result=nums.map(n=>{let ok=isCorrectNum(qq,n);let ans=answerKeyFor(qq,n);let status=ok===true?`<div class="result correct">Q${n} ✓ Correct <span class="small"> / Answer: ${escapeHtml(ans)}</span></div>`:ok===false?`<div class="result wrong">Q${n} ✗ Incorrect ${ans?`<span class="small"> / Answer: ${escapeHtml(ans)}</span>`:''}</div>`:`<div class="result empty">Q${n} No answer ${ans?`<span class="small"> / Answer: ${escapeHtml(ans)}</span>`:''}</div>`;return status+`${explanationFor(qq,n)}`}).join('')}
+let input='';
+if(qq.type==='radio'){
+  let n=qq.num;let a=answers[n]||'';input='<div class="options">'+(qq.options||[]).map(op=>`<label class="opt"><input type="radio" name="q${n}" value="${escapeHtml(op)}" ${a===op?'checked':''}> <span>${escapeHtml(op)}</span></label>`).join('')+'</div>';
+}else if(qq.type==='summary'){
+  input=`<div class="summaryBox">${(qq.summaryHtml||'').replace(/\{\{(\d+)(?:\|([^}]+))?\}\}/g,(m,n,ph)=>`<input data-textq="${n}" value="${escapeHtml(answers[n]||'')}" placeholder="${ph?escapeHtml(ph):'Q'+n}">`)}</div>`;
+}else{
+  let n=qq.num;let a=answers[n]||'';input=`<input class="textAns" data-textq="${n}" value="${escapeHtml(a)}" placeholder="Type your answer">`;
+}
+let label=nums.length>1?`${nums[0]}-${nums[nums.length-1]}`:nums[0];
+box.innerHTML=`<div class="qtop"><div><span class="qnum">${label}</span> <span class="qtype">${qq.type.toUpperCase()}</span></div><button class="flag ${marked?'on':''}" data-flag="${nums.join(',')}">🚩 Review</button></div><div class="qtext">${qq.question?escapeHtml(qq.question):'Answer for question '+label}</div>${input}${result}`;
+box.querySelectorAll('input[type=radio]').forEach(r=>r.onchange=e=>{answers[qq.num]=e.target.value;save();updateCounts();});
+box.querySelectorAll('[data-textq]').forEach(text=>text.oninput=e=>{answers[e.target.dataset.textq]=e.target.value;save();updateCounts();});
+box.querySelector('[data-flag]').onclick=e=>{nums.forEach(n=>flags[n]=!marked);save();render();};return box;}
+function updateCounts(){let s=data.sections[current];let nums=s.questions.flatMap(q=>qNums(q));let ans=nums.filter(n=>answers[n]&&answers[n].toString().trim()).length;let fl=nums.filter(n=>flags[n]).length;answeredCount.textContent=`Answered ${ans}/${nums.length} / Review ${fl}`;}
+function sectionAnswerStats(idx=current){
+  let s=data.sections[idx];
+  let nums=s.questions.flatMap(q=>qNums(q));
+  let unansweredNums=nums.filter(n=>!(answers[n]&&answers[n].toString().trim()));
+  return {section:s,total:nums.length,answered:nums.length-unansweredNums.length,unanswered:unansweredNums.length,unansweredNums};
+}
+function confirmGradeSection(idx=current){
+  let st=sectionAnswerStats(idx);
+  let title=st.section.title || ('Passage '+(idx+1));
+  let msg='この1長文だけを採点します。\n\n'+title+'\n回答済み: '+st.answered+' / '+st.total;
+  if(st.unanswered>0){
+    msg+='\n未回答: '+st.unanswered+'問\n'+st.unansweredNums.map(n=>'Q'+n).join(', ')+'\n\n未回答があります。このままGRADEしますか？';
+  }else{
+    msg+='\n\nすべて回答済みです。GRADEしますか？';
+  }
+  if(window.confirm(msg)) gradeSection(idx,true);
+}
+function gradeSection(idx=current,show=true){let s=data.sections[idx];let score=0;let total=sectionPointTotal(s);let unanswered=0;s.questions.forEach(qq=>qNums(qq).forEach(n=>{let ok=isCorrectNum(qq,n);if(ok===true)score++; if(ok===null)unanswered++;}));graded[s.id]={score,total,unanswered};saveLocalProgress();syncProgress();if(show){render();showResult(sectionResultHtml(s,score,total,unanswered,false));}return{score,total,unanswered};}
+function gradeAll(){let score=0,total=0,un=0;data.sections.forEach((_,i)=>{let r=gradeSection(i,false);score+=r.score;total+=r.total;un+=r.unanswered;});render();showResult(allResultHtml(score,total,un));}
+function resultRowsForSection(s){
+  let rows=[];
+  s.questions.forEach(q=>qNums(q).forEach(n=>{
+    let user=(answers[n]??'').toString().trim();
+    let ans=answerKeyFor(q,n)??'';
+    let ok=isCorrectNum(q,n);
+    rows.push({q:n,type:q.type,user,answer:ans,status:ok===true?'correct':ok===false?'wrong':'empty'});
+  }));
+  rows.sort((a,b)=>Number(a.q)-Number(b.q));
+  return rows;
+}
+function resultRowsHtml(rows){
+  return `<h3>Question Results</h3><table class="resultTable"><tr><th>Q</th><th>Result</th><th>Your Answer</th><th>Correct Answer</th><th>Type</th></tr>`+
+    rows.map(r=>`<tr><td>Q${r.q}</td><td>${r.status==='correct'?'<span class="pill ok">✓ Correct</span>':r.status==='wrong'?'<span class="pill bad">✗ Wrong</span>':'<span class="pill empty">No Answer</span>'}</td><td>${escapeHtml(r.user||'-')}</td><td>${escapeHtml(r.answer||'-')}</td><td>${escapeHtml(r.type)}</td></tr>`).join('')+
+    `</table>`;
+}
+function sectionResultHtml(s,score,total,un,all){let pct=Math.round(score/total*100);let refBand=scaledBand(score,total);let scaled=Math.round(score/total*40);let rows=resultRowsForSection(s);window.lastResultContext={mode:'section',sectionId:s.id};return `<h3>${escapeHtml(s.title)} Result</h3><div class="scoreBox"><div class="metric"><div>Score</div><b>${score}/${total}</b></div><div class="metric"><div>Reference Band</div><b>${refBand}</b></div><div class="metric"><div>Unanswered</div><b>${un}</b></div></div><p><b>Accuracy:</b> ${pct}% / <b>40問換算:</b> ${scaled}/40</p><p class="small">1長文だけの参考値です。本来のIELTS Reading Bandは40問全体で見ます。</p>${resultRowsHtml(rows)}<h3>Band Scale</h3><table class="bandTable"><tr><th>Band Scores</th><th>Correct Answers</th></tr>${bandRowsHtml()}</table>`}
+function allResultHtml(score,total,un){let pct=Math.round(score/total*100);let band=getBand(score);window.lastResultContext={mode:'all'};let tables=data.sections.map(s=>`<h3>${escapeHtml(s.title)}</h3>`+resultRowsHtml(resultRowsForSection(s))).join('');return `<h3>Full Reading Result</h3><div class="scoreBox"><div class="metric"><div>Score</div><b>${score}/${total}</b></div><div class="metric"><div>Accuracy</div><b>${pct}%</b></div><div class="metric"><div>Estimated Band</div><b>${band}</b></div></div><p>未回答: ${un}</p>${tables}<h3>Band Scale</h3><table class="bandTable"><tr><th>Band Scores</th><th>Correct Answers</th></tr>${bandRowsHtml()}</table>`}
+function showResult(html){resultBody.innerHTML=html;openModal('resultModal');setTimeout(()=>{let b=document.getElementById('sendTeacherBtn');if(b)b.onclick=openSubmitReport;let c=document.getElementById('copyResultBtn');if(c)c.onclick=()=>copyText(buildSubmissionReport());},0)}
+function renderVocab(){let s=data.sections[current];let saved=JSON.parse(localStorage.getItem('ieltsReadingVocab')||'{}');let html=`<h3>${escapeHtml(s.title)}</h3><div class="vocabTools"><button class="btn primary" id="showVocabAnswersBtn">${showVocabAnswers?'Hide Answers':'Show All Answers'}</button><button class="btn" id="fillVocabAnswersBtn">Fill Actual Meanings</button></div><div class="vocabGrid"><b>Word</b><b>Guess</b><b>Actual Meaning</b>`;(s.vocab||[]).forEach(v=>{let w=getVocabWord(v);let meaning=getVocabMeaning(v);let row=saved[s.id]?.[w]||{};let actual=showVocabAnswers?(row.actual||meaning):(row.actual||'');html+=`<div><b>${escapeHtml(w)}</b>${showVocabAnswers&&meaning?`<div class="vocabAnswer">${escapeHtml(meaning)}</div>`:''}</div><input data-vocab="${escapeHtml(w)}" data-field="guess" value="${escapeHtml(row.guess||'')}" placeholder="推測"><input data-vocab="${escapeHtml(w)}" data-field="actual" value="${escapeHtml(actual)}" placeholder="実際の意味">`});html+='</div>';vocabBody.innerHTML=html;vocabBody.querySelectorAll('input').forEach(inp=>inp.oninput=()=>{let all=JSON.parse(localStorage.getItem('ieltsReadingVocab')||'{}');all[s.id]=all[s.id]||{};let w=inp.dataset.vocab;all[s.id][w]=all[s.id][w]||{};all[s.id][w][inp.dataset.field]=inp.value;localStorage.setItem('ieltsReadingVocab',JSON.stringify(all));});document.getElementById('showVocabAnswersBtn').onclick=()=>{showVocabAnswers=!showVocabAnswers;renderVocab();};document.getElementById('fillVocabAnswersBtn').onclick=()=>{let all=JSON.parse(localStorage.getItem('ieltsReadingVocab')||'{}');all[s.id]=all[s.id]||{};(s.vocab||[]).forEach(v=>{let w=getVocabWord(v);all[s.id][w]=all[s.id][w]||{};all[s.id][w].actual=getVocabMeaning(v)||all[s.id][w].actual||'';});localStorage.setItem('ieltsReadingVocab',JSON.stringify(all));showVocabAnswers=true;renderVocab();};}
+function protectPassage(){let pc=document.getElementById('passageContent');if(!pc)return;['copy','cut','dragstart','contextmenu'].forEach(ev=>pc.addEventListener(ev,e=>{e.preventDefault();return false;}));pc.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&['c','x','a'].includes(e.key.toLowerCase()))e.preventDefault();});}
+function markSelection(){let sel=window.getSelection();if(!sel||sel.rangeCount===0)return;let range=sel.getRangeAt(0);let pc=document.getElementById('passageContent');if(!pc||!pc.contains(range.commonAncestorContainer)||range.collapsed)return;let span=document.createElement('span');span.className='marker';try{range.surroundContents(span);}catch(e){let frag=range.extractContents();span.appendChild(frag);range.insertNode(span);}sel.removeAllRanges();saveHighlights();}
+function saveHighlights(){let s=data.sections[current];let pc=document.getElementById('passageContent');if(!pc)return;let all=JSON.parse(localStorage.getItem('ieltsReadingHighlights')||'{}');all[s.id]=pc.innerHTML;localStorage.setItem('ieltsReadingHighlights',JSON.stringify(all));}
+function clearHighlights(){let s=data.sections[current];let all=JSON.parse(localStorage.getItem('ieltsReadingHighlights')||'{}');delete all[s.id];localStorage.setItem('ieltsReadingHighlights',JSON.stringify(all));render();}
+function getStudent(){return {student_name:admin.studentName||'guest',class_name:admin.className||'',test_id:data.title||'reading-test'};}
+function updateStudentBadge(){studentBadge.textContent=admin.studentName?`${admin.studentName}${admin.className?' / '+admin.className:''}`:'No name';}
+function startFromOverlay(){let name=startStudentName.value.trim();if(!name){alert('名前を入力してください');return;}admin={...admin,studentName:name,className:startClassName.value.trim()};localStorage.setItem('ieltsReadingAdmin',JSON.stringify(admin));updateStudentBadge();startOverlay.classList.add('hide');saveLocalProgress();syncProgress();start();}
+function localSummary(){let rows=[];let fullScore=0,fullTotal=0;data.sections.forEach((s,i)=>{let r=gradeSectionSilent(i);fullScore+=r.score;fullTotal+=r.total;rows.push({section_id:s.id,section_title:s.title,...r});});let band=getBand(fullScore);return {rows,fullScore,fullTotal,band};}
+function gradeSectionSilent(idx){let s=data.sections[idx];let score=0,total=sectionPointTotal(s),unanswered=0;s.questions.forEach(q=>qNums(q).forEach(n=>{let ok=isCorrectNum(q,n);if(ok===true)score++;if(ok===null)unanswered++;}));let answered=total-unanswered;return{score,total,unanswered,answered};}
+function saveLocalProgress(){let stu=getStudent();let sum=localSummary();localStorage.setItem('ieltsReadingProgressLocal',JSON.stringify({updated_at:new Date().toISOString(),...stu,...sum,answers,flags}));}
+
+function buildSubmissionReport(){
+  let stu=getStudent();
+  let now=new Date();
+  let mode=(window.lastResultContext&&window.lastResultContext.mode)||'section';
+  let targetSections=mode==='all'?data.sections:[data.sections.find(x=>x.id===window.lastResultContext?.sectionId)||data.sections[current]];
+  let lines=[];
+  lines.push('IELTS READING SUBMISSION REPORT');
+  lines.push('Date: '+now.toLocaleString());
+  lines.push('Name: '+(stu.student_name||''));
+  lines.push('Class: '+(stu.class_name||''));
+  lines.push('Test: '+(data.title||''));
+  lines.push('Mode: '+(mode==='all'?'Full Reading':'One Passage'));
+  lines.push('');
+  targetSections.forEach(s=>{
+    let rows=resultRowsForSection(s);
+    let score=rows.filter(r=>r.status==='correct').length;
+    let total=rows.length;
+    let un=rows.filter(r=>r.status==='empty').length;
+    lines.push('['+s.title+' / '+(s.range||'')+']');
+    lines.push('Score: '+score+' / '+total);
+    lines.push('Reference Band: '+scaledBand(score,total));
+    lines.push('Unanswered: '+un);
+    lines.push('Results:');
+    rows.forEach(r=>{
+      let mark=r.status==='correct'?'O':r.status==='wrong'?'X':'-';
+      lines.push('Q'+r.q+' '+mark+' | Your: '+(r.user||'未回答')+' | Answer: '+(r.answer||'-')+' | '+r.type);
+    });
+    lines.push('');
+  });
+  let wrongs=targetSections.flatMap(s=>resultRowsForSection(s).filter(r=>r.status!=='correct').map(r=>'Q'+r.q));
+  lines.push('Review Questions: '+(wrongs.length?wrongs.join(', '):'None'));
+  return lines.join('\n');
+}
+function openSubmitReport(){
+  let report=buildSubmissionReport();
+  submitText.value=report;
+  copyNotice.textContent='';
+  closeModal('resultModal');
+  openModal('submitModal');
+}
+function copyText(txt){
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(()=>{alert('結果をコピーしました。');}).catch(()=>fallbackCopy(txt));}
+  else fallbackCopy(txt);
+}
+function fallbackCopy(txt){let ta=document.createElement('textarea');ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();alert('結果をコピーしました。');}
+function downloadSubmission(){let report=submitText.value||buildSubmissionReport();let stu=getStudent();let safe=(stu.student_name||'student').replace(/[^a-zA-Z0-9_\-ぁ-んァ-ン一-龥]/g,'_');let blob=new Blob([report],{type:'text/plain;charset=utf-8'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`ielts_reading_${safe}_${new Date().toISOString().slice(0,10)}.txt`;a.click();URL.revokeObjectURL(a.href);}
+function mailSubmission(){let subject=encodeURIComponent('IELTS Reading Submission');let body=encodeURIComponent(submitText.value||buildSubmissionReport());location.href=`mailto:?subject=${subject}&body=${body}`;}
+let syncTimer=null;function debouncedSync(){clearTimeout(syncTimer);syncTimer=setTimeout(syncProgress,1200)}
+async function syncProgress(){if(!admin.supabaseUrl||!admin.supabaseKey)return;let stu=getStudent();let sum=localSummary();let payload=sum.rows.map(r=>({test_id:stu.test_id,student_name:stu.student_name,class_name:stu.class_name,section_id:r.section_id,score:r.score,total:r.total,unanswered:r.unanswered,answered:r.answered,full_score:sum.fullScore,full_total:sum.fullTotal,band:sum.band,answers,flags,updated_at:new Date().toISOString()}));try{let res=await fetch(admin.supabaseUrl.replace(/\/$/,'')+'/rest/v1/ielts_reading_progress?on_conflict=test_id,student_name,section_id',{method:'POST',headers:{'apikey':admin.supabaseKey,'Authorization':'Bearer '+admin.supabaseKey,'Content-Type':'application/json','Prefer':'resolution=merge-duplicates'},body:JSON.stringify(payload)});if(!res.ok)throw new Error(await res.text());}catch(e){console.warn('sync failed',e);}}
+async function refreshAdmin(){studentName.value=admin.studentName||'';className.value=admin.className||'';supabaseUrl.value=admin.supabaseUrl||'';supabaseKey.value=admin.supabaseKey||'';let local=JSON.parse(localStorage.getItem('ieltsReadingProgressLocal')||'{}');let html='<h3>Local progress</h3>';if(local.rows){html+=progressTable(local.rows,local.fullScore,local.fullTotal,local.band,local.updated_at);}else{html+='<p class="small">まだ進捗がありません。</p>'}if(admin.supabaseUrl&&admin.supabaseKey){try{let url=admin.supabaseUrl.replace(/\/$/,'')+`/rest/v1/ielts_reading_progress?select=student_name,class_name,section_id,score,total,answered,unanswered,full_score,full_total,band,updated_at&test_id=eq.${encodeURIComponent(data.title||'reading-test')}&order=updated_at.desc`;let res=await fetch(url,{headers:{'apikey':admin.supabaseKey,'Authorization':'Bearer '+admin.supabaseKey}});let rows=await res.json();html+='<h3>Central dashboard</h3>'+centralTable(rows);}catch(e){html+='<p class="result wrong">DB読込失敗: '+escapeHtml(e.message)+'</p>'}}adminBody.innerHTML=html;}
+function progressTable(rows,fs,ft,band,updated){return `<p><b>Full:</b> ${fs}/${ft} / Band ${band} <span class="small">${escapeHtml(updated||'')}</span></p><table class="adminTable"><tr><th>Section</th><th>Score</th><th>Answered</th><th>Unanswered</th></tr>`+rows.map(r=>`<tr><td>${escapeHtml(r.section_title||r.section_id)}</td><td>${r.score}/${r.total}</td><td>${r.answered}</td><td>${r.unanswered}</td></tr>`).join('')+'</table>'}
+function centralTable(rows){if(!Array.isArray(rows)||!rows.length)return '<p class="small">中央DBにデータがありません。</p>';return `<table class="adminTable"><tr><th>Name</th><th>Class</th><th>Section</th><th>Score</th><th>Answered</th><th>Full</th><th>Band</th><th>Updated</th></tr>`+rows.map(r=>`<tr><td>${escapeHtml(r.student_name)}</td><td>${escapeHtml(r.class_name||'')}</td><td>${escapeHtml(r.section_id)}</td><td>${r.score}/${r.total}</td><td>${r.answered}</td><td>${r.full_score}/${r.full_total}</td><td>${escapeHtml(r.band||'')}</td><td>${escapeHtml((r.updated_at||'').replace('T',' ').slice(0,16))}</td></tr>`).join('')+'</table>'}
+function start(){if(running)return;running=true;tick=setInterval(()=>{remain--;drawTimer();if(remain<=0){clearInterval(tick);running=false;gradeAll();}},1000)}
+function pause(){running=false;clearInterval(tick)}
+function drawTimer(){let m=Math.floor(remain/60),s=remain%60;timer.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;timer.classList.toggle('danger',remain<=300)}
+function openModal(id){document.getElementById(id).classList.add('show')}function closeModal(id){document.getElementById(id).classList.remove('show')}
+function escapeHtml(x){return (x??'').toString().replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+startBtn.onclick=start;pauseBtn.onclick=pause;startPracticeBtn.onclick=startFromOverlay;teacherMenuBtn.onclick=()=>teacherDrop.classList.toggle('show');document.addEventListener('click',e=>{if(!e.target.closest('.teacherMenu'))teacherDrop.classList.remove('show')});scaleDockHead.onclick=()=>scaleDock.classList.toggle('collapsed');gradeSectionBtn.onclick=()=>confirmGradeSection(current);gradeAllBtn.onclick=gradeAll;prevBtn.onclick=()=>{current--;render()};nextBtn.onclick=()=>{current++;render()};markBtn.onclick=markSelection;clearMarkBtn.onclick=clearHighlights;vocabBtn.onclick=()=>{renderVocab();openModal('vocabModal')};adminBtn.onclick=()=>{refreshAdmin();openModal('adminModal')};saveStudentBtn.onclick=()=>{admin={studentName:studentName.value.trim(),className:className.value.trim(),supabaseUrl:supabaseUrl.value.trim(),supabaseKey:supabaseKey.value.trim()};localStorage.setItem('ieltsReadingAdmin',JSON.stringify(admin));updateStudentBadge();saveLocalProgress();syncProgress();refreshAdmin();};syncNowBtn.onclick=()=>syncProgress().then(refreshAdmin);refreshAdminBtn.onclick=refreshAdmin;settingsBtn.onclick=()=>{jsonArea.value=JSON.stringify(data,null,2);openModal('settingsModal')};applyJsonBtn.onclick=()=>{try{data=JSON.parse(jsonArea.value);localStorage.setItem('ieltsReadingData',JSON.stringify(data));remain=(data.durationMinutes||60)*60;drawTimer();graded={};current=0;render();closeModal('settingsModal')}catch(e){alert('JSON error: '+e.message)}};resetJsonBtn.onclick=()=>{if(confirm('テンプレートに戻しますか？解答・設定は消えます。')){localStorage.removeItem('ieltsReadingData');localStorage.removeItem('ieltsReadingAnswers');localStorage.removeItem('ieltsReadingFlags');location.reload();}};downloadJsonBtn.onclick=()=>{let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ielts_reading_template.json';a.click();URL.revokeObjectURL(a.href)};
+if(typeof copySubmitBtn!=='undefined')copySubmitBtn.onclick=()=>{let txt=submitText.value||buildSubmissionReport(); if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(()=>copyNotice.textContent='Copied!').catch(()=>fallbackCopy(txt));}else fallbackCopy(txt);};if(typeof downloadSubmitBtn!=='undefined')downloadSubmitBtn.onclick=downloadSubmission;if(typeof mailSubmitBtn!=='undefined')mailSubmitBtn.onclick=mailSubmission;
+startStudentName.value=admin.studentName||'';
+startClassName.value=admin.className||'';
+// Always show the start screen on page load. Name is remembered, but the test never auto-starts.
+updateStudentBadge();
+renderScaleDock();
+drawTimer();
+render();
+</script>
+</body>
+</html>
