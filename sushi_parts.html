@@ -56375,5 +56375,79 @@ coburg`;
 @media(max-width:650px){.rewardHandDetails>summary{display:block}.rewardHandDetails>summary span{display:block;margin-top:2px}.rewardHandGrid{max-height:98px}.rewardHandGrid.smallGrid{max-height:122px}}
 </style>
 
+
+
+<script>
+// ===== v6.27 draw repair: non-duplicate but not deck-starved =====
+(function(){
+  const BAD_COMPLETED_PARTS_V627 = new Set([
+    'inspect','inspection','suspect','prospect','respect','respectful',
+    'contract','extract','attract','retract','transport','export','import','deport',
+    'project','reject','inject','object'
+  ]);
+  const CORE_SUFFIX_BONUS_V627 = ['ous','ness','ful','less','ment','tion','able','ible','ity','ion','al','er','or','ly'];
+  function safe(fn, fallback){ try{ return fn(); }catch(e){ return fallback; } }
+  function uniq(arr){ return [...new Set((arr||[]).filter(Boolean))]; }
+  function hasPartId(id){ return !!id && !BAD_COMPLETED_PARTS_V627.has(id) && safe(()=>!!part(id), false); }
+  function inHandSet(){ return new Set((Array.isArray(hand)?hand:[]).map(c=>c&&c.id).filter(Boolean)); }
+  function getUnlockedIds(){
+    const ids=[];
+    safe(()=>{ if(Array.isArray(deck)) ids.push(...deck); }, null);
+    safe(()=>{ if(typeof availablePartIds==='function') ids.push(...availablePartIds()); }, null);
+    safe(()=>{ if(typeof unlockedParts!=='undefined' && unlockedParts && typeof unlockedParts.forEach==='function') unlockedParts.forEach(id=>ids.push(id)); }, null);
+    safe(()=>{ if(Array.isArray(STARTER_PARTS)) ids.push(...STARTER_PARTS); }, null);
+    // 最後の保険。deckが薄くなりすぎても、部品全体から未所持を引けるようにする。
+    safe(()=>{ if(Array.isArray(PARTS)) ids.push(...PARTS.map(p=>p&&p.id)); }, null);
+    return uniq(ids).filter(hasPartId);
+  }
+  function pick(ids){ return ids&&ids.length ? ids[Math.floor(Math.random()*ids.length)] : null; }
+  function weightedPickNonHand(){
+    const handIds=inHandSet();
+    const all=getUnlockedIds();
+    let ids=all.filter(id=>!handIds.has(id));
+    if(!ids.length) return null;
+    const suffix=ids.filter(id=>CORE_SUFFIX_BONUS_V627.includes(id));
+    const rare=ids.filter(id=>safe(()=>['rare','epic','legendary'].includes(rarityOf(id)), false));
+    if(suffix.length && Math.random()<0.32) return pick(suffix);
+    if(rare.length && Math.random()<0.20) return pick(rare);
+    return pick(ids);
+  }
+  drawCards = function(n){
+    if(!Array.isArray(hand)) hand=[];
+    // 既存の完全重複はここで一度だけ整理。ただし以後は広い未所持プールから補充する。
+    const seen=new Set();
+    hand = hand.filter(c=>{
+      if(!c || !hasPartId(c.id)) return false;
+      if(seen.has(c.id)) return false;
+      seen.add(c.id);
+      return true;
+    });
+    for(let i=0;i<n && hand.length<MAX_HAND;i++){
+      const id=weightedPickNonHand();
+      if(!id) break;
+      hand.push(makeCard(id));
+    }
+  };
+  const oldDrawExtra = safe(()=>drawExtra, null);
+  if(oldDrawExtra){
+    drawExtra = function(){
+      const before = Array.isArray(hand) ? hand.length : 0;
+      const beforeEnergy = typeof energy!=='undefined' ? energy : 0;
+      oldDrawExtra.apply(this, arguments);
+      // 古いラップでドローが空振りした場合の救済。Energyは二重消費させない。
+      if((Array.isArray(hand)?hand.length:0)===before && beforeEnergy>0){
+        if(typeof energy!=='undefined') energy = Math.max(0, beforeEnergy-1);
+        drawCards(1);
+        if(typeof render==='function') render();
+      }
+    };
+    const btn=document.getElementById('drawBtn');
+    if(btn) btn.onclick=drawExtra;
+  }
+  safe(()=>console.log('v6.27 draw repair loaded'), null);
+})();
+// ===== end v6.27 =====
+</script>
+
 </body>
 </html>
