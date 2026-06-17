@@ -1362,37 +1362,57 @@ async function loadExternalVocab(){
 
   vocabLoadPromise = (async()=>{
     try{
-      const [wordsRes, setsRes] = await Promise.all([
-        fetch(VOCAB_DATA_PATHS.words, {cache:'no-cache'}),
-        fetch(VOCAB_DATA_PATHS.sets, {cache:'no-cache'})
-      ]);
-      if(!wordsRes.ok || !setsRes.ok) throw new Error('vocab json not found');
+      const wordsRes = await fetch(VOCAB_DATA_PATHS.words, {cache:'no-cache'});
+      if(!wordsRes.ok) throw new Error('words_master_v1.json not found');
 
-      const [masterWords, gameSets] = await Promise.all([wordsRes.json(), setsRes.json()]);
-      const hayaoshiSets = gameSets && gameSets.sushi_hayaoshi;
-      if(!Array.isArray(masterWords) || !hayaoshiSets) throw new Error('vocab json format mismatch');
+      const masterWords = await wordsRes.json();
+      if(!Array.isArray(masterWords)) throw new Error('words_master_v1.json format mismatch');
 
-      const nextWords = {};
+      const LEVELS = ['beginner','intermediate','advanced'];
+      const nextWords = { beginner:[], intermediate:[], advanced:[] };
       const seenByLevel = {beginner:new Set(), intermediate:new Set(), advanced:new Set()};
+      let jaFallbackCount = 0;
+      let inferredLevelCount = 0;
+      let skippedCount = 0;
 
-      ['beginner','intermediate','advanced'].forEach(level=>{
-        // v2: すし早押しタグではなく、共通辞書の level だけで出題プールを作る。
-        // これで words_master_v1.json を増やすほど、各レベルの語彙がそのまま増える。
-        nextWords[level] = masterWords
-          .filter(w => String(w.level || '').toLowerCase() === level)
-          .map(src => ({
-            word: src.word,
-            jp: src.ja || src.meaning_ja || '',
-            definition: src.definition_en || src.definition || ''
-          }))
-          .filter(x => {
-            const key = String(x.word || '').toLowerCase();
-            if(!x.word || !x.definition || seenByLevel[level].has(key)) return false;
-            seenByLevel[level].add(key);
-            return true;
-          });
+      function inferLevel(src){
+        const raw = String(src.level || '').toLowerCase();
+        if(LEVELS.includes(raw)) return raw;
+        inferredLevelCount++;
+        const word = String(src.word || '');
+        const freq = String(src.freq || '').toUpperCase();
+        const parts = Array.isArray(src.parts) ? src.parts : [];
+        if(freq === 'S' || freq === 'A' || word.length >= 11 || parts.length >= 3) return 'advanced';
+        if(freq === 'B' || word.length >= 8 || parts.length >= 2) return 'intermediate';
+        return 'beginner';
+      }
 
-        // JSON側に不足があった時だけ、HTML内蔵データを保険として足す。
+      masterWords.forEach(src=>{
+        const word = String(src.word || '').trim();
+        if(!word) return;
+
+        const level = inferLevel(src);
+        const key = word.toLowerCase();
+        if(seenByLevel[level].has(key)) return;
+
+        let definition = String(src.definition_en || src.definition || '').trim();
+        const jp = String(src.ja || src.meaning_ja || '').trim();
+
+        // 英英定義がない語も、語彙増量テスト用に日本語ヒントで救う。
+        // 今後 definition_en を増やせば、この日本語ヒントは自動的に英英定義へ置き換わる。
+        if(!definition && jp){
+          definition = `日本語の意味：${jp}`;
+          jaFallbackCount++;
+        }
+
+        if(!definition){ skippedCount++; return; }
+
+        nextWords[level].push({ word, jp, definition });
+        seenByLevel[level].add(key);
+      });
+
+      // JSON側に不足があった時だけ、HTML内蔵データを保険として使う。
+      LEVELS.forEach(level=>{
         if(nextWords[level].length < 10 && Array.isArray(WORDS[level])){
           nextWords[level] = WORDS[level];
         }
@@ -1410,44 +1430,27 @@ async function loadExternalVocab(){
         };
 
         setVocabDebug(`JSON${masterWords.length} B:${levelPool.beginner} I:${levelPool.intermediate} A:${levelPool.advanced}`);
-        console.info('🍣 JSON vocab loaded by level:', {
-          source: VOCAB_DATA_PATHS,
+        console.info('🍣 JSON vocab loaded from master by level:', {
+          source: VOCAB_DATA_PATHS.words,
           masterWords: masterWords.length,
-          levelPool
+          levelPool,
+          jaFallbackCount,
+          inferredLevelCount,
+          skippedCount
         });
         return true;
       }
-      throw new Error('not enough hayaoshi vocab');
+      throw new Error('not enough vocab after master import');
     }catch(e){
-      setVocabDebug(`LOCAL${EMBEDDED_WORD_COUNT}`);
       console.warn('🍣 JSON vocab load failed. Fallback to embedded WORDS.', e);
+      const localCount = Object.values(WORDS).reduce((sum, list)=>sum + (Array.isArray(list) ? list.length : 0), 0);
+      setVocabDebug(`LOCAL${localCount}`);
       return false;
     }
   })();
 
   return vocabLoadPromise;
 }
-
-const SETTINGS = {
-  beginner:{label:'Beginner', choices:6, speed:2000},
-  intermediate:{label:'Intermediate', choices:9, speed:2000},
-  advanced:{label:'Advanced', choices:12, speed:2000}
-};
-const TOTAL = 10;
-const LOCK_TIME = 6000;
-const MAX_MISS = 1;
-let selectedLevel = 'beginner';
-let selectedMode = 'solo';
-let teamEntriesReady = false;
-let plannedMatchSchedule = null;
-let matchDrawTimers = [];
-let matchDrawAnimating = false;
-let startAfterDrawPending = false;
-let state = {};
-let revealTimer = null;
-let nextTimer = null;
-
-const $ = id => document.getElementById(id);
 
 const SUPABASE_URL = "https://rxyoyveykxdfrpomkltl.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7";
