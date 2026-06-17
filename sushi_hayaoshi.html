@@ -1354,6 +1354,22 @@ function setVocabDebug(label){
   if(el) el.textContent = `🍣${label}`;
 }
 
+async function fetchJsonWithTimeout(url, ms = 4500){
+  const controller = new AbortController();
+  const timer = setTimeout(()=>controller.abort(), ms);
+  try{
+    const res = await fetch(url, { cache:'no-cache', signal: controller.signal });
+    if(!res.ok) throw new Error(`${url} not found: ${res.status}`);
+    return await res.json();
+  }finally{
+    clearTimeout(timer);
+  }
+}
+
+function timeoutResult(ms, message){
+  return new Promise(resolve=>setTimeout(()=>resolve({ data:null, error:{ message } }), ms));
+}
+
 setVocabDebug(`LOCAL${EMBEDDED_WORD_COUNT}`);
 
 async function loadExternalVocab(){
@@ -1362,10 +1378,7 @@ async function loadExternalVocab(){
 
   vocabLoadPromise = (async()=>{
     try{
-      const wordsRes = await fetch(VOCAB_DATA_PATHS.words, {cache:'no-cache'});
-      if(!wordsRes.ok) throw new Error('words_master_v1.json not found');
-
-      const masterWords = await wordsRes.json();
+      const masterWords = await fetchJsonWithTimeout(VOCAB_DATA_PATHS.words, 4500);
       if(!Array.isArray(masterWords)) throw new Error('words_master_v1.json format mismatch');
 
       const LEVELS = ['beginner','intermediate','advanced'];
@@ -1486,8 +1499,15 @@ async function loadHayaoshiRanking(level = rankingLevel){
   if(!supabaseClient){ if(list) list.innerHTML = '<div class="hayaoshi-status">ランキング機能はオフラインです</div>'; return; }
   if(status) status.textContent = "読み込み中...";
   const mode = getHayaoshiMode(level);
-  const { data, error } = await supabaseClient.from("scores").select("id, player_name, score, max_combo, accuracy, mode").eq("mode", mode).order("score", { ascending:false }).limit(100);
-  if(error){ console.error("hayaoshi ranking load error:", error); if(status) status.textContent = "ランキング取得失敗: " + error.message; if(list) list.innerHTML = '<div class="hayaoshi-status">取得できませんでした</div>'; return; }
+  const rankingQuery = supabaseClient.from("scores").select("id, player_name, score, max_combo, accuracy, mode").eq("mode", mode).order("score", { ascending:false }).limit(100);
+  const { data, error } = await Promise.race([rankingQuery, timeoutResult(4500, "timeout")]);
+  if(error){
+    console.error("hayaoshi ranking load error:", error);
+    const msg = error.message === "timeout" ? "ランキング取得タイムアウト（ゲームは遊べます）" : "ランキング取得失敗: " + error.message;
+    if(status) status.textContent = msg;
+    if(list) list.innerHTML = '<div class="hayaoshi-status">取得できませんでした</div>';
+    return;
+  }
   const best = new Map();
   (data || []).forEach(row=>{ const key = String(row.player_name || "NO NAME").normalize("NFKC").trim().toLowerCase(); if(!best.has(key) || Number(row.score) > Number(best.get(key).score)) best.set(key,row); });
   const rows = [...best.values()].sort((a,b)=>Number(b.score)-Number(a.score)).slice(0,10);
