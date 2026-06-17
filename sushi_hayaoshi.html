@@ -1372,20 +1372,25 @@ async function loadExternalVocab(){
       const hayaoshiSets = gameSets && gameSets.sushi_hayaoshi;
       if(!Array.isArray(masterWords) || !hayaoshiSets) throw new Error('vocab json format mismatch');
 
-      const wordMap = new Map(masterWords.map(w=>[String(w.word || '').toLowerCase(), w]));
       const nextWords = {};
+      const seenByLevel = {beginner:new Set(), intermediate:new Set(), advanced:new Set()};
 
       ['beginner','intermediate','advanced'].forEach(level=>{
-        const list = Array.isArray(hayaoshiSets[level]) ? hayaoshiSets[level] : [];
-        nextWords[level] = list.map(word=>{
-          const src = wordMap.get(String(word).toLowerCase());
-          if(!src) return null;
-          return {
+        // v2: すし早押しタグではなく、共通辞書の level だけで出題プールを作る。
+        // これで words_master_v1.json を増やすほど、各レベルの語彙がそのまま増える。
+        nextWords[level] = masterWords
+          .filter(w => String(w.level || '').toLowerCase() === level)
+          .map(src => ({
             word: src.word,
             jp: src.ja || src.meaning_ja || '',
             definition: src.definition_en || src.definition || ''
-          };
-        }).filter(x=>x && x.word && x.definition);
+          }))
+          .filter(x => {
+            const key = String(x.word || '').toLowerCase();
+            if(!x.word || !x.definition || seenByLevel[level].has(key)) return false;
+            seenByLevel[level].add(key);
+            return true;
+          });
 
         // JSON側に不足があった時だけ、HTML内蔵データを保険として足す。
         if(nextWords[level].length < 10 && Array.isArray(WORDS[level])){
@@ -1397,22 +1402,18 @@ async function loadExternalVocab(){
         WORDS = nextWords;
         vocabLoadedFromJson = true;
 
-        const hayaoshiTaggedCount = masterWords.filter(w =>
-          Array.isArray(w.games) && w.games.includes('sushi_hayaoshi')
-        ).length;
-        const hayaoshiPool = {
+        const levelPool = {
           beginner: WORDS.beginner.length,
           intermediate: WORDS.intermediate.length,
           advanced: WORDS.advanced.length,
           total: Object.values(WORDS).reduce((sum, list)=>sum + (Array.isArray(list) ? list.length : 0), 0)
         };
 
-        setVocabDebug(`JSON${masterWords.length} H:${hayaoshiTaggedCount} B:${hayaoshiPool.beginner} I:${hayaoshiPool.intermediate} A:${hayaoshiPool.advanced}`);
-        console.info('🍣 JSON vocab loaded:', {
+        setVocabDebug(`JSON${masterWords.length} B:${levelPool.beginner} I:${levelPool.intermediate} A:${levelPool.advanced}`);
+        console.info('🍣 JSON vocab loaded by level:', {
           source: VOCAB_DATA_PATHS,
           masterWords: masterWords.length,
-          hayaoshiTaggedCount,
-          sushiHayaoshi: hayaoshiPool
+          levelPool
         });
         return true;
       }
