@@ -56670,5 +56670,106 @@ coburg`;
 // ===== end v6.29 =====
 </script>
 
+
+<style>
+/* ===== v6.30 energy card exchange ===== */
+#exchangeBtn.exchangeReady{background:#fff8d7!important;border-color:#ffd36b!important;color:#8a5a00!important;box-shadow:0 6px 14px rgba(255,211,107,.20)!important}
+#exchangeBtn{font-size:14px!important;padding:10px 12px!important}
+@media(max-width:650px){#exchangeBtn{font-size:13px!important;padding:9px 10px!important}}
+</style>
+
+<script>
+// ===== v6.30 energy card exchange =====
+// Energy 1を使って、選択中カード1枚を捨て、新しいカード1枚に交換する。
+// 手札上限と重複回避は既存のdrawCardsに任せる。ドロー失敗時はカードとEnergyを戻す。
+(function(){
+  function safe(fn, fallback){ try{ return fn(); }catch(e){ return fallback; } }
+  function q(id){ return document.getElementById(id); }
+  function uidOf(c){ return c && c.uid; }
+  function installExchangeButton(){
+    if(q('exchangeBtn')) return;
+    const draw=q('drawBtn');
+    if(!draw || !draw.parentNode) return;
+    const btn=document.createElement('button');
+    btn.id='exchangeBtn';
+    btn.type='button';
+    btn.className='secondary';
+    btn.textContent='🔁交換（Energy 1）';
+    btn.title='カードを1枚選んでから押すと、Energy 1で別カードに交換します。';
+    btn.onclick=exchangeSelectedCard;
+    draw.insertAdjacentElement('afterend', btn);
+  }
+  function updateExchangeButton(){
+    const btn=q('exchangeBtn');
+    if(!btn) return;
+    const n = Array.isArray(selected) ? selected.length : 0;
+    const e = Number(typeof energy!=='undefined' ? energy : 0) || 0;
+    const disabled = !!(typeof shopOpen!=='undefined' && shopOpen) || n!==1 || e<1;
+    btn.disabled = disabled;
+    btn.classList.toggle('exchangeReady', !disabled);
+  }
+  function say(t,cls){ safe(()=>setMsg(t,cls), null); }
+  function exchangeSelectedCard(){
+    if(typeof shopOpen!=='undefined' && shopOpen) return;
+    if(!Array.isArray(selected) || selected.length!==1){
+      say('交換したいカードを1枚だけ選んでください。','warn');
+      return;
+    }
+    if((Number(typeof energy!=='undefined' ? energy : 0)||0)<1){
+      say('Energyが足りない。交換にはEnergy 1が必要です。','bad');
+      return;
+    }
+    if(!Array.isArray(hand)) hand=[];
+    const old = selected[0];
+    const oldUid = uidOf(old);
+    const idx = hand.findIndex(c=>uidOf(c)===oldUid);
+    if(idx<0){
+      selected=[];
+      say('交換対象が見つかりませんでした。もう一度選んでください。','warn');
+      safe(()=>render(), null);
+      return;
+    }
+
+    const beforeLen = hand.length;
+    const oldCard = hand[idx];
+    hand.splice(idx,1);
+    selected=[];
+    energy = Math.max(0, energy-1);
+
+    safe(()=>drawCards(1), null);
+    const afterLen = hand.length;
+    if(afterLen < beforeLen){
+      // 候補枯渇などで引けなかった場合は戻す。
+      hand.splice(Math.min(idx, hand.length),0,oldCard);
+      energy = Math.min(typeof maxEnergy!=='undefined' ? maxEnergy : 3, energy+1);
+      say('交換できる新カードがありませんでした。Energyは戻しました。','warn');
+    }else{
+      const newCard = hand[hand.length-1];
+      const oldName = (oldCard && (oldCard.text||oldCard.id)) || 'カード';
+      const newName = (newCard && (newCard.text||newCard.id)) || '新カード';
+      say(`Energy 1で「${oldName}」を「${newName}」に交換しました。`,'ok');
+    }
+    safe(()=>{ const cards=q('cards'); if(cards) cards.classList.remove('emptyWarn'); }, null);
+    safe(()=>render(), null);
+    safe(()=>saveRunState(), null);
+  }
+
+  const oldRender = safe(()=>render, null);
+  if(oldRender){
+    render = function(){
+      const r = oldRender.apply(this, arguments);
+      installExchangeButton();
+      updateExchangeButton();
+      return r;
+    };
+  }
+  document.addEventListener('DOMContentLoaded',()=>{ installExchangeButton(); updateExchangeButton(); });
+  window.addEventListener('load',()=>{ installExchangeButton(); updateExchangeButton(); });
+  window.exchangeSelectedCard = exchangeSelectedCard;
+  safe(()=>console.log('v6.30 energy card exchange loaded'), null);
+})();
+// ===== end v6.30 =====
+</script>
+
 </body>
 </html>
