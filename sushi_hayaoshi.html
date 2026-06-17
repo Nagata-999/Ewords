@@ -1465,6 +1465,28 @@ async function loadExternalVocab(){
   return vocabLoadPromise;
 }
 
+
+const SETTINGS = {
+  beginner:{label:'Beginner', choices:6, speed:2000},
+  intermediate:{label:'Intermediate', choices:9, speed:2000},
+  advanced:{label:'Advanced', choices:12, speed:2000}
+};
+const TOTAL = 10;
+const LOCK_TIME = 6000;
+const MAX_MISS = 1;
+let selectedLevel = 'beginner';
+let selectedMode = 'solo';
+let teamEntriesReady = false;
+let plannedMatchSchedule = null;
+let matchDrawTimers = [];
+let matchDrawAnimating = false;
+let startAfterDrawPending = false;
+let state = {};
+let revealTimer = null;
+let nextTimer = null;
+
+const $ = id => document.getElementById(id);
+
 const SUPABASE_URL = "https://rxyoyveykxdfrpomkltl.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7";
 const supabaseClient = window.supabase ? supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY) : null;
