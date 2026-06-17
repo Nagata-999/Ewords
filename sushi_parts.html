@@ -56449,5 +56449,226 @@ coburg`;
 // ===== end v6.27 =====
 </script>
 
+
+
+<style>
+/* ===== v6.28 hand sort buttons ===== */
+.sortBtn.activeSort{background:#263238!important;color:#fff7d7!important;border-color:#263238!important;box-shadow:0 6px 14px rgba(0,0,0,.12)!important}
+.sortBtn{font-size:14px!important;padding:10px 12px!important}
+@media(max-width:650px){.sortBtn{font-size:13px!important;padding:9px 10px!important}}
+</style>
+
+<script>
+// ===== v6.28 hand sort buttons: type / acquired order =====
+(function(){
+  const SORT_KEY='sushi_parts_hand_sort_mode_v628';
+  let cardOrderCounter = 1;
+  function safe(fn, fallback){ try{ return fn(); }catch(e){ return fallback; } }
+  function q(id){ return document.getElementById(id); }
+  function typeRank(c){
+    const t = c && (c.type || safe(()=>part(c.id).type,''));
+    return t==='prefix' ? 0 : t==='root' ? 1 : t==='suffix' ? 2 : 9;
+  }
+  function getOrder(c){ return Number(c && (c.acqOrder ?? c.order ?? c.__order)) || 0; }
+  function setOrder(c, n){ if(c){ c.acqOrder=n; c.__order=n; } }
+  function scanCounter(){
+    const max = Math.max(0, ...((Array.isArray(hand)?hand:[]).map(getOrder)));
+    cardOrderCounter = Math.max(cardOrderCounter, max + 1);
+  }
+  function ensureOrders(){
+    if(!Array.isArray(hand)) return;
+    scanCounter();
+    hand.forEach(c=>{ if(c && !getOrder(c)) setOrder(c, cardOrderCounter++); });
+  }
+  function currentMode(){ return localStorage.getItem(SORT_KEY) || 'acquired'; }
+  function sortHand(mode=currentMode()){
+    if(!Array.isArray(hand)) return;
+    ensureOrders();
+    if(mode==='type'){
+      hand.sort((a,b)=> typeRank(a)-typeRank(b) || getOrder(a)-getOrder(b) || String(a.id||'').localeCompare(String(b.id||'')));
+    }else{
+      hand.sort((a,b)=> getOrder(a)-getOrder(b));
+    }
+  }
+  function updateSortButtons(){
+    const mode=currentMode();
+    const a=q('sortAcquiredBtn'), t=q('sortTypeBtn');
+    if(a) a.classList.toggle('activeSort', mode==='acquired');
+    if(t) t.classList.toggle('activeSort', mode==='type');
+  }
+  function setSortMode(mode){
+    localStorage.setItem(SORT_KEY, mode);
+    sortHand(mode);
+    updateSortButtons();
+    safe(()=>render(), null);
+  }
+  function installButtons(){
+    if(q('sortAcquiredBtn') || q('sortTypeBtn')){ updateSortButtons(); return; }
+    const draw=q('drawBtn');
+    if(!draw || !draw.parentNode) return;
+    const btnA=document.createElement('button');
+    btnA.id='sortAcquiredBtn';
+    btnA.type='button';
+    btnA.className='secondary sortBtn';
+    btnA.textContent='🔃取得順';
+    btnA.onclick=()=>setSortMode('acquired');
+    const btnT=document.createElement('button');
+    btnT.id='sortTypeBtn';
+    btnT.type='button';
+    btnT.className='secondary sortBtn';
+    btnT.textContent='🧩種別順';
+    btnT.onclick=()=>setSortMode('type');
+    draw.insertAdjacentElement('afterend', btnT);
+    btnT.insertAdjacentElement('afterend', btnA);
+    updateSortButtons();
+  }
+
+  const oldMakeCard = safe(()=>makeCard, null);
+  if(oldMakeCard){
+    makeCard = function(id){
+      const c = oldMakeCard.apply(this, arguments);
+      if(c && !getOrder(c)) setOrder(c, cardOrderCounter++);
+      return c;
+    };
+  }
+
+  const oldRender = safe(()=>render, null);
+  if(oldRender){
+    render = function(){
+      ensureOrders();
+      sortHand(currentMode());
+      const r = oldRender.apply(this, arguments);
+      installButtons();
+      updateSortButtons();
+      return r;
+    };
+  }
+
+  const oldSaveRunState = safe(()=>saveRunState, null);
+  if(oldSaveRunState){
+    saveRunState = function(){ ensureOrders(); return oldSaveRunState.apply(this, arguments); };
+  }
+
+  document.addEventListener('DOMContentLoaded',()=>{ installButtons(); ensureOrders(); sortHand(currentMode()); updateSortButtons(); });
+  window.addEventListener('load',()=>{ installButtons(); updateSortButtons(); });
+  window.sortSushiPartsHandByAcquired=()=>setSortMode('acquired');
+  window.sortSushiPartsHandByType=()=>setSortMode('type');
+  safe(()=>console.log('v6.28 hand sort buttons loaded'), null);
+})();
+// ===== end v6.28 =====
+</script>
+
+
+
+<script>
+// ===== v6.29 reward cards go directly to hand when there is space =====
+// 報酬で選んだカードは「デッキ入り」だけでなく、手札が16枚未満なら即手札にも入る。
+// ただし手札が満杯、または同じカードをすでに手札に持っている場合はデッキ入りだけにする。
+(function(){
+  function safe(fn, fallback){ try{ return fn(); }catch(e){ return fallback; } }
+  function q(id){ return document.getElementById(id); }
+  function idOfCard(c){ return typeof c==='string' ? c : (c && c.id) || ''; }
+  function maxHand(){ return Number(typeof MAX_HAND!=='undefined' ? MAX_HAND : 16) || 16; }
+  function handHas(id){ return Array.isArray(hand) && hand.some(c=>idOfCard(c)===id); }
+  function ensureDeckHas(id, count=1){
+    if(!id) return;
+    if(!Array.isArray(deck)) deck=[];
+    for(let i=0;i<count;i++) deck.push(id);
+  }
+  function unlockPart(id){
+    safe(()=>{ if(typeof unlockedParts!=='undefined' && unlockedParts && typeof unlockedParts.add==='function') unlockedParts.add(id); }, null);
+  }
+  function giveRewardCardNow(id, deckCount=1){
+    if(!id) return {toHand:false, reason:'no-id'};
+    ensureDeckHas(id, deckCount);
+    unlockPart(id);
+    if(!Array.isArray(hand)) hand=[];
+    if(hand.length>=maxHand()) return {toHand:false, reason:'full'};
+    if(handHas(id)) return {toHand:false, reason:'already'};
+    const card = safe(()=>makeCard(id), null);
+    if(card){ hand.push(card); return {toHand:true, reason:'added'}; }
+    return {toHand:false, reason:'make-failed'};
+  }
+  function noteRewardResult(id, result){
+    const p=safe(()=>part(id), null);
+    const name=(p&&p.text)||id;
+    let text = result && result.toHand ? `報酬カード「${name}」を手札に追加。` : `報酬カード「${name}」はデッキに追加。`;
+    if(result && result.reason==='full') text += ' 手札が16枚なので、今後のドロー候補に入ります。';
+    if(result && result.reason==='already') text += ' すでに手札にあるので、今後のドロー候補に入ります。';
+    safe(()=>{ if(typeof setMsg==='function') setMsg(text, result&&result.toHand?'ok':'warn'); }, null);
+  }
+
+  // 報酬カードの説明を「即手札＋永久解放」に変更。
+  const oldCardShopHtml = safe(()=>cardShopHtml, null);
+  if(oldCardShopHtml){
+    cardShopHtml = function(it,i){
+      const p=it&&it.p; const id=p&&p.id;
+      const r=safe(()=>rarityOf(id),'common');
+      const label=safe(()=>rarityLabel(r),r);
+      const type=safe(()=>typeLabel(p.type),'部品');
+      return `<div class="shopItem ${r}" onclick="takeShop(${i})"><b>カード獲得：${p.text}</b> <span class="rarity ${r}">${label}</span><br><span class="small">${type} / ${p.meaning}<br>手札が16枚未満なら今すぐ手札へ。満杯ならデッキに入り、今後ドローされます。</span></div>`;
+    };
+  }
+
+  // takeShopを上書き。通常の報酬カードは即手札へ。研究カード×2はデッキ2枚＋空きがあれば1枚即手札。
+  const oldTakeShop = safe(()=>takeShop, null);
+  if(oldTakeShop){
+    takeShop = function(i){
+      const choices = window.__shopChoices || [];
+      const it = choices[i];
+      if(!it) return oldTakeShop.apply(this, arguments);
+      const title=q('shopTitle');
+      const isLab = !!(title && String(title.textContent||'').includes('研究所'));
+
+      if(it.kind==='card' && it.p && it.p.id){
+        const res = giveRewardCardNow(it.p.id, 1);
+        if(!isLab){ round++; roundScore=0; energy=Math.min(maxEnergy,energy+2); }
+        shopOpen=false;
+        const shop=q('shop'); if(shop) shop.classList.add('hidden');
+        noteRewardResult(it.p.id, res);
+        safe(()=>{ if(typeof render==='function') render(); }, null);
+        safe(()=>{ if(typeof saveRunState==='function') saveRunState(); }, null);
+        return;
+      }
+
+      if(it.kind==='research' && it.p && it.p.id){
+        if(rp<it.cost) return;
+        rp-=it.cost;
+        const res = giveRewardCardNow(it.p.id, 2);
+        if(!isLab){ round++; roundScore=0; energy=Math.min(maxEnergy,energy+2); }
+        shopOpen=false;
+        const shop=q('shop'); if(shop) shop.classList.add('hidden');
+        noteRewardResult(it.p.id, res);
+        safe(()=>{ if(typeof render==='function') render(); }, null);
+        safe(()=>{ if(typeof saveRunState==='function') saveRunState(); }, null);
+        return;
+      }
+
+      return oldTakeShop.apply(this, arguments);
+    };
+  }
+
+  // 既存のrenderShopChoicesがresearch表示を使っている場合だけ説明を補正。
+  const oldRenderShopChoices = safe(()=>renderShopChoices, null);
+  if(oldRenderShopChoices){
+    renderShopChoices = function(choices){
+      const r = oldRenderShopChoices.apply(this, arguments);
+      safe(()=>{
+        document.querySelectorAll('#shopItems .shopItem .small').forEach(el=>{
+          if(String(el.textContent||'').includes('デッキに2枚追加')){
+            el.textContent='デッキに2枚追加。手札が16枚未満なら1枚は今すぐ手札へ。';
+          }
+        });
+        if(typeof renderRewardHandPreview==='function') renderRewardHandPreview();
+      }, null);
+      return r;
+    };
+  }
+
+  safe(()=>console.log('v6.29 reward-to-hand patch loaded'), null);
+})();
+// ===== end v6.29 =====
+</script>
+
 </body>
 </html>
