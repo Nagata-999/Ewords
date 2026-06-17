@@ -1071,6 +1071,141 @@ function addAliasKeys(map,w){
 const WORD_MAP=new Map();
 WORDS.forEach(w=>addAliasKeys(WORD_MAP,w));
 function lookupWordByIds(ids){return WORD_MAP.get(ids.join("|"))||null}
+
+// ===== JSON master loader v7.1: canonical data/words_master.json + parts_master.json =====
+(function(){
+  const WORDS_URL = './data/words_master.json';
+  const PARTS_URL = './data/parts_master.json';
+  const DEBUG_ID = 'sushiPartsJsonDebug';
+  const TIMEOUT_MS = 2200;
+  let status = { mode:'LOCAL', wordsAdded:0, partsAdded:0, wordTotal:0, partTotal:0, mapTotal:0, error:'' };
+
+  function q(id){ return document.getElementById(id); }
+  function ensureDebug(){
+    let el = q(DEBUG_ID);
+    if(!el){
+      el = document.createElement('div');
+      el.id = DEBUG_ID;
+      el.style.cssText = 'position:fixed;right:6px;bottom:4px;z-index:99999;font-size:8px;line-height:1.15;font-weight:1000;opacity:.46;pointer-events:none;color:#8a5a00;background:rgba(255,250,240,.65);border:1px dashed rgba(138,90,0,.35);border-radius:999px;padding:2px 5px;max-width:94vw;white-space:nowrap;';
+      document.body.appendChild(el);
+    }
+    return el;
+  }
+  function updateDebug(extra){
+    status.wordTotal = Array.isArray(WORDS) ? WORDS.length : 0;
+    status.partTotal = Array.isArray(PARTS) ? PARTS.length : 0;
+    try{ status.mapTotal = (typeof WORD_MAP!=='undefined' && WORD_MAP && WORD_MAP.size) ? WORD_MAP.size : 0; }catch(e){ status.mapTotal = 0; }
+    const text = status.mode === 'JSON'
+      ? `🍣JSON W+${status.wordsAdded} P+${status.partsAdded} W:${status.wordTotal} P:${status.partTotal} M:${status.mapTotal}`
+      : `🍣LOCAL W:${status.wordTotal} P:${status.partTotal}${status.error?' !':''}`;
+    const el = ensureDebug();
+    el.textContent = extra ? `${text} ${extra}` : text;
+    try{ console.log('[sushiPartsJSON]', status); }catch(e){}
+  }
+  function fetchJson(url){
+    return Promise.race([
+      fetch(url, {cache:'no-store'}).then(r=>{ if(!r.ok) throw new Error(url+' '+r.status); return r.json(); }),
+      new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout '+url)), TIMEOUT_MS))
+    ]);
+  }
+  function normalizePart(p){
+    if(!p) return null;
+    const id = String(p.id || p.part || p.text || '').trim();
+    if(!id) return null;
+    const type = ['prefix','root','suffix'].includes(p.type) ? p.type : 'root';
+    return { id, type, text:String(p.text || id), meaning:String(p.meaning || p.ja || p.meaning_ja || '語源部品') };
+  }
+  function normalizeWord(w){
+    if(!w) return null;
+    const word = String(w.word || '').trim();
+    const parts = Array.isArray(w.parts) ? w.parts.map(x=>String(x).trim()).filter(Boolean) : [];
+    // すしPartsの体験を守るため、部品情報がある語だけ外部追加する。
+    if(!word || parts.length < 2) return null;
+    return {
+      word,
+      ja: String(w.ja || w.meaning || w.meaning_ja || ''),
+      definition_en: String(w.definition_en || w.definition || ''),
+      parts,
+      image: String(w.image || `${parts.join(' + ')} → ${word}`),
+      freq: String(w.freq || ''),
+      level: String(w.level || ''),
+      games: Array.isArray(w.games) ? w.games : [],
+      relations: w.relations || {},
+      sources: Array.isArray(w.sources) ? w.sources : [],
+      _jsonMaster: true
+    };
+  }
+  function rebuildWordMap(){
+    try{
+      if(typeof WORD_MAP!=='undefined' && WORD_MAP && typeof WORD_MAP.clear==='function'){
+        WORD_MAP.clear();
+        WORDS.forEach(w=>{ try{ addAliasKeys(WORD_MAP,w); }catch(e){} });
+      }
+    }catch(e){ console.warn('[sushiPartsJSON] map rebuild failed', e); }
+  }
+  function mergeParts(jsonParts){
+    if(!Array.isArray(jsonParts) || !Array.isArray(PARTS)) return 0;
+    const seen = new Set(PARTS.map(p=>String(p && p.id)));
+    let added = 0;
+    jsonParts.map(normalizePart).filter(Boolean).forEach(p=>{
+      if(!seen.has(p.id)){
+        PARTS.push(p);
+        seen.add(p.id);
+        added++;
+      }
+    });
+    return added;
+  }
+  function mergeWords(jsonWords){
+    if(!Array.isArray(jsonWords) || !Array.isArray(WORDS)) return 0;
+    const byWord = new Map(WORDS.map(w=>[String(w && w.word || '').toLowerCase(), w]));
+    let added = 0, supplemented = 0;
+    jsonWords.map(normalizeWord).filter(Boolean).forEach(w=>{
+      const key = w.word.toLowerCase();
+      const old = byWord.get(key);
+      if(!old){
+        WORDS.push(w);
+        byWord.set(key, w);
+        added++;
+      }else{
+        // 既存の手触りを優先。空欄だけ補う。
+        if((!old.ja) && w.ja) old.ja = w.ja;
+        if((!old.definition_en) && w.definition_en) old.definition_en = w.definition_en;
+        if((!old.image) && w.image) old.image = w.image;
+        if((!old.freq) && w.freq) old.freq = w.freq;
+        if((!Array.isArray(old.parts) || !old.parts.length) && w.parts.length) old.parts = w.parts;
+        supplemented++;
+      }
+    });
+    status.supplemented = supplemented;
+    return added;
+  }
+  async function loadMasters(){
+    updateDebug('loading');
+    try{
+      const [jsonWords, jsonParts] = await Promise.all([fetchJson(WORDS_URL), fetchJson(PARTS_URL)]);
+      status.partsAdded = mergeParts(jsonParts);
+      status.wordsAdded = mergeWords(jsonWords);
+      rebuildWordMap();
+      status.mode = 'JSON';
+      status.error = '';
+      updateDebug();
+    }catch(e){
+      status.mode = 'LOCAL';
+      status.error = e && e.message ? e.message : String(e);
+      console.warn('[sushiPartsJSON] master load failed; using embedded data.', e);
+      updateDebug();
+    }
+  }
+  window.sushiPartsJsonStatus = status;
+  window.reloadSushiPartsMasters = loadMasters;
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', loadMasters, {once:true});
+  }else{
+    loadMasters();
+  }
+})();
+// ===== end JSON master loader v7.1 =====
 // ===== end tolerant matcher patch =====
 
 const JOKER_POOL=[
