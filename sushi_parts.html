@@ -56126,6 +56126,169 @@ coburg`;
   console.info('v6.24: reward hand preview enabled.');
 })();
 // ===== end v6.24 =====
+
+
+// ===== v6.25 spect / ous / reward rarity fix =====
+(function(){
+  const BAD_COMPLETED_PARTS = new Set([
+    'inspect','inspection','suspect','prospect','respect','respectful',
+    'contract','extract','attract','retract','transport','export','import','deport',
+    'project','reject','inject','object'
+  ]);
+  const SPECT_VARIANTS = ['spect','spec','spic'];
+  const CORE_SUFFIX_BONUS = ['ous','ness','ful','less','ment','tion','able','ible','ity','ion','al','er','or','ly'];
+
+  function safe(fn, fallback){ try{ return fn(); }catch(e){ return fallback; } }
+  function hasPart(id){ return Array.isArray(PARTS) && PARTS.some(p=>p.id===id); }
+  function upsertPart(p){
+    if(!Array.isArray(PARTS) || !p || !p.id) return;
+    for(let i=PARTS.length-1;i>=0;i--){ if(PARTS[i].id===p.id) PARTS.splice(i,1); }
+    PARTS.push(p);
+  }
+  function removeBadPartsEverywhere(){
+    if(Array.isArray(PARTS)){
+      for(let i=PARTS.length-1;i>=0;i--){
+        const p=PARTS[i];
+        if(p && BAD_COMPLETED_PARTS.has(p.id)) PARTS.splice(i,1);
+      }
+    }
+    if(Array.isArray(deck)) deck = deck.filter(id=>!BAD_COMPLETED_PARTS.has(id));
+    if(Array.isArray(hand)) hand = hand.filter(c=>c && !BAD_COMPLETED_PARTS.has(c.id));
+    if(Array.isArray(selected)) selected = selected.filter(c=>c && !BAD_COMPLETED_PARTS.has(c.id));
+    safe(()=>{ if(unlockedParts && typeof unlockedParts.delete==='function') BAD_COMPLETED_PARTS.forEach(id=>unlockedParts.delete(id)); }, null);
+  }
+  function addAliasToMap(wordObj, aliases){
+    aliases = aliases || [];
+    safe(()=>{ if(typeof addAliasKeys==='function' && typeof WORD_MAP!=='undefined') addAliasKeys(WORD_MAP, wordObj); }, null);
+    aliases.forEach(parts=>{
+      safe(()=>{
+        if(typeof WORD_MAP!=='undefined') WORD_MAP.set(parts.join('|'), wordObj);
+      }, null);
+    });
+  }
+  function upsertWord(w, aliases){
+    if(!Array.isArray(WORDS) || !w || !w.word || !Array.isArray(w.parts)) return;
+    let existing = WORDS.find(x=>x.word===w.word);
+    if(existing){
+      existing.ja = existing.ja || w.ja;
+      existing.parts = w.parts;
+      existing.image = w.image || existing.image;
+      existing.freq = w.freq || existing.freq || 'B';
+      addAliasToMap(existing, aliases);
+      return;
+    }
+    WORDS.push(w);
+    addAliasToMap(w, aliases);
+  }
+  function pickUniquePartByRarity(targetRarity, usedIds){
+    const used = usedIds || new Set();
+    const pool = PARTS.filter(p=>p && !BAD_COMPLETED_PARTS.has(p.id) && !used.has(p.id) && rarityOf(p.id)===targetRarity);
+    return pool.length ? rand(pool) : null;
+  }
+  function pickRewardPart(usedIds, forceRarePlus){
+    const roll = Math.random()*100;
+    const order = forceRarePlus
+      ? (roll<70 ? ['rare','epic','legendary','common'] : roll<94 ? ['epic','rare','legendary','common'] : ['legendary','epic','rare','common'])
+      : (roll<55 ? ['common','rare','epic','legendary'] : roll<85 ? ['rare','epic','common','legendary'] : roll<97 ? ['epic','rare','legendary','common'] : ['legendary','epic','rare','common']);
+    for(const r of order){
+      const p = pickUniquePartByRarity(r, usedIds);
+      if(p) return p;
+    }
+    const pool = PARTS.filter(p=>p && !BAD_COMPLETED_PARTS.has(p.id) && !(usedIds||new Set()).has(p.id));
+    return pool.length ? rand(pool) : rand(PARTS);
+  }
+
+  // 1) 完成語カードを消し、部品カードだけで作らせる
+  removeBadPartsEverywhere();
+
+  // 2) ousは接尾辞として固定。spect族と必要prefixも補強。
+  upsertPart({id:'ous', type:'suffix', text:'ous', meaning:'〜に満ちた・〜の多い'});
+  upsertPart({id:'spect', type:'root', text:'spect', meaning:'見る'});
+  if(!hasPart('con')) upsertPart({id:'con', type:'prefix', text:'con', meaning:'共に・強意'});
+  if(!hasPart('in')) upsertPart({id:'in', type:'prefix', text:'in', meaning:'中へ・否定'});
+  if(!hasPart('re')) upsertPart({id:'re', type:'prefix', text:'re', meaning:'再び・後ろへ'});
+  if(!hasPart('pro')) upsertPart({id:'pro', type:'prefix', text:'pro', meaning:'前へ'});
+  if(!hasPart('sus')) upsertPart({id:'sus', type:'prefix', text:'sus', meaning:'下から・密かに'});
+
+  // 3) spec / spic / spect は内部的に同じ語根として扱う
+  safe(()=>{
+    if(typeof PART_ALIASES!=='undefined'){
+      PART_ALIASES.spect = SPECT_VARIANTS;
+      PART_ALIASES.spec = SPECT_VARIANTS;
+      PART_ALIASES.spic = SPECT_VARIANTS;
+      PART_ALIASES.sus = ['sus','sub','sup'];
+    }
+  }, null);
+
+  // 4) spectファミリー。con + spect + ous / con + spec + ous / con + spic + ous を通す。
+  upsertWord({word:'inspect', ja:'検査する', parts:['in','spect'], image:'in + spect → inspect', freq:'A'}, [['in','spec'],['in','spic']]);
+  upsertWord({word:'inspection', ja:'検査・点検', parts:['in','spect','ion'], image:'in + spect + ion → inspection', freq:'A'}, [['in','spec','ion'],['in','spic','ion']]);
+  upsertWord({word:'respect', ja:'尊敬する・尊重する', parts:['re','spect'], image:'re + spect → respect', freq:'S'}, [['re','spec'],['re','spic']]);
+  upsertWord({word:'respectful', ja:'敬意を示す', parts:['re','spect','ful'], image:'re + spect + ful → respectful', freq:'A'}, [['re','spec','ful'],['re','spic','ful']]);
+  upsertWord({word:'suspect', ja:'疑う・容疑者', parts:['sus','spect'], image:'sus + spect → suspect', freq:'A'}, [['sus','spec'],['sus','spic']]);
+  upsertWord({word:'prospect', ja:'見込み・展望', parts:['pro','spect'], image:'pro + spect → prospect', freq:'A'}, [['pro','spec'],['pro','spic']]);
+  upsertWord({word:'conspicuous', ja:'目立つ', parts:['con','spect','ous'], image:'con + spect + ous → conspicuous', freq:'A'}, [['con','spec','ous'],['con','spic','ous']]);
+  upsertWord({word:'inconspicuous', ja:'目立たない', parts:['in','con','spect','ous'], image:'in + con + spect + ous → inconspicuous', freq:'A'}, [['in','con','spec','ous'],['in','con','spic','ous'],['un','con','spect','ous'],['un','con','spec','ous'],['un','con','spic','ous']]);
+
+  // 5) レア/エピック候補を増やす。Setはconstでも中身は変更できる。
+  safe(()=>{
+    ['spect','tract','press','ject','mit','fer','cept','duce','duct','tain','port','dict','struct','pose','ous','ence','ance','ism','ist','ary','ory'].forEach(id=>RARE_IDS.add(id));
+    ['pseudo','hyper','multi','anthrop','astro','crypto','chron','graph','phon','bio','geo','log','morph','path','meter','scope'].forEach(id=>EPIC_IDS.add(id));
+  }, null);
+
+  // 6) ドロー時、suffix不足で詰まらないように一定確率で頻出suffixを優先。
+  const oldDrawCardsV625 = (typeof drawCards==='function') ? drawCards : null;
+  if(oldDrawCardsV625){
+    drawCards = function(n){
+      removeBadPartsEverywhere();
+      for(let i=0;i<n && hand.length<MAX_HAND;i++){
+        const suffixPool = deck.filter(id=>CORE_SUFFIX_BONUS.includes(id) && hasPart(id));
+        const rarePool = deck.filter(id=>hasPart(id) && ['rare','epic','legendary'].includes(rarityOf(id)));
+        let id = null;
+        if(suffixPool.length && Math.random()<0.30) id = rand(suffixPool);
+        else if(rarePool.length && Math.random()<0.18) id = rand(rarePool);
+        else id = rand(deck.filter(id=>hasPart(id) && !BAD_COMPLETED_PARTS.has(id)) || deck);
+        hand.push(makeCard(id));
+      }
+    };
+  }
+
+  // 7) 報酬は「Commonばかり」を避ける。2枠のうち最低1枠はRare以上を狙う。
+  const oldOpenShopV625 = (typeof openShop==='function') ? openShop : null;
+  if(oldOpenShopV625){
+    openShop = function(){
+      removeBadPartsEverywhere();
+      shopOpen=true;
+      $('shopTitle').textContent='ショップ：報酬を1つ選ぶ';
+      $('shopHelp').textContent='カードを増やすか、ジョーカーでルールを書き換えよう。Rare/Epicも出やすくしました。';
+      const unused=JOKER_POOL.filter(j=>!jokers.some(x=>x.id===j.id));
+      const used=new Set();
+      const p1=pickRewardPart(used,false); if(p1) used.add(p1.id);
+      const p2=pickRewardPart(used,true); if(p2) used.add(p2.id);
+      const choices=[];
+      if(p1) choices.push({kind:'card',p:p1});
+      if(p2) choices.push({kind:'card',p:p2});
+      choices.push({kind:'joker',j:rand(unused.length?unused:JOKER_POOL)});
+      if(rp>=3){ const p3=pickRewardPart(used,true); if(p3) choices.push({kind:'research',cost:3+(rarityOf(p3.id)==='epic'?2:0),p:p3}); }
+      renderShopChoices(choices);
+      $('shop').classList.remove('hidden');
+      safe(()=>{ if(typeof renderRewardHandPreview==='function') renderRewardHandPreview(); }, null);
+    };
+  }
+
+  // 8) 既存セーブから復帰しても悪いカードが残らないようにする。
+  const oldRenderV625 = (typeof render==='function') ? render : null;
+  if(oldRenderV625){
+    render = function(){ removeBadPartsEverywhere(); return oldRenderV625(); };
+  }
+  const oldSaveRunStateV625 = (typeof saveRunState==='function') ? saveRunState : null;
+  if(oldSaveRunStateV625){
+    saveRunState = function(){ removeBadPartsEverywhere(); return oldSaveRunStateV625(); };
+  }
+
+  safe(()=>console.log('v6.25 spect/ous/reward rarity fix loaded'), null);
+})();
+// ===== end v6.25 =====
 </script>
 
 <style>
