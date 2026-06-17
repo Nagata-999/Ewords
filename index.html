@@ -1705,6 +1705,245 @@
   }
 }
 
+
+
+/* =========================================
+   White orange game theme override
+   トップページに合わせてゲーム本体も白オレンジへ統一
+========================================= */
+:root {
+  --bg1: #fff7ed;
+  --bg2: #fffaf2;
+  --panel: rgba(255,255,255,0.86);
+  --text: #172033;
+  --muted: #64748b;
+  --good: #16a34a;
+  --bad: #dc2626;
+  --warn: #ea580c;
+  --shadow: 0 10px 26px rgba(15,23,42,0.08);
+}
+
+html, body {
+  background:
+    radial-gradient(circle at 18% 0%, rgba(251,146,60,0.18), transparent 34%),
+    radial-gradient(circle at 96% 10%, rgba(20,184,166,0.10), transparent 30%),
+    #fff7ed !important;
+  color: #172033;
+}
+
+.app {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(251,146,60,0.10), transparent 34%),
+    #fff7ed;
+}
+
+.panel {
+  background: rgba(255,255,255,0.88);
+  border: 1px solid #f1d7bc;
+  box-shadow: 0 10px 26px rgba(15,23,42,0.07);
+  backdrop-filter: blur(8px);
+}
+
+.topbar,
+.question-card,
+.arena,
+.bottom {
+  background: #fffaf2;
+}
+
+.stat {
+  background: #ffffff;
+  border: 1px solid #f3dfc8;
+}
+
+.stat-label,
+.question-label,
+.combo-line,
+.small,
+.status-line,
+.ranking-sub,
+.growth-score,
+.growth-next,
+.modal p {
+  color: #64748b;
+}
+
+.stat-value,
+.question-text,
+.modal h1,
+.modal h2,
+.modal h3,
+.info-page h2,
+.info-page p,
+.info-page li {
+  color: #172033;
+}
+
+.mode-badge {
+  color: #7c2d12;
+  background: linear-gradient(180deg, #fed7aa 0%, #fb923c 100%);
+}
+
+.combo-value,
+.ranking-title,
+.growth-rank {
+  color: #c2410c;
+}
+
+.feedback { color: #64748b; }
+.feedback.good { color: #15803d; }
+.feedback.bad { color: #b91c1c; }
+.feedback.warn { color: #c2410c; }
+
+.arena {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.94), rgba(255,247,237,0.94));
+}
+
+.balloon {
+  color: #7c2d12;
+  background: linear-gradient(180deg, #ffffff 0%, #ffedd5 100%);
+  border: 1px solid #fdba74;
+  box-shadow: 0 10px 20px rgba(251,146,60,0.18);
+}
+
+.balloon.correct-flash {
+  background: linear-gradient(180deg, #dcfce7 0%, #86efac 100%);
+  color: #14532d;
+  border-color: #86efac;
+}
+
+.balloon.wrong-flash {
+  background: linear-gradient(180deg, #fee2e2 0%, #fca5a5 100%);
+  color: #7f1d1d;
+  border-color: #fca5a5;
+}
+
+.btn.primary,
+.btn.gold {
+  background: linear-gradient(180deg, #fb6a3c 0%, #f4511e 100%);
+  color: #ffffff;
+}
+
+.btn.secondary {
+  background: #e2e8f0;
+  color: #172033;
+}
+
+.btn.green {
+  background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
+}
+
+.btn.orange {
+  background: linear-gradient(180deg, #fb923c 0%, #f97316 100%);
+}
+
+.overlay:not(#menuOverlay) {
+  background: rgba(255,247,237,0.78);
+  backdrop-filter: blur(8px);
+}
+
+.overlay:not(#menuOverlay) .modal,
+#menuOverlay .info-page {
+  background:
+    radial-gradient(circle at 18% 0%, rgba(251,146,60,0.14), transparent 34%),
+    #fffaf2;
+  color: #172033;
+  border: 1px solid #f1d7bc;
+  box-shadow: 0 18px 48px rgba(15,23,42,0.10);
+}
+
+.ranking-box,
+.result-box,
+.growth-card,
+.mistake-list,
+.rank-up-banner {
+  background: #ffffff;
+  border: 1px solid #f1d7bc;
+  box-shadow: 0 8px 22px rgba(15,23,42,0.05);
+}
+
+.ranking-tab {
+  color: #172033;
+  background: #ffffff;
+  border: 1px solid #f1d7bc;
+}
+
+.ranking-tab.active {
+  color: #ffffff;
+  background: linear-gradient(180deg, #fb6a3c 0%, #f4511e 100%);
+}
+
+.ranking-row {
+  border-bottom-color: #f1d7bc;
+}
+
+.ranking-rank { color: #ea580c; }
+.ranking-score { color: #172033; }
+.ranking-empty { color: #64748b; }
+
+.growth-bar {
+  background: #f1f5f9;
+  border-color: #e2e8f0;
+}
+
+.mode-title-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  margin-right: 10px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #fed7aa 0%, #fb923c 100%);
+  color: #7c2d12;
+  font-weight: 1000;
+  vertical-align: middle;
+  box-shadow: 0 8px 18px rgba(251,146,60,0.18);
+}
+
+#gameStartTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.side-menu {
+  background: #fffaf2;
+  color: #172033;
+  border-left: 1px solid #f1d7bc;
+}
+.side-menu h2 { color: #172033; }
+.menu-group-title { color: #ea580c; }
+.menu-link {
+  background: #ffffff;
+  color: #172033;
+  border: 1px solid #f1d7bc;
+}
+.menu-link small { color: #64748b; }
+.hamburger-btn {
+  background: rgba(255,255,255,.92);
+  border: 1px solid #f1d7bc;
+}
+.hamburger-btn span { background: #c2410c; }
+
+.app.danger-mode {
+  background:
+    radial-gradient(circle at top, rgba(239,68,68,0.16) 0%, rgba(255,247,237,0) 44%),
+    #fff7ed;
+}
+
+.app.awakening-mode {
+  background:
+    radial-gradient(circle at 50% 12%, rgba(250,204,21,0.22) 0%, rgba(251,146,60,0.14) 42%, rgba(255,247,237,0) 80%),
+    #fff7ed;
+}
+
+.app.awakening-mode .panel {
+  border-color: rgba(251,146,60,0.45);
+  box-shadow: 0 0 28px rgba(251,146,60,0.14), 0 10px 26px rgba(15,23,42,0.07);
+}
+
 </style>
 </head>
 <body>
@@ -1876,15 +2115,15 @@
             <h2 style="margin-top:24px;font-size:24px;">無料英語ゲーム一覧</h2>
           </div>
 <div class="compact-game-grid" aria-label="すし単のゲーム一覧">
-            <button class="compact-game blue" id="startSushiBtnAlt">
+            <button class="compact-game blue" id="openSushiStartBtn">
               すし単
               <small>英単語</small>
             </button>
-            <button class="compact-game purple" id="startShinoBtn">
+            <button class="compact-game purple" id="openShinoStartBtn">
               しの単
               <small>synonym</small>
             </button>
-            <button class="compact-game pink" id="startAntoniBtn">
+            <button class="compact-game pink" id="openAntoniStartBtn">
               あんとに単
               <small>antonym</small>
             </button>
@@ -1916,19 +2155,6 @@
               すし勘
               <small>リスニング強化ゲーム（開発中）</small>
             </a>
-          </div>
-
-          <div class="growth-card" id="homeGrowthCard">
-            <div class="growth-head">
-              <div class="growth-rank" id="homeAnimalRank">🐹 ハムスター</div>
-              <div class="growth-score" id="homeTotalScore">0</div>
-            </div>
-            <div class="growth-bar"><div class="growth-fill" id="homeGrowthFill"></div></div>
-            <div class="growth-next" id="homeGrowthNext">次の動物まであと -</div>
-          </div>
-
-          <div class="ranking-quiet">
-            <button class="btn gold" id="openRankingBtn">ランキング</button>
           </div>
 
           <div class="utility-row" aria-label="サイト内メニュー">
@@ -1988,6 +2214,26 @@
               <button class="footer-link-btn" id="footerContactBtn">お問い合わせ</button>
             </div>
           </footer>
+        </div>
+
+        <div id="gameStartPanel" class="info-page hidden">
+          <h2 id="gameStartTitle">すし単</h2>
+          <p id="gameStartDesc">日本語に合う英単語を選ぶモードです。</p>
+
+          <div class="growth-card hidden" id="gameStartGrowthCard">
+            <div class="growth-head">
+              <div class="growth-rank" id="homeAnimalRank">🐹 ハムスター</div>
+              <div class="growth-score" id="homeTotalScore">0</div>
+            </div>
+            <div class="growth-bar"><div class="growth-fill" id="homeGrowthFill"></div></div>
+            <div class="growth-next" id="homeGrowthNext">次の動物まであと -</div>
+          </div>
+
+          <div class="menu-btns">
+            <button class="btn primary" id="selectedStartBtn">ゲームスタート</button>
+            <button class="btn gold" id="selectedRankingBtn">ランキング</button>
+            <button class="btn secondary" id="backHomeFromGameStartBtn">ゲーム一覧へ戻る</button>
+          </div>
         </div>
 
         <div id="aboutPanel" class="info-page hidden">
@@ -2192,6 +2438,7 @@
     let audioCtx = null;
     let currentMode = PUBLIC_MODE;
     let rankingMode = PUBLIC_MODE;
+    let selectedMenuMode = PUBLIC_MODE;
 
     const GROWTH_STORAGE_KEY = "sushitan_total_score_v1";
     const GROWTH_MAX_SCORE = 1000000;
@@ -5426,6 +5673,16 @@
     const startShinoBtn = document.getElementById('startShinoBtn');
     const startAntoniBtn = document.getElementById('startAntoniBtn');
     const openRankingBtn = document.getElementById('openRankingBtn');
+    const openSushiStartBtn = document.getElementById('openSushiStartBtn');
+    const openShinoStartBtn = document.getElementById('openShinoStartBtn');
+    const openAntoniStartBtn = document.getElementById('openAntoniStartBtn');
+    const gameStartPanel = document.getElementById('gameStartPanel');
+    const gameStartTitle = document.getElementById('gameStartTitle');
+    const gameStartDesc = document.getElementById('gameStartDesc');
+    const gameStartGrowthCard = document.getElementById('gameStartGrowthCard');
+    const selectedStartBtn = document.getElementById('selectedStartBtn');
+    const selectedRankingBtn = document.getElementById('selectedRankingBtn');
+    const backHomeFromGameStartBtn = document.getElementById('backHomeFromGameStartBtn');
     const closeRankingBtn = document.getElementById('closeRankingBtn');
     const gameTitleEl = document.getElementById('gameTitle');
     const homePanel = document.getElementById('homePanel');
@@ -5466,6 +5723,7 @@
     const homeTotalScore = document.getElementById('homeTotalScore');
     const homeGrowthFill = document.getElementById('homeGrowthFill');
     const homeGrowthNext = document.getElementById('homeGrowthNext');
+    const resultGrowthCard = document.getElementById('resultGrowthCard');
     const resultAnimalRank = document.getElementById('resultAnimalRank');
     const resultTotalScore = document.getElementById('resultTotalScore');
     const resultGrowthFill = document.getElementById('resultGrowthFill');
@@ -6117,6 +6375,7 @@
     function showHomeSubPanel(panelName = 'home') {
       const panels = {
         home: homePanel,
+        gameStart: gameStartPanel,
         howto: howToPanel,
         about: aboutPanel,
         privacy: privacyPanel,
@@ -6127,7 +6386,38 @@
       });
       const target = panels[panelName] || homePanel;
       if (target) target.classList.remove('hidden');
-      if (panelName === 'home') renderGrowthCard("home", getStoredTotalScore());
+      if (panelName === 'gameStart' && selectedMenuMode === MODE_SUSHI) {
+        renderGrowthCard("home", getStoredTotalScore());
+      }
+    }
+
+    function openGameStartPanel(mode) {
+      selectedMenuMode = normalizeModeForDb(mode || MODE_SUSHI);
+      currentMode = selectedMenuMode;
+      const modeText = {
+        [MODE_SUSHI]: {
+          title: "すし単",
+          desc: "日本語に合う英単語をタップする基本モード。ここに累計スコア成長も移動しました。"
+        },
+        [MODE_SHINO]: {
+          title: "しの単",
+          desc: "表示された英単語と意味が近い synonym をタップする言い換え練習モード。"
+        },
+        [MODE_ANTONI]: {
+          title: "あんとに単",
+          desc: "表示された英単語と反対の意味の antonym をタップする対義語練習モード。"
+        }
+      };
+      const info = modeText[selectedMenuMode] || modeText[MODE_SUSHI];
+      if (gameStartTitle) {
+        const iconText = selectedMenuMode === MODE_SHINO ? "し" : selectedMenuMode === MODE_ANTONI ? "対" : "す";
+        gameStartTitle.innerHTML = `<span class="mode-title-icon">${iconText}</span>${info.title}`;
+      }
+      if (gameStartDesc) gameStartDesc.textContent = info.desc;
+      if (gameStartGrowthCard) {
+        gameStartGrowthCard.classList.toggle('hidden', selectedMenuMode !== MODE_SUSHI);
+      }
+      showHomeSubPanel('gameStart');
     }
 
     function backToMenu() {
@@ -6141,7 +6431,6 @@
       resultOverlay.classList.add('hidden');
       if (clearOverlay) clearOverlay.classList.add('hidden');
       showHomeSubPanel('home');
-      renderGrowthCard("home", getStoredTotalScore());
       clearArena();
       questionText.textContent = '準備OK？';
       setFeedback('モードを選んでスタート');
@@ -6339,8 +6628,10 @@
       clearScore.textContent = bonusScore;
       clearAccuracy.textContent = `${accuracy}%`;
       clearMaxCombo.textContent = GAME.maxCombo;
-      addGrowthScore(bonusScore);
-      renderGrowthCard("home", getStoredTotalScore());
+      if (currentMode === MODE_SUSHI) {
+        addGrowthScore(bonusScore);
+        renderGrowthCard("home", getStoredTotalScore());
+      }
       if (clearOverlay) clearOverlay.classList.remove('hidden');
 
       await saveHighScore(bonusScore, accuracy);
@@ -6401,9 +6692,15 @@
     if (backHomeFromPrivacyBtn) backHomeFromPrivacyBtn.addEventListener('click', () => showHomeSubPanel('home'));
     if (backHomeFromContactBtn) backHomeFromContactBtn.addEventListener('click', () => showHomeSubPanel('home'));
 
-    if (startSushiBtn) startSushiBtn.addEventListener('click', () => startGame(MODE_SUSHI));
-    if (startShinoBtn) startShinoBtn.addEventListener('click', () => startGame(MODE_SHINO));
-    if (startAntoniBtn) startAntoniBtn.addEventListener('click', () => startGame(MODE_ANTONI));
+    if (startSushiBtn) startSushiBtn.addEventListener('click', () => openGameStartPanel(MODE_SUSHI));
+    if (startShinoBtn) startShinoBtn.addEventListener('click', () => openGameStartPanel(MODE_SHINO));
+    if (startAntoniBtn) startAntoniBtn.addEventListener('click', () => openGameStartPanel(MODE_ANTONI));
+    if (openSushiStartBtn) openSushiStartBtn.addEventListener('click', () => openGameStartPanel(MODE_SUSHI));
+    if (openShinoStartBtn) openShinoStartBtn.addEventListener('click', () => openGameStartPanel(MODE_SHINO));
+    if (openAntoniStartBtn) openAntoniStartBtn.addEventListener('click', () => openGameStartPanel(MODE_ANTONI));
+    if (selectedStartBtn) selectedStartBtn.addEventListener('click', () => startGame(selectedMenuMode));
+    if (selectedRankingBtn) selectedRankingBtn.addEventListener('click', () => openRankingScreen(selectedMenuMode));
+    if (backHomeFromGameStartBtn) backHomeFromGameStartBtn.addEventListener('click', () => showHomeSubPanel('home'));
 
     playAgainBtn.addEventListener('click', () => startGame(currentMode));
     if (clearPlayAgainBtn) clearPlayAgainBtn.addEventListener('click', () => startGame(currentMode));
@@ -6413,7 +6710,7 @@
     backToMenuBtn.addEventListener('click', backToMenu);
     if (clearBackToMenuBtn) clearBackToMenuBtn.addEventListener('click', backToMenu);
 
-    openRankingBtn.addEventListener('click', () => openRankingScreen(currentMode || PUBLIC_MODE));
+    if (openRankingBtn) openRankingBtn.addEventListener('click', () => openRankingScreen(currentMode || PUBLIC_MODE));
     closeRankingBtn.addEventListener('click', backToMenu);
 
     if (rankingTabSushi) rankingTabSushi.addEventListener('click', () => openRankingScreen(MODE_SUSHI));
@@ -6426,19 +6723,7 @@
 
     updateModeBadge();
     showHomeSubPanel('home');
-    renderGrowthCard("home", getStoredTotalScore());
     loadRanking(PUBLIC_MODE, rankingScreenList);
-  
-    // Stylish top: すし単 start
-    if (document.getElementById("startSushiBtnAlt")) {
-      document.getElementById("startSushiBtnAlt").onclick = () => {
-        currentMode = MODE_SUSHI;
-        if (typeof startGame === "function") {
-          startGame();
-        }
-      };
-    }
-
 </script>
 
 <script>
