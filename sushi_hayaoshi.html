@@ -1439,14 +1439,37 @@ async function loadExternalVocab(){
           total: Object.values(WORDS).reduce((sum, list)=>sum + (Array.isArray(list) ? list.length : 0), 0)
         };
 
-        setVocabDebug(`JSON${masterWords.length} SAFE B:${levelPool.beginner} I:${levelPool.intermediate} A:${levelPool.advanced}`);
-        console.info('🍣 JSON vocab loaded safely:', {
+        const diag = masterWords.reduce((acc, w)=>{
+          const lv = String(w.level || 'none').toLowerCase();
+          const hasDef = !!String(w.definition_en || w.definition || '').trim();
+          const isHayaoshi = Array.isArray(w.games) && w.games.includes('sushi_hayaoshi');
+          acc.total++;
+          acc.level[lv] = (acc.level[lv] || 0) + 1;
+          if(hasDef){
+            acc.defTotal++;
+            acc.defLevel[lv] = (acc.defLevel[lv] || 0) + 1;
+          }
+          if(isHayaoshi){
+            acc.hayaoshiTotal++;
+            acc.hayaoshiLevel[lv] = (acc.hayaoshiLevel[lv] || 0) + 1;
+          }
+          return acc;
+        }, { total:0, defTotal:0, hayaoshiTotal:0, level:{}, defLevel:{}, hayaoshiLevel:{} });
+
+        const shortDiag = `M${diag.total} DEF${diag.defTotal} LV B:${diag.level.beginner||0} I:${diag.level.intermediate||0} A:${diag.level.advanced||0} N:${diag.level.none||0} USE B:${levelPool.beginner} I:${levelPool.intermediate} A:${levelPool.advanced}`;
+        setVocabDebug(shortDiag);
+        const dbgEl = document.getElementById('jsonDebug');
+        if(dbgEl){
+          dbgEl.title = `master=${diag.total} / definition=${diag.defTotal} / hayaoshi=${diag.hayaoshiTotal} / level=${JSON.stringify(diag.level)} / definitionLevel=${JSON.stringify(diag.defLevel)} / gamePool=${JSON.stringify(levelPool)}`;
+        }
+        console.info('🍣 JSON vocab diagnostics:', {
           source: VOCAB_DATA_PATHS.words,
           masterWords: masterWords.length,
           levelPool,
           addedCount,
           skippedBeginner,
-          skippedNoDefinition
+          skippedNoDefinition,
+          diag
         });
         return true;
       }
