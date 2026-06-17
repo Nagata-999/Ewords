@@ -1396,16 +1396,23 @@ async function loadExternalVocab(){
       if(nextWords.beginner.length && nextWords.intermediate.length && nextWords.advanced.length){
         WORDS = nextWords;
         vocabLoadedFromJson = true;
-        setVocabDebug(`JSON${masterWords.length}`);
+
+        const hayaoshiTaggedCount = masterWords.filter(w =>
+          Array.isArray(w.games) && w.games.includes('sushi_hayaoshi')
+        ).length;
+        const hayaoshiPool = {
+          beginner: WORDS.beginner.length,
+          intermediate: WORDS.intermediate.length,
+          advanced: WORDS.advanced.length,
+          total: Object.values(WORDS).reduce((sum, list)=>sum + (Array.isArray(list) ? list.length : 0), 0)
+        };
+
+        setVocabDebug(`JSON${masterWords.length} H:${hayaoshiTaggedCount} B:${hayaoshiPool.beginner} I:${hayaoshiPool.intermediate} A:${hayaoshiPool.advanced}`);
         console.info('🍣 JSON vocab loaded:', {
           source: VOCAB_DATA_PATHS,
           masterWords: masterWords.length,
-          sushiHayaoshi: {
-            beginner: WORDS.beginner.length,
-            intermediate: WORDS.intermediate.length,
-            advanced: WORDS.advanced.length,
-            total: Object.values(WORDS).reduce((sum, list)=>sum + (Array.isArray(list) ? list.length : 0), 0)
-          }
+          hayaoshiTaggedCount,
+          sushiHayaoshi: hayaoshiPool
         });
         return true;
       }
