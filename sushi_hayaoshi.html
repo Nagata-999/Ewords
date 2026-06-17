@@ -1348,6 +1348,7 @@ const VOCAB_DATA_PATHS = {
 let vocabLoadPromise = null;
 let vocabLoadedFromJson = false;
 const EMBEDDED_WORD_COUNT = Object.values(WORDS).reduce((sum, list)=>sum + (Array.isArray(list) ? list.length : 0), 0);
+const EMBEDDED_WORDS = JSON.parse(JSON.stringify(WORDS));
 
 function setVocabDebug(label){
   const el = document.getElementById('jsonDebug');
@@ -1382,53 +1383,49 @@ async function loadExternalVocab(){
       if(!Array.isArray(masterWords)) throw new Error('words_master_v1.json format mismatch');
 
       const LEVELS = ['beginner','intermediate','advanced'];
-      const nextWords = { beginner:[], intermediate:[], advanced:[] };
-      const seenByLevel = {beginner:new Set(), intermediate:new Set(), advanced:new Set()};
-      let jaFallbackCount = 0;
-      let inferredLevelCount = 0;
-      let skippedCount = 0;
-
-      function inferLevel(src){
-        const raw = String(src.level || '').toLowerCase();
-        if(LEVELS.includes(raw)) return raw;
-        inferredLevelCount++;
-        const word = String(src.word || '');
-        const freq = String(src.freq || '').toUpperCase();
-        const parts = Array.isArray(src.parts) ? src.parts : [];
-        if(freq === 'S' || freq === 'A' || word.length >= 11 || parts.length >= 3) return 'advanced';
-        if(freq === 'B' || word.length >= 8 || parts.length >= 2) return 'intermediate';
-        return 'beginner';
-      }
+      const nextWords = {
+        // Beginnerは安全第一。現ローカル語彙だけを使う。
+        beginner: [...(EMBEDDED_WORDS.beginner || [])],
+        // 中級・上級はローカルを土台に、masterから英英定義つきだけ追加する。
+        intermediate: [...(EMBEDDED_WORDS.intermediate || [])],
+        advanced: [...(EMBEDDED_WORDS.advanced || [])]
+      };
+      const seenByLevel = {
+        beginner: new Set(nextWords.beginner.map(x => String(x.word || '').toLowerCase())),
+        intermediate: new Set(nextWords.intermediate.map(x => String(x.word || '').toLowerCase())),
+        advanced: new Set(nextWords.advanced.map(x => String(x.word || '').toLowerCase()))
+      };
+      let addedCount = 0;
+      let skippedNoDefinition = 0;
+      let skippedBeginner = 0;
 
       masterWords.forEach(src=>{
         const word = String(src.word || '').trim();
         if(!word) return;
 
-        const level = inferLevel(src);
+        const level = String(src.level || '').toLowerCase();
+        if(!LEVELS.includes(level)) return;
+
+        // Beginnerに難語が混ざっていたので、外部JSONからはBeginnerへ追加しない。
+        // Beginner拡張は、あとで人間チェック済みの beginner_safe.json 方式にする。
+        if(level === 'beginner'){
+          skippedBeginner++;
+          return;
+        }
+
+        const definition = String(src.definition_en || src.definition || '').trim();
+        if(!definition){
+          skippedNoDefinition++;
+          return;
+        }
+
         const key = word.toLowerCase();
         if(seenByLevel[level].has(key)) return;
 
-        let definition = String(src.definition_en || src.definition || '').trim();
         const jp = String(src.ja || src.meaning_ja || '').trim();
-
-        // 英英定義がない語も、語彙増量テスト用に日本語ヒントで救う。
-        // 今後 definition_en を増やせば、この日本語ヒントは自動的に英英定義へ置き換わる。
-        if(!definition && jp){
-          definition = `日本語の意味：${jp}`;
-          jaFallbackCount++;
-        }
-
-        if(!definition){ skippedCount++; return; }
-
         nextWords[level].push({ word, jp, definition });
         seenByLevel[level].add(key);
-      });
-
-      // JSON側に不足があった時だけ、HTML内蔵データを保険として使う。
-      LEVELS.forEach(level=>{
-        if(nextWords[level].length < 10 && Array.isArray(WORDS[level])){
-          nextWords[level] = WORDS[level];
-        }
+        addedCount++;
       });
 
       if(nextWords.beginner.length && nextWords.intermediate.length && nextWords.advanced.length){
@@ -1442,20 +1439,21 @@ async function loadExternalVocab(){
           total: Object.values(WORDS).reduce((sum, list)=>sum + (Array.isArray(list) ? list.length : 0), 0)
         };
 
-        setVocabDebug(`JSON${masterWords.length} B:${levelPool.beginner} I:${levelPool.intermediate} A:${levelPool.advanced}`);
-        console.info('🍣 JSON vocab loaded from master by level:', {
+        setVocabDebug(`JSON${masterWords.length} SAFE B:${levelPool.beginner} I:${levelPool.intermediate} A:${levelPool.advanced}`);
+        console.info('🍣 JSON vocab loaded safely:', {
           source: VOCAB_DATA_PATHS.words,
           masterWords: masterWords.length,
           levelPool,
-          jaFallbackCount,
-          inferredLevelCount,
-          skippedCount
+          addedCount,
+          skippedBeginner,
+          skippedNoDefinition
         });
         return true;
       }
-      throw new Error('not enough vocab after master import');
+      throw new Error('not enough vocab after safe master import');
     }catch(e){
       console.warn('🍣 JSON vocab load failed. Fallback to embedded WORDS.', e);
+      WORDS = EMBEDDED_WORDS;
       const localCount = Object.values(WORDS).reduce((sum, list)=>sum + (Array.isArray(list) ? list.length : 0), 0);
       setVocabDebug(`LOCAL${localCount}`);
       return false;
@@ -1464,7 +1462,6 @@ async function loadExternalVocab(){
 
   return vocabLoadPromise;
 }
-
 
 const SETTINGS = {
   beginner:{label:'Beginner', choices:6, speed:2000},
