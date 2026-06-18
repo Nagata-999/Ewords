@@ -57105,5 +57105,259 @@ coburg`;
 // ===== end v6.32 =====
 </script>
 
+
+
+<style>
+/* ===== v6.33 balanced rewards + hand cap 26 ===== */
+.balanceNote{display:inline-block;margin-top:4px;padding:3px 8px;border-radius:999px;background:#fff8ef;border:1px solid #ffd0bd;color:#d84315;font-size:11px;font-weight:1000}
+.handFullNote{display:inline-block;margin-top:4px;padding:3px 8px;border-radius:999px;background:#fff0f0;border:1px solid #ffc1c1;color:#c62828;font-size:11px;font-weight:1000}
+</style>
+<script>
+// ===== v6.33 balanced rewards + hand cap 26 =====
+// ・手札上限拡張は最大26まで
+// ・26到達後はバックパック系ジョーカーを報酬候補から除外
+// ・バックパック出現率を下げる
+// ・カード報酬は手札がいっぱいなら取得しない
+// ・ドローは「不足している種別」を優先して、接頭辞・語根・接尾辞の偏りを抑える
+(function(){
+  function safe(fn, fallback){ try{ return fn(); }catch(e){ return fallback; } }
+  function q(id){ return document.getElementById(id); }
+  const HARD_HAND_CAP = 26;
+  const BASE_HAND_CAP = 20;
+
+  function baseMax(){ return Number(typeof MAX_HAND!=='undefined' ? MAX_HAND : BASE_HAND_CAP) || BASE_HAND_CAP; }
+  function rawBackpackBonus(){
+    return safe(()=> (Array.isArray(jokers)?jokers:[]).reduce((sum,j)=>sum + (Number(j&&j.handLimitBonus)||0),0), 0);
+  }
+  function cappedMaxHand(){ return Math.min(HARD_HAND_CAP, baseMax() + rawBackpackBonus()); }
+  window.sushiPartsMaxHand = cappedMaxHand;
+
+  function idOf(c){ return typeof c==='string'?c:(c&&(c.id||c.partId||c.part_id))||''; }
+  function pObj(id){ return safe(()=>part(id), null) || (Array.isArray(PARTS)?PARTS.find(p=>p&&p.id===id):null); }
+  function validId(id){ return !!id && !!pObj(id) && !['inspect','inspection','suspect','prospect','respect','respectful','contract','extract','attract','retract','transport','export','import','deport','project','reject','inject','object','remove'].includes(String(id)); }
+  function handIds(){ return (Array.isArray(hand)?hand:[]).map(idOf).filter(Boolean); }
+  function hasInHand(id){ return handIds().includes(id); }
+  function typeOf(id){ const p=pObj(id); return p&&p.type; }
+  function countType(t){ return handIds().filter(id=>typeOf(id)===t).length; }
+  function uniq(a){ return [...new Set((a||[]).filter(Boolean))]; }
+  function allUnlockedIds(){ return uniq([...(Array.isArray(deck)?deck:[]), ...(safe(()=>Array.from(unlockedParts||[]),[]))]).filter(validId); }
+  function poolByType(t, excludeHand){
+    return allUnlockedIds().filter(id=>typeOf(id)===t && (!excludeHand || !hasInHand(id)));
+  }
+  function anyPool(excludeHand){ return allUnlockedIds().filter(id=>!excludeHand || !hasInHand(id)); }
+  function pick(arr){ return arr&&arr.length ? arr[Math.floor(Math.random()*arr.length)] : null; }
+  function make(id){ return safe(()=>makeCard(id), null); }
+  function handIsFull(){ return (Array.isArray(hand)?hand.length:0) >= cappedMaxHand(); }
+  function say(t, cls){ safe(()=>setMsg(t, cls), null); }
+  function closeShop(){ const shop=q('shop'); if(shop) shop.classList.add('hidden'); shopOpen=false; }
+  function advanceRound(){ round++; roundScore=0; energy=Math.min(maxEnergy,energy+2); }
+
+  function cleanHand(){
+    if(!Array.isArray(hand)) hand=[];
+    const seen=new Set();
+    hand=hand.filter(c=>{
+      const id=idOf(c);
+      if(!validId(id)) return false;
+      if(seen.has(id)) return false;
+      seen.add(id);
+      return true;
+    });
+    if(hand.length>cappedMaxHand()) hand=hand.slice(0,cappedMaxHand());
+  }
+
+  // 20枚なら prefix 5 / root 9 / suffix 6 程度、26枚なら 7 / 11 / 8 程度を目安にする。
+  function desiredCounts(){
+    const m=cappedMaxHand();
+    return {
+      prefix: Math.max(3, Math.round(m*0.27)),
+      root:   Math.max(4, Math.round(m*0.42)),
+      suffix: Math.max(3, m - Math.max(3, Math.round(m*0.27)) - Math.max(4, Math.round(m*0.42)))
+    };
+  }
+  function deficitType(){
+    const d=desiredCounts();
+    const types=['prefix','root','suffix'];
+    const scored=types.map(t=>({
+      type:t,
+      deficit:(d[t]-countType(t))/Math.max(1,d[t]),
+      pool:poolByType(t,true)
+    })).filter(x=>x.pool.length);
+    if(!scored.length) return null;
+    scored.sort((a,b)=>b.deficit-a.deficit);
+    return scored[0].type;
+  }
+  function chooseBalancedId(){
+    const t=deficitType();
+    if(t && Math.random()<0.82){
+      const pool=poolByType(t,true);
+      if(pool.length) return pick(pool);
+    }
+    // 重要接尾辞は不足時だけ少し優先。常時ブーストしすぎない。
+    const suffixImportant=poolByType('suffix',true).filter(id=>['ous','ness','ful','less','ment','tion','able','ible','ity','ion','al','er','or','ly'].includes(id));
+    if(suffixImportant.length && countType('suffix') < desiredCounts().suffix && Math.random()<0.22) return pick(suffixImportant);
+    // Rare/Epicは少量だけ維持。
+    const rare=anyPool(true).filter(id=>safe(()=>['rare','epic','legendary'].includes(rarityOf(id)),false));
+    if(rare.length && Math.random()<0.10) return pick(rare);
+    return pick(anyPool(true)) || pick(anyPool(false));
+  }
+
+  drawCards = function(n){
+    cleanHand();
+    const count=Number(n)||0;
+    let added=0;
+    for(let i=0;i<count && hand.length<cappedMaxHand();i++){
+      const id=chooseBalancedId();
+      if(!id) break;
+      const c=make(id);
+      if(!c) break;
+      hand.push(c); added++;
+    }
+    return added;
+  };
+
+  // 報酬カードは「空きがあれば即手札」。いっぱいなら取得しない。
+  function giveRewardCardToHandOnly(id){
+    if(!id || !validId(id)) return {ok:false, reason:'invalid'};
+    if(!Array.isArray(hand)) hand=[];
+    cleanHand();
+    if(handIsFull()) return {ok:false, reason:'full'};
+    if(hasInHand(id)){
+      // 重複は避けつつ、既に持っている場合だけ従来通りデッキ解放扱い。
+      if(!Array.isArray(deck)) deck=[];
+      deck.push(id);
+      safe(()=>{ if(typeof unlockedParts!=='undefined' && unlockedParts && unlockedParts.add) unlockedParts.add(id); }, null);
+      return {ok:false, reason:'already'};
+    }
+    const c=make(id);
+    if(!c) return {ok:false, reason:'failed'};
+    hand.push(c);
+    if(!Array.isArray(deck)) deck=[];
+    deck.push(id);
+    safe(()=>{ if(typeof unlockedParts!=='undefined' && unlockedParts && unlockedParts.add) unlockedParts.add(id); }, null);
+    return {ok:true, reason:'added'};
+  }
+
+  const prevTakeShop=safe(()=>takeShop,null);
+  if(prevTakeShop && !prevTakeShop.__v633Balanced){
+    takeShop=function(i){
+      const choices=window.__shopChoices||[];
+      const it=choices[i];
+      const title=q('shopTitle');
+      const isLab=!!(title&&String(title.textContent||'').includes('研究所'));
+      if(!it) return prevTakeShop.apply(this,arguments);
+
+      if(it.kind==='joker' && it.j && it.j.handLimitBonus){
+        if(cappedMaxHand()>=HARD_HAND_CAP){
+          say('手札上限は26枚で最大です。この拡張は選べません。','warn');
+          return;
+        }
+        if(!Array.isArray(jokers)) jokers=[];
+        jokers.push(it.j);
+        if(!isLab) advanceRound();
+        closeShop();
+        say(`🎒 手札上限 +2。現在 ${cappedMaxHand()} 枚まで持てます。`, 'ok');
+        safe(()=>render(), null); safe(()=>saveRunState(), null);
+        return;
+      }
+
+      if(it.kind==='card' && it.p && it.p.id){
+        const res=giveRewardCardToHandOnly(it.p.id);
+        if(!isLab) advanceRound();
+        closeShop();
+        const p=pObj(it.p.id)||it.p;
+        const name=(p&&p.text)||it.p.id;
+        if(res.ok) say(`報酬カード「${name}」を手札に追加。`, 'ok');
+        else if(res.reason==='full') say(`手札がいっぱいです。「${name}」は手に入りません。カードを交換・消費して空きを作ろう。`, 'warn');
+        else if(res.reason==='already') say(`「${name}」はすでに手札にあります。デッキに追加しました。`, 'warn');
+        else say(`「${name}」は取得できませんでした。`, 'bad');
+        safe(()=>render(), null); safe(()=>saveRunState(), null);
+        return;
+      }
+
+      if(it.kind==='research' && it.p && it.p.id){
+        if(rp<it.cost) return;
+        rp-=it.cost;
+        const res=giveRewardCardToHandOnly(it.p.id);
+        if(!isLab) advanceRound();
+        closeShop();
+        const p=pObj(it.p.id)||it.p;
+        const name=(p&&p.text)||it.p.id;
+        if(res.ok) say(`研究カード「${name}」を手札に追加。`, 'ok');
+        else if(res.reason==='full') say(`手札がいっぱいです。「${name}」は手に入りません。`, 'warn');
+        else say(`研究カード「${name}」はデッキに追加しました。`, 'warn');
+        safe(()=>render(), null); safe(()=>saveRunState(), null);
+        return;
+      }
+
+      return prevTakeShop.apply(this,arguments);
+    };
+    takeShop.__v633Balanced=true;
+  }
+
+  function filterAndTuneRewards(){
+    const choices=window.__shopChoices||[];
+    if(!choices.length) return;
+    // 26枚到達後は拡張を出さない。未到達でも便利すぎるので出現率をかなり下げる。
+    for(let i=choices.length-1;i>=0;i--){
+      const it=choices[i];
+      const isBackpack=it&&it.kind==='joker'&&it.j&&it.j.handLimitBonus;
+      if(!isBackpack) continue;
+      if(cappedMaxHand()>=HARD_HAND_CAP || Math.random()<0.65){
+        const replacementId=chooseBalancedId();
+        const p=replacementId?pObj(replacementId):null;
+        if(p) choices[i]={kind:'card',p};
+        else choices.splice(i,1);
+      }
+    }
+    // 報酬カードも現在不足している種別を優先。接頭辞固定ブーストは解除して全体バランスへ。
+    const t=deficitType();
+    if(t){
+      const pool=poolByType(t,true).map(id=>pObj(id)).filter(Boolean);
+      const idx=choices.findIndex(it=>it&&it.kind==='card');
+      if(idx>=0 && pool.length && Math.random()<0.72) choices[idx]={kind:'card',p:pick(pool)};
+    }
+  }
+
+  const prevOpenShop=safe(()=>openShop,null);
+  if(prevOpenShop && !prevOpenShop.__v633Balanced){
+    openShop=function(){
+      const r=prevOpenShop.apply(this,arguments);
+      safe(()=>{
+        filterAndTuneRewards();
+        if(typeof renderShopChoices==='function') renderShopChoices(window.__shopChoices||[]);
+        const help=q('shopHelp');
+        if(help) help.textContent='報酬カードは空きがあれば即手札に入ります。手札がいっぱいの時は手に入りません。手札上限は最大26枚です。';
+        document.querySelectorAll('#shopItems .shopItem').forEach((el,i)=>{
+          const it=(window.__shopChoices||[])[i];
+          if(it&&it.kind==='joker'&&it.j&&it.j.handLimitBonus&&!el.querySelector('.balanceNote')){
+            el.insertAdjacentHTML('beforeend',`<br><span class="balanceNote">手札上限 ${cappedMaxHand()} → ${Math.min(HARD_HAND_CAP,cappedMaxHand()+2)} / 最大26</span>`);
+          }
+          if(it&&it.kind==='card'&&!el.querySelector('.handFullNote')){
+            el.insertAdjacentHTML('beforeend','<br><span class="handFullNote">手札満杯時は取得不可</span>');
+          }
+        });
+      }, null);
+      return r;
+    };
+    openShop.__v633Balanced=true;
+  }
+
+  const prevRender=safe(()=>render,null);
+  if(prevRender && !prevRender.__v633Balanced){
+    render=function(){
+      cleanHand();
+      const r=prevRender.apply(this,arguments);
+      safe(()=>{ const h=q('handCount'); if(h) h.textContent=`${Array.isArray(hand)?hand.length:0}/${cappedMaxHand()}`; }, null);
+      return r;
+    };
+    render.__v633Balanced=true;
+  }
+
+  safe(()=>{ if(typeof render==='function') render(); }, null);
+  safe(()=>console.log('v6.33 balanced rewards + hand cap 26 loaded'), null);
+})();
+// ===== end v6.33 =====
+</script>
+
 </body>
 </html>
