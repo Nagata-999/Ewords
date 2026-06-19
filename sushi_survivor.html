@@ -199,7 +199,7 @@ function renderTray(){let trayEl=$('tray');trayEl.classList.toggle('empty',tray.
 function addPart(p){if(!canUsePart(p)){toast('その部品は使用数上限');return}tray.push(p);renderTray()}function removePart(i){tray.splice(i,1);renderTray()}function undoPart(){tray.pop();renderTray()}function clearTray(){tray=[];renderTray()}function openConfirm(){if(!craftCandidate)return;let d=WORDS[craftCandidate];$('modalWord').className='big rarity-'+d.rarity;$('modalWord').textContent=craftCandidate;$('modalInfo').textContent=`${d.jp} / ${d.parts.join(' + ')} / ${d.desc}`;$('confirmModal').classList.remove('hidden')}function closeConfirm(){$('confirmModal').classList.add('hidden')}function confirmCraft(){let w=craftCandidate;if(!w)return; if(!save.made.includes(w)){save.made.push(w); if(!save.dex.includes(w))save.dex.push(w); toast('✨ NEW WORD: '+w)} if(!save.equipped.includes(w)&&save.equipped.length<5)save.equipped.push(w); clearTray(); closeConfirm(); persist(); renderForge()}
 function toggleEquip(w){let i=save.equipped.indexOf(w);if(i>=0)save.equipped.splice(i,1);else if(save.equipped.length<5)save.equipped.push(w);else toast('スロット満杯');persist();renderForge()}function lowerStage(){if(save.stage>1){save.stage--;persist();renderForge();toast('Stage '+save.stage+'を周回')}}
 function renderDex(){let names=Object.keys(WORDS);$('dexCount').textContent=save.dex.length;$('dexTotal').textContent=names.length;$('dexList').innerHTML=names.map(w=>{let got=save.dex.includes(w),d=WORDS[w];return `<div class="dexItem" style="opacity:${got?1:.35}"><div><b class="rarity-${d.rarity}">${got?w:'?????'}</b><div class="muted">${got?d.jp:'未発見'} / ${d.parts.join(' + ')} / ${d.desc}</div></div><span class="pill">${d.rarity}</span></div>`}).join('')}
-function renderStageSelect(){let max=Math.max(1,save.bestStage);let html='';for(let i=1;i<=Math.max(8,max+2);i++){let open=i<=max;let goal=stageGoal(i);html+=`<div class="choice stageBtn ${open?'':'locked'}" ${open?`onclick="selectStage(${i})"`:''}><div><div class="big">Stage ${i}</div><div class="muted">討伐 ${goal}匹 / 高速戦 ${enemyPreview(i)}</div></div><div>${open?'挑戦':'LOCK'}</div></div>`} $('stageList').innerHTML=html}
+function renderStageSelect(){let max=Math.max(1,save.bestStage);let html='';for(let i=1;i<=Math.max(8,max+2);i++){let open=i<=max;let goal=stageGoal(i);let parts=stageRewardParts(i).join(' / ');html+=`<div class="choice stageBtn ${open?'':'locked'}" ${open?`onclick="selectStage(${i})"`:''}><div><div class="big">Stage ${i}</div><div class="muted">討伐 ${goal}匹 / BOSS ${enemyPreview(i)}<br>報酬: ${parts}</div></div><div>${open?'挑戦':'LOCK'}</div></div>`} $('stageList').innerHTML=html}
 function selectStage(n){if(n>save.bestStage)return;save.stage=n;persist();showForge();toast('Stage '+n+'を選択')}
 let cv=$('cv'),ctx=cv.getContext('2d'),W,H,player,enemies,bullets,enemyBullets,orbs,floatTexts,keys={},killGoal,ko,hp,last,joy={x:0,y:0},cool={},runStage=1,ended=false,spawnMeter=0,spawnedCount=0;
 function resize(){W=cv.width=innerWidth*devicePixelRatio;H=cv.height=innerHeight*devicePixelRatio;ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);W=innerWidth;H=innerHeight}
@@ -335,9 +335,41 @@ function draw(){ctx.clearRect(0,0,W,H);ctx.textAlign='center';
   orbs.forEach(o=>{let ox=player.x+Math.cos(o.a)*58,oy=player.y+Math.sin(o.a)*58;ctx.fillStyle=o.color||'#2ca86b';ctx.beginPath();ctx.arc(ox,oy,10,0,7);ctx.fill();ctx.fillStyle='#fff';ctx.font='bold 10px system-ui';ctx.fillText('P',ox,oy+3)});
   floatTexts.forEach(f=>{ctx.globalAlpha=Math.max(0,f.life/.55);ctx.fillStyle=f.color||'#ef493d';ctx.font=`bold ${f.size||18}px system-ui`;ctx.fillText(f.txt,f.x,f.y);ctx.globalAlpha=1})}
 let rolledPart=null,rollTimer=null;
-function buildRewardPool(){let near=Object.values(WORDS).flatMap(w=>w.parts.filter(p=>!save.parts[p]&&w.parts.filter(x=>save.parts[x]).length>=w.parts.length-1));let pool=[...ALL_PARTS];if(near.length){for(let n of near)pool.push(n,n,n)}if(runStage>=3){pool.push('trans','con','spect','spic','uous','ation','tion')}return pool}
-function reward(){rolledPart=null;$('rollPart').textContent='?';$('rollInfo').textContent='ボタンを押してロール開始';$('rollBtn').disabled=false;$('takeBtn').disabled=true;screen('reward')}
-function startRewardRoll(){let pool=buildRewardPool();$('rollBtn').disabled=true;$('takeBtn').disabled=true;let count=0;clearInterval(rollTimer);rollTimer=setInterval(()=>{let p=pool[Math.floor(Math.random()*pool.length)];$('rollPart').textContent=p;$('rollInfo').textContent=(save.parts[p]?`Lv${save.parts[p]} → Lv${save.parts[p]+1}`:'NEW PART')+' / 関連: '+PART_HINT[p];count++;if(count>18){clearInterval(rollTimer);rolledPart=p;$('takeBtn').disabled=false;$('rollInfo').textContent=(save.parts[p]?`LEVEL UP候補 Lv${save.parts[p]} → Lv${save.parts[p]+1}`:'NEW PART候補')+' / 関連: '+PART_HINT[p];}},65)}
+// ===== stage fixed reward pools =====
+// 各ステージの宝箱から出る部品は固定。周回すると同じ部品がLvアップする。
+// なるべく「拾ったが何も作れない」を減らすため、初期部品 im / port から広がる順に配置。
+const STAGE_REWARD_POOLS={
+  1:['ex','re','able','spect'],              // export / report / portable / respect 系
+  2:['in','trans','ion','er'],               // inspect / transport / inspection / importer 系
+  3:['con','spic','uous','tion'],            // conspicuous / reproduction / -tion 系
+  4:['pro','duc','duce','ation'],            // reproduce / reproduction / transportation 系
+  5:['ful','ity','spec','able'],             // respectful / respectable / portability 系
+  6:['tract','ive','or','ance'],             // contract / attractive / conductor / attendance 系
+  7:['com','press','ment','ible'],           // compress / commitment / compressible 系
+  8:['dict','contra','ory','ence']           // contradict / contradictory / conference 系
+};
+const FALLBACK_REWARD_POOL=['ex','re','able','spect','in','trans','ion','er','con','spic','uous','tion','pro','duc','ation','ful','ity'];
+function stageRewardParts(stage){
+  const keys=Object.keys(STAGE_REWARD_POOLS).map(Number).sort((a,b)=>a-b);
+  if(STAGE_REWARD_POOLS[stage]) return STAGE_REWARD_POOLS[stage].filter(p=>PART_HINT[p]||ALL_PARTS.includes(p));
+  const base=STAGE_REWARD_POOLS[keys[(stage-1)%keys.length]]||FALLBACK_REWARD_POOL;
+  return base.filter(p=>PART_HINT[p]||ALL_PARTS.includes(p));
+}
+function buildRewardPool(){
+  // 初回クリア報酬は必ず ex。import から export を作らせる導線。
+  if(!save.parts.ex) return ['ex'];
+  let fixed=stageRewardParts(runStage);
+  if(!fixed.length) fixed=FALLBACK_REWARD_POOL;
+  // 固定4種類を基本にしつつ、未所持を少しだけ重くして新展開も起こす。
+  const pool=[];
+  fixed.forEach(p=>{
+    const weight=save.parts[p]?2:4;
+    for(let i=0;i<weight;i++) pool.push(p);
+  });
+  return pool;
+}
+function reward(){rolledPart=null;$('rollPart').textContent='?';const pool=stageRewardParts(runStage);$('rollInfo').textContent=(!save.parts.ex?'初回確定: ex':`Stage ${runStage}: ${pool.join(' / ')}`);$('rollBtn').disabled=false;$('takeBtn').disabled=true;screen('reward')}
+function startRewardRoll(){let pool=buildRewardPool();$('rollBtn').disabled=true;$('takeBtn').disabled=true;let count=0;clearInterval(rollTimer);rollTimer=setInterval(()=>{let p=pool[Math.floor(Math.random()*pool.length)];$('rollPart').textContent=p;$('rollInfo').textContent=(save.parts[p]?`Lv${save.parts[p]} → Lv${save.parts[p]+1}`:'NEW PART')+' / 関連: '+(PART_HINT[p]||'???');count++;if(count>18){clearInterval(rollTimer);rolledPart=p;$('takeBtn').disabled=false;$('rollInfo').textContent=(save.parts[p]?`LEVEL UP候補 Lv${save.parts[p]} → Lv${save.parts[p]+1}`:'NEW PART候補')+' / 関連: '+(PART_HINT[p]||'???');}},65)}
 function takeRolledPart(){if(!rolledPart)return;let p=rolledPart;save.parts[p]=(save.parts[p]||0)+1;persist();toast((save.parts[p]>1?'LEVEL UP: ':'NEW PART: ')+p);setTimeout(showForge,450)}
 function toast(t){let d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),900)}
 let stick=$('stick'),knob=$('knob');stick.addEventListener('pointerdown',drag);stick.addEventListener('pointermove',drag);stick.addEventListener('pointerup',end);stick.addEventListener('pointercancel',end);function drag(e){stick.setPointerCapture(e.pointerId);let r=stick.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,x=e.clientX-cx,y=e.clientY-cy,l=Math.hypot(x,y),m=Math.min(l,42);joy.x=l?x/l:0;joy.y=l?y/l:0;knob.style.left=38+joy.x*m+'px';knob.style.top=38+joy.y*m+'px'}function end(){joy.x=joy.y=0;knob.style.left='38px';knob.style.top='38px'}
