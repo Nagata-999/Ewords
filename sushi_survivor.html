@@ -92,7 +92,7 @@ html,body{background:#fffaf2!important;}
 <section id="title" class="screen"><div class="panel titlePanel"><img src="images/logo.png" class="titleLogo" alt="Sushi Survivor" onerror="this.style.display='none';document.getElementById('logoFallback').classList.remove('hidden');"><div id="logoFallback" class="logoFallback hidden">SUSHI<br>SURVIVOR</div><div class="homeMenu"><button id="stageSelectBtn" class="stageMainBtn" onclick="showStageSelect()">ステージ選択</button><button id="dexIconBtn" class="iconBtn" onclick="showDex()" aria-label="図鑑">📖</button><button id="equipIconBtn" class="iconBtn" onclick="showForge()" aria-label="装備">⚔️</button></div><button class="topReturnBtn" onclick="goSushitanTop()">すし単トップに戻る</button></div></section>
 <section id="stageSelect" class="screen hidden"><div class="panel"><div class="row between"><h1 style="font-size:32px">🗺 ステージ選択</h1><div class="screenTopActions"><button class="secondary" onclick="goSushitanTop()">すし単トップ</button><button class="secondary" onclick="showTitle()">タイトルへ戻る</button></div></div><div id="stageList" class="grid"></div></div></section>
 <section id="forge" class="screen hidden"><div class="panel"><div class="row between"><div><h1 style="font-size:33px">⚒ 武器編集</h1><div class="muted">挑戦ステージ: <b id="stageNo"></b> / 到達最高: <b id="bestStageNo"></b></div></div><div class="screenTopActions"><button class="secondary" onclick="goSushitanTop()">すし単トップ</button><div class="pill">Dex <span id="miniDex">0</span></div></div></div><div class="grid"><div class="card"><div class="sectionTitle">装備スロット 5</div><div id="slots"></div><div class="row" style="margin-top:10px"><button onclick="startGame()">討伐ステージ開始</button><button class="secondary" onclick="lowerStage()">前ステージ周回</button></div></div><div class="card"><div class="sectionTitle">所持武器</div><div id="weaponList"></div></div></div><div class="sectionTitle">手持ち部品</div><div id="partsBox" class="card"></div><div class="sectionTitle">部品クラフト</div><div class="craftBoard"><div id="tray" class="tray empty"></div><div id="resultBox" class="resultBox no">部品を並べて単語を作ってみよう。</div><div class="row" style="margin-top:10px"><button class="ghost" onclick="undoPart()">1つ戻す</button><button class="ghost" onclick="clearTray()">クリア</button><button id="confirmCraftBtn" onclick="openConfirm()" disabled>これで決定</button></div></div><div class="row" style="margin-top:14px"><button class="secondary" onclick="showTitle()">タイトルへ戻る</button><button class="secondary" onclick="showDex()">図鑑</button></div></div></section>
-<section id="game" class="screen hidden"><canvas id="cv"></canvas><button class="gameHomeBtn" onclick="showTitle()" title="タイトルへ戻る">🏠</button><div class="hud"><div class="hudBox">Stage <span id="hudStage">1</span></div><div class="hudBox">🎯 <span id="goalTxt">0/20</span></div><div class="hudBox hpWrap">❤️ <span id="hpTxt">100</span><span class="hpBar"><i id="hpGauge"></i></span></div><div class="hudBox">敵 <span id="enemyTypeTxt">🦠</span> <span id="enemyHpTxt">-</span></div></div><div id="weaponHud" class="bottomHud"></div><div class="tapHelp">タップした場所へ移動</div></section>
+<section id="game" class="screen hidden"><canvas id="cv"></canvas><button class="gameHomeBtn" onclick="showTitle()" title="タイトルへ戻る">🏠</button><div class="hud"><div class="hudBox">Stage <span id="hudStage">1</span></div><div class="hudBox">🎯 <span id="goalTxt">0/20</span></div><div class="hudBox hpWrap">❤️ <span id="hpTxt">100</span><span class="hpBar"><i id="hpGauge"></i></span></div><div class="hudBox">敵 <span id="enemyTypeTxt">🦠</span> <span id="enemyHpTxt">-</span></div></div><div id="weaponHud" class="bottomHud"></div><div class="tapHelp">押している方向へ移動</div></section>
 <section id="reward" class="screen hidden"><div class="panel"><div class="row between"><button class="secondary" onclick="showTitle()">タイトルへ戻る</button><button class="secondary" onclick="goSushitanTop()">すし単トップ</button></div><div class="treasure">🎁</div><h1 style="text-align:center;font-size:34px">Stage Clear!</h1><p class="muted" style="text-align:center">報酬ロールを回して、ランダム部品を獲得。</p><div class="rollBox"><div class="muted">REWARD ROLL</div><div id="rollPart" class="rollPart">?</div><div id="rollInfo" class="muted">ボタンを押してロール開始</div></div><div class="row" style="justify-content:center"><button id="rollBtn" onclick="startRewardRoll()">ロールを回す</button><button id="takeBtn" class="secondary" onclick="takeRolledPart()" disabled>受け取る</button></div></div></section>
 <section id="dex" class="screen hidden"><div class="panel"><div class="row between"><h1 style="font-size:32px">📖 Word Dex</h1><div class="screenTopActions"><button class="secondary" onclick="goSushitanTop()">すし単トップ</button><div class="pill"><span id="dexCount">0</span>/<span id="dexTotal">0</span></div></div></div><div id="dexList"></div><div class="row" style="margin-top:14px"><button onclick="showTitle()">タイトルへ戻る</button><button class="secondary" onclick="showForge()">武器編集へ</button><button class="secondary" onclick="goSushitanTop()">すし単トップ</button></div></div></section>
 <div id="confirmModal" class="modalBg hidden"><div class="modal"><div class="big" id="modalWord">word</div><p id="modalInfo" class="muted"></p><div class="row" style="justify-content:center"><button onclick="confirmCraft()">決定して武器化</button><button class="secondary" onclick="closeConfirm()">やっぱり戻る</button></div></div></div>
@@ -238,7 +238,7 @@ function toggleEquip(w){let i=save.equipped.indexOf(w);if(i>=0)save.equipped.spl
 function renderDex(){let names=Object.keys(WORDS);$('dexCount').textContent=save.dex.length;$('dexTotal').textContent=names.length;$('dexList').innerHTML=names.map(w=>{let got=save.dex.includes(w),d=WORDS[w];return `<div class="dexItem" style="opacity:${got?1:.35}"><div><b class="rarity-${d.rarity}">${got?w:'?????'}</b><div class="muted">${got?d.jp:'未発見'} / ${d.parts.join(' + ')} / ${d.desc}</div></div><span class="pill">${d.rarity}</span></div>`}).join('')}
 function renderStageSelect(){let max=Math.max(1,save.bestStage);let html='';for(let i=1;i<=Math.max(8,max+2);i++){let open=i<=max;let goal=stageGoal(i);html+=`<div class="choice stageBtn ${open?'':'locked'}" ${open?`onclick="selectStage(${i})"`:''}><div><div class="big">Stage ${i}</div><div class="muted">討伐 ${goal}匹 / 高速戦 ${enemyPreview(i)}</div></div><div>${open?'挑戦':'LOCK'}</div></div>`} $('stageList').innerHTML=html}
 function selectStage(n){if(n>save.bestStage)return;save.stage=n;persist();showForge();toast('Stage '+n+'を選択')}
-let cv=$('cv'),ctx=cv.getContext('2d'),W,H,player,enemies,bullets,enemyBullets,orbs,floatTexts,keys={},killGoal,ko,hp,last,targetX=0,targetY=0,tapPulse=0,cool={},runStage=1,ended=false,spawnMeter=0,spawnedCount=0;
+let cv=$('cv'),ctx=cv.getContext('2d'),W,H,player,enemies,bullets,enemyBullets,orbs,floatTexts,keys={},killGoal,ko,hp,last,targetX=0,targetY=0,tapPulse=0,touchMove=false,moveDX=0,moveDY=0,cool={},runStage=1,ended=false,spawnMeter=0,spawnedCount=0;
 function resize(){W=cv.width=innerWidth*devicePixelRatio;H=cv.height=innerHeight*devicePixelRatio;ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);W=innerWidth;H=innerHeight}
 addEventListener('resize',resize);resize();addEventListener('keydown',e=>keys[e.key.toLowerCase()]=1);addEventListener('keyup',e=>keys[e.key.toLowerCase()]=0);
 function hasBarrier(){return save.equipped.some(w=>['orbit','aura','ghost'].includes(WORDS[w]?.type))}
@@ -328,7 +328,14 @@ function loop(now){
   while(spawnMeter>=1 && spawnedCount<killGoal && enemies.length<Math.min(killGoal-ko,10+runStage*2+(runStage>=3?5:0))){spawn();spawnMeter--}
   let kx=(keys['arrowright']||keys['d']?1:0)-(keys['arrowleft']||keys['a']?1:0),ky=(keys['arrowdown']||keys['s']?1:0)-(keys['arrowup']||keys['w']?1:0);
   if(kx||ky){let len=Math.hypot(kx,ky)||1;player.x=Math.max(18,Math.min(W-18,player.x+kx/len*260*dt));player.y=Math.max(18,Math.min(H-18,player.y+ky/len*260*dt));targetX=player.x;targetY=player.y;}
-  else{const dx=targetX-player.x,dy=targetY-player.y,d=Math.hypot(dx,dy);if(d>5){const speed=260;player.x=Math.max(18,Math.min(W-18,player.x+dx/d*speed*dt));player.y=Math.max(18,Math.min(H-18,player.y+dy/d*speed*dt));}}
+  else if(touchMove){
+    const d=Math.hypot(moveDX,moveDY);
+    if(d>10){
+      const speed=180;
+      player.x=Math.max(18,Math.min(W-18,player.x+(moveDX/d)*speed*dt));
+      player.y=Math.max(18,Math.min(H-18,player.y+(moveDY/d)*speed*dt));
+    }
+  }
   if(tapPulse>0)tapPulse=Math.max(0,tapPulse-dt);
   save.equipped.forEach((w,i)=>fire(w,dt,i));updateEnemies(dt);updateBullets(dt);updateEnemyBullets(dt);updateOrbs(dt);
   floatTexts.forEach(f=>{f.y-=34*dt;f.life-=dt});floatTexts=floatTexts.filter(f=>f.life>0);enemies=enemies.filter(e=>!e.dead);updateEnemyHud();draw();
@@ -437,13 +444,28 @@ function toast(t){let d=document.createElement('div');d.className='toast';d.text
 function setMoveTargetFromPointer(e){
   if($('game').classList.contains('hidden')||!player) return;
   const r=cv.getBoundingClientRect();
-  targetX=Math.max(18,Math.min(W-18,e.clientX-r.left));
-  targetY=Math.max(18,Math.min(H-18,e.clientY-r.top));
+  const px=e.clientX-r.left;
+  const py=e.clientY-r.top;
+  moveDX=px-player.x;
+  moveDY=py-player.y;
+  touchMove=true;
+  targetX=px;
+  targetY=py;
   tapPulse=.45;
 }
 cv.addEventListener('pointerdown',e=>{setMoveTargetFromPointer(e);});
 cv.addEventListener('pointermove',e=>{if(e.buttons) setMoveTargetFromPointer(e);});
-cv.addEventListener('pointercancel',()=>{tapPulse=0;});
+cv.addEventListener('pointerup',()=>{
+  touchMove=false;
+  moveDX=0;
+  moveDY=0;
+});
+cv.addEventListener('pointercancel',()=>{
+  touchMove=false;
+  moveDX=0;
+  moveDY=0;
+  tapPulse=0;
+});
 
 // v0.15 failsafe: inline onclickが効かない環境でもボタンを動かす
 document.addEventListener('DOMContentLoaded',()=>{
