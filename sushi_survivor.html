@@ -22,16 +22,69 @@ html,body{background:#fffaf2!important;}
 @media(max-width:800px){.homeMenu{grid-template-columns:1fr 84px 84px!important;gap:10px}.stageMainBtn,.iconBtn{min-height:86px}.iconBtn{font-size:38px}.titleLogo{width:min(520px,96vw);padding:4px}}
 
 @media(max-width:800px){.titleGrid{grid-template-columns:1fr}.stick{display:block}.panel{padding:14px;border-radius:23px}.grid{grid-template-columns:1fr}.hud{font-size:12px}.weaponChip{font-size:10px;padding:5px 7px}.screen{padding:9px}.big{font-size:23px}}
+
+
+/* ===== v16 global navigation fixes ===== */
+.globalNav{
+  position:fixed;
+  top:12px;
+  right:12px;
+  z-index:9999;
+  display:flex;
+  gap:8px;
+  align-items:center;
+  pointer-events:auto;
+}
+.globalNav button{
+  width:48px;
+  height:48px;
+  padding:0;
+  border-radius:15px;
+  font-size:22px;
+  box-shadow:0 5px 0 #d9af72,0 10px 22px rgba(116,65,10,.12);
+  background:#fff;
+  color:#2d2116;
+  border:2px solid #efcf9d;
+}
+.globalNav button.titleHomeBtn{
+  background:linear-gradient(180deg,#ffb34e,#ff8a1d);
+  color:white;
+  border:0;
+  box-shadow:0 5px 0 #bb5d00,0 10px 22px rgba(116,65,10,.18);
+}
+.globalNav button:active{transform:translateY(3px)}
+.gameHomeBtn{
+  position:absolute;
+  top:68px;
+  right:10px;
+  z-index:30;
+  width:52px;
+  height:52px;
+  padding:0;
+  border-radius:16px;
+  font-size:24px;
+  background:#fff;
+  color:#2d2116;
+  border:2px solid #efcf9d;
+  box-shadow:0 6px 16px rgba(86,48,8,.12);
+}
+@media(max-width:800px){
+  .globalNav{top:8px;right:8px;gap:6px}
+  .globalNav button{width:42px;height:42px;font-size:19px;border-radius:13px}
+  .gameHomeBtn{top:62px;right:8px;width:44px;height:44px;font-size:20px}
+}
+
 </style>
 </head>
 <body>
 <div id="app">
+<div class="globalNav" id="globalNav" aria-label="quick navigation"><button class="titleHomeBtn" onclick="showTitle()" title="タイトルへ戻る">🏠</button><button onclick="showForge()" title="装備">⚔️</button><button onclick="showDex()" title="図鑑">📖</button></div>
 <section id="title" class="screen"><div class="panel titlePanel"><img src="images/logo.png" class="titleLogo" alt="Sushi Survivor" onerror="this.style.display='none';document.getElementById('logoFallback').classList.remove('hidden');"><div id="logoFallback" class="logoFallback hidden">SUSHI<br>SURVIVOR</div><div class="homeMenu"><button id="stageSelectBtn" class="stageMainBtn" onclick="showStageSelect()">ステージ選択</button><button id="dexIconBtn" class="iconBtn" onclick="showDex()" aria-label="図鑑">📖</button><button id="equipIconBtn" class="iconBtn" onclick="showForge()" aria-label="装備">⚔️</button></div><button class="topReturnBtn" onclick="goSushitanTop()">すし単トップに戻る</button></div></section>
-<section id="stageSelect" class="screen hidden"><div class="panel"><div class="row between"><h1 style="font-size:32px">🗺 ステージ選択</h1><div class="screenTopActions"><button class="secondary" onclick="goSushitanTop()">すし単トップ</button><button class="secondary" onclick="showTitle()">戻る</button></div></div><div id="stageList" class="grid"></div></div></section>
-<section id="forge" class="screen hidden"><div class="panel"><div class="row between"><div><h1 style="font-size:33px">⚒ 武器編集</h1><div class="muted">挑戦ステージ: <b id="stageNo"></b> / 到達最高: <b id="bestStageNo"></b></div></div><div class="screenTopActions"><button class="secondary" onclick="goSushitanTop()">すし単トップ</button><div class="pill">Dex <span id="miniDex">0</span></div></div></div><div class="grid"><div class="card"><div class="sectionTitle">装備スロット 5</div><div id="slots"></div><div class="row" style="margin-top:10px"><button onclick="startGame()">討伐ステージ開始</button><button class="secondary" onclick="lowerStage()">前ステージ周回</button></div></div><div class="card"><div class="sectionTitle">所持武器</div><div id="weaponList"></div></div></div><div class="sectionTitle">手持ち部品</div><div id="partsBox" class="card"></div><div class="sectionTitle">部品クラフト</div><div class="craftBoard"><div id="tray" class="tray empty"></div><div id="resultBox" class="resultBox no">部品を並べて単語を作ってみよう。</div><div class="row" style="margin-top:10px"><button class="ghost" onclick="undoPart()">1つ戻す</button><button class="ghost" onclick="clearTray()">クリア</button><button id="confirmCraftBtn" onclick="openConfirm()" disabled>これで決定</button></div></div><div class="row" style="margin-top:14px"><button class="secondary" onclick="showTitle()">戻る</button><button class="secondary" onclick="showDex()">図鑑</button></div></div></section>
-<section id="game" class="screen hidden"><canvas id="cv"></canvas><div class="hud"><div class="hudBox">Stage <span id="hudStage">1</span></div><div class="hudBox">🎯 <span id="goalTxt">0/20</span></div><div class="hudBox hpWrap">❤️ <span id="hpTxt">100</span><span class="hpBar"><i id="hpGauge"></i></span></div><div class="hudBox">敵 <span id="enemyTypeTxt">🦠</span> <span id="enemyHpTxt">-</span></div></div><div id="weaponHud" class="bottomHud"></div><div class="stick" id="stick"><div class="knob" id="knob"></div></div></section>
-<section id="reward" class="screen hidden"><div class="panel"><div class="treasure">🎁</div><h1 style="text-align:center;font-size:34px">Stage Clear!</h1><p class="muted" style="text-align:center">報酬ロールを回して、ランダム部品を獲得。</p><div class="rollBox"><div class="muted">REWARD ROLL</div><div id="rollPart" class="rollPart">?</div><div id="rollInfo" class="muted">ボタンを押してロール開始</div></div><div class="row" style="justify-content:center"><button id="rollBtn" onclick="startRewardRoll()">ロールを回す</button><button id="takeBtn" class="secondary" onclick="takeRolledPart()" disabled>受け取る</button></div></div></section>
-<section id="dex" class="screen hidden"><div class="panel"><div class="row between"><h1 style="font-size:32px">📖 Word Dex</h1><div class="screenTopActions"><button class="secondary" onclick="goSushitanTop()">すし単トップ</button><div class="pill"><span id="dexCount">0</span>/<span id="dexTotal">0</span></div></div></div><div id="dexList"></div><div class="row" style="margin-top:14px"><button onclick="showForge()">武器編集へ</button><button class="secondary" onclick="showTitle()">戻る</button></div></div></section>
+<section id="stageSelect" class="screen hidden"><div class="panel"><div class="row between"><h1 style="font-size:32px">🗺 ステージ選択</h1><div class="screenTopActions"><button class="secondary" onclick="goSushitanTop()">すし単トップ</button><button class="secondary" onclick="showTitle()">タイトルへ戻る</button></div></div><div id="stageList" class="grid"></div></div></section>
+<section id="forge" class="screen hidden"><div class="panel"><div class="row between"><div><h1 style="font-size:33px">⚒ 武器編集</h1><div class="muted">挑戦ステージ: <b id="stageNo"></b> / 到達最高: <b id="bestStageNo"></b></div></div><div class="screenTopActions"><button class="secondary" onclick="goSushitanTop()">すし単トップ</button><div class="pill">Dex <span id="miniDex">0</span></div></div></div><div class="grid"><div class="card"><div class="sectionTitle">装備スロット 5</div><div id="slots"></div><div class="row" style="margin-top:10px"><button onclick="startGame()">討伐ステージ開始</button><button class="secondary" onclick="lowerStage()">前ステージ周回</button></div></div><div class="card"><div class="sectionTitle">所持武器</div><div id="weaponList"></div></div></div><div class="sectionTitle">手持ち部品</div><div id="partsBox" class="card"></div><div class="sectionTitle">部品クラフト</div><div class="craftBoard"><div id="tray" class="tray empty"></div><div id="resultBox" class="resultBox no">部品を並べて単語を作ってみよう。</div><div class="row" style="margin-top:10px"><button class="ghost" onclick="undoPart()">1つ戻す</button><button class="ghost" onclick="clearTray()">クリア</button><button id="confirmCraftBtn" onclick="openConfirm()" disabled>これで決定</button></div></div><div class="row" style="margin-top:14px"><button class="secondary" onclick="showTitle()">タイトルへ戻る</button><button class="secondary" onclick="showDex()">図鑑</button></div></div></section>
+<section id="game" class="screen hidden"><canvas id="cv"></canvas><button class="gameHomeBtn" onclick="showTitle()" title="タイトルへ戻る">🏠</button><div class="hud"><div class="hudBox">Stage <span id="hudStage">1</span></div><div class="hudBox">🎯 <span id="goalTxt">0/20</span></div><div class="hudBox hpWrap">❤️ <span id="hpTxt">100</span><span class="hpBar"><i id="hpGauge"></i></span></div><div class="hudBox">敵 <span id="enemyTypeTxt">🦠</span> <span id="enemyHpTxt">-</span></div></div><div id="weaponHud" class="bottomHud"></div><div class="stick" id="stick"><div class="knob" id="knob"></div></div></section>
+<section id="reward" class="screen hidden"><div class="panel"><div class="row between"><button class="secondary" onclick="showTitle()">タイトルへ戻る</button><button class="secondary" onclick="goSushitanTop()">すし単トップ</button></div><div class="treasure">🎁</div><h1 style="text-align:center;font-size:34px">Stage Clear!</h1><p class="muted" style="text-align:center">報酬ロールを回して、ランダム部品を獲得。</p><div class="rollBox"><div class="muted">REWARD ROLL</div><div id="rollPart" class="rollPart">?</div><div id="rollInfo" class="muted">ボタンを押してロール開始</div></div><div class="row" style="justify-content:center"><button id="rollBtn" onclick="startRewardRoll()">ロールを回す</button><button id="takeBtn" class="secondary" onclick="takeRolledPart()" disabled>受け取る</button></div></div></section>
+<section id="dex" class="screen hidden"><div class="panel"><div class="row between"><h1 style="font-size:32px">📖 Word Dex</h1><div class="screenTopActions"><button class="secondary" onclick="goSushitanTop()">すし単トップ</button><div class="pill"><span id="dexCount">0</span>/<span id="dexTotal">0</span></div></div></div><div id="dexList"></div><div class="row" style="margin-top:14px"><button onclick="showTitle()">タイトルへ戻る</button><button class="secondary" onclick="showForge()">武器編集へ</button><button class="secondary" onclick="goSushitanTop()">すし単トップ</button></div></div></section>
 <div id="confirmModal" class="modalBg hidden"><div class="modal"><div class="big" id="modalWord">word</div><p id="modalInfo" class="muted"></p><div class="row" style="justify-content:center"><button onclick="confirmCraft()">決定して武器化</button><button class="secondary" onclick="closeConfirm()">やっぱり戻る</button></div></div></div>
 </div>
 <script>
@@ -119,7 +172,7 @@ const ALL_PARTS=Object.keys(PART_HINT);
 const KEY='sws_proto_v2';
 let save=JSON.parse(localStorage.getItem(KEY)||'null')||{stage:1,bestStage:1,parts:{im:1,port:1},made:['import'],equipped:['import'],dex:['import']};
 let tray=[],craftCandidate=null;
-function persist(){localStorage.setItem(KEY,JSON.stringify(save))}function $(id){return document.getElementById(id)}function screen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));$(id).classList.remove('hidden')}function showTitle(){renderTitle();screen('title')}function showForge(){renderForge();screen('forge')}function showDex(){renderDex();screen('dex')}function showStageSelect(){renderStageSelect();screen('stageSelect')}function goSushitanTop(){window.location.href='/index.html'}function resetData(){if(confirm('試作データを消す？')){localStorage.removeItem(KEY);location.reload()}}
+function persist(){localStorage.setItem(KEY,JSON.stringify(save))}function $(id){return document.getElementById(id)}function screen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));$(id).classList.remove('hidden')}function showTitle(){ended=true;try{$('confirmModal').classList.add('hidden')}catch(e){};renderTitle();screen('title')}function showForge(){renderForge();screen('forge')}function showDex(){renderDex();screen('dex')}function showStageSelect(){renderStageSelect();screen('stageSelect')}function goSushitanTop(){window.location.href='/index.html'}function resetData(){if(confirm('試作データを消す？')){localStorage.removeItem(KEY);location.reload()}}
 function partLv(p){return save.parts[p]||0}function partClass(p){let lv=partLv(p);return lv>=4?'lv4':lv>=3?'lv3':lv>=2?'lv2':''}function canUsePart(p){return tray.filter(x=>x===p).length < partLv(p)}
 function findWordByParts(parts){
   const ids=(parts||[]).map(x=>String(x||'').toLowerCase()).filter(Boolean);
