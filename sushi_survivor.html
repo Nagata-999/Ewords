@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-<title>すしサバイバー v0.10</title>
+<title>すしサバイバー v0.20</title>
 <style>
 :root{--bg1:#fff8ef;--bg2:#ffe2b3;--ink:#2d2116;--sub:#826146;--orange:#ff8a1d;--orange2:#ffb34e;--red:#ef493d;--green:#2ca86b;--blue:#2f7ee6;--purple:#8e44ad;--gold:#d99816;--card:#fffdf8;--line:#efcf9d;--shadow:rgba(102,58,12,.18)}
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(135deg,var(--bg1),var(--bg2));color:var(--ink);touch-action:none}button{font:inherit;border:0;border-radius:16px;padding:11px 15px;font-weight:1000;background:linear-gradient(180deg,var(--orange2),var(--orange));color:white;box-shadow:0 5px 0 #bb5d00;cursor:pointer}button:active{transform:translateY(3px);box-shadow:0 2px 0 #bb5d00}button.secondary{background:white;color:var(--ink);border:2px solid var(--line);box-shadow:0 5px 0 #d9af72}button.ghost{background:#fff7e8;color:var(--ink);box-shadow:none;border:2px solid #efd2a5}button:disabled{opacity:.42;filter:grayscale(.3);cursor:not-allowed}.hidden{display:none!important}
@@ -74,6 +74,16 @@ html,body{background:#fffaf2!important;}
   .gameHomeBtn{top:62px;right:8px;width:44px;height:44px;font-size:20px}
 }
 
+/* ===== v20 tap-to-move controls ===== */
+.stick,.knob{display:none!important;}
+.tapHelp{
+  position:absolute;left:50%;bottom:54px;transform:translateX(-50%);z-index:28;
+  background:rgba(255,255,255,.86);border:2px solid #efcf9d;border-radius:999px;
+  padding:6px 12px;font-size:12px;font-weight:1000;color:#826146;pointer-events:none;
+  box-shadow:0 6px 16px rgba(86,48,8,.10);
+}
+@media(max-width:800px){.tapHelp{bottom:48px;font-size:11px}}
+
 </style>
 </head>
 <body>
@@ -82,7 +92,7 @@ html,body{background:#fffaf2!important;}
 <section id="title" class="screen"><div class="panel titlePanel"><img src="images/logo.png" class="titleLogo" alt="Sushi Survivor" onerror="this.style.display='none';document.getElementById('logoFallback').classList.remove('hidden');"><div id="logoFallback" class="logoFallback hidden">SUSHI<br>SURVIVOR</div><div class="homeMenu"><button id="stageSelectBtn" class="stageMainBtn" onclick="showStageSelect()">ステージ選択</button><button id="dexIconBtn" class="iconBtn" onclick="showDex()" aria-label="図鑑">📖</button><button id="equipIconBtn" class="iconBtn" onclick="showForge()" aria-label="装備">⚔️</button></div><button class="topReturnBtn" onclick="goSushitanTop()">すし単トップに戻る</button></div></section>
 <section id="stageSelect" class="screen hidden"><div class="panel"><div class="row between"><h1 style="font-size:32px">🗺 ステージ選択</h1><div class="screenTopActions"><button class="secondary" onclick="goSushitanTop()">すし単トップ</button><button class="secondary" onclick="showTitle()">タイトルへ戻る</button></div></div><div id="stageList" class="grid"></div></div></section>
 <section id="forge" class="screen hidden"><div class="panel"><div class="row between"><div><h1 style="font-size:33px">⚒ 武器編集</h1><div class="muted">挑戦ステージ: <b id="stageNo"></b> / 到達最高: <b id="bestStageNo"></b></div></div><div class="screenTopActions"><button class="secondary" onclick="goSushitanTop()">すし単トップ</button><div class="pill">Dex <span id="miniDex">0</span></div></div></div><div class="grid"><div class="card"><div class="sectionTitle">装備スロット 5</div><div id="slots"></div><div class="row" style="margin-top:10px"><button onclick="startGame()">討伐ステージ開始</button><button class="secondary" onclick="lowerStage()">前ステージ周回</button></div></div><div class="card"><div class="sectionTitle">所持武器</div><div id="weaponList"></div></div></div><div class="sectionTitle">手持ち部品</div><div id="partsBox" class="card"></div><div class="sectionTitle">部品クラフト</div><div class="craftBoard"><div id="tray" class="tray empty"></div><div id="resultBox" class="resultBox no">部品を並べて単語を作ってみよう。</div><div class="row" style="margin-top:10px"><button class="ghost" onclick="undoPart()">1つ戻す</button><button class="ghost" onclick="clearTray()">クリア</button><button id="confirmCraftBtn" onclick="openConfirm()" disabled>これで決定</button></div></div><div class="row" style="margin-top:14px"><button class="secondary" onclick="showTitle()">タイトルへ戻る</button><button class="secondary" onclick="showDex()">図鑑</button></div></div></section>
-<section id="game" class="screen hidden"><canvas id="cv"></canvas><button class="gameHomeBtn" onclick="showTitle()" title="タイトルへ戻る">🏠</button><div class="hud"><div class="hudBox">Stage <span id="hudStage">1</span></div><div class="hudBox">🎯 <span id="goalTxt">0/20</span></div><div class="hudBox hpWrap">❤️ <span id="hpTxt">100</span><span class="hpBar"><i id="hpGauge"></i></span></div><div class="hudBox">敵 <span id="enemyTypeTxt">🦠</span> <span id="enemyHpTxt">-</span></div></div><div id="weaponHud" class="bottomHud"></div><div class="stick" id="stick"><div class="knob" id="knob"></div></div></section>
+<section id="game" class="screen hidden"><canvas id="cv"></canvas><button class="gameHomeBtn" onclick="showTitle()" title="タイトルへ戻る">🏠</button><div class="hud"><div class="hudBox">Stage <span id="hudStage">1</span></div><div class="hudBox">🎯 <span id="goalTxt">0/20</span></div><div class="hudBox hpWrap">❤️ <span id="hpTxt">100</span><span class="hpBar"><i id="hpGauge"></i></span></div><div class="hudBox">敵 <span id="enemyTypeTxt">🦠</span> <span id="enemyHpTxt">-</span></div></div><div id="weaponHud" class="bottomHud"></div><div class="tapHelp">タップした場所へ移動</div></section>
 <section id="reward" class="screen hidden"><div class="panel"><div class="row between"><button class="secondary" onclick="showTitle()">タイトルへ戻る</button><button class="secondary" onclick="goSushitanTop()">すし単トップ</button></div><div class="treasure">🎁</div><h1 style="text-align:center;font-size:34px">Stage Clear!</h1><p class="muted" style="text-align:center">報酬ロールを回して、ランダム部品を獲得。</p><div class="rollBox"><div class="muted">REWARD ROLL</div><div id="rollPart" class="rollPart">?</div><div id="rollInfo" class="muted">ボタンを押してロール開始</div></div><div class="row" style="justify-content:center"><button id="rollBtn" onclick="startRewardRoll()">ロールを回す</button><button id="takeBtn" class="secondary" onclick="takeRolledPart()" disabled>受け取る</button></div></div></section>
 <section id="dex" class="screen hidden"><div class="panel"><div class="row between"><h1 style="font-size:32px">📖 Word Dex</h1><div class="screenTopActions"><button class="secondary" onclick="goSushitanTop()">すし単トップ</button><div class="pill"><span id="dexCount">0</span>/<span id="dexTotal">0</span></div></div></div><div id="dexList"></div><div class="row" style="margin-top:14px"><button onclick="showTitle()">タイトルへ戻る</button><button class="secondary" onclick="showForge()">武器編集へ</button><button class="secondary" onclick="goSushitanTop()">すし単トップ</button></div></div></section>
 <div id="confirmModal" class="modalBg hidden"><div class="modal"><div class="big" id="modalWord">word</div><p id="modalInfo" class="muted"></p><div class="row" style="justify-content:center"><button onclick="confirmCraft()">決定して武器化</button><button class="secondary" onclick="closeConfirm()">やっぱり戻る</button></div></div></div>
@@ -171,8 +181,23 @@ const WORD_VISUAL={
 const ALL_PARTS=Object.keys(PART_HINT);
 const KEY='sws_proto_v2';
 let save=JSON.parse(localStorage.getItem(KEY)||'null')||{stage:1,bestStage:1,parts:{im:1,port:1},made:['import'],equipped:['import'],dex:['import']};
+function normalizeSave(){
+  if(!save.parts) save.parts={im:1,port:1};
+  if(!Array.isArray(save.made)) save.made=[];
+  if(!Array.isArray(save.equipped)) save.equipped=[];
+  if(!Array.isArray(save.dex)) save.dex=[];
+  const owned=new Set([...save.made,...save.equipped,...save.dex].filter(w=>WORDS[w]));
+  owned.add('import');
+  save.made=[...owned];
+  save.dex=[...new Set([...save.dex,...save.made].filter(w=>WORDS[w]))];
+  save.equipped=[...new Set(save.equipped.filter(w=>WORDS[w] && owned.has(w)))].slice(0,5);
+  if(save.equipped.length===0) save.equipped=['import'];
+  if(!save.stage) save.stage=1;
+  if(!save.bestStage) save.bestStage=Math.max(1,save.stage||1);
+}
+normalizeSave();
 let tray=[],craftCandidate=null;
-function persist(){localStorage.setItem(KEY,JSON.stringify(save))}function $(id){return document.getElementById(id)}function screen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));$(id).classList.remove('hidden')}function showTitle(){ended=true;try{$('confirmModal').classList.add('hidden')}catch(e){};renderTitle();screen('title')}function showForge(){renderForge();screen('forge')}function showDex(){renderDex();screen('dex')}function showStageSelect(){renderStageSelect();screen('stageSelect')}function goSushitanTop(){window.location.href='/index.html'}function resetData(){if(confirm('試作データを消す？')){localStorage.removeItem(KEY);location.reload()}}
+function persist(){normalizeSave();localStorage.setItem(KEY,JSON.stringify(save))}function $(id){return document.getElementById(id)}function screen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));$(id).classList.remove('hidden')}function showTitle(){ended=true;try{$('confirmModal').classList.add('hidden')}catch(e){};renderTitle();screen('title')}function showForge(){renderForge();screen('forge')}function showDex(){renderDex();screen('dex')}function showStageSelect(){renderStageSelect();screen('stageSelect')}function goSushitanTop(){window.location.href='/index.html'}function resetData(){if(confirm('試作データを消す？')){localStorage.removeItem(KEY);location.reload()}}
 function partLv(p){return save.parts[p]||0}function partClass(p){let lv=partLv(p);return lv>=4?'lv4':lv>=3?'lv3':lv>=2?'lv2':''}function canUsePart(p){return tray.filter(x=>x===p).length < partLv(p)}
 function findWordByParts(parts){
   const ids=(parts||[]).map(x=>String(x||'').toLowerCase()).filter(Boolean);
@@ -193,28 +218,40 @@ function renderTitle(){
 }
 function renderForge(){ $('stageNo').textContent=save.stage; $('bestStageNo').textContent=save.bestStage; $('miniDex').textContent=save.dex.length+'/'+Object.keys(WORDS).length; renderSlots(); renderWeapons(); renderParts(); renderTray(); }
 function renderSlots(){ $('slots').innerHTML=[0,1,2,3,4].map(i=>`<div class="slot ${save.equipped[i]?'full':''}">${i+1}. ${save.equipped[i]?`<span class="rarity-${WORDS[save.equipped[i]].rarity}">${save.equipped[i]}</span><br><span class="muted">${WORDS[save.equipped[i]].desc}</span>`:'空'}</div>`).join('') }
-function renderWeapons(){ $('weaponList').innerHTML=save.made.map(w=>{let data=WORDS[w];return `<div class="weaponCard ${save.equipped.includes(w)?'equipped':''}"><div><b class="rarity-${data.rarity}">${w}</b><div class="muted">${data.jp} / ${data.desc}</div></div><button class="small" onclick="toggleEquip('${w}')">${save.equipped.includes(w)?'外す':'装備'}</button></div>`}).join('')||'<p class="muted">まだ武器なし</p>' }
+function renderWeapons(){
+  normalizeSave();
+  const owned=[...new Set(save.made.filter(w=>WORDS[w]))].sort((a,b)=>{
+    const ea=save.equipped.includes(a), eb=save.equipped.includes(b);
+    if(ea!==eb) return ea?-1:1;
+    const ra={legend:4,epic:3,rare:2,common:1};
+    return (ra[WORDS[b].rarity]||0)-(ra[WORDS[a].rarity]||0) || a.localeCompare(b);
+  });
+  $('weaponList').innerHTML=owned.map(w=>{
+    let data=WORDS[w], on=save.equipped.includes(w), full=save.equipped.length>=5 && !on;
+    return `<div class="weaponCard ${on?'equipped':''}"><div><b class="rarity-${data.rarity}">${w}</b><div class="muted">${data.jp} / ${data.desc}${on?' / 装備中':' / 待機中'}</div></div><button class="small" onclick="toggleEquip('${w}')" ${full?'disabled':''}>${on?'外す':'装備'}</button></div>`;
+  }).join('')||'<p class="muted">まだ武器なし</p>';
+}
 function renderParts(){ $('partsBox').innerHTML=ALL_PARTS.filter(p=>partLv(p)>0).sort().map(p=>`<span class="part ${partClass(p)} ${!canUsePart(p)?'used':''}" onclick="addPart('${p}')">${p} <b>Lv${partLv(p)}</b></span>`).join('') }
 function renderTray(){let trayEl=$('tray');trayEl.classList.toggle('empty',tray.length===0);trayEl.innerHTML=tray.map((p,i)=>`<span class="part ${partClass(p)}" onclick="removePart(${i})">${p}</span>`).join('');craftCandidate=findWordByParts(tray);let box=$('resultBox'),btn=$('confirmCraftBtn'); if(craftCandidate){let d=WORDS[craftCandidate], already=save.made.includes(craftCandidate);box.className='resultBox ok';box.innerHTML=`くっついた！ <b>${craftCandidate}</b>（${d.jp}） ${already?'※作成済み':'NEW候補'}`;btn.disabled=false;}else{box.className='resultBox no';box.textContent=tray.length?'まだ単語にならない。順番を変えるか、部品を足してみよう。':'部品を並べて単語を作ってみよう。';btn.disabled=true;} renderParts();}
 function addPart(p){if(!canUsePart(p)){toast('その部品は使用数上限');return}tray.push(p);renderTray()}function removePart(i){tray.splice(i,1);renderTray()}function undoPart(){tray.pop();renderTray()}function clearTray(){tray=[];renderTray()}function openConfirm(){if(!craftCandidate)return;let d=WORDS[craftCandidate];$('modalWord').className='big rarity-'+d.rarity;$('modalWord').textContent=craftCandidate;$('modalInfo').textContent=`${d.jp} / ${d.parts.join(' + ')} / ${d.desc}`;$('confirmModal').classList.remove('hidden')}function closeConfirm(){$('confirmModal').classList.add('hidden')}function confirmCraft(){let w=craftCandidate;if(!w)return; if(!save.made.includes(w)){save.made.push(w); if(!save.dex.includes(w))save.dex.push(w); toast('✨ NEW WORD: '+w)} if(!save.equipped.includes(w)&&save.equipped.length<5)save.equipped.push(w); clearTray(); closeConfirm(); persist(); renderForge()}
 function toggleEquip(w){let i=save.equipped.indexOf(w);if(i>=0)save.equipped.splice(i,1);else if(save.equipped.length<5)save.equipped.push(w);else toast('スロット満杯');persist();renderForge()}function lowerStage(){if(save.stage>1){save.stage--;persist();renderForge();toast('Stage '+save.stage+'を周回')}}
 function renderDex(){let names=Object.keys(WORDS);$('dexCount').textContent=save.dex.length;$('dexTotal').textContent=names.length;$('dexList').innerHTML=names.map(w=>{let got=save.dex.includes(w),d=WORDS[w];return `<div class="dexItem" style="opacity:${got?1:.35}"><div><b class="rarity-${d.rarity}">${got?w:'?????'}</b><div class="muted">${got?d.jp:'未発見'} / ${d.parts.join(' + ')} / ${d.desc}</div></div><span class="pill">${d.rarity}</span></div>`}).join('')}
-function renderStageSelect(){let max=Math.max(1,save.bestStage);let html='';for(let i=1;i<=Math.max(8,max+2);i++){let open=i<=max;let goal=stageGoal(i);let parts=stageRewardParts(i).join(' / ');html+=`<div class="choice stageBtn ${open?'':'locked'}" ${open?`onclick="selectStage(${i})"`:''}><div><div class="big">Stage ${i}</div><div class="muted">討伐 ${goal}匹 / BOSS ${enemyPreview(i)}<br>報酬: ${parts}</div></div><div>${open?'挑戦':'LOCK'}</div></div>`} $('stageList').innerHTML=html}
+function renderStageSelect(){let max=Math.max(1,save.bestStage);let html='';for(let i=1;i<=Math.max(8,max+2);i++){let open=i<=max;let goal=stageGoal(i);html+=`<div class="choice stageBtn ${open?'':'locked'}" ${open?`onclick="selectStage(${i})"`:''}><div><div class="big">Stage ${i}</div><div class="muted">討伐 ${goal}匹 / 高速戦 ${enemyPreview(i)}</div></div><div>${open?'挑戦':'LOCK'}</div></div>`} $('stageList').innerHTML=html}
 function selectStage(n){if(n>save.bestStage)return;save.stage=n;persist();showForge();toast('Stage '+n+'を選択')}
-let cv=$('cv'),ctx=cv.getContext('2d'),W,H,player,enemies,bullets,enemyBullets,orbs,floatTexts,keys={},killGoal,ko,hp,last,joy={x:0,y:0},cool={},runStage=1,ended=false,spawnMeter=0,spawnedCount=0;
+let cv=$('cv'),ctx=cv.getContext('2d'),W,H,player,enemies,bullets,enemyBullets,orbs,floatTexts,keys={},killGoal,ko,hp,last,targetX=0,targetY=0,tapPulse=0,cool={},runStage=1,ended=false,spawnMeter=0,spawnedCount=0;
 function resize(){W=cv.width=innerWidth*devicePixelRatio;H=cv.height=innerHeight*devicePixelRatio;ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);W=innerWidth;H=innerHeight}
 addEventListener('resize',resize);resize();addEventListener('keydown',e=>keys[e.key.toLowerCase()]=1);addEventListener('keyup',e=>keys[e.key.toLowerCase()]=0);
 function hasBarrier(){return save.equipped.some(w=>['orbit','aura','ghost'].includes(WORDS[w]?.type))}
 function startGame(){
   if(save.equipped.length===0){toast('武器を装備してくれ');return}
-  runStage=save.stage;ended=false;screen('game');player={x:W/2,y:H/2,r:15};enemies=[];bullets=[];enemyBullets=[];orbs=[];floatTexts=[];killGoal=stageGoal(runStage);ko=0;hp=100;cool={};spawnMeter=0;spawnedCount=0;last=performance.now();
+  runStage=save.stage;ended=false;screen('game');player={x:W/2,y:H/2,r:15};targetX=player.x;targetY=player.y;tapPulse=0;enemies=[];bullets=[];enemyBullets=[];orbs=[];floatTexts=[];killGoal=stageGoal(runStage);ko=0;hp=100;cool={};spawnMeter=0;spawnedCount=0;last=performance.now();
   $('hudStage').textContent=runStage;$('goalTxt').textContent=`0/${killGoal}`;$('hpTxt').textContent=hp;$('hpGauge').style.width='100%';$('enemyTypeTxt').textContent=enemyPreview(runStage);$('enemyHpTxt').textContent='-';
   $('weaponHud').innerHTML=save.equipped.map(w=>{let v=WORD_VISUAL[WORDS[w].type]||WORD_VISUAL.rapid;return `<div class="weaponChip"><span style="color:${v.color}">${v.glyph}</span> ${w} <small>独立</small></div>`}).join('');
   requestAnimationFrame(loop)
 }
 function winGame(){if(ended)return;ended=true;save.stage=Math.max(save.stage,runStage+1);save.bestStage=Math.max(save.bestStage,save.stage);persist();reward()}
 function loseGame(){if(ended)return;ended=true;save.stage=Math.max(1,runStage-1);persist();toast('Stage '+runStage+'失敗。Stage '+save.stage+'を周回しよう');setTimeout(showForge,1050)}
-function enemyPreview(stage){let arr=['S'];if(stage>=2)arr.push('F');if(stage>=3)arr.push('T','R');if(stage>=4)arr.push('E');arr.push('B');return arr.join(' ')}
+function enemyPreview(stage){let arr=['🦠'];if(stage>=2)arr.push('👾');if(stage>=3)arr.push('🤖','☣️');if(stage>=4)arr.push('💀');arr.push('👹');return arr.join(' ')}
 function chooseEnemyType(){
   let r=Math.random();
   if(spawnedCount===killGoal-1)return 'boss';
@@ -289,8 +326,10 @@ function loop(now){
   if($('game').classList.contains('hidden')||ended)return;requestAnimationFrame(loop);let dt=Math.min((now-last)/1000,.033);last=now;
   spawnMeter+=dt*(2.25+runStage*.28+(runStage>=3?1.05:0));
   while(spawnMeter>=1 && spawnedCount<killGoal && enemies.length<Math.min(killGoal-ko,10+runStage*2+(runStage>=3?5:0))){spawn();spawnMeter--}
-  let mx=(keys['arrowright']||keys['d']?1:0)-(keys['arrowleft']||keys['a']?1:0)+joy.x,my=(keys['arrowdown']||keys['s']?1:0)-(keys['arrowup']||keys['w']?1:0)+joy.y;let len=Math.hypot(mx,my)||1;
-  player.x=Math.max(18,Math.min(W-18,player.x+mx/len*220*dt));player.y=Math.max(18,Math.min(H-18,player.y+my/len*220*dt));
+  let kx=(keys['arrowright']||keys['d']?1:0)-(keys['arrowleft']||keys['a']?1:0),ky=(keys['arrowdown']||keys['s']?1:0)-(keys['arrowup']||keys['w']?1:0);
+  if(kx||ky){let len=Math.hypot(kx,ky)||1;player.x=Math.max(18,Math.min(W-18,player.x+kx/len*260*dt));player.y=Math.max(18,Math.min(H-18,player.y+ky/len*260*dt));targetX=player.x;targetY=player.y;}
+  else{const dx=targetX-player.x,dy=targetY-player.y,d=Math.hypot(dx,dy);if(d>5){const speed=260;player.x=Math.max(18,Math.min(W-18,player.x+dx/d*speed*dt));player.y=Math.max(18,Math.min(H-18,player.y+dy/d*speed*dt));}}
+  if(tapPulse>0)tapPulse=Math.max(0,tapPulse-dt);
   save.equipped.forEach((w,i)=>fire(w,dt,i));updateEnemies(dt);updateBullets(dt);updateEnemyBullets(dt);updateOrbs(dt);
   floatTexts.forEach(f=>{f.y-=34*dt;f.life-=dt});floatTexts=floatTexts.filter(f=>f.life>0);enemies=enemies.filter(e=>!e.dead);updateEnemyHud();draw();
   $('hpTxt').textContent=Math.max(0,Math.floor(hp));$('hpGauge').style.width=Math.max(0,hp)+'%';$('goalTxt').textContent=Math.min(ko,killGoal)+'/'+killGoal;if(ko>=killGoal)winGame()
@@ -330,6 +369,7 @@ function drawEnemy(e){
 }
 function draw(){ctx.clearRect(0,0,W,H);ctx.textAlign='center';
   if(hasBarrier()){ctx.strokeStyle='rgba(44,168,107,.42)';ctx.lineWidth=5;ctx.beginPath();ctx.arc(player.x,player.y,66,0,Math.PI*2);ctx.stroke();ctx.strokeStyle='rgba(47,126,230,.18)';ctx.lineWidth=9;ctx.beginPath();ctx.arc(player.x,player.y,78,0,Math.PI*2);ctx.stroke()}
+  if(tapPulse>0){ctx.save();ctx.globalAlpha=Math.min(1,tapPulse/.45);ctx.strokeStyle='rgba(255,138,29,.65)';ctx.lineWidth=3;ctx.beginPath();ctx.arc(targetX,targetY,12+(1-tapPulse/.45)*14,0,Math.PI*2);ctx.stroke();ctx.fillStyle='rgba(255,138,29,.32)';ctx.beginPath();ctx.arc(targetX,targetY,4,0,Math.PI*2);ctx.fill();ctx.restore();}
   ctx.font='22px system-ui';ctx.fillText('🍣',player.x,player.y+8);
   enemies.forEach(drawEnemy);bullets.forEach(drawBullet);enemyBullets.forEach(drawBullet);
   orbs.forEach(o=>{let ox=player.x+Math.cos(o.a)*58,oy=player.y+Math.sin(o.a)*58;ctx.fillStyle=o.color||'#2ca86b';ctx.beginPath();ctx.arc(ox,oy,10,0,7);ctx.fill();ctx.fillStyle='#fff';ctx.font='bold 10px system-ui';ctx.fillText('P',ox,oy+3)});
@@ -368,11 +408,42 @@ function buildRewardPool(){
   });
   return pool;
 }
-function reward(){rolledPart=null;$('rollPart').textContent='?';const pool=stageRewardParts(runStage);$('rollInfo').textContent=(!save.parts.ex?'初回確定: ex':`Stage ${runStage}: ${pool.join(' / ')}`);$('rollBtn').disabled=false;$('takeBtn').disabled=true;screen('reward')}
-function startRewardRoll(){let pool=buildRewardPool();$('rollBtn').disabled=true;$('takeBtn').disabled=true;let count=0;clearInterval(rollTimer);rollTimer=setInterval(()=>{let p=pool[Math.floor(Math.random()*pool.length)];$('rollPart').textContent=p;$('rollInfo').textContent=(save.parts[p]?`Lv${save.parts[p]} → Lv${save.parts[p]+1}`:'NEW PART')+' / 関連: '+(PART_HINT[p]||'???');count++;if(count>18){clearInterval(rollTimer);rolledPart=p;$('takeBtn').disabled=false;$('rollInfo').textContent=(save.parts[p]?`LEVEL UP候補 Lv${save.parts[p]} → Lv${save.parts[p]+1}`:'NEW PART候補')+' / 関連: '+(PART_HINT[p]||'???');}},65)}
+function reward(){rolledPart=null;$('rollPart').textContent='?';const pool=stageRewardParts(runStage);$('rollInfo').textContent=`Stage ${runStage} 報酬ロール`; $('rollBtn').disabled=false;$('takeBtn').disabled=true;screen('reward')}
+function startRewardRoll(){
+  let pool=buildRewardPool();
+  const finalPart=(!save.parts.ex)?'ex':pool[Math.floor(Math.random()*pool.length)];
+  const visualPool=stageRewardParts(runStage).length?stageRewardParts(runStage):FALLBACK_REWARD_POOL;
+  $('rollBtn').disabled=true;$('takeBtn').disabled=true;
+  let count=0;clearInterval(rollTimer);
+  rollTimer=setInterval(()=>{
+    let p=visualPool[Math.floor(Math.random()*visualPool.length)];
+    if(count>17) p=finalPart;
+    $('rollPart').textContent=p;
+    $('rollInfo').textContent=(save.parts[p]?`Lv${save.parts[p]} → Lv${save.parts[p]+1}`:'NEW PART')+' / 関連: '+(PART_HINT[p]||'???');
+    count++;
+    if(count>18){
+      clearInterval(rollTimer);
+      let p=finalPart;
+      rolledPart=p;
+      $('rollPart').textContent=p;
+      $('takeBtn').disabled=false;
+      $('rollInfo').textContent=(save.parts[p]?`LEVEL UP候補 Lv${save.parts[p]} → Lv${save.parts[p]+1}`:'NEW PART候補')+' / 関連: '+(PART_HINT[p]||'???');
+    }
+  },65);
+}
 function takeRolledPart(){if(!rolledPart)return;let p=rolledPart;save.parts[p]=(save.parts[p]||0)+1;persist();toast((save.parts[p]>1?'LEVEL UP: ':'NEW PART: ')+p);setTimeout(showForge,450)}
 function toast(t){let d=document.createElement('div');d.className='toast';d.textContent=t;document.body.appendChild(d);setTimeout(()=>d.remove(),900)}
-let stick=$('stick'),knob=$('knob');stick.addEventListener('pointerdown',drag);stick.addEventListener('pointermove',drag);stick.addEventListener('pointerup',end);stick.addEventListener('pointercancel',end);function drag(e){stick.setPointerCapture(e.pointerId);let r=stick.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2,x=e.clientX-cx,y=e.clientY-cy,l=Math.hypot(x,y),m=Math.min(l,42);joy.x=l?x/l:0;joy.y=l?y/l:0;knob.style.left=38+joy.x*m+'px';knob.style.top=38+joy.y*m+'px'}function end(){joy.x=joy.y=0;knob.style.left='38px';knob.style.top='38px'}
+// v20 tap-to-move controls
+function setMoveTargetFromPointer(e){
+  if($('game').classList.contains('hidden')||!player) return;
+  const r=cv.getBoundingClientRect();
+  targetX=Math.max(18,Math.min(W-18,e.clientX-r.left));
+  targetY=Math.max(18,Math.min(H-18,e.clientY-r.top));
+  tapPulse=.45;
+}
+cv.addEventListener('pointerdown',e=>{setMoveTargetFromPointer(e);});
+cv.addEventListener('pointermove',e=>{if(e.buttons) setMoveTargetFromPointer(e);});
+cv.addEventListener('pointercancel',()=>{tapPulse=0;});
 
 // v0.15 failsafe: inline onclickが効かない環境でもボタンを動かす
 document.addEventListener('DOMContentLoaded',()=>{
