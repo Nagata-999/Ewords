@@ -11,11 +11,42 @@
 .craftBoard{background:linear-gradient(180deg,#fff8ec,#fff);border:3px solid #eabf83;border-radius:24px;padding:14px}.tray{min-height:74px;border:3px dashed #dfb071;border-radius:20px;background:#fffaf2;padding:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}.tray.empty:before{content:'部品をタップしてここに並べる';color:#9c7658;font-weight:900}.resultBox{margin-top:10px;background:#2d2116;color:white;border-radius:18px;padding:12px;font-weight:1000}.resultBox.ok{background:linear-gradient(135deg,#1f9d63,#2ecb7e)}.resultBox.no{background:linear-gradient(135deg,#5d4a3a,#2d2116)}
 #game{background:radial-gradient(circle at 50% 50%,#fff9e9 0,#ffe2ad 55%,#ffc979 100%)}canvas{position:absolute;inset:0;width:100%;height:100%;display:block}.hud{position:absolute;left:10px;right:10px;top:10px;display:flex;justify-content:space-between;gap:8px;pointer-events:none}.hudBox{background:rgba(255,255,255,.9);border:2px solid #e7ba78;border-radius:16px;padding:7px 11px;font-weight:1000;box-shadow:0 6px 16px rgba(86,48,8,.12)}.bottomHud{position:absolute;left:10px;right:10px;bottom:10px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;pointer-events:none}.weaponChip{background:rgba(255,255,255,.92);border:2px solid #e9bd7b;border-radius:999px;padding:6px 9px;font-size:12px;font-weight:1000}.hpWrap{display:inline-flex;align-items:center;gap:7px}.hpBar{width:92px;height:10px;background:#ffe3d6;border:2px solid #e7a06d;border-radius:99px;overflow:hidden}.hpBar i{display:block;height:100%;background:linear-gradient(90deg,#2ca86b,#8ad65e);width:100%}.rollBox{margin:12px auto;background:linear-gradient(180deg,#fff6df,#fff);border:4px solid #e9bd7b;border-radius:26px;width:min(440px,90vw);padding:20px;text-align:center;box-shadow:inset 0 0 0 3px #fff4dc}.rollPart{font-size:54px;font-weight:1000;letter-spacing:.04em}.titleGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}.miniStage{display:flex;justify-content:space-between;align-items:center;text-align:left;margin:8px 0;padding:12px 14px;border:3px solid #e9bd7b;border-radius:18px;background:#fff;font-weight:1000;cursor:pointer}.miniStage:hover{transform:translateY(-2px);border-color:var(--orange)}.miniStage.locked{opacity:.42;filter:grayscale(.7);cursor:not-allowed}.miniDexItem{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid #f0d7b2}.stageBtn{display:flex;justify-content:space-between;align-items:center;text-align:left}.stageBtn.locked{opacity:.45;filter:grayscale(.7)}.stick{position:absolute;left:22px;bottom:24px;width:118px;height:118px;border-radius:50%;background:rgba(255,255,255,.35);border:3px solid rgba(255,255,255,.8);display:none}.knob{position:absolute;left:38px;top:38px;width:38px;height:38px;border-radius:50%;background:rgba(255,138,29,.82)}.toast{position:absolute;left:50%;top:14%;transform:translateX(-50%);background:rgba(45,33,22,.94);color:white;border-radius:18px;padding:12px 18px;font-size:22px;font-weight:1000;z-index:40;pointer-events:none;animation:pop .9s ease forwards}@keyframes pop{0%{transform:translate(-50%,-8px) scale(.9);opacity:0}15%{opacity:1}100%{transform:translate(-50%,-42px) scale(1.04);opacity:0}}.treasure{font-size:56px;text-align:center;animation:bob 1s infinite alternate}@keyframes bob{to{transform:translateY(-8px)}}.choice{background:white;border:3px solid #e9bd7b;border-radius:20px;padding:14px;text-align:center;font-weight:1000;cursor:pointer;transition:.12s}.choice:hover{transform:translateY(-3px);border-color:var(--orange)}.dexItem{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:9px;border-bottom:1px solid #f0d7b2}.dexItem b{font-size:19px}.modalBg{position:absolute;inset:0;background:rgba(45,33,22,.5);display:flex;align-items:center;justify-content:center;z-index:50;padding:16px}.modal{width:min(520px,94vw);background:white;border:3px solid #f4c077;border-radius:26px;padding:20px;box-shadow:0 18px 60px rgba(0,0,0,.25);text-align:center}.shake{animation:shake .25s}@keyframes shake{25%{transform:translateX(-5px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}.titlePanel{text-align:center;max-width:820px;background:rgba(255,253,248,.88)}.titleLogo{width:min(620px,92vw);display:block;margin:0 auto 18px;filter:drop-shadow(0 16px 22px rgba(90,43,8,.18))}.homeMenu{display:grid;grid-template-columns:1fr 112px 112px;gap:16px;align-items:stretch;margin-top:10px}.stageMainBtn{font-size:26px;min-height:112px}.iconBtn{font-size:46px;min-height:112px;padding:0}.stageBtn{min-height:110px;display:flex;align-items:center;justify-content:space-between;text-align:left}
 @media(max-width:800px){.titleGrid{grid-template-columns:1fr}.stick{display:block}.panel{padding:14px;border-radius:23px}.grid{grid-template-columns:1fr}.hud{font-size:12px}.weaponChip{font-size:10px;padding:5px 7px}.screen{padding:9px}.big{font-size:23px}}
+
+/* ===== v0.14 title/logo polish ===== */
+html,body{background:#fffaf2!important;}
+#title{background:#fffaf2!important;}
+.titlePanel{
+  background:#fff!important;
+  border:0!important;
+  box-shadow:none!important;
+  max-width:860px;
+}
+.titleLogo{
+  background:#fff;
+  padding:8px 10px;
+  border-radius:28px;
+  box-shadow:none;
+  filter:drop-shadow(0 10px 18px rgba(90,43,8,.12));
+}
+.topReturnBtn{
+  margin-top:18px;
+  background:#fff!important;
+  color:#8a4a05!important;
+  border:2px solid #efcf9d!important;
+  box-shadow:0 5px 0 #d9af72!important;
+}
+.topReturnBtn:active{transform:translateY(3px);box-shadow:0 2px 0 #d9af72!important;}
+@media(max-width:720px){
+  .homeMenu{grid-template-columns:1fr 84px 84px;gap:10px}
+  .stageMainBtn,.iconBtn{min-height:88px}
+  .titleLogo{width:min(520px,96vw);padding:4px}
+}
+
 </style>
 </head>
 <body>
 <div id="app">
-<section id="title" class="screen"><div class="panel titlePanel"><img src="images/logo.png" class="titleLogo" alt="Sushi Survivor"><div class="homeMenu"><button class="stageMainBtn" onclick="showStageSelect()">ステージ選択</button><button class="iconBtn" onclick="showDex()" aria-label="図鑑">📖</button><button class="iconBtn" onclick="showForge()" aria-label="装備">⚔️</button></div></div></section>
+<section id="title" class="screen"><div class="panel titlePanel"><img src="images/logo.png" class="titleLogo" alt="Sushi Survivor"><div class="homeMenu"><button class="stageMainBtn" onclick="showStageSelect()">ステージ選択</button><button class="iconBtn" onclick="showDex()" aria-label="図鑑">📖</button><button class="iconBtn" onclick="showForge()" aria-label="装備">⚔️</button></div><button class="topReturnBtn" onclick="goSushitanTop()">すし単トップに戻る</button></div></section>
 <section id="stageSelect" class="screen hidden"><div class="panel"><div class="row between"><h1 style="font-size:32px">🗺 ステージ選択</h1><button class="secondary" onclick="showTitle()">戻る</button></div><div id="stageList" class="grid"></div></div></section>
 <section id="forge" class="screen hidden"><div class="panel"><div class="row between"><div><h1 style="font-size:33px">⚒ 武器編集</h1><div class="muted">挑戦ステージ: <b id="stageNo"></b> / 到達最高: <b id="bestStageNo"></b></div></div><div class="pill">Dex <span id="miniDex">0</span></div></div><div class="grid"><div class="card"><div class="sectionTitle">装備スロット 5</div><div id="slots"></div><div class="row" style="margin-top:10px"><button onclick="startGame()">討伐ステージ開始</button><button class="secondary" onclick="lowerStage()">前ステージ周回</button></div></div><div class="card"><div class="sectionTitle">所持武器</div><div id="weaponList"></div></div></div><div class="sectionTitle">手持ち部品</div><div id="partsBox" class="card"></div><div class="sectionTitle">部品クラフト</div><div class="craftBoard"><div id="tray" class="tray empty"></div><div id="resultBox" class="resultBox no">部品を並べて単語を作ってみよう。</div><div class="row" style="margin-top:10px"><button class="ghost" onclick="undoPart()">1つ戻す</button><button class="ghost" onclick="clearTray()">クリア</button><button id="confirmCraftBtn" onclick="openConfirm()" disabled>これで決定</button></div></div><div class="row" style="margin-top:14px"><button class="secondary" onclick="showTitle()">戻る</button><button class="secondary" onclick="showDex()">図鑑</button></div></div></section>
 <section id="game" class="screen hidden"><canvas id="cv"></canvas><div class="hud"><div class="hudBox">Stage <span id="hudStage">1</span></div><div class="hudBox">🎯 <span id="goalTxt">0/20</span></div><div class="hudBox hpWrap">❤️ <span id="hpTxt">100</span><span class="hpBar"><i id="hpGauge"></i></span></div><div class="hudBox">敵 <span id="enemyTypeTxt">🦠</span> <span id="enemyHpTxt">-</span></div></div><div id="weaponHud" class="bottomHud"></div><div class="stick" id="stick"><div class="knob" id="knob"></div></div></section>
@@ -24,6 +55,19 @@
 <div id="confirmModal" class="modalBg hidden"><div class="modal"><div class="big" id="modalWord">word</div><p id="modalInfo" class="muted"></p><div class="row" style="justify-content:center"><button onclick="confirmCraft()">決定して武器化</button><button class="secondary" onclick="closeConfirm()">やっぱり戻る</button></div></div></div>
 </div>
 <script>
+// ===== v0.14 UI/navigation fix =====
+function $(id){ return document.getElementById(id); }
+function screen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));
+  const target=$(id);
+  if(target) target.classList.remove('hidden');
+}
+function showTitle(){ renderTitle?.(); screen('title'); }
+function showStageSelect(){ renderStageSelect?.(); screen('stageSelect'); }
+function showForge(){ renderForge?.(); screen('forge'); }
+function showDex(){ renderDex?.(); screen('dex'); }
+function goSushitanTop(){ window.location.href = '/index.html'; }
+// ===== end v0.14 =====
 const KILL_BASE=20;
 function stageGoal(stage){return stage===1?10:stage===2?15:20+(stage-3)*8}
 const ENEMY_TYPES={
