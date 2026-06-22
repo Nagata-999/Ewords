@@ -1944,6 +1944,27 @@ html, body {
   box-shadow: 0 0 28px rgba(251,146,60,0.14), 0 10px 26px rgba(15,23,42,0.07);
 }
 
+
+.title-with-logo{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.title-logo{
+  width:80px;
+  height:80px;
+  object-fit:contain;
+  flex-shrink:0;
+}
+
+@media (max-width:420px){
+  .title-logo{
+    width:50px;
+    height:50px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -2117,7 +2138,10 @@ html, body {
         <div id="homePanel">
           <div class="brand-hero">
             <span class="brand-mark">🍣 ENGLISH GAMES</span>
-            <h1 id="gameTitle" class="brand-title">無料で遊べる英語ゲーム「すし単」</h1>
+            <h1 id="gameTitle" class="brand-title title-with-logo">
+  <img src="images/8A375098-C3CF-41E4-8C01-234FF4E34E2E.png" alt="満点侍" class="title-logo">
+  <span>無料で遊べる英語ゲーム「すし単」</span>
+</h1>
             <p class="brand-sub">
               英検・IELTS・高校英語に対応した無料英語ゲーム集。
               英単語ゲーム、語源ゲーム、英語タイピング、リスニングゲームで楽しく学習できます。
