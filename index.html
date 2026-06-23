@@ -1945,24 +1945,25 @@ html, body {
 }
 
 
-.title-with-logo{
+#gameTitle{
   display:flex !important;
-  align-items:center;
-  gap:14px;
+  align-items:center !important;
+  gap:14px !important;
 }
 
-.title-logo{
-  width:80px;
-  height:80px;
-  object-fit:contain;
-  flex-shrink:0;
-  display:block;
+.title-logo-bg{
+  width:80px !important;
+  height:80px !important;
+  flex:0 0 80px !important;
+  display:block !important;
+  background:url("/images/manten.png") center/contain no-repeat;
 }
 
 @media (max-width:420px){
-  .title-logo{
-    width:50px;
-    height:50px;
+  .title-logo-bg{
+    width:50px !important;
+    height:50px !important;
+    flex-basis:50px !important;
   }
 }
 
@@ -2139,8 +2140,8 @@ html, body {
         <div id="homePanel">
           <div class="brand-hero">
             <span class="brand-mark">🍣 ENGLISH GAMES</span>
-            <h1 id="gameTitle" class="brand-title title-with-logo">
-  <img src="/images/manten.png" alt="満点侍" class="title-logo">
+            <h1 id="gameTitle" class="brand-title">
+  <span class="title-logo-bg"></span>
   <span>無料で遊べる英語ゲーム「すし単」</span>
 </h1>
             <p class="brand-sub">
