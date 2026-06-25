@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>英語暗唱カード</title>
+<style>
+:root{
+  --bg:#f4f6f8;
+  --card:#ffffff;
+  --main:#e67e22;
+  --ink:#111827;
+  --muted:#4b5563;
+  --line:#e5e7eb;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  padding:24px;
+  font-family:Arial,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+}
+.header{
+  max-width:1400px;
+  margin:0 auto 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+.title h1{margin:0;color:var(--main);font-size:2.2rem}
+.controls{display:flex;flex-wrap:wrap;gap:10px}
+button{
+  padding:11px 18px;
+  border:none;
+  border-radius:12px;
+  background:var(--main);
+  color:white;
+  font-weight:bold;
+  font-size:15px;
+  cursor:pointer;
+  box-shadow:0 3px 8px rgba(0,0,0,.12);
+}
+button.secondary{background:#374151}
+button.print{background:#10b981}
+
+.nav-links{
+  max-width:1400px;
+  margin:0 auto 18px;
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+}
+.nav-btn{
+  display:inline-block;
+  padding:12px 18px;
+  border-radius:12px;
+  text-decoration:none;
+  color:#fff;
+  font-weight:bold;
+  box-shadow:0 3px 8px rgba(0,0,0,.12);
+}
+.home-btn{background:#f59e0b}
+.nav-btn:hover{opacity:.9;transform:translateY(-1px)}
+@media print{
+  .nav-links{display:none !important}
+}
+
+.article-box{
+  max-width:1400px;
+  margin:0 auto 26px;
+  padding:28px;
+  background:white;
+  border-radius:18px;
+  box-shadow:0 4px 10px rgba(0,0,0,.08);
+  line-height:1.9;
+}
+.article-box h2{
+  margin-top:0;
+  color:var(--main);
+  font-size:1.55rem;
+}
+.article-box h3{
+  color:#374151;
+  margin:22px 0 6px;
+  border-left:6px solid var(--main);
+  padding-left:10px;
+  font-size:1.15rem;
+}
+.article-box p{margin:8px 0;color:#374151}
+.tips{
+  margin-top:20px;
+  padding:16px 18px;
+  border-radius:12px;
+  background:#fff7ed;
+  border:1px solid #fdba74;
+}
+.container{max-width:1400px;margin:auto}
+.card{
+  display:grid;
+  grid-template-columns:58px 1.08fr .92fr;
+  gap:18px;
+  background:var(--card);
+  border-radius:18px;
+  padding:18px 20px;
+  margin:14px 0;
+  box-shadow:0 4px 10px rgba(0,0,0,.09);
+  align-items:center;
+  border:1px solid #eef0f2;
+}
+.num{
+  width:54px;height:54px;border-radius:50%;
+  background:var(--main);color:white;
+  font-size:1.35rem;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:bold;
+}
+.eng,.jp{line-height:1.5}
+.eng{font-size:1.13rem;font-weight:bold}
+.jp{font-size:1rem;color:var(--muted);border-left:3px solid var(--line);padding-left:18px}
+.hideEng .eng{visibility:hidden}
+.hideJp .jp{visibility:hidden}
+.footer{
+  max-width:1400px;
+  margin:22px auto 0;
+  padding:14px 18px;
+  border-radius:14px;
+  background:white;
+  color:#6b7280;
+  box-shadow:0 3px 8px rgba(0,0,0,.08);
+}
+@media(max-width:900px){
+  body{padding:14px}
+  .header{display:block}
+  .controls{margin-top:14px}
+  .card{grid-template-columns:1fr}
+  .jp{border-left:none;border-top:3px solid var(--line);padding-left:0;padding-top:12px}
+}
+@media print{
+  @page{size:A4 landscape;margin:7mm}
+  body{background:white;padding:0}
+  .controls,.footer,.article-box{display:none !important}
+  .header{
+    max-width:none;
+    margin:0 0 4mm;
+    padding-bottom:2mm;
+    border-bottom:1.5px solid #e67e22;
+  }
+  .title h1{font-size:15pt;color:#111 !important}
+  .container{
+    max-width:none;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:2.8mm;
+  }
+  .card{
+    height:31mm;
+    margin:0;
+    padding:3.2mm 4mm;
+    display:grid;
+    grid-template-columns:10mm 1.1fr .9fr;
+    gap:4mm;
+    align-items:center;
+    break-inside:avoid;
+    page-break-inside:avoid;
+    box-shadow:none;
+    border:1px solid #bbb;
+    border-radius:6px;
+  }
+  .num{
+    width:8mm;height:8mm;
+    font-size:9pt;
+    background:#e67e22 !important;
+    color:white !important;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+  .eng{font-size:9.8pt;line-height:1.28}
+  .jp{
+    font-size:8.8pt;
+    line-height:1.35;
+    padding-left:3.5mm;
+    border-left:1.5px solid #ddd;
+  }
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="title">
+    <h1>英語暗唱カード</h1>
+  </div>
+  <div class="controls">
+    <button onclick="document.body.classList.toggle('hideEng')">英語 ON/OFF</button>
+    <button onclick="document.body.classList.toggle('hideJp')" class="secondary">日本語 ON/OFF</button>
+    <button onclick="window.print()" class="print">印刷用レイアウトで印刷</button>
+  </div>
+</div>
+
+
+<div class="nav-links">
+  <a href="/index.html" class="nav-btn home-btn">🏠 すし単トップへ戻る</a>
+</div>
+
+<section class="article-box">
+  <h2>なぜ英語の暗唱は効果的なのか？</h2>
+  <p>
+    汎用性の高い英文を意味を理解したうえで暗記し，繰り返し声に出すことは，
+    英語の処理速度を上げるためのトレーニングです。
+    これは，スポーツや筋力トレーニングに近い学習です。
+    一度説明を聞いただけで体が強くならないのと同じように，英文構造も一度理解しただけではすぐには使えるようになりません。
+    何度も同じ良質な英文を読み，唱え，思い出すことで，英語の型が脳に落とし込まれていきます。
+  </p>
+
+  <h3>① 長文読解力が向上する</h3>
+  <p>
+    長文読解で重要なのは，難しい文法を一つずつ考えることではなく，
+    英語の構造をできるだけ速く処理することです。
+    例えば <strong>Although some people believe that ...</strong> や
+    <strong>it can also provide opportunities for ...</strong> のような形を何度も暗唱しておくと，
+    似た構造が長文に出てきたときに，文法を分解しなくても意味の流れをつかみやすくなります。
+  </p>
+  <p>
+    これは筋トレでフォームを反復することに似ています。
+    最初は意識しないとできなかった動きも，繰り返すことで自然にできるようになります。
+    英語も同じで，良質な英文を反復することで，語順，接続，意味の流れを処理する力が鍛えられます。
+    その結果，読む速度が上がり，内容理解に使える余力も増えます。
+  </p>
+
+  <h3>② リスニング力が向上する</h3>
+  <p>
+    リスニングでは，聞こえてきた英語を瞬時に処理する力が求められます。
+    暗唱によって英語の語順や頻出表現に慣れると，英文を処理する速度が上がります。
+    その結果，音声を聞いたときにも内容を素早く理解できるようになり，リスニング力の向上につながります。
+  </p>
+
+  <h3>③ 文法感覚が身につく</h3>
+  <p>
+    文法をルールとして覚えるだけでは，実際に読むとき，聞くとき，書くときに時間がかかります。
+    一方で，正しい英文を何度も音読・暗唱すると，
+    <strong>この語順が自然である</strong>，<strong>この接続が自然である</strong> という感覚が身につきます。
+    これは文法を暗記するというより，文法を使える形で体に入れる練習です。
+  </p>
+
+  <h3>④ 英作文・スピーキングにも応用できる</h3>
+  <p>
+    このカードでは，試験や実生活で使い回しやすい英文を選んでいます。
+    暗唱した英文の一部を入れ替えるだけで，さまざまなテーマについて自分の意見を表現できます。
+    一から英文を作るよりも負担が少なく，正確で自然な英文を素早く出しやすくなります。
+  </p>
+
+  <div class="tips">
+    <strong>おすすめの使い方</strong><br>
+    ① 英文の意味と構造を確認する<br>
+    ② 声に出して何度も読む<br>
+    ③ 日本語だけを見て英文を再現する<br>
+    ④ 見ないで暗唱する<br>
+    ⑤ キーワードを入れ替えて，自分の英文として使ってみる
+  </div>
+</section>
+
+<div class="container">
+
+  <div class="card">
+    <div class="num">1</div>
+    <div class="eng">Although some people believe that social media is harmful to young people, it can help them communicate with others and broaden their perspectives.</div>
+    <div class="jp">ソーシャルメディアは若者に有害だと考える人もいますが，他者とのコミュニケーションを助け，視野を広げることもできます。</div>
+  </div>
+
+  <div class="card">
+    <div class="num">2</div>
+    <div class="eng">In this increasingly globalized society, people need to understand different cultures because they often work and communicate with people from various backgrounds.</div>
+    <div class="jp">このますますグローバル化する社会において，人々はさまざまな背景を持つ人々と働き，コミュニケーションをとるため，異文化を理解する必要があります。</div>
+  </div>
+
+  <div class="card">
+    <div class="num">3</div>
+    <div class="eng">Many people argue that studying abroad is expensive, but the benefits of gaining international experience often outweigh the costs.</div>
+    <div class="jp">留学は費用がかかると主張する人も多いですが，国際的な経験を得る利益はしばしばその費用を上回ります。</div>
+  </div>
+
+  <div class="card">
+    <div class="num">4</div>
+    <div class="eng">Volunteer activities give young people opportunities to develop communication skills, teamwork, and critical thinking skills.</div>
+    <div class="jp">ボランティア活動は，若者にコミュニケーション能力，チームワーク，批判的思考力を伸ばす機会を与えます。</div>
+  </div>
+
+  <div class="card">
+    <div class="num">5</div>
+    <div class="eng">Although artificial intelligence may replace some jobs, it will also create new opportunities and improve people's quality of life.</div>
+    <div class="jp">人工知能は一部の仕事を置き換えるかもしれませんが，新しい機会を生み出し，人々の生活の質を向上させるでしょう。</div>
+  </div>
+
+  <div class="card">
+    <div class="num">6</div>
+    <div class="eng">Reading books can broaden people's perspectives and cultural horizons because readers are exposed to many different ideas and values.</div>
+    <div class="jp">読書は，多くの異なる考え方や価値観に触れられるため，人々の視点と文化的視野を広げることができます。</div>
+  </div>
+
+  <div class="card">
+    <div class="num">7</div>
+    <div class="eng">Some people might say that the Internet has potential risks, but education can reduce those risks and maximize its advantages.</div>
+    <div class="jp">インターネットには潜在的なリスクがあると言う人もいるかもしれませんが，教育はそのリスクを減らし，利点を最大化できます。</div>
+  </div>
+
+  <div class="card">
+    <div class="num">8</div>
+    <div class="eng">Environmental issues are among the most serious problems facing the world today because they threaten both human health and biodiversity.</div>
+    <div class="jp">環境問題は，人間の健康と生物多様性の両方を脅かすため，今日世界が直面している最も深刻な問題の一つです。</div>
+  </div>
+
+  <div class="card">
+    <div class="num">9</div>
+    <div class="eng">Playing sports is not only good for physical health but also helps people learn patience and cooperation.</div>
+    <div class="jp">スポーツをすることは身体の健康に良いだけでなく，人々が忍耐や協力を学ぶ助けにもなります。</div>
+  </div>
+
+  <div class="card">
+    <div class="num">10</div>
+    <div class="eng">Many schools encourage students to participate in volunteer work because such activities raise awareness of social problems.</div>
+    <div class="jp">多くの学校は，そのような活動が社会問題への意識を高めるため，生徒にボランティア活動への参加をすすめています。</div>
+  </div>
+
+  <div class="card">
+    <div class="num">11</div>
+    <div class="eng">As technology continues to develop rapidly, people must improve their computer literacy in order to succeed in modern society.</div>
+    <div class="jp">技術が急速に発展し続ける中で，人々は現代社会で成功するためにコンピューターリテラシーを向上させなければなりません。</div>
+  </div>
+
+  <div class="card">
+    <div class="num">12</div>
+    <div class="eng">Although online learning is convenient, face-to-face classes still play an important role in developing communication skills.</div>
+    <div class="jp">オンライン学習は便利ですが，対面授業はコミュニケーション能力を伸ばすうえで今でも重要な役割を果たしています。</div>
+  </div>
+
+  <div class="card">
+    <div class="num">13</div>
+    <div class="eng">Learning foreign languages enables people to understand different viewpoints and communicate effectively with people around the world.</div>
+    <div class="jp">外国語を学ぶことは，人々が異なる視点を理解し，世界中の人々と効果的にコミュニケーションをとることを可能にします。</div>
+  </div>
+
+  <div class="card">
+    <div class="num">14</div>
+    <div class="eng">Many people believe that renewable energy should be promoted because fossil fuels contribute to global warming.</div>
+    <div class="jp">化石燃料は地球温暖化に寄与するため，再生可能エネルギーは促進されるべきだと多くの人が考えています。</div>
+  </div>
+
+  <div class="card">
+    <div class="num">15</div>
+    <div class="eng">Traveling abroad often changes people's attitudes because it allows them to experience different cultures firsthand.</div>
+    <div class="jp">海外旅行は，異文化を直接体験することを可能にするため，しばしば人々の考え方を変えます。</div>
+  </div>
+
+  <div class="card">
+    <div class="num">16</div>
+    <div class="eng">Critical thinking skills are becoming increasingly important because we are surrounded by a vast amount of information every day.</div>
+    <div class="jp">私たちは毎日膨大な情報に囲まれているため，批判的思考力はますます重要になっています。</div>
+  </div>
+
+  <div class="card">
+    <div class="num">17</div>
+    <div class="eng">Some people oppose immigration because of cultural differences, but immigrants often make significant contributions to society and the economy.</div>
+    <div class="jp">文化の違いを理由に移民に反対する人もいますが，移民はしばしば社会や経済に大きく貢献します。</div>
+  </div>
+
+  <div class="card">
+    <div class="num">18</div>
+    <div class="eng">Although fast food saves time and effort, eating it too frequently can have negative effects on people's health.</div>
+    <div class="jp">ファストフードは時間と労力を節約しますが，あまりに頻繁に食べると人々の健康に悪影響を与える可能性があります。</div>
+  </div>
+
+  <div class="card">
+    <div class="num">19</div>
+    <div class="eng">Schools should encourage students to discuss social issues because doing so helps them develop their own opinions and respect those of others.</div>
+    <div class="jp">学校は生徒に社会問題について議論することを促すべきです。そうすることで，自分の意見を育て，他者の意見を尊重する助けになるからです。</div>
+  </div>
+
+  <div class="card">
+    <div class="num">20</div>
+    <div class="eng">While technological progress has made our lives more convenient, we should also consider its potential disadvantages and ethical issues.</div>
+    <div class="jp">技術の進歩は私たちの生活をより便利にしましたが，その潜在的な欠点や倫理的な問題も考慮すべきです。</div>
+  </div>
+
+</div>
+<div class="footer">
+  印刷時はA4横向きで，1ページ5枚を想定。記事部分は印刷されず，カードのみ印刷されます。
+</div>
+</body>
+</html>
