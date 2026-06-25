@@ -386,7 +386,7 @@ label{
 <button class="bigbtn" onclick="showBuzzerMenu()">早押し<span>最初の正解だけ得点</span></button>
 </section>
 
-<section id="soloSetup" class="panel hidden"><span class="badge">Solo</span><h2>一人でプレイ</h2><div class="setup"><div><label>Category</label><select id="soloCat"></select></div><div><label>Rule</label><input value="One mistake ends the game" disabled></div></div><button onclick="startSolo()">Start</button><button class="secondary" onclick="home()">Back</button></section>
+<section id="soloSetup" class="panel hidden"><div class="notice">音楽・楽器・アニメ漫画・ディズニーは出題率アップ中です。</div><span class="badge">Solo</span><h2>一人でプレイ</h2><div class="setup"><div><label>Category</label><select id="soloCat"></select></div><div><label>Rule</label><input value="One mistake ends the game" disabled></div></div><button onclick="startSolo()">Start</button><button class="secondary" onclick="home()">Back</button></section>
 <section id="soloGame" class="hidden"><section class="stats"><div class="stat"><div id="streak" class="num">0</div><div class="cap">Streak</div></div><div class="stat"><div id="best" class="num">0</div><div class="cap">Best</div></div><div class="stat"><div id="level" class="num">∞</div><div class="cap">Pool</div></div><div class="stat"><div id="count" class="num">0</div><div class="cap">Answered</div></div></section><section class="panel"><span id="soloBadge" class="badge"></span><div id="soloQ" class="question"></div><div id="soloChoices" class="choices"></div><div id="soloRes" class="result"></div><button id="soloNext" class="hidden" onclick="nextSolo()">Next</button><button class="secondary" onclick="home()">Home</button></section></section>
 <section id="soloOver" class="panel hidden" style="text-align:center">
 <h2>I'm cooked... 🍣</h2>
@@ -411,7 +411,7 @@ label{
 <section id="localFinal" class="panel hidden" style="text-align:center"><h2>Final Ranking 🍣</h2><table id="localFinalTable" class="rank"></table><button onclick="showLocalSetup()">Again</button><button class="secondary" onclick="home()">Home</button></section>
 
 <section id="onlineMenu" class="panel hidden"><span class="badge">Session ID</span><h2>みんなでプレイ：セッションID</h2><div class="notice">この版はSupabase未設定なら同一ブラウザ内デモ通信。HTML内のSUPABASE_URL / SUPABASE_ANON_KEYを入れると別端末対応にできます。</div><button onclick="showOnlineHost()">ホストになる</button><button class="blue" onclick="showJoin()">参加する</button><button class="secondary" onclick="home()">Back</button></section>
-<section id="onlineHostSetup" class="panel hidden"><span class="badge">Host</span><h2>セッション作成</h2><div class="setup"><div><label>Category</label><select id="onlineCat"></select></div><div><label>Questions</label><select id="onlineLen"><option>5</option><option selected>10</option><option>15</option><option>20</option></select></div></div><button onclick="createSession()">Create Session</button><button class="secondary" onclick="showOnlineMenu()">Back</button></section>
+<section id="onlineHostSetup" class="panel hidden"><div class="notice">音楽・楽器・アニメ漫画・ディズニーは出題率アップ中です。</div><span class="badge">Host</span><h2>セッション作成</h2><div class="setup"><div><label>Category</label><select id="onlineCat"></select></div><div><label>Questions</label><select id="onlineLen"><option>5</option><option selected>10</option><option>15</option><option>20</option></select></div></div><button onclick="createSession()">Create Session</button><button class="secondary" onclick="showOnlineMenu()">Back</button></section>
 <section id="onlineLobby" class="panel hidden"><span class="badge">Host Lobby</span><h2>Session ID</h2><div id="code" class="code"></div><h3>Players</h3><div id="onlinePlayers" class="players"></div><button onclick="startOnline()">Start Quiz</button></section>
 <section id="onlineHostGame" class="panel hidden"><span id="ohBadge" class="badge"></span><div id="ohProg" class="small"></div><div id="hostTimer" class="timer-ring" style="--timePct:100">20</div><div id="ohQ" class="question"></div><div id="ohChoices" class="choices"></div><div id="ohStatus" class="notice"></div><div id="hostAnsweredBar" class="answered-bar"></div><button onclick="revealOnline()">Reveal / Score</button><button class="secondary" onclick="home()">End</button></section>
 <section id="onlineResult" class="panel hidden"><span class="badge">Answer Check</span><div id="onlineAns" class="result show"></div><div id="onlineBreakdown" class="answer-breakdown"></div><button onclick="showOnlineRanking()">Show Ranking</button><button class="secondary" onclick="home()">End</button></section><section id="onlineRanking" class="panel hidden"><span class="badge">Current Ranking</span><table id="onlineTable" class="rank"></table><button onclick="nextOnline()">Next Question</button><button class="secondary" onclick="home()">End</button></section>
@@ -419,7 +419,7 @@ label{
 <section id="playerWait" class="panel hidden"><span class="badge">Player</span><h2 id="pStatus">Waiting...</h2><p class="small">ホスト画面を見て、問題が始まるまで待ってください。</p></section>
 <section id="playerGame" class="panel hidden"><span class="badge">Choose Answer</span><h2 id="pName"></h2><div class="pad kahoot-pad"><button id="pa" onclick="submitPlayer(0)"><span class="kahoot-symbol">▲</span><span class="kahoot-letter">A</span></button><button id="pb" onclick="submitPlayer(1)"><span class="kahoot-symbol">◆</span><span class="kahoot-letter">B</span></button><button id="pc" onclick="submitPlayer(2)"><span class="kahoot-symbol">●</span><span class="kahoot-letter">C</span></button><button id="pd" onclick="submitPlayer(3)"><span class="kahoot-symbol">■</span><span class="kahoot-letter">D</span></button></div><div id="pMsg" class="notice">問題文はホスト画面を見てください。</div><div id="playerAnsweredBar" class="answered-bar"></div></section>
 
-<section id="buzzerMenu" class="panel hidden">
+<section id="buzzerMenu" class="panel hidden"><div class="notice">音楽・楽器・アニメ漫画・ディズニーは出題率アップ中です。</div>
   <span class="badge">Buzzer Mode</span>
   <h2>早押しモード</h2>
   <div class="setup">
@@ -502,6 +502,48 @@ label{
 <div id="quizCountdownOverlay" class="countdown-overlay">3</div>
 
 <script>
+
+// v-category-weight: Music / Anime / Disney appear more often in random pools
+const CATEGORY_WEIGHTS = {
+  "Anime & Manga": 4,
+  "Popular Music": 4,
+  "Music History": 4,
+  "Musical Instruments": 3,
+  "Disney": 3
+};
+
+function buildWeightedQuestionPool(pool){
+  const weighted = [];
+  (pool || []).forEach(q => {
+    const w = CATEGORY_WEIGHTS[q.cat] || 1;
+    for(let i=0;i<w;i++) weighted.push(q);
+  });
+  return weighted.length ? weighted : pool;
+}
+
+function weightedShuffleQuestions(pool){
+  const source = [...(pool || [])];
+  const result = [];
+  while(source.length){
+    const weighted = buildWeightedQuestionPool(source);
+    const picked = weighted[Math.floor(Math.random() * weighted.length)];
+    const idx = source.indexOf(picked);
+    if(idx >= 0){
+      result.push(picked);
+      source.splice(idx,1);
+    }else{
+      break;
+    }
+  }
+  return result;
+}
+
+function pickWeightedQuestion(pool){
+  const weighted = buildWeightedQuestionPool(pool || []);
+  return weighted[Math.floor(Math.random() * weighted.length)];
+}
+
+
 
 // v-safe-result-countdown helpers
 function renderAllChoicesHTML(q, players, mode){
