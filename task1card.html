@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IELTS Task 1 Complete Card Builder</title>
+<style>
+:root{
+  --bg:#fff7ef;--panel:#fff;--ink:#222;--muted:#6b7280;--line:#eadfd4;
+  --dark:#111827;--orange:#f97316;--blue:#2563eb;--green:#16a34a;--red:#dc2626;
+  --purple:#7c3aed;--yellow:#ca8a04;--brown:#92400e;--teal:#0f766e;
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,#fff7ef,#fff);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink)}
+header{background:var(--dark);color:white;padding:20px;position:sticky;top:0;z-index:5;box-shadow:0 3px 14px rgba(0,0,0,.18)}
+header h1{margin:0;font-size:1.35rem}header p{margin:6px 0 0;color:#fed7aa;font-size:.92rem}
+.wrap{max-width:1260px;margin:0 auto;padding:18px;display:grid;grid-template-columns:1.05fr .95fr;gap:16px}
+@media(max-width:920px){.wrap{grid-template-columns:1fr}header{position:static}}
+.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+h2{font-size:1.1rem;margin:0 0 10px}h3{font-size:.95rem;margin:16px 0 8px}.small{font-size:.86rem;color:var(--muted);line-height:1.6}
+.controls{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}@media(max-width:650px){.controls{grid-template-columns:1fr}}
+select,textarea{width:100%;border:1px solid #ddd6ce;border-radius:12px;padding:10px;font-size:.95rem;background:white;color:#111827}
+label{font-weight:800;font-size:.85rem}
+.typeTabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 12px}
+.typeBtn{border:2px solid #fed7aa;background:#fff;color:#111827;border-radius:14px;padding:9px 12px;font-weight:900;cursor:pointer}
+.typeBtn.active{background:#f97316;color:#fff;border-color:#f97316}
+.chartBox{height:270px;border:1px solid #eee0d2;border-radius:14px;background:#fffaf5;padding:10px;overflow:hidden}
+svg{width:100%;height:100%}.legend{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0;font-size:.86rem}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:4px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.tab{border:2px solid #d1d5db;background:#fff;color:#111827;border-radius:999px;padding:8px 10px;font-weight:900;cursor:pointer;box-shadow:0 2px 4px rgba(0,0,0,.04)}
+.tab:hover{background:#fff7ed}.tab.active{background:#111827;color:#fff;border-color:#111827}.tab.disabled{opacity:.35;pointer-events:none;background:#e5e7eb;color:#6b7280;border-color:#d1d5db;box-shadow:none}
+.bank{display:none}.bank.active{display:block}.cards{display:grid;grid-template-columns:1fr;gap:8px}
+.card{border:1px solid #eadfd4;border-left:7px solid var(--orange);border-radius:12px;background:#fff;padding:10px;cursor:pointer;transition:.12s}
+.card:hover{box-shadow:0 5px 14px rgba(0,0,0,.08);transform:translateY(-1px)}
+.card .en{font-size:.95rem;line-height:1.55}.card .jp{font-size:.78rem;color:var(--muted);margin-top:3px}
+.fixed{font-weight:900;color:#111827}.var{font-weight:850;color:#dc2626}.num{font-weight:850;color:#2563eb}.note{font-weight:850;color:#0f766e}
+.intro{border-left-color:var(--blue)}.overall{border-left-color:var(--green)}.body{border-left-color:var(--orange)}.detail{border-left-color:var(--yellow)}.compare{border-left-color:var(--purple)}.connector{border-left-color:var(--teal)}
+.slot{border:1px dashed #d6c7b8;background:#fffaf5;border-radius:14px;padding:10px;margin-bottom:10px}
+.slotHead{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:6px}.slotTitle{font-weight:900;color:#7c2d12}
+.slotText{min-height:48px;line-height:1.7;font-size:.96rem}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.chip{background:#111827;color:white;border-radius:999px;padding:6px 9px;font-size:.78rem}
+button{border:0;background:#f97316;color:white;border-radius:12px;padding:9px 12px;font-weight:800;cursor:pointer;margin:3px}
+button.secondary{background:#374151}button.light{background:#f3f4f6;color:#111827}button.mini{font-size:.78rem;padding:6px 9px}
+textarea{min-height:270px;line-height:1.65;resize:vertical}.count{display:flex;justify-content:space-between;background:#fff7ed;border:1px solid #fed7aa;padding:10px;border-radius:14px;margin:10px 0}.count strong{font-size:1.25rem}.bad{color:#dc2626}.ok{color:#16a34a}.long{color:#ca8a04}
+.help{background:#ecfeff;border:1px solid #a5f3fc;border-radius:14px;padding:10px;font-size:.88rem;line-height:1.6;margin:10px 0}
+.mode{background:#f9fafb;border:1px solid #e5e7eb;border-radius:14px;padding:10px;margin-bottom:10px}
+.key{display:flex;gap:8px;flex-wrap:wrap;font-size:.82rem;margin:8px 0}.key span{background:#f9fafb;border:1px solid #e5e7eb;border-radius:999px;padding:5px 8px}
+.guideBox{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:10px;margin:8px 0 10px;font-size:.86rem;line-height:1.6}
+.guideBox b{color:#111827}.guideSteps{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}.guideStep{background:#fff;border:1px solid #e5e7eb;border-radius:999px;padding:4px 8px;font-size:.78rem;font-weight:800}
+.slotHint{font-size:.8rem;color:#6b7280;margin-bottom:6px;line-height:1.5}
+.badge{display:inline-block;margin-left:6px;padding:2px 6px;border-radius:999px;background:#fff7ed;color:#9a3412;border:1px solid #fed7aa;font-size:.72rem;font-weight:900}
+.badge.b2{background:#f5f3ff;color:#5b21b6;border-color:#ddd6fe}.cardGuide{margin-top:5px;font-size:.74rem;color:#92400e;font-weight:800}
+</style>
+</head>
+<body>
+<header>
+<h1>IELTS Task 1 Complete Card Builder</h1>
+<p>折線・棒・円・表・プロセス・地図をカード選択で組み立てる</p>
+</header>
+
+<main class="wrap">
+<section class="panel">
+<h2>1. Task type</h2>
+<div class="typeTabs" id="typeTabs"></div>
+
+<div class="controls">
+<div><label>テーマ</label><select id="themeSelect"></select></div>
+<div><label>パターン</label><select id="patternSelect"></select></div>
+<div><label>説明対象</label><select id="targetSelect"></select></div>
+</div>
+
+<div class="chartBox"><svg id="chart" viewBox="0 0 700 270" preserveAspectRatio="none"></svg></div>
+<div id="legend" class="legend"></div>
+<p id="taskText" class="small"></p>
+
+<div class="key">
+<span><b class="fixed">黒太字</b>＝覚える型</span>
+<span><b class="var">赤</b>＝問題ごとに変える</span>
+<span><b class="num">青</b>＝図表から読む数字・時期</span>
+</div>
+
+<div class="help" id="typeHelp"></div>
+
+<div class="tabs">
+<button class="tab active" data-bank="intro">Intro</button>
+<button class="tab" data-bank="overall">Overall</button>
+<button class="tab" data-bank="body">Body Sentence</button>
+<button class="tab" data-bank="detail">Detail / Number</button>
+<button class="tab" data-bank="compare">Compare</button>
+<button class="tab" data-bank="connector">Connector</button>
+</div>
+<div id="banks"></div>
+</section>
+
+<section class="panel">
+<h2>2. 組み立てスロット</h2>
+<div class="mode">
+<label>カードの入れ先：</label>
+<label><input type="radio" name="slot" value="intro" checked> Intro</label>
+<label><input type="radio" name="slot" value="overall"> Overall</label>
+<label><input type="radio" name="slot" value="body1"> Body 1</label>
+<label><input type="radio" name="slot" value="body2"> Body 2</label>
+<div class="small" id="slotAdvice" style="margin-top:6px;"></div>
+</div>
+
+<div class="slot">
+<div class="slotHead"><div class="slotTitle">Introduction</div><button class="mini light" onclick="clearSlot('intro')">消去</button></div>
+<div class="slotHint">導入カードを1枚選ぶ。ここは短くてOK。</div>
+<div id="slotIntro" class="slotText" contenteditable="true"></div>
+<div id="chipsIntro" class="chips"></div>
+</div>
+
+<div class="slot">
+<div class="slotHead"><div class="slotTitle">Overview</div><button class="mini light" onclick="clearSlot('overall')">消去</button></div>
+<div class="slotHint">全体傾向カードを1枚選ぶ。細かい数字は入れない。</div>
+<div id="slotOverall" class="slotText" contenteditable="true"></div>
+<div id="chipsOverall" class="chips"></div>
+</div>
+
+<div class="slot">
+<div class="slotHead"><div class="slotTitle">Body 1</div><button class="mini light" onclick="clearSlot('body1')">消去</button></div>
+<div class="slotHint" id="body1Hint">一番目立つデータ。おすすめ：Body Sentence 1枚 → Detail 1〜2枚。</div>
+<div id="slotBody1" class="slotText" contenteditable="true"></div>
+<div id="chipsBody1" class="chips"></div>
+</div>
+
+<div class="slot">
+<div class="slotHead"><div class="slotTitle">Body 2</div><button class="mini light" onclick="clearSlot('body2')">消去</button></div>
+<div class="slotHint" id="body2Hint">残り＋比較。おすすめ：Body Sentence 1枚 → Compare 1枚 → Detail 1枚。</div>
+<div id="slotBody2" class="slotText" contenteditable="true"></div>
+<div id="chipsBody2" class="chips"></div>
+</div>
+
+<button onclick="makeDraft()">下書きへ反映</button>
+<button class="secondary" onclick="autoExample()">カード例を自動選択</button>
+<button class="light" onclick="clearAll()">全部消去</button>
+
+<h3>3. 下書き</h3>
+<div class="count"><div>語数：<strong id="wordCount">0</strong></div><div id="wordStatus" class="bad">150語まであと少し</div></div>
+<textarea id="draft"></textarea>
+<button class="secondary" onclick="copyDraft()">コピー</button>
+</section>
+</main>
+
+<script>
+const TASKS={
+ line:{
+  label:"折線",
+  help:`<b>Line graph：</b>Body 1は一番変化した線、Body 2は残り＋比較。上昇・下降・横ばい・追い抜きを見る。`,
+  themes:{
+   population:{label:"Population",item:"the population",itemPlural:"population figures",subject:"three cities",A:"City A",B:"City B",C:"City C",unit:"thousand people"},
+   cost:{label:"Cost",item:"the cost of electricity",itemPlural:"electricity costs",subject:"three countries",A:"Country A",B:"Country B",C:"Country C",unit:"dollars per month"},
+   sales:{label:"Sales",item:"sales",itemPlural:"sales figures",subject:"three products",A:"Product A",B:"Product B",C:"Product C",unit:"million units"}
+  },
+  patterns:{
+   riseFall:{label:"A上昇・B下降・C横ばい",years:[2010,2012,2014,2016,2018,2020],A:[20,30,45,58,70,85],B:[80,72,62,50,42,35],C:[45,46,45,47,46,48]},
+   fluctuate:{label:"変動あり",years:[2010,2012,2014,2016,2018,2020],A:[40,55,45,60,58,75],B:[65,60,70,55,62,50],C:[30,35,38,42,41,45]},
+   overtake:{label:"追い抜きあり",years:[2010,2012,2014,2016,2018,2020],A:[25,35,48,60,78,90],B:[70,65,60,55,50,45],C:[40,42,45,48,52,57]}
+  }
+ },
+ bar:{
+  label:"棒",
+  help:`<b>Bar chart：</b>Body 1は最大・最小、Body 2は残りや比較。順位・差・割合を説明する。`,
+  themes:{
+   spending:{label:"Spending",item:"average spending",itemPlural:"spending figures",subject:"five categories",A:"Food",B:"Transport",C:"Entertainment",unit:"dollars"},
+   students:{label:"Students",item:"the number of students",itemPlural:"student numbers",subject:"five subjects",A:"Science",B:"English",C:"Art",unit:"students"},
+   exports:{label:"Exports",item:"export revenue",itemPlural:"export figures",subject:"five products",A:"Electronics",B:"Clothing",C:"Coffee",unit:"million dollars"}
+  },
+  patterns:{
+   category:{label:"カテゴリ比較",years:["A","B","C"],A:[75],B:[45],C:[30],extra:[60,25],extraNames:["Housing","Other"]},
+   largeGap:{label:"差が大きい",years:["A","B","C"],A:[90],B:[35],C:[20],extra:[55,40],extraNames:["Books","Travel"]},
+   close:{label:"差が小さい",years:["A","B","C"],A:[55],B:[50],C:[48],extra:[45,42],extraNames:["Music","Sport"]}
+  }
+ },
+ pie:{
+  label:"円",
+  help:`<b>Pie chart：</b>Body 1は最大シェア、Body 2は小さい項目や合計。accounted for / made up を使う。`,
+  themes:{
+   energy:{label:"Energy",item:"energy consumption",itemPlural:"shares of energy consumption",subject:"five sources",A:"Oil",B:"Gas",C:"Coal",unit:"%"},
+   time:{label:"Leisure time",item:"leisure time",itemPlural:"shares of leisure time",subject:"five activities",A:"Watching TV",B:"Sports",C:"Reading",unit:"%"},
+   budget:{label:"Budget",item:"household spending",itemPlural:"shares of household spending",subject:"five categories",A:"Rent",B:"Food",C:"Transport",unit:"%"}
+  },
+  patterns:{
+   dominant:{label:"最大項目が大きい",A:[45],B:[25],C:[15],extra:[10,5],extraNames:["Other A","Other B"]},
+   balanced:{label:"比較的均等",A:[30],B:[25],C:[20],extra:[15,10],extraNames:["Other A","Other B"]},
+   twoLarge:{label:"2項目で過半数",A:[35],B:[30],C:[15],extra:[12,8],extraNames:["Other A","Other B"]}
+  }
+ },
+ table:{
+  label:"表",
+  help:`<b>Table：</b>Body 1は最高・最低、Body 2は残りの比較。表は順位と差を簡潔に書く。`,
+  themes:{
+   schools:{label:"Schools",item:"school performance",itemPlural:"performance figures",subject:"three schools",A:"School A",B:"School B",C:"School C",unit:"points"},
+   cities:{label:"Cities",item:"quality-of-life scores",itemPlural:"scores",subject:"three cities",A:"City A",B:"City B",C:"City C",unit:"points"},
+   hotels:{label:"Hotels",item:"hotel ratings",itemPlural:"ratings",subject:"three hotels",A:"Hotel A",B:"Hotel B",C:"Hotel C",unit:"points"}
+  },
+  patterns:{
+   scores:{label:"スコア表",A:[82],B:[74],C:[68],extra:[91,56],extraNames:["Category D","Category E"]},
+   mixed:{label:"ばらつきあり",A:[65],B:[88],C:[72],extra:[59,80],extraNames:["Category D","Category E"]},
+   close:{label:"接戦",A:[71],B:[74],C:[69],extra:[73,70],extraNames:["Category D","Category E"]}
+  }
+ },
+ process:{
+  label:"プロセス",
+  help:`<b>Process diagram：</b>Body 1は前半、Body 2は後半。順序表現と受動態が中心。`,
+  themes:{
+   coffee:{label:"Coffee",item:"how coffee is produced",subject:"coffee production",A:"coffee beans",B:"the beans",C:"the final product",unit:"stages"},
+   plastic:{label:"Plastic bottles",item:"how plastic bottles are recycled",subject:"plastic bottle recycling",A:"used bottles",B:"the plastic",C:"new products",unit:"stages"},
+   paper:{label:"Paper",item:"how paper is made",subject:"paper production",A:"wood",B:"pulp",C:"paper",unit:"stages"}
+  },
+  patterns:{
+   linear:{label:"直線プロセス",steps:["collected","transported","sorted","cleaned","processed","packaged"]},
+   seven:{label:"7段階",steps:["collected","washed","cut into pieces","melted","formed","checked","reused"]},
+   natural:{label:"自然物加工",steps:["harvested","dried","roasted","ground","packed","delivered"]}
+  }
+ },
+ map:{
+  label:"地図",
+  help:`<b>Map：</b>Body 1は大きな変化、Body 2は細かい追加・撤去。replace / construct / expand を使う。`,
+  themes:{
+   town:{label:"Town",item:"changes to a town",subject:"a town",A:"farmland",B:"residential areas",C:"a new road",unit:"map"},
+   school:{label:"School",item:"changes to a school campus",subject:"a school campus",A:"sports field",B:"new buildings",C:"a car park",unit:"map"},
+   park:{label:"Park",item:"changes to a public park",subject:"a public park",A:"open space",B:"playground",C:"walking paths",unit:"map"}
+  },
+  patterns:{
+   urban:{label:"都市化",steps:["farmland replaced","new houses built","road added","park reduced"]},
+   facilities:{label:"施設追加",steps:["new building constructed","car park added","path extended","green area remained"]},
+   leisure:{label:"公園整備",steps:["playground added","pond removed","paths built","cafe constructed"]}
+  }
+ }
+};
+
+const BASE_BANKS={
+ intro:{
+  line:[
+   {type:"intro",jp:"基本導入",html:`<span class="fixed">The line graph illustrates</span> <span class="var">{item}</span> <span class="fixed">in</span> <span class="var">{subject}</span> <span class="fixed">between</span> <span class="num">2010</span> <span class="fixed">and</span> <span class="num">2020</span>.`,plain:`The line graph illustrates {item} in {subject} between 2010 and 2020.`},
+   {type:"intro",jp:"比較型導入",html:`<span class="fixed">The line graph compares</span> <span class="var">{itemPlural}</span> <span class="fixed">for</span> <span class="var">{subject}</span> <span class="fixed">over a ten-year period</span>.`,plain:`The line graph compares {itemPlural} for {subject} over a ten-year period.`}
+  ],
+  bar:[
+   {type:"intro",jp:"棒グラフ導入",html:`<span class="fixed">The bar chart compares</span> <span class="var">{item}</span> <span class="fixed">across</span> <span class="var">{subject}</span>.`,plain:`The bar chart compares {item} across {subject}.`},
+   {type:"intro",jp:"情報提示",html:`<span class="fixed">The chart gives information about</span> <span class="var">{item}</span> <span class="fixed">in</span> <span class="var">{subject}</span>.`,plain:`The chart gives information about {item} in {subject}.`}
+  ],
+  pie:[
+   {type:"intro",jp:"円グラフ導入",html:`<span class="fixed">The pie chart shows the proportion of</span> <span class="var">{item}</span> <span class="fixed">by</span> <span class="var">{subject}</span>.`,plain:`The pie chart shows the proportion of {item} by {subject}.`},
+   {type:"intro",jp:"シェア導入",html:`<span class="fixed">The chart illustrates how</span> <span class="var">{item}</span> <span class="fixed">is divided among</span> <span class="var">{subject}</span>.`,plain:`The chart illustrates how {item} is divided among {subject}.`}
+  ],
+  table:[
+   {type:"intro",jp:"表導入",html:`<span class="fixed">The table compares</span> <span class="var">{item}</span> <span class="fixed">among</span> <span class="var">{subject}</span>.`,plain:`The table compares {item} among {subject}.`},
+   {type:"intro",jp:"データ導入",html:`<span class="fixed">The table provides data on</span> <span class="var">{item}</span> <span class="fixed">for</span> <span class="var">{subject}</span>.`,plain:`The table provides data on {item} for {subject}.`}
+  ],
+  process:[
+   {type:"intro",jp:"プロセス導入",html:`<span class="fixed">The diagram illustrates</span> <span class="var">{item}</span>.`,plain:`The diagram illustrates {item}.`},
+   {type:"intro",jp:"過程導入",html:`<span class="fixed">The diagram shows the process of</span> <span class="var">{subject}</span>.`,plain:`The diagram shows the process of {subject}.`}
+  ],
+  map:[
+   {type:"intro",jp:"地図導入",html:`<span class="fixed">The maps illustrate</span> <span class="var">{item}</span>.`,plain:`The maps illustrate {item}.`},
+   {type:"intro",jp:"変化導入",html:`<span class="fixed">The maps show how</span> <span class="var">{subject}</span> <span class="fixed">changed over time</span>.`,plain:`The maps show how {subject} changed over time.`}
+  ]
+ },
+ overall:{
+  line:[
+   {type:"overall",jp:"上昇・下降・横ばい",html:`<span class="fixed">Overall, it is clear that</span> <span class="var">{A}</span> <span class="fixed">showed an upward trend, whereas</span> <span class="var">{B}</span> <span class="fixed">decreased. In addition,</span> <span class="var">{C}</span> <span class="fixed">remained relatively stable throughout the period</span>.`,plain:`Overall, it is clear that {A} showed an upward trend, whereas {B} decreased. In addition, {C} remained relatively stable throughout the period.`},
+   {type:"overall",jp:"万能",html:`<span class="fixed">Overall, the figures changed in different ways over the period</span>.`,plain:`Overall, the figures changed in different ways over the period.`}
+  ],
+  bar:[
+   {type:"overall",jp:"最大・最小",html:`<span class="fixed">Overall,</span> <span class="var">{A}</span> <span class="fixed">recorded the highest figure, while</span> <span class="var">{C}</span> <span class="fixed">had the lowest</span>.`,plain:`Overall, {A} recorded the highest figure, while {C} had the lowest.`},
+   {type:"overall",jp:"差がある",html:`<span class="fixed">Overall, there were clear differences among the categories</span>.`,plain:`Overall, there were clear differences among the categories.`}
+  ],
+  pie:[
+   {type:"overall",jp:"最大シェア",html:`<span class="fixed">Overall,</span> <span class="var">{A}</span> <span class="fixed">accounted for the largest share, whereas the smallest proportions were seen in the remaining categories</span>.`,plain:`Overall, {A} accounted for the largest share, whereas the smallest proportions were seen in the remaining categories.`},
+   {type:"overall",jp:"2項目で大半",html:`<span class="fixed">Overall, the two largest categories made up more than half of the total</span>.`,plain:`Overall, the two largest categories made up more than half of the total.`}
+  ],
+  table:[
+   {type:"overall",jp:"最高・最低",html:`<span class="fixed">Overall, the highest figure was recorded by</span> <span class="var">{A}</span>, <span class="fixed">whereas</span> <span class="var">{C}</span> <span class="fixed">had the lowest value</span>.`,plain:`Overall, the highest figure was recorded by {A}, whereas {C} had the lowest value.`},
+   {type:"overall",jp:"差が目立つ",html:`<span class="fixed">Overall, the table shows noticeable variation among the categories</span>.`,plain:`Overall, the table shows noticeable variation among the categories.`}
+  ],
+  process:[
+   {type:"overall",jp:"直線プロセス",html:`<span class="fixed">Overall, it is a linear process consisting of several stages, beginning with</span> <span class="var">{A}</span> <span class="fixed">and ending with</span> <span class="var">{C}</span>.`,plain:`Overall, it is a linear process consisting of several stages, beginning with {A} and ending with {C}.`},
+   {type:"overall",jp:"複数段階",html:`<span class="fixed">Overall, the process involves a number of stages from preparation to final production</span>.`,plain:`Overall, the process involves a number of stages from preparation to final production.`}
+  ],
+  map:[
+   {type:"overall",jp:"都市化",html:`<span class="fixed">Overall, the area became more developed, with several new facilities being added</span>.`,plain:`Overall, the area became more developed, with several new facilities being added.`},
+   {type:"overall",jp:"置き換え",html:`<span class="fixed">Overall, the most significant change was that</span> <span class="var">{A}</span> <span class="fixed">was replaced by</span> <span class="var">{B}</span>.`,plain:`Overall, the most significant change was that {A} was replaced by {B}.`}
+  ]
+ }
+};
+
+const COMMON={
+ body:{
+  line:[
+   {type:"body",jp:"A上昇",target:"A",html:`<span class="fixed">Looking first at</span> <span class="var">{name}</span>, <span class="var">{subj}</span> <span class="fixed">increased steadily from</span> <span class="num">{start}</span> <span class="fixed">to</span> <span class="num">{end}</span>.`,plain:`Looking first at {name}, {subj} increased steadily from {start} to {end}.`},
+   {type:"body",jp:"B下降",target:"B",html:`<span class="fixed">Turning to</span> <span class="var">{name}</span>, <span class="var">{subj}</span> <span class="fixed">fell steadily from</span> <span class="num">{start}</span> <span class="fixed">to</span> <span class="num">{end}</span>.`,plain:`Turning to {name}, {subj} fell steadily from {start} to {end}.`},
+   {type:"body",jp:"C横ばい",target:"C",html:`<span class="fixed">As for</span> <span class="var">{name}</span>, <span class="var">{subj}</span> <span class="fixed">remained relatively stable, changing only slightly from</span> <span class="num">{start}</span> <span class="fixed">to</span> <span class="num">{end}</span>.`,plain:`As for {name}, {subj} remained relatively stable, changing only slightly from {start} to {end}.`}
+  ],
+  bar:[
+   {type:"body",jp:"最大",target:"A",html:`<span class="fixed">Looking first at</span> <span class="var">{name}</span>, <span class="fixed">this category recorded the highest figure, at</span> <span class="num">{start}</span>.`,plain:`Looking first at {name}, this category recorded the highest figure, at {start}.`},
+   {type:"body",jp:"中位",target:"B",html:`<span class="fixed">By comparison,</span> <span class="var">{name}</span> <span class="fixed">stood at</span> <span class="num">{start}</span>.`,plain:`By comparison, {name} stood at {start}.`},
+   {type:"body",jp:"最小",target:"C",html:`<span class="var">{name}</span> <span class="fixed">had a lower figure, at</span> <span class="num">{start}</span>.`,plain:`{name} had a lower figure, at {start}.`}
+  ],
+  pie:[
+   {type:"body",jp:"最大シェア",target:"A",html:`<span class="fixed">The largest share was</span> <span class="var">{name}</span>, <span class="fixed">which accounted for</span> <span class="num">{start}%</span> <span class="fixed">of the total</span>.`,plain:`The largest share was {name}, which accounted for {start}% of the total.`},
+   {type:"body",jp:"2番目",target:"B",html:`<span class="var">{name}</span> <span class="fixed">made up</span> <span class="num">{start}%</span> <span class="fixed">of the total</span>.`,plain:`{name} made up {start}% of the total.`},
+   {type:"body",jp:"小さい項目",target:"C",html:`<span class="var">{name}</span> <span class="fixed">represented a smaller share, at</span> <span class="num">{start}%</span>.`,plain:`{name} represented a smaller share, at {start}%.`}
+  ],
+  table:[
+   {type:"body",jp:"最高値",target:"A",html:`<span class="fixed">The highest figure was recorded by</span> <span class="var">{name}</span>, <span class="fixed">at</span> <span class="num">{start}</span>.`,plain:`The highest figure was recorded by {name}, at {start}.`},
+   {type:"body",jp:"比較",target:"B",html:`<span class="var">{name}</span> <span class="fixed">had a figure of</span> <span class="num">{start}</span>, <span class="fixed">which was lower than the highest value</span>.`,plain:`{name} had a figure of {start}, which was lower than the highest value.`},
+   {type:"body",jp:"最低値",target:"C",html:`<span class="fixed">The lowest value was seen in</span> <span class="var">{name}</span>, <span class="fixed">at</span> <span class="num">{start}</span>.`,plain:`The lowest value was seen in {name}, at {start}.`}
+  ],
+  process:[
+   {type:"body",jp:"前半開始",html:`<span class="fixed">Initially,</span> <span class="var">{A}</span> <span class="fixed">are collected and then transported to the next stage</span>.`,plain:`Initially, {A} are collected and then transported to the next stage.`},
+   {type:"body",jp:"中間段階",html:`<span class="fixed">In the subsequent stage,</span> <span class="var">{B}</span> <span class="fixed">are processed and prepared for further treatment</span>.`,plain:`In the subsequent stage, {B} are processed and prepared for further treatment.`},
+   {type:"body",jp:"最終段階",html:`<span class="fixed">Finally,</span> <span class="var">{C}</span> <span class="fixed">is produced and made ready for use</span>.`,plain:`Finally, {C} is produced and made ready for use.`}
+  ],
+  map:[
+   {type:"body",jp:"置き換え",html:`<span class="var">{A}</span> <span class="fixed">was replaced by</span> <span class="var">{B}</span>.`,plain:`{A} was replaced by {B}.`},
+   {type:"body",jp:"建設",html:`<span class="fixed">A new</span> <span class="var">{C}</span> <span class="fixed">was constructed in the area</span>.`,plain:`A new {C} was constructed in the area.`},
+   {type:"body",jp:"追加",html:`<span class="fixed">Several new facilities were added, making the area more developed</span>.`,plain:`Several new facilities were added, making the area more developed.`}
+  ]
+ },
+ detail:{
+  line:[
+   {type:"detail",jp:"増加量",target:"A",html:`<span class="fixed">This means that it increased by about</span> <span class="num">{diff}</span> <span class="fixed">over the whole period</span>.`,plain:`This means that it increased by about {diff} over the whole period.`},
+   {type:"detail",jp:"減少量",target:"B",html:`<span class="fixed">This represents a decline of roughly</span> <span class="num">{diff}</span>.`,plain:`This represents a decline of roughly {diff}.`},
+   {type:"detail",jp:"最終値",html:`<span class="fixed">By</span> <span class="num">2020</span>, <span class="fixed">the figure had reached</span> <span class="num">{end}</span>.`,plain:`By 2020, the figure had reached {end}.`}
+  ],
+  bar:[
+   {type:"detail",jp:"差",target:"A",html:`<span class="fixed">This was around</span> <span class="num">{diffAB}</span> <span class="fixed">higher than</span> <span class="var">{B}</span>.`,plain:`This was around {diffAB} higher than {B}.`},
+   {type:"detail",jp:"おおよそ",html:`<span class="fixed">The figure was approximately</span> <span class="num">{start}</span>.`,plain:`The figure was approximately {start}.`},
+   {type:"detail",jp:"最低との差",target:"C",html:`<span class="fixed">This was much lower than the figure for</span> <span class="var">{A}</span>.`,plain:`This was much lower than the figure for {A}.`}
+  ],
+  pie:[
+   {type:"detail",jp:"合計",target:"A",html:`<span class="fixed">Together,</span> <span class="var">{A}</span> <span class="fixed">and</span> <span class="var">{B}</span> <span class="fixed">represented</span> <span class="num">{sumAB}%</span> <span class="fixed">of the total</span>.`,plain:`Together, {A} and {B} represented {sumAB}% of the total.`},
+   {type:"detail",jp:"半分近く",html:`<span class="fixed">This category alone made up nearly half of the total</span>.`,plain:`This category alone made up nearly half of the total.`},
+   {type:"detail",jp:"小さい",target:"C",html:`<span class="fixed">This was one of the smaller proportions shown in the chart</span>.`,plain:`This was one of the smaller proportions shown in the chart.`}
+  ],
+  table:[
+   {type:"detail",jp:"差",html:`<span class="fixed">The difference between the highest and lowest figures was</span> <span class="num">{range}</span>.`,plain:`The difference between the highest and lowest figures was {range}.`},
+   {type:"detail",jp:"中間",target:"B",html:`<span class="var">{name}</span> <span class="fixed">was in the middle of the range</span>.`,plain:`{name} was in the middle of the range.`}
+  ],
+  process:[
+   {type:"detail",jp:"受動態追加",html:`<span class="fixed">After that, the material is treated before being sent to the next stage</span>.`,plain:`After that, the material is treated before being sent to the next stage.`},
+   {type:"detail",jp:"順序追加",html:`<span class="fixed">Once this has been completed, the product moves on to the final stage</span>.`,plain:`Once this has been completed, the product moves on to the final stage.`}
+  ],
+  map:[
+   {type:"detail",jp:"位置",html:`<span class="fixed">This change took place in the central part of the area</span>.`,plain:`This change took place in the central part of the area.`},
+   {type:"detail",jp:"発展",html:`<span class="fixed">As a result, the area became more urbanised</span>.`,plain:`As a result, the area became more urbanised.`}
+  ]
+ },
+ compare:{
+  line:[
+   {type:"compare",jp:"対照",html:`<span class="fixed">By comparison,</span> <span class="var">{other}</span> <span class="fixed">was lower</span>.`,plain:`By comparison, {other} was lower.`},
+   {type:"compare",jp:"差が明確",html:`<span class="fixed">As a result, the gap between</span> <span class="var">{name}</span> <span class="fixed">and</span> <span class="var">{other}</span> <span class="fixed">was clear</span>.`,plain:`As a result, the gap between {name} and {other} was clear.`},
+   {type:"compare",jp:"追い抜き",html:`<span class="var">{name}</span> <span class="fixed">overtook</span> <span class="var">{other}</span> <span class="fixed">towards the end of the period</span>.`,plain:`{name} overtook {other} towards the end of the period.`}
+  ],
+  bar:[
+   {type:"compare",jp:"対照",html:`<span class="fixed">By comparison,</span> <span class="var">{other}</span> <span class="fixed">recorded a lower figure</span>.`,plain:`By comparison, {other} recorded a lower figure.`},
+   {type:"compare",jp:"最大との差",html:`<span class="fixed">This was clearly higher than the figure for</span> <span class="var">{other}</span>.`,plain:`This was clearly higher than the figure for {other}.`},
+   {type:"compare",jp:"順位比較",html:`<span class="var">{name}</span> <span class="fixed">ranked above</span> <span class="var">{other}</span>.`,plain:`{name} ranked above {other}.`}
+  ],
+  pie:[
+   {type:"compare",jp:"シェア比較",html:`<span class="fixed">By comparison,</span> <span class="var">{other}</span> <span class="fixed">made up a smaller share</span>.`,plain:`By comparison, {other} made up a smaller share.`},
+   {type:"compare",jp:"合わせて",html:`<span class="fixed">Together,</span> <span class="var">{name}</span> <span class="fixed">and</span> <span class="var">{other}</span> <span class="fixed">represented a large proportion of the total</span>.`,plain:`Together, {name} and {other} represented a large proportion of the total.`},
+   {type:"compare",jp:"最大と最小",html:`<span class="fixed">There was a clear contrast between the largest and smallest shares</span>.`,plain:`There was a clear contrast between the largest and smallest shares.`}
+  ],
+  table:[
+   {type:"compare",jp:"表の比較",html:`<span class="fixed">By comparison,</span> <span class="var">{other}</span> <span class="fixed">had a lower value</span>.`,plain:`By comparison, {other} had a lower value.`},
+   {type:"compare",jp:"最高最低",html:`<span class="fixed">The difference between the highest and lowest figures was noticeable</span>.`,plain:`The difference between the highest and lowest figures was noticeable.`},
+   {type:"compare",jp:"中位比較",html:`<span class="var">{name}</span> <span class="fixed">was higher than</span> <span class="var">{other}</span>.`,plain:`{name} was higher than {other}.`}
+  ],
+  map:[
+   {type:"compare",jp:"前後比較",html:`<span class="fixed">Compared with the earlier map, several new facilities were added</span>.`,plain:`Compared with the earlier map, several new facilities were added.`},
+   {type:"compare",jp:"以前との対照",html:`<span class="fixed">In contrast to the previous layout, the area became more developed</span>.`,plain:`In contrast to the previous layout, the area became more developed.`},
+   {type:"compare",jp:"最大の変化",html:`<span class="fixed">The most noticeable change was the replacement of</span> <span class="var">{A}</span> <span class="fixed">with</span> <span class="var">{B}</span>.`,plain:`The most noticeable change was the replacement of {A} with {B}.`},
+   {type:"compare",jp:"主要な違い",html:`<span class="fixed">One major difference between the two maps is the addition of</span> <span class="var">{C}</span>.`,plain:`One major difference between the two maps is the addition of {C}.`},
+   {type:"compare",jp:"もう一つの変化",html:`<span class="fixed">Another significant change was that the area became more accessible</span>.`,plain:`Another significant change was that the area became more accessible.`}
+  ],
+  process:[]
+ },
+ connector:{
+  default:[
+   {type:"connector",jp:"対照",html:`<span class="fixed">In contrast,</span>`,plain:`In contrast,`},
+   {type:"connector",jp:"一方で",html:`<span class="fixed">Meanwhile,</span>`,plain:`Meanwhile,`},
+   {type:"connector",jp:"その後",html:`<span class="fixed">After that,</span>`,plain:`After that,`},
+   {type:"connector",jp:"最後に",html:`<span class="fixed">Finally,</span>`,plain:`Finally,`}
+  ]
+ }
+};
+
+let taskType="line";
+let slotCards={intro:[],overall:[],body1:[],body2:[]};
+const colors=["#2563eb","#dc2626","#16a34a","#f97316","#7c3aed"];
+function $(id){return document.getElementById(id)}
+function task(){return TASKS[taskType]}
+function theme(){return task().themes[$("themeSelect").value]}
+function pattern(){return task().patterns[$("patternSelect").value]}
+function selectedSlot(){return document.querySelector('input[name="slot"]:checked').value}
+function slotTextEl(s){return {intro:$("slotIntro"),overall:$("slotOverall"),body1:$("slotBody1"),body2:$("slotBody2")}[s]}
+function chipsEl(s){return {intro:$("chipsIntro"),overall:$("chipsOverall"),body1:$("chipsBody1"),body2:$("chipsBody2")}[s]}
+function values(k){return (pattern()[k] || [0])}
+function start(k){return values(k)[0]}
+function end(k){let arr=values(k);return arr[arr.length-1]}
+function diff(k){return Math.abs(end(k)-start(k))}
+function other(k){return k==="A"?"B":"A"}
+function subjectOf(k){const th=theme(); if(taskType==="line") return th.label==="Sales" ? "sales of "+th[k] : th.item+" of "+th[k]; return th[k];}
+function fill(str,obj={}){
+ const th=theme(); const k=obj.target || $("targetSelect").value || "A"; const o=other(k);
+ const vals = ["A","B","C"].map(x=>start(x));
+ const max=Math.max(...vals), min=Math.min(...vals);
+ return str
+  .replaceAll("{item}",th.item||"").replaceAll("{itemPlural}",th.itemPlural||th.item||"").replaceAll("{subject}",th.subject||"")
+  .replaceAll("{A}",th.A||"").replaceAll("{B}",th.B||"").replaceAll("{C}",th.C||"")
+  .replaceAll("{name}",th[k]||"").replaceAll("{subj}",subjectOf(k)||"").replaceAll("{other}",th[o]||"")
+  .replaceAll("{start}",start(k)).replaceAll("{end}",end(k)).replaceAll("{diff}",diff(k))
+  .replaceAll("{diffAB}",Math.abs(start("A")-start("B"))).replaceAll("{sumAB}",start("A")+start("B"))
+  .replaceAll("{range}",max-min);
+}
+function currentBanks(){
+ return {
+  intro:BASE_BANKS.intro[taskType]||[],
+  overall:BASE_BANKS.overall[taskType]||[],
+  body:COMMON.body[taskType]||[],
+  detail:COMMON.detail[taskType]||[],
+  compare:COMMON.compare[taskType]||[],
+  connector:COMMON.connector.default
+ };
+}
+function init(){
+ Object.entries(TASKS).forEach(([k,v])=>$("typeTabs").insertAdjacentHTML("beforeend",`<button class="typeBtn ${k===taskType?'active':''}" data-type="${k}">${v.label}</button>`));
+ document.querySelectorAll(".typeBtn").forEach(btn=>btn.addEventListener("click",()=>{taskType=btn.dataset.type;document.querySelectorAll(".typeBtn").forEach(b=>b.classList.remove("active"));btn.classList.add("active");resetSelectors();clearAll(false);renderBanks();renderAll();}));
+ resetSelectors();
+ renderBanks(); renderAll();
+ ["themeSelect","patternSelect","targetSelect"].forEach(id=>$(id).addEventListener("change",renderAll));
+ $("draft").addEventListener("input",updateCount);
+ document.querySelectorAll(".tab").forEach(tab=>tab.addEventListener("click",()=>{document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));tab.classList.add("active");document.querySelectorAll(".bank").forEach(b=>b.classList.remove("active"));$("bank-"+tab.dataset.bank).classList.add("active")}));
+}
+function resetSelectors(){
+ $("themeSelect").innerHTML=""; Object.entries(task().themes).forEach(([k,v])=>$("themeSelect").insertAdjacentHTML("beforeend",`<option value="${k}">${v.label}</option>`));
+ $("patternSelect").innerHTML=""; Object.entries(task().patterns).forEach(([k,v])=>$("patternSelect").insertAdjacentHTML("beforeend",`<option value="${k}">${v.label}</option>`));
+ $("targetSelect").innerHTML="";
+ if(taskType==="process"||taskType==="map"){["A","B","C"].forEach(k=>$("targetSelect").insertAdjacentHTML("beforeend",`<option value="${k}">${theme()?.[k]||k}</option>`));}
+ else {["A","B","C"].forEach(k=>$("targetSelect").insertAdjacentHTML("beforeend",`<option value="${k}">${k}</option>`));}
+}
+function renderBanks(){
+ const banks=currentBanks(); const root=$("banks");root.innerHTML="";
+ Object.entries(banks).forEach(([key,list],idx)=>{
+  const div=document.createElement("div");div.className="bank "+(idx===0?"active":"");div.id="bank-"+key;
+  div.innerHTML=`<h3>${labelName(key)}</h3><div class="cards"></div>`;
+  const cards=div.querySelector(".cards");
+  list.forEach(obj=>{
+   const c=document.createElement("div");c.className="card "+key;
+   c.innerHTML=`<div class="en">${fill(obj.html,obj)}</div><div class="jp">${obj.jp}${guideBadge(obj)}</div><div class="cardGuide">${guideText(obj)}</div>`;
+   c.onclick=()=>addCard(obj);
+   cards.appendChild(c);
+  });
+  root.appendChild(div);
+ });
+}
+function labelName(k){return {intro:"Introduction Cards",overall:"Overview Cards",body:"Body Sentence Cards",detail:"Detail / Number Cards",compare:"Compare Cards",connector:"Connector Cards"}[k]}
+function guideBadge(obj){if(obj.type==="body")return '<span class="badge">Body中心</span>'; if(obj.type==="detail")return '<span class="badge">肉付け</span>'; if(obj.type==="compare")return '<span class="badge b2">Body 2向き</span>'; return "";}
+function guideText(obj){if(obj.type==="intro")return "Introに入れる：1枚でOK"; if(obj.type==="overall")return "Overviewに入れる：1枚でOK"; if(obj.type==="body")return "Bodyの中心文：まず1枚選ぶ"; if(obj.type==="detail")return "数字・位置・段階を足す"; if(obj.type==="compare")return "比較を足す：Body 2におすすめ"; if(obj.type==="connector")return "つなぎ：必要な時だけ追加"; return "";}
+function refreshCards(){renderBanks(); document.querySelectorAll(".bank").forEach(b=>b.classList.remove("active")); const active=document.querySelector(".tab.active")?.dataset.bank||"intro"; if($("bank-"+active))$("bank-"+active).classList.add("active");}
+function addCard(obj){
+ let s=selectedSlot();
+ if(obj.type==="intro")s="intro";
+ if(obj.type==="overall")s="overall";
+ if(obj.type==="intro"||obj.type==="overall"){document.querySelector(`input[name="slot"][value="${s}"]`).checked=true;slotCards[s]=[obj];}
+ else slotCards[s].push(obj);
+ renderSlot(s);
+}
+function renderSlot(s){
+ chipsEl(s).innerHTML=slotCards[s].map(x=>`<span class="chip">${x.jp}</span>`).join("");
+ slotTextEl(s).innerHTML=slotCards[s].map(x=>fill(x.html,x)).join(" ");
+}
+function clearSlot(s){slotCards[s]=[];renderSlot(s)}
+function clearAll(clearDraft=true){["intro","overall","body1","body2"].forEach(clearSlot); if(clearDraft){$("draft").value="";updateCount();}}
+function stripHtml(html){const tmp=document.createElement("div");tmp.innerHTML=html;return tmp.textContent||tmp.innerText||""}
+function normalizeText(t){return t.replace(/\s+/g," ").replace(/\s+([,.])/g,"$1").trim()}
+function makeDraft(){
+ const text=[normalizeText(stripHtml($("slotIntro").innerHTML)),"",normalizeText(stripHtml($("slotOverall").innerHTML)),"",normalizeText(stripHtml($("slotBody1").innerHTML)),"",normalizeText(stripHtml($("slotBody2").innerHTML))].join("\n").replace(/\n{3,}/g,"\n\n").trim();
+ $("draft").value=text;updateCount();
+}
+function autoExample(){
+ const banks=currentBanks();
+ slotCards.intro=[banks.intro[0]];
+ slotCards.overall=[banks.overall[0]];
+ slotCards.body1=[banks.body[0], ...(banks.detail[0]?[banks.detail[0]]:[])];
+ slotCards.body2=[banks.body[1]||banks.body[0], ...(banks.compare[0]?[banks.compare[0]]:[]), ...(banks.body[2]?[banks.body[2]]:[])];
+ ["intro","overall","body1","body2"].forEach(renderSlot); makeDraft();
+}
+function countWords(s){const m=s.trim().match(/[A-Za-z0-9]+(?:[-'][A-Za-z0-9]+)?/g);return m?m.length:0}
+function updateCount(){const n=countWords($("draft").value);$("wordCount").textContent=n;const st=$("wordStatus");st.className=n<150?"bad":n<=200?"ok":"long";st.textContent=n<150?`あと${150-n}語：Detailカードを足そう`:n<=200?"OK：150語以上":"少し長い"}
+function copyDraft(){navigator.clipboard.writeText($("draft").value)}
+
+function updateTabAvailability(){
+ const compareTab=document.querySelector('.tab[data-bank="compare"]');
+ const banks=currentBanks();
+ if(compareTab){
+   if(!banks.compare || banks.compare.length===0){
+     compareTab.classList.add("disabled");
+     if(compareTab.classList.contains("active")){
+       compareTab.classList.remove("active");
+       const introTab=document.querySelector('.tab[data-bank="intro"]');
+       if(introTab) introTab.classList.add("active");
+       document.querySelectorAll(".bank").forEach(b=>b.classList.remove("active"));
+       const introBank=$("bank-intro");
+       if(introBank) introBank.classList.add("active");
+     }
+   }else{
+     compareTab.classList.remove("disabled");
+   }
+ }
+}
+
+function renderAll(){
+ $("typeHelp").innerHTML=task().help + `<div class="guideSteps"><span class="guideStep">Intro 1枚</span><span class="guideStep">Overview 1枚</span><span class="guideStep">Body 1: 中心+詳細</span><span class="guideStep">Body 2: 残り+比較</span></div>`;
+ $("slotAdvice").textContent = taskType==="process" ? "ProcessはBody 1に前半、Body 2に後半を書く。Compareは使わないので無効化。" : taskType==="map" ? "MapはBody 1に大きな変化、Body 2に細かい追加を書く。" : "Body 1は一番目立つデータ、Body 2は残り＋比較。";
+ $("body1Hint").textContent = taskType==="process" ? "前半の段階を書く。Initially / In the subsequent stage を使う。" : taskType==="map" ? "一番大きな変化を書く。replace / construct が便利。" : "一番目立つデータ。おすすめ：Body Sentence 1枚 → Detail 1〜2枚。";
+ $("body2Hint").textContent = taskType==="process" ? "後半の段階を書く。After that / Finally を使う。" : taskType==="map" ? "残りの変化を書く。追加・撤去・位置を説明。" : "残り＋比較。おすすめ：Body Sentence 1枚 → Compare 1枚 → Detail 1枚。";
+ drawVisual();
+ const th=theme();
+ $("taskText").textContent = taskType==="process" ? `The diagram shows ${th.item}.` : taskType==="map" ? `The maps show ${th.item}.` : `The chart shows ${th.item} in ${th.subject}.`;
+ refreshCards();
+ updateTabAvailability();
+ ["intro","overall","body1","body2"].forEach(renderSlot);
+}
+function drawVisual(){
+ const svg=$("chart"),p=pattern(),th=theme(); svg.innerHTML="";
+ if(taskType==="line")return drawLine(svg,p,th);
+ if(taskType==="bar"||taskType==="table")return drawBar(svg,p,th);
+ if(taskType==="pie")return drawPie(svg,p,th);
+ if(taskType==="process")return drawProcess(svg,p,th);
+ if(taskType==="map")return drawMap(svg,p,th);
+}
+function drawLine(svg,p,th){
+ const W=700,H=270,L=50,R=18,T=18,B=36;const max=Math.max(...p.A,...p.B,...p.C)+10;const x=i=>L+i*(W-L-R)/(p.years.length-1);const y=v=>H-B-v*(H-T-B)/max;
+ for(let g=0;g<=4;g++){const yy=T+g*(H-T-B)/4;svg.insertAdjacentHTML("beforeend",`<line x1="${L}" y1="${yy}" x2="${W-R}" y2="${yy}" stroke="#eadfd4"/>`)}
+ p.years.forEach((yr,i)=>svg.insertAdjacentHTML("beforeend",`<text x="${x(i)}" y="${H-10}" text-anchor="middle" font-size="12" fill="#6b7280">${yr}</text>`));
+ ["A","B","C"].forEach((key,idx)=>{const arr=p[key];const pts=arr.map((v,i)=>`${x(i)},${y(v)}`).join(" ");svg.insertAdjacentHTML("beforeend",`<polyline points="${pts}" fill="none" stroke="${colors[idx]}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`);arr.forEach((v,i)=>svg.insertAdjacentHTML("beforeend",`<circle cx="${x(i)}" cy="${y(v)}" r="4" fill="${colors[idx]}"/>`))});
+ $("legend").innerHTML=`<span><i class="dot" style="background:${colors[0]}"></i>${th.A}</span><span><i class="dot" style="background:${colors[1]}"></i>${th.B}</span><span><i class="dot" style="background:${colors[2]}"></i>${th.C}</span><span class="small">Unit: ${th.unit}</span>`;
+}
+function drawBar(svg,p,th){
+ const W=700,H=270,L=50,B=42,T=20; const names=[th.A,th.B,th.C,...(p.extraNames||[])]; const vals=[start("A"),start("B"),start("C"),...(p.extra||[])]; const max=Math.max(...vals)+10; const bw=(W-L-30)/vals.length*0.62;
+ vals.forEach((v,i)=>{const x=L+20+i*((W-L-30)/vals.length);const h=v*(H-T-B)/max;const y=H-B-h;svg.insertAdjacentHTML("beforeend",`<rect x="${x}" y="${y}" width="${bw}" height="${h}" rx="8" fill="${colors[i%colors.length]}"/>`);svg.insertAdjacentHTML("beforeend",`<text x="${x+bw/2}" y="${y-6}" text-anchor="middle" font-size="12" fill="#111827">${v}</text>`);svg.insertAdjacentHTML("beforeend",`<text x="${x+bw/2}" y="${H-12}" text-anchor="middle" font-size="11" fill="#6b7280">${names[i]}</text>`);});
+ $("legend").innerHTML=`<span class="small">Unit: ${th.unit}</span>`;
+}
+function drawPie(svg,p,th){
+ const cx=350,cy=135,r=90; const names=[th.A,th.B,th.C,...(p.extraNames||[])]; const vals=[start("A"),start("B"),start("C"),...(p.extra||[])]; let startAng=-Math.PI/2; const total=vals.reduce((a,b)=>a+b,0);
+ vals.forEach((v,i)=>{const ang=v/total*Math.PI*2; const endAng=startAng+ang; const x1=cx+r*Math.cos(startAng),y1=cy+r*Math.sin(startAng),x2=cx+r*Math.cos(endAng),y2=cy+r*Math.sin(endAng); const large=ang>Math.PI?1:0; svg.insertAdjacentHTML("beforeend",`<path d="M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${large} 1 ${x2} ${y2} Z" fill="${colors[i%colors.length]}"/>`); const mid=startAng+ang/2; svg.insertAdjacentHTML("beforeend",`<text x="${cx+(r+32)*Math.cos(mid)}" y="${cy+(r+32)*Math.sin(mid)}" text-anchor="middle" font-size="12" fill="#111827">${names[i]} ${v}%</text>`); startAng=endAng;});
+ $("legend").innerHTML=`<span class="small">Total: 100%</span>`;
+}
+function drawProcess(svg,p,th){
+ const steps=p.steps||["stage 1","stage 2","stage 3"]; const W=700,H=270; const gap=W/(steps.length+1);
+ steps.forEach((s,i)=>{const x=gap*(i+1)-45,y=105;svg.insertAdjacentHTML("beforeend",`<rect x="${x}" y="${y}" width="90" height="48" rx="12" fill="#fff" stroke="#f97316" stroke-width="3"/>`);svg.insertAdjacentHTML("beforeend",`<text x="${x+45}" y="${y+28}" text-anchor="middle" font-size="11" fill="#111827">${s}</text>`); if(i<steps.length-1){svg.insertAdjacentHTML("beforeend",`<text x="${x+102}" y="${y+30}" font-size="22" fill="#6b7280">→</text>`);}});
+ $("legend").innerHTML=`<span class="small">${th.subject}</span>`;
+}
+function drawMap(svg,p,th){
+ svg.insertAdjacentHTML("beforeend",`<rect x="65" y="35" width="250" height="190" rx="18" fill="#ecfccb" stroke="#84cc16" stroke-width="3"/><text x="190" y="28" text-anchor="middle" font-size="14" fill="#111827">Before</text>`);
+ svg.insertAdjacentHTML("beforeend",`<rect x="385" y="35" width="250" height="190" rx="18" fill="#fef3c7" stroke="#f59e0b" stroke-width="3"/><text x="510" y="28" text-anchor="middle" font-size="14" fill="#111827">After</text>`);
+ svg.insertAdjacentHTML("beforeend",`<text x="190" y="130" text-anchor="middle" font-size="18" fill="#365314">${th.A}</text><text x="510" y="105" text-anchor="middle" font-size="18" fill="#7c2d12">${th.B}</text><text x="510" y="160" text-anchor="middle" font-size="16" fill="#1d4ed8">${th.C}</text><text x="345" y="135" text-anchor="middle" font-size="34" fill="#6b7280">→</text>`);
+ $("legend").innerHTML=`<span class="small">${th.subject}</span>`;
+}
+init();
+</script>
+</body>
+</html>
