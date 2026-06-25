@@ -1961,10 +1961,32 @@ html, body {
   display:block !important;
 }
 
-.game-title-text{
-  display:block !important;
+.game-title-block{
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:center !important;
   flex:1 1 auto !important;
   min-width:0 !important;
+  line-height:1 !important;
+}
+
+.game-title-main{
+  display:block !important;
+  color:#172033 !important;
+  font-size:clamp(64px, 9vw, 104px) !important;
+  font-weight:1000 !important;
+  letter-spacing:-0.06em !important;
+  line-height:0.95 !important;
+}
+
+.game-title-sub{
+  display:block !important;
+  margin-top:10px !important;
+  color:#ea580c !important;
+  font-size:clamp(16px, 2.2vw, 24px) !important;
+  font-weight:900 !important;
+  letter-spacing:0.04em !important;
+  line-height:1.25 !important;
 }
 
 @media (max-width:420px){
@@ -1972,6 +1994,13 @@ html, body {
     width:54px !important;
     height:54px !important;
     flex-basis:54px !important;
+  }
+  .game-title-main{
+    font-size:52px !important;
+  }
+  .game-title-sub{
+    margin-top:6px !important;
+    font-size:14px !important;
   }
 }
 
@@ -2162,7 +2191,10 @@ html, body {
             <span class="brand-mark">🍣 ENGLISH GAMES</span>
             <h1 id="gameTitle" class="brand-title">
   <img id="mantenLogo" class="title-logo" src="/images/manten.png" alt="満点侍">
-  <span class="game-title-text">無料で遊べる英語ゲーム「すし単」</span>
+  <span class="game-title-block">
+    <span class="game-title-main">すし単</span>
+    <span class="game-title-sub">無料で遊べる英語ゲーム</span>
+  </span>
 </h1>
             <p class="brand-sub">
               英検・IELTS・高校英語に対応した無料英語ゲーム集。
