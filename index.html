@@ -1955,8 +1955,17 @@ html, body {
   width:80px !important;
   height:80px !important;
   flex:0 0 80px !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  background:url("images/manten.png") center/contain no-repeat;
+}
+
+.title-logo-bg img{
+  width:100% !important;
+  height:100% !important;
+  object-fit:contain !important;
   display:block !important;
-  background:url("/images/manten.png") center/contain no-repeat;
 }
 
 @media (max-width:420px){
@@ -2153,7 +2162,7 @@ html, body {
           <div class="brand-hero">
             <span class="brand-mark">🍣 ENGLISH GAMES</span>
             <h1 id="gameTitle" class="brand-title">
-  <span class="title-logo-bg"></span>
+  <span class="title-logo-bg"><img id="mantenLogo" src="images/manten.png" alt="満点侍"></span>
   <span>無料で遊べる英語ゲーム「すし単」</span>
 </h1>
             <p class="brand-sub">
@@ -2221,7 +2230,7 @@ html, body {
           <div class="portal-section">
             <h2>学習記事</h2>
             <p>
-              ゲームとは別に、英単語一覧・ライティング表現集・英作文練習問題をまとめています。
+              ゲームとは別に、英単語一覧・ライティング表現集・英作文練習問題・暗唱のすすめ・IELTS TASK1カードをまとめています。
               英語をゲームで楽しく練習しながら、記事ページで知識を整理できます。
             </p>
             <div class="portal-game-grid">
@@ -2236,6 +2245,14 @@ html, body {
               <a class="portal-game-card green" href="/writing-practice.html">
                 <strong>英作文練習問題</strong>
                 <span>表現を使って書くための練習テーマ集。</span>
+              </a>
+              <a class="portal-game-card word" href="/recitation_cards.html">
+                <strong>暗唱のすすめ</strong>
+                <span>英語暗唱の効果と、授業・自学で使える暗唱トレーニング。</span>
+              </a>
+              <a class="portal-game-card green" href="/task1card.html">
+                <strong>IELTS TASK1 カード</strong>
+                <span>IELTS Writing Task 1 の頻出表現をカード形式で練習。</span>
               </a>
               
               <a class="portal-game-card word" href="/IELTSRdemo.html">
@@ -6811,5 +6828,18 @@ html, body {
 })();
 </script>
 
+
+<script>
+(function(){
+  const logo = document.getElementById('mantenLogo');
+  if (!logo) return;
+  const candidates = ['images/manten.png', '/images/manten.png', './images/manten.png', 'manten.png'];
+  let index = 0;
+  logo.addEventListener('error', function(){
+    index += 1;
+    if (index < candidates.length) logo.src = candidates[index];
+  });
+})();
+</script>
 </body>
 </html>
