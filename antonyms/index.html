@@ -6,6 +6,96 @@
   <title>アントニム一覧｜すし単</title>
   <meta name="description" content="英検・IELTS・高校英語で役立つ反意語を、英単語・日本語・antonym・antonymの日本語で整理した一覧です。">
   <link rel="stylesheet" href="../style.css">
+
+<style>
+:root{
+  --orange:#ff6b00;
+  --orange2:#ff9a3d;
+  --orange-line:#ffd7b8;
+  --ink:#222831;
+  --bg:#fff8f1;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0 !important;
+  background:linear-gradient(180deg,#fff8f1 0%,#fff 34%,#fff8f1 100%) !important;
+  color:var(--ink) !important;
+  font-family:"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif !important;
+}
+.page{max-width:1180px !important;margin:0 auto !important;padding:28px 22px 56px !important;}
+.hero{
+  position:relative;overflow:hidden;background:#fff !important;border:1px solid var(--orange-line) !important;
+  border-radius:28px !important;padding:44px 30px 34px !important;text-align:center !important;
+  box-shadow:0 14px 40px rgba(255,107,0,.10) !important;margin-bottom:24px !important;
+}
+.hero::before,.hero::after{
+  content:"";position:absolute;width:260px;height:260px;border:24px solid rgba(255,107,0,.045);
+  border-radius:50%;top:80px;pointer-events:none;
+}
+.hero::before{left:-120px}.hero::after{right:-120px}
+.kicker{
+  display:inline-block !important;padding:8px 22px !important;border:2px solid var(--orange) !important;
+  border-radius:999px !important;background:#fff !important;color:var(--orange) !important;font-weight:800 !important;
+}
+h1{
+  margin:18px 0 8px !important;color:var(--orange) !important;
+  font-size:clamp(2rem,4.2vw,3.4rem) !important;line-height:1.15 !important;
+}
+.hero p{max-width:820px !important;margin:16px auto 0 !important;line-height:1.9 !important;color:#374151 !important;font-weight:600 !important;}
+.home-link{
+  display:inline-flex !important;align-items:center !important;justify-content:center !important;min-height:44px !important;
+  padding:11px 24px !important;border-radius:999px !important;text-decoration:none !important;font-weight:800 !important;
+  border:2px solid var(--orange) !important;background:linear-gradient(90deg,var(--orange),var(--orange2)) !important;color:#fff !important;
+  box-shadow:0 8px 18px rgba(255,107,0,.18) !important;
+}
+.card{
+  background:#fff !important;border:1px solid var(--orange-line) !important;border-radius:28px !important;
+  padding:26px 26px 32px !important;box-shadow:0 14px 40px rgba(255,107,0,.10) !important;
+}
+.controls{display:flex !important;flex-direction:column !important;gap:14px !important;margin:0 0 20px !important;}
+.search-row{display:flex !important;align-items:center !important;gap:16px !important;flex-wrap:wrap !important;}
+.search{
+  width:min(680px,100%) !important;height:56px !important;padding:0 18px !important;
+  border:2px solid var(--orange-line) !important;border-radius:16px !important;background:#fff !important;color:var(--ink) !important;font-size:1rem !important;
+}
+.search:focus{outline:none !important;border-color:var(--orange) !important;box-shadow:0 0 0 4px rgba(255,107,0,.12) !important;}
+.count{color:var(--orange) !important;font-weight:900 !important;font-size:1.05rem !important;}
+.toggle-row{display:flex !important;gap:10px !important;flex-wrap:wrap !important;}
+.toggle-btn{
+  border:2px solid var(--orange) !important;background:#fff !important;color:var(--orange) !important;
+  border-radius:999px !important;padding:10px 18px !important;font-weight:900 !important;cursor:pointer !important;font-size:.95rem !important;
+}
+.toggle-btn.active{background:linear-gradient(90deg,var(--orange),var(--orange2)) !important;color:#fff !important;}
+.table-wrap{overflow:auto !important;border:1px solid var(--orange-line) !important;border-radius:18px !important;background:#fff !important;}
+.vocab-table{
+  width:100% !important;border-collapse:separate !important;border-spacing:0 !important;background:#fff !important;color:var(--ink) !important;
+}
+.vocab-table thead tr{background:linear-gradient(90deg,var(--orange),var(--orange2)) !important;}
+.vocab-table th{
+  padding:16px 18px !important;color:#fff !important;text-align:left !important;font-weight:900 !important;border-bottom:0 !important;white-space:nowrap !important;
+}
+.vocab-table th:first-child{border-top-left-radius:16px;}
+.vocab-table th:last-child{border-top-right-radius:16px;}
+.vocab-table tbody tr{background:#fff !important;color:var(--ink) !important;}
+.vocab-table tbody tr:nth-child(even){background:#fffaf5 !important;}
+.vocab-table tbody tr:hover{background:#fff1e5 !important;}
+.vocab-table td{
+  padding:17px 18px !important;border-bottom:1px solid var(--orange-line) !important;color:var(--ink) !important;
+  vertical-align:top !important;text-align:left !important;font-size:1rem !important;line-height:1.55 !important;
+}
+.vocab-table td:nth-child(1),.vocab-table td:nth-child(3){color:var(--orange) !important;font-weight:900 !important;}
+.vocab-table strong{color:inherit !important;font-weight:900 !important;}
+.hide-ja .vocab-table th:nth-child(2),.hide-ja .vocab-table td:nth-child(2),
+.hide-ja .vocab-table th:nth-child(4),.hide-ja .vocab-table td:nth-child(4){display:none !important;}
+.hide-en .vocab-table th:nth-child(1),.hide-en .vocab-table td:nth-child(1),
+.hide-en .vocab-table th:nth-child(3),.hide-en .vocab-table td:nth-child(3){display:none !important;}
+@media(max-width:700px){
+  .page{padding:16px 12px 40px !important;}
+  .hero,.card{padding:22px 16px !important;border-radius:20px !important;}
+  .vocab-table th,.vocab-table td{padding:13px 12px !important;}
+}
+</style>
+
 </head>
 <body>
   <main class="page">
@@ -16,7 +106,19 @@
       <p><a class="home-link" href="/">ゲームに戻る</a></p>
     </header>
     <section class="card">
-      <table class="vocab-table">
+
+      <div class="controls">
+        <div class="search-row">
+          <input id="search" class="search" type="search" placeholder="英単語・日本語・antonymで検索">
+          <div id="count" class="count"></div>
+        </div>
+        <div class="toggle-row" aria-label="表示切り替え">
+          <button type="button" id="toggleJapanese" class="toggle-btn">日本語を消す</button>
+          <button type="button" id="toggleEnglish" class="toggle-btn">英語を消す</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="vocab-table">
         <thead>
           <tr>
             <th>英単語</th>
@@ -514,8 +616,51 @@
 <tr><td><strong>worsen</strong></td><td>悪化する</td><td><strong>improve</strong></td><td>～を向上させる</td></tr>
 <tr><td><strong>worst</strong></td><td>最悪の</td><td><strong>best</strong></td><td>最良の</td></tr>
         </tbody>
-      </table>
+        </table>
+      </div>
     </section>
   </main>
+
+<script>
+(function(){
+  const body=document.body;
+  const table=document.querySelector('.vocab-table');
+  const rows=table?Array.from(table.querySelectorAll('tbody tr')):[];
+  const search=document.getElementById('search');
+  const count=document.getElementById('count');
+  const jaBtn=document.getElementById('toggleJapanese');
+  const enBtn=document.getElementById('toggleEnglish');
+
+  function updateCount(){
+    if(!count)return;
+    const visible=rows.filter(row=>row.style.display!=='none').length;
+    count.textContent=visible+' / '+rows.length+' 件';
+  }
+  function filterRows(){
+    const q=search?search.value.trim().toLowerCase():'';
+    rows.forEach(row=>{
+      row.style.display=row.textContent.toLowerCase().includes(q)?'':'none';
+    });
+    updateCount();
+  }
+  function setBtn(btn,active,onText,offText){
+    if(!btn)return;
+    btn.classList.toggle('active',active);
+    btn.textContent=active?offText:onText;
+  }
+  function refreshButtons(){
+    const jaHidden=body.classList.contains('hide-ja');
+    const enHidden=body.classList.contains('hide-en');
+    setBtn(jaBtn,jaHidden,'日本語を消す','日本語を戻す');
+    setBtn(enBtn,enHidden,'英語を消す','英語を戻す');
+  }
+  if(search)search.addEventListener('input',filterRows);
+  if(jaBtn)jaBtn.addEventListener('click',()=>{body.classList.toggle('hide-ja');refreshButtons();});
+  if(enBtn)enBtn.addEventListener('click',()=>{body.classList.toggle('hide-en');refreshButtons();});
+  filterRows();
+  refreshButtons();
+})();
+</script>
+
 </body>
 </html>
