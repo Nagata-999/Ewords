@@ -16,7 +16,7 @@
 <div class="combo-flash" id="comboFlash"><div class="combo-text" id="comboText">3 COMBO!</div></div>
 <div class="app">
 <header class="brand"><div class="brand-left"><div class="logo">🍣</div><div><h1>すしクロック</h1></div></div></header>
-<main id="home" class="screen active"><section class="hero"><div class="grid"><div class="card"><h3>📘 Study</h3><p>1問ごとに解説。to は「〜前」、past は「〜過ぎ」を確認。</p><button class="btn green" onclick="startGame('study')">解説つき</button></div><div class="card"><h3>⚡ Solo Attack</h3><p>60秒スコアアタック。速さ・連続正解で加点。</p><button class="btn" onclick="startGame('solo')">一人で勝負</button></div><div class="card"><h3>🔴 VS Battle 🔵</h3><p>左右チーム対戦。先に正解したチームが得点。</p><button class="btn blue" onclick="startGame('vs')">左右対戦</button></div><div class="card"><h3>🏫 Team Battle</h3><p>最大10人×2チーム。すし早押し風に対戦カード抽選。</p><button class="btn dark" onclick="openTeamSetup()">メンバー入力へ</button></div><div class="card"><h3>⌨️ Typing</h3><p>時計を見て、英語表現をタイプ。スペルと語順を練習。</p><button class="btn green" onclick="startGame('typing')">タイピング練習</button></div></div><div class="settings">レベル：<select id="levelSelect">
+<main id="home" class="screen active"><section class="hero"><div class="grid"><div class="card"><h3>📘 Study</h3><p>1問ごとに解説。to は「〜前」、past は「〜過ぎ」を確認。</p><button class="btn green" onclick="startGame('study')">解説つき</button></div><div class="card"><h3>⚡ Solo Attack</h3><p>60秒スコアアタック。速さ・連続正解で加点。</p><button class="btn" onclick="startGame('solo')">一人で勝負</button></div><div class="card"><h3>🔴 VS Battle 🔵</h3><p>左右チーム対戦。先に正解したチームが得点。</p><button class="btn blue" onclick="startGame('vs')">左右対戦</button></div><div class="card"><h3>🏫 Team Battle</h3><p>最大10人×2チーム。すし早押し風に対戦カード抽選。</p><button class="btn dark" onclick="openTeamSetup()">メンバー入力へ</button></div><div class="card"><h3>⌨️ Typing</h3><p>60秒で何問タイプできるか挑戦。時計を見て英語で答える。</p><button class="btn green" onclick="startGame('typing')">タイピング練習</button></div></div><div class="settings">レベル：<select id="levelSelect">
 <option value="1">Lv1 o'clock</option>
 <option value="2">Lv2 to</option>
 <option value="3">Lv3 past</option>
@@ -54,55 +54,82 @@ function initNames(){['red','blue'].forEach(team=>{const box=$(team+'Names');box
 function toggleTeamEntry(){const e=$('teamEntry');e.classList.toggle('show');updatePreview()}function openTeamSetup(){const e=$('teamEntry');e.classList.add('show');updatePreview();e.scrollIntoView({behavior:'smooth',block:'start'});const first=e.querySelector('input');if(first)setTimeout(()=>first.focus(),350)}function members(team){return [...$(team+'Names').querySelectorAll('input')].map(x=>x.value.trim()).filter(Boolean)}function roundsEach(){return +$('roundsEach').value||3}function updatePreview(){const r=members('red'),b=members('blue'),pairs=Math.max(r.length,b.length),total=pairs*roundsEach();$('matchPreview').innerHTML=`${r.length}対${b.length}：<b>${pairs}カード</b> × 各${roundsEach()}問 = <b>${total}問</b>`}function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function buildSchedule(){const r=shuffle(members('red').length?members('red'):['RED']),b=shuffle(members('blue').length?members('blue'):['BLUE']);const pairs=Math.max(r.length,b.length),out=[];for(let i=0;i<pairs;i++){for(let q=1;q<=roundsEach();q++)out.push({red:r[i%r.length],blue:b[i%b.length],match:i+1,q,per:roundsEach()})}return out}function previewSchedule(){const s=buildSchedule();$('shuffleOverlay').classList.add('show');let i=0;const cards=[...new Map(s.map(x=>[x.match,x])).values()];const t=setInterval(()=>{$('shuffleSub').textContent=`${cards[i%cards.length].red}  VS  ${cards[i%cards.length].blue}`;i++},180);setTimeout(()=>{clearInterval(t);$('shuffleOverlay').classList.remove('show');$('matchPreview').innerHTML=cards.slice(0,6).map((m,i)=>`${i+1}. ${m.red} vs ${m.blue} × ${m.per}問`).join('　')},1600)}
 function showScreen(id){['home','game','finish'].forEach(s=>$(s).classList.toggle('active',s===id));if(id==='home')loadRanking()}function goHome(){clearInterval(timerId);timerId=null;stopBGM();showScreen('home')}
-function startGame(mode){currentMode=mode;clearInterval(timerId);const level=+$('levelSelect').value,cc=+$('choiceCount').value;const total=mode==='team'?buildSchedule().length:(mode==='study'||mode==='typing'||mode==='vs'?10:20);state={mode,level,cc,total,q:0,score:0,combo:0,red:0,blue:0,redCombo:0,blueCombo:0,time:60,schedule:mode==='team'?buildSchedule():null,answered:false,current:null,seen:[]};$('modeStat').textContent=mode==='study'?'Study':mode==='typing'?'Typing':mode==='solo'?'Solo Attack':mode==='vs'?'VS Battle':'Team Battle';$('timerWrap').style.display=(mode==='study'||mode==='typing')?'none':'block';$('battleBoard').style.display=(mode==='vs'||mode==='team')?'grid':'none';$('qtotal').textContent=total;$('score').textContent='0';$('combo').textContent='0';showScreen('game');startBGM();startCountdown(()=>{if(mode==='solo'){timerId=setInterval(()=>{state.time--;$('timer').textContent=state.time;if(state.time<=0)finishGame()},1000)}nextQuestion()})}
+function startGame(mode){currentMode=mode;clearInterval(timerId);const level=+$('levelSelect').value,cc=+$('choiceCount').value;const total=mode==='typing'?999:(mode==='team'?buildSchedule().length:(mode==='study'||mode==='vs'?10:20));state={mode,level,cc,total,q:0,score:0,combo:0,red:0,blue:0,redCombo:0,blueCombo:0,time:60,schedule:mode==='team'?buildSchedule():null,answered:false,current:null,seen:[]};$('modeStat').textContent=mode==='study'?'Study':mode==='typing'?'Typing 60s':mode==='solo'?'Solo Attack':mode==='vs'?'VS Battle':'Team Battle';$('timerWrap').style.display=mode==='study'?'none':'block';$('timer').textContent='60';$('battleBoard').style.display=(mode==='vs'||mode==='team')?'grid':'none';$('qtotal').textContent=mode==='typing'?'∞':total;$('score').textContent='0';$('combo').textContent='0';showScreen('game');startBGM();startCountdown(()=>{if(mode==='solo'||mode==='typing'){timerId=setInterval(()=>{state.time--;$('timer').textContent=state.time;if(state.time<=0)finishGame()},1000)}nextQuestion()})}
 function startCountdown(cb){lock=true;$('countdown').classList.add('show');let n=3;$('countNum').textContent=n;const t=setInterval(()=>{n--;if(n>0){$('countNum').textContent=n}else{clearInterval(t);$('countdown').classList.remove('show');lock=false;cb()}},750)}
-function nextQuestion(){if(timerId&&state.time<=0)return finishGame();if(state.q>=state.total)return finishGame();state.q++;state.answered=false;state.current=makeQuestion(state.level);$('qnum').textContent=state.q;$('levelLine').textContent=LEVEL_LABEL[state.level];$('questionText').textContent=state.current.phrase;$('hintText').textContent=state.mode==='typing'?'時計を見て、英語でタイプしよう':(state.mode==='study'?'正しい時計を選んで、解説を読もう':'速く正確に選ぼう');$('resultBox').classList.remove('show');renderMatch();if(state.mode==='typing')renderTyping();else renderChoices();updateRanks();}
+function nextQuestion(){if(timerId&&state.time<=0)return finishGame();if(state.mode!=='typing'&&state.q>=state.total)return finishGame();state.q++;state.answered=false;state.current=makeQuestion(state.level);$('qnum').textContent=state.q;$('levelLine').textContent=LEVEL_LABEL[state.level];$('questionText').textContent=state.current.phrase;$('hintText').textContent=state.mode==='typing'?'60秒で何問タイプできるか挑戦！':(state.mode==='study'?'正しい時計を選んで、解説を読もう':'速く正確に選ぼう');$('resultBox').classList.remove('show');renderMatch();if(state.mode==='typing')renderTyping();else renderChoices();updateRanks();}
 function renderMatch(){const show=state.mode==='vs'||state.mode==='team';$('matchCard').classList.toggle('show',show);if(!show)return;if(state.mode==='vs'){$('redNow').textContent='RED TEAM';$('blueNow').textContent='BLUE TEAM';$('vsText').textContent='VS'}else{const m=state.schedule[state.q-1];$('redNow').textContent=m.red;$('blueNow').textContent=m.blue;$('vsText').innerHTML=`MATCH<br>${m.match}-${m.q}`}}
 function renderChoices(){$('typingBox').classList.remove('show');const grid=$('choices');grid.style.display='grid';grid.innerHTML='';grid.classList.toggle('battle',state.mode==='vs'||state.mode==='team');const opts=makeOptions(state.current,state.cc);function makeBtn(o,i,side){const b=document.createElement('button');b.className='choice';b.dataset.h=o.h;b.dataset.m=o.m;if(side)b.dataset.side=side;b.innerHTML=`<span class="answer-badge">${String.fromCharCode(65+i)}</span><canvas width="220" height="220"></canvas>`;b.onclick=()=>answer(b,o);drawClock(b.querySelector('canvas'),o.h,o.m);return b}if(state.mode==='vs'||state.mode==='team'){['red','blue'].forEach(side=>{const panel=document.createElement('div');panel.className='team-choice-panel '+side;panel.innerHTML=`<div class="team-choice-title">${side==='red'?'🔴 RED':'🔵 BLUE'}</div><div class="team-choice-grid"></div>`;const inner=panel.querySelector('.team-choice-grid');opts.forEach((o,i)=>inner.appendChild(makeBtn(o,i,side)));grid.appendChild(panel)})}else{opts.forEach((o,i)=>grid.appendChild(makeBtn(o,i,'')))}state.start=Date.now()}
 
 function renderTyping(){const grid=$('choices');grid.innerHTML='';grid.style.display='none';$('typingBox').classList.add('show');$('questionText').textContent='What time is it?';drawClock($('typingCanvas'),state.current.h,state.current.m);const input=$('typingInput');input.value='';input.disabled=false;setTimeout(()=>input.focus(),80);state.start=Date.now();input.onkeydown=e=>{if(e.key==='Enter')checkTyping()};}
 function normalizeTyping(s){return (s||'').toLowerCase().replace(/[’']/g,'').replace(/-/g,' ').replace(/fourty/g,'forty').replace(/\s+/g,' ').trim();}
+function numberWord(n){
+  if(n>=0 && n<nums.length && nums[n])return nums[n];
+  if(n<40)return `thirty-${nums[n-30]}`;
+  if(n===40)return 'forty';
+  if(n<50)return `forty-${nums[n-40]}`;
+  if(n===50)return 'fifty';
+  if(n<60)return `fifty-${nums[n-50]}`;
+  return String(n);
+}
 function minuteWord(m){
   if(m===0)return 'o clock';
   if(m<10)return `oh ${nums[m]}`;
-  if(m<30)return nums[m];
-  if(m===30)return 'thirty';
-  if(m===40)return 'forty';
-  if(m===50)return 'fifty';
-  return nums[m];
+  return numberWord(m);
 }
 function acceptableAnswers(q){
   const ans=new Set();
   const hour=to12(q.h);
+  const next=to12(q.h+1);
   const mm=String(q.m).padStart(2,'0');
+  const minutePlain=numberWord(q.m);
+
+  // past / to / half / quarter の学習表現
   ans.add(normalizeTyping(phrase(q.h,q.m,'word')));
+
+  // そのまま読む表現: 5:55 = five fifty five / 11:40 = eleven forty
+  if(q.m===0){
+    ans.add(normalizeTyping(nums[hour]));
+    ans.add(normalizeTyping(`${nums[hour]} o clock`));
+    ans.add(normalizeTyping(`${nums[hour]} oclock`));
+  }else{
+    ans.add(normalizeTyping(`${nums[hour]} ${minutePlain}`));
+    if(q.m<10){
+      ans.add(normalizeTyping(`${nums[hour]} oh ${nums[q.m]}`));
+      ans.add(normalizeTyping(`${nums[hour]} zero ${nums[q.m]}`));
+      ans.add(normalizeTyping(`${nums[hour]} ${nums[q.m]}`));
+    }
+  }
+
+  // 数字混じり・デジタル表記
   ans.add(normalizeTyping(`${hour}:${mm}`));
   ans.add(normalizeTyping(`${hour} ${mm}`));
   ans.add(normalizeTyping(`${hour} ${q.m}`));
-  if(q.m===0){
-    ans.add(normalizeTyping(nums[hour]));
-    ans.add(normalizeTyping(`${nums[hour]} oclock`));
-  }else{
-    ans.add(normalizeTyping(`${nums[hour]} ${minuteWord(q.m)}`));
-    if(q.m<10)ans.add(normalizeTyping(`${nums[hour]} ${nums[q.m]}`));
-  }
+
+  // 数字を使った past / to も許可
   if(q.m>30){
     const remain=60-q.m;
-    const next=to12(q.h+1);
     ans.add(normalizeTyping(`${remain} to ${next}`));
-    ans.add(normalizeTyping(`${nums[remain]} to ${next}`));
+    ans.add(normalizeTyping(`${numberWord(remain)} to ${next}`));
+    ans.add(normalizeTyping(`${remain} to ${nums[next]}`));
   }
   if(q.m>0 && q.m<30){
     ans.add(normalizeTyping(`${q.m} past ${hour}`));
-    ans.add(normalizeTyping(`${nums[q.m]} past ${hour}`));
+    ans.add(normalizeTyping(`${numberWord(q.m)} past ${hour}`));
+    ans.add(normalizeTyping(`${q.m} past ${nums[hour]}`));
   }
+
+  // forty / fourty 両方許可
+  [...ans].forEach(a=>{
+    if(a.includes('forty'))ans.add(a.replace(/forty/g,'fourty'));
+    if(a.includes('fourty'))ans.add(a.replace(/fourty/g,'forty'));
+  });
   return ans;
 }
-function checkTyping(){if(lock||state.answered||state.mode!=='typing')return;const val=normalizeTyping($('typingInput').value);const ok=acceptableAnswers(state.current).has(val);state.answered=true;$('typingInput').disabled=true;const speed=Math.max(0,Math.round(100-(Date.now()-state.start)/120));let pts=0;if(ok){state.combo++;pts=120+speed+state.combo*10;state.score+=pts;$('resultTitle').textContent=`正解！ +${pts}`;if(state.combo>=3)flash(`${state.combo} COMBO!`)}else{state.combo=0;$('resultTitle').textContent=`おしい！ 正解は ${cap(phrase(state.current.h,state.current.m,'word'))}`}$('score').textContent=state.score;$('combo').textContent=state.combo;$('explainText').innerHTML=explain(state.current);$('resultBox').classList.add('show');}
+function checkTyping(){if(lock||state.answered||state.mode!=='typing')return;const val=normalizeTyping($('typingInput').value);const ok=acceptableAnswers(state.current).has(val);state.answered=true;$('typingInput').disabled=true;const speed=Math.max(0,Math.round(100-(Date.now()-state.start)/120));let pts=0;if(ok){state.combo++;pts=120+speed+state.combo*10;state.score+=pts;$('resultTitle').textContent=`正解！ +${pts}`;if(state.combo>=3)flash(`${state.combo} COMBO!`)}else{state.combo=0;$('resultTitle').textContent=`おしい！ 正解は ${cap(phrase(state.current.h,state.current.m,'word'))}`}$('score').textContent=state.score;$('combo').textContent=state.combo;$('explainText').innerHTML=explain(state.current);$('resultBox').classList.add('show');setTimeout(()=>{if(state.mode==='typing'&&state.answered&&state.time>0)nextQuestion()},900);}
 
 function answer(btn,o){if(lock||state.answered)return;const ok=o.h===state.current.h&&o.m===state.current.m;const speed=Math.max(0,Math.round(100-(Date.now()-state.start)/120));state.answered=true;[...document.querySelectorAll('.choice')].forEach(c=>{c.classList.add('disabled');if(+c.dataset.h===state.current.h&&+c.dataset.m===state.current.m)c.classList.add('correct')});if(!ok)btn.classList.add('wrong');let title,pts=0;if(ok){state.combo++;pts=100+speed+state.combo*10;state.score+=pts;title=`正解！ +${pts}`;if(state.combo>=3)flash(`${state.combo} COMBO!`)}else{state.combo=0;title='おしい！'}if(state.mode==='vs'||state.mode==='team'){const side=decideSide(btn);if(ok){const p=100+speed+(side==='red'?state.redCombo:state.blueCombo)*10;if(side==='red'){state.red+=p;state.redCombo++;state.blueCombo=0}else{state.blue+=p;state.blueCombo++;state.redCombo=0}if(Math.max(state.redCombo,state.blueCombo)>=3)flash(`${side.toUpperCase()} ${Math.max(state.redCombo,state.blueCombo)} COMBO!`)}else{if(side==='red')state.redCombo=0;else state.blueCombo=0}}$('score').textContent=state.score;$('combo').textContent=state.combo;$('resultTitle').textContent=title;$('explainText').innerHTML=explain(state.current);$('miniReview').innerHTML=explain(state.current);$('resultBox').classList.add('show');updateRanks();if(state.mode!=='study')setTimeout(()=>{if(state.answered)nextQuestion()},1350)}
 function decideSide(btn){return btn.dataset.side || ((btn.getBoundingClientRect().left+btn.getBoundingClientRect().width/2 < innerWidth/2)?'red':'blue')}function updateRanks(){if(state.mode==='vs'||state.mode==='team'){$('battleRanks').innerHTML=`<div class="rank-row"><span>🔴 RED</span><span>${state.red} <span class="tag">combo ${state.redCombo}</span></span></div><div class="rank-row"><span>🔵 BLUE</span><span>${state.blue} <span class="tag">combo ${state.blueCombo}</span></span></div>`}}
-function finishGame(){clearInterval(timerId);timerId=null;stopBGM();showScreen('finish');let text='';if(state.mode==='vs'||state.mode==='team'){const win=state.red===state.blue?'DRAW':state.red>state.blue?'RED WIN!':'BLUE WIN!';$('finalScore').textContent=`${win}`;text=`RED ${state.red} / BLUE ${state.blue}`;$('saveRow').style.display='none';}else{$('finalScore').textContent=state.score;text=`${state.q}問に挑戦。最大コンボ ${state.combo}`;$('saveRow').style.display=(state.mode==='solo'||state.mode==='typing')?'flex':'none';}$('finalText').textContent=text;$('saveStatus').textContent='';}
+function finishGame(){clearInterval(timerId);timerId=null;stopBGM();showScreen('finish');let text='';if(state.mode==='vs'||state.mode==='team'){const win=state.red===state.blue?'DRAW':state.red>state.blue?'RED WIN!':'BLUE WIN!';$('finalScore').textContent=`${win}`;text=`RED ${state.red} / BLUE ${state.blue}`;$('saveRow').style.display='none';}else{$('finalScore').textContent=state.score;text=state.mode==='typing'?`60秒で${state.q}問に挑戦。最大コンボ ${state.combo}`:`${state.q}問に挑戦。最大コンボ ${state.combo}`;$('saveRow').style.display=(state.mode==='solo'||state.mode==='typing')?'flex':'none';}$('finalText').textContent=text;$('saveStatus').textContent='';}
 function flash(t){$('comboText').textContent=t;$('comboFlash').classList.add('show');setTimeout(()=>$('comboFlash').classList.remove('show'),900)}
 function fmt(h,m){return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`}function to12(h){h%=12;return h===0?12:h}function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}const nums=['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty','twenty-one','twenty-two','twenty-three','twenty-four','twenty-five','twenty-six','twenty-seven','twenty-eight','twenty-nine'];function phrase(h,m,type){const hh=to12(h),next=to12(h+1);if(type==='digital')return `${hh}:${String(m).padStart(2,'0')}`;if(m===0)return `${nums[hh]} o'clock`;if(m===30)return `half past ${nums[hh]}`;if(m===15)return `quarter past ${nums[hh]}`;if(m===45)return `quarter to ${nums[next]}`;if(m<30)return `${nums[m]} past ${nums[hh]}`;return `${nums[60-m]} to ${nums[next]}`}
 function makeQuestion(level){let h=1+Math.floor(Math.random()*12),mins,type='word';
