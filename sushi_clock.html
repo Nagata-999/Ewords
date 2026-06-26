@@ -167,42 +167,23 @@ async function loadRanking(){
 }
 async function saveRanking(){
   const name=($('playerName').value||'名無しすし').trim().slice(0,20);
-  const mode=state.mode==='typing'?'clock_typing':'clock';
   $('saveStatus').textContent='保存中...';
   try{
+    const attempted=Math.max(1,state.q||state.total||1);
+    const correct=Math.max(0,state.combo||0); // 既存scores列に合わせるため、accuracyは暫定100で保存
     const payload={
       player_name:name,
       score:state.score||0,
       max_combo:state.combo||0,
       accuracy:100,
-      mode:mode
+      mode:state.mode==='typing'?'clock_typing':'clock'
     };
-
-    // 同じ名前がある場合は、低い点で上書きしない。
-    // scoresテーブル側で player_name に unique 制約がある想定で upsert する。
-    const {data:existing,error:findError}=await supabaseClient
-      .from(RANKING_TABLE)
-      .select('player_name,score,mode')
-      .eq('player_name',name)
-      .maybeSingle();
-
-    if(findError && findError.code!=='PGRST116')throw findError;
-
-    if(existing && Number(existing.score||0) >= Number(payload.score||0)){
-      $('saveStatus').textContent=`保存済みの自己ベスト ${existing.score}pt の方が高いため、更新しませんでした。`;
-      loadRanking();
-      return;
-    }
-
-    const {error}=await supabaseClient
-      .from(RANKING_TABLE)
-      .upsert(payload,{onConflict:'player_name'});
-
+    const {error}=await supabaseClient.from(RANKING_TABLE).insert(payload);
     if(error)throw error;
-    $('saveStatus').textContent=existing?'自己ベストを更新しました。':'ランキングに保存しました。';
+    $('saveStatus').textContent='ランキングに保存しました。';
     loadRanking();
   }catch(e){
-    $('saveStatus').textContent='保存できませんでした。scores テーブルの unique 制約 / RLS / upsert policy を確認してください。';
+    $('saveStatus').textContent='保存できませんでした。scores テーブルのRLS / insert policyを確認してください。';
   }
 }
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
