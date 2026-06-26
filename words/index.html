@@ -6,6 +6,30 @@
 <title>すし単 英単語一覧｜英検・IELTS向け語彙リスト</title>
 <meta name="description" content="すし単に収録している英単語と日本語の意味、短い例文を一覧で確認できるページです。英検2級〜準1級、IELTS 5.0〜6.0前後の語彙学習に使えます。">
 <link rel="stylesheet" href="../style.css">
+
+<style>
+:root{--main:#ff8c42;--main2:#ffb366;--bg:#fff8f1;--card:#fff;--text:#333;}
+body{margin:0;font-family:"Segoe UI",sans-serif;background:linear-gradient(180deg,#fff8f1,#fff3e8);color:var(--text);}
+.wrap{max-width:1100px;margin:auto;padding:20px;}
+.hero,.card{background:#fff;border-radius:24px;padding:30px;box-shadow:0 8px 30px rgba(255,140,66,.12);margin-bottom:30px;}
+.hero{text-align:center;}
+.kicker{display:inline-block;background:var(--main);color:#fff;padding:8px 18px;border-radius:999px;font-weight:bold;}
+h1,h2{color:#e66a00;}
+.lead{line-height:1.8}
+.search{width:100%;max-width:500px;padding:14px 18px;border:2px solid #ffd0ad;border-radius:14px;font-size:1rem;}
+.search:focus{outline:none;border-color:var(--main);}
+table{width:100%;border-collapse:collapse;}
+th,td{padding:12px;border-bottom:1px solid #eee;text-align:left;}
+tbody tr:nth-child(even){background:#fff8f3;}
+tbody tr:hover{background:#ffe8d3;}
+.word{color:#e66a00;font-weight:700;}
+.ja{color:#777;font-size:.9rem;}
+.game-link,.secondary{display:inline-block;margin:8px;padding:12px 22px;border-radius:999px;text-decoration:none;font-weight:bold;}
+.game-link{background:linear-gradient(90deg,#ff8c42,#ffb347);color:#fff;}
+.secondary{background:#fff3e8;color:#e66a00;}
+.note{background:#fff3cd;border-left:5px solid #ffb300;padding:12px 18px;border-radius:12px;margin-bottom:20px;}
+</style>
+
 </head>
 <body>
 <div class="wrap">
@@ -22,7 +46,7 @@
 </section>
 <section class="card">
 <h2>英単語一覧</h2>
-<p class="note">&lt;tr&gt;&lt;th&gt;No.&lt;/th&gt;&lt;th&gt;英単語&lt;/th&gt;&lt;th&gt;日本語での扱い&lt;/th&gt;&lt;th&gt;例文&lt;/th&gt;&lt;/tr&gt;</p>
+<p class="note">単語・意味・例文を検索できます。</p>
 <div class="controls">
 <input id="search" class="search" type="search" placeholder="単語・日本語・例文で検索">
 <div id="count" class="count"></div>
