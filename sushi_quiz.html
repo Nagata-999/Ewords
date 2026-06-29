@@ -374,6 +374,64 @@ label{
 .countdown-overlay.show{display:flex;animation:countPop .7s ease-out}
 @keyframes countPop{0%{transform:scale(.65);opacity:.4}40%{transform:scale(1.08);opacity:1}100%{transform:scale(1);opacity:1}}
 .choice-summary{margin-top:14px;display:grid;gap:8px}.choice-summary-row{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:12px 14px;border-radius:14px;border:2px solid #ead6b8;background:#fff8ed;font-weight:900}.choice-summary-row.correct-choice{border-color:#22c55e;background:#ecfdf5}.choice-label{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:999px;background:#111827;color:#fff;font-weight:1000}.choice-picked{font-size:13px;color:#7b6755}.player-choice-text{font-size:13px;color:#7b6755;margin-left:8px}
+
+/* category card ON/OFF selector */
+.category-card-toolbar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:8px 0 12px;
+}
+.category-card-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+  gap:10px;
+  margin-top:8px;
+}
+.category-card{
+  border:2px solid #ffd399;
+  background:#fff8ed;
+  color:#9a4b08;
+  border-radius:18px;
+  padding:12px 14px;
+  min-height:76px;
+  cursor:pointer;
+  box-shadow:0 4px 0 #efc176;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:4px;
+  user-select:none;
+  transition:.12s transform,.12s filter,.12s opacity;
+}
+.category-card:hover{transform:translateY(-1px)}
+.category-card.off{
+  background:#f8fafc;
+  color:#94a3b8;
+  border-color:#e2e8f0;
+  box-shadow:0 4px 0 #cbd5e1;
+  opacity:.62;
+  filter:grayscale(.35);
+}
+.category-card-name{font-size:clamp(16px,2vw,22px);font-weight:1000;line-height:1.2}
+.category-card-count{font-size:13px;font-weight:900;color:#7b6755}
+.category-card.off .category-card-count{color:#94a3b8}
+.category-card-check{font-size:13px;font-weight:1000}
+
+.home-ranking-card{
+  background:linear-gradient(135deg,#fff7d6,#ffffff);
+}
+.ranking-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
+  margin:12px 0;
+}
+#homeRankingTop3 div{
+  margin:6px 0;
+}
+
 </style>
 </head>
 <body>
@@ -384,9 +442,22 @@ label{
 <button class="bigbtn" onclick="showSoloSetup()">一人でプレイ<span>1ミス終了のサバイバル。</span></button>
 <button class="bigbtn" onclick="showOnlineMenu()">みんなでプレイ<span>全員回答モード</span></button>
 <button class="bigbtn" onclick="showBuzzerMenu()">早押し<span>最初の正解だけ得点</span></button>
+<button class="bigbtn home-ranking-card" onclick="showHomeRanking()">ランキング<span>一人プレイの上位記録を見る</span></button>
 </section>
 
-<section id="soloSetup" class="panel hidden"><div class="notice">音楽・楽器・アニメ漫画・ディズニー・洋画・レトロゲーム・スポーツは出題率アップ中です。</div><span class="badge">Solo</span><h2>一人でプレイ</h2><div class="setup"><div><label>Category</label><select id="soloCat"></select></div><div><label>Rule</label><input value="One mistake ends the game" disabled></div></div><button onclick="startSolo()">Start</button><button class="secondary" onclick="home()">Back</button></section>
+<section id="homeRanking" class="panel hidden" style="text-align:center">
+  <span class="badge">Solo Ranking</span>
+  <h2>🏆 ランキング</h2>
+  <div id="homeRankingMsg" class="notice">ランキングを読み込みます。</div>
+  <div id="homeRankingTop3"></div>
+  <table class="rank"><tbody id="homeRankingTable"></tbody></table>
+  <div class="ranking-actions">
+    <button onclick="loadHomeRanking()">Reload</button>
+    <button class="secondary" onclick="home()">Home</button>
+  </div>
+</section>
+
+<section id="soloSetup" class="panel hidden"><div class="notice">音楽・楽器・アニメ漫画・ディズニー・洋画・レトロゲーム・スポーツは出題率アップ中です。</div><span class="badge">Solo</span><h2>一人でプレイ</h2><div class="setup"><div><label>Categories</label><div class="category-card-toolbar"><button type="button" class="secondary" onclick="setCategoryCards('soloCatCards',true)">All ON</button><button type="button" class="secondary" onclick="setCategoryCards('soloCatCards',false)">All OFF</button></div><div id="soloCatCards" class="category-card-grid"></div></div><div><label>Rule</label><input value="One mistake ends the game" disabled></div></div><button onclick="startSolo()">Start</button><button class="secondary" onclick="home()">Back</button></section>
 <section id="soloGame" class="hidden"><section class="stats"><div class="stat"><div id="streak" class="num">0</div><div class="cap">Streak</div></div><div class="stat"><div id="best" class="num">0</div><div class="cap">Best</div></div><div class="stat"><div id="level" class="num">∞</div><div class="cap">Pool</div></div><div class="stat"><div id="count" class="num">0</div><div class="cap">Answered</div></div></section><section class="panel"><span id="soloBadge" class="badge"></span><div id="soloQ" class="question"></div><div id="soloChoices" class="choices"></div><div id="soloRes" class="result"></div><button id="soloNext" class="hidden" onclick="nextSolo()">Next</button><button class="secondary" onclick="home()">Home</button></section></section>
 <section id="soloOver" class="panel hidden" style="text-align:center">
 <h2>I'm cooked... 🍣</h2>
@@ -404,14 +475,14 @@ label{
 <button class="secondary" onclick="home()">Home</button>
 </section>
 
-<section id="localSetup" class="panel hidden"><span class="badge">Same-device Party</span><h2>みんなでプレイ：同一端末</h2><div class="setup"><div><label>Category</label><select id="localCat"></select></div><div><label>Questions</label><select id="localLen"><option>5</option><option selected>10</option><option>15</option><option>20</option></select></div></div><h3>Players</h3><div class="setup"><input id="localName" placeholder="Player name"><button onclick="addLocalPlayer()">Add</button></div><div id="localPlayers" class="players"></div><button onclick="startLocal()">Start</button><button class="secondary" onclick="home()">Back</button></section>
+<section id="localSetup" class="panel hidden"><span class="badge">Same-device Party</span><h2>みんなでプレイ：同一端末</h2><div class="setup"><div><label>Categories</label><div class="category-card-toolbar"><button type="button" class="secondary" onclick="setCategoryCards('localCatCards',true)">All ON</button><button type="button" class="secondary" onclick="setCategoryCards('localCatCards',false)">All OFF</button></div><div id="localCatCards" class="category-card-grid"></div></div><div><label>Questions</label><select id="localLen"><option>5</option><option selected>10</option><option>15</option><option>20</option></select></div></div><h3>Players</h3><div class="setup"><input id="localName" placeholder="Player name"><button onclick="addLocalPlayer()">Add</button></div><div id="localPlayers" class="players"></div><button onclick="startLocal()">Start</button><button class="secondary" onclick="home()">Back</button></section>
 <section id="localHost" class="panel hidden"><span id="localBadge" class="badge"></span><div id="localProg" class="small"></div><div id="localQ" class="question"></div><div id="localChoices" class="choices"></div><button class="blue" onclick="showLocalPad()">Players answer</button><button class="secondary" onclick="localReveal()">Reveal</button></section>
 <section id="localPad" class="panel hidden"><span class="badge">Answer Pad</span><h2 id="localTurn"></h2><div class="pad kahoot-pad"><button onclick="submitLocal(0)"><span class="kahoot-symbol">▲</span><span class="kahoot-letter">A</span></button><button onclick="submitLocal(1)"><span class="kahoot-symbol">◆</span><span class="kahoot-letter">B</span></button><button onclick="submitLocal(2)"><span class="kahoot-symbol">●</span><span class="kahoot-letter">C</span></button><button onclick="submitLocal(3)"><span class="kahoot-symbol">■</span><span class="kahoot-letter">D</span></button></div></section>
 <section id="localResult" class="panel hidden"><span class="badge">Result</span><div id="localAns" class="result show"></div><table id="localTable" class="rank"></table><button onclick="nextLocal()">Next</button><button class="secondary" onclick="home()">Home</button></section>
 <section id="localFinal" class="panel hidden" style="text-align:center"><h2>Final Ranking 🍣</h2><table id="localFinalTable" class="rank"></table><button onclick="showLocalSetup()">Again</button><button class="secondary" onclick="home()">Home</button></section>
 
 <section id="onlineMenu" class="panel hidden"><span class="badge">Session ID</span><h2>みんなでプレイ：セッションID</h2><div class="notice">この版はSupabase未設定なら同一ブラウザ内デモ通信。HTML内のSUPABASE_URL / SUPABASE_ANON_KEYを入れると別端末対応にできます。</div><button onclick="showOnlineHost()">ホストになる</button><button class="blue" onclick="showJoin()">参加する</button><button class="secondary" onclick="home()">Back</button></section>
-<section id="onlineHostSetup" class="panel hidden"><div class="notice">音楽・楽器・アニメ漫画・ディズニー・洋画・レトロゲーム・スポーツは出題率アップ中です。</div><span class="badge">Host</span><h2>セッション作成</h2><div class="setup"><div><label>Category</label><select id="onlineCat"></select></div><div><label>Questions</label><select id="onlineLen"><option>5</option><option selected>10</option><option>15</option><option>20</option></select></div></div><button onclick="createSession()">Create Session</button><button class="secondary" onclick="showOnlineMenu()">Back</button></section>
+<section id="onlineHostSetup" class="panel hidden"><div class="notice">音楽・楽器・アニメ漫画・ディズニー・洋画・レトロゲーム・スポーツは出題率アップ中です。</div><span class="badge">Host</span><h2>セッション作成</h2><div class="setup"><div><label>Categories</label><div class="category-card-toolbar"><button type="button" class="secondary" onclick="setCategoryCards('onlineCatCards',true)">All ON</button><button type="button" class="secondary" onclick="setCategoryCards('onlineCatCards',false)">All OFF</button></div><div id="onlineCatCards" class="category-card-grid"></div></div><div><label>Questions</label><select id="onlineLen"><option>5</option><option selected>10</option><option>15</option><option>20</option></select></div></div><button onclick="createSession()">Create Session</button><button class="secondary" onclick="showOnlineMenu()">Back</button></section>
 <section id="onlineLobby" class="panel hidden"><span class="badge">Host Lobby</span><h2>Session ID</h2><div id="code" class="code"></div><h3>Players</h3><div id="onlinePlayers" class="players"></div><button onclick="startOnline()">Start Quiz</button></section>
 <section id="onlineHostGame" class="panel hidden"><span id="ohBadge" class="badge"></span><div id="ohProg" class="small"></div><div id="hostTimer" class="timer-ring" style="--timePct:100">20</div><div id="ohQ" class="question"></div><div id="ohChoices" class="choices"></div><div id="ohStatus" class="notice"></div><div id="hostAnsweredBar" class="answered-bar"></div><button onclick="revealOnline()">Reveal / Score</button><button class="secondary" onclick="home()">End</button></section>
 <section id="onlineResult" class="panel hidden"><span class="badge">Answer Check</span><div id="onlineAns" class="result show"></div><div id="onlineBreakdown" class="answer-breakdown"></div><button onclick="showOnlineRanking()">Show Ranking</button><button class="secondary" onclick="home()">End</button></section><section id="onlineRanking" class="panel hidden"><span class="badge">Current Ranking</span><table id="onlineTable" class="rank"></table><button onclick="nextOnline()">Next Question</button><button class="secondary" onclick="home()">End</button></section>
@@ -423,7 +494,7 @@ label{
   <span class="badge">Buzzer Mode</span>
   <h2>早押しモード</h2>
   <div class="setup">
-    <div><label>Category</label><select id="buzzerCat"></select></div>
+    <div><label>Categories</label><div class="category-card-toolbar"><button type="button" class="secondary" onclick="setCategoryCards('buzzerCatCards',true)">All ON</button><button type="button" class="secondary" onclick="setCategoryCards('buzzerCatCards',false)">All OFF</button></div><div id="buzzerCatCards" class="category-card-grid"></div></div>
     <div><label>Questions</label><select id="buzzerLen"><option>5</option><option selected>10</option><option>15</option><option>20</option></select></div>
   </div>
   <button onclick="createBuzzerSession()">ホストになる</button>
@@ -721,10 +792,50 @@ const SUPABASE_URL = "https://rxyoyveykxdfrpomkltl.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7";
 const HAS_SUPABASE = !!(SUPABASE_URL && (typeof SUPABASE_ANON_KEY !== "undefined" ? SUPABASE_ANON_KEY : SUPABASE_PUBLISHABLE_KEY) && window.supabase);
 const sb = HAS_SUPABASE ? window.supabase.createClient(SUPABASE_URL, (typeof SUPABASE_ANON_KEY !== "undefined" ? SUPABASE_ANON_KEY : SUPABASE_PUBLISHABLE_KEY)) : null;
-const screens=["home","soloSetup","soloGame","soloOver","localSetup","localHost","localPad","localResult","localFinal","onlineMenu","onlineHostSetup","onlineLobby","onlineHostGame","onlineResult","onlineRanking","join","playerWait","playerGame","buzzerMenu","buzzerLobby","buzzerJoin","buzzerHostGame","buzzerPlayerWait","buzzerPlayerGame","buzzerResult","buzzerRanking"];
+const screens=["home","homeRanking","soloSetup","soloGame","soloOver","localSetup","localHost","localPad","localResult","localFinal","onlineMenu","onlineHostSetup","onlineLobby","onlineHostGame","onlineResult","onlineRanking","join","playerWait","playerGame","buzzerMenu","buzzerLobby","buzzerJoin","buzzerHostGame","buzzerPlayerWait","buzzerPlayerGame","buzzerResult","buzzerRanking"];
 let solo={}, local={players:[]}, online={}, timer=null;
 function hide(){screens.forEach(id=>document.getElementById(id).classList.add("hidden"))} function show(id){hide();document.getElementById(id).classList.remove("hidden")} function home(){stop(); if(typeof stopBuzzerTimer==='function') stopBuzzerTimer(); show("home")}
 function shuffle(a){return [...a].sort(()=>Math.random()-.5)} function cats(){return ["Random",...Array.from(new Set(QUESTIONS.map(q=>q.cat))).sort()]}
+
+
+async function loadHomeRanking(){
+ const msg=document.getElementById('homeRankingMsg');
+ const top=document.getElementById('homeRankingTop3');
+ const table=document.getElementById('homeRankingTable');
+ if(!msg || !top || !table) return;
+ top.innerHTML="";
+ table.innerHTML="";
+ if(!HAS_SUPABASE){
+   msg.textContent="Supabase設定がないため、ランキングを表示できません。";
+   return;
+ }
+ msg.textContent="Loading...";
+ const {data,error}=await sb.from('scores')
+   .select('*')
+   .eq('mode','sushi_quiz_solo')
+   .order('score',{ascending:false})
+   .limit(20);
+ if(error){
+   msg.textContent="ランキングを読み込めませんでした。scoresテーブルやRLS設定を確認してください。";
+   return;
+ }
+ const rows=data||[];
+ if(!rows.length){
+   msg.textContent="まだ記録がありません。一人プレイでスコアを保存すると表示されます。";
+   return;
+ }
+ msg.textContent=`上位${rows.length}件を表示中`;
+ top.innerHTML=rows.slice(0,3).map((r,i)=>
+   `<div style="font-size:clamp(22px,3vw,34px);font-weight:1000">${['🥇','🥈','🥉'][i]} ${r.player_name} ${r.score}</div>`
+ ).join('');
+ table.innerHTML=rows.map((r,i)=>
+   `<tr class="ranking-big-row"><td>${i+1}</td><td>${r.player_name}</td><td>${r.score}</td></tr>`
+ ).join('');
+}
+function showHomeRanking(){
+ show('homeRanking');
+ loadHomeRanking();
+}
 
 async function saveSoloScore(){
  if(!HAS_SUPABASE){return;}
@@ -769,8 +880,36 @@ async function saveSoloScore(){
  document.getElementById('soloRankingWrap').classList.remove('hidden');
 }
 
-function setup(){["soloCat","localCat","onlineCat","buzzerCat"].forEach(id=>{let s=document.getElementById(id);s.innerHTML="";cats().forEach(c=>{let o=document.createElement("option");o.textContent=c;s.appendChild(o)})})}
+function categoryList(){return Array.from(new Set(QUESTIONS.map(q=>q.cat))).sort()}
+function categoryCount(cat){return QUESTIONS.filter(q=>q.cat===cat).length}
+function renderCategoryCards(id){
+  const wrap=document.getElementById(id);
+  if(!wrap) return;
+  wrap.innerHTML=categoryList().map(cat=>`<div class="category-card" data-cat="${cat.replace(/&/g,'&amp;').replace(/"/g,'&quot;')}" onclick="toggleCategoryCard(this)"><div class="category-card-check">ON</div><div class="category-card-name">${cat}</div><div class="category-card-count">${categoryCount(cat)} questions</div></div>`).join("");
+}
+function toggleCategoryCard(el){
+  el.classList.toggle("off");
+  el.querySelector(".category-card-check").textContent=el.classList.contains("off") ? "OFF" : "ON";
+}
+function setCategoryCards(id,on){
+  document.querySelectorAll(`#${id} .category-card`).forEach(card=>{
+    card.classList.toggle("off", !on);
+    const check=card.querySelector(".category-card-check");
+    if(check) check.textContent=on ? "ON" : "OFF";
+  });
+}
+function selectedCategories(id){
+  return [...document.querySelectorAll(`#${id} .category-card:not(.off)`)].map(card=>card.dataset.cat);
+}
+function requireSelectedCategories(id){
+  const selected=selectedCategories(id);
+  if(!selected.length){ alert("少なくとも1ジャンルはONにしてください。Default is all ON."); return null; }
+  return selected;
+}
+function categoryKey(cat){ return Array.isArray(cat) ? cat.join("|") : String(cat||"Random"); }
+function setup(){["soloCatCards","localCatCards","onlineCatCards","buzzerCatCards"].forEach(renderCategoryCards)}
 function pool(cat){
+  if(Array.isArray(cat)) return QUESTIONS.filter(q => cat.includes(q.cat));
   return QUESTIONS.filter(q => cat==="Random" || q.cat===cat);
 }
 function pick(cat, used=[]){
@@ -870,8 +1009,9 @@ function table(id,ps){let r=[...ps].sort((a,b)=>(b.score||0)-(a.score||0));docum
 // solo
 function showSoloSetup(){show("soloSetup")}
 function startSolo(){
-  let cat=soloCat.value;
-  solo={cat,streak:0,count:0,best:Number(localStorage.getItem("sqbest_"+cat)||0),locked:false};
+  let cat=requireSelectedCategories("soloCatCards");
+  if(!cat) return;
+  solo={cat,streak:0,count:0,best:Number(localStorage.getItem("sqbest_"+categoryKey(cat))||0),locked:false};
   nextSolo();
 }
 function nextSolo(){
@@ -926,7 +1066,7 @@ function ansSolo(i,el){
 
 // local party
 function showLocalSetup(){renderLocalPlayers();show("localSetup")} function addLocalPlayer(){let n=cleanPlayerName(localName.value.trim());if(!n)return;local.players.push({name:n,score:0,correct:0,answer:null});localName.value="";renderLocalPlayers()} function renderLocalPlayers(){localPlayers.innerHTML="";(local.players||[]).forEach((p,i)=>{let d=document.createElement("div");d.className="player";d.textContent=cleanPlayerName(p.name)+" ✕";d.onclick=()=>{local.players.splice(i,1);renderLocalPlayers()};localPlayers.appendChild(d)})}
-function startLocal(){if(!local.players.length)return alert("Add players");local={...local,cat:localCat.value,len:Number(localLen.value),idx:0,used:[],turn:0,players:local.players.map(p=>({name:p.name,score:0,correct:0,answer:null}))};nextLocalQ()}
+function startLocal(){if(!local.players.length)return alert("Add players");const cat=requireSelectedCategories("localCatCards"); if(!cat) return; local={...local,cat,len:Number(localLen.value),idx:0,used:[],turn:0,players:local.players.map(p=>({name:p.name,score:0,correct:0,answer:null}))};nextLocalQ()}
 function nextLocalQ(){if(local.idx>=local.len){show("localFinal");table("localFinalTable",local.players);return}local.cur=pick(local.cat,local.used);local.used.push(local.cur.q);local.players.forEach(p=>p.answer=null);local.turn=0;show("localHost");renderLocalHost()}
 function renderLocalHost(){let c=local.cur;localBadge.textContent=`${c.cat}`;localProg.textContent=`Question ${local.idx+1} / ${local.len}`;localQ.textContent=c.q;localChoices.innerHTML="";c.choices.forEach((x,i)=>{let d=document.createElement("div");d.className="choice";d.innerHTML=`<b>${["▲ A","◆ B","● C","■ D"][i]}.</b> ${x}`;localChoices.appendChild(d)})}
 function showLocalPad(){show("localPad");localTurn.textContent=cleanPlayerName(local.players[local.turn].name)+", choose your answer"} function submitLocal(a){local.players[local.turn].answer=a;local.turn++;if(local.turn>=local.players.length)localReveal();else showLocalPad()}
@@ -936,10 +1076,11 @@ function localReveal(){let c=local.cur;local.players.forEach(p=>{if(p.answer===c
 function showOnlineMenu(){show("onlineMenu")} function showOnlineHost(){show("onlineHostSetup")} function showJoin(){show("join")}
 async function createSession(){
   let c=code4();
-  online={role:"host",code:c,cat:onlineCat.value,len:Number(onlineLen.value),idx:0,used:[],players:[]};
+  const cat=requireSelectedCategories("onlineCatCards"); if(!cat) return;
+  online={role:"host",code:c,cat,len:Number(onlineLen.value),idx:0,used:[],players:[]};
 
   if(HAS_SUPABASE){
-    const payload={code:c,status:"lobby",category:online.cat,length:online.len,q_index:0,current_question:null};
+    const payload={code:c,status:"lobby",category:"Custom",length:online.len,q_index:0,current_question:null};
     const {data,error}=await sb
       .from("sushi_quiz_sessions")
       .insert(payload)
@@ -964,7 +1105,7 @@ async function createSession(){
       return;
     }
   }else{
-    setL(c,"session",{code:c,status:"lobby",category:online.cat,length:online.len,q_index:0,current_question:null});
+    setL(c,"session",{code:c,status:"lobby",category:"Custom",length:online.len,q_index:0,current_question:null});
     setL(c,"players",[]);
   }
 
@@ -1160,13 +1301,14 @@ async function refreshBuzzerPlayers(){
 
 async function createBuzzerSession(){
   const c=code4();
-  buzzer={role:"host",code:c,cat:buzzerCat.value,len:Number(buzzerLen.value),idx:0,used:[],players:[],winner:null,revealed:false};
+  const cat=requireSelectedCategories("buzzerCatCards"); if(!cat) return;
+  buzzer={role:"host",code:c,cat,len:Number(buzzerLen.value),idx:0,used:[],players:[],winner:null,revealed:false};
   if(HAS_SUPABASE){
-    const payload={code:c,status:"buzzer_lobby",category:buzzer.cat,length:buzzer.len,q_index:0,current_question:null};
+    const payload={code:c,status:"buzzer_lobby",category:"Custom",length:buzzer.len,q_index:0,current_question:null};
     const {data,error}=await sb.from("sushi_quiz_sessions").insert(payload).select().maybeSingle();
     if(error||!data){ alert("セッション作成に失敗しました。"); console.error(error); return; }
   }else{
-    setL(c,"session",{code:c,status:"buzzer_lobby",category:buzzer.cat,length:buzzer.len,q_index:0,current_question:null});
+    setL(c,"session",{code:c,status:"buzzer_lobby",category:"Custom",length:buzzer.len,q_index:0,current_question:null});
     setL(c,"players",[]);
   }
   buzzerCode.textContent=c;
@@ -1520,32 +1662,6 @@ async function showBuzzerRanking(){
 {"cat": "Disney", "q": "Ariel's father?", "choices": ["Triton", "Poseidon", "Neptune", "Eric"], "ans": 0, "exp": "Triton is correct."},
 {"cat": "Disney", "q": "Which Disney film is set in Colombia?", "choices": ["Encanto", "Coco", "Luca", "Brave"], "ans": 0, "exp": "Encanto is correct."},
 {"cat": "Disney", "q": "Name of the snowman in Frozen?", "choices": ["Olaf", "Sven", "Kristoff", "Hans"], "ans": 0, "exp": "Olaf is correct."},
-                                           // Add to QUESTIONS array
-
-{"cat":"Historical Figures","q":"Who was known as the 'Little Corporal'?","choices":["Napoleon","Caesar","Lincoln","Churchill"],"ans":0,"exp":"Napoleon Bonaparte was nicknamed the Little Corporal."},
-{"cat":"Historical Figures","q":"Who discovered America for Europeans in 1492?","choices":["Magellan","Columbus","Cook","Vespucci"],"ans":1,"exp":"Christopher Columbus reached the Americas in 1492."},
-{"cat":"Historical Figures","q":"Who developed the theory of relativity?","choices":["Newton","Darwin","Einstein","Galileo"],"ans":2,"exp":"Albert Einstein developed relativity."},
-{"cat":"Historical Figures","q":"Who unified Japan after Oda Nobunaga?","choices":["Tokugawa Ieyasu","Toyotomi Hideyoshi","Saigo Takamori","Minamoto Yoritomo"],"ans":1,"exp":"Toyotomi Hideyoshi unified most of Japan."},
-{"cat":"Historical Figures","q":"Who was the first president of the United States?","choices":["Lincoln","Washington","Jefferson","Adams"],"ans":1,"exp":"George Washington was the first U.S. president."},
-
-{"cat":"Sports Stars","q":"Which soccer player won the 2022 FIFA World Cup with Argentina?","choices":["Ronaldo","Messi","Neymar","Mbappe"],"ans":1,"exp":"Lionel Messi captained Argentina to victory."},
-{"cat":"Sports Stars","q":"Which baseball player is nicknamed 'Sho-Time'?","choices":["Ichiro","Ohtani","Judge","Matsui"],"ans":1,"exp":"Shohei Ohtani is known as Sho-Time."},
-{"cat":"Sports Stars","q":"Which NBA legend is known as 'His Airness'?","choices":["Jordan","LeBron","Bryant","Curry"],"ans":0,"exp":"Michael Jordan is called His Airness."},
-{"cat":"Sports Stars","q":"Which sprinter holds the men's 100m world record?","choices":["Bolt","Lewis","Blake","Powell"],"ans":0,"exp":"Usain Bolt holds the world record."},
-{"cat":"Sports Stars","q":"Which Japanese figure skater won back-to-back Olympic gold medals?","choices":["Uno","Hanyu","Kagiyama","Takahashi"],"ans":1,"exp":"Yuzuru Hanyu won Olympic gold in 2014 and 2018."},
-
-{"cat":"Flags","q":"Which country's flag is known as the Union Jack?","choices":["USA","UK","Australia","Canada"],"ans":1,"exp":"The Union Jack is the flag of the United Kingdom."},
-{"cat":"Flags","q":"Which country's flag features a maple leaf?","choices":["Canada","Brazil","Mexico","Australia"],"ans":0,"exp":"Canada's flag has a red maple leaf."},
-{"cat":"Flags","q":"A red flag with a white cross belongs to which country?","choices":["Switzerland","Denmark","Austria","Finland"],"ans":0,"exp":"Switzerland uses a white cross on red."},
-{"cat":"Flags","q":"Which country's flag has a red circle on a white background?","choices":["Japan","Bangladesh","Palau","Indonesia"],"ans":0,"exp":"Japan's flag is known as the Hinomaru."},
-{"cat":"Flags","q":"Green, yellow, and blue are prominent colors on which country's flag?","choices":["Brazil","Italy","Germany","France"],"ans":0,"exp":"Brazil's flag is green, yellow, and blue."},
-
-{"cat":"Musical Instruments","q":"Which instrument has 88 keys?","choices":["Violin","Piano","Flute","Trumpet"],"ans":1,"exp":"A standard piano has 88 keys."},
-{"cat":"Musical Instruments","q":"Which woodwind instrument is usually made of metal?","choices":["Clarinet","Oboe","Saxophone","Bassoon"],"ans":2,"exp":"Saxophones are metal but classified as woodwinds."},
-{"cat":"Musical Instruments","q":"Which instrument is the largest in the string family?","choices":["Violin","Cello","Double Bass","Viola"],"ans":2,"exp":"The double bass is the largest common string instrument."},
-{"cat":"Musical Instruments","q":"Which brass instrument has a slide?","choices":["Trumpet","Tuba","French Horn","Trombone"],"ans":3,"exp":"The trombone uses a slide."},
-{"cat":"Musical Instruments","q":"Which instrument keeps rhythm in many bands?","choices":["Harp","Drums","Flute","Violin"],"ans":1,"exp":"Drums often provide rhythm."},
-
 {"cat": "Disney", "q": "Villain in The Lion King?", "choices": ["Scar", "Shere Khan", "Jafar", "Ursula"], "ans": 0, "exp": "Scar is correct."}]);
 }
 
