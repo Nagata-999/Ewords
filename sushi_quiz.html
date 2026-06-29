@@ -386,7 +386,7 @@ label{
 <button class="bigbtn" onclick="showBuzzerMenu()">早押し<span>最初の正解だけ得点</span></button>
 </section>
 
-<section id="soloSetup" class="panel hidden"><div class="notice">音楽・楽器・アニメ漫画・ディズニーは出題率アップ中です。</div><span class="badge">Solo</span><h2>一人でプレイ</h2><div class="setup"><div><label>Category</label><select id="soloCat"></select></div><div><label>Rule</label><input value="One mistake ends the game" disabled></div></div><button onclick="startSolo()">Start</button><button class="secondary" onclick="home()">Back</button></section>
+<section id="soloSetup" class="panel hidden"><div class="notice">音楽・楽器・アニメ漫画・ディズニー・洋画・レトロゲーム・スポーツは出題率アップ中です。</div><span class="badge">Solo</span><h2>一人でプレイ</h2><div class="setup"><div><label>Category</label><select id="soloCat"></select></div><div><label>Rule</label><input value="One mistake ends the game" disabled></div></div><button onclick="startSolo()">Start</button><button class="secondary" onclick="home()">Back</button></section>
 <section id="soloGame" class="hidden"><section class="stats"><div class="stat"><div id="streak" class="num">0</div><div class="cap">Streak</div></div><div class="stat"><div id="best" class="num">0</div><div class="cap">Best</div></div><div class="stat"><div id="level" class="num">∞</div><div class="cap">Pool</div></div><div class="stat"><div id="count" class="num">0</div><div class="cap">Answered</div></div></section><section class="panel"><span id="soloBadge" class="badge"></span><div id="soloQ" class="question"></div><div id="soloChoices" class="choices"></div><div id="soloRes" class="result"></div><button id="soloNext" class="hidden" onclick="nextSolo()">Next</button><button class="secondary" onclick="home()">Home</button></section></section>
 <section id="soloOver" class="panel hidden" style="text-align:center">
 <h2>I'm cooked... 🍣</h2>
@@ -411,7 +411,7 @@ label{
 <section id="localFinal" class="panel hidden" style="text-align:center"><h2>Final Ranking 🍣</h2><table id="localFinalTable" class="rank"></table><button onclick="showLocalSetup()">Again</button><button class="secondary" onclick="home()">Home</button></section>
 
 <section id="onlineMenu" class="panel hidden"><span class="badge">Session ID</span><h2>みんなでプレイ：セッションID</h2><div class="notice">この版はSupabase未設定なら同一ブラウザ内デモ通信。HTML内のSUPABASE_URL / SUPABASE_ANON_KEYを入れると別端末対応にできます。</div><button onclick="showOnlineHost()">ホストになる</button><button class="blue" onclick="showJoin()">参加する</button><button class="secondary" onclick="home()">Back</button></section>
-<section id="onlineHostSetup" class="panel hidden"><div class="notice">音楽・楽器・アニメ漫画・ディズニーは出題率アップ中です。</div><span class="badge">Host</span><h2>セッション作成</h2><div class="setup"><div><label>Category</label><select id="onlineCat"></select></div><div><label>Questions</label><select id="onlineLen"><option>5</option><option selected>10</option><option>15</option><option>20</option></select></div></div><button onclick="createSession()">Create Session</button><button class="secondary" onclick="showOnlineMenu()">Back</button></section>
+<section id="onlineHostSetup" class="panel hidden"><div class="notice">音楽・楽器・アニメ漫画・ディズニー・洋画・レトロゲーム・スポーツは出題率アップ中です。</div><span class="badge">Host</span><h2>セッション作成</h2><div class="setup"><div><label>Category</label><select id="onlineCat"></select></div><div><label>Questions</label><select id="onlineLen"><option>5</option><option selected>10</option><option>15</option><option>20</option></select></div></div><button onclick="createSession()">Create Session</button><button class="secondary" onclick="showOnlineMenu()">Back</button></section>
 <section id="onlineLobby" class="panel hidden"><span class="badge">Host Lobby</span><h2>Session ID</h2><div id="code" class="code"></div><h3>Players</h3><div id="onlinePlayers" class="players"></div><button onclick="startOnline()">Start Quiz</button></section>
 <section id="onlineHostGame" class="panel hidden"><span id="ohBadge" class="badge"></span><div id="ohProg" class="small"></div><div id="hostTimer" class="timer-ring" style="--timePct:100">20</div><div id="ohQ" class="question"></div><div id="ohChoices" class="choices"></div><div id="ohStatus" class="notice"></div><div id="hostAnsweredBar" class="answered-bar"></div><button onclick="revealOnline()">Reveal / Score</button><button class="secondary" onclick="home()">End</button></section>
 <section id="onlineResult" class="panel hidden"><span class="badge">Answer Check</span><div id="onlineAns" class="result show"></div><div id="onlineBreakdown" class="answer-breakdown"></div><button onclick="showOnlineRanking()">Show Ranking</button><button class="secondary" onclick="home()">End</button></section><section id="onlineRanking" class="panel hidden"><span class="badge">Current Ranking</span><table id="onlineTable" class="rank"></table><button onclick="nextOnline()">Next Question</button><button class="secondary" onclick="home()">End</button></section>
@@ -419,7 +419,7 @@ label{
 <section id="playerWait" class="panel hidden"><span class="badge">Player</span><h2 id="pStatus">Waiting...</h2><p class="small">ホスト画面を見て、問題が始まるまで待ってください。</p></section>
 <section id="playerGame" class="panel hidden"><span class="badge">Choose Answer</span><h2 id="pName"></h2><div class="pad kahoot-pad"><button id="pa" onclick="submitPlayer(0)"><span class="kahoot-symbol">▲</span><span class="kahoot-letter">A</span></button><button id="pb" onclick="submitPlayer(1)"><span class="kahoot-symbol">◆</span><span class="kahoot-letter">B</span></button><button id="pc" onclick="submitPlayer(2)"><span class="kahoot-symbol">●</span><span class="kahoot-letter">C</span></button><button id="pd" onclick="submitPlayer(3)"><span class="kahoot-symbol">■</span><span class="kahoot-letter">D</span></button></div><div id="pMsg" class="notice">問題文はホスト画面を見てください。</div><div id="playerAnsweredBar" class="answered-bar"></div></section>
 
-<section id="buzzerMenu" class="panel hidden"><div class="notice">音楽・楽器・アニメ漫画・ディズニーは出題率アップ中です。</div>
+<section id="buzzerMenu" class="panel hidden"><div class="notice">音楽・楽器・アニメ漫画・ディズニー・洋画・レトロゲーム・スポーツは出題率アップ中です。</div>
   <span class="badge">Buzzer Mode</span>
   <h2>早押しモード</h2>
   <div class="setup">
@@ -509,7 +509,11 @@ const CATEGORY_WEIGHTS = {
   "Popular Music": 4,
   "Music History": 4,
   "Musical Instruments": 3,
-  "Disney": 3
+  "Disney": 3,
+  "World Capitals": 2,
+  "Retro Games": 3,
+  "Sports General": 3,
+  "Western Movies": 3
 };
 
 function buildWeightedQuestionPool(pool){
@@ -655,7 +659,64 @@ const QUESTIONS = [{"cat":"Chemistry","q":"What is the chemical symbol for gold?
 {"cat": "World Heritage", "q": "The Great Barrier Reef is off the coast of which country?", "choices": ["Australia", "New Zealand", "Indonesia", "South Africa"], "ans": 0, "exp": "The Great Barrier Reef is off Australia."},
 {"cat": "World Heritage", "q": "Stonehenge is located in which country?", "choices": ["England", "Ireland", "Scotland", "Wales"], "ans": 0, "exp": "Stonehenge is in England."},
 {"cat": "World Heritage", "q": "The Alhambra is located in which Spanish city?", "choices": ["Granada", "Seville", "Madrid", "Barcelona"], "ans": 0, "exp": "The Alhambra is in Granada."},
-{"cat": "World Heritage", "q": "The Galapagos Islands belong to which country?", "choices": ["Ecuador", "Peru", "Chile", "Colombia"], "ans": 0, "exp": "The Galapagos Islands belong to Ecuador."}];
+{"cat": "World Heritage", "q": "The Galapagos Islands belong to which country?", "choices": ["Ecuador", "Peru", "Chile", "Colombia"], "ans": 0, "exp": "The Galapagos Islands belong to Ecuador."},
+{"cat": "World Capitals", "q": "What is the capital of Australia?", "choices": ["Sydney", "Melbourne", "Canberra", "Perth"], "ans": 2, "exp": "Canberra is the capital of Australia."},
+{"cat": "World Capitals", "q": "What is the capital of Canada?", "choices": ["Toronto", "Vancouver", "Ottawa", "Montreal"], "ans": 2, "exp": "Ottawa is the capital of Canada."},
+{"cat": "World Capitals", "q": "What is the capital of Brazil?", "choices": ["Rio de Janeiro", "São Paulo", "Brasília", "Salvador"], "ans": 2, "exp": "Brasília is the capital of Brazil."},
+{"cat": "World Capitals", "q": "What is the capital of Egypt?", "choices": ["Cairo", "Alexandria", "Luxor", "Giza"], "ans": 0, "exp": "Cairo is the capital of Egypt."},
+{"cat": "World Capitals", "q": "What is the capital of Thailand?", "choices": ["Bangkok", "Phuket", "Chiang Mai", "Pattaya"], "ans": 0, "exp": "Bangkok is the capital of Thailand."},
+{"cat": "World Capitals", "q": "What is the capital of Vietnam?", "choices": ["Ho Chi Minh City", "Hanoi", "Da Nang", "Hue"], "ans": 1, "exp": "Hanoi is the capital of Vietnam."},
+{"cat": "World Capitals", "q": "What is the capital of New Zealand?", "choices": ["Auckland", "Wellington", "Christchurch", "Queenstown"], "ans": 1, "exp": "Wellington is the capital of New Zealand."},
+{"cat": "World Capitals", "q": "What is the capital of Turkey?", "choices": ["Istanbul", "Ankara", "Izmir", "Bursa"], "ans": 1, "exp": "Ankara is the capital of Turkey."},
+{"cat": "World Capitals", "q": "What is the capital of South Africa?", "choices": ["Cape Town", "Johannesburg", "Pretoria", "Durban"], "ans": 2, "exp": "Pretoria is the administrative capital of South Africa."},
+{"cat": "World Capitals", "q": "What is the capital of Kenya?", "choices": ["Nairobi", "Mombasa", "Kampala", "Lagos"], "ans": 0, "exp": "Nairobi is the capital of Kenya."},
+{"cat": "World Capitals", "q": "What is the capital of Argentina?", "choices": ["Lima", "Santiago", "Buenos Aires", "Montevideo"], "ans": 2, "exp": "Buenos Aires is the capital of Argentina."},
+{"cat": "World Capitals", "q": "What is the capital of Greece?", "choices": ["Athens", "Rome", "Istanbul", "Sparta"], "ans": 0, "exp": "Athens is the capital of Greece."},
+{"cat": "World Capitals", "q": "What is the capital of Norway?", "choices": ["Stockholm", "Oslo", "Copenhagen", "Helsinki"], "ans": 1, "exp": "Oslo is the capital of Norway."},
+{"cat": "World Capitals", "q": "What is the capital of India?", "choices": ["Mumbai", "New Delhi", "Kolkata", "Bengaluru"], "ans": 1, "exp": "New Delhi is the capital of India."},
+{"cat": "World Capitals", "q": "What is the capital of Indonesia?", "choices": ["Jakarta", "Bali", "Surabaya", "Bandung"], "ans": 0, "exp": "Jakarta is the capital of Indonesia."},
+{"cat": "Retro Games", "q": "Which company created Super Mario Bros.?", "choices": ["Nintendo", "Sega", "Sony", "Capcom"], "ans": 0, "exp": "Super Mario Bros. was created by Nintendo."},
+{"cat": "Retro Games", "q": "What color is Pac-Man?", "choices": ["Blue", "Red", "Yellow", "Green"], "ans": 2, "exp": "Pac-Man is yellow."},
+{"cat": "Retro Games", "q": "Which game features Link as the hero?", "choices": ["Final Fantasy", "The Legend of Zelda", "Dragon Quest", "Mega Man"], "ans": 1, "exp": "Link is the hero of The Legend of Zelda series."},
+{"cat": "Retro Games", "q": "Which puzzle game uses falling blocks called tetrominoes?", "choices": ["Tetris", "Puyo Puyo", "Dr. Mario", "Bomberman"], "ans": 0, "exp": "Tetris uses tetrominoes."},
+{"cat": "Retro Games", "q": "Which character is known as the blue hedgehog?", "choices": ["Mega Man", "Sonic", "Kirby", "Donkey Kong"], "ans": 1, "exp": "Sonic is the blue hedgehog."},
+{"cat": "Retro Games", "q": "In Donkey Kong, who does the player control?", "choices": ["Mario", "Link", "Sonic", "Pac-Man"], "ans": 0, "exp": "The player controls Mario, originally called Jumpman."},
+{"cat": "Retro Games", "q": "Which classic RPG series features slimes as famous monsters?", "choices": ["Dragon Quest", "Street Fighter", "Tetris", "F-Zero"], "ans": 0, "exp": "Slimes are iconic monsters in Dragon Quest."},
+{"cat": "Retro Games", "q": "Which fighting game series includes Ryu and Ken?", "choices": ["Street Fighter", "Tekken", "Mortal Kombat", "Virtua Fighter"], "ans": 0, "exp": "Ryu and Ken are Street Fighter characters."},
+{"cat": "Retro Games", "q": "Which pink Nintendo character can inhale enemies?", "choices": ["Kirby", "Pikachu", "Yoshi", "Ness"], "ans": 0, "exp": "Kirby can inhale enemies."},
+{"cat": "Retro Games", "q": "Which game series features Mega Man?", "choices": ["Mega Man", "Metroid", "Castlevania", "Contra"], "ans": 0, "exp": "Mega Man is the main character of the Mega Man series."},
+{"cat": "Retro Games", "q": "Which classic game is about a frog crossing roads and rivers?", "choices": ["Frogger", "Galaga", "Dig Dug", "Q*bert"], "ans": 0, "exp": "Frogger is about guiding a frog across roads and rivers."},
+{"cat": "Retro Games", "q": "Which arcade game is famous for shooting rows of alien invaders?", "choices": ["Space Invaders", "Pac-Man", "Out Run", "Bubble Bobble"], "ans": 0, "exp": "Space Invaders is a classic alien-shooting arcade game."},
+{"cat": "Sports General", "q": "Which sport is played at the Super Bowl?", "choices": ["American football", "Basketball", "Baseball", "Ice hockey"], "ans": 0, "exp": "The Super Bowl is the championship game of American football."},
+{"cat": "Sports General", "q": "Which sport is associated with the FIFA World Cup?", "choices": ["Soccer", "Rugby", "Cricket", "Tennis"], "ans": 0, "exp": "The FIFA World Cup is a soccer tournament."},
+{"cat": "Sports General", "q": "How many players are on a soccer team on the field?", "choices": ["9", "10", "11", "12"], "ans": 2, "exp": "A soccer team has 11 players on the field."},
+{"cat": "Sports General", "q": "Which sport uses a puck?", "choices": ["Ice hockey", "Basketball", "Tennis", "Golf"], "ans": 0, "exp": "Ice hockey uses a puck."},
+{"cat": "Sports General", "q": "Which sport uses a shuttlecock?", "choices": ["Badminton", "Tennis", "Volleyball", "Table tennis"], "ans": 0, "exp": "Badminton uses a shuttlecock."},
+{"cat": "Sports General", "q": "Which sport uses the terms 'ippon' and 'waza-ari'?", "choices": ["Judo", "Soccer", "Golf", "Baseball"], "ans": 0, "exp": "Ippon and waza-ari are judo terms."},
+{"cat": "Sports General", "q": "Which sport uses the terms 'spare' and 'strike'?", "choices": ["Bowling", "Rugby", "Swimming", "Boxing"], "ans": 0, "exp": "Spare and strike are bowling terms."},
+{"cat": "Sports General", "q": "Which race is 42.195 kilometers long?", "choices": ["Marathon", "Sprint", "Triathlon only", "Relay"], "ans": 0, "exp": "A marathon is 42.195 kilometers."},
+{"cat": "Sports General", "q": "Which sport is played at Augusta National?", "choices": ["Golf", "Tennis", "Baseball", "Rugby"], "ans": 0, "exp": "Augusta National is famous for golf's Masters Tournament."},
+{"cat": "Sports General", "q": "In boxing, what does KO stand for?", "choices": ["Knockout", "Kick Off", "Keep Out", "King Order"], "ans": 0, "exp": "KO stands for knockout."},
+{"cat": "Sports General", "q": "Which sport has a position called goalkeeper?", "choices": ["Soccer", "Baseball", "Golf", "Sumo"], "ans": 0, "exp": "A goalkeeper protects the goal in soccer and some other sports."},
+{"cat": "Sports General", "q": "Which country is famous for the haka before rugby matches?", "choices": ["New Zealand", "Brazil", "Canada", "Spain"], "ans": 0, "exp": "New Zealand teams are famous for performing the haka."},
+{"cat": "Sports General", "q": "Which sport uses a table, a net, and a small white ball?", "choices": ["Table tennis", "Volleyball", "Cricket", "Lacrosse"], "ans": 0, "exp": "Table tennis uses a table, a net, and a small ball."},
+{"cat": "Sports General", "q": "Which Olympic sport includes the balance beam?", "choices": ["Gymnastics", "Swimming", "Archery", "Cycling"], "ans": 0, "exp": "The balance beam is an artistic gymnastics event."},
+{"cat": "Sports General", "q": "Which sport has the Tour de France?", "choices": ["Cycling", "Running", "Skiing", "Rowing"], "ans": 0, "exp": "The Tour de France is a cycling race."},
+{"cat": "Western Movies", "q": "Which movie features the quote 'May the Force be with you'?", "choices": ["Star Wars", "Titanic", "Avatar", "Jaws"], "ans": 0, "exp": "'May the Force be with you' is from Star Wars."},
+{"cat": "Western Movies", "q": "Which movie features a giant iceberg disaster?", "choices": ["Titanic", "Jurassic Park", "The Matrix", "Rocky"], "ans": 0, "exp": "Titanic is about the famous ship disaster."},
+{"cat": "Western Movies", "q": "Which movie features dinosaurs brought back to life in a theme park?", "choices": ["Jurassic Park", "Back to the Future", "E.T.", "Indiana Jones"], "ans": 0, "exp": "Jurassic Park features cloned dinosaurs in a theme park."},
+{"cat": "Western Movies", "q": "Which movie features the character Jack Sparrow?", "choices": ["Pirates of the Caribbean", "Harry Potter", "The Lord of the Rings", "Home Alone"], "ans": 0, "exp": "Jack Sparrow appears in Pirates of the Caribbean."},
+{"cat": "Western Movies", "q": "Which film series features Hogwarts?", "choices": ["Harry Potter", "Star Wars", "The Matrix", "Rocky"], "ans": 0, "exp": "Hogwarts is the school in Harry Potter."},
+{"cat": "Western Movies", "q": "Which movie features the line 'I'll be back'?", "choices": ["The Terminator", "Toy Story", "The Lion King", "Avatar"], "ans": 0, "exp": "'I'll be back' is a famous line from The Terminator."},
+{"cat": "Western Movies", "q": "Which movie features a computer world called the Matrix?", "choices": ["The Matrix", "E.T.", "Jaws", "Rocky"], "ans": 0, "exp": "The Matrix is about a simulated reality."},
+{"cat": "Western Movies", "q": "Which movie series features Frodo and the One Ring?", "choices": ["The Lord of the Rings", "Harry Potter", "Star Wars", "Indiana Jones"], "ans": 0, "exp": "Frodo carries the One Ring in The Lord of the Rings."},
+{"cat": "Western Movies", "q": "Which movie features a young boy left alone at Christmas?", "choices": ["Home Alone", "Jaws", "Rocky", "Avatar"], "ans": 0, "exp": "Home Alone features Kevin left alone at Christmas."},
+{"cat": "Western Movies", "q": "Which movie features a boxer named Rocky Balboa?", "choices": ["Rocky", "Rambo", "Top Gun", "Jaws"], "ans": 0, "exp": "Rocky Balboa is the main character of Rocky."},
+{"cat": "Western Movies", "q": "Which movie features a shark attacking a beach town?", "choices": ["Jaws", "Titanic", "E.T.", "Avatar"], "ans": 0, "exp": "Jaws features a dangerous shark near a beach town."},
+{"cat": "Western Movies", "q": "Which movie features blue-skinned Na'vi on Pandora?", "choices": ["Avatar", "The Matrix", "Star Wars", "Jurassic Park"], "ans": 0, "exp": "Avatar is set on Pandora and features the Na'vi."},
+{"cat": "Western Movies", "q": "Which movie features archaeologist Indiana Jones?", "choices": ["Raiders of the Lost Ark", "Toy Story", "Frozen", "The Avengers"], "ans": 0, "exp": "Indiana Jones appears in Raiders of the Lost Ark and related films."},
+{"cat": "Western Movies", "q": "Which Marvel team includes Iron Man, Thor, and Captain America?", "choices": ["The Avengers", "The X-Men only", "The Guardians only", "The Incredibles"], "ans": 0, "exp": "Iron Man, Thor, and Captain America are Avengers."},
+{"cat": "Western Movies", "q": "Which movie features a friendly alien who says 'E.T. phone home'?", "choices": ["E.T.", "Alien", "Avatar", "Star Wars"], "ans": 0, "exp": "E.T. is the friendly alien in E.T. the Extra-Terrestrial."}];
 const SUPABASE_URL = "https://rxyoyveykxdfrpomkltl.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7";
 const HAS_SUPABASE = !!(SUPABASE_URL && (typeof SUPABASE_ANON_KEY !== "undefined" ? SUPABASE_ANON_KEY : SUPABASE_PUBLISHABLE_KEY) && window.supabase);
