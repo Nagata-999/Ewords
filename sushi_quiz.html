@@ -980,6 +980,10 @@ function pool(cat){
   if(Array.isArray(cat)) return QUESTIONS.filter(q => cat.includes(q.cat));
   return QUESTIONS.filter(q => cat==="Random" || q.cat===cat);
 }
+function actualPoolCount(cat){
+  // Show the real number of questions, not the weighted draw count.
+  return pool(cat).length;
+}
 function pick(cat, used=[]){
   let p=pool(cat).filter(q=>!used.includes(q.q));
   if(!p.length) p=pool(cat);
@@ -1090,9 +1094,11 @@ function nextSolo(){
   show("soloGame");
   soloRes.classList.remove("show");
   soloNext.classList.add("hidden");
+  soloNext.textContent="Next";
+  soloNext.onclick=nextSolo;
   streak.textContent=solo.streak;
   best.textContent=solo.best;
-  level.textContent=pool(solo.cat).length;
+  level.textContent=actualPoolCount(solo.cat);
   count.textContent=solo.count;
   soloBadge.textContent=`${solo.cur.cat}`;
   soloQ.textContent=solo.cur.q;
@@ -1119,16 +1125,18 @@ function ansSolo(i,el){
     soloNext.classList.remove("hidden");
     streak.textContent=solo.streak;
     best.textContent=solo.best;
-    level.textContent=pool(solo.cat).length;
+    level.textContent=actualPoolCount(solo.cat);
     count.textContent=solo.count;
   }else{
     el.classList.add("wrong");
     soloRes.className="result show";
-    soloRes.innerHTML=`❌ Wrong!<br>Answer: <b>${c.choices[c.ans]}</b><br>${c.exp}`;
-    setTimeout(()=>{
+    soloRes.innerHTML=`❌ Wrong!<br>Answer: <b>${c.choices[c.ans]}</b><br>${c.exp}<br><br><span class="small">Read the answer, then press the button.</span>`;
+    soloNext.textContent="See Result";
+    soloNext.onclick=()=>{
       soloFinal.innerHTML=`Your streak: <b>${solo.streak}</b><br>Best: <b>${solo.best}</b><br>Answered: <b>${solo.count}</b>`;
-      show("soloOver")
-    },800)
+      show("soloOver");
+    };
+    soloNext.classList.remove("hidden");
   }
 }
 
