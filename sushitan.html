@@ -6669,12 +6669,12 @@ html, body {
     if (backHomeFromPrivacyBtn) backHomeFromPrivacyBtn.addEventListener('click', () => showHomeSubPanel('home'));
     if (backHomeFromContactBtn) backHomeFromContactBtn.addEventListener('click', () => showHomeSubPanel('home'));
 
-    if (startSushiBtn) startSushiBtn.addEventListener('click', () => openGameStartPanel(MODE_SUSHI));
-    if (startShinoBtn) startShinoBtn.addEventListener('click', () => openGameStartPanel(MODE_SHINO));
-    if (startAntoniBtn) startAntoniBtn.addEventListener('click', () => openGameStartPanel(MODE_ANTONI));
-    if (openSushiStartBtn) openSushiStartBtn.addEventListener('click', () => openGameStartPanel(PUBLIC_MODE));
-    if (openShinoStartBtn) openShinoStartBtn.addEventListener('click', () => openGameStartPanel(MODE_SHINO));
-    if (openAntoniStartBtn) openAntoniStartBtn.addEventListener('click', () => openGameStartPanel(MODE_ANTONI));
+    if (startSushiBtn) startSushiBtn.addEventListener('click', () => startGame(MODE_SUSHI));
+    if (startShinoBtn) startShinoBtn.addEventListener('click', () => startGame(MODE_SHINO));
+    if (startAntoniBtn) startAntoniBtn.addEventListener('click', () => startGame(MODE_ANTONI));
+    if (openSushiStartBtn) openSushiStartBtn.addEventListener('click', () => startGame(PUBLIC_MODE));
+    if (openShinoStartBtn) openShinoStartBtn.addEventListener('click', () => startGame(MODE_SHINO));
+    if (openAntoniStartBtn) openAntoniStartBtn.addEventListener('click', () => startGame(MODE_ANTONI));
     if (selectedStartBtn) selectedStartBtn.addEventListener('click', () => startGame(selectedMenuMode));
     if (selectedRankingBtn) selectedRankingBtn.addEventListener('click', () => openRankingScreen(selectedMenuMode));
     if (backHomeFromGameStartBtn) backHomeFromGameStartBtn.addEventListener('click', () => showHomeSubPanel('home'));
