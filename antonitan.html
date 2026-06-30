@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>アントニム一覧｜すし単</title>
+  <meta name="description" content="英検・IELTS・高校英語で役立つ反意語を、英単語・日本語・antonym・antonymの日本語で整理した一覧です。">
+  <link rel="stylesheet" href="style.css">
+
+<style>
+:root{
+  --orange:#ff6b00;
+  --orange2:#ff9a3d;
+  --orange-line:#ffd7b8;
+  --ink:#222831;
+  --bg:#fff8f1;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0 !important;
+  background:linear-gradient(180deg,#fff8f1 0%,#fff 34%,#fff8f1 100%) !important;
+  color:var(--ink) !important;
+  font-family:"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif !important;
+}
+.page{max-width:1180px !important;margin:0 auto !important;padding:28px 22px 56px !important;}
+.hero{
+  position:relative;overflow:hidden;background:#fff !important;border:1px solid var(--orange-line) !important;
+  border-radius:28px !important;padding:44px 30px 34px !important;text-align:center !important;
+  box-shadow:0 14px 40px rgba(255,107,0,.10) !important;margin-bottom:24px !important;
+}
+.hero::before,.hero::after{
+  content:"";position:absolute;width:260px;height:260px;border:24px solid rgba(255,107,0,.045);
+  border-radius:50%;top:80px;pointer-events:none;
+}
+.hero::before{left:-120px}.hero::after{right:-120px}
+.kicker{
+  display:inline-block !important;padding:8px 22px !important;border:2px solid var(--orange) !important;
+  border-radius:999px !important;background:#fff !important;color:var(--orange) !important;font-weight:800 !important;
+}
+h1{
+  margin:18px 0 8px !important;color:var(--orange) !important;
+  font-size:clamp(2rem,4.2vw,3.4rem) !important;line-height:1.15 !important;
+}
+.hero p{max-width:820px !important;margin:16px auto 0 !important;line-height:1.9 !important;color:#374151 !important;font-weight:600 !important;}
+.home-link{
+  display:inline-flex !important;align-items:center !important;justify-content:center !important;min-height:44px !important;
+  padding:11px 24px !important;border-radius:999px !important;text-decoration:none !important;font-weight:800 !important;
+  border:2px solid var(--orange) !important;background:linear-gradient(90deg,var(--orange),var(--orange2)) !important;color:#fff !important;
+  box-shadow:0 8px 18px rgba(255,107,0,.18) !important;
+}
+.card{
+  background:#fff !important;border:1px solid var(--orange-line) !important;border-radius:28px !important;
+  padding:26px 26px 32px !important;box-shadow:0 14px 40px rgba(255,107,0,.10) !important;
+}
+.controls{display:flex !important;flex-direction:column !important;gap:14px !important;margin:0 0 20px !important;}
+.search-row{display:flex !important;align-items:center !important;gap:16px !important;flex-wrap:wrap !important;}
+.search{
+  width:min(680px,100%) !important;height:56px !important;padding:0 18px !important;
+  border:2px solid var(--orange-line) !important;border-radius:16px !important;background:#fff !important;color:var(--ink) !important;font-size:1rem !important;
+}
+.search:focus{outline:none !important;border-color:var(--orange) !important;box-shadow:0 0 0 4px rgba(255,107,0,.12) !important;}
+.count{color:var(--orange) !important;font-weight:900 !important;font-size:1.05rem !important;}
+.toggle-row{display:flex !important;gap:10px !important;flex-wrap:wrap !important;}
+.toggle-btn{
+  border:2px solid var(--orange) !important;background:#fff !important;color:var(--orange) !important;
+  border-radius:999px !important;padding:10px 18px !important;font-weight:900 !important;cursor:pointer !important;font-size:.95rem !important;
+}
+.toggle-btn.active{background:linear-gradient(90deg,var(--orange),var(--orange2)) !important;color:#fff !important;}
+.table-wrap{overflow:auto !important;border:1px solid var(--orange-line) !important;border-radius:18px !important;background:#fff !important;}
+.vocab-table{
+  width:100% !important;border-collapse:separate !important;border-spacing:0 !important;background:#fff !important;color:var(--ink) !important;
+}
+.vocab-table thead tr{background:linear-gradient(90deg,var(--orange),var(--orange2)) !important;}
+.vocab-table th{
+  padding:16px 18px !important;color:#fff !important;text-align:left !important;font-weight:900 !important;border-bottom:0 !important;white-space:nowrap !important;
+}
+.vocab-table th:first-child{border-top-left-radius:16px;}
+.vocab-table th:last-child{border-top-right-radius:16px;}
+.vocab-table tbody tr{background:#fff !important;color:var(--ink) !important;}
+.vocab-table tbody tr:nth-child(even){background:#fffaf5 !important;}
+.vocab-table tbody tr:hover{background:#fff1e5 !important;}
+.vocab-table td{
+  padding:17px 18px !important;border-bottom:1px solid var(--orange-line) !important;color:var(--ink) !important;
+  vertical-align:top !important;text-align:left !important;font-size:1rem !important;line-height:1.55 !important;
+}
+.vocab-table td:nth-child(1),.vocab-table td:nth-child(3){color:var(--orange) !important;font-weight:900 !important;}
+.vocab-table strong{color:inherit !important;font-weight:900 !important;}
+.hide-ja .vocab-table th:nth-child(2),.hide-ja .vocab-table td:nth-child(2),
+.hide-ja .vocab-table th:nth-child(4),.hide-ja .vocab-table td:nth-child(4){display:none !important;}
+.hide-en .vocab-table th:nth-child(1),.hide-en .vocab-table td:nth-child(1),
+.hide-en .vocab-table th:nth-child(3),.hide-en .vocab-table td:nth-child(3){display:none !important;}
+@media(max-width:700px){
+  .page{padding:16px 12px 40px !important;}
+  .hero,.card{padding:22px 16px !important;border-radius:20px !important;}
+  .vocab-table th,.vocab-table td{padding:13px 12px !important;}
+}
+</style>
+
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <p class="kicker">すし単 英語学習リスト</p>
+      <h1>アントニム一覧</h1>
+      <p>英検・IELTS・高校英語で役立つ反意語を、英単語・日本語・antonym・antonymの日本語で整理した一覧です。</p>
+      <p><a class="home-link" href="index.html">トップに戻る</a></p>
+    </header>
+    <section class="card">
+
+      <div class="controls">
+        <div class="search-row">
+          <input id="search" class="search" type="search" placeholder="英単語・日本語・antonymで検索">
+          <div id="count" class="count"></div>
+        </div>
+        <div class="toggle-row" aria-label="表示切り替え">
+          <button type="button" id="toggleJapanese" class="toggle-btn">日本語を消す</button>
+          <button type="button" id="toggleEnglish" class="toggle-btn">英語を消す</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="vocab-table">
+        <thead>
+          <tr>
+            <th>英単語</th>
+            <th>日本語</th>
+            <th>antonym</th>
+            <th>antonymの日本語</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>above</strong></td><td>上に、上方の</td><td><strong>below</strong></td><td>下に、下方の</td></tr>
+<tr><td><strong>absence</strong></td><td>不在、欠如</td><td><strong>presence</strong></td><td>存在、出席</td></tr>
+<tr><td><strong>abstract</strong></td><td>抽象的な</td><td><strong>concrete</strong></td><td>具体的な</td></tr>
+<tr><td><strong>absurd</strong></td><td>ばかげた</td><td><strong>reasonable</strong></td><td>理にかなった</td></tr>
+<tr><td><strong>abundant</strong></td><td>豊富な</td><td><strong>scarce</strong></td><td>乏しい、不足した</td></tr>
+<tr><td><strong>accept</strong></td><td>～を受け入れる</td><td><strong>reject</strong></td><td>～を断る</td></tr>
+<tr><td><strong>access</strong></td><td>利用する権利</td><td><strong>barrier</strong></td><td>壁</td></tr>
+<tr><td><strong>active</strong></td><td>活動的な</td><td><strong>passive</strong></td><td>受動的な、消極的な</td></tr>
+<tr><td><strong>add</strong></td><td>～を加える</td><td><strong>remove</strong></td><td>～を移す、取り去る</td></tr>
+<tr><td><strong>admire</strong></td><td>～に感心する</td><td><strong>despise</strong></td><td>軽蔑する</td></tr>
+<tr><td><strong>adult</strong></td><td>大人、成人の</td><td><strong>child</strong></td><td>子ども</td></tr>
+<tr><td><strong>advance</strong></td><td>前進、進歩</td><td><strong>retreat</strong></td><td>退く</td></tr>
+<tr><td><strong>advantage</strong></td><td>利点</td><td><strong>drawback</strong></td><td>欠点</td></tr>
+<tr><td><strong>after</strong></td><td>～の後に</td><td><strong>before</strong></td><td>～の前に</td></tr>
+<tr><td><strong>agree</strong></td><td>同意する</td><td><strong>refuse</strong></td><td>～を断る</td></tr>
+<tr><td><strong>alike</strong></td><td>似ている</td><td><strong>different</strong></td><td>異なる</td></tr>
+<tr><td><strong>alive</strong></td><td>生きている</td><td><strong>dead</strong></td><td>死んでいる</td></tr>
+<tr><td><strong>allow</strong></td><td>～を許可する</td><td><strong>forbid</strong></td><td>～を禁じる</td></tr>
+<tr><td><strong>ally</strong></td><td>同盟国</td><td><strong>opponent</strong></td><td>敵</td></tr>
+<tr><td><strong>amuse</strong></td><td>～を楽しませる</td><td><strong>bore</strong></td><td>～をうんざりさせる</td></tr>
+<tr><td><strong>ancient</strong></td><td>古代の</td><td><strong>modern</strong></td><td>現代の</td></tr>
+<tr><td><strong>annoy</strong></td><td>～をいらいらさせる</td><td><strong>please</strong></td><td>喜ばせる、どうぞ</td></tr>
+<tr><td><strong>answer</strong></td><td>答え、答える</td><td><strong>question</strong></td><td>質問、疑問</td></tr>
+<tr><td><strong>anxious</strong></td><td>心配して、切望して</td><td><strong>calm</strong></td><td>冷静な</td></tr>
+<tr><td><strong>appear</strong></td><td>現れる</td><td><strong>vanish</strong></td><td>消える</td></tr>
+<tr><td><strong>approach</strong></td><td>～に接近する；～に取り組む；方法</td><td><strong>avoid</strong></td><td>～を避ける</td></tr>
+<tr><td><strong>appropriate</strong></td><td>適切な</td><td><strong>wrong</strong></td><td>間違った</td></tr>
+<tr><td><strong>arrive</strong></td><td>到着する</td><td><strong>depart</strong></td><td>出発する</td></tr>
+<tr><td><strong>arrogant</strong></td><td>傲慢な</td><td><strong>modest</strong></td><td>控えめな、謙虚な、わずかな</td></tr>
+<tr><td><strong>artificial</strong></td><td>人工</td><td><strong>natural</strong></td><td>自然の</td></tr>
+<tr><td><strong>asleep</strong></td><td>眠っている</td><td><strong>awake</strong></td><td>目を覚まして</td></tr>
+<tr><td><strong>assist</strong></td><td>～を助ける、～を手伝う</td><td><strong>obstruct</strong></td><td>妨げる</td></tr>
+<tr><td><strong>attach</strong></td><td>AをBにくっつける</td><td><strong>detach</strong></td><td>切り離す</td></tr>
+<tr><td><strong>attack</strong></td><td>攻撃する、攻撃</td><td><strong>defend</strong></td><td>守る、防御する</td></tr>
+<tr><td><strong>attract</strong></td><td>～を引きつける</td><td><strong>repel</strong></td><td>追い払う、反発する</td></tr>
+<tr><td><strong>available</strong></td><td>手に入る、利用できる</td><td><strong>scarce</strong></td><td>乏しい、不足した</td></tr>
+<tr><td><strong>avoid</strong></td><td>～を避ける</td><td><strong>approach</strong></td><td>～に接近する；～に取り組む；方法</td></tr>
+<tr><td><strong>awake</strong></td><td>目を覚まして</td><td><strong>asleep</strong></td><td>眠っている</td></tr>
+<tr><td><strong>aware</strong></td><td>気づいている</td><td><strong>ignorant</strong></td><td>無知な</td></tr>
+<tr><td><strong>awful</strong></td><td>ひどい</td><td><strong>fantastic</strong></td><td>すばらしい</td></tr>
+<tr><td><strong>awkward</strong></td><td>気まずい</td><td><strong>comfortable</strong></td><td>快適な</td></tr>
+<tr><td><strong>ban</strong></td><td>禁止する</td><td><strong>permit</strong></td><td>許可する</td></tr>
+<tr><td><strong>barrier</strong></td><td>壁</td><td><strong>access</strong></td><td>利用する権利</td></tr>
+<tr><td><strong>before</strong></td><td>～の前に</td><td><strong>after</strong></td><td>～の後に</td></tr>
+<tr><td><strong>begin</strong></td><td>始める、始まる</td><td><strong>end</strong></td><td>終わり、終える</td></tr>
+<tr><td><strong>beginning</strong></td><td>始まり</td><td><strong>end</strong></td><td>終わり、終える</td></tr>
+<tr><td><strong>believe</strong></td><td>信じる</td><td><strong>doubt</strong></td><td>疑う、疑い</td></tr>
+<tr><td><strong>below</strong></td><td>下に、下方の</td><td><strong>above</strong></td><td>上に、上方の</td></tr>
+<tr><td><strong>benefit</strong></td><td>利益</td><td><strong>harm</strong></td><td>害</td></tr>
+<tr><td><strong>besides</strong></td><td>そのうえ、加えて</td><td><strong>except</strong></td><td>～を除いて</td></tr>
+<tr><td><strong>best</strong></td><td>最良の</td><td><strong>worst</strong></td><td>最悪の</td></tr>
+<tr><td><strong>better</strong></td><td>より良い</td><td><strong>worse</strong></td><td>より悪い</td></tr>
+<tr><td><strong>beyond</strong></td><td>～を越えて</td><td><strong>within</strong></td><td>～以内に、～の内側に</td></tr>
+<tr><td><strong>bold</strong></td><td>大胆な</td><td><strong>timid</strong></td><td>臆病な</td></tr>
+<tr><td><strong>bore</strong></td><td>～をうんざりさせる</td><td><strong>amuse</strong></td><td>～を楽しませる</td></tr>
+<tr><td><strong>borrow</strong></td><td>～を借りる</td><td><strong>lend</strong></td><td>貸す</td></tr>
+<tr><td><strong>bottom</strong></td><td>底、下部</td><td><strong>top</strong></td><td>頂上、上部</td></tr>
+<tr><td><strong>brave</strong></td><td>勇敢な</td><td><strong>cowardly</strong></td><td>臆病な</td></tr>
+<tr><td><strong>brief</strong></td><td>簡潔な</td><td><strong>long</strong></td><td>長い</td></tr>
+<tr><td><strong>broad</strong></td><td>広い</td><td><strong>narrow</strong></td><td>狭い</td></tr>
+<tr><td><strong>build</strong></td><td>建てる、作る</td><td><strong>demolish</strong></td><td>取り壊す</td></tr>
+<tr><td><strong>buy</strong></td><td>買う</td><td><strong>sell</strong></td><td>売る</td></tr>
+<tr><td><strong>calm</strong></td><td>冷静な</td><td><strong>upset</strong></td><td>動揺している</td></tr>
+<tr><td><strong>capable</strong></td><td>～する能力がある</td><td><strong>helpless</strong></td><td>無力な</td></tr>
+<tr><td><strong>cause</strong></td><td>原因、引き起こす</td><td><strong>effect</strong></td><td>効果、影響、結果</td></tr>
+<tr><td><strong>cease</strong></td><td>やめる、終わる</td><td><strong>continue</strong></td><td>続ける</td></tr>
+<tr><td><strong>certain</strong></td><td>確かな、ある</td><td><strong>doubtful</strong></td><td>疑わしい</td></tr>
+<tr><td><strong>certainly</strong></td><td>確かに</td><td><strong>possibly</strong></td><td>おそらく、もしかすると</td></tr>
+<tr><td><strong>chaos</strong></td><td>混沌</td><td><strong>order</strong></td><td>命令、順序、注文</td></tr>
+<tr><td><strong>cheap</strong></td><td>安い</td><td><strong>expensive</strong></td><td>高価な</td></tr>
+<tr><td><strong>child</strong></td><td>子ども</td><td><strong>adult</strong></td><td>大人、成人の</td></tr>
+<tr><td><strong>clarify</strong></td><td>明らかにする、説明する</td><td><strong>confuse</strong></td><td>～を当惑させる</td></tr>
+<tr><td><strong>clean</strong></td><td>清潔な、きれいにする</td><td><strong>dirty</strong></td><td>汚い</td></tr>
+<tr><td><strong>clear</strong></td><td>明らかな、澄んだ</td><td><strong>vague</strong></td><td>漠然とした</td></tr>
+<tr><td><strong>clever</strong></td><td>賢い</td><td><strong>stupid</strong></td><td>ばかな</td></tr>
+<tr><td><strong>close</strong></td><td>閉じる、近い</td><td><strong>open</strong></td><td>開ける、開いた</td></tr>
+<tr><td><strong>cold</strong></td><td>寒い、冷たい</td><td><strong>hot</strong></td><td>暑い、熱い</td></tr>
+<tr><td><strong>collective</strong></td><td>集団</td><td><strong>individual</strong></td><td>個人</td></tr>
+<tr><td><strong>combine</strong></td><td>～を結合させる</td><td><strong>divide</strong></td><td>分割する</td></tr>
+<tr><td><strong>comfortable</strong></td><td>快適な</td><td><strong>awkward</strong></td><td>気まずい</td></tr>
+<tr><td><strong>common</strong></td><td>共通の、普通の</td><td><strong>rare</strong></td><td>珍しい</td></tr>
+<tr><td><strong>complete</strong></td><td>完全な</td><td><strong>partial</strong></td><td>部分的な、偏った</td></tr>
+<tr><td><strong>complex</strong></td><td>複雑な</td><td><strong>simple</strong></td><td>単純な</td></tr>
+<tr><td><strong>complicate</strong></td><td>複雑にする</td><td><strong>simplify</strong></td><td>簡単にする</td></tr>
+<tr><td><strong>complicated</strong></td><td>複雑な</td><td><strong>simple</strong></td><td>単純な</td></tr>
+<tr><td><strong>conceal</strong></td><td>隠す</td><td><strong>expose</strong></td><td>ＡをＢにさらす</td></tr>
+<tr><td><strong>concrete</strong></td><td>具体的な</td><td><strong>abstract</strong></td><td>抽象的な</td></tr>
+<tr><td><strong>confidence</strong></td><td>自信</td><td><strong>doubt</strong></td><td>疑う、疑い</td></tr>
+<tr><td><strong>conform</strong></td><td>従う</td><td><strong>rebel</strong></td><td>反逆者</td></tr>
+<tr><td><strong>confuse</strong></td><td>～を当惑させる</td><td><strong>clarify</strong></td><td>明らかにする、説明する</td></tr>
+<tr><td><strong>connect</strong></td><td>つなぐ</td><td><strong>separate</strong></td><td>分ける、別々の</td></tr>
+<tr><td><strong>conscious</strong></td><td>意識している</td><td><strong>asleep</strong></td><td>眠っている</td></tr>
+<tr><td><strong>construct</strong></td><td>建設する、組み立てる</td><td><strong>destroy</strong></td><td>～を破壊する</td></tr>
+<tr><td><strong>continue</strong></td><td>続ける</td><td><strong>cease</strong></td><td>やめる、終わる</td></tr>
+<tr><td><strong>contrary</strong></td><td>反対の</td><td><strong>same</strong></td><td>同じ</td></tr>
+<tr><td><strong>conventional</strong></td><td>従来の、伝統的な</td><td><strong>novel</strong></td><td>新しい、小説</td></tr>
+<tr><td><strong>convince</strong></td><td>～を納得させる、確信させる</td><td><strong>confuse</strong></td><td>～を当惑させる</td></tr>
+<tr><td><strong>cool</strong></td><td>涼しい、冷静な</td><td><strong>warm</strong></td><td>暖かい</td></tr>
+<tr><td><strong>costly</strong></td><td>高価な</td><td><strong>cheap</strong></td><td>安い</td></tr>
+<tr><td><strong>courage</strong></td><td>勇気</td><td><strong>fear</strong></td><td>恐れ、恐れる</td></tr>
+<tr><td><strong>cowardly</strong></td><td>臆病な</td><td><strong>brave</strong></td><td>勇敢な</td></tr>
+<tr><td><strong>create</strong></td><td>作る、生み出す</td><td><strong>ruin</strong></td><td>～を台無しにする、破滅させる</td></tr>
+<tr><td><strong>criticize</strong></td><td>～を非難する</td><td><strong>praise</strong></td><td>～をほめる</td></tr>
+<tr><td><strong>cure</strong></td><td>～を治療する</td><td><strong>infect</strong></td><td>〈人〉に感染する</td></tr>
+<tr><td><strong>curious</strong></td><td>好奇心の強い</td><td><strong>indifferent</strong></td><td>無関心だ</td></tr>
+<tr><td><strong>current</strong></td><td>最新の</td><td><strong>former</strong></td><td>前の</td></tr>
+<tr><td><strong>damage</strong></td><td>損害、傷つける</td><td><strong>preserve</strong></td><td>保護する、保存する</td></tr>
+<tr><td><strong>danger</strong></td><td>危険</td><td><strong>security</strong></td><td>安全</td></tr>
+<tr><td><strong>dangerous</strong></td><td>危険な</td><td><strong>safe</strong></td><td>安全な</td></tr>
+<tr><td><strong>darkness</strong></td><td>暗闇</td><td><strong>light</strong></td><td>光、軽い</td></tr>
+<tr><td><strong>day</strong></td><td>日、昼</td><td><strong>night</strong></td><td>夜</td></tr>
+<tr><td><strong>dead</strong></td><td>死んでいる</td><td><strong>alive</strong></td><td>生きている</td></tr>
+<tr><td><strong>decline</strong></td><td>衰退する、低下する、～を辞退する</td><td><strong>growth</strong></td><td>成長、増加</td></tr>
+<tr><td><strong>decrease</strong></td><td>減少する、減らす</td><td><strong>increase</strong></td><td>増える、～を増やす</td></tr>
+<tr><td><strong>deep</strong></td><td>深い</td><td><strong>shallow</strong></td><td>浅い</td></tr>
+<tr><td><strong>defeat</strong></td><td>～を打ち負かす</td><td><strong>victory</strong></td><td>勝利</td></tr>
+<tr><td><strong>defend</strong></td><td>守る、防御する</td><td><strong>attack</strong></td><td>攻撃する、攻撃</td></tr>
+<tr><td><strong>delight</strong></td><td>大喜び</td><td><strong>sadness</strong></td><td>悲しみ</td></tr>
+<tr><td><strong>demand</strong></td><td>～を要求する</td><td><strong>supply</strong></td><td>～を供給する</td></tr>
+<tr><td><strong>demolish</strong></td><td>取り壊す</td><td><strong>build</strong></td><td>建てる、作る</td></tr>
+<tr><td><strong>dense</strong></td><td>密集した、濃い</td><td><strong>sparse</strong></td><td>まばらな</td></tr>
+<tr><td><strong>depart</strong></td><td>出発する</td><td><strong>arrive</strong></td><td>到着する</td></tr>
+<tr><td><strong>depth</strong></td><td>深さ</td><td><strong>surface</strong></td><td>表面</td></tr>
+<tr><td><strong>despair</strong></td><td>絶望</td><td><strong>hope</strong></td><td>希望、望む</td></tr>
+<tr><td><strong>despise</strong></td><td>軽蔑する</td><td><strong>admire</strong></td><td>～に感心する</td></tr>
+<tr><td><strong>destination</strong></td><td>目的地</td><td><strong>source</strong></td><td>源</td></tr>
+<tr><td><strong>destroy</strong></td><td>～を破壊する</td><td><strong>construct</strong></td><td>建設する、組み立てる</td></tr>
+<tr><td><strong>detach</strong></td><td>切り離す</td><td><strong>attach</strong></td><td>AをBにくっつける</td></tr>
+<tr><td><strong>die</strong></td><td>死ぬ</td><td><strong>live</strong></td><td>生きる、住む</td></tr>
+<tr><td><strong>different</strong></td><td>異なる</td><td><strong>similar</strong></td><td>似ている</td></tr>
+<tr><td><strong>dirty</strong></td><td>汚い</td><td><strong>clean</strong></td><td>清潔な、きれいにする</td></tr>
+<tr><td><strong>disappoint</strong></td><td>～を失望させる</td><td><strong>satisfy</strong></td><td>～を満たす</td></tr>
+<tr><td><strong>discourage</strong></td><td>落胆させる、思いとどまらせる</td><td><strong>encourage</strong></td><td>はげます</td></tr>
+<tr><td><strong>dismiss</strong></td><td>(考えなど)を無視する、(人)を解雇する、解散する</td><td><strong>employ</strong></td><td>～を雇う、～を用いる</td></tr>
+<tr><td><strong>divide</strong></td><td>分割する</td><td><strong>combine</strong></td><td>～を結合させる</td></tr>
+<tr><td><strong>domestic</strong></td><td>家庭の、国内の</td><td><strong>foreign</strong></td><td>外国の</td></tr>
+<tr><td><strong>doubt</strong></td><td>疑う、疑い</td><td><strong>trust</strong></td><td>～を信用する</td></tr>
+<tr><td><strong>drawback</strong></td><td>欠点</td><td><strong>advantage</strong></td><td>利点</td></tr>
+<tr><td><strong>drop</strong></td><td>落ちる、落とす</td><td><strong>lift</strong></td><td>持ち上げる</td></tr>
+<tr><td><strong>dry</strong></td><td>乾いた</td><td><strong>wet</strong></td><td>濡れた</td></tr>
+<tr><td><strong>dull</strong></td><td>退屈させる</td><td><strong>sensitive</strong></td><td>敏感な</td></tr>
+<tr><td><strong>eager</strong></td><td>熱望している</td><td><strong>reluctant</strong></td><td>したがらない</td></tr>
+<tr><td><strong>early</strong></td><td>早い</td><td><strong>late</strong></td><td>遅い</td></tr>
+<tr><td><strong>effect</strong></td><td>効果、影響、結果</td><td><strong>cause</strong></td><td>原因、引き起こす</td></tr>
+<tr><td><strong>effective</strong></td><td>効果的な</td><td><strong>weak</strong></td><td>弱い</td></tr>
+<tr><td><strong>efficient</strong></td><td>効率がいい</td><td><strong>wasteful</strong></td><td>無駄の多い</td></tr>
+<tr><td><strong>employ</strong></td><td>～を雇う、～を用いる</td><td><strong>dismiss</strong></td><td>(考えなど)を無視する、(人)を解雇する、解散する</td></tr>
+<tr><td><strong>empty</strong></td><td>からの</td><td><strong>full</strong></td><td>いっぱいの、満ちた</td></tr>
+<tr><td><strong>enable</strong></td><td>～を可能にする</td><td><strong>prevent</strong></td><td>～をさまたげる</td></tr>
+<tr><td><strong>encourage</strong></td><td>はげます</td><td><strong>discourage</strong></td><td>落胆させる、思いとどまらせる</td></tr>
+<tr><td><strong>end</strong></td><td>終わり、終える</td><td><strong>begin</strong></td><td>始める、始まる</td></tr>
+<tr><td><strong>enemy</strong></td><td>敵</td><td><strong>friend</strong></td><td>友人</td></tr>
+<tr><td><strong>enormous</strong></td><td>莫大な</td><td><strong>tiny</strong></td><td>ちっちゃな</td></tr>
+<tr><td><strong>enter</strong></td><td>入る</td><td><strong>leave</strong></td><td>去る、残す</td></tr>
+<tr><td><strong>entire</strong></td><td>全</td><td><strong>partial</strong></td><td>部分的な、偏った</td></tr>
+<tr><td><strong>essential</strong></td><td>不可欠な</td><td><strong>optional</strong></td><td>任意の</td></tr>
+<tr><td><strong>evil</strong></td><td>悪い</td><td><strong>good</strong></td><td>良い</td></tr>
+<tr><td><strong>exactly</strong></td><td>正確に</td><td><strong>roughly</strong></td><td>おおよそ、粗く</td></tr>
+<tr><td><strong>excellent</strong></td><td>すばらしい</td><td><strong>terrible</strong></td><td>ひどい</td></tr>
+<tr><td><strong>except</strong></td><td>～を除いて</td><td><strong>besides</strong></td><td>そのうえ、加えて</td></tr>
+<tr><td><strong>exclude</strong></td><td>除外する</td><td><strong>include</strong></td><td>～を含む、含める</td></tr>
+<tr><td><strong>expand</strong></td><td>拡大する</td><td><strong>shrink</strong></td><td>縮小する</td></tr>
+<tr><td><strong>expense</strong></td><td>費用</td><td><strong>income</strong></td><td>所得</td></tr>
+<tr><td><strong>expensive</strong></td><td>高価な</td><td><strong>cheap</strong></td><td>安い</td></tr>
+<tr><td><strong>export</strong></td><td>輸出する、輸出</td><td><strong>import</strong></td><td>～を輸入する</td></tr>
+<tr><td><strong>expose</strong></td><td>ＡをＢにさらす</td><td><strong>conceal</strong></td><td>隠す</td></tr>
+<tr><td><strong>fact</strong></td><td>事実</td><td><strong>fiction</strong></td><td>小説</td></tr>
+<tr><td><strong>fail</strong></td><td>失敗する</td><td><strong>succeed</strong></td><td>成功する</td></tr>
+<tr><td><strong>failure</strong></td><td>失敗</td><td><strong>success</strong></td><td>成功</td></tr>
+<tr><td><strong>fake</strong></td><td>偽物の</td><td><strong>genuine</strong></td><td>本物の、真の、心からの</td></tr>
+<tr><td><strong>fall</strong></td><td>落ちる、下がる</td><td><strong>rise</strong></td><td>上昇する</td></tr>
+<tr><td><strong>familiar</strong></td><td>熟知している、くわしい</td><td><strong>strange</strong></td><td>奇妙な</td></tr>
+<tr><td><strong>fantastic</strong></td><td>すばらしい</td><td><strong>awful</strong></td><td>ひどい</td></tr>
+<tr><td><strong>far</strong></td><td>遠い</td><td><strong>near</strong></td><td>近い</td></tr>
+<tr><td><strong>fast</strong></td><td>速い</td><td><strong>slow</strong></td><td>遅い</td></tr>
+<tr><td><strong>fear</strong></td><td>恐れ、恐れる</td><td><strong>trust</strong></td><td>～を信用する</td></tr>
+<tr><td><strong>female</strong></td><td>女性の、雌の</td><td><strong>male</strong></td><td>男の</td></tr>
+<tr><td><strong>fiction</strong></td><td>小説</td><td><strong>fact</strong></td><td>事実</td></tr>
+<tr><td><strong>finish</strong></td><td>終える</td><td><strong>start</strong></td><td>始める、始まる</td></tr>
+<tr><td><strong>fire</strong></td><td>火、解雇する</td><td><strong>hire</strong></td><td>～を雇う</td></tr>
+<tr><td><strong>flexible</strong></td><td>柔軟な</td><td><strong>rigid</strong></td><td>厳格な</td></tr>
+<tr><td><strong>follow</strong></td><td>～の後に続く、～に従う</td><td><strong>lead</strong></td><td>導く</td></tr>
+<tr><td><strong>following</strong></td><td>次の、以下の</td><td><strong>previous</strong></td><td>前の</td></tr>
+<tr><td><strong>foolish</strong></td><td>愚かな</td><td><strong>wise</strong></td><td>賢い</td></tr>
+<tr><td><strong>forbid</strong></td><td>～を禁じる</td><td><strong>allow</strong></td><td>～を許可する</td></tr>
+<tr><td><strong>forced</strong></td><td>強制された</td><td><strong>voluntary</strong></td><td>自発的な</td></tr>
+<tr><td><strong>foreign</strong></td><td>外国の</td><td><strong>domestic</strong></td><td>家庭の、国内の</td></tr>
+<tr><td><strong>forget</strong></td><td>忘れる</td><td><strong>remember</strong></td><td>覚えている、思い出す</td></tr>
+<tr><td><strong>former</strong></td><td>前の</td><td><strong>current</strong></td><td>最新の</td></tr>
+<tr><td><strong>fragile</strong></td><td>壊れやすい</td><td><strong>tough</strong></td><td>たくましい、骨の折れる</td></tr>
+<tr><td><strong>freedom</strong></td><td>自由</td><td><strong>restriction</strong></td><td>制限</td></tr>
+<tr><td><strong>freeze</strong></td><td>凍りつく</td><td><strong>melt</strong></td><td>溶ける</td></tr>
+<tr><td><strong>frequent</strong></td><td>頻繁な</td><td><strong>rare</strong></td><td>珍しい</td></tr>
+<tr><td><strong>frequently</strong></td><td>しばしば</td><td><strong>occasionally</strong></td><td>時々</td></tr>
+<tr><td><strong>fresh</strong></td><td>新鮮な</td><td><strong>stale</strong></td><td>古くなった、新鮮でない</td></tr>
+<tr><td><strong>friend</strong></td><td>友人</td><td><strong>enemy</strong></td><td>敵</td></tr>
+<tr><td><strong>full</strong></td><td>いっぱいの、満ちた</td><td><strong>empty</strong></td><td>からの</td></tr>
+<tr><td><strong>future</strong></td><td>未来、将来の</td><td><strong>past</strong></td><td>過去、～を過ぎて</td></tr>
+<tr><td><strong>gain</strong></td><td>得る</td><td><strong>lose</strong></td><td>失う、負ける</td></tr>
+<tr><td><strong>general</strong></td><td>一般</td><td><strong>specific</strong></td><td>特定の</td></tr>
+<tr><td><strong>generous</strong></td><td>気前のよい</td><td><strong>selfish</strong></td><td>利己的な</td></tr>
+<tr><td><strong>gentle</strong></td><td>優しい、穏やかな</td><td><strong>rough</strong></td><td>荒い、大雑把な</td></tr>
+<tr><td><strong>genuine</strong></td><td>本物の、真の、心からの</td><td><strong>artificial</strong></td><td>人工</td></tr>
+<tr><td><strong>give</strong></td><td>与える</td><td><strong>receive</strong></td><td>受け取る</td></tr>
+<tr><td><strong>global</strong></td><td>世界的な</td><td><strong>local</strong></td><td>地域の</td></tr>
+<tr><td><strong>good</strong></td><td>良い</td><td><strong>evil</strong></td><td>悪い</td></tr>
+<tr><td><strong>gradual</strong></td><td>徐々の</td><td><strong>sudden</strong></td><td>突然の</td></tr>
+<tr><td><strong>growth</strong></td><td>成長、増加</td><td><strong>decline</strong></td><td>衰退する、低下する、～を辞退する</td></tr>
+<tr><td><strong>guilty</strong></td><td>有罪の、罪の意識がある</td><td><strong>innocent</strong></td><td>無罪の、罪のない、無邪気な</td></tr>
+<tr><td><strong>hard</strong></td><td>難しい、硬い</td><td><strong>soft</strong></td><td>柔らかい</td></tr>
+<tr><td><strong>harm</strong></td><td>害</td><td><strong>protect</strong></td><td>守る、保護する</td></tr>
+<tr><td><strong>harsh</strong></td><td>厳しい</td><td><strong>pleasant</strong></td><td>楽しい</td></tr>
+<tr><td><strong>hasty</strong></td><td>急いだ、軽率な</td><td><strong>patient</strong></td><td>患者、忍耐強い</td></tr>
+<tr><td><strong>hate</strong></td><td>嫌う</td><td><strong>love</strong></td><td>愛する、愛</td></tr>
+<tr><td><strong>heal</strong></td><td>〈けがなど〉を治す、治る</td><td><strong>injure</strong></td><td>～を傷つける</td></tr>
+<tr><td><strong>healthy</strong></td><td>健康な</td><td><strong>sick</strong></td><td>病気の</td></tr>
+<tr><td><strong>heavy</strong></td><td>重い</td><td><strong>light</strong></td><td>光、軽い</td></tr>
+<tr><td><strong>help</strong></td><td>助ける</td><td><strong>hurt</strong></td><td>～を傷つける</td></tr>
+<tr><td><strong>hidden</strong></td><td>隠れた</td><td><strong>obvious</strong></td><td>明白な</td></tr>
+<tr><td><strong>hide</strong></td><td>隠す</td><td><strong>reveal</strong></td><td>明らかにする</td></tr>
+<tr><td><strong>high</strong></td><td>高い</td><td><strong>low</strong></td><td>低い</td></tr>
+<tr><td><strong>hinder</strong></td><td>さまたげる</td><td><strong>promote</strong></td><td>～を促進する</td></tr>
+<tr><td><strong>hire</strong></td><td>～を雇う</td><td><strong>fire</strong></td><td>火、解雇する</td></tr>
+<tr><td><strong>hope</strong></td><td>希望、望む</td><td><strong>despair</strong></td><td>絶望</td></tr>
+<tr><td><strong>hot</strong></td><td>暑い、熱い</td><td><strong>cold</strong></td><td>寒い、冷たい</td></tr>
+<tr><td><strong>huge</strong></td><td>巨大な</td><td><strong>tiny</strong></td><td>ちっちゃな</td></tr>
+<tr><td><strong>humble</strong></td><td>謙虚な、粗末な</td><td><strong>proud</strong></td><td>誇りに思う</td></tr>
+<tr><td><strong>hurt</strong></td><td>～を傷つける</td><td><strong>help</strong></td><td>助ける</td></tr>
+<tr><td><strong>idealistic</strong></td><td>理想主義的な</td><td><strong>realistic</strong></td><td>現実的な</td></tr>
+<tr><td><strong>ignorance</strong></td><td>無知</td><td><strong>knowledge</strong></td><td>知識</td></tr>
+<tr><td><strong>ignore</strong></td><td>～を無視する</td><td><strong>notice</strong></td><td>～に気づく</td></tr>
+<tr><td><strong>import</strong></td><td>～を輸入する</td><td><strong>export</strong></td><td>輸出する、輸出</td></tr>
+<tr><td><strong>important</strong></td><td>重要な</td><td><strong>trivial</strong></td><td>ささいな</td></tr>
+<tr><td><strong>improve</strong></td><td>～を向上させる</td><td><strong>worsen</strong></td><td>悪化する</td></tr>
+<tr><td><strong>include</strong></td><td>～を含む、含める</td><td><strong>exclude</strong></td><td>除外する</td></tr>
+<tr><td><strong>income</strong></td><td>所得</td><td><strong>expense</strong></td><td>費用</td></tr>
+<tr><td><strong>increase</strong></td><td>増える、～を増やす</td><td><strong>decrease</strong></td><td>減少する、減らす</td></tr>
+<tr><td><strong>indifferent</strong></td><td>無関心だ</td><td><strong>curious</strong></td><td>好奇心の強い</td></tr>
+<tr><td><strong>individual</strong></td><td>個人</td><td><strong>collective</strong></td><td>集団</td></tr>
+<tr><td><strong>infect</strong></td><td>〈人〉に感染する</td><td><strong>cure</strong></td><td>～を治療する</td></tr>
+<tr><td><strong>inferior</strong></td><td>劣った</td><td><strong>superior</strong></td><td>よりすぐれている</td></tr>
+<tr><td><strong>injure</strong></td><td>～を傷つける</td><td><strong>heal</strong></td><td>〈けがなど〉を治す、治る</td></tr>
+<tr><td><strong>innocent</strong></td><td>無罪の、罪のない、無邪気な</td><td><strong>guilty</strong></td><td>有罪の、罪の意識がある</td></tr>
+<tr><td><strong>innovation</strong></td><td>革新</td><td><strong>tradition</strong></td><td>伝統</td></tr>
+<tr><td><strong>inside</strong></td><td>内側に、内部</td><td><strong>outside</strong></td><td>外側に</td></tr>
+<tr><td><strong>interest</strong></td><td>興味、利益</td><td><strong>bore</strong></td><td>～をうんざりさせる</td></tr>
+<tr><td><strong>join</strong></td><td>参加する</td><td><strong>split</strong></td><td>～を割る、分裂する</td></tr>
+<tr><td><strong>joy</strong></td><td>喜び</td><td><strong>sorrow</strong></td><td>悲しみ</td></tr>
+<tr><td><strong>junior</strong></td><td>年下の、下級の</td><td><strong>senior</strong></td><td>上級の、先輩の</td></tr>
+<tr><td><strong>knowledge</strong></td><td>知識</td><td><strong>ignorance</strong></td><td>無知</td></tr>
+<tr><td><strong>lack</strong></td><td>不足</td><td><strong>plenty</strong></td><td>十分な</td></tr>
+<tr><td><strong>large</strong></td><td>大きい</td><td><strong>small</strong></td><td>小さい</td></tr>
+<tr><td><strong>lasting</strong></td><td>永続する</td><td><strong>temporary</strong></td><td>一時的な</td></tr>
+<tr><td><strong>late</strong></td><td>遅い</td><td><strong>early</strong></td><td>早い</td></tr>
+<tr><td><strong>lead</strong></td><td>導く</td><td><strong>follow</strong></td><td>～の後に続く、～に従う</td></tr>
+<tr><td><strong>leave</strong></td><td>去る、残す</td><td><strong>enter</strong></td><td>入る</td></tr>
+<tr><td><strong>lend</strong></td><td>貸す</td><td><strong>borrow</strong></td><td>～を借りる</td></tr>
+<tr><td><strong>lenient</strong></td><td>寛大な</td><td><strong>strict</strong></td><td>厳しい</td></tr>
+<tr><td><strong>lie</strong></td><td>横たわる、うそをつく</td><td><strong>truth</strong></td><td>真実</td></tr>
+<tr><td><strong>lift</strong></td><td>持ち上げる</td><td><strong>drop</strong></td><td>落ちる、落とす</td></tr>
+<tr><td><strong>light</strong></td><td>光、軽い</td><td><strong>darkness</strong></td><td>暗闇</td></tr>
+<tr><td><strong>like</strong></td><td>好む、～のような</td><td><strong>hate</strong></td><td>嫌う</td></tr>
+<tr><td><strong>likely</strong></td><td>可能性が高い</td><td><strong>doubtful</strong></td><td>疑わしい</td></tr>
+<tr><td><strong>live</strong></td><td>生きる、住む</td><td><strong>die</strong></td><td>死ぬ</td></tr>
+<tr><td><strong>local</strong></td><td>地域の</td><td><strong>global</strong></td><td>世界的な</td></tr>
+<tr><td><strong>long</strong></td><td>長い</td><td><strong>brief</strong></td><td>簡潔な</td></tr>
+<tr><td><strong>lose</strong></td><td>失う、負ける</td><td><strong>gain</strong></td><td>得る</td></tr>
+<tr><td><strong>loss</strong></td><td>損失</td><td><strong>profit</strong></td><td>もうけ</td></tr>
+<tr><td><strong>love</strong></td><td>愛する、愛</td><td><strong>hate</strong></td><td>嫌う</td></tr>
+<tr><td><strong>low</strong></td><td>低い</td><td><strong>high</strong></td><td>高い</td></tr>
+<tr><td><strong>lower</strong></td><td>下げる、より低い</td><td><strong>raise</strong></td><td>～を上げる、～を育てる</td></tr>
+<tr><td><strong>major</strong></td><td>主要な、大きな</td><td><strong>minor</strong></td><td>小さい</td></tr>
+<tr><td><strong>majority</strong></td><td>大多数</td><td><strong>minority</strong></td><td>少数派</td></tr>
+<tr><td><strong>male</strong></td><td>男の</td><td><strong>female</strong></td><td>女性の、雌の</td></tr>
+<tr><td><strong>mandatory</strong></td><td>義務的な</td><td><strong>optional</strong></td><td>任意の</td></tr>
+<tr><td><strong>maximum</strong></td><td>最大の</td><td><strong>minimum</strong></td><td>最小限の</td></tr>
+<tr><td><strong>melt</strong></td><td>溶ける</td><td><strong>freeze</strong></td><td>凍りつく</td></tr>
+<tr><td><strong>mental</strong></td><td>精神の、知的な</td><td><strong>physical</strong></td><td>身体の、肉体の</td></tr>
+<tr><td><strong>minimum</strong></td><td>最小限の</td><td><strong>maximum</strong></td><td>最大の</td></tr>
+<tr><td><strong>minor</strong></td><td>小さい</td><td><strong>major</strong></td><td>主要な、大きな</td></tr>
+<tr><td><strong>minority</strong></td><td>少数派</td><td><strong>majority</strong></td><td>大多数</td></tr>
+<tr><td><strong>modern</strong></td><td>現代の</td><td><strong>ancient</strong></td><td>古代の</td></tr>
+<tr><td><strong>modest</strong></td><td>控えめな、謙虚な、わずかな</td><td><strong>arrogant</strong></td><td>傲慢な</td></tr>
+<tr><td><strong>narrow</strong></td><td>狭い</td><td><strong>broad</strong></td><td>広い</td></tr>
+<tr><td><strong>native</strong></td><td>母国の</td><td><strong>foreign</strong></td><td>外国の</td></tr>
+<tr><td><strong>natural</strong></td><td>自然の</td><td><strong>artificial</strong></td><td>人工</td></tr>
+<tr><td><strong>near</strong></td><td>近い</td><td><strong>far</strong></td><td>遠い</td></tr>
+<tr><td><strong>nearly</strong></td><td>ほとんど</td><td><strong>exactly</strong></td><td>正確に</td></tr>
+<tr><td><strong>necessary</strong></td><td>必要な</td><td><strong>optional</strong></td><td>任意の</td></tr>
+<tr><td><strong>negative</strong></td><td>否定の</td><td><strong>positive</strong></td><td>積極的な</td></tr>
+<tr><td><strong>nervous</strong></td><td>神経質な、不安な</td><td><strong>relaxed</strong></td><td>くつろいだ</td></tr>
+<tr><td><strong>new</strong></td><td>新しい</td><td><strong>old</strong></td><td>古い、年老いた</td></tr>
+<tr><td><strong>night</strong></td><td>夜</td><td><strong>day</strong></td><td>日、昼</td></tr>
+<tr><td><strong>normal</strong></td><td>普通の</td><td><strong>strange</strong></td><td>奇妙な</td></tr>
+<tr><td><strong>notice</strong></td><td>～に気づく</td><td><strong>ignore</strong></td><td>～を無視する</td></tr>
+<tr><td><strong>novel</strong></td><td>新しい、小説</td><td><strong>conventional</strong></td><td>従来の、伝統的な</td></tr>
+<tr><td><strong>nowhere</strong></td><td>どこにも～ない</td><td><strong>throughout</strong></td><td>～の至る所に、～を通して</td></tr>
+<tr><td><strong>obstruct</strong></td><td>妨げる</td><td><strong>assist</strong></td><td>～を助ける、～を手伝う</td></tr>
+<tr><td><strong>obvious</strong></td><td>明白な</td><td><strong>hidden</strong></td><td>隠れた</td></tr>
+<tr><td><strong>occasionally</strong></td><td>時々</td><td><strong>frequently</strong></td><td>しばしば</td></tr>
+<tr><td><strong>often</strong></td><td>しばしば</td><td><strong>seldom</strong></td><td>めったに～ない</td></tr>
+<tr><td><strong>old</strong></td><td>古い、年老いた</td><td><strong>new</strong></td><td>新しい</td></tr>
+<tr><td><strong>open</strong></td><td>開ける、開いた</td><td><strong>close</strong></td><td>閉じる、近い</td></tr>
+<tr><td><strong>opponent</strong></td><td>敵</td><td><strong>ally</strong></td><td>同盟国</td></tr>
+<tr><td><strong>oppose</strong></td><td>～に反対する</td><td><strong>support</strong></td><td>～を支持する</td></tr>
+<tr><td><strong>optimistic</strong></td><td>楽観的な</td><td><strong>pessimistic</strong></td><td>悲観的な</td></tr>
+<tr><td><strong>optional</strong></td><td>任意の</td><td><strong>essential</strong></td><td>不可欠な</td></tr>
+<tr><td><strong>order</strong></td><td>命令、順序、注文</td><td><strong>chaos</strong></td><td>混沌</td></tr>
+<tr><td><strong>ordinary</strong></td><td>普通の</td><td><strong>remarkable</strong></td><td>すばらしい</td></tr>
+<tr><td><strong>origin</strong></td><td>起源</td><td><strong>end</strong></td><td>終わり、終える</td></tr>
+<tr><td><strong>outside</strong></td><td>外側に</td><td><strong>inside</strong></td><td>内側に、内部</td></tr>
+<tr><td><strong>pain</strong></td><td>苦痛</td><td><strong>pleasure</strong></td><td>喜び</td></tr>
+<tr><td><strong>panic</strong></td><td>パニック</td><td><strong>calm</strong></td><td>冷静な</td></tr>
+<tr><td><strong>partial</strong></td><td>部分的な、偏った</td><td><strong>complete</strong></td><td>完全な</td></tr>
+<tr><td><strong>passive</strong></td><td>受動的な、消極的な</td><td><strong>active</strong></td><td>活動的な</td></tr>
+<tr><td><strong>past</strong></td><td>過去、～を過ぎて</td><td><strong>future</strong></td><td>未来、将来の</td></tr>
+<tr><td><strong>patient</strong></td><td>患者、忍耐強い</td><td><strong>hasty</strong></td><td>急いだ、軽率な</td></tr>
+<tr><td><strong>peace</strong></td><td>平和</td><td><strong>war</strong></td><td>戦争</td></tr>
+<tr><td><strong>perish</strong></td><td>滅びる、死ぬ</td><td><strong>survive</strong></td><td>生き残る</td></tr>
+<tr><td><strong>permanent</strong></td><td>永久</td><td><strong>temporary</strong></td><td>一時的な</td></tr>
+<tr><td><strong>permit</strong></td><td>許可する</td><td><strong>ban</strong></td><td>禁止する</td></tr>
+<tr><td><strong>personal</strong></td><td>個人の</td><td><strong>public</strong></td><td>公共の、公衆</td></tr>
+<tr><td><strong>pessimistic</strong></td><td>悲観的な</td><td><strong>optimistic</strong></td><td>楽観的な</td></tr>
+<tr><td><strong>physical</strong></td><td>身体の、肉体の</td><td><strong>mental</strong></td><td>精神の、知的な</td></tr>
+<tr><td><strong>pleasant</strong></td><td>楽しい</td><td><strong>harsh</strong></td><td>厳しい</td></tr>
+<tr><td><strong>please</strong></td><td>喜ばせる、どうぞ</td><td><strong>annoy</strong></td><td>～をいらいらさせる</td></tr>
+<tr><td><strong>pleasure</strong></td><td>喜び</td><td><strong>pain</strong></td><td>苦痛</td></tr>
+<tr><td><strong>plenty</strong></td><td>十分な</td><td><strong>lack</strong></td><td>不足</td></tr>
+<tr><td><strong>polite</strong></td><td>礼儀正しい</td><td><strong>rude</strong></td><td>失礼な</td></tr>
+<tr><td><strong>poor</strong></td><td>貧しい、乏しい</td><td><strong>rich</strong></td><td>豊かな、裕福な</td></tr>
+<tr><td><strong>positive</strong></td><td>積極的な</td><td><strong>negative</strong></td><td>否定の</td></tr>
+<tr><td><strong>possible</strong></td><td>可能な</td><td><strong>hopeless</strong></td><td>絶望的な</td></tr>
+<tr><td><strong>possibly</strong></td><td>おそらく、もしかすると</td><td><strong>certainly</strong></td><td>確かに</td></tr>
+<tr><td><strong>poverty</strong></td><td>貧乏</td><td><strong>wealth</strong></td><td>富</td></tr>
+<tr><td><strong>practical</strong></td><td>実用的な</td><td><strong>theoretical</strong></td><td>理論上の</td></tr>
+<tr><td><strong>praise</strong></td><td>～をほめる</td><td><strong>criticize</strong></td><td>～を非難する</td></tr>
+<tr><td><strong>presence</strong></td><td>存在、出席</td><td><strong>absence</strong></td><td>不在、欠如</td></tr>
+<tr><td><strong>preserve</strong></td><td>保護する、保存する</td><td><strong>damage</strong></td><td>損害、傷つける</td></tr>
+<tr><td><strong>prevent</strong></td><td>～をさまたげる</td><td><strong>enable</strong></td><td>～を可能にする</td></tr>
+<tr><td><strong>previous</strong></td><td>前の</td><td><strong>following</strong></td><td>次の、以下の</td></tr>
+<tr><td><strong>private</strong></td><td>個人の、私的な</td><td><strong>public</strong></td><td>公共の、公衆</td></tr>
+<tr><td><strong>problem</strong></td><td>問題</td><td><strong>solution</strong></td><td>解決策</td></tr>
+<tr><td><strong>profit</strong></td><td>もうけ</td><td><strong>loss</strong></td><td>損失</td></tr>
+<tr><td><strong>profound</strong></td><td>深い</td><td><strong>shallow</strong></td><td>浅い</td></tr>
+<tr><td><strong>progress</strong></td><td>進歩、前進</td><td><strong>regress</strong></td><td>後退する</td></tr>
+<tr><td><strong>promote</strong></td><td>～を促進する</td><td><strong>hinder</strong></td><td>さまたげる</td></tr>
+<tr><td><strong>proper</strong></td><td>適切な</td><td><strong>wrong</strong></td><td>間違った</td></tr>
+<tr><td><strong>protect</strong></td><td>守る、保護する</td><td><strong>harm</strong></td><td>害</td></tr>
+<tr><td><strong>proud</strong></td><td>誇りに思う</td><td><strong>humble</strong></td><td>謙虚な、粗末な</td></tr>
+<tr><td><strong>public</strong></td><td>公共の、公衆</td><td><strong>private</strong></td><td>個人の、私的な</td></tr>
+<tr><td><strong>pull</strong></td><td>引く</td><td><strong>push</strong></td><td>押す</td></tr>
+<tr><td><strong>punishment</strong></td><td>罰</td><td><strong>reward</strong></td><td>報酬</td></tr>
+<tr><td><strong>pure</strong></td><td>純</td><td><strong>polluted</strong></td><td>汚染された</td></tr>
+<tr><td><strong>push</strong></td><td>押す</td><td><strong>pull</strong></td><td>引く</td></tr>
+<tr><td><strong>question</strong></td><td>質問、疑問</td><td><strong>answer</strong></td><td>答え、答える</td></tr>
+<tr><td><strong>quick</strong></td><td>速い、素早い</td><td><strong>slow</strong></td><td>遅い</td></tr>
+<tr><td><strong>raise</strong></td><td>～を上げる、～を育てる</td><td><strong>lower</strong></td><td>下げる、より低い</td></tr>
+<tr><td><strong>rapid</strong></td><td>速い、急速な</td><td><strong>slow</strong></td><td>遅い</td></tr>
+<tr><td><strong>rare</strong></td><td>珍しい</td><td><strong>common</strong></td><td>共通の、普通の</td></tr>
+<tr><td><strong>realistic</strong></td><td>現実的な</td><td><strong>idealistic</strong></td><td>理想主義的な</td></tr>
+<tr><td><strong>reasonable</strong></td><td>理にかなった</td><td><strong>absurd</strong></td><td>ばかげた</td></tr>
+<tr><td><strong>rebel</strong></td><td>反逆者</td><td><strong>conform</strong></td><td>従う</td></tr>
+<tr><td><strong>recall</strong></td><td>～を思い出す</td><td><strong>ignore</strong></td><td>～を無視する</td></tr>
+<tr><td><strong>receive</strong></td><td>受け取る</td><td><strong>give</strong></td><td>与える</td></tr>
+<tr><td><strong>recover</strong></td><td>Aから回復する</td><td><strong>decline</strong></td><td>衰退する、低下する、～を辞退する</td></tr>
+<tr><td><strong>reduce</strong></td><td>減らす</td><td><strong>increase</strong></td><td>増える、～を増やす</td></tr>
+<tr><td><strong>refuse</strong></td><td>～を断る</td><td><strong>accept</strong></td><td>～を受け入れる</td></tr>
+<tr><td><strong>regress</strong></td><td>後退する</td><td><strong>progress</strong></td><td>進歩、前進</td></tr>
+<tr><td><strong>reject</strong></td><td>～を断る</td><td><strong>accept</strong></td><td>～を受け入れる</td></tr>
+<tr><td><strong>relax</strong></td><td>くつろぐ、緩める</td><td><strong>worry</strong></td><td>心配する</td></tr>
+<tr><td><strong>relaxed</strong></td><td>くつろいだ</td><td><strong>nervous</strong></td><td>神経質な、不安な</td></tr>
+<tr><td><strong>reluctant</strong></td><td>したがらない</td><td><strong>eager</strong></td><td>熱望している</td></tr>
+<tr><td><strong>remarkable</strong></td><td>すばらしい</td><td><strong>ordinary</strong></td><td>普通の</td></tr>
+<tr><td><strong>remember</strong></td><td>覚えている、思い出す</td><td><strong>forget</strong></td><td>忘れる</td></tr>
+<tr><td><strong>remove</strong></td><td>～を移す、取り去る</td><td><strong>add</strong></td><td>～を加える</td></tr>
+<tr><td><strong>repel</strong></td><td>追い払う、反発する</td><td><strong>attract</strong></td><td>～を引きつける</td></tr>
+<tr><td><strong>restriction</strong></td><td>制限</td><td><strong>freedom</strong></td><td>自由</td></tr>
+<tr><td><strong>retreat</strong></td><td>退く</td><td><strong>advance</strong></td><td>前進、進歩</td></tr>
+<tr><td><strong>reveal</strong></td><td>明らかにする</td><td><strong>hide</strong></td><td>隠す</td></tr>
+<tr><td><strong>reward</strong></td><td>報酬</td><td><strong>punishment</strong></td><td>罰</td></tr>
+<tr><td><strong>rich</strong></td><td>豊かな、裕福な</td><td><strong>poor</strong></td><td>貧しい、乏しい</td></tr>
+<tr><td><strong>rigid</strong></td><td>厳格な</td><td><strong>flexible</strong></td><td>柔軟な</td></tr>
+<tr><td><strong>rise</strong></td><td>上昇する</td><td><strong>fall</strong></td><td>落ちる、下がる</td></tr>
+<tr><td><strong>risk</strong></td><td>危険</td><td><strong>safety</strong></td><td>安全</td></tr>
+<tr><td><strong>rough</strong></td><td>荒い、大雑把な</td><td><strong>smooth</strong></td><td>滑らかな</td></tr>
+<tr><td><strong>roughly</strong></td><td>おおよそ、粗く</td><td><strong>exactly</strong></td><td>正確に</td></tr>
+<tr><td><strong>rude</strong></td><td>失礼な</td><td><strong>polite</strong></td><td>礼儀正しい</td></tr>
+<tr><td><strong>ruin</strong></td><td>～を台無しにする、破滅させる</td><td><strong>create</strong></td><td>作る、生み出す</td></tr>
+<tr><td><strong>rural</strong></td><td>田舎の</td><td><strong>urban</strong></td><td>都会の</td></tr>
+<tr><td><strong>sacrifice</strong></td><td>～を犠牲にする</td><td><strong>gain</strong></td><td>得る</td></tr>
+<tr><td><strong>sadness</strong></td><td>悲しみ</td><td><strong>delight</strong></td><td>大喜び</td></tr>
+<tr><td><strong>safe</strong></td><td>安全な</td><td><strong>dangerous</strong></td><td>危険な</td></tr>
+<tr><td><strong>safety</strong></td><td>安全</td><td><strong>risk</strong></td><td>危険</td></tr>
+<tr><td><strong>same</strong></td><td>同じ</td><td><strong>different</strong></td><td>異なる</td></tr>
+<tr><td><strong>satisfy</strong></td><td>～を満たす</td><td><strong>disappoint</strong></td><td>～を失望させる</td></tr>
+<tr><td><strong>save</strong></td><td>救う、節約する</td><td><strong>waste</strong></td><td>無駄にする、浪費</td></tr>
+<tr><td><strong>scarce</strong></td><td>乏しい、不足した</td><td><strong>available</strong></td><td>手に入る、利用できる</td></tr>
+<tr><td><strong>secure</strong></td><td>安全な、確保する</td><td><strong>risky</strong></td><td>危険な</td></tr>
+<tr><td><strong>security</strong></td><td>安全</td><td><strong>danger</strong></td><td>危険</td></tr>
+<tr><td><strong>seldom</strong></td><td>めったに～ない</td><td><strong>often</strong></td><td>しばしば</td></tr>
+<tr><td><strong>selfish</strong></td><td>利己的な</td><td><strong>generous</strong></td><td>気前のよい</td></tr>
+<tr><td><strong>sell</strong></td><td>売る</td><td><strong>buy</strong></td><td>買う</td></tr>
+<tr><td><strong>senior</strong></td><td>上級の、先輩の</td><td><strong>junior</strong></td><td>年下の、下級の</td></tr>
+<tr><td><strong>sensitive</strong></td><td>敏感な</td><td><strong>dull</strong></td><td>退屈させる</td></tr>
+<tr><td><strong>separate</strong></td><td>分ける、別々の</td><td><strong>connect</strong></td><td>つなぐ</td></tr>
+<tr><td><strong>setback</strong></td><td>挫折、後退</td><td><strong>advance</strong></td><td>前進、進歩</td></tr>
+<tr><td><strong>shallow</strong></td><td>浅い</td><td><strong>deep</strong></td><td>深い</td></tr>
+<tr><td><strong>sharp</strong></td><td>急激な</td><td><strong>gradual</strong></td><td>徐々の</td></tr>
+<tr><td><strong>short</strong></td><td>短い、不足した</td><td><strong>long</strong></td><td>長い</td></tr>
+<tr><td><strong>shortage</strong></td><td>不足</td><td><strong>supply</strong></td><td>～を供給する</td></tr>
+<tr><td><strong>shrink</strong></td><td>縮小する</td><td><strong>expand</strong></td><td>拡大する</td></tr>
+<tr><td><strong>sick</strong></td><td>病気の</td><td><strong>healthy</strong></td><td>健康な</td></tr>
+<tr><td><strong>significant</strong></td><td>重要な、かなりの</td><td><strong>trivial</strong></td><td>ささいな</td></tr>
+<tr><td><strong>similar</strong></td><td>似ている</td><td><strong>different</strong></td><td>異なる</td></tr>
+<tr><td><strong>simple</strong></td><td>単純な</td><td><strong>complex</strong></td><td>複雑な</td></tr>
+<tr><td><strong>simplify</strong></td><td>簡単にする</td><td><strong>complicate</strong></td><td>複雑にする</td></tr>
+<tr><td><strong>slow</strong></td><td>遅い</td><td><strong>rapid</strong></td><td>速い、急速な</td></tr>
+<tr><td><strong>small</strong></td><td>小さい</td><td><strong>large</strong></td><td>大きい</td></tr>
+<tr><td><strong>smooth</strong></td><td>滑らかな</td><td><strong>rough</strong></td><td>荒い、大雑把な</td></tr>
+<tr><td><strong>soft</strong></td><td>柔らかい</td><td><strong>hard</strong></td><td>難しい、硬い</td></tr>
+<tr><td><strong>solution</strong></td><td>解決策</td><td><strong>problem</strong></td><td>問題</td></tr>
+<tr><td><strong>sorrow</strong></td><td>悲しみ</td><td><strong>joy</strong></td><td>喜び</td></tr>
+<tr><td><strong>source</strong></td><td>源</td><td><strong>destination</strong></td><td>目的地</td></tr>
+<tr><td><strong>sparse</strong></td><td>まばらな</td><td><strong>dense</strong></td><td>密集した、濃い</td></tr>
+<tr><td><strong>specific</strong></td><td>特定の</td><td><strong>general</strong></td><td>一般</td></tr>
+<tr><td><strong>split</strong></td><td>～を割る、分裂する</td><td><strong>join</strong></td><td>参加する</td></tr>
+<tr><td><strong>stable</strong></td><td>安定した</td><td><strong>shaky</strong></td><td>不安定な</td></tr>
+<tr><td><strong>stale</strong></td><td>古くなった、新鮮でない</td><td><strong>fresh</strong></td><td>新鮮な</td></tr>
+<tr><td><strong>start</strong></td><td>始める、始まる</td><td><strong>finish</strong></td><td>終える</td></tr>
+<tr><td><strong>strength</strong></td><td>強さ</td><td><strong>weakness</strong></td><td>弱点</td></tr>
+<tr><td><strong>strengthen</strong></td><td>強化する</td><td><strong>weaken</strong></td><td>弱める</td></tr>
+<tr><td><strong>strict</strong></td><td>厳しい</td><td><strong>lenient</strong></td><td>寛大な</td></tr>
+<tr><td><strong>strong</strong></td><td>強い</td><td><strong>weak</strong></td><td>弱い</td></tr>
+<tr><td><strong>stupid</strong></td><td>ばかな</td><td><strong>clever</strong></td><td>賢い</td></tr>
+<tr><td><strong>succeed</strong></td><td>成功する</td><td><strong>fail</strong></td><td>失敗する</td></tr>
+<tr><td><strong>success</strong></td><td>成功</td><td><strong>failure</strong></td><td>失敗</td></tr>
+<tr><td><strong>sudden</strong></td><td>突然の</td><td><strong>gradual</strong></td><td>徐々の</td></tr>
+<tr><td><strong>superior</strong></td><td>よりすぐれている</td><td><strong>inferior</strong></td><td>劣った</td></tr>
+<tr><td><strong>supply</strong></td><td>～を供給する</td><td><strong>demand</strong></td><td>～を要求する</td></tr>
+<tr><td><strong>support</strong></td><td>～を支持する</td><td><strong>oppose</strong></td><td>～に反対する</td></tr>
+<tr><td><strong>surface</strong></td><td>表面</td><td><strong>depth</strong></td><td>深さ</td></tr>
+<tr><td><strong>survive</strong></td><td>生き残る</td><td><strong>perish</strong></td><td>滅びる、死ぬ</td></tr>
+<tr><td><strong>temporary</strong></td><td>一時的な</td><td><strong>permanent</strong></td><td>永久</td></tr>
+<tr><td><strong>terrible</strong></td><td>ひどい</td><td><strong>excellent</strong></td><td>すばらしい</td></tr>
+<tr><td><strong>theoretical</strong></td><td>理論上の</td><td><strong>practical</strong></td><td>実用的な</td></tr>
+<tr><td><strong>thick</strong></td><td>厚い、濃い</td><td><strong>thin</strong></td><td>薄い、細い</td></tr>
+<tr><td><strong>thin</strong></td><td>薄い、細い</td><td><strong>thick</strong></td><td>厚い、濃い</td></tr>
+<tr><td><strong>throughout</strong></td><td>～の至る所に、～を通して</td><td><strong>nowhere</strong></td><td>どこにも～ない</td></tr>
+<tr><td><strong>timid</strong></td><td>臆病な</td><td><strong>bold</strong></td><td>大胆な</td></tr>
+<tr><td><strong>tiny</strong></td><td>ちっちゃな</td><td><strong>huge</strong></td><td>巨大な</td></tr>
+<tr><td><strong>top</strong></td><td>頂上、上部</td><td><strong>bottom</strong></td><td>底、下部</td></tr>
+<tr><td><strong>tough</strong></td><td>たくましい、骨の折れる</td><td><strong>fragile</strong></td><td>壊れやすい</td></tr>
+<tr><td><strong>tradition</strong></td><td>伝統</td><td><strong>innovation</strong></td><td>革新</td></tr>
+<tr><td><strong>trivial</strong></td><td>ささいな</td><td><strong>significant</strong></td><td>重要な、かなりの</td></tr>
+<tr><td><strong>trust</strong></td><td>～を信用する</td><td><strong>doubt</strong></td><td>疑う、疑い</td></tr>
+<tr><td><strong>truth</strong></td><td>真実</td><td><strong>lie</strong></td><td>横たわる、うそをつく</td></tr>
+<tr><td><strong>typical</strong></td><td>典型的な</td><td><strong>rare</strong></td><td>珍しい</td></tr>
+<tr><td><strong>upper</strong></td><td>上の</td><td><strong>lower</strong></td><td>下げる、より低い</td></tr>
+<tr><td><strong>upset</strong></td><td>動揺している</td><td><strong>calm</strong></td><td>冷静な</td></tr>
+<tr><td><strong>urban</strong></td><td>都会の</td><td><strong>rural</strong></td><td>田舎の</td></tr>
+<tr><td><strong>useful</strong></td><td>役に立つ</td><td><strong>useless</strong></td><td>役に立たない</td></tr>
+<tr><td><strong>vague</strong></td><td>漠然とした</td><td><strong>clear</strong></td><td>明らかな、澄んだ</td></tr>
+<tr><td><strong>valuable</strong></td><td>価値のある</td><td><strong>worthless</strong></td><td>価値のない</td></tr>
+<tr><td><strong>vanish</strong></td><td>消える</td><td><strong>appear</strong></td><td>現れる</td></tr>
+<tr><td><strong>victory</strong></td><td>勝利</td><td><strong>defeat</strong></td><td>～を打ち負かす</td></tr>
+<tr><td><strong>visible</strong></td><td>目に見える</td><td><strong>hidden</strong></td><td>隠れた</td></tr>
+<tr><td><strong>voluntary</strong></td><td>自発的な</td><td><strong>forced</strong></td><td>強制された</td></tr>
+<tr><td><strong>war</strong></td><td>戦争</td><td><strong>peace</strong></td><td>平和</td></tr>
+<tr><td><strong>warm</strong></td><td>暖かい</td><td><strong>cool</strong></td><td>涼しい、冷静な</td></tr>
+<tr><td><strong>waste</strong></td><td>無駄にする、浪費</td><td><strong>save</strong></td><td>救う、節約する</td></tr>
+<tr><td><strong>weak</strong></td><td>弱い</td><td><strong>strong</strong></td><td>強い</td></tr>
+<tr><td><strong>weaken</strong></td><td>弱める</td><td><strong>strengthen</strong></td><td>強化する</td></tr>
+<tr><td><strong>weakness</strong></td><td>弱点</td><td><strong>strength</strong></td><td>強さ</td></tr>
+<tr><td><strong>wealth</strong></td><td>富</td><td><strong>poverty</strong></td><td>貧乏</td></tr>
+<tr><td><strong>wealthy</strong></td><td>裕福な</td><td><strong>poor</strong></td><td>貧しい、乏しい</td></tr>
+<tr><td><strong>wet</strong></td><td>濡れた</td><td><strong>dry</strong></td><td>乾いた</td></tr>
+<tr><td><strong>whole</strong></td><td>全体の</td><td><strong>partial</strong></td><td>部分的な、偏った</td></tr>
+<tr><td><strong>wide</strong></td><td>広い</td><td><strong>narrow</strong></td><td>狭い</td></tr>
+<tr><td><strong>willing</strong></td><td>～する気がある、～してもかまわない</td><td><strong>reluctant</strong></td><td>したがらない</td></tr>
+<tr><td><strong>win</strong></td><td>勝つ</td><td><strong>lose</strong></td><td>失う、負ける</td></tr>
+<tr><td><strong>wise</strong></td><td>賢い</td><td><strong>foolish</strong></td><td>愚かな</td></tr>
+<tr><td><strong>withdraw</strong></td><td>～を引っ込める、引きこもる、退く、(預金など)を引き出す</td><td><strong>advance</strong></td><td>前進、進歩</td></tr>
+<tr><td><strong>within</strong></td><td>～以内に、～の内側に</td><td><strong>beyond</strong></td><td>～を越えて</td></tr>
+<tr><td><strong>worry</strong></td><td>心配する</td><td><strong>relax</strong></td><td>くつろぐ、緩める</td></tr>
+<tr><td><strong>worse</strong></td><td>より悪い</td><td><strong>better</strong></td><td>より良い</td></tr>
+<tr><td><strong>worsen</strong></td><td>悪化する</td><td><strong>improve</strong></td><td>～を向上させる</td></tr>
+<tr><td><strong>worst</strong></td><td>最悪の</td><td><strong>best</strong></td><td>最良の</td></tr>
+        </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+<script>
+(function(){
+  const body=document.body;
+  const table=document.querySelector('.vocab-table');
+  const rows=table?Array.from(table.querySelectorAll('tbody tr')):[];
+  const search=document.getElementById('search');
+  const count=document.getElementById('count');
+  const jaBtn=document.getElementById('toggleJapanese');
+  const enBtn=document.getElementById('toggleEnglish');
+
+  function updateCount(){
+    if(!count)return;
+    const visible=rows.filter(row=>row.style.display!=='none').length;
+    count.textContent=visible+' / '+rows.length+' 件';
+  }
+  function filterRows(){
+    const q=search?search.value.trim().toLowerCase():'';
+    rows.forEach(row=>{
+      row.style.display=row.textContent.toLowerCase().includes(q)?'':'none';
+    });
+    updateCount();
+  }
+  function setBtn(btn,active,onText,offText){
+    if(!btn)return;
+    btn.classList.toggle('active',active);
+    btn.textContent=active?offText:onText;
+  }
+  function refreshButtons(){
+    const jaHidden=body.classList.contains('hide-ja');
+    const enHidden=body.classList.contains('hide-en');
+    setBtn(jaBtn,jaHidden,'日本語を消す','日本語を戻す');
+    setBtn(enBtn,enHidden,'英語を消す','英語を戻す');
+  }
+  if(search)search.addEventListener('input',filterRows);
+  if(jaBtn)jaBtn.addEventListener('click',()=>{body.classList.toggle('hide-ja');refreshButtons();});
+  if(enBtn)enBtn.addEventListener('click',()=>{body.classList.toggle('hide-en');refreshButtons();});
+  filterRows();
+  refreshButtons();
+})();
+</script>
+
+</body>
+</html>
