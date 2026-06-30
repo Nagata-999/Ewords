@@ -2004,6 +2004,47 @@ html, body {
   }
 }
 
+
+
+/* Sushi level selector */
+.level-select-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 7px;
+  margin: 12px 0 8px;
+}
+.level-btn {
+  border: 1px solid #f1d7bc;
+  border-radius: 12px;
+  padding: 10px 6px;
+  background: #ffffff;
+  color: #172033;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 5px 14px rgba(15,23,42,0.04);
+}
+.level-btn.active {
+  background: linear-gradient(180deg, #fb6a3c 0%, #f4511e 100%);
+  color: #ffffff;
+  border-color: #f4511e;
+}
+.level-note {
+  margin: 4px 0 8px !important;
+  font-size: 12px !important;
+  color: #64748b !important;
+  text-align: center;
+}
+.ranking-level-tabs {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 7px;
+  margin: 0 0 10px;
+}
+@media (max-width:420px){
+  .level-select-grid, .ranking-level-tabs { grid-template-columns: repeat(2, 1fr); }
+}
+
 </style>
 </head>
 <body>
@@ -2229,6 +2270,15 @@ html, body {
             <div class="growth-next" id="homeGrowthNext">次の動物まであと -</div>
           </div>
 
+          <div id="sushiLevelSelect" class="level-select-grid">
+            <button class="level-btn active" data-level="all">ALL</button>
+            <button class="level-btn" data-level="level1">Lv.1</button>
+            <button class="level-btn" data-level="level2">Lv.2</button>
+            <button class="level-btn" data-level="level3">Lv.3</button>
+            <button class="level-btn" data-level="level4">Lv.4</button>
+          </div>
+          <p id="sushiLevelNote" class="level-note">ALL：全単語 / Lv.1：1-600 / Lv.2：601-1200 / Lv.3：1201-1700 / Lv.4：1701-最後</p>
+
           <div class="menu-btns">
             <button class="btn primary" id="selectedStartBtn">ゲームスタート</button>
             <button class="btn gold" id="selectedRankingBtn">ランキング</button>
@@ -2255,6 +2305,13 @@ html, body {
           <button class="ranking-tab active" id="rankingTabSushi">すし単</button>
           <button class="ranking-tab" id="rankingTabShino">しの単</button>
           <button class="ranking-tab" id="rankingTabAntoni">あんとに単</button>
+        </div>
+        <div class="ranking-level-tabs" id="rankingLevelTabs">
+          <button class="ranking-tab active" data-level="all">ALL</button>
+          <button class="ranking-tab" data-level="level1">Lv.1</button>
+          <button class="ranking-tab" data-level="level2">Lv.2</button>
+          <button class="ranking-tab" data-level="level3">Lv.3</button>
+          <button class="ranking-tab" data-level="level4">Lv.4</button>
         </div>
         <div id="rankingScreenList" class="ranking-box">
           <div class="ranking-title">🏆 Ranking</div>
@@ -2366,6 +2423,14 @@ html, body {
     const MODE_SHINO = "shino";
     const MODE_ANTONI = "antoni";
     const PUBLIC_MODE = MODE_SUSHI;
+    const SUSHI_LEVEL_ALL = "all";
+    const SUSHI_LEVELS = {
+      all: { label: "ALL", dbMode: MODE_SUSHI, range: null, desc: "全単語" },
+      level1: { label: "Lv.1", dbMode: "core_level1", range: [0, 600], desc: "1〜600" },
+      level2: { label: "Lv.2", dbMode: "core_level2", range: [600, 1200], desc: "601〜1200" },
+      level3: { label: "Lv.3", dbMode: "core_level3", range: [1200, 1700], desc: "1201〜1700" },
+      level4: { label: "Lv.4", dbMode: "core_level4", range: [1700, Infinity], desc: "1701〜最後" }
+    };
 
     const MODE_CONFIG = {
       [MODE_SUSHI]: {
@@ -2397,14 +2462,33 @@ html, body {
       if (mode === "core") return MODE_SUSHI;
       if (mode === "shino") return MODE_SHINO;
       if (mode === "antoni") return MODE_ANTONI;
+      if (mode === "core_level1" || mode === "core_level2" || mode === "core_level3" || mode === "core_level4") return mode;
       return mode || MODE_SUSHI;
+    }
+
+    function normalizeSushiLevel(level) {
+      return SUSHI_LEVELS[level] ? level : SUSHI_LEVEL_ALL;
+    }
+
+    function getDbModeForGame(mode = currentMode, level = currentSushiLevel) {
+      const normalizedMode = normalizeModeForDb(mode);
+      if (normalizedMode !== MODE_SUSHI) return normalizedMode;
+      return SUSHI_LEVELS[normalizeSushiLevel(level)].dbMode;
+    }
+
+    function getLevelFromDbMode(dbMode) {
+      const found = Object.entries(SUSHI_LEVELS).find(([, info]) => info.dbMode === dbMode);
+      return found ? found[0] : SUSHI_LEVEL_ALL;
     }
 
 
     let audioCtx = null;
     let currentMode = PUBLIC_MODE;
+    let currentSushiLevel = SUSHI_LEVEL_ALL;
     let rankingMode = PUBLIC_MODE;
+    let rankingSushiLevel = SUSHI_LEVEL_ALL;
     let selectedMenuMode = PUBLIC_MODE;
+    let selectedSushiLevel = SUSHI_LEVEL_ALL;
 
     const GROWTH_STORAGE_KEY = "sushitan_total_score_v1";
     const GROWTH_MAX_SCORE = 1000000;
@@ -5649,6 +5733,9 @@ html, body {
     const selectedStartBtn = document.getElementById('selectedStartBtn');
     const selectedRankingBtn = document.getElementById('selectedRankingBtn');
     const backHomeFromGameStartBtn = document.getElementById('backHomeFromGameStartBtn');
+    const sushiLevelSelect = document.getElementById('sushiLevelSelect');
+    const sushiLevelNote = document.getElementById('sushiLevelNote');
+    const rankingLevelTabs = document.getElementById('rankingLevelTabs');
     const closeRankingBtn = document.getElementById('closeRankingBtn');
     const gameTitleEl = document.getElementById('gameTitle');
     const homePanel = document.getElementById('homePanel');
@@ -5802,11 +5889,24 @@ html, body {
     function getWords(mode = currentMode) {
       if (mode === MODE_SHINO) return SHINO_WORDS;
       if (mode === MODE_ANTONI) return ANTONI_WORDS;
-      return WORDS;
+      const levelInfo = SUSHI_LEVELS[normalizeSushiLevel(currentSushiLevel)];
+      if (!levelInfo.range) return WORDS;
+      const [start, end] = levelInfo.range;
+      return WORDS.slice(start, end === Infinity ? WORDS.length : end);
     }
 
-    function getModeLabel(mode = currentMode) {
-      return getModeConfig(mode).label;
+    function getWordCountForLevel(level = currentSushiLevel) {
+      const info = SUSHI_LEVELS[normalizeSushiLevel(level)];
+      if (!info.range) return WORDS.length;
+      const [start, end] = info.range;
+      return Math.max(0, WORDS.slice(start, end === Infinity ? WORDS.length : end).length);
+    }
+
+    function getModeLabel(mode = currentMode, level = currentSushiLevel) {
+      const normalizedMode = normalizeModeForDb(mode);
+      const baseLabel = getModeConfig(normalizedMode).label;
+      if (normalizedMode === MODE_SUSHI) return `${baseLabel} ${SUSHI_LEVELS[normalizeSushiLevel(level)].label}`;
+      return baseLabel;
     }
 
     function getQuestionPrompt(question) {
@@ -6311,8 +6411,9 @@ html, body {
       bgm.currentTime = 0;
     }
 
-    function startGame(mode) {
-      currentMode = mode;
+    function startGame(mode, level = selectedSushiLevel) {
+      currentMode = normalizeModeForDb(mode);
+      currentSushiLevel = currentMode === MODE_SUSHI ? normalizeSushiLevel(level) : SUSHI_LEVEL_ALL;
       ensureAudio();
       startBGM();
       GAME.running = true;
@@ -6368,9 +6469,11 @@ html, body {
       }
     }
 
-    function openGameStartPanel(mode) {
+    function openGameStartPanel(mode, level = selectedSushiLevel) {
       selectedMenuMode = normalizeModeForDb(mode || MODE_SUSHI);
+      selectedSushiLevel = selectedMenuMode === MODE_SUSHI ? normalizeSushiLevel(level) : SUSHI_LEVEL_ALL;
       currentMode = selectedMenuMode;
+      currentSushiLevel = selectedSushiLevel;
       const modeText = {
         [MODE_SUSHI]: {
           title: "すし単",
@@ -6390,10 +6493,19 @@ html, body {
         const iconText = selectedMenuMode === MODE_SHINO ? "し" : selectedMenuMode === MODE_ANTONI ? "対" : "す";
         gameStartTitle.innerHTML = `<span class="mode-title-icon">${iconText}</span>${info.title}`;
       }
-      if (gameStartDesc) gameStartDesc.textContent = info.desc;
+      if (gameStartDesc) gameStartDesc.textContent = selectedMenuMode === MODE_SUSHI
+        ? `${info.desc} / ${SUSHI_LEVELS[selectedSushiLevel].label}（${SUSHI_LEVELS[selectedSushiLevel].desc}・${getWordCountForLevel(selectedSushiLevel)}語）`
+        : info.desc;
       if (gameStartGrowthCard) {
         gameStartGrowthCard.classList.toggle('hidden', selectedMenuMode !== MODE_SUSHI);
       }
+      if (sushiLevelSelect) {
+        sushiLevelSelect.classList.toggle('hidden', selectedMenuMode !== MODE_SUSHI);
+        sushiLevelSelect.querySelectorAll('[data-level]').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.level === selectedSushiLevel);
+        });
+      }
+      if (sushiLevelNote) sushiLevelNote.classList.toggle('hidden', selectedMenuMode !== MODE_SUSHI);
       showHomeSubPanel('gameStart');
     }
 
@@ -6414,10 +6526,11 @@ html, body {
       updateHud();
     }
 
-    function renderRanking(container, data, mode) {
+    function renderRanking(container, data, mode, level = rankingSushiLevel) {
       mode = normalizeModeForDb(mode);
+      level = mode === MODE_SUSHI ? normalizeSushiLevel(level) : SUSHI_LEVEL_ALL;
       if (!container) return;
-      const title = `<div class="ranking-title">🏆 ${getModeLabel(mode)} Ranking</div>`;
+      const title = `<div class="ranking-title">🏆 ${getModeLabel(mode, level)} Ranking</div>`;
 
       if (!data || data.length === 0) {
         container.innerHTML = title + `<div class="ranking-empty">まだスコアがありません</div>`;
@@ -6506,47 +6619,57 @@ html, body {
       if (rankingTabSushi) rankingTabSushi.classList.toggle("active", rankingMode === MODE_SUSHI);
       if (rankingTabShino) rankingTabShino.classList.toggle("active", rankingMode === MODE_SHINO);
       if (rankingTabAntoni) rankingTabAntoni.classList.toggle("active", rankingMode === MODE_ANTONI);
+      if (rankingLevelTabs) {
+        rankingLevelTabs.classList.toggle('hidden', rankingMode !== MODE_SUSHI);
+        rankingLevelTabs.querySelectorAll('[data-level]').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.level === rankingSushiLevel);
+        });
+      }
     }
 
-    async function loadRanking(mode = currentMode, target = rankingList) {
+    async function loadRanking(mode = currentMode, target = rankingList, level = currentSushiLevel) {
       mode = normalizeModeForDb(mode);
+      level = mode === MODE_SUSHI ? normalizeSushiLevel(level) : SUSHI_LEVEL_ALL;
+      const dbMode = getDbModeForGame(mode, level);
       if (!supabaseClient) {
-        renderRanking(target, [], mode);
+        renderRanking(target, [], mode, level);
         return [];
       }
 
+      const modeFilter = dbMode === MODE_SUSHI ? [MODE_SUSHI, "core"] : [dbMode];
       const { data, error } = await supabaseClient
         .from("scores")
         .select("id, player_name, score, max_combo, accuracy, mode")
-        .in("mode", mode === MODE_SUSHI ? [MODE_SUSHI, "core"] : [mode])
+        .in("mode", modeFilter)
         .order("score", { ascending: false })
         .limit(500);
 
       if (error) {
         console.error("ranking load error:", error);
         if (target === rankingScreenList) rankingStatus.textContent = "ランキング取得失敗";
-        renderRanking(target, [], mode);
+        renderRanking(target, [], mode, level);
         return [];
       }
 
       const deduped = dedupeRanking(data || []);
-      renderRanking(target, deduped, mode);
+      renderRanking(target, deduped, mode, level);
 
       if (target === rankingScreenList) {
-        rankingStatus.textContent = `${getModeLabel(mode)} の上位 ${deduped.length} 件（同名は最高点のみ表示）`;
+        rankingStatus.textContent = `${getModeLabel(mode, level)} の上位 ${deduped.length} 件（同名は最高点のみ表示）`;
       }
       return deduped;
     }
 
-    async function openRankingScreen(mode = currentMode || PUBLIC_MODE) {
-      rankingMode = mode;
+    async function openRankingScreen(mode = currentMode || PUBLIC_MODE, level = currentSushiLevel) {
+      rankingMode = normalizeModeForDb(mode);
+      rankingSushiLevel = rankingMode === MODE_SUSHI ? normalizeSushiLevel(level) : SUSHI_LEVEL_ALL;
       setRankingTabUI();
       rankingStatus.textContent = "読み込み中...";
       menuOverlay.classList.add('hidden');
       resultOverlay.classList.add('hidden');
       if (clearOverlay) clearOverlay.classList.add('hidden');
       rankingOverlay.classList.remove('hidden');
-      await loadRanking(rankingMode, rankingScreenList);
+      await loadRanking(rankingMode, rankingScreenList, rankingSushiLevel);
     }
 
     async function saveHighScore(finalScoreValue, accuracy) {
@@ -6555,7 +6678,7 @@ html, body {
       const input = prompt("名前を入力してください", localStorage.getItem("speed_vocab_name") || "");
       if (input === null) {
         saveStatus.textContent = "保存をスキップしました";
-        await loadRanking(currentMode, rankingList);
+        await loadRanking(currentMode, rankingList, currentSushiLevel);
         return;
       }
 
@@ -6569,7 +6692,7 @@ html, body {
   p_score: finalScoreValue,
   p_max_combo: GAME.maxCombo,
   p_accuracy: accuracy,
-  p_mode: normalizeModeForDb(currentMode)
+  p_mode: getDbModeForGame(currentMode, currentSushiLevel)
 });
 
       if (error) {
@@ -6578,6 +6701,7 @@ html, body {
       } else {
         GAME.scoreSavedThisRound = true;
         rankingMode = normalizeModeForDb(currentMode);
+        rankingSushiLevel = currentMode === MODE_SUSHI ? currentSushiLevel : SUSHI_LEVEL_ALL;
         saveStatus.textContent = `${playerName} の記録を保存しました`;
       }
     }
@@ -6653,7 +6777,7 @@ html, body {
       resultOverlay.classList.remove('hidden');
 
       await saveHighScore(bonusScore, accuracy);
-      await loadRanking(currentMode, rankingList);
+      await loadRanking(currentMode, rankingList, currentSushiLevel);
     }
 
 
@@ -6672,27 +6796,39 @@ html, body {
     if (startSushiBtn) startSushiBtn.addEventListener('click', () => startGame(MODE_SUSHI));
     if (startShinoBtn) startShinoBtn.addEventListener('click', () => startGame(MODE_SHINO));
     if (startAntoniBtn) startAntoniBtn.addEventListener('click', () => startGame(MODE_ANTONI));
-    if (openSushiStartBtn) openSushiStartBtn.addEventListener('click', () => startGame(PUBLIC_MODE));
+    if (openSushiStartBtn) openSushiStartBtn.addEventListener('click', () => openGameStartPanel(PUBLIC_MODE, selectedSushiLevel));
     if (openShinoStartBtn) openShinoStartBtn.addEventListener('click', () => startGame(MODE_SHINO));
     if (openAntoniStartBtn) openAntoniStartBtn.addEventListener('click', () => startGame(MODE_ANTONI));
-    if (selectedStartBtn) selectedStartBtn.addEventListener('click', () => startGame(selectedMenuMode));
-    if (selectedRankingBtn) selectedRankingBtn.addEventListener('click', () => openRankingScreen(selectedMenuMode));
+    if (selectedStartBtn) selectedStartBtn.addEventListener('click', () => startGame(selectedMenuMode, selectedSushiLevel));
+    if (selectedRankingBtn) selectedRankingBtn.addEventListener('click', () => openRankingScreen(selectedMenuMode, selectedSushiLevel));
     if (backHomeFromGameStartBtn) backHomeFromGameStartBtn.addEventListener('click', () => showHomeSubPanel('home'));
 
-    playAgainBtn.addEventListener('click', () => startGame(currentMode));
-    if (clearPlayAgainBtn) clearPlayAgainBtn.addEventListener('click', () => startGame(currentMode));
-    retryBtn.addEventListener('click', () => startGame(currentMode));
+    playAgainBtn.addEventListener('click', () => startGame(currentMode, currentSushiLevel));
+    if (clearPlayAgainBtn) clearPlayAgainBtn.addEventListener('click', () => startGame(currentMode, currentSushiLevel));
+    retryBtn.addEventListener('click', () => startGame(currentMode, currentSushiLevel));
 
     menuBtn.addEventListener('click', backToMenu);
     backToMenuBtn.addEventListener('click', backToMenu);
     if (clearBackToMenuBtn) clearBackToMenuBtn.addEventListener('click', backToMenu);
 
-    if (openRankingBtn) openRankingBtn.addEventListener('click', () => openRankingScreen(currentMode || PUBLIC_MODE));
+    if (openRankingBtn) openRankingBtn.addEventListener('click', () => openRankingScreen(PUBLIC_MODE, selectedSushiLevel));
     closeRankingBtn.addEventListener('click', backToMenu);
 
-    if (rankingTabSushi) rankingTabSushi.addEventListener('click', () => openRankingScreen(MODE_SUSHI));
+    if (rankingTabSushi) rankingTabSushi.addEventListener('click', () => openRankingScreen(MODE_SUSHI, rankingSushiLevel));
     if (rankingTabShino) rankingTabShino.addEventListener('click', () => openRankingScreen(MODE_SHINO));
     if (rankingTabAntoni) rankingTabAntoni.addEventListener('click', () => openRankingScreen(MODE_ANTONI));
+
+    if (sushiLevelSelect) {
+      sushiLevelSelect.querySelectorAll('[data-level]').forEach(btn => {
+        btn.addEventListener('click', () => openGameStartPanel(MODE_SUSHI, btn.dataset.level));
+      });
+    }
+
+    if (rankingLevelTabs) {
+      rankingLevelTabs.querySelectorAll('[data-level]').forEach(btn => {
+        btn.addEventListener('click', () => openRankingScreen(MODE_SUSHI, btn.dataset.level));
+      });
+    }
 
     window.addEventListener('resize', () => {
       if (GAME.running) renderQuestion();
@@ -6700,7 +6836,7 @@ html, body {
 
     updateModeBadge();
     showHomeSubPanel('home');
-    loadRanking(PUBLIC_MODE, rankingScreenList);
+    loadRanking(PUBLIC_MODE, rankingScreenList, SUSHI_LEVEL_ALL);
 </script>
 
 <script>
