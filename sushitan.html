@@ -2207,7 +2207,7 @@ html, body {
           <div class="menu-btns">
             <button class="btn primary" id="openSushiStartBtn">ゲームスタート</button>
             <button class="btn gold" id="openRankingBtn">ランキング</button>
-            <a class="btn secondary" href="/index.html" style="text-decoration:none;text-align:center;">表紙ページへ戻る</a>
+            <a class="btn secondary" href="index.html" style="text-decoration:none;text-align:center;">表紙ページへ戻る</a>
           </div>
 
           <div class="quiet-seo">
@@ -6672,7 +6672,7 @@ html, body {
     if (startSushiBtn) startSushiBtn.addEventListener('click', () => openGameStartPanel(MODE_SUSHI));
     if (startShinoBtn) startShinoBtn.addEventListener('click', () => openGameStartPanel(MODE_SHINO));
     if (startAntoniBtn) startAntoniBtn.addEventListener('click', () => openGameStartPanel(MODE_ANTONI));
-    if (openSushiStartBtn) openSushiStartBtn.addEventListener('click', () => openGameStartPanel(MODE_SUSHI));
+    if (openSushiStartBtn) openSushiStartBtn.addEventListener('click', () => openGameStartPanel(PUBLIC_MODE));
     if (openShinoStartBtn) openShinoStartBtn.addEventListener('click', () => openGameStartPanel(MODE_SHINO));
     if (openAntoniStartBtn) openAntoniStartBtn.addEventListener('click', () => openGameStartPanel(MODE_ANTONI));
     if (selectedStartBtn) selectedStartBtn.addEventListener('click', () => startGame(selectedMenuMode));
