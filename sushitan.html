@@ -2240,35 +2240,75 @@ html, body {
 
 
 
-/* Unified button widths */
-.level-block{max-width:520px;margin:18px auto;}
-.level-select-grid{grid-template-columns:repeat(5,minmax(70px,1fr));gap:10px;}
-.level-btn{
-height:48px;
-padding:0 12px;
-font-size:14px;
-border-radius:14px;
+/* Unified start-screen layout */
+.learning-accordion,
+.level-block,
+.menu-btns,
+.ranking-quiet{
+  width:100%;
+  max-width:520px;
+  margin-left:auto;
+  margin-right:auto;
 }
-.learning-accordion{max-width:520px;margin:18px auto;}
+.learning-accordion{margin-top:18px;margin-bottom:0;}
 .learning-accordion summary{
-min-height:48px;
-padding:0 16px;
+  min-height:58px;
+  padding:0 16px;
+  border-radius:16px;
 }
-.menu-btns,.ranking-quiet{max-width:520px;margin:16px auto 0;}
+.learning-accordion summary::after{
+  width:34px;
+  height:34px;
+  flex-basis:34px;
+}
+.level-block{
+  margin-top:12px;
+  margin-bottom:0;
+  padding:14px 16px 13px;
+  border-radius:18px;
+}
+.level-select-grid{
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:10px;
+  margin:8px 0 6px;
+}
+.level-btn{
+  height:48px;
+  padding:0 10px;
+  font-size:14px;
+  border-radius:14px;
+}
+.menu-btns,
+.ranking-quiet{
+  margin-top:12px;
+  gap:10px;
+}
 .menu-btns .btn,
 .ranking-quiet .btn{
-width:100%;
-max-width:320px;
-margin:0 auto;
-display:block;
-height:48px;
-padding:0 18px;
-font-size:15px;
-border-radius:14px;
+  width:100%;
+  max-width:none;
+  margin:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:56px;
+  padding:0 22px;
+  font-size:16px;
+  border-radius:16px;
+  line-height:1.2;
+}
+.menu-btns a.btn{
+  display:flex !important;
+  align-items:center;
+  justify-content:center;
 }
 @media (max-width:420px){
-.level-select-grid{grid-template-columns:repeat(2,1fr);}
-.menu-btns .btn,.ranking-quiet .btn,.learning-accordion{max-width:100%;}
+  .level-select-grid{grid-template-columns:repeat(2,1fr);}
+  .learning-accordion,
+  .level-block,
+  .menu-btns,
+  .ranking-quiet{max-width:100%;}
+  .menu-btns .btn,.ranking-quiet .btn{min-height:54px;}
 }
 
 </style>
