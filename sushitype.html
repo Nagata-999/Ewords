@@ -577,6 +577,87 @@
     .time-stat .stat-value { font-size: 50px; }
   }
 
+
+
+  /* Final typing layout: larger prompt, larger time, score moved to side */
+  .hud.final-typing-hud {}
+  .hud {
+    grid-template-columns: 1.4fr 1.1fr .9fr .85fr .85fr !important;
+    align-items: stretch;
+  }
+  .hud .stat { min-height: 92px; }
+  .time-stat {
+    grid-column: auto !important;
+    background: linear-gradient(180deg,#ffffff,#fff2df) !important;
+    border: 2px solid var(--border2) !important;
+    box-shadow: 0 10px 24px rgba(255,138,0,.14);
+  }
+  .time-stat .stat-label { font-size: 15px !important; color: #a25a00; }
+  .time-stat .stat-value {
+    font-size: clamp(50px, 6vw, 76px) !important;
+    line-height: .95 !important;
+    color: var(--accent) !important;
+    letter-spacing: -0.055em;
+  }
+  .layout {
+    grid-template-columns: minmax(0, 1.9fr) minmax(330px, .72fr) !important;
+    align-items: start;
+  }
+  #mainCard { padding: 26px !important; }
+  #promptBox {
+    min-height: 340px !important;
+    font-size: clamp(27px, 2.7vw, 36px) !important;
+    line-height: 1.92 !important;
+    padding: 28px !important;
+    border-radius: 22px !important;
+    background: #fffdf9 !important;
+    border: 2px solid #ffd6a6 !important;
+    box-shadow: inset 0 2px 0 rgba(255,255,255,.8), 0 12px 28px rgba(120,72,0,.10);
+  }
+  .side-card {
+    position: sticky;
+    top: 14px;
+  }
+  .score-side-block {
+    background: linear-gradient(180deg,#ffffff,#fff3e7) !important;
+    border: 2px solid var(--border2) !important;
+    text-align: center;
+    padding: 18px !important;
+  }
+  .side-score-value {
+    font-size: clamp(44px, 5vw, 64px);
+    font-weight: 1000;
+    line-height: 1;
+    color: var(--accent);
+    letter-spacing: -0.045em;
+  }
+  .side-card .side-block:nth-child(2) { margin-top: 10px; }
+  .typing-info,
+  .mode-bar,
+  .hud,
+  .layout { max-width: 1180px; margin-left: auto; margin-right: auto; }
+  .typing-info summary { min-height: 62px; }
+  .mode-bar { padding: 14px; }
+  .mode-btn { min-height: 46px; padding: 12px 20px; }
+  .section-title { font-size: 24px !important; }
+  .mini-progress { margin-top: 16px; }
+  .controls { margin-top: 18px; }
+  .controls .sub-btn { min-height: 54px !important; padding: 14px 22px !important; }
+
+  @media(max-width:980px){
+    .hud { grid-template-columns: repeat(2,1fr) !important; }
+    .time-stat { grid-column: 1 / -1 !important; }
+    .layout { grid-template-columns: 1fr !important; }
+    .side-card { position: static; }
+    #promptBox { min-height: 285px !important; font-size: 24px !important; }
+  }
+  @media(max-width:560px){
+    .hud { grid-template-columns: 1fr !important; }
+    .time-stat .stat-value { font-size: 58px !important; }
+    #promptBox { min-height: 250px !important; font-size: 20px !important; padding: 20px !important; }
+    .side-score-value { font-size: 48px; }
+  }
+
 </style>
 </head>
 <body>
@@ -624,7 +705,6 @@
     <div class="stat"><div class="stat-label">Accuracy</div><div class="stat-value"><span id="accuracyValue">100.0</span>%</div></div>
     <div class="stat"><div class="stat-label">Cleared</div><div class="stat-value"><span id="clearedValue">0</span></div></div>
     <div class="stat"><div class="stat-label">Best</div><div class="stat-value"><span id="bestValue">-</span></div></div>
-    <div class="stat score-stat"><div class="stat-label">Score</div><div class="stat-value"><span id="scoreValue">0</span></div></div>
   </div>
   <div class="layout">
     <div class="card" id="mainCard">
@@ -660,7 +740,8 @@
       <div class="hint" id="hintText">Click the text and type.</div>
       <div class="result" id="resultText"></div>
     </div>
-    <div class="card">
+    <div class="card side-card">
+      <div class="side-block score-side-block"><div class="side-title">Score</div><div class="side-score-value"><span id="scoreValue">0</span></div></div>
       <div class="side-block"><div class="side-title">Save Score</div><div class="save-area"><input id="playerNameInput" class="name-input" placeholder="Player name" maxlength="20" /><button class="save-btn" id="saveScoreBtn">Save</button></div><div class="small-note" id="saveStatus">Play first, then save your score.</div></div>
       <div class="side-block"><div class="side-title">Ranking</div><div id="rankingList" class="small-note">Loading...</div></div>
       <div class="side-block"><div class="side-title" id="queueTitle">Queue</div><div class="list" id="queueList"></div></div>
