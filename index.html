@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4726251793577317" crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4726251793577317" crossorigin="anonymous">
+document.querySelectorAll('.game-info-toggle').forEach(btn=>{btn.addEventListener('click',()=>{btn.closest('.game-item').classList.toggle('open')})});
+</script>
   <meta name="google-adsense-account" content="ca-pub-4726251793577317">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,6 +20,13 @@
     :root{--bg:#fbf4ea;--card:#fffaf2;--line:#f1d7bc;--text:#172033;--muted:#64748b;--orange:#f4511e;--teal:#0f766e;--shadow:0 14px 34px rgba(15,23,42,.07)}
     *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 18% 8%,rgba(251,146,60,.14),transparent 30%),radial-gradient(circle at 86% 12%,rgba(20,184,166,.10),transparent 28%),var(--bg);color:var(--text)}
     a{color:inherit}.page{max-width:1120px;margin:0 auto;padding:42px 22px 56px}.hero{max-width:760px;padding-top:26px}.brand-mark{display:inline-flex;padding:6px 12px;border-radius:999px;background:#fff3e2;border:1px solid #fed7aa;color:#ea580c;font-size:12px;font-weight:900;letter-spacing:.06em}.title{display:flex;align-items:center;gap:16px;margin:16px 0 12px}.title img{width:92px;height:92px;object-fit:contain}.title-main{display:block;font-size:clamp(58px,8vw,100px);font-weight:1000;letter-spacing:-.06em;line-height:.95}.title-sub{display:block;margin-top:8px;color:#ea580c;font-size:clamp(16px,2.2vw,24px);font-weight:900}.lead{font-size:17px;line-height:1.9;color:#475569}.section{margin-top:28px;padding:24px;border-radius:24px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow)}.section h2{margin:0 0 12px;font-size:24px}.section p{color:#475569;line-height:1.75}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.card{display:flex;min-height:132px;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;border-radius:22px;background:#fff;border:1px solid var(--line);box-shadow:0 8px 20px rgba(15,23,42,.05);text-decoration:none;font-weight:1000;transition:transform .18s ease,box-shadow .18s ease}.card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(15,23,42,.09)}.card small{display:block;margin-top:6px;color:var(--muted);font-size:12px;font-weight:800}.blue{background:linear-gradient(180deg,#eff6ff 0%,#fff 100%)}.purple{background:linear-gradient(180deg,#f5f3ff 0%,#fff 100%)}.pink{background:linear-gradient(180deg,#fdf2f8 0%,#fff 100%)}.green{background:linear-gradient(180deg,#ecfdf5 0%,#fff 100%)}.orange{background:linear-gradient(180deg,#fff7ed 0%,#fff 100%)}.article-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.article{display:block;text-decoration:none;padding:18px;border-radius:18px;background:#fff;border:1px solid var(--line)}.article strong{display:block;margin-bottom:6px}.article span{display:block;color:var(--muted);font-size:13px;line-height:1.5}.footer{margin-top:28px;padding-top:18px;border-top:1px solid #ead7bf;color:var(--muted);text-align:center;font-size:12px}.footer a{color:var(--teal);font-weight:800;margin:0 6px}.hamburger-btn{position:fixed;top:14px;right:14px;z-index:10;width:52px;height:52px;border:none;border-radius:14px;background:rgba(255,255,255,.92);border:1px solid var(--line);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.12)}.hamburger-btn span{width:24px;height:3px;border-radius:999px;background:#c2410c}.side-menu{position:fixed;top:0;right:-320px;width:300px;max-width:82vw;height:100vh;background:#fffaf2;z-index:9;transition:right .28s ease;padding:80px 20px 30px;overflow-y:auto;box-shadow:-10px 0 30px rgba(0,0,0,.16);border-left:1px solid var(--line)}.side-menu.open{right:0}.menu-group-title{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#ea580c;margin:22px 0 10px;font-weight:900}.menu-link{display:block;padding:12px 14px;border-radius:12px;margin-bottom:8px;background:#fff;color:#172033;text-decoration:none;font-weight:800;border:1px solid var(--line)}.menu-link small{display:block;margin-top:2px;color:#64748b;font-size:11px}.hamburger-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:8;opacity:0;pointer-events:none;transition:opacity .25s}.hamburger-overlay.show{opacity:1;pointer-events:auto}@media(max-width:720px){.page{padding:22px 14px 38px}.title img{width:58px;height:58px}.title-main{font-size:54px}.grid,.article-grid{grid-template-columns:repeat(2,1fr);gap:10px}.card{min-height:116px;padding:14px}.section{padding:16px;border-radius:20px}}@media(max-width:420px){.grid,.article-grid{grid-template-columns:1fr}.lead{font-size:14px}.title-main{font-size:48px}.title-sub{font-size:14px}}
+
+    .game-item{display:flex;flex-direction:column;gap:8px}
+    .game-info-toggle{border:1px solid var(--line);border-radius:14px;background:#fffaf2;color:#0f766e;font-weight:900;padding:9px 10px;cursor:pointer;box-shadow:0 5px 14px rgba(15,23,42,.04)}
+    .game-info-toggle::before{content:"▼ ";font-size:11px}.game-item.open .game-info-toggle::before{content:"▲ "}
+    .game-info{display:none;padding:15px 16px;border-radius:18px;background:#fff;border:1px solid var(--line);box-shadow:0 8px 20px rgba(15,23,42,.04);font-size:13px;line-height:1.75;color:#475569;text-align:left}.game-item.open .game-info{display:block}
+    .game-info h3{margin:0 0 8px;font-size:16px;color:#172033}.game-info h4{margin:12px 0 4px;font-size:14px;color:#ea580c}.game-info ul{margin:4px 0 0;padding-left:1.2em}.game-info li{margin:2px 0}
+
   </style>
 </head>
 <body>
@@ -35,7 +44,6 @@
   <a class="menu-link" href="sushi_parts.html">すしParts<small>word parts roguelike</small></a>
   <a class="menu-link" href="sushi_hayaoshi.html">すし早押し<small>definition battle</small></a>
   <a class="menu-link" href="sushi_quiz.html">すしクイズ<small>general quiz</small></a>
-  <a class="menu-link" href="sushi_survivor.html">すしサバイバー<small>word survivor</small></a>
   <a class="menu-link" href="sushitanjunior.html">すし単ジュニア<small>小中学生向け英語ゲーム</small></a>
   <div class="menu-group-title">Articles｜学習記事</div>
   <a class="menu-link" href="words/index.html">単語一覧<small>word list</small></a>
@@ -54,18 +62,16 @@
   <section class="section">
     <h2>無料英語ゲーム一覧</h2>
     <div class="grid">
-      <a class="card blue" href="sushitan.html">すし単<small>英単語</small></a>
-      <a class="card purple" href="shinotan.html">しの単<small>synonym</small></a>
-      <a class="card pink" href="antonitan.html">あんとに単<small>antonym</small></a>
-      <a class="card green" href="sushitype.html">すしタイプ<small>typing</small></a>
-      <a class="card orange" href="sushi_run.html">すしRUN<small>run game</small></a>
-      <a class="card blue" href="sushitalk.html">すしTalk<small>slang game</small></a>
-      <a class="card green" href="sushi_parts.html">すしParts<small>語源ローグライク</small></a>
-      <a class="card purple" href="sushi_hayaoshi.html">すし早押し<small>英英定義バトル</small></a>
-      <a class="card orange" href="sushi_quiz.html">すしクイズ<small>general quiz</small></a>
-      <a class="card green" href="sushikan.html">すし勘<small>リスニング強化ゲーム</small></a>
-      <a class="card orange" href="sushi_survivor.html">すしサバイバー<small>word survivor</small></a>
-      <a class="card blue" href="sushitanjunior.html">すし単ジュニア<small>小中学生向け</small></a>
+      <div class="game-item"><a class="card blue" href="sushitan.html">すし単<small>英単語</small></a><button class="game-info-toggle" type="button">このゲームについて</button><div class="game-info"><h3>すし単</h3><p>英単語は、意味を知っているだけでは十分ではありません。英語を読むときや聞くときは、単語を見たり聞いたりした瞬間に意味が浮かぶことが大切です。すし単は、その「瞬発力」を鍛えるためのゲームです。繰り返し遊ぶことで、長文読解やリスニングでも英語を前から理解しやすくなります。</p><h4>このゲームで身につくこと</h4><ul><li>英単語を素早く理解する力</li><li>長文を読むスピード</li><li>リスニングの処理速度</li><li>英検・IELTS・大学受験に必要な語彙力</li></ul></div></div>
+      <div class="game-item"><a class="card purple" href="shinotan.html">しの単<small>synonym</small></a><button class="game-info-toggle" type="button">このゲームについて</button><div class="game-info"><h3>しの単</h3><p>英語では、一つの意味をさまざまな単語で表現します。そのため、類義語を知らないと長文が読みにくくなったり、英作文で同じ単語ばかり使ってしまったりします。しの単では、ゲーム感覚で類義語を繰り返し学び、語彙の幅を広げることができます。</p><h4>このゲームで身につくこと</h4><ul><li>類義語の知識</li><li>英検準1級・1級レベルの語彙力</li><li>IELTS Reading対策</li><li>自然な英作文</li></ul></div></div>
+      <div class="game-item"><a class="card pink" href="antonitan.html">あんとに単<small>antonym</small></a><button class="game-info-toggle" type="button">このゲームについて</button><div class="game-info"><h3>あんとに単</h3><p>反対語を知ると、一つの単語から二倍、三倍と語彙を増やせます。「あの単語の反対は何だろう」と考える習慣は、英語を整理して覚えることにもつながります。</p><h4>このゲームで身につくこと</h4><ul><li>反対語の知識</li><li>語彙の整理</li><li>英作文で表現の幅を広げる力</li><li>英検・大学受験対策</li></ul></div></div>
+      <div class="game-item"><a class="card green" href="sushitype.html">すしタイプ<small>typing</small></a><button class="game-info-toggle" type="button">このゲームについて</button><div class="game-info"><h3>すしタイプ</h3><p>タイピングをしながら英単語を覚えることで、単語のスペルを自然に身につけられます。何度も入力することで、読むだけでは覚えにくい単語も定着しやすくなります。</p><h4>このゲームで身につくこと</h4><ul><li>スペル</li><li>タイピング</li><li>単語の定着</li><li>英作文の基礎</li></ul></div></div>
+      <div class="game-item"><a class="card orange" href="sushi_run.html">すしRUN<small>run game</small></a><button class="game-info-toggle" type="button">このゲームについて</button><div class="game-info"><h3>すしRUN</h3><p>英語は、一語ずつ訳すよりも、前から意味を理解していくことが大切です。すしRUNでは、走りながら素早く英文を読み取ることで、スピードと正確さを同時に鍛えることができます。</p><h4>このゲームで身につくこと</h4><ul><li>英文を前から読む力</li><li>速読力</li><li>集中力</li><li>英文処理速度</li></ul></div></div>
+      <div class="game-item"><a class="card blue" href="sushitalk.html">すしTalk<small>slang game</small></a><button class="game-info-toggle" type="button">このゲームについて</button><div class="game-info"><h3>すしTalk</h3><p>教科書ではあまり学べない日常英会話やスラングをゲームで学べます。映画やYouTube、SNSで見かける表現を知ることで、より自然な英語に近づけます。</p><h4>このゲームで身につくこと</h4><ul><li>日常英会話</li><li>スラング</li><li>海外文化への理解</li><li>リスニング力</li></ul></div></div>
+      <div class="game-item"><a class="card green" href="sushi_parts.html">すしParts<small>語源ローグライク</small></a><button class="game-info-toggle" type="button">このゲームについて</button><div class="game-info"><h3>すしParts</h3><p>知らない単語でも、接頭辞・語根・接尾辞が分かれば意味を推測できることがあります。すしPartsでは、単語を部品に分けて考える力をゲーム感覚で身につけられます。</p><h4>このゲームで身につくこと</h4><ul><li>語源の知識</li><li>初見単語を推測する力</li><li>語彙を効率よく増やす力</li><li>IELTS・英検準1級以上の語彙対策</li></ul></div></div>
+      <div class="game-item"><a class="card purple" href="sushi_hayaoshi.html">すし早押し<small>英英定義バトル</small></a><button class="game-info-toggle" type="button">このゲームについて</button><div class="game-info"><h3>すし早押し</h3><p>英英辞典のような説明を読んで、できるだけ早く単語を当てるゲームです。意味を日本語に訳すのではなく、英語のまま理解する練習にもなります。</p><h4>このゲームで身につくこと</h4><ul><li>英英語彙力</li><li>読解力</li><li>判断力</li><li>IELTS Reading対策</li></ul></div></div>
+      <div class="game-item"><a class="card orange" href="sushi_quiz.html">すしクイズ<small>general quiz</small></a><button class="game-info-toggle" type="button">このゲームについて</button><div class="game-info"><h3>すしクイズ</h3><p>英語だけでなく、地理・音楽・スポーツ・文化など幅広い知識を使って遊べるクイズゲームです。英語学習の合間に、知識を増やしながら楽しく集中力を高められます。</p><h4>このゲームで身につくこと</h4><ul><li>幅広い一般知識</li><li>英語で考えるきっかけ</li><li>素早く判断する力</li><li>友達と競いながら学ぶ習慣</li></ul></div></div>
+      <div class="game-item"><a class="card blue" href="sushitanjunior.html">すし単ジュニア<small>小中学生向け</small></a><button class="game-info-toggle" type="button">このゲームについて</button><div class="game-info"><h3>すし単ジュニア</h3><p>小中学生が英語に慣れるためのゲームをまとめたページです。時計、基本単語、簡単な表現などを、授業や家庭学習で使いやすい形で練習できます。英語が苦手な生徒でも、まずは遊びながら触れることを大切にしています。</p><h4>このゲームで身につくこと</h4><ul><li>基本的な英単語</li><li>中学英語の土台</li><li>英語に触れる習慣</li><li>授業前後の短時間練習</li></ul></div></div>
     </div>
   </section>
   <section class="section">
@@ -90,6 +96,8 @@
 </main>
 <script>
 const hamburgerBtn=document.getElementById('hamburgerBtn');const sideMenu=document.getElementById('sideMenu');const overlay=document.getElementById('hamburgerOverlay');function closeMenu(){sideMenu.classList.remove('open');overlay.classList.remove('show');hamburgerBtn.setAttribute('aria-expanded','false')}hamburgerBtn.addEventListener('click',()=>{const open=sideMenu.classList.toggle('open');overlay.classList.toggle('show',open);hamburgerBtn.setAttribute('aria-expanded',open?'true':'false')});overlay.addEventListener('click',closeMenu);document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
+
+document.querySelectorAll('.game-info-toggle').forEach(btn=>{btn.addEventListener('click',()=>{btn.closest('.game-item').classList.toggle('open')})});
 </script>
 </body>
 </html>
