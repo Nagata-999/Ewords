@@ -2004,6 +2004,61 @@ html, body {
   }
 }
 
+
+/* Game learning accordion for AdSense-friendly explanation */
+.learning-accordion {
+  margin: 12px 0 4px;
+  border: 1px solid #f1d7bc;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(15,23,42,0.05);
+  overflow: hidden;
+}
+.learning-accordion summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  color: #c2410c;
+  font-size: 20px;
+  font-weight: 1000;
+  line-height: 1;
+  text-align: right;
+  user-select: none;
+}
+.learning-accordion summary::-webkit-details-marker { display: none; }
+.learning-accordion summary::after { content: "▽"; }
+.learning-accordion[open] summary::after { content: "▲"; }
+.learning-body {
+  padding: 0 15px 15px;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.75;
+  text-align: left;
+}
+.learning-body h3 {
+  margin: 8px 0 6px;
+  color: #172033;
+  font-size: 16px;
+}
+.learning-body p {
+  margin: 7px 0;
+  color: #475569 !important;
+}
+.learning-body ul {
+  margin: 7px 0 0;
+  padding-left: 1.2em;
+}
+.learning-body li {
+  margin: 3px 0;
+}
+.ranking-tabs.shino-only {
+  display: none !important;
+}
+@media (min-width: 900px) {
+  .learning-accordion { max-width: 760px; margin: 16px auto 4px; }
+  .learning-body { font-size: 15px; padding: 0 20px 18px; }
+}
+
 </style>
 </head>
 <body>
@@ -2204,10 +2259,33 @@ html, body {
             <p class="brand-sub">英単語と意味が近い語をタップする無料シノニムゲームです。英検・IELTS・高校英語の言い換え力を鍛えます。</p>
           </div>
 
+          <details class="learning-accordion">
+            <summary aria-label="このゲームについて"></summary>
+            <div class="learning-body">
+              <h3>このゲームについて</h3>
+              <p><strong>しの単</strong>は、英単語と意味が近い語をすばやく選ぶ無料のシノニムゲームです。単語を「日本語訳だけ」で覚えるのではなく、近い意味の英語同士を結びつけることで、読解・リスニング・英作文で使える語彙力を育てます。</p>
+
+              <h3>どんな力が伸びる？</h3>
+              <p>英検、IELTS、大学受験の長文では、本文と選択肢で同じ意味が別の表現に言い換えられることがよくあります。しの単では、important と significant、help と assist のような言い換えに慣れることで、問題文の意味をすばやくつかむ練習ができます。</p>
+
+              <h3>おすすめの使い方</h3>
+              <ul>
+                <li>英検・IELTS・高校英語の語彙を復習したい人</li>
+                <li>長文読解で言い換え表現に強くなりたい人</li>
+                <li>ライティングで同じ単語の繰り返しを減らしたい人</li>
+                <li>短時間でテンポよく英単語を確認したい人</li>
+              </ul>
+
+              <h3>学習のポイント</h3>
+              <p>間違えた単語は、意味だけでなく「どの単語と近い意味なのか」まで確認すると効果的です。1日5分でも続けることで、英語を英語のまま処理するスピードが少しずつ上がっていきます。</p>
+            </div>
+          </details>
+
+
           <div class="menu-btns">
             <button class="btn primary" id="openSushiStartBtn">ゲームスタート</button>
             <button class="btn gold" id="openRankingBtn">ランキング</button>
-            <a class="btn secondary" href="index.html" style="text-decoration:none;text-align:center;">表紙ページへ戻る</a>
+            <a class="btn secondary" href="index.html" style="text-decoration:none;text-align:center;">トップページに戻る</a>
           </div>
 
           <div class="quiet-seo">
@@ -2218,7 +2296,20 @@ html, body {
 
         <div id="gameStartPanel" class="info-page hidden">
           <h2 id="gameStartTitle">すし単</h2>
-          <p id="gameStartDesc">日本語に合う英単語をタップする基本モードです。</p>
+          <p id="gameStartDesc">英単語と意味が近い語をタップするシノニムゲームです。</p>
+
+
+          <details class="learning-accordion">
+            <summary aria-label="このゲームについて"></summary>
+            <div class="learning-body">
+              <h3>しの単で学べること</h3>
+              <p>しの単は、英単語と意味が近い語を選びながら、シノニム・言い換え表現を覚える英語ゲームです。長文読解では、本文の単語が選択肢で別の表現に置き換えられることが多いため、シノニムに慣れておくと内容をつかみやすくなります。</p>
+              <h3>英検・IELTS対策にも使えます</h3>
+              <p>英検やIELTSでは、important、significant、essential のように、似た意味の単語を見分ける力が必要です。ゲーム形式で何度も触れることで、単語の意味を日本語だけでなく英語同士の関係として覚えられます。</p>
+              <h3>遊び方のコツ</h3>
+              <p>正解だけを覚えるのではなく、間違えた選択肢も確認すると語彙の幅が広がります。短時間でも毎日続けることで、読解やリスニングで言い換えに反応するスピードが上がります。</p>
+            </div>
+          </details>
 
           <div class="growth-card hidden" id="gameStartGrowthCard">
             <div class="growth-head">
@@ -2238,7 +2329,7 @@ html, body {
 
         <div id="howToPanel" class="info-page hidden">
           <h2>遊び方</h2>
-          <p>日本語に合う英単語をタップしてください。正解すると得点と時間が増えます。5秒以内に答えるとコンボが続きます。</p>
+          <p>英単語と意味が近い語をタップしてください。正解すると得点と時間が増えます。5秒以内に答えるとコンボが続きます。</p>
           <div class="menu-btns"><button class="btn secondary" id="backHomeFromHowToBtn">戻る</button></div>
         </div>
 
@@ -2251,10 +2342,8 @@ html, body {
     <div class="overlay hidden" id="rankingOverlay">
       <div class="modal">
         <h2>Ranking</h2>
-        <div class="ranking-tabs">
-          <button class="ranking-tab active" id="rankingTabSushi">すし単</button>
-          <button class="ranking-tab" id="rankingTabShino">しの単</button>
-          <button class="ranking-tab" id="rankingTabAntoni">あんとに単</button>
+        <div class="ranking-tabs shino-only" aria-hidden="true">
+          <button class="ranking-tab active" id="rankingTabShino">しの単</button>
         </div>
         <div id="rankingScreenList" class="ranking-box">
           <div class="ranking-title">🏆 Ranking</div>
@@ -6508,7 +6597,7 @@ html, body {
       if (rankingTabAntoni) rankingTabAntoni.classList.toggle("active", rankingMode === MODE_ANTONI);
     }
 
-    async function loadRanking(mode = currentMode, target = rankingList) {
+    async function loadRanking(mode = MODE_SHINO, target = rankingList) {
       mode = normalizeModeForDb(mode);
       if (!supabaseClient) {
         renderRanking(target, [], mode);
@@ -6538,8 +6627,8 @@ html, body {
       return deduped;
     }
 
-    async function openRankingScreen(mode = currentMode || PUBLIC_MODE) {
-      rankingMode = mode;
+    async function openRankingScreen(mode = MODE_SHINO) {
+      rankingMode = MODE_SHINO;
       setRankingTabUI();
       rankingStatus.textContent = "読み込み中...";
       menuOverlay.classList.add('hidden');
