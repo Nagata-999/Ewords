@@ -30,13 +30,8 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;touch-action:none;back
 .road-line{position:absolute;width:8px;height:60px;background:rgba(255,255,255,.16);left:50%;transform:translateX(-50%);border-radius:999px}
 #trail{position:absolute;bottom:128px;width:31%;height:64px;border-radius:999px;background:linear-gradient(90deg,rgba(250,204,21,0),rgba(250,204,21,.55));z-index:7;opacity:0;transition:left .10s ease;filter:blur(8px)}
 #game.fever #trail{opacity:1}
-#player{position:absolute;bottom:118px;width:31%;height:82px;border-radius:16px;background-image:url('images/E40923CC-5231-44CE-A3F5-C22B9C3684C2.png');background-size:400% 100%;background-repeat:no-repeat;background-position:33.333% 50%;transition:left .10s ease,transform .12s ease;z-index:12;overflow:hidden;animation:sushiRunSprite .42s steps(1) infinite}
-@keyframes sushiRunSprite{
-0%,33%{background-position:33.333% 50%}
-34%,66%{background-position:66.666% 50%}
-67%,100%{background-position:100% 50%}
-}
-#player.dash{transform:scale(1.16);filter:drop-shadow(0 0 20px #f59e0b);animation-duration:.2s}
+#player{position:absolute;bottom:118px;width:31%;height:82px;border-radius:16px;background-image:url('assets/player1.png');background-size:contain;background-repeat:no-repeat;background-position:center;transition:left .10s ease,transform .12s ease;z-index:12;overflow:hidden}
+#player.dash{transform:scale(1.16);filter:drop-shadow(0 0 20px #f59e0b)}
 #hud{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:min(92vw,560px);z-index:30;display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:8px;pointer-events:none}
 .box{background:rgba(15,23,42,.78);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:9px;text-align:center;backdrop-filter:blur(8px)}
 .label{color:#94a3b8;font-size:10px;font-weight:800}.value{font-size:23px;font-weight:1000;margin-top:3px}
@@ -68,9 +63,6 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;touch-action:none;back
 #menu{width:min(92vw,560px);max-height:92dvh;overflow:auto;background:linear-gradient(180deg,#fffdf8 0%,#fff7ed 100%);border:2px solid #fed7aa;border-radius:28px;padding:28px;text-align:center;box-shadow:0 22px 70px rgba(154,52,18,.18);color:#7c2d12}
 #title{font-size:clamp(42px,8vw,72px);font-weight:1000;color:#f97316;text-shadow:0 3px 0 #ffedd5}
 #subtitle{color:#9a3412;margin-top:8px;line-height:1.6}
-.menuMascots{display:flex;justify-content:center;gap:12px;margin:12px auto 6px}
-.menuMascot{width:64px;height:64px;background-image:url('images/E40923CC-5231-44CE-A3F5-C22B9C3684C2.png');background-size:400% 100%;background-repeat:no-repeat;border-radius:18px;background-color:#fff7ed;border:2px solid #fed7aa;box-shadow:0 8px 18px rgba(249,115,22,.18)}
-.menuMascot.f2{background-position:33.333% 50%}.menuMascot.f3{background-position:66.666% 50%}.menuMascot.f4{background-position:100% 50%}
 button{border:none;border-radius:18px;padding:14px 18px;font-size:18px;font-weight:1000;cursor:pointer;color:white;background:linear-gradient(180deg,#2563eb,#1d4ed8);box-shadow:0 10px 24px rgba(0,0,0,.35)}
 #menu button{color:#7c2d12;background:linear-gradient(180deg,#fff7ed,#fed7aa);border:2px solid #fdba74;box-shadow:0 10px 22px rgba(249,115,22,.22)}
 #menu button:hover{filter:brightness(1.03);transform:translateY(-1px)}
@@ -220,11 +212,6 @@ overflow:hidden;
   <button id="leftBtn">←</button><button id="rightBtn">→</button>
   <div id="controlBar"><button id="leftBtn2" class="ctrlBtn">←</button><button id="boostBtn" class="ctrlBtn">◎</button><button id="rightBtn2" class="ctrlBtn">→</button><div id="boostGauge"><div id="boostFill"></div></div></div><div id="overlay"><div id="menu">
     <div id="title">すしRUN</div>
-    <div class="menuMascots" aria-hidden="true">
-      <span class="menuMascot f2"></span>
-      <span class="menuMascot f3"></span>
-      <span class="menuMascot f4"></span>
-    </div>
     <div id="subtitle">英単語を選びながら走る、スピード型の単語ゲーム。</div>
     <button id="startBtn" onclick="startGame()">START</button>
     <button id="rankingBtn" onclick="showTopRanking()">ランキング確認</button><br>
