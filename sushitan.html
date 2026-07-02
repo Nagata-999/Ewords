@@ -2045,6 +2045,91 @@ html, body {
   .level-select-grid, .ranking-level-tabs { grid-template-columns: repeat(2, 1fr); }
 }
 
+
+
+/* PC ranking layout improvement */
+@media (min-width: 760px) {
+  #rankingOverlay {
+    align-items: center;
+    padding: 28px;
+  }
+
+  #rankingOverlay .modal {
+    width: min(96vw, 880px);
+    max-height: 90dvh;
+    padding: 28px;
+  }
+
+  #rankingOverlay h2 {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  #rankingOverlay .ranking-tabs,
+  #rankingOverlay .ranking-level-tabs {
+    display: grid;
+    gap: 10px;
+  }
+
+  #rankingOverlay .ranking-tabs {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  #rankingOverlay .ranking-level-tabs {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  #rankingOverlay .ranking-tab {
+    min-width: 0;
+    padding: 12px 14px;
+    font-size: 15px;
+  }
+
+  #rankingScreenList.ranking-box {
+    padding: 18px 20px;
+    border-radius: 18px;
+  }
+
+  #rankingScreenList .ranking-title {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  #rankingScreenList .ranking-scroll {
+    max-height: 58vh;
+    padding-right: 8px;
+  }
+
+  #rankingScreenList .ranking-row {
+    grid-template-columns: 64px minmax(0, 1fr) 130px;
+    gap: 14px;
+    padding: 12px 10px;
+    font-size: 16px;
+  }
+
+  #rankingScreenList .ranking-rank {
+    font-size: 17px;
+  }
+
+  #rankingScreenList .ranking-name {
+    font-size: 17px;
+  }
+
+  #rankingScreenList .ranking-sub {
+    font-size: 13px;
+  }
+
+  #rankingScreenList .ranking-score {
+    font-size: 22px;
+    text-align: right;
+  }
+
+  #rankingOverlay #closeRankingBtn {
+    max-width: 220px;
+    margin-left: auto;
+  }
+}
+
 </style>
 </head>
 <body>
