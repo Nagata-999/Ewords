@@ -2130,6 +2130,59 @@ html, body {
   }
 }
 
+
+
+/* Game start learning accordion */
+.learning-accordion {
+  margin: 12px 0 4px;
+  border: 1px solid #f1d7bc;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(15,23,42,0.05);
+  overflow: hidden;
+}
+.learning-accordion summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 10px 14px;
+  color: #c2410c;
+  font-size: 20px;
+  font-weight: 1000;
+  line-height: 1;
+  text-align: right;
+  user-select: none;
+}
+.learning-accordion summary::-webkit-details-marker { display: none; }
+.learning-accordion summary::after { content: "▽"; }
+.learning-accordion[open] summary::after { content: "▲"; }
+.learning-body {
+  padding: 0 15px 15px;
+  color: #475569;
+  font-size: 14px;
+  line-height: 1.75;
+  text-align: left;
+}
+.learning-body h3 {
+  margin: 8px 0 6px;
+  color: #172033;
+  font-size: 16px;
+}
+.learning-body p {
+  margin: 7px 0;
+  color: #475569 !important;
+}
+.learning-body ul {
+  margin: 7px 0 0;
+  padding-left: 1.2em;
+}
+.learning-body li {
+  margin: 3px 0;
+}
+@media (min-width: 900px) {
+  .learning-accordion { max-width: 760px; margin: 16px auto 4px; }
+  .learning-body { font-size: 15px; padding: 0 20px 18px; }
+}
+
 </style>
 </head>
 <body>
@@ -2345,6 +2398,22 @@ html, body {
         <div id="gameStartPanel" class="info-page hidden">
           <h2 id="gameStartTitle">すし単</h2>
           <p id="gameStartDesc">日本語に合う英単語をタップする基本モードです。</p>
+
+          <details class="learning-accordion" id="gameLearningDetails">
+            <summary aria-label="ゲーム説明を開く"></summary>
+            <div class="learning-body" id="gameLearningBody">
+              <h3>このゲームについて</h3>
+              <p>英単語は、意味を知っているだけでは十分ではありません。英語を読むときや聞くときは、単語を見たり聞いたりした瞬間に意味が浮かぶことが大切です。</p>
+              <p>すし単は、その瞬発力を鍛えるためのゲームです。繰り返し遊ぶことで、長文読解やリスニングでも英語を前から理解しやすくなります。</p>
+              <h3>このゲームで身につくこと</h3>
+              <ul>
+                <li>英単語を素早く理解する力</li>
+                <li>長文を読むスピード</li>
+                <li>リスニングの処理速度</li>
+                <li>英検・IELTS・大学受験に必要な語彙力</li>
+              </ul>
+            </div>
+          </details>
 
           <div class="growth-card hidden" id="gameStartGrowthCard">
             <div class="growth-head">
@@ -5814,6 +5883,8 @@ html, body {
     const gameStartPanel = document.getElementById('gameStartPanel');
     const gameStartTitle = document.getElementById('gameStartTitle');
     const gameStartDesc = document.getElementById('gameStartDesc');
+    const gameLearningDetails = document.getElementById('gameLearningDetails');
+    const gameLearningBody = document.getElementById('gameLearningBody');
     const gameStartGrowthCard = document.getElementById('gameStartGrowthCard');
     const selectedStartBtn = document.getElementById('selectedStartBtn');
     const selectedRankingBtn = document.getElementById('selectedRankingBtn');
@@ -6562,15 +6633,33 @@ html, body {
       const modeText = {
         [MODE_SUSHI]: {
           title: "すし単",
-          desc: "日本語に合う英単語をタップする基本モード。"
+          desc: "日本語に合う英単語をタップする基本モード。",
+          learning: `
+            <h3>このゲームについて</h3>
+            <p>英単語は、意味を知っているだけでは十分ではありません。英語を読むときや聞くときは、単語を見たり聞いたりした瞬間に意味が浮かぶことが大切です。</p>
+            <p>すし単は、その瞬発力を鍛えるためのゲームです。繰り返し遊ぶことで、長文読解やリスニングでも英語を前から理解しやすくなります。</p>
+            <h3>このゲームで身につくこと</h3>
+            <ul><li>英単語を素早く理解する力</li><li>長文を読むスピード</li><li>リスニングの処理速度</li><li>英検・IELTS・大学受験に必要な語彙力</li></ul>`
         },
         [MODE_SHINO]: {
           title: "しの単",
-          desc: "表示された英単語と意味が近い synonym をタップする言い換え練習モード。"
+          desc: "表示された英単語と意味が近い synonym をタップする言い換え練習モード。",
+          learning: `
+            <h3>このゲームについて</h3>
+            <p>英語では、一つの意味をさまざまな単語で表します。類義語を知らないと、長文が読みにくくなったり、英作文で同じ単語ばかり使ってしまったりします。</p>
+            <p>しの単では、ゲーム感覚で類義語を繰り返し学び、語彙の幅を広げることができます。</p>
+            <h3>このゲームで身につくこと</h3>
+            <ul><li>類義語の知識</li><li>英検準1級・1級レベルの語彙力</li><li>IELTS Reading対策</li><li>自然な英作文に近づける力</li></ul>`
         },
         [MODE_ANTONI]: {
           title: "あんとに単",
-          desc: "表示された英単語と反対の意味の antonym をタップする対義語練習モード。"
+          desc: "表示された英単語と反対の意味の antonym をタップする対義語練習モード。",
+          learning: `
+            <h3>このゲームについて</h3>
+            <p>反対語を知ると、一つの単語から二倍、三倍と語彙を増やせます。</p>
+            <p>「この単語の反対は何だろう」と考える習慣は、英語を整理して覚えることにもつながります。</p>
+            <h3>このゲームで身につくこと</h3>
+            <ul><li>反対語の知識</li><li>語彙を整理する力</li><li>英作文で表現の幅を広げる力</li><li>英検・大学受験対策</li></ul>`
         }
       };
       const info = modeText[selectedMenuMode] || modeText[MODE_SUSHI];
@@ -6581,6 +6670,8 @@ html, body {
       if (gameStartDesc) gameStartDesc.textContent = selectedMenuMode === MODE_SUSHI
         ? `${info.desc} / ${SUSHI_LEVELS[selectedSushiLevel].label}（${SUSHI_LEVELS[selectedSushiLevel].desc}・${getWordCountForLevel(selectedSushiLevel)}語）`
         : info.desc;
+      if (gameLearningBody) gameLearningBody.innerHTML = info.learning || "";
+      if (gameLearningDetails) gameLearningDetails.open = false;
       if (gameStartGrowthCard) {
         gameStartGrowthCard.classList.toggle('hidden', selectedMenuMode !== MODE_SUSHI);
       }
