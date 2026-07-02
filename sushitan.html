@@ -2217,6 +2217,27 @@ html, body {
   .learning-body { font-size: 15px; padding: 18px 20px; }
 }
 
+
+.level-block {
+  margin: 14px 0 4px;
+  padding: 14px;
+  border: 1px solid #f1d7bc;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(15,23,42,0.05);
+}
+.level-heading {
+  margin-bottom: 9px;
+  color: #172033;
+  font-size: 14px;
+  font-weight: 1000;
+}
+#menuOverlay .level-block {
+  background: #ffffff;
+  border: 1px solid #f1d7bc;
+  box-shadow: 0 8px 22px rgba(15,23,42,0.05);
+}
+
 </style>
 </head>
 <body>
@@ -2439,6 +2460,18 @@ html, body {
             </div>
           </details>
 
+          <div class="level-block">
+            <div class="level-heading">出題レベル</div>
+            <div id="sushiLevelSelect" class="level-select-grid">
+              <button class="level-btn active" data-level="all">ALL</button>
+              <button class="level-btn" data-level="level1">Lv.1</button>
+              <button class="level-btn" data-level="level2">Lv.2</button>
+              <button class="level-btn" data-level="level3">Lv.3</button>
+              <button class="level-btn" data-level="level4">Lv.4</button>
+            </div>
+            <p id="sushiLevelNote" class="level-note">選んだレベルの単語だけでプレイします。</p>
+          </div>
+
           <div class="menu-btns">
             <button class="btn primary" id="openSushiStartBtn">ゲームスタート</button>
             <button class="btn gold" id="openRankingBtn">ランキング</button>
@@ -2479,17 +2512,7 @@ html, body {
             <div class="growth-bar"><div class="growth-fill" id="homeGrowthFill"></div></div>
             <div class="growth-next" id="homeGrowthNext">次の動物まであと -</div>
           </div>
-
-          <div id="sushiLevelSelect" class="level-select-grid">
-            <button class="level-btn active" data-level="all">ALL</button>
-            <button class="level-btn" data-level="level1">Lv.1</button>
-            <button class="level-btn" data-level="level2">Lv.2</button>
-            <button class="level-btn" data-level="level3">Lv.3</button>
-            <button class="level-btn" data-level="level4">Lv.4</button>
-          </div>
-          <p id="sushiLevelNote" class="level-note">ALL：全単語 / Lv.1：1-600 / Lv.2：601-1200 / Lv.3：1201-1700 / Lv.4：1701-最後</p>
-
-          <div class="menu-btns">
+<div class="menu-btns">
             <button class="btn primary" id="selectedStartBtn">ゲームスタート</button>
             <button class="btn gold" id="selectedRankingBtn">ランキング</button>
             <button class="btn secondary" id="backHomeFromGameStartBtn">戻る</button>
@@ -7031,7 +7054,7 @@ html, body {
     if (startSushiBtn) startSushiBtn.addEventListener('click', () => startGame(MODE_SUSHI));
     if (startShinoBtn) startShinoBtn.addEventListener('click', () => startGame(MODE_SHINO));
     if (startAntoniBtn) startAntoniBtn.addEventListener('click', () => startGame(MODE_ANTONI));
-    if (openSushiStartBtn) openSushiStartBtn.addEventListener('click', () => startGame(MODE_SUSHI, SUSHI_LEVEL_ALL));
+    if (openSushiStartBtn) openSushiStartBtn.addEventListener('click', () => startGame(MODE_SUSHI, selectedSushiLevel));
     if (openShinoStartBtn) openShinoStartBtn.addEventListener('click', () => startGame(MODE_SHINO));
     if (openAntoniStartBtn) openAntoniStartBtn.addEventListener('click', () => startGame(MODE_ANTONI));
     if (selectedStartBtn) selectedStartBtn.addEventListener('click', () => startGame(selectedMenuMode, selectedSushiLevel));
@@ -7055,7 +7078,13 @@ html, body {
 
     if (sushiLevelSelect) {
       sushiLevelSelect.querySelectorAll('[data-level]').forEach(btn => {
-        btn.addEventListener('click', () => openGameStartPanel(MODE_SUSHI, btn.dataset.level));
+        btn.addEventListener('click', () => {
+          selectedSushiLevel = normalizeSushiLevel(btn.dataset.level);
+          currentSushiLevel = selectedSushiLevel;
+          sushiLevelSelect.querySelectorAll('[data-level]').forEach(b => {
+            b.classList.toggle('active', b.dataset.level === selectedSushiLevel);
+          });
+        });
       });
     }
 
