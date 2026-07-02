@@ -6,9 +6,9 @@
   <meta name="google-adsense-account" content="ca-pub-4726251793577317">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>しの単｜無料英語ゲーム・synonym game｜すし単</title>
+  <title>すし単ゲーム｜無料英単語ゲーム</title>
 
-  <meta name="description" content="英単語と意味が近い語をタップする無料シノニムゲームです。英検・IELTS・高校英語の言い換え力を鍛えます。" />
+  <meta name="description" content="すし単は、無料で遊べる英語ゲームサイトです。英単語ゲーム、英語タイピング、語源ゲーム、リスニングゲーム、英語クイズで楽しく学習できます。英検・IELTS・高校英語に対応。" />
 
   <meta name="keywords" content="すし単,すし英語,しの単,あんとに単,すしタイプ,すしRUN,すしParts,すしTalk,すし早押し,すしクイズ,すし勘,英語ゲーム,無料英語ゲーム,英単語ゲーム,語源ゲーム,リスニングゲーム,英語タイピング,IELTS,英検,高校英語,無料英語学習" />
 
@@ -2005,41 +2005,202 @@ html, body {
 }
 
 
-/* Game learning accordion for AdSense-friendly explanation */
-.learning-accordion {
-  margin: 12px 0 4px;
+
+/* Sushi level selector */
+.level-select-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 7px;
+  margin: 12px 0 8px;
+}
+.level-btn {
   border: 1px solid #f1d7bc;
-  border-radius: 16px;
+  border-radius: 12px;
+  padding: 10px 6px;
   background: #ffffff;
-  box-shadow: 0 8px 20px rgba(15,23,42,0.05);
-  overflow: hidden;
+  color: #172033;
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 5px 14px rgba(15,23,42,0.04);
+}
+.level-btn.active {
+  background: linear-gradient(180deg, #fb6a3c 0%, #f4511e 100%);
+  color: #ffffff;
+  border-color: #f4511e;
+}
+.level-note {
+  margin: 4px 0 8px !important;
+  font-size: 12px !important;
+  color: #64748b !important;
+  text-align: center;
+}
+.ranking-level-tabs {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 7px;
+  margin: 0 0 10px;
+}
+@media (max-width:420px){
+  .level-select-grid, .ranking-level-tabs { grid-template-columns: repeat(2, 1fr); }
+}
+
+
+
+/* PC ranking layout improvement */
+@media (min-width: 760px) {
+  #rankingOverlay {
+    align-items: center;
+    padding: 28px;
+  }
+
+  #rankingOverlay .modal {
+    width: min(96vw, 880px);
+    max-height: 90dvh;
+    padding: 28px;
+  }
+
+  #rankingOverlay h2 {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+
+  #rankingOverlay .ranking-tabs,
+  #rankingOverlay .ranking-level-tabs {
+    display: grid;
+    gap: 10px;
+  }
+
+  #rankingOverlay .ranking-tabs {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  #rankingOverlay .ranking-level-tabs {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  #rankingOverlay .ranking-tab {
+    min-width: 0;
+    padding: 12px 14px;
+    font-size: 15px;
+  }
+
+  #rankingScreenList.ranking-box {
+    padding: 18px 20px;
+    border-radius: 18px;
+  }
+
+  #rankingScreenList .ranking-title {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  #rankingScreenList .ranking-scroll {
+    max-height: 58vh;
+    padding-right: 8px;
+  }
+
+  #rankingScreenList .ranking-row {
+    grid-template-columns: 64px minmax(0, 1fr) 130px;
+    gap: 14px;
+    padding: 12px 10px;
+    font-size: 16px;
+  }
+
+  #rankingScreenList .ranking-rank {
+    font-size: 17px;
+  }
+
+  #rankingScreenList .ranking-name {
+    font-size: 17px;
+  }
+
+  #rankingScreenList .ranking-sub {
+    font-size: 13px;
+  }
+
+  #rankingScreenList .ranking-score {
+    font-size: 22px;
+    text-align: right;
+  }
+
+  #rankingOverlay #closeRankingBtn {
+    max-width: 220px;
+    margin-left: auto;
+  }
+}
+
+
+
+/* Game start learning accordion - natural card style */
+.learning-accordion {
+  margin: 14px 0 6px;
+  border: none;
+  border-radius: 18px;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
 }
 .learning-accordion summary {
   list-style: none;
   cursor: pointer;
-  padding: 10px 14px;
-  color: #c2410c;
-  font-size: 20px;
-  font-weight: 1000;
-  line-height: 1;
-  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 16px;
+  border: 1px solid #f1d7bc;
+  border-radius: 16px;
+  background: #ffffff;
+  color: #172033;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.35;
+  text-align: left;
   user-select: none;
+  box-shadow: 0 8px 20px rgba(15,23,42,0.05);
 }
 .learning-accordion summary::-webkit-details-marker { display: none; }
-.learning-accordion summary::after { content: "▽"; }
+.learning-accordion summary::before {
+  content: "このゲームについて";
+}
+.learning-accordion summary::after {
+  content: "▽";
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: #fff7ed;
+  color: #ea580c;
+  border: 1px solid #fed7aa;
+  font-size: 16px;
+  font-weight: 1000;
+}
+.learning-accordion[open] summary {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
 .learning-accordion[open] summary::after { content: "▲"; }
 .learning-body {
-  padding: 0 15px 15px;
+  margin-top: 8px;
+  padding: 15px 16px 16px;
+  border: 1px solid #f1d7bc;
+  border-radius: 16px;
+  background: #ffffff;
   color: #475569;
   font-size: 14px;
   line-height: 1.75;
   text-align: left;
+  box-shadow: 0 8px 20px rgba(15,23,42,0.05);
 }
 .learning-body h3 {
-  margin: 8px 0 6px;
+  margin: 10px 0 6px;
   color: #172033;
   font-size: 16px;
 }
+.learning-body h3:first-child { margin-top: 0; }
 .learning-body p {
   margin: 7px 0;
   color: #475569 !important;
@@ -2051,12 +2212,30 @@ html, body {
 .learning-body li {
   margin: 3px 0;
 }
-.ranking-tabs.shino-only {
-  display: none !important;
-}
 @media (min-width: 900px) {
-  .learning-accordion { max-width: 760px; margin: 16px auto 4px; }
-  .learning-body { font-size: 15px; padding: 0 20px 18px; }
+  .learning-accordion { max-width: 760px; margin: 18px auto 6px; }
+  .learning-body { font-size: 15px; padding: 18px 20px; }
+}
+
+
+.level-block {
+  margin: 14px 0 4px;
+  padding: 14px;
+  border: 1px solid #f1d7bc;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(15,23,42,0.05);
+}
+.level-heading {
+  margin-bottom: 9px;
+  color: #172033;
+  font-size: 14px;
+  font-weight: 1000;
+}
+#menuOverlay .level-block {
+  background: #ffffff;
+  border: 1px solid #f1d7bc;
+  box-shadow: 0 8px 22px rgba(15,23,42,0.05);
 }
 
 </style>
@@ -2197,7 +2376,7 @@ html, body {
       <div>
         <div class="stat">
           <div class="stat-label">Mode</div>
-          <div class="stat-value" style="font-size:18px;"><span class="mode-badge" id="modeBadge">しの単</span></div>
+          <div class="stat-value" style="font-size:18px;"><span class="mode-badge" id="modeBadge">すし単</span></div>
         </div>
       </div>
       <div>
@@ -2225,11 +2404,11 @@ html, body {
     </div>
 
     <div class="panel question-card">
-      <div class="question-label">英単語と意味が近い語をタップ</div>
+      <div class="question-label">日本語に合う英単語をタップ</div>
       <div class="question-text" id="questionText">準備OK？</div>
     </div>
 
-    <div class="feedback" id="feedbackText">ゲームスタートを押してください</div>
+    <div class="feedback" id="feedbackText">モードを選んでスタート</div>
 
     <div class="panel arena" id="arena"></div>
 
@@ -2248,66 +2427,80 @@ html, body {
       <div class="modal home-modal">
         <div id="homePanel">
           <div class="brand-hero">
-            <span class="brand-mark">🍣 synonym game</span>
+            <span class="brand-mark">🍣 WORD GAME</span>
             <h1 id="gameTitle" class="brand-title">
               <img id="mantenLogo" class="title-logo" src="/images/manten.png" alt="満点侍">
               <span class="game-title-block">
-                <span class="game-title-main">しの単</span>
-                <span class="game-title-sub">synonym game</span>
+                <span class="game-title-main">すし単</span>
+                <span class="game-title-sub">英単語ゲーム</span>
               </span>
             </h1>
-            <p class="brand-sub">英単語と意味が近い語をタップする無料シノニムゲームです。英検・IELTS・高校英語の言い換え力を鍛えます。</p>
+            <p class="brand-sub">日本語に合う英単語をタップ。30秒でハイスコアを目指そう。</p>
           </div>
 
           <details class="learning-accordion">
-            <summary aria-label="このゲームについて"></summary>
+            <summary aria-label="ゲーム説明を開く"></summary>
             <div class="learning-body">
               <h3>このゲームについて</h3>
-              <p><strong>しの単</strong>は、英単語と意味が近い語をすばやく選ぶ無料のシノニムゲームです。単語を「日本語訳だけ」で覚えるのではなく、近い意味の英語同士を結びつけることで、読解・リスニング・英作文で使える語彙力を育てます。</p>
+              <p><strong>すし単</strong>は、英単語を素早く判断しながら学べる無料の英語ゲームです。制限時間内に正しい意味を選び続けることで、英単語を何度も反復し、自然と語彙力を伸ばせるように設計されています。</p>
 
-              <h3>どんな力が伸びる？</h3>
-              <p>英検、IELTS、大学受験の長文では、本文と選択肢で同じ意味が別の表現に言い換えられることがよくあります。しの単では、important と significant、help と assist のような言い換えに慣れることで、問題文の意味をすばやくつかむ練習ができます。</p>
-
-              <h3>おすすめの使い方</h3>
+              <h3>どんな人におすすめ？</h3>
               <ul>
-                <li>英検・IELTS・高校英語の語彙を復習したい人</li>
-                <li>長文読解で言い換え表現に強くなりたい人</li>
-                <li>ライティングで同じ単語の繰り返しを減らしたい人</li>
-                <li>短時間でテンポよく英単語を確認したい人</li>
+                <li>英検3級〜準1級の単語を覚えたい人</li>
+                <li>高校英語の語彙を効率よく復習したい人</li>
+                <li>IELTS・大学受験の基礎語彙を増やしたい人</li>
+                <li>ゲーム感覚で英語を学びたい人</li>
               </ul>
 
-              <h3>学習のポイント</h3>
-              <p>間違えた単語は、意味だけでなく「どの単語と近い意味なのか」まで確認すると効果的です。1日5分でも続けることで、英語を英語のまま処理するスピードが少しずつ上がっていきます。</p>
+              <h3>ゲームの特徴</h3>
+              <p>問題はランダムに出題されるため、同じ単語でも何度も復習できます。コンボをつなげるほど高得点を狙えるため、集中力を保ちながらテンポよく学習できます。間違えた単語は結果画面で確認できるので、苦手語彙の復習にも役立ちます。</p>
+
+              <h3>効果的な使い方</h3>
+              <p>1日5〜10分程度でも継続してプレイすることで、英単語を思い出すスピード、つまり語彙の処理速度が上がります。これは英検や大学受験だけでなく、IELTSやTOEFLなどのリーディング・リスニングにも役立つ基礎力になります。</p>
             </div>
           </details>
 
+          <div class="level-block">
+            <div class="level-heading">出題レベル</div>
+            <div id="sushiLevelSelect" class="level-select-grid">
+              <button class="level-btn active" data-level="all">ALL</button>
+              <button class="level-btn" data-level="level1">Lv.1</button>
+              <button class="level-btn" data-level="level2">Lv.2</button>
+              <button class="level-btn" data-level="level3">Lv.3</button>
+              <button class="level-btn" data-level="level4">Lv.4</button>
+            </div>
+            <p id="sushiLevelNote" class="level-note">選んだレベルの単語だけでプレイします。</p>
+          </div>
 
           <div class="menu-btns">
             <button class="btn primary" id="openSushiStartBtn">ゲームスタート</button>
             <button class="btn gold" id="openRankingBtn">ランキング</button>
             <a class="btn secondary" href="index.html" style="text-decoration:none;text-align:center;">トップページに戻る</a>
           </div>
-
-          <div class="quiet-seo">
-            <h2>しの単</h2>
-            <p>英単語と意味が近い語をタップする無料シノニムゲームです。英検・IELTS・高校英語の言い換え力を鍛えます。</p>
-          </div>
         </div>
 
         <div id="gameStartPanel" class="info-page hidden">
           <h2 id="gameStartTitle">すし単</h2>
-          <p id="gameStartDesc">英単語と意味が近い語をタップするシノニムゲームです。</p>
+          <p id="gameStartDesc">日本語に合う英単語をタップする基本モードです。</p>
 
-
-          <details class="learning-accordion">
-            <summary aria-label="このゲームについて"></summary>
-            <div class="learning-body">
-              <h3>しの単で学べること</h3>
-              <p>しの単は、英単語と意味が近い語を選びながら、シノニム・言い換え表現を覚える英語ゲームです。長文読解では、本文の単語が選択肢で別の表現に置き換えられることが多いため、シノニムに慣れておくと内容をつかみやすくなります。</p>
-              <h3>英検・IELTS対策にも使えます</h3>
-              <p>英検やIELTSでは、important、significant、essential のように、似た意味の単語を見分ける力が必要です。ゲーム形式で何度も触れることで、単語の意味を日本語だけでなく英語同士の関係として覚えられます。</p>
-              <h3>遊び方のコツ</h3>
-              <p>正解だけを覚えるのではなく、間違えた選択肢も確認すると語彙の幅が広がります。短時間でも毎日続けることで、読解やリスニングで言い換えに反応するスピードが上がります。</p>
+          <details class="learning-accordion" id="gameLearningDetails">
+            <summary aria-label="ゲーム説明を開く"></summary>
+            <div class="learning-body" id="gameLearningBody">
+              <h3>このゲームについて</h3>
+              <p><strong>すし単</strong>は、英単語を素早く判断しながら学べる無料の英語ゲームです。制限時間内に正しい意味を選び続けることで、英単語を何度も反復し、自然と語彙力を伸ばせるように設計されています。</p>
+              <h3>どんな人におすすめ？</h3>
+              <ul>
+                <li>英検3級〜準1級の単語を覚えたい人</li>
+                <li>高校英語の語彙を効率よく復習したい人</li>
+                <li>IELTS・大学受験の基礎語彙を増やしたい人</li>
+                <li>ゲーム感覚で英語を学びたい人</li>
+              </ul>
+              <h3>ゲームの特徴</h3>
+              <p>問題はランダムに出題されるため、同じ単語でも何度も復習できます。コンボをつなげるほど高得点を狙えるため、集中力を保ちながらテンポよく学習できます。間違えた単語は結果画面で確認できるので、苦手語彙の復習にも役立ちます。</p>
+              <h3>効果的な使い方</h3>
+              <p>1日5〜10分程度でも継続してプレイすることで、英単語を思い出すスピード、つまり語彙の処理速度が上がります。これは英検や大学受験だけでなく、IELTSやTOEFLなどのリーディング・リスニングにも役立つ基礎力になります。</p>
+              <h3>無料で利用できます</h3>
+              <p>すし単は登録不要・無料で遊べます。英単語ゲームのほかにも、シノニム、アントニム、タイピング、語源学習など、さまざまな英語ゲームを公開しています。</p>
             </div>
           </details>
 
@@ -2319,8 +2512,7 @@ html, body {
             <div class="growth-bar"><div class="growth-fill" id="homeGrowthFill"></div></div>
             <div class="growth-next" id="homeGrowthNext">次の動物まであと -</div>
           </div>
-
-          <div class="menu-btns">
+<div class="menu-btns">
             <button class="btn primary" id="selectedStartBtn">ゲームスタート</button>
             <button class="btn gold" id="selectedRankingBtn">ランキング</button>
             <button class="btn secondary" id="backHomeFromGameStartBtn">戻る</button>
@@ -2329,7 +2521,7 @@ html, body {
 
         <div id="howToPanel" class="info-page hidden">
           <h2>遊び方</h2>
-          <p>英単語と意味が近い語をタップしてください。正解すると得点と時間が増えます。5秒以内に答えるとコンボが続きます。</p>
+          <p>日本語に合う英単語をタップしてください。正解すると得点と時間が増えます。5秒以内に答えるとコンボが続きます。</p>
           <div class="menu-btns"><button class="btn secondary" id="backHomeFromHowToBtn">戻る</button></div>
         </div>
 
@@ -2342,8 +2534,15 @@ html, body {
     <div class="overlay hidden" id="rankingOverlay">
       <div class="modal">
         <h2>Ranking</h2>
-        <div class="ranking-tabs shino-only" aria-hidden="true">
-          <button class="ranking-tab active" id="rankingTabShino">しの単</button>
+        <div class="ranking-tabs">
+          <button class="ranking-tab active" id="rankingTabSushi">すし単</button>
+        </div>
+        <div class="ranking-level-tabs" id="rankingLevelTabs">
+          <button class="ranking-tab active" data-level="all">ALL</button>
+          <button class="ranking-tab" data-level="level1">Lv.1</button>
+          <button class="ranking-tab" data-level="level2">Lv.2</button>
+          <button class="ranking-tab" data-level="level3">Lv.3</button>
+          <button class="ranking-tab" data-level="level4">Lv.4</button>
         </div>
         <div id="rankingScreenList" class="ranking-box">
           <div class="ranking-title">🏆 Ranking</div>
@@ -2450,11 +2649,19 @@ html, body {
       SUPABASE_PUBLISHABLE_KEY
     );
 
-    const GAME_TITLE = "しの単";
+    const GAME_TITLE = "すし単";
     const MODE_SUSHI = "core";
     const MODE_SHINO = "shino";
     const MODE_ANTONI = "antoni";
-    const PUBLIC_MODE = MODE_SHINO;
+    const PUBLIC_MODE = MODE_SUSHI;
+    const SUSHI_LEVEL_ALL = "all";
+    const SUSHI_LEVELS = {
+      all: { label: "ALL", dbMode: MODE_SUSHI, range: null, desc: "全単語" },
+      level1: { label: "Lv.1", dbMode: "core_level1", range: [0, 600], desc: "1〜600" },
+      level2: { label: "Lv.2", dbMode: "core_level2", range: [600, 1200], desc: "601〜1200" },
+      level3: { label: "Lv.3", dbMode: "core_level3", range: [1200, 1700], desc: "1201〜1700" },
+      level4: { label: "Lv.4", dbMode: "core_level4", range: [1700, Infinity], desc: "1701〜最後" }
+    };
 
     const MODE_CONFIG = {
       [MODE_SUSHI]: {
@@ -2486,14 +2693,33 @@ html, body {
       if (mode === "core") return MODE_SUSHI;
       if (mode === "shino") return MODE_SHINO;
       if (mode === "antoni") return MODE_ANTONI;
+      if (mode === "core_level1" || mode === "core_level2" || mode === "core_level3" || mode === "core_level4") return mode;
       return mode || MODE_SUSHI;
+    }
+
+    function normalizeSushiLevel(level) {
+      return SUSHI_LEVELS[level] ? level : SUSHI_LEVEL_ALL;
+    }
+
+    function getDbModeForGame(mode = currentMode, level = currentSushiLevel) {
+      const normalizedMode = normalizeModeForDb(mode);
+      if (normalizedMode !== MODE_SUSHI) return normalizedMode;
+      return SUSHI_LEVELS[normalizeSushiLevel(level)].dbMode;
+    }
+
+    function getLevelFromDbMode(dbMode) {
+      const found = Object.entries(SUSHI_LEVELS).find(([, info]) => info.dbMode === dbMode);
+      return found ? found[0] : SUSHI_LEVEL_ALL;
     }
 
 
     let audioCtx = null;
     let currentMode = PUBLIC_MODE;
+    let currentSushiLevel = SUSHI_LEVEL_ALL;
     let rankingMode = PUBLIC_MODE;
+    let rankingSushiLevel = SUSHI_LEVEL_ALL;
     let selectedMenuMode = PUBLIC_MODE;
+    let selectedSushiLevel = SUSHI_LEVEL_ALL;
 
     const GROWTH_STORAGE_KEY = "sushitan_total_score_v1";
     const GROWTH_MAX_SCORE = 1000000;
@@ -5734,10 +5960,15 @@ html, body {
     const gameStartPanel = document.getElementById('gameStartPanel');
     const gameStartTitle = document.getElementById('gameStartTitle');
     const gameStartDesc = document.getElementById('gameStartDesc');
+    const gameLearningDetails = document.getElementById('gameLearningDetails');
+    const gameLearningBody = document.getElementById('gameLearningBody');
     const gameStartGrowthCard = document.getElementById('gameStartGrowthCard');
     const selectedStartBtn = document.getElementById('selectedStartBtn');
     const selectedRankingBtn = document.getElementById('selectedRankingBtn');
     const backHomeFromGameStartBtn = document.getElementById('backHomeFromGameStartBtn');
+    const sushiLevelSelect = document.getElementById('sushiLevelSelect');
+    const sushiLevelNote = document.getElementById('sushiLevelNote');
+    const rankingLevelTabs = document.getElementById('rankingLevelTabs');
     const closeRankingBtn = document.getElementById('closeRankingBtn');
     const gameTitleEl = document.getElementById('gameTitle');
     const homePanel = document.getElementById('homePanel');
@@ -5891,11 +6122,24 @@ html, body {
     function getWords(mode = currentMode) {
       if (mode === MODE_SHINO) return SHINO_WORDS;
       if (mode === MODE_ANTONI) return ANTONI_WORDS;
-      return WORDS;
+      const levelInfo = SUSHI_LEVELS[normalizeSushiLevel(currentSushiLevel)];
+      if (!levelInfo.range) return WORDS;
+      const [start, end] = levelInfo.range;
+      return WORDS.slice(start, end === Infinity ? WORDS.length : end);
     }
 
-    function getModeLabel(mode = currentMode) {
-      return getModeConfig(mode).label;
+    function getWordCountForLevel(level = currentSushiLevel) {
+      const info = SUSHI_LEVELS[normalizeSushiLevel(level)];
+      if (!info.range) return WORDS.length;
+      const [start, end] = info.range;
+      return Math.max(0, WORDS.slice(start, end === Infinity ? WORDS.length : end).length);
+    }
+
+    function getModeLabel(mode = currentMode, level = currentSushiLevel) {
+      const normalizedMode = normalizeModeForDb(mode);
+      const baseLabel = getModeConfig(normalizedMode).label;
+      if (normalizedMode === MODE_SUSHI) return `${baseLabel} ${SUSHI_LEVELS[normalizeSushiLevel(level)].label}`;
+      return baseLabel;
     }
 
     function getQuestionPrompt(question) {
@@ -6400,8 +6644,9 @@ html, body {
       bgm.currentTime = 0;
     }
 
-    function startGame(mode) {
-      currentMode = mode;
+    function startGame(mode, level = selectedSushiLevel) {
+      currentMode = normalizeModeForDb(mode);
+      currentSushiLevel = currentMode === MODE_SUSHI ? normalizeSushiLevel(level) : SUSHI_LEVEL_ALL;
       ensureAudio();
       startBGM();
       GAME.running = true;
@@ -6457,21 +6702,46 @@ html, body {
       }
     }
 
-    function openGameStartPanel(mode) {
+    function openGameStartPanel(mode, level = selectedSushiLevel) {
       selectedMenuMode = normalizeModeForDb(mode || MODE_SUSHI);
+      selectedSushiLevel = selectedMenuMode === MODE_SUSHI ? normalizeSushiLevel(level) : SUSHI_LEVEL_ALL;
       currentMode = selectedMenuMode;
+      currentSushiLevel = selectedSushiLevel;
       const modeText = {
         [MODE_SUSHI]: {
           title: "すし単",
-          desc: "日本語に合う英単語をタップする基本モード。ここに累計スコア成長も移動しました。"
+          desc: "日本語に合う英単語をタップする基本モード。",
+          learning: `
+            <h3>このゲームについて</h3>
+            <p><strong>すし単</strong>は、英単語を素早く判断しながら学べる無料の英語ゲームです。制限時間内に正しい意味を選び続けることで、英単語を何度も反復し、自然と語彙力を伸ばせるように設計されています。</p>
+            <h3>どんな人におすすめ？</h3>
+            <ul><li>英検3級〜準1級の単語を覚えたい人</li><li>高校英語の語彙を効率よく復習したい人</li><li>IELTS・大学受験の基礎語彙を増やしたい人</li><li>ゲーム感覚で英語を学びたい人</li></ul>
+            <h3>ゲームの特徴</h3>
+            <p>問題はランダムに出題されるため、同じ単語でも何度も復習できます。コンボをつなげるほど高得点を狙えるため、集中力を保ちながらテンポよく学習できます。間違えた単語は結果画面で確認できるので、苦手語彙の復習にも役立ちます。</p>
+            <h3>効果的な使い方</h3>
+            <p>1日5〜10分程度でも継続してプレイすることで、英単語を思い出すスピード、つまり語彙の処理速度が上がります。これは英検や大学受験だけでなく、IELTSやTOEFLなどのリーディング・リスニングにも役立つ基礎力になります。</p>
+            <h3>無料で利用できます</h3>
+            <p>すし単は登録不要・無料で遊べます。英単語ゲームのほかにも、シノニム、アントニム、タイピング、語源学習など、さまざまな英語ゲームを公開しています。</p>`
         },
         [MODE_SHINO]: {
           title: "しの単",
-          desc: "表示された英単語と意味が近い synonym をタップする言い換え練習モード。"
+          desc: "表示された英単語と意味が近い synonym をタップする言い換え練習モード。",
+          learning: `
+            <h3>このゲームについて</h3>
+            <p>英語では、一つの意味をさまざまな単語で表します。類義語を知らないと、長文が読みにくくなったり、英作文で同じ単語ばかり使ってしまったりします。</p>
+            <p>しの単では、ゲーム感覚で類義語を繰り返し学び、語彙の幅を広げることができます。</p>
+            <h3>このゲームで身につくこと</h3>
+            <ul><li>類義語の知識</li><li>英検準1級・1級レベルの語彙力</li><li>IELTS Reading対策</li><li>自然な英作文に近づける力</li></ul>`
         },
         [MODE_ANTONI]: {
           title: "あんとに単",
-          desc: "表示された英単語と反対の意味の antonym をタップする対義語練習モード。"
+          desc: "表示された英単語と反対の意味の antonym をタップする対義語練習モード。",
+          learning: `
+            <h3>このゲームについて</h3>
+            <p>反対語を知ると、一つの単語から二倍、三倍と語彙を増やせます。</p>
+            <p>「この単語の反対は何だろう」と考える習慣は、英語を整理して覚えることにもつながります。</p>
+            <h3>このゲームで身につくこと</h3>
+            <ul><li>反対語の知識</li><li>語彙を整理する力</li><li>英作文で表現の幅を広げる力</li><li>英検・大学受験対策</li></ul>`
         }
       };
       const info = modeText[selectedMenuMode] || modeText[MODE_SUSHI];
@@ -6479,10 +6749,21 @@ html, body {
         const iconText = selectedMenuMode === MODE_SHINO ? "し" : selectedMenuMode === MODE_ANTONI ? "対" : "す";
         gameStartTitle.innerHTML = `<span class="mode-title-icon">${iconText}</span>${info.title}`;
       }
-      if (gameStartDesc) gameStartDesc.textContent = info.desc;
+      if (gameStartDesc) gameStartDesc.textContent = selectedMenuMode === MODE_SUSHI
+        ? `${info.desc} / ${SUSHI_LEVELS[selectedSushiLevel].label}（${SUSHI_LEVELS[selectedSushiLevel].desc}・${getWordCountForLevel(selectedSushiLevel)}語）`
+        : info.desc;
+      if (gameLearningBody) gameLearningBody.innerHTML = info.learning || "";
+      if (gameLearningDetails) gameLearningDetails.open = false;
       if (gameStartGrowthCard) {
         gameStartGrowthCard.classList.toggle('hidden', selectedMenuMode !== MODE_SUSHI);
       }
+      if (sushiLevelSelect) {
+        sushiLevelSelect.classList.toggle('hidden', selectedMenuMode !== MODE_SUSHI);
+        sushiLevelSelect.querySelectorAll('[data-level]').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.level === selectedSushiLevel);
+        });
+      }
+      if (sushiLevelNote) sushiLevelNote.classList.toggle('hidden', selectedMenuMode !== MODE_SUSHI);
       showHomeSubPanel('gameStart');
     }
 
@@ -6503,10 +6784,11 @@ html, body {
       updateHud();
     }
 
-    function renderRanking(container, data, mode) {
+    function renderRanking(container, data, mode, level = rankingSushiLevel) {
       mode = normalizeModeForDb(mode);
+      level = mode === MODE_SUSHI ? normalizeSushiLevel(level) : SUSHI_LEVEL_ALL;
       if (!container) return;
-      const title = `<div class="ranking-title">🏆 ${getModeLabel(mode)} Ranking</div>`;
+      const title = `<div class="ranking-title">🏆 ${getModeLabel(mode, level)} Ranking</div>`;
 
       if (!data || data.length === 0) {
         container.innerHTML = title + `<div class="ranking-empty">まだスコアがありません</div>`;
@@ -6595,47 +6877,57 @@ html, body {
       if (rankingTabSushi) rankingTabSushi.classList.toggle("active", rankingMode === MODE_SUSHI);
       if (rankingTabShino) rankingTabShino.classList.toggle("active", rankingMode === MODE_SHINO);
       if (rankingTabAntoni) rankingTabAntoni.classList.toggle("active", rankingMode === MODE_ANTONI);
+      if (rankingLevelTabs) {
+        rankingLevelTabs.classList.toggle('hidden', rankingMode !== MODE_SUSHI);
+        rankingLevelTabs.querySelectorAll('[data-level]').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.level === rankingSushiLevel);
+        });
+      }
     }
 
-    async function loadRanking(mode = MODE_SHINO, target = rankingList) {
+    async function loadRanking(mode = currentMode, target = rankingList, level = currentSushiLevel) {
       mode = normalizeModeForDb(mode);
+      level = mode === MODE_SUSHI ? normalizeSushiLevel(level) : SUSHI_LEVEL_ALL;
+      const dbMode = getDbModeForGame(mode, level);
       if (!supabaseClient) {
-        renderRanking(target, [], mode);
+        renderRanking(target, [], mode, level);
         return [];
       }
 
+      const modeFilter = dbMode === MODE_SUSHI ? [MODE_SUSHI, "core"] : [dbMode];
       const { data, error } = await supabaseClient
         .from("scores")
         .select("id, player_name, score, max_combo, accuracy, mode")
-        .in("mode", mode === MODE_SUSHI ? [MODE_SUSHI, "core"] : [mode])
+        .in("mode", modeFilter)
         .order("score", { ascending: false })
         .limit(500);
 
       if (error) {
         console.error("ranking load error:", error);
         if (target === rankingScreenList) rankingStatus.textContent = "ランキング取得失敗";
-        renderRanking(target, [], mode);
+        renderRanking(target, [], mode, level);
         return [];
       }
 
       const deduped = dedupeRanking(data || []);
-      renderRanking(target, deduped, mode);
+      renderRanking(target, deduped, mode, level);
 
       if (target === rankingScreenList) {
-        rankingStatus.textContent = `${getModeLabel(mode)} の上位 ${deduped.length} 件（同名は最高点のみ表示）`;
+        rankingStatus.textContent = `${getModeLabel(mode, level)} の上位 ${deduped.length} 件（同名は最高点のみ表示）`;
       }
       return deduped;
     }
 
-    async function openRankingScreen(mode = MODE_SHINO) {
-      rankingMode = MODE_SHINO;
+    async function openRankingScreen(mode = currentMode || PUBLIC_MODE, level = currentSushiLevel) {
+      rankingMode = normalizeModeForDb(mode);
+      rankingSushiLevel = rankingMode === MODE_SUSHI ? normalizeSushiLevel(level) : SUSHI_LEVEL_ALL;
       setRankingTabUI();
       rankingStatus.textContent = "読み込み中...";
       menuOverlay.classList.add('hidden');
       resultOverlay.classList.add('hidden');
       if (clearOverlay) clearOverlay.classList.add('hidden');
       rankingOverlay.classList.remove('hidden');
-      await loadRanking(rankingMode, rankingScreenList);
+      await loadRanking(rankingMode, rankingScreenList, rankingSushiLevel);
     }
 
     async function saveHighScore(finalScoreValue, accuracy) {
@@ -6644,7 +6936,7 @@ html, body {
       const input = prompt("名前を入力してください", localStorage.getItem("speed_vocab_name") || "");
       if (input === null) {
         saveStatus.textContent = "保存をスキップしました";
-        await loadRanking(currentMode, rankingList);
+        await loadRanking(currentMode, rankingList, currentSushiLevel);
         return;
       }
 
@@ -6658,7 +6950,7 @@ html, body {
   p_score: finalScoreValue,
   p_max_combo: GAME.maxCombo,
   p_accuracy: accuracy,
-  p_mode: normalizeModeForDb(currentMode)
+  p_mode: getDbModeForGame(currentMode, currentSushiLevel)
 });
 
       if (error) {
@@ -6667,6 +6959,7 @@ html, body {
       } else {
         GAME.scoreSavedThisRound = true;
         rankingMode = normalizeModeForDb(currentMode);
+        rankingSushiLevel = currentMode === MODE_SUSHI ? currentSushiLevel : SUSHI_LEVEL_ALL;
         saveStatus.textContent = `${playerName} の記録を保存しました`;
       }
     }
@@ -6742,7 +7035,7 @@ html, body {
       resultOverlay.classList.remove('hidden');
 
       await saveHighScore(bonusScore, accuracy);
-      await loadRanking(currentMode, rankingList);
+      await loadRanking(currentMode, rankingList, currentSushiLevel);
     }
 
 
@@ -6761,27 +7054,45 @@ html, body {
     if (startSushiBtn) startSushiBtn.addEventListener('click', () => startGame(MODE_SUSHI));
     if (startShinoBtn) startShinoBtn.addEventListener('click', () => startGame(MODE_SHINO));
     if (startAntoniBtn) startAntoniBtn.addEventListener('click', () => startGame(MODE_ANTONI));
-    if (openSushiStartBtn) openSushiStartBtn.addEventListener('click', () => startGame(PUBLIC_MODE));
+    if (openSushiStartBtn) openSushiStartBtn.addEventListener('click', () => startGame(MODE_SUSHI, selectedSushiLevel));
     if (openShinoStartBtn) openShinoStartBtn.addEventListener('click', () => startGame(MODE_SHINO));
     if (openAntoniStartBtn) openAntoniStartBtn.addEventListener('click', () => startGame(MODE_ANTONI));
-    if (selectedStartBtn) selectedStartBtn.addEventListener('click', () => startGame(selectedMenuMode));
-    if (selectedRankingBtn) selectedRankingBtn.addEventListener('click', () => openRankingScreen(selectedMenuMode));
+    if (selectedStartBtn) selectedStartBtn.addEventListener('click', () => startGame(selectedMenuMode, selectedSushiLevel));
+    if (selectedRankingBtn) selectedRankingBtn.addEventListener('click', () => openRankingScreen(selectedMenuMode, selectedSushiLevel));
     if (backHomeFromGameStartBtn) backHomeFromGameStartBtn.addEventListener('click', () => showHomeSubPanel('home'));
 
-    playAgainBtn.addEventListener('click', () => startGame(currentMode));
-    if (clearPlayAgainBtn) clearPlayAgainBtn.addEventListener('click', () => startGame(currentMode));
-    retryBtn.addEventListener('click', () => startGame(currentMode));
+    playAgainBtn.addEventListener('click', () => startGame(currentMode, currentSushiLevel));
+    if (clearPlayAgainBtn) clearPlayAgainBtn.addEventListener('click', () => startGame(currentMode, currentSushiLevel));
+    retryBtn.addEventListener('click', () => startGame(currentMode, currentSushiLevel));
 
     menuBtn.addEventListener('click', backToMenu);
     backToMenuBtn.addEventListener('click', backToMenu);
     if (clearBackToMenuBtn) clearBackToMenuBtn.addEventListener('click', backToMenu);
 
-    if (openRankingBtn) openRankingBtn.addEventListener('click', () => openRankingScreen(currentMode || PUBLIC_MODE));
+    if (openRankingBtn) openRankingBtn.addEventListener('click', () => openRankingScreen(PUBLIC_MODE, selectedSushiLevel));
     closeRankingBtn.addEventListener('click', backToMenu);
 
-    if (rankingTabSushi) rankingTabSushi.addEventListener('click', () => openRankingScreen(MODE_SUSHI));
+    if (rankingTabSushi) rankingTabSushi.addEventListener('click', () => openRankingScreen(MODE_SUSHI, rankingSushiLevel));
     if (rankingTabShino) rankingTabShino.addEventListener('click', () => openRankingScreen(MODE_SHINO));
     if (rankingTabAntoni) rankingTabAntoni.addEventListener('click', () => openRankingScreen(MODE_ANTONI));
+
+    if (sushiLevelSelect) {
+      sushiLevelSelect.querySelectorAll('[data-level]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          selectedSushiLevel = normalizeSushiLevel(btn.dataset.level);
+          currentSushiLevel = selectedSushiLevel;
+          sushiLevelSelect.querySelectorAll('[data-level]').forEach(b => {
+            b.classList.toggle('active', b.dataset.level === selectedSushiLevel);
+          });
+        });
+      });
+    }
+
+    if (rankingLevelTabs) {
+      rankingLevelTabs.querySelectorAll('[data-level]').forEach(btn => {
+        btn.addEventListener('click', () => openRankingScreen(MODE_SUSHI, btn.dataset.level));
+      });
+    }
 
     window.addEventListener('resize', () => {
       if (GAME.running) renderQuestion();
@@ -6789,7 +7100,7 @@ html, body {
 
     updateModeBadge();
     showHomeSubPanel('home');
-    loadRanking(PUBLIC_MODE, rankingScreenList);
+    loadRanking(PUBLIC_MODE, rankingScreenList, SUSHI_LEVEL_ALL);
 </script>
 
 <script>
