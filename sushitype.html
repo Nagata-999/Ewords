@@ -446,6 +446,137 @@
     .side-block{padding:8px;margin-bottom:6px;}
     .list{max-height:120px;}
   }
+
+  /* =========================================
+     Start / explanation and larger typing view
+  ========================================= */
+  .typing-info {
+    max-width: 980px;
+    margin: 0 auto 14px;
+    border: none;
+    background: transparent;
+  }
+  .typing-info summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 58px;
+    padding: 14px 18px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: #ffffff;
+    color: #222;
+    font-size: 15px;
+    font-weight: 900;
+    box-shadow: 0 10px 24px rgba(120,72,0,.10);
+    user-select: none;
+  }
+  .typing-info summary::-webkit-details-marker { display:none; }
+  .typing-info summary::before { content: "このゲームについて"; }
+  .typing-info summary::after {
+    content: "▽";
+    display: inline-grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+    border-radius: 999px;
+    background: #fff7ef;
+    color: var(--accent);
+    border: 1px solid var(--border2);
+    font-size: 18px;
+    font-weight: 900;
+  }
+  .typing-info[open] summary::after { content: "▲"; }
+  .typing-info-body {
+    margin-top: 10px;
+    padding: 18px 20px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: #ffffff;
+    box-shadow: 0 10px 24px rgba(120,72,0,.10);
+    color: #4b5563;
+    line-height: 1.75;
+  }
+  .typing-info-body h2 {
+    margin: 0 0 8px;
+    color: #222;
+    font-size: 18px;
+  }
+  .typing-info-body p { margin: 8px 0; }
+
+  .hud {
+    grid-template-columns: 1.2fr 1.25fr repeat(3, .82fr);
+    align-items: stretch;
+  }
+  .time-stat {
+    background: linear-gradient(180deg,#ffffff,#fff4e6);
+    border-color: var(--border2);
+  }
+  .time-stat .stat-label {
+    font-size: 14px;
+  }
+  .time-stat .stat-value {
+    font-size: clamp(42px, 5.5vw, 68px);
+    line-height: 1;
+    color: var(--accent);
+    letter-spacing: -0.04em;
+  }
+  .score-stat {
+    grid-column: 1 / -1;
+    justify-self: end;
+    width: min(100%, 300px);
+    min-height: 68px;
+    background: #fff7ef;
+  }
+  .score-stat .stat-value {
+    font-size: 32px;
+    color: #222;
+  }
+  .layout {
+    grid-template-columns: minmax(0, 1.75fr) minmax(320px, .75fr);
+  }
+  #mainCard {
+    padding: 24px;
+  }
+  #promptBox {
+    min-height: 285px;
+    font-size: clamp(25px, 2.55vw, 34px);
+    line-height: 1.9;
+    padding: 24px;
+    border-radius: 20px;
+  }
+  .jp-translation {
+    font-size: 16px;
+    padding-top: 14px;
+    margin-top: 16px;
+  }
+  .section-title {
+    font-size: 22px;
+    margin-bottom: 14px;
+  }
+  .controls .sub-btn {
+    min-height: 50px;
+    padding: 13px 20px;
+    border-radius: 16px;
+    font-size: 15px;
+  }
+  @media(max-width:980px){
+    .hud { grid-template-columns: repeat(2,1fr); }
+    .time-stat { grid-column: 1 / -1; }
+    .score-stat { grid-column: 1 / -1; justify-self: stretch; width: 100%; }
+    .layout { grid-template-columns: 1fr; }
+    #promptBox { min-height: 250px; font-size: 24px; }
+  }
+  @media(max-width:560px){
+    .typing-info summary { min-height: 54px; }
+    #promptBox { min-height: 220px; font-size: 20px; padding: 18px; }
+    .time-stat .stat-value { font-size: 50px; }
+  }
+
 </style>
 </head>
 <body>
@@ -455,6 +586,26 @@
     <p>テンプレート、表現、単語をタイムアタック・練習・ボスバトルで反復。</p>
     <p><a href="index.html" class="home-btn">← すし単トップへ戻る</a></p>
   </div>
+
+  <details class="typing-info">
+    <summary></summary>
+    <div class="typing-info-body">
+      <h2>すしタイプについて</h2>
+      <p>
+        <strong>すしタイプ</strong>は、英作文やIELTS Writing Task 1、英検ライティングで使える英語表現を、
+        タイピングしながら反復できる無料の英語学習ゲームです。
+      </p>
+      <p>
+        画面に表示された英文を正確に入力することで、よく使う英文の型、グラフ描写の表現、
+        意見文で使えるフレーズを手と目で覚えられるようにしています。
+      </p>
+      <p>
+        タイムアタック、無限練習、バトルモードを切り替えられるため、
+        短時間の復習にも、授業中の練習にも使いやすい構成です。
+      </p>
+    </div>
+  </details>
+
   <div class="mode-bar">
     <button class="mode-btn active" data-dataset="essayTemplate">テンプレート</button>
     <button class="mode-btn" data-dataset="task1Expressions">TASK1表現</button>
@@ -469,11 +620,11 @@
   </div>
   <div class="hud">
     <div class="stat"><div class="stat-label">Mode</div><div class="stat-value" id="modeLabel">Essay Template / Time Attack</div></div>
-    <div class="stat"><div class="stat-label">Time</div><div class="stat-value"><span id="timeValue">60.0</span>s</div></div>
+    <div class="stat time-stat"><div class="stat-label">Time</div><div class="stat-value"><span id="timeValue">60.0</span>s</div></div>
     <div class="stat"><div class="stat-label">Accuracy</div><div class="stat-value"><span id="accuracyValue">100.0</span>%</div></div>
     <div class="stat"><div class="stat-label">Cleared</div><div class="stat-value"><span id="clearedValue">0</span></div></div>
-    <div class="stat"><div class="stat-label">Score</div><div class="stat-value"><span id="scoreValue">0</span></div></div>
     <div class="stat"><div class="stat-label">Best</div><div class="stat-value"><span id="bestValue">-</span></div></div>
+    <div class="stat score-stat"><div class="stat-label">Score</div><div class="stat-value"><span id="scoreValue">0</span></div></div>
   </div>
   <div class="layout">
     <div class="card" id="mainCard">
