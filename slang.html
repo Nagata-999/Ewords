@@ -1,368 +1,826 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title>よく使う英語スラング・日常会話表現｜すし英語</title>
-<meta name="description" content="Bussin’, Slay, No cap, Bet, I’m cooked, Straight up など、SNSや日常会話でよく使う英語スラングを例文・日本語訳・ニュアンス解説つきで紹介します。">
+<meta content="日常会話でよく使う英語表現・スラングを、意味・例文・ニュアンス解説つきで整理しました。We'll see, Straight up, Sounds good, No cap などを自然に学べます。" name="description"/>
 <style>
-    :root{
-      --bg:#fffaf2;
-      --card:#ffffff;
-      --ink:#24313f;
-      --muted:#637083;
-      --brand:#ef6c3e;
-      --brand2:#1f8a70;
-      --line:#eadfce;
-      --soft:#fff2df;
-      --blue:#eaf4ff;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
-      color:var(--ink);
-      background:linear-gradient(180deg,#fff7eb 0%,#fffaf2 35%,#ffffff 100%);
-      line-height:1.85;
-    }
-    a{color:var(--brand2);text-decoration:none;font-weight:700}
-    a:hover{text-decoration:underline}
-    header{
-      position:sticky;top:0;z-index:10;
-      background:rgba(255,250,242,.94);
-      backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--line);
-    }
-    .nav{
-      max-width:1080px;margin:auto;padding:12px 18px;
-      display:flex;align-items:center;justify-content:space-between;gap:14px;
-    }
-    .logo{font-size:20px;font-weight:900;letter-spacing:.04em;color:var(--brand)}
-    .navlinks{display:flex;gap:14px;flex-wrap:wrap;font-size:14px}
-    .hero{
-      max-width:1080px;margin:0 auto;padding:54px 18px 32px;
-      display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center;
-    }
-    .badge{display:inline-block;background:var(--soft);color:var(--brand);border:1px solid #ffd3b8;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:800}
-    h1{font-size:clamp(32px,5vw,56px);line-height:1.16;margin:16px 0 14px;letter-spacing:.02em}
-    .lead{font-size:18px;color:#435064;margin:0 0 22px}
-    .heroCard{
-      background:var(--card);border:1px solid var(--line);border-radius:24px;padding:22px;
-      box-shadow:0 16px 40px rgba(75,49,22,.08);
-    }
-    .heroCard h2{margin-top:0;font-size:22px}
-    .quick{display:grid;gap:10px;margin:16px 0 0;padding:0;list-style:none}
-    .quick li{background:#fff8ee;border:1px solid #f2dec5;border-radius:14px;padding:10px 12px;font-weight:700}
-    main{max-width:1080px;margin:auto;padding:0 18px 56px}
-    section{margin:30px 0}
-    .sectionTitle{font-size:30px;line-height:1.25;margin:0 0 10px}
-    .note{
-      background:#fff;border:1px solid var(--line);border-left:6px solid var(--brand2);
-      padding:18px 20px;border-radius:18px;color:#344255;
-    }
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-    .phrase{
-      background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;
-      box-shadow:0 10px 28px rgba(75,49,22,.06);
-    }
-    .phraseNum{font-size:12px;font-weight:900;color:#fff;background:var(--brand);display:inline-block;border-radius:999px;padding:3px 9px;margin-bottom:10px}
-    .phrase h3{font-size:21px;line-height:1.35;margin:0 0 10px;color:#182432}
-    .meaning{font-weight:800;color:#3b4654;margin:8px 0}
-    .example{background:var(--blue);border-radius:14px;padding:12px 14px;margin:12px 0;color:#1d3448}
-    .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
-    .tag{font-size:12px;background:#f5f7fa;border:1px solid #dfe5ec;border-radius:999px;padding:3px 9px;color:#526070;font-weight:700}
-    .steps{counter-reset:item;display:grid;gap:12px}
-    .step{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px 18px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start}
-    .step:before{counter-increment:item;content:counter(item);width:32px;height:32px;border-radius:50%;background:var(--brand2);color:#fff;display:grid;place-items:center;font-weight:900}
-    .sample{
-      background:#1f2937;color:#f8fafc;border-radius:22px;padding:22px;overflow:auto;
-      box-shadow:0 14px 34px rgba(31,41,55,.18);
-    }
-    .sample strong{color:#ffd28a}
-    .sample p{margin:0 0 12px}
-    .cta{
-      display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;
-      background:linear-gradient(135deg,#fff2df,#eaf7f3);border:1px solid var(--line);border-radius:26px;padding:24px;margin-top:34px;
-    }
-    .btn{display:inline-block;background:var(--brand);color:#fff;border-radius:999px;padding:12px 18px;font-weight:900;box-shadow:0 8px 18px rgba(239,108,62,.25)}
-    footer{border-top:1px solid var(--line);background:#fff;padding:28px 18px;color:var(--muted);font-size:13px}
-    .footInner{max-width:1080px;margin:auto}
-    @media(max-width:760px){
-      .hero{grid-template-columns:1fr;padding-top:34px}.grid{grid-template-columns:1fr}.cta{grid-template-columns:1fr}.nav{align-items:flex-start;flex-direction:column}.navlinks{gap:10px}h1{font-size:34px}.lead{font-size:16px}
-    }
-  
-.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.toc a{background:#fff8ee;border:1px solid #f2dec5;border-radius:999px;padding:6px 10px;font-size:13px;color:#365248}.warning{background:#fff7ed;border:1px solid #fed7aa;border-left:6px solid var(--brand);padding:16px 18px;border-radius:18px;color:#344255;margin-top:16px}
-.hero{grid-template-columns:1fr!important;max-width:900px}
+:root{
+  --bg:#fffaf2;
+  --card:#ffffff;
+  --ink:#24313f;
+  --muted:#637083;
+  --brand:#ef6c3e;
+  --brand2:#1f8a70;
+  --line:#eadfce;
+  --soft:#fff2df;
+  --blue:#eaf4ff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+  color:var(--ink);
+  background:linear-gradient(180deg,#fff7eb 0%,#fffaf2 35%,#ffffff 100%);
+  line-height:1.85;
+}
+a{color:var(--brand2);text-decoration:none;font-weight:800}
+a:hover{text-decoration:underline}
+header{
+  position:sticky;top:0;z-index:10;
+  background:rgba(255,250,242,.94);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav{
+  max-width:1080px;margin:auto;padding:12px 18px;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+}
+.logo{font-size:20px;font-weight:900;letter-spacing:.04em;color:var(--brand)}
+.navlinks{display:flex;gap:14px;flex-wrap:wrap;font-size:14px}
+.hero{max-width:900px;margin:0 auto;padding:54px 18px 28px}
+.badge{display:inline-block;background:var(--soft);color:var(--brand);border:1px solid #ffd3b8;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:900}
+h1{font-size:clamp(32px,5vw,56px);line-height:1.16;margin:16px 0 14px;letter-spacing:.02em}
+.lead{font-size:18px;color:#435064;margin:0 0 20px;max-width:760px}
+.guide{
+  background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px 20px;
+  box-shadow:0 12px 32px rgba(75,49,22,.06);margin-top:18px;
+}
+.guide strong{color:var(--brand)}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.toc a{background:#fff8ee;border:1px solid #f2dec5;border-radius:999px;padding:7px 11px;font-size:13px;color:#365248}
+main{max-width:1080px;margin:auto;padding:0 18px 56px}
+.phraseSection{margin:34px 0}
+.sectionHead{margin:0 0 14px}
+.sectionTitle{font-size:30px;line-height:1.25;margin:0 0 6px}
+.sectionHead p{margin:0;color:#4d5a68}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.phrase{
+  background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;
+  box-shadow:0 10px 28px rgba(75,49,22,.055);
+}
+.phraseTop{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+.phraseNum{font-size:12px;font-weight:900;color:#fff;background:var(--brand);display:inline-block;border-radius:999px;padding:3px 9px}
+.level{font-size:13px;color:#d88a00;letter-spacing:.03em;white-space:nowrap}
+.phrase h3{font-size:21px;line-height:1.35;margin:0 0 8px;color:#182432}
+.meaning{font-weight:900;color:#3b4654;margin:6px 0}
+.example{background:var(--blue);border-radius:14px;padding:11px 13px;margin:12px 0;color:#1d3448;font-weight:700}
+.phrase p{margin:10px 0 0;color:#485565}
+.note{
+  background:#fff;border:1px solid var(--line);border-left:6px solid var(--brand2);
+  padding:17px 19px;border-radius:18px;color:#344255;margin:24px 0;
+}
+.cta{
+  display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;
+  background:linear-gradient(135deg,#fff2df,#eaf7f3);border:1px solid var(--line);border-radius:26px;padding:24px;margin-top:36px;
+}
+.btn{display:inline-block;background:var(--brand);color:#fff;border-radius:999px;padding:12px 18px;font-weight:900;box-shadow:0 8px 18px rgba(239,108,62,.25)}
+footer{border-top:1px solid var(--line);background:#fff;padding:28px 18px;color:var(--muted);font-size:13px}
+.footInner{max-width:1080px;margin:auto}
+@media(max-width:760px){
+  .nav{align-items:flex-start;flex-direction:column}
+  .navlinks{gap:10px}
+  .hero{padding-top:34px}
+  h1{font-size:34px}
+  .lead{font-size:16px}
+  .grid{grid-template-columns:1fr}
+  .cta{grid-template-columns:1fr}
+}
 
+/* Numberless phrase cards */
+.phrase h3{margin-top:0}
+.phrase{position:relative}
 </style>
 </head>
 <body>
 <header>
-  <div class="nav">
-    <div class="logo">🍣 すし英語</div>
-    <nav class="navlinks" aria-label="主要メニュー">
-      <a href="/">トップ</a>
-      <a href="/index.html">すし単</a>
-      <a href="/shinotan.html">しの単</a>
-      <a href="/sushitype.html">スシタイプ</a>
-      <a href="/sushirun.html">すしRUN</a>
-      <a href="/privacy.html">Privacy</a>
-      <a href="/contact.html">Contact</a>
-    </nav>
-  </div>
+<div class="nav">
+<div class="logo">🍣 すし英語</div>
+<nav aria-label="主要メニュー" class="navlinks">
+<a href="/">トップ</a>
+<a href="/index.html">すし単</a>
+<a href="/shinotan.html">しの単</a>
+<a href="/sushitype.html">スシタイプ</a>
+<a href="/sushirun.html">すしRUN</a>
+<a href="/privacy.html">Privacy</a>
+<a href="/contact.html">Contact</a>
+</nav>
+</div>
 </header>
 <div class="hero">
-<div>
-<span class="badge">SNS英語・日常会話・スラング</span>
+<span class="badge">日常会話・SNS英語・スラング</span>
 <h1>よく使う英語スラング・日常会話表現</h1>
-<p class="lead">「めんどい」「詰んだ」「それな」「普通にやばい」など、日本語ではよく言うのに英語にしづらい表現を、例文とニュアンスで覚えるページです。</p>
-<a class="btn" href="#phrases">表現を見る</a>
+<p class="lead">日本語では自然に返せるのに、英語だと少し迷う。そんな会話の一言を、短い例文とニュアンスで整理しました。</p>
+<div class="guide">
+<strong>★★★★★＝まず覚えたい表現</strong><br/>
+    ★★★★☆＝よく使う表現　／　★★★☆☆＝知っていると便利　／　★★☆☆☆＝意味を知っておくと安心
+    <div class="toc"><a href="#everyday">Everyday English</a><a href="#reactions">Reactions</a><a href="#agreement">Agreement</a><a href="#encouragement">Encouragement</a><a href="#compliments">Compliments</a><a href="#casual">Casual Slang</a><a href="#internet">Internet Slang</a></div>
 </div>
 </div>
 <main>
-<section id="phrases">
-<h2 class="sectionTitle">まず覚えたい表現</h2>
+<div class="note">このページでは、スラングだけでなく <strong>We'll see.</strong> や <strong>Sounds good.</strong> のような、実際の会話でよく使う自然な返答もまとめています。まずは Everyday English から見るのがおすすめです。</div>
+<section class="phraseSection" id="everyday">
+<div class="sectionHead">
+<h2 class="sectionTitle">Everyday English</h2>
+<p>毎日の会話でよく使う、まず押さえたい自然な返答です。</p>
+</div>
 <div class="grid">
 <article class="phrase" id="exp1">
-<span class="phraseNum">Expression 1</span>
-<h3>Bussin’</h3>
-<p class="meaning">めっちゃ美味しい／最高</p>
-<div class="example">例：This ramen is bussin’.<br>（このラーメン、マジでうまい。）</div>
-<p>食べ物を強く褒める時によく使われる表現です。TikTokやYouTube Shortsの食レポ動画でかなり広まりました。“delicious” よりもテンションが高く、「うますぎ！」に近い空気があります。若い世代やSNS文化との相性がかなり強い表現です。</p>
-<div class="tags"><span class="tag">食べ物</span><span class="tag">褒め言葉</span><span class="tag">SNS</span></div>
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★★</span></div>
+<h3>We'll see.</h3>
+<p class="meaning">様子を見よう／その時考えよう</p>
+<div class="example">例：We'll see what happens.</div>
+<p>今すぐ答えを決めず、自然に保留したい時に使います。</p>
 </article><article class="phrase" id="exp2">
-<span class="phraseNum">Expression 2</span>
-<h3>Slay</h3>
-<p class="meaning">完璧／超イケてる</p>
-<div class="example">例：You slay in that outfit.<br>（その服、めっちゃ似合ってる。）</div>
-<p>元々 slay は「倒す」という意味ですが、現在は「圧倒的に良い」「キマってる」という褒め言葉として使われます。ファッション、メイク、ダンス動画などで特によく見かけます。女性同士の会話やTikTok文化でかなり一般化しました。</p>
-<div class="tags"><span class="tag">褒める</span><span class="tag">ファッション</span><span class="tag">TikTok</span></div>
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★★</span></div>
+<h3>Sounds good.</h3>
+<p class="meaning">いいね／それで大丈夫</p>
+<div class="example">例：Sounds good. Let's meet at three.</div>
+<p>誘いや提案に対する、かなり使いやすい返事です。</p>
 </article><article class="phrase" id="exp3">
-<span class="phraseNum">Expression 3</span>
-<h3>Rizz</h3>
-<p class="meaning">魅力／モテる力</p>
-<div class="example">例：He’s got so much rizz.<br>（彼、めちゃくちゃモテそう。）</div>
-<p>charisma（カリスマ）から来たネットスラングです。「自然に人を惹きつける感じ」を表します。2023年には Oxford Word of the Year に選ばれ、一気に有名になりました。恋愛系の会話やゲーム配信でもかなり使われています。</p>
-<div class="tags"><span class="tag">恋愛</span><span class="tag">SNS</span><span class="tag">魅力</span></div>
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★★</span></div>
+<h3>That works.</h3>
+<p class="meaning">それでいける／それで大丈夫</p>
+<div class="example">例：Friday works for me.</div>
+<p>予定・方法・提案が問題ない時に使います。</p>
 </article><article class="phrase" id="exp4">
-<span class="phraseNum">Expression 4</span>
-<h3>No cap</h3>
-<p class="meaning">マジで／嘘なしで</p>
-<div class="example">例：No cap, this movie was amazing.<br>（マジでこの映画最高だった。）</div>
-<p>cap が「嘘」を意味するスラングで、no cap は「嘘抜きで」という意味になります。AAE（African American English）やヒップホップ文化から広がった表現で、現在はかなり一般的です。強調表現としてかなり便利ですが、フォーマルな場面では避けた方が安全です。</p>
-<div class="tags"><span class="tag">強調</span><span class="tag">会話</span><span class="tag">ヒップホップ</span></div>
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★★</span></div>
+<h3>Makes sense.</h3>
+<p class="meaning">なるほど／筋が通っている</p>
+<div class="example">例：That makes sense.</div>
+<p>相手の説明に納得した時の定番です。</p>
 </article><article class="phrase" id="exp5">
-<span class="phraseNum">Expression 5</span>
-<h3>Bet.</h3>
-<p class="meaning">了解／いいね／のった</p>
-<div class="example">例：“Let’s play after school.”<br>“Bet.”<br>（「放課後やろうぜ」<br>「いいね、やろう」）</div>
-<p>短いですがかなり実用的な返答です。「了解」「OK」「それいいね」くらいの軽いノリがあります。友達同士のチャットで特によく使われ、テンポが速い会話と相性が良い表現です。</p>
-<div class="tags"><span class="tag">返答</span><span class="tag">誘い</span><span class="tag">チャット</span></div>
-</article><article class="phrase" id="exp6">
-<span class="phraseNum">Expression 6</span>
-<h3>Delulu</h3>
-<p class="meaning">妄想状態／現実見えてない</p>
-<div class="example">例：She’s completely delulu.<br>（彼女、完全に妄想モードだ。）</div>
-<p>delusional（妄想的な）の略です。K-popファンダムや恋愛系SNSで広まりました。本来は少し危険な意味もありますが、今は「恋愛で都合よく考えてる」くらいの軽いネタとして使われることが多いです。</p>
-<div class="tags"><span class="tag">恋愛</span><span class="tag">ミーム</span><span class="tag">SNS</span></div>
-</article><article class="phrase" id="exp7">
-<span class="phraseNum">Expression 7</span>
-<h3>I can’t be bothered.</h3>
-<p class="meaning">めんどい／やる気しない</p>
-<div class="example">例：I can’t be bothered to study today.<br>（今日勉強する気しない。）</div>
-<p>かなりネイティブっぽい表現です。単なる lazy よりも、「やろうと思えばできるけど、気力がない」という空気があります。イギリス英語圏では特によく使われます。</p>
-<div class="tags"><span class="tag">日常</span><span class="tag">本音</span><span class="tag">だるい</span></div>
-</article><article class="phrase" id="exp8">
-<span class="phraseNum">Expression 8</span>
-<h3>Straight up</h3>
-<p class="meaning">マジで／完全に／ほんそれ</p>
-<div class="example">例：That’s straight up impossible.<br>“This summer is awful.”<br>“Straight up.”<br>（それ絶対無理だろ。<br>「今年の夏やばい」<br>「ほんそれ」）</div>
-<p>強い同意や断定を表す表現です。「完全にそう」「それに違いない」というニュアンスがあり、SNSや会話でかなりよく使われます。単独で返事として使うと、「マジでそれ」という空気になります。</p>
-<div class="tags"><span class="tag">同意</span><span class="tag">断定</span><span class="tag">会話</span></div>
-</article><article class="phrase" id="exp9">
-<span class="phraseNum">Expression 9</span>
-<h3>Lowkey</h3>
-<p class="meaning">ちょっと／実は</p>
-<div class="example">例：I’m lowkey tired.<br>（ちょっと疲れてる。）</div>
-<p>「控えめに言うと」という感じがあります。強く言い切らず、本音を少しだけ出す時によく使われます。SNSや日常会話でかなり頻出です。</p>
-<div class="tags"><span class="tag">本音</span><span class="tag">控えめ</span><span class="tag">SNS</span></div>
-</article><article class="phrase" id="exp10">
-<span class="phraseNum">Expression 10</span>
-<h3>af</h3>
-<p class="meaning">めっちゃ／クソほど</p>
-<div class="example">例：It’s hot af today.<br>（今日クソ暑い。）</div>
-<p>as fxxk の略です。かなりカジュアルで、SNSや友達同士向けの表現です。強調力がかなり強いため、先生や初対面相手には基本的に使いません。</p>
-<div class="tags"><span class="tag">強調</span><span class="tag">SNS</span><span class="tag">カジュアル</span></div>
-</article><article class="phrase" id="exp11">
-<span class="phraseNum">Expression 11</span>
-<h3>I’m cooked.</h3>
-<p class="meaning">詰んだ／終わった</p>
-<div class="example">例：I forgot my homework. I’m cooked.<br>（宿題忘れた。詰んだ。）</div>
-<p>最近かなり広がったネットスラングです。元々は「焼かれた＝やられた」みたいな感覚から来ています。テスト、恋愛、寝坊など、「もう無理だ…」という場面でよく使われます。深刻というより、少しネタっぽく絶望する空気があります。</p>
-<div class="tags"><span class="tag">失敗</span><span class="tag">学校</span><span class="tag">ミーム</span></div>
-</article><article class="phrase" id="exp12">
-<span class="phraseNum">Expression 12</span>
-<h3>That’s wild.</h3>
-<p class="meaning">やばい／えぐい</p>
-<div class="example">例：You missed the bus twice? That’s wild.<br>（バス2回逃したの？やば。）</div>
-<p>驚き・軽いドン引き・共感をまとめて表現できる便利な言葉です。“That’s crazy.” より少し今っぽい空気があります。TikTokや配信文化とも相性が良く、かなり頻繁に使われています。</p>
-<div class="tags"><span class="tag">驚き</span><span class="tag">共感</span><span class="tag">会話</span></div>
-</article><article class="phrase" id="exp13">
-<span class="phraseNum">Expression 13</span>
-<h3>Pain.</h3>
-<p class="meaning">つらい／しんどい</p>
-<div class="example">例：The bus left right in front of me. Pain.<br>（目の前でバス行った。つら。）</div>
-<p>一語だけで終わるのが特徴です。短いですが、「人生終わった感」をかなり上手く出せます。ミーム文化やSNSで広まり、今ではかなり一般化しています。</p>
-<div class="tags"><span class="tag">共感</span><span class="tag">日常</span><span class="tag">ミーム</span></div>
-</article><article class="phrase" id="exp14">
-<span class="phraseNum">Expression 14</span>
-<h3>Beefing</h3>
-<p class="meaning">もめてる／バチバチしてる</p>
-<div class="example">例：Why are you beefing with him?<br>（なんであいつと揉めてるの？）</div>
-<p>beef は「牛肉」だけでなく、「揉め事」という意味でも使われます。ヒップホップ文化でよく使われるようになり、ラッパー同士の対立を “beef” と呼ぶこともあります。今では学校・SNS・ゲームなど幅広い場面で使われます。</p>
-<div class="tags"><span class="tag">人間関係</span><span class="tag">ケンカ</span><span class="tag">SNS</span></div>
-</article><article class="phrase" id="exp15">
-<span class="phraseNum">Expression 15</span>
-<h3>Salty</h3>
-<p class="meaning">イライラしてる／ひがんでる</p>
-<div class="example">例：Don’t be salty just because you lost.<br>（負けたからってイライラするなよ。）</div>
-<p>ゲーム文化とかなり相性が良い表現です。負けたり、悔しかったりして機嫌が悪くなっている状態を表します。「拗ねてる」に近い空気もあります。</p>
-<div class="tags"><span class="tag">ゲーム</span><span class="tag">感情</span><span class="tag">煽り</span></div>
-</article><article class="phrase" id="exp16">
-<span class="phraseNum">Expression 16</span>
-<h3>He’s giving... / She’s giving...</h3>
-<p class="meaning">〜感ある／〜っぽい</p>
-<div class="example">例：She’s giving main character energy.<br>（主人公感ある。）</div>
-<p>TikTokやファッション系SNSで爆発的に広まった表現です。文法的には少し特殊ですが、「なんかそういう雰囲気ある」をかなり自然に言えます。単語というより、“空気を表現する型” として覚えると便利です。</p>
-<div class="tags"><span class="tag">雰囲気</span><span class="tag">SNS</span><span class="tag">表現</span></div>
-</article><article class="phrase" id="exp17">
-<span class="phraseNum">Expression 17</span>
-<h3>Ate</h3>
-<p class="meaning">完璧にやった／キメた</p>
-<div class="example">例：Your presentation? You ate.<br>（プレゼン？完璧だったよ。）</div>
-<p>元は “eat up the stage” のような表現から来ています。歌、ダンス、ファッション、発表など、「圧倒的に良かった」時によく使われます。特にTikTokやメイク動画で頻出です。</p>
-<div class="tags"><span class="tag">褒める</span><span class="tag">発表</span><span class="tag">TikTok</span></div>
-</article><article class="phrase" id="exp18">
-<span class="phraseNum">Expression 18</span>
-<h3>Huge W.</h3>
-<p class="meaning">デカすぎる勝利</p>
-<div class="example">例：You passed IELTS? Huge W.<br>（IELTS受かったの？最高じゃん。）</div>
-<p>W は “win” の略です。逆に L は “loss” を意味します。ゲーム文化・配信文化から広まり、今ではかなり一般的なネット英語になっています。</p>
-<div class="tags"><span class="tag">勝利</span><span class="tag">ゲーム</span><span class="tag">配信</span></div>
-</article><article class="phrase" id="exp19">
-<span class="phraseNum">Expression 19</span>
-<h3>Touch grass.</h3>
-<p class="meaning">外出ろ</p>
-<div class="example">例：You played for 18 hours? Touch grass.<br>（18時間ゲームしたの？外出ろ。）</div>
-<p>かなりネットっぽい煽り表現です。「ネットに浸かりすぎだから現実世界に戻れ」という意味があります。冗談っぽく使われることも多いですが、少し攻撃的でもあります。</p>
-<div class="tags"><span class="tag">煽り</span><span class="tag">ネット</span><span class="tag">ゲーム</span></div>
-</article><article class="phrase" id="exp20">
-<span class="phraseNum">Expression 20</span>
-<h3>Built different.</h3>
-<p class="meaning">格が違う</p>
-<div class="example">例：He ran a marathon without training. Built different.<br>（練習なしでマラソン走ったの？格が違う。）</div>
-<p>「普通の人とは違う」という意味の褒め言葉です。スポーツ、ゲーム、筋トレ動画などでかなりよく使われます。少しネタっぽく大げさに褒める空気があります。</p>
-<div class="tags"><span class="tag">褒める</span><span class="tag">スポーツ</span><span class="tag">ゲーム</span></div>
-</article><article class="phrase" id="exp21">
-<span class="phraseNum">Expression 21</span>
-<h3>This is fire.</h3>
-<p class="meaning">これ神／めっちゃ良い</p>
-<div class="example">例：This song is fire.<br>（この曲めっちゃ良い。）</div>
-<p>「熱い」ではなく、「最高」という意味で使われます。音楽、服、食べ物、プレイなど、かなり幅広く褒められる便利表現です。“cool” よりテンションが高く、SNSとの相性もかなり良いです。</p>
-<div class="tags"><span class="tag">褒める</span><span class="tag">音楽</span><span class="tag">SNS</span></div>
-</article><article class="phrase" id="exp22">
-<span class="phraseNum">Expression 22</span>
-<h3>Ghosting</h3>
-<p class="meaning">既読無視／突然連絡を断つ</p>
-<div class="example">例：He’s ghosting me.<br>（彼、既読無視してる。）</div>
-<p>ghost（幽霊）のように突然消えるイメージから来ています。恋愛系の会話でかなり頻出です。SNSやマッチングアプリ文化とも強く結びついています。</p>
-<div class="tags"><span class="tag">恋愛</span><span class="tag">SNS</span><span class="tag">人間関係</span></div>
-</article><article class="phrase" id="exp23">
-<span class="phraseNum">Expression 23</span>
-<h3>I feel you.</h3>
-<p class="meaning">わかるよ／気持ちわかる</p>
-<div class="example">例：“I’m exhausted.”<br>“I feel you.”<br>（「もうヘトヘト」<br>「わかるよ…」）</div>
-<p>かなり自然な共感表現です。“That’s such a mood.” が「その状況わかる〜」なのに対して、こちらは「相手の感情に共感している」感じが強いです。学校、仕事、恋愛、疲れなど、かなり幅広い場面で使えます。短く言えるうえに冷たくなりにくいので、実際の会話ではかなり便利な表現です。</p>
-<div class="tags"><span class="tag">共感</span><span class="tag">会話</span><span class="tag">日常</span></div>
-</article><article class="phrase" id="exp24">
-<span class="phraseNum">Expression 24</span>
-<h3>NPC behavior.</h3>
-<p class="meaning">量産型っぽい／自分で考えてなさそう</p>
-<div class="example">例：Bro says the same thing every day. NPC behavior.<br>（毎日同じこと言ってる。NPCすぎる。）</div>
-<p>NPC はゲームの “Non-Player Character” の略です。つまり、「自分で考えず決まった動きをしてる人」をネタっぽく表現しています。かなりネット文化寄りの言葉です。</p>
-<div class="tags"><span class="tag">ゲーム</span><span class="tag">ネット</span><span class="tag">煽り</span></div>
-</article><article class="phrase" id="exp25">
-<span class="phraseNum">Expression 25</span>
-<h3>You cooked.</h3>
-<p class="meaning">やるじゃん／キマってる</p>
-<div class="example">例：That presentation was amazing. You cooked.<br>（あのプレゼンすごかった。やるじゃん。）</div>
-<p>I’m cooked が「終わった」なのに対して、こちらは逆に「良い仕事した」という意味です。“cook” が「うまく仕上げる」みたいな感覚で使われています。最近かなり使用頻度が上がっています。</p>
-<div class="tags"><span class="tag">褒める</span><span class="tag">成功</span><span class="tag">会話</span></div>
-</article><article class="phrase" id="exp26">
-<span class="phraseNum">Expression 26</span>
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★★</span></div>
 <h3>Fair enough.</h3>
 <p class="meaning">まあそれはわかる</p>
-<div class="example">例：“I don’t want to go out today.”<br>“Fair enough.”<br>（「今日は出かけたくない」<br>「まあそれはわかる」）</div>
-<p>かなり自然な同意表現です。完全同意というより、「それにも一理ある」という落ち着いた空気があります。大人でもかなり使います。</p>
-<div class="tags"><span class="tag">同意</span><span class="tag">会話</span><span class="tag">自然表現</span></div>
-</article><article class="phrase" id="exp27">
-<span class="phraseNum">Expression 27</span>
+<div class="example">例：I don't feel like going out. / Fair enough.</div>
+<p>完全同意ではないけれど、相手の理由を受け入れる感じです。</p>
+</article><article class="phrase" id="exp6">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★★</span></div>
+<h3>Good point.</h3>
+<p class="meaning">いい指摘だね</p>
+<div class="example">例：Good point. I didn't think of that.</div>
+<p>議論や相談で相手の意見を認める時に便利です。</p>
+</article><article class="phrase" id="exp7">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★★</span></div>
+<h3>I get it.</h3>
+<p class="meaning">わかるよ／理解した</p>
+<div class="example">例：I get it. That's really annoying.</div>
+<p>理解と軽い共感をまとめて伝えられます。</p>
+</article><article class="phrase" id="exp8">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★★</span></div>
+<h3>I feel you.</h3>
+<p class="meaning">気持ちわかるよ</p>
+<div class="example">例：I'm exhausted. / I feel you.</div>
+<p>相手の感情に寄り添う、かなり自然な共感表現です。</p>
+</article><article class="phrase" id="exp9">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★★</span></div>
+<h3>No worries.</h3>
+<p class="meaning">大丈夫／気にしないで</p>
+<div class="example">例：Sorry I'm late. / No worries.</div>
+<p>謝られた時や感謝された時にやわらかく返せます。</p>
+</article><article class="phrase" id="exp10">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★★</span></div>
 <h3>My bad.</h3>
-<p class="meaning">ごめん／俺のミス</p>
-<div class="example">例：My bad, I forgot to reply.<br>（ごめん、返信忘れてた。）</div>
-<p>かなりカジュアルな謝罪表現です。“I’m sorry.” より軽く、友達同士向けです。短く言えるので会話テンポがかなり自然になります。</p>
-<div class="tags"><span class="tag">謝罪</span><span class="tag">友達</span><span class="tag">会話</span></div>
+<p class="meaning">ごめん／自分のミス</p>
+<div class="example">例：My bad, I forgot to reply.</div>
+<p>友達同士で使う軽い謝罪です。</p>
+</article><article class="phrase" id="exp11">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>That's on me.</h3>
+<p class="meaning">それは自分の責任</p>
+<div class="example">例：That's on me. I should've checked.</div>
+<p>ミスをきちんと引き受ける時の自然な言い方です。</p>
+</article><article class="phrase" id="exp12">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Let's figure it out.</h3>
+<p class="meaning">一緒に考えよう／なんとかしよう</p>
+<div class="example">例：Don't worry. Let's figure it out.</div>
+<p>困った時に、前向きに解決へ向かう表現です。</p>
+</article><article class="phrase" id="exp13">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>We'll figure something out.</h3>
+<p class="meaning">何か方法を考えよう</p>
+<div class="example">例：We'll figure something out by tomorrow.</div>
+<p>まだ答えはないけれど、解決する意思を伝えます。</p>
+</article><article class="phrase" id="exp14">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Let's give it a shot.</h3>
+<p class="meaning">試してみよう</p>
+<div class="example">例：Let's give it a shot.</div>
+<p>少し不安でも、とりあえず挑戦する時に使います。</p>
+</article><article class="phrase" id="exp15">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>I'm down.</h3>
+<p class="meaning">いいよ／のるよ</p>
+<div class="example">例：Want to grab lunch? / I'm down.</div>
+<p>友達の誘いに軽く乗る時のカジュアル表現です。</p>
+</article><article class="phrase" id="exp16">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>I'm in.</h3>
+<p class="meaning">参加する／やる</p>
+<div class="example">例：We're playing after school. / I'm in.</div>
+<p>計画や活動に参加する意思を短く言えます。</p>
+</article><article class="phrase" id="exp17">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Count me in.</h3>
+<p class="meaning">私も入れて</p>
+<div class="example">例：Movie night? Count me in.</div>
+<p>誘いに前向きに参加したい時の表現です。</p>
+</article><article class="phrase" id="exp18">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>I'll pass.</h3>
+<p class="meaning">今回はやめておく</p>
+<div class="example">例：Thanks, but I'll pass.</div>
+<p>きつくなりすぎず断る時に使えます。</p>
+</article><article class="phrase" id="exp19">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Maybe next time.</h3>
+<p class="meaning">また今度ね</p>
+<div class="example">例：I can't today. Maybe next time.</div>
+<p>誘いをやわらかく断る定番です。</p>
+</article><article class="phrase" id="exp20">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>I'm not sure.</h3>
+<p class="meaning">ちょっとわからない／迷っている</p>
+<div class="example">例：I'm not sure about that.</div>
+<p>即答を避けたい時に便利です。</p>
+</article><article class="phrase" id="exp21">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>It depends.</h3>
+<p class="meaning">場合による</p>
+<div class="example">例：It depends on the weather.</div>
+<p>条件次第で答えが変わる時に使います。</p>
+</article><article class="phrase" id="exp22">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Why not?</h3>
+<p class="meaning">いいんじゃない？／やってみよう</p>
+<div class="example">例：Why not? It sounds fun.</div>
+<p>軽く賛成する時の自然な一言です。</p>
+</article><article class="phrase" id="exp23">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Go for it.</h3>
+<p class="meaning">やってみなよ</p>
+<div class="example">例：If you want to try, go for it.</div>
+<p>相手の挑戦を後押しする表現です。</p>
+</article><article class="phrase" id="exp24">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>You have a point.</h3>
+<p class="meaning">一理あるね</p>
+<div class="example">例：You have a point, but I'm still not sure.</div>
+<p>相手の意見を認めつつ、自分の考えも残せます。</p>
+</article>
+<article class="phrase">
+
+<h3>We'll see.</h3>
+<p class="meaning">様子を見よう／そのうち分かる</p>
+<div class="example">例：We'll see what happens.<br/>（様子を見よう。）</div>
+<p>返事を保留したい時の超頻出表現。</p>
+<div class="tags"><span class="tag">日常会話</span><span class="tag">超頻出</span></div>
+</article><article class="phrase">
+
+<h3>Let's figure it out.</h3>
+<p class="meaning">何とかしよう</p>
+<div class="example">例：We'll figure it out together.<br/>（一緒に何とかしよう。）</div>
+<p>問題解決で非常によく使われる。</p>
+<div class="tags"><span class="tag">日常会話</span><span class="tag">超頻出</span></div>
+</article><article class="phrase">
+
+<h3>Sounds good.</h3>
+<p class="meaning">いいね</p>
+<div class="example">例：“Let's meet at 6.” “Sounds good.”</div>
+<p>誘いや提案への自然な返事。</p>
+<div class="tags"><span class="tag">日常会話</span><span class="tag">超頻出</span></div>
+</article><article class="phrase">
+
+<h3>Makes sense.</h3>
+<p class="meaning">なるほどね</p>
+<div class="example">例：That makes sense.<br/>（なるほど。）</div>
+<p>納得した時の定番。</p>
+<div class="tags"><span class="tag">日常会話</span><span class="tag">超頻出</span></div>
+</article><article class="phrase">
+
+<h3>Good point.</h3>
+<p class="meaning">いい指摘だね</p>
+<div class="example">例：That's a good point.</div>
+<p>議論でも日常会話でも頻出。</p>
+<div class="tags"><span class="tag">日常会話</span><span class="tag">超頻出</span></div>
+</article><article class="phrase">
+
+<h3>I'm down.</h3>
+<p class="meaning">やるよ／参加する</p>
+<div class="example">例：I'm down for that.</div>
+<p>友達同士で非常によく使う。</p>
+<div class="tags"><span class="tag">日常会話</span><span class="tag">超頻出</span></div>
+</article><article class="phrase">
+
+<h3>No worries.</h3>
+<p class="meaning">大丈夫だよ</p>
+<div class="example">例：No worries. It happens.</div>
+<p>軽い安心・返答に便利。</p>
+<div class="tags"><span class="tag">日常会話</span><span class="tag">超頻出</span></div>
+</article><article class="phrase">
+
+<h3>That's on me.</h3>
+<p class="meaning">それは自分のミス</p>
+<div class="example">例：That's on me. Sorry.</div>
+<p>My bad より少し大人っぽい。</p>
+<div class="tags"><span class="tag">日常会話</span><span class="tag">超頻出</span></div>
+</article>
+<article class="phrase">
+
+<h3>Straight up</h3>
+<p class="meaning">マジで／完全に／率直に言うと</p>
+<div class="example">例：Straight up, I think this is a good idea.<br/>（マジで、これはいいアイデアだと思う。）</div>
+<p>文頭では「率直に言うと」、単独では「ほんとそれ」という強い同意にもなります。</p>
+<div class="tags"><span class="tag">強調</span><span class="tag">同意</span><span class="tag">超頻出</span></div>
+</article>
+<article class="phrase">
+
+<h3>That means a lot.</h3>
+<p class="meaning">すごく嬉しい／ありがたい</p>
+<div class="example">例：Thank you. That means a lot.<br/>（ありがとう。すごく嬉しい。）</div>
+<p>相手の言葉や行動が自分にとって大きいと伝える表現です。</p>
+<div class="tags"><span class="tag">感謝</span><span class="tag">気持ち</span><span class="tag">日常会話</span></div>
+</article>
+<article class="phrase">
+
+<h3>I appreciate it.</h3>
+<p class="meaning">感謝します／助かります</p>
+<div class="example">例：Thanks for your help. I appreciate it.<br/>（手伝ってくれてありがとう。助かります。）</div>
+<p>Thank you より少し丁寧で大人っぽい感謝表現です。</p>
+<div class="tags"><span class="tag">感謝</span><span class="tag">丁寧</span><span class="tag">会話</span></div>
+</article>
+<article class="phrase">
+
+<h3>My mistake.</h3>
+<p class="meaning">私のミスです</p>
+<div class="example">例：My mistake. I read it wrong.<br/>（私のミスです。読み間違えました。）</div>
+<p>My bad より少し落ち着いた謝罪表現です。</p>
+<div class="tags"><span class="tag">謝罪</span><span class="tag">会話</span><span class="tag">丁寧</span></div>
+</article>
+</div>
+</section><section class="phraseSection" id="reactions">
+<div class="sectionHead">
+<h2 class="sectionTitle">Reactions</h2>
+<p>驚き・共感・会話のつなぎに使える短いリアクションです。</p>
+</div>
+<div class="grid">
+<article class="phrase" id="exp25">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★★</span></div>
+<h3>No way!</h3>
+<p class="meaning">うそでしょ！</p>
+<div class="example">例：I won the ticket. / No way!</div>
+<p>強い驚きや喜びに使います。</p>
+</article><article class="phrase" id="exp26">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★★</span></div>
+<h3>Seriously?</h3>
+<p class="meaning">本当に？</p>
+<div class="example">例：Seriously? That's amazing.</div>
+<p>驚き・確認のどちらにも使えます。</p>
+</article><article class="phrase" id="exp27">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★★</span></div>
+<h3>Really?</h3>
+<p class="meaning">本当？</p>
+<div class="example">例：Really? I didn't know that.</div>
+<p>最も基本的な聞き返しの一つです。</p>
 </article><article class="phrase" id="exp28">
-<span class="phraseNum">Expression 28</span>
-<h3>Deadass.</h3>
-<p class="meaning">ガチで／本当に</p>
-<div class="example">例：I’m deadass serious.<br>（マジで本気だよ。）</div>
-<p>かなり強い「本気」を表します。ニューヨーク系スラングとして有名で、ラップ文化とも関係があります。no cap に近いですが、deadass の方が勢いがあります。</p>
-<div class="tags"><span class="tag">強調</span><span class="tag">本気</span><span class="tag">会話</span></div>
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>For real?</h3>
+<p class="meaning">マジで？</p>
+<div class="example">例：For real? That's crazy.</div>
+<p>かなりカジュアルな驚き表現です。</p>
 </article><article class="phrase" id="exp29">
-<span class="phraseNum">Expression 29</span>
-<h3>Say less.</h3>
-<p class="meaning">了解／もうわかった</p>
-<div class="example">例：“We’re ordering pizza tonight.”<br>“Say less.”<br>（「今日ピザ頼む」<br>「最高、了解」）</div>
-<p>直訳すると「もうそれ以上言うな」ですが、実際には「もう理解した」「それ最高」という意味です。ノリの良い返答としてかなり便利です。</p>
-<div class="tags"><span class="tag">返答</span><span class="tag">了解</span><span class="tag">ノリ</span></div>
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>That's crazy.</h3>
+<p class="meaning">それすごい／やばい</p>
+<div class="example">例：You met him yesterday? That's crazy.</div>
+<p>良い意味でも悪い意味でも使える便利な反応です。</p>
 </article><article class="phrase" id="exp30">
-<span class="phraseNum">Expression 30</span>
-<h3>Cope harder.</h3>
-<p class="meaning">現実見ろ／言い訳してろ</p>
-<div class="example">例：“You only won because of luck.”<br>“Cope harder.”<br>（「運だけだろ」<br>「はいはい言い訳おつ」）</div>
-<p>かなり煽り寄りの表現です。ネット論争やゲーム文化でよく使われます。冗談っぽく使うこともありますが、普通に攻撃的でもあります。</p>
-<div class="tags"><span class="tag">煽り</span><span class="tag">ネット</span><span class="tag">ゲーム</span></div>
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>That's wild.</h3>
+<p class="meaning">それやばい／えぐい</p>
+<div class="example">例：You missed the bus twice? That's wild.</div>
+<p>驚きと軽い共感をまとめて出せます。</p>
 </article><article class="phrase" id="exp31">
-<span class="phraseNum">Expression 31</span>
-<h3>Move on.</h3>
-<p class="meaning">切り替えろ／次行こう</p>
-<div class="example">例：You should move on.<br>（もう切り替えた方がいいよ。）</div>
-<p>失恋、失敗、人間関係など、色々な場面で使われます。冷たく聞こえることもありますが、「前に進もう」という意味でもあります。</p>
-<div class="tags"><span class="tag">失恋</span><span class="tag">励まし</span><span class="tag">日常</span></div>
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>You're kidding.</h3>
+<p class="meaning">冗談でしょ</p>
+<div class="example">例：You're kidding. Again?</div>
+<p>信じられない時の反応です。</p>
 </article><article class="phrase" id="exp32">
-<span class="phraseNum">Expression 32</span>
-<h3>Cringe.</h3>
-<p class="meaning">痛い／きつい</p>
-<div class="example">例：That joke was cringe.<br>（そのジョーク痛かった。）</div>
-<p>「見ていて恥ずかしくなる感じ」を表します。ネット文化でかなり一般化しました。少し強めなので、人に直接使う時は注意です。</p>
-<div class="tags"><span class="tag">感情</span><span class="tag">ネット</span><span class="tag">注意</span></div>
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Tell me more.</h3>
+<p class="meaning">もっと聞かせて</p>
+<div class="example">例：That sounds interesting. Tell me more.</div>
+<p>会話を広げる時に便利です。</p>
+</article><article class="phrase" id="exp33">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>What happened?</h3>
+<p class="meaning">何があったの？</p>
+<div class="example">例：You look upset. What happened?</div>
+<p>相手の話を自然に引き出します。</p>
+</article><article class="phrase" id="exp34">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Are you okay?</h3>
+<p class="meaning">大丈夫？</p>
+<div class="example">例：You look tired. Are you okay?</div>
+<p>心配や気遣いを短く伝えられます。</p>
+</article><article class="phrase" id="exp35">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★☆☆</span></div>
+<h3>Wow.</h3>
+<p class="meaning">わあ／すごい</p>
+<div class="example">例：Wow, that's beautiful.</div>
+<p>幅広く使えますが、言い方で印象が変わります。</p>
+</article><article class="phrase" id="exp36">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★☆☆</span></div>
+<h3>Interesting.</h3>
+<p class="meaning">興味深いね</p>
+<div class="example">例：Interesting. I never thought about it that way.</div>
+<p>少し落ち着いたリアクションです。</p>
+</article>
+</div>
+</section><section class="phraseSection" id="agreement">
+<div class="sectionHead">
+<h2 class="sectionTitle">Agreement</h2>
+<p>同意・納得・相づちに使える表現です。</p>
+</div>
+<div class="grid">
+<article class="phrase" id="exp37">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★★</span></div>
+<h3>Exactly.</h3>
+<p class="meaning">まさにそう</p>
+<div class="example">例：Exactly. That's what I mean.</div>
+<p>相手の言ったことに強く同意します。</p>
+</article><article class="phrase" id="exp38">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★★</span></div>
+<h3>I know, right?</h3>
+<p class="meaning">だよね？／それな</p>
+<div class="example">例：It's so hot today. / I know, right?</div>
+<p>共感をこめた同意の定番です。</p>
+</article><article class="phrase" id="exp39">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Totally.</h3>
+<p class="meaning">完全にそう</p>
+<div class="example">例：Totally. I agree.</div>
+<p>カジュアルで強めの同意です。</p>
+</article><article class="phrase" id="exp40">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Absolutely.</h3>
+<p class="meaning">本当にその通り</p>
+<div class="example">例：Absolutely. That's important.</div>
+<p>少し丁寧で強い同意です。</p>
+</article><article class="phrase" id="exp41">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Same here.</h3>
+<p class="meaning">私も同じ</p>
+<div class="example">例：I'm tired. / Same here.</div>
+<p>自分も同じ状況だと伝えます。</p>
+</article><article class="phrase" id="exp42">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>That's true.</h3>
+<p class="meaning">それは本当だね</p>
+<div class="example">例：That's true. We need more time.</div>
+<p>落ち着いた同意表現です。</p>
+</article><article class="phrase" id="exp43">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★☆☆</span></div>
+<h3>Couldn't agree more.</h3>
+<p class="meaning">大賛成</p>
+<div class="example">例：I couldn't agree more.</div>
+<p>かなり強い同意。少し大人っぽい表現です。</p>
+</article><article class="phrase" id="exp44">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★☆☆</span></div>
+<h3>True.</h3>
+<p class="meaning">たしかに</p>
+<div class="example">例：True. That's a problem.</div>
+<p>短く、チャットでもよく使われます。</p>
+</article>
+</div>
+</section><section class="phraseSection" id="encouragement">
+<div class="sectionHead">
+<h2 class="sectionTitle">Encouragement</h2>
+<p>励ます・応援する・安心させる表現です。</p>
+</div>
+<div class="grid">
+<article class="phrase" id="exp45">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★★</span></div>
+<h3>You got this.</h3>
+<p class="meaning">君ならできる</p>
+<div class="example">例：Don't worry. You got this.</div>
+<p>発表・試合・試験前などに使いやすい一言です。</p>
+</article><article class="phrase" id="exp46">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★★</span></div>
+<h3>You'll be fine.</h3>
+<p class="meaning">大丈夫だよ</p>
+<div class="example">例：You'll be fine. Just take a breath.</div>
+<p>不安な相手を落ち着かせる時に使います。</p>
+</article><article class="phrase" id="exp47">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Hang in there.</h3>
+<p class="meaning">踏ん張って／頑張って</p>
+<div class="example">例：Hang in there. It's almost over.</div>
+<p>つらい状況を耐えている相手に使います。</p>
+</article><article class="phrase" id="exp48">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>I'm rooting for you.</h3>
+<p class="meaning">応援しているよ</p>
+<div class="example">例：I'm rooting for you tomorrow.</div>
+<p>気持ちをこめて応援する表現です。</p>
+</article><article class="phrase" id="exp49">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Fingers crossed.</h3>
+<p class="meaning">うまくいくよう祈ってる</p>
+<div class="example">例：Fingers crossed for your interview.</div>
+<p>結果待ちの相手に使いやすい表現です。</p>
+</article><article class="phrase" id="exp50">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Keep going.</h3>
+<p class="meaning">そのまま続けて</p>
+<div class="example">例：Keep going. You're getting better.</div>
+<p>努力を続ける相手を励まします。</p>
+</article><article class="phrase" id="exp51">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Don't worry about it.</h3>
+<p class="meaning">気にしないで</p>
+<div class="example">例：Don't worry about it. It happens.</div>
+<p>相手のミスをやわらかく受け止めます。</p>
+</article><article class="phrase" id="exp52">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★☆☆</span></div>
+<h3>You can do it.</h3>
+<p class="meaning">できるよ</p>
+<div class="example">例：You can do it. I believe in you.</div>
+<p>シンプルでわかりやすい励ましです。</p>
+</article><article class="phrase" id="exp53">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★☆☆</span></div>
+<h3>Take your time.</h3>
+<p class="meaning">ゆっくりでいいよ</p>
+<div class="example">例：Take your time. I'm listening.</div>
+<p>相手を急かさず待つ時に使います。</p>
+</article><article class="phrase" id="exp54">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★☆☆</span></div>
+<h3>It happens.</h3>
+<p class="meaning">そういうこともある</p>
+<div class="example">例：It's okay. It happens.</div>
+<p>失敗した相手を軽く慰める表現です。</p>
+</article>
+</div>
+</section><section class="phraseSection" id="compliments">
+<div class="sectionHead">
+<h2 class="sectionTitle">Compliments</h2>
+<p>褒める時に使いやすい表現です。</p>
+</div>
+<div class="grid">
+<article class="phrase" id="exp55">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★★</span></div>
+<h3>Nice!</h3>
+<p class="meaning">いいね！</p>
+<div class="example">例：Nice! That's a good idea.</div>
+<p>短く何にでも使える基本の褒め言葉です。</p>
+</article><article class="phrase" id="exp56">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★★</span></div>
+<h3>Awesome!</h3>
+<p class="meaning">最高！</p>
+<div class="example">例：Awesome! You did it.</div>
+<p>テンション高めに褒める時に便利です。</p>
+</article><article class="phrase" id="exp57">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Looks great.</h3>
+<p class="meaning">いい感じ／似合ってる</p>
+<div class="example">例：That jacket looks great.</div>
+<p>服・見た目・デザインなどを褒めます。</p>
+</article><article class="phrase" id="exp58">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Good job.</h3>
+<p class="meaning">よくやったね</p>
+<div class="example">例：Good job on the presentation.</div>
+<p>成果や努力を認める表現です。</p>
+</article><article class="phrase" id="exp59">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Well done.</h3>
+<p class="meaning">よくできました</p>
+<div class="example">例：Well done. That was clear.</div>
+<p>少し丁寧な褒め方です。</p>
+</article><article class="phrase" id="exp60">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>I'm proud of you.</h3>
+<p class="meaning">誇りに思うよ</p>
+<div class="example">例：I'm proud of you for trying.</div>
+<p>努力や成長をしっかり褒めたい時に使います。</p>
+</article><article class="phrase" id="exp61">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>That's impressive.</h3>
+<p class="meaning">それはすごい</p>
+<div class="example">例：You finished it already? That's impressive.</div>
+<p>能力や成果に感心した時に使います。</p>
+</article><article class="phrase" id="exp62">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>You nailed it.</h3>
+<p class="meaning">完璧にやったね</p>
+<div class="example">例：You nailed it in the interview.</div>
+<p>発表・演技・試験などでうまくいった時に使います。</p>
+</article><article class="phrase" id="exp63">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★☆☆</span></div>
+<h3>Love it.</h3>
+<p class="meaning">それ好き</p>
+<div class="example">例：Love it. The color is perfect.</div>
+<p>デザインやアイデアを軽く褒められます。</p>
+</article><article class="phrase" id="exp64">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★☆☆</span></div>
+<h3>That's so you.</h3>
+<p class="meaning">君らしくていい</p>
+<div class="example">例：That design is so you.</div>
+<p>相手の個性に合っている時に使います。</p>
+</article>
+</div>
+</section><section class="phraseSection" id="casual">
+<div class="sectionHead">
+<h2 class="sectionTitle">Casual Slang</h2>
+<p>友達同士やSNSでよく見るカジュアル表現です。使う相手は選びましょう。</p>
+</div>
+<div class="grid">
+<article class="phrase" id="exp65">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>No cap</h3>
+<p class="meaning">マジで／嘘なしで</p>
+<div class="example">例：No cap, this movie was amazing.</div>
+<p>強調に使います。フォーマルな場面では避けます。</p>
+</article><article class="phrase" id="exp66">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Lowkey</h3>
+<p class="meaning">ちょっと／実は</p>
+<div class="example">例：I'm lowkey tired.</div>
+<p>本音を控えめに出す時によく使います。</p>
+</article><article class="phrase" id="exp67">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Bet.</h3>
+<p class="meaning">了解／のった</p>
+<div class="example">例：Let's play after school. / Bet.</div>
+<p>誘いや提案にテンポよく乗る返事です。</p>
+</article><article class="phrase" id="exp68">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Fire</h3>
+<p class="meaning">最高／神</p>
+<div class="example">例：This song is fire.</div>
+<p>音楽・服・食べ物など幅広く褒められます。</p>
+</article><article class="phrase" id="exp69">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>I'm cooked.</h3>
+<p class="meaning">詰んだ／終わった</p>
+<div class="example">例：I forgot my homework. I'm cooked.</div>
+<p>失敗を少しネタっぽく言う表現です。</p>
+</article><article class="phrase" id="exp70">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>You cooked.</h3>
+<p class="meaning">やるじゃん／キマってる</p>
+<div class="example">例：That presentation was great. You cooked.</div>
+<p>良い仕事をした相手を褒めます。</p>
+</article><article class="phrase" id="exp71">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★☆☆</span></div>
+<h3>Slay</h3>
+<p class="meaning">キマってる／超イケてる</p>
+<div class="example">例：You slay in that outfit.</div>
+<p>ファッションや見た目をテンション高く褒めます。</p>
+</article><article class="phrase" id="exp72">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★☆☆</span></div>
+<h3>Ate</h3>
+<p class="meaning">完璧にやった</p>
+<div class="example">例：Your dance? You ate.</div>
+<p>ダンス・発表・メイクなどでよく使われます。</p>
+</article><article class="phrase" id="exp73">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★☆☆</span></div>
+<h3>Rizz</h3>
+<p class="meaning">モテる力／魅力</p>
+<div class="example">例：He's got rizz.</div>
+<p>恋愛や人を惹きつける雰囲気について使います。</p>
+</article><article class="phrase" id="exp74">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★☆☆</span></div>
+<h3>Huge W</h3>
+<p class="meaning">大勝利</p>
+<div class="example">例：You passed? Huge W.</div>
+<p>ゲーム・SNS文化由来の勝利表現です。</p>
+</article><article class="phrase" id="exp75">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★☆☆</span></div>
+<h3>Built different</h3>
+<p class="meaning">格が違う</p>
+<div class="example">例：She ran 10K before school. Built different.</div>
+<p>大げさに褒める時に使います。</p>
+</article><article class="phrase" id="exp76">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★☆☆</span></div>
+<h3>Valid</h3>
+<p class="meaning">それはアリ／わかる</p>
+<div class="example">例：That's a valid reason.</div>
+<p>相手の意見や感情を認める時に便利です。</p>
+</article><article class="phrase" id="exp77">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★☆☆</span></div>
+<h3>Bussin'</h3>
+<p class="meaning">めっちゃ美味しい</p>
+<div class="example">例：This ramen is bussin'.</div>
+<p>食べ物を強く褒める表現です。</p>
+</article><article class="phrase" id="exp78">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★☆☆☆</span></div>
+<h3>af</h3>
+<p class="meaning">めっちゃ／クソほど</p>
+<div class="example">例：It's hot af today.</div>
+<p>かなりカジュアルで強い表現。使う場面に注意です。</p>
+</article>
+</div>
+</section><section class="phraseSection" id="internet">
+<div class="sectionHead">
+<h2 class="sectionTitle">Internet Slang</h2>
+<p>ネット文化やミームでよく見る表現です。意味を知っておくと理解しやすくなります。</p>
+</div>
+<div class="grid">
+<article class="phrase" id="exp79">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Mood.</h3>
+<p class="meaning">わかりすぎる／今の気分</p>
+<div class="example">例：I just want to sleep. / Mood.</div>
+<p>相手の状況に強く共感する一語です。</p>
+</article><article class="phrase" id="exp80">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Real.</h3>
+<p class="meaning">それな／本当にそう</p>
+<div class="example">例：I'm so tired of homework. / Real.</div>
+<p>短い共感表現としてSNSでよく見ます。</p>
+</article><article class="phrase" id="exp81">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★★☆</span></div>
+<h3>Pain.</h3>
+<p class="meaning">つらい</p>
+<div class="example">例：The bus left right in front of me. Pain.</div>
+<p>小さな絶望を一語で表せます。</p>
+</article><article class="phrase" id="exp82">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★☆☆</span></div>
+<h3>Delulu</h3>
+<p class="meaning">妄想モード</p>
+<div class="example">例：I'm delulu, but I still think they'll text back.</div>
+<p>恋愛や推し活の文脈でよく見ます。</p>
+</article><article class="phrase" id="exp83">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★☆☆</span></div>
+<h3>NPC behavior</h3>
+<p class="meaning">量産型っぽい／自分で考えてなさそう</p>
+<div class="example">例：He says the same thing every day. NPC behavior.</div>
+<p>ゲーム由来のネット表現です。やや煽りです。</p>
+</article><article class="phrase" id="exp84">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★☆☆</span></div>
+<h3>Lore</h3>
+<p class="meaning">裏設定／背景情報</p>
+<div class="example">例：Drop the lore.</div>
+<p>人物や出来事の背景をネタっぽく表します。</p>
+</article><article class="phrase" id="exp85">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★☆☆</span></div>
+<h3>Spill the tea</h3>
+<p class="meaning">詳しく話して／暴露して</p>
+<div class="example">例：Spill the tea. What happened?</div>
+<p>ゴシップや秘密の話を聞きたい時の表現です。</p>
+</article><article class="phrase" id="exp86">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★☆☆</span></div>
+<h3>What's the tea?</h3>
+<p class="meaning">何があったの？</p>
+<div class="example">例：What's the tea between them?</div>
+<p>揉め事や噂の詳細を聞く表現です。</p>
+</article><article class="phrase" id="exp87">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★★☆☆</span></div>
+<h3>Ghosting</h3>
+<p class="meaning">突然連絡を断つこと</p>
+<div class="example">例：He's ghosting me.</div>
+<p>恋愛やSNSでよく使われます。</p>
+</article><article class="phrase" id="exp88">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★☆☆☆</span></div>
+<h3>Touch grass</h3>
+<p class="meaning">外出ろ／現実に戻れ</p>
+<div class="example">例：You played for 18 hours? Touch grass.</div>
+<p>ネットに浸かりすぎた相手への煽りです。</p>
+</article><article class="phrase" id="exp89">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★☆☆☆</span></div>
+<h3>Cope harder</h3>
+<p class="meaning">言い訳してろ／現実見ろ</p>
+<div class="example">例：You only won by luck. / Cope harder.</div>
+<p>かなり攻撃的なネット表現です。</p>
+</article><article class="phrase" id="exp90">
+<div class="phraseTop"><span aria-label="重要度" class="level">★★☆☆☆</span></div>
+<h3>Cringe</h3>
+<p class="meaning">痛い／見ていてきつい</p>
+<div class="example">例：That joke was cringe.</div>
+<p>人に直接言うと強めに聞こえます。</p>
 </article>
 </div>
 </section>
 <section class="cta">
 <div>
 <h2 class="sectionTitle" style="margin-bottom:6px">ゲームでも英語を練習しよう</h2>
-<p style="margin:0;color:#4d5a68">単語・スラング・タイピング練習を通して、英語を楽しく増やしていきましょう。</p>
+<p style="margin:0;color:#4d5a68">単語・タイピング・会話表現を通して、英語を楽しく増やしていきましょう。</p>
 </div>
 <a class="btn" href="/">すし英語トップへ</a>
 </section>
 </main>
 <footer>
-  <div class="footInner">
-    <p>© すし英語｜英語を楽しく学ぶための学習サイト</p>
-    <p>本ページは英語学習を目的とした独自教材です。「英検」は公益財団法人 日本英語検定協会の登録商標です。本サイトは同協会の承認・推奨を受けたものではありません。</p>
-  </div>
+<div class="footInner">
+<p>© すし英語｜英語を楽しく学ぶための学習サイト</p>
+<p>本ページは英語学習を目的とした独自教材です。「英検」は公益財団法人 日本英語検定協会の登録商標です。本サイトは同協会の承認・推奨を受けたものではありません。</p>
+</div>
 </footer>
 </body>
 </html>
