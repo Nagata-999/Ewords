@@ -1,17 +1,35 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
 <title>Sushi Talk｜すし英語</title>
 <style>
-:root{--bg:#fffaf2;--card:#fff;--ink:#24313f;--muted:#637083;--brand:#ef6c3e;--brand2:#1f8a70;--line:#eadfce;--soft:#fff2df;--blue:#eaf4ff;--danger:#e11d48;--gold:#f59e0b;--green:#22c55e;--purple:#8b5cf6}*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;min-height:100%;background:#fffaf2;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic",Meiryo,sans-serif}body{background:linear-gradient(180deg,#fff7eb 0%,#fffaf2 40%,#fff 100%)}button{font-family:inherit}#app{width:min(100vw,560px);min-height:100dvh;margin:auto;padding:12px;display:flex;flex-direction:column;gap:10px;position:relative;overflow:hidden}.header{display:flex;justify-content:space-between;align-items:center;gap:8px}.logo{font-size:22px;font-weight:900;color:var(--brand)}.smallLink{color:var(--brand2);font-weight:800;text-decoration:none;font-size:13px}.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:15px;box-shadow:0 12px 32px rgba(75,49,22,.08)}.title{font-size:46px;line-height:1;font-weight:1000;color:var(--brand);text-align:center;margin-top:18px}.lead{color:#435064;text-align:center;line-height:1.75;font-weight:700}.btn{border:none;border-radius:999px;padding:14px 18px;background:var(--brand);color:#fff;font-size:18px;font-weight:900;box-shadow:0 8px 18px rgba(239,108,62,.25)}.btn.secondary{background:var(--brand2)}.btn:active,.characterSelect:active,.choice:active{transform:scale(.985)}.loadingNote{margin-top:10px;color:#637083;font-size:13px;font-weight:800;text-align:center}.status{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.stat{background:#fff8ee;border:1px solid #f2dec5;border-radius:16px;padding:8px;text-align:center}.statLabel{color:var(--muted);font-size:10px;font-weight:900}.statValue{color:var(--brand);font-size:21px;font-weight:1000}.heartLine{text-align:center;font-size:27px;letter-spacing:2px;line-height:1.2}.heartHint{text-align:center;font-size:12px;font-weight:900;color:var(--muted);margin-top:3px}.timerWrap{height:10px;background:#fff3e6;border:1px solid #f2dec5;border-radius:999px;overflow:hidden}.timerFill{height:100%;width:100%;background:linear-gradient(90deg,#22c55e,#f59e0b,#ef4444);transition:width .08s linear}.characterList{display:grid;gap:10px}.characterSelect{width:100%;border:1px solid var(--line);border-radius:22px;background:#fff;padding:12px;display:grid;grid-template-columns:82px 1fr;gap:12px;text-align:left;box-shadow:0 8px 18px rgba(75,49,22,.06);color:var(--ink)}.miniSpriteWrap{width:82px;height:102px;overflow:hidden;border-radius:18px;background:#fff8ee;border:1px solid #f2dec5;position:relative}.miniSprite,.sprite{background-image:var(--sheet);background-size:500% 100%;background-repeat:no-repeat;background-position:0% 50%}.miniSprite{width:82px;height:102px}.selectName{font-size:24px;font-weight:1000;line-height:1.1}.selectType{display:inline-block;margin:5px 0;background:var(--soft);color:var(--brand);border:1px solid #ffd3b8;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:900}.ruleGrid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px}.ruleBox{border-radius:14px;padding:8px;font-size:12px;font-weight:900;line-height:1.35}.ruleBox.good{background:#ecfdf5;color:#047857;border:1px solid #a7f3d0}.ruleBox.bad{background:#fff1f2;color:#be123c;border:1px solid #fecdd3}.conversationCard{padding:14px;overflow:hidden}.conversationHero{display:grid;grid-template-columns:112px 1fr;gap:10px;align-items:start}.spriteWrap{width:112px;height:154px;overflow:hidden;border-radius:18px;background:linear-gradient(180deg,#fff8ee,#fff);border:1px solid var(--line);display:flex;align-items:flex-start;justify-content:center;position:relative}.spriteWrap::after{content:"";position:absolute;inset:auto 10px 8px;height:14px;border-radius:50%;background:rgba(0,0,0,.08);filter:blur(5px)}.sprite{width:112px;height:154px;transition:background-position .14s ease,filter .18s ease;position:relative;z-index:2}.sprite.normal{background-position:0% 50%}.sprite.good{background-position:25% 50%;filter:drop-shadow(0 0 16px rgba(31,138,112,.25))}.sprite.bad{background-position:50% 50%;filter:drop-shadow(0 0 16px rgba(239,108,62,.25))}.sprite.shock{background-position:75% 50%;filter:drop-shadow(0 0 16px rgba(59,130,246,.25))}.sprite.love{background-position:100% 50%;filter:drop-shadow(0 0 20px rgba(244,114,182,.35))}.charName{font-size:24px;font-weight:1000;line-height:1.15}.charType{display:inline-block;margin-top:5px;background:var(--soft);color:var(--brand);border:1px solid #ffd3b8;border-radius:999px;padding:3px 8px;font-size:11px;font-weight:900}.comboBadge{display:inline-block;margin-top:6px;background:#ecfdf5;color:#047857;border:1px solid #a7f3d0;border-radius:999px;padding:3px 8px;font-size:11px;font-weight:1000}.bubble{position:relative;background:var(--blue);border-radius:18px;padding:11px 12px;margin-top:10px;color:#1d3448}.bubble::before{content:"";position:absolute;left:-8px;top:28px;width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-right:10px solid var(--blue)}.sceneInBubble{font-size:14px;font-weight:900;line-height:1.45;margin-bottom:6px;color:var(--ink)}.bubble .en{font-size:19px;font-weight:1000;line-height:1.35}.bubble .ja{color:#435064;margin-top:4px;font-size:12px;font-weight:700}.choiceAreaInCard{margin-top:12px;display:grid;gap:10px}.choice{text-align:left;border:none;border-radius:20px;padding:12px 13px;background:#fff;border:1px solid var(--line);box-shadow:0 8px 18px rgba(75,49,22,.06);color:var(--ink);position:relative;overflow:hidden}.choiceEN{font-size:18px;font-weight:1000}.choiceJA{color:var(--muted);font-size:13px;margin-top:4px;font-weight:700}.choice.locked{opacity:.38;pointer-events:none}.choice.selected{opacity:1;border:2px solid var(--brand);background:#fff8ee}.replyBubble{position:relative;background:#fff8ee;border:1px solid #f2dec5;border-radius:20px;padding:14px 15px;margin-top:12px;text-align:center;cursor:pointer}.hidden{display:none}.tapNext{color:var(--brand2);font-size:12px;font-weight:1000;letter-spacing:.12em}.delta{font-size:38px;font-weight:1000;margin-top:4px;color:var(--brand2)}.delta.bad{color:var(--danger)}.replyEN{font-size:22px;font-weight:1000;line-height:1.35}.replyJA{color:var(--muted);margin-top:5px;font-weight:700}.resultRank{text-align:center;font-size:44px;font-weight:1000;color:var(--brand);line-height:1.05}.log{display:grid;gap:8px}.logRow{background:#fff8ee;border:1px solid #f2dec5;border-radius:14px;padding:10px;font-size:13px;line-height:1.55}.flash{position:fixed;inset:0;pointer-events:none;z-index:50;opacity:0}.flash.good{background:rgba(34,197,94,.22);animation:flash .38s ease}.flash.bad{background:rgba(225,29,72,.25);animation:flash .38s ease}.flash.best{background:rgba(250,204,21,.28);animation:flash .55s ease}@keyframes flash{0%{opacity:0}35%{opacity:1}100%{opacity:0}}.shake{animation:shake .25s ease}@keyframes shake{0%{transform:translateX(0)}25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-5px)}100%{transform:translateX(0)}}.pop{animation:pop .25s ease}@keyframes pop{0%{transform:scale(.82);opacity:.4}100%{transform:scale(1);opacity:1}}.float{animation:float 2.2s ease-in-out infinite}@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-3px)}100%{transform:translateY(0)}}@media(max-width:420px){#app{padding:9px}.title{font-size:39px}.characterSelect{grid-template-columns:70px 1fr}.miniSpriteWrap,.miniSprite{width:70px;height:90px}.selectName{font-size:21px}.ruleGrid{grid-template-columns:1fr}.conversationHero{grid-template-columns:102px 1fr}.spriteWrap,.sprite{width:102px;height:142px}.bubble .en{font-size:17px}.choiceEN{font-size:17px}.card{padding:13px}.statValue{font-size:18px}.heartLine{font-size:23px}}
+:root{--bg:#fffaf2;--card:#fff;--ink:#24313f;--muted:#637083;--brand:#ef6c3e;--brand2:#1f8a70;--line:#eadfce;--soft:#fff2df;--blue:#eaf4ff;--danger:#e11d48;--gold:#f59e0b;--green:#22c55e;--purple:#8b5cf6}*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;min-height:100%;background:#fffaf2;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic",Meiryo,sans-serif}body{background:linear-gradient(180deg,#fff7eb 0%,#fffaf2 40%,#fff 100%)}button{font-family:inherit}#app{width:min(100vw,560px);min-height:100dvh;margin:auto;padding:12px;display:flex;flex-direction:column;gap:8px;position:relative;overflow:visible}.header{display:flex;justify-content:space-between;align-items:center;gap:8px}.logo{font-size:22px;font-weight:900;color:var(--brand)}.smallLink{color:var(--brand2);font-weight:800;text-decoration:none;font-size:13px}.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:15px;box-shadow:0 12px 32px rgba(75,49,22,.08)}.title{font-size:46px;line-height:1;font-weight:1000;color:var(--brand);text-align:center;margin-top:8px}.lead{color:#435064;text-align:center;line-height:1.75;font-weight:700}.btn{border:none;border-radius:999px;padding:14px 18px;background:var(--brand);color:#fff;font-size:18px;font-weight:900;box-shadow:0 8px 18px rgba(239,108,62,.25)}.btn.secondary{background:var(--brand2)}.btn:active,.characterSelect:active,.choice:active{transform:scale(.985)}.loadingNote{margin-top:10px;color:#637083;font-size:13px;font-weight:800;text-align:center}.status{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.stat{background:#fff8ee;border:1px solid #f2dec5;border-radius:16px;padding:8px;text-align:center}.statLabel{color:var(--muted);font-size:10px;font-weight:900}.statValue{color:var(--brand);font-size:21px;font-weight:1000}.heartLine{text-align:center;font-size:27px;letter-spacing:2px;line-height:1.2}.heartHint{text-align:center;font-size:12px;font-weight:900;color:var(--muted);margin-top:3px}.timerWrap{height:10px;background:#fff3e6;border:1px solid #f2dec5;border-radius:999px;overflow:hidden}.timerFill{height:100%;width:100%;background:linear-gradient(90deg,#22c55e,#f59e0b,#ef4444);transition:width .08s linear}.characterList{display:grid;gap:8px}.characterSelect{width:100%;border:1px solid var(--line);border-radius:22px;background:#fff;padding:12px;display:grid;grid-template-columns:82px 1fr;gap:12px;text-align:left;box-shadow:0 8px 18px rgba(75,49,22,.06);color:var(--ink)}.miniSpriteWrap{width:82px;height:102px;overflow:hidden;border-radius:18px;background:#fff8ee;border:1px solid #f2dec5;position:relative}.miniSprite,.sprite{background-image:var(--sheet);background-size:500% 100%;background-repeat:no-repeat;background-position:0% 50%}.miniSprite{width:82px;height:102px}.selectName{font-size:24px;font-weight:1000;line-height:1.1}.selectType{display:inline-block;margin:5px 0;background:var(--soft);color:var(--brand);border:1px solid #ffd3b8;border-radius:999px;padding:3px 9px;font-size:11px;font-weight:900}.ruleGrid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px}.ruleBox{border-radius:14px;padding:8px;font-size:12px;font-weight:900;line-height:1.35}.ruleBox.good{background:#ecfdf5;color:#047857;border:1px solid #a7f3d0}.ruleBox.bad{background:#fff1f2;color:#be123c;border:1px solid #fecdd3}.conversationCard{padding:14px;overflow:hidden}.conversationHero{display:grid;grid-template-columns:112px 1fr;gap:8px;align-items:start}.spriteWrap{width:112px;height:154px;overflow:hidden;border-radius:18px;background:linear-gradient(180deg,#fff8ee,#fff);border:1px solid var(--line);display:flex;align-items:flex-start;justify-content:center;position:relative}.spriteWrap::after{content:"";position:absolute;inset:auto 10px 8px;height:14px;border-radius:50%;background:rgba(0,0,0,.08);filter:blur(5px)}.sprite{width:112px;height:154px;transition:background-position .14s ease,filter .18s ease;position:relative;z-index:2}.sprite.normal{background-position:0% 50%}.sprite.good{background-position:25% 50%;filter:drop-shadow(0 0 16px rgba(31,138,112,.25))}.sprite.bad{background-position:50% 50%;filter:drop-shadow(0 0 16px rgba(239,108,62,.25))}.sprite.shock{background-position:75% 50%;filter:drop-shadow(0 0 16px rgba(59,130,246,.25))}.sprite.love{background-position:100% 50%;filter:drop-shadow(0 0 20px rgba(244,114,182,.35))}.charName{font-size:24px;font-weight:1000;line-height:1.15}.charType{display:inline-block;margin-top:5px;background:var(--soft);color:var(--brand);border:1px solid #ffd3b8;border-radius:999px;padding:3px 8px;font-size:11px;font-weight:900}.comboBadge{display:inline-block;margin-top:6px;background:#ecfdf5;color:#047857;border:1px solid #a7f3d0;border-radius:999px;padding:3px 8px;font-size:11px;font-weight:1000}.bubble{position:relative;background:var(--blue);border-radius:18px;padding:11px 12px;margin-top:10px;color:#1d3448}.bubble::before{content:"";position:absolute;left:-8px;top:28px;width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-right:10px solid var(--blue)}.sceneInBubble{font-size:14px;font-weight:900;line-height:1.45;margin-bottom:6px;color:var(--ink)}.bubble .en{font-size:19px;font-weight:1000;line-height:1.35}.bubble .ja{color:#435064;margin-top:4px;font-size:12px;font-weight:700}.choiceAreaInCard{margin-top:12px;display:grid;gap:8px}.choice{text-align:left;border:none;border-radius:20px;padding:12px 13px;background:#fff;border:1px solid var(--line);box-shadow:0 8px 18px rgba(75,49,22,.06);color:var(--ink);position:relative;overflow:hidden}.choiceEN{font-size:18px;font-weight:1000}.choiceJA{color:var(--muted);font-size:13px;margin-top:4px;font-weight:700}.choice.locked{opacity:.38;pointer-events:none}.choice.selected{opacity:1;border:2px solid var(--brand);background:#fff8ee}.replyBubble{position:relative;background:#fff8ee;border:1px solid #f2dec5;border-radius:20px;padding:14px 15px;margin-top:12px;text-align:center;cursor:pointer}.hidden{display:none}.tapNext{color:var(--brand2);font-size:12px;font-weight:1000;letter-spacing:.12em}.delta{font-size:38px;font-weight:1000;margin-top:4px;color:var(--brand2)}.delta.bad{color:var(--danger)}.replyEN{font-size:22px;font-weight:1000;line-height:1.35}.replyJA{color:var(--muted);margin-top:5px;font-weight:700}.resultRank{text-align:center;font-size:44px;font-weight:1000;color:var(--brand);line-height:1.05}.log{display:grid;gap:8px}.logRow{background:#fff8ee;border:1px solid #f2dec5;border-radius:14px;padding:10px;font-size:13px;line-height:1.55}.flash{position:fixed;inset:0;pointer-events:none;z-index:50;opacity:0}.flash.good{background:rgba(34,197,94,.22);animation:flash .38s ease}.flash.bad{background:rgba(225,29,72,.25);animation:flash .38s ease}.flash.best{background:rgba(250,204,21,.28);animation:flash .55s ease}@keyframes flash{0%{opacity:0}35%{opacity:1}100%{opacity:0}}.shake{animation:shake .25s ease}@keyframes shake{0%{transform:translateX(0)}25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-5px)}100%{transform:translateX(0)}}.pop{animation:pop .25s ease}@keyframes pop{0%{transform:scale(.82);opacity:.4}100%{transform:scale(1);opacity:1}}.float{animation:float 2.2s ease-in-out infinite}@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-3px)}100%{transform:translateY(0)}}@media(max-width:420px){#app{padding:9px}.title{font-size:39px}.characterSelect{grid-template-columns:70px 1fr}.miniSpriteWrap,.miniSprite{width:70px;height:90px}.selectName{font-size:21px}.ruleGrid{grid-template-columns:1fr}.conversationHero{grid-template-columns:102px 1fr}.spriteWrap,.sprite{width:102px;height:142px}.bubble .en{font-size:17px}.choiceEN{font-size:17px}.card{padding:13px}.statValue{font-size:18px}.heartLine{font-size:23px}}
+
+/* v2: 6 choices + clearer character differentiation */
+.choiceAreaInCard{gap:7px}
+.choice{padding:9px 11px;border-radius:16px}
+.choiceEN{font-size:16px}
+.choiceJA{font-size:12px}
+@media(max-width:420px){.choice{padding:8px 10px}.choiceEN{font-size:15px}}
 </style>
 </head>
 <body>
-<div id="app"></div><div id="flash" class="flash"></div>
-
+<div id="app"></div><div class="flash" id="flash"></div>
 <script>
+const INFO_HTML = `
+<details class="card" style="margin-bottom:4px">
+<summary style="cursor:pointer;font-weight:900;color:var(--brand);font-size:18px;">&#9661; このゲームで学べること</summary>
+<div style="margin-top:12px;line-height:1.8;color:#435064;font-weight:700">
+<p><strong>Sushi Talk</strong> は、ネイティブが日常会話でよく使う自然な英語表現を学ぶゲームです。</p>
+<p>学校ではあまり習わない <b>We'll see.</b>、<b>I feel you.</b>、<b>Fair enough.</b> のような日常表現から、<b>No cap.</b>、<b>Straight up.</b> などのスラングまで、実際によく使われる英語を楽しく学べます。</p>
+
+<p>日常英会話・スラング・リアクション表現をゲーム感覚で学びたい人におすすめです。</p>
+</div>
+</details>`;
+
 const SPRITE_FILES=["assets/SL-01.webp","assets/SL-02.webp","assets/SL-03.webp","assets/SL-04.webp","assets/SL-05.webp"];
 function preloadSprites(){return Promise.all(SPRITE_FILES.map(src=>new Promise(resolve=>{const img=new Image();img.onload=resolve;img.onerror=resolve;img.src=src;})));}
 function a(en,ja,tags){return{en,ja,tags};}
@@ -22,11 +40,11 @@ function sample(arr,n){return shuffle(arr).slice(0,n);}
 function uniqueChoices(list){const seen=new Set(),out=[];for(const x of list){if(x&&!seen.has(x.en)){seen.add(x.en);out.push(x);}}return out;}
 
 const CHARACTERS=[
-{id:"sushi",name:"Sushi",type:"普通の人",sheet:"assets/SL-01.webp",likes:["friendly","honest","empathy","casual"],hates:["rude","too_edgy","chaotic"],best:"共感・自然な返答",worst:"攻撃的・雑すぎる返答",time:20,profile:"普通に優しい返答が強い。スラングも軽めならOK。"},
-{id:"ally",name:"Ally",type:"ネット民",sheet:"assets/SL-02.webp",likes:["meme","weird","relatable","slang"],hates:["formal","lecture","basic"],best:"ミーム・ネット感・共感",worst:"堅すぎる返答・説教",time:18,profile:"Pain / cooked / lore / NPC みたいなネット感が刺さる。"},
-{id:"mark",name:"Mark",type:"陽キャ・オラオラ",sheet:"assets/SL-03.webp",likes:["hype","bold","slang","challenge"],hates:["passive","cold","formal"],best:"盛り上げ・強気・テンション",worst:"冷たい返答・弱い返答",time:22,profile:"Huge W / Built different / LET'S GOOO系が強い。"},
-{id:"susie",name:"Susie",type:"ギャル",sheet:"assets/SL-04.webp",likes:["slang","hype","friendly","tease"],hates:["formal","rude","lecture"],best:"スラング・ノリの良さ",worst:"堅い返答・上から目線",time:14,profile:"slay / ate / fire / rizz みたいなノリが好き。"},
-{id:"malia",name:"Malia",type:"堅そうな人",sheet:"assets/SL-05.webp",likes:["polite","honest","empathy","careful"],hates:["slang","rude","too_edgy","chaotic"],best:"丁寧・誠実・配慮",worst:"スラング・失礼な返答",time:24,profile:"相手への配慮を見ている。雑なスラングはだいたい危険。"}
+{id:"sushi",name:"Sushi",type:"普通の人",sheet:"assets/SL-01.webp",likes:["friendly","honest","empathy","casual","daily","safe"],hates:["slang","meme","rude","too_edgy","chaotic","cold"],best:"自然・共感・やさしい返答",worst:"スラング連発・攻撃的な返答",time:22,profile:"普通に会話ができる相手。I feel you / Sounds good / No worries などの自然表現が強い。スラングはほぼ刺さらない。"},
+{id:"ally",name:"Ally",type:"ネット民",sheet:"assets/SL-02.webp",likes:["meme","weird","relatable","slang","internet"],hates:["formal","lecture","basic","stiff"],best:"ミーム・ネット感・共感",worst:"堅すぎる返答・説教",time:18,profile:"Pain / cooked / lore / NPC / no cap みたいなネット感が刺さる。丁寧すぎると弱い。"},
+{id:"mark",name:"Mark",type:"陽キャ・オラオラ",sheet:"assets/SL-03.webp",likes:["hype","bold","challenge","positive","slang"],hates:["passive","cold","formal","careful"],best:"盛り上げ・強気・前向き",worst:"冷たい返答・弱い返答・堅い返答",time:20,profile:"Huge W / You got this / LET'S GOOO 系が強い。共感だけで終わるより前に押す返答が好き。"},
+{id:"susie",name:"Susie",type:"ギャル",sheet:"assets/SL-04.webp",likes:["slang","hype","friendly","tease","cute"],hates:["formal","rude","lecture","stiff"],best:"ノリ・褒め・友達感",worst:"堅い返答・上から目線",time:15,profile:"slay / ate / fire / obsessed みたいな明るいノリが好き。失礼な煽りはNG。"},
+{id:"malia",name:"Malia",type:"堅そうな人",sheet:"assets/SL-05.webp",likes:["polite","honest","empathy","careful","safe"],hates:["slang","meme","rude","too_edgy","chaotic","internet"],best:"丁寧・誠実・配慮",worst:"スラング・雑なノリ・失礼な返答",time:25,profile:"丁寧さと配慮を見ている。No cap / cooked / delulu 系はほぼ地雷。"}
 ];
 
 const SCENARIOS=[
@@ -214,6 +232,65 @@ a("Who asked?","誰が聞いた？",["rude","too_edgy","cold"]),a("I don't care.
 ];
 const ZERO_ANSWERS=[a("Okay.","そうなんだ",["basic"]),a("I see.","なるほど",["basic"]),a("Maybe.","たぶんね",["passive"]),a("Sounds normal.","普通だね",["basic"]),a("I guess.","まあね",["passive"]),a("Alright.","了解",["basic"]),a("That's okay.","まあ大丈夫",["basic"]),a("Interesting.","興味深いね",["formal","basic"]),a("Cool.","へえ、いいね",["basic","casual"]),a("Hmm.","ふーん",["basic","passive"]),a("Not bad.","悪くない",["basic"]),a("Fair enough.","まあわかる",["basic","casual"]),a("I suppose so.","そうかもね",["formal","passive"]),a("That's something.","それは何かだね",["basic","weird"]),a("Good to know.","知れてよかった",["formal","basic"])
 ];
+
+const GLOBAL_RESPONSES=[
+a("Straight up, I feel you.","マジでわかる",["daily","casual","empathy","honest"]),
+a("I feel you.","気持ちわかる",["daily","friendly","empathy","safe"]),
+a("That makes sense.","なるほどね",["daily","honest","safe"]),
+a("Makes sense.","なるほど",["daily","honest","safe"]),
+a("Fair enough.","まあそれはわかる",["daily","honest","safe"]),
+a("Good point.","いい指摘だね",["daily","honest","safe"]),
+a("You have a point.","一理あるね",["daily","honest","safe"]),
+a("Sounds good.","いいね",["daily","friendly","safe"]),
+a("That works.","それでいける",["daily","friendly","safe"]),
+a("We'll see.","様子を見よう",["daily","casual","safe"]),
+a("Let's figure it out.","なんとかしよう",["daily","friendly","honest","safe"]),
+a("We'll figure something out.","何か方法を考えよう",["daily","friendly","empathy","safe"]),
+a("No worries.","大丈夫だよ",["daily","friendly","empathy","safe"]),
+a("That's on me.","それは自分のミス",["daily","honest","safe"]),
+a("My mistake.","私のミスです",["daily","honest","safe"]),
+a("I'm down.","のるよ",["daily","casual","friendly"]),
+a("I'm in.","参加する",["daily","friendly"]),
+a("I'll pass.","今回はやめておく",["daily","casual","safe"]),
+a("Why not?","いいじゃん",["daily","casual","friendly"]),
+a("Go for it.","やってみなよ",["daily","positive","challenge","friendly"]),
+a("You got this.","君ならできる",["daily","positive","hype","friendly"]),
+a("Hang in there.","踏ん張って",["daily","empathy","friendly"]),
+a("I'm rooting for you.","応援してるよ",["daily","empathy","friendly","positive"]),
+a("Fingers crossed.","うまくいくといいね",["daily","friendly","positive"]),
+a("You nailed it.","完璧だったよ",["daily","hype","positive","friendly"]),
+a("That means a lot.","すごく嬉しい",["daily","empathy","honest","safe"]),
+a("I appreciate it.","感謝します",["daily","polite","honest","safe"]),
+a("Tell me more.","もっと聞かせて",["daily","friendly","safe"]),
+a("For real?","マジで？",["daily","casual","slang"]),
+a("No way!","うそでしょ！",["daily","casual","friendly"]),
+a("Seriously?","本当に？",["daily","casual","safe"]),
+a("Are you okay?","大丈夫？",["daily","empathy","safe"]),
+a("Take your time.","ゆっくりでいいよ",["daily","polite","empathy","safe"]),
+a("Please take care.","無理しないでね",["polite","empathy","careful","safe"]),
+a("I understand.","わかります",["polite","empathy","safe"]),
+a("I'm sorry to hear that.","それはつらいですね",["polite","empathy","careful","safe"]),
+a("That's wonderful.","それは素晴らしいですね",["polite","honest","safe"]),
+a("I'm glad to hear that.","それを聞けてうれしいです",["polite","empathy","safe"]),
+a("Let's go!","いこうぜ！",["hype","positive","friendly"]),
+a("LET'S GOOO!","うおおお！",["hype","slang","bold"]),
+a("Huge W.","大勝利",["slang","hype","internet"]),
+a("Built different.","格が違う",["slang","hype","internet","bold"]),
+a("No cap, that's wild.","ガチでやばい",["slang","internet","hype"]),
+a("Lowkey, same.","ちょっと同じ",["slang","relatable","internet"]),
+a("Pain.","つらすぎ",["slang","meme","internet","relatable"]),
+a("We're cooked.","詰んだな",["slang","meme","internet","relatable"]),
+a("That's so real.","それめっちゃわかる",["slang","relatable","internet"]),
+a("Main character energy.","主人公感ある",["slang","meme","internet","hype"]),
+a("Drop the lore.","設定語って",["slang","meme","internet","weird"]),
+a("Spill the tea.","詳しく聞かせて",["slang","meme","internet"]),
+a("You slay.","めっちゃいいじゃん",["slang","hype","friendly","cute"]),
+a("You ate.","完璧じゃん",["slang","hype","cute"]),
+a("I'm obsessed.","それめっちゃ好き",["slang","hype","friendly","cute"]),
+a("That's fire.","それ神",["slang","hype"]),
+a("Girl, you're still slaying.","それでも最高だよ",["slang","hype","friendly","cute"])
+];
+
 const FINAL_PROMPTS=[
 {s:"最後に相手が聞いてきた。",en:"So, how was talking with me?",ja:"で、私と話してみてどうだった？",cat:"listen"},
 {s:"最後に相手が笑って聞いてきた。",en:"You get my vibe, right?",ja:"私のノリ、わかったでしょ？",cat:"appearance"},
@@ -223,24 +300,132 @@ const FINAL_PROMPTS=[
 const REPLIES={best:{en:["Perfect vibe!","You nailed it!","That was exactly right!","That landed perfectly.","You read the room perfectly."],ja:["最高。完全に刺さった。","これは大当たり。","空気読み、完璧。","相手の好みにかなり合った。","そのキャラにはかなり強い返答。"]},good:{en:["Nice answer.","That works.","Pretty good.","Good enough.","That was natural."],ja:["いい返答。","悪くない。","ちゃんと伝わった。","会話はかなり自然。","無難に好印象。"]},zero:{en:["Hmm. Okay.","Not bad, not great.","I guess that works.","A little plain.","Safe, but weak."],ja:["まあ普通。","刺さりはしない。","会話は続くけど弱い。","無難だが決め手に欠ける。","安全だが攻略力は低い。"]},bad:{en:["That was not it.","Ouch.","Nope.","Wrong vibe.","You missed the vibe."],ja:["それは地雷。","空気が死んだ。","かなり印象ダウン。","相手の嫌いなノリを踏んだ。","キャラ読み失敗。"]},time:{en:"Too late!",ja:"時間切れ。空気が流れた。"}};
 let selectedChar=null,route=[],turn=0,heart=5,combo=0,maxCombo=0,locked=false,timer=null,timeLeft=0,totalTime=0,log=[],recentAnswers=[];
 const MAX_HEART=15,MIN_HEART=0,app=document.getElementById("app"),flash=document.getElementById("flash");
-function showTitle(){app.innerHTML=`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title">Sushi Talk</div><button class="btn" style="width:100%;margin-top:18px" onclick="showCharacterSelect()">START</button></div>`;}
-async function showCharacterSelect(){await preloadSprites();app.innerHTML=`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title" style="font-size:36px;margin-top:4px">誰と話す？</div></div><div class="characterList">${CHARACTERS.map(ch=>`<button class="characterSelect" onclick="startRoute('${ch.id}')"><div class="miniSpriteWrap"><div class="miniSprite" style="--sheet:url('${ch.sheet}')"></div></div><div><div class="selectName">${ch.name}</div><span class="selectType">${ch.type}</span><div class="ruleGrid"><div class="ruleBox good">👍 最高<br>${ch.best}</div><div class="ruleBox bad">👎 マイナス<br>${ch.worst}</div></div><div style="margin-top:6px;color:var(--muted);font-size:12px;font-weight:800;line-height:1.45">${ch.profile}</div></div></button>`).join("")}</div>`;}
-function startRoute(id){selectedChar=CHARACTERS.find(c=>c.id===id);route=sample(SCENARIOS,8);route.push(pick(FINAL_PROMPTS));turn=0;heart=5;combo=0;maxCombo=0;locked=false;log=[];recentAnswers=[];nextTurn();}
+function showTitle(){app.innerHTML=INFO_HTML+`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title">Sushi Talk</div><p class="lead"><br></p><button class="btn" style="width:100%;margin-top:8px" onclick="showCharacterSelect()">START</button></div>`;}
+async function showCharacterSelect(){await preloadSprites();app.innerHTML=INFO_HTML+`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title" style="font-size:36px;margin-top:4px">誰と話す？</div><p class="lead" style="margin-bottom:0">同じ返答でも、相手によってスコアが変わります。</p></div><div class="characterList">${CHARACTERS.map(ch=>`<button class="characterSelect" onclick="startRoute('${ch.id}')"><div class="miniSpriteWrap"><div class="miniSprite" style="--sheet:url('${ch.sheet}')"></div></div><div><div class="selectName">${ch.name}</div><span class="selectType">${ch.type}</span><div class="ruleGrid"><div class="ruleBox good">👍 最高<br>${ch.best}</div><div class="ruleBox bad">👎 マイナス<br>${ch.worst}</div></div><div style="margin-top:6px;color:var(--muted);font-size:12px;font-weight:800;line-height:1.45">${ch.profile}</div></div></button>`).join("")}</div>`;}
+function startRoute(id){selectedChar=CHARACTERS.find(c=>c.id===id);route=sample(SCENARIOS,9);route.push(pick(FINAL_PROMPTS));turn=0;heart=5;combo=0;maxCombo=0;locked=false;log=[];recentAnswers=[];nextTurn();}
 function nextTurn(){clearInterval(timer);if(turn>=route.length||heart<=0){showResult();return;}locked=false;renderTurn();startTimer(selectedChar.time);}
 function renderHearts(){let full=Math.max(0,Math.min(MAX_HEART,heart));return "❤️".repeat(full)+"🤍".repeat(Math.max(0,10-full));}
-function scoreAnswer(char,ans){let s=0;for(const t of ans.tags||[]){if(char.likes.includes(t))s+=2;if(char.hates.includes(t))s-=3;}if((ans.tags||[]).includes("rude"))s-=3;if((ans.tags||[]).includes("too_edgy"))s-=2;if((ans.tags||[]).includes("cold"))s-=2;if((ans.tags||[]).includes("empathy"))s+=1;if((ans.tags||[]).includes("honest"))s+=.5;return s;}
+
+function hasTag(ans,tag){return (ans.tags||[]).includes(tag);}
+function scoreAnswer(char,ans){
+  let s=0;
+  const tags=ans.tags||[];
+  for(const t of tags){
+    if(char.likes.includes(t))s+=2;
+    if(char.hates.includes(t))s-=3;
+  }
+  if(tags.includes("rude"))s-=4;
+  if(tags.includes("too_edgy"))s-=3;
+  if(tags.includes("cold"))s-=3;
+  if(tags.includes("chaotic"))s-=2;
+  if(tags.includes("empathy"))s+=1;
+  if(tags.includes("honest"))s+=.8;
+  if(tags.includes("safe"))s+=.8;
+  if(tags.includes("daily"))s+=.8;
+
+  // キャラ差をはっきり出す
+  if(char.id==="sushi"){
+    if(tags.includes("slang"))s-=2.5;
+    if(tags.includes("meme")||tags.includes("internet"))s-=2;
+    if(tags.includes("polite"))s+=.3;
+    if(tags.includes("friendly")||tags.includes("empathy"))s+=1.2;
+  }
+  if(char.id==="malia"){
+    if(tags.includes("slang"))s-=5;
+    if(tags.includes("meme")||tags.includes("internet"))s-=4;
+    if(tags.includes("polite")||tags.includes("careful"))s+=2;
+    if(tags.includes("safe"))s+=1.5;
+  }
+  if(char.id==="ally"){
+    if(tags.includes("polite")||tags.includes("formal")||tags.includes("stiff"))s-=2.5;
+    if(tags.includes("meme")||tags.includes("internet"))s+=1.8;
+  }
+  if(char.id==="mark"){
+    if(tags.includes("polite")||tags.includes("formal")||tags.includes("passive"))s-=2;
+    if(tags.includes("positive")||tags.includes("challenge")||tags.includes("hype"))s+=1.5;
+  }
+  if(char.id==="susie"){
+    if(tags.includes("polite")||tags.includes("formal")||tags.includes("stiff"))s-=2;
+    if(tags.includes("cute")||tags.includes("friendly")||tags.includes("hype"))s+=1.3;
+  }
+  return s;
+}
 function poolsFor(cat){return B[cat]||B.relate;}
-function getPoolForChar(cat,char){const p=poolsFor(cat);let list=[]; if(char.id==="susie")list=[...(p.slang||[]),...(p.friendly||[]),...(p.meme||[])]; else if(char.id==="malia")list=[...(p.polite||[]),...(p.friendly||[])]; else if(char.id==="ally")list=[...(p.meme||[]),...(p.slang||[]),...(p.friendly||[])]; else if(char.id==="mark")list=[...(p.slang||[]),...(p.meme||[]),...(p.friendly||[])]; else list=[...(p.friendly||[]),...(p.polite||[]),...(p.slang||[]),...(p.meme||[])]; return uniqueChoices(list).filter(x=>!recentAnswers.includes(x.en));}
-function chooseByScore(list,char,min,max,exclude){let cands=uniqueChoices(list).filter(x=>!exclude.has(x.en));cands=cands.map(x=>({x,score:scoreAnswer(char,x)})).filter(o=>o.score>=min&&o.score<=max);if(!cands.length)return null;const top=cands.sort((a,b)=>b.score-a.score).slice(0,Math.min(12,cands.length));return pick(top).x;}
-function buildChoices(sc,char){let all=getPoolForChar(sc.cat,char); if(all.length<10) all=uniqueChoices([...(all||[]),...Object.values(poolsFor(sc.cat)).flat(),...Object.values(B.relates||{}).flat()].filter(Boolean)); const used=new Set(); let best=chooseByScore(all,char,3,99,used)||pick(uniqueChoices(all)); used.add(best.en); let good=chooseByScore(all,char,1,2.9,used)||chooseByScore(all,char,0,99,used)||pick(ZERO_ANSWERS); used.add(good.en); let zero=pick(ZERO_ANSWERS.filter(x=>!used.has(x.en)&&!recentAnswers.includes(x.en))||ZERO_ANSWERS); used.add(zero.en); let badPool=uniqueChoices([...BAD_ANSWERS,...Object.values(poolsFor(sc.cat)).flat()]).filter(x=>!used.has(x.en)&&!recentAnswers.includes(x.en)); let bad=chooseByScore(badPool,char,-99,-1,used)||pick(BAD_ANSWERS.filter(x=>!used.has(x.en))||BAD_ANSWERS); return shuffle([{...best,delta:3,role:"best"},{...good,delta:1,role:"good"},{...zero,delta:0,role:"zero"},{...bad,delta:-3,role:"bad"}]);}
-function renderTurn(){const sc=route[turn];const choices=buildChoices(sc,selectedChar);window.currentChoices=choices;app.innerHTML=`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="status"><div class="stat"><div class="statLabel">TURN</div><div class="statValue">${turn+1}/${route.length}</div></div><div class="stat"><div class="statLabel">TARGET</div><div class="statValue" style="font-size:17px">${selectedChar.name}</div></div><div class="stat"><div class="statLabel">COMBO</div><div class="statValue">${combo}</div></div></div><div class="card"><div class="heartLine">${renderHearts()}</div><div class="heartHint">好感度：数字は見えない。反応で読め。</div></div><div class="timerWrap"><div class="timerFill" id="timerFill"></div></div><div class="card conversationCard" id="characterCard"><div class="conversationHero"><div class="spriteWrap"><div class="sprite normal float" id="sprite" style="--sheet:url('${selectedChar.sheet}')"></div></div><div><div class="charName">${selectedChar.name}</div><span class="charType">${selectedChar.type}</span><div class="comboBadge">${combo>1?combo+" COMBO":"VIBE CHECK"}</div><div class="bubble"><div class="sceneInBubble">${esc(sc.s)}</div><div class="en">${esc(sc.en)}</div><div class="ja">${esc(sc.ja)}</div></div></div></div><div class="choiceAreaInCard">${choices.map((choice,i)=>`<button class="choice" onclick="choose(${i})"><div class="choiceEN">${esc(choice.en)}</div><div class="choiceJA">${esc(choice.ja)}</div></button>`).join("")}</div><div class="replyBubble hidden" id="feedback"></div></div>`;}
+function flattenPools(obj){return Object.values(obj||{}).flat().filter(Boolean);}
+function allAnswersFor(cat){return uniqueChoices([...flattenPools(poolsFor(cat)),...GLOBAL_RESPONSES,...ZERO_ANSWERS,...BAD_ANSWERS]);}
+function getPoolForChar(cat,char){
+  const p=poolsFor(cat);
+  let list=[];
+  if(char.id==="malia")list=[...(p.polite||[]),...(p.friendly||[]),...GLOBAL_RESPONSES];
+  else if(char.id==="sushi")list=[...(p.friendly||[]),...(p.polite||[]),...GLOBAL_RESPONSES];
+  else if(char.id==="ally")list=[...(p.meme||[]),...(p.slang||[]),...GLOBAL_RESPONSES,...(p.friendly||[])];
+  else if(char.id==="mark")list=[...(p.slang||[]),...(p.meme||[]),...GLOBAL_RESPONSES,...(p.friendly||[])];
+  else if(char.id==="susie")list=[...(p.slang||[]),...(p.friendly||[]),...GLOBAL_RESPONSES,...(p.meme||[])];
+  else list=[...(p.friendly||[]),...(p.polite||[]),...GLOBAL_RESPONSES,...(p.slang||[]),...(p.meme||[])];
+  return uniqueChoices(list).filter(x=>!recentAnswers.includes(x.en));
+}
+function rankedCandidates(list,char,exclude){
+  return uniqueChoices(list)
+    .filter(x=>x && !exclude.has(x.en) && !recentAnswers.includes(x.en))
+    .map(x=>({x,score:scoreAnswer(char,x)}))
+    .sort((a,b)=>b.score-a.score);
+}
+function takeByRange(list,char,min,max,exclude,n){
+  const out=[];
+  const ranked=rankedCandidates(list,char,exclude).filter(o=>o.score>=min&&o.score<=max);
+  for(const o of ranked){
+    if(out.length>=n)break;
+    exclude.add(o.x.en);
+    out.push(o.x);
+  }
+  return out;
+}
+function fillRandom(out,list,exclude,n,role,delta){
+  const cands=shuffle(uniqueChoices(list).filter(x=>x && !exclude.has(x.en) && !recentAnswers.includes(x.en)));
+  for(const x of cands){
+    if(out.length>=n)break;
+    exclude.add(x.en);
+    out.push({...x,role,delta});
+  }
+}
+function buildChoices(sc,char){
+  const used=new Set();
+  const main=getPoolForChar(sc.cat,char);
+  const all=allAnswersFor(sc.cat);
+
+  const choices=[];
+  const best=takeByRange([...main,...all],char,4.5,99,used,1);
+  best.forEach(x=>choices.push({...x,delta:3,role:"best"}));
+
+  let good=takeByRange([...main,...all],char,2.2,4.49,used,2);
+  good.forEach(x=>choices.push({...x,delta:1,role:"good"}));
+
+  let zero=takeByRange([...all],char,-.5,2.19,used,3);
+  zero.forEach(x=>choices.push({...x,delta:0,role:"zero"}));
+
+  let bad=takeByRange([...all],char,-99,-.51,used,4);
+  bad.forEach(x=>choices.push({...x,delta:-3,role:"bad"}));
+
+  // 足りない場合の保険。必ず6択に近づける。
+  fillRandom(choices,[...ZERO_ANSWERS,...GLOBAL_RESPONSES],used,6,"zero",0);
+  fillRandom(choices,[...BAD_ANSWERS,...all],used,10,"bad",-3);
+
+  // ベストが取れなかった場合は、最高スコアのものを1つだけ正解にする。
+  if(!choices.some(x=>x.role==="best")){
+    const top=rankedCandidates([...main,...all],char,used)[0];
+    if(top){used.add(top.x.en);choices.unshift({...top.x,delta:3,role:"best"});}
+  }
+
+  return shuffle(choices.slice(0,6));
+}
+function renderTurn(){const sc=route[turn];const choices=buildChoices(sc,selectedChar);window.currentChoices=choices;app.innerHTML=INFO_HTML+`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="status"><div class="stat"><div class="statLabel">TURN</div><div class="statValue">${turn+1}/${route.length}</div></div><div class="stat"><div class="statLabel">TARGET</div><div class="statValue" style="font-size:17px">${selectedChar.name}</div></div><div class="stat"><div class="statLabel">COMBO</div><div class="statValue">${combo}</div></div></div><div class="card"><div class="heartLine">${renderHearts()}</div><div class="heartHint">好感度：6択。相手の性格で正解が変わる。</div></div><div class="timerWrap"><div class="timerFill" id="timerFill"></div></div><div class="card conversationCard" id="characterCard"><div class="conversationHero"><div class="spriteWrap"><div class="sprite normal float" id="sprite" style="--sheet:url('${selectedChar.sheet}')"></div></div><div><div class="charName">${selectedChar.name}</div><span class="charType">${selectedChar.type}</span><div class="comboBadge">${combo>1?combo+" COMBO":"VIBE CHECK"}</div><div class="bubble"><div class="sceneInBubble">${esc(sc.s)}</div><div class="en">${esc(sc.en)}</div><div class="ja">${esc(sc.ja)}</div></div></div></div><div class="choiceAreaInCard">${choices.map((choice,i)=>`<button class="choice" onclick="choose(${i})"><div class="choiceEN">${esc(choice.en)}</div><div class="choiceJA">${esc(choice.ja)}</div></button>`).join("")}</div><div class="replyBubble hidden" id="feedback"></div></div>`;}
 function startTimer(sec){totalTime=sec;timeLeft=sec;const fill=()=>{const el=document.getElementById("timerFill");if(el)el.style.width=Math.max(0,(timeLeft/totalTime)*100)+"%";};fill();timer=setInterval(()=>{if(locked)return;timeLeft-=.1;fill();if(timeLeft<=0)timeoutChoose();},100);}
 function choose(index){if(locked)return;locked=true;clearInterval(timer);const choice=window.currentChoices[index];applyResult(choice,choice.delta,index,false);}
 function timeoutChoose(){if(locked)return;locked=true;clearInterval(timer);applyResult({en:"TIME OUT",ja:"時間切れ",delta:-3,role:"bad"},-3,null,true);}
 function applyResult(choice,delta,index,isTimeout){heart=Math.max(MIN_HEART,Math.min(MAX_HEART,heart+delta));if(delta===3){combo++;}else{combo=0;}maxCombo=Math.max(maxCombo,combo);const tier=isTimeout?"time":delta===3?"best":delta===1?"good":delta===0?"zero":"bad";const expression=delta===3?"love":delta===1?"good":delta===0?"shock":"bad";const reply=getReply(tier);log.push({turn:turn+1,scene:route[turn].ja,choice:choice.en,ja:choice.ja,delta,replyEN:reply.en,replyJA:reply.ja,role:choice.role||tier});if(choice.en!=="TIME OUT"){recentAnswers.push(choice.en);recentAnswers=recentAnswers.slice(-22);}document.querySelectorAll(".choice").forEach((btn,i)=>{btn.classList.add("locked");if(i===index)btn.classList.add("selected");});const sprite=document.getElementById("sprite");sprite.className="sprite "+expression+" pop";const card=document.getElementById("characterCard");if(delta<0)card.classList.add("shake");triggerFlash(delta===3?"best":delta<0?"bad":"good");const feedback=document.getElementById("feedback");feedback.classList.remove("hidden");feedback.innerHTML=`<div class="tapNext">TAP TO CONTINUE</div><div class="delta ${delta<0?'bad':''}">${delta>0?"+"+delta:delta}</div><div class="replyEN">${esc(reply.en)}</div><div class="replyJA">${esc(reply.ja)}</div><div class="heartLine" style="font-size:23px;margin-top:8px">${renderHearts()}</div>`;feedback.onclick=()=>{turn++;nextTurn();};}
 function getReply(tier){if(tier==="time")return REPLIES.time;const pool=REPLIES[tier];const i=Math.floor(Math.random()*pool.en.length);return{en:pool.en[i],ja:pool.ja[i]};}
 function triggerFlash(type){flash.className="flash "+type;setTimeout(()=>flash.className="flash",600);}
-function showResult(){clearInterval(timer);let rank="CLASSMATE",comment="会話は成立した。でも攻略にはまだ遠い。";if(heart>=13){rank="BEST FRIEND";comment="完全攻略。相手のノリを読み切った。";}else if(heart>=10){rank="GOOD FRIEND";comment="かなり好印象。あと一歩で親友。";}else if(heart>=7){rank="FRIEND";comment="悪くない。空気はだいたい読めている。";}else if(heart>=4){rank="AWKWARD";comment="少し気まずい。地雷を踏みすぎた。";}else{rank="GAME OVER";comment="空気が崩壊した。相手の嫌いな返答を確認しよう。";}app.innerHTML=`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title" style="font-size:36px;margin-top:4px">RESULT</div><div class="resultRank">${rank}</div><div class="heartLine" style="margin-top:10px">${renderHearts()}</div><p class="lead">${selectedChar.name}：${comment}<br>MAX COMBO：${maxCombo}</p><button class="btn" style="width:100%" onclick="startRoute('${selectedChar.id}')">同じ相手でもう一回</button><button class="btn secondary" style="width:100%;margin-top:10px" onclick="showCharacterSelect()">相手を変える</button></div><div class="card"><b>会話ログ</b><div class="log">${log.map(l=>`<div class="logRow"><b>${l.turn}. ${selectedChar.name}</b>：${esc(l.scene)}<br>${esc(l.choice)}（${esc(l.ja)}） <b>${l.delta>0?"+"+l.delta:l.delta}</b><br>${esc(l.replyEN)}<br><span style="color:var(--muted)">${esc(l.replyJA)}</span></div>`).join("")}</div></div>`;}
+function showResult(){clearInterval(timer);let rank="CLASSMATE",comment="会話は成立した。でも攻略にはまだ遠い。";if(heart>=13){rank="BEST FRIEND";comment="完全攻略。相手のノリを読み切った。";}else if(heart>=10){rank="GOOD FRIEND";comment="かなり好印象。あと一歩で親友。";}else if(heart>=7){rank="FRIEND";comment="悪くない。空気はだいたい読めている。";}else if(heart>=4){rank="AWKWARD";comment="少し気まずい。地雷を踏みすぎた。";}else{rank="GAME OVER";comment="空気が崩壊した。相手の嫌いな返答を確認しよう。";}app.innerHTML=INFO_HTML+`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title" style="font-size:36px;margin-top:4px">RESULT</div><div class="resultRank">${rank}</div><div class="heartLine" style="margin-top:10px">${renderHearts()}</div><p class="lead">${selectedChar.name}：${comment}<br>MAX COMBO：${maxCombo}</p><button class="btn" style="width:100%" onclick="startRoute('${selectedChar.id}')">同じ相手でもう一回</button><button class="btn secondary" style="width:100%;margin-top:10px" onclick="showCharacterSelect()">相手を変える</button></div><div class="card"><b>会話ログ</b><div class="log">${log.map(l=>`<div class="logRow"><b>${l.turn}. ${selectedChar.name}</b>：${esc(l.scene)}<br>${esc(l.choice)}（${esc(l.ja)}） <b>${l.delta>0?"+"+l.delta:l.delta}</b><br>${esc(l.replyEN)}<br><span style="color:var(--muted)">${esc(l.replyJA)}</span></div>`).join("")}</div></div>`;}
 showTitle();
 </script>
 </body>
