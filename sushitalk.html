@@ -300,8 +300,8 @@ const FINAL_PROMPTS=[
 const REPLIES={best:{en:["Perfect vibe!","You nailed it!","That was exactly right!","That landed perfectly.","You read the room perfectly."],ja:["最高。完全に刺さった。","これは大当たり。","空気読み、完璧。","相手の好みにかなり合った。","そのキャラにはかなり強い返答。"]},good:{en:["Nice answer.","That works.","Pretty good.","Good enough.","That was natural."],ja:["いい返答。","悪くない。","ちゃんと伝わった。","会話はかなり自然。","無難に好印象。"]},zero:{en:["Hmm. Okay.","Not bad, not great.","I guess that works.","A little plain.","Safe, but weak."],ja:["まあ普通。","刺さりはしない。","会話は続くけど弱い。","無難だが決め手に欠ける。","安全だが攻略力は低い。"]},bad:{en:["That was not it.","Ouch.","Nope.","Wrong vibe.","You missed the vibe."],ja:["それは地雷。","空気が死んだ。","かなり印象ダウン。","相手の嫌いなノリを踏んだ。","キャラ読み失敗。"]},time:{en:"Too late!",ja:"時間切れ。空気が流れた。"}};
 let selectedChar=null,route=[],turn=0,heart=5,combo=0,maxCombo=0,locked=false,timer=null,timeLeft=0,totalTime=0,log=[],recentAnswers=[];
 const MAX_HEART=15,MIN_HEART=0,app=document.getElementById("app"),flash=document.getElementById("flash");
-function showTitle(){app.innerHTML=INFO_HTML+`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title">Sushi Talk</div><p class="lead"><br></p><button class="btn" style="width:100%;margin-top:8px" onclick="startRandomSet()">START</button></div>`;}
-async function startRandomSet(){await preloadSprites();app.innerHTML=INFO_HTML+`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title" style="font-size:36px;margin-top:4px">誰と話す？</div><p class="lead" style="margin-bottom:0">同じ返答でも、相手によってスコアが変わります。</p></div><div class="characterList">${CHARACTERS.map(ch=>`<button class="characterSelect" onclick="startRoute('${ch.id}')"><div class="miniSpriteWrap"><div class="miniSprite" style="--sheet:url('${ch.sheet}')"></div></div><div><div class="selectName">${ch.name}</div><span class="selectType">${ch.type}</span><div class="ruleGrid"><div class="ruleBox good">👍 最高<br>${ch.best}</div><div class="ruleBox bad">👎 マイナス<br>${ch.worst}</div></div><div style="margin-top:6px;color:var(--muted);font-size:12px;font-weight:800;line-height:1.45">${ch.profile}</div></div></button>`).join("")}</div>`;}
+function showTitle(){app.innerHTML=INFO_HTML+`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title">Sushi Talk</div><p class="lead"><br></p><button class="btn" style="width:100%;margin-top:8px" onclick="showCharacterSelect()">START</button></div>`;}
+async function showCharacterSelect(){await preloadSprites();app.innerHTML=INFO_HTML+`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title" style="font-size:36px;margin-top:4px">誰と話す？</div><p class="lead" style="margin-bottom:0">同じ返答でも、相手によってスコアが変わります。</p></div><div class="characterList">${CHARACTERS.map(ch=>`<button class="characterSelect" onclick="startRoute('${ch.id}')"><div class="miniSpriteWrap"><div class="miniSprite" style="--sheet:url('${ch.sheet}')"></div></div><div><div class="selectName">${ch.name}</div><span class="selectType">${ch.type}</span><div class="ruleGrid"><div class="ruleBox good">👍 最高<br>${ch.best}</div><div class="ruleBox bad">👎 マイナス<br>${ch.worst}</div></div><div style="margin-top:6px;color:var(--muted);font-size:12px;font-weight:800;line-height:1.45">${ch.profile}</div></div></button>`).join("")}</div>`;}
 function startRoute(id){selectedChar=CHARACTERS.find(c=>c.id===id);route=sample(SCENARIOS,9);route.push(pick(FINAL_PROMPTS));turn=0;heart=5;combo=0;maxCombo=0;locked=false;log=[];recentAnswers=[];nextTurn();}
 function nextTurn(){clearInterval(timer);if(turn>=route.length||heart<=0){showResult();return;}locked=false;renderTurn();startTimer(selectedChar.time);}
 function renderHearts(){let full=Math.max(0,Math.min(MAX_HEART,heart));return "❤️".repeat(full)+"🤍".repeat(Math.max(0,10-full));}
@@ -425,49 +425,65 @@ function timeoutChoose(){if(locked)return;locked=true;clearInterval(timer);apply
 function applyResult(choice,delta,index,isTimeout){heart=Math.max(MIN_HEART,Math.min(MAX_HEART,heart+delta));if(delta===3){combo++;}else{combo=0;}maxCombo=Math.max(maxCombo,combo);const tier=isTimeout?"time":delta===3?"best":delta===1?"good":delta===0?"zero":"bad";const expression=delta===3?"love":delta===1?"good":delta===0?"shock":"bad";const reply=getReply(tier);log.push({turn:turn+1,scene:route[turn].ja,choice:choice.en,ja:choice.ja,delta,replyEN:reply.en,replyJA:reply.ja,role:choice.role||tier});if(choice.en!=="TIME OUT"){recentAnswers.push(choice.en);recentAnswers=recentAnswers.slice(-22);}document.querySelectorAll(".choice").forEach((btn,i)=>{btn.classList.add("locked");if(i===index)btn.classList.add("selected");});const sprite=document.getElementById("sprite");sprite.className="sprite "+expression+" pop";const card=document.getElementById("characterCard");if(delta<0)card.classList.add("shake");triggerFlash(delta===3?"best":delta<0?"bad":"good");const feedback=document.getElementById("feedback");feedback.classList.remove("hidden");feedback.innerHTML=`<div class="tapNext">TAP TO CONTINUE</div><div class="delta ${delta<0?'bad':''}">${delta>0?"+"+delta:delta}</div><div class="replyEN">${esc(reply.en)}</div><div class="replyJA">${esc(reply.ja)}</div><div class="heartLine" style="font-size:23px;margin-top:8px">${renderHearts()}</div>`;feedback.onclick=()=>{turn++;nextTurn();};}
 function getReply(tier){if(tier==="time")return REPLIES.time;const pool=REPLIES[tier];const i=Math.floor(Math.random()*pool.en.length);return{en:pool.en[i],ja:pool.ja[i]};}
 function triggerFlash(type){flash.className="flash "+type;setTimeout(()=>flash.className="flash",600);}
-function showResult(){clearInterval(timer);let rank="CLASSMATE",comment="会話は成立した。でも攻略にはまだ遠い。";if(heart>=13){rank="BEST FRIEND";comment="完全攻略。相手のノリを読み切った。";}else if(heart>=10){rank="GOOD FRIEND";comment="かなり好印象。あと一歩で親友。";}else if(heart>=7){rank="FRIEND";comment="悪くない。空気はだいたい読めている。";}else if(heart>=4){rank="AWKWARD";comment="少し気まずい。地雷を踏みすぎた。";}else{rank="GAME OVER";comment="空気が崩壊した。相手の嫌いな返答を確認しよう。";}app.innerHTML=INFO_HTML+`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title" style="font-size:36px;margin-top:4px">RESULT</div><div class="resultRank">${rank}</div><div class="heartLine" style="margin-top:10px">${renderHearts()}</div><p class="lead">${selectedChar.name}：${comment}<br>MAX COMBO：${maxCombo}</p><button class="btn" style="width:100%" onclick="startRoute('${selectedChar.id}')">同じ相手でもう一回</button><button class="btn secondary" style="width:100%;margin-top:10px" onclick="startRandomSet()">相手を変える</button></div><div class="card"><b>会話ログ</b><div class="log">${log.map(l=>`<div class="logRow"><b>${l.turn}. ${selectedChar.name}</b>：${esc(l.scene)}<br>${esc(l.choice)}（${esc(l.ja)}） <b>${l.delta>0?"+"+l.delta:l.delta}</b><br>${esc(l.replyEN)}<br><span style="color:var(--muted)">${esc(l.replyJA)}</span></div>`).join("")}</div></div>`;}
+function showResult(){clearInterval(timer);let rank="CLASSMATE",comment="会話は成立した。でも攻略にはまだ遠い。";if(heart>=13){rank="BEST FRIEND";comment="完全攻略。相手のノリを読み切った。";}else if(heart>=10){rank="GOOD FRIEND";comment="かなり好印象。あと一歩で親友。";}else if(heart>=7){rank="FRIEND";comment="悪くない。空気はだいたい読めている。";}else if(heart>=4){rank="AWKWARD";comment="少し気まずい。地雷を踏みすぎた。";}else{rank="GAME OVER";comment="空気が崩壊した。相手の嫌いな返答を確認しよう。";}app.innerHTML=INFO_HTML+`<div class="header"><div class="logo">🍣 Sushi Talk</div><a class="smallLink" href="./index.html">すし単へ</a></div><div class="card"><div class="title" style="font-size:36px;margin-top:4px">RESULT</div><div class="resultRank">${rank}</div><div class="heartLine" style="margin-top:10px">${renderHearts()}</div><p class="lead">${selectedChar.name}：${comment}<br>MAX COMBO：${maxCombo}</p><button class="btn" style="width:100%" onclick="startRoute('${selectedChar.id}')">同じ相手でもう一回</button><button class="btn secondary" style="width:100%;margin-top:10px" onclick="showCharacterSelect()">相手を変える</button></div><div class="card"><b>会話ログ</b><div class="log">${log.map(l=>`<div class="logRow"><b>${l.turn}. ${selectedChar.name}</b>：${esc(l.scene)}<br>${esc(l.choice)}（${esc(l.ja)}） <b>${l.delta>0?"+"+l.delta:l.delta}</b><br>${esc(l.replyEN)}<br><span style="color:var(--muted)">${esc(l.replyJA)}</span></div>`).join("")}</div></div>`;}
 showTitle();
 </script>
 
+
 <script>
-/* Sushi Talk v3.1: 5人1セット・毎セットシャッフル */
+/* Sushi Talk fixed start: 5 rounds, all 5 characters once */
 (function(){
-  function shuffledCharacters(){
-    if(typeof CHARACTERS === "undefined") return [];
-    return [...CHARACTERS].sort(()=>Math.random() - 0.5);
+  function shuffleArray(arr){
+    return [...arr].sort(function(){ return Math.random() - 0.5; });
   }
 
-  window.startRandomSet = function(){
-    if(typeof state === "undefined") window.state = {};
-    state.round = 0;
-    state.totalRounds = 5;
-    state.rounds = shuffledCharacters().slice(0,5);
-    state.characterQueue = state.rounds;
-    state.scoreByCharacter = {};
-    state.rounds.forEach(c => state.scoreByCharacter[c.id] = 0);
+  window.startFiveSet = function(){
+    if(typeof CHARACTERS === "undefined") return;
+    window.__sushiTalkCharacterQueue = shuffleArray(CHARACTERS).slice(0,5);
+    window.__sushiTalkRoundLimit = 5;
+    window.__sushiTalkRoundIndex = 0;
 
-    if(typeof startGame === "function"){
-      try{
-        if(state.characterQueue && state.characterQueue.length){
-          state.currentCharacter = state.characterQueue[0];
-          window.currentCharacter = state.currentCharacter;
+    const first = window.__sushiTalkCharacterQueue[0];
+
+    try{
+      if(typeof startGame === "function"){
+        // 元コードが startGame(character) 型ならこちらで動く
+        if(startGame.length >= 1){
+          return startGame(first);
         }
-      }catch(e){}
-      return startGame();
+        // 元コードが state.selectedCharacter を読む型に備える
+        if(typeof state !== "undefined"){
+          state.character = first;
+          state.currentCharacter = first;
+          state.selectedCharacter = first;
+          state.round = 0;
+          state.maxRound = 5;
+          state.totalRounds = 5;
+        }
+        window.currentCharacter = first;
+        return startGame();
+      }
+    }catch(e){
+      console.error(e);
     }
-    if(typeof nextRound === "function") return nextRound();
   };
 
-  window.pickRoundCharacter = function(){
-    if(typeof state === "undefined") window.state = {};
-    if(!state.characterQueue || !state.characterQueue.length){
-      state.characterQueue = shuffledCharacters().slice(0,5);
-    }
-    const ch = state.characterQueue.shift();
-    state.currentCharacter = ch;
-    window.currentCharacter = ch;
-    return ch;
-  };
+  // STARTボタンのonclickを安全に上書き
+  function patchStartButtons(){
+    document.querySelectorAll("button, .btn").forEach(function(btn){
+      const txt = (btn.textContent || "").trim().toLowerCase();
+      if(txt.includes("start") || txt.includes("スタート")){
+        btn.onclick = function(ev){
+          ev.preventDefault();
+          window.startFiveSet();
+        };
+      }
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", patchStartButtons);
+  setTimeout(patchStartButtons, 300);
+  setTimeout(patchStartButtons, 1000);
 })();
 </script>
 
