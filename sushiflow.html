@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sushi Flow v0.3</title>
+<style>
+:root{--bg:#fffdf8;--text:#222;--jp:#666;--accent:#f28c28}
+*{box-sizing:border-box}
+html,body{
+  margin:0;width:100%;height:100%;overflow:hidden;
+  background:var(--bg);color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Yu Gothic",sans-serif
+}
+button,input{font:inherit}
+.screen{
+  position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+  transition:opacity .45s ease
+}
+.hidden{opacity:0;pointer-events:none}
+.start-card{width:min(520px,calc(100vw - 32px));text-align:center}
+h1{margin:0;font-size:clamp(44px,8vw,72px);letter-spacing:-.04em}
+h1 span{color:var(--accent)}
+.tagline{margin:10px 0 34px;color:#777}
+.level-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:16px}
+.level-btn{
+  min-height:72px;border:1px solid #ddd;border-radius:18px;background:#fff;
+  font-size:24px;font-weight:700;cursor:pointer
+}
+.level-btn.selected{border:2px solid var(--accent);background:#fff5ea;color:#b85d00}
+#startBtn{
+  width:100%;min-height:66px;border:0;border-radius:18px;background:var(--accent);
+  color:#fff;font-size:23px;font-weight:800;cursor:pointer
+}
+#status{min-height:20px;margin-top:12px;color:#888;font-size:13px}
+
+#card{
+  width:min(1000px,90vw);
+  text-align:center;
+  opacity:1;
+  transform:translateY(0) scale(1);
+  transition:opacity .95s ease,transform .95s ease
+}
+#card.card-out{opacity:0;transform:translateY(-10px) scale(.99)}
+
+.line{
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity 1.15s ease,transform 1.15s ease;
+  visibility:hidden;
+}
+.line.show{
+  opacity:1;
+  transform:translateY(0);
+  visibility:visible;
+}
+#english{
+  min-height:1.15em;
+  font-size:clamp(58px,10vw,128px);
+  line-height:1.05;font-weight:800;letter-spacing:-.04em;overflow-wrap:anywhere
+}
+#japanese{
+  min-height:1.4em;margin-top:20px;color:var(--jp);
+  font-size:clamp(28px,4vw,52px);line-height:1.35
+}
+
+.controls{
+  position:fixed;left:50%;bottom:16px;width:min(700px,calc(100vw - 28px));
+  transform:translateX(-50%);display:grid;
+  grid-template-columns:auto auto 1fr auto auto auto;
+  align-items:center;gap:12px;padding:11px 15px;
+  border:1px solid rgba(0,0,0,.06);border-radius:20px;
+  background:rgba(255,255,255,.82);backdrop-filter:blur(10px);
+  opacity:.32;transition:opacity .2s ease
+}
+.controls:hover,.controls.active{opacity:1}
+.icon-btn{width:42px;height:42px;border:0;border-radius:50%;background:#f3f3f3;cursor:pointer;font-weight:800}
+#speedSlider{width:100%;accent-color:var(--accent);cursor:pointer}
+#speedValue{min-width:50px;color:#666;font-variant-numeric:tabular-nums}
+@media(max-width:600px){
+  .controls{grid-template-columns:auto auto 1fr auto auto}
+  #speedValue{display:none}
+}
+</style>
+</head>
+<body>
+<section id="startScreen" class="screen">
+  <div class="start-card">
+    <h1>Sushi <span>Flow</span></h1>
+    <p class="tagline">見るだけ。流れるままに。</p>
+    <div class="level-grid">
+      <button class="level-btn selected" data-level="1">LV1</button>
+      <button class="level-btn" data-level="2">LV2</button>
+      <button class="level-btn" data-level="3">LV3</button>
+      <button class="level-btn" data-level="4">LV4</button>
+    </div>
+    <button id="startBtn" disabled>START</button>
+    <div id="status">仮データで起動します</div>
+  </div>
+</section>
+
+<section id="flowScreen" class="screen hidden">
+  <div id="card">
+    <div id="english" class="line"></div>
+    <div id="japanese" class="line"></div>
+  </div>
+
+  <div id="controls" class="controls">
+    <button id="pauseBtn" class="icon-btn">Ⅱ</button>
+    <span>⚡</span>
+    <input id="speedSlider" type="range" min="0.5" max="5" step="0.1" value="2.5">
+    <span>🌿</span>
+    <span id="speedValue">2.5s</span>
+    <button id="exitBtn" class="icon-btn">×</button>
+  </div>
+</section>
+
+<script>
+const DATA_PATH = "./data/words_master.json";
+
+const fallbackWords=[
+ {english:"recover",japanese:"回復する",level:1},
+ {english:"ancient",japanese:"古代の",level:1},
+ {english:"prevent",japanese:"防ぐ",level:1},
+ {english:"include",japanese:"含む",level:1},
+ {english:"maintain",japanese:"維持する",level:2},
+ {english:"purchase",japanese:"購入する",level:2},
+ {english:"significant",japanese:"重要な",level:3},
+ {english:"controversial",japanese:"議論を呼ぶ",level:4}
+];
+
+let words=[];
+
+function normalizeWords(raw){
+ const source = Array.isArray(raw)
+   ? raw
+   : Array.isArray(raw?.words)
+     ? raw.words
+     : Array.isArray(raw?.data)
+       ? raw.data
+       : [];
+
+ return source.map((item,index)=>{
+   const english = item.english ?? item.word ?? item.en ?? item.term ?? item.front ?? "";
+   const japanese = item.japanese ?? item.meaning ?? item.jp ?? item.ja ?? item.translation ?? item.back ?? "";
+   let level = Number(item.level ?? item.lv ?? item.grade ?? item.group ?? 0);
+
+   if(!level){
+     if(index < 600) level = 1;
+     else if(index < 1200) level = 2;
+     else if(index < 1700) level = 3;
+     else level = 4;
+   }
+
+   return {
+     english:String(english).trim(),
+     japanese:String(japanese).trim(),
+     level
+   };
+ }).filter(word => word.english && word.japanese && word.level >= 1 && word.level <= 4);
+}
+
+async function loadWords(){
+ el.startBtn.disabled = true;
+ el.status.textContent = "すし単の単語データを読み込み中...";
+
+ try{
+   const response = await fetch(DATA_PATH,{cache:"no-store"});
+   if(!response.ok) throw new Error("HTTP " + response.status);
+
+   const raw = await response.json();
+   words = normalizeWords(raw);
+   if(!words.length) throw new Error("使用できる単語がありません");
+
+   const counts = [1,2,3,4].map(level => words.filter(word=>word.level===level).length);
+   el.status.textContent = `全${words.length}語　LV1:${counts[0]} / LV2:${counts[1]} / LV3:${counts[2]} / LV4:${counts[3]}`;
+ }catch(error){
+   console.warn("words_master.json load failed:",error);
+   words = fallbackWords;
+   el.status.textContent = "単語データを読み込めなかったため、確認用データで起動します";
+ }
+
+ el.startBtn.disabled = false;
+}
+
+const el={
+ startScreen:document.getElementById("startScreen"),
+ flowScreen:document.getElementById("flowScreen"),
+ levels:[...document.querySelectorAll(".level-btn")],
+ startBtn:document.getElementById("startBtn"),
+ status:document.getElementById("status"),
+ card:document.getElementById("card"),
+ english:document.getElementById("english"),
+ japanese:document.getElementById("japanese"),
+ controls:document.getElementById("controls"),
+ pauseBtn:document.getElementById("pauseBtn"),
+ speedSlider:document.getElementById("speedSlider"),
+ speedValue:document.getElementById("speedValue"),
+ exitBtn:document.getElementById("exitBtn")
+};
+
+let level=1,active=[],pool=[],recent=[];
+let speed=2.5,paused=false;
+let nextTimer=null,revealTimer=null,swapTimer=null,controlsTimer=null;
+
+function shuffle(a){
+ const c=[...a];
+ for(let i=c.length-1;i>0;i--){
+   const j=Math.floor(Math.random()*(i+1));
+   [c[i],c[j]]=[c[j],c[i]];
+ }
+ return c;
+}
+function refill(){pool=shuffle(active)}
+function nextWord(){
+ const repeat=recent.length>=5&&Math.random()<.10;
+ let word;
+ if(repeat){
+   const safe=Math.max(1,recent.length-2);
+   word=recent[Math.floor(Math.random()*safe)];
+ }else{
+   if(!pool.length)refill();
+   word=pool.pop();
+ }
+ recent.push(word);
+ if(recent.length>20)recent.shift();
+ return word;
+}
+function clearTimers(){
+ clearTimeout(nextTimer);
+ clearTimeout(revealTimer);
+ clearTimeout(swapTimer);
+}
+function hideBothImmediately(){
+ el.english.style.transition="none";
+ el.japanese.style.transition="none";
+ el.english.classList.remove("show");
+ el.japanese.classList.remove("show");
+ void el.card.offsetHeight;
+ el.english.style.transition="";
+ el.japanese.style.transition="";
+}
+function runCycle(){
+ if(paused)return;
+ clearTimers();
+
+ const word=nextWord();
+ const japaneseFirst=Math.random()<.35;
+ const first=japaneseFirst?el.japanese:el.english;
+ const second=japaneseFirst?el.english:el.japanese;
+ const revealDelay=Math.max(700,Math.min(1900,speed*450));
+
+ // 1. 現在のカード全体を消す
+ el.card.classList.add("card-out");
+
+ // 2. 完全に消えた後で、両方を非表示にして内容を差し替える
+ swapTimer=setTimeout(()=>{
+   hideBothImmediately();
+   el.english.textContent=word.english;
+   el.japanese.textContent=word.japanese;
+
+   // 3. 先に出す側だけを可視状態にしてからカードを戻す
+   first.classList.add("show");
+   second.classList.remove("show");
+   el.card.classList.remove("card-out");
+
+   // 4. 後発側だけを独立してフェードイン
+   revealTimer=setTimeout(()=>{
+     second.classList.add("show");
+   },revealDelay);
+
+ },1000);
+
+ // 次の単語への切替
+ nextTimer=setTimeout(runCycle,speed*1000+3100);
+}
+
+function startFlow(){
+ active=words.filter(w=>w.level===level);
+ if(!active.length){el.status.textContent=`LV${level} の単語がありません`;return}
+ pool=[];recent=[];paused=false;
+ el.pauseBtn.textContent="Ⅱ";
+ refill();
+ hideBothImmediately();
+ el.startScreen.classList.add("hidden");
+ el.flowScreen.classList.remove("hidden");
+ runCycle();
+}
+function stopFlow(){
+ clearTimers();
+ paused=false;
+ el.pauseBtn.textContent="Ⅱ";
+ hideBothImmediately();
+ el.english.textContent="";
+ el.japanese.textContent="";
+ el.flowScreen.classList.add("hidden");
+ el.startScreen.classList.remove("hidden");
+}
+function togglePause(){
+ paused=!paused;
+ el.pauseBtn.textContent=paused?"▶":"Ⅱ";
+ if(paused)clearTimers();else runCycle();
+}
+function updateSpeed(){
+ speed=Number(el.speedSlider.value);
+ el.speedValue.textContent=speed.toFixed(1)+"s";
+}
+function wakeControls(){
+ el.controls.classList.add("active");
+ clearTimeout(controlsTimer);
+ controlsTimer=setTimeout(()=>el.controls.classList.remove("active"),1800);
+}
+
+el.levels.forEach(btn=>{
+ btn.addEventListener("click",()=>{
+   level=Number(btn.dataset.level);
+   el.levels.forEach(x=>x.classList.remove("selected"));
+   btn.classList.add("selected");
+ });
+});
+el.startBtn.addEventListener("click",startFlow);
+el.pauseBtn.addEventListener("click",togglePause);
+el.exitBtn.addEventListener("click",stopFlow);
+el.speedSlider.addEventListener("input",updateSpeed);
+["mousemove","pointerdown","touchstart"].forEach(name=>{
+ el.flowScreen.addEventListener(name,wakeControls,{passive:true});
+});
+document.addEventListener("keydown",e=>{
+ if(el.flowScreen.classList.contains("hidden"))return;
+ if(e.code==="Space"){e.preventDefault();togglePause()}
+ if(e.code==="Escape")stopFlow();
+});
+
+loadWords();
+</script>
+</body>
+</html>
