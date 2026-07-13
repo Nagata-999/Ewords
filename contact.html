@@ -4,56 +4,67 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>お問い合わせ｜すし単</title>
-  <meta name="description" content="すし単へのお問い合わせページです。不具合報告、教材やゲームへのご意見を受け付けています。">
+  <meta name="description" content="すし単へのお問い合わせページです。ゲームの不具合、ご意見、ご要望はこちらからご連絡ください。">
   <style>
-    :root{--bg:#fbf4ea;--card:#fffaf2;--line:#f1d7bc;--text:#172033;--muted:#64748b;--orange:#f4511e;--teal:#0f766e}
-    *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
-    main{max-width:760px;margin:0 auto;padding:36px 18px 60px}.back{display:inline-block;margin-bottom:18px;color:var(--teal);font-weight:900;text-decoration:none}.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 14px 34px rgba(15,23,42,.06)}h1{margin-top:0}p{line-height:1.8;color:#475569}label{display:block;margin:18px 0 7px;font-weight:900}input,select,textarea{width:100%;padding:12px 14px;border:1px solid #d9c4ae;border-radius:12px;font:inherit;background:#fff}textarea{min-height:180px;resize:vertical}.btn{margin-top:18px;border:0;border-radius:999px;background:var(--orange);color:white;font-weight:900;padding:12px 20px;cursor:pointer}.btn:hover{filter:brightness(.96)}.note{font-size:13px;color:var(--muted)}.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+    :root{
+      --bg:#fbf4ea;--card:#fffaf2;--line:#f1d7bc;--text:#172033;
+      --muted:#64748b;--orange:#f4511e;--teal:#0f766e;
+      --shadow:0 14px 34px rgba(15,23,42,.07)
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at 18% 8%,rgba(251,146,60,.14),transparent 30%),
+        radial-gradient(circle at 86% 12%,rgba(20,184,166,.10),transparent 28%),
+        var(--bg);
+      color:var(--text)
+    }
+    main{max-width:760px;margin:0 auto;padding:56px 20px}
+    .card{
+      background:var(--card);border:1px solid var(--line);border-radius:24px;
+      box-shadow:var(--shadow);padding:28px
+    }
+    h1{margin:0 0 18px;font-size:clamp(30px,5vw,46px)}
+    p{line-height:1.9;color:#475569}
+    .mail{
+      margin:24px 0;padding:18px;border-radius:16px;background:#fff;
+      border:1px solid var(--line);text-align:center
+    }
+    .mail a{
+      color:var(--orange);font-weight:900;word-break:break-all;text-decoration:none
+    }
+    .mail a:hover{text-decoration:underline}
+    .back{
+      display:inline-block;margin-top:8px;color:var(--teal);
+      font-weight:900;text-decoration:none
+    }
+    .back:hover{text-decoration:underline}
+    footer{margin-top:22px;text-align:center;color:var(--muted);font-size:12px}
+    footer a{color:var(--teal);font-weight:800;margin:0 6px}
   </style>
 </head>
 <body>
-<main>
-  <a class="back" href="index.html">← すし単トップへ戻る</a>
-  <section class="card">
-    <h1>お問い合わせ</h1>
-    <p>ゲームの不具合、教材内容についてのご意見、追加してほしい機能、学校での利用についてなどはこちらからお願いします。</p>
-    <p class="note">送信内容は <b>sushisushitantan@gmail.com</b> に届きます。</p>
-
-    <form action="https://formsubmit.co/sushisushitantan@gmail.com" method="POST">
-      <input type="hidden" name="_subject" value="【すし単】新しいお問い合わせ">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_next" value="https://sushitan.net/contact-thanks.html">
-
-      <div class="hp" aria-hidden="true">
-        <label for="website">Website</label>
-        <input id="website" type="text" name="_honey" tabindex="-1" autocomplete="off">
+  <main>
+    <section class="card">
+      <h1>お問い合わせ</h1>
+      <p>すし単をご利用いただきありがとうございます。</p>
+      <p>
+        ゲームの不具合、ご意見、ご要望、学校や授業での利用についてのお問い合わせは、
+        下記メールアドレスまでご連絡ください。
+      </p>
+      <div class="mail">
+        <a href="mailto:sushisushitantan@gmail.com">sushisushitantan@gmail.com</a>
       </div>
-
-      <label for="name">お名前</label>
-      <input id="name" name="お名前" autocomplete="name" required>
-
-      <label for="email">返信先メールアドレス</label>
-      <input id="email" name="email" type="email" autocomplete="email" required>
-
-      <label for="category">お問い合わせ内容</label>
-      <select id="category" name="カテゴリ">
-        <option>ゲームの不具合</option>
-        <option>教材内容について</option>
-        <option>追加してほしい機能</option>
-        <option>学校での利用について</option>
-        <option>広告・権利関係</option>
-        <option>その他</option>
-      </select>
-
-      <label for="message">メッセージ</label>
-      <textarea id="message" name="メッセージ" required></textarea>
-
-      <button class="btn" type="submit">送信する</button>
-    </form>
-
-    <p class="note">初回のみ、FormSubmitから確認メールが届きます。そのメール内の確認ボタンを押すと、以後の問い合わせが受信できるようになります。</p>
-  </section>
-</main>
+      <p>内容を確認のうえ、必要に応じて返信いたします。</p>
+      <a class="back" href="index.html">← トップページへ戻る</a>
+    </section>
+    <footer>
+      © すし単
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="contact.html">Contact</a>
+    </footer>
+  </main>
 </body>
 </html>
