@@ -8,7 +8,7 @@
   <style>
     :root{--bg:#fbf4ea;--card:#fffaf2;--line:#f1d7bc;--text:#172033;--muted:#64748b;--orange:#f4511e;--teal:#0f766e}
     *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
-    main{max-width:760px;margin:0 auto;padding:36px 18px 60px}.back{display:inline-block;margin-bottom:18px;color:var(--teal);font-weight:900;text-decoration:none}.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 14px 34px rgba(15,23,42,.06)}h1{margin-top:0}p{line-height:1.8;color:#475569}label{display:block;margin:18px 0 7px;font-weight:900}input,select,textarea{width:100%;padding:12px 14px;border:1px solid #d9c4ae;border-radius:12px;font:inherit;background:#fff}textarea{min-height:180px;resize:vertical}.btn{margin-top:18px;border:0;border-radius:999px;background:var(--orange);color:white;font-weight:900;padding:12px 20px;cursor:pointer}.note{font-size:13px;color:var(--muted)}.status{margin-top:12px;font-weight:900;color:var(--teal)}
+    main{max-width:760px;margin:0 auto;padding:36px 18px 60px}.back{display:inline-block;margin-bottom:18px;color:var(--teal);font-weight:900;text-decoration:none}.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:26px;box-shadow:0 14px 34px rgba(15,23,42,.06)}h1{margin-top:0}p{line-height:1.8;color:#475569}label{display:block;margin:18px 0 7px;font-weight:900}input,select,textarea{width:100%;padding:12px 14px;border:1px solid #d9c4ae;border-radius:12px;font:inherit;background:#fff}textarea{min-height:180px;resize:vertical}.btn{margin-top:18px;border:0;border-radius:999px;background:var(--orange);color:white;font-weight:900;padding:12px 20px;cursor:pointer}.btn:hover{filter:brightness(.96)}.note{font-size:13px;color:var(--muted)}.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
   </style>
 </head>
 <body>
@@ -16,44 +16,44 @@
   <a class="back" href="index.html">← すし単トップへ戻る</a>
   <section class="card">
     <h1>お問い合わせ</h1>
-    <p>ゲームの不具合、教材内容についてのご意見、掲載内容に関する連絡などはこちらからお願いします。</p>
-    <p class="note">送信ボタンを押すと、端末のメールアプリが開きます。入力内容はサーバーには保存されません。</p>
-    <form id="contactForm">
+    <p>ゲームの不具合、教材内容についてのご意見、追加してほしい機能、学校での利用についてなどはこちらからお願いします。</p>
+    <p class="note">送信内容は <b>sushisushitantan@gmail.com</b> に届きます。</p>
+
+    <form action="https://formsubmit.co/sushisushitantan@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="【すし単】新しいお問い合わせ">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://sushitan.net/contact-thanks.html">
+
+      <div class="hp" aria-hidden="true">
+        <label for="website">Website</label>
+        <input id="website" type="text" name="_honey" tabindex="-1" autocomplete="off">
+      </div>
+
       <label for="name">お名前</label>
-      <input id="name" name="name" autocomplete="name" required>
+      <input id="name" name="お名前" autocomplete="name" required>
 
       <label for="email">返信先メールアドレス</label>
       <input id="email" name="email" type="email" autocomplete="email" required>
 
       <label for="category">お問い合わせ内容</label>
-      <select id="category" name="category">
+      <select id="category" name="カテゴリ">
         <option>ゲームの不具合</option>
         <option>教材内容について</option>
+        <option>追加してほしい機能</option>
+        <option>学校での利用について</option>
         <option>広告・権利関係</option>
         <option>その他</option>
       </select>
 
       <label for="message">メッセージ</label>
-      <textarea id="message" name="message" required></textarea>
+      <textarea id="message" name="メッセージ" required></textarea>
 
-      <button class="btn" type="submit">メールアプリを開く</button>
-      <div class="status" id="status" aria-live="polite"></div>
+      <button class="btn" type="submit">送信する</button>
     </form>
+
+    <p class="note">初回のみ、FormSubmitから確認メールが届きます。そのメール内の確認ボタンを押すと、以後の問い合わせが受信できるようになります。</p>
   </section>
 </main>
-<script>
-const CONTACT_EMAIL='contact@sushitan.net';
-document.getElementById('contactForm').addEventListener('submit',e=>{
-  e.preventDefault();
-  const name=document.getElementById('name').value.trim();
-  const email=document.getElementById('email').value.trim();
-  const category=document.getElementById('category').value;
-  const message=document.getElementById('message').value.trim();
-  const subject=`【すし単お問い合わせ】${category}`;
-  const body=`お名前: ${name}\n返信先: ${email}\nカテゴリ: ${category}\n\n${message}`;
-  document.getElementById('status').textContent='メールアプリを開きます。';
-  location.href=`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-});
-</script>
 </body>
 </html>
