@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AIがあるのに、英語は勉強する必要があるの？｜すし英語</title>
+  <meta name="description" content="AIが翻訳してくれる時代に、英語を学ぶ意味はあるのか。必要だからではなく、楽しいから学ぶ。そんな英語学習の考え方を紹介します。">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="AIがあるのに、英語は勉強する必要があるの？">
+  <meta property="og:description" content="必要だから学ぶのではなく、面白いから学ぶ。AI時代の英語学習について考えます。">
+  <meta property="og:locale" content="ja_JP">
+
+  <style>
+    :root {
+      --orange: #f28c28;
+      --orange-dark: #d86f0c;
+      --orange-soft: #fff4e8;
+      --ink: #252525;
+      --muted: #6b6b6b;
+      --line: #ece7e1;
+      --paper: #ffffff;
+      --bg: #fffaf5;
+      --max: 820px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP",
+        "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+      line-height: 1.9;
+      letter-spacing: 0.02em;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+    }
+
+    .header-inner {
+      width: min(calc(100% - 32px), 1080px);
+      margin: 0 auto;
+      min-height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 1.14rem;
+      color: var(--orange-dark);
+      white-space: nowrap;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 0.92rem;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: #4a4a4a;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      color: var(--orange-dark);
+    }
+
+    main {
+      padding: 44px 16px 72px;
+    }
+
+    .article {
+      width: min(100%, var(--max));
+      margin: 0 auto;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 14px 40px rgba(80, 45, 10, 0.07);
+      overflow: hidden;
+    }
+
+    .hero {
+      padding: 54px 52px 38px;
+      background:
+        radial-gradient(circle at top right, rgba(242, 140, 40, 0.16), transparent 36%),
+        linear-gradient(180deg, #ffffff 0%, #fffaf4 100%);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--orange-dark);
+      font-weight: 800;
+      font-size: 0.86rem;
+      letter-spacing: 0.12em;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+    }
+
+    .lead {
+      margin: 24px 0 0;
+      color: #474747;
+      font-size: 1.08rem;
+      line-height: 1.95;
+    }
+
+    .meta {
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .content {
+      padding: 44px 52px 54px;
+      font-size: 1.03rem;
+    }
+
+    .content p {
+      margin: 0 0 1.45em;
+    }
+
+    .content h2 {
+      margin: 2.7em 0 0.9em;
+      font-size: 1.45rem;
+      line-height: 1.5;
+      padding-left: 14px;
+      border-left: 5px solid var(--orange);
+    }
+
+    .highlight {
+      margin: 2.2em 0;
+      padding: 26px 28px;
+      border-radius: 16px;
+      background: var(--orange-soft);
+      border: 1px solid #f5d6b6;
+      font-size: 1.18rem;
+      font-weight: 800;
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    .closing {
+      margin-top: 2.6em;
+      padding-top: 2em;
+      border-top: 1px solid var(--line);
+    }
+
+    .related {
+      margin-top: 34px;
+      padding: 28px;
+      border-radius: 16px;
+      background: #faf8f5;
+      border: 1px solid var(--line);
+    }
+
+    .related h2 {
+      margin-top: 0;
+    }
+
+    .related a {
+      display: inline-block;
+      margin-top: 6px;
+      color: var(--orange-dark);
+      font-weight: 700;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+    }
+
+    .site-footer {
+      width: min(calc(100% - 32px), 1080px);
+      margin: 0 auto;
+      padding: 0 0 42px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      text-align: center;
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        gap: 12px;
+        font-size: 0.82rem;
+      }
+
+      .hero {
+        padding: 38px 24px 30px;
+      }
+
+      .content {
+        padding: 34px 24px 42px;
+      }
+
+      .article {
+        border-radius: 16px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .header-inner {
+        min-height: 60px;
+      }
+
+      .nav a:nth-child(2) {
+        display: none;
+      }
+
+      main {
+        padding-top: 24px;
+      }
+
+      .lead {
+        font-size: 1rem;
+      }
+
+      .content {
+        font-size: 1rem;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "AIがあるのに、英語は勉強する必要があるの？",
+    "description": "AIが翻訳してくれる時代に、英語を学ぶ意味はあるのか。必要だからではなく、楽しいから学ぶ。そんな英語学習の考え方を紹介します。",
+    "datePublished": "2026-07-14",
+    "dateModified": "2026-07-14",
+    "inLanguage": "ja",
+    "publisher": {
+      "@type": "Organization",
+      "name": "すし英語"
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../index.html">すし英語</a>
+      <nav class="nav" aria-label="メインナビゲーション">
+        <a href="../index.html">トップ</a>
+        <a href="../articles.html">記事一覧</a>
+        <a href="../contact.html">問い合わせ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <article class="article">
+      <header class="hero">
+        <p class="eyebrow">ENGLISH &amp; AI</p>
+        <h1>AIがあるのに、英語は勉強する必要があるの？</h1>
+        <p class="lead">
+          AIが翻訳してくれる時代に、英語を学ぶ意味はあるのでしょうか。
+          必要かどうかだけで考えると、見えなくなってしまうものがあります。
+        </p>
+        <p class="meta">公開日：2026年7月14日</p>
+      </header>
+
+      <div class="content">
+        <p>
+          最近、「AIが英語を翻訳してくれるから、もう英語を勉強する必要はない」と言われることがあります。
+        </p>
+
+        <p>
+          たしかに、その意見には一理あります。
+        </p>
+
+        <p>
+          旅行先で困ることも減るでしょうし、海外の記事も動画もAIが一瞬で翻訳してくれます。
+          将来はイヤホン一つで、言葉の壁がほとんどなくなるかもしれません。
+        </p>
+
+        <p>
+          それでも私は、「だから英語を勉強する意味がなくなる」とは思いません。
+        </p>
+
+        <p>
+          なぜなら、人は「必要だから」だけで行動する生き物ではないからです。
+        </p>
+
+        <h2>聴けるのに、それでも自分で演奏する</h2>
+
+        <p>
+          音楽は、今では世界中の曲を好きなだけ聴けます。
+        </p>
+
+        <p>
+          それでもピアノを弾く人がいます。
+          ギターを始める人がいます。
+          自分で歌う人もいます。
+        </p>
+
+        <p>
+          「AIが演奏してくれるなら、自分で弾く必要はない」とは、あまり考えません。
+        </p>
+
+        <p>
+          自分で音を奏でることが楽しいからです。
+        </p>
+
+        <h2>車があるのに、それでも走る</h2>
+
+        <p>
+          同じように、車があります。
+        </p>
+
+        <p>
+          目的地へ行くだけなら、車の方が速くて楽です。
+        </p>
+
+        <p>
+          それでもジョギングをする人がいます。
+          マラソンに挑戦する人がいます。
+          山に登る人もいます。
+        </p>
+
+        <p>
+          効率だけを考えれば、どれも必要ありません。
+        </p>
+
+        <p>
+          でも、多くの人は「やりたいから」やっています。
+        </p>
+
+        <h2>英語も、きっとそれに近い</h2>
+
+        <p>
+          AIがどれだけ進化しても、自分で英語を話して笑い合う楽しさや、
+          映画や音楽をそのまま味わえる喜びは残ります。
+        </p>
+
+        <p>
+          海外の人と直接話が通じた瞬間。
+          映画のセリフが字幕より先に理解できた瞬間。
+          好きな歌の言葉が、そのまま心に入ってきた瞬間。
+        </p>
+
+        <p>
+          そうした体験は、「必要だから」ではなく、「面白いから」続けた先にあります。
+        </p>
+
+        <p>
+          英語は、資格や受験のためだけのものではありません。
+        </p>
+
+        <p>
+          世界中の人と話したり、本を読んだり、ゲームをしたり、旅行をしたり。
+          楽しみ方を少し増やしてくれる道具です。
+        </p>
+
+        <h2>AIは、英語学習の敵ではない</h2>
+
+        <p>
+          AIは、英語を学ぶ意味を奪う存在ではありません。
+        </p>
+
+        <p>
+          分からない表現をすぐに調べたり、会話の練習相手になってもらったり、
+          自分の英文を直してもらったりできます。
+        </p>
+
+        <p>
+          むしろ、英語をもっと気軽に始められるようにしてくれる、最高のパートナーです。
+        </p>
+
+        <div class="highlight">
+          必要だから学ぶのではなく、面白いから学ぶ。
+        </div>
+
+        <div class="closing">
+          <p>
+            「AIがあるのに英語は必要か」という問いに、無理に大きな答えを出す必要はないのかもしれません。
+          </p>
+
+          <p>
+            車があっても走る人がいます。
+            どんな曲でも再生できるのに、自分でピアノやギターを弾く人がいます。
+          </p>
+
+          <p>
+            英語も同じです。
+          </p>
+
+          <p>
+            少し面白そうだからやってみる。
+            分かる言葉が一つ増えたら、ちょっとうれしい。
+          </p>
+
+          <p>
+            そのくらいの理由で、十分なのではないでしょうか。
+          </p>
+        </div>
+
+        <section class="related" aria-labelledby="related-title">
+          <h2 id="related-title">英語をゲームで楽しむ</h2>
+          <p>
+            単語や表現を、短い時間で気軽に練習できます。
+          </p>
+          <a href="../index.html">すし英語のゲームを見る →</a>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 すし英語</p>
+  </footer>
+</body>
+</html>
