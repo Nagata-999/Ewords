@@ -15,6 +15,7 @@ let wrongOnly = false;
 let seconds = 1200;
 let timerId = null;
 let markMode = false;
+let checkedQuestions = new Set();
 let studentName = localStorage.getItem('ielts_student_name') || '';
 let className = localStorage.getItem('ielts_class_name') || '';
 
@@ -85,6 +86,35 @@ function shouldShowQuestion(q){
   return questionNumbers(q).some(n=>!isCorrect(q,n));
 }
 
+function checkOne(n){
+  const q = data.questions.find(item=>questionNumbers(item).includes(Number(n)));
+  if(!q) return;
+  if(!String(answers[n] || '').trim()){
+    const card = document.querySelector(`[data-question-card="${n}"]`) || document.querySelector(`[data-summary-card="${questionNumbers(q)[0]}"]`);
+    const note = card?.querySelector(`[data-check-note="${n}"]`);
+    if(note){
+      note.textContent = '先に解答を入力してください。';
+      note.className = 'checkNote warn';
+    }
+    return;
+  }
+  checkedQuestions.add(Number(n));
+  renderQuestions();
+  requestAnimationFrame(()=>{
+    const target=document.querySelector(`[data-feedback-for="${n}"]`);
+    target?.scrollIntoView({behavior:'smooth',block:'nearest'});
+  });
+}
+
+function setQuickTimer(minutes){
+  stopTimer();
+  seconds = minutes * 60;
+  updateTimer();
+  timerId = setInterval(tick,1000);
+  $('#startPause').textContent='Pause';
+  $('#moreMenu')?.classList.remove('show');
+}
+
 function renderQuestions(){
   let html = '';
   for(const q of data.questions){
@@ -92,18 +122,21 @@ function renderQuestions(){
     const nums = questionNumbers(q);
     const flagged = nums.some(n=>flags[n]);
     if(q.type === 'summary'){
-      html += `<article class="qcard"><div class="qtop"><span class="qnum">Q${nums[0]}–${nums.at(-1)}</span><button class="flag ${flagged?'on':''}" data-flag="${nums[0]}">Review</button></div><div class="qtype">${esc(questionType(q))}</div><div class="qtext">${esc(q.question)}</div><div class="summaryBox">${q.summaryHtml.replace(/\{\{(\d+)(?:\|[^}]*)?\}\}/g,(_,n)=>`<input aria-label="Question ${n}" data-n="${n}" value="${esc(answers[n]||'')}">`)}</div>`;
-      if(graded) for(const n of nums) html += `<div class="subResult"><b>Q${n}</b>${resultLine(q,n)}${feedbackHtml(q,n)}</div>`;
+      html += `<article class="qcard" data-summary-card="${nums[0]}"><div class="qtop"><span class="qnum">Q${nums[0]}–${nums.at(-1)}</span><button class="flag ${flagged?'on':''}" data-flag="${nums[0]}">Review</button></div><div class="qtype">${esc(questionType(q))}</div><div class="qtext">${esc(q.question)}</div><div class="summaryBox">${q.summaryHtml.replace(/\{\{(\d+)(?:\|[^}]*)?\}\}/g,(_,n)=>`<input aria-label="Question ${n}" data-n="${n}" value="${esc(answers[n]||'')}">`)}</div><div class="summaryCheckRow">${nums.map(n=>`<button class="checkBtn" data-check="${n}">Check Q${n}</button><span class="checkNote" data-check-note="${n}"></span>`).join('')}</div>`;
+      for(const n of nums){
+        if(graded || checkedQuestions.has(Number(n))) html += `<div class="subResult" data-feedback-for="${n}"><b>Q${n}</b>${resultLine(q,n)}${feedbackHtml(q,n)}</div>`;
+      }
       html += '</article>';
     } else {
       const n = q.num;
-      html += `<article class="qcard"><div class="qtop"><span class="qnum">Q${n}</span><button class="flag ${flags[n]?'on':''}" data-flag="${n}">Review</button></div><div class="qtype">${esc(questionType(q))}</div><div class="qtext">${esc(q.question)}</div>`;
+      html += `<article class="qcard" data-question-card="${n}"><div class="qtop"><span class="qnum">Q${n}</span><button class="flag ${flags[n]?'on':''}" data-flag="${n}">Review</button></div><div class="qtype">${esc(questionType(q))}</div><div class="qtext">${esc(q.question)}</div>`;
       if(q.type === 'radio'){
         html += `<div class="options">${q.options.map(o=>`<label class="opt"><input type="radio" name="q${n}" data-n="${n}" value="${esc(o)}" ${answers[n]===o?'checked':''}><span>${esc(o)}</span></label>`).join('')}</div>`;
       } else {
         html += `<input class="textAns" aria-label="Question ${n}" data-n="${n}" value="${esc(answers[n]||'')}">`;
       }
-      if(graded) html += resultLine(q,n) + feedbackHtml(q,n);
+      html += `<div class="singleCheckRow"><button class="checkBtn" data-check="${n}">Check Q${n}</button><span class="checkNote" data-check-note="${n}"></span></div>`;
+      if(graded || checkedQuestions.has(Number(n))) html += `<div data-feedback-for="${n}">${resultLine(q,n)}${feedbackHtml(q,n)}</div>`;
       html += '</article>';
     }
   }
@@ -111,9 +144,15 @@ function renderQuestions(){
   $('#questionsBody').innerHTML = html;
   $('#questionsBody').querySelectorAll('[data-n]').forEach(el=>{
     el.addEventListener(el.type === 'radio' ? 'change' : 'input', event=>{
-      answers[event.target.dataset.n] = event.target.value;
+      const n=Number(event.target.dataset.n);
+      answers[n] = event.target.value;
+      checkedQuestions.delete(n);
       saveProgress();
+      if(el.type === 'radio') renderQuestions();
     });
+  });
+  $('#questionsBody').querySelectorAll('[data-check]').forEach(button=>{
+    button.addEventListener('click',()=>checkOne(Number(button.dataset.check)));
   });
   $('#questionsBody').querySelectorAll('[data-flag]').forEach(button=>{
     button.addEventListener('click',()=>{
@@ -242,13 +281,13 @@ function renderApp(){
   $('#app').innerHTML = `
     <header class="appHeader">
       <a class="brand" href="index.html">IELTS <span>Reading</span> <small>${esc(data.id)}</small></a>
-      <div class="headRight"><div class="timer" id="timer"></div><button class="btn" id="startPause">Start</button><button class="btn" id="vocabBtn">Vocabulary</button><button class="btn dark" id="gradeBtn">Grade</button><button class="btn hamburger" id="moreBtn">☰</button></div>
-      <div class="moreMenu" id="moreMenu"><button id="submitBtn">Submit report</button><button id="changeNameBtn">Change name</button><button id="clearAnswersBtn">Clear this passage</button></div>
+      <div class="headRight"><div class="timer" id="timer"></div><button class="btn" id="startPause">Start</button><button class="btn quickBtn" id="fiveMinBtn">5 min</button><button class="btn" id="vocabBtn">Vocabulary</button><button class="btn dark" id="gradeBtn">Grade</button><button class="btn hamburger" id="moreBtn">☰</button></div>
+      <div class="moreMenu" id="moreMenu"><button id="twentyMinBtn">20-minute timer</button><button id="fiveMinMenuBtn">5-minute timer</button><button id="submitBtn">Submit report</button><button id="changeNameBtn">Change name</button><button id="clearAnswersBtn">Clear this passage</button></div>
     </header>
     <div class="studentStrip"><span>${esc(studentName||'No name')}</span>${className?`<span>${esc(className)}</span>`:''}<button class="btn smallBtn" id="reviewWrongBtn" hidden>Incorrect only</button></div>
     <main class="readerGrid">
       <section class="pane"><div class="paneHead"><div><b>${esc(data.title)}</b><small>${esc(data.source||'')}</small></div><div class="paneTools"><button class="btn" id="markBtn">Marker</button><button class="btn" id="clearMarksBtn">Clear marks</button></div></div><div class="paneBody"><div class="passageContent" id="passageContent">${data.passageHtml}</div></div><div class="footer"><a href="${prev?`reading.html?id=${encodeURIComponent(prev.id)}`:'index.html'}">${prev?'← '+esc(prev.id):'← Library'}</a><span>${esc(data.range||'')}</span><a href="${next?`reading.html?id=${encodeURIComponent(next.id)}`:'index.html'}">${next?esc(next.id)+' →':'Library →'}</a></div></section>
-      <section class="pane"><div class="paneHead"><b>Questions</b><button class="btn primary" id="gradeBtn2">Grade This Passage</button></div><div class="paneBody" id="questionsBody"></div><div class="footer"><span id="answeredCount"></span><button class="btn" id="topBtn">Top ↑</button></div></section>
+      <section class="pane"><div class="paneHead"><div><b>Questions</b><small>1問だけでも「Check Q」で採点できます。</small></div><button class="btn primary" id="gradeBtn2">Grade This Passage</button></div><div class="paneBody" id="questionsBody"></div><div class="footer"><span id="answeredCount"></span><button class="btn" id="topBtn">Top ↑</button></div></section>
     </main>
     <div class="modal" id="resultModal"><div class="modalCard"><h2>Result</h2><div id="resultBody"></div><div class="modalActions"><button class="btn primary" id="resultReviewBtn">Review incorrect answers</button><button class="btn" id="resultSubmitBtn">Submission report</button><button class="btn dark closeModal">Close</button></div></div></div>
     <div class="modal" id="vocabModal"><div class="modalCard"><h2>Vocabulary Mission</h2><p class="smallText">先に意味を推測してから答えを確認しよう。</p><div id="vocabBody"></div><button class="btn dark closeModal">Close</button></div></div>
@@ -261,6 +300,9 @@ function renderApp(){
 
   $('#gradeBtn').onclick=$('#gradeBtn2').onclick=grade;
   $('#startPause').onclick=toggleTimer;
+  $('#fiveMinBtn').onclick=()=>setQuickTimer(5);
+  $('#fiveMinMenuBtn').onclick=()=>setQuickTimer(5);
+  $('#twentyMinBtn').onclick=()=>setQuickTimer(data.durationMinutes||20);
   $('#vocabBtn').onclick=openVocabulary;
   $('#markBtn').onclick=()=>{markMode=!markMode;$('#markBtn').classList.toggle('primary',markMode)};
   $('#clearMarksBtn').onclick=()=>document.querySelectorAll('.marker').forEach(mark=>mark.replaceWith(document.createTextNode(mark.textContent)));
