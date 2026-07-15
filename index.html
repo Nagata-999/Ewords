@@ -34,6 +34,17 @@
     .game-info{display:none;padding:15px 16px;border-radius:18px;background:#fff;border:1px solid var(--line);box-shadow:0 8px 20px rgba(15,23,42,.04);font-size:13px;line-height:1.75;color:#475569;text-align:left}.game-item.open .game-info{display:block}
     .game-info h3{margin:0 0 8px;font-size:16px;color:#172033}.game-info h4{margin:12px 0 4px;font-size:14px;color:#ea580c}.game-info ul{margin:4px 0 0;padding-left:1.2em}.game-info li{margin:2px 0}
 
+
+    .install-app{margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:18px 20px;border-radius:20px;background:linear-gradient(135deg,#fff7ed,#ffffff);border:1px solid #fed7aa;box-shadow:0 10px 24px rgba(15,23,42,.06)}
+    .install-app-text strong{display:block;font-size:17px;margin-bottom:4px}.install-app-text span{display:block;color:#64748b;font-size:13px;line-height:1.55}
+    .install-app-btn{flex:0 0 auto;border:none;border-radius:14px;background:#f4511e;color:#fff;font-weight:900;padding:13px 18px;cursor:pointer;box-shadow:0 8px 18px rgba(244,81,30,.24)}
+    .install-app-btn:hover{filter:brightness(.97)}.install-app[hidden]{display:none}
+    .install-modal{position:fixed;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(15,23,42,.48)}
+    .install-modal[hidden]{display:none}.install-modal-card{width:min(100%,420px);background:#fffaf2;border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 24px 60px rgba(0,0,0,.22)}
+    .install-modal-card h2{margin:0 0 10px;font-size:22px}.install-modal-card p{margin:0;color:#475569;line-height:1.75}
+    .install-steps{margin:16px 0 0;padding-left:1.3em;color:#172033;line-height:1.8}.install-modal-close{margin-top:18px;width:100%;border:none;border-radius:14px;background:#172033;color:#fff;font-weight:900;padding:12px;cursor:pointer}
+    @media(max-width:560px){.install-app{align-items:flex-start;flex-direction:column}.install-app-btn{width:100%}}
+
   </style>
 </head>
 <body>
@@ -67,6 +78,28 @@
     <h1 class="title"><img src="/images/manten.png" alt="満点侍"><span><span class="title-main">すし単</span><span class="title-sub">無料で遊べる英語ゲーム</span></span></h1>
     <p class="lead">英検・IELTS・高校英語に対応した無料英語ゲーム集。英単語ゲーム、語源ゲーム、英語タイピング、リスニングゲームで楽しく学習できます。</p>
   </section>
+
+  <section class="install-app" id="installApp" hidden>
+    <div class="install-app-text">
+      <strong>📱 ホーム画面に追加</strong>
+      <span>すし単をアプリのように開けます。毎日の英語学習をもっと手軽に。</span>
+    </div>
+    <button class="install-app-btn" id="installAppBtn" type="button">追加する</button>
+  </section>
+
+  <div class="install-modal" id="installModal" hidden role="dialog" aria-modal="true" aria-labelledby="installModalTitle">
+    <div class="install-modal-card">
+      <h2 id="installModalTitle">iPhoneでホーム画面に追加</h2>
+      <p>Safariのメニューから追加できます。</p>
+      <ol class="install-steps">
+        <li>画面下の共有ボタンを押す</li>
+        <li>「ホーム画面に追加」を選ぶ</li>
+        <li>右上の「追加」を押す</li>
+      </ol>
+      <button class="install-modal-close" id="installModalClose" type="button">閉じる</button>
+    </div>
+  </div>
+
   <section class="section">
     <h2>無料英語ゲーム一覧</h2>
     <div class="grid">
@@ -145,6 +178,61 @@ if ("serviceWorker" in navigator) {
     });
   });
 }
+</script>
+
+
+<script>
+(() => {
+  const installBox = document.getElementById("installApp");
+  const installBtn = document.getElementById("installAppBtn");
+  const modal = document.getElementById("installModal");
+  const modalClose = document.getElementById("installModalClose");
+  let deferredPrompt = null;
+
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  const isStandalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+
+  if (isStandalone) return;
+
+  if (isIOS) {
+    installBox.hidden = false;
+    installBtn.textContent = "追加方法を見る";
+    installBtn.addEventListener("click", () => {
+      modal.hidden = false;
+    });
+  }
+
+  window.addEventListener("beforeinstallprompt", event => {
+    event.preventDefault();
+    deferredPrompt = event;
+    installBox.hidden = false;
+  });
+
+  installBtn.addEventListener("click", async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt = null;
+    installBox.hidden = true;
+  });
+
+  window.addEventListener("appinstalled", () => {
+    installBox.hidden = true;
+    deferredPrompt = null;
+  });
+
+  modalClose.addEventListener("click", () => {
+    modal.hidden = true;
+  });
+
+  modal.addEventListener("click", event => {
+    if (event.target === modal) modal.hidden = true;
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") modal.hidden = true;
+  });
+})();
 </script>
 
 </body>
