@@ -1,0 +1,65 @@
+{
+  "id": "q1",
+  "set": 1,
+  "passage": 1,
+  "title": "Dance Contest Messages",
+  "label": "問1",
+  "range": "Questions 1–3",
+  "durationMinutes": 6,
+  "source": "AI-generated original common-test-style practice.",
+  "passageHtml": "<div class=\"materialCard\"><h3>Messages about the School Dance Contest</h3><div class=\"chatLine\"><span class=\"chatName\">Maya:</span> The final rehearsal has moved from Friday to Thursday at 4:15 in the gym. Please bring the blue team shirts.</div><div class=\"chatLine\"><span class=\"chatName\">Ken:</span> I have science club until 4:30 on Thursday. Can someone show me the changes later?</div><div class=\"chatLine\"><span class=\"chatName\">Maya:</span> Sure. We will record the new ending. Watch it before Saturday morning.</div><div class=\"chatLine\"><span class=\"chatName\">Lena:</span> I can bring Ken's shirt because his is still at my house.</div></div>",
+  "vocab": [
+    {
+      "word": "rehearsal",
+      "meaning": "リハーサル"
+    },
+    {
+      "word": "ending",
+      "meaning": "終わりの部分"
+    }
+  ],
+  "questions": [
+    {
+      "num": 1,
+      "type": "radio",
+      "question": "What changed about the rehearsal?",
+      "options": [
+        "Its location",
+        "Its day",
+        "Its team leader",
+        "Its clothing rule"
+      ],
+      "answer": "Its day",
+      "evidence": "The final rehearsal has moved from Friday to Thursday.",
+      "reason_ja": "FridayからThursdayへ変更されたため、変わったのは曜日です。"
+    },
+    {
+      "num": 2,
+      "type": "radio",
+      "question": "What should Ken do before Saturday morning?",
+      "options": [
+        "Buy a new shirt",
+        "Leave science club early",
+        "Watch a recording",
+        "Practise with Lena"
+      ],
+      "answer": "Watch a recording",
+      "evidence": "We will record the new ending. Watch it before Saturday morning.",
+      "reason_ja": "欠席部分は録画で確認するよう指示されています。"
+    },
+    {
+      "num": 3,
+      "type": "radio",
+      "question": "Why will Lena bring an extra shirt?",
+      "options": [
+        "Ken left it at her house",
+        "Maya asked her to buy one",
+        "The team colour changed",
+        "The gym is cold"
+      ],
+      "answer": "Ken left it at her house",
+      "evidence": "Ken's shirt ... is still at my house.",
+      "reason_ja": "所有場所を示す情報を直接読み取ります。"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "id": "q3",
+  "set": 1,
+  "passage": 3,
+  "title": "Library Event Flyer",
+  "label": "問3",
+  "range": "Questions 1–4",
+  "durationMinutes": 8,
+  "source": "AI-generated original common-test-style practice.",
+  "passageHtml": "<div class=\"materialCard\"><h3>Make Something Saturday</h3><p>West Park Library invites teenagers to join one of our free workshops.</p><table class=\"infoTable\"><tr><th>Workshop</th><th>Time</th><th>Age</th><th>Limit</th></tr><tr><td>Podcast Basics</td><td>10:00–11:30</td><td>13–18</td><td>12 people</td></tr><tr><td>Photo Stories</td><td>11:00–12:30</td><td>15–18</td><td>8 people</td></tr><tr><td>Mini Magazine</td><td>13:30–15:30</td><td>13–18</td><td>16 people</td></tr></table><p>Registration closes on 18 July. You may register for only one workshop. Bring headphones for Podcast Basics. Cameras will be lent to Photo Stories participants. All materials for Mini Magazine are provided.</p><p>Cancellations made by 20 July allow another person to take the place.</p></div>",
+  "vocab": [
+    {
+      "word": "participant",
+      "meaning": "参加者"
+    },
+    {
+      "word": "cancellation",
+      "meaning": "キャンセル"
+    }
+  ],
+  "questions": [
+    {
+      "num": 1,
+      "type": "radio",
+      "question": "Which workshop can a 14-year-old attend in the afternoon?",
+      "options": [
+        "Podcast Basics",
+        "Photo Stories",
+        "Mini Magazine",
+        "None"
+      ],
+      "answer": "Mini Magazine",
+      "evidence": "Mini Magazine: 13:30–15:30, age 13–18.",
+      "reason_ja": "年齢と時間帯の両条件を満たすのはMini Magazineです。"
+    },
+    {
+      "num": 2,
+      "type": "radio",
+      "question": "What do Photo Stories participants NOT need to bring?",
+      "options": [
+        "A camera",
+        "Their registration information",
+        "Their own ideas",
+        "Time to attend"
+      ],
+      "answer": "A camera",
+      "evidence": "Cameras will be lent to Photo Stories participants.",
+      "reason_ja": "カメラは貸し出されるため持参不要です。"
+    },
+    {
+      "num": 3,
+      "type": "radio",
+      "question": "Why should a participant cancel by 20 July?",
+      "options": [
+        "To receive free headphones",
+        "To change to two workshops",
+        "To let another person join",
+        "To borrow a camera"
+      ],
+      "answer": "To let another person join",
+      "evidence": "Cancellations made by 20 July allow another person to take the place.",
+      "reason_ja": "期限内のキャンセルは他の参加者に枠を譲るためです。"
+    },
+    {
+      "num": 4,
+      "type": "radio",
+      "question": "Which statement is true?",
+      "options": [
+        "Each person may join two workshops",
+        "Every workshop accepts the same number",
+        "Registration ends before the cancellation deadline",
+        "Only adults may attend"
+      ],
+      "answer": "Registration ends before the cancellation deadline",
+      "evidence": "Registration closes on 18 July; cancellations by 20 July.",
+      "reason_ja": "18日締切、20日キャンセル期限なので、登録締切が先です。"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "id": "q4",
+  "set": 1,
+  "passage": 4,
+  "title": "Choosing a Study Space",
+  "label": "問4",
+  "range": "Questions 1–4",
+  "durationMinutes": 9,
+  "source": "AI-generated original common-test-style practice.",
+  "passageHtml": "<div class=\"materialCard\"><h3>Where Should We Create a New Study Space?</h3><p><b>Student A:</b> The unused music room is quiet and has large windows. However, it is far from the main classrooms.</p><p><b>Student B:</b> The area beside the cafeteria is central and easy to find, but it becomes noisy at lunch.</p><p><b>Student C:</b> We could divide the old computer room. It already has desks and power outlets, although renovation would cost more.</p><p><b>Student D:</b> An outdoor covered area would be inexpensive and pleasant in spring, but it would be uncomfortable in winter.</p><table class=\"infoTable\"><tr><th>School priority</th><th>Importance</th></tr><tr><td>Quiet throughout the day</td><td>High</td></tr><tr><td>Low initial cost</td><td>Medium</td></tr><tr><td>Access to electricity</td><td>High</td></tr><tr><td>Near the cafeteria</td><td>Low</td></tr></table></div>",
+  "vocab": [
+    {
+      "word": "outlet",
+      "meaning": "コンセント"
+    },
+    {
+      "word": "renovation",
+      "meaning": "改修"
+    }
+  ],
+  "questions": [
+    {
+      "num": 1,
+      "type": "radio",
+      "question": "Which proposal best satisfies both high-priority conditions?",
+      "options": [
+        "Student A",
+        "Student B",
+        "Student C",
+        "Student D"
+      ],
+      "answer": "Student C",
+      "evidence": "The old computer room has desks and power outlets; unlike the cafeteria area, no daytime noise problem is mentioned.",
+      "reason_ja": "静かさと電源の両条件を最も満たす案を選びます。"
+    },
+    {
+      "num": 2,
+      "type": "radio",
+      "question": "What is the main weakness of Student B’s proposal?",
+      "options": [
+        "It lacks windows",
+        "It is expensive",
+        "It may be noisy",
+        "It is hard to find"
+      ],
+      "answer": "It may be noisy",
+      "evidence": "It becomes noisy at lunch.",
+      "reason_ja": "昼休みに騒がしくなることが弱点です。"
+    },
+    {
+      "num": 3,
+      "type": "radio",
+      "question": "Which proposal focuses most clearly on seasonal comfort?",
+      "options": [
+        "Student A",
+        "Student B",
+        "Student C",
+        "Student D"
+      ],
+      "answer": "Student D",
+      "evidence": "pleasant in spring, but ... uncomfortable in winter.",
+      "reason_ja": "springとwinterを対比して季節による快適性を論じています。"
+    },
+    {
+      "num": 4,
+      "type": "radio",
+      "question": "Why might the school reject Student A’s proposal?",
+      "options": [
+        "It has no desks",
+        "It is too far away",
+        "It costs too much",
+        "It is outdoors"
+      ],
+      "answer": "It is too far away",
+      "evidence": "it is far from the main classrooms.",
+      "reason_ja": "立地上の不便さが明示されています。"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "id": "q5",
+  "set": 1,
+  "passage": 5,
+  "title": "A Volunteer’s Journal",
+  "label": "問5",
+  "range": "Questions 1–4",
+  "durationMinutes": 10,
+  "source": "AI-generated original common-test-style practice.",
+  "passageHtml": "<div class=\"materialCard\"><h3>From Noah’s Volunteer Journal</h3><p>When I signed up to help at the city animal shelter, I imagined playing with dogs. On my first morning, however, Ms. Chen handed me a bucket and showed me how to clean the cages. I was disappointed, but I tried to work quickly.</p><p>Later, I noticed a small dog named Pepper refusing to eat. Ms. Chen explained that Pepper became nervous around new people. Instead of touching her, I sat quietly outside the cage and read my history notes aloud. After several visits, Pepper began eating while I was there.</p><p>On my final day, a family came to meet Pepper. She stayed behind me at first, but then slowly walked toward the youngest child. Seeing that, I understood that the cleaning and quiet hours had mattered. The work was not what I had expected, but it had taught me to pay attention rather than simply try to be useful in the way I preferred.</p></div>",
+  "vocab": [
+    {
+      "word": "shelter",
+      "meaning": "保護施設"
+    },
+    {
+      "word": "refuse",
+      "meaning": "拒む"
+    }
+  ],
+  "questions": [
+    {
+      "num": 1,
+      "type": "radio",
+      "question": "What did Noah expect to do at the shelter?",
+      "options": [
+        "Clean cages",
+        "Play with dogs",
+        "Study history",
+        "Meet families"
+      ],
+      "answer": "Play with dogs",
+      "evidence": "I imagined playing with dogs.",
+      "reason_ja": "最初の期待を直接問う問題です。"
+    },
+    {
+      "num": 2,
+      "type": "radio",
+      "question": "Why did Noah read aloud near Pepper?",
+      "options": [
+        "To train her to perform",
+        "To finish his homework",
+        "To let her become used to him without pressure",
+        "To make Ms. Chen laugh"
+      ],
+      "answer": "To let her become used to him without pressure",
+      "evidence": "Instead of touching her, I sat quietly ... and read.",
+      "reason_ja": "触れずに静かに存在することで、犬の緊張を和らげようとしました。"
+    },
+    {
+      "num": 3,
+      "type": "radio",
+      "question": "What change shows Pepper trusted Noah more?",
+      "options": [
+        "She cleaned her cage",
+        "She ate while he was there",
+        "She learned history",
+        "She barked at visitors"
+      ],
+      "answer": "She ate while he was there",
+      "evidence": "After several visits, Pepper began eating while I was there.",
+      "reason_ja": "食べるようになったことが安心感の変化を示します。"
+    },
+    {
+      "num": 4,
+      "type": "radio",
+      "question": "What lesson did Noah learn?",
+      "options": [
+        "Useful work must always be enjoyable",
+        "Animals should never meet children",
+        "Helping requires noticing what is actually needed",
+        "Volunteers should choose only easy tasks"
+      ],
+      "answer": "Helping requires noticing what is actually needed",
+      "evidence": "it had taught me to pay attention rather than simply try to be useful in the way I preferred.",
+      "reason_ja": "自分のやりたい支援ではなく、相手に必要な支援を見極めることを学びました。"
+    }
+  ]
+}

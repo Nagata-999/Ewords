@@ -3,7 +3,7 @@
 const $ = selector => document.querySelector(selector);
 const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 const params = new URLSearchParams(location.search);
-const passageId = params.get('id') || 'set1';
+const passageId = params.get('id') || 'q1';
 const storageKey = suffix => `common_reading_${passageId}_${suffix}`;
 
 let data = null;
@@ -298,8 +298,8 @@ function renderApp(){
     </header>
     <div class="studentStrip"><span>${esc(studentName||'No name')}</span>${className?`<span>${esc(className)}</span>`:''}<button class="btn smallBtn" id="reviewWrongBtn" hidden>Incorrect only</button></div>
     <main class="readerGrid">
-      <section class="pane"><div class="paneHead"><div><b>${esc(data.title)}</b><small>${esc(data.source||'')}</small></div><div class="paneTools"><button class="btn" id="markBtn">Marker</button><button class="btn" id="clearMarksBtn">Clear marks</button></div></div><div class="paneBody"><div class="passageContent" id="passageContent">${data.passageHtml}</div></div><div class="footer"><a href="${prev?`reading.html?id=${encodeURIComponent(prev.id)}`:'index.html'}">${prev?'← '+esc(prev.id):'← Library'}</a><span>${esc(data.range||'')}</span><a href="${next?`reading.html?id=${encodeURIComponent(next.id)}`:'index.html'}">${next?esc(next.id)+' →':'Library →'}</a></div></section>
-      <section class="pane"><div class="paneHead"><div><b>Questions</b><small>1問だけでも「Check Q」で採点できます。</small></div><button class="btn primary" id="gradeBtn2">Grade This Passage</button></div><div class="paneBody" id="questionsBody"></div><div class="footer"><span id="answeredCount"></span><button class="btn" id="topBtn">Top ↑</button></div></section>
+      <section class="pane"><div class="paneHead"><div><b>${esc(data.title)}</b><small>${esc(data.source||'')}</small></div><div class="paneTools"><button class="btn" id="markBtn">Marker</button><button class="btn" id="clearMarksBtn">Clear marks</button></div></div><div class="paneBody"><div class="passageContent" id="passageContent">${data.passageHtml}</div></div><div class="footer"><a href="${prev?`reading.html?id=${encodeURIComponent(prev.id)}`:'index.html'}">${prev?'← '+esc(prev.id):'← Library'}</a><span>${esc(data.range||'')}</span><a href="${next?`reading.html?id=${encodeURIComponent(next.id)}`:'index.html'}">${next?esc(next.code || next.id)+' →':'Library →'}</a></div></section>
+      <section class="pane"><div class="paneHead"><div><b>Questions</b><small>1問だけでも「Check Q」で採点できます。</small></div><button class="btn primary" id="gradeBtn2">この大問を採点</button></div><div class="paneBody" id="questionsBody"></div><div class="footer"><span id="answeredCount"></span><button class="btn" id="topBtn">Top ↑</button></div></section>
     </main>
     <div class="modal" id="resultModal"><div class="modalCard"><h2>Result</h2><div id="resultBody"></div><div class="modalActions"><button class="btn primary" id="resultReviewBtn">Review incorrect answers</button><button class="btn" id="resultSubmitBtn">Submission report</button><button class="btn dark closeModal">Close</button></div></div></div>
     <div class="modal" id="vocabModal"><div class="modalCard"><h2>Vocabulary Mission</h2><p class="smallText">先に意味を推測してから答えを確認しよう。</p><div id="vocabBody"></div><button class="btn dark closeModal">Close</button></div></div>
@@ -336,5 +336,5 @@ Promise.all([
   fetch(`data/${encodeURIComponent(passageId)}.json`,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(`Passage HTTP ${r.status}`);return r.json()}),
   fetch('data/manifest.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(`Manifest HTTP ${r.status}`);return r.json()})
 ]).then(([passage,items])=>{data=passage;manifest=items;renderApp()}).catch(error=>{
-  $('#app').innerHTML=`<div class="errorBox standalone"><b>Passage data could not be loaded.</b><p><a href="index.html">Return to Library</a></p><small>${esc(error.message)}</small></div>`;
+  $('#app').innerHTML=`<div class="errorBox standalone"><b>問題データを読み込めませんでした。</b><p><a href="index.html">ライブラリへ戻る</a></p><small>${esc(error.message)}</small></div>`;
 });

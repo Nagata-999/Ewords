@@ -1,0 +1,111 @@
+{
+  "id": "q8",
+  "set": 1,
+  "passage": 8,
+  "title": "Should Schools Use Learning Analytics?",
+  "label": "問8",
+  "range": "Questions 1–6",
+  "durationMinutes": 15,
+  "source": "AI-generated original common-test-style practice.",
+  "passageHtml": "<div class=\"materialCard\"><h3>Article: The Promise and Risk of Learning Analytics</h3><p>Learning analytics systems collect information such as assignment completion, quiz results, and time spent on online materials. Supporters argue that these systems help teachers notice students who may need assistance before a final exam reveals a serious problem.</p><p>However, the data can be misleading. A student may leave a lesson open while doing something else, so “time spent” is not always equal to learning. In addition, students who know they are constantly measured may choose safe tasks that improve their numbers rather than difficult tasks that deepen understanding.</p><p>The strongest systems do not replace teacher judgment. Instead, they provide signals that teachers investigate through conversation and classroom observation. Schools must also explain what data are collected, how long they are stored, and who can see them.</p></div><div class=\"materialCard\"><h3>Survey of 200 Students</h3><table class=\"infoTable\"><tr><th>Statement</th><th>Agree</th></tr><tr><td>Data could help teachers offer support earlier.</td><td>68%</td></tr><tr><td>I understand what learning data my school stores.</td><td>29%</td></tr><tr><td>I would change my study behaviour if every action were measured.</td><td>61%</td></tr><tr><td>Analytics should make decisions without teacher review.</td><td>14%</td></tr></table></div><div class=\"materialCard\"><h3>School Proposal</h3><p>The school plans to introduce analytics next term. Data will be kept for five years. Students will receive a short notice, but no lesson about how the system works. Automatic alerts will be sent to parents whenever a student’s weekly activity falls below the class average.</p></div>",
+  "vocab": [
+    {
+      "word": "analytics",
+      "meaning": "データ分析"
+    },
+    {
+      "word": "misleading",
+      "meaning": "誤解を招く"
+    },
+    {
+      "word": "investigate",
+      "meaning": "詳しく調べる"
+    }
+  ],
+  "questions": [
+    {
+      "num": 1,
+      "type": "radio",
+      "question": "What is one potential benefit of learning analytics?",
+      "options": [
+        "It guarantees high exam scores",
+        "It can identify possible problems earlier",
+        "It removes the need for teachers",
+        "It measures understanding perfectly"
+      ],
+      "answer": "It can identify possible problems earlier",
+      "evidence": "help teachers notice students who may need assistance before a final exam.",
+      "reason_ja": "問題が深刻になる前に支援の必要性を見つけられる点です。"
+    },
+    {
+      "num": 2,
+      "type": "radio",
+      "question": "Why can “time spent” data be unreliable?",
+      "options": [
+        "Students cannot use online materials",
+        "A lesson may remain open while the student is not studying",
+        "Teachers always change the data",
+        "Time is never recorded"
+      ],
+      "answer": "A lesson may remain open while the student is not studying",
+      "evidence": "A student may leave a lesson open while doing something else.",
+      "reason_ja": "画面が開いている時間と実際の学習時間が一致しないためです。"
+    },
+    {
+      "num": 3,
+      "type": "radio",
+      "question": "Which survey result most strongly supports keeping teacher review?",
+      "options": [
+        "68% support early help",
+        "29% understand stored data",
+        "61% may change behaviour",
+        "Only 14% support decisions without teacher review"
+      ],
+      "answer": "Only 14% support decisions without teacher review",
+      "evidence": "Analytics should make decisions without teacher review: 14%.",
+      "reason_ja": "自動判断への支持が低いことが、教師による確認の必要性を最も直接支えます。"
+    },
+    {
+      "num": 4,
+      "type": "radio",
+      "question": "What concern is suggested by the 29% result?",
+      "options": [
+        "Most students lack clarity about stored data",
+        "Students dislike all technology",
+        "Teachers cannot read data",
+        "Data are kept for too little time"
+      ],
+      "answer": "Most students lack clarity about stored data",
+      "evidence": "I understand what learning data my school stores: 29%.",
+      "reason_ja": "理解している生徒が少ないため、透明性不足が示唆されます。"
+    },
+    {
+      "num": 5,
+      "type": "radio",
+      "question": "Which part of the school proposal conflicts most clearly with the article’s recommendation?",
+      "options": [
+        "Introducing the system next term",
+        "Sending alerts based automatically on below-average activity",
+        "Using weekly activity",
+        "Informing parents"
+      ],
+      "answer": "Sending alerts based automatically on below-average activity",
+      "evidence": "The strongest systems do not replace teacher judgment; teachers investigate signals.",
+      "reason_ja": "教師の確認なしに平均以下という数値だけで自動通知する点が、記事の提言と衝突します。"
+    },
+    {
+      "num": 6,
+      "type": "radio",
+      "question": "What change would best improve the proposal?",
+      "options": [
+        "Hide the system from students",
+        "Delete teacher observations",
+        "Teach students how data work and require human review before alerts",
+        "Measure more student actions"
+      ],
+      "answer": "Teach students how data work and require human review before alerts",
+      "evidence": "Schools must explain what data are collected ... and systems should not replace teacher judgment.",
+      "reason_ja": "透明性と人間による判断の両方を追加する改善が最適です。"
+    }
+  ]
+}

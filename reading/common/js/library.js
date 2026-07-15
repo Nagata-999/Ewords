@@ -7,6 +7,7 @@ function loadResult(id){
 }
 
 function render(items){
+  items = [...items].sort((a,b)=>(a.order||0)-(b.order||0));
   const results = items.map(item => ({item, result: loadResult(item.id)}));
   const completed = results.filter(x => x.result).length;
   const totalCorrect = results.reduce((sum,x)=>sum+(x.result?.score||0),0);
@@ -47,15 +48,15 @@ function render(items){
     const groupItems = items.filter(item => groupName(item) === group);
     return `
     <section class="setSection">
-      <div class="setHead"><h2>${esc(group)}</h2><span>${groupItems.length} ${groupItems.length === 1 ? 'set' : 'sets'}</span></div>
+      <div class="setHead"><h2>${esc(group)}</h2><span>${groupItems.length}問</span></div>
       <div class="cards">
         ${groupItems.map(item=>{
           const r=loadResult(item.id);
           return `<a class="card ${r?'completed':''}" href="reading.html?id=${encodeURIComponent(item.id)}">
-            <div class="cardTop"><span class="cardCode">${esc(item.id)}</span>${r?'<span class="doneBadge">COMPLETED</span>':''}</div>
+            <div class="cardTop"><span class="cardCode">${esc(item.code || item.id)}</span>${r?'<span class="doneBadge">COMPLETED</span>':''}</div>
             <div class="cardTitle">${esc(item.title)}</div>
             <div class="cardMeta">${esc(item.range)} · ${esc(item.questionCount)} questions · ${esc(item.durationMinutes||20)} min</div>
-            ${r?`<div class="cardResult"><b>${r.score}/${r.total}</b><span>${Math.round(r.score/r.total*100)}%</span></div>`:'<div class="cardStart">Start passage →</div>'}
+            ${r?`<div class="cardResult"><b>${r.score}/${r.total}</b><span>${Math.round(r.score/r.total*100)}%</span></div>`:'<div class="cardStart">練習を始める →</div>'}
           </a>`;
         }).join('')}
       </div>

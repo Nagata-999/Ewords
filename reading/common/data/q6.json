@@ -1,0 +1,97 @@
+{
+  "id": "q6",
+  "set": 1,
+  "passage": 6,
+  "title": "Cooling the City",
+  "label": "問6",
+  "range": "Questions 1–5",
+  "durationMinutes": 12,
+  "source": "AI-generated original common-test-style practice.",
+  "passageHtml": "<div class=\"materialCard\"><h3>Cooling the City</h3><p>Cities are often warmer than nearby rural areas because roads and buildings absorb heat during the day and release it slowly at night. This is called the urban heat island effect.</p><p>One response is to plant street trees. Their leaves provide shade, while water released from leaves cools the surrounding air. Yet trees need soil, water, and years to grow. Another option is a “cool roof,” made with a light-coloured surface that reflects more sunlight. Cool roofs can be installed quickly, but they mainly improve the building beneath them and offer little shade at street level.</p><p>Some cities also use small “pocket parks” on unused land. These combine plants, seating, and sometimes water features. Their cooling effect may cover only a limited area, but they can also provide places for rest and social contact.</p><table class=\"infoTable\"><tr><th>Method</th><th>Setup speed</th><th>Street shade</th><th>Other benefit</th></tr><tr><td>Street trees</td><td>Slow</td><td>High</td><td>Habitat</td></tr><tr><td>Cool roofs</td><td>Fast</td><td>Low</td><td>Lower indoor heat</td></tr><tr><td>Pocket parks</td><td>Medium</td><td>Medium</td><td>Rest and social space</td></tr></table></div>",
+  "vocab": [
+    {
+      "word": "absorb",
+      "meaning": "吸収する"
+    },
+    {
+      "word": "reflect",
+      "meaning": "反射する"
+    },
+    {
+      "word": "rural",
+      "meaning": "地方の"
+    }
+  ],
+  "questions": [
+    {
+      "num": 1,
+      "type": "radio",
+      "question": "Why do cities stay warm at night?",
+      "options": [
+        "Trees release too much water",
+        "Buildings and roads slowly release stored heat",
+        "Rural areas reflect less sunlight",
+        "Cool roofs produce heat"
+      ],
+      "answer": "Buildings and roads slowly release stored heat",
+      "evidence": "roads and buildings absorb heat ... and release it slowly at night.",
+      "reason_ja": "昼間に蓄えた熱を夜に放出するためです。"
+    },
+    {
+      "num": 2,
+      "type": "radio",
+      "question": "Which method is best when a quick reduction in indoor heat is needed?",
+      "options": [
+        "Street trees",
+        "Cool roofs",
+        "Pocket parks",
+        "Water features"
+      ],
+      "answer": "Cool roofs",
+      "evidence": "Cool roofs can be installed quickly ... Lower indoor heat.",
+      "reason_ja": "設置速度と屋内温度の両条件を表と本文から統合します。"
+    },
+    {
+      "num": 3,
+      "type": "radio",
+      "question": "What disadvantage of street trees is mentioned?",
+      "options": [
+        "They provide no shade",
+        "They require time and resources to grow",
+        "They increase indoor heat",
+        "They prevent social contact"
+      ],
+      "answer": "They require time and resources to grow",
+      "evidence": "trees need soil, water, and years to grow.",
+      "reason_ja": "必要な資源と成長時間が欠点です。"
+    },
+    {
+      "num": 4,
+      "type": "radio",
+      "question": "How are pocket parks different from cool roofs?",
+      "options": [
+        "They can provide a social space",
+        "They are always cheaper",
+        "They reflect more sunlight",
+        "They only benefit buildings"
+      ],
+      "answer": "They can provide a social space",
+      "evidence": "they can also provide places for rest and social contact.",
+      "reason_ja": "社会的交流の場になる点が違いです。"
+    },
+    {
+      "num": 5,
+      "type": "radio",
+      "question": "What is the main idea of the passage?",
+      "options": [
+        "One cooling method is perfect for every city",
+        "Cities should remove all buildings",
+        "Different cooling methods have different strengths and limits",
+        "Rural areas are becoming hotter than cities"
+      ],
+      "answer": "Different cooling methods have different strengths and limits",
+      "evidence": "Each method is described with benefits and limitations.",
+      "reason_ja": "複数の対策を比較し、それぞれの長所と限界を示す文章です。"
+    }
+  ]
+}
