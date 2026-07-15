@@ -55,6 +55,25 @@ font-weight:800;line-height:1.45;box-shadow:0 4px 12px rgba(80,45,15,.06);overfl
 font-weight:900;color:var(--orange2);line-height:1.8;white-space:pre-line}
 .connection.show{display:block;animation:fade .25s ease}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.example-card{
+  display:none;
+  max-width:880px;
+  margin:0 auto 18px;
+  padding:20px;
+  background:#fffaf6;
+  border:1px solid var(--line);
+  border-radius:18px;
+  box-shadow:0 8px 20px rgba(80,45,15,.06)
+}
+.example-card.show{display:block;animation:fade .25s ease}
+.example-card h3{margin:0 0 14px;text-align:center;color:var(--orange2);font-size:1.2rem}
+.example-block{padding:14px;background:#fff;border:1px solid var(--line);border-radius:13px;margin-bottom:10px}
+.example-label{display:block;margin-bottom:6px;color:var(--orange2);font-weight:900;font-size:.92rem}
+.example-text{line-height:1.75;overflow-wrap:anywhere;white-space:pre-line}
+.next-wrap{text-align:center;margin-top:14px}
+.next-btn{min-width:220px}
+
 .result,.ranking,.list{padding:clamp(24px,5vw,48px)}
 .result h2,.ranking h2,.list h2{text-align:center;margin:0 0 18px;font-size:clamp(1.8rem,5vw,3rem)}
 .bigscore{text-align:center;font-size:2rem;font-weight:900;margin-bottom:22px;color:var(--orange2)}
@@ -111,6 +130,26 @@ th,td{padding:12px;border-bottom:1px solid var(--line);text-align:left;vertical-
   </section>
 
   <div id="connection" class="connection"></div>
+
+  <section id="exampleCard" class="example-card" aria-live="polite">
+    <h3>例文で確認</h3>
+    <div id="classicalBlock" class="example-block">
+      <span class="example-label">古文例文</span>
+      <div id="classicalExample" class="example-text"></div>
+    </div>
+    <div id="englishBlock" class="example-block">
+      <span class="example-label">英語例文</span>
+      <div id="englishExample" class="example-text"></div>
+    </div>
+    <div id="modernBlock" class="example-block">
+      <span class="example-label">現代語訳</span>
+      <div id="modernExample" class="example-text"></div>
+    </div>
+    <div class="next-wrap">
+      <button id="nextQuestion" class="btn primary next-btn" type="button">次の問題へ</button>
+    </div>
+  </section>
+
   <div id="feedback" class="feedback"></div>
 </section>
 
@@ -191,6 +230,7 @@ function next(){
   $("remain").textContent="残り "+pool.length+"語";
   $("feedback").textContent="";$("feedback").className="feedback";
   $("connection").classList.remove("show");$("connection").textContent="";
+  $("exampleCard").classList.remove("show");
   $("englishStage").classList.remove("hidden");$("modernStage").classList.add("hidden");
   renderChoices("english");
   renderChoices("modern");
@@ -219,11 +259,26 @@ function choose(type,w,button){
     setTimeout(()=>{$("englishStage").classList.add("hidden");$("modernStage").classList.remove("hidden");$("feedback").textContent="";$("feedback").className="feedback";locked=false},450);
   }else{
     score++;round++;$("score").textContent=score;
+    $("modernStage").classList.add("hidden");
     $("connection").textContent=target.kobun+"\n↓\n"+target.english_display+"\n↓\n"+target.modern_display;
     $("connection").classList.add("show");
-    $("feedback").textContent="正解！ 3つがつながりました。";$("feedback").className="feedback ok";
-    setTimeout(next,850);
+    showExamples(target);
+    $("feedback").textContent="正解！ 例文を確認して次へ進もう。";$("feedback").className="feedback ok";
   }
+}
+
+function showExamples(word){
+  const fields=[
+    ["classicalBlock","classicalExample",word.classical_example],
+    ["englishBlock","englishExample",word.english_example],
+    ["modernBlock","modernExample",word.modern_translation]
+  ];
+  fields.forEach(([blockId,textId,value])=>{
+    const has=String(value||"").trim().length>0;
+    $(blockId).style.display=has?"block":"none";
+    $(textId).textContent=has?value:"";
+  });
+  $("exampleCard").classList.add("show");
 }
 function endGame(){
   const w=wrongWord||target;
@@ -271,6 +326,7 @@ $("openRanking").onclick=openRanking;$("resultRanking").onclick=openRanking;
 $("openList").onclick=()=>show("list");
 $("resultHome").onclick=$("rankingHome").onclick=$("listHome").onclick=()=>show("home");
 $("save").onclick=saveScore;$("search").oninput=filterList;
+$("nextQuestion").onclick=()=>{if(!locked)return;next();};
 
 initDb();loadData();
 </script>
