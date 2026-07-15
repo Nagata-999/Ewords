@@ -45,9 +45,27 @@
     .install-steps{margin:16px 0 0;padding-left:1.3em;color:#172033;line-height:1.8}.install-modal-close{margin-top:18px;width:100%;border:none;border-radius:14px;background:#172033;color:#fff;font-weight:900;padding:12px;cursor:pointer}
     @media(max-width:560px){.install-app{align-items:flex-start;flex-direction:column}.install-app-btn{width:100%}}
 
+
+    .app-splash{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:#fbf4ea;opacity:1;transition:opacity .55s ease}
+    .app-splash.show{display:flex}.app-splash.hide{opacity:0;pointer-events:none}
+    .app-splash-inner{text-align:center;opacity:0;transform:scale(.94);animation:splashTitle 1.15s ease forwards}
+    .app-splash-sushi{font-size:76px;line-height:1;margin-bottom:14px}
+    .app-splash-title{font-size:42px;font-weight:1000;letter-spacing:-.04em;color:#f4511e}
+    .app-splash-sub{margin-top:7px;color:#0f766e;font-size:12px;font-weight:900;letter-spacing:.12em}
+    @keyframes splashTitle{0%{opacity:0;transform:scale(.94)}45%,75%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.03)}}
+
   </style>
 </head>
 <body>
+
+<div class="app-splash" id="appSplash" aria-hidden="true">
+  <div class="app-splash-inner">
+    <div class="app-splash-sushi">🍣</div>
+    <div class="app-splash-title">すし単</div>
+    <div class="app-splash-sub">ENGLISH GAMES</div>
+  </div>
+</div>
+
 <button class="hamburger-btn" id="hamburgerBtn" aria-label="サイトメニューを開く" aria-expanded="false"><span></span><span></span><span></span></button>
 <div class="hamburger-overlay" id="hamburgerOverlay"></div>
 <aside class="side-menu" id="sideMenu" aria-label="すし単サイトメニュー">
@@ -231,6 +249,27 @@ if ("serviceWorker" in navigator) {
 
   document.addEventListener("keydown", event => {
     if (event.key === "Escape") modal.hidden = true;
+  });
+})();
+</script>
+
+
+<script>
+(() => {
+  const appMode =
+    window.matchMedia("(display-mode: standalone)").matches ||
+    window.navigator.standalone === true;
+
+  if (!appMode) return;
+
+  const splash = document.getElementById("appSplash");
+  splash.classList.add("show");
+
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      splash.classList.add("hide");
+      setTimeout(() => splash.remove(), 600);
+    }, 1150);
   });
 })();
 </script>
