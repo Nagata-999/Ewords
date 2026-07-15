@@ -94,7 +94,7 @@ th,td{padding:12px;border-bottom:1px solid var(--line);text-align:left;vertical-
 <main class="wrap">
 <header class="top">
   <div class="brand"><div class="logo">🍣</div><div>すしこぶ単</div></div>
-  <a class="link" href="index.html">トップページに戻る</a>
+  <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="link" href="kobun-list.html">古文単語一覧</a><a class="link" href="index.html">トップページに戻る</a></div>
 </header>
 
 <section id="home" class="screen active panel hero">
@@ -103,7 +103,7 @@ th,td{padding:12px;border-bottom:1px solid var(--line);text-align:left;vertical-
   <div class="actions">
     <button class="btn primary" id="start">ゲームスタート</button>
     <button class="btn secondary" id="openRanking">ランキング</button>
-    <button class="btn neutral" id="openList">古文単語一覧</button>
+    <a class="btn neutral" href="kobun-list.html" style="text-decoration:none">古文単語一覧</a>
   </div>
   <details>
     <summary>このゲームについて</summary>
@@ -323,7 +323,7 @@ function filterList(){
 
 $("start").onclick=startGame;$("retry").onclick=startGame;$("rankingStart").onclick=startGame;
 $("openRanking").onclick=openRanking;$("resultRanking").onclick=openRanking;
-$("openList").onclick=()=>show("list");
+
 $("resultHome").onclick=$("rankingHome").onclick=$("listHome").onclick=()=>show("home");
 $("save").onclick=saveScore;$("search").oninput=filterList;
 $("nextQuestion").onclick=()=>{if(!locked)return;next();};
