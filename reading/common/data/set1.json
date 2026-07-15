@@ -1,0 +1,101 @@
+{
+  "id": "set1",
+  "set": 1,
+  "passage": 1,
+  "title": "Community Exchange Day",
+  "label": "SET 1",
+  "range": "Questions 1–5",
+  "durationMinutes": 12,
+  "source": "AI-generated original common-test-style practice.",
+  "passageHtml": "<div class=\"materialCard\"><h3>Material A: Email</h3><div class=\"mailHead\">From: Ms. Ito<br>To: Student Volunteers<br>Subject: Community Exchange Day</div><p>Thank you for helping at Saturday’s event. Please arrive at Greenfield Community Center by <b>8:40 a.m.</b> The doors open to visitors at 10:00, but we need time to prepare the rooms.</p><p>You may choose one of three jobs: welcoming visitors, helping at the international food tables, or supporting children’s activities. Students helping with food must attend a short safety briefing at <b>9:00 in Room B</b>.</p><p>Lunch will be provided. Bring a reusable water bottle and wear comfortable shoes. The event ends at 3:30 p.m., and clean-up should finish by 4:00.</p></div><div class=\"materialCard\"><h3>Material B: Volunteer Schedule</h3><table class=\"infoTable\"><tr><th>Job</th><th>Start</th><th>Main task</th><th>Special note</th></tr><tr><td>Welcome Desk</td><td>9:30</td><td>Give maps and answer questions</td><td>Confident spoken English helpful</td></tr><tr><td>Food Tables</td><td>9:00</td><td>Arrange food and explain dishes</td><td>Safety briefing required</td></tr><tr><td>Children’s Area</td><td>9:20</td><td>Run games and craft activities</td><td>Meet beside the stage</td></tr></table></div><div class=\"materialCard\"><h3>Material C: Group Chat</h3><div class=\"chatLine\"><span class=\"chatName\">Mika:</span> I need to leave by 3:40 because of basketball practice.</div><div class=\"chatLine\"><span class=\"chatName\">Leo:</span> I’m good at speaking with people, but I can’t come before 9:15.</div><div class=\"chatLine\"><span class=\"chatName\">Sara:</span> I want to learn about food from other countries. I can arrive at 8:30.</div></div>",
+  "vocab": [
+    {
+      "word": "briefing",
+      "meaning": "事前説明"
+    },
+    {
+      "word": "reusable",
+      "meaning": "再利用できる"
+    },
+    {
+      "word": "arrange",
+      "meaning": "並べる、準備する"
+    },
+    {
+      "word": "confident",
+      "meaning": "自信のある"
+    }
+  ],
+  "questions": [
+    {
+      "num": 1,
+      "type": "radio",
+      "question": "Why must volunteers arrive before the doors open?",
+      "options": [
+        "To practise speaking English",
+        "To prepare the rooms",
+        "To eat lunch together",
+        "To meet local athletes"
+      ],
+      "answer": "To prepare the rooms",
+      "evidence": "The doors open to visitors at 10:00, but we need time to prepare the rooms.",
+      "reason_ja": "来場者の入場前に会場準備をする必要があるためです。but の後ろに到着時刻が早い理由があります。"
+    },
+    {
+      "num": 2,
+      "type": "radio",
+      "question": "Which job requires volunteers to receive special instructions?",
+      "options": [
+        "Welcome Desk",
+        "Food Tables",
+        "Children’s Area",
+        "Clean-up Team"
+      ],
+      "answer": "Food Tables",
+      "evidence": "Students helping with food must attend a short safety briefing at 9:00 in Room B.",
+      "reason_ja": "food を担当する生徒には safety briefing が必要だとメールと表の両方に書かれています。"
+    },
+    {
+      "num": 3,
+      "type": "radio",
+      "question": "Which job is most suitable for Leo?",
+      "options": [
+        "Welcome Desk",
+        "Food Tables",
+        "Children’s Area",
+        "None of the jobs"
+      ],
+      "answer": "Welcome Desk",
+      "evidence": "Welcome Desk starts at 9:30 and confident spoken English is helpful. Leo can arrive after 9:15 and is good at speaking with people.",
+      "reason_ja": "Leoは9時15分より前には来られません。9時30分開始で、会話力が役立つWelcome Deskが最適です。"
+    },
+    {
+      "num": 4,
+      "type": "radio",
+      "question": "Why is Sara a good match for the Food Tables?",
+      "options": [
+        "She can stay after 4:00",
+        "She wants to learn about international food and can attend the briefing",
+        "She has basketball practice",
+        "She prefers craft activities"
+      ],
+      "answer": "She wants to learn about international food and can attend the briefing",
+      "evidence": "Sara wants to learn about food from other countries and can arrive at 8:30; the briefing begins at 9:00.",
+      "reason_ja": "関心と到着可能時刻の二つの条件を組み合わせて判断します。"
+    },
+    {
+      "num": 5,
+      "type": "radio",
+      "question": "What problem does Mika have with the event schedule?",
+      "options": [
+        "She cannot arrive by 8:40",
+        "She cannot attend the food briefing",
+        "She may not be able to help with all of the clean-up",
+        "She cannot bring a water bottle"
+      ],
+      "answer": "She may not be able to help with all of the clean-up",
+      "evidence": "Mika must leave by 3:40, while clean-up should finish by 4:00.",
+      "reason_ja": "イベント終了は3時30分ですが、片付けは4時までです。Mikaは3時40分に退出するため、最後まで片付けられない可能性があります。"
+    }
+  ]
+}
