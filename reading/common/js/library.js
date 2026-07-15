@@ -41,12 +41,15 @@ function render(items){
     location.reload();
   });
 
-  const sets = [...new Set(items.map(x=>x.id.split('-')[0]))];
-  document.querySelector('#library').innerHTML = sets.map(set => `
+  const groupName = item => String(item.group || item.section || 'Practice');
+  const groups = [...new Set(items.map(groupName))];
+  document.querySelector('#library').innerHTML = groups.map(group => {
+    const groupItems = items.filter(item => groupName(item) === group);
+    return `
     <section class="setSection">
-      <div class="setHead"><h2>SET ${esc(set)}</h2><span>${items.filter(x=>x.id.startsWith(set+'-')).length} sets</span></div>
+      <div class="setHead"><h2>${esc(group)}</h2><span>${groupItems.length} ${groupItems.length === 1 ? 'set' : 'sets'}</span></div>
       <div class="cards">
-        ${items.filter(x=>x.id.startsWith(set+'-')).map(item=>{
+        ${groupItems.map(item=>{
           const r=loadResult(item.id);
           return `<a class="card ${r?'completed':''}" href="reading.html?id=${encodeURIComponent(item.id)}">
             <div class="cardTop"><span class="cardCode">${esc(item.id)}</span>${r?'<span class="doneBadge">COMPLETED</span>':''}</div>
@@ -56,7 +59,8 @@ function render(items){
           </a>`;
         }).join('')}
       </div>
-    </section>`).join('');
+    </section>`;
+  }).join('');
 }
 
 fetch('data/manifest.json',{cache:'no-store'})

@@ -292,7 +292,7 @@ function renderApp(){
   const {prev,next}=neighbourLinks();
   $('#app').innerHTML = `
     <header class="appHeader">
-      <a class="brand" href="index.html">IELTS <span>Reading</span> <small>${esc(data.id)}</small></a>
+      <a class="brand" href="index.html">共通 <span>Reading</span> <small>${esc(data.id)}</small></a>
       <div class="headRight"><div class="timer" id="timer"></div><button class="btn" id="startPause">Start</button><button class="btn quickBtn" id="fiveMinBtn">5 min</button><button class="btn" id="vocabBtn">Vocabulary</button><button class="btn dark" id="gradeBtn">Grade</button><button class="btn hamburger" id="moreBtn">☰</button></div>
       <div class="moreMenu" id="moreMenu"><button id="twentyMinBtn">20-minute timer</button><button id="fiveMinMenuBtn">5-minute timer</button><button id="submitBtn">Submit report</button><button id="changeNameBtn">Change name</button><button id="clearAnswersBtn">Clear this passage</button></div>
     </header>
