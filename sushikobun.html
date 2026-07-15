@@ -490,6 +490,66 @@
       color: var(--muted);
     }
 
+
+    .target-card {
+      max-width: 760px;
+      margin: 0 auto 20px;
+      padding: 24px 20px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, #fffaf6 0%, #ffffff 100%);
+      border: 2px solid #ffd3aa;
+      text-align: center;
+      box-shadow: 0 8px 22px rgba(90, 55, 25, .08);
+    }
+
+    .target-label {
+      color: var(--orange-dark);
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .target-word {
+      font-size: clamp(2rem, 7vw, 4rem);
+      font-weight: 900;
+      line-height: 1.2;
+      overflow-wrap: anywhere;
+    }
+
+    .answer-stage {
+      max-width: 900px;
+      margin: 0 auto 18px;
+      background: #fffaf6;
+      border: 1px solid #f2dfcf;
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .answer-stage h2 {
+      margin: 0 0 12px;
+      text-align: center;
+      color: var(--orange-dark);
+      font-size: 1.08rem;
+    }
+
+    .answer-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hidden-stage {
+      display: none;
+    }
+
+    .connection-view {
+      min-height: 0;
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+      font-weight: 900;
+      line-height: 1.8;
+      color: var(--orange-dark);
+      white-space: pre-line;
+    }
+
     @media (max-width: 820px) {
       .columns {
         grid-template-columns: 1fr;
@@ -605,23 +665,22 @@
 
       <p class="instruction">同じ意味の「古文・英語・現代語」を一つずつ選んでください。</p>
 
-      <div class="columns">
-        <section class="word-column">
-          <h2>古文</h2>
-          <div id="kobunOptions" class="option-list"></div>
-        </section>
+      <section class="target-card">
+        <div class="target-label">古文</div>
+        <div id="kobunPrompt" class="target-word">あはれ</div>
+      </section>
 
-        <section class="word-column">
-          <h2>English</h2>
-          <div id="englishOptions" class="option-list"></div>
-        </section>
+      <section id="englishStage" class="answer-stage">
+        <h2>English</h2>
+        <div id="englishOptions" class="option-list answer-grid"></div>
+      </section>
 
-        <section class="word-column">
-          <h2>現代語</h2>
-          <div id="modernOptions" class="option-list"></div>
-        </section>
-      </div>
+      <section id="modernStage" class="answer-stage hidden-stage">
+        <h2>現代語</h2>
+        <div id="modernOptions" class="option-list answer-grid"></div>
+      </section>
 
+      <div id="connectionView" class="connection-view" aria-live="polite"></div>
       <div id="feedback" class="feedback"></div>
     </section>
 
@@ -728,7 +787,7 @@
     let score = 0;
     let round = 1;
     let currentTarget = null;
-    let selected = { kobun: null, english: null, modern: null };
+    let selected = { english: null, modern: null };
     let acceptingInput = true;
     let lastWrongSelection = null;
 
@@ -840,7 +899,7 @@
     }
 
     function nextQuestion() {
-      selected = { kobun: null, english: null, modern: null };
+      selected = { english: null, modern: null };
       acceptingInput = true;
 
       if (gamePool.length === 0) {
@@ -855,9 +914,12 @@
 
       const optionWords = [currentTarget, ...distractors];
 
-      renderOptions("kobun", shuffle(optionWords));
+      $("kobunPrompt").textContent = currentTarget.kobun;
       renderOptions("english", shuffle(optionWords));
       renderOptions("modern", shuffle(optionWords));
+      $("englishStage").classList.remove("hidden-stage");
+      $("modernStage").classList.add("hidden-stage");
+      $("connectionView").textContent = "";
 
       $("roundText").textContent = `Round ${round}`;
       $("remainingText").textContent = `残り ${gamePool.length}語`;
@@ -867,7 +929,6 @@
 
     function renderOptions(type, optionWords) {
       const containerMap = {
-        kobun: $("kobunOptions"),
         english: $("englishOptions"),
         modern: $("modernOptions")
       };
@@ -892,7 +953,6 @@
       if (!acceptingInput) return;
 
       const containerMap = {
-        kobun: $("kobunOptions"),
         english: $("englishOptions"),
         modern: $("modernOptions")
       };
@@ -904,53 +964,62 @@
       button.classList.add("selected");
       selected[type] = word;
 
-      if (selected.kobun && selected.english && selected.modern) {
-        judgeAnswer();
+      if (type === "english") {
+        judgeEnglish(button);
+      } else if (type === "modern") {
+        judgeModern(button);
       }
     }
 
-    function judgeAnswer() {
+    function judgeEnglish(button) {
       acceptingInput = false;
 
-      const ids = [
-        selected.kobun.id,
-        selected.english.id,
-        selected.modern.id
-      ];
+      if (selected.english.id === currentTarget.id) {
+        button.classList.add("correct-flash");
+        $("feedback").textContent = "英語 正解！ 次は現代語。";
+        $("feedback").className = "feedback success";
+        setTimeout(() => {
+          $("englishStage").classList.add("hidden-stage");
+          $("modernStage").classList.remove("hidden-stage");
+          $("feedback").textContent = "";
+          $("feedback").className = "feedback";
+          acceptingInput = true;
+        }, 500);
+      } else {
+        button.classList.add("wrong-flash");
+        lastWrongSelection = {
+          selected: { ...selected },
+          target: currentTarget
+        };
+        $("feedback").textContent = "英語が不正解。ゲーム終了！";
+        $("feedback").className = "feedback danger";
+        setTimeout(endGame, 650);
+      }
+    }
 
-      const isCorrect =
-        ids[0] === currentTarget.id &&
-        ids[1] === currentTarget.id &&
-        ids[2] === currentTarget.id;
+    function judgeModern(button) {
+      acceptingInput = false;
 
-      if (isCorrect) {
+      if (selected.modern.id === currentTarget.id) {
         score += 1;
         round += 1;
         $("scoreValue").textContent = String(score);
         $("feedback").textContent = "正解！ 3つがつながりました。";
         $("feedback").className = "feedback success";
-
-        document
-          .querySelectorAll(".option.selected")
-          .forEach(option => option.classList.add("correct-flash"));
-
-        setTimeout(nextQuestion, 700);
-        return;
+        $("connectionView").textContent =
+          `${currentTarget.kobun}\n↓\n${currentTarget.english}\n↓\n${currentTarget.modern}`;
+        button.classList.add("correct-flash");
+        setTimeout(nextQuestion, 850);
+      } else {
+        button.classList.add("wrong-flash");
+        lastWrongSelection = {
+          selected: { ...selected },
+          target: currentTarget
+        };
+        $("feedback").textContent = "現代語が不正解。ゲーム終了！";
+        $("feedback").className = "feedback danger";
+        setTimeout(endGame, 650);
       }
-
-      lastWrongSelection = {
-        selected: { ...selected },
-        target: currentTarget
-      };
-
-      $("feedback").textContent = "不正解。ゲーム終了！";
-      $("feedback").className = "feedback danger";
-
-      document
-        .querySelectorAll(".option.selected")
-        .forEach(option => option.classList.add("wrong-flash"));
-
-      setTimeout(endGame, 700);
     }
 
     function endGame() {
