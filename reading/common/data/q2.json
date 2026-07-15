@@ -1,65 +1,79 @@
 {
   "id": "q2",
-  "set": 1,
+  "set": "q2",
   "passage": 2,
-  "title": "Eco Week Newsletter",
+  "title": "問2　調査報告とコメント",
   "label": "問2",
-  "range": "Questions 1–3",
-  "durationMinutes": 7,
-  "source": "AI-generated original common-test-style practice.",
-  "passageHtml": "<div class=\"materialCard\"><h3>Riverside High Eco Week</h3><p>This year, each class will choose one activity. Students should select an activity that can be completed during lunch break. The winning class will receive money to improve its classroom.</p><table class=\"infoTable\"><tr><th>Activity</th><th>Day</th><th>Place</th><th>What to bring</th></tr><tr><td>Book Swap</td><td>Mon–Fri</td><td>Library entrance</td><td>One used book</td></tr><tr><td>Bike Check</td><td>Tuesday</td><td>School gate</td><td>Your bicycle</td></tr><tr><td>Food-Waste Survey</td><td>Wednesday</td><td>Cafeteria</td><td>Nothing</td></tr><tr><td>Uniform Repair</td><td>Thursday</td><td>Room 204</td><td>Damaged clothing</td></tr></table><p><b>Note:</b> The Bike Check begins at 12:20. All other activities begin at 12:35.</p></div>",
+  "range": "Questions 1-4",
+  "durationMinutes": 9,
+  "source": "AI-generated original. Common Test-style practice; no exam text reproduced.",
+  "passageHtml": "<div class=\"material reportMaterial\"><h3>Posted by the Student Services Office</h3><p class=\"date\">12 April 2026</p><h2>After-School Study Space Survey</h2>\n<p>Last month, 78% of the students who use after-school study spaces answered our survey. We consider this response rate high enough to reveal useful trends, although it does not represent every student.</p>\n<p>The library remained the most popular location: 84% of respondents said it was quiet enough for individual work, up six percentage points from the previous survey. Satisfaction with available seats, however, fell from 71% to 58%. The cafeteria received the highest score for group discussion, but only 39% of respondents considered it suitable for concentrated reading.</p>\n<p>From May, the library will add twenty movable chairs and keep the second floor open until 6:30 p.m. The cafeteria will introduce a quiet zone near the windows from 4:00 to 5:00 p.m. Cold drinks will still be allowed there, but hot meals must be eaten in the central dining area.</p>\n<table><tr><th>Space</th><th>Quiet enough</th><th>Enough seats</th><th>Good for group work</th></tr><tr><td>Library</td><td>84%</td><td>58%</td><td>31%</td></tr><tr><td>Cafeteria</td><td>39%</td><td>76%</td><td>88%</td></tr><tr><td>Learning Commons</td><td>67%</td><td>64%</td><td>72%</td></tr></table></div>\n<div class=\"material commentsMaterial\"><h3>Student Comments</h3><p><b>Riku:</b> I usually work alone, so the library suits me. I sometimes arrive after club practice and cannot find a seat. Extending the second-floor hours should help.</p><p><b>Sofia:</b> My project team meets in the cafeteria. We can talk freely, but music from the kitchen area makes serious reading difficult. The new quiet zone sounds useful, provided groups respect it.</p></div><div class=\"material additionalMaterial\"><h3>How to Read the Results</h3><p>The office warns that percentages should be compared carefully. A high score for one purpose does not mean a space is best for every purpose. For example, the cafeteria's strong group-work score reflects freedom to talk, while its lower quietness score reflects the same feature. Students were also allowed to select more than one space, so the figures should not be added together as if they represented separate groups.</p><p>The office will repeat the survey after the new seating and quiet-zone trial has operated for one term. Students will then be asked whether the changes improved their actual study experience, not merely whether they noticed them.</p></div>",
   "vocab": [
     {
-      "word": "swap",
-      "meaning": "交換"
+      "word": "response rate",
+      "meaning": "回答率"
     },
     {
-      "word": "damaged",
-      "meaning": "傷んだ"
+      "word": "provided",
+      "meaning": "～という条件で"
     }
   ],
   "questions": [
     {
       "num": 1,
       "type": "radio",
-      "question": "Which activity is available on more than one day?",
+      "question": "Which option best describes the office's view of the survey?",
       "options": [
-        "Book Swap",
-        "Bike Check",
-        "Food-Waste Survey",
-        "Uniform Repair"
+        "The results are useless because not all students replied.",
+        "The response rate is sufficient to show meaningful patterns.",
+        "The survey proves that every student prefers the library.",
+        "The office plans to conduct the survey every month."
       ],
-      "answer": "Book Swap",
-      "evidence": "Book Swap: Mon–Fri.",
-      "reason_ja": "複数日にわたって行われるのはBook Swapだけです。"
+      "answer": "The response rate is sufficient to show meaningful patterns.",
+      "evidence": "high enough to reveal useful trends",
+      "reason_ja": "十分な回答率で傾向を示せるという立場です。"
     },
     {
       "num": 2,
       "type": "radio",
-      "question": "A student has lunch until 12:30. Which activity may be difficult to join from the start?",
+      "question": "Which statement is true according to the report?",
       "options": [
-        "Book Swap",
-        "Bike Check",
-        "Food-Waste Survey",
-        "Uniform Repair"
+        "Satisfaction with library seating increased.",
+        "The cafeteria was rated best for silent reading.",
+        "The library received a higher quietness rating than before.",
+        "Hot meals will be allowed in the cafeteria quiet zone."
       ],
-      "answer": "Bike Check",
-      "evidence": "The Bike Check begins at 12:20.",
-      "reason_ja": "他の活動より早い12:20開始なので、12:30まで昼食の生徒は開始に間に合いません。"
+      "answer": "The library received a higher quietness rating than before.",
+      "evidence": "up six percentage points from the previous survey",
+      "reason_ja": "図書館が静かだという評価は前回より6ポイント上昇しました。"
     },
     {
       "num": 3,
       "type": "radio",
-      "question": "What is the purpose of the class prize?",
+      "question": "Which option best reflects Riku's comment?",
       "options": [
-        "To pay for lunch",
-        "To repair bicycles",
-        "To improve the classroom",
-        "To buy uniforms"
+        "He wants the library to close earlier.",
+        "He expects the announced change to solve a problem he faces.",
+        "He prefers group work in the cafeteria.",
+        "He thinks movable chairs will make the library noisier."
       ],
-      "answer": "To improve the classroom",
-      "evidence": "The winning class will receive money to improve its classroom.",
-      "reason_ja": "賞金の用途を本文から確認します。"
+      "answer": "He expects the announced change to solve a problem he faces.",
+      "evidence": "Extending the second-floor hours should help.",
+      "reason_ja": "部活動後に席がない問題が、開館時間延長で改善すると考えています。"
+    },
+    {
+      "num": 4,
+      "type": "radio",
+      "question": "What concern does Sofia express?",
+      "options": [
+        "Students may not follow the purpose of the quiet zone.",
+        "The cafeteria will stop allowing all drinks.",
+        "The library does not permit group projects.",
+        "The learning commons has too few seats."
+      ],
+      "answer": "Students may not follow the purpose of the quiet zone.",
+      "evidence": "provided groups respect it",
+      "reason_ja": "静かな区域を利用者が守ることが条件だと述べています。"
     }
   ]
 }

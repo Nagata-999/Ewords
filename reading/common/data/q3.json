@@ -1,79 +1,79 @@
 {
   "id": "q3",
-  "set": 1,
+  "set": "q3",
   "passage": 3,
-  "title": "Library Event Flyer",
+  "title": "問3　短い物語",
   "label": "問3",
-  "range": "Questions 1–4",
-  "durationMinutes": 8,
-  "source": "AI-generated original common-test-style practice.",
-  "passageHtml": "<div class=\"materialCard\"><h3>Make Something Saturday</h3><p>West Park Library invites teenagers to join one of our free workshops.</p><table class=\"infoTable\"><tr><th>Workshop</th><th>Time</th><th>Age</th><th>Limit</th></tr><tr><td>Podcast Basics</td><td>10:00–11:30</td><td>13–18</td><td>12 people</td></tr><tr><td>Photo Stories</td><td>11:00–12:30</td><td>15–18</td><td>8 people</td></tr><tr><td>Mini Magazine</td><td>13:30–15:30</td><td>13–18</td><td>16 people</td></tr></table><p>Registration closes on 18 July. You may register for only one workshop. Bring headphones for Podcast Basics. Cameras will be lent to Photo Stories participants. All materials for Mini Magazine are provided.</p><p>Cancellations made by 20 July allow another person to take the place.</p></div>",
+  "range": "Questions 1-4",
+  "durationMinutes": 10,
+  "source": "AI-generated original. Common Test-style practice; no exam text reproduced.",
+  "passageHtml": "<div class=\"material storyMaterial\"><h2>The Blue Notebook</h2>\n<p>For the school creativity workshop, Haru and his classmate Nia were asked to spend forty minutes without using their phones. Haru expected the activity to be boring. He had joined only because his older sister said that a quiet break might help him stop worrying about an upcoming speech.</p>\n<p>At first, Haru noticed every small sound in the room: a chair moving, rain touching the window, and someone turning a page. Then he saw a blue notebook on the empty desk beside him. A label on the cover said, “Ideas that are not ready yet.” He wanted to open it, but the workshop leader had told everyone not to touch objects that were not their own.</p>\n<p>A few minutes later, a gust of wind pushed the notebook onto the floor. Several loose pages slid underneath a cabinet. Haru quietly raised his hand. The leader nodded, so he and Nia collected the pages. Most contained unfinished drawings, short questions, and strange combinations such as “umbrella garden” and “library bicycle.”</p>\n<p>When the workshop ended, the leader explained that the notebook belonged to former participants. They had been invited to record incomplete ideas rather than throw them away. “A weak idea today may connect with another idea next month,” she said. Haru wrote his name on a blank page and added, “A speech that begins with a question from the audience.”</p>\n<p>That evening, he changed the opening of his presentation. He still felt nervous, but now he was curious to see how the audience would respond.</p></div><div class=\"material reflectionMaterial\"><h3>Workshop Leader's Note</h3><p>The aim of the phone-free session was not to prove that technology is harmful. Participants were asked to notice what their attention did when it was not constantly directed by messages or video. Some became restless, while others began to observe details they normally ignored. The blue notebook was one of several objects in the room designed to suggest that creative thinking often develops in stages.</p><p>Nia later told Haru that she had initially thought his question-based opening sounded risky. After hearing him explain it, however, she offered to act as the first audience member during rehearsal. Haru accepted because he realized that an unfinished idea becomes stronger when another person responds to it.</p></div>",
   "vocab": [
     {
-      "word": "participant",
-      "meaning": "参加者"
+      "word": "gust",
+      "meaning": "突風"
     },
     {
-      "word": "cancellation",
-      "meaning": "キャンセル"
+      "word": "incomplete",
+      "meaning": "未完成の"
     }
   ],
   "questions": [
     {
       "num": 1,
       "type": "radio",
-      "question": "Which workshop can a 14-year-old attend in the afternoon?",
+      "question": "Why did Haru attend the workshop?",
       "options": [
-        "Podcast Basics",
-        "Photo Stories",
-        "Mini Magazine",
-        "None"
+        "His teacher required him to repair a notebook.",
+        "A family member suggested that a quiet break might help him.",
+        "Nia promised to write his speech.",
+        "He wanted to use his phone in a new way."
       ],
-      "answer": "Mini Magazine",
-      "evidence": "Mini Magazine: 13:30–15:30, age 13–18.",
-      "reason_ja": "年齢と時間帯の両条件を満たすのはMini Magazineです。"
+      "answer": "A family member suggested that a quiet break might help him.",
+      "evidence": "his older sister said that a quiet break might help him",
+      "reason_ja": "姉の助言が参加のきっかけです。"
     },
     {
       "num": 2,
       "type": "radio",
-      "question": "What do Photo Stories participants NOT need to bring?",
+      "question": "Which event happened immediately before Haru and Nia collected the loose pages?",
       "options": [
-        "A camera",
-        "Their registration information",
-        "Their own ideas",
-        "Time to attend"
+        "Haru wrote a new speech opening.",
+        "The leader explained the history of the notebook.",
+        "Wind knocked the notebook onto the floor.",
+        "Haru opened the notebook without permission."
       ],
-      "answer": "A camera",
-      "evidence": "Cameras will be lent to Photo Stories participants.",
-      "reason_ja": "カメラは貸し出されるため持参不要です。"
+      "answer": "Wind knocked the notebook onto the floor.",
+      "evidence": "a gust of wind pushed the notebook onto the floor",
+      "reason_ja": "風でノートが落ち、その後ページを集めました。"
     },
     {
       "num": 3,
       "type": "radio",
-      "question": "Why should a participant cancel by 20 July?",
+      "question": "What lesson did Haru most likely learn?",
       "options": [
-        "To receive free headphones",
-        "To change to two workshops",
-        "To let another person join",
-        "To borrow a camera"
+        "Only complete ideas are worth recording.",
+        "Unfinished ideas can become useful later.",
+        "Public speaking should always be avoided.",
+        "Creative work requires complete silence."
       ],
-      "answer": "To let another person join",
-      "evidence": "Cancellations made by 20 July allow another person to take the place.",
-      "reason_ja": "期限内のキャンセルは他の参加者に枠を譲るためです。"
+      "answer": "Unfinished ideas can become useful later.",
+      "evidence": "A weak idea today may connect with another idea next month.",
+      "reason_ja": "未完成の考えも後で役立つ可能性があるという教訓です。"
     },
     {
       "num": 4,
       "type": "radio",
-      "question": "Which statement is true?",
+      "question": "How did Haru feel at the end?",
       "options": [
-        "Each person may join two workshops",
-        "Every workshop accepts the same number",
-        "Registration ends before the cancellation deadline",
-        "Only adults may attend"
+        "Completely free from nervousness",
+        "Angry that the notebook was private",
+        "Still nervous but more interested in trying his idea",
+        "Disappointed that Nia did not help"
       ],
-      "answer": "Registration ends before the cancellation deadline",
-      "evidence": "Registration closes on 18 July; cancellations by 20 July.",
-      "reason_ja": "18日締切、20日キャンセル期限なので、登録締切が先です。"
+      "answer": "Still nervous but more interested in trying his idea",
+      "evidence": "He still felt nervous, but now he was curious",
+      "reason_ja": "緊張は残る一方、試すことへの好奇心が生まれています。"
     }
   ]
 }

@@ -1,93 +1,107 @@
 {
   "id": "q7",
-  "set": 1,
+  "set": "q7",
   "passage": 7,
-  "title": "Why We Lose Focus",
+  "title": "問7　説明文とスライド",
   "label": "問7",
-  "range": "Questions 1–5",
-  "durationMinutes": 13,
-  "source": "AI-generated original common-test-style practice.",
-  "passageHtml": "<div class=\"materialCard\"><h3>Why We Lose Focus</h3><p>People often describe attention as if it were a light that can simply be pointed at one task. In reality, attention is influenced by goals, emotions, habits, and the environment. A phone notification is distracting not only because it makes a sound, but because it suggests that new social information may be waiting.</p><p>Researchers distinguish between external distraction and mind-wandering. External distraction is caused by something in the environment. Mind-wandering occurs when thoughts move away from the task without an outside event. Both can reduce performance, but they may require different solutions.</p><p>Removing notifications can reduce external distraction. It does not, however, guarantee concentration. When a task feels meaningless or too difficult, the mind may search for a more rewarding subject. Short breaks can help, especially when they are planned before attention completely fails. Yet a break filled with rapidly changing online content may make returning to slow work harder.</p><p>The goal, therefore, is not to eliminate every unrelated thought. That would be unrealistic. A better approach is to notice why attention has shifted and choose a response that matches the cause.</p></div>",
+  "range": "Questions 1-6",
+  "durationMinutes": 20,
+  "source": "AI-generated original. Common Test-style practice; no exam text reproduced.",
+  "passageHtml": "<div class=\"material articleMaterial\"><h2>Useful Friction: Why Easier Is Not Always Better</h2>\n<p>Designers often try to remove every delay from daily life. Doors open automatically, applications remember our choices, and online stores allow purchases with one click. These changes save time. Yet researchers have begun to examine situations in which a small amount of difficulty - sometimes called useful friction - can improve judgment, memory, or safety.</p>\n<p>Consider digital reading. When information appears in a smooth, endless stream, people may continue scrolling without deciding what matters. A short pause between sections can encourage readers to predict what comes next or summarize what they have just learned. The pause does not add new information; it changes how actively the reader processes what is already there.</p>\n<p>Useful friction can also protect people from impulsive action. Some banks allow customers to place a twenty-four-hour delay on unusually large transfers. The delay may feel inconvenient, but it gives users time to notice fraud or reconsider an emotional purchase. Similarly, a confirmation screen that clearly states the amount and recipient can prevent errors better than a tiny warning message that users automatically ignore.</p>\n<p>However, difficulty is not automatically useful. A complicated medical form may prevent patients from receiving care, and an unclear station sign may cause travelers to miss trains. The key question is whether the extra effort supports the user's goal or merely blocks it. Good friction is targeted: it slows down a risky decision but does not make ordinary tasks unnecessarily hard.</p>\n<p>Researchers in a university learning lab tested this distinction. One group of students watched a twelve-minute video without interruption. A second group saw three brief prompts asking them to choose the best summary of the previous section. A third group experienced random pauses containing no question. The summary-prompt group remembered the most information one week later. The random-pause group reported the greatest annoyance and performed no better than the uninterrupted group.</p>\n<table><tr><th>Condition</th><th>Average recall after one week</th><th>Reported annoyance (1-5)</th></tr><tr><td>No interruption</td><td>61%</td><td>1.8</td></tr><tr><td>Summary prompts</td><td>76%</td><td>2.4</td></tr><tr><td>Random pauses</td><td>60%</td><td>4.1</td></tr></table>\n<p>These findings suggest that designers should not ask only, “Can we make this faster?” They should also ask, “At which moment would a deliberate pause help the user think?” In education, finance, and public safety, the best design may be neither perfectly smooth nor frustratingly difficult. It may contain just enough resistance to support a better decision.</p></div>\n<div class=\"material slideMaterial\"><h3>Presentation Slides</h3><ol><li>Definition: a small, purposeful difficulty</li><li>Possible benefits: deeper processing; fewer impulsive errors</li><li>Important distinction: targeted friction vs. pointless obstacles</li><li>Study result: summary prompts improved later recall</li><li>Discussion: Where would a useful pause improve your daily routine?</li></ol></div><div class=\"material examplesMaterial\"><h3>Further Examples</h3><p>Useful friction appears in physical environments as well. A brightly colored strip before a staircase may make walkers slow down and notice a change in height. A tool cabinet with outlines showing where each item belongs makes returning equipment slightly more deliberate, but it also makes missing tools immediately visible. In both cases, the design interrupts automatic behavior at the exact moment attention is valuable.</p><p>There is also an ethical issue. Designers have the power to decide where users encounter delay. A company could add many steps to cancel a subscription while keeping enrollment effortless. That is friction, but it serves the company rather than the user. Researchers therefore argue that useful friction should be transparent and proportionate. Users should understand why a pause exists, and the effort required should match the seriousness of the decision.</p><p>In classrooms, teachers can apply this idea without making lessons unpleasant. Asking students to retrieve an answer before showing it, compare two possible explanations, or write a one-sentence summary introduces a small challenge. The challenge is useful only when students have enough knowledge to respond. If the task is far beyond their current understanding, the result is confusion rather than deeper learning.</p></div>",
   "vocab": [
     {
-      "word": "distraction",
-      "meaning": "注意をそらすもの"
+      "word": "friction",
+      "meaning": "摩擦・意図的な抵抗"
     },
     {
-      "word": "guarantee",
-      "meaning": "保証する"
+      "word": "impulsive",
+      "meaning": "衝動的な"
     }
   ],
   "questions": [
     {
       "num": 1,
       "type": "radio",
-      "question": "Why can a phone notification be especially distracting?",
+      "question": "What does “useful friction” mean in the passage?",
       "options": [
-        "It always contains bad news",
-        "It suggests new social information may be available",
-        "It makes tasks easier",
-        "It prevents mind-wandering"
+        "A technical problem that always slows users",
+        "A purposeful difficulty that can support better thinking or safety",
+        "Any design feature that makes a service expensive",
+        "A random interruption used to test patience"
       ],
-      "answer": "It suggests new social information may be available",
-      "evidence": "it suggests that new social information may be waiting.",
-      "reason_ja": "音だけでなく、社会的情報への期待が注意を引くと説明されています。"
+      "answer": "A purposeful difficulty that can support better thinking or safety",
+      "evidence": "a small amount of difficulty ... can improve judgment, memory, or safety",
+      "reason_ja": "思考・記憶・安全を助ける意図的な小さな負荷です。"
     },
     {
       "num": 2,
       "type": "radio",
-      "question": "What is mind-wandering?",
+      "question": "Why can a pause help digital readers?",
       "options": [
-        "Attention moving away without an external event",
-        "A planned break outside",
-        "A loud environmental sound",
-        "A type of phone notification"
+        "It adds information not contained in the text.",
+        "It forces them to purchase the next section.",
+        "It may encourage active prediction or summary.",
+        "It makes the screen physically brighter."
       ],
-      "answer": "Attention moving away without an external event",
-      "evidence": "Mind-wandering occurs when thoughts move away from the task without an outside event.",
-      "reason_ja": "定義を正確に捉える問題です。"
+      "answer": "It may encourage active prediction or summary.",
+      "evidence": "encourage readers to predict ... or summarize",
+      "reason_ja": "予測や要約を促し、能動的処理につながります。"
     },
     {
       "num": 3,
       "type": "radio",
-      "question": "Why may turning off notifications be insufficient?",
+      "question": "Which example shows friction used mainly for safety?",
       "options": [
-        "All tasks become impossible",
-        "Internal causes can still reduce concentration",
-        "Phones continue making sounds",
-        "Breaks are never useful"
+        "An endless social media feed",
+        "A delay on a large bank transfer",
+        "An unclear medical form",
+        "A random pause in a video"
       ],
-      "answer": "Internal causes can still reduce concentration",
-      "evidence": "When a task feels meaningless or too difficult, the mind may search for a more rewarding subject.",
-      "reason_ja": "外的刺激を除いても、課題の難しさや意味のなさという内的要因が残ります。"
+      "answer": "A delay on a large bank transfer",
+      "evidence": "gives users time to notice fraud",
+      "reason_ja": "詐欺や衝動的送金を防ぐための遅延です。"
     },
     {
       "num": 4,
       "type": "radio",
-      "question": "What kind of break may make returning to work harder?",
+      "question": "What distinction does the author emphasize?",
       "options": [
-        "A planned short walk",
-        "A quiet drink",
-        "Rapidly changing online content",
-        "A break before attention fails"
+        "All inconvenience improves memory.",
+        "Useful friction supports a goal, while bad difficulty merely obstructs it.",
+        "Fast systems are always unsafe.",
+        "Public services should avoid confirmation screens."
       ],
-      "answer": "Rapidly changing online content",
-      "evidence": "a break filled with rapidly changing online content may make returning to slow work harder.",
-      "reason_ja": "刺激の強いオンライン内容が復帰を難しくします。"
+      "answer": "Useful friction supports a goal, while bad difficulty merely obstructs it.",
+      "evidence": "whether the extra effort supports the user's goal or merely blocks it",
+      "reason_ja": "目的を助ける負荷と、単なる障害を区別しています。"
     },
     {
       "num": 5,
       "type": "radio",
-      "question": "What does the writer recommend?",
+      "question": "What can be concluded from the study table?",
       "options": [
-        "Eliminating every unrelated thought",
-        "Using the same solution for every distraction",
-        "Identifying the cause of lost attention before responding",
-        "Avoiding all difficult tasks"
+        "Random pauses produced the highest recall.",
+        "Summary prompts improved recall with only a moderate rise in annoyance.",
+        "No interruption caused the greatest annoyance.",
+        "All three conditions produced nearly identical results."
       ],
-      "answer": "Identifying the cause of lost attention before responding",
-      "evidence": "notice why attention has shifted and choose a response that matches the cause.",
-      "reason_ja": "原因に応じた対処が結論です。"
+      "answer": "Summary prompts improved recall with only a moderate rise in annoyance.",
+      "evidence": "76% ... 2.4",
+      "reason_ja": "要約プロンプトは記憶を高め、苛立ちはランダム停止よりかなり低いです。"
+    },
+    {
+      "num": 6,
+      "type": "radio",
+      "question": "Which student habit is most likely to apply the article effectively?",
+      "options": [
+        "Adding random alarms while reading",
+        "Pausing after each section to state its main point",
+        "Making every routine task more complicated",
+        "Removing all confirmation screens from payments"
+      ],
+      "answer": "Pausing after each section to state its main point",
+      "evidence": "summary prompts asking ... previous section",
+      "reason_ja": "各区切りで要点を言う行動が研究結果に合います。"
     }
   ]
 }

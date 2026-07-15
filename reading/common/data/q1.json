@@ -1,65 +1,65 @@
 {
   "id": "q1",
-  "set": 1,
+  "set": "q1",
   "passage": 1,
-  "title": "Dance Contest Messages",
+  "title": "問1　グループチャット",
   "label": "問1",
-  "range": "Questions 1–3",
+  "range": "Questions 1-3",
   "durationMinutes": 6,
-  "source": "AI-generated original common-test-style practice.",
-  "passageHtml": "<div class=\"materialCard\"><h3>Messages about the School Dance Contest</h3><div class=\"chatLine\"><span class=\"chatName\">Maya:</span> The final rehearsal has moved from Friday to Thursday at 4:15 in the gym. Please bring the blue team shirts.</div><div class=\"chatLine\"><span class=\"chatName\">Ken:</span> I have science club until 4:30 on Thursday. Can someone show me the changes later?</div><div class=\"chatLine\"><span class=\"chatName\">Maya:</span> Sure. We will record the new ending. Watch it before Saturday morning.</div><div class=\"chatLine\"><span class=\"chatName\">Lena:</span> I can bring Ken's shirt because his is still at my house.</div></div>",
+  "source": "AI-generated original. Common Test-style practice; no exam text reproduced.",
+  "passageHtml": "\n<div class=\"material chatMaterial\"><h3>International Culture Club - Group Chat</h3>\n<p><b>You:</b> We need to decide what to wear for Saturday's welcome performance. The first half uses traditional Irish music, and the second half changes to electronic dance music.</p>\n<p><b>Mina:</b> Green jackets would match the first part. My cousin's shop can lend us six, but we have eight dancers.</p>\n<p><b>Leo:</b> We could wear plain white shirts under the jackets. When the music changes, we take the jackets off and use silver wristbands.</p>\n<p><b>Aya:</b> Wristbands are safer than long necklaces. We lift one another during the final section, so anything hanging from the neck could catch on a costume.</p>\n<p><b>Daniel:</b> I agree about safety. However, the stage lights are very bright. Silver wristbands might reflect too much light into the audience.</p>\n<p><b>You:</b> How about blue cloth bands instead? They are cheap, easy to see, and will not reflect the lights.</p>\n<p><b>Mina:</b> Good. Before buying them, let's show the plan to Ms. Carter. She will be in the music room from 4:00, and our rehearsal begins at 4:30.</p>\n</div>\n<div class=\"material noticeMaterial\"><h3>Saturday Schedule</h3><table><tr><th>Time</th><th>Activity</th></tr><tr><td>9:00</td><td>Costume check</td></tr><tr><td>9:20</td><td>Stage rehearsal</td></tr><tr><td>10:15</td><td>Welcome performance</td></tr></table></div>",
   "vocab": [
     {
-      "word": "rehearsal",
-      "meaning": "リハーサル"
+      "word": "reflect",
+      "meaning": "反射する"
     },
     {
-      "word": "ending",
-      "meaning": "終わりの部分"
+      "word": "catch on",
+      "meaning": "～に引っかかる"
     }
   ],
   "questions": [
     {
       "num": 1,
       "type": "radio",
-      "question": "What changed about the rehearsal?",
+      "question": "Which two people specifically mention a possible safety problem?",
       "options": [
-        "Its location",
-        "Its day",
-        "Its team leader",
-        "Its clothing rule"
+        "Mina and Leo",
+        "Leo and Aya",
+        "Aya and Daniel",
+        "Daniel and Mina"
       ],
-      "answer": "Its day",
-      "evidence": "The final rehearsal has moved from Friday to Thursday.",
-      "reason_ja": "FridayからThursdayへ変更されたため、変わったのは曜日です。"
+      "answer": "Aya and Daniel",
+      "evidence": "Aya says necklaces could catch on a costume, and Daniel says he agrees about safety.",
+      "reason_ja": "安全上の問題を直接述べているのはAyaとDanielです。"
     },
     {
       "num": 2,
       "type": "radio",
-      "question": "What should Ken do before Saturday morning?",
+      "question": "According to the final plan, what will the dancers probably wear during the second half?",
       "options": [
-        "Buy a new shirt",
-        "Leave science club early",
-        "Watch a recording",
-        "Practise with Lena"
+        "Green jackets over white shirts",
+        "White shirts with blue cloth bands",
+        "White shirts with silver wristbands",
+        "Blue jackets with necklaces"
       ],
-      "answer": "Watch a recording",
-      "evidence": "We will record the new ending. Watch it before Saturday morning.",
-      "reason_ja": "欠席部分は録画で確認するよう指示されています。"
+      "answer": "White shirts with blue cloth bands",
+      "evidence": "How about blue cloth bands instead?",
+      "reason_ja": "ジャケットを脱ぎ、白いシャツと青い布のバンドになると考えられます。"
     },
     {
       "num": 3,
       "type": "radio",
-      "question": "Why will Lena bring an extra shirt?",
+      "question": "What will the club most likely do first before rehearsal?",
       "options": [
-        "Ken left it at her house",
-        "Maya asked her to buy one",
-        "The team colour changed",
-        "The gym is cold"
+        "Buy eight green jackets",
+        "Ask Ms. Carter about the costume plan",
+        "Check the stage lights with the audience",
+        "Begin the full stage rehearsal"
       ],
-      "answer": "Ken left it at her house",
-      "evidence": "Ken's shirt ... is still at my house.",
-      "reason_ja": "所有場所を示す情報を直接読み取ります。"
+      "answer": "Ask Ms. Carter about the costume plan",
+      "evidence": "Before buying them, let's show the plan to Ms. Carter.",
+      "reason_ja": "購入前にMs. Carterへ相談し、その後4:30からリハーサルです。"
     }
   ]
 }

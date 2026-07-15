@@ -1,79 +1,93 @@
 {
   "id": "q5",
-  "set": 1,
+  "set": "q5",
   "passage": 5,
-  "title": "A Volunteer’s Journal",
+  "title": "問5　案内・フォーム・メール",
   "label": "問5",
-  "range": "Questions 1–4",
-  "durationMinutes": 10,
-  "source": "AI-generated original common-test-style practice.",
-  "passageHtml": "<div class=\"materialCard\"><h3>From Noah’s Volunteer Journal</h3><p>When I signed up to help at the city animal shelter, I imagined playing with dogs. On my first morning, however, Ms. Chen handed me a bucket and showed me how to clean the cages. I was disappointed, but I tried to work quickly.</p><p>Later, I noticed a small dog named Pepper refusing to eat. Ms. Chen explained that Pepper became nervous around new people. Instead of touching her, I sat quietly outside the cage and read my history notes aloud. After several visits, Pepper began eating while I was there.</p><p>On my final day, a family came to meet Pepper. She stayed behind me at first, but then slowly walked toward the youngest child. Seeing that, I understood that the cleaning and quiet hours had mattered. The work was not what I had expected, but it had taught me to pay attention rather than simply try to be useful in the way I preferred.</p></div>",
+  "range": "Questions 1-5",
+  "durationMinutes": 15,
+  "source": "AI-generated original. Common Test-style practice; no exam text reproduced.",
+  "passageHtml": "<div class=\"material flyerMaterial\"><h2>Riverdale Community Museum</h2><h3>Local Objects Week: Recommendations and Student Guides Wanted</h3>\n<p>From 3 to 10 August, the museum will display everyday objects that tell stories about life in different parts of the world. Objects will be shown in the main gallery all week. On the final afternoon, student guides will introduce selected objects to families.</p>\n<p>We welcome recommendations of safe, portable objects made before 2015. Each object should be small enough to fit inside a 40 cm display case. If you volunteer as a guide and complete the training session, you will receive a museum café voucher.</p>\n<ul><li>Recommendation period: 1 June-12 July</li><li>Maximum insured value: £80</li><li>Objects may be handmade or commercially produced.</li></ul></div>\n<div class=\"material formMaterial\"><h3>Your Online Form</h3><table><tr><th>Object</th><th>Year</th><th>Value</th><th>Comment</th></tr><tr><td>Wooden lunch box</td><td>1998</td><td>£35</td><td>Made by my grandfather; used on mountain trips.</td></tr><tr><td>Solar radio</td><td>2018</td><td>£45</td><td>Used during power cuts; works without batteries.</td></tr><tr><td>Festival mask</td><td>2006</td><td>£70</td><td>Light, handmade, and worn in a local summer dance.</td></tr><tr><td>Stone cooking pot</td><td>1985</td><td>£60</td><td>Traditional family pot; weighs 18 kilograms.</td></tr></table><p><b>Will you volunteer as a student guide?</b> No</p></div>\n<div class=\"material emailMaterial\"><h3>Email from the Museum</h3><p>Thank you for your recommendations. Two objects meet all exhibition conditions and have been accepted. One object is too recent, while another cannot be placed safely in our standard case. We would also be grateful if you reconsidered helping as a guide; several international families have registered for the final afternoon. You may also send one additional recommendation before the deadline.</p></div><div class=\"material attachmentMaterial\"><h3>Attachment: Exhibition Review Notes</h3><p><b>Wooden lunch box:</b> Accepted. The personal history is clear, the object is easy to display, and its size is suitable for the case.</p><p><b>Solar radio:</b> Not accepted for the main exhibition because of the date condition. The museum may consider it for a future event about emergency technology.</p><p><b>Festival mask:</b> Accepted. Staff would like a short explanation of the dance and the materials used to make the mask.</p><p><b>Stone cooking pot:</b> Not accepted. Although its age and value are suitable, its weight creates a risk when staff move the display case.</p><p>The museum selects objects not because they are rare or expensive but because visitors can understand a larger story through them. For this reason, a simple object with a strong explanation may be preferred to an unusual object with little background information.</p></div>",
   "vocab": [
     {
-      "word": "shelter",
-      "meaning": "保護施設"
+      "word": "portable",
+      "meaning": "持ち運べる"
     },
     {
-      "word": "refuse",
-      "meaning": "拒む"
+      "word": "insured value",
+      "meaning": "保険評価額"
     }
   ],
   "questions": [
     {
       "num": 1,
       "type": "radio",
-      "question": "What did Noah expect to do at the shelter?",
+      "question": "What is the main purpose of Local Objects Week?",
       "options": [
-        "Clean cages",
-        "Play with dogs",
-        "Study history",
-        "Meet families"
+        "To sell valuable antiques to visitors",
+        "To use ordinary objects to introduce ways of life",
+        "To train professional museum workers",
+        "To collect only handmade objects from students"
       ],
-      "answer": "Play with dogs",
-      "evidence": "I imagined playing with dogs.",
-      "reason_ja": "最初の期待を直接問う問題です。"
+      "answer": "To use ordinary objects to introduce ways of life",
+      "evidence": "everyday objects that tell stories about life",
+      "reason_ja": "日用品を通して各地の生活を紹介する催しです。"
     },
     {
       "num": 2,
       "type": "radio",
-      "question": "Why did Noah read aloud near Pepper?",
+      "question": "Which statement about volunteers is true?",
       "options": [
-        "To train her to perform",
-        "To finish his homework",
-        "To let her become used to him without pressure",
-        "To make Ms. Chen laugh"
+        "They must bring an object worth over £80.",
+        "They will guide families on every day of the event.",
+        "They can receive a voucher after completing training.",
+        "They may skip the training if they speak English."
       ],
-      "answer": "To let her become used to him without pressure",
-      "evidence": "Instead of touching her, I sat quietly ... and read.",
-      "reason_ja": "触れずに静かに存在することで、犬の緊張を和らげようとしました。"
+      "answer": "They can receive a voucher after completing training.",
+      "evidence": "complete the training session, you will receive a museum café voucher",
+      "reason_ja": "研修を完了した案内役にはカフェ券が渡されます。"
     },
     {
       "num": 3,
       "type": "radio",
-      "question": "What change shows Pepper trusted Noah more?",
+      "question": "Which two objects were most likely accepted?",
       "options": [
-        "She cleaned her cage",
-        "She ate while he was there",
-        "She learned history",
-        "She barked at visitors"
+        "Wooden lunch box and solar radio",
+        "Wooden lunch box and festival mask",
+        "Solar radio and stone cooking pot",
+        "Festival mask and stone cooking pot"
       ],
-      "answer": "She ate while he was there",
-      "evidence": "After several visits, Pepper began eating while I was there.",
-      "reason_ja": "食べるようになったことが安心感の変化を示します。"
+      "answer": "Wooden lunch box and festival mask",
+      "evidence": "Two objects meet all exhibition conditions",
+      "reason_ja": "1998・£35・小型の弁当箱と、2006・£70・軽い仮面が条件を満たします。"
     },
     {
       "num": 4,
       "type": "radio",
-      "question": "What lesson did Noah learn?",
+      "question": "Why was the solar radio rejected?",
       "options": [
-        "Useful work must always be enjoyable",
-        "Animals should never meet children",
-        "Helping requires noticing what is actually needed",
-        "Volunteers should choose only easy tasks"
+        "It was made after the required year.",
+        "It was too expensive to insure.",
+        "It was not commercially produced.",
+        "It needed batteries to operate."
       ],
-      "answer": "Helping requires noticing what is actually needed",
-      "evidence": "it had taught me to pay attention rather than simply try to be useful in the way I preferred.",
-      "reason_ja": "自分のやりたい支援ではなく、相手に必要な支援を見極めることを学びました。"
+      "answer": "It was made after the required year.",
+      "evidence": "safe, portable objects made before 2015",
+      "reason_ja": "2018年製なので「2015年より前」という条件を満たしません。"
+    },
+    {
+      "num": 5,
+      "type": "radio",
+      "question": "What two actions does the museum ask you to consider?",
+      "options": [
+        "Buy a larger display case",
+        "Volunteer as a guide",
+        "Recommend another object",
+        "Translate the exhibition labels"
+      ],
+      "answer": "Volunteer as a guide",
+      "evidence": "reconsidered helping as a guide",
+      "reason_ja": "案内役の再検討と追加推薦の二つですが、この設問では案内役を問います。"
     }
   ]
 }

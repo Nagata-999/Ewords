@@ -1,97 +1,107 @@
 {
   "id": "q6",
-  "set": 1,
+  "set": "q6",
   "passage": 6,
-  "title": "Cooling the City",
+  "title": "問6　物語とアウトライン",
   "label": "問6",
-  "range": "Questions 1–5",
-  "durationMinutes": 12,
-  "source": "AI-generated original common-test-style practice.",
-  "passageHtml": "<div class=\"materialCard\"><h3>Cooling the City</h3><p>Cities are often warmer than nearby rural areas because roads and buildings absorb heat during the day and release it slowly at night. This is called the urban heat island effect.</p><p>One response is to plant street trees. Their leaves provide shade, while water released from leaves cools the surrounding air. Yet trees need soil, water, and years to grow. Another option is a “cool roof,” made with a light-coloured surface that reflects more sunlight. Cool roofs can be installed quickly, but they mainly improve the building beneath them and offer little shade at street level.</p><p>Some cities also use small “pocket parks” on unused land. These combine plants, seating, and sometimes water features. Their cooling effect may cover only a limited area, but they can also provide places for rest and social contact.</p><table class=\"infoTable\"><tr><th>Method</th><th>Setup speed</th><th>Street shade</th><th>Other benefit</th></tr><tr><td>Street trees</td><td>Slow</td><td>High</td><td>Habitat</td></tr><tr><td>Cool roofs</td><td>Fast</td><td>Low</td><td>Lower indoor heat</td></tr><tr><td>Pocket parks</td><td>Medium</td><td>Medium</td><td>Rest and social space</td></tr></table></div>",
+  "range": "Questions 1-6",
+  "durationMinutes": 18,
+  "source": "AI-generated original. Common Test-style practice; no exam text reproduced.",
+  "passageHtml": "<div class=\"material storyMaterial\"><h2>The Last Bus Ticket</h2>\n<p>On rainy Friday afternoons, Emi usually waited for the number 14 bus outside the sports center. She carried a heavy badminton bag and spent the ride reviewing vocabulary for Monday's quiz. One particular Friday, she found an old paper ticket inside a library book she had borrowed. On the back, someone had written, “Do not miss the last stop.”</p>\n<p>At first Emi assumed it was a joke. Paper tickets had not been used in the city for years. Still, the handwriting reminded her of her grandfather, who had once driven buses. He often told her that a driver needed to remember not only streets but also people: the nurse who boarded before sunrise, the child who waved from the same corner, and the elderly man who counted every coin twice.</p>\n<p>The bus arrived crowded. Emi took the only free seat beside a woman holding several grocery bags. At the next stop, an elderly passenger entered. Emi stood and offered him her seat. The woman moved one bag so that Emi could sit partly on the edge. “Thank you,” she whispered. “These are supplies for the community kitchen, and I was afraid they would fall.”</p>\n<p>A few stops later, the driver announced that road construction would force the bus to end its route early. Most passengers complained and opened map apps. The elderly man looked confused. He explained that he needed to reach Maple House, a care center near the usual last stop, but he did not own a smartphone.</p>\n<p>Emi knew the area only from her grandfather's stories. She remembered a narrow walking path beside the canal and believed it might lead to Maple House. The woman with the groceries said the community kitchen was in the same building. Together, they left the bus and followed the canal. Rainwater had covered part of the path, so Emi used her badminton bag to block branches while the woman carried the elderly man's umbrella.</p>\n<p>They reached Maple House just before the kitchen closed. A volunteer at the entrance thanked them and noticed the paper ticket in Emi's hand. “Where did you get that?” he asked. The ticket had been issued on the final day Emi's grandfather drove the number 14 route. The volunteer had been a student then and remembered the driver waiting several extra minutes so that he would not miss an important hospital visit.</p>\n<p>That evening, Emi told her grandfather everything. He smiled at the message on the ticket. “I wrote reminders on spare tickets,” he said. “That one meant drivers should never forget the people at the end of the route.”</p>\n<p>On Monday, Emi returned the library book. Before doing so, she placed a new card inside it: “A route is more than a line on a map.”</p></div>\n<div class=\"material outlineMaterial\"><h3>Story Outline</h3><p><b>Emi:</b> badminton player; usually studies on the bus; remembers her grandfather's stories.</p><p><b>Grandfather:</b> former bus driver; believed drivers should pay attention to passengers.</p><p><b>Key incidents:</b> ticket found -> route shortened -> passengers cooperate -> meaning of note discovered.</p></div><div class=\"material contextMaterial\"><h3>Presentation Notes</h3><p>The story moves between Emi's present and her grandfather's past. The ticket acts as a physical link between the two periods. At first, Emi treats its message as a mystery. By the end, she understands it as a principle: transport is a public service shaped by attention to individual people.</p><p>The other passengers are important because Emi does not solve the problem alone. The woman carries the umbrella, Emi remembers the route, and the elderly man explains his destination. Their cooperation turns an inconvenient route change into an opportunity to help one another. The final card that Emi leaves in the library book suggests that she wants the idea to continue traveling to another reader.</p></div>",
   "vocab": [
     {
-      "word": "absorb",
-      "meaning": "吸収する"
+      "word": "issue",
+      "meaning": "発行する"
     },
     {
-      "word": "reflect",
-      "meaning": "反射する"
-    },
-    {
-      "word": "rural",
-      "meaning": "地方の"
+      "word": "spare",
+      "meaning": "予備の"
     }
   ],
   "questions": [
     {
       "num": 1,
       "type": "radio",
-      "question": "Why do cities stay warm at night?",
+      "question": "What first caused Emi to think about her grandfather?",
       "options": [
-        "Trees release too much water",
-        "Buildings and roads slowly release stored heat",
-        "Rural areas reflect less sunlight",
-        "Cool roofs produce heat"
+        "The bus driver changed the route.",
+        "She found a handwritten message on an old ticket.",
+        "An elderly passenger counted coins.",
+        "A volunteer mentioned a hospital."
       ],
-      "answer": "Buildings and roads slowly release stored heat",
-      "evidence": "roads and buildings absorb heat ... and release it slowly at night.",
-      "reason_ja": "昼間に蓄えた熱を夜に放出するためです。"
+      "answer": "She found a handwritten message on an old ticket.",
+      "evidence": "the handwriting reminded her of her grandfather",
+      "reason_ja": "古い切符の筆跡が祖父を思い出させました。"
     },
     {
       "num": 2,
       "type": "radio",
-      "question": "Which method is best when a quick reduction in indoor heat is needed?",
+      "question": "Why did Emi and the woman leave the bus together?",
       "options": [
-        "Street trees",
-        "Cool roofs",
-        "Pocket parks",
-        "Water features"
+        "They both wanted to avoid the vocabulary quiz.",
+        "They needed to return the old ticket.",
+        "Their destinations were in the same building area.",
+        "The driver asked them to inspect the canal."
       ],
-      "answer": "Cool roofs",
-      "evidence": "Cool roofs can be installed quickly ... Lower indoor heat.",
-      "reason_ja": "設置速度と屋内温度の両条件を表と本文から統合します。"
+      "answer": "Their destinations were in the same building area.",
+      "evidence": "the community kitchen was in the same building",
+      "reason_ja": "Maple Houseと地域食堂が同じ建物にありました。"
     },
     {
       "num": 3,
       "type": "radio",
-      "question": "What disadvantage of street trees is mentioned?",
+      "question": "Which event happened first?",
       "options": [
-        "They provide no shade",
-        "They require time and resources to grow",
-        "They increase indoor heat",
-        "They prevent social contact"
+        "The volunteer recognized the ticket.",
+        "Emi offered her seat to an elderly passenger.",
+        "The route ended early because of construction.",
+        "Emi placed a new card in the library book."
       ],
-      "answer": "They require time and resources to grow",
-      "evidence": "trees need soil, water, and years to grow.",
-      "reason_ja": "必要な資源と成長時間が欠点です。"
+      "answer": "Emi offered her seat to an elderly passenger.",
+      "evidence": "At the next stop, an elderly passenger entered. Emi stood...",
+      "reason_ja": "座席を譲る出来事が最も早いです。"
     },
     {
       "num": 4,
       "type": "radio",
-      "question": "How are pocket parks different from cool roofs?",
+      "question": "What did the grandfather mean by “people at the end of the route”?",
       "options": [
-        "They can provide a social space",
-        "They are always cheaper",
-        "They reflect more sunlight",
-        "They only benefit buildings"
+        "Only passengers who paid with paper tickets",
+        "People whose needs might be forgotten if a driver focused only on the timetable",
+        "Drivers who worked the final shift",
+        "Volunteers waiting at the community kitchen"
       ],
-      "answer": "They can provide a social space",
-      "evidence": "they can also provide places for rest and social contact.",
-      "reason_ja": "社会的交流の場になる点が違いです。"
+      "answer": "People whose needs might be forgotten if a driver focused only on the timetable",
+      "evidence": "drivers should never forget the people at the end of the route",
+      "reason_ja": "路線そのものではなく、最後まで利用する人への配慮を表します。"
     },
     {
       "num": 5,
       "type": "radio",
-      "question": "What is the main idea of the passage?",
+      "question": "Which best describes the grandfather?",
       "options": [
-        "One cooling method is perfect for every city",
-        "Cities should remove all buildings",
-        "Different cooling methods have different strengths and limits",
-        "Rural areas are becoming hotter than cities"
+        "He showed care through practical actions.",
+        "He disliked passengers who delayed buses.",
+        "He depended on map apps for every route.",
+        "He kept his work completely separate from people."
       ],
-      "answer": "Different cooling methods have different strengths and limits",
-      "evidence": "Each method is described with benefits and limitations.",
-      "reason_ja": "複数の対策を比較し、それぞれの長所と限界を示す文章です。"
+      "answer": "He showed care through practical actions.",
+      "evidence": "waiting several extra minutes",
+      "reason_ja": "言葉だけでなく、待つという行動で配慮を示しました。"
+    },
+    {
+      "num": 6,
+      "type": "radio",
+      "question": "What is the main message of the story?",
+      "options": [
+        "Old transport systems are always better.",
+        "Small acts of attention can connect people across time.",
+        "Students should never study on buses.",
+        "Community kitchens should provide transport."
+      ],
+      "answer": "Small acts of attention can connect people across time.",
+      "evidence": "A route is more than a line on a map.",
+      "reason_ja": "人への小さな配慮が世代を越えてつながる物語です。"
     }
   ]
 }
