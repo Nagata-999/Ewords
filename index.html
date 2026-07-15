@@ -4,6 +4,14 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4726251793577317" crossorigin="anonymous"></script>
   <meta name="google-adsense-account" content="ca-pub-4726251793577317">
   <meta charset="UTF-8" />
+  <meta name="theme-color" content="#f4511e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="すし単" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" href="/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>すし単｜無料英語ゲーム・英単語ゲーム・英語タイピング【英検・IELTS対応】</title>
   <meta name="description" content="すし単は、無料で遊べる英語ゲームサイトです。英単語ゲーム、英語タイピング、語源ゲーム、リスニングゲーム、英語クイズで楽しく学習できます。英検・IELTS・高校英語に対応。" />
@@ -128,5 +136,16 @@ const hamburgerBtn=document.getElementById('hamburgerBtn');const sideMenu=docume
 
 document.querySelectorAll('.game-info-toggle').forEach(btn=>{btn.addEventListener('click',()=>{const item=btn.closest('.game-item');const open=item.classList.toggle('open');btn.textContent=open?'▲':'▽';btn.setAttribute('aria-label',open?'説明を閉じる':'説明を開く');})});
 </script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js").catch(error => {
+      console.error("Service Worker registration failed:", error);
+    });
+  });
+}
+</script>
+
 </body>
 </html>
