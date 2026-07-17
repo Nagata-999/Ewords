@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f97316">
+<title>すし音読｜ひらがなルビで英語を音読</title>
+<meta name="description" content="英文を1文ずつ、すしルビ・和訳・英語音声つきで練習できる無料の英語音読教材です。">
+<style>
+:root{--o:#f97316;--od:#c2410c;--os:#fff7ed;--ink:#292524;--mut:#78716c;--line:#fed7aa;--w:#fff;--shadow:0 14px 36px rgba(124,45,18,.12);--r:22px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ink);background:radial-gradient(circle at top left,#fff7ed 0,transparent 34%),linear-gradient(180deg,#fffdfa,#fff7ed);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Yu Gothic UI","Yu Gothic",Meiryo,sans-serif}
+a{color:var(--od);font-weight:800;text-decoration:none}a:hover{text-decoration:underline}
+.app{width:min(940px,100%);margin:auto;padding:18px 16px 42px}.site-nav{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:15px;flex-wrap:wrap}.site-nav .links{display:flex;gap:12px;flex-wrap:wrap;font-size:.9rem}
+.hero{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:16px}.brand{display:flex;gap:12px;align-items:center}.logo{width:52px;height:52px;display:grid;place-items:center;border-radius:16px;background:#fff;box-shadow:var(--shadow);font-size:28px;border:1px solid #ffedd5}h1{margin:0;font-size:clamp(1.55rem,4vw,2.25rem)}.tag{margin:4px 0 0;color:var(--mut);font-size:.92rem}.settings{display:flex;gap:8px;align-items:center;flex-wrap:wrap}select{min-height:44px;border:1px solid var(--line);border-radius:12px;background:#fff;padding:0 12px;max-width:280px}
+.panel{background:rgba(255,255,255,.96);border:1px solid #ffedd5;border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}.top{display:grid;grid-template-columns:1fr auto;gap:10px;padding:16px 18px;border-bottom:1px solid #ffedd5;background:linear-gradient(180deg,#fff,#fffaf5)}.settitle,.count{font-weight:800}.count{color:var(--od)}.setdesc{grid-column:1/-1;color:var(--mut);font-size:.86rem}.progresswrap{grid-column:1/-1;height:8px;background:#ffedd5;border-radius:99px;overflow:hidden}.progress{height:100%;background:linear-gradient(90deg,#fb923c,#f97316);transition:.25s}
+.card{padding:clamp(22px,5vw,44px);min-height:440px;display:flex;flex-direction:column;justify-content:center;text-align:center}.label{align-self:center;margin-bottom:18px;color:var(--od);background:var(--os);border:1px solid var(--line);padding:7px 12px;border-radius:999px;font-size:.85rem;font-weight:800}.en{margin:0;font-family:Georgia,"Times New Roman",serif;font-size:clamp(1.55rem,4.5vw,2.7rem);line-height:1.55}.helper{min-height:145px;margin-top:26px;padding-top:22px;border-top:1px dashed var(--line);display:flex;flex-direction:column;gap:12px}.ruby{margin:0;color:#9a3412;font-size:clamp(1.12rem,3.4vw,1.62rem);line-height:1.85;font-weight:800;letter-spacing:.04em;overflow-wrap:anywhere}.tr{margin:0;color:#57534e;font-size:clamp(1rem,3vw,1.2rem);line-height:1.7}.ph{margin:0;color:#a8a29e}
+.controls{padding:18px;border-top:1px solid #ffedd5;background:#fffaf5}.assist{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}.audio{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:10px;margin-bottom:14px}.speed-row{display:flex;justify-content:center;align-items:center;gap:10px;margin-bottom:14px;color:var(--mut);font-size:.9rem}input[type=range]{width:min(280px,60vw);accent-color:var(--o)}.navrow{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}.btn{min-height:50px;border:0;border-radius:14px;padding:10px 14px;cursor:pointer;font-weight:800}.soft{color:var(--od);background:#fff;border:1px solid var(--line)}.soft.active{color:#fff;background:var(--o)}.main{color:#fff;background:linear-gradient(180deg,#fb923c,#f97316);box-shadow:0 8px 18px rgba(249,115,22,.22)}.btn:disabled{opacity:.4;cursor:not-allowed}.dot{min-width:58px;text-align:center;color:var(--mut);font-weight:800}.tools{display:flex;justify-content:center;gap:10px;margin-top:14px;flex-wrap:wrap}.mini{min-height:42px;padding:8px 12px;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--mut);font-weight:700;cursor:pointer}details{margin-top:18px;background:#fff;border:1px solid #ffedd5;border-radius:16px;padding:14px 16px}summary{cursor:pointer;font-weight:800;color:var(--od)}.about{color:#57534e;line-height:1.8;font-size:.95rem}.guide-link{display:inline-block;margin-top:8px;padding:9px 13px;border-radius:999px;background:var(--os);border:1px solid var(--line)}.complete{padding:30px;text-align:center}
+@media(max-width:650px){.hero{align-items:flex-start;flex-direction:column}.settings{width:100%}select{width:100%;max-width:none}.assist,.audio{grid-template-columns:1fr 1fr}.assist .wide,.audio .wide{grid-column:1/-1}.card{min-height:405px}.navrow{grid-template-columns:1fr 52px 1fr}.site-nav{align-items:flex-start}}
+</style>
+</head>
+<body>
+<main class="app">
+<nav class="site-nav" aria-label="サイトメニュー"><a href="/">🍣 すし英語</a><div class="links"><a href="/">トップ</a><a href="/sushi-ruby-guide.html">ルビの読み方</a><a href="/privacy.html">Privacy</a><a href="/contact.html">Contact</a></div></nav>
+<header class="hero"><div class="brand"><div class="logo">🍣</div><div><h1>すし音読</h1><p class="tag">ルビを確認しながら、英語を1文ずつ読む。</p></div></div><div class="settings"><select id="lessonSelect" aria-label="教材を選択"></select><select id="voiceSelect" aria-label="音声を選択"><option value="">音声：自動</option></select></div></header>
+<section class="panel"><div class="top"><div class="settitle" id="setTitle"></div><div class="count" id="counter"></div><div class="setdesc" id="setDesc"></div><div class="progresswrap"><div class="progress" id="progress"></div></div></div>
+<div id="learning"><article class="card"><div class="label" id="sentenceLabel"></div><p class="en" id="english"></p><div class="helper" id="helper"></div></article>
+<div class="controls"><div class="assist"><button class="btn soft" id="rubyBtn">ルビを見る</button><button class="btn soft" id="translationBtn">和訳を見る</button><button class="btn soft wide" id="bothBtn">ルビ＋和訳</button></div>
+<div class="audio"><button class="btn main wide" id="playBtn">▶ 音声を聞く</button><button class="btn soft" id="pauseBtn" disabled>⏸ 一時停止</button><button class="btn soft" id="stopBtn" disabled>■ 停止</button></div>
+<div class="speed-row"><label for="speed">速さ</label><input id="speed" type="range" min="0.6" max="1.1" step="0.05" value="0.82"><span id="speedValue">0.82×</span></div>
+<div class="navrow"><button class="btn soft" id="prevBtn">← 前へ</button><div class="dot" id="pageDot"></div><button class="btn main" id="nextBtn">次へ →</button></div><div class="tools"><button class="mini" id="hideBtn">補助を隠す</button><button class="mini" id="restartBtn">最初から</button></div></div></div>
+<div class="complete" id="complete" hidden><div style="font-size:46px">🍣</div><h2>SET完了！</h2><p style="color:#78716c">次はルビを隠して、もう一度読んでみよう。</p><button class="btn main" id="againBtn">もう一度読む</button></div></section>
+<details><summary>この教材について</summary><div class="about"><p>英文を先に自分で読み、必要なときだけルビを確認してください。ルビは正確な発音記号ではなく、英語の音やつながりをつかむための目安です。</p><p><strong>表記例：</strong> <em>the</em> は「だ」、<em>Can I</em> は「けない」、<em>river</em> は「ぅrぃゔぁ」、<em>book</em> は「ぶぅっ(k)」のように表します。</p><a class="guide-link" href="/sushi-ruby-guide.html">すしルビの読み方を見る →</a></div></details>
+</main>
+<script>
+const lessons=[{"id": "morning", "title": "SET 1｜Morning Walk", "description": "約200語のやさしい物語", "sentences": [{"text": "Last Sunday, I woke up early because I wanted to go for a long walk before breakfast.", "ruby": "らす(t) さんでぃ、あぃ うぉうかっ(p) あーぅrりー びこーz あぃ わんにっ た ごう ふぉら ろんぐ うぉー(k) びふぉー ぶぅrぇっくふぁす(t)。", "translation": "先週の日曜日、朝食前に長い散歩へ行きたかったので、私は早く起きました。"}, {"text": "The weather was cool, and the streets were quiet.", "ruby": "だ うぇざぁ わz くーぅ、ぇん だ すとぅrぃーつ わぁ くわぃぇっ(t)。", "translation": "天気は涼しく、通りは静かでした。"}, {"text": "I put on my running shoes, grabbed a bottle of water, and left my house.", "ruby": "あぃ ぷろん まぃ ぅrぁにんぐ しゅーz、ぐぅrぇあぶどぁ ぼろぅぁゔ わーらー、ぇん れふ(t) まぃ はうs。", "translation": "私はランニングシューズを履き、水のボトルをつかんで家を出ました。"}, {"text": "As I walked through the park, I saw children playing soccer, an old man reading a newspaper, and several people walking their dogs.", "ruby": "ぁざぃ うぉー(k)t するー だ ぱぁr(k)、あぃ そー ちるどぅrん ぷれぇいんぐ さかぁ、ぁん おうぅ(d) まぇあん ぅrぃーでぃんぐぁ にゅーzぺぇいぱぁ、ぇん せゔぅrぅ ぴーぽぅ うぉーきんぐ ぜぁ どっ(g)z。", "translation": "公園を歩いていると、サッカーをする子どもたち、新聞を読む老人、犬を散歩させる人々が見えました。"}, {"text": "Everyone looked relaxed and happy.", "ruby": "えゔぅrぃわん るっ(k)t ぅrぃれぇあくす(t) ぇん へぇあぴー。", "translation": "みんなくつろいで幸せそうに見えました。"}, {"text": "After about thirty minutes, I reached a small café near the river.", "ruby": "ぇあふたぁ ぁばう(t) さぁrりー みにっ(t)s、あぃ ぅrぃーち(t)ぁ すもおぅ かふぇい にぁ だ ぅrぃゔぁ。", "translation": "約30分後、私は川の近くにある小さなカフェに着きました。"}, {"text": "I ordered a cup of coffee and a sandwich, then sat by the window to enjoy the view.", "ruby": "あぃ おーだぁどぁ かっぱゔ こーふぃー ぇんぁ せぇあんうぃっち、ぜん せぇあ(t) ばぃ だ うぃんどう た えんじょい だ びゅー。", "translation": "コーヒーとサンドイッチを注文し、景色を楽しむため窓際に座りました。"}, {"text": "While I was eating, I thought about my goals for this year.", "ruby": "わあぃらぃ わz いーりんぐ、あぃ そーらばう(t) まぃ ごうぅz ふぉー でぃs いやぁ。", "translation": "食べながら、私は今年の目標について考えました。"}, {"text": "I want to improve my English, run a faster marathon, and spend more time with my family.", "ruby": "あぃ わな いんぷぅrーゔ まぃ いんぐりっしゅ、ぅrぁな ふぇあすたぁ めぇあぅrぁそん、ぇん すぺん(d) もぁ たあぃm うぃず まぃ ふぇあみりー。", "translation": "英語を上達させ、もっと速くマラソンを走り、家族と過ごす時間を増やしたいと思っています。"}, {"text": "I know these goals will take time, but I believe that making small efforts every day will eventually lead to big results.", "ruby": "あぃ のう ずぃーz ごうぅz うぃぅ てぇい(k) たあぃm、ばらぃ びりーゔ ざっ めぇいきんぐ すもおぅ えふぁつ えゔぅrぃ でぇい うぃぅ いゔぇんちゅありー りー(d) た びっ(g) ぅrぃざぅつ。", "translation": "これらの目標には時間がかかりますが、毎日の小さな努力がやがて大きな結果につながると信じています。"}, {"text": "Before going home, I took one last look at the river.", "ruby": "びふぉー ごういんぐ ほおぅ(m)、あぃ とぅっ(k) わん らす(t) るっかっ だ ぅrぃゔぁ。", "translation": "家へ帰る前に、私はもう一度川を眺めました。"}, {"text": "The morning had been simple, but it gave me time to think clearly.", "ruby": "だ もーにんぐ は(d) びん すぃんぽぅ、ばりっ げぇいゔ みー たあぃm た すぃん(k) くりぁぅりー。", "translation": "その朝は何でもない時間でしたが、落ち着いて考える時間を与えてくれました。"}, {"text": "I promised myself that I would never stop learning new things.", "ruby": "あぃ ぷぅrぁみす(t) まぃせぅふ ざらぃ うっ(d) ねゔぁ すたぁっ(p) らーにんぐ にゅー すぃんぐz。", "translation": "私は、新しいことを学び続けると自分に約束しました。"}]}, {"id": "writing", "title": "SET 2｜Writing Phrases", "description": "英作文で使える表現", "sentences": [{"text": "I agree with the idea that schools should provide breakfast for children for the following two reasons.", "ruby": "あぃ ぁぐぅrぃー うぃず でぃ あぃでぃぁ ざっ すくーぅz しゅっ(d) ぷぅrぁゔあぃ(d) ぶぅrぇっくふぁす(t) ふぉー ちるどぅrん ふぉー だ ふぁろういんぐ とぅー ぅrぃーずんz。", "translation": "私は、学校が子どもたちに朝食を提供すべきだという考えに、次の2つの理由で賛成です。"}, {"text": "School breakfast programs have a positive effect on children's health.", "ruby": "すくーぅ ぶぅrぇっくふぁす(t) ぷぅrおぐぅrぇあむz へぁゔぁ ぱずぃてぃゔ いふぇくたん ちるどぅrんz へぅす。", "translation": "学校の朝食制度は子どもの健康に良い影響を与えます。"}, {"text": "The Internet enables people to learn about different cultures.", "ruby": "でぃ いんなねっ(t) いねぇいぼぅz ぴーぽぅ た らーなばう(t) でぃふぅrん(t) かぅちゃぁz。", "translation": "インターネットは人々が異なる文化について学ぶことを可能にします。"}, {"text": "Environmental education contributes to raising awareness of global warming.", "ruby": "えんゔあぃぅrんめんろぅ えじゅけぇいしょん こんとぅrぃびゅーつ た ぅrぇいずぃんぐ ぁうぇあねすぁゔ ぐろうぼぅ うぉーみんぐ。", "translation": "環境教育は地球温暖化への意識を高めることに貢献します。"}, {"text": "Some people might say that providing breakfast costs too much, but the advantages outweigh the disadvantages.", "ruby": "さむ ぴーぽぅ まい(t) せぇい ざっ ぷぅrぁゔあぃでぃんぐ ぶぅrぇっくふぁす(t) こす(t)s とぅー まっち、ばっ でぃ ぁどゔぇあんてぃじず あうとうぇい だ でぃすぁどゔぇあんてぃじず。", "translation": "朝食の提供には費用がかかりすぎるという人もいますが、利点は欠点を上回ります。"}, {"text": "Sports give us opportunities to learn teamwork and communication skills.", "ruby": "すぽーつ ぎゔぁs おぱちゅーにてぃーz た らーん てぃーむわー(k) ぇん かみゅにけぇいしょん すきぅz。", "translation": "スポーツは私たちにチームワークやコミュニケーション能力を学ぶ機会を与えます。"}, {"text": "Can I use this phrase in another topic?", "ruby": "けない ゆーz でぃs ふぅrぇいずぃん なざぁ たぴっ(k)？", "translation": "この表現を別のトピックでも使えますか。"}, {"text": "Yes, you can use it in many different situations.", "ruby": "いぇs、ゆー けん ゆーずぃりん めにー でぃふぅrん(t) すぃちゅえぇいしょんz。", "translation": "はい、多くの異なる状況で使えます。"}, {"text": "In conclusion, for the reasons I mentioned above, school breakfast programs are beneficial.", "ruby": "いん こんくるーじょん、ふぉー だ ぅrぃーずんz あぃ めんしょんだばゔ、すくーぅ ぶぅrぇっくふぁす(t) ぷぅrおぐぅrぇあむz ぁ べねふぃしゃぅ。", "translation": "結論として、以上の理由から、学校の朝食制度には利点があります。"}]}, {"id": "sound", "title": "SET 3｜Sound Practice", "description": "すしルビの基本音", "sentences": [{"text": "Can I have a glass of water?", "ruby": "けない へぁゔぁ ぐぅrぇあすぁゔ わーらー？", "translation": "水を一杯いただけますか。"}, {"text": "The book is on the desk.", "ruby": "だ ぶぅっ(k) ぃz おん だ でぇす(k)。", "translation": "その本は机の上にあります。"}, {"text": "The river is very quiet in the morning.", "ruby": "だ ぅrぃゔぁ ぃz ゔぇぅrぃ くわぃぇっ(t) ぃん だ もーにんぐ。", "translation": "その川は朝、とても静かです。"}, {"text": "Would you like a glass of wine?", "ruby": "うっじゅ らいくぁ ぐぅrぇあすぁゔ わあいん？", "translation": "ワインを一杯いかがですか。"}, {"text": "My passport is in my bag.", "ruby": "まぃ ぺぇあすぽー(t) ぃz ぃん まぃ べぇあ(g)。", "translation": "私のパスポートはかばんの中にあります。"}, {"text": "I want to go home.", "ruby": "あぃ わな ごう ほおぅ(m)。", "translation": "私は家に帰りたいです。"}, {"text": "Please stop at the red light.", "ruby": "ぷりーz すたぁっ(p) あっ だ ぅrぇっ(d) らあぃ(t)。", "translation": "赤信号で止まってください。"}, {"text": "Sheep and ships sound different.", "ruby": "しぃー(p) ぇん しっ(p)s さうん(d) でぃふぅrん(t)。", "translation": "sheepとshipsは異なる音です。"}]}];
+let lessonIndex=0,current=0,showRuby=false,showTranslation=false,voices=[],audioState='idle',activeUtterance=null;
+const $=id=>document.getElementById(id);
+const lessonSelect=$('lessonSelect'),voiceSelect=$('voiceSelect'),speed=$('speed');
+lessons.forEach((l,i)=>{const o=document.createElement('option');o.value=i;o.textContent=l.title;lessonSelect.appendChild(o)});
+function lesson(){return lessons[lessonIndex]}
+function item(){return lesson().sentences[current]}
+function render(){
+  const l=lesson(),it=item();
+  $('setTitle').textContent=l.title;$('setDesc').textContent=l.description||'';
+  $('english').textContent=it.text;$('sentenceLabel').textContent=`Sentence ${current+1}`;
+  $('counter').textContent=`${current+1} / ${l.sentences.length}`;$('pageDot').textContent=current+1;
+  $('progress').style.width=`${(current+1)/l.sentences.length*100}%`;
+  $('prevBtn').disabled=current===0;$('nextBtn').textContent=current===l.sentences.length-1?'完了 →':'次へ →';
+  $('rubyBtn').classList.toggle('active',showRuby);$('translationBtn').classList.toggle('active',showTranslation);
+  $('rubyBtn').textContent=showRuby?'ルビを隠す':'ルビを見る';$('translationBtn').textContent=showTranslation?'和訳を隠す':'和訳を見る';
+  const h=$('helper');h.innerHTML='';
+  if(showRuby){const p=document.createElement('p');p.className='ruby';p.textContent=it.ruby;h.appendChild(p)}
+  if(showTranslation){const p=document.createElement('p');p.className='tr';p.textContent=it.translation;h.appendChild(p)}
+  if(!showRuby&&!showTranslation){const p=document.createElement('p');p.className='ph';p.textContent='まず英文だけで読んでみよう。';h.appendChild(p)}
+  updateAudioButtons();
+}
+function updateAudioButtons(){
+  $('playBtn').textContent=audioState==='paused'?'▶ 再開':audioState==='playing'?'🔊 再生中…':'▶ 音声を聞く';
+  $('playBtn').disabled=audioState==='playing';$('pauseBtn').disabled=audioState!=='playing';$('stopBtn').disabled=audioState==='idle';
+}
+function stopSpeech(){
+  if('speechSynthesis' in window) window.speechSynthesis.cancel();
+  activeUtterance=null;audioState='idle';updateAudioButtons();
+}
+function play(){
+  if(!('speechSynthesis' in window)){alert('この端末では音声再生に対応していません。');return}
+  if(audioState==='paused'){window.speechSynthesis.resume();audioState='playing';updateAudioButtons();return}
+  stopSpeech();
+  const u=new SpeechSynthesisUtterance(item().text);activeUtterance=u;u.lang='en-US';u.rate=Number(speed.value);u.pitch=1;
+  const v=voices.find(x=>x.name===voiceSelect.value);if(v)u.voice=v;
+  u.onend=()=>{activeUtterance=null;audioState='idle';updateAudioButtons()};
+  u.onerror=()=>{activeUtterance=null;audioState='idle';updateAudioButtons()};
+  window.speechSynthesis.speak(u);audioState='playing';updateAudioButtons();
+}
+function pause(){
+  if(audioState==='playing'){window.speechSynthesis.pause();audioState='paused';updateAudioButtons()}
+}
+function loadVoices(){
+  if(!('speechSynthesis' in window))return;
+  voices=window.speechSynthesis.getVoices().filter(v=>/^en/i.test(v.lang));
+  const currentVoice=voiceSelect.value;voiceSelect.innerHTML='<option value="">音声：自動</option>';
+  voices.forEach(v=>{const o=document.createElement('option');o.value=v.name;o.textContent=`${v.name} (${v.lang})`;voiceSelect.appendChild(o)});
+  if([...voiceSelect.options].some(o=>o.value===currentVoice))voiceSelect.value=currentVoice;
+}
+function resetPosition(){
+  stopSpeech();current=0;showRuby=false;showTranslation=false;$('learning').hidden=false;$('complete').hidden=true;render();
+}
+$('rubyBtn').onclick=()=>{showRuby=!showRuby;render()};
+$('translationBtn').onclick=()=>{showTranslation=!showTranslation;render()};
+$('bothBtn').onclick=()=>{showRuby=true;showTranslation=true;render()};
+$('hideBtn').onclick=()=>{showRuby=false;showTranslation=false;render()};
+$('playBtn').onclick=play;$('pauseBtn').onclick=pause;$('stopBtn').onclick=stopSpeech;
+$('prevBtn').onclick=()=>{if(current>0){stopSpeech();current--;showRuby=false;showTranslation=false;render()}};
+$('nextBtn').onclick=()=>{stopSpeech();if(current<lesson().sentences.length-1){current++;showRuby=false;showTranslation=false;render()}else{$('learning').hidden=true;$('complete').hidden=false;$('progress').style.width='100%'}};
+$('restartBtn').onclick=resetPosition;$('againBtn').onclick=resetPosition;
+lessonSelect.onchange=e=>{lessonIndex=Number(e.target.value);resetPosition()};
+speed.oninput=()=>{$('speedValue').textContent=`${Number(speed.value).toFixed(2)}×`;if(audioState!=='idle')stopSpeech()};
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&audioState==='playing')pause()});
+window.addEventListener('beforeunload',stopSpeech);
+loadVoices();if('speechSynthesis'in window)window.speechSynthesis.onvoiceschanged=loadVoices;render();
+</script>
+</body></html>
