@@ -268,10 +268,18 @@ function setupMarker(){
   });
 }
 
+function manifestItems(raw){
+  if(Array.isArray(raw)) return raw;
+  if(raw && Array.isArray(raw.sets)){
+    return raw.sets.flatMap(set => set.passages || []).filter(item => item.status !== 'coming-soon');
+  }
+  return [];
+}
+
 function neighbourLinks(){
-  const idx=manifest.findIndex(x=>x.id===passageId);
-  const prev=manifest[idx-1], next=manifest[idx+1];
-  return {prev,next};
+  const items = manifestItems(manifest);
+  const idx = items.findIndex(x=>x.id===passageId);
+  return {prev:items[idx-1], next:items[idx+1]};
 }
 
 function renderApp(){
@@ -323,6 +331,6 @@ function renderApp(){
 Promise.all([
   fetch(`data/${encodeURIComponent(passageId)}.json`,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(`Passage HTTP ${r.status}`);return r.json()}),
   fetch('data/manifest.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(`Manifest HTTP ${r.status}`);return r.json()})
-]).then(([passage,rawManifest])=>{data=passage;manifest=Array.isArray(rawManifest)?rawManifest:(rawManifest.sets||[]).flatMap(set=>set.passages||[]);renderApp()}).catch(error=>{
+]).then(([passage,items])=>{data=passage;manifest=items;renderApp()}).catch(error=>{
   $('#app').innerHTML=`<div class="errorBox standalone"><b>Passage data could not be loaded.</b><p><a href="index.html">Return to Library</a></p><small>${esc(error.message)}</small></div>`;
 });

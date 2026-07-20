@@ -17,5 +17,7 @@
 .checkNote.warn{color:var(--warn)}
 .summaryCheckRow{padding-top:10px;border-top:1px dashed var(--line)}
 
-/* v2.0 Library */
-.setOverview{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:12px}.setOverview h2{margin:3px 0 7px;font-size:27px}.setOverview p{margin:0;color:var(--muted);max-width:720px;line-height:1.65}.setKicker{font-size:12px;font-weight:950;letter-spacing:.08em;text-transform:uppercase;color:var(--orange)}.setBadges{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.setBadges span{background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900}.setProgress{display:grid;grid-template-columns:auto minmax(140px,260px);gap:12px;align-items:center;margin:8px 0 14px;color:var(--muted);font-size:12px;font-weight:800}.comingCard{background:#fffaf4;border:2px dashed var(--line);border-radius:18px;padding:22px;color:var(--muted);font-weight:800}.setComing{opacity:.78}@media(max-width:720px){.setOverview{display:block}.setBadges{justify-content:flex-start;margin-top:12px}.setProgress{grid-template-columns:1fr}.cards{grid-template-columns:1fr}}
+.setDescription{margin:-2px 0 12px;color:var(--muted);line-height:1.6}
+.setProgress{margin:0 0 14px}
+.comingSet{opacity:.82}
+.comingSet .dashIntro{margin-top:8px}

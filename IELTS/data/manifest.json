@@ -1,12 +1,12 @@
 {
-  "version": "2.0",
+  "version": "2.1",
   "sets": [
     {
-      "id": "1",
-      "title": "SET 1 — Foundation",
+      "id": "set1",
+      "number": 1,
+      "title": "Foundation",
       "band": "5.5–6.0",
-      "difficulty": "Starter",
-      "description": "比較的読みやすい語彙で、IELTS Readingの問題形式と解き方に慣れるセットです。",
+      "description": "IELTS Readingの形式に慣れるための、比較的読みやすいオリジナル問題です。",
       "status": "available",
       "passages": [
         {
@@ -36,11 +36,11 @@
       ]
     },
     {
-      "id": "2",
-      "title": "SET 2 — Cambridge Practice",
-      "band": "6.5–7.5",
-      "difficulty": "Authentic",
-      "description": "Roman shipbuildingを含む、本番レベルの3 Passageです。授業や20分演習に使えます。",
+      "id": "set2",
+      "number": 2,
+      "title": "Cambridge Practice",
+      "band": "6.0–7.0",
+      "description": "授業・実戦用。Roman Shipbuildingを含む本番レベルの3 Passageです。",
       "status": "available",
       "passages": [
         {
@@ -70,20 +70,20 @@
       ]
     },
     {
-      "id": "3",
-      "title": "SET 3 — Core",
+      "id": "set3",
+      "number": 3,
+      "title": "Core",
       "band": "6.5–7.0",
-      "difficulty": "Coming soon",
-      "description": "本番標準レベルのオリジナル問題を追加予定です。",
+      "description": "準備中",
       "status": "coming-soon",
       "passages": []
     },
     {
-      "id": "4",
-      "title": "SET 4 — Advanced",
-      "band": "7.0–7.5",
-      "difficulty": "Coming soon",
-      "description": "より抽象度の高い本番上級レベルを追加予定です。",
+      "id": "set4",
+      "number": 4,
+      "title": "Advanced",
+      "band": "7.0–7.5+",
+      "description": "準備中",
       "status": "coming-soon",
       "passages": []
     }
