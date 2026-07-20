@@ -268,10 +268,18 @@ function setupMarker(){
   });
 }
 
+function manifestItems(raw){
+  if(Array.isArray(raw)) return raw;
+  if(raw && Array.isArray(raw.sets)){
+    return raw.sets.flatMap(set => set.passages || []).filter(item => item.status !== 'coming-soon');
+  }
+  return [];
+}
+
 function neighbourLinks(){
-  const idx=manifest.findIndex(x=>x.id===passageId);
-  const prev=manifest[idx-1], next=manifest[idx+1];
-  return {prev,next};
+  const items = manifestItems(manifest);
+  const idx = items.findIndex(x=>x.id===passageId);
+  return {prev:items[idx-1], next:items[idx+1]};
 }
 
 function renderApp(){
