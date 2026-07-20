@@ -106,7 +106,7 @@ function render(raw){
   document.querySelector('#library').innerHTML = manifest.sets.map(setCard).join('');
 }
 
-fetch('data/manifest.json',{cache:'no-store'})
+fetch('data/manifest.json?v=2.1.1',{cache:'no-store'})
   .then(r=>{if(!r.ok) throw new Error(`HTTP ${r.status}`); return r.json();})
   .then(render)
   .catch(err=>{
