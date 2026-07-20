@@ -17,7 +17,44 @@
 .checkNote.warn{color:var(--warn)}
 .summaryCheckRow{padding-top:10px;border-top:1px dashed var(--line)}
 
-.setDescription{margin:-2px 0 12px;color:var(--muted);line-height:1.6}
-.setProgress{margin:0 0 14px}
-.comingSet{opacity:.82}
-.comingSet .dashIntro{margin-top:8px}
+
+/* Evidence jump v2.2 */
+.evidenceTitleRow{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+.evidenceJumpBtn{
+  border:1px solid var(--orange);
+  background:#fff;
+  color:#9a4f08;
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:12px;
+  font-weight:900;
+  cursor:pointer;
+}
+.evidenceJumpBtn:hover{
+  background:#fff0df;
+  transform:translateY(-1px);
+}
+.evidenceTarget{
+  position:relative;
+  border-radius:10px;
+  outline:3px solid rgba(242,140,40,.65);
+  background:#fff7cf !important;
+  box-shadow:0 0 0 7px rgba(242,140,40,.12);
+  animation:evidencePulse 1s ease-in-out 3;
+}
+mark.evidenceExact{
+  background:#ffe066;
+  color:inherit;
+  border-radius:4px;
+  padding:1px 2px;
+  box-shadow:0 0 0 2px rgba(255,224,102,.35);
+}
+@keyframes evidencePulse{
+  0%,100%{outline-color:rgba(242,140,40,.35)}
+  50%{outline-color:rgba(242,140,40,1)}
+}

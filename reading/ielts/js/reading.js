@@ -59,15 +59,142 @@ function tableHtml(title,pairs){
   return `<div class="fbTitle">${esc(title)}</div><table class="pairs"><tr><th>Question</th><th>Passage</th></tr>${pairs.map(pair=>`<tr><td>${esc(pair[0])}</td><td>${esc(pair[1])}</td></tr>`).join('')}</table>`;
 }
 
+
+function evidenceFor(q,n){
+  return typeof q.evidence === 'string' ? q.evidence : q.evidence?.[n];
+}
+
+function normaliseEvidenceText(value){
+  return String(value || '')
+    .replace(/[“”"']/g,'')
+    .replace(/…/g,'...')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+
+function evidenceFragments(value){
+  const clean = normaliseEvidenceText(value);
+  const parts = clean
+    .split(/\.{3,}|…+/)
+    .map(x=>x.trim())
+    .filter(x=>x.length >= 12);
+  return [...parts, clean]
+    .filter(Boolean)
+    .sort((a,b)=>b.length-a.length);
+}
+
+function clearEvidenceHighlight(){
+  document.querySelectorAll('.evidenceTarget').forEach(el=>{
+    el.classList.remove('evidenceTarget');
+  });
+  document.querySelectorAll('mark.evidenceExact').forEach(mark=>{
+    mark.replaceWith(document.createTextNode(mark.textContent));
+  });
+  document.querySelector('#passageContent')?.normalize();
+}
+
+function findEvidenceContainer(evidence){
+  const root = document.querySelector('#passageContent');
+  if(!root || !evidence) return null;
+
+  const blocks = [...root.querySelectorAll('p,li,blockquote')];
+  const fragments = evidenceFragments(evidence);
+
+  for(const fragment of fragments){
+    const target = fragment.toLowerCase();
+    const exact = blocks.find(block =>
+      normaliseEvidenceText(block.textContent).toLowerCase().includes(target)
+    );
+    if(exact) return {block:exact, fragment};
+  }
+
+  // Fallback: choose the paragraph with the greatest word overlap.
+  const evidenceWords = new Set(
+    normaliseEvidenceText(evidence).toLowerCase()
+      .split(/[^a-z0-9]+/)
+      .filter(word=>word.length >= 4)
+  );
+  let best = null;
+  let bestScore = 0;
+
+  for(const block of blocks){
+    const words = new Set(
+      normaliseEvidenceText(block.textContent).toLowerCase()
+        .split(/[^a-z0-9]+/)
+        .filter(word=>word.length >= 4)
+    );
+    let score = 0;
+    evidenceWords.forEach(word=>{ if(words.has(word)) score++; });
+    if(score > bestScore){
+      bestScore = score;
+      best = block;
+    }
+  }
+  return bestScore >= 3 ? {block:best, fragment:''} : null;
+}
+
+function highlightExactText(block, fragment){
+  if(!block || !fragment) return false;
+  const target = fragment.toLowerCase();
+  const walker = document.createTreeWalker(block, NodeFilter.SHOW_TEXT);
+  let node;
+
+  while((node = walker.nextNode())){
+    const text = node.nodeValue || '';
+    const index = text.toLowerCase().indexOf(target);
+    if(index === -1) continue;
+
+    const before = document.createTextNode(text.slice(0,index));
+    const mark = document.createElement('mark');
+    mark.className = 'evidenceExact';
+    mark.textContent = text.slice(index,index+fragment.length);
+    const after = document.createTextNode(text.slice(index+fragment.length));
+
+    const parent = node.parentNode;
+    parent.insertBefore(before,node);
+    parent.insertBefore(mark,node);
+    parent.insertBefore(after,node);
+    parent.removeChild(node);
+    return true;
+  }
+  return false;
+}
+
+function jumpToEvidence(questionNumber){
+  const q = data.questions.find(item =>
+    questionNumbers(item).includes(Number(questionNumber))
+  );
+  if(!q) return;
+
+  const evidence = evidenceFor(q,Number(questionNumber));
+  if(!evidence) return;
+
+  clearEvidenceHighlight();
+  const match = findEvidenceContainer(evidence);
+
+  if(!match){
+    alert('本文中の根拠箇所を自動で特定できませんでした。解説欄のEvidenceを確認してください。');
+    return;
+  }
+
+  match.block.classList.add('evidenceTarget');
+  highlightExactText(match.block, match.fragment);
+  match.block.scrollIntoView({behavior:'smooth',block:'center'});
+
+  window.setTimeout(()=>{
+    match.block.classList.remove('evidenceTarget');
+  },4500);
+}
+
 function feedbackHtml(q,n){
-  const ev = typeof q.evidence === 'string' ? q.evidence : q.evidence?.[n];
+  const ev = evidenceFor(q,n);
   const reason = typeof q.reason_ja === 'string' ? q.reason_ja : q.reason_ja?.[n];
   const synonyms = Array.isArray(q.keyword_pairs) ? q.keyword_pairs : q.keyword_pairs?.[n];
   const contradictions = Array.isArray(q.contradiction_pairs) ? q.contradiction_pairs : q.contradiction_pairs?.[n];
   const ngReason = typeof q.not_given_reason === 'string' ? q.not_given_reason : q.not_given_reason?.[n];
   const skill = questionType(q);
   let html = `<div class="feedback"><div class="feedbackHead"><span>${esc(skill)}</span><b>Answer: ${esc(answerFor(q,n))}</b></div>`;
-  if(ev) html += `<div class="fbTitle">Evidence</div><div class="evidence">“${esc(ev)}”</div>`;
+  if(ev) html += `<div class="fbTitle evidenceTitleRow"><span>Evidence</span><button type="button" class="evidenceJumpBtn" data-evidence-jump="${n}">本文の根拠へ移動</button></div><div class="evidence">“${esc(ev)}”</div>`;
   html += tableHtml('Synonyms / matching expressions', synonyms);
   html += tableHtml('Contradicting expressions', contradictions);
   if(ngReason) html += `<div class="fbTitle">Why NOT GIVEN?</div><div>${esc(ngReason)}</div>`;
@@ -164,6 +291,13 @@ function renderQuestions(){
     });
   });
   updateAnsweredCount();
+
+  $('#questionsBody').querySelectorAll('[data-evidence-jump]').forEach(button=>{
+    button.addEventListener('click',()=>{
+      jumpToEvidence(Number(button.dataset.evidenceJump));
+    });
+  });
+
 }
 
 function flaggedState(q){ return questionNumbers(q).some(n=>flags[n]); }
@@ -271,15 +405,17 @@ function setupMarker(){
 function manifestItems(raw){
   if(Array.isArray(raw)) return raw;
   if(raw && Array.isArray(raw.sets)){
-    return raw.sets.flatMap(set => set.passages || []).filter(item => item.status !== 'coming-soon');
+    return raw.sets.flatMap(set=>set.passages||[])
+      .filter(item=>item.status!=='coming-soon');
   }
   return [];
 }
 
 function neighbourLinks(){
-  const items = manifestItems(manifest);
-  const idx = items.findIndex(x=>x.id===passageId);
-  return {prev:items[idx-1], next:items[idx+1]};
+  const items=manifestItems(manifest);
+  const idx=items.findIndex(x=>x.id===passageId);
+  const prev=items[idx-1], next=items[idx+1];
+  return {prev,next};
 }
 
 function renderApp(){
@@ -329,8 +465,8 @@ function renderApp(){
 }
 
 Promise.all([
-  fetch(`data/${encodeURIComponent(passageId)}.json`,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(`Passage HTTP ${r.status}`);return r.json()}),
-  fetch('data/manifest.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(`Manifest HTTP ${r.status}`);return r.json()})
+  fetch(`data/${encodeURIComponent(passageId)}.json?v=2.2`,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(`Passage HTTP ${r.status}`);return r.json()}),
+  fetch('data/manifest.json?v=2.2',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(`Manifest HTTP ${r.status}`);return r.json()})
 ]).then(([passage,items])=>{data=passage;manifest=items;renderApp()}).catch(error=>{
   $('#app').innerHTML=`<div class="errorBox standalone"><b>Passage data could not be loaded.</b><p><a href="index.html">Return to Library</a></p><small>${esc(error.message)}</small></div>`;
 });
