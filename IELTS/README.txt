@@ -1,59 +1,19 @@
-IELTS Reading Library — GitHubアップロード用
+IELTS Reading v2.0 — GitHub / Cloudflare upload-ready
 
-【設置方法】
-1. この「IELTS」フォルダを、そのままGitHubリポジトリの sushitan/ 配下へアップロードします。
-2. 最終配置を次の形にしてください。
+【アップロード】
+このフォルダの中身を、公開中の /reading/ielts/ フォルダへそのまま上書きしてください。
+フォルダ階層（css / js / data）を崩さないでください。
 
-sushitan/
-  index.html
-  IELTS/
-    index.html
-    reading.html
-    css/reading.css
-    js/library.js
-    js/reading.js
-    data/manifest.json
-    data/1-1.json ...
+【v2.0の変更】
+- manifest.jsonをSET情報付きの新形式へ変更
+- manifestからSET・Passage・リンクを完全自動生成
+- SETごとのBand、説明、進捗を表示
+- SET3・SET4のComing soon枠を追加
+- 既存の1問Check、5分タイマー、20分一括採点を維持
+- Roman shipbuilding等の実問題をSET2へ配置
+- Why Small Libraries等のオリジナル問題をSET1へ配置
 
-3. アクセス先
-   /IELTS/index.html
-   例: https://あなたのドメイン/IELTS/
-
-【重要】
-- IELTSフォルダ内の階層を崩さず、フォルダごとアップロードしてください。
-- PC上で index.html を直接ダブルクリックすると、ブラウザの制限でJSONが読み込めない場合があります。
-- GitHub Pages / Cloudflare Pages上ではそのまま動作します。
-- IELTSトップの「← すし英語トップ」は ../index.html に戻る設定です。
-
-【新しいPassageの追加】
-1. data/3-1.json のような教材JSONを追加します。
-2. data/manifest.json に1件追加します。
-3. それだけでLibraryにカードが自動表示されます。HTMLの追加は不要です。
-
-manifest.json 追加例:
-{
-  "id": "3-1",
-  "title": "New Passage Title",
-  "range": "Questions 1–13",
-  "status": "available",
-  "questionCount": 13,
-  "durationMinutes": 20
-}
-
-【現在の機能】
-- reading.html?id=1-1 方式の共通画面
-- Passageごとの20分タイマー
-- 自動保存、最高点、Library進捗表示
-- 問題形式別の弱点分析
-- 詳細採点（根拠・シノニム・矛盾語・NOT GIVEN理由・日本語解説）
-- Incorrect only復習
-- Reviewフラグ
-- Vocabulary Mission
-- 本文マーカー
-- 生徒名・クラス保存
-- 教師提出用レポートのコピー／TXT保存
-- 前後のPassage移動
-
-【データ保存】
-進捗はブラウザのlocalStorageに保存されます。別端末とは同期されません。
-Supabase連携は次の成長段階として追加できますが、現版は設定なしですぐ公開・使用できます。
+【今後の追加】
+1. data/3-1.jsonのような教材JSONを追加
+2. data/manifest.jsonの該当SETのpassages配列へ登録
+3. HTMLやリンクの編集は不要
