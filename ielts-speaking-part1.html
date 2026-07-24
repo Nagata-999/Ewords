@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IELTS Speaking Part 1攻略｜自分のストーリーを作ろう</title>
+  <meta name="description" content="IELTS Speaking Part 1で、自分の経験や考えをもとにした話しやすいストーリーを作る方法を解説。英語学習、友達、将来、AIなどを一つの軸につなげて答える練習ができます。">
+  <style>
+    :root {
+      --bg: #fffaf5;
+      --card: #ffffff;
+      --text: #2f2a26;
+      --muted: #74675e;
+      --primary: #f28c28;
+      --primary-dark: #c96210;
+      --accent: #ffad42;
+      --line: #f0d8c3;
+      --soft: #fff3e6;
+      --soft-blue: #fff7ef;
+      --soft-yellow: #fff8df;
+      --danger-soft: #fff1ed;
+      --shadow: 0 10px 30px rgba(120, 72, 24, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.85;
+    }
+
+    a {
+      color: var(--primary);
+    }
+
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(242, 140, 40, 0.98), rgba(218, 103, 18, 0.96)),
+        radial-gradient(circle at top right, rgba(255,255,255,0.2), transparent 45%);
+      color: #fff;
+      padding: 72px 20px 64px;
+    }
+
+    .hero-inner,
+    main {
+      width: min(980px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 5px 12px;
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2rem, 6vw, 4rem);
+      line-height: 1.2;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 0;
+      font-size: 1.08rem;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .hero-note {
+      margin-top: 22px;
+      padding: 16px 18px;
+      max-width: 760px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 14px;
+    }
+
+    main {
+      padding: 44px 0 80px;
+    }
+
+    .toc,
+    section,
+    .summary-box {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .toc {
+      padding: 24px 26px;
+      margin-bottom: 28px;
+    }
+
+    .toc h2 {
+      margin-top: 0;
+      font-size: 1.2rem;
+    }
+
+    .toc ol {
+      margin: 0;
+      padding-left: 1.3em;
+      columns: 2;
+      gap: 36px;
+    }
+
+    .toc li {
+      margin: 6px 0;
+      break-inside: avoid;
+    }
+
+    section {
+      padding: 30px;
+      margin: 0 0 28px;
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      font-size: clamp(1.45rem, 4vw, 2rem);
+      line-height: 1.4;
+    }
+
+    h3 {
+      margin: 28px 0 12px;
+      font-size: 1.22rem;
+      color: var(--primary-dark);
+    }
+
+    p {
+      margin: 0 0 1em;
+    }
+
+    .lead {
+      font-size: 1.08rem;
+    }
+
+    .big-idea {
+      margin: 22px 0;
+      padding: 22px;
+      background: var(--soft);
+      border-left: 6px solid var(--primary);
+      border-radius: 12px;
+      font-size: 1.12rem;
+      font-weight: 700;
+    }
+
+    .warning {
+      margin: 20px 0;
+      padding: 18px 20px;
+      background: var(--danger-soft);
+      border-left: 5px solid #dc2626;
+      border-radius: 12px;
+    }
+
+    .formula {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 22px 0;
+    }
+
+    .formula div {
+      padding: 18px;
+      background: var(--soft-blue);
+      border: 1px solid #f2c89f;
+      border-radius: 14px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .arrow {
+      color: var(--primary);
+      font-size: 1.35rem;
+    }
+
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .pillar {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+    }
+
+    .pillar-number {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      margin-bottom: 10px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .pillar h3 {
+      margin: 0 0 8px;
+      color: var(--text);
+    }
+
+    .english {
+      margin: 12px 0;
+      padding: 16px 18px;
+      background: #fffaf6;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.02rem;
+    }
+
+    .qa-card {
+      margin: 18px 0;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .question {
+      padding: 14px 18px;
+      background: #fff3e8;
+      font-weight: 800;
+    }
+
+    .answer {
+      padding: 18px;
+      background: #fff;
+    }
+
+    .route {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .route strong {
+      color: var(--primary-dark);
+    }
+
+    .topic-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 0.95rem;
+    }
+
+    .topic-table th,
+    .topic-table td {
+      border: 1px solid var(--line);
+      padding: 13px 14px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .topic-table th {
+      background: #fff3e8;
+    }
+
+    .topic-table tr:nth-child(even) td {
+      background: #fbfdff;
+    }
+
+    .phrase-list {
+      display: grid;
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .phrase {
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--soft-yellow);
+    }
+
+    .mini-label {
+      display: inline-block;
+      margin-bottom: 6px;
+      color: #a84d09;
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .steps {
+      counter-reset: step;
+      display: grid;
+      gap: 14px;
+      margin: 20px 0;
+    }
+
+    .step {
+      position: relative;
+      padding: 18px 18px 18px 60px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 17px;
+      top: 17px;
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 800;
+    }
+
+
+    .model-story {
+      border: 2px solid #f28c28;
+      background: #fffdf9;
+    }
+
+    .model-intro {
+      margin: 18px 0 22px;
+      padding: 18px 20px;
+      background: #fff3e6;
+      border-radius: 14px;
+    }
+
+    .story-map {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0 24px;
+    }
+
+    .story-chip {
+      padding: 7px 12px;
+      border: 1px solid #f2c89f;
+      border-radius: 999px;
+      background: #fff;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #a84d09;
+    }
+
+    .full-answer {
+      padding: 24px;
+      border-radius: 16px;
+      background: #fff8f1;
+      border-left: 6px solid #f28c28;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.08rem;
+      line-height: 1.95;
+    }
+
+    .story-breakdown {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .story-part {
+      padding: 17px;
+      border: 1px solid #f0d8c3;
+      border-radius: 13px;
+      background: #fff;
+    }
+
+    .story-part strong {
+      color: #c96210;
+    }
+
+    .part23 {
+      background: linear-gradient(180deg, #ffffff, #fff8f1);
+    }
+
+    .summary-box {
+      padding: 30px;
+      background: linear-gradient(135deg, #fff1e2, #ffffff);
+    }
+
+    .summary-box ul {
+      margin-bottom: 0;
+    }
+
+    footer {
+      padding: 28px 20px 44px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 760px) {
+      .hero {
+        padding-top: 52px;
+      }
+
+      section,
+      .summary-box {
+        padding: 22px;
+      }
+
+      .toc ol {
+        columns: 1;
+      }
+
+      .formula,
+      .pillar-grid,
+      .story-breakdown {
+        grid-template-columns: 1fr;
+      }
+
+      .topic-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">IELTS Speaking 攻略</span>
+      <h1>IELTS Speaking Part 1<br>自分のストーリーを作ろう</h1>
+      <p>
+        Part 1では、質問ごとにまったく別の答えを作る必要はない。
+        自分が話しやすい経験や考えを一つのストーリーにまとめておけば、
+        さまざまなテーマに自然に応用できる。
+      </p>
+      <div class="hero-note">
+        ここでは「英語を学びたい」という軸を使い、
+        友達、将来、AI、異文化などの話へ広げる方法を紹介する。
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <nav class="toc" aria-label="目次">
+      <h2>目次</h2>
+      <ol>
+        <li><a href="#idea">100問分の答えは必要ない</a></li>
+        <li><a href="#rule">自分のストーリーを使う基本ルール</a></li>
+        <li><a href="#pillars">ストーリーを支える5つの軸</a></li>
+        <li><a href="#model-story">大きな見本</a></li>
+        <li><a href="#examples">Part 1の具体例</a></li>
+        <li><a href="#map">15テーマの振り分け</a></li>
+        <li><a href="#phrases">使い回せる表現</a></li>
+        <li><a href="#practice">練習方法</a></li>
+        <li><a href="#part23">Part 2・3への応用</a></li>
+      </ol>
+    </nav>
+
+    <section id="idea">
+      <h2>質問ごとに別の人物になる必要はない</h2>
+      <p class="lead">
+        IELTS Speakingの問題集を見ると、Work or Study、Hometown、Home、Friends、Family、
+        Reading、Music、Movies、Technologyなど、大量のテーマが並んでいる。
+      </p>
+      <p>
+        これを見て、多くの受験生は「質問ごとに答えを作らなければならない」と考える。
+        しかし、その方法では準備量が増えすぎるうえ、本番で少し違う質問が出ただけで答えられなくなる。
+      </p>
+
+      <div class="big-idea">
+        質問を一つずつ暗記するのではなく、何度でも使える「自分のストーリー」を用意する。
+      </div>
+
+      <p>
+        例えば、次のような方向性である。
+      </p>
+
+      <div class="pillar-grid">
+        <div class="pillar">
+          <span class="pillar-number">1</span>
+          <h3>英語学習</h3>
+          <p>語彙、リスニング、発音、海外の人との会話へつなげる。</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-number">2</span>
+          <h3>異文化理解</h3>
+          <p>さまざまな価値観を知り、視野を広げたいという話にする。</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-number">3</span>
+          <h3>将来の夢</h3>
+          <p>海外、国際的な仕事、将来に役立つという方向へ持っていく。</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-number">4</span>
+          <h3>自己成長</h3>
+          <p>新しいことを学ぶ、自信がつく、考え方が広がると説明する。</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-number">5</span>
+          <h3>健康・気分転換</h3>
+          <p>ストレス解消、集中力、健康維持という話へつなげる。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="rule">
+      <h2>自分のストーリーを使う基本ルール</h2>
+
+      <div class="formula">
+        <div>① 質問に直接答える</div>
+        <div class="arrow">↓</div>
+        <div>② 得意な話題へつなげる</div>
+      </div>
+
+      <p>
+        重要なのは、最初から無理やり英語学習の話を始めないことである。
+        まず質問に答え、その後に理由や具体例として得意な話題を入れる。
+      </p>
+
+      <div class="qa-card">
+        <div class="question">What kind of movies do you like?</div>
+        <div class="answer">
+          <div class="english">
+            I especially enjoy foreign movies. They are entertaining, and they also help me improve my English listening skills and learn more about other cultures.
+          </div>
+          <div class="route"><strong>流れ：</strong>映画の種類に回答 → 英語学習 → 異文化理解</div>
+        </div>
+      </div>
+
+      <div class="warning">
+        <strong>注意：</strong>
+        どの質問にも突然「英語の勉強に役立つからです」と答えると不自然になる。
+        必ず質問に一度答えてから、自分の得意な方向へ話を伸ばす。
+      </div>
+    </section>
+
+    <section id="pillars">
+      <h2>自分のストーリーを支える5つの軸</h2>
+
+      <h3>万能ストーリー1：英語学習に役立つ</h3>
+      <div class="english">
+        It helps me improve my English, especially my vocabulary and listening skills.
+      </div>
+      <div class="english">
+        It gives me a good chance to use English in a practical way.
+      </div>
+
+      <h3>万能ストーリー2：いろいろな人と話したい</h3>
+      <div class="english">
+        I would like to communicate with people from different countries.
+      </div>
+      <div class="english">
+        Talking with different people helps me see things from different perspectives.
+      </div>
+
+      <h3>万能ストーリー3：将来に役立つ</h3>
+      <div class="english">
+        I think it will be useful for my future studies and career.
+      </div>
+      <div class="english">
+        I hope to work in an international environment in the future.
+      </div>
+
+      <h3>万能ストーリー4：新しいことを学べる</h3>
+      <div class="english">
+        I enjoy learning new things because it broadens my horizons.
+      </div>
+      <div class="english">
+        It gives me new ideas and helps me grow as a person.
+      </div>
+
+      <h3>万能ストーリー5：リラックスできる</h3>
+      <div class="english">
+        It helps me relax and take my mind off schoolwork.
+      </div>
+      <div class="english">
+        It is a good way to reduce stress and refresh my mind.
+      </div>
+    </section>
+
+
+    <section id="model-story" class="model-story">
+      <h2>大きな見本：「英語を学びたい」を中心にする</h2>
+
+      <div class="model-intro">
+        次の一つのストーリーには、英語学習、友達、将来の仕事、異文化理解、
+        AI、テクノロジー、自己成長がすべて入っている。
+        この内容を丸ごと毎回答えるのではなく、質問に合う部分だけを取り出して使う。
+      </div>
+
+      <div class="story-map" aria-label="ストーリーに含まれる話題">
+        <span class="story-chip">英語学習</span>
+        <span class="story-chip">友達</span>
+        <span class="story-chip">海外の人</span>
+        <span class="story-chip">異文化</span>
+        <span class="story-chip">将来の仕事</span>
+        <span class="story-chip">AI</span>
+        <span class="story-chip">新しい視点</span>
+      </div>
+
+      <div class="full-answer">
+        I have been trying to improve my English because I would like to communicate with people from different countries. 
+        One of my close friends is also studying English, so we sometimes practise together and share useful videos and apps. 
+        Recently, I have started using AI tools as well. They allow me to ask questions, correct my sentences, and practise speaking whenever I have time. 
+        Of course, AI cannot completely replace real communication, but it makes studying easier and more convenient. 
+        In the future, I hope to use English in my work and meet people from different backgrounds. 
+        I believe that communicating with them will not only improve my language skills but also help me understand different values and see things from new perspectives.
+      </div>
+
+      <div class="story-breakdown">
+        <div class="story-part">
+          <strong>Study / Reading / Internet</strong><br>
+          英語力を伸ばすために、動画、アプリ、記事などを使っている。
+        </div>
+        <div class="story-part">
+          <strong>Friends</strong><br>
+          友達と一緒に練習し、教材やアプリを共有している。
+        </div>
+        <div class="story-part">
+          <strong>Technology / AI</strong><br>
+          AIで質問、添削、スピーキング練習ができる。
+        </div>
+        <div class="story-part">
+          <strong>Future / Work</strong><br>
+          将来は英語を仕事で使い、海外の人と関わりたい。
+        </div>
+        <div class="story-part">
+          <strong>Culture / Travel</strong><br>
+          異なる背景の人と話し、文化や価値観を知りたい。
+        </div>
+        <div class="story-part">
+          <strong>Personal Growth</strong><br>
+          英語を通して視野を広げ、新しい考え方を得たい。
+        </div>
+      </div>
+
+      <h3>質問ごとに、必要な部分だけ使う</h3>
+
+      <div class="qa-card">
+        <div class="question">Do you prefer studying alone or with others?</div>
+        <div class="answer">
+          <div class="english">
+            I usually prefer studying with others. One of my close friends is also learning English, so we sometimes practise together and share useful videos and apps.
+          </div>
+          <div class="route"><strong>取り出した部分：</strong>友達＋英語学習</div>
+        </div>
+      </div>
+
+      <div class="qa-card">
+        <div class="question">Do you enjoy learning about new technology?</div>
+        <div class="answer">
+          <div class="english">
+            Yes, especially when it is useful for learning. Recently, I have started using AI tools to correct my English and practise speaking.
+          </div>
+          <div class="route"><strong>取り出した部分：</strong>AI＋英語学習</div>
+        </div>
+      </div>
+
+      <div class="qa-card">
+        <div class="question">What kind of job would you like to have in the future?</div>
+        <div class="answer">
+          <div class="english">
+            I would like to have a job where I can use English and communicate with people from different backgrounds. I think that would help me keep learning and broaden my perspective.
+          </div>
+          <div class="route"><strong>取り出した部分：</strong>将来＋国際交流＋自己成長</div>
+        </div>
+      </div>
+
+      <div class="qa-card">
+        <div class="question">Why do you think friendship is important?</div>
+        <div class="answer">
+          <div class="english">
+            Friends can support and motivate each other. For example, one of my friends is also studying English, and practising together makes learning more enjoyable.
+          </div>
+          <div class="route"><strong>取り出した部分：</strong>友達＋支え合い＋英語学習</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="examples">
+      <h2>同じストーリーを質問に合わせて使う</h2>
+
+      <h3>Work or Study</h3>
+      <div class="qa-card">
+        <div class="question">Why did you choose that subject?</div>
+        <div class="answer">
+          <div class="english">
+            I chose it because I have always been interested in communicating with people. I also think it will help me work in an international environment in the future.
+          </div>
+          <div class="route"><strong>使用した軸：</strong>コミュニケーション＋将来の夢</div>
+        </div>
+      </div>
+
+      <div class="qa-card">
+        <div class="question">What do you enjoy most about your studies?</div>
+        <div class="answer">
+          <div class="english">
+            I enjoy learning new ideas and discussing them with other people. It often gives me a different perspective.
+          </div>
+          <div class="route"><strong>使用した軸：</strong>自己成長＋異なる視点</div>
+        </div>
+      </div>
+
+      <h3>Hometown</h3>
+      <div class="qa-card">
+        <div class="question">What do you like most about living there?</div>
+        <div class="answer">
+          <div class="english">
+            I like the fact that it is convenient and quite welcoming. There are also some places where I can meet visitors from overseas and use English.
+          </div>
+          <div class="route"><strong>使用した軸：</strong>住みやすさ＋英語を使う機会</div>
+        </div>
+      </div>
+
+      <h3>Friends</h3>
+      <div class="qa-card">
+        <div class="question">What qualities do you value in a friend?</div>
+        <div class="answer">
+          <div class="english">
+            I value honesty and open-mindedness. I like friends who listen to different opinions because talking with them helps me broaden my perspective.
+          </div>
+          <div class="route"><strong>使用した軸：</strong>人間関係＋視野を広げる</div>
+        </div>
+      </div>
+
+      <h3>Reading</h3>
+      <div class="qa-card">
+        <div class="question">Do you enjoy reading?</div>
+        <div class="answer">
+          <div class="english">
+            Yes, I do. I often read short articles in English because they help me build my vocabulary and learn about what is happening in other countries.
+          </div>
+          <div class="route"><strong>使用した軸：</strong>英語学習＋異文化</div>
+        </div>
+      </div>
+
+      <h3>Music</h3>
+      <div class="qa-card">
+        <div class="question">When do you usually listen to music?</div>
+        <div class="answer">
+          <div class="english">
+            I usually listen to music while commuting or relaxing at home. I often choose English songs because they are enjoyable and useful for improving my pronunciation.
+          </div>
+          <div class="route"><strong>使用した軸：</strong>リラックス＋英語学習</div>
+        </div>
+      </div>
+
+      <h3>Movies</h3>
+      <div class="qa-card">
+        <div class="question">Why are movies popular?</div>
+        <div class="answer">
+          <div class="english">
+            I think movies are popular because they are entertaining and easy to enjoy. They can also introduce people to different cultures and ways of thinking.
+          </div>
+          <div class="route"><strong>使用した軸：</strong>娯楽＋異文化理解</div>
+        </div>
+      </div>
+
+      <h3>Technology</h3>
+      <div class="qa-card">
+        <div class="question">Has technology changed your life?</div>
+        <div class="answer">
+          <div class="english">
+            Definitely. It has made learning much more convenient. For example, I can watch English videos, use learning apps, and communicate with people overseas.
+          </div>
+          <div class="route"><strong>使用した軸：</strong>便利さ＋英語学習＋国際交流</div>
+        </div>
+      </div>
+
+      <h3>Shopping</h3>
+      <div class="qa-card">
+        <div class="question">What was the last thing you bought?</div>
+        <div class="answer">
+          <div class="english">
+            The last thing I bought was a pair of wireless earphones. I use them to listen to music and English podcasts while travelling to school.
+          </div>
+          <div class="route"><strong>使用した軸：</strong>買い物＋英語学習</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="map">
+      <h2>Part 1の15テーマは、この方向へ持っていく</h2>
+
+      <table class="topic-table">
+        <thead>
+          <tr>
+            <th>テーマ</th>
+            <th>話を持っていく方向</th>
+            <th>使いやすいキーワード</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Work or Study</td>
+            <td>将来の仕事、英語、国際的な環境</td>
+            <td>future career / international environment</td>
+          </tr>
+          <tr>
+            <td>Hometown</td>
+            <td>住みやすさ、観光客、外国人との交流</td>
+            <td>welcoming / visitors / convenient</td>
+          </tr>
+          <tr>
+            <td>Home</td>
+            <td>勉強、リラックス、集中できる環境</td>
+            <td>comfortable / concentrate / relax</td>
+          </tr>
+          <tr>
+            <td>Friends</td>
+            <td>コミュニケーション、異なる意見、視野</td>
+            <td>open-minded / perspective / support</td>
+          </tr>
+          <tr>
+            <td>Family</td>
+            <td>支え、価値観、将来への影響</td>
+            <td>supportive / influence / values</td>
+          </tr>
+          <tr>
+            <td>Reading</td>
+            <td>語彙、知識、海外の情報</td>
+            <td>vocabulary / knowledge / articles</td>
+          </tr>
+          <tr>
+            <td>Music</td>
+            <td>発音、リスニング、気分転換</td>
+            <td>pronunciation / relax / English songs</td>
+          </tr>
+          <tr>
+            <td>Movies</td>
+            <td>英語、異文化、娯楽</td>
+            <td>listening / culture / entertaining</td>
+          </tr>
+          <tr>
+            <td>Television</td>
+            <td>ニュース、教育、海外情報</td>
+            <td>educational / current events / overseas</td>
+          </tr>
+          <tr>
+            <td>Technology</td>
+            <td>学習効率、情報、海外との交流</td>
+            <td>efficient / convenient / communicate</td>
+          </tr>
+          <tr>
+            <td>Mobile Phones</td>
+            <td>学習アプリ、連絡、英語動画</td>
+            <td>apps / videos / keep in touch</td>
+          </tr>
+          <tr>
+            <td>Computers</td>
+            <td>勉強、情報収集、将来の仕事</td>
+            <td>research / assignments / career</td>
+          </tr>
+          <tr>
+            <td>Internet</td>
+            <td>英語学習、海外情報、信頼性</td>
+            <td>online resources / reliable / access</td>
+          </tr>
+          <tr>
+            <td>Social Media</td>
+            <td>国際交流、情報、使いすぎの問題</td>
+            <td>connect / share / spend too much time</td>
+          </tr>
+          <tr>
+            <td>Shopping</td>
+            <td>勉強道具、便利な物、生活改善</td>
+            <td>useful / practical / save time</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="phrases">
+      <h2>ストーリーをつなぐ表現</h2>
+
+      <div class="phrase-list">
+        <div class="phrase">
+          <span class="mini-label">英語学習</span>
+          <div class="english">It helps me improve my English in a natural way.</div>
+        </div>
+        <div class="phrase">
+          <span class="mini-label">視野を広げる</span>
+          <div class="english">It helps me see things from a different perspective.</div>
+        </div>
+        <div class="phrase">
+          <span class="mini-label">異文化理解</span>
+          <div class="english">It gives me a chance to learn about different cultures.</div>
+        </div>
+        <div class="phrase">
+          <span class="mini-label">将来</span>
+          <div class="english">I think it will be useful for my future career.</div>
+        </div>
+        <div class="phrase">
+          <span class="mini-label">自己成長</span>
+          <div class="english">It allows me to learn new things and grow as a person.</div>
+        </div>
+        <div class="phrase">
+          <span class="mini-label">人との交流</span>
+          <div class="english">I enjoy communicating with people from different backgrounds.</div>
+        </div>
+        <div class="phrase">
+          <span class="mini-label">リラックス</span>
+          <div class="english">It helps me relax and refresh my mind.</div>
+        </div>
+        <div class="phrase">
+          <span class="mini-label">便利さ</span>
+          <div class="english">It saves me a lot of time and effort.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="practice">
+      <h2>本番までの練習方法</h2>
+
+      <div class="steps">
+        <div class="step">
+          <strong>5つの万能ストーリーを決める。</strong><br>
+          英語学習、異文化、将来、自己成長、健康などから、自分が話しやすいものを選ぶ。
+        </div>
+        <div class="step">
+          <strong>各ストーリーにつき3文だけ覚える。</strong><br>
+          長い模範解答を丸暗記するのではなく、何度でも使える短い英文を準備する。
+        </div>
+        <div class="step">
+          <strong>質問に直接答える1文を先に言う。</strong><br>
+          Yes, I do. / I usually... / I prefer... などで、まず質問に反応する。
+        </div>
+        <div class="step">
+          <strong>万能ストーリーを1つ足す。</strong><br>
+          because、also、for exampleを使い、得意な話題へ自然につなげる。
+        </div>
+        <div class="step">
+          <strong>20〜30秒で答える練習をする。</strong><br>
+          長すぎる回答ではなく、2〜4文で止める練習をする。
+        </div>
+      </div>
+
+      <div class="big-idea">
+        丸暗記するのは「質問ごとの答え」ではない。何度でも使える自分の考え方である。
+      </div>
+    </section>
+
+    <section id="part23" class="part23">
+      <h2>この方法はPart 2・Part 3にも使える</h2>
+
+      <h3>Part 2</h3>
+      <p>Part 2の人物・場所・物・経験も、同じ素材を何度も使える。</p>
+
+      <table class="topic-table">
+        <thead>
+          <tr>
+            <th>問題</th>
+            <th>使い回す内容</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Describe a teacher you admire.</td>
+            <td>英語を好きにしてくれた先生</td>
+          </tr>
+          <tr>
+            <td>Describe a book you enjoyed reading.</td>
+            <td>英語学習に役立った本</td>
+          </tr>
+          <tr>
+            <td>Describe a useful app.</td>
+            <td>英語学習アプリ</td>
+          </tr>
+          <tr>
+            <td>Describe a person who inspired you.</td>
+            <td>海外経験のある人、英語の先生</td>
+          </tr>
+          <tr>
+            <td>Describe a goal you achieved.</td>
+            <td>英語試験、留学準備、学習習慣</td>
+          </tr>
+          <tr>
+            <td>Describe something you want to learn.</td>
+            <td>英語、別の外国語、異文化</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Part 3</h3>
+      <p>
+        Part 3では、自分の話だけでなく社会全体の話に広げる。
+        それでも「教育」「コミュニケーション」「異文化」「将来」という同じ軸が使える。
+      </p>
+
+      <div class="qa-card">
+        <div class="question">How will AI change education?</div>
+        <div class="answer">
+          <div class="english">
+            I think AI will make education more personalized and convenient. For example, students will be able to practise languages at their own level and receive immediate feedback.
+          </div>
+        </div>
+      </div>
+
+      <div class="qa-card">
+        <div class="question">Why do people like travelling?</div>
+        <div class="answer">
+          <div class="english">
+            One reason is that travelling allows people to experience different cultures. It can also broaden their perspective and improve their communication skills.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="summary-box">
+      <h2>まとめ</h2>
+      <p>
+        IELTS Speakingは、100個の質問に100個の答えを用意する試験ではない。
+        話しやすいストーリーを少数作り、質問に合わせて少しずつ形を変える試験である。
+      </p>
+      <ul>
+        <li>まず質問に直接答える</li>
+        <li>その後、得意な話題へつなげる</li>
+        <li>英語学習、異文化、将来、自己成長、健康を軸にする</li>
+        <li>長文の丸暗記ではなく、使い回せる短い表現を覚える</li>
+      </ul>
+      <p style="margin-top: 1.2em; margin-bottom: 0;">
+        質問に正面から答えながら、自分がよく知っている経験や考えにつなげる。
+        それだけで、Part 1の答えはずっと作りやすくなる。
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    IELTS Speaking Part 1 攻略記事
+  </footer>
+</body>
+</html>
