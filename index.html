@@ -46,6 +46,7 @@
     @media(max-width:560px){.install-app{align-items:flex-start;flex-direction:column}.install-app-btn{width:100%}}
 
 
+    .about-link{display:inline-flex;align-items:center;margin-top:4px;padding:11px 16px;border-radius:14px;background:#fff3e2;border:1px solid #fed7aa;color:#c2410c;text-decoration:none;font-weight:900;transition:transform .18s ease,box-shadow .18s ease}.about-link:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(15,23,42,.07)}
     .app-splash{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:#fbf4ea;opacity:1;transition:opacity .55s ease}
     .app-splash.show{display:flex}.app-splash.hide{opacity:0;pointer-events:none}
     .app-splash-inner{text-align:center;opacity:0;transform:scale(.94);animation:splashTitle 1.15s ease forwards}
@@ -91,6 +92,10 @@
 <a class="menu-link" href="writing-practice.html">ライティング練習問題<small>英検・IELTS向け</small></a>
 <a class="menu-link" href="recitation_cards.html">暗唱のすすめ<small>暗唱トレーニング</small></a>
 <a class="menu-link" href="task1card.html">IELTS Writing Task 1 カード<small>Task 1 頻出表現</small></a>
+<div class="menu-group-title">Info｜サイト情報</div>
+<a class="menu-link" href="about.html">すし単について<small>このサイトを作っている理由</small></a>
+<a class="menu-link" href="privacy.html">Privacy Policy<small>プライバシーポリシー</small></a>
+<a class="menu-link" href="contact.html">Contact<small>お問い合わせ</small></a>
 </aside>
 <main class="page">
 <section class="hero">
@@ -205,10 +210,12 @@
 </div>
 </section>
 <section class="section">
-<h2>すし単とは</h2>
-<p>すし単は、無料で遊べる英語ゲームサイトです。英単語ゲーム、英語タイピングゲーム、語源ゲーム、リスニングゲーム、英語クイズを通して、英検・IELTS・高校英語の学習を楽しく続けられます。</p>
+<h2>すし単について</h2>
+<p>すし単は、英語を勉強するときに「もう少し気軽に練習できるものがあればいいな」と思い、個人で作り始めた学習サイトです。</p>
+<p>英単語、言い換え、語源、タイピング、英作文、IELTSなど、短い時間でも繰り返し取り組めるゲームや教材を少しずつ作っています。</p>
+<a class="about-link" href="about.html">すし単について詳しく見る →</a>
 </section>
-<footer class="footer">© すし単 <a href="privacy.html">Privacy Policy</a> <a href="contact.html">Contact</a></footer>
+<footer class="footer">© すし単 <a href="about.html">すし単について</a> <a href="privacy.html">Privacy Policy</a> <a href="contact.html">Contact</a></footer>
 </main>
 <script>
 const hamburgerBtn=document.getElementById('hamburgerBtn');const sideMenu=document.getElementById('sideMenu');const overlay=document.getElementById('hamburgerOverlay');function closeMenu(){sideMenu.classList.remove('open');overlay.classList.remove('show');hamburgerBtn.setAttribute('aria-expanded','false')}hamburgerBtn.addEventListener('click',()=>{const open=sideMenu.classList.toggle('open');overlay.classList.toggle('show',open);hamburgerBtn.setAttribute('aria-expanded',open?'true':'false')});overlay.addEventListener('click',closeMenu);document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
