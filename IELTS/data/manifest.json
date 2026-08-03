@@ -1,12 +1,12 @@
 {
-  "version": "2.1",
+  "version": "3.0",
   "sets": [
     {
       "id": "set1",
       "number": 1,
       "title": "Foundation",
       "band": "5.5–6.0",
-      "description": "IELTS Readingの形式に慣れるための、比較的読みやすいオリジナル問題です。",
+      "description": "比較的読みやすいオリジナル問題で、IELTS Readingの基本形式に慣れます。",
       "status": "available",
       "passages": [
         {
@@ -38,14 +38,14 @@
     {
       "id": "set2",
       "number": 2,
-      "title": "Cambridge Practice",
-      "band": "6.0–7.0",
-      "description": "授業・実戦用。Roman Shipbuildingを含む本番レベルの3 Passageです。",
+      "title": "Practice",
+      "band": "6.0–6.5",
+      "description": "身近な社会・環境テーマを扱う、すし単オリジナル問題です。",
       "status": "available",
       "passages": [
         {
           "id": "2-1",
-          "title": "Roman shipbuilding and navigation",
+          "title": "Bringing Urban Streams Back to the Surface",
           "range": "Questions 1–13",
           "status": "available",
           "questionCount": 13,
@@ -53,7 +53,7 @@
         },
         {
           "id": "2-2",
-          "title": "Climate change reveals ancient artefacts in Norway’s glaciers",
+          "title": "The Quiet Growth of Seed Libraries",
           "range": "Questions 14–26",
           "status": "available",
           "questionCount": 13,
@@ -61,7 +61,7 @@
         },
         {
           "id": "2-3",
-          "title": "Plant ‘thermometer’ triggers springtime growth by measuring night-time heat",
+          "title": "Why Night Trains Are Returning",
           "range": "Questions 27–40",
           "status": "available",
           "questionCount": 14,
@@ -74,18 +74,68 @@
       "number": 3,
       "title": "Core",
       "band": "6.5–7.0",
-      "description": "準備中",
-      "status": "coming-soon",
-      "passages": []
+      "description": "抽象度と語彙レベルを上げた本番対応のオリジナル問題です。",
+      "status": "available",
+      "passages": [
+        {
+          "id": "3-1",
+          "title": "The Hidden Science of Wayfinding",
+          "range": "Questions 1–13",
+          "status": "available",
+          "questionCount": 13,
+          "durationMinutes": 20
+        },
+        {
+          "id": "3-2",
+          "title": "Farming on Water",
+          "range": "Questions 14–26",
+          "status": "available",
+          "questionCount": 13,
+          "durationMinutes": 20
+        },
+        {
+          "id": "3-3",
+          "title": "How Standards Quietly Shape Technology",
+          "range": "Questions 27–40",
+          "status": "available",
+          "questionCount": 14,
+          "durationMinutes": 20
+        }
+      ]
     },
     {
       "id": "set4",
       "number": 4,
       "title": "Advanced",
       "band": "7.0–7.5+",
-      "description": "準備中",
-      "status": "coming-soon",
-      "passages": []
+      "description": "複雑な論理展開と概念理解を問う上級オリジナル問題です。",
+      "status": "available",
+      "passages": [
+        {
+          "id": "4-1",
+          "title": "The Productive Uses of Uncertainty",
+          "range": "Questions 1–13",
+          "status": "available",
+          "questionCount": 13,
+          "durationMinutes": 20
+        },
+        {
+          "id": "4-2",
+          "title": "Smell and the Architecture of Memory",
+          "range": "Questions 14–26",
+          "status": "available",
+          "questionCount": 13,
+          "durationMinutes": 20
+        },
+        {
+          "id": "4-3",
+          "title": "When Efficiency Creates Fragility",
+          "range": "Questions 27–40",
+          "status": "available",
+          "questionCount": 14,
+          "durationMinutes": 20
+        }
+      ]
     }
   ]
 }
