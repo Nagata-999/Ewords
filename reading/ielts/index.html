@@ -4,16 +4,27 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#f28c28">
-  <title>IELTS Reading Library</title>
+  <title>IELTS Reading 練習問題｜すし単</title>
+  <meta name="description" content="IELTS Academic ReadingをPassageごとにオンラインで練習できます。採点、根拠、シノニム、日本語解説付き。問題の表示・印刷にも対応しています。">
   <link rel="stylesheet" href="css/reading.css?v=2.1.1">
+  <style>
+    .libraryNav{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px}
+    .libraryNav a{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:12px;text-decoration:none;font-weight:900;transition:transform .18s ease,filter .18s ease}
+    .libraryNav a:hover{transform:translateY(-2px);filter:brightness(.98)}
+    .printPracticeLink{background:#f28c28;color:#fff;box-shadow:0 7px 18px rgba(242,140,40,.22)}
+    @media(max-width:560px){.libraryNav{align-items:stretch;flex-direction:column}.libraryNav a{width:100%}}
+  </style>
 </head>
 <body class="libraryPage">
   <div class="libraryWrap">
     <header class="libraryHero">
       <div>
-        <a class="backHome" href="../index.html">← すし英語トップ</a>
-        <h1>IELTS Reading Library</h1>
+        <a class="backHome" href="../index.html">← 長文練習トップ</a>
+        <h1>IELTS Reading 練習問題</h1>
         <p>Passageを1つずつ、20分で練習。採点後は根拠・シノニム・日本語解説まで確認できます。</p>
+        <nav class="libraryNav" aria-label="IELTS Readingの学習方法">
+          <a class="printPracticeLink" href="print/">問題を読む・印刷する →</a>
+        </nav>
       </div>
       <div class="heroStats" id="heroStats"></div>
     </header>
