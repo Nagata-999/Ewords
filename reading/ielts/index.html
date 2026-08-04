@@ -12,7 +12,17 @@
     .libraryNav a{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:12px;text-decoration:none;font-weight:900;transition:transform .18s ease,filter .18s ease}
     .libraryNav a:hover{transform:translateY(-2px);filter:brightness(.98)}
     .printPracticeLink{background:#f28c28;color:#fff;box-shadow:0 7px 18px rgba(242,140,40,.22)}
+    .readingGuide{margin-top:28px;padding:26px;border:1px solid #ead9c8;border-radius:24px;background:#fff;box-shadow:0 10px 26px rgba(88,52,15,.07);color:#27211c}
+    .readingGuide h2{margin:0 0 10px;font-size:clamp(24px,4vw,32px)}
+    .readingGuide>p{margin:0;color:#6f6258;line-height:1.85}
+    .guideGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:20px}
+    .guideCard{padding:19px;border:1px solid #f0dfcf;border-radius:18px;background:#fffaf5}
+    .guideCard h3{margin:0 0 8px;font-size:18px}
+    .guideCard p{margin:0;color:#62574f;line-height:1.75}
+    .guideSteps{margin:14px 0 0;padding-left:1.35em;color:#62574f;line-height:1.85}
+    .guideNote{margin-top:18px;padding-top:17px;border-top:1px solid #ead9c8;color:#786b61;font-size:13px;line-height:1.7}
     @media(max-width:560px){.libraryNav{align-items:stretch;flex-direction:column}.libraryNav a{width:100%}}
+    @media(max-width:680px){.readingGuide{padding:21px 17px}.guideGrid{grid-template-columns:1fr}}
   </style>
 </head>
 <body class="libraryPage">
@@ -31,6 +41,46 @@
 
     <section class="dashboard" id="dashboard"></section>
     <main id="library"><div class="loading">Loading library…</div></main>
+
+    <section class="readingGuide" aria-labelledby="readingGuideTitle">
+      <h2 id="readingGuideTitle">IELTS Readingの練習方法</h2>
+      <p>IELTS Academic Readingは、3つの長文と合計40問に60分で取り組む試験です。このページでは、1 Passageずつの短時間練習と、3 Passageを通したフルテストの両方ができます。問題はすべて、すし単で作成したオリジナル教材です。</p>
+
+      <div class="guideGrid">
+        <section class="guideCard">
+          <h3>1 Passageずつ練習する</h3>
+          <p>上のLibraryから問題を選ぶと、1 Passageを20分の目安で練習できます。1問ごとに採点できるため、授業の一部や短い自習時間にも利用できます。</p>
+        </section>
+
+        <section class="guideCard">
+          <h3>解答後に根拠を確認する</h3>
+          <p>正解・不正解だけで終わらず、本文中の根拠、設問との言い換え、日本語解説を確認できます。特にNOT GIVENは、本文に反対情報があるのか、判断材料そのものがないのかを区別してください。</p>
+        </section>
+
+        <section class="guideCard">
+          <h3>本番と同じ60分で解く</h3>
+          <p>Set 5以降は、3 Passage・40問・約2,100語で構成したフルテストです。途中で答えを確認せず、60分を計って最後まで進めると、本番に近い時間配分を練習できます。</p>
+        </section>
+
+        <section class="guideCard">
+          <h3>問題を印刷して使う</h3>
+          <p>「問題を読む・印刷する」から、問題用ページと解答・根拠ページを別々に開けます。紙に線を引きながら解きたい場合や、授業・家庭学習で配布する場合に利用してください。</p>
+        </section>
+      </div>
+
+      <section class="guideCard" style="margin-top:14px">
+        <h3>収録している主な設問形式</h3>
+        <p>TRUE / FALSE / NOT GIVEN、YES / NO / NOT GIVEN、見出し選択、段落情報照合、選択問題、要約・文完成などを収録しています。設問文と本文では同じ意味が別の表現で示されることが多いため、単語の一致だけでなく、文全体の意味を照合することが大切です。</p>
+        <ol class="guideSteps">
+          <li>最初は1 Passageを20分で解く</li>
+          <li>採点後、間違えた問題の根拠まで戻る</li>
+          <li>本文と設問の言い換えを記録する</li>
+          <li>慣れたら3 Passageを60分で通して解く</li>
+        </ol>
+      </section>
+
+      <p class="guideNote">本教材はIELTS Academic Reading形式を参考にした独自の学習教材です。IELTSの公式問題または過去問題ではなく、IELTS運営機関との提携・承認を示すものではありません。</p>
+    </section>
   </div>
   <script src="js/library.js?v=2.1.1" defer></script>
 </body>
