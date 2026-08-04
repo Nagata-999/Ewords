@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>お問い合わせ｜すし単</title>
-  <meta name="description" content="すし単へのお問い合わせページです。ゲームの不具合、ご意見、ご要望はこちらからご連絡ください。">
+  <meta name="description" content="すし単へのお問い合わせページです。ゲームの不具合、ご意見、ご要望、学校や授業での利用についてご連絡いただけます。">
+  <link rel="canonical" href="https://sushitan.net/contact.html">
   <style>
     :root{
       --bg:#fbf4ea;--card:#fffaf2;--line:#f1d7bc;--text:#172033;
@@ -27,6 +28,7 @@
       box-shadow:var(--shadow);padding:28px
     }
     h1{margin:0 0 18px;font-size:clamp(30px,5vw,46px)}
+    h2{margin:28px 0 8px;font-size:19px;color:#c2410c}
     p{line-height:1.9;color:#475569}
     .mail{
       margin:24px 0;padding:18px;border-radius:16px;background:#fff;
@@ -36,13 +38,16 @@
       color:var(--orange);font-weight:900;word-break:break-all;text-decoration:none
     }
     .mail a:hover{text-decoration:underline}
+    .notice{padding:14px 16px;border-radius:14px;background:#fff7ed;border:1px solid #fed7aa;font-size:13px;line-height:1.75;color:#6b5a4c}
     .back{
-      display:inline-block;margin-top:8px;color:var(--teal);
+      display:inline-block;margin-top:18px;color:var(--teal);
       font-weight:900;text-decoration:none
     }
     .back:hover{text-decoration:underline}
-    footer{margin-top:22px;text-align:center;color:var(--muted);font-size:12px}
-    footer a{color:var(--teal);font-weight:800;margin:0 6px}
+    .footer{margin-top:28px;padding-top:18px;border-top:1px solid #ead7bf;text-align:center;color:var(--muted);font-size:12px}
+    .footer a{display:inline-block;color:var(--teal);font-weight:800;margin:4px 7px;text-decoration:none}
+    .footer a:hover{text-decoration:underline}
+    @media(max-width:560px){main{padding:28px 14px 40px}.card{padding:22px 17px;border-radius:19px}}
   </style>
 </head>
 <body>
@@ -50,21 +55,22 @@
     <section class="card">
       <h1>お問い合わせ</h1>
       <p>すし単をご利用いただきありがとうございます。</p>
-      <p>
-        ゲームの不具合、ご意見、ご要望、学校や授業での利用についてのお問い合わせは、
-        下記メールアドレスまでご連絡ください。
-      </p>
+      <p>ゲームの不具合、ご意見、ご要望、学校や授業での利用、教材の内容についてのお問い合わせは、下記メールアドレスまでご連絡ください。</p>
+
       <div class="mail">
         <a href="mailto:sushisushitantan@gmail.com">sushisushitantan@gmail.com</a>
       </div>
-      <p>内容を確認のうえ、必要に応じて返信いたします。</p>
+
+      <h2>お問い合わせの際にお知らせください</h2>
+      <p>不具合については、利用したゲームや教材の名前、表示された画面、利用端末やブラウザなどを分かる範囲でお知らせいただけると、確認しやすくなります。</p>
+      <p>内容を確認のうえ、必要に応じて返信いたします。すべてのお問い合わせへの返信や、個別の英語学習・試験結果に関する回答を保証するものではありません。</p>
+
+      <p class="notice">メール本文には、パスワード、住所、電話番号、学校名など、確認に必要のない個人情報を記載しないでください。お送りいただいた情報は、お問い合わせへの回答と必要な連絡のために利用します。</p>
+
       <a class="back" href="index.html">← トップページへ戻る</a>
     </section>
-    <footer>
-      © すし単
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="contact.html">Contact</a>
-    </footer>
+
+    <footer class="footer">© すし単 <a href="index.html">トップページ</a><a href="about.html">運営者情報</a><a href="privacy.html">プライバシーポリシー</a><a href="contact.html">お問い合わせ</a></footer>
   </main>
 </body>
 </html>
