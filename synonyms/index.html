@@ -270,6 +270,12 @@ h1{
   .hero,.card{padding:22px 16px !important;border-radius:20px !important;}
   .vocab-table th,.vocab-table td{padding:13px 12px !important;}
 }
+.learning-note{
+  margin:0 0 24px !important;padding:20px 22px !important;background:var(--orange-soft,#fff3e8) !important;
+  border:1px solid var(--orange-line) !important;border-radius:18px !important;color:#374151 !important;line-height:1.8 !important;
+}
+.learning-note h2{margin:0 0 8px !important;color:var(--orange) !important;font-size:1.35rem !important;}
+.learning-note p{margin:8px 0 !important;}
 </style>
 
 </head>
@@ -283,9 +289,14 @@ h1{
     </header>
     <section class="card">
 
-      <div class="controls">
+            <div class="learning-note">
+        <h2>シノニムの使い方</h2>
+        <p>シノニムは意味が近い語ですが、どの文でもそのまま交換できるとは限りません。まず日本語の中心的な意味を確認し、英文を書くときは目的語・前置詞・語調の違いも辞書で確かめてください。</p>
+        <p><strong>例：</strong><em>abandon</em> と <em>give up</em> はどちらも「あきらめる・捨てる」に近い一方、<em>abandon a plan</em> と <em>give up trying</em> のように、後ろに続く語や形が異なります。</p>
+      </div>
+<div class="controls">
         <div class="search-row">
-          <input id="search" class="search" type="search" placeholder="英単語・日本語・synonymで検索">
+          <input id="search" class="search" type="search" placeholder="英単語・日本語・synonymで検索" aria-label="英単語・日本語・synonymで検索">
           <div id="count" class="count"></div>
         </div>
         <div class="toggle-row" aria-label="表示切り替え">
@@ -297,10 +308,10 @@ h1{
         <table class="vocab-table">
         <thead>
           <tr>
-            <th>英単語</th>
-            <th>日本語</th>
-            <th>synonym</th>
-            <th>synonymの日本語</th>
+            <th scope="col">英単語</th>
+            <th scope="col">日本語</th>
+            <th scope="col">synonym</th>
+            <th scope="col">synonymの日本語</th>
           </tr>
         </thead>
         <tbody>
@@ -309,19 +320,19 @@ h1{
 <tr><td><strong>abrupt</strong></td><td>突然の、不意の</td><td><strong>sudden</strong></td><td>突然の</td></tr>
 <tr><td><strong>abruptly</strong></td><td>不意に、突然に</td><td><strong>suddenly</strong></td><td>突然に</td></tr>
 <tr><td><strong>absorb</strong></td><td>～を吸収する</td><td><strong>take in</strong></td><td>取り入れる、理解する</td></tr>
-<tr><td><strong>accept</strong></td><td>～を受け入れる</td><td><strong>receive</strong></td><td>受け取る</td></tr>
+<tr><td><strong>accept</strong></td><td>～を受け入れる</td><td><strong>approve</strong></td><td>～を承認する</td></tr>
 <tr><td><strong>acquire</strong></td><td>得る、習得する</td><td><strong>obtain</strong></td><td>得る、入手する</td></tr>
 <tr><td><strong>adapt</strong></td><td>～を適応させる、適応する</td><td><strong>adjust</strong></td><td>～に慣れる、調節して合わせる</td></tr>
-<tr><td><strong>add</strong></td><td>～を加える</td><td><strong>include</strong></td><td>～を含む、含める</td></tr>
+<tr><td><strong>add</strong></td><td>～を加える</td><td><strong>append</strong></td><td>～を付け加える</td></tr>
 <tr><td><strong>adjust</strong></td><td>～に慣れる、調節して合わせる</td><td><strong>adapt</strong></td><td>～を適応させる、適応する</td></tr>
-<tr><td><strong>administration</strong></td><td>経営、行政</td><td><strong>government</strong></td><td>政府</td></tr>
+<tr><td><strong>administration</strong></td><td>経営、行政</td><td><strong>management</strong></td><td>経営、管理</td></tr>
 <tr><td><strong>admire</strong></td><td>～に感心する</td><td><strong>respect</strong></td><td>尊敬する、尊敬</td></tr>
 <tr><td><strong>admit</strong></td><td>～を認める</td><td><strong>acknowledge</strong></td><td>認める</td></tr>
-<tr><td><strong>adopt</strong></td><td>～を採用する</td><td><strong>use</strong></td><td>使う</td></tr>
+<tr><td><strong>adopt</strong></td><td>～を採用する</td><td><strong>embrace</strong></td><td>考え・方針などを受け入れる</td></tr>
 <tr><td><strong>advantage</strong></td><td>利点</td><td><strong>benefit</strong></td><td>利益</td></tr>
 <tr><td><strong>advocate</strong></td><td>主張する</td><td><strong>support</strong></td><td>～を支持する</td></tr>
 <tr><td><strong>agency</strong></td><td>機関、代理店</td><td><strong>organization</strong></td><td>組織</td></tr>
-<tr><td><strong>aim</strong></td><td>～をねらう</td><td><strong>goal</strong></td><td>目標</td></tr>
+<tr><td><strong>aim</strong></td><td>～をねらう</td><td><strong>target</strong></td><td>～を目標にする、ねらう</td></tr>
 <tr><td><strong>alarm</strong></td><td>～をぎょっとさせる、おびえさせる</td><td><strong>frighten</strong></td><td>～をおびえさせる</td></tr>
 <tr><td><strong>alike</strong></td><td>似ている</td><td><strong>similar</strong></td><td>似ている</td></tr>
 <tr><td><strong>all over</strong></td><td>至る所に</td><td><strong>throughout</strong></td><td>～の至る所に、～を通して</td></tr>
@@ -330,8 +341,8 @@ h1{
 <tr><td><strong>amaze</strong></td><td>～を驚嘆させる</td><td><strong>surprise</strong></td><td>驚かせる、驚き</td></tr>
 <tr><td><strong>amount</strong></td><td>量</td><td><strong>quantity</strong></td><td>量</td></tr>
 <tr><td><strong>amuse</strong></td><td>～を楽しませる</td><td><strong>entertain</strong></td><td>～を楽しませる</td></tr>
-<tr><td><strong>analysis</strong></td><td>分析</td><td><strong>study</strong></td><td>勉強する、研究</td></tr>
-<tr><td><strong>analyze</strong></td><td>分析する</td><td><strong>study</strong></td><td>勉強する、研究</td></tr>
+<tr><td><strong>analysis</strong></td><td>分析</td><td><strong>examination</strong></td><td>詳しい調査、検討</td></tr>
+<tr><td><strong>analyze</strong></td><td>分析する</td><td><strong>examine</strong></td><td>詳しく調べる</td></tr>
 <tr><td><strong>ancestor</strong></td><td>祖先</td><td><strong>forefather</strong></td><td>祖先</td></tr>
 <tr><td><strong>ancient</strong></td><td>古代の</td><td><strong>old</strong></td><td>古い、年老いた</td></tr>
 <tr><td><strong>announce</strong></td><td>～を発表する</td><td><strong>declare</strong></td><td>～を宣言する</td></tr>
@@ -437,7 +448,6 @@ h1{
 <tr><td><strong>continue</strong></td><td>続ける</td><td><strong>keep going</strong></td><td>続ける</td></tr>
 <tr><td><strong>contrary</strong></td><td>反対の</td><td><strong>opposite</strong></td><td>反対の</td></tr>
 <tr><td><strong>contrast</strong></td><td>対比</td><td><strong>difference</strong></td><td>違い</td></tr>
-<tr><td><strong>contribute</strong></td><td>～に貢献する、～の一因となる、AをBに寄付する</td><td><strong>add</strong></td><td>～を加える</td></tr>
 <tr><td><strong>convenient</strong></td><td>都合がいい</td><td><strong>handy</strong></td><td>便利な</td></tr>
 <tr><td><strong>conversely</strong></td><td>逆に</td><td><strong>oppositely</strong></td><td>反対に</td></tr>
 <tr><td><strong>convince</strong></td><td>～を納得させる、確信させる</td><td><strong>persuade</strong></td><td>～を説得する</td></tr>
@@ -560,7 +570,7 @@ h1{
 <tr><td><strong>global</strong></td><td>世界的な</td><td><strong>worldwide</strong></td><td>世界的な</td></tr>
 <tr><td><strong>good</strong></td><td>良い</td><td><strong>positive</strong></td><td>積極的な</td></tr>
 <tr><td><strong>goods</strong></td><td>商品</td><td><strong>products</strong></td><td>製品</td></tr>
-<tr><td><strong>government</strong></td><td>政府</td><td><strong>administration</strong></td><td>経営、行政</td></tr>
+<tr><td><strong>government</strong></td><td>政府</td><td><strong>administration</strong></td><td>政府、行政機関</td></tr>
 <tr><td><strong>governmental</strong></td><td>政府の</td><td><strong>political</strong></td><td>政治的な</td></tr>
 <tr><td><strong>gradual</strong></td><td>徐々の</td><td><strong>slow</strong></td><td>遅い</td></tr>
 <tr><td><strong>graduate</strong></td><td>～を卒業する</td><td><strong>finish school</strong></td><td>卒業する</td></tr>
@@ -752,7 +762,7 @@ h1{
 <tr><td><strong>public</strong></td><td>公共の、公衆</td><td><strong>civil</strong></td><td>一般市民の</td></tr>
 <tr><td><strong>publish</strong></td><td>～を出版する</td><td><strong>release</strong></td><td>～を解放する、～を発表する</td></tr>
 <tr><td><strong>purchase</strong></td><td>購入する</td><td><strong>buy</strong></td><td>買う</td></tr>
-<tr><td><strong>purpose</strong></td><td>目的</td><td><strong>aim</strong></td><td>～をねらう</td></tr>
+<tr><td><strong>purpose</strong></td><td>目的</td><td><strong>aim</strong></td><td>目的、ねらい</td></tr>
 <tr><td><strong>puzzle</strong></td><td>～を当惑させる</td><td><strong>confuse</strong></td><td>～を当惑させる</td></tr>
 <tr><td><strong>quality</strong></td><td>質</td><td><strong>standard</strong></td><td>水準</td></tr>
 <tr><td><strong>quantity</strong></td><td>量</td><td><strong>amount</strong></td><td>量</td></tr>
@@ -897,13 +907,13 @@ h1{
 <tr><td><strong>usual</strong></td><td>普通の</td><td><strong>normal</strong></td><td>普通の</td></tr>
 <tr><td><strong>vacant</strong></td><td>空いている</td><td><strong>empty</strong></td><td>からの</td></tr>
 <tr><td><strong>valuable</strong></td><td>価値のある</td><td><strong>useful</strong></td><td>役に立つ</td></tr>
-<tr><td><strong>value</strong></td><td>価値</td><td><strong>worth</strong></td><td>～の価値がある</td></tr>
+<tr><td><strong>value</strong></td><td>価値</td><td><strong>worth</strong></td><td>価値</td></tr>
 <tr><td><strong>vary</strong></td><td>変わる、さまざまである</td><td><strong>differ</strong></td><td>異なる</td></tr>
 <tr><td><strong>verify</strong></td><td>確認する、証明する</td><td><strong>confirm</strong></td><td>～を裏付ける</td></tr>
 <tr><td><strong>vertical</strong></td><td>垂直の</td><td><strong>upright</strong></td><td>直立した、まっすぐに</td></tr>
 <tr><td><strong>vital</strong></td><td>非常に重要な</td><td><strong>necessary</strong></td><td>必要な</td></tr>
 <tr><td><strong>wander</strong></td><td>歩き回る</td><td><strong>roam</strong></td><td>歩き回る</td></tr>
-<tr><td><strong>warn</strong></td><td>～に警告する</td><td><strong>alert</strong></td><td>用心する</td></tr>
+<tr><td><strong>warn</strong></td><td>～に警告する</td><td><strong>caution</strong></td><td>～に注意を与える</td></tr>
 <tr><td><strong>wealth</strong></td><td>富</td><td><strong>riches</strong></td><td>富</td></tr>
 <tr><td><strong>whole</strong></td><td>全体の</td><td><strong>entire</strong></td><td>全</td></tr>
 <tr><td><strong>wicked</strong></td><td>邪悪な</td><td><strong>evil</strong></td><td>悪い</td></tr>
@@ -914,7 +924,6 @@ h1{
 <tr><td><strong>worried</strong></td><td>心配した</td><td><strong>anxious</strong></td><td>心配して、切望して</td></tr>
 <tr><td><strong>worry</strong></td><td>心配する</td><td><strong>concern</strong></td><td>関心事、心配させる</td></tr>
 <tr><td><strong>worse</strong></td><td>より悪い</td><td><strong>inferior</strong></td><td>劣った</td></tr>
-<tr><td><strong>worth</strong></td><td>～の価値がある</td><td><strong>value</strong></td><td>価値</td></tr>
 <tr><td><strong>youth</strong></td><td>若者</td><td><strong>young people</strong></td><td>若者</td></tr>
         </tbody>
         </table>
