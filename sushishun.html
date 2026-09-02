@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f4511e">
+  <title>すし瞬｜日本語を見た瞬間、英語にする50文</title>
+  <meta name="description" content="日本語を見て、すぐ英語にする瞬間英作文。50の重要例文で英文法も自然に総復習できます。">
+  <style>
+    :root{--bg:#fbf4ea;--card:#fffdf8;--ink:#172033;--muted:#64748b;--orange:#f4511e;--orange2:#ff7a36;--teal:#0f766e;--line:#efd7c0;--shadow:0 18px 45px rgba(51,34,20,.10)}
+    *{box-sizing:border-box}html{background:var(--bg)}body{margin:0;color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI","Yu Gothic",Meiryo,sans-serif;background:radial-gradient(circle at 15% 0,rgba(255,122,54,.16),transparent 28rem),var(--bg);min-height:100vh}
+    button,select{font:inherit}.wrap{width:min(760px,calc(100% - 28px));margin:auto;padding:18px 0 44px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:15px}.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:1.25rem}.mark{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;background:linear-gradient(145deg,var(--orange2),var(--orange));color:#fff;box-shadow:0 8px 20px rgba(244,81,30,.25)}.home{color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:700}.panel{background:rgba(255,253,248,.93);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}
+    .setup{padding:18px;margin-bottom:14px}.intro{margin:0 0 14px;font-size:.95rem;line-height:1.7;color:var(--muted)}.ranges{display:flex;gap:8px;overflow-x:auto;padding:2px 1px 5px;scrollbar-width:none}.ranges::-webkit-scrollbar{display:none}.chip{flex:0 0 auto;border:1px solid var(--line);background:#fffaf2;color:var(--ink);border-radius:999px;padding:9px 13px;font-weight:800;cursor:pointer}.chip.active{background:var(--ink);border-color:var(--ink);color:white}
+    .status{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;padding:12px 16px;margin-bottom:14px}.progressText{font-size:.88rem;color:var(--muted);font-weight:700}.bar{height:8px;background:#f0dfcf;border-radius:99px;overflow:hidden;margin-top:7px}.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--orange),#ff9a4f);border-radius:99px;transition:width .25s}.count{font-weight:900;color:var(--teal)}
+    .card{padding:clamp(22px,5vw,38px);min-height:395px;display:flex;flex-direction:column;position:relative;overflow:hidden}.num{font-size:.8rem;letter-spacing:.08em;color:var(--orange);font-weight:900}.jp{font-size:clamp(1.3rem,4.7vw,1.85rem);font-weight:850;line-height:1.6;margin:30px 0 24px}.prompt{margin:auto 0;text-align:center;color:var(--muted);font-size:.9rem}.answer{display:none;border-top:1px solid var(--line);padding-top:22px;margin-top:6px}.answer.open{display:block;animation:rise .2s ease}.en{font-size:clamp(1.15rem,4.2vw,1.55rem);font-weight:850;line-height:1.55}.note{margin-top:12px;color:var(--teal);font-size:.94rem;font-weight:750;line-height:1.5}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:26px}.btn{min-height:50px;border-radius:15px;border:1px solid var(--line);font-weight:900;cursor:pointer}.primary{grid-column:1/-1;background:linear-gradient(135deg,var(--orange2),var(--orange));color:#fff;border:0;box-shadow:0 8px 18px rgba(244,81,30,.22)}.again{background:#fffaf2;color:var(--ink)}.got{background:var(--teal);border-color:var(--teal);color:white}.hidden{display:none!important}.done{text-align:center;margin:auto}.done .big{font-size:3.2rem;margin-bottom:8px}.done h2{margin:0 0 8px}.done p{color:var(--muted);line-height:1.65}.footer{text-align:center;color:var(--muted);font-size:.8rem;margin-top:22px}@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}@media(max-width:480px){.wrap{width:min(100% - 18px,760px);padding-top:10px}.setup{padding:14px}.card{border-radius:20px;min-height:430px}.top{padding:0 4px}.home{display:none}}
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <header class="top"><div class="brand"><span class="mark">瞬</span><span>すし瞬</span></div><a class="home" href="/">すし単トップへ</a></header>
+  <section class="panel setup"><p class="intro">日本語を見て、1〜2秒で英文を声に出そう。答えを開くと、短い文法解説も確認できます。</p><div class="ranges" id="ranges"></div></section>
+  <section class="panel status"><div><div class="progressText" id="progressText">1 / 10</div><div class="bar"><i id="bar"></i></div></div><div class="count" id="count">習得 0 / 50</div></section>
+  <section class="panel card" id="card">
+    <div id="practice"><div class="num" id="num">01</div><div class="jp" id="jp"></div><div class="prompt" id="prompt">英文を声に出してから、答えを確認</div><div class="answer" id="answer"><div class="en" id="en"></div><div class="note" id="note"></div></div><div class="actions"><button class="btn primary" id="show">英文を見る</button><button class="btn again hidden" id="again">もう一度</button><button class="btn got hidden" id="got">言えた</button></div></div>
+    <div class="done hidden" id="done"><div class="big">🍣</div><h2>セット完了</h2><p id="doneText"></p><button class="btn primary" id="restart">もう一周する</button></div>
+  </section>
+  <footer class="footer">SUSHITAN.NET</footer>
+</main>
+<script>
+const raw=`外国で暮らした後は、物事が違って見えるかもしれない。|You may see things differently after living in another country.|may + 動詞：〜かもしれない
+最初は難しいかもしれないが、すぐに慣れるだろう。|It might be difficult at first, but you will soon get used to it.|might：控えめな可能性を表す
+一日中働いたのだから、疲れているに違いない。|You must be tired after working all day.|must be：〜に違いない
+彼は私が昨日言ったことを忘れたのかもしれない。|He may have forgotten what I told him yesterday.|may have + p.p.：〜したかもしれない
+もっと時間があれば、もっとうまくできたのに。|I could have done better if I had had more time.|could have + p.p.：〜できたはずだった
+これほど上手になるには、相当練習したに違いない。|He must have practiced a lot to become this good.|must have + p.p.：〜したに違いない
+私は自分の考え方を変えてくれた人たちに何人も出会ったことがある。|I have met many people who changed the way I think.|have + p.p.：〜したことがある
+この方法は長年、多くの国で使われてきた。|This method has been used in many countries for many years.|has been + p.p.：〜されてきた
+テストの点数だけで判断されたくない。|I don't want to be judged only by my test scores.|want to be + p.p.：〜されたくない
+英語は行く場所によって話され方が異なる。|English is spoken differently depending on where you go.|depending on：〜によって
+若者が異なる文化を経験することは重要だ。|It is important for young people to experience different cultures.|It is ... for A to do：Aが〜するのは…だ
+異なる意見を受け入れることは、時に私たちには難しい。|It is sometimes difficult for us to accept different opinions.|It is ... for A to do の応用
+言語を学ぶことは、多くの人が思う以上に時間がかかる。|Learning a language takes more time than most people expect.|Doingを主語にする形
+間違えることは、新しいことを学ぶ大切な一部だ。|Making mistakes is an important part of learning something new.|Making mistakes：間違えること
+私は自分とは違う考えを持つ人と話すのが好きだ。|I enjoy talking with people who have different ideas from mine.|enjoy doing：〜するのを楽しむ
+彼は全員の考えを変えようとするのを諦めた。|He gave up trying to change everyone's mind.|give up doing：〜するのを諦める
+外で待っている生徒たちは別の学校の生徒だ。|The students waiting outside are from another school.|名詞 + doing：〜している名詞
+旅行中に撮った写真を見て、多くの思い出がよみがえった。|The pictures taken during the trip brought back many memories.|名詞 + p.p.：〜された名詞
+多くの人がスマホを見ながら道を歩いている。|Many people walk down the street while looking at their phones.|while doing：〜しながら
+テストの準備で忙しく、彼に電話するのを忘れた。|I was busy preparing for the test and forgot to call him.|be busy doing：〜するのに忙しい
+海外旅行をして、他の文化にもっと興味を持つようになった。|Traveling abroad made me more interested in other cultures.|make O C：OをCにする
+この経験で、家族がどれほど大切か気づいた。|This experience made me realize how important family is.|make A do：Aに〜させる
+変えられないことを心配しても意味がない。|There is no point in worrying about things you cannot change.|There is no point in doing：〜しても意味がない
+よく旅行する人は、世界を違った見方で見ることが多い。|People who travel a lot often see the world differently.|who：人を後ろから説明する
+英語を使える仕事を見つけたい。|I want to find a job that allows me to use English.|that：名詞を後ろから説明する
+先週読んだ本で、私は完全に考えが変わった。|The book I read last week completely changed my mind.|目的格の関係代名詞は省略できる
+両親がオーストラリアに住んでいる友達がいる。|I have a friend whose parents live in Australia.|whose + 名詞：その人の〜
+ここは私が親友と初めて会った場所だ。|This is the place where I first met my best friend.|where：場所を説明する
+初めてカナダに着いた日のことを今でも覚えている。|I still remember the day when I first arrived in Canada.|when：時を説明する
+私がこの学校を選んだ理由はとても単純だ。|The reason why I chose this school is very simple.|the reason why：〜する理由
+何を言うかより、何をするかの方が重要だ。|What you do is more important than what you say.|what S V：SがVすること
+大切なのは、どこから始めるかではなく、どこまで行くかだ。|What matters is not where you start but where you finish.|What matters is ...：大切なのは…だ
+自分に一番よいと思うものを何でも選んでよい。|You can choose whatever you think is best for you.|whatever：〜するものは何でも
+最初に終わった人は誰でも早く教室を出てよい。|Whoever finishes first can leave the classroom early.|whoever：〜する人は誰でも
+一番落ち着くところなら、どこに座ってもよい。|You can sit wherever you feel most comfortable.|wherever：〜するところならどこでも
+この曲を聞くといつも高校時代を思い出す。|Whenever I hear this song, I remember my high school days.|whenever：〜するときはいつでも
+どれほど忙しくても、自分のための時間は必要だ。|However busy you are, you need some time for yourself.|however + 形容詞：どれほど〜でも
+英語で自分の気持ちを表せるようになるまで、長い時間がかかった。|It took me a long time to express my feelings in English.|It takes A time to do：Aが〜するのに時間がかかる
+自分の考えを簡潔に説明するのは難しいと感じる。|I find it difficult to explain my ideas simply.|find it + 形容詞 + to do：〜するのを…だと感じる
+成功するかどうかは、失敗から学べるかどうかにかかっている。|Success depends on whether you can learn from failure.|depend on whether：〜かどうかにかかっている
+旅行は他者だけでなく、自分自身についても教えてくれる。|Traveling teaches us not only about others but also about ourselves.|not only A but also B：AだけでなくBも
+練習すればするほど、自信がつく。|The more you practice, the more confident you become.|the more ..., the more ...：〜すればするほど…
+とても疲れていたので、帰りの電車で眠ってしまった。|I was so tired that I fell asleep on the train home.|so ... that：とても〜なので…
+一人で解決するには複雑すぎる問題もある。|Some problems are too complicated to solve alone.|too ... to do：〜すぎて…できない
+テクノロジーが私たちの生活を変えたことは間違いない。|There is no doubt that technology has changed our lives.|There is no doubt that：〜は間違いない
+賛成か反対かにかかわらず、その理由を説明する必要がある。|Whether you agree or disagree, you need to explain your reasons.|whether A or B：AであろうとBであろうと
+英語を上達させるには、できるだけ頻繁に使う必要がある。|To improve your English, you need to use it as often as possible.|as ... as possible：できるだけ…
+失敗を恐れる気持ちに、新しいことへの挑戦を妨げさせてはいけない。|Do not let fear of failure prevent you from trying something new.|prevent A from doing：Aが〜するのを妨げる
+多くの生徒は、自分の考えを明確に表すのに苦労している。|Many students have difficulty expressing their ideas clearly.|have difficulty doing：〜するのに苦労する
+留学は、これまでにした中で最良の決断の一つだった。|Studying abroad was one of the best decisions I have ever made.|one of the + 最上級 + 複数名詞`;
+const data=raw.split('\n').map((s,i)=>{const [ja,en,note]=s.split('|');return{id:i+1,ja,en,note}});
+const $=id=>document.getElementById(id), mastered=new Set(JSON.parse(localStorage.getItem('sushishun_mastered')||'[]'));
+let mode='1-10', queue=[], pos=0;
+const modes=[['1-10','1〜10'],['11-20','11〜20'],['21-30','21〜30'],['31-40','31〜40'],['41-50','41〜50'],['all','全50文'],['random','ランダム']];
+function save(){localStorage.setItem('sushishun_mastered',JSON.stringify([...mastered]));$('count').textContent=`習得 ${mastered.size} / 50`}
+function makeQueue(){if(mode==='all')queue=data.map((_,i)=>i);else if(mode==='random')queue=data.map((_,i)=>i).sort(()=>Math.random()-.5);else{const a=+mode.split('-')[0]-1,b=+mode.split('-')[1];queue=data.map((_,i)=>i).slice(a,b)}pos=0;render()}
+function render(){if(pos>=queue.length){$('practice').classList.add('hidden');$('done').classList.remove('hidden');$('doneText').textContent=`${queue.length}文の練習が終わりました。習得済みは全部で${mastered.size}文です。`;return} $('practice').classList.remove('hidden');$('done').classList.add('hidden');const d=data[queue[pos]];$('num').textContent=String(d.id).padStart(2,'0');$('jp').textContent=d.ja;$('en').textContent=d.en;$('note').textContent=d.note;$('answer').classList.remove('open');$('prompt').classList.remove('hidden');$('show').classList.remove('hidden');$('again').classList.add('hidden');$('got').classList.add('hidden');$('progressText').textContent=`${pos+1} / ${queue.length}`;$('bar').style.width=`${(pos/queue.length)*100}%`}
+function next(ok){if(ok){mastered.add(data[queue[pos]].id);save()}pos++;render()}
+$('show').onclick=()=>{$('answer').classList.add('open');$('prompt').classList.add('hidden');$('show').classList.add('hidden');$('again').classList.remove('hidden');$('got').classList.remove('hidden')};$('again').onclick=()=>next(false);$('got').onclick=()=>next(true);$('restart').onclick=makeQueue;
+const ranges=$('ranges');modes.forEach(([key,label])=>{const b=document.createElement('button');b.className='chip'+(key===mode?' active':'');b.textContent=label;b.onclick=()=>{mode=key;[...ranges.children].forEach(x=>x.classList.remove('active'));b.classList.add('active');makeQueue()};ranges.appendChild(b)});save();makeQueue();
+</script>
+</body>
+</html>
