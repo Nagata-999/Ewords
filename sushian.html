@@ -85,14 +85,14 @@
   const panels=['setupPanel','quizPanel','resultPanel','weakPanel'];
   let session={mode:'range',items:[],index:0,answered:false,stats:{correct:0,wrong:0,unknown:0},range:{start:1,end:100,count:'20'}};
 
-  function blankState(){return {schemaVersion:2,weakWords:{},wordProgress:{},updatedAt:null};}
-  function normaliseState(state){state.wordProgress ||= {};return state;}
+  function blankState(){return {schemaVersion:2,weakWords:{},masteredWords:{},updatedAt:null};}
+  function normaliseState(state){state.masteredWords ||= {};if(state.wordProgress){Object.entries(state.wordProgress).forEach(([id,progress])=>{if(progress?.mastered)state.masteredWords[id]=true;});delete state.wordProgress;}return state;}
   function loadState(){try{const value=JSON.parse(localStorage.getItem(STORAGE_KEY)||'null');if(value&&value.schemaVersion===2&&value.weakWords)return normaliseState(value);const legacy=JSON.parse(localStorage.getItem(LEGACY_STORAGE_KEY)||'null');if(legacy&&legacy.weakWords){const byWord=new Map(VOCAB.map(v=>[v.word.toLowerCase(),v]));const migrated=blankState();Object.values(legacy.weakWords).forEach(old=>{const current=byWord.get(String(old.word||'').toLowerCase());if(current)migrated.weakWords[current.id]={...old,id:current.id,word:current.word,meaning:current.meaning};});saveState(migrated);localStorage.removeItem(LEGACY_STORAGE_KEY);return migrated;}return blankState();}catch{return blankState();}}
   function saveState(state){state.updatedAt=new Date().toISOString();localStorage.setItem(STORAGE_KEY,JSON.stringify(state));updateWeakCounts();}
   function showPanel(id){panels.forEach(name=>$(name).classList.toggle('hidden',name!==id));window.scrollTo({top:0,behavior:'smooth'});}
   function shuffle(array){const a=[...array];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-  function updateWeakCounts(){const state=loadState();const n=Object.keys(state.weakWords).length;const mastered=Object.values(state.wordProgress).filter(progress=>progress.mastered).length;$('weakCountTop').textContent=n;$('weakCount').textContent=n;$('masteredCountTop').textContent=mastered;}
-  function updateMastery(item,correct){const state=loadState();const key=String(item.id);const progress=state.wordProgress[key]||{streak:0,mastered:false};if(correct){progress.streak=(progress.streak||0)+1;if(progress.streak>=2)progress.mastered=true;}else{progress.streak=0;progress.mastered=false;}progress.updatedAt=new Date().toISOString();state.wordProgress[key]=progress;saveState(state);}
+  function updateWeakCounts(){const state=loadState();const n=Object.keys(state.weakWords).length;const mastered=Object.keys(state.masteredWords).length;$('weakCountTop').textContent=n;$('weakCount').textContent=n;$('masteredCountTop').textContent=mastered;}
+  function updateMastery(item,correct){if(!correct)return;const state=loadState();state.masteredWords[String(item.id)]=true;saveState(state);}
   function finishFirstGuide(){localStorage.setItem(GUIDE_SEEN_KEY,'1');$('learningGuide')?.classList.add('hidden');}
   function readRange(){const start=Number($('rangeStart').value),end=Number($('rangeEnd').value);if(!Number.isInteger(start)||!Number.isInteger(end)||start<1||end>VOCAB.length||start>end)return null;return {start,end};}
   function refreshRangeInfo(){const r=readRange();$('setupMessage').textContent='';if(!r){$('rangeInfo').textContent=`1〜${VOCAB.length}の範囲で、開始番号を終了番号以下にしてください。`;return;}$('rangeInfo').textContent=`${r.start}〜${r.end}：${r.end-r.start+1}語から出題`;}
