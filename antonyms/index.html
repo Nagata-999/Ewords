@@ -94,6 +94,12 @@ h1{
   .hero,.card{padding:22px 16px !important;border-radius:20px !important;}
   .vocab-table th,.vocab-table td{padding:13px 12px !important;}
 }
+.learning-note{
+  margin:0 0 24px !important;padding:20px 22px !important;background:var(--orange-soft,#fff3e8) !important;
+  border:1px solid var(--orange-line) !important;border-radius:18px !important;color:#374151 !important;line-height:1.8 !important;
+}
+.learning-note h2{margin:0 0 8px !important;color:var(--orange) !important;font-size:1.35rem !important;}
+.learning-note p{margin:8px 0 !important;}
 </style>
 
 </head>
@@ -107,9 +113,14 @@ h1{
     </header>
     <section class="card">
 
-      <div class="controls">
+            <div class="learning-note">
+        <h2>アントニムの使い方</h2>
+        <p>アントニムは反対の意味を表す語です。ただし、反対関係は文脈によって変わることがあります。形容詞・名詞・動詞などの品詞をそろえて覚えると、英作文や言い換えで使いやすくなります。</p>
+        <p><strong>例：</strong><em>accept</em> と <em>reject</em> は「受け入れる／拒否する」、<em>abundant</em> と <em>scarce</em> は「豊富な／乏しい」という対立です。</p>
+      </div>
+<div class="controls">
         <div class="search-row">
-          <input id="search" class="search" type="search" placeholder="英単語・日本語・antonymで検索">
+          <input id="search" class="search" type="search" placeholder="英単語・日本語・antonymで検索" aria-label="英単語・日本語・antonymで検索">
           <div id="count" class="count"></div>
         </div>
         <div class="toggle-row" aria-label="表示切り替え">
@@ -121,10 +132,10 @@ h1{
         <table class="vocab-table">
         <thead>
           <tr>
-            <th>英単語</th>
-            <th>日本語</th>
-            <th>antonym</th>
-            <th>antonymの日本語</th>
+            <th scope="col">英単語</th>
+            <th scope="col">日本語</th>
+            <th scope="col">antonym</th>
+            <th scope="col">antonymの日本語</th>
           </tr>
         </thead>
         <tbody>
@@ -134,7 +145,6 @@ h1{
 <tr><td><strong>absurd</strong></td><td>ばかげた</td><td><strong>reasonable</strong></td><td>理にかなった</td></tr>
 <tr><td><strong>abundant</strong></td><td>豊富な</td><td><strong>scarce</strong></td><td>乏しい、不足した</td></tr>
 <tr><td><strong>accept</strong></td><td>～を受け入れる</td><td><strong>reject</strong></td><td>～を断る</td></tr>
-<tr><td><strong>access</strong></td><td>利用する権利</td><td><strong>barrier</strong></td><td>壁</td></tr>
 <tr><td><strong>active</strong></td><td>活動的な</td><td><strong>passive</strong></td><td>受動的な、消極的な</td></tr>
 <tr><td><strong>add</strong></td><td>～を加える</td><td><strong>remove</strong></td><td>～を移す、取り去る</td></tr>
 <tr><td><strong>admire</strong></td><td>～に感心する</td><td><strong>despise</strong></td><td>軽蔑する</td></tr>
@@ -142,15 +152,14 @@ h1{
 <tr><td><strong>advance</strong></td><td>前進、進歩</td><td><strong>retreat</strong></td><td>退く</td></tr>
 <tr><td><strong>advantage</strong></td><td>利点</td><td><strong>drawback</strong></td><td>欠点</td></tr>
 <tr><td><strong>after</strong></td><td>～の後に</td><td><strong>before</strong></td><td>～の前に</td></tr>
-<tr><td><strong>agree</strong></td><td>同意する</td><td><strong>refuse</strong></td><td>～を断る</td></tr>
+<tr><td><strong>agree</strong></td><td>同意する</td><td><strong>disagree</strong></td><td>意見が合わない、反対する</td></tr>
 <tr><td><strong>alike</strong></td><td>似ている</td><td><strong>different</strong></td><td>異なる</td></tr>
 <tr><td><strong>alive</strong></td><td>生きている</td><td><strong>dead</strong></td><td>死んでいる</td></tr>
 <tr><td><strong>allow</strong></td><td>～を許可する</td><td><strong>forbid</strong></td><td>～を禁じる</td></tr>
-<tr><td><strong>ally</strong></td><td>同盟国</td><td><strong>opponent</strong></td><td>敵</td></tr>
+<tr><td><strong>ally</strong></td><td>同盟国、味方</td><td><strong>enemy</strong></td><td>敵</td></tr>
 <tr><td><strong>amuse</strong></td><td>～を楽しませる</td><td><strong>bore</strong></td><td>～をうんざりさせる</td></tr>
 <tr><td><strong>ancient</strong></td><td>古代の</td><td><strong>modern</strong></td><td>現代の</td></tr>
 <tr><td><strong>annoy</strong></td><td>～をいらいらさせる</td><td><strong>please</strong></td><td>喜ばせる、どうぞ</td></tr>
-<tr><td><strong>answer</strong></td><td>答え、答える</td><td><strong>question</strong></td><td>質問、疑問</td></tr>
 <tr><td><strong>anxious</strong></td><td>心配して、切望して</td><td><strong>calm</strong></td><td>冷静な</td></tr>
 <tr><td><strong>appear</strong></td><td>現れる</td><td><strong>vanish</strong></td><td>消える</td></tr>
 <tr><td><strong>approach</strong></td><td>～に接近する；～に取り組む；方法</td><td><strong>avoid</strong></td><td>～を避ける</td></tr>
@@ -170,7 +179,6 @@ h1{
 <tr><td><strong>awful</strong></td><td>ひどい</td><td><strong>fantastic</strong></td><td>すばらしい</td></tr>
 <tr><td><strong>awkward</strong></td><td>気まずい</td><td><strong>comfortable</strong></td><td>快適な</td></tr>
 <tr><td><strong>ban</strong></td><td>禁止する</td><td><strong>permit</strong></td><td>許可する</td></tr>
-<tr><td><strong>barrier</strong></td><td>壁</td><td><strong>access</strong></td><td>利用する権利</td></tr>
 <tr><td><strong>before</strong></td><td>～の前に</td><td><strong>after</strong></td><td>～の後に</td></tr>
 <tr><td><strong>begin</strong></td><td>始める、始まる</td><td><strong>end</strong></td><td>終わり、終える</td></tr>
 <tr><td><strong>beginning</strong></td><td>始まり</td><td><strong>end</strong></td><td>終わり、終える</td></tr>
@@ -243,7 +251,7 @@ h1{
 <tr><td><strong>decline</strong></td><td>衰退する、低下する、～を辞退する</td><td><strong>growth</strong></td><td>成長、増加</td></tr>
 <tr><td><strong>decrease</strong></td><td>減少する、減らす</td><td><strong>increase</strong></td><td>増える、～を増やす</td></tr>
 <tr><td><strong>deep</strong></td><td>深い</td><td><strong>shallow</strong></td><td>浅い</td></tr>
-<tr><td><strong>defeat</strong></td><td>～を打ち負かす</td><td><strong>victory</strong></td><td>勝利</td></tr>
+<tr><td><strong>defeat</strong></td><td>敗北</td><td><strong>victory</strong></td><td>勝利</td></tr>
 <tr><td><strong>defend</strong></td><td>守る、防御する</td><td><strong>attack</strong></td><td>攻撃する、攻撃</td></tr>
 <tr><td><strong>delight</strong></td><td>大喜び</td><td><strong>sadness</strong></td><td>悲しみ</td></tr>
 <tr><td><strong>demand</strong></td><td>～を要求する</td><td><strong>supply</strong></td><td>～を供給する</td></tr>
@@ -482,7 +490,6 @@ h1{
 <tr><td><strong>punishment</strong></td><td>罰</td><td><strong>reward</strong></td><td>報酬</td></tr>
 <tr><td><strong>pure</strong></td><td>純</td><td><strong>polluted</strong></td><td>汚染された</td></tr>
 <tr><td><strong>push</strong></td><td>押す</td><td><strong>pull</strong></td><td>引く</td></tr>
-<tr><td><strong>question</strong></td><td>質問、疑問</td><td><strong>answer</strong></td><td>答え、答える</td></tr>
 <tr><td><strong>quick</strong></td><td>速い、素早い</td><td><strong>slow</strong></td><td>遅い</td></tr>
 <tr><td><strong>raise</strong></td><td>～を上げる、～を育てる</td><td><strong>lower</strong></td><td>下げる、より低い</td></tr>
 <tr><td><strong>rapid</strong></td><td>速い、急速な</td><td><strong>slow</strong></td><td>遅い</td></tr>
@@ -592,7 +599,7 @@ h1{
 <tr><td><strong>vague</strong></td><td>漠然とした</td><td><strong>clear</strong></td><td>明らかな、澄んだ</td></tr>
 <tr><td><strong>valuable</strong></td><td>価値のある</td><td><strong>worthless</strong></td><td>価値のない</td></tr>
 <tr><td><strong>vanish</strong></td><td>消える</td><td><strong>appear</strong></td><td>現れる</td></tr>
-<tr><td><strong>victory</strong></td><td>勝利</td><td><strong>defeat</strong></td><td>～を打ち負かす</td></tr>
+<tr><td><strong>victory</strong></td><td>勝利</td><td><strong>defeat</strong></td><td>敗北</td></tr>
 <tr><td><strong>visible</strong></td><td>目に見える</td><td><strong>hidden</strong></td><td>隠れた</td></tr>
 <tr><td><strong>voluntary</strong></td><td>自発的な</td><td><strong>forced</strong></td><td>強制された</td></tr>
 <tr><td><strong>war</strong></td><td>戦争</td><td><strong>peace</strong></td><td>平和</td></tr>
@@ -609,7 +616,7 @@ h1{
 <tr><td><strong>willing</strong></td><td>～する気がある、～してもかまわない</td><td><strong>reluctant</strong></td><td>したがらない</td></tr>
 <tr><td><strong>win</strong></td><td>勝つ</td><td><strong>lose</strong></td><td>失う、負ける</td></tr>
 <tr><td><strong>wise</strong></td><td>賢い</td><td><strong>foolish</strong></td><td>愚かな</td></tr>
-<tr><td><strong>withdraw</strong></td><td>～を引っ込める、引きこもる、退く、(預金など)を引き出す</td><td><strong>advance</strong></td><td>前進、進歩</td></tr>
+<tr><td><strong>withdraw</strong></td><td>退く、撤退する</td><td><strong>advance</strong></td><td>前進する</td></tr>
 <tr><td><strong>within</strong></td><td>～以内に、～の内側に</td><td><strong>beyond</strong></td><td>～を越えて</td></tr>
 <tr><td><strong>worry</strong></td><td>心配する</td><td><strong>relax</strong></td><td>くつろぐ、緩める</td></tr>
 <tr><td><strong>worse</strong></td><td>より悪い</td><td><strong>better</strong></td><td>より良い</td></tr>
