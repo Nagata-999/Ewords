@@ -4,26 +4,39 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#f28c28">
-  <title>IELTS Reading 練習問題｜すし単</title>
-  <meta name="description" content="IELTS Academic ReadingをPassageごとにオンラインで練習できます。採点、根拠、シノニム、日本語解説付き。問題の表示・印刷にも対応しています。">
+  <title>IELTS Reading 練習問題24題｜採点・解説付き｜すし単</title>
+  <meta name="description" content="IELTS Academic Readingのオリジナル練習問題を8セット・24パッセージ収録。1題20分の練習から40問60分のフルテストまで、採点・根拠・シノニム・日本語解説付きで学べます。">
   <link rel="stylesheet" href="css/reading.css?v=2.1.1">
   <style>
     .libraryNav{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px}
     .libraryNav a{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:12px;text-decoration:none;font-weight:900;transition:transform .18s ease,filter .18s ease}
     .libraryNav a:hover{transform:translateY(-2px);filter:brightness(.98)}
     .printPracticeLink{background:#f28c28;color:#fff;box-shadow:0 7px 18px rgba(242,140,40,.22)}
-    .readingGuide{margin-top:28px;padding:26px;border:1px solid #ead9c8;border-radius:24px;background:#fff;box-shadow:0 10px 26px rgba(88,52,15,.07);color:#27211c}
-    .readingGuide h2{margin:0 0 10px;font-size:clamp(24px,4vw,32px)}
-    .readingGuide>p{margin:0;color:#6f6258;line-height:1.85}
+    .staticLibrary,.readingGuide{margin-top:28px;padding:26px;border:1px solid #ead9c8;border-radius:24px;background:#fff;box-shadow:0 10px 26px rgba(88,52,15,.07);color:#27211c}
+    .staticLibrary h2,.readingGuide h2{margin:0 0 10px;font-size:clamp(24px,4vw,32px)}
+    .staticLead,.readingGuide>p{margin:0;color:#6f6258;line-height:1.85}
+    .setLinks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:20px}
+    .staticSet{padding:19px;border:1px solid #f0dfcf;border-radius:18px;background:#fffaf5}
+    .staticSet h3{margin:0 0 4px;font-size:18px}
+    .setLevel{margin:0 0 7px;color:#8a5a2b;font-size:13px;font-weight:850}
+    .setSummary{margin:0 0 12px;color:#62574f;line-height:1.65;font-size:14px}
+    .passageLinks{display:grid;gap:8px}
+    .passageLinks a{display:block;padding:10px 12px;border:1px solid #ead9c8;border-radius:12px;background:#fff;color:#49311d;text-decoration:none;line-height:1.45}
+    .passageLinks a:hover{border-color:#f28c28;background:#fff7ee}
+    .passageLinks strong{display:block;color:#8a480f}
+    .passageLinks span{display:block;margin-top:2px;color:#796b60;font-size:12px}
+    .readingGuide h2{margin-bottom:10px}
     .guideGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:20px}
     .guideCard{padding:19px;border:1px solid #f0dfcf;border-radius:18px;background:#fffaf5}
     .guideCard h3{margin:0 0 8px;font-size:18px}
     .guideCard p{margin:0;color:#62574f;line-height:1.75}
     .guideSteps{margin:14px 0 0;padding-left:1.35em;color:#62574f;line-height:1.85}
     .guideNote{margin-top:18px;padding-top:17px;border-top:1px solid #ead9c8;color:#786b61;font-size:13px;line-height:1.7}
-    .siteFooter{margin-top:30px;padding:18px 0 8px;border-top:1px solid #ead9c8;color:#796b60;text-align:center;font-size:12px}.siteFooter a{display:inline-block;margin:4px 7px;color:#80511f;font-weight:850;text-decoration:none}.siteFooter a:hover{text-decoration:underline}
+    .siteFooter{margin-top:30px;padding:18px 0 8px;border-top:1px solid #ead9c8;color:#796b60;text-align:center;font-size:12px}
+    .siteFooter a{display:inline-block;margin:4px 7px;color:#80511f;font-weight:850;text-decoration:none}
+    .siteFooter a:hover{text-decoration:underline}
+    @media(max-width:680px){.staticLibrary,.readingGuide{padding:21px 17px}.setLinks,.guideGrid{grid-template-columns:1fr}}
     @media(max-width:560px){.libraryNav{align-items:stretch;flex-direction:column}.libraryNav a{width:100%}}
-    @media(max-width:680px){.readingGuide{padding:21px 17px}.guideGrid{grid-template-columns:1fr}}
   </style>
 </head>
 <body class="libraryPage">
@@ -43,43 +56,99 @@
     <section class="dashboard" id="dashboard"></section>
     <main id="library"><div class="loading">Loading library…</div></main>
 
+    <section class="staticLibrary" aria-labelledby="passageListTitle">
+      <h2 id="passageListTitle">収録問題一覧</h2>
+      <p class="staticLead">8セット・全24 Passageを収録しています。SET 1から4は難易度別の練習、SET 5から8は3 Passage・40問を60分で解くフルテストです。各タイトルから直接問題を開けます。</p>
+      <div class="setLinks">
+        <section class="staticSet">
+          <h3>SET 1 — Foundation</h3><p class="setLevel">Band 5.5–6.0</p>
+          <p class="setSummary">比較的読みやすい問題で、IELTS Readingの基本形式に慣れます。</p>
+          <div class="passageLinks">
+            <a href="reading.html?id=1-1"><strong>Why Small Libraries Still Matter</strong><span>Questions 1–13 · 13問 · 20分</span></a>
+            <a href="reading.html?id=1-2"><strong>The Return of Repair</strong><span>Questions 14–26 · 13問 · 20分</span></a>
+            <a href="reading.html?id=1-3"><strong>The Limits of Predicting Creativity</strong><span>Questions 27–40 · 14問 · 20分</span></a>
+          </div>
+        </section>
+        <section class="staticSet">
+          <h3>SET 2 — Practice</h3><p class="setLevel">Band 6.0–6.5</p>
+          <p class="setSummary">身近な社会・環境テーマを扱うオリジナル問題です。</p>
+          <div class="passageLinks">
+            <a href="reading.html?id=2-1"><strong>Bringing Urban Streams Back to the Surface</strong><span>Questions 1–13 · 13問 · 20分</span></a>
+            <a href="reading.html?id=2-2"><strong>The Quiet Growth of Seed Libraries</strong><span>Questions 14–26 · 13問 · 20分</span></a>
+            <a href="reading.html?id=2-3"><strong>Why Night Trains Are Returning</strong><span>Questions 27–40 · 14問 · 20分</span></a>
+          </div>
+        </section>
+        <section class="staticSet">
+          <h3>SET 3 — Core</h3><p class="setLevel">Band 6.5–7.0</p>
+          <p class="setSummary">抽象度と語彙レベルを上げた本番対応の問題です。</p>
+          <div class="passageLinks">
+            <a href="reading.html?id=3-1"><strong>The Hidden Science of Wayfinding</strong><span>Questions 1–13 · 13問 · 20分</span></a>
+            <a href="reading.html?id=3-2"><strong>Farming on Water</strong><span>Questions 14–26 · 13問 · 20分</span></a>
+            <a href="reading.html?id=3-3"><strong>How Standards Quietly Shape Technology</strong><span>Questions 27–40 · 14問 · 20分</span></a>
+          </div>
+        </section>
+        <section class="staticSet">
+          <h3>SET 4 — Advanced</h3><p class="setLevel">Band 7.0–7.5+</p>
+          <p class="setSummary">複雑な論理展開と概念理解を問う上級問題です。</p>
+          <div class="passageLinks">
+            <a href="reading.html?id=4-1"><strong>The Productive Uses of Uncertainty</strong><span>Questions 1–13 · 13問 · 20分</span></a>
+            <a href="reading.html?id=4-2"><strong>Smell and the Architecture of Memory</strong><span>Questions 14–26 · 13問 · 20分</span></a>
+            <a href="reading.html?id=4-3"><strong>When Efficiency Creates Fragility</strong><span>Questions 27–40 · 14問 · 20分</span></a>
+          </div>
+        </section>
+        <section class="staticSet">
+          <h3>SET 5 — Full Test I</h3><p class="setLevel">Band 6.5–7.0 · 40問 · 60分</p>
+          <p class="setSummary">本番と同程度の分量で取り組む、長文中心のフルテストです。</p>
+          <div class="passageLinks">
+            <a href="reading.html?id=5-1"><strong>The Second Life of Urban Timber</strong><span>Questions 1–13 · 13問 · 20分</span></a>
+            <a href="reading.html?id=5-2"><strong>How Maps Learned to Show Movement</strong><span>Questions 14–26 · 13問 · 20分</span></a>
+            <a href="reading.html?id=5-3"><strong>The Argument for Productive Forgetting</strong><span>Questions 27–40 · 14問 · 20分</span></a>
+          </div>
+        </section>
+        <section class="staticSet">
+          <h3>SET 6 — Full Test II</h3><p class="setLevel">Band 6.5–7.5 · 40問 · 60分</p>
+          <p class="setSummary">設問形式と言い換えの幅を広げた本番仕様のテストです。</p>
+          <div class="passageLinks">
+            <a href="reading.html?id=6-1"><strong>The Return of the Public Drinking Fountain</strong><span>Questions 1–13 · 13問 · 20分</span></a>
+            <a href="reading.html?id=6-2"><strong>What Archaeological Experiments Can Prove</strong><span>Questions 14–26 · 13問 · 20分</span></a>
+            <a href="reading.html?id=6-3"><strong>Why Convenience Changes What We Choose</strong><span>Questions 27–40 · 14問 · 20分</span></a>
+          </div>
+        </section>
+        <section class="staticSet">
+          <h3>SET 7 — Full Test III</h3><p class="setLevel">Band 7.0–7.5+ · 40問 · 60分</p>
+          <p class="setSummary">抽象的な論考と複数情報の照合を含む上級フルテストです。</p>
+          <div class="passageLinks">
+            <a href="reading.html?id=7-1"><strong>Reading the History Locked in Lake Mud</strong><span>Questions 1–13 · 13問 · 20分</span></a>
+            <a href="reading.html?id=7-2"><strong>The Problem with Measuring Quiet</strong><span>Questions 14–26 · 13問 · 20分</span></a>
+            <a href="reading.html?id=7-3"><strong>When Expertise Becomes Collective</strong><span>Questions 27–40 · 14問 · 20分</span></a>
+          </div>
+        </section>
+        <section class="staticSet">
+          <h3>SET 8 — Full Test IV</h3><p class="setLevel">Band 7.0–8.0 · 40問 · 60分</p>
+          <p class="setSummary">長い段落と高密度の論証を読み切る発展フルテストです。</p>
+          <div class="passageLinks">
+            <a href="reading.html?id=8-1"><strong>The Unfinished Science of Soil Carbon</strong><span>Questions 1–13 · 13問 · 20分</span></a>
+            <a href="reading.html?id=8-2"><strong>How Institutions Learn from Near Misses</strong><span>Questions 14–26 · 13問 · 20分</span></a>
+            <a href="reading.html?id=8-3"><strong>The Politics of Maintenance</strong><span>Questions 27–40 · 14問 · 20分</span></a>
+          </div>
+        </section>
+      </div>
+    </section>
+
     <section class="readingGuide" aria-labelledby="readingGuideTitle">
       <h2 id="readingGuideTitle">IELTS Readingの練習方法</h2>
       <p>IELTS Academic Readingは、3つの長文と合計40問に60分で取り組む試験です。このページでは、1 Passageずつの短時間練習と、3 Passageを通したフルテストの両方ができます。問題はすべて、すし単で作成したオリジナル教材です。</p>
-
       <div class="guideGrid">
-        <section class="guideCard">
-          <h3>1 Passageずつ練習する</h3>
-          <p>上のLibraryから問題を選ぶと、1 Passageを20分の目安で練習できます。1問ごとに採点できるため、授業の一部や短い自習時間にも利用できます。</p>
-        </section>
-
-        <section class="guideCard">
-          <h3>解答後に根拠を確認する</h3>
-          <p>正解・不正解だけで終わらず、本文中の根拠、設問との言い換え、日本語解説を確認できます。特にNOT GIVENは、本文に反対情報があるのか、判断材料そのものがないのかを区別してください。</p>
-        </section>
-
-        <section class="guideCard">
-          <h3>本番と同じ60分で解く</h3>
-          <p>Set 5以降は、3 Passage・40問・約2,100語で構成したフルテストです。途中で答えを確認せず、60分を計って最後まで進めると、本番に近い時間配分を練習できます。</p>
-        </section>
-
-        <section class="guideCard">
-          <h3>問題を印刷して使う</h3>
-          <p>「問題を読む・印刷する」から、問題用ページと解答・根拠ページを別々に開けます。紙に線を引きながら解きたい場合や、授業・家庭学習で配布する場合に利用してください。</p>
-        </section>
+        <section class="guideCard"><h3>1 Passageずつ練習する</h3><p>問題を選ぶと、1 Passageを20分の目安で練習できます。1問ごとに採点できるため、授業の一部や短い自習時間にも利用できます。</p></section>
+        <section class="guideCard"><h3>解答後に根拠を確認する</h3><p>正解・不正解だけで終わらず、本文中の根拠、設問との言い換え、日本語解説を確認できます。特にNOT GIVENは、本文に反対情報があるのか、判断材料そのものがないのかを区別してください。</p></section>
+        <section class="guideCard"><h3>本番と同じ60分で解く</h3><p>Set 5以降は、3 Passage・40問・約2,100語で構成したフルテストです。途中で答えを確認せず、60分を計って最後まで進めると、本番に近い時間配分を練習できます。</p></section>
+        <section class="guideCard"><h3>問題を印刷して使う</h3><p>「問題を読む・印刷する」から、問題用ページと解答・根拠ページを別々に開けます。紙に線を引きながら解きたい場合や、授業・家庭学習で配布する場合に利用してください。</p></section>
       </div>
-
       <section class="guideCard" style="margin-top:14px">
         <h3>収録している主な設問形式</h3>
         <p>TRUE / FALSE / NOT GIVEN、YES / NO / NOT GIVEN、見出し選択、段落情報照合、選択問題、要約・文完成などを収録しています。設問文と本文では同じ意味が別の表現で示されることが多いため、単語の一致だけでなく、文全体の意味を照合することが大切です。</p>
-        <ol class="guideSteps">
-          <li>最初は1 Passageを20分で解く</li>
-          <li>採点後、間違えた問題の根拠まで戻る</li>
-          <li>本文と設問の言い換えを記録する</li>
-          <li>慣れたら3 Passageを60分で通して解く</li>
-        </ol>
+        <ol class="guideSteps"><li>最初は1 Passageを20分で解く</li><li>採点後、間違えた問題の根拠まで戻る</li><li>本文と設問の言い換えを記録する</li><li>慣れたら3 Passageを60分で通して解く</li></ol>
       </section>
-
       <p class="guideNote">本教材はIELTS Academic Reading形式を参考にした独自の学習教材です。IELTSの公式問題または過去問題ではなく、IELTS運営機関との提携・承認を示すものではありません。</p>
     </section>
     <footer class="siteFooter">© すし単 <a href="../../index.html">トップページ</a><a href="../../about.html">運営者情報</a><a href="../../privacy.html">プライバシーポリシー</a><a href="../../contact.html">お問い合わせ</a></footer>
