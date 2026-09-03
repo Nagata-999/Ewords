@@ -1,9 +1,9 @@
 <!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><title>シャリ単</title><style>
 *{box-sizing:border-box}body{margin:0;background:#071120;color:#fff;font-family:system-ui,'Noto Sans JP',sans-serif;overflow:hidden}.app{height:100vh;position:relative;background:radial-gradient(circle at 50% 110%,#ff6b1a33,transparent 35%),linear-gradient(#06101f 0 65%,#152619 65%)}
-.stars{position:absolute;inset:0;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:37px 37px;opacity:.35}.top{position:absolute;z-index:20;top:0;left:0;right:0;padding:12px 16px;display:flex;align-items:center;gap:12px;background:linear-gradient(#06101fee,transparent)}.logo{font-size:25px;font-weight:1000}.logo b{color:#ffb02e}.stats{margin-left:auto;display:flex;gap:8px}.pill{background:#ffffff12;border:1px solid #ffffff22;border-radius:999px;padding:7px 12px;font-weight:800}.q{position:absolute;z-index:10;top:72px;left:50%;transform:translateX(-50%);width:min(92%,680px);text-align:center}.q small{opacity:.65}.q h1{margin:4px 0;font-size:clamp(24px,6vw,42px);text-shadow:0 4px 20px #000}.field{position:absolute;inset:125px 0 0}.ground{position:absolute;bottom:0;height:25%;left:0;right:0;background:linear-gradient(#263e22,#102515)}.dinos{position:absolute;bottom:11%;left:50%;transform:translateX(-50%);display:flex;gap:clamp(2px,2vw,18px);align-items:flex-end}.dino{font-size:clamp(45px,9vw,78px);filter:drop-shadow(0 10px 7px #0008);transition:.3s}.dino.dead{animation:dinoGone .55s forwards}@keyframes dinoGone{30%{transform:translateY(-18px) rotate(15deg);filter:brightness(3)}100%{transform:translateY(35px) rotate(70deg);opacity:0}}.meteor{position:absolute;top:-100px;width:clamp(100px,23vw,155px);height:clamp(70px,15vw,105px);border:0;border-radius:52% 48% 48% 52%;background:radial-gradient(circle at 35% 30%,#ffb05a,#d54a19 45%,#64200d 72%);color:white;font-size:clamp(15px,3.5vw,22px);font-weight:1000;text-shadow:0 2px 3px #000;box-shadow:0 0 25px #ff5a22aa,inset -12px -12px 20px #0005;cursor:pointer;animation:fall var(--speed) linear forwards;z-index:8}.meteor:before{content:'';position:absolute;width:110px;height:30px;right:75%;top:30%;background:linear-gradient(90deg,transparent,#ff7b22aa,#fff4a9);filter:blur(5px);transform:rotate(-15deg);z-index:-1}.meteor:active{scale:.9}@keyframes fall{to{top:72%}}.boom{animation:boom .45s forwards!important}@keyframes boom{30%{scale:1.5;filter:brightness(4)}100%{scale:0;opacity:0;transform:rotate(120deg)}}.shake{animation:shake .45s}@keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
-.overlay{position:absolute;inset:0;z-index:50;background:#030914ee;display:flex;align-items:center;justify-content:center;padding:20px}.panel{width:min(700px,100%);background:#101d30;border:1px solid #ffffff22;border-radius:24px;padding:24px;box-shadow:0 25px 80px #000}.panel h1{font-size:44px;margin:0 0 5px}.panel h1 b{color:#ffad28}.panel p{opacity:.75}.input{width:100%;height:210px;background:#07111e;color:#fff;border:1px solid #ffffff2b;border-radius:14px;padding:14px;font-size:16px;resize:none}.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.presets{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 4px}.preset{background:#17324e;color:#fff;border:1px solid #ffffff25;border-radius:999px;padding:9px 13px;font-weight:900;cursor:pointer}.preset:hover{filter:brightness(1.15)}.btn{border:0;border-radius:14px;padding:13px 18px;font-weight:1000;font-size:16px;cursor:pointer}.primary{background:#ff9e22;color:#241000;flex:1}.ghost{background:#ffffff14;color:#fff}.flash{position:absolute;inset:0;pointer-events:none;z-index:30;opacity:0}.flash.on{animation:flash .35s}@keyframes flash{40%{opacity:.85;background:white}100%{opacity:0}}.msg{position:absolute;z-index:25;top:48%;left:50%;transform:translate(-50%,-50%);font-size:clamp(38px,9vw,72px);font-weight:1000;text-shadow:0 6px 20px #000;pointer-events:none}.impactMeteor{position:fixed;z-index:60;pointer-events:none;width:85px;height:65px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff0a8,#ff7a24 34%,#82220f 72%);box-shadow:0 0 35px #ff6a22,0 0 70px #ff3d00;transition:transform .34s cubic-bezier(.3,.85,.4,1),opacity .12s .28s}.impact{position:fixed;z-index:61;pointer-events:none;width:18px;height:18px;border-radius:50%;background:#fff3b0;box-shadow:0 0 0 8px #ff8a2a99,0 0 0 18px #ff3d0044;animation:impactRing .48s ease-out forwards}@keyframes impactRing{to{transform:scale(5);opacity:0}}.sad{position:fixed;z-index:62;pointer-events:none;font-size:34px;animation:sadFloat 1s ease-out forwards;text-shadow:0 3px 8px #000}@keyframes sadFloat{0%{transform:translate(-50%,0) scale(.5);opacity:0}25%{opacity:1;transform:translate(-50%,-12px) scale(1.15)}100%{transform:translate(-50%,-75px) scale(.85);opacity:0}}.dino.hit{animation:dinoHit .45s}@keyframes dinoHit{20%{transform:translateY(-8px) rotate(-8deg)}40%{transform:translateY(4px) rotate(8deg)}70%{filter:brightness(2) saturate(.4)}100%{transform:none}}.hidden{display:none}.hint{font-size:13px;opacity:.6;margin-top:8px}
-</style></head><body><div class="app" id="app"><div class="stars"></div><div class="top"><div class="logo">☄️ <b>シャリ</b>単</div><div class="stats"><div class="pill">🦖 <span id="lives">5</span></div><div class="pill">🎯 <span id="progress">0/10</span></div><div class="pill">⭐ <span id="score">0</span></div></div></div><div class="q"><small>日本語に合う英単語の隕石を破壊せよ！</small><h1 id="question">---</h1></div><div class="field" id="field"><div class="ground"></div><div class="dinos" id="dinos"></div></div><div class="flash" id="flash"></div><div class="msg" id="msg"></div>
-<div class="overlay" id="start"><div class="panel"><h1>☄️ <b>シャリ単</b> 🦖</h1><p>単語リストを貼るだけ。恐竜を隕石から守れ。</p><div class="presets"><button class="preset" data-set="health">🩺 保健セット</button><button class="preset" data-set="science">🔬 科学セット</button><button class="preset" data-set="animals">🐾 動物セット</button><button class="preset" data-set="space">🚀 宇宙セット</button></div><textarea class="input" id="words" spellcheck="false">Average life expectancy, 平均寿命
+.stars{position:absolute;inset:0;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:37px 37px;opacity:.35}.top{position:absolute;z-index:20;top:0;left:0;right:0;padding:12px 16px;display:flex;align-items:center;gap:12px;background:linear-gradient(#06101fee,transparent)}.logo{font-size:25px;font-weight:1000}.logo b{color:#ffb02e}.stats{margin-left:auto;display:flex;gap:8px}.pill{background:#ffffff12;border:1px solid #ffffff22;border-radius:999px;padding:7px 12px;font-weight:800;color:#fff}.soundBtn{cursor:pointer;font:inherit}.soundBtn.off{opacity:.5}.q{position:absolute;z-index:10;top:72px;left:50%;transform:translateX(-50%);width:min(92%,680px);text-align:center}.q small{opacity:.65}.q h1{margin:4px 0;font-size:clamp(24px,6vw,42px);text-shadow:0 4px 20px #000}.field{position:absolute;inset:125px 0 0}.ground{position:absolute;bottom:0;height:25%;left:0;right:0;background:linear-gradient(#263e22,#102515)}.dinos{position:absolute;bottom:11%;left:50%;transform:translateX(-50%);display:flex;gap:clamp(2px,2vw,18px);align-items:flex-end}.dino{font-size:clamp(45px,9vw,78px);filter:drop-shadow(0 10px 7px #0008);transition:.3s}.dino.dead{animation:dinoGone .55s forwards}@keyframes dinoGone{30%{transform:translateY(-18px) rotate(15deg);filter:brightness(3)}100%{transform:translateY(35px) rotate(70deg);opacity:0}}.meteor{position:absolute;top:-100px;width:clamp(100px,23vw,155px);height:clamp(70px,15vw,105px);border:0;border-radius:52% 48% 48% 52%;background:radial-gradient(circle at 35% 30%,#ffb05a,#d54a19 45%,#64200d 72%);color:white;font-size:clamp(15px,3.5vw,22px);font-weight:1000;text-shadow:0 2px 3px #000;box-shadow:0 0 25px #ff5a22aa,inset -12px -12px 20px #0005;cursor:pointer;animation:fall var(--speed) linear forwards;z-index:8}.meteor:before{content:'';position:absolute;width:110px;height:30px;right:75%;top:30%;background:linear-gradient(90deg,transparent,#ff7b22aa,#fff4a9);filter:blur(5px);transform:rotate(-15deg);z-index:-1}.meteor:active{scale:.9}@keyframes fall{to{top:72%}}.boom{animation:boom .45s forwards!important}@keyframes boom{30%{scale:1.5;filter:brightness(4)}100%{scale:0;opacity:0;transform:rotate(120deg)}}.shake{animation:shake .45s}@keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.overlay{position:absolute;inset:0;z-index:50;background:#030914ee;display:flex;align-items:center;justify-content:center;padding:20px}.panel{width:min(700px,100%);background:#101d30;border:1px solid #ffffff22;border-radius:24px;padding:24px;box-shadow:0 25px 80px #000}.panel h1{font-size:44px;margin:0 0 5px}.panel h1 b{color:#ffad28}.panel p{opacity:.75}.input{width:100%;height:210px;background:#07111e;color:#fff;border:1px solid #ffffff2b;border-radius:14px;padding:14px;font-size:16px;resize:none}.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.presets{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 4px}.preset{background:#17324e;color:#fff;border:1px solid #ffffff25;border-radius:999px;padding:9px 13px;font-weight:900;cursor:pointer}.preset:hover{filter:brightness(1.15)}.btn{border:0;border-radius:14px;padding:13px 18px;font-weight:1000;font-size:16px;cursor:pointer}.primary{background:#ff9e22;color:#241000;flex:1}.ghost{background:#ffffff14;color:#fff}.flash{position:absolute;inset:0;pointer-events:none;z-index:30;opacity:0}.flash.on{animation:flash .35s}@keyframes flash{40%{opacity:.85;background:white}100%{opacity:0}}.msg{position:absolute;z-index:25;top:48%;left:50%;transform:translate(-50%,-50%);font-size:clamp(38px,9vw,72px);font-weight:1000;text-shadow:0 6px 20px #000;pointer-events:none}.impactMeteor{position:fixed;z-index:60;pointer-events:none;width:85px;height:65px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff0a8,#ff7a24 34%,#82220f 72%);box-shadow:0 0 35px #ff6a22,0 0 70px #ff3d00;transition:transform .34s cubic-bezier(.3,.85,.4,1),opacity .12s .28s}.impact{position:fixed;z-index:61;pointer-events:none;width:18px;height:18px;border-radius:50%;background:#fff3b0;box-shadow:0 0 0 8px #ff8a2a99,0 0 0 18px #ff3d0044;animation:impactRing .48s ease-out forwards}@keyframes impactRing{to{transform:scale(5);opacity:0}}.sad{position:fixed;z-index:62;pointer-events:none;font-size:34px;animation:sadFloat 1s ease-out forwards;text-shadow:0 3px 8px #000}@keyframes sadFloat{0%{transform:translate(-50%,0) scale(.5);opacity:0}25%{opacity:1;transform:translate(-50%,-12px) scale(1.15)}100%{transform:translate(-50%,-75px) scale(.85);opacity:0}}.dino.hit{animation:dinoHit .45s}@keyframes dinoHit{20%{transform:translateY(-8px) rotate(-8deg)}40%{transform:translateY(4px) rotate(8deg)}70%{filter:brightness(2) saturate(.4)}100%{transform:none}}.heal{position:absolute;z-index:18;left:-90px;top:48%;font-size:54px;filter:drop-shadow(0 0 12px #72ff95);cursor:pointer;animation:healFly var(--healSpeed) linear forwards;user-select:none}.heal:after{content:'＋1';position:absolute;right:-18px;top:-8px;font-size:16px;font-weight:1000;color:#8dff9b;text-shadow:0 2px 5px #000}@keyframes healFly{to{left:calc(100% + 90px)}}.heal.got{animation:healGet .35s forwards}@keyframes healGet{50%{transform:scale(1.7);filter:brightness(3) drop-shadow(0 0 30px #8cff99)}100%{transform:scale(0);opacity:0}}.introText{font-size:clamp(26px,6vw,48px);font-weight:1000;line-height:1.18;text-align:center}.introText span{display:block;font-size:.55em;margin-top:12px;opacity:.78}.countdown{font-size:clamp(70px,18vw,150px);font-weight:1000;text-shadow:0 8px 30px #000}.hidden{display:none}.hint{font-size:13px;opacity:.6;margin-top:8px}
+</style></head><body><div class="app" id="app"><div class="stars"></div><div class="top"><div class="logo">☄️ <b>シャリ</b>単</div><div class="stats"><div class="pill">🦖 <span id="lives">5</span></div><div class="pill">🎯 <span id="progress">0/10</span></div><div class="pill">⭐ <span id="score">0</span></div><button class="pill soundBtn" id="soundBtn" type="button" aria-label="効果音のオンオフ">🔊 SE</button></div></div><div class="q"><small>日本語に合う英単語の隕石を破壊せよ！</small><h1 id="question">---</h1></div><div class="field" id="field"><div class="ground"></div><div class="dinos" id="dinos"></div></div><div class="flash" id="flash"></div><div class="msg" id="msg"></div>
+<div class="overlay" id="start"><div class="panel"><h1>☄️ <b>シャリ単</b> 🦖</h1><p>単語リストを貼るだけ。恐竜を隕石から守れ。</p><div class="presets"><button class="preset" data-set="health">🩺 保健セット</button><button class="preset" data-set="science">🔬 科学セット</button><button class="preset" data-set="animals">🐾 動物セット</button><button class="preset" data-set="space">🚀 宇宙セット</button><button class="preset" data-set="environment">🌱 環境</button><button class="preset" data-set="geography">🌍 地理</button><button class="preset" data-set="school">🏫 学校</button><button class="preset" data-set="food">🍽️ 食べ物</button><button class="preset" data-set="verbs">⚡ 動詞</button><button class="preset" data-set="adjectives">✨ 形容詞</button><button class="preset" data-set="technology">💻 科学技術</button><button class="preset" data-set="society">🏙️ 社会</button></div><textarea class="input" id="words" spellcheck="false">Average life expectancy, 平均寿命
 Healthy life expectancy, 健康寿命
 Infant mortality rate, 幼児死亡率
 Lifestyle disease, 生活習慣病
@@ -44,9 +44,24 @@ High Blood Pressure, 高血圧症
 Cardiovascular Disease, 循環器病
 Artery, 動脈
 Health Checkup, 健康診断</textarea><div class="hint">形式：英単語, 日本語（タブ区切り／「英語 = 日本語」でもOK）</div><div class="row"><button class="btn ghost" id="demo">保健セットに戻す</button><button class="btn primary" id="go">ゲーム開始</button></div></div></div>
+<div class="overlay hidden" id="intro"><div class="panel" style="text-align:center"><div class="introText" id="introText">METEOR INCOMING!<span>Tap the correct answer, destroy the meteor, and save the dinosaurs!</span></div><div class="countdown hidden" id="countdown">3</div></div></div>
 <div class="overlay hidden" id="end"><div class="panel" style="text-align:center"><h1 id="endTitle">GAME OVER</h1><p id="endSub" style="font-size:22px;font-weight:900;margin:6px 0 14px"></p><p id="result"></p><div class="row"><button class="btn primary" onclick="location.reload()">もう一度</button></div></div></div></div>
 <script>
-const $=s=>document.querySelector(s), field=$('#field'),msg=$('#msg'),flash=$('#flash');let list=[],score=0,combo=0,round=0,alive=true,pending=0,lives=5,target=10,used=[],locked=false;
+const $=s=>document.querySelector(s), field=$('#field'),msg=$('#msg'),flash=$('#flash');let list=[],score=0,combo=0,round=0,alive=true,pending=0,lives=5,target=10,used=[],locked=false,healTimer=null;
+let audioCtx=null,seOn=true;
+function initAudio(){if(!audioCtx){audioCtx=new (window.AudioContext||window.webkitAudioContext)()}if(audioCtx.state==='suspended')audioCtx.resume()}
+function tone(freq=440,dur=.12,type='sine',vol=.12,when=0,endFreq=null){if(!seOn)return;initAudio();let t=audioCtx.currentTime+when,o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=type;o.frequency.setValueAtTime(freq,t);if(endFreq)o.frequency.exponentialRampToValueAtTime(Math.max(20,endFreq),t+dur);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(g).connect(audioCtx.destination);o.start(t);o.stop(t+dur+.03)}
+function noise(dur=.25,vol=.18,when=0,lowpass=900){if(!seOn)return;initAudio();let sr=audioCtx.sampleRate,b=audioCtx.createBuffer(1,Math.ceil(sr*dur),sr),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*(1-i/d.length);let src=audioCtx.createBufferSource(),f=audioCtx.createBiquadFilter(),g=audioCtx.createGain(),t=audioCtx.currentTime+when;src.buffer=b;f.type='lowpass';f.frequency.value=lowpass;g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.0001,t+dur);src.connect(f).connect(g).connect(audioCtx.destination);src.start(t)}
+const SFX={
+ count(n){tone(n==='GO'?660:440,.09,'square',.08);if(n==='GO')tone(990,.16,'square',.07,.08)},
+ correct(){tone(780,.09,'square',.09);tone(1170,.12,'triangle',.08,.06);noise(.10,.05,0,2200)},
+ tapWrong(){tone(190,.09,'sawtooth',.05,0,110)},
+ impact(){noise(.38,.24,0,500);tone(95,.34,'sawtooth',.16,0,42);tone(58,.42,'sine',.12,.03,30)},
+ dinoGone(){tone(330,.18,'triangle',.055,0,210);tone(210,.28,'triangle',.045,.12,90)},
+ heal(){tone(660,.10,'sine',.08);tone(880,.12,'sine',.08,.08);tone(1320,.18,'triangle',.07,.17)},
+ win(){[523,659,784,1047].forEach((f,i)=>tone(f,.22,'triangle',.08,i*.13));tone(1318,.35,'sine',.06,.55)},
+ extinct(){noise(.55,.20,0,350);tone(110,.65,'sawtooth',.14,0,38);tone(73,.9,'sine',.12,.18,28)}
+};
 const sample=$('#words').value;
 const presets={
 health:`Average life expectancy, 平均寿命
@@ -159,17 +174,180 @@ crater, クレーター
 solar system, 太陽系
 black hole, ブラックホール
 light-year, 光年
-exploration, 探査`
+exploration, 探査`,
+environment:`climate change, 気候変動
+global warming, 地球温暖化
+renewable energy, 再生可能エネルギー
+solar power, 太陽光発電
+wind power, 風力発電
+recycle, 再利用する
+reduce, 減らす
+reuse, 再使用する
+pollution, 汚染
+air pollution, 大気汚染
+water pollution, 水質汚染
+biodiversity, 生物多様性
+conservation, 保全
+deforestation, 森林破壊
+emission, 排出
+carbon dioxide, 二酸化炭素
+fossil fuel, 化石燃料
+sustainable, 持続可能な
+waste, 廃棄物
+ecosystem, 生態系`,
+geography:`continent, 大陸
+ocean, 海洋
+mountain, 山
+river, 川
+lake, 湖
+desert, 砂漠
+island, 島
+coast, 海岸
+valley, 谷
+plain, 平野
+peninsula, 半島
+latitude, 緯度
+longitude, 経度
+population, 人口
+capital, 首都
+border, 国境
+region, 地域
+urban, 都市の
+rural, 農村の
+map, 地図`,
+school:`assignment, 課題
+homework, 宿題
+subject, 教科
+classmate, 同級生
+teacher, 教師
+student, 生徒
+principal, 校長
+semester, 学期
+grade, 成績
+exam, 試験
+quiz, 小テスト
+textbook, 教科書
+notebook, ノート
+presentation, 発表
+discussion, 話し合い
+research, 調査
+club activity, 部活動
+school festival, 文化祭
+graduation, 卒業
+attendance, 出席`,
+food:`ingredient, 材料
+recipe, レシピ
+vegetable, 野菜
+fruit, 果物
+meat, 肉
+seafood, 魚介類
+dairy product, 乳製品
+nutrition, 栄養
+protein, たんぱく質
+carbohydrate, 炭水化物
+vitamin, ビタミン
+boil, ゆでる
+fry, 炒める
+bake, 焼く
+grill, 網焼きする
+slice, 薄切りにする
+seasoning, 調味料
+flavor, 風味
+appetite, 食欲
+delicious, おいしい`,
+verbs:`achieve, 達成する
+avoid, 避ける
+compare, 比較する
+consider, 検討する
+create, 作り出す
+decrease, 減少する
+develop, 発展させる
+discover, 発見する
+encourage, 励ます
+explain, 説明する
+improve, 改善する
+increase, 増加する
+influence, 影響を与える
+maintain, 維持する
+prevent, 防ぐ
+provide, 提供する
+require, 必要とする
+solve, 解決する
+support, 支援する
+reduce, 減らす`,
+adjectives:`accurate, 正確な
+available, 利用可能な
+common, 一般的な
+complex, 複雑な
+convenient, 便利な
+effective, 効果的な
+essential, 不可欠な
+flexible, 柔軟な
+independent, 独立した
+likely, ありそうな
+major, 主要な
+negative, 否定的な
+positive, 肯定的な
+possible, 可能な
+responsible, 責任のある
+significant, 重要な
+similar, 似ている
+specific, 具体的な
+sustainable, 持続可能な
+valuable, 価値のある`,
+technology:`artificial intelligence, 人工知能
+robot, ロボット
+algorithm, アルゴリズム
+data, データ
+database, データベース
+network, ネットワーク
+software, ソフトウェア
+hardware, ハードウェア
+device, 機器
+sensor, センサー
+automation, 自動化
+privacy, プライバシー
+security, 安全性
+digital, デジタルの
+innovation, 革新
+program, プログラム
+application, アプリケーション
+virtual reality, 仮想現実
+cloud computing, クラウドコンピューティング
+cyberattack, サイバー攻撃`,
+society:`community, 地域社会
+culture, 文化
+economy, 経済
+education, 教育
+employment, 雇用
+equality, 平等
+inequality, 不平等
+poverty, 貧困
+welfare, 福祉
+policy, 政策
+government, 政府
+law, 法律
+rights, 権利
+responsibility, 責任
+diversity, 多様性
+population, 人口
+aging society, 高齢化社会
+immigration, 移民
+volunteer, ボランティア
+public service, 公共サービス`
 };
 function parse(t){return t.split(/\n+/).map(x=>x.trim()).filter(Boolean).map(x=>{let p=x.split(/\t|\s*=\s*|\s*,\s*|\s*：\s*|\s*:\s*/);return p.length>=2?{en:p[0].trim(),ja:p.slice(1).join(' ').trim()}:null}).filter(x=>x&&x.en&&x.ja)}
 function pick(a){return a[Math.floor(Math.random()*a.length)]}function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
-function start(){list=parse($('#words').value);if(list.length<1){alert('1語以上入れてください。');return}target=Math.min(10,list.length);lives=5;score=combo=round=0;used=[];alive=true;renderDinos();update();$('#start').classList.add('hidden');next()}
+function start(){initAudio();list=parse($('#words').value);if(list.length<1){alert('1語以上入れてください。');return}target=Math.min(10,list.length);lives=5;score=combo=round=0;used=[];alive=true;renderDinos();update();$('#start').classList.add('hidden');showIntro()}function showIntro(){$('#intro').classList.remove('hidden');$('#introText').classList.remove('hidden');$('#countdown').classList.add('hidden');setTimeout(()=>{$('#introText').classList.add('hidden');$('#countdown').classList.remove('hidden');let n=3;$('#countdown').textContent=n;SFX.count(n);let t=setInterval(()=>{n--;if(n>0){$('#countdown').textContent=n;SFX.count(n)}else{clearInterval(t);$('#countdown').textContent='GO!';SFX.count('GO');setTimeout(()=>{$('#intro').classList.add('hidden');next();scheduleHeal()},450)}},700)},1700)}
 function next(){if(!alive)return;if(round>=target){win();return}locked=false;document.querySelectorAll('.meteor').forEach(x=>x.remove());let pool=list.filter(x=>!used.includes(x));if(!pool.length){used=[];pool=[...list]}let ans=pick(pool);used.push(ans);$('#question').textContent=ans.ja;let wrong=shuffle(list.filter(x=>x!==ans)).slice(0,Math.min(3,list.length-1));let opts=shuffle([ans,...wrong]);pending=opts.length;opts.forEach((o,i)=>spawn(o,o===ans,i,opts.length))}
-function spawn(o,correct,i,n){let b=document.createElement('button');b.className='meteor';b.textContent=o.en;b.style.left=`calc(${(i+.5)*100/n}% - 65px)`;b.style.setProperty('--speed',`${6.2+Math.random()*1.0}s`);b.dataset.correct=correct;b.onclick=()=>hit(b,correct);b.addEventListener('animationend',()=>{if(!alive||b.classList.contains('boom'))return;if(correct)fail(b);else{b.remove();pending--;}});field.appendChild(b)}
-function hit(b,correct){if(!alive||locked||b.disabled)return;if(correct){locked=true;b.classList.add('boom');score+=100+combo*20;combo++;round++;update();msg.textContent=combo>=3?`🔥 ${combo} COMBO!`:'NICE!';setTimeout(()=>msg.textContent='',450);setTimeout(next,520)}else{b.disabled=true;combo=0;score=Math.max(0,score-20);impactWrong(b)}}
-function impactWrong(b){if(!alive)return;let ds=[...document.querySelectorAll('.dino:not(.dead):not(.dying)')],victim=ds[ds.length-1];if(!victim)return;victim.classList.add('dying');let br=b.getBoundingClientRect(),vr=victim.getBoundingClientRect();let ghost=document.createElement('div');ghost.className='impactMeteor';ghost.style.left=(br.left+br.width/2-42)+'px';ghost.style.top=(br.top+br.height/2-32)+'px';document.body.appendChild(ghost);b.classList.add('boom');requestAnimationFrame(()=>{let dx=(vr.left+vr.width/2)-(br.left+br.width/2),dy=(vr.top+vr.height/2)-(br.top+br.height/2);ghost.style.transform=`translate(${dx}px,${dy}px) scale(.8) rotate(150deg)`;ghost.style.opacity='.98'});setTimeout(()=>{ghost.remove();lives--;update();victim.classList.add('hit');setTimeout(()=>victim.classList.remove('hit'),420);let ir=document.createElement('div');ir.className='impact';ir.style.left=(vr.left+vr.width/2-9)+'px';ir.style.top=(vr.top+vr.height/2-9)+'px';document.body.appendChild(ir);setTimeout(()=>ir.remove(),520);let sad=document.createElement('div');sad.className='sad';sad.textContent='😢';sad.style.left=(vr.left+vr.width/2)+'px';sad.style.top=(vr.top-5)+'px';document.body.appendChild(sad);setTimeout(()=>sad.remove(),1000);$('#app').classList.remove('shake');void $('#app').offsetWidth;$('#app').classList.add('shake');flash.classList.remove('on');void flash.offsetWidth;flash.classList.add('on');msg.textContent='NOOO! 🦖';if(navigator.vibrate)navigator.vibrate([90,45,140]);setTimeout(()=>{victim.classList.remove('dying');victim.classList.add('dead');msg.textContent='';if(lives<=0){alive=false;locked=true;document.querySelectorAll('.meteor').forEach(x=>x.disabled=true);$('#result').textContent=`スコア ${score}　／　${round}/${target}問クリア`;$('#endTitle').textContent='絶滅 / EXTINCTION';$('#endSub').textContent='恐竜たちは絶滅してしまった… / The dinosaurs went extinct...';setTimeout(()=>$('#end').classList.remove('hidden'),300)}},360)},340)}
+function spawn(o,correct,i,n){let b=document.createElement('button');b.className='meteor';b.textContent=o.en;b.style.left=`calc(${(i+.5)*100/n}% - 65px)`;let base=Math.max(4.3,9.2-round*.48);b.style.setProperty('--speed',`${base+Math.random()*.8}s`);b.dataset.correct=correct;b.onclick=()=>hit(b,correct);b.addEventListener('animationend',()=>{if(!alive||b.classList.contains('boom'))return;if(correct)fail(b);else{b.remove();pending--;}});field.appendChild(b)}
+function hit(b,correct){if(!alive||locked||b.disabled)return;if(correct){locked=true;SFX.correct();b.classList.add('boom');score+=100+combo*20;combo++;round++;update();msg.textContent=combo>=3?`🔥 ${combo} COMBO!`:'NICE!';setTimeout(()=>msg.textContent='',450);setTimeout(next,520)}else{b.disabled=true;SFX.tapWrong();combo=0;score=Math.max(0,score-20);impactWrong(b)}}
+function impactWrong(b){if(!alive)return;let ds=[...document.querySelectorAll('.dino:not(.dead):not(.dying)')],victim=ds[ds.length-1];if(!victim)return;victim.classList.add('dying');let br=b.getBoundingClientRect(),vr=victim.getBoundingClientRect();let ghost=document.createElement('div');ghost.className='impactMeteor';ghost.style.left=(br.left+br.width/2-42)+'px';ghost.style.top=(br.top+br.height/2-32)+'px';document.body.appendChild(ghost);b.classList.add('boom');requestAnimationFrame(()=>{let dx=(vr.left+vr.width/2)-(br.left+br.width/2),dy=(vr.top+vr.height/2)-(br.top+br.height/2);ghost.style.transform=`translate(${dx}px,${dy}px) scale(.8) rotate(150deg)`;ghost.style.opacity='.98'});setTimeout(()=>{ghost.remove();SFX.impact();lives--;update();victim.classList.add('hit');setTimeout(()=>victim.classList.remove('hit'),420);let ir=document.createElement('div');ir.className='impact';ir.style.left=(vr.left+vr.width/2-9)+'px';ir.style.top=(vr.top+vr.height/2-9)+'px';document.body.appendChild(ir);setTimeout(()=>ir.remove(),520);let sad=document.createElement('div');sad.className='sad';sad.textContent='😢';sad.style.left=(vr.left+vr.width/2)+'px';sad.style.top=(vr.top-5)+'px';document.body.appendChild(sad);setTimeout(()=>sad.remove(),1000);$('#app').classList.remove('shake');void $('#app').offsetWidth;$('#app').classList.add('shake');flash.classList.remove('on');void flash.offsetWidth;flash.classList.add('on');msg.textContent='NOOO! 🦖';if(navigator.vibrate)navigator.vibrate([90,45,140]);setTimeout(()=>{victim.classList.remove('dying');victim.classList.add('dead');SFX.dinoGone();msg.textContent='';if(lives<=0){alive=false;clearTimeout(healTimer);locked=true;document.querySelectorAll('.meteor').forEach(x=>x.disabled=true);$('#result').textContent=`スコア ${score}　／　${round}/${target}問クリア`;SFX.extinct();$('#endTitle').textContent='絶滅 / EXTINCTION';$('#endSub').textContent='恐竜たちは絶滅してしまった… / The dinosaurs went extinct...';setTimeout(()=>$('#end').classList.remove('hidden'),300)}},360)},340)}
+function scheduleHeal(){clearTimeout(healTimer);if(!alive)return;healTimer=setTimeout(()=>{if(alive&&lives<5&&!document.querySelector('.heal'))spawnHeal();scheduleHeal()},5000+Math.random()*5000)}
+function spawnHeal(){let h=document.createElement('div');h.className='heal';h.textContent='🥚';h.title='回復アイテム';h.style.top=(35+Math.random()*25)+'%';h.style.setProperty('--healSpeed',(4.2+Math.random()*1.2)+'s');h.onclick=()=>{if(!alive||h.classList.contains('got'))return;h.classList.add('got');SFX.heal();lives=Math.min(5,lives+1);restoreDino();score+=50;update();msg.textContent='RECOVER! 🦖 +1';setTimeout(()=>msg.textContent='',650);setTimeout(()=>h.remove(),350)};h.addEventListener('animationend',()=>h.remove());field.appendChild(h)}
+function restoreDino(){let dead=[...document.querySelectorAll('.dino.dead')];if(dead.length){let d=dead[0];d.classList.remove('dead','dying','hit');d.style.opacity='';d.style.transform=''}}
 function fail(b){if(!alive||locked)return;locked=true;impactWrong(b);setTimeout(()=>{if(alive&&lives>0){locked=false;next()}},850)}
 function renderDinos(){$('#dinos').innerHTML=Array.from({length:5},()=>'<span class="dino">🦖</span>').join('')}
-function win(){alive=false;document.querySelectorAll('.meteor').forEach(x=>x.remove());$('#endTitle').textContent='生存！ / SURVIVED! 🎉';$('#endSub').textContent='恐竜は絶滅しなかった！ / The dinosaurs survived!';$('#result').textContent=`スコア ${score}　／　${target}問クリア　／　恐竜 ${lives}匹生存`;$('#end').classList.remove('hidden')}
-function update(){$('#score').textContent=score;$('#lives').textContent=lives;$('#progress').textContent=`${round}/${target}`}document.querySelectorAll('.preset').forEach(b=>b.onclick=()=>{$('#words').value=presets[b.dataset.set]});$('#go').onclick=start;$('#demo').onclick=()=>$('#words').value=sample;
+function win(){alive=false;SFX.win();clearTimeout(healTimer);document.querySelectorAll('.meteor').forEach(x=>x.remove());$('#endTitle').textContent='生存！ / SURVIVED! 🎉';$('#endSub').textContent='恐竜は絶滅しなかった！ / The dinosaurs survived!';$('#result').textContent=`スコア ${score}　／　${target}問クリア　／　恐竜 ${lives}匹生存`;$('#end').classList.remove('hidden')}
+function update(){$('#score').textContent=score;$('#lives').textContent=lives;$('#progress').textContent=`${round}/${target}`}document.querySelectorAll('.preset').forEach(b=>b.onclick=()=>{$('#words').value=presets[b.dataset.set]});$('#go').onclick=start;$('#demo').onclick=()=>$('#words').value=sample;$('#soundBtn').onclick=()=>{initAudio();seOn=!seOn;$('#soundBtn').textContent=seOn?'🔊 SE':'🔇 SE';$('#soundBtn').classList.toggle('off',!seOn);if(seOn)tone(880,.08,'sine',.05)};
 </script></body></html>
