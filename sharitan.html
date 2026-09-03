@@ -1,0 +1,175 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"><title>シャリ単</title><style>
+*{box-sizing:border-box}body{margin:0;background:#071120;color:#fff;font-family:system-ui,'Noto Sans JP',sans-serif;overflow:hidden}.app{height:100vh;position:relative;background:radial-gradient(circle at 50% 110%,#ff6b1a33,transparent 35%),linear-gradient(#06101f 0 65%,#152619 65%)}
+.stars{position:absolute;inset:0;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:37px 37px;opacity:.35}.top{position:absolute;z-index:20;top:0;left:0;right:0;padding:12px 16px;display:flex;align-items:center;gap:12px;background:linear-gradient(#06101fee,transparent)}.logo{font-size:25px;font-weight:1000}.logo b{color:#ffb02e}.stats{margin-left:auto;display:flex;gap:8px}.pill{background:#ffffff12;border:1px solid #ffffff22;border-radius:999px;padding:7px 12px;font-weight:800}.q{position:absolute;z-index:10;top:72px;left:50%;transform:translateX(-50%);width:min(92%,680px);text-align:center}.q small{opacity:.65}.q h1{margin:4px 0;font-size:clamp(24px,6vw,42px);text-shadow:0 4px 20px #000}.field{position:absolute;inset:125px 0 0}.ground{position:absolute;bottom:0;height:25%;left:0;right:0;background:linear-gradient(#263e22,#102515)}.dinos{position:absolute;bottom:11%;left:50%;transform:translateX(-50%);display:flex;gap:clamp(2px,2vw,18px);align-items:flex-end}.dino{font-size:clamp(45px,9vw,78px);filter:drop-shadow(0 10px 7px #0008);transition:.3s}.dino.dead{animation:dinoGone .55s forwards}@keyframes dinoGone{30%{transform:translateY(-18px) rotate(15deg);filter:brightness(3)}100%{transform:translateY(35px) rotate(70deg);opacity:0}}.meteor{position:absolute;top:-100px;width:clamp(100px,23vw,155px);height:clamp(70px,15vw,105px);border:0;border-radius:52% 48% 48% 52%;background:radial-gradient(circle at 35% 30%,#ffb05a,#d54a19 45%,#64200d 72%);color:white;font-size:clamp(15px,3.5vw,22px);font-weight:1000;text-shadow:0 2px 3px #000;box-shadow:0 0 25px #ff5a22aa,inset -12px -12px 20px #0005;cursor:pointer;animation:fall var(--speed) linear forwards;z-index:8}.meteor:before{content:'';position:absolute;width:110px;height:30px;right:75%;top:30%;background:linear-gradient(90deg,transparent,#ff7b22aa,#fff4a9);filter:blur(5px);transform:rotate(-15deg);z-index:-1}.meteor:active{scale:.9}@keyframes fall{to{top:72%}}.boom{animation:boom .45s forwards!important}@keyframes boom{30%{scale:1.5;filter:brightness(4)}100%{scale:0;opacity:0;transform:rotate(120deg)}}.shake{animation:shake .45s}@keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.overlay{position:absolute;inset:0;z-index:50;background:#030914ee;display:flex;align-items:center;justify-content:center;padding:20px}.panel{width:min(700px,100%);background:#101d30;border:1px solid #ffffff22;border-radius:24px;padding:24px;box-shadow:0 25px 80px #000}.panel h1{font-size:44px;margin:0 0 5px}.panel h1 b{color:#ffad28}.panel p{opacity:.75}.input{width:100%;height:210px;background:#07111e;color:#fff;border:1px solid #ffffff2b;border-radius:14px;padding:14px;font-size:16px;resize:none}.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.presets{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 4px}.preset{background:#17324e;color:#fff;border:1px solid #ffffff25;border-radius:999px;padding:9px 13px;font-weight:900;cursor:pointer}.preset:hover{filter:brightness(1.15)}.btn{border:0;border-radius:14px;padding:13px 18px;font-weight:1000;font-size:16px;cursor:pointer}.primary{background:#ff9e22;color:#241000;flex:1}.ghost{background:#ffffff14;color:#fff}.flash{position:absolute;inset:0;pointer-events:none;z-index:30;opacity:0}.flash.on{animation:flash .35s}@keyframes flash{40%{opacity:.85;background:white}100%{opacity:0}}.msg{position:absolute;z-index:25;top:48%;left:50%;transform:translate(-50%,-50%);font-size:clamp(38px,9vw,72px);font-weight:1000;text-shadow:0 6px 20px #000;pointer-events:none}.impactMeteor{position:fixed;z-index:60;pointer-events:none;width:85px;height:65px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff0a8,#ff7a24 34%,#82220f 72%);box-shadow:0 0 35px #ff6a22,0 0 70px #ff3d00;transition:transform .34s cubic-bezier(.3,.85,.4,1),opacity .12s .28s}.impact{position:fixed;z-index:61;pointer-events:none;width:18px;height:18px;border-radius:50%;background:#fff3b0;box-shadow:0 0 0 8px #ff8a2a99,0 0 0 18px #ff3d0044;animation:impactRing .48s ease-out forwards}@keyframes impactRing{to{transform:scale(5);opacity:0}}.sad{position:fixed;z-index:62;pointer-events:none;font-size:34px;animation:sadFloat 1s ease-out forwards;text-shadow:0 3px 8px #000}@keyframes sadFloat{0%{transform:translate(-50%,0) scale(.5);opacity:0}25%{opacity:1;transform:translate(-50%,-12px) scale(1.15)}100%{transform:translate(-50%,-75px) scale(.85);opacity:0}}.dino.hit{animation:dinoHit .45s}@keyframes dinoHit{20%{transform:translateY(-8px) rotate(-8deg)}40%{transform:translateY(4px) rotate(8deg)}70%{filter:brightness(2) saturate(.4)}100%{transform:none}}.hidden{display:none}.hint{font-size:13px;opacity:.6;margin-top:8px}
+</style></head><body><div class="app" id="app"><div class="stars"></div><div class="top"><div class="logo">☄️ <b>シャリ</b>単</div><div class="stats"><div class="pill">🦖 <span id="lives">5</span></div><div class="pill">🎯 <span id="progress">0/10</span></div><div class="pill">⭐ <span id="score">0</span></div></div></div><div class="q"><small>日本語に合う英単語の隕石を破壊せよ！</small><h1 id="question">---</h1></div><div class="field" id="field"><div class="ground"></div><div class="dinos" id="dinos"></div></div><div class="flash" id="flash"></div><div class="msg" id="msg"></div>
+<div class="overlay" id="start"><div class="panel"><h1>☄️ <b>シャリ単</b> 🦖</h1><p>単語リストを貼るだけ。恐竜を隕石から守れ。</p><div class="presets"><button class="preset" data-set="health">🩺 保健セット</button><button class="preset" data-set="science">🔬 科学セット</button><button class="preset" data-set="animals">🐾 動物セット</button><button class="preset" data-set="space">🚀 宇宙セット</button></div><textarea class="input" id="words" spellcheck="false">Average life expectancy, 平均寿命
+Healthy life expectancy, 健康寿命
+Infant mortality rate, 幼児死亡率
+Lifestyle disease, 生活習慣病
+Diabetes, 糖尿病
+Dementia, 認知症
+Disease pattern, 疾病構造
+Infectious disease, 感染症
+Cerebrovascular disease, 脳血管疾患
+Stroke, 脳血管疾患
+Mental disorder, 精神疾患
+Chronic Illnesses, 慢性疾患
+Purpose, 生きがい
+Well-being, 良好な状態
+Social Security, 社会保障
+Second-Hand Smoking, 受動喫煙
+Smoking, 喫煙
+Climate, 気候
+Green Spaces, 緑地
+Health Disparity, 健康格差
+Vaccination, 接種
+Values, 価値観
+Influence, 影響
+Bias, 偏り
+Pathogen, 病原体
+Emerging Infectious Disease, 新興感染症
+To mutate, 突然変異する
+Re-emerging Infectious Disease, 再興感染症
+Disinfect, 消毒する
+Food poisoning, 食中毒
+Quarantine, 検疫
+Human Rights Issues, 人権問題
+STI, 性感染症
+Sexually Transmitted Infection, 性感染症
+Untreated, 未治療
+Incurable, 不治
+Blood Vessel, 血管
+High Blood Pressure, 高血圧症
+Cardiovascular Disease, 循環器病
+Artery, 動脈
+Health Checkup, 健康診断</textarea><div class="hint">形式：英単語, 日本語（タブ区切り／「英語 = 日本語」でもOK）</div><div class="row"><button class="btn ghost" id="demo">保健セットに戻す</button><button class="btn primary" id="go">ゲーム開始</button></div></div></div>
+<div class="overlay hidden" id="end"><div class="panel" style="text-align:center"><h1 id="endTitle">GAME OVER</h1><p id="endSub" style="font-size:22px;font-weight:900;margin:6px 0 14px"></p><p id="result"></p><div class="row"><button class="btn primary" onclick="location.reload()">もう一度</button></div></div></div></div>
+<script>
+const $=s=>document.querySelector(s), field=$('#field'),msg=$('#msg'),flash=$('#flash');let list=[],score=0,combo=0,round=0,alive=true,pending=0,lives=5,target=10,used=[],locked=false;
+const sample=$('#words').value;
+const presets={
+health:`Average life expectancy, 平均寿命
+Healthy life expectancy, 健康寿命
+Infant mortality rate, 幼児死亡率
+Lifestyle disease, 生活習慣病
+Diabetes, 糖尿病
+Dementia, 認知症
+Disease pattern, 疾病構造
+Infectious disease, 感染症
+Cerebrovascular disease, 脳血管疾患
+Stroke, 脳血管疾患
+Mental disorder, 精神疾患
+Chronic Illnesses, 慢性疾患
+Purpose, 生きがい
+Well-being, 良好な状態
+Social Security, 社会保障
+Second-Hand Smoking, 受動喫煙
+Smoking, 喫煙
+Climate, 気候
+Green Spaces, 緑地
+Health Disparity, 健康格差
+Vaccination, 接種
+Values, 価値観
+Influence, 影響
+Bias, 偏り
+Pathogen, 病原体
+Emerging Infectious Disease, 新興感染症
+To mutate, 突然変異する
+Re-emerging Infectious Disease, 再興感染症
+Disinfect, 消毒する
+Food poisoning, 食中毒
+Quarantine, 検疫
+Human Rights Issues, 人権問題
+STI, 性感染症
+Sexually Transmitted Infection, 性感染症
+Untreated, 未治療
+Incurable, 不治
+Blood Vessel, 血管
+High Blood Pressure, 高血圧症
+Cardiovascular Disease, 循環器病
+Artery, 動脈
+Health Checkup, 健康診断`,
+science:`gravity, 重力
+matter, 物質
+energy, エネルギー
+force, 力
+motion, 運動
+velocity, 速度
+mass, 質量
+volume, 体積
+density, 密度
+atom, 原子
+molecule, 分子
+element, 元素
+compound, 化合物
+reaction, 反応
+acid, 酸
+base, 塩基
+cell, 細胞
+gene, 遺伝子
+evolution, 進化
+ecosystem, 生態系
+photosynthesis, 光合成
+fossil, 化石
+experiment, 実験
+hypothesis, 仮説
+observation, 観察`,
+animals:`mammal, 哺乳類
+reptile, 爬虫類
+amphibian, 両生類
+bird, 鳥類
+insect, 昆虫
+predator, 捕食者
+prey, 獲物
+habitat, 生息地
+species, 種
+herbivore, 草食動物
+carnivore, 肉食動物
+omnivore, 雑食動物
+nocturnal, 夜行性の
+endangered, 絶滅危惧の
+extinct, 絶滅した
+migration, 移動
+hatch, 孵化する
+hibernate, 冬眠する
+breed, 繁殖する
+camouflage, 擬態
+claw, かぎ爪
+fang, 牙
+feather, 羽毛
+scale, うろこ
+shell, 甲羅`,
+space:`planet, 惑星
+star, 恒星
+moon, 衛星
+galaxy, 銀河
+universe, 宇宙
+asteroid, 小惑星
+meteor, 隕石
+comet, 彗星
+orbit, 軌道
+gravity, 重力
+atmosphere, 大気
+satellite, 人工衛星
+spacecraft, 宇宙船
+astronaut, 宇宙飛行士
+launch, 打ち上げる
+crater, クレーター
+solar system, 太陽系
+black hole, ブラックホール
+light-year, 光年
+exploration, 探査`
+};
+function parse(t){return t.split(/\n+/).map(x=>x.trim()).filter(Boolean).map(x=>{let p=x.split(/\t|\s*=\s*|\s*,\s*|\s*：\s*|\s*:\s*/);return p.length>=2?{en:p[0].trim(),ja:p.slice(1).join(' ').trim()}:null}).filter(x=>x&&x.en&&x.ja)}
+function pick(a){return a[Math.floor(Math.random()*a.length)]}function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function start(){list=parse($('#words').value);if(list.length<1){alert('1語以上入れてください。');return}target=Math.min(10,list.length);lives=5;score=combo=round=0;used=[];alive=true;renderDinos();update();$('#start').classList.add('hidden');next()}
+function next(){if(!alive)return;if(round>=target){win();return}locked=false;document.querySelectorAll('.meteor').forEach(x=>x.remove());let pool=list.filter(x=>!used.includes(x));if(!pool.length){used=[];pool=[...list]}let ans=pick(pool);used.push(ans);$('#question').textContent=ans.ja;let wrong=shuffle(list.filter(x=>x!==ans)).slice(0,Math.min(3,list.length-1));let opts=shuffle([ans,...wrong]);pending=opts.length;opts.forEach((o,i)=>spawn(o,o===ans,i,opts.length))}
+function spawn(o,correct,i,n){let b=document.createElement('button');b.className='meteor';b.textContent=o.en;b.style.left=`calc(${(i+.5)*100/n}% - 65px)`;b.style.setProperty('--speed',`${6.2+Math.random()*1.0}s`);b.dataset.correct=correct;b.onclick=()=>hit(b,correct);b.addEventListener('animationend',()=>{if(!alive||b.classList.contains('boom'))return;if(correct)fail(b);else{b.remove();pending--;}});field.appendChild(b)}
+function hit(b,correct){if(!alive||locked||b.disabled)return;if(correct){locked=true;b.classList.add('boom');score+=100+combo*20;combo++;round++;update();msg.textContent=combo>=3?`🔥 ${combo} COMBO!`:'NICE!';setTimeout(()=>msg.textContent='',450);setTimeout(next,520)}else{b.disabled=true;combo=0;score=Math.max(0,score-20);impactWrong(b)}}
+function impactWrong(b){if(!alive)return;let ds=[...document.querySelectorAll('.dino:not(.dead):not(.dying)')],victim=ds[ds.length-1];if(!victim)return;victim.classList.add('dying');let br=b.getBoundingClientRect(),vr=victim.getBoundingClientRect();let ghost=document.createElement('div');ghost.className='impactMeteor';ghost.style.left=(br.left+br.width/2-42)+'px';ghost.style.top=(br.top+br.height/2-32)+'px';document.body.appendChild(ghost);b.classList.add('boom');requestAnimationFrame(()=>{let dx=(vr.left+vr.width/2)-(br.left+br.width/2),dy=(vr.top+vr.height/2)-(br.top+br.height/2);ghost.style.transform=`translate(${dx}px,${dy}px) scale(.8) rotate(150deg)`;ghost.style.opacity='.98'});setTimeout(()=>{ghost.remove();lives--;update();victim.classList.add('hit');setTimeout(()=>victim.classList.remove('hit'),420);let ir=document.createElement('div');ir.className='impact';ir.style.left=(vr.left+vr.width/2-9)+'px';ir.style.top=(vr.top+vr.height/2-9)+'px';document.body.appendChild(ir);setTimeout(()=>ir.remove(),520);let sad=document.createElement('div');sad.className='sad';sad.textContent='😢';sad.style.left=(vr.left+vr.width/2)+'px';sad.style.top=(vr.top-5)+'px';document.body.appendChild(sad);setTimeout(()=>sad.remove(),1000);$('#app').classList.remove('shake');void $('#app').offsetWidth;$('#app').classList.add('shake');flash.classList.remove('on');void flash.offsetWidth;flash.classList.add('on');msg.textContent='NOOO! 🦖';if(navigator.vibrate)navigator.vibrate([90,45,140]);setTimeout(()=>{victim.classList.remove('dying');victim.classList.add('dead');msg.textContent='';if(lives<=0){alive=false;locked=true;document.querySelectorAll('.meteor').forEach(x=>x.disabled=true);$('#result').textContent=`スコア ${score}　／　${round}/${target}問クリア`;$('#endTitle').textContent='絶滅 / EXTINCTION';$('#endSub').textContent='恐竜たちは絶滅してしまった… / The dinosaurs went extinct...';setTimeout(()=>$('#end').classList.remove('hidden'),300)}},360)},340)}
+function fail(b){if(!alive||locked)return;locked=true;impactWrong(b);setTimeout(()=>{if(alive&&lives>0){locked=false;next()}},850)}
+function renderDinos(){$('#dinos').innerHTML=Array.from({length:5},()=>'<span class="dino">🦖</span>').join('')}
+function win(){alive=false;document.querySelectorAll('.meteor').forEach(x=>x.remove());$('#endTitle').textContent='生存！ / SURVIVED! 🎉';$('#endSub').textContent='恐竜は絶滅しなかった！ / The dinosaurs survived!';$('#result').textContent=`スコア ${score}　／　${target}問クリア　／　恐竜 ${lives}匹生存`;$('#end').classList.remove('hidden')}
+function update(){$('#score').textContent=score;$('#lives').textContent=lives;$('#progress').textContent=`${round}/${target}`}document.querySelectorAll('.preset').forEach(b=>b.onclick=()=>{$('#words').value=presets[b.dataset.set]});$('#go').onclick=start;$('#demo').onclick=()=>$('#words').value=sample;
+</script></body></html>
