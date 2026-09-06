@@ -65,7 +65,7 @@
     @keyframes splashTitle{0%{opacity:0;transform:scale(.94)}45%,75%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.03)}}
 
   
-/* ===== すし単 ログインボーナス ===== */
+/* ===== すし単 毎日勉強偉いボーナス ===== */
 .login-bonus{margin-top:22px;padding:18px 20px;border-radius:22px;background:linear-gradient(135deg,#fff7ed,#fff,#ecfdf5);border:1px solid #fed7aa;box-shadow:0 10px 24px rgba(15,23,42,.06)}
 .login-bonus-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.login-bonus-title{font-weight:1000;font-size:18px}.gem-pill{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #bae6fd;font-weight:1000;color:#0369a1;box-shadow:0 5px 14px rgba(14,165,233,.10)}
 .login-bonus-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:13px}.login-stat{padding:10px 8px;border-radius:14px;background:rgba(255,255,255,.8);border:1px solid #f1d7bc;text-align:center}.login-stat b{display:block;font-size:20px}.login-stat small{color:#64748b;font-weight:800}.login-next{margin:12px 0 0;color:#475569;font-size:13px;font-weight:800}.login-claim{width:100%;margin-top:12px;border:0;border-radius:15px;padding:13px;background:linear-gradient(135deg,#f4511e,#fb923c);color:#fff;font-weight:1000;font-size:15px;cursor:pointer;box-shadow:0 10px 22px rgba(244,81,30,.24);animation:claimPulse 1.2s ease-in-out infinite}.login-claim[hidden]{display:none}@keyframes claimPulse{50%{transform:scale(1.02);box-shadow:0 12px 30px rgba(244,81,30,.38)}}
@@ -128,7 +128,7 @@
 </section>
 
 <section class="login-bonus" id="loginBonus">
-  <div class="login-bonus-head"><div class="login-bonus-title">🎁 ログインボーナス</div><div class="gem-pill">💎 <span id="gemBalance">0</span> すしジェム</div></div>
+  <div class="login-bonus-head"><div class="login-bonus-title">🎁 毎日勉強偉いボーナス</div><div class="gem-pill">💎 <span id="gemBalance">0</span> すしジェム <small style="font-weight:700;opacity:.72">（用途なし・集めて遊ぼう）</small></div></div>
   <div class="login-bonus-stats"><div class="login-stat"><b id="loginStreak">1</b><small>連続ログイン</small></div><div class="login-stat"><b id="loginTotal">1</b><small>累計ログイン</small></div><div class="login-stat"><b id="loginCycle">1 / 3</b><small>3日報酬</small></div></div>
   <p class="login-next" id="loginNext">3日連続で100ジェム＋宝箱ラッシュ！</p>
   <button class="login-claim" id="loginClaim" type="button" hidden>🎁 100ジェムを受け取る！</button>
@@ -361,14 +361,15 @@ if ("serviceWorker" in navigator) {
  }
  render();
  const modal=$('chestModal'),chest=$('chest'),start=$('chestStart'),timer=$('chestTimer'),count=$('tapCount'),bonus=$('tapBonus'),result=$('chestResult'),flash=$('screenFlash');
- let running=false,taps=0,raf=0,endAt=0,audio=null;
+ let running=false,taps=0,raf=0,endAt=0,audio=null,testMode=false;
  function tone(freq,dur=.045){try{audio=audio||new (window.AudioContext||window.webkitAudioContext)();const o=audio.createOscillator(),g=audio.createGain();o.frequency.value=freq;o.type='sine';g.gain.setValueAtTime(.055,audio.currentTime);g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+dur);o.connect(g);g.connect(audio.destination);o.start();o.stop(audio.currentTime+dur)}catch(e){}}
  function particle(x,y){for(let i=0;i<3;i++){const p=document.createElement('div');p.className='gem-particle';p.textContent=Math.random()<.72?'💎':'✨';p.style.left=x+'px';p.style.top=y+'px';p.style.setProperty('--x',(Math.random()*180-90)+'px');p.style.setProperty('--y',(-60-Math.random()*150)+'px');document.body.appendChild(p);setTimeout(()=>p.remove(),850)}}
  function hit(e){if(!running)return;taps++;count.textContent=taps;bonus.textContent=Math.min(50,Math.floor(taps/2));chest.classList.remove('hit');void chest.offsetWidth;chest.classList.add('hit');const r=chest.getBoundingClientRect(),x=e?.clientX||r.left+r.width/2,y=e?.clientY||r.top+r.height/2;particle(x,y);const f=document.createElement('div');f.className='tap-float';f.textContent=taps%2===0?'+1 💎':'TAP!';f.style.left=(x-25)+'px';f.style.top=(y-20)+'px';document.body.appendChild(f);setTimeout(()=>f.remove(),600);tone(330+Math.min(taps,60)*8);if(taps%10===0){flash.classList.remove('go');void flash.offsetWidth;flash.classList.add('go');navigator.vibrate?.(18)}}
  chest.addEventListener('pointerdown',hit);
- $('loginClaim').addEventListener('click',()=>{modal.hidden=false;start.hidden=false;result.hidden=true;timer.textContent='5.0';count.textContent='0';bonus.textContent='0';chest.textContent='🎁';$('chestSub').textContent='100ジェム確定！さらに連打で上乗せ！'});
+ function openChest(isTest=false){testMode=isTest;modal.hidden=false;start.hidden=false;result.hidden=true;timer.textContent='5.0';count.textContent='0';bonus.textContent='0';chest.textContent='🎁';$('chestSub').textContent=isTest?'🧪 テストモード：ジェムは保存されません':'100ジェム確定！さらに連打で上乗せ！'}
+ $('loginClaim').addEventListener('click',()=>openChest(false));
  start.addEventListener('click',()=>{if(running)return;running=true;taps=0;count.textContent='0';bonus.textContent='0';start.hidden=true;endAt=performance.now()+5000;tone(520,.1);navigator.vibrate?.([25,30,25]);const loop=()=>{const left=Math.max(0,endAt-performance.now());timer.textContent=(left/1000).toFixed(1);if(left>0)raf=requestAnimationFrame(loop);else finish()};loop()});
- function finish(){running=false;cancelAnimationFrame(raf);const extra=Math.min(50,Math.floor(taps/2)),earned=100+extra;data.gems=(data.gems||0)+earned;data.pending=false;data.claimedMilestones=[...(data.claimedMilestones||[]),data.pendingDay||today].slice(-120);data.pendingDay='';save();render();chest.textContent='💎';timer.textContent='GET!';$('chestSub').textContent='報酬獲得！';result.hidden=false;result.innerHTML=`100 + ${extra} BONUS<br><strong>${earned} 💎</strong>`;for(let i=0;i<24;i++)setTimeout(()=>{const r=chest.getBoundingClientRect();particle(r.left+r.width/2,r.top+r.height/2)},i*35);tone(660,.12);setTimeout(()=>tone(880,.16),120);navigator.vibrate?.([30,40,60,40,100]);setTimeout(()=>{const b=document.createElement('button');b.className='chest-start';b.textContent='閉じる';b.onclick=()=>modal.hidden=true;result.appendChild(b)},650)}
+ function finish(){running=false;cancelAnimationFrame(raf);const extra=Math.min(50,Math.floor(taps/2)),earned=100+extra;if(!testMode){data.gems=(data.gems||0)+earned;data.pending=false;data.claimedMilestones=[...(data.claimedMilestones||[]),data.pendingDay||today].slice(-120);data.pendingDay='';save();render()}chest.textContent='💎';timer.textContent=testMode?'TEST':'GET!';$('chestSub').textContent=testMode?'🧪 テスト完了：実データは変更していません':'報酬獲得！';result.hidden=false;result.innerHTML=`100 + ${extra} BONUS<br><strong>${earned} 💎</strong>${testMode?'<br><small>※テストなので加算されません</small>':''}`;for(let i=0;i<24;i++)setTimeout(()=>{const r=chest.getBoundingClientRect();particle(r.left+r.width/2,r.top+r.height/2)},i*35);tone(660,.12);setTimeout(()=>tone(880,.16),120);navigator.vibrate?.([30,40,60,40,100]);setTimeout(()=>{const b=document.createElement('button');b.className='chest-start';b.textContent='閉じる';b.onclick=()=>modal.hidden=true;result.appendChild(b)},650)}
 })();
 </script>
 
