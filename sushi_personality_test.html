@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>すし性格診断 | What Would You Do?</title>
+<style>
+  :root{
+    --bg:#fffaf6; --card:#ffffff; --text:#222; --muted:#6f6f6f;
+    --accent:#ff7a1a; --accent2:#ffb067; --line:#f0dfd2;
+    --good:#2f9e67;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+    background:linear-gradient(180deg,#fff7f0 0%,#fff 48%,#fffaf7 100%);
+    color:var(--text);
+  }
+  .wrap{max-width:860px;margin:0 auto;padding:24px 16px 60px}
+  header{text-align:center;padding:26px 8px 18px}
+  .logo{font-size:54px;line-height:1}
+  h1{margin:10px 0 6px;font-size:clamp(30px,6vw,48px)}
+  .sub{color:var(--muted);font-weight:700}
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:24px;
+    padding:24px; box-shadow:0 12px 34px rgba(130,70,25,.08); margin-top:18px;
+  }
+  .hidden{display:none!important}
+  .btn{
+    border:0;border-radius:16px;padding:14px 20px;font-size:17px;font-weight:800;
+    cursor:pointer;transition:.15s; width:100%;
+  }
+  .btn-primary{background:var(--accent);color:#fff}
+  .btn-primary:hover{transform:translateY(-1px);filter:brightness(.98)}
+  .btn-secondary{background:#fff3e8;color:#b75200;border:1px solid #ffd5b4}
+  .small{font-size:13px;color:var(--muted);line-height:1.7}
+  .intro p{line-height:1.8}
+  .progress-wrap{margin-bottom:20px}
+  .progress-top{display:flex;justify-content:space-between;font-weight:800;margin-bottom:8px}
+  .bar{height:12px;background:#f3eee9;border-radius:999px;overflow:hidden}
+  .bar > div{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%}
+  .category{
+    display:inline-block;padding:6px 10px;border-radius:999px;background:#fff0e5;color:#ba570c;
+    font-size:12px;font-weight:800;margin-bottom:12px
+  }
+  .question{font-size:clamp(23px,4vw,32px);line-height:1.35;margin:4px 0 18px}
+  .answers{display:grid;gap:12px}
+  .answer{
+    width:100%;text-align:left;padding:16px 18px;border:1px solid #eadfd7;border-radius:16px;
+    background:#fff;font-size:17px;line-height:1.5;cursor:pointer;font-weight:650;
+  }
+  .answer:hover{border-color:#ffaf72;background:#fff8f2;transform:translateY(-1px)}
+  .letter{
+    display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;
+    margin-right:10px;background:#fff0e5;color:#bd590d;font-weight:900
+  }
+  .result-title{text-align:center}
+  .result-title .type{font-size:clamp(28px,6vw,46px);font-weight:950;margin:8px 0;color:#c85b08}
+  .result-title .emoji{font-size:56px}
+  .traits{display:grid;gap:12px;margin:24px 0}
+  .trait-row{display:grid;grid-template-columns:130px 1fr 54px;gap:12px;align-items:center}
+  .trait-name{font-weight:850}
+  .traitbar{height:13px;background:#f3eee9;border-radius:99px;overflow:hidden}
+  .traitbar span{display:block;height:100%;background:linear-gradient(90deg,#ff9c50,#ff7315)}
+  .pct{text-align:right;font-weight:850}
+  .analysis{
+    background:#fff9f4;border-left:5px solid var(--accent);padding:18px 20px;border-radius:14px;
+    line-height:1.85;font-size:16px
+  }
+  .strength{
+    margin:18px 0;padding:15px 18px;border-radius:14px;background:#f2fbf6;
+    border:1px solid #d7f0e1;color:#246b48;font-weight:750
+  }
+  .agree-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0}
+  .agree{
+    border:1px solid #eadfd7;background:#fff;border-radius:14px;padding:12px 8px;
+    font-weight:800;cursor:pointer
+  }
+  .agree.selected{background:#fff0e5;border-color:#ff9c50;color:#a84b06}
+  .speak{
+    background:#fff3e8;border:1px dashed #ffad6d;border-radius:18px;padding:18px;line-height:1.8
+  }
+  .speak strong{color:#b44f00}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px}
+  .chip{
+    padding:8px 11px;border-radius:999px;background:#fff;border:1px solid #f0d7c6;
+    font-weight:750;font-size:14px
+  }
+  .footer-note{text-align:center;margin-top:18px}
+  @media(max-width:650px){
+    .card{padding:18px;border-radius:20px}
+    .trait-row{grid-template-columns:104px 1fr 46px;gap:8px;font-size:14px}
+    .agree-grid{grid-template-columns:1fr}
+    .question{font-size:24px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">🍣</div>
+    <h1>すし性格診断</h1>
+    <div class="sub">WHAT WOULD YOU DO?</div>
+  </header>
+
+  <section id="start" class="card intro">
+    <h2>20 situations. What would YOU do?</h2>
+    <p>
+      50のシチュエーションから毎回20問がランダムで出題されます。<br>
+      深く考えすぎず、いちばん自分に近い答えを選んでください。
+    </p>
+    <p class="small">
+      Choose the answer that is closest to you. Don't think too much. Just be yourself!
+    </p>
+    <button class="btn btn-primary" onclick="startQuiz()">診断スタート 🍣</button>
+  </section>
+
+  <section id="quiz" class="card hidden">
+    <div class="progress-wrap">
+      <div class="progress-top"><span id="qnum">1 / 20</span><span id="catlabel"></span></div>
+      <div class="bar"><div id="progress"></div></div>
+    </div>
+    <div class="category" id="category"></div>
+    <div class="question" id="question"></div>
+    <div class="answers" id="answers"></div>
+  </section>
+
+  <section id="result" class="card hidden">
+    <div class="result-title">
+      <div class="emoji">🍣✨</div>
+      <div class="small">YOUR PERSONALITY TYPE</div>
+      <div class="type" id="typeName"></div>
+      <div id="typeTagline" class="sub"></div>
+    </div>
+
+    <div class="traits" id="traits"></div>
+
+    <div class="analysis" id="analysis"></div>
+    <div class="strength" id="strength"></div>
+
+    <h3>Do you agree?</h3>
+    <div class="agree-grid">
+      <button class="agree" onclick="selectAgree(this)">YES, THAT'S ME!</button>
+      <button class="agree" onclick="selectAgree(this)">MAYBE...</button>
+      <button class="agree" onclick="selectAgree(this)">NOT REALLY!</button>
+    </div>
+
+    <h3>Your key words</h3>
+    <div class="chips" id="chips"></div>
+
+    <div class="speak">
+      <strong>🎤 Describe your personality!</strong><br><br>
+      I think I am <strong id="s1">_____</strong> and <strong id="s2">_____</strong>.<br>
+      The test says I am <strong id="s3">_____</strong>, and I think that's true.<br>
+      However, I don't think I am very __________.<br>
+      For example, ________________________________.
+    </div>
+
+    <div style="display:grid;gap:10px;margin-top:18px">
+      <button class="btn btn-primary" onclick="startQuiz()">もう一度診断する 🔄</button>
+      <button class="btn btn-secondary" onclick="location.reload()">トップに戻る</button>
+    </div>
+
+    <p class="small footer-note">
+      ※この診断は授業・娯楽用です。心理学的・医学的な診断ではありません。
+    </p>
+  </section>
+</div>
+
+<script>
+const traits = [
+  "Adventurous","Friendly","Honest","Independent","Confident","Caring",
+  "Curious","Responsible","Calm","Competitive","Cautious","Easygoing"
+];
+
+const Q = (cat,q,answers)=>({cat,q,answers});
+const A = (text,score)=>({text,score});
+
+const pool = [
+Q("Money & Morals","You find a wallet with ¥30,000 in it. There is an ID card inside.",[
+ A("Take it to the police.",{Honest:3,Responsible:2,Caring:1}),
+ A("Contact the owner myself.",{Honest:2,Caring:3,Confident:1}),
+ A("Leave it where it is.",{Cautious:2,Easygoing:1}),
+ A("Take the money. Nobody will know. 😈",{Independent:1,Adventurous:1,Easygoing:1})
+]),
+Q("Money & Morals","A vending machine gives you ¥1,000 too much change.",[
+ A("Find someone and return it.",{Honest:3,Responsible:2}),
+ A("Leave the extra money there.",{Honest:2,Cautious:1}),
+ A("Keep it. The machine made the mistake.",{Easygoing:2,Independent:1}),
+ A("Buy everyone drinks with it.",{Friendly:2,Caring:2,Easygoing:1})
+]),
+Q("Money & Morals","You win ¥1,000,000. What is your first thought?",[
+ A("Save most of it.",{Responsible:3,Cautious:2}),
+ A("Travel somewhere amazing.",{Adventurous:3,Curious:2}),
+ A("Buy something I've always wanted.",{Easygoing:2,Independent:2}),
+ A("Do something nice for family or friends.",{Caring:3,Friendly:2})
+]),
+Q("Money & Morals","You see someone drop ¥5,000, but they don't notice.",[
+ A("Run after them and return it.",{Honest:3,Caring:2}),
+ A("Call out loudly to them.",{Confident:2,Honest:2}),
+ A("Pick it up and take it to a nearby shop.",{Responsible:2,Cautious:2}),
+ A("Wait a moment to see what happens.",{Cautious:2,Calm:1})
+]),
+Q("Money & Morals","A friend forgets they owe you ¥2,000.",[
+ A("Remind them directly.",{Confident:2,Honest:2}),
+ A("Wait a few days, then mention it.",{Calm:2,Cautious:1}),
+ A("Forget about it.",{Easygoing:3,Caring:1}),
+ A("Make a joke about it until they remember.",{Friendly:2,Easygoing:2})
+]),
+
+Q("Friends","Your best friend cheats on an important test.",[
+ A("Tell them they shouldn't do it again.",{Honest:2,Caring:2,Confident:1}),
+ A("Say nothing. They're my friend.",{Caring:2,Easygoing:2}),
+ A("Tell the teacher.",{Honest:3,Responsible:3}),
+ A("Make fun of them for needing to cheat.",{Easygoing:2,Confident:1})
+]),
+Q("Friends","Your friend is being laughed at by several people.",[
+ A("Stand next to my friend and speak up.",{Caring:3,Confident:3}),
+ A("Take my friend away from the situation.",{Caring:3,Calm:2}),
+ A("Check on them later.",{Caring:2,Cautious:2}),
+ A("Try to change the mood with a joke.",{Friendly:2,Easygoing:2})
+]),
+Q("Friends","Your friend shows you a terrible haircut and says, 'Do you like it?'",[
+ A("Tell them honestly that it isn't my favorite.",{Honest:3,Confident:2}),
+ A("Say something positive without lying too much.",{Caring:3,Calm:2}),
+ A("Say, 'If you like it, that's what matters.'",{Independent:2,Caring:2}),
+ A("Say it looks amazing.",{Friendly:2,Caring:1,Easygoing:1})
+]),
+Q("Friends","Two close friends are fighting, and both want you on their side.",[
+ A("Listen to both before deciding.",{Calm:3,Responsible:2}),
+ A("Refuse to choose sides.",{Independent:2,Easygoing:2}),
+ A("Support the friend I think is right.",{Honest:2,Confident:2}),
+ A("Try to get them talking again.",{Caring:3,Friendly:2})
+]),
+Q("Friends","Your friend tells you a huge secret.",[
+ A("Nobody will ever hear it from me.",{Responsible:3,Caring:2}),
+ A("I might tell one person I really trust.",{Friendly:2,Easygoing:1}),
+ A("It depends on the secret.",{Calm:2,Responsible:1}),
+ A("This is why people shouldn't tell me secrets. 😅",{Easygoing:3,Friendly:1})
+]),
+
+Q("School","Your group has ten minutes left, but nobody is doing anything.",[
+ A("Take charge.",{Confident:3,Responsible:3}),
+ A("Suggest what everyone should do.",{Friendly:2,Responsible:2}),
+ A("Wait for someone else to lead.",{Cautious:2,Easygoing:1}),
+ A("Finish as much as I can myself.",{Independent:2,Responsible:3})
+]),
+Q("School","The teacher asks for a volunteer to present first.",[
+ A("I'll do it.",{Confident:3,Responsible:1}),
+ A("I can do it if nobody else wants to.",{Caring:2,Confident:1}),
+ A("Look down at my desk.",{Cautious:2}),
+ A("Suddenly become fascinated by my pencil case.",{Easygoing:3})
+]),
+Q("School","You have a big test tomorrow and haven't studied at all.",[
+ A("Study all night.",{Responsible:3,Competitive:2}),
+ A("Study only the most important things.",{Calm:2,Responsible:2}),
+ A("Go to bed. I'll survive.",{Easygoing:3,Confident:1}),
+ A("Accept my fate. 😂",{Easygoing:3,Calm:1})
+]),
+Q("School","Everyone in your group disagrees with your idea, but you still think you're right.",[
+ A("Keep arguing for my idea.",{Independent:3,Confident:3}),
+ A("Explain it once more, then listen.",{Calm:3,Confident:2}),
+ A("Go with the group.",{Friendly:2,Caring:1}),
+ A("Stop talking about it.",{Cautious:2,Easygoing:1})
+]),
+Q("School","You get a much lower grade than you expected.",[
+ A("Ask the teacher what I can improve.",{Responsible:3,Confident:2}),
+ A("Study harder next time.",{Competitive:2,Responsible:2}),
+ A("Feel bad for a while, then move on.",{Calm:2,Easygoing:1}),
+ A("Tell myself the test was unfair.",{Easygoing:2,Independent:1})
+]),
+
+Q("Social","You go to a party but know almost nobody.",[
+ A("Start talking to someone.",{Friendly:3,Confident:3}),
+ A("Stay with the one person I know.",{Friendly:1,Cautious:2}),
+ A("Wait for someone to talk to me.",{Cautious:2,Calm:1}),
+ A("I probably wouldn't go in the first place.",{Independent:2,Cautious:2})
+]),
+Q("Social","You are alone at a café. A stranger starts talking to you.",[
+ A("Great! Let's talk.",{Friendly:3,Curious:2}),
+ A("Talk politely for a while.",{Friendly:2,Calm:2}),
+ A("Give short answers.",{Cautious:2,Independent:1}),
+ A("Please leave me and my coffee alone.",{Independent:3,Easygoing:1})
+]),
+Q("Social","You accidentally send an embarrassing message to the wrong person.",[
+ A("Explain immediately.",{Honest:2,Confident:2}),
+ A("Make a joke about it.",{Easygoing:3,Confident:1}),
+ A("Pretend it never happened.",{Calm:1,Cautious:2}),
+ A("Turn off my phone and disappear.",{Cautious:3,Easygoing:1})
+]),
+Q("Social","You see someone sitting alone at a school event.",[
+ A("Go talk to them.",{Friendly:3,Caring:3}),
+ A("Smile at them first.",{Caring:2,Cautious:1}),
+ A("Assume they want to be alone.",{Independent:2,Calm:1}),
+ A("Ask a friend to come with me and say hello.",{Friendly:2,Cautious:1})
+]),
+Q("Social","Someone gives you a compliment you didn't expect.",[
+ A("Say 'Thank you!' and enjoy it.",{Confident:2,Easygoing:2}),
+ A("Compliment them back.",{Friendly:2,Caring:1}),
+ A("Laugh because I don't know what to say.",{Easygoing:2,Cautious:1}),
+ A("Wonder if they really mean it.",{Cautious:2,Curious:1})
+]),
+
+Q("Conflict","Someone insults you in front of everyone.",[
+ A("Insult them back.",{Confident:2,Competitive:2}),
+ A("Laugh it off.",{Easygoing:3,Calm:2}),
+ A("Ask why they said that.",{Calm:3,Confident:2}),
+ A("Say nothing, but remember it forever.",{Cautious:2,Independent:1})
+]),
+Q("Conflict","Someone cuts in front of you after you've waited 30 minutes.",[
+ A("Tell them to go to the back.",{Confident:3,Honest:1}),
+ A("Ask politely if they noticed the line.",{Calm:3,Friendly:1}),
+ A("Say nothing.",{Cautious:2,Easygoing:1}),
+ A("Complain to my friend for the next ten minutes.",{Easygoing:2,Friendly:1})
+]),
+Q("Conflict","A teammate blames you for a mistake that wasn't yours.",[
+ A("Correct them immediately.",{Confident:3,Honest:2}),
+ A("Explain calmly what happened.",{Calm:3,Honest:2}),
+ A("Ignore it unless it becomes a problem.",{Easygoing:2,Cautious:1}),
+ A("Wait and talk to them privately later.",{Caring:2,Calm:2})
+]),
+Q("Conflict","Your friend cancels plans at the last minute.",[
+ A("Tell them I'm annoyed.",{Honest:2,Confident:2}),
+ A("Ask if everything is okay.",{Caring:3,Calm:1}),
+ A("No problem. I'll do something else.",{Easygoing:3,Independent:2}),
+ A("Say 'fine' but secretly stay annoyed.",{Cautious:2})
+]),
+Q("Conflict","A person online writes something rude about you.",[
+ A("Reply.",{Confident:2,Competitive:2}),
+ A("Ignore it.",{Calm:3,Easygoing:2}),
+ A("Block them.",{Responsible:2,Independent:2}),
+ A("Show my friends and laugh about it.",{Friendly:2,Easygoing:2})
+]),
+
+Q("Risk & Adventure","You can bet ¥10,000 for a 50% chance of winning ¥30,000.",[
+ A("Absolutely.",{Adventurous:3,Confident:2}),
+ A("Maybe. Sounds fun.",{Adventurous:2,Easygoing:2}),
+ A("No. I'll keep my money.",{Responsible:3,Cautious:2}),
+ A("Never. I hate unnecessary risks.",{Cautious:3,Responsible:2})
+]),
+Q("Risk & Adventure","Your friends invite you on a trip tomorrow.",[
+ A("YES. Where are we going?",{Adventurous:3,Easygoing:2}),
+ A("Check my schedule first.",{Responsible:2,Cautious:2}),
+ A("I need more time to prepare.",{Cautious:3}),
+ A("It depends on who is going.",{Friendly:2,Calm:1})
+]),
+Q("Risk & Adventure","You can try skydiving for free today.",[
+ A("Sign me up.",{Adventurous:3,Confident:2}),
+ A("Maybe, after watching other people first.",{Curious:2,Cautious:2}),
+ A("I'd rather do something safer.",{Cautious:3,Responsible:1}),
+ A("No chance.",{Cautious:3,Independent:1})
+]),
+Q("Risk & Adventure","You are traveling and get lost in a city where you don't speak the language.",[
+ A("Ask someone for help.",{Confident:2,Friendly:2}),
+ A("Explore until I figure it out.",{Curious:3,Adventurous:2}),
+ A("Use my phone and make a careful plan.",{Responsible:3,Calm:2}),
+ A("Panic for one minute, then solve it.",{Easygoing:1,Responsible:2})
+]),
+Q("Risk & Adventure","A restaurant menu has a dish you've never heard of.",[
+ A("Order it.",{Curious:3,Adventurous:2}),
+ A("Ask what it is first.",{Curious:2,Cautious:1}),
+ A("Order something I know I like.",{Cautious:2}),
+ A("Let my friend choose for me.",{Easygoing:2,Friendly:1})
+]),
+
+Q("Embarrassing","You trip and fall in front of many people.",[
+ A("Laugh at myself.",{Easygoing:3,Confident:2}),
+ A("Stand up quickly and keep moving.",{Calm:2,Confident:1}),
+ A("Pretend nothing happened.",{Calm:1,Cautious:2}),
+ A("Remember it at 3 a.m. for the next five years.",{Cautious:2,Independent:1})
+]),
+Q("Embarrassing","You accidentally like your crush's old social-media post from three years ago.",[
+ A("Unlike it immediately.",{Cautious:3}),
+ A("Pretend nothing happened.",{Calm:2,Easygoing:1}),
+ A("Like three more posts. Own it.",{Confident:3,Easygoing:2}),
+ A("Delete my account and move abroad.",{Easygoing:3})
+]),
+Q("Embarrassing","You call your teacher 'Mom' or 'Dad' by mistake.",[
+ A("Laugh and continue.",{Easygoing:3,Confident:1}),
+ A("Say sorry and move on.",{Calm:3,Responsible:1}),
+ A("Freeze.",{Cautious:2}),
+ A("Transfer schools immediately. 😭",{Easygoing:3})
+]),
+Q("Embarrassing","You sing loudly with headphones on and realize everyone heard you.",[
+ A("Keep singing.",{Confident:3,Easygoing:2}),
+ A("Laugh.",{Easygoing:3}),
+ A("Stop immediately.",{Cautious:2}),
+ A("Ask, 'Was I good?'",{Confident:2,Friendly:1})
+]),
+Q("Embarrassing","You forget someone's name while talking directly to them.",[
+ A("Admit it and ask again.",{Honest:2,Confident:2}),
+ A("Try to avoid saying their name.",{Cautious:3}),
+ A("Ask another person later.",{Responsible:1,Cautious:2}),
+ A("Give them a nickname in my head forever.",{Easygoing:3})
+]),
+
+Q("Leadership","Nobody can decide where your group should eat.",[
+ A("Choose a place.",{Confident:3,Independent:2}),
+ A("Give everyone two choices and vote.",{Responsible:2,Friendly:2}),
+ A("Say, 'Anywhere is fine.'",{Easygoing:3}),
+ A("Wait until someone else decides.",{Cautious:2})
+]),
+Q("Leadership","Your team is losing badly in a game.",[
+ A("Try to motivate everyone.",{Confident:3,Caring:2}),
+ A("Focus on doing my own job well.",{Responsible:3,Independent:2}),
+ A("Keep it fun even if we lose.",{Easygoing:3,Friendly:2}),
+ A("Become even more competitive.",{Competitive:3,Confident:1})
+]),
+Q("Leadership","A younger student asks you for advice.",[
+ A("Give clear advice.",{Confident:2,Caring:2}),
+ A("Ask questions before advising.",{Curious:2,Calm:2}),
+ A("Tell them what worked for me.",{Honest:2,Caring:1}),
+ A("Help them find someone who knows more.",{Responsible:2,Caring:2})
+]),
+Q("Leadership","Your group has two good ideas but time for only one.",[
+ A("Decide quickly.",{Confident:2,Responsible:2}),
+ A("Compare the pros and cons.",{Calm:3,Responsible:3}),
+ A("Vote.",{Friendly:2,Honest:1}),
+ A("Try to combine both ideas.",{Curious:2,Caring:1})
+]),
+Q("Leadership","A classmate is clearly struggling with a task.",[
+ A("Offer help immediately.",{Caring:3,Friendly:2}),
+ A("Wait to see if they ask.",{Cautious:2,Responsible:1}),
+ A("Show them an easier method.",{Responsible:2,Confident:1}),
+ A("Encourage them first.",{Caring:2,Friendly:2})
+]),
+
+Q("Crazy / Fantasy","You can become invisible for 24 hours. What do you do?",[
+ A("Explore places I normally can't enter.",{Curious:3,Adventurous:2}),
+ A("Prank my friends.",{Easygoing:3,Friendly:1}),
+ A("Find out what people really say about me.",{Curious:2,Cautious:2}),
+ A("I don't want this power.",{Responsible:2,Cautious:2})
+]),
+Q("Crazy / Fantasy","An alien says, 'Come with me. I'll bring you back tomorrow.'",[
+ A("LET'S GO.",{Adventurous:3,Curious:2}),
+ A("Ask about 50 questions first.",{Curious:3,Cautious:2}),
+ A("Take a photo and run away.",{Easygoing:2,Cautious:2}),
+ A("Absolutely not.",{Cautious:3,Responsible:1})
+]),
+Q("Crazy / Fantasy","You can read people's minds for one day.",[
+ A("Read my best friend's mind.",{Curious:2,Caring:1}),
+ A("Read my teacher's mind.",{Curious:3,Easygoing:1}),
+ A("Read my crush's mind.",{Curious:3,Adventurous:1}),
+ A("Nobody's. That sounds terrifying.",{Responsible:2,Cautious:3})
+]),
+Q("Crazy / Fantasy","You wake up and everyone knows your name.",[
+ A("Enjoy being famous.",{Confident:3,Friendly:1}),
+ A("Find out why.",{Curious:3,Calm:1}),
+ A("Hide.",{Cautious:3,Independent:1}),
+ A("Use it to help people somehow.",{Caring:3,Responsible:2})
+]),
+Q("Crazy / Fantasy","You get one superpower. Which do you choose?",[
+ A("Flying.",{Adventurous:3,Curious:1}),
+ A("Healing people.",{Caring:3,Responsible:1}),
+ A("Stopping time.",{Independent:2,Curious:2}),
+ A("Perfect luck.",{Easygoing:3,Confident:1})
+]),
+
+Q("Daily Life","You have a completely free Sunday.",[
+ A("Go somewhere new.",{Adventurous:2,Curious:3}),
+ A("Meet friends.",{Friendly:3}),
+ A("Stay home and enjoy my hobbies.",{Independent:3,Easygoing:2}),
+ A("Make a plan to use the day well.",{Responsible:3})
+]),
+Q("Daily Life","Your phone battery is at 2% and you forgot your charger.",[
+ A("Ask someone to borrow one.",{Friendly:2,Confident:1}),
+ A("Turn off everything unnecessary.",{Responsible:3,Calm:2}),
+ A("Accept that my phone is about to die.",{Easygoing:3}),
+ A("Feel strangely uncomfortable.",{Cautious:2})
+]),
+Q("Daily Life","You arrive 20 minutes early.",[
+ A("Enjoy having extra time.",{Calm:3,Easygoing:2}),
+ A("Check what I need to do.",{Responsible:3}),
+ A("Walk around and explore.",{Curious:2,Adventurous:1}),
+ A("Message someone.",{Friendly:2})
+]),
+Q("Daily Life","Your room gets messy.",[
+ A("Clean it immediately.",{Responsible:3,Cautious:1}),
+ A("Clean when it starts bothering me.",{Calm:2,Responsible:1}),
+ A("I know where everything is.",{Independent:2,Easygoing:2}),
+ A("Wait until I suddenly become motivated.",{Easygoing:3})
+]),
+Q("Daily Life","You have to choose between the same favorite meal and something new.",[
+ A("Try something new.",{Curious:3,Adventurous:2}),
+ A("Favorite meal. Easy choice.",{Cautious:2,Easygoing:2}),
+ A("Ask what my friends recommend.",{Friendly:2,Curious:1}),
+ A("Spend way too long deciding.",{Cautious:2,Curious:1})
+])
+];
+
+let quiz=[], idx=0;
+let scores={}, possible={};
+
+function resetScores(){
+  scores={}; possible={};
+  traits.forEach(t=>{scores[t]=0;possible[t]=0;});
+}
+
+function shuffle(arr){
+  return [...arr].sort(()=>Math.random()-0.5);
+}
+
+function pickQuestions(){
+  const groups={};
+  pool.forEach(q=>(groups[q.cat]??=[]).push(q));
+  let chosen=[];
+  Object.values(groups).forEach(g=>chosen.push(...shuffle(g).slice(0,2)));
+  // There are 10 categories x 2 = 20.
+  return shuffle(chosen).slice(0,20);
+}
+
+function startQuiz(){
+  quiz=pickQuestions();
+  idx=0; resetScores();
+  document.getElementById("start").classList.add("hidden");
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  renderQuestion();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function renderQuestion(){
+  const q=quiz[idx];
+  document.getElementById("qnum").textContent=`${idx+1} / ${quiz.length}`;
+  document.getElementById("progress").style.width=`${(idx/quiz.length)*100}%`;
+  document.getElementById("category").textContent=q.cat;
+  document.getElementById("catlabel").textContent="🍣";
+  document.getElementById("question").textContent=q.q;
+  const box=document.getElementById("answers");
+  box.innerHTML="";
+  q.answers.forEach((a,i)=>{
+    const b=document.createElement("button");
+    b.className="answer";
+    b.innerHTML=`<span class="letter">${String.fromCharCode(65+i)}</span>${a.text}`;
+    b.onclick=()=>choose(a,q);
+    box.appendChild(b);
+  });
+}
+
+function choose(answer,q){
+  Object.entries(answer.score).forEach(([t,v])=>{
+    if(scores[t]!==undefined) scores[t]+=v;
+  });
+  // Normalize based on the maximum available score from each shown question.
+  q.answers.forEach(a=>{
+    Object.entries(a.score).forEach(([t,v])=>{
+      possible[t]=Math.max(possible[t]||0,0); // ensure exists
+    });
+  });
+  // for each trait, add the max score it could have received from this question
+  traits.forEach(t=>{
+    const m=Math.max(...q.answers.map(a=>a.score[t]||0));
+    possible[t]+=m;
+  });
+  idx++;
+  if(idx<quiz.length) renderQuestion();
+  else showResult();
+}
+
+function pctFor(t){
+  if(!possible[t]) return 50;
+  const raw=Math.round((scores[t]/possible[t])*100);
+  // soften extremes so result feels human rather than binary
+  return Math.max(24,Math.min(94,Math.round(raw*0.78+15)));
+}
+
+const typeDefs=[
+ {name:"THE CURIOUS EXPLORER", keys:["Curious","Adventurous"], tag:"You learn by discovering what is out there.", icon:"🧭"},
+ {name:"THE KIND SUPPORTER", keys:["Caring","Friendly"], tag:"People feel comfortable around you.", icon:"🤝"},
+ {name:"THE CALM STRATEGIST", keys:["Calm","Responsible"], tag:"You think before you move.", icon:"🧠"},
+ {name:"THE BOLD LEADER", keys:["Confident","Responsible"], tag:"You step forward when something needs to happen.", icon:"🔥"},
+ {name:"THE FREE SPIRIT", keys:["Easygoing","Independent"], tag:"You prefer being yourself to following the crowd.", icon:"🌈"},
+ {name:"THE LOYAL GUARDIAN", keys:["Honest","Caring"], tag:"Trust matters to you.", icon:"🛡️"},
+ {name:"THE QUIET THINKER", keys:["Independent","Cautious"], tag:"You notice more than people may realize.", icon:"🌙"},
+ {name:"THE DRIVEN CHALLENGER", keys:["Competitive","Confident"], tag:"A challenge often brings out your best.", icon:"🏆"}
+];
+
+function chooseType(pcts){
+  return [...typeDefs].sort((a,b)=>{
+    const av=(pcts[a.keys[0]]+pcts[a.keys[1]])/2;
+    const bv=(pcts[b.keys[0]]+pcts[b.keys[1]])/2;
+    return bv-av;
+  })[0];
+}
+
+function positiveLow(t){
+ const m={
+  Adventurous:"You do not rush into unnecessary risks and prefer choices you can feel good about.",
+  Friendly:"You do not need constant social attention and often value a smaller number of genuine connections.",
+  Honest:"You often think about how your words affect other people instead of saying everything immediately.",
+  Independent:"You are able to cooperate and adjust when a group needs you.",
+  Confident:"You may be modest and careful before putting yourself forward.",
+  Caring:"You respect other people's space and do not always interfere.",
+  Curious:"You can focus deeply on things that genuinely matter to you instead of chasing every new thing.",
+  Responsible:"You can stay flexible and avoid putting too much pressure on yourself.",
+  Calm:"You feel things strongly, which can make you sensitive to what is happening around you.",
+  Competitive:"You can enjoy an activity without needing to win.",
+  Cautious:"You are often comfortable trusting your instincts and acting without overthinking.",
+  Easygoing:"You take important things seriously and can stay focused when something matters."
+ };
+ return m[t];
+}
+
+function phraseFor(t,high=true){
+ const highMap={
+  Adventurous:"You are open to new experiences and are often willing to take a chance when something feels worthwhile.",
+  Friendly:"You naturally connect with people and usually make social situations easier for others.",
+  Honest:"You value sincerity and usually prefer clear, genuine relationships.",
+  Independent:"You tend to think for yourself rather than simply following what everyone else is doing.",
+  Confident:"You can step forward when needed, even if you do not always feel completely fearless inside.",
+  Caring:"You notice how other people feel and often think about the effect your choices have on them.",
+  Curious:"You like understanding how things work and are drawn to unfamiliar ideas or experiences.",
+  Responsible:"People can often rely on you when something genuinely needs to get done.",
+  Calm:"You are usually able to keep your head when a situation becomes awkward or stressful.",
+  Competitive:"Challenges can bring out a surprisingly determined side of you.",
+  Cautious:"You prefer to understand a situation before committing yourself to it.",
+  Easygoing:"You are good at adapting when things do not go exactly as planned."
+ };
+ return high?highMap[t]:positiveLow(t);
+}
+
+function showResult(){
+  document.getElementById("quiz").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+
+  const pcts={}; traits.forEach(t=>pcts[t]=pctFor(t));
+  const ranked=[...traits].sort((a,b)=>pcts[b]-pcts[a]);
+  const top=ranked.slice(0,5);
+  const low=ranked[ranked.length-1];
+  const type=chooseType(pcts);
+
+  document.getElementById("typeName").textContent=type.name;
+  document.getElementById("typeTagline").textContent=type.tag;
+
+  const tb=document.getElementById("traits"); tb.innerHTML="";
+  top.forEach(t=>{
+    tb.innerHTML+=`
+      <div class="trait-row">
+        <div class="trait-name">${t}</div>
+        <div class="traitbar"><span style="width:${pcts[t]}%"></span></div>
+        <div class="pct">${pcts[t]}%</div>
+      </div>`;
+  });
+
+  const top1=top[0], top2=top[1], top3=top[2];
+  const barnum1="You may look fairly relaxed on the outside, but you think more deeply about important things than people sometimes realize.";
+  const barnum2="You do not show every side of yourself to everyone. With people you trust, you can be noticeably more open, playful, or determined.";
+  const text = `
+    <p>${phraseFor(top1,true)} ${phraseFor(top2,true)}</p>
+    <p>${barnum1}</p>
+    <p>${phraseFor(top3,true)} At the same time, ${positiveLow(low).charAt(0).toLowerCase()+positiveLow(low).slice(1)}</p>
+    <p>${barnum2}</p>
+  `;
+  document.getElementById("analysis").innerHTML=text;
+
+  const strengths={
+    Adventurous:"You can move toward new experiences without needing every detail in advance.",
+    Friendly:"You can make people feel included.",
+    Honest:"People are likely to know where they stand with you.",
+    Independent:"You are able to keep your own point of view.",
+    Confident:"You can act even when a situation feels uncomfortable.",
+    Caring:"You notice people who might otherwise be overlooked.",
+    Curious:"You can turn ordinary situations into opportunities to learn something.",
+    Responsible:"You can be counted on when things become serious.",
+    Calm:"You can bring stability to stressful situations.",
+    Competitive:"You can find extra energy when there is a goal to chase.",
+    Cautious:"You are good at noticing risks before other people do.",
+    Easygoing:"You recover quickly when plans change."
+  };
+  document.getElementById("strength").innerHTML=`🌟 <strong>Your hidden strength:</strong> ${strengths[top1]}`;
+
+  const chips=document.getElementById("chips"); chips.innerHTML="";
+  top.forEach(t=>chips.innerHTML+=`<span class="chip">${t}</span>`);
+
+  document.getElementById("s1").textContent=top1.toLowerCase();
+  document.getElementById("s2").textContent=top2.toLowerCase();
+  document.getElementById("s3").textContent=top3.toLowerCase();
+
+  document.querySelectorAll(".agree").forEach(x=>x.classList.remove("selected"));
+  document.getElementById("progress").style.width="100%";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function selectAgree(el){
+  document.querySelectorAll(".agree").forEach(x=>x.classList.remove("selected"));
+  el.classList.add("selected");
+}
+</script>
+</body>
+</html>
