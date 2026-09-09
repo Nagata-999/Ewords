@@ -95,10 +95,10 @@
     .question{font-size:24px}
   }
 </style>
-</head>
+<style>.sushi-return{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 14px;border:1px solid #d8d3c5;border-radius:10px;background:#fffaf2;color:#0f766e;font:700 12px system-ui,sans-serif;text-decoration:none;box-sizing:border-box}.sushi-return:focus-visible{outline:3px solid #f4511e;outline-offset:3px}</style></head>
 <body>
 <div class="wrap">
-  <header>
+  <a class="sushi-return" href="index.html">← トップに戻る</a><header>
     <div class="logo">🍣</div>
     <h1>すし性格診断</h1>
     <div class="sub">WHAT WOULD YOU DO?</div>
@@ -159,7 +159,7 @@
 
     <div style="display:grid;gap:10px;margin-top:18px">
       <button class="btn btn-primary" onclick="startQuiz()">もう一度診断する 🔄</button>
-      <button class="btn btn-secondary" onclick="location.reload()">トップに戻る</button>
+      <button class="btn btn-secondary" onclick="location.href='index.html'">トップに戻る</button>
     </div>
 
     <p class="small footer-note">
@@ -689,3 +689,4 @@ function selectAgree(el){
 </script>
 </body>
 </html>
+
