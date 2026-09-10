@@ -70,6 +70,10 @@ function entitySpan(cls,html,title=''){
   return s;
 }
 
+function tileVariant(x,y,count){
+  return Math.abs((x*17+y*31+game.floor*13)%count);
+}
+
 render=function(){
   if(!game)return;
   rememberSeen();
@@ -97,7 +101,8 @@ render=function(){
       if(x<0||y<0||x>=W||y>=H){c.className='cell void';board.append(c);continue;}
       const now=visibleNow(x,y),seen=game.seen.has(key(x,y));
       if(!seen){c.className='cell void';board.append(c);continue;}
-      c.className='cell '+(game.grid[y][x]?'floor':'wall')+(now?'':' memory');
+      if(game.grid[y][x]) c.className=`cell floor floor-${tileVariant(x,y,3)}`+(now?'':' memory');
+      else c.className=`cell wall wall-${tileVariant(x,y,4)}`+(now?'':' memory');
       if(now&&game.grid[y][x]&&x===game.exit.x&&y===game.exit.y)c.classList.add('exit');
 
       if(now){
