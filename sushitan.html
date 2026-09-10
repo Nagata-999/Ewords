@@ -2492,7 +2492,7 @@ html, body {
     <div id="comboBreak" class="combo-break">COMBO BREAK...</div>
 
     <div class="panel bottom">
-      <button class="btn primary" id="menuBtn">Menu</button>
+      <button class="btn orange hidden" id="endReviewBtn">復習を終了</button><button class="btn primary" id="menuBtn">Menu</button>
       <button class="btn secondary" id="retryBtn">Retry</button>
     </div>
 
@@ -2545,6 +2545,13 @@ html, body {
             <p id="sushiLevelNote" class="level-note">選んだレベルの単語だけでプレイします。</p>
           </div>
 
+          <section class="home-section" aria-label="復習リスト">
+            <h3>📝 間違えた単語 <span id="savedReviewCount">0</span>語</h3>
+            <div id="savedReviewList" class="mistake-list"></div>
+            <p class="small">このブラウザに自動保存。全レベルの苦手単語を、時間制限なしで復習できます。2回連続正解でリストから外れます。</p>
+            <div class="menu-btns"><button class="btn green" id="startReviewBtn" disabled>復習する</button><button class="btn secondary" id="clearReviewBtn">リストを消去</button></div>
+            <p class="small" id="reviewStorageStatus" role="status"></p>
+          </section>
           <div class="menu-btns">
             <button class="btn primary" id="openSushiStartBtn">ゲームスタート</button>
             <button class="btn gold" id="openRankingBtn">ランキング</button>
@@ -2616,6 +2623,10 @@ html, body {
           <button class="ranking-tab" data-level="level2">Lv.2</button>
           <button class="ranking-tab" data-level="level3">Lv.3</button>
           <button class="ranking-tab" data-level="level4">Lv.4</button>
+        </div>
+        <div class="ranking-tabs" aria-label="ランキング期間">
+          <button class="ranking-tab active" data-ranking-period="today">TODAY</button>
+          <button class="ranking-tab" data-ranking-period="all">ALL TIME</button>
         </div>
         <div id="rankingScreenList" class="ranking-box">
           <div class="ranking-title">🏆 Ranking</div>
@@ -2690,6 +2701,10 @@ html, body {
           <div id="rankUpBanner" class="rank-up-banner hidden">RANK UP!</div>
         </div>
 
+        <div class="ranking-tabs" aria-label="ランキング期間">
+          <button class="ranking-tab active" data-ranking-period="today">TODAY</button>
+          <button class="ranking-tab" data-ranking-period="all">ALL TIME</button>
+        </div>
         <div id="rankingList" class="ranking-box">
           <div class="ranking-title">🏆 Ranking</div>
           <div class="ranking-empty">まだスコアがありません</div>
@@ -2705,11 +2720,13 @@ html, body {
         <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
           <button class="btn primary" id="playAgainBtn">もう一回</button>
           <button class="btn secondary" id="backToMenuBtn">Menu</button>
+          <button class="btn green" id="resultReviewBtn">苦手単語を復習</button>
                   </div>
       </div>
     </div>
   </div>
 
+  <div class="overlay hidden" id="reviewDoneOverlay"><div class="modal"><h2>復習終了</h2><p id="reviewSummary"></p><p class="small">復習はランキング・累計スコアに加算されません。</p><button class="btn primary" id="reviewDoneHome">復習リストへ</button></div></div>
   <audio id="bgm" src="music.mp3" loop preload="auto"></audio>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -3051,7 +3068,95 @@ html, body {
     const clearPlayAgainBtn = document.getElementById('clearPlayAgainBtn');
     const clearBackToMenuBtn = document.getElementById('clearBackToMenuBtn');
 
+    const REVIEW_KEY = 'sushitan_word_review_v1';
+    let reviewMemory = {};
+    let reviewStorageFailed = false;
+    let rankingPeriod = 'today';
+    const rankingRequests = new WeakMap();
+    function reviewKey(word) { return JSON.stringify([word.en, word.jp]); }
+    function readReview() {
+      if (reviewStorageFailed) return reviewMemory;
+      try {
+        const raw = JSON.parse(localStorage.getItem(REVIEW_KEY) || '{}');
+        if (!raw || Array.isArray(raw) || typeof raw !== 'object') throw new Error('invalid review');
+        reviewMemory = Object.fromEntries(Object.entries(raw).filter(([key, row]) =>
+          row && typeof row.en === 'string' && typeof row.jp === 'string' && key === reviewKey(row)
+        ).map(([key,row]) => [key, {...row, misses: Math.max(1, Number(row.misses) || 1), streak: row.streak === 1 ? 1 : 0}]));
+      } catch { reviewStorageFailed = true; }
+      return reviewMemory;
+    }
+    function writeReview(data) {
+      reviewMemory = data;
+      try { localStorage.setItem(REVIEW_KEY, JSON.stringify(data)); reviewStorageFailed = false; }
+      catch { reviewStorageFailed = true; }
+      renderReviewList();
+    }
+    function availableReviewWords() {
+      const data = readReview();
+      return [...new Map(WORDS.filter(w => Object.hasOwn(data, reviewKey(w))).map(w => [reviewKey(w), w])).values()];
+    }
+    function rememberReviewMiss(word) {
+      const data = readReview(), key = reviewKey(word), previous = data[key];
+      data[key] = {en: word.en, jp: word.jp, misses: (previous?.misses || 0) + 1, streak: 0};
+      writeReview(data);
+    }
+    function reviewCorrect(word) {
+      const data = readReview(), key = reviewKey(word);
+      if (!data[key]) return true;
+      data[key].streak += 1;
+      const graduated = data[key].streak >= 2;
+      if (graduated) delete data[key];
+      writeReview(data);
+      return graduated;
+    }
+    function renderReviewList() {
+      const box = document.getElementById('savedReviewList');
+      if (!box) return;
+      const data = readReview();
+      const rows = availableReviewWords().map(w => data[reviewKey(w)]).sort((a,b) => b.misses-a.misses);
+      document.getElementById('savedReviewCount').textContent = rows.length;
+      document.getElementById('startReviewBtn').disabled = !rows.length;
+      box.innerHTML = rows.length ? rows.map(w => `<div class="mistake-row"><div><b>${escapeHtml(w.en)}</b><br>${escapeHtml(w.jp)}</div><div>ミス ${w.misses}回<br>${w.streak}/2</div></div>`).join('') : '<p class="small">復習する単語はありません。</p>';
+      document.getElementById('reviewStorageStatus').textContent = reviewStorageFailed ? 'ブラウザに保存できません。この画面を閉じると復習記録が失われる場合があります。' : '';
+    }
+    function handleReviewTap(button) {
+      GAME.questionLocked = true;
+      GAME.attemptCount++;
+      const correct = button.dataset.type === 'correct';
+      GAME.balloons.forEach(({el}) => { el.disabled = true; if (el.dataset.type === 'correct') el.classList.add('correct-flash'); });
+      if (correct) {
+        GAME.correctCount++;
+        const graduated = reviewCorrect(GAME.currentQuestion);
+        setFeedback(graduated ? '復習完了！リストから外れました。' : '正解！あと1回連続正解で復習完了。', 'good');
+        soundCorrect();
+      } else {
+        recordMistake(button);
+        button.classList.add('wrong-flash');
+        setFeedback(`正解：${getAnswerValue(GAME.currentQuestion)} / 連続正解をリセット`, 'bad');
+        soundWrong();
+      }
+      updateHud();
+      const round = GAME.roundId;
+      clearTimeout(GAME.nextQuestionTimer);
+      GAME.nextQuestionTimer = setTimeout(() => {
+        if (GAME.running && GAME.roundId === round) renderQuestion();
+      }, correct ? 700 : 1300);
+    }
+    function endReview() {
+      GAME.running = false;
+      clearInterval(GAME.tickTimer);
+      clearTimeout(GAME.nextQuestionTimer);
+      stopBGM(); clearArena(); resetIntensityModes();
+      const remaining = availableReviewWords().length;
+      document.getElementById('reviewSummary').textContent = remaining ? `正解 ${GAME.correctCount}回。残り ${remaining}語です。` : 'すべての単語の復習が完了しました！';
+      document.getElementById('reviewDoneOverlay').classList.remove('hidden');
+      document.getElementById('endReviewBtn').classList.add('hidden');
+      updateHud();
+    }
     const GAME = {
+      roundId: 0,
+      nextQuestionTimer: null,
+      reviewMode: false,
       lastCountdownBeepSecond: null,
       running: false,
       score: 0,
@@ -3160,7 +3265,7 @@ html, body {
     }
 
     function updateModeBadge() {
-      modeBadge.textContent = getModeLabel();
+      modeBadge.textContent = GAME.reviewMode ? `復習・残り ${availableReviewWords().length}語` : getModeLabel();
       const label = document.querySelector('.question-label');
       if (label) label.textContent = getModeConfig().questionLabel;
     }
@@ -3180,6 +3285,13 @@ html, body {
     }
 
     function pickQuestion() {
+      if (GAME.reviewMode) {
+        const words = availableReviewWords();
+        if (!words.length) return null;
+        const alternatives = words.filter(w => reviewKey(w) !== (GAME.currentQuestion && reviewKey(GAME.currentQuestion)));
+        const pool = alternatives.length ? alternatives : words;
+        return pool[Math.floor(Math.random() * pool.length)];
+      }
       if (!GAME.remainingQuestions.length) return null;
       const next = GAME.remainingQuestions.pop();
       GAME.usedQuestions.push(next);
@@ -3211,7 +3323,7 @@ html, body {
 
     function updateHud() {
       scoreValue.textContent = Math.round(GAME.score);
-      timeValue.textContent = Math.max(0, GAME.timeLeft).toFixed(1);
+      timeValue.textContent = GAME.reviewMode ? '∞' : Math.max(0, GAME.timeLeft).toFixed(1);
       comboValue.textContent = `x${GAME.combo}`;
       updateModeBadge();
 
@@ -3337,6 +3449,7 @@ html, body {
 
     function recordMistake(button) {
       if (!GAME.currentQuestion) return;
+      if (currentMode === MODE_SUSHI) rememberReviewMiss(GAME.currentQuestion);
       const correct = getAnswerValue(GAME.currentQuestion);
       const picked = button ? button.dataset.value : "";
       GAME.mistakes.push({
@@ -3490,7 +3603,7 @@ html, body {
       btn.addEventListener('click', () => handleTap(btn));
     }
 
-    function renderQuestion() {
+    function renderQuestion(reuseCurrent = false) {
       clearArena();
       const words = getWords();
 
@@ -3500,9 +3613,10 @@ html, body {
         return;
       }
 
-      GAME.currentQuestion = pickQuestion();
+      if (!reuseCurrent) GAME.currentQuestion = pickQuestion();
 
       if (!GAME.currentQuestion) {
+        if (GAME.reviewMode) { endReview(); return; }
         endPerfectClear();
         return;
       }
@@ -3552,6 +3666,7 @@ html, body {
 
     function handleTap(button) {
       if (!GAME.running || GAME.questionLocked) return;
+      if (GAME.reviewMode) { handleReviewTap(button); return; }
 
       const now = performance.now();
       const type = button.dataset.type;
@@ -3574,8 +3689,9 @@ html, body {
         soundCombo(GAME.combo);
         updateHud();
 
-        setTimeout(() => {
-          if (!GAME.running) return;
+        const round = GAME.roundId;
+        GAME.nextQuestionTimer = setTimeout(() => {
+          if (!GAME.running || GAME.roundId !== round) return;
           renderQuestion();
         }, 420);
 
@@ -3604,7 +3720,7 @@ html, body {
     }
 
     function tick() {
-      if (!GAME.running) return;
+      if (!GAME.running || GAME.reviewMode) return;
 
       GAME.timeLeft -= 0.1;
       updateIntensityModes();
@@ -3649,9 +3765,16 @@ html, body {
       bgm.currentTime = 0;
     }
 
-    async function startGame(mode, level = selectedSushiLevel) {
+    async function startGame(mode, level = selectedSushiLevel, reviewMode = false) {
       const dataLoaded = await WORD_DATA_READY;
       if (!dataLoaded) return;
+      if (reviewMode && !availableReviewWords().length) { renderReviewList(); return; }
+      GAME.roundId++;
+      clearTimeout(GAME.nextQuestionTimer);
+      GAME.reviewMode = reviewMode && normalizeModeForDb(mode) === MODE_SUSHI;
+      GAME.currentQuestion = null;
+      document.getElementById('reviewDoneOverlay').classList.add('hidden');
+      document.getElementById('endReviewBtn').classList.toggle('hidden', !GAME.reviewMode);
       currentMode = normalizeModeForDb(mode);
       currentSushiLevel = currentMode === MODE_SUSHI ? normalizeSushiLevel(level) : SUSHI_LEVEL_ALL;
       ensureAudio();
@@ -3686,7 +3809,8 @@ html, body {
       updateHud();
 
       clearInterval(GAME.tickTimer);
-      GAME.tickTimer = setInterval(tick, 100);
+      if (!GAME.reviewMode) GAME.tickTimer = setInterval(tick, 100);
+      else setFeedback('時間制限なし。同じ単語に2回連続正解で復習完了。');
     }
 
 
@@ -3775,6 +3899,12 @@ html, body {
     }
 
     function backToMenu() {
+      GAME.roundId++;
+      clearTimeout(GAME.nextQuestionTimer);
+      GAME.reviewMode = false;
+      document.getElementById('reviewDoneOverlay').classList.add('hidden');
+      document.getElementById('endReviewBtn').classList.add('hidden');
+      renderReviewList();
       GAME.running = false;
       stopBGM();
       clearInterval(GAME.tickTimer);
@@ -3892,37 +4022,44 @@ html, body {
       }
     }
 
-    async function loadRanking(mode = currentMode, target = rankingList, level = currentSushiLevel) {
+    async function loadRanking(mode = currentMode, target = rankingList, level = currentSushiLevel, period = rankingPeriod) {
       mode = normalizeModeForDb(mode);
       level = mode === MODE_SUSHI ? normalizeSushiLevel(level) : SUSHI_LEVEL_ALL;
       const dbMode = getDbModeForGame(mode, level);
-      if (!supabaseClient) {
-        renderRanking(target, [], mode, level);
+      if (!target) return [];
+      const request = {};
+      rankingRequests.set(target, request);
+      document.querySelectorAll('[data-ranking-period]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.rankingPeriod === period);
+        btn.setAttribute('aria-pressed', String(btn.dataset.rankingPeriod === period));
+      });
+      target.innerHTML = '<div class="ranking-empty">読み込み中...</div>';
+      try {
+        if (!supabaseClient) throw new Error('ランキング未接続');
+        let result;
+        if (period === 'today') {
+          result = await supabaseClient.rpc('get_daily_high_scores', {p_mode: dbMode, p_limit: 50});
+        } else {
+          result = await supabaseClient.from('scores').select('id, player_name, score, max_combo, accuracy, mode')
+            .in('mode', dbMode === MODE_SUSHI ? [MODE_SUSHI, 'core'] : [dbMode])
+            .order('score', {ascending:false}).limit(500);
+        }
+        if (rankingRequests.get(target) !== request) return [];
+        if (result.error) throw result.error;
+        const rows = dedupeRanking(result.data || []);
+        renderRanking(target, rows, mode, level);
+        const caption = period === 'today' ? 'TODAY：今日の最高点（日本時間0時更新）' : 'ALL TIME：通算最高点';
+        const note = document.createElement('div'); note.className = 'small'; note.textContent = caption;
+        target.prepend(note);
+        if (target === rankingScreenList) rankingStatus.textContent = `${caption} / 同名は1件 / 上位 ${rows.length}件`;
+        return rows;
+      } catch (error) {
+        if (rankingRequests.get(target) !== request) return [];
+        target.innerHTML = '<div class="ranking-empty">ランキングを取得できませんでした。もう一度タブを選んでください。</div>';
+        if (target === rankingScreenList) rankingStatus.textContent = '取得失敗';
+        console.error('ranking load error:', error);
         return [];
       }
-
-      const modeFilter = dbMode === MODE_SUSHI ? [MODE_SUSHI, "core"] : [dbMode];
-      const { data, error } = await supabaseClient
-        .from("scores")
-        .select("id, player_name, score, max_combo, accuracy, mode")
-        .in("mode", modeFilter)
-        .order("score", { ascending: false })
-        .limit(500);
-
-      if (error) {
-        console.error("ranking load error:", error);
-        if (target === rankingScreenList) rankingStatus.textContent = "ランキング取得失敗";
-        renderRanking(target, [], mode, level);
-        return [];
-      }
-
-      const deduped = dedupeRanking(data || []);
-      renderRanking(target, deduped, mode, level);
-
-      if (target === rankingScreenList) {
-        rankingStatus.textContent = `${getModeLabel(mode, level)} の上位 ${deduped.length} 件（同名は最高点のみ表示）`;
-      }
-      return deduped;
     }
 
     async function openRankingScreen(mode = currentMode || PUBLIC_MODE, level = currentSushiLevel) {
@@ -3938,7 +4075,9 @@ html, body {
     }
 
     async function saveHighScore(finalScoreValue, accuracy) {
-      if (!supabaseClient || GAME.scoreSavedThisRound) return;
+      if (!supabaseClient || GAME.scoreSavedThisRound || GAME.reviewMode) return;
+      const round = GAME.roundId;
+      const savedMode = currentMode, savedLevel = currentSushiLevel, maxCombo = GAME.maxCombo;
 
       const input = prompt("名前を入力してください", localStorage.getItem("speed_vocab_name") || "");
       if (input === null) {
@@ -3952,13 +4091,15 @@ html, body {
       localStorage.setItem("sushitan_player_name", playerName);
       saveStatus.textContent = "保存中...";
 
-      const { error } = await supabaseClient.rpc("save_high_score", {
-  p_player_name: playerName,
-  p_score: finalScoreValue,
-  p_max_combo: GAME.maxCombo,
-  p_accuracy: accuracy,
-  p_mode: getDbModeForGame(currentMode, currentSushiLevel)
-});
+      let error;
+      try {
+        const result = await supabaseClient.rpc(savedMode === MODE_SUSHI ? 'save_score_with_daily' : 'save_high_score', {
+          p_player_name: playerName, p_score: finalScoreValue, p_max_combo: maxCombo,
+          p_accuracy: accuracy, p_mode: getDbModeForGame(savedMode, savedLevel)
+        });
+        error = result.error;
+      } catch (e) { error = e; }
+      if (round !== GAME.roundId) return;
 
       if (error) {
         console.error("save error:", error);
@@ -3971,6 +4112,8 @@ html, body {
       }
     }
     async function endPerfectClear() {
+      if (GAME.reviewMode) { endReview(); return; }
+      if (!GAME.running) return;
       ensureAudio();
       GAME.running = false;
       clearInterval(GAME.tickTimer);
@@ -4004,6 +4147,9 @@ html, body {
     }
 
     async function endGame() {
+      if (GAME.reviewMode) { endReview(); return; }
+      if (!GAME.running) return;
+      const round = GAME.roundId;
       ensureAudio();
       GAME.running = false;
       clearInterval(GAME.tickTimer);
@@ -4042,7 +4188,7 @@ html, body {
       resultOverlay.classList.remove('hidden');
 
       await saveHighScore(bonusScore, accuracy);
-      await loadRanking(currentMode, rankingList, currentSushiLevel);
+      if (round === GAME.roundId) await loadRanking(currentMode, rankingList, currentSushiLevel);
     }
 
 
@@ -4102,9 +4248,23 @@ html, body {
     }
 
     window.addEventListener('resize', () => {
-      if (GAME.running) renderQuestion();
+      if (GAME.running && !GAME.questionLocked) renderQuestion(true);
     });
 
+    document.getElementById('startReviewBtn').addEventListener('click', () => startGame(MODE_SUSHI, SUSHI_LEVEL_ALL, true));
+    document.getElementById('endReviewBtn').addEventListener('click', endReview);
+    document.getElementById('reviewDoneHome').addEventListener('click', backToMenu);
+    document.getElementById('clearReviewBtn').addEventListener('click', () => {
+      if (confirm('すし単の復習リストをすべて消去しますか？')) writeReview({});
+    });
+    document.getElementById('resultReviewBtn').addEventListener('click', () => startGame(MODE_SUSHI, SUSHI_LEVEL_ALL, true));
+    document.querySelectorAll('[data-ranking-period]').forEach(btn => btn.addEventListener('click', () => {
+      rankingPeriod = btn.dataset.rankingPeriod;
+      if (!rankingOverlay.classList.contains('hidden')) loadRanking(rankingMode, rankingScreenList, rankingSushiLevel);
+      else loadRanking(currentMode, rankingList, currentSushiLevel);
+    }));
+    WORD_DATA_READY.then(() => renderReviewList());
+    window.addEventListener('storage', event => { if (event.key === REVIEW_KEY) renderReviewList(); });
     updateModeBadge();
     showHomeSubPanel('home');
     loadRanking(PUBLIC_MODE, rankingScreenList, SUSHI_LEVEL_ALL);
@@ -4153,3 +4313,4 @@ html, body {
 </script>
 </body>
 </html>
+
