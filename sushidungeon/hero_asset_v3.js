@@ -5,22 +5,31 @@
   let heroFront=null;
   let heroDirs=null;
   let observer=null;
+  let forcedDir='s';
 
-  function facingOf(el){
+  function classFacing(el){
     if(el.classList.contains('facing-n'))return 'n';
     if(el.classList.contains('facing-e'))return 'e';
     if(el.classList.contains('facing-w'))return 'w';
-    return 's';
+    if(el.classList.contains('facing-s'))return 's';
+    return null;
   }
+  function facingOf(el){return classFacing(el)||forcedDir||'s';}
 
-  function sourceFor(el){
-    const dir=facingOf(el);
-    return (heroDirs&&heroDirs[dir]) || heroFront || (heroDirs&&heroDirs.s) || null;
+  function parseDirObject(text){
+    const out={};
+    for(const d of ['s','e','n','w']){
+      const re=new RegExp('(?:^|[,\\{])\\s*'+d+"\\s*:\\s*'([^']+)'",'m');
+      const m=text.match(re);
+      if(m)out[d]=m[1];
+    }
+    return Object.keys(out).length===4?out:null;
   }
 
   function paint(){
     document.querySelectorAll('#board .entity.player').forEach(el=>{
-      const src=sourceFor(el);
+      const dir=facingOf(el);
+      const src=(heroDirs&&heroDirs[dir])||heroFront||(heroDirs&&heroDirs.s);
       if(!src)return;
       let img=el.querySelector('img.heroAssetV3');
       if(!img){
@@ -30,8 +39,7 @@
         img.draggable=false;
         el.replaceChildren(img);
       }
-      const dir=facingOf(el);
-      if(img.dataset.heroDir!==dir || img.src!==src){
+      if(img.dataset.heroDir!==dir || img.getAttribute('src')!==src){
         img.src=src;
         img.dataset.heroDir=dir;
       }
@@ -39,11 +47,31 @@
     });
   }
 
+  function setDirFromDelta(dx,dy){
+    if(Math.abs(dx)>Math.abs(dy))forcedDir=dx>0?'e':'w';
+    else if(dy!==0)forcedDir=dy>0?'s':'n';
+    requestAnimationFrame(paint);
+  }
+
+  function bindInputFacing(){
+    document.querySelectorAll('.dpad button[data-dir]').forEach(btn=>{
+      btn.addEventListener('pointerdown',()=>{
+        const [dx,dy]=(btn.dataset.dir||'0,0').split(',').map(Number);
+        setDirFromDelta(dx,dy);
+      },{passive:true});
+    });
+    document.addEventListener('keydown',e=>{
+      const map={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]};
+      if(map[e.key])setDirFromDelta(...map[e.key]);
+    },{passive:true});
+  }
+
   function watch(){
     const board=document.getElementById('board');
     if(!board||observer)return;
     observer=new MutationObserver(()=>requestAnimationFrame(paint));
     observer.observe(board,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});
+    bindInputFacing();
     paint();
     let tries=0;
     const timer=setInterval(()=>{paint();if(++tries>=80)clearInterval(timer)},50);
@@ -51,12 +79,13 @@
 
   Promise.allSettled([
     fetch(FRONT_SOURCE,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('front load failed');return r.text()}).then(text=>{
-      const m=text.match(/const HERO='([^']+)'/);if(!m)throw new Error('front data missing');heroFront=m[1];
+      const m=text.match(/const HERO='([^']+)'/);if(m)heroFront=m[1];
     }),
     fetch(DIR_SOURCE,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('dir load failed');return r.text()}).then(text=>{
-      const m=text.match(/const HERO=(\{[\s\S]*?\});/);if(!m)throw new Error('dir data missing');heroDirs=Function('"use strict";return ('+m[1]+')')();
+      heroDirs=parseDirObject(text);
+      if(!heroDirs)throw new Error('dir data missing');
     })
-  ]).then(()=>{watch();paint()}).catch(()=>{watch();paint()});
+  ]).then(()=>{watch();paint()});
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',watch,{once:true});
   else watch();
