@@ -14,14 +14,20 @@
     if(el.classList.contains('facing-s'))return 's';
     return null;
   }
-  function facingOf(el){return classFacing(el)||forcedDir||'s';}
+  function facingOf(el){return forcedDir||classFacing(el)||'s';}
 
   function parseDirObject(text){
     const out={};
+    const start=text.indexOf('const HERO={');
+    if(start<0)return null;
+    const chunk=text.slice(start, Math.min(text.length,start+500000));
     for(const d of ['s','e','n','w']){
-      const re=new RegExp('(?:^|[,\\{])\\s*'+d+"\\s*:\\s*'([^']+)'",'m');
-      const m=text.match(re);
-      if(m)out[d]=m[1];
+      const marker=d+":'";
+      const i=chunk.indexOf(marker);
+      if(i<0)continue;
+      const j=i+marker.length;
+      const k=chunk.indexOf("'",j);
+      if(k>j)out[d]=chunk.slice(j,k);
     }
     return Object.keys(out).length===4?out:null;
   }
@@ -40,7 +46,7 @@
         el.replaceChildren(img);
       }
       if(img.dataset.heroDir!==dir || img.getAttribute('src')!==src){
-        img.src=src;
+        img.setAttribute('src',src);
         img.dataset.heroDir=dir;
       }
       el.dataset.heroAssetVisual='1';
@@ -50,15 +56,20 @@
   function setDirFromDelta(dx,dy){
     if(Math.abs(dx)>Math.abs(dy))forcedDir=dx>0?'e':'w';
     else if(dy!==0)forcedDir=dy>0?'s':'n';
+    paint();
     requestAnimationFrame(paint);
+    setTimeout(paint,40);
   }
 
   function bindInputFacing(){
     document.querySelectorAll('.dpad button[data-dir]').forEach(btn=>{
-      btn.addEventListener('pointerdown',()=>{
+      const update=()=>{
         const [dx,dy]=(btn.dataset.dir||'0,0').split(',').map(Number);
         setDirFromDelta(dx,dy);
-      },{passive:true});
+      };
+      btn.addEventListener('pointerdown',update,{passive:true});
+      btn.addEventListener('touchstart',update,{passive:true});
+      btn.addEventListener('click',update,{passive:true});
     });
     document.addEventListener('keydown',e=>{
       const map={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]};
