@@ -17,7 +17,7 @@
       const img=el.querySelector('img.heroAssetV3');
       if(!img)return;
       const dir=facingOf(el);
-      if(img.dataset.heroDir===dir)return;
+      if(img.dataset.heroDir===dir && img.src===directional[dir])return;
       img.src=directional[dir]||directional.s;
       img.dataset.heroDir=dir;
     });
@@ -31,19 +31,19 @@
     repaint();
   }
 
-  fetch(SOURCE,{cache:'force-cache'})
+  fetch(SOURCE,{cache:'no-store'})
     .then(r=>{if(!r.ok)throw new Error('direction data load failed');return r.text()})
     .then(text=>{
       const match=text.match(/const HERO=(\{[\s\S]*?\});/);
       if(!match)throw new Error('direction data not found');
       directional=Function('"use strict";return ('+match[1]+')')();
       observeBoard();
+      repaint();
+      let tries=0;
+      const timer=setInterval(()=>{ repaint(); if(++tries>=40)clearInterval(timer); },50);
     })
-    .catch(()=>{});
+    .catch(err=>console.warn('[hero_direction]',err));
 
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',observeBoard,{once:true});
-  }else{
-    observeBoard();
-  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',observeBoard,{once:true});
+  else observeBoard();
 })();
