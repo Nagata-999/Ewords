@@ -1,25 +1,19 @@
 'use strict';
 (function(){
-  function nudge(){
+  let done=false;
+  function bootHero(){
+    if(done)return;
     const p=document.querySelector('#board .entity.player');
-    if(!p)return false;
-    if(!p.querySelector('.heroAssetV3')){
-      p.classList.add('hero-bootstrap-nudge');
-      requestAnimationFrame(()=>p.classList.remove('hero-bootstrap-nudge'));
-    }
-    return true;
+    if(!p)return;
+    done=true;
+    // Repaint once after the async game boot. This does not advance a turn.
+    requestAnimationFrame(()=>{
+      if(typeof render==='function')render();
+    });
   }
-  function boot(){
-    let tries=0;
-    const timer=setInterval(()=>{
-      nudge();
-      if(++tries>40)clearInterval(timer);
-    },50);
-    const board=document.getElementById('board');
-    if(board){
-      const obs=new MutationObserver(()=>requestAnimationFrame(nudge));
-      obs.observe(board,{childList:true,subtree:true});
-    }
-  }
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+  const timer=setInterval(()=>{
+    bootHero();
+    if(done)clearInterval(timer);
+  },25);
+  setTimeout(()=>clearInterval(timer),5000);
 })();
