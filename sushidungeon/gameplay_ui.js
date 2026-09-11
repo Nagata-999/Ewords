@@ -70,9 +70,7 @@
       return;
     }
     m=t.match(/^(.+?)の(?:攻撃|毒牙|強打|豪腕|突進)！\s*(\d+)ダメージ/);
-    if(m){
-      showDamage(document.querySelector('#board .entity.player'),Number(m[2]),'taken');
-    }
+    if(m)showDamage(document.querySelector('#board .entity.player'),Number(m[2]),'taken');
   }
 
   const originalMsg=window.msg;
@@ -84,9 +82,32 @@
     };
   }
 
+  const originalDescend=window.descend;
+  if(typeof originalDescend==='function'){
+    window.descend=function(){
+      const dialog=document.getElementById('stairsDialog');
+      if(!dialog){originalDescend();return;}
+      const text=document.getElementById('stairsText');
+      if(text)text.textContent=game.floor>=10?'この階段の先へ進みますか？':'階段を降りて次の階へ進みますか？';
+      if(!dialog.open)dialog.showModal();
+    };
+  }
+
   window.sushiDungeonRecentLog=push;
   document.addEventListener('DOMContentLoaded',()=>{
     const source=document.getElementById('message');
     if(source&&source.textContent.trim())push(source.textContent.trim());
+
+    const dialog=document.getElementById('stairsDialog');
+    const yes=document.getElementById('stairsYes');
+    const no=document.getElementById('stairsNo');
+    if(yes)yes.addEventListener('click',()=>{
+      if(dialog?.open)dialog.close();
+      if(typeof originalDescend==='function')originalDescend();
+    });
+    if(no)no.addEventListener('click',()=>{
+      if(dialog?.open)dialog.close();
+      if(game&&!game.dead)endTurn();
+    });
   });
 })();
