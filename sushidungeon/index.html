@@ -4,31 +4,57 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <title>すしの不思議なダンジョン｜試作版</title>
-<link rel="stylesheet" href="style.css?v=20260911-1338">
-<link rel="stylesheet" href="tiles.css?v=20260911-1338">
-<link rel="stylesheet" href="directions.css?v=20260911-1338">
+<link rel="stylesheet" href="style.css?v=20260911-1349">
+<link rel="stylesheet" href="tiles.css?v=20260911-1349">
+<link rel="stylesheet" href="directions.css?v=20260911-1349">
 </head>
 <body>
 <main class="app">
-  <header class="topbar"><div><strong>すしの不思議なダンジョン</strong><small>1–10F PROTOTYPE</small></div><a href="../index.html">TOP</a></header>
-  <section class="stats" aria-label="冒険ステータス"><div><b id="floorLabel">1F</b><span>階</span></div><div><b id="levelLabel">Lv 1</b><span>レベル</span></div><div class="wide"><b id="hpLabel">HP 20/20</b><span class="meter"><i id="hpBar"></i></span></div><div class="wide"><b id="hungerLabel">🍣 100/100</b><span class="meter hunger"><i id="hungerBar"></i></span></div></section>
-  <section class="gearline"><span id="weaponLabel">⚔ 素手</span><span id="shieldLabel">🛡 なし</span><span id="accLabel">✨ なし</span></section>
-  <section id="boardWrap" class="boardWrap" aria-label="ダンジョン盤面"><div id="board" class="board"></div><div id="floatMsg" class="floatMsg" hidden></div></section>
-  <section class="controls">
-    <div class="dpad" aria-label="移動"><button data-dir="-1,-1">↖</button><button data-dir="0,-1">↑</button><button data-dir="1,-1">↗</button><button data-dir="-1,0">←</button><button id="waitBtn">・</button><button data-dir="1,0">→</button><button data-dir="-1,1">↙</button><button data-dir="0,1">↓</button><button data-dir="1,1">↘</button></div>
-    <div class="actions"><button id="attackBtn" class="attackBtn">⚔ 攻撃</button><button id="inventoryBtn">🎒 道具 <b id="invCount">0</b></button><button id="logBtn">📜 ログ</button></div>
+  <header class="miniTop"><strong>すしの不思議なダンジョン</strong><span>1–10F</span><a href="../index.html">×</a></header>
+
+  <section class="gameHud" aria-label="冒険ステータス">
+    <div class="floorBox"><b id="floorLabel">1F</b></div>
+    <div class="levelBox"><b id="levelLabel">Lv 1</b></div>
+    <div class="hudGauge hpGauge"><b id="hpLabel">HP 20/20</b><span class="meter"><i id="hpBar"></i></span></div>
+    <div class="hudGauge hungerGauge"><b id="hungerLabel">🍣 100/100</b><span class="meter hunger"><i id="hungerBar"></i></span></div>
   </section>
+
+  <section class="gearDock" aria-label="装備">
+    <span id="weaponLabel" title="武器">⚔ 素手</span>
+    <span id="shieldLabel" title="盾">🛡 なし</span>
+    <span id="accLabel" title="アクセサリー">✨ なし</span>
+  </section>
+
+  <section id="boardWrap" class="boardWrap" aria-label="ダンジョン盤面">
+    <div id="board" class="board"></div>
+    <div id="floatMsg" class="floatMsg" hidden></div>
+  </section>
+
   <section class="message"><p id="message">10Fを目指せ。英単語宝箱は毎階ひとつ。</p></section>
+
+  <section class="controls">
+    <div class="dpad" aria-label="移動">
+      <button data-dir="-1,-1">↖</button><button data-dir="0,-1">↑</button><button data-dir="1,-1">↗</button>
+      <button data-dir="-1,0">←</button><button id="waitBtn">●</button><button data-dir="1,0">→</button>
+      <button data-dir="-1,1">↙</button><button data-dir="0,1">↓</button><button data-dir="1,1">↘</button>
+    </div>
+    <div class="actions">
+      <button id="attackBtn" class="attackBtn"><span>⚔</span><b>攻撃</b></button>
+      <button id="inventoryBtn" class="bagBtn"><span>🎒</span><b>道具</b><em id="invCount">0</em></button>
+      <button id="logBtn" class="logBtn">📜 ログ</button>
+    </div>
+  </section>
 </main>
+
 <dialog id="wordDialog" class="modal"><form method="dialog"><small>ENGLISH TREASURE</small><h2>英単語宝箱</h2><p id="wordPrompt" class="wordPrompt"></p><div id="wordChoices" class="choiceGrid"></div><button id="wordClose" class="sub" value="cancel" hidden>閉じる</button></form></dialog>
 <dialog id="inventoryDialog" class="modal"><form method="dialog"><h2>🎒 道具</h2><div id="inventoryList" class="inventoryList"></div><button class="sub" value="cancel">閉じる</button></form></dialog>
 <dialog id="keepDialog" class="modal keepModal"><form method="dialog"><small>10F REACHED</small><h2>到達！ 1つだけ持ち帰れる</h2><p>この冒険で拾った装備から、アバター用トロフィーとして永久保存する品を1つ選べます。</p><div id="keepList" class="inventoryList"></div><button id="keepNone" class="sub" value="cancel">今回は持ち帰らない</button></form></dialog>
 <dialog id="gameOverDialog" class="modal dangerModal"><form method="dialog"><h2 id="gameOverTitle">力尽きた…</h2><p id="gameOverText"></p><button id="retryBtn" value="default">もう一度 1Fから</button></form></dialog>
 <dialog id="logDialog" class="modal"><form method="dialog"><h2>📜 冒険ログ</h2><div id="logList" class="logList"></div><button class="sub" value="cancel">閉じる</button></form></dialog>
-<script src="../sushigacha/avatar.js?v=20260911-1338"></script>
-<script src="game.js?v=20260911-1338"></script>
-<script src="view.js?v=20260911-1338"></script>
-<script src="enemy_ai.js?v=20260911-1338"></script>
-<script src="directions.js?v=20260911-1338"></script>
-<script src="enemy_sprites.js?v=20260911-1338"></script>
+<script src="../sushigacha/avatar.js?v=20260911-1349"></script>
+<script src="game.js?v=20260911-1349"></script>
+<script src="view.js?v=20260911-1349"></script>
+<script src="enemy_ai.js?v=20260911-1349"></script>
+<script src="directions.js?v=20260911-1349"></script>
+<script src="enemy_sprites.js?v=20260911-1349"></script>
 </body></html>
