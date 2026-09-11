@@ -4,7 +4,6 @@
   if(prefersReduced)return;
 
   let movingPlayer=false;
-  let playerStep=null;
 
   function rectMap(){
     const map=new Map();
@@ -36,10 +35,11 @@
       const dx=old.left-now.left,dy=old.top-now.top;
       if(Math.abs(dx)<1&&Math.abs(dy)<1)continue;
       if(Math.abs(dx)>now.width*2.3||Math.abs(dy)>now.height*2.3)continue;
+      el.getAnimations?.().forEach(a=>a.cancel());
       el.animate([
         {transform:`translate(${dx}px,${dy}px)`},
         {transform:'translate(0,0)'}
-      ],{duration:135,easing:'cubic-bezier(.2,.8,.2,1)'});
+      ],{duration:185,easing:'cubic-bezier(.22,.72,.18,1)',fill:'both'});
     }
   }
 
@@ -57,26 +57,28 @@
     const board=document.getElementById('board');
     if(!board||(!dx&&!dy))return;
     const cellW=board.clientWidth/11,cellH=board.clientHeight/7;
-    board.getAnimations?.().forEach(a=>a.cancel());
+    // Do not cancel a half-finished glide and snap to a new one. Finish the current
+    // visual step first; rapid input otherwise looks faster and jerkier than grid movement.
+    const running=board.getAnimations?.().find(a=>a.playState==='running');
+    if(running)running.finish();
     board.animate([
       {transform:`translate(${dx*cellW}px,${dy*cellH}px)`},
       {transform:'translate(0,0)'}
-    ],{duration:145,easing:'cubic-bezier(.16,.84,.25,1)'});
+    ],{duration:190,easing:'cubic-bezier(.25,.72,.2,1)',fill:'both'});
   }
 
   const baseMove=window.move;
   if(typeof baseMove==='function'){
     window.move=function(dx,dy){
-      if(!game||game.dead)return baseMove.apply(this,arguments);
+      if(!game||game.dead||movingPlayer)return;
       const before={x:game.player.x,y:game.player.y};
       movingPlayer=true;
-      playerStep={dx,dy};
       const out=baseMove.apply(this,arguments);
       const moved=game&&game.player&&(game.player.x!==before.x||game.player.y!==before.y);
       requestAnimationFrame(()=>{
         if(moved)cameraGlide(dx,dy);
-        movingPlayer=false;
-        playerStep=null;
+        // Keep one visual step readable before accepting another movement input.
+        setTimeout(()=>{movingPlayer=false},moved?170:45);
       });
       return out;
     };
