@@ -3,9 +3,10 @@
   const recent=[];
 
   function classify(t){
-    if(/に\d+ダメージ/.test(t))return 'playerAttack';
-    if(/の攻撃|強打|豪腕|毒牙|突進/.test(t))return 'enemyAttack';
-    if(/拾った|手に入れた|装備した|食べた|飲んだ|鍛えた|補強した/.test(t))return 'itemEvent';
+    if(/^あなた →/.test(t)||/に\d+ダメージ/.test(t))return 'playerAttack';
+    if(/^敵 →/.test(t)||/の攻撃|強打|豪腕|毒牙|突進/.test(t))return 'enemyAttack';
+    if(/^🎁/.test(t)||/拾った|手に入れた|装備した|食べた|飲んだ|鍛えた|補強した/.test(t))return 'itemEvent';
+    if(/^✓/.test(t))return 'successEvent';
     return 'system';
   }
 
@@ -21,13 +22,35 @@
     }
   }
 
+  function pushOne(text,kind){
+    const t=String(text||'').trim();if(!t)return;
+    recent.push({text:t,kind:kind||classify(t)});
+    while(recent.length>4)recent.shift();
+    paint();
+  }
+
   function push(text){
     if(!text)return;
     const t=String(text).trim();
     if(!t)return;
-    recent.push({text:t,kind:classify(t)});
-    while(recent.length>4)recent.shift();
-    paint();
+
+    let m=t.match(/^(.+?)に(\d+)ダメージ。?$/);
+    if(m){pushOne(`あなた → ${m[1]}：${m[2]}ダメージ`,'playerAttack');return;}
+
+    m=t.match(/^(.+?)の(?:攻撃|毒牙|強打|豪腕|突進)！\s*(\d+)ダメージ。?$/);
+    if(m){pushOne(`敵 → あなた：${m[1]}の攻撃 ${m[2]}ダメージ`,'enemyAttack');return;}
+
+    m=t.match(/^正解！\s*(.+?)\s+(.+?)を手に入れた。?$/);
+    if(m){
+      pushOne('✓ 英単語宝箱：正解！','successEvent');
+      pushOne(`🎁 獲得：${m[1]} ${m[2]}`,'itemEvent');
+      return;
+    }
+
+    m=t.match(/^(.+?)を拾った。?$/);
+    if(m){pushOne(`🎒 拾った：${m[1]}`,'itemEvent');return;}
+
+    pushOne(t);
   }
 
   function damageLayer(){
