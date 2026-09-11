@@ -20,12 +20,18 @@
     if(!free(nx,ny,e))return false;
     e.x=nx;e.y=ny;return true;
   }
+  function pause(ms){return new Promise(r=>setTimeout(r,ms))}
+  function setBusy(v){
+    window.sushiTurnBusy=!!v;
+    document.body.classList.toggle('turnBusy',!!v);
+  }
   function attackPlayer(e){
     const def=(game.shield?.power||0)+(game.shield?.plus||0)+(game.accessory?.effect==='defense'?2:0);
     const dmg=Math.max(1,e.atk+Math.floor(game.floor/4)-Math.floor(def*.55)+rnd(3)-1);
     game.hp-=dmg;
     if(typeof flashMotion==='function'){flashMotion(e,'attack',230);flashMotion('player','hit',280)}
     msg(`${e.name}の攻撃！ ${dmg}ダメージ。`);
+    render();
     if(game.hp<=0){die(e.name);return true}
     return false;
   }
@@ -41,19 +47,36 @@
     return false;
   }
 
-  // Prototype rule: every enemy gets exactly one action per turn.
-  // No charge, double-move, poison bite, heavy attack, or move-then-attack specials for now.
+  // One enemy = one action. Actions are presented one-by-one so the player can read the turn.
   enemyTurn=function(){
-    for(const e of game.enemies){
-      if(e.hp<=0)continue;
-      if(e.asleep){if(Math.random()<.18)e.asleep=false;continue}
-      if(adjacent(e)){
-        if(attackPlayer(e))return;
-        continue;
+    if(window.sushiTurnBusy)return;
+    const actors=game.enemies.filter(e=>e.hp>0);
+    setBusy(true);
+    (async()=>{
+      // Let the player's attack / movement land visually before enemies answer.
+      await pause(300);
+      for(const e of actors){
+        if(!game||game.dead||e.hp<=0)break;
+        if(e.asleep){
+          if(Math.random()<.18)e.asleep=false;
+          continue;
+        }
+        if(adjacent(e)){
+          if(attackPlayer(e))break;
+          await pause(390);
+          continue;
+        }
+        const dist=Math.abs(game.player.x-e.x)+Math.abs(game.player.y-e.y);
+        let moved=false;
+        if(dist<8)moved=chase(e);
+        else if(Math.random()<.35)moved=wander(e);
+        if(moved){
+          render();
+          await pause(135);
+        }
       }
-      const dist=Math.abs(game.player.x-e.x)+Math.abs(game.player.y-e.y);
-      if(dist<8)chase(e);
-      else if(Math.random()<.35)wander(e);
-    }
+      setBusy(false);
+      if(game&&!game.dead)render();
+    })().catch(()=>setBusy(false));
   };
 })();
