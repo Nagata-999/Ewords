@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <title>すしの不思議なダンジョン｜試作版</title>
-<link rel="stylesheet" href="style.css?v=20260911-1834">
-<link rel="stylesheet" href="tiles.css?v=20260911-1834">
-<link rel="stylesheet" href="directions.css?v=20260911-1834">
-<link rel="stylesheet" href="hud.css?v=20260911-1834">
-<link rel="stylesheet" href="gameplay_ui.css?v=20260911-1834">
+<link rel="stylesheet" href="style.css?v=20260911-1842">
+<link rel="stylesheet" href="tiles.css?v=20260911-1842">
+<link rel="stylesheet" href="directions.css?v=20260911-1842">
+<link rel="stylesheet" href="hud.css?v=20260911-1842">
+<link rel="stylesheet" href="gameplay_ui.css?v=20260911-1842">
 </head>
 <body>
 <main class="app">
@@ -53,15 +53,16 @@
 
 <dialog id="wordDialog" class="modal"><form method="dialog"><small>ENGLISH TREASURE</small><h2>英単語宝箱</h2><p id="wordPrompt" class="wordPrompt"></p><div id="wordChoices" class="choiceGrid"></div><button id="wordClose" class="sub" value="cancel" hidden>閉じる</button></form></dialog>
 <dialog id="inventoryDialog" class="modal"><form method="dialog"><h2>🎒 道具</h2><div id="inventoryList" class="inventoryList"></div><button class="sub" value="cancel">閉じる</button></form></dialog>
+<dialog id="stairsDialog" class="modal stairsModal"><form method="dialog"><small>STAIRS</small><h2>階段を見つけた</h2><div class="stairsPreview" aria-hidden="true"></div><p id="stairsText">階段を降りて次の階へ進みますか？</p><div class="stairsActions"><button id="stairsNo" type="button" class="descendNo">やめる</button><button id="stairsYes" type="button" class="descendYes">降りる</button></div></form></dialog>
 <dialog id="keepDialog" class="modal keepModal"><form method="dialog"><small>10F REACHED</small><h2>到達！ 1つだけ持ち帰れる</h2><p>この冒険で拾った装備から、アバター用トロフィーとして永久保存する品を1つ選べます。</p><div id="keepList" class="inventoryList"></div><button id="keepNone" class="sub" value="cancel">今回は持ち帰らない</button></form></dialog>
 <dialog id="gameOverDialog" class="modal dangerModal"><form method="dialog"><h2 id="gameOverTitle">力尽きた…</h2><p id="gameOverText"></p><button id="retryBtn" value="default">もう一度 1Fから</button></form></dialog>
 <dialog id="logDialog" class="modal"><form method="dialog"><h2>📜 冒険ログ</h2><div id="logList" class="logList"></div><button class="sub" value="cancel">閉じる</button></form></dialog>
-<script src="../sushigacha/avatar.js?v=20260911-1834"></script>
-<script src="game.js?v=20260911-1834"></script>
-<script src="view.js?v=20260911-1834"></script>
-<script src="visibility_rules.js?v=20260911-1834"></script>
-<script src="enemy_ai.js?v=20260911-1834"></script>
-<script src="directions.js?v=20260911-1834"></script>
-<script src="enemy_sprites.js?v=20260911-1834"></script>
-<script src="gameplay_ui.js?v=20260911-1834"></script>
+<script src="../sushigacha/avatar.js?v=20260911-1842"></script>
+<script src="game.js?v=20260911-1842"></script>
+<script src="view.js?v=20260911-1842"></script>
+<script src="visibility_rules.js?v=20260911-1842"></script>
+<script src="enemy_ai.js?v=20260911-1842"></script>
+<script src="directions.js?v=20260911-1842"></script>
+<script src="enemy_sprites.js?v=20260911-1842"></script>
+<script src="gameplay_ui.js?v=20260911-1842"></script>
 </body></html>
