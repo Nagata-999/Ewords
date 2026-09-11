@@ -1,0 +1,35 @@
+/* Compact in-game HUD: keeps the dungeon dominant on phone screens. */
+.miniTop{height:30px;display:flex;align-items:center;gap:7px;padding:0 2px;color:#aeb8a9}
+.miniTop strong{font-size:11px;letter-spacing:.04em;color:#dce2d6;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.miniTop span{font-size:8px;letter-spacing:.14em;color:#b9a960;border:1px solid #4b503d;border-radius:3px;padding:2px 4px;margin-left:auto}
+.miniTop a{width:24px;height:24px;display:grid;place-items:center;text-decoration:none;color:#9ca696;border:1px solid #384138;border-radius:4px;background:#121813;font-size:14px}
+.gameHud{display:grid;grid-template-columns:48px 48px minmax(102px,1fr) minmax(102px,1fr);gap:3px;margin-bottom:3px;height:36px}
+.gameHud>div{min-width:0;background:linear-gradient(#222b23,#111712);border:1px solid #465142;box-shadow:inset 0 1px #ffffff0d,0 2px 4px #0008}
+.floorBox,.levelBox{display:grid;place-items:center;border-radius:5px}
+.floorBox b{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:16px;color:#f0da75;text-shadow:0 0 7px #ddbd3b33}
+.levelBox b{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;color:#d8e2d2}
+.hudGauge{position:relative;padding:4px 5px;border-radius:5px;display:flex;flex-direction:column;justify-content:center}
+.hudGauge b{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:9px;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:clip}
+.hudGauge .meter{height:7px;margin-top:4px;border-radius:2px;background:#080b09;border-color:#313a31}
+.hpGauge{border-color:#62443f!important}.hpGauge b{color:#f5c2b9}
+.hungerGauge{border-color:#655b3a!important}.hungerGauge b{color:#f0db94}
+.gearDock{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px;margin-bottom:4px;height:24px}
+.gearDock span{display:flex;align-items:center;min-width:0;padding:2px 5px;border:1px solid #343d32;border-radius:4px;background:#101511;color:#bfc8ba;font-size:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.boardWrap{aspect-ratio:16/10!important;border-radius:3px!important;border-color:#606b57!important}
+.message{margin-top:4px!important;min-height:29px!important;height:29px;padding:5px 7px!important;overflow:hidden}
+.message p{font-size:10px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.controls{margin-top:5px!important;grid-template-columns:minmax(180px,1.25fr) minmax(92px,.48fr)!important;gap:6px!important;align-items:stretch}
+.dpad{aspect-ratio:1.58/1;max-height:150px;padding:5px!important;gap:3px!important;border-radius:12px!important;background:radial-gradient(circle at 50% 50%,#1f2920,#0d120e 75%)!important;border-color:#303a2f!important}
+.dpad button{min-height:0!important;border-radius:8px!important;font-size:17px!important;background:linear-gradient(#303c31,#1a221b)!important;border-color:#4b5848!important}
+.dpad button:nth-child(2),.dpad button:nth-child(4),.dpad button:nth-child(6),.dpad button:nth-child(8){background:linear-gradient(#39463a,#202920)!important;color:#f0f2eb!important}
+.dpad #waitBtn{border-radius:50%!important;margin:5px;background:radial-gradient(circle,#dbc75f 0 18%,#3d4333 20% 100%)!important;color:transparent!important;border-color:#66705c!important}
+.actions{display:grid!important;grid-template-rows:1.25fr 1fr!important;gap:5px!important}
+.actions button{min-height:0!important;position:relative;border-radius:12px!important}
+.actions button span{display:block;font-size:22px;line-height:1.05}.actions button b{display:block;font-size:10px;letter-spacing:.05em}
+.actions .attackBtn{font-size:10px!important;background:radial-gradient(circle at 50% 25%,#824936,#4b2c24 52%,#2b1c19)!important;border:2px solid #8c5947!important;box-shadow:inset 0 1px #ffffff16,0 3px 7px #000a!important}
+.actions .attackBtn.enemyReady{background:radial-gradient(circle at 50% 25%,#dc6a48,#873527 57%,#4d211a)!important;border-color:#ffac7d!important;box-shadow:0 0 18px #e95d4055,inset 0 1px #ffffff28!important}
+.actions .bagBtn{background:radial-gradient(circle at 50% 22%,#475747,#263227 58%,#182019)!important;border-color:#586654!important}
+.actions .bagBtn em{position:absolute;right:7px;top:6px;min-width:17px;height:17px;display:grid;place-items:center;border-radius:9px;background:#cfb84d;color:#161810;font-size:9px;font-style:normal;font-weight:900;border:1px solid #f2dd79}
+.actions .logBtn{display:none!important}
+@media(max-width:420px){.app{padding-left:4px!important;padding-right:4px!important}.miniTop{height:27px}.gameHud{grid-template-columns:42px 42px minmax(87px,1fr) minmax(87px,1fr);height:33px}.floorBox b{font-size:14px}.levelBox b{font-size:9px}.hudGauge{padding:3px 4px}.hudGauge b{font-size:8px}.hudGauge .meter{height:6px;margin-top:3px}.gearDock{height:21px;margin-bottom:3px}.gearDock span{font-size:7px;padding:2px 4px}.boardWrap{aspect-ratio:16/10.15!important}.controls{grid-template-columns:1.4fr .56fr!important}.dpad{padding:4px!important}.dpad button{font-size:15px!important}.actions button span{font-size:20px}.message{height:27px!important;min-height:27px!important}.message p{font-size:9px!important}}
+@media(min-width:520px){.boardWrap{aspect-ratio:16/9.5!important}.dpad{max-height:160px}.gameHud{grid-template-columns:54px 54px 1fr 1fr}.floorBox b{font-size:18px}.hudGauge b{font-size:10px}}
