@@ -4,8 +4,7 @@
 
   function isFloor(x,y){return x>=0&&y>=0&&x<W&&y<H&&!!game.grid[y][x]}
 
-  // A room tile is any walkable tile that belongs to at least one 2x2 open block.
-  // One-cell-wide corridors therefore stay outside the room mask.
+  // Detect room cores from 2x2 open areas. One-cell-wide corridors stay outside.
   function buildRoomMap(){
     const map=Array.from({length:H},()=>Array(W).fill(-1));
     const candidate=Array.from({length:H},()=>Array(W).fill(false));
@@ -33,6 +32,22 @@
   }
 
   function roomIdAt(x,y){return game?.roomMap?.[y]?.[x] ?? -1}
+
+  // Treat the doorway tile immediately touching a room as part of that room for vision.
+  // This makes the whole floor brighten the moment the player exits a corridor.
+  function currentRoomId(){
+    if(!game?.player)return -1;
+    const {x,y}=game.player;
+    const direct=roomIdAt(x,y);
+    if(direct>=0)return direct;
+    const near=[];
+    for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){
+      const id=roomIdAt(x+dx,y+dy);
+      if(id>=0&&!near.includes(id))near.push(id);
+    }
+    return near.length===1?near[0]:-1;
+  }
+
   function roomCells(){
     const out=[];
     for(let y=1;y<H-1;y++)for(let x=1;x<W-1;x++)if(roomIdAt(x,y)>=0)out.push({x,y});
@@ -52,7 +67,9 @@
       const p=freeRoomSpot(used);if(p){it.x=p.x;it.y=p.y;used.add(key(p.x,p.y));}
     }
     if(game.chest){
-      if(roomIdAt(game.chest.x,game.chest.y)<0||used.has(key(game.chest.x,game.chest.y))){const p=freeRoomSpot(used);if(p){game.chest.x=p.x;game.chest.y=p.y;}}
+      if(roomIdAt(game.chest.x,game.chest.y)<0||used.has(key(game.chest.x,game.chest.y))){
+        const p=freeRoomSpot(used);if(p){game.chest.x=p.x;game.chest.y=p.y;}
+      }
     }
   }
 
@@ -64,15 +81,17 @@
     rememberSeen();
   };
 
-  // Room: show the whole current room plus its doorway rim.
-  // Corridor: only the immediate 3x3 area around the player is currently visible.
+  // Room: the whole current room is bright.
+  // Corridor: only the immediate 3x3 area around the player is bright.
   visibleNow=function(x,y){
     if(!game||!game.player)return false;
-    const px=game.player.x,py=game.player.y,pr=roomIdAt(px,py);
+    const px=game.player.x,py=game.player.y,pr=currentRoomId();
     if(pr>=0){
       if(roomIdAt(x,y)===pr)return true;
-      // show walls/doorway immediately touching the current room
-      for(let yy=-1;yy<=1;yy++)for(let xx=-1;xx<=1;xx++)if(Math.abs(xx)+Math.abs(yy)===1&&roomIdAt(x+xx,y+yy)===pr)return true;
+      // Keep the doorway/walls around the room readable.
+      for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){
+        if(roomIdAt(x+dx,y+dy)===pr)return true;
+      }
       return false;
     }
     return Math.max(Math.abs(x-px),Math.abs(y-py))<=1;
@@ -85,4 +104,5 @@
   };
 
   window.sushiDungeonRoomIdAt=roomIdAt;
+  window.sushiDungeonCurrentRoomId=currentRoomId;
 })();
