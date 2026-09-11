@@ -1,0 +1,13 @@
+/* Visual-only walk cycle. Does not touch game state or movement logic. */
+#board .entity.player.walk-visual img.heroAssetV3{
+  animation:heroWalk4 180ms steps(1,end) 1;
+  transform-origin:50% 88%;
+  will-change:transform;
+}
+@keyframes heroWalk4{
+  0%   {transform:translateY(0) scaleX(1) scaleY(1)}
+  25%  {transform:translateY(-3px) scaleX(.98) scaleY(1.03)}
+  50%  {transform:translateY(0) scaleX(1.03) scaleY(.98)}
+  75%  {transform:translateY(-2px) scaleX(.99) scaleY(1.02)}
+  100% {transform:translateY(0) scaleX(1) scaleY(1)}
+}
