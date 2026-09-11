@@ -3,83 +3,83 @@
   const prefersReduced=window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches;
   if(prefersReduced)return;
 
-  let movingPlayer=false;
+  let pendingStep=null;
+  let lastEnemyRects=new Map();
 
-  function rectMap(){
-    const map=new Map();
-    const player=document.querySelector('#board .entity.player');
-    if(player)map.set('player',player.getBoundingClientRect());
-    const counts={};
+  function cellSize(){
+    const board=document.getElementById('board');
+    if(!board)return {w:0,h:0};
+    return {w:board.clientWidth/11,h:board.clientHeight/7};
+  }
+
+  function snapshotEnemies(){
+    const map=new Map(),counts={};
     document.querySelectorAll('#board .entity.enemy').forEach(el=>{
       const name=el.title||'enemy';
       const n=counts[name]=(counts[name]||0)+1;
-      map.set(`enemy:${name}:${n}`,el.getBoundingClientRect());
+      map.set(`${name}:${n}`,el.getBoundingClientRect());
     });
     return map;
   }
 
-  function animateEntities(before){
-    if(movingPlayer||!before?.size)return;
+  function animatePlayer(){
+    if(!pendingStep)return;
+    const el=document.querySelector('#board .entity.player');
+    if(!el)return;
+    const {w,h}=cellSize();
+    const {dx,dy}=pendingStep;
+    el.getAnimations?.().forEach(a=>a.cancel());
+    el.animate([
+      {transform:`translate(${-dx*w}px,${-dy*h}px)`,offset:0},
+      {transform:`translate(${-dx*w*.18}px,${-dy*h*.18}px)`,offset:.72},
+      {transform:'translate(0,0)',offset:1}
+    ],{duration:185,easing:'cubic-bezier(.2,.78,.22,1)',fill:'none'});
+    pendingStep=null;
+  }
+
+  function animateEnemies(before){
+    if(!before?.size)return;
     const counts={};
-    const items=[];
-    const player=document.querySelector('#board .entity.player');
-    if(player)items.push(['player',player]);
     document.querySelectorAll('#board .entity.enemy').forEach(el=>{
       const name=el.title||'enemy';
       const n=counts[name]=(counts[name]||0)+1;
-      items.push([`enemy:${name}:${n}`,el]);
-    });
-    for(const [key,el] of items){
-      const old=before.get(key);if(!old)continue;
+      const old=before.get(`${name}:${n}`);
+      if(!old)return;
       const now=el.getBoundingClientRect();
       const dx=old.left-now.left,dy=old.top-now.top;
-      if(Math.abs(dx)<1&&Math.abs(dy)<1)continue;
-      if(Math.abs(dx)>now.width*2.3||Math.abs(dy)>now.height*2.3)continue;
+      if(Math.abs(dx)<2&&Math.abs(dy)<2)return;
+      if(Math.abs(dx)>now.width*1.8||Math.abs(dy)>now.height*1.8)return;
       el.getAnimations?.().forEach(a=>a.cancel());
       el.animate([
         {transform:`translate(${dx}px,${dy}px)`},
         {transform:'translate(0,0)'}
-      ],{duration:185,easing:'cubic-bezier(.22,.72,.18,1)',fill:'both'});
-    }
+      ],{duration:170,easing:'cubic-bezier(.2,.78,.22,1)',fill:'none'});
+    });
   }
 
   const baseRender=window.render;
   if(typeof baseRender==='function'){
     window.render=function(){
-      const before=rectMap();
+      const before=snapshotEnemies();
       const out=baseRender.apply(this,arguments);
-      requestAnimationFrame(()=>animateEntities(before));
+      requestAnimationFrame(()=>{
+        animatePlayer();
+        animateEnemies(before);
+      });
       return out;
     };
-  }
-
-  function cameraGlide(dx,dy){
-    const board=document.getElementById('board');
-    if(!board||(!dx&&!dy))return;
-    const cellW=board.clientWidth/11,cellH=board.clientHeight/7;
-    // Do not cancel a half-finished glide and snap to a new one. Finish the current
-    // visual step first; rapid input otherwise looks faster and jerkier than grid movement.
-    const running=board.getAnimations?.().find(a=>a.playState==='running');
-    if(running)running.finish();
-    board.animate([
-      {transform:`translate(${dx*cellW}px,${dy*cellH}px)`},
-      {transform:'translate(0,0)'}
-    ],{duration:190,easing:'cubic-bezier(.25,.72,.2,1)',fill:'both'});
   }
 
   const baseMove=window.move;
   if(typeof baseMove==='function'){
     window.move=function(dx,dy){
-      if(!game||game.dead||movingPlayer)return;
+      if(!game||game.dead)return baseMove.apply(this,arguments);
       const before={x:game.player.x,y:game.player.y};
-      movingPlayer=true;
       const out=baseMove.apply(this,arguments);
       const moved=game&&game.player&&(game.player.x!==before.x||game.player.y!==before.y);
-      requestAnimationFrame(()=>{
-        if(moved)cameraGlide(dx,dy);
-        // Keep one visual step readable before accepting another movement input.
-        setTimeout(()=>{movingPlayer=false},moved?170:45);
-      });
+      if(moved)pendingStep={dx,dy};
+      else pendingStep=null;
+      requestAnimationFrame(()=>animatePlayer());
       return out;
     };
   }
