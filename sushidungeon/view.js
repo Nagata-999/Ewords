@@ -21,11 +21,46 @@ function wallTouchesFloor(x,y){
   for(let yy=-1;yy<=1;yy++)for(let xx=-1;xx<=1;xx++)if((xx||yy)&&walkable(x+xx,y+yy))return true;
   return false;
 }
-function wallClass(x,y){
+function cardinalMask(x,y){
+  let m=0;
+  if(walkable(x,y-1))m|=1;
+  if(walkable(x+1,y))m|=2;
+  if(walkable(x,y+1))m|=4;
+  if(walkable(x-1,y))m|=8;
+  return m;
+}
+function diagonalMask(x,y){
+  let m=0;
+  if(walkable(x+1,y-1))m|=1;
+  if(walkable(x+1,y+1))m|=2;
+  if(walkable(x-1,y+1))m|=4;
+  if(walkable(x-1,y-1))m|=8;
+  return m;
+}
+function wallAutoClass(x,y){
+  const m=cardinalMask(x,y),d=diagonalMask(x,y);
+  const names={
+    0:'pillar',1:'south-face',2:'west-face',3:'corner-sw',4:'north-face',5:'vertical-gap',6:'corner-nw',7:'cap-west',
+    8:'east-face',9:'corner-se',10:'horizontal-gap',11:'cap-south',12:'corner-ne',13:'cap-east',14:'cap-north',15:'island'
+  };
+  let cls=`wall-auto wall-${names[m]} wall-mask-${m} diag-${d}`;
+  if(m===0){
+    if(d===1)cls+=' outer-corner-sw';
+    else if(d===2)cls+=' outer-corner-nw';
+    else if(d===4)cls+=' outer-corner-ne';
+    else if(d===8)cls+=' outer-corner-se';
+  }
+  return cls;
+}
+function floorAutoClass(x,y){
   const n=walkable(x,y-1),e=walkable(x+1,y),s=walkable(x,y+1),w=walkable(x-1,y);
-  const parts=[];
-  if(n)parts.push('n'); if(e)parts.push('e'); if(s)parts.push('s'); if(w)parts.push('w');
-  return 'wall-edge-'+(parts.join('')||'none');
+  const parts=['floor-auto'];
+  if(!n)parts.push('edge-n'); if(!e)parts.push('edge-e'); if(!s)parts.push('edge-s'); if(!w)parts.push('edge-w');
+  if(!n&&!w)parts.push('floor-corner-nw');
+  if(!n&&!e)parts.push('floor-corner-ne');
+  if(!s&&!w)parts.push('floor-corner-sw');
+  if(!s&&!e)parts.push('floor-corner-se');
+  return parts.join(' ');
 }
 function tileVariant(x,y,count){return Math.abs((x*17+y*31+game.floor*13)%count)}
 function flashMotion(target,state,duration=250){
@@ -83,9 +118,9 @@ function render(){
     if(!seen){c.className='cell void';board.append(c);continue}
 
     if(walkable(x,y)){
-      c.className=`cell floor floor-${tileVariant(x,y,3)}`+(now?'':' memory');
+      c.className=`cell floor floor-${tileVariant(x,y,3)} ${floorAutoClass(x,y)}`+(now?'':' memory');
     }else if(wallTouchesFloor(x,y)){
-      c.className=`cell wall ${wallClass(x,y)} wall-${tileVariant(x,y,4)}`+(now?'':' memory');
+      c.className=`cell wall wall-${tileVariant(x,y,4)} ${wallAutoClass(x,y)}`+(now?'':' memory');
     }else{
       c.className='cell void';board.append(c);continue;
     }
