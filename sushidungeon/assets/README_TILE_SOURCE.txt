@@ -1,0 +1,1 @@
+Dungeon tile art source: cropped from the concept sheet generated in the ChatGPT project on 2026-09-11. The production sprite is stored as dungeon_tiles_sprite.jpg and used by sushidungeon/style.css.
