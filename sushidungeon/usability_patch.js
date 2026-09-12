@@ -3,6 +3,10 @@
   let faceMode=false;
   let holdTimer=0;
   let holdTriggered=false;
+  let moveDelay=0;
+  let moveRepeat=0;
+  let activeDirButton=null;
+  let repeatStarted=false;
 
   function setFacingOnly(dx,dy){
     if(!game||game.dead||(!dx&&!dy))return;
@@ -13,6 +17,12 @@
   function leaveFaceMode(){
     faceMode=false;
     document.getElementById('waitBtn')?.classList.remove('faceMode');
+  }
+  function stopMoveRepeat(){
+    clearTimeout(moveDelay);clearInterval(moveRepeat);
+    moveDelay=0;moveRepeat=0;
+    if(activeDirButton)activeDirButton.classList.remove('dirPressed');
+    activeDirButton=null;
   }
 
   // Board tap: face toward the tapped side without consuming a turn.
@@ -31,9 +41,7 @@
     },{passive:true});
   }
 
-  // One-thumb Shiren-style control:
-  // short tap center = wait one turn; long press center = arm face-only mode;
-  // the next direction changes facing without moving or spending a turn.
+  // Center button: tap = wait one turn, long press = face-only mode.
   const wait=document.getElementById('waitBtn');
   if(wait){
     wait.textContent='向';
@@ -54,13 +62,51 @@
     },true);
   }
 
+  // Direction input polish:
+  // - tap moves on release, not on initial touch
+  // - hold waits 300ms, then repeats every 150ms
+  // - sliding off the button cancels the input
   document.querySelectorAll('[data-dir]').forEach(b=>{
+    const [dx,dy]=b.dataset.dir.split(',').map(Number);
+
     b.addEventListener('pointerdown',e=>{
-      if(!faceMode)return;
       e.preventDefault();e.stopImmediatePropagation();
-      const [dx,dy]=b.dataset.dir.split(',').map(Number);
-      setFacingOnly(dx,dy);
-      leaveFaceMode();
+      stopMoveRepeat();
+
+      if(faceMode){
+        setFacingOnly(dx,dy);
+        leaveFaceMode();
+        return;
+      }
+
+      activeDirButton=b;repeatStarted=false;b.classList.add('dirPressed');
+      moveDelay=setTimeout(()=>{
+        if(activeDirButton!==b||!game||game.dead)return;
+        repeatStarted=true;
+        if(!enemyAdjacent())move(dx,dy);
+        moveRepeat=setInterval(()=>{
+          if(activeDirButton!==b||!game||game.dead||enemyAdjacent())return;
+          move(dx,dy);
+        },150);
+      },300);
+    },true);
+
+    b.addEventListener('pointerup',e=>{
+      if(activeDirButton!==b)return;
+      e.preventDefault();e.stopImmediatePropagation();
+      const shouldTapMove=!repeatStarted;
+      stopMoveRepeat();
+      if(shouldTapMove&&game&&!game.dead)move(dx,dy);
+    },true);
+
+    b.addEventListener('pointercancel',e=>{
+      if(activeDirButton!==b)return;
+      e.preventDefault();e.stopImmediatePropagation();stopMoveRepeat();
+    },true);
+
+    b.addEventListener('pointerleave',e=>{
+      if(activeDirButton!==b)return;
+      e.preventDefault();e.stopImmediatePropagation();stopMoveRepeat();
     },true);
   });
 
