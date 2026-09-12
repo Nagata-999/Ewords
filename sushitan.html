@@ -4135,6 +4135,12 @@ html, body {
 
       clearUsedWords.textContent = GAME.usedQuestions.length;
       clearScore.textContent = bonusScore;
+      if (window.SushiGem) {
+        const reward = window.SushiGem.awardScore('sushitan', bonusScore, `sushitan:${GAME.roundId}:clear:${currentMode}`);
+        if (reward.gems > 0 && clearScore?.parentElement) {
+          clearScore.parentElement.title = `+${reward.gems} gem${reward.gems===1?'':'s'} / ${reward.remainder}/100 toward next gem`;
+        }
+      }
       clearAccuracy.textContent = `${accuracy}%`;
       clearMaxCombo.textContent = GAME.maxCombo;
       if (currentMode === MODE_SUSHI) {
@@ -4170,6 +4176,12 @@ html, body {
       );
 
       finalScore.textContent = bonusScore;
+      if (window.SushiGem) {
+        const reward = window.SushiGem.awardScore('sushitan', bonusScore, `sushitan:${GAME.roundId}:end:${currentMode}`);
+        if (reward.gems > 0 && finalScore?.parentElement) {
+          finalScore.parentElement.title = `+${reward.gems} gem${reward.gems===1?'':'s'} / ${reward.remainder}/100 toward next gem`;
+        }
+      }
       finalAccuracy.textContent = `${accuracy}%`;
       finalCorrect.textContent = GAME.correctCount;
       finalMaxCombo.textContent = GAME.maxCombo;
@@ -4311,6 +4323,7 @@ html, body {
   });
 })();
 </script>
+<script src="sushigacha/gem-system.js?v=20260912-1"></script>
 <script src="sushigacha/avatar-widget.js?v=20260912-2"></script>
 </body>
 </html>
