@@ -7,12 +7,13 @@
   };
   let arrows=0;
   let facing=[0,1];
+  let flying=false;
 
   function button(){return document.getElementById('arrowBtn')}
   function sync(){
     if(game&&Number.isFinite(game.arrows))arrows=game.arrows;
     const b=button();if(!b)return;
-    b.disabled=!game||game.dead||arrows<=0;
+    b.disabled=!game||game.dead||arrows<=0||flying;
     b.innerHTML=`<span>➶</span><b>矢 ${arrows}</b>`;
   }
   function setCount(n){arrows=Math.max(0,n|0);if(game)game.arrows=arrows;sync()}
@@ -21,30 +22,62 @@
     for(const [c,d] of Object.entries(DIR_FROM_CLASS))if(p.classList.contains(c)){facing=d;break}
   }
   function enemyAt(x,y){return game.enemies.find(e=>e.hp>0&&e.x===x&&e.y===y)}
-  function shoot(){
-    if(!game||game.dead||arrows<=0)return;
+  function visibleCell(x,y){return document.querySelector(`#board .cell[data-x="${x}"][data-y="${y}"]`)}
+  function pointFor(x,y){
+    const wrap=document.getElementById('boardWrap'),cell=visibleCell(x,y);
+    if(!wrap||!cell)return null;
+    const wr=wrap.getBoundingClientRect(),cr=cell.getBoundingClientRect();
+    return {x:cr.left-wr.left+cr.width/2,y:cr.top-wr.top+cr.height/2,size:Math.min(cr.width,cr.height)};
+  }
+  function angle(dx,dy){return Math.atan2(dy,dx)*180/Math.PI}
+  function animateArrow(path,dx,dy,hit){
+    const wrap=document.getElementById('boardWrap');if(!wrap)return Promise.resolve();
+    const pts=path.map(p=>pointFor(p.x,p.y)).filter(Boolean);
+    const start=pointFor(game.player.x,game.player.y);
+    if(!start||!pts.length)return Promise.resolve();
+    const el=document.createElement('span');el.className='flyingArrow';el.textContent='➶';
+    el.style.left=`${start.x}px`;el.style.top=`${start.y}px`;el.style.fontSize=`${Math.max(20,start.size*.72)}px`;el.style.transform=`translate(-50%,-50%) rotate(${angle(dx,dy)}deg)`;
+    wrap.append(el);
+    return new Promise(resolve=>{
+      let i=0;
+      function step(){
+        if(i>=pts.length){
+          if(hit){el.classList.add('arrowImpact');setTimeout(()=>{el.remove();resolve()},105)}
+          else {el.classList.add('arrowFade');setTimeout(()=>{el.remove();resolve()},90)}
+          return;
+        }
+        const p=pts[i++];el.style.left=`${p.x}px`;el.style.top=`${p.y}px`;
+        setTimeout(step,42);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+  async function shoot(){
+    if(!game||game.dead||arrows<=0||flying)return;
     learnFacing();
     const [dx,dy]=facing;if(!dx&&!dy)return;
-    setCount(arrows-1);
+    flying=true;setCount(arrows-1);
     let x=game.player.x,y=game.player.y,hit=null;
+    const path=[];
     for(let i=0;i<RANGE;i++){
       x+=dx;y+=dy;
       if(x<0||y<0||x>=W||y>=H||!game.grid[y]?.[x])break;
-      hit=enemyAt(x,y);if(hit)break;
+      path.push({x,y});hit=enemyAt(x,y);if(hit)break;
     }
+    await animateArrow(path,dx,dy,hit);
     if(hit){
       const dmg=4+Math.floor(game.level*.7)+rnd(3);
       hit.hp-=dmg;
       msg(`➶ ${hit.name}に${dmg}ダメージ。`);
+      const cell=visibleCell(hit.x,hit.y);if(cell){cell.classList.remove('arrowHit');void cell.offsetWidth;cell.classList.add('arrowHit');setTimeout(()=>cell.classList.remove('arrowHit'),180)}
       if(hit.hp<=0){
         game.exp+=hit.exp;log(`${hit.name}を矢で倒した。`);
         while(game.exp>=game.nextExp){game.exp-=game.nextExp;game.level++;game.nextExp=Math.floor(game.nextExp*1.45)+3;game.maxHp+=4;game.hp=game.maxHp;msg(`レベル${game.level}！ HP全回復。`);log(`Lv ${game.level}になった。`)}
       }
     }else msg('➶ 矢は暗闇へ飛んでいった。');
-    endTurn();
+    endTurn();flying=false;sync();
   }
 
-  // Arrows are ammunition, not inventory slots. Each bundle adds 3–6 shots.
   const oldPickup=window.pickup;
   if(typeof oldPickup==='function')window.pickup=function(){
     const i=game?.items?.findIndex(it=>it.x===game.player.x&&it.y===game.player.y&&it.type==='arrow');
@@ -52,7 +85,6 @@
     return oldPickup();
   };
 
-  // Add arrow bundles to some floors without replacing the scarce normal loot.
   const oldGenerate=window.generateFloor;
   if(typeof oldGenerate==='function')window.generateFloor=function(){
     oldGenerate();
