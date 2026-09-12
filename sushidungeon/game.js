@@ -1,6 +1,6 @@
 'use strict';
 const $=id=>document.getElementById(id);
-const W=13,H=13,LEDGER='sushitan_login_bonus_v1',DUNGEON_SAVE='sushidungeon_meta_v1';
+const W=17,H=17,LEDGER='sushitan_login_bonus_v1',DUNGEON_SAVE='sushidungeon_meta_v1';
 const DIRS=[[0,-1],[1,-1],[1,0],[1,1],[0,1],[-1,1],[-1,0],[-1,-1]];
 const WEAPONS=[
  {name:'木の棒',type:'weapon',power:1,icon:'🪵',weight:28},{name:'川魚包丁',type:'weapon',power:3,icon:'🔪',weight:24},{name:'鉄の剣',type:'weapon',power:4,icon:'⚔️',weight:20},{name:'ロングソード',type:'weapon',power:5,icon:'🗡️',weight:15},{name:'銀の出刃包丁',type:'weapon',power:7,icon:'🔪',weight:8},{name:'古騎士の剣',type:'weapon',power:9,icon:'⚔️',weight:5}
