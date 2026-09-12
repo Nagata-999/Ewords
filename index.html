@@ -12,7 +12,7 @@
 <link href="/manifest.json" rel="manifest"/>
 <link href="/icon-192.png" rel="apple-touch-icon"/>
 <link href="/icon-192.png" rel="icon" sizes="192x192" type="image/png"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
 <title>すし単｜無料英語ゲーム・英単語ゲーム・英語タイピング</title>
 <meta content="すし単（すしたん）は、無料で遊べる英語ゲームサイトです。範囲指定と苦手単語の復習ができる「すし暗」、英単語ゲーム、英語タイピング、語源ゲーム、リスニングゲームなどを収録。英検・IELTS・高校英語に対応。" name="description"/>
 <meta content="すし暗,すし単,すし英語,英語ゲーム,無料英語ゲーム,英単語ゲーム,語源ゲーム,リスニングゲーム,英語タイピング,IELTS,英検,高校英語" name="keywords"/>
@@ -65,6 +65,11 @@
     @keyframes splashTitle{0%{opacity:0;transform:scale(.94)}45%,75%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.03)}}
 
   
+
+/* rapid-tap zoom guard */
+html,body{touch-action:manipulation;-webkit-text-size-adjust:100%}
+button,.login-claim,.chest,.chest-start,.chest-modal{touch-action:manipulation!important;-webkit-user-select:none!important;user-select:none!important;-webkit-tap-highlight-color:transparent!important}
+
 /* ===== すし単 毎日勉強偉いボーナス ===== */
 .login-bonus{margin-top:22px;padding:18px 20px;border-radius:22px;background:linear-gradient(135deg,#fff7ed,#fff,#ecfdf5);border:1px solid #fed7aa;box-shadow:0 10px 24px rgba(15,23,42,.06)}
 .login-bonus-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.login-bonus-title{font-weight:1000;font-size:18px}.gem-pill{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid #bae6fd;font-weight:1000;color:#0369a1;box-shadow:0 5px 14px rgba(14,165,233,.10)}
