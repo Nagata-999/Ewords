@@ -1,4 +1,5 @@
 /* Mobile rapid-tap guard: stronger iOS/Safari protection on game controls. */
-html,body{-webkit-text-size-adjust:100%}
+html,body{-webkit-text-size-adjust:100%;-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important}
+body *{-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important}
 button,.controls,.dpad,.dpad button,.actions,.actions button,#attackBtn,#inventoryBtn,#arrowBtn,#waitBtn,.miniMap{touch-action:none!important;-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important;-webkit-tap-highlight-color:transparent!important}
 .boardWrap{touch-action:none!important;-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none!important}
