@@ -49,7 +49,6 @@
   }
 
   function hairPolish(a) {
-    const color = ['#493b32','#9b6241','#323b52'][a.hairColor] || '#493b32';
     if (a.gender === 'female') {
       return `<g fill="none" stroke="#ffffff" stroke-width="2.3" stroke-linecap="round" opacity=".16">
         <path d="M89 43Q110 31 139 40"/><path d="M82 56Q96 48 108 46"/>
@@ -58,6 +57,46 @@
     return `<g fill="none" stroke="#ffffff" stroke-width="2.1" stroke-linecap="round" opacity=".13">
       <path d="M88 45Q111 32 140 40"/><path d="M102 39Q116 34 128 35"/>
     </g>`;
+  }
+
+  function limbPolish(a, bottom) {
+    const skin = ['#f4cfae','#dba77f','#ac7657'][a.skin] || '#f4cfae';
+    const female = a.gender === 'female';
+    const hands = female ? `
+      <g fill="${skin}" stroke="#8d6550" stroke-width="1.4" stroke-linejoin="round">
+        <path d="M58 178Q62 176 67 179L75 187Q77 192 73 196Q69 199 65 195L57 188Q54 183 58 178Z"/>
+        <path d="M182 178Q178 176 173 179L165 187Q163 192 167 196Q171 199 175 195L183 188Q186 183 182 178Z"/>
+      </g>
+      <g fill="none" stroke="#8d6550" stroke-width="1" opacity=".7">
+        <path d="M61 184L68 190M179 184L172 190"/>
+      </g>` : `
+      <g fill="${skin}" stroke="#8d6550" stroke-width="1.5" stroke-linejoin="round">
+        <path d="M49 178Q55 175 61 180L70 188Q73 193 69 197Q65 201 60 197L50 189Q46 184 49 178Z"/>
+        <path d="M191 178Q185 175 179 180L170 188Q167 193 171 197Q175 201 180 197L190 189Q194 184 191 178Z"/>
+      </g>
+      <g fill="none" stroke="#8d6550" stroke-width="1.1" opacity=".7">
+        <path d="M53 184L62 191M187 184L178 191"/>
+      </g>`;
+
+    let lower = '';
+    if (bottom?.kind === 'schoolSkirt') {
+      lower = `
+        <path d="M96 241L111 241L109 260Q103 264 97 260Z" fill="${skin}"/>
+        <path d="M130 241L145 241L146 260Q140 264 133 260Z" fill="${skin}"/>
+        <path d="M95 246L111 246L109 263Q103 267 96 263Z" fill="#1d2943"/>
+        <path d="M130 246L146 246L147 263Q140 267 133 263Z" fill="#1d2943"/>
+        <path d="M91 259Q102 256 113 260L112 268Q102 273 90 268Z" fill="#171c23" stroke="#0f1218" stroke-width="1.2"/>
+        <path d="M128 260Q139 256 150 259L151 268Q140 273 129 268Z" fill="#171c23" stroke="#0f1218" stroke-width="1.2"/>`;
+    } else {
+      lower = female ? `
+        <path d="M92 249L113 249L111 263H94Z" fill="#f4cfae" opacity=".9"/>
+        <path d="M127 249L148 249L147 263H129Z" fill="#f4cfae" opacity=".9"/>
+        <path d="M89 259Q102 255 114 260L113 269Q102 273 89 268Z" fill="#20252c" stroke="#11161c" stroke-width="1.2"/>
+        <path d="M126 260Q139 255 151 259L152 268Q140 273 127 269Z" fill="#20252c" stroke="#11161c" stroke-width="1.2"/>` : `
+        <path d="M89 256Q102 252 115 256L113 268Q102 273 88 268Z" fill="#171c23" stroke="#0f1218" stroke-width="1.3"/>
+        <path d="M126 256Q139 252 152 256L153 268Q140 273 127 268Z" fill="#171c23" stroke="#0f1218" stroke-width="1.3"/>`;
+    }
+    return hands + lower;
   }
 
   function uniformPolish(a, top, bottom) {
@@ -94,17 +133,10 @@
           <path d="M80 214H160M78 228H162M82 240H158" stroke="#a6abb4" stroke-width="1.6"/>
           <path d="M90 207L85 245M105 205L102 249M120 205V251M135 205L139 249M150 207L156 245" stroke="#737985" stroke-width="1.5"/>
           <path d="M97 206L94 246M128 206L130 249M145 208L150 244" stroke="#d7dbe0" stroke-width="1" opacity=".75"/>
-        </g>
-        <path d="M95 243L111 243L109 263Q102 267 96 263Z" fill="#1d2943"/>
-        <path d="M130 243L146 243L147 263Q140 267 133 263Z" fill="#1d2943"/>
-        <path d="M92 260Q102 257 112 260L111 268Q101 272 91 267Z" fill="#171c23"/>
-        <path d="M129 260Q139 257 149 260L150 267Q140 272 130 268Z" fill="#171c23"/>`;
+        </g>`;
     }
     if (bottom?.kind === 'schoolSlacks') {
-      out += `
-        <path d="M87 207Q120 213 153 207" fill="none" stroke="#232c36" stroke-width="2" opacity=".7"/>
-        <path d="M93 253Q103 250 113 253L112 267Q102 271 91 267Z" fill="#171c23"/>
-        <path d="M128 253Q139 250 149 253L150 267Q139 271 129 267Z" fill="#171c23"/>`;
+      out += `<path d="M87 207Q120 213 153 207" fill="none" stroke="#232c36" stroke-width="2" opacity=".7"/>`;
     }
     return out;
   }
@@ -118,7 +150,7 @@
     svg = bodyShape(svg, a.gender);
     svg = svg.replace('<svg ', `<svg data-avatar-gender="${a.gender}" `);
 
-    const polish = uniformPolish(a, top, bottom) + facePolish(a) + hairPolish(a);
+    const polish = uniformPolish(a, top, bottom) + limbPolish(a, bottom) + facePolish(a) + hairPolish(a);
     return insertBeforeClose(svg, polish);
   };
 })();
