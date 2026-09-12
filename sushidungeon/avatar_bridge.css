@@ -1,0 +1,4 @@
+.miniTop .dungeonAvatar{width:29px;height:29px;flex:0 0 29px;padding:0;border:1px solid #6b6440;border-radius:50%;background:radial-gradient(circle at 50% 42%,#31382d,#111611 72%);overflow:hidden;display:grid;place-items:center;box-shadow:inset 0 1px #fff2,0 1px 4px #0009}
+.miniTop .dungeonAvatar svg{width:34px;height:auto;transform:translateY(5px);filter:drop-shadow(0 1px 1px #0008)}
+.miniTop .dungeonAvatar:hover,.miniTop .dungeonAvatar:focus-visible{border-color:#e0c85f;filter:brightness(1.15)}
+@media(max-width:420px){.miniTop .dungeonAvatar{width:26px;height:26px;flex-basis:26px}.miniTop .dungeonAvatar svg{width:31px;transform:translateY(5px)}}
