@@ -10,8 +10,6 @@
     '洞窟トロル':['#6f7454','#404531','#a68e68']
   };
   const GOBLIN_FALLBACK={s:'assets/enemy_goblin_s.svg',n:'assets/enemy_goblin_n.svg',e:'assets/enemy_goblin_e.svg',w:'assets/enemy_goblin_w.svg'};
-  const GOBLIN={...GOBLIN_FALLBACK};
-  const GOBLIN_TEXT={s:'assets/goblin512_s.b64.txt',n:'assets/goblin512_n.b64.txt',e:'assets/goblin512_e.b64.txt',w:'assets/goblin512_w.b64.txt'};
   const ATLAS_TEXT='assets/enemy_atlas48.b64.txt';
   const ATLAS_ROWS={'洞窟ネズミ':0,'洞窟コウモリ':1,'骸骨兵':2,'オーク兵':3,'石像兵':4,'洞窟トロル':5};
   const ATLAS_COL={s:0,w:1,e:2,n:3};
@@ -27,7 +25,8 @@
     el.dataset.fullSprite=sig;
     const hp=el.querySelector('.enemyHp')?.outerHTML||'';
     if(name==='緑小鬼'){
-      el.innerHTML=`<span class="enemyGlyph directionalEnemy"><img class="enemySprite512 goblin512" src="${GOBLIN[dir]||GOBLIN.s}" alt=""></span>${hp}`;
+      const src=GOBLIN_FALLBACK[dir]||GOBLIN_FALLBACK.s;
+      el.innerHTML=`<span class="enemyGlyph directionalEnemy"><img class="enemySprite512 goblin512" src="${src}" alt=""></span>${hp}`;
       return;
     }
     if(atlasSrc&&name in ATLAS_ROWS){
@@ -37,13 +36,9 @@
     const art=fallbackArt(name,dir);if(art)el.innerHTML=`<span class="enemyGlyph directionalEnemy">${art}</span>${hp}`;
   }
   function refreshAll(){document.querySelectorAll('.entity.enemy').forEach(refresh)}
-  async function loadGoblin512(){
-    await Promise.all(Object.entries(GOBLIN_TEXT).map(async([dir,url])=>{try{const res=await fetch(url,{cache:'force-cache'});if(!res.ok)return;const text=(await res.text()).trim();if(text.startsWith('UklGR'))GOBLIN[dir]='data:image/webp;base64,'+text}catch(_e){}}));
-    document.querySelectorAll('.entity.enemy[title="緑小鬼"]').forEach(el=>delete el.dataset.fullSprite);refreshAll();
-  }
   async function loadAtlas(){
     try{const res=await fetch(ATLAS_TEXT,{cache:'force-cache'});if(!res.ok)return;const text=(await res.text()).trim();if(!text.startsWith('UklGR'))return;atlasSrc='data:image/webp;base64,'+text;const img=new Image();img.src=atlasSrc;document.querySelectorAll('.entity.enemy').forEach(el=>delete el.dataset.fullSprite);refreshAll()}catch(_e){}
   }
   const obs=new MutationObserver(()=>requestAnimationFrame(refreshAll));
-  window.addEventListener('DOMContentLoaded',()=>{const b=document.getElementById('board');if(b)obs.observe(b,{childList:true,subtree:true});refreshAll();loadGoblin512();loadAtlas()});
+  window.addEventListener('DOMContentLoaded',()=>{const b=document.getElementById('board');if(b)obs.observe(b,{childList:true,subtree:true});refreshAll();loadAtlas()});
 })();
