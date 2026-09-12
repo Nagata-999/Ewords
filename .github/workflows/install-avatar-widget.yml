@@ -19,22 +19,28 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           targets = [Path('sushitan.html'), Path('sushitype.html')]
-          old = '<script src="sushigacha/avatar-widget.js?v=20260912-1"></script>'
-          new = '<script src="sushigacha/avatar-widget.js?v=20260912-2"></script>'
+          versions = [
+              '<script src="sushigacha/avatar-widget.js?v=20260912-1"></script>',
+              '<script src="sushigacha/avatar-widget.js?v=20260912-2"></script>',
+          ]
+          new = '<script src="sushigacha/avatar-widget.js?v=20260912-3"></script>'
           for p in targets:
               text = p.read_text(encoding='utf-8')
-              if old in text:
-                  text = text.replace(old, new)
-                  p.write_text(text, encoding='utf-8')
-                  print(f'{p}: refreshed')
-              elif new in text:
-                  print(f'{p}: already refreshed')
-              elif 'sushigacha/avatar-widget.js' not in text:
+              changed = False
+              for old in versions:
+                  if old in text:
+                      text = text.replace(old, new)
+                      changed = True
+              if 'sushigacha/avatar-widget.js' not in text:
                   if '</body>' not in text:
                       raise SystemExit(f'{p}: </body> not found')
                   text = text.replace('</body>', new + '\n</body>', 1)
+                  changed = True
+              if changed:
                   p.write_text(text, encoding='utf-8')
-                  print(f'{p}: installed')
+                  print(f'{p}: refreshed to v3')
+              else:
+                  print(f'{p}: already v3')
           PY
       - name: Commit changes
         shell: bash
@@ -46,5 +52,5 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add sushitan.html sushitype.html
-          git commit -m 'Refresh reactive avatar widget'
+          git commit -m 'Load English avatar reactions'
           git push
