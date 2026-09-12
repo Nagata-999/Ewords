@@ -1,5 +1,9 @@
 'use strict';
 (function(){
+  let faceMode=false;
+  let holdTimer=0;
+  let holdTriggered=false;
+
   function setFacingOnly(dx,dy){
     if(!game||game.dead||(!dx&&!dy))return;
     playerFacing=facingFrom(dx,dy,playerFacing);
@@ -7,6 +11,7 @@
     render();
   }
 
+  // Board tap: face toward the tapped side without consuming a turn.
   const board=document.getElementById('boardWrap');
   if(board){
     let sx=0,sy=0,armed=false;
@@ -21,6 +26,40 @@
       setFacingOnly(dx,dy);
     },{passive:true});
   }
+
+  // Shiren-style mobile control: hold the center button, then press a direction.
+  // While held, directions only rotate the hero and consume no turn.
+  const wait=document.getElementById('waitBtn');
+  if(wait){
+    wait.textContent='向';
+    wait.title='タップ: 1ターン待機 / 長押し: 向き変更';
+    wait.addEventListener('pointerdown',e=>{
+      e.preventDefault();
+      holdTriggered=false;
+      clearTimeout(holdTimer);
+      holdTimer=setTimeout(()=>{
+        holdTriggered=true;faceMode=true;wait.classList.add('faceMode');
+        if(typeof msg==='function')msg('向き変更モード');
+      },220);
+    },true);
+    const finish=()=>{
+      clearTimeout(holdTimer);
+      if(faceMode){faceMode=false;wait.classList.remove('faceMode');}
+    };
+    ['pointerup','pointercancel','pointerleave'].forEach(ev=>wait.addEventListener(ev,finish,true));
+    wait.addEventListener('click',e=>{
+      if(holdTriggered){e.preventDefault();e.stopImmediatePropagation();holdTriggered=false;return;}
+    },true);
+  }
+
+  document.querySelectorAll('[data-dir]').forEach(b=>{
+    b.addEventListener('pointerdown',e=>{
+      if(!faceMode)return;
+      e.preventDefault();e.stopImmediatePropagation();
+      const [dx,dy]=b.dataset.dir.split(',').map(Number);
+      setFacingOnly(dx,dy);
+    },true);
+  });
 
   document.addEventListener('keydown',e=>{
     if(!e.shiftKey)return;
