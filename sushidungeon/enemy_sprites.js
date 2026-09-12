@@ -9,13 +9,19 @@
     '石像兵':['#7d817a','#535850','#aaa99b'],
     '洞窟トロル':['#6f7454','#404531','#a68e68']
   };
-  const GOBLIN={
+  const GOBLIN_FALLBACK={
     s:'assets/enemy_goblin_s.svg',
     n:'assets/enemy_goblin_n.svg',
     e:'assets/enemy_goblin_e.svg',
     w:'assets/enemy_goblin_w.svg'
   };
-  Object.values(GOBLIN).forEach(src=>{const i=new Image();i.src=src});
+  const GOBLIN={...GOBLIN_FALLBACK};
+  const GOBLIN_TEXT={
+    s:'assets/goblin512_s.b64.txt',
+    n:'assets/goblin512_n.b64.txt',
+    e:'assets/goblin512_e.b64.txt',
+    w:'assets/goblin512_w.b64.txt'
+  };
   function facing(el){for(const d of ['n','e','s','w'])if(el.classList.contains('facing-'+d))return d;return 's'}
   function wrap(body,dir,cls='monsterSprite'){return `<svg viewBox="0 0 256 256" class="${cls}" preserveAspectRatio="xMidYMax meet"><g transform="scale(2.56)">${body}</g></svg>`}
   function bat(dir,c){const [a,b,s]=c;if(dir==='n')return wrap(`<path d="M50 48Q18 15 5 37Q17 44 24 58Q10 63 26 75Q39 65 50 59Q61 65 74 75Q90 63 76 58Q83 44 95 37Q82 15 50 48Z" fill="${a}"/><circle cx="50" cy="48" r="15" fill="${b}"/>`,dir);if(dir==='e'||dir==='w')return wrap(`<path d="M37 50Q8 20 5 45Q18 48 26 61Q13 67 29 76Q40 68 49 61Q65 54 89 38Q88 62 63 68Q54 74 42 75Z" fill="${a}"/><circle cx="53" cy="49" r="14" fill="${b}"/><circle cx="62" cy="46" r="2.5" fill="${s}"/>`,dir);return wrap(`<path d="M50 48Q18 15 5 37Q17 44 24 58Q10 63 26 75Q39 65 50 59Q61 65 74 75Q90 63 76 58Q83 44 95 37Q82 15 50 48Z" fill="${a}"/><circle cx="50" cy="48" r="15" fill="${b}"/><circle cx="44" cy="46" r="3" fill="${s}"/><circle cx="56" cy="46" r="3" fill="${s}"/>`,dir)}
@@ -29,12 +35,31 @@
     el.dataset.fullSprite=sig;
     const hp=el.querySelector('.enemyHp')?.outerHTML||'';
     if(name==='緑小鬼'){
-      el.innerHTML=`<span class="enemyGlyph directionalEnemy"><img class="enemySprite256 goblin256" src="${GOBLIN[dir]||GOBLIN.s}" alt=""></span>${hp}`;
+      el.innerHTML=`<span class="enemyGlyph directionalEnemy"><img class="enemySprite512 goblin512" src="${GOBLIN[dir]||GOBLIN.s}" alt=""></span>${hp}`;
       return;
     }
     const art=svg(name,dir);if(!art)return;
     el.innerHTML=`<span class="enemyGlyph directionalEnemy">${art}</span>${hp}`;
   }
   function refreshAll(){document.querySelectorAll('.entity.enemy').forEach(refresh)}
-  const obs=new MutationObserver(()=>requestAnimationFrame(refreshAll));window.addEventListener('DOMContentLoaded',()=>{const b=document.getElementById('board');if(b)obs.observe(b,{childList:true,subtree:true});refreshAll()});
+  async function loadGoblin512(){
+    await Promise.all(Object.entries(GOBLIN_TEXT).map(async([dir,url])=>{
+      try{
+        const res=await fetch(url,{cache:'force-cache'});
+        if(!res.ok)return;
+        const text=(await res.text()).trim();
+        if(text.startsWith('UklGR'))GOBLIN[dir]='data:image/webp;base64,'+text;
+      }catch(_e){}
+    }));
+    Object.values(GOBLIN).forEach(src=>{const i=new Image();i.src=src});
+    document.querySelectorAll('.entity.enemy[title="緑小鬼"]').forEach(el=>delete el.dataset.fullSprite);
+    refreshAll();
+  }
+  const obs=new MutationObserver(()=>requestAnimationFrame(refreshAll));
+  window.addEventListener('DOMContentLoaded',()=>{
+    const b=document.getElementById('board');
+    if(b)obs.observe(b,{childList:true,subtree:true});
+    refreshAll();
+    loadGoblin512();
+  });
 })();
