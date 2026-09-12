@@ -1,0 +1,61 @@
+name: Install SushiTan gem rewards
+
+on:
+  push:
+    paths:
+      - '.github/workflows/install-gem-rewards.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inject gem system and SushiTan payouts
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('sushitan.html')
+          text=p.read_text(encoding='utf-8')
+
+          gem_tag='<script src="sushigacha/gem-system.js?v=20260912-1"></script>'
+          avatar_tag='<script src="sushigacha/avatar-widget.js?v=20260912-2"></script>'
+          if gem_tag not in text:
+              if avatar_tag in text:
+                  text=text.replace(avatar_tag,gem_tag+'\n'+avatar_tag,1)
+              elif '</body>' in text:
+                  text=text.replace('</body>',gem_tag+'\n</body>',1)
+              else:
+                  raise SystemExit('sushitan.html: </body> not found')
+
+          clear_anchor='''      clearScore.textContent = bonusScore;\n      clearAccuracy.textContent = `${accuracy}%`;'''
+          clear_insert='''      clearScore.textContent = bonusScore;\n      if (window.SushiGem) {\n        const reward = window.SushiGem.awardScore('sushitan', bonusScore, `sushitan:${GAME.roundId}:clear:${currentMode}`);\n        if (reward.gems > 0 && clearScore?.parentElement) {\n          clearScore.parentElement.title = `+${reward.gems} gem${reward.gems===1?'':'s'} / ${reward.remainder}/100 toward next gem`;\n        }\n      }\n      clearAccuracy.textContent = `${accuracy}%`;'''
+          if clear_insert not in text:
+              if clear_anchor not in text:
+                  raise SystemExit('clear reward anchor not found')
+              text=text.replace(clear_anchor,clear_insert,1)
+
+          end_anchor='''      finalScore.textContent = bonusScore;\n      finalAccuracy.textContent = `${accuracy}%`;'''
+          end_insert='''      finalScore.textContent = bonusScore;\n      if (window.SushiGem) {\n        const reward = window.SushiGem.awardScore('sushitan', bonusScore, `sushitan:${GAME.roundId}:end:${currentMode}`);\n        if (reward.gems > 0 && finalScore?.parentElement) {\n          finalScore.parentElement.title = `+${reward.gems} gem${reward.gems===1?'':'s'} / ${reward.remainder}/100 toward next gem`;\n        }\n      }\n      finalAccuracy.textContent = `${accuracy}%`;'''
+          if end_insert not in text:
+              if end_anchor not in text:
+                  raise SystemExit('end reward anchor not found')
+              text=text.replace(end_anchor,end_insert,1)
+
+          p.write_text(text,encoding='utf-8')
+          PY
+      - name: Commit changes
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No changes needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add sushitan.html
+          git commit -m 'Award gems from SushiTan scores'
+          git push
