@@ -10,6 +10,10 @@
     window.dispatchEvent(new CustomEvent('sushi-facing',{detail:{dx,dy}}));
     render();
   }
+  function leaveFaceMode(){
+    faceMode=false;
+    document.getElementById('waitBtn')?.classList.remove('faceMode');
+  }
 
   // Board tap: face toward the tapped side without consuming a turn.
   const board=document.getElementById('boardWrap');
@@ -27,28 +31,26 @@
     },{passive:true});
   }
 
-  // Shiren-style mobile control: hold the center button, then press a direction.
-  // While held, directions only rotate the hero and consume no turn.
+  // One-thumb Shiren-style control:
+  // short tap center = wait one turn; long press center = arm face-only mode;
+  // the next direction changes facing without moving or spending a turn.
   const wait=document.getElementById('waitBtn');
   if(wait){
     wait.textContent='向';
-    wait.title='タップ: 1ターン待機 / 長押し: 向き変更';
+    wait.title='タップ: 1ターン待機 / 長押し: 次の方向入力で向き変更';
     wait.addEventListener('pointerdown',e=>{
       e.preventDefault();
       holdTriggered=false;
       clearTimeout(holdTimer);
       holdTimer=setTimeout(()=>{
         holdTriggered=true;faceMode=true;wait.classList.add('faceMode');
-        if(typeof msg==='function')msg('向き変更モード');
+        if(typeof msg==='function')msg('向き変更：方向をタップ');
       },220);
     },true);
-    const finish=()=>{
-      clearTimeout(holdTimer);
-      if(faceMode){faceMode=false;wait.classList.remove('faceMode');}
-    };
-    ['pointerup','pointercancel','pointerleave'].forEach(ev=>wait.addEventListener(ev,finish,true));
+    ['pointerup','pointercancel','pointerleave'].forEach(ev=>wait.addEventListener(ev,()=>clearTimeout(holdTimer),true));
     wait.addEventListener('click',e=>{
       if(holdTriggered){e.preventDefault();e.stopImmediatePropagation();holdTriggered=false;return;}
+      if(faceMode){e.preventDefault();e.stopImmediatePropagation();leaveFaceMode();}
     },true);
   }
 
@@ -58,6 +60,7 @@
       e.preventDefault();e.stopImmediatePropagation();
       const [dx,dy]=b.dataset.dir.split(',').map(Number);
       setFacingOnly(dx,dy);
+      leaveFaceMode();
     },true);
   });
 
