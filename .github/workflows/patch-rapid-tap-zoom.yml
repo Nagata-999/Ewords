@@ -1,0 +1,44 @@
+name: Patch rapid-tap zoom guards
+
+on:
+  push:
+    paths:
+      - '.github/workflows/patch-rapid-tap-zoom.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch homepage rapid-tap controls
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          text=p.read_text(encoding='utf-8')
+          old='<meta content="width=device-width, initial-scale=1.0" name="viewport"/>'
+          new='<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>'
+          if old in text:
+              text=text.replace(old,new,1)
+          guard='''\n/* rapid-tap zoom guard */\nhtml,body{touch-action:manipulation;-webkit-text-size-adjust:100%}\nbutton,.login-claim,.chest,.chest-start,.chest-modal{touch-action:manipulation!important;-webkit-user-select:none!important;user-select:none!important;-webkit-tap-highlight-color:transparent!important}\n'''
+          marker='/* ===== すし単 毎日勉強偉いボーナス ===== */'
+          if '/* rapid-tap zoom guard */' not in text:
+              text=text.replace(marker,guard+'\n'+marker,1)
+          p.write_text(text,encoding='utf-8')
+          PY
+      - name: Commit changes
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No changes needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Prevent rapid-tap zoom on gem chest'
+          git push
