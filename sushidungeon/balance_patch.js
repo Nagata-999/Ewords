@@ -48,7 +48,7 @@
     const enemySpots=allOpen.filter(p=>!roomContains(startRoom,p.x,p.y)&&Math.max(Math.abs(p.x-game.player.x),Math.abs(p.y-game.player.y))>=4);
     const enemyCount=2+Math.floor(game.floor*.45);
     for(let i=0;i<enemyCount&&enemySpots.length;i++){
-      const p=takeFrom(enemySpots),pool=ENEMIES.filter(e=>game.floor>=e.min&&game.floor<=e.max),base=pool[rnd(pool.length)];
+      const p=takeFrom(enemySpots),pool=ENEMIES.filter(e=>e.name!=='毒蜘蛛'&&game.floor>=e.min&&game.floor<=e.max),base=pool[rnd(pool.length)];
       game.enemies.push({...base,x:p.x,y:p.y,hp:base.hp+Math.floor(game.floor/3),maxHp:base.hp+Math.floor(game.floor/3),asleep:false});
     }
 
