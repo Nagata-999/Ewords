@@ -97,5 +97,6 @@
 
   document.addEventListener('click',e=>{const d=e.target.closest('[data-dir]');if(d){const [dx,dy]=d.dataset.dir.split(',').map(Number);if(dx||dy)facing=[dx,dy]}});
   document.addEventListener('keydown',e=>{const m={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]};if(m[e.key])facing=m[e.key]});
+  window.addEventListener('sushi-facing',e=>{const dx=Number(e.detail?.dx)||0,dy=Number(e.detail?.dy)||0;if(dx||dy)facing=[dx,dy]});
   document.addEventListener('DOMContentLoaded',()=>{button()?.addEventListener('click',shoot);sync();new MutationObserver(sync).observe(document.getElementById('board')||document.body,{childList:true,subtree:true})});
 })();
