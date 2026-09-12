@@ -1,0 +1,69 @@
+name: Install multi game gem rewards
+
+on:
+  push:
+    paths:
+      - '.github/workflows/install-multi-game-gems.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inject gem reward scripts
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          targets = [Path('sushitype.html'), Path('sushi_run.html')]
+          gem = '<script src="sushigacha/gem-system.js?v=20260913-1"></script>'
+          bridge = '<script src="sushigacha/game-gem-bridge.js?v=20260913-1"></script>'
+
+          for p in targets:
+              text = p.read_text(encoding='utf-8')
+              changed = False
+
+              # Normalize any older gem-system cache version.
+              import re
+              if 'sushigacha/gem-system.js' in text:
+                  new_text = re.sub(r'<script src="sushigacha/gem-system\.js\?v=[^"]+"></script>', gem, text)
+                  changed |= new_text != text
+                  text = new_text
+              else:
+                  if '</body>' not in text:
+                      raise SystemExit(f'{p}: </body> not found')
+                  text = text.replace('</body>', gem + '\n</body>', 1)
+                  changed = True
+
+              if 'sushigacha/game-gem-bridge.js' in text:
+                  new_text = re.sub(r'<script src="sushigacha/game-gem-bridge\.js\?v=[^"]+"></script>', bridge, text)
+                  changed |= new_text != text
+                  text = new_text
+              else:
+                  if '</body>' not in text:
+                      raise SystemExit(f'{p}: </body> not found')
+                  text = text.replace('</body>', bridge + '\n</body>', 1)
+                  changed = True
+
+              if changed:
+                  p.write_text(text, encoding='utf-8')
+                  print(f'{p}: updated')
+              else:
+                  print(f'{p}: already current')
+          PY
+      - name: Commit changes
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No changes needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add sushitype.html sushi_run.html
+          git commit -m 'Enable gem rewards in SushiType and SushiRun'
+          git push
