@@ -1,0 +1,3 @@
+/* Mobile rapid-tap guard: keep game controls responsive without Safari double-tap zoom. */
+html,body{touch-action:manipulation;-webkit-text-size-adjust:100%}
+button,.controls,.dpad,.dpad button,.actions,.actions button,#attackBtn,#inventoryBtn,#arrowBtn,#waitBtn,.boardWrap,.miniMap{touch-action:manipulation!important;-webkit-user-select:none!important;user-select:none!important;-webkit-tap-highlight-color:transparent!important}
