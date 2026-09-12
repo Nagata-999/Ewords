@@ -1,0 +1,8 @@
+.flyingArrow{position:absolute;z-index:32;pointer-events:none;color:#f7e5a1;font-weight:900;line-height:1;text-shadow:0 0 3px #fff7c8,0 0 7px #dcae45,0 2px 2px #000;transition:left 42ms linear,top 42ms linear;will-change:left,top,transform,opacity;filter:drop-shadow(0 2px 2px #0009)}
+.flyingArrow.arrowImpact{animation:arrowImpact .1s ease-out forwards}
+.flyingArrow.arrowFade{animation:arrowFade .09s linear forwards}
+.arrowHit{animation:arrowCellHit .18s ease-out}
+@keyframes arrowImpact{0%{opacity:1;scale:1}45%{opacity:1;scale:1.35}100%{opacity:0;scale:.7}}
+@keyframes arrowFade{to{opacity:0}}
+@keyframes arrowCellHit{0%{filter:brightness(1)}35%{filter:brightness(2.1)}100%{filter:brightness(1)}}
+@media(prefers-reduced-motion:reduce){.flyingArrow{transition:none}.flyingArrow.arrowImpact,.flyingArrow.arrowFade,.arrowHit{animation:none}}
