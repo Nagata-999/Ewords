@@ -13,23 +13,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Inject shared avatar widget
+      - name: Refresh shared avatar widget
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
           targets = [Path('sushitan.html'), Path('sushitype.html')]
-          tag = '<script src="sushigacha/avatar-widget.js?v=20260912-1"></script>'
+          old = '<script src="sushigacha/avatar-widget.js?v=20260912-1"></script>'
+          new = '<script src="sushigacha/avatar-widget.js?v=20260912-2"></script>'
           for p in targets:
               text = p.read_text(encoding='utf-8')
-              if 'sushigacha/avatar-widget.js' in text:
-                  print(f'{p}: already installed')
-                  continue
-              if '</body>' not in text:
-                  raise SystemExit(f'{p}: </body> not found')
-              text = text.replace('</body>', tag + '\n</body>', 1)
-              p.write_text(text, encoding='utf-8')
-              print(f'{p}: installed')
+              if old in text:
+                  text = text.replace(old, new)
+                  p.write_text(text, encoding='utf-8')
+                  print(f'{p}: refreshed')
+              elif new in text:
+                  print(f'{p}: already refreshed')
+              elif 'sushigacha/avatar-widget.js' not in text:
+                  if '</body>' not in text:
+                      raise SystemExit(f'{p}: </body> not found')
+                  text = text.replace('</body>', new + '\n</body>', 1)
+                  p.write_text(text, encoding='utf-8')
+                  print(f'{p}: installed')
           PY
       - name: Commit changes
         shell: bash
@@ -41,5 +46,5 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add sushitan.html sushitype.html
-          git commit -m 'Show saved avatar in SushiTan and SushiType'
+          git commit -m 'Refresh reactive avatar widget'
           git push
