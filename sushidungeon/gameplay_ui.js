@@ -5,8 +5,10 @@
   function classify(t){
     if(/^あなた →/.test(t)||/に\d+ダメージ/.test(t))return 'playerAttack';
     if(/^敵 →/.test(t)||/の攻撃|強打|豪腕|毒牙|突進/.test(t))return 'enemyAttack';
+    if(/HP回復|回復した|全回復|満腹度回復/.test(t))return 'healEvent';
+    if(/F。階段|Fへ降りた|階段|レベル\d+/.test(t))return 'floorEvent';
     if(/^🎁/.test(t)||/拾った|手に入れた|装備した|食べた|飲んだ|鍛えた|補強した/.test(t))return 'itemEvent';
-    if(/^✓/.test(t))return 'successEvent';
+    if(/^✓/.test(t)||/正解/.test(t))return 'successEvent';
     return 'system';
   }
 
