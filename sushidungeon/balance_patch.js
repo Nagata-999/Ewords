@@ -16,19 +16,23 @@
 
   generateFloor=function(){
     const grid=Array.from({length:H},()=>Array(W).fill(0)),rooms=[];
-    const targetRooms=5+rnd(3); // 5–7 rooms
-    for(let tries=0;tries<120&&rooms.length<targetRooms;tries++){
-      const w=2+rnd(3),h=2+rnd(3),x=1+rnd(W-w-2),y=1+rnd(H-h-2);
+    const targetRooms=6+rnd(4); // 6–9 rooms on the larger floor
+    for(let tries=0;tries<190&&rooms.length<targetRooms;tries++){
+      const w=2+rnd(4),h=2+rnd(4),x=1+rnd(W-w-2),y=1+rnd(H-h-2);
       if(rooms.some(r=>x<r.x+r.w&&x+w>r.x&&y<r.y+r.h&&y+h>r.y))continue;
       const room={x,y,w,h,cx:x+Math.floor(w/2),cy:y+Math.floor(h/2)};
       carveRoomLocal(grid,x,y,w,h);
       if(rooms.length)carveCorridorLocal(grid,{x:rooms.at(-1).cx,y:rooms.at(-1).cy},{x:room.cx,y:room.cy});
       rooms.push(room);
     }
-    if(rooms.length<4){
+    if(rooms.length<5){
       for(let y=0;y<H;y++)grid[y].fill(0);
       rooms.splice(0);
-      const fixed=[{x:1,y:1,w:3,h:3},{x:8,y:1,w:3,h:3},{x:1,y:8,w:3,h:3},{x:8,y:8,w:3,h:3},{x:5,y:5,w:3,h:3}];
+      const fixed=[
+        {x:1,y:1,w:3,h:3},{x:7,y:1,w:3,h:3},{x:13,y:1,w:3,h:3},
+        {x:1,y:7,w:3,h:3},{x:7,y:7,w:3,h:3},{x:13,y:7,w:3,h:3},
+        {x:1,y:13,w:3,h:3},{x:7,y:13,w:3,h:3},{x:13,y:13,w:3,h:3}
+      ];
       for(const r of fixed){r.cx=r.x+1;r.cy=r.y+1;carveRoomLocal(grid,r.x,r.y,r.w,r.h);if(rooms.length)carveCorridorLocal(grid,{x:rooms.at(-1).cx,y:rooms.at(-1).cy},{x:r.cx,y:r.cy});rooms.push(r)}
     }
 
@@ -46,20 +50,20 @@
     // Never start with enemies in the player's starting room or right beside the player.
     const startRoom=rooms[0];
     const enemySpots=allOpen.filter(p=>!roomContains(startRoom,p.x,p.y)&&Math.max(Math.abs(p.x-game.player.x),Math.abs(p.y-game.player.y))>=4);
-    const enemyCount=2+Math.floor(game.floor*.45);
+    const enemyCount=3+Math.floor(game.floor*.5);
     for(let i=0;i<enemyCount&&enemySpots.length;i++){
       const p=takeFrom(enemySpots),pool=ENEMIES.filter(e=>e.name!=='毒蜘蛛'&&game.floor>=e.min&&game.floor<=e.max),base=pool[rnd(pool.length)];
       game.enemies.push({...base,x:p.x,y:p.y,hp:base.hp+Math.floor(game.floor/3),maxHp:base.hp+Math.floor(game.floor/3),asleep:false});
     }
 
-    // Fewer ordinary items: 1 most floors, occasionally 2. English chest remains one per floor.
+    // Keep normal loot scarce even though the floor is larger.
     const itemSpots=allOpen.filter(p=>!used.has(key(p.x,p.y)));
-    const itemCount=1+(Math.random()<.35?1:0);
+    const itemCount=1+(Math.random()<.45?1:0);
     for(let i=0;i<itemCount&&itemSpots.length;i++){
       const p=takeFrom(itemSpots);game.items.push({...randomItem(false),x:p.x,y:p.y});
     }
     const chestSpots=allOpen.filter(p=>!used.has(key(p.x,p.y)));
     if(chestSpots.length){const p=takeFrom(chestSpots);game.chest={x:p.x,y:p.y,opened:false}}
-    msg(`${game.floor}F。階段を探そう。`);
+    msg(`${game.floor}F。広い階層だ。階段を探そう。`);
   };
 })();
