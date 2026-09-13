@@ -11,20 +11,25 @@
   function spawnBoss(){
     if(!game||game.floor!==BOSS_FLOOR||game.bossSpawned10)return;
     const occupiedKeys=new Set(game.enemies.filter(e=>e.hp>0).map(e=>`${e.x},${e.y}`));
-    const candidates=[];
+    const far=[],near=[];
     for(let y=1;y<H-1;y++)for(let x=1;x<W-1;x++){
       if(!game.grid[y][x])continue;
       if(x===game.player.x&&y===game.player.y)continue;
       if(x===game.exit.x&&y===game.exit.y)continue;
       if(occupiedKeys.has(`${x},${y}`))continue;
       const dist=Math.max(Math.abs(x-game.player.x),Math.abs(y-game.player.y));
-      if(dist>=5)candidates.push({x,y,dist});
+      const cell={x,y,dist};
+      if(dist>=5)far.push(cell); else if(dist>=2)near.push(cell);
     }
-    candidates.sort((a,b)=>b.dist-a.dist);
-    const p=candidates[0];
-    if(!p)return;
+    far.sort((a,b)=>b.dist-a.dist);
+    near.sort((a,b)=>b.dist-a.dist);
+    const p=far[0]||near[0];
+    if(!p){
+      console.warn('[SushiDungeon] boss spawn failed: no free floor tile');
+      return;
+    }
     game.enemies.push({
-      name:'ゴブリン隊長',icon:'👺',hp:42,maxHp:42,atk:11,exp:28,
+      name:'ゴブリン隊長',icon:'👺',spriteBase:'緑小鬼',hp:42,maxHp:42,atk:11,exp:28,
       min:10,max:10,x:p.x,y:p.y,asleep:false,isBoss:true
     });
     game.bossSpawned10=true;
