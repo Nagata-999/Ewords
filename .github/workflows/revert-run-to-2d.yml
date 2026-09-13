@@ -1,0 +1,39 @@
+name: Revert SushiRun to 2D avatar
+
+on:
+  push:
+    paths:
+      - '.github/workflows/revert-run-to-2d.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  revert:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove Three.js runner and keep 2D avatar
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('sushi_run.html')
+          text=p.read_text(encoding='utf-8')
+          text=re.sub(r'\n?<script src="sushigacha/run-avatar-3d\.js\?v=[^"]+"></script>', '', text)
+          text=re.sub(r'<script src="sushigacha/run-avatar\.js\?v=[^"]+"></script>', '<script src="sushigacha/run-avatar.js?v=20260913-2"></script>', text)
+          p.write_text(text,encoding='utf-8')
+          PY
+      - name: Commit changes
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No changes needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add sushi_run.html
+          git commit -m 'Revert SushiRun runner to stable 2D avatar'
+          git push
