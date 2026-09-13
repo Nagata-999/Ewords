@@ -3,23 +3,26 @@
   const BOSS_FLOOR=1; // DEBUG: normally 10
   const baseGenerate=generateFloor;
   const baseDescend=descend;
+  const baseStart=startGame;
 
   function livingBoss(){
     return game?.enemies?.find(e=>e.isBoss&&e.hp>0)||null;
   }
 
-  function spawnBoss(){
-    if(!game||game.floor!==BOSS_FLOOR||game.bossSpawned10)return;
-    const occupiedKeys=new Set(game.enemies.filter(e=>e.hp>0).map(e=>`${e.x},${e.y}`));
+  function spawnBoss(force=false){
+    if(!game||game.floor!==BOSS_FLOOR)return;
+    if(livingBoss())return;
+    if(game.bossSpawned10&&!force)return;
+    const occupiedKeys=new Set((game.enemies||[]).filter(e=>e.hp>0).map(e=>`${e.x},${e.y}`));
     const far=[],near=[];
     for(let y=1;y<H-1;y++)for(let x=1;x<W-1;x++){
-      if(!game.grid[y][x])continue;
+      if(!game.grid?.[y]?.[x])continue;
       if(x===game.player.x&&y===game.player.y)continue;
       if(x===game.exit.x&&y===game.exit.y)continue;
       if(occupiedKeys.has(`${x},${y}`))continue;
       const dist=Math.max(Math.abs(x-game.player.x),Math.abs(y-game.player.y));
       const cell={x,y,dist};
-      if(dist>=5)far.push(cell); else if(dist>=2)near.push(cell);
+      if(dist>=5)far.push(cell); else if(dist>=1)near.push(cell);
     }
     far.sort((a,b)=>b.dist-a.dist);
     near.sort((a,b)=>b.dist-a.dist);
@@ -40,7 +43,16 @@
 
   generateFloor=function(){
     const r=baseGenerate.apply(this,arguments);
-    if(game?.floor===BOSS_FLOOR)spawnBoss();
+    if(game?.floor===BOSS_FLOOR)spawnBoss(true);
+    return r;
+  };
+
+  startGame=function(){
+    const r=baseStart.apply(this,arguments);
+    if(game?.floor===BOSS_FLOOR){
+      spawnBoss(true);
+      if(typeof render==='function')render();
+    }
     return r;
   };
 
@@ -75,5 +87,5 @@
     return r;
   };
 
-  window.sushiBossFloors={livingBoss};
+  window.sushiBossFloors={livingBoss,spawnBoss};
 })();
