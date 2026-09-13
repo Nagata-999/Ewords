@@ -17,7 +17,7 @@
     updateContinue();return overlay;
   }
   function updateContinue(){if(!overlay)return;const save=readSave(),btn=overlay.querySelector('#titleContinue'),info=overlay.querySelector('#titleSaveInfo');btn.disabled=!save;if(!save){info.textContent='セーブデータはありません';return}const g=save.game;info.textContent=`${g.floor}F  /  Lv ${g.level}  /  HP ${Math.max(0,g.hp)}/${g.maxHp}`}
-  function open(){build();updateContinue();overlay.classList.remove('closing');overlay.hidden=false;requestAnimationFrame(()=>overlay.classList.add('open'))}
+  function open(){build();updateContinue();overlay.classList.remove('closing');overlay.hidden=false;overlay.classList.add('open');document.documentElement.classList.remove('title-boot')}
   function close(){if(!overlay)return;overlay.classList.remove('open');overlay.classList.add('closing');setTimeout(()=>{overlay.hidden=true;overlay.classList.remove('closing')},420)}
   function hookSaves(){
     if(typeof endTurn==='function'&&!endTurn.__saveWrapped){const base=endTurn;endTurn=function(){const r=base.apply(this,arguments);writeSave();return r};endTurn.__saveWrapped=true}
