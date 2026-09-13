@@ -47,7 +47,12 @@
       game.enemies.push({name:'水スライム',icon:'💧',hp:18,maxHp:18,atk:9,exp:8,min:20,max:20,x:p.x,y:p.y,asleep:false,motion:'idle',facing:'s',summoned:true});
       occupied.add(`${p.x},${p.y}`);spawned++;
     }
-    if(spawned){msg(`💥 巨大水スライムが分裂した！ 水スライム${spawned}体が飛び散った！`);log(`20F BOSS PHASE：巨大水スライムがHP半分で分裂。水スライム${spawned}体を召喚。`);if(typeof render==='function')render()}
+    if(spawned){
+      try{window.dispatchEvent(new CustomEvent('sushi-water-split',{detail:{x:boss.x,y:boss.y,count:spawned}}))}catch{}
+      msg(`💥 巨大水スライムが分裂した！ 水スライム${spawned}体が飛び散った！`);
+      log(`20F BOSS PHASE：巨大水スライムがHP半分で分裂。水スライム${spawned}体を召喚。`);
+      if(typeof render==='function')render()
+    }
   }
   generateFloor=function(){const r=baseGenerate.apply(this,arguments);spawnBoss();return r};
   descend=function(){
