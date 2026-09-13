@@ -4,8 +4,8 @@
 
   function isFloor(x,y){return x>=0&&y>=0&&x<W&&y<H&&!!game.grid[y][x]}
 
-  // Detect room cores from 2x2 open areas. One-cell-wide corridors stay outside.
   function buildRoomMap(){
+    if(!game?.grid)return;
     const map=Array.from({length:H},()=>Array(W).fill(-1));
     const candidate=Array.from({length:H},()=>Array(W).fill(false));
     for(let y=0;y<H-1;y++)for(let x=0;x<W-1;x++){
@@ -31,12 +31,18 @@
     game.roomCount=id;
   }
 
-  function roomIdAt(x,y){return game?.roomMap?.[y]?.[x] ?? -1}
+  function ensureRoomMap(){
+    if(!game?.roomMap||game.roomMap.length!==H)buildRoomMap();
+  }
 
-  // Treat the doorway tile immediately touching a room as part of that room for vision.
-  // This makes the whole floor brighten the moment the player exits a corridor.
+  function roomIdAt(x,y){
+    ensureRoomMap();
+    return game?.roomMap?.[y]?.[x] ?? -1;
+  }
+
   function currentRoomId(){
     if(!game?.player)return -1;
+    ensureRoomMap();
     const {x,y}=game.player;
     const direct=roomIdAt(x,y);
     if(direct>=0)return direct;
@@ -49,6 +55,7 @@
   }
 
   function roomCells(){
+    ensureRoomMap();
     const out=[];
     for(let y=1;y<H-1;y++)for(let x=1;x<W-1;x++)if(roomIdAt(x,y)>=0)out.push({x,y});
     return out;
@@ -81,14 +88,16 @@
     rememberSeen();
   };
 
-  // Room: the whole current room is bright.
-  // Corridor: only the immediate 3x3 area around the player is bright.
   visibleNow=function(x,y){
     if(!game||!game.player)return false;
-    const px=game.player.x,py=game.player.y,pr=currentRoomId();
+    const px=game.player.x,py=game.player.y;
+
+    // Adjacent enemies must always be visible, even at corridor/room boundaries.
+    if(game.enemies?.some(e=>e.hp>0&&e.x===x&&e.y===y&&Math.max(Math.abs(x-px),Math.abs(y-py))<=1))return true;
+
+    const pr=currentRoomId();
     if(pr>=0){
       if(roomIdAt(x,y)===pr)return true;
-      // Keep the doorway/walls around the room readable.
       for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){
         if(roomIdAt(x+dx,y+dy)===pr)return true;
       }
@@ -100,9 +109,13 @@
   rememberSeen=function(){
     if(!game||!game.player)return;
     if(!(game.seen instanceof Set))game.seen=new Set();
+    ensureRoomMap();
     for(let y=0;y<H;y++)for(let x=0;x<W;x++)if(visibleNow(x,y))game.seen.add(key(x,y));
   };
 
   window.sushiDungeonRoomIdAt=roomIdAt;
   window.sushiDungeonCurrentRoomId=currentRoomId;
+  window.sushiDungeonVisibleNow=(x,y)=>visibleNow(x,y);
+  window.sushiDungeonRememberSeen=()=>rememberSeen();
+  window.sushiDungeonRebuildRoomMap=buildRoomMap;
 })();
