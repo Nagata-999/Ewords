@@ -23,7 +23,9 @@
   function addSuspendButton(){
     if(suspendBtn)return suspendBtn;
     suspendBtn=document.createElement('button');suspendBtn.type='button';suspendBtn.id='suspendBtn';suspendBtn.className='suspendBtn';suspendBtn.textContent='💾 中断';suspendBtn.setAttribute('aria-label','現在の冒険をセーブしてタイトルへ戻る');suspendBtn.addEventListener('click',suspend);
-    const host=document.querySelector('.message.battleFeed')||document.querySelector('.message')||document.querySelector('.app');host.appendChild(suspendBtn);suspendBtn.hidden=true;return suspendBtn;
+    const top=document.querySelector('.miniTop'),title=top?.querySelector('strong');
+    if(top&&title)title.insertAdjacentElement('afterend',suspendBtn);else (top||document.querySelector('.app')||document.body).appendChild(suspendBtn);
+    suspendBtn.hidden=true;return suspendBtn;
   }
   function hookSaves(){
     if(typeof endTurn==='function'&&!endTurn.__saveWrapped){const base=endTurn;endTurn=function(){const r=base.apply(this,arguments);writeSave();return r};endTurn.__saveWrapped=true}
