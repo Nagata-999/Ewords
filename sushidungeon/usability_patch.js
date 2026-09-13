@@ -6,7 +6,6 @@
   let moveDelay=0;
   let moveRepeat=0;
   let activeDirButton=null;
-  let repeatStarted=false;
 
   function setFacingOnly(dx,dy){
     if(!game||game.dead||(!dx&&!dy))return;
@@ -25,7 +24,6 @@
     activeDirButton=null;
   }
 
-  // Board tap: face toward the tapped side without consuming a turn.
   const board=document.getElementById('boardWrap');
   if(board){
     let sx=0,sy=0,armed=false;
@@ -41,7 +39,6 @@
     },{passive:true});
   }
 
-  // Center button: tap = wait one turn, long press = face-only mode.
   const wait=document.getElementById('waitBtn');
   if(wait){
     wait.textContent='向';
@@ -62,10 +59,10 @@
     },true);
   }
 
-  // Direction input polish:
-  // - tap moves on release, not on initial touch
-  // - hold waits 300ms, then repeats every 150ms
-  // - sliding off the button cancels the input
+  // Immediate-response direction input:
+  // - first step fires on pointerdown
+  // - holding begins after 260ms, then repeats every 145ms
+  // - sliding off/cancel stops repeat, but never delays the first step
   document.querySelectorAll('[data-dir]').forEach(b=>{
     const [dx,dy]=b.dataset.dir.split(',').map(Number);
 
@@ -79,35 +76,22 @@
         return;
       }
 
-      activeDirButton=b;repeatStarted=false;b.classList.add('dirPressed');
+      activeDirButton=b;b.classList.add('dirPressed');
+      if(game&&!game.dead)move(dx,dy);
+
       moveDelay=setTimeout(()=>{
         if(activeDirButton!==b||!game||game.dead)return;
-        repeatStarted=true;
-        if(!enemyAdjacent())move(dx,dy);
         moveRepeat=setInterval(()=>{
           if(activeDirButton!==b||!game||game.dead||enemyAdjacent())return;
           move(dx,dy);
-        },150);
-      },300);
+        },145);
+      },260);
     },true);
 
-    b.addEventListener('pointerup',e=>{
-      if(activeDirButton!==b)return;
-      e.preventDefault();e.stopImmediatePropagation();
-      const shouldTapMove=!repeatStarted;
-      stopMoveRepeat();
-      if(shouldTapMove&&game&&!game.dead)move(dx,dy);
-    },true);
-
-    b.addEventListener('pointercancel',e=>{
+    ['pointerup','pointercancel','pointerleave'].forEach(ev=>b.addEventListener(ev,e=>{
       if(activeDirButton!==b)return;
       e.preventDefault();e.stopImmediatePropagation();stopMoveRepeat();
-    },true);
-
-    b.addEventListener('pointerleave',e=>{
-      if(activeDirButton!==b)return;
-      e.preventDefault();e.stopImmediatePropagation();stopMoveRepeat();
-    },true);
+    },true));
   });
 
   document.addEventListener('keydown',e=>{
