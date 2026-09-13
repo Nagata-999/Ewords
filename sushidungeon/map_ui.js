@@ -1,9 +1,11 @@
 'use strict';
 (function(){
   let mini,miniGrid,dialog,fullGrid,queued=false;
+  function isCurrent(x,y){return game?.player&&Math.abs(x-game.player.x)<=5&&Math.abs(y-game.player.y)<=3}
   function buildCell(x,y,seen){
     const c=document.createElement('i'),floor=!!game.grid[y]?.[x],known=game.mapReveal||!seen||seen.has(key(x,y));
     c.className='mapCell '+(!known?'unknown':floor?'floor':'wall');
+    if(known)c.classList.add(isCurrent(x,y)?'current':'explored');
     if(known&&floor){
       if(game.exit&&game.exit.x===x&&game.exit.y===y)c.classList.add('stairs');
       if(game.chest&&!game.chest.open&&game.chest.x===x&&game.chest.y===y)c.classList.add('chest');
@@ -23,7 +25,7 @@
   function ensureDialog(){
     if(dialog)return;
     dialog=document.createElement('dialog');dialog.id='mapDialog';dialog.className='mapDialog';
-    dialog.innerHTML='<div class="mapPanel"><header><div><small>DUNGEON MAP</small><h2>全体マップ</h2></div><button type="button" class="mapClose" aria-label="閉じる">×</button></header><div id="fullMapGrid" class="fullMapGrid"></div><footer><span><i class="mapLegend player"></i>現在地</span><span><i class="mapLegend stairs"></i>階段</span><span><i class="mapLegend chest"></i>宝箱</span></footer></div>';
+    dialog.innerHTML='<div class="mapPanel"><header><div><small>DUNGEON MAP</small><h2>全体マップ</h2></div><button type="button" class="mapClose" aria-label="閉じる">×</button></header><div id="fullMapGrid" class="fullMapGrid"></div><footer><span><i class="mapLegend current"></i>現在視界</span><span><i class="mapLegend explored"></i>探索済み</span><span><i class="mapLegend unknown"></i>未探索</span><span><i class="mapLegend player"></i>現在地</span><span><i class="mapLegend stairs"></i>階段</span><span><i class="mapLegend chest"></i>宝箱</span></footer></div>';
     document.body.append(dialog);fullGrid=dialog.querySelector('#fullMapGrid');
     dialog.querySelector('.mapClose').onclick=()=>dialog.close();dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
   }
