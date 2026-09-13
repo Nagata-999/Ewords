@@ -3,7 +3,7 @@
   const BOSSES={
     10:{name:'ゴブリン隊長',icon:'👺',spriteBase:'緑小鬼',hp:42,atk:11,exp:28,message:'ゴブリン隊長が階段を封鎖している！'},
     20:{name:'巨大水スライム',icon:'💧',spriteBase:'水スライム',hp:78,atk:15,exp:55,message:'巨大水スライムが水路を塞いでいる！'},
-    30:{name:'黒鉄の騎士長',icon:'🛡️',spriteBase:'黒鉄の騎士',hp:118,atk:19,exp:90,message:'黒鉄の騎士長が灼熱の最深部を守っている！'}
+    30:{name:'黒鉄の騎士',icon:'🛡️',spriteBase:'黒鉄の騎士',hp:118,atk:19,exp:90,message:'黒鉄の騎士が灼熱の最深部を守っている！'}
   };
   const baseGenerate=generateFloor;
   const baseDescend=descend;
