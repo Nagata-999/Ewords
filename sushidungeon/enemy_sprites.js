@@ -15,15 +15,17 @@
   function goblinFallback(){return wrap('<path d="M28 86Q22 62 31 43L21 26 40 34Q50 25 60 34L79 26 69 43Q78 62 72 86Z" fill="#568a45" stroke="#263b27" stroke-width="4"/><circle cx="42" cy="51" r="4" fill="#f3e6b8"/><circle cx="58" cy="51" r="4" fill="#f3e6b8"/><path d="M39 67Q50 74 61 67" fill="none" stroke="#263b27" stroke-width="4"/><path d="M31 82L19 96M69 82L81 96" stroke="#d7c58f" stroke-width="6"/>','monsterSprite goblinEmergency')}
   function refresh(el){
     const name=el.title,dir=facing(el),sig=name+'-'+dir+'-'+(atlasSrc?'a':'f')+'-'+(spiderAtlasSrc?'s':'v');
-    const hasExpected=name==='緑小鬼'?!!el.querySelector('.goblinRendered'):name==='毒蜘蛛'?!!el.querySelector('.spiderRendered'):!!el.querySelector('.enemyAtlas512,.monsterSprite');
+    const isGoblin=name==='緑小鬼'||name==='ゴブリン隊長';
+    const hasExpected=isGoblin?!!el.querySelector('.goblinRendered'):name==='毒蜘蛛'?!!el.querySelector('.spiderRendered'):!!el.querySelector('.enemyAtlas512,.monsterSprite');
     if(el.dataset.fullSprite===sig&&hasExpected)return;
     el.dataset.fullSprite=sig;
     const hp=el.querySelector('.enemyHp')?.outerHTML||'';
-    if(name==='緑小鬼'){
+    if(isGoblin){
+      const bossExtra=name==='ゴブリン隊長'?'filter:hue-rotate(300deg) saturate(1.35) brightness(.9);':'filter:hue-rotate(92deg) saturate(.82) brightness(.95);';
       if(atlasSrc){
-        el.innerHTML=`<span class="enemyGlyph directionalEnemy enemyAtlas512 goblinRendered" style="${atlasStyle(3,dir,'filter:hue-rotate(92deg) saturate(.82) brightness(.95);')}"></span>${hp}`;
+        el.innerHTML=`<span class="enemyGlyph directionalEnemy enemyAtlas512 goblinRendered${name==='ゴブリン隊長'?' goblinCaptainRendered':''}" style="${atlasStyle(3,dir,bossExtra)}"></span>${hp}`;
       }else{
-        el.innerHTML=`<span class="enemyGlyph directionalEnemy goblinRendered">${goblinFallback()}</span>${hp}`;
+        el.innerHTML=`<span class="enemyGlyph directionalEnemy goblinRendered${name==='ゴブリン隊長'?' goblinCaptainRendered':''}">${goblinFallback()}</span>${hp}`;
       }
       return;
     }
