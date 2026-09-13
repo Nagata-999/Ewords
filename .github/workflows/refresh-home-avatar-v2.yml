@@ -1,4 +1,4 @@
-name: Refresh home avatar walker v2
+name: Refresh home avatar walker v3
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
           import re
           p=Path('index.html')
           text=p.read_text(encoding='utf-8')
-          text=re.sub(r'<script src="sushigacha/home-avatar-walker\.js\?v=[^"]+"></script>', '<script src="sushigacha/home-avatar-walker.js?v=20260913-2"></script>', text)
+          text=re.sub(r'<script src="sushigacha/home-avatar-walker\.js\?v=[^"]+"></script>', '<script src="sushigacha/home-avatar-walker.js?v=20260913-3"></script>', text)
           p.write_text(text,encoding='utf-8')
           PY
       - name: Commit changes
@@ -34,5 +34,5 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html
-          git commit -m 'Load richer home avatar motions'
+          git commit -m 'Enable interactive home avatar props'
           git push
