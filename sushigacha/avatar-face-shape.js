@@ -8,15 +8,16 @@
   const faceRe=/<ellipse cx="120" cy="90" rx="48" ry="47" fill="([^"]+)" stroke="#354b47" stroke-width="3"\/>/;
 
   function shapeMarkup(shape, skin){
+    const common=`fill="${skin}" stroke="#354b47" stroke-width="3" stroke-linejoin="round"`;
     switch(shape){
-      case 1: // round
-        return `<circle cx="120" cy="90" r="48" fill="${skin}" stroke="#354b47" stroke-width="3"/>`;
-      case 2: // oval / egg
-        return `<path d="M120 42C91 42 72 59 72 87C72 115 90 136 120 142C150 136 168 115 168 87C168 59 149 42 120 42Z" fill="${skin}" stroke="#354b47" stroke-width="3" stroke-linejoin="round"/>`;
-      case 3: // sharp
-        return `<path d="M120 43C91 43 73 59 72 87C72 111 86 128 101 136L120 145L139 136C154 128 168 111 168 87C167 59 149 43 120 43Z" fill="${skin}" stroke="#354b47" stroke-width="3" stroke-linejoin="round"/>`;
-      case 4: // long
-        return `<path d="M120 39C93 39 76 56 75 86C74 116 91 139 120 148C149 139 166 116 165 86C164 56 147 39 120 39Z" fill="${skin}" stroke="#354b47" stroke-width="3" stroke-linejoin="round"/>`;
+      case 1: // round: forehead/temples/cheeks all wider, chin tucked up
+        return `<path d="M120 42 C91 42 69 59 69 87 C69 111 85 132 107 138 C115 140 125 140 133 138 C155 132 171 111 171 87 C171 59 149 42 120 42 Z" ${common}/>`;
+      case 2: // egg: narrower temples, fuller middle, gently pointed lower face
+        return `<path d="M120 40 C96 40 78 53 74 75 C70 96 78 118 94 132 C103 140 112 145 120 148 C128 145 137 140 146 132 C162 118 170 96 166 75 C162 53 144 40 120 40 Z" ${common}/>`;
+      case 3: // sharp: slimmer temples, defined cheekbones and V-line jaw
+        return `<path d="M120 41 C99 41 82 52 76 71 C70 89 76 106 88 119 C96 128 106 135 120 146 C134 135 144 128 152 119 C164 106 170 89 164 71 C158 52 141 41 120 41 Z" ${common}/>`;
+      case 4: // long: taller/narrower from forehead through jaw, not just chin extension
+        return `<path d="M120 36 C98 36 81 49 76 71 C71 94 76 117 90 134 C99 145 109 151 120 154 C131 151 141 145 150 134 C164 117 169 94 164 71 C159 49 142 36 120 36 Z" ${common}/>`;
       default:
         return `<ellipse cx="120" cy="90" rx="48" ry="47" fill="${skin}" stroke="#354b47" stroke-width="3"/>`;
     }
