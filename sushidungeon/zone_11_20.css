@@ -1,0 +1,19 @@
+/* 11–20F: Underground Waterway. Applied by zone_visuals.js without touching base dungeon tiles. */
+body.zone-waterway .floor{background-color:#1d3537!important;box-shadow:inset 0 0 0 1px #102729!important}
+body.zone-waterway .floor-0{background-image:linear-gradient(135deg,#8ed8d51a,#0000 36%,#07191d55),repeating-linear-gradient(0deg,#244346 0 9px,#203d40 9px 18px)!important}
+body.zone-waterway .floor-1{background-image:linear-gradient(145deg,#6fc5c31a,#0000 40%,#06191c66),repeating-linear-gradient(90deg,#203f42 0 12px,#1c393c 12px 24px)!important}
+body.zone-waterway .floor-2{background-image:radial-gradient(circle at 28% 32%,#8fd9d322 0 4%,transparent 5%),linear-gradient(125deg,#315456,#1a3437 68%,#10272b)!important}
+body.zone-waterway .floor::before{background:radial-gradient(circle at 50% 42%,transparent 38%,#04181c44 75%,#020b0ddd 100%)!important}
+body.zone-waterway .floor-auto::after{background-image:linear-gradient(90deg,transparent 46%,#75c9c50c 49% 51%,transparent 54%)}
+body.zone-waterway .floor.edge-n::after{box-shadow:inset 0 5px 8px #06191ddd!important}
+body.zone-waterway .floor.edge-s::after{box-shadow:inset 0 -8px 11px #020b0ddd!important}
+body.zone-waterway .wall{background-color:#14292b!important;border-color:#071315!important;box-shadow:inset 0 1px 0 #70918c55,inset 0 -7px 0 #0b1a1c,0 5px 10px #000b!important}
+body.zone-waterway .wall::before{background:linear-gradient(145deg,#526e69 0 7%,#3a5955 8% 45%,#294744 46% 100%)!important;border-color:#172f2e!important;box-shadow:inset 2px 2px 0 #73918b55,inset -2px -2px 0 #17302f!important}
+body.zone-waterway .wall::after{background:linear-gradient(#274846 0 12%,#183433 13% 48%,#0c2022 49% 100%)!important;border-color:#071718!important;box-shadow:inset 0 3px 0 #52736d55!important}
+body.zone-waterway .wall-0::before{background:linear-gradient(145deg,#58736e 0 8%,#3d5c57 9% 48%,#294744 49%)!important}
+body.zone-waterway .wall-1::before{background:linear-gradient(155deg,#4c6863 0 12%,#35534f 13% 56%,#25423f 57%)!important}
+body.zone-waterway .wall-2::before{background:linear-gradient(135deg,#607b75 0 7%,#41615c 8% 62%,#2a4945 63%)!important}
+body.zone-waterway .wall-3::before{background:linear-gradient(150deg,#536f69,#395854 48%,#274541 49%)!important}
+body.zone-waterway .wall.edge-s::after,body.zone-waterway .wall-south-face::after,body.zone-waterway .wall-corner-sw::after,body.zone-waterway .wall-corner-se::after{background:linear-gradient(#31534f 0 10%,#173331 12% 58%,#091b1c 60% 100%)!important;box-shadow:inset 0 4px 0 #64827b55!important}
+body.zone-waterway .memory{filter:brightness(.24) saturate(.55) hue-rotate(8deg)!important}
+body.zone-waterway #boardWrap{box-shadow:0 0 0 1px #315d5b55,0 12px 32px #04141666!important}
