@@ -5,6 +5,7 @@
   function classify(t){
     if(/^あなた →/.test(t)||/に\d+ダメージ/.test(t))return 'playerAttack';
     if(/^敵 →/.test(t)||/の攻撃|強打|豪腕|毒牙|突進/.test(t))return 'enemyAttack';
+    if(/^EXP \+\d+/.test(t))return 'successEvent';
     if(/HP回復|回復した|全回復|満腹度回復/.test(t))return 'healEvent';
     if(/F。階段|Fへ降りた|階段|レベル\d+/.test(t))return 'floorEvent';
     if(/^🎁/.test(t)||/拾った|手に入れた|装備した|食べた|飲んだ|鍛えた|補強した/.test(t))return 'itemEvent';
@@ -119,6 +120,20 @@
       push(t);
       damageFromMessage(t);
       return originalMsg(t);
+    };
+  }
+
+  const originalAttack=window.attack;
+  if(typeof originalAttack==='function'){
+    window.attack=function(enemy){
+      const beforeHp=enemy?.hp??0;
+      const beforeExp=game?.exp??0;
+      const reward=enemy?.exp??0;
+      const result=originalAttack(enemy);
+      if(beforeHp>0&&enemy?.hp<=0&&reward>0){
+        pushOne(`EXP +${reward}`,'successEvent');
+      }
+      return result;
     };
   }
 
