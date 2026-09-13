@@ -1,0 +1,52 @@
+name: Install lucky gem events
+
+on:
+  push:
+    paths:
+      - '.github/workflows/install-lucky-gem-events.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install lucky gem scripts
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          # SushiTan lucky drops
+          p=Path('sushitan.html')
+          text=p.read_text(encoding='utf-8')
+          text=re.sub(r'\n?<script src="sushigacha/sushitan-lucky-gems\.js\?v=[^"]+"></script>', '', text)
+          tag='<script src="sushigacha/sushitan-lucky-gems.js?v=20260913-1"></script>'
+          anchor=re.search(r'<script src="sushigacha/gem-system\.js\?v=[^"]+"></script>', text)
+          if anchor:
+              text=text.replace(anchor.group(0), anchor.group(0)+'\n'+tag)
+          else:
+              text=text.replace('</body>', tag+'\n</body>')
+          p.write_text(text,encoding='utf-8')
+
+          # SushiRun rare + fever-double pickup cache refresh
+          p=Path('sushi_run.html')
+          text=p.read_text(encoding='utf-8')
+          text=re.sub(r'<script src="sushigacha/run-gem-pickups\.js\?v=[^"]+"></script>', '<script src="sushigacha/run-gem-pickups.js?v=20260913-2"></script>', text)
+          p.write_text(text,encoding='utf-8')
+          PY
+      - name: Commit changes
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No changes needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add sushitan.html sushi_run.html
+          git commit -m 'Enable lucky gem drops and rare SushiRun gems'
+          git push
