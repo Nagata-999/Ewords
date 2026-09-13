@@ -1,20 +1,24 @@
 'use strict';
 (function(){
   let mini,miniGrid,dialog,fullGrid,queued=false;
-  function isVisibleNow(x,y){try{return typeof visibleNow==='function'&&visibleNow(x,y)}catch{return false}}
+  function isVisibleNow(x,y){
+    try{
+      if(typeof window.sushiDungeonVisibleNow==='function')return !!window.sushiDungeonVisibleNow(x,y);
+      return typeof visibleNow==='function'&&!!visibleNow(x,y);
+    }catch{return false}
+  }
   function buildCell(x,y,seen,mode){
     const c=document.createElement('i'),floor=!!game.grid[y]?.[x],known=game.mapReveal||!seen||seen.has(key(x,y)),current=known&&isVisibleNow(x,y);
     c.className='mapCell '+(!known?'unknown':floor?'floor':'wall');
     if(known)c.classList.add(current?'current':'explored');
-    // Force strong visual separation here so minimap state cannot be hidden by older CSS/cache.
     if(mode==='mini'){
       if(!known)c.style.background='#05080b';
-      else if(current)c.style.background=floor?'#74cfff':'#477c9c';
-      else c.style.background=floor?'#b9f06f':'#78a94d';
+      else if(current)c.style.background=floor?'#63cfff':'#3f7898';
+      else c.style.background=floor?'#ffd866':'#b58a2f';
     }else{
       if(!known)c.style.background='#0a1722';
       else if(current)c.style.background=floor?'#91d8ff':'#5b96ba';
-      else c.style.background=floor?'#c8f58a':'#82b55a';
+      else c.style.background=floor?'#ffe58a':'#c49a3a';
     }
     if(known&&floor){
       if(game.exit&&game.exit.x===x&&game.exit.y===y)c.classList.add('stairs');
