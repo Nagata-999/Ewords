@@ -1,0 +1,15 @@
+/* 21–30F: Lava Cavern */
+body.zone-lava .floor{background-color:#34211d!important;box-shadow:inset 0 0 0 1px #1a0c08!important}
+body.zone-lava .floor-0{background-image:linear-gradient(135deg,#ffb34716,#0000 35%,#1a090866),repeating-linear-gradient(0deg,#4a2d24 0 10px,#3b241f 10px 20px)!important}
+body.zone-lava .floor-1{background-image:radial-gradient(circle at 72% 35%,#ff8c3222 0 5%,transparent 6%),linear-gradient(145deg,#4a2a22,#2d1a18 70%,#170b0a)!important}
+body.zone-lava .floor-2{background-image:linear-gradient(125deg,#5a3024,#331b18 62%,#1b0d0b)!important}
+body.zone-lava .floor::before{background:radial-gradient(circle at 50% 46%,transparent 35%,#1a080844 72%,#090303dd 100%)!important}
+body.zone-lava .floor-auto::after{background-image:linear-gradient(90deg,transparent 46%,#ff9c3a13 49% 51%,transparent 54%)}
+body.zone-lava .floor.edge-n::after{box-shadow:inset 0 5px 8px #210906dd!important}
+body.zone-lava .floor.edge-s::after{box-shadow:inset 0 -8px 11px #0e0303ee!important}
+body.zone-lava .wall{background-color:#261512!important;border-color:#100706!important;box-shadow:inset 0 1px 0 #8a5f4d55,inset 0 -7px 0 #150b09,0 5px 10px #000b!important}
+body.zone-lava .wall::before{background:linear-gradient(145deg,#6a463b 0 8%,#52352d 9% 46%,#3c241f 47% 100%)!important;border-color:#281511!important;box-shadow:inset 2px 2px 0 #9c705f55,inset -2px -2px 0 #2b1713!important}
+body.zone-lava .wall::after{background:linear-gradient(#4b2c24 0 12%,#301a16 13% 48%,#1a0d0b 49% 100%)!important;border-color:#120706!important;box-shadow:inset 0 3px 0 #7b514355!important}
+body.zone-lava .memory{filter:brightness(.23) saturate(.6)!important}
+body.zone-lava #boardWrap{box-shadow:0 0 0 1px #7b3a2455,0 12px 34px #18070688!important}
+body.zone-lava .exit{box-shadow:inset 0 0 18px #ff8b2e66!important}
