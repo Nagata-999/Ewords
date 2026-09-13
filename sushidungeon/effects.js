@@ -19,20 +19,15 @@
       return document.getElementById('board')?.children?.[vy*11+vx]||null;
     }catch{return null}
   }
-  function enemyByName(name){return [...document.querySelectorAll('#board .entity.enemy')].find(e=>e.title===name)||null}
-  function enemyForHit(name){
+  function enemyForHit(){
     const t=window.__sushiLastHitTarget;
-    if(t&&t.name===name){
-      const exact=cellForWorld(t.x,t.y)?.querySelector('.entity.enemy');
-      if(exact)return exact;
-    }
-    return enemyByName(name);
+    if(!t)return null;
+    return cellForWorld(t.x,t.y)?.querySelector('.entity.enemy')||null;
   }
-  function gameEnemyForHit(name){
+  function gameEnemyForHit(){
     try{
       const t=window.__sushiLastHitTarget;
-      if(t&&t.name===name&&t.enemy)return t.enemy.hp<=0?t.enemy:null;
-      return game?.enemies?.find(e=>e.name===name&&e.hp<=0)||null;
+      return t?.enemy&&t.enemy.hp<=0?t.enemy:null;
     }catch{return null}
   }
   function burstAt(el,kind='hit'){
@@ -78,8 +73,13 @@
     }
     cells.forEach((c,i)=>setTimeout(()=>burstAt(c,'explosion'),Math.min(i,12)*12));
     hit.forEach((h,i)=>setTimeout(()=>{
-      const e=cellForWorld(h.x,h.y)?.querySelector('.entity.enemy');
-      if(e){burstAt(e,'explosionHit');sparkleAt(e,'defeat')}
+      const c=cellForWorld(h.x,h.y);
+      const e=c?.querySelector('.entity.enemy');
+      const target=e||c;
+      if(target){
+        burstAt(target,'explosionHit');
+        if(h.killed)sparkleAt(target,'defeat');
+      }
     },40+i*35));
     flash('explosion');shake('heavy');haptic([25,18,32]);
   }
@@ -90,8 +90,8 @@
     const t=String(text||'');let m;
     m=t.match(/^(.+?)に(\d+)ダメージ/);
     if(m){
-      const e=enemyForHit(m[1]);slashAt(e);burstAt(e,'hit');haptic(12);
-      if(gameEnemyForHit(m[1]))setTimeout(()=>defeatAt(e),55);
+      const e=enemyForHit();slashAt(e);burstAt(e,'hit');haptic(12);
+      if(gameEnemyForHit())setTimeout(()=>defeatAt(e),55);
       return;
     }
     m=t.match(/^(.+?)の(?:攻撃|毒牙|強打|豪腕|突進)！\s*(\d+)ダメージ/);
