@@ -91,4 +91,6 @@ function finish(){let s=DATA.sets[setIndex];if(!saved.includes(s.id)){saved.push
 function nextTheme(){let c=DATA.categories.find(x=>x.id===catId),cur=c.sets.indexOf(DATA.sets[setIndex].id),sid=c.sets[(cur+1)%c.sets.length];openStudy(DATA.sets.findIndex(s=>s.id===sid))}
 function backCategory(){openCategory(catId)}function goHome(){renderHome();show("home")}
 renderHome();
-</script></body></html>
+</script><script src="sushigacha/gem-system.js?v=20260913-2"></script>
+<script src="sushigacha/multi-game-lucky-gems.js?v=20260913-2"></script>
+</body></html>
