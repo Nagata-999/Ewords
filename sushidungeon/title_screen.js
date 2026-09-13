@@ -41,7 +41,7 @@
         <div class="titleSushi">🍣</div>
         <p class="titleKicker">SUSHI MYSTERY DUNGEON</p>
         <h1>すしの<br><span>不思議なダンジョン</span></h1>
-        <p class="titleTagline">剣と寿司と英単語。10Fを目指せ。</p>
+        <p class="titleTagline">剣と寿司と英単語。100Fを目指せ。</p>
         <div class="titleButtons">
           <button id="titleNew" type="button" class="titleBtn primary">はじめから</button>
           <button id="titleContinue" type="button" class="titleBtn">つづきから</button>
