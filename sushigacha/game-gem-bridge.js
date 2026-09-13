@@ -43,23 +43,9 @@
     check();
   }
 
-  function watchRun(){
-    const menu=document.getElementById('menu');
-    if(!menu)return;
-    const check=()=>{
-      const t=(menu.textContent||'').replace(/\s+/g,' ').trim();
-      if(!/GAME OVER/i.test(t))return;
-      const m=t.match(/DISTANCE\s*:\s*(\d+)m/i); if(!m)return;
-      const distance=Number(m[1]);
-      award('sushirun',distance,1000,`gameover:${distance}:${t.slice(0,120)}`);
-    };
-    new MutationObserver(check).observe(menu,{childList:true,subtree:true,characterData:true});
-    check();
-  }
-
   function init(){
     if(page==='sushitype.html')watchType();
-    else if(page==='sushi_run.html')watchRun();
+    // SushiRun now uses in-game collectible gems instead of a game-over distance payout.
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
