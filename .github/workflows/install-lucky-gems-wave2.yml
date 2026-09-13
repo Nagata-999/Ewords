@@ -1,0 +1,72 @@
+name: Install lucky gems wave 2
+
+on:
+  push:
+    paths:
+      - '.github/workflows/install-lucky-gems-wave2.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Patch more game pages
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          pages = [
+              'shinotan.html',
+              'antonitan.html',
+              'sushitalk.html',
+              'sukaishi_world_study_v03.html',
+          ]
+          gem = '<script src="sushigacha/gem-system.js?v=20260913-2"></script>'
+          lucky = '<script src="sushigacha/multi-game-lucky-gems.js?v=20260913-2"></script>'
+
+          for name in pages:
+              p = Path(name)
+              if not p.exists():
+                  print('skip missing', name)
+                  continue
+              text = p.read_text(encoding='utf-8')
+              text = re.sub(r'\n?<script src="sushigacha/gem-system\.js\?v=[^"]+"></script>', '', text)
+              text = re.sub(r'\n?<script src="sushigacha/multi-game-lucky-gems\.js\?v=[^"]+"></script>', '', text)
+              block = gem + '\n' + lucky + '\n'
+              text = text.replace('</body>', block + '</body>')
+              p.write_text(text, encoding='utf-8')
+              print('patched', name)
+
+          p = Path('sushidungeon/index.html')
+          text = p.read_text(encoding='utf-8')
+          text = re.sub(r'\n?<script src="\.\./sushigacha/gem-system\.js\?v=[^"]+"></script>', '', text)
+          text = re.sub(r'\n?<script src="gem_chest\.js\?v=[^"]+"></script>', '', text)
+          block = '<script src="../sushigacha/gem-system.js?v=20260913-2"></script>\n<script src="gem_chest.js?v=20260913-1"></script>\n'
+          text = text.replace('</body>', block + '</body>')
+          p.write_text(text, encoding='utf-8')
+          print('patched sushidungeon/index.html')
+          PY
+      - name: Commit and push safely
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No changes needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add shinotan.html antonitan.html sushitalk.html sukaishi_world_study_v03.html sushidungeon/index.html
+          git commit -m 'Enable lucky gems in synonyms talk world history and dungeon'
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin main && exit 0
+            echo "Push attempt $i failed; retrying..."
+            sleep 2
+          done
+          exit 1
