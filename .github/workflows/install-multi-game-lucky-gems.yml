@@ -1,0 +1,63 @@
+name: Install multi-game lucky gems
+
+on:
+  push:
+    paths:
+      - '.github/workflows/install-multi-game-lucky-gems.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Patch game pages
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          pages = [
+              'sushi_hayaoshi.html',
+              'sushi_quiz.html',
+              'sushi_survivor.html',
+              'sushi_parts.html',
+          ]
+          gem = '<script src="sushigacha/gem-system.js?v=20260913-2"></script>'
+          lucky = '<script src="sushigacha/multi-game-lucky-gems.js?v=20260913-1"></script>'
+
+          for name in pages:
+              p = Path(name)
+              if not p.exists():
+                  print('skip missing', name)
+                  continue
+              text = p.read_text(encoding='utf-8')
+              text = re.sub(r'\n?<script src="sushigacha/gem-system\.js\?v=[^"]+"></script>', '', text)
+              text = re.sub(r'\n?<script src="sushigacha/multi-game-lucky-gems\.js\?v=[^"]+"></script>', '', text)
+              block = gem + '\n' + lucky + '\n'
+              text = text.replace('</body>', block + '</body>')
+              p.write_text(text, encoding='utf-8')
+              print('patched', name)
+          PY
+      - name: Commit and push safely
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No changes needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add sushi_hayaoshi.html sushi_quiz.html sushi_survivor.html sushi_parts.html
+          git commit -m 'Enable lucky gem drops in more sushi games'
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin main && exit 0
+            echo "Push attempt $i failed; retrying..."
+            sleep 2
+          done
+          exit 1
