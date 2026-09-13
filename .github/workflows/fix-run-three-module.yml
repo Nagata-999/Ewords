@@ -1,0 +1,50 @@
+name: Fix SushiRun Three.js module loader
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-run-three-module.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fix Three.js loader and bust cache
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          js=Path('sushigacha/run-avatar-3d.js')
+          text=js.read_text(encoding='utf-8')
+          old="await loadScript('https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.min.js');"
+          new="window.THREE = await import('https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js');"
+          if old in text:
+              text=text.replace(old,new,1)
+          elif 'three.module.js' not in text:
+              raise SystemExit('Three.js loader pattern not found')
+          js.write_text(text,encoding='utf-8')
+
+          page=Path('sushi_run.html')
+          html=page.read_text(encoding='utf-8')
+          tag='<script src="sushigacha/run-avatar-3d.js?v=20260913-3"></script>'
+          html=re.sub(r'<script src="sushigacha/run-avatar-3d\.js\?v=[^"]+"></script>',tag,html)
+          page.write_text(html,encoding='utf-8')
+          PY
+      - name: Commit changes
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No changes needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add sushigacha/run-avatar-3d.js sushi_run.html
+          git commit -m 'Fix Three.js chibi runner loader'
+          git push
