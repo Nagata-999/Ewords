@@ -26,7 +26,13 @@
     if(typeof die==='function'&&!die.__saveWrapped){const base=die;die=function(){clearSave();return base.apply(this,arguments)};die.__saveWrapped=true}
     if(typeof finishClear==='function'&&!finishClear.__saveWrapped){const base=finishClear;finishClear=function(){clearSave();return base.apply(this,arguments)};finishClear.__saveWrapped=true}
   }
-  function init(){build();hookSaves();open()}
+  function loadRankingAssets(){
+    if(!document.querySelector('link[data-dungeon-ranking]')){const l=document.createElement('link');l.rel='stylesheet';l.href='ranking.css?v=20260914-0625';l.dataset.dungeonRanking='1';document.head.appendChild(l)}
+    const loadRanking=()=>{if(document.querySelector('script[data-dungeon-ranking]'))return;const r=document.createElement('script');r.src='ranking.js?v=20260914-0625';r.dataset.dungeonRanking='1';document.body.appendChild(r)};
+    if(window.supabase?.createClient){loadRanking();return}
+    const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';s.onload=loadRanking;s.onerror=loadRanking;document.head.appendChild(s);
+  }
+  function init(){build();hookSaves();open();loadRankingAssets()}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
   window.sushiTitleScreen={open,close,save:writeSave,clearSave};
 })();
