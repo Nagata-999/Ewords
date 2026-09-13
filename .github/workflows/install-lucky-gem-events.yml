@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Install lucky gem scripts
         shell: bash
         run: |
@@ -24,7 +26,7 @@ jobs:
           p=Path('sushitan.html')
           text=p.read_text(encoding='utf-8')
           text=re.sub(r'\n?<script src="sushigacha/sushitan-lucky-gems\.js\?v=[^"]+"></script>', '', text)
-          tag='<script src="sushigacha/sushitan-lucky-gems.js?v=20260913-1"></script>'
+          tag='<script src="sushigacha/sushitan-lucky-gems.js?v=20260913-2"></script>'
           anchor=re.search(r'<script src="sushigacha/gem-system\.js\?v=[^"]+"></script>', text)
           if anchor:
               text=text.replace(anchor.group(0), anchor.group(0)+'\n'+tag)
@@ -49,4 +51,17 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add sushitan.html sushi_run.html
           git commit -m 'Enable lucky gem drops and rare SushiRun gems'
-          git push
+
+          # Other automation may update main at the same time. Rebase and retry.
+          for attempt in 1 2 3 4; do
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Push conflicted; rebasing on latest main (attempt ${attempt})..."
+            git fetch origin main
+            git rebase origin/main
+            sleep $((attempt * 2))
+          done
+
+          echo 'Failed to push after retries.' >&2
+          exit 1
