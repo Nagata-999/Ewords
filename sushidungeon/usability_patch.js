@@ -6,6 +6,7 @@
   let moveDelay=0;
   let moveRepeat=0;
   let activeDirButton=null;
+  let moveQueued=false;
 
   function setFacingOnly(dx,dy){
     if(!game||game.dead||(!dx&&!dy))return;
@@ -22,6 +23,36 @@
     moveDelay=0;moveRepeat=0;
     if(activeDirButton)activeDirButton.classList.remove('dirPressed');
     activeDirButton=null;
+  }
+  function canVisualStep(dx,dy){
+    if(!game||game.dead)return false;
+    const tx=game.player.x+dx,ty=game.player.y+dy;
+    if(tx<0||ty<0||tx>=W||ty>=H||!game.grid?.[ty]?.[tx])return false;
+    if(game.enemies?.some(e=>e.hp>0&&e.x===tx&&e.y===ty))return false;
+    return true;
+  }
+  function nudgeHero(dx,dy){
+    const img=document.getElementById('heroBoardSprite');
+    const cell=document.querySelector('#board .entity.player')?.closest('.cell');
+    if(!img||!cell)return;
+    const r=cell.getBoundingClientRect();
+    const nx=Math.round(r.width*.18*dx),ny=Math.round(r.height*.18*dy);
+    img.style.translate=`${nx}px ${ny}px`;
+  }
+  function clearHeroNudge(){
+    const img=document.getElementById('heroBoardSprite');
+    if(img)img.style.translate='';
+  }
+  function responsiveMove(dx,dy){
+    if(!game||game.dead||moveQueued)return;
+    moveQueued=true;
+    window.dispatchEvent(new CustomEvent('sushi-facing',{detail:{dx,dy}}));
+    if(canVisualStep(dx,dy))nudgeHero(dx,dy);
+    requestAnimationFrame(()=>{
+      moveQueued=false;
+      move(dx,dy);
+      requestAnimationFrame(clearHeroNudge);
+    });
   }
 
   const board=document.getElementById('boardWrap');
@@ -59,10 +90,8 @@
     },true);
   }
 
-  // Immediate-response direction input:
-  // - first step fires on pointerdown
-  // - holding begins after 260ms, then repeats every 145ms
-  // - sliding off/cancel stops repeat, but never delays the first step
+  // Perceived-latency polish:
+  // show a tiny hero nudge immediately, then run the real move on the next frame.
   document.querySelectorAll('[data-dir]').forEach(b=>{
     const [dx,dy]=b.dataset.dir.split(',').map(Number);
 
@@ -77,13 +106,13 @@
       }
 
       activeDirButton=b;b.classList.add('dirPressed');
-      if(game&&!game.dead)move(dx,dy);
+      responsiveMove(dx,dy);
 
       moveDelay=setTimeout(()=>{
         if(activeDirButton!==b||!game||game.dead)return;
         moveRepeat=setInterval(()=>{
           if(activeDirButton!==b||!game||game.dead||enemyAdjacent())return;
-          move(dx,dy);
+          responsiveMove(dx,dy);
         },145);
       },260);
     },true);
