@@ -3,13 +3,11 @@
   if (typeof avatarSVG !== 'function') return;
   if (typeof DEFAULT_AVATAR === 'object' && DEFAULT_AVATAR) {
     if(DEFAULT_AVATAR.faceShape == null) DEFAULT_AVATAR.faceShape = 0;
-    if(DEFAULT_AVATAR.expression == null) DEFAULT_AVATAR.expression = 0;
     if(DEFAULT_AVATAR.pet == null) DEFAULT_AVATAR.pet = 0;
     if(DEFAULT_AVATAR.aura == null) DEFAULT_AVATAR.aura = 0;
   }
 
   const FACE_SHAPE_NAMES=['標準','丸顔','シャープ'];
-  const EXPRESSIONS=['ふつう','にこにこ','ドヤ顔','びっくり','ねむそう'];
   const PETS=['なし','ねこ','すし','スライム','恐竜'];
   const AURAS=['なし','キラキラ','炎','電気','桜'];
   const baseRender=avatarSVG;
@@ -31,7 +29,6 @@
   }
 
   function extras(a){
-    const e=Math.max(0,Math.min(EXPRESSIONS.length-1,Number(a.expression)||0));
     const p=Math.max(0,Math.min(PETS.length-1,Number(a.pet)||0));
     const u=Math.max(0,Math.min(AURAS.length-1,Number(a.aura)||0));
     let s='';
@@ -40,10 +37,6 @@
     if(u===3)s+='<g font-size="21"><text x="43" y="102">⚡</text><text x="180" y="128">⚡</text><text x="50" y="218">⚡</text></g>';
     if(u===4)s+='<g font-size="18"><text x="43" y="72">🌸</text><text x="181" y="112">🌸</text><text x="50" y="201">🌸</text></g>';
     if(p){const icon=['','🐱','🍣','🟢','🦖'][p];s+=`<g><ellipse cx="194" cy="251" rx="25" ry="7" fill="#000" opacity=".09"/><text x="174" y="247" font-size="35">${icon}</text></g>`;}
-    if(e===1)s+='<g fill="none" stroke="#8b4f43" stroke-width="3" stroke-linecap="round"><path d="M103 108 Q120 124 137 108"/></g><g fill="#e9958c" opacity=".5"><ellipse cx="91" cy="106" rx="8" ry="4"/><ellipse cx="149" cy="106" rx="8" ry="4"/></g>';
-    if(e===2)s+='<g fill="none" stroke="#354b47" stroke-width="3" stroke-linecap="round"><path d="M88 86 Q98 80 107 86"/><path d="M133 86 Q143 80 152 86"/></g><path d="M108 112 Q121 119 134 110" fill="none" stroke="#8b4f43" stroke-width="3" stroke-linecap="round"/>';
-    if(e===3)s+='<g fill="#354b47"><circle cx="98" cy="91" r="5"/><circle cx="142" cy="91" r="5"/></g><ellipse cx="120" cy="113" rx="7" ry="9" fill="#8b4f43"/>';
-    if(e===4)s+='<g fill="none" stroke="#354b47" stroke-width="3" stroke-linecap="round"><path d="M89 92 Q98 87 107 92"/><path d="M133 92 Q142 87 151 92"/></g><path d="M112 113 Q120 109 128 113" fill="none" stroke="#8b4f43" stroke-width="3" stroke-linecap="round"/>';
     return s;
   }
 
@@ -59,5 +52,5 @@
   };
 
   window.SushiAvatarFaceShape={names:FACE_SHAPE_NAMES};
-  window.SushiAvatarFun={expressions:EXPRESSIONS,pets:PETS,auras:AURAS};
+  window.SushiAvatarFun={pets:PETS,auras:AURAS};
 })();
