@@ -1,6 +1,6 @@
 'use strict';
 (function(){
-  const BOSS_FLOOR=10;
+  const BOSS_FLOOR=1; // DEBUG: normally 10
   const baseGenerate=generateFloor;
   const baseDescend=descend;
 
@@ -29,8 +29,8 @@
     });
     game.bossSpawned10=true;
     game.bossDefeated10=false;
-    msg('⚠ 10F。ゴブリン隊長が階段を封鎖している！');
-    log('BOSS：ゴブリン隊長が現れた。倒さなければ先へ進めない。');
+    msg('⚠ DEBUG：ゴブリン隊長が1Fに出現！');
+    log('DEBUG BOSS：ゴブリン隊長が現れた。');
   }
 
   generateFloor=function(){
@@ -44,14 +44,14 @@
       const boss=livingBoss();
       if(boss){
         msg('階段はゴブリン隊長に封鎖されている！');
-        log('ゴブリン隊長を倒さなければ11Fへ進めない。');
+        log('ゴブリン隊長を倒さなければ先へ進めない。');
         if(typeof render==='function')render();
         return;
       }
       if(!game.bossDefeated10){
         game.bossDefeated10=true;
-        msg('ゴブリン隊長を撃破！ 11Fへの道が開いた。');
-        log('10F BOSS ゴブリン隊長を撃破した。');
+        msg('ゴブリン隊長を撃破！ 次の階への道が開いた。');
+        log('DEBUG BOSS CLEAR：ゴブリン隊長撃破。');
       }
     }
     return baseDescend.apply(this,arguments);
@@ -65,7 +65,7 @@
     if(wasBoss&&alive&&enemy.hp<=0){
       game.bossDefeated10=true;
       msg('★ ゴブリン隊長を倒した！ 階段の封印が解けた！');
-      log('10F BOSS CLEAR：ゴブリン隊長撃破。');
+      log('DEBUG BOSS CLEAR：ゴブリン隊長撃破。');
     }
     return r;
   };
