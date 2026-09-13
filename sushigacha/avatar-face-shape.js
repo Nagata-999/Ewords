@@ -28,6 +28,15 @@
     return svg;
   }
 
+  function petMarkup(p){
+    if(!p)return '';
+    const shadow='<ellipse cx="194" cy="254" rx="20" ry="5" fill="#000" opacity=".10"/>';
+    if(p===1)return `<g>${shadow}<ellipse cx="194" cy="239" rx="14" ry="15" fill="#f2b56b" stroke="#6b5141" stroke-width="2"/><path d="M181 230 L184 215 L191 226 M207 230 L204 215 L197 226" fill="#f2b56b" stroke="#6b5141" stroke-width="2" stroke-linejoin="round"/><circle cx="189" cy="234" r="2" fill="#354b47"/><circle cx="199" cy="234" r="2" fill="#354b47"/><path d="M192 240 Q194 242 196 240" fill="none" stroke="#8b4f43" stroke-width="1.7" stroke-linecap="round"/><path d="M181 245 Q173 240 176 231" fill="none" stroke="#6b5141" stroke-width="3" stroke-linecap="round"/></g>`;
+    if(p===2)return `<g>${shadow}<ellipse cx="194" cy="243" rx="18" ry="10" fill="#fff" stroke="#6b5141" stroke-width="2"/><rect x="178" y="235" width="32" height="10" rx="5" fill="#ef6b63"/><rect x="190" y="234" width="8" height="12" rx="2" fill="#2f5c4d"/></g>`;
+    if(p===3)return `<g>${shadow}<path d="M176 246 Q176 224 194 222 Q212 224 212 246 Q207 252 194 252 Q181 252 176 246Z" fill="#7fd68a" stroke="#4d7454" stroke-width="2"/><circle cx="188" cy="238" r="2" fill="#354b47"/><circle cx="200" cy="238" r="2" fill="#354b47"/><path d="M190 244 Q194 247 198 244" fill="none" stroke="#4d7454" stroke-width="1.7"/></g>`;
+    return `<g>${shadow}<path d="M179 248 Q176 233 184 224 Q193 216 203 224 Q213 233 207 249 Q197 253 179 248Z" fill="#78b86b" stroke="#456a42" stroke-width="2"/><path d="M184 225 L178 215 L190 222 M202 225 L208 216 L207 230" fill="#78b86b" stroke="#456a42" stroke-width="2" stroke-linejoin="round"/><circle cx="188" cy="236" r="2" fill="#354b47"/><circle cx="199" cy="236" r="2" fill="#354b47"/><path d="M191 243 Q195 246 199 242" fill="none" stroke="#456a42" stroke-width="1.7"/></g>`;
+  }
+
   function extras(a){
     const p=Math.max(0,Math.min(PETS.length-1,Number(a.pet)||0));
     const u=Math.max(0,Math.min(AURAS.length-1,Number(a.aura)||0));
@@ -36,7 +45,7 @@
     if(u===2)s+='<g font-size="23"><text x="38" y="178">🔥</text><text x="178" y="178">🔥</text><text x="57" y="229">🔥</text><text x="159" y="229">🔥</text></g>';
     if(u===3)s+='<g font-size="21"><text x="43" y="102">⚡</text><text x="180" y="128">⚡</text><text x="50" y="218">⚡</text></g>';
     if(u===4)s+='<g font-size="18"><text x="43" y="72">🌸</text><text x="181" y="112">🌸</text><text x="50" y="201">🌸</text></g>';
-    if(p){const icon=['','🐱','🍣','🟢','🦖'][p];s+=`<g><ellipse cx="194" cy="251" rx="25" ry="7" fill="#000" opacity=".09"/><text x="174" y="247" font-size="35">${icon}</text></g>`;}
+    s+=petMarkup(p);
     return s;
   }
 
