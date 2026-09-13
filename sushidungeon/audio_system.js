@@ -6,13 +6,11 @@
   let bgm=null;
   let started=false;
 
-  function save(){
-    try{localStorage.setItem(KEY,JSON.stringify(config))}catch{}
-  }
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(config))}catch{}}
 
   function ensureBgm(){
     if(bgm)return bgm;
-    bgm=new Audio('Under_The_Cold_Stone.mp3');
+    bgm=new Audio('audio/bgm/Under_The_Cold_Stone.mp3');
     bgm.loop=true;
     bgm.preload='auto';
     bgm.volume=config.enabled?config.bgmVolume:0;
@@ -29,21 +27,20 @@
     if(bgm)bgm.volume=config.enabled?config.bgmVolume:0;
   }
 
-  function startBgm(){
+  async function startBgm(){
     const audio=ensureBgm();
     if(!config.enabled||started)return;
-    audio.play().then(()=>{started=true;updateUi()}).catch(()=>{});
+    try{
+      await audio.play();
+      started=true;
+      updateUi();
+    }catch{}
   }
 
   function toggleAudio(){
     config.enabled=!config.enabled;
     save();
-    if(config.enabled){
-      startBgm();
-    }else if(bgm){
-      bgm.pause();
-      started=false;
-    }
+    if(config.enabled){startBgm()}else if(bgm){bgm.pause();started=false}
     updateUi();
   }
 
