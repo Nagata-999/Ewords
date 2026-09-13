@@ -1,0 +1,46 @@
+name: Install SushiRun gem pickups
+
+on:
+  push:
+    paths:
+      - '.github/workflows/install-run-gem-pickups.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inject gem pickup script
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('sushi_run.html')
+          text=p.read_text(encoding='utf-8')
+          tag='<script src="sushigacha/run-gem-pickups.js?v=20260913-1"></script>'
+          text=re.sub(r'\n?<script src="sushigacha/run-gem-pickups\.js\?v=[^"]+"></script>', '', text)
+          anchor='<script src="sushigacha/run-avatar.js?v=20260913-2"></script>'
+          if anchor in text:
+              text=text.replace(anchor, anchor+'\n'+tag)
+          else:
+              text=text.replace('</body>', tag+'\n</body>')
+          # ensure the updated bridge is not stuck behind an old cache
+          text=re.sub(r'<script src="sushigacha/game-gem-bridge\.js\?v=[^"]+"></script>', '<script src="sushigacha/game-gem-bridge.js?v=20260913-2"></script>', text)
+          p.write_text(text,encoding='utf-8')
+          PY
+      - name: Commit changes
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No changes needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add sushi_run.html
+          git commit -m 'Enable collectible gems in SushiRun'
+          git push
