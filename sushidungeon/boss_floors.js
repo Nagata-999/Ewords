@@ -22,10 +22,32 @@
     }
     spots.sort((a,b)=>b.dist-a.dist);
     const p=spots[0];if(!p)return;
-    game.enemies.push({...spec,maxHp:spec.hp,min:game.floor,max:game.floor,x:p.x,y:p.y,asleep:false,motion:'idle',facing:'s',isBoss:true,bossFloor:game.floor});
+    game.enemies.push({...spec,maxHp:spec.hp,min:game.floor,max:game.floor,x:p.x,y:p.y,asleep:false,motion:'idle',facing:'s',isBoss:true,bossFloor:game.floor,splitTriggered:false});
     game[`bossSpawned${game.floor}`]=true;game[`bossDefeated${game.floor}`]=false;
     msg(`⚠ ${game.floor}F。${spec.message}`);
     log(`BOSS：${spec.name}が現れた。倒さなければ先へ進めない。`);
+  }
+  function splitGiantSlime(boss){
+    if(!game||game.floor!==20||!boss||boss.name!=='巨大水スライム'||boss.splitTriggered||boss.hp<=0||boss.hp>Math.ceil(boss.maxHp/2))return;
+    boss.splitTriggered=true;
+    const occupied=new Set((game.enemies||[]).filter(e=>e.hp>0&&e!==boss).map(e=>`${e.x},${e.y}`));
+    occupied.add(`${game.player.x},${game.player.y}`);occupied.add(`${boss.x},${boss.y}`);
+    const candidates=[];
+    for(let dy=-2;dy<=2;dy++)for(let dx=-2;dx<=2;dx++){
+      if(!dx&&!dy)continue;
+      const x=boss.x+dx,y=boss.y+dy;
+      if(x<1||y<1||x>=W-1||y>=H-1||!game.grid?.[y]?.[x]||occupied.has(`${x},${y}`))continue;
+      candidates.push({x,y,d:Math.max(Math.abs(dx),Math.abs(dy))});
+    }
+    candidates.sort((a,b)=>a.d-b.d);
+    let spawned=0;
+    for(const p of candidates){
+      if(spawned>=2)break;
+      if(occupied.has(`${p.x},${p.y}`))continue;
+      game.enemies.push({name:'水スライム',icon:'💧',hp:18,maxHp:18,atk:9,exp:8,min:20,max:20,x:p.x,y:p.y,asleep:false,motion:'idle',facing:'s',summoned:true});
+      occupied.add(`${p.x},${p.y}`);spawned++;
+    }
+    if(spawned){msg(`💥 巨大水スライムが分裂した！ 水スライム${spawned}体が飛び散った！`);log(`20F BOSS PHASE：巨大水スライムがHP半分で分裂。水スライム${spawned}体を召喚。`);if(typeof render==='function')render()}
   }
   generateFloor=function(){const r=baseGenerate.apply(this,arguments);spawnBoss();return r};
   descend=function(){
@@ -41,8 +63,9 @@
   attack=function(enemy){
     const wasBoss=!!enemy?.isBoss,alive=enemy?.hp>0,bossFloor=enemy?.bossFloor||game?.floor,name=enemy?.name;
     const r=baseAttack.apply(this,arguments);
+    if(wasBoss&&alive&&enemy.hp>0)splitGiantSlime(enemy);
     if(wasBoss&&alive&&enemy.hp<=0){game[`bossDefeated${bossFloor}`]=true;msg(`★ ${name}を倒した！ 階段の封印が解けた！`);log(`${bossFloor}F BOSS CLEAR：${name}撃破。`)}
     return r
   };
-  window.sushiBossFloors={livingBoss,spawnBoss,BOSSES};
+  window.sushiBossFloors={livingBoss,spawnBoss,splitGiantSlime,BOSSES};
 })();
