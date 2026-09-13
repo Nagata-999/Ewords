@@ -67,17 +67,18 @@
   function paint(){
     const board=document.getElementById('board');if(!board||!game?.traps)return;
     const cells=[...board.children];
-    cells.forEach((c,i)=>{
-      c.querySelector('.trapMark')?.remove();
-      const vx=i%11,vy=Math.floor(i/11);
-      const x=game.player.x+(vx-5),y=game.player.y+(vy-3);
+    cells.forEach(c=>{
+      const x=Number(c.dataset.x),y=Number(c.dataset.y);
+      if(!Number.isFinite(x)||!Number.isFinite(y))return;
       const t=game.traps.find(t=>t.revealed&&t.x===x&&t.y===y);
-      if(!t)return;
-      const s=document.createElement('span');s.className='trapMark'+(t.spent?' spent':'');s.textContent=t.icon;s.title=t.name;c.append(s);
+      const old=c.querySelector('.trapMark');
+      if(!t){old?.remove();return}
+      if(old&&old.dataset.trapKey===`${x},${y},${t.type},${t.spent}`)return;
+      old?.remove();
+      const s=document.createElement('span');s.className='trapMark'+(t.spent?' spent':'');s.textContent=t.icon;s.title=t.name;s.dataset.trapKey=`${x},${y},${t.type},${t.spent}`;c.append(s);
     });
   }
 
-  document.addEventListener('DOMContentLoaded',()=>{
-    const board=document.getElementById('board');if(board)new MutationObserver(()=>requestAnimationFrame(paint)).observe(board,{childList:true,subtree:true});
-  });
+  window.addEventListener('sushi-rendered',()=>requestAnimationFrame(paint));
+  document.addEventListener('DOMContentLoaded',()=>requestAnimationFrame(paint));
 })();
