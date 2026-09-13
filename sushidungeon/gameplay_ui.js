@@ -70,6 +70,21 @@
   function enemyEntityByName(name){
     return [...document.querySelectorAll('#board .entity.enemy')].find(el=>el.title===name)||null;
   }
+  function cellForWorld(x,y){
+    try{
+      const vx=x-(game.player.x-5),vy=y-(game.player.y-3);
+      if(vx<0||vy<0||vx>=11||vy>=7)return null;
+      return document.getElementById('board')?.children?.[vy*11+vx]||null;
+    }catch{return null}
+  }
+  function exactEnemyEntity(name){
+    const t=window.__sushiLastHitTarget;
+    if(t&&t.name===name){
+      const exact=cellForWorld(t.x,t.y)?.querySelector('.entity.enemy');
+      if(exact)return exact;
+    }
+    return enemyEntityByName(name);
+  }
 
   function showDamage(target,amount,kind){
     if(!target||!amount)return;
@@ -91,7 +106,7 @@
     const t=String(text||'');
     let m=t.match(/^(.+?)に(\d+)ダメージ/);
     if(m){
-      showDamage(enemyEntityByName(m[1]),Number(m[2]),'dealt');
+      showDamage(exactEnemyEntity(m[1]),Number(m[2]),'dealt');
       return;
     }
     m=t.match(/^(.+?)の(?:攻撃|毒牙|強打|豪腕|突進)！\s*(\d+)ダメージ/);
