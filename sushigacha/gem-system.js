@@ -37,4 +37,12 @@
     return {gems,remainder,balance:ledger.gems,duplicate:false};
   }
   window.SushiGem={awardScore,balance};
+
+  // The gem system is already shared by the main learning games, so it also mounts
+  // the persistent navigation/daily-quest bar without editing every game page.
+  if(!document.querySelector('script[src*="site-taskbar.js"]')){
+    const s=document.createElement('script');
+    s.src='/sushigacha/site-taskbar.js?v=20260914-1';
+    document.head.appendChild(s);
+  }
 })();
