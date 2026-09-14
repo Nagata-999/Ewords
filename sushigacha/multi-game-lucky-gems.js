@@ -75,3 +75,29 @@
     }
   }).observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});
 })();
+
+// Sushi Quiz ranking message dedupe fix.
+(() => {
+  if (!/sushi_quiz\.html$/i.test(location.pathname)) return;
+  function clearRankingChase(tableId){
+    const table=document.getElementById(tableId);
+    if(!table || !table.parentNode) return;
+    [...table.parentNode.children].forEach(el=>{
+      if(el!==table && el.classList?.contains('chase-message') && el.classList.contains('hot')) el.remove();
+    });
+  }
+  const previousOnlineRanking=window.showOnlineRanking;
+  if(typeof previousOnlineRanking==='function'){
+    window.showOnlineRanking=function(...args){
+      clearRankingChase('onlineTable');
+      return previousOnlineRanking.apply(this,args);
+    };
+  }
+  const previousBuzzerRanking=window.showBuzzerRanking;
+  if(typeof previousBuzzerRanking==='function'){
+    window.showBuzzerRanking=async function(...args){
+      clearRankingChase('buzzerRankTable');
+      return await previousBuzzerRanking.apply(this,args);
+    };
+  }
+})();
