@@ -43,6 +43,6 @@
     const s=document.createElement('script');s.src=src;document.head.appendChild(s);
   }
   loadOnce('site-taskbar.js','/sushigacha/site-taskbar.js?v=20260914-6');
-  loadOnce('daily-quest-click-bridge.js','/sushigacha/daily-quest-click-bridge.js?v=20260914-5');
+  loadOnce('daily-quest-click-bridge.js','/sushigacha/daily-quest-click-bridge.js?v=20260914-6');
   loadOnce('daily-quest-links.js','/sushigacha/daily-quest-links.js?v=20260914-1');
 })();
