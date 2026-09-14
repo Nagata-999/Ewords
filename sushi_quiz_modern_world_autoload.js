@@ -1,0 +1,2 @@
+// Compatibility alias for Sushi Quiz expansion loading.
+(()=>{if(window.__sushiQuizModernAutoload)return;window.__sushiQuizModernAutoload=true;const s=document.createElement('script');s.src='/sushi_quiz_latest_loader.js?v=20260915-modern-1';s.async=false;document.head.appendChild(s);})();
