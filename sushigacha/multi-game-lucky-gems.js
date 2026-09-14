@@ -115,13 +115,9 @@
     try{
       if(typeof QUESTIONS==='undefined' || !Array.isArray(QUESTIONS)) return;
       if(typeof SUSHI_QUIZ_EXTRA_QUESTIONS==='undefined' || !Array.isArray(SUSHI_QUIZ_EXTRA_QUESTIONS)) return;
-
-      // Do not add an identical category+question twice.
       const existing=new Set(QUESTIONS.map(q=>`${q.cat}::${q.q}`));
       const additions=SUSHI_QUIZ_EXTRA_QUESTIONS.filter(q=>!existing.has(`${q.cat}::${q.q}`));
       QUESTIONS.push(...additions);
-
-      // Repair confirmed explanation mismatches in the original bank.
       const fixes=new Map([
         ['Which river flows through Budapest?','Budapest lies on the Danube River.'],
         ['Which Asian country was formerly known as Siam?','Thailand was formerly known as Siam.'],
@@ -130,13 +126,18 @@
         ['Which branch of AI focuses on training models using large datasets?','Machine learning trains models to identify patterns from data.']
       ]);
       QUESTIONS.forEach(q=>{ if(fixes.has(q.q)) q.exp=fixes.get(q.q); });
-
-      // setup() ran before this async file arrived, so refresh all category cards.
-      if(typeof renderCategoryCards==='function'){
-        ['soloCatCards','localCatCards','onlineCatCards','buzzerCatCards'].forEach(renderCategoryCards);
-      }
+      if(typeof renderCategoryCards==='function') ['soloCatCards','localCatCards','onlineCatCards','buzzerCatCards'].forEach(renderCategoryCards);
       window.__sushiQuizExtraQuestionsLoaded = true;
       console.info(`Sushi Quiz: added ${additions.length} extra questions (${QUESTIONS.length} total).`);
+
+      // Load the second expansion after the first one has merged.
+      if(!window.__sushiQuizMathLiteratureLoaderStarted){
+        window.__sushiQuizMathLiteratureLoaderStarted=true;
+        const extra2=document.createElement('script');
+        extra2.src='/sushi_quiz_math_literature.js?v=20260914-1';
+        extra2.async=false;
+        document.head.appendChild(extra2);
+      }
     }catch(err){
       console.warn('Sushi Quiz extra questions failed to load:',err);
     }
