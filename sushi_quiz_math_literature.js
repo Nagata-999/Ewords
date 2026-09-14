@@ -1,118 +1,28 @@
-// Sushi Quiz expansion: 50 Math + 50 Literature questions (2026-09-14)
+// Sushi Quiz expansion entrypoint.
+// This URL is already loaded by older cached versions of the shared quiz loader.
 (() => {
-const EXTRA = [
-{"cat":"Math","q":"What is the value of 2^5 × 2^3?","choices":["64","128","256","512"],"ans":2,"exp":"When multiplying powers with the same base, add the exponents: 2^8 = 256."},
-{"cat":"Math","q":"If x² = 49 and x is positive, what is x?","choices":["5","6","7","8"],"ans":2,"exp":"The positive square root of 49 is 7."},
-{"cat":"Math","q":"What is the next prime number after 29?","choices":["30","31","33","37"],"ans":1,"exp":"31 is prime and is the first prime number after 29."},
-{"cat":"Math","q":"What is the sum of the interior angles of a hexagon?","choices":["540°","720°","900°","1080°"],"ans":1,"exp":"For an n-sided polygon the sum is (n−2)×180°, so a hexagon has 720°."},
-{"cat":"Math","q":"If 3x + 5 = 20, what is x?","choices":["3","4","5","6"],"ans":2,"exp":"3x = 15, so x = 5."},
-{"cat":"Math","q":"Which number is the additive identity?","choices":["−1","0","1","10"],"ans":1,"exp":"Adding 0 does not change a number, so 0 is the additive identity."},
-{"cat":"Math","q":"What is 15% of 240?","choices":["24","30","36","40"],"ans":2,"exp":"0.15 × 240 = 36."},
-{"cat":"Math","q":"What is the greatest common divisor of 36 and 48?","choices":["6","8","12","16"],"ans":2,"exp":"12 is the greatest integer that divides both 36 and 48."},
-{"cat":"Math","q":"What is the least common multiple of 6 and 8?","choices":["12","18","24","48"],"ans":2,"exp":"24 is the smallest positive number divisible by both 6 and 8."},
-{"cat":"Math","q":"A circle has radius 5. What is its area?","choices":["10π","20π","25π","50π"],"ans":2,"exp":"Area = πr² = 25π."},
-{"cat":"Math","q":"What is the slope of the line y = 3x − 4?","choices":["−4","−3","3","4"],"ans":2,"exp":"In y = mx + b, m is the slope, so the slope is 3."},
-{"cat":"Math","q":"If f(x)=x²+1, what is f(3)?","choices":["7","9","10","12"],"ans":2,"exp":"f(3)=3²+1=10."},
-{"cat":"Math","q":"Which equation represents a circle centered at the origin with radius 3?","choices":["x+y=3","x²+y²=3","x²+y²=9","x²−y²=9"],"ans":2,"exp":"A circle centered at the origin has equation x²+y²=r², so r=3 gives 9."},
-{"cat":"Math","q":"What is sin 30°?","choices":["0","1/2","√2/2","1"],"ans":1,"exp":"The standard trigonometric value sin 30° is 1/2."},
-{"cat":"Math","q":"What is cos 60°?","choices":["0","1/2","√3/2","1"],"ans":1,"exp":"The standard trigonometric value cos 60° is 1/2."},
-{"cat":"Math","q":"What is tan 45°?","choices":["0","1/2","1","√2"],"ans":2,"exp":"tan 45° = 1."},
-{"cat":"Math","q":"What is the derivative of x³?","choices":["x²","2x","3x²","3x"],"ans":2,"exp":"By the power rule, d(x³)/dx = 3x²."},
-{"cat":"Math","q":"What is the derivative of sin x?","choices":["cos x","−cos x","sin x","−sin x"],"ans":0,"exp":"The derivative of sin x is cos x."},
-{"cat":"Math","q":"What is the indefinite integral of 2x with respect to x?","choices":["x² + C","2x² + C","x + C","2 + C"],"ans":0,"exp":"The antiderivative of 2x is x² + C."},
-{"cat":"Math","q":"What is log₂(32)?","choices":["4","5","6","8"],"ans":1,"exp":"2^5 = 32, so log₂(32)=5."},
-{"cat":"Math","q":"If 10^x = 0.01, what is x?","choices":["−2","−1","1","2"],"ans":0,"exp":"0.01 = 10^−2."},
-{"cat":"Math","q":"An arithmetic sequence begins 4, 7, 10, 13. What is the 10th term?","choices":["28","30","31","34"],"ans":2,"exp":"a₁₀=4+9×3=31."},
-{"cat":"Math","q":"A geometric sequence begins 3, 6, 12, 24. What is the next term?","choices":["30","36","42","48"],"ans":3,"exp":"Each term is multiplied by 2, so the next term is 48."},
-{"cat":"Math","q":"What is the sum 1+2+3+...+100?","choices":["5000","5050","5100","10000"],"ans":1,"exp":"Using n(n+1)/2 gives 100×101/2 = 5050."},
-{"cat":"Math","q":"What is the median of 2, 5, 7, 9, 20?","choices":["5","7","8","9"],"ans":1,"exp":"The middle value of the ordered five numbers is 7."},
-{"cat":"Math","q":"What is the mean of 4, 6, 8, and 10?","choices":["6","7","8","9"],"ans":1,"exp":"(4+6+8+10)/4 = 7."},
-{"cat":"Math","q":"A fair coin is tossed three times. What is the probability of getting three heads?","choices":["1/4","1/6","1/8","1/16"],"ans":2,"exp":"(1/2)^3 = 1/8."},
-{"cat":"Math","q":"How many different ways can three distinct books be arranged on a shelf?","choices":["3","6","8","9"],"ans":1,"exp":"There are 3! = 6 arrangements."},
-{"cat":"Math","q":"How many ways can 2 people be chosen from 5 people?","choices":["5","8","10","20"],"ans":2,"exp":"5 choose 2 = 10."},
-{"cat":"Math","q":"Which value is equal to 0!?","choices":["0","1","Undefined","Infinity"],"ans":1,"exp":"By definition, 0! = 1."},
-{"cat":"Math","q":"Which mathematician is most closely associated with the theorem a²+b²=c²?","choices":["Euclid","Pythagoras","Fibonacci","Gauss"],"ans":1,"exp":"The relationship is known as the Pythagorean theorem."},
-{"cat":"Math","q":"Which mathematician introduced a famous sequence beginning 1, 1, 2, 3, 5, 8?","choices":["Fibonacci","Euler","Pascal","Descartes"],"ans":0,"exp":"The sequence is named after Fibonacci."},
-{"cat":"Math","q":"Which constant is approximately 2.71828?","choices":["π","e","φ","√2"],"ans":1,"exp":"Euler's number e is approximately 2.71828."},
-{"cat":"Math","q":"Which constant is approximately 1.618?","choices":["e","π","The golden ratio","√3"],"ans":2,"exp":"The golden ratio φ is approximately 1.618."},
-{"cat":"Math","q":"What is i², where i is the imaginary unit?","choices":["−1","0","1","2"],"ans":0,"exp":"The imaginary unit is defined by i² = −1."},
-{"cat":"Math","q":"What is the determinant of the matrix [[1,2],[3,4]]?","choices":["−2","−1","2","10"],"ans":0,"exp":"The determinant is 1×4 − 2×3 = −2."},
-{"cat":"Math","q":"Which graph is produced by y=x²?","choices":["Circle","Parabola","Hyperbola","Straight line"],"ans":1,"exp":"The graph of y=x² is a parabola."},
-{"cat":"Math","q":"What is the vertex of y=(x−2)²+3?","choices":["(−2,3)","(2,−3)","(2,3)","(3,2)"],"ans":2,"exp":"Vertex form y=(x−h)²+k has vertex (h,k), so it is (2,3)."},
-{"cat":"Math","q":"If two angles are complementary and one is 35°, what is the other?","choices":["45°","55°","65°","145°"],"ans":1,"exp":"Complementary angles add to 90°, so the other angle is 55°."},
-{"cat":"Math","q":"What is the volume of a cube with side length 4?","choices":["16","32","48","64"],"ans":3,"exp":"Volume = 4³ = 64."},
-{"cat":"Math","q":"A right triangle has hypotenuse 10 and one leg 6. What is the other leg?","choices":["4","6","8","9"],"ans":2,"exp":"By the Pythagorean theorem, the other leg is √(100−36)=8."},
-{"cat":"Math","q":"What is the sum of the first five powers of 2: 1+2+4+8+16?","choices":["30","31","32","33"],"ans":1,"exp":"1+2+4+8+16 = 31."},
-{"cat":"Math","q":"If a quantity doubles every hour, by what factor has it grown after 4 hours?","choices":["4","8","16","32"],"ans":2,"exp":"Four doublings give 2^4 = 16 times the original amount."},
-{"cat":"Math","q":"Which statement is true for every prime number greater than 2?","choices":["It is odd","It is a multiple of 3","It ends in 1","It is a square number"],"ans":0,"exp":"Every prime greater than 2 must be odd."},
-{"cat":"Math","q":"What is the remainder when 100 is divided by 7?","choices":["1","2","3","4"],"ans":1,"exp":"100 = 7×14 + 2."},
-{"cat":"Math","q":"If x+y=10 and x−y=4, what is x?","choices":["3","6","7","8"],"ans":2,"exp":"Adding the equations gives 2x=14, so x=7."},
-{"cat":"Math","q":"What are the solutions of x²−5x+6=0?","choices":["1 and 6","2 and 3","−2 and −3","3 and 5"],"ans":1,"exp":"x²−5x+6=(x−2)(x−3), so x=2 or 3."},
-{"cat":"Math","q":"What is the absolute value of −17?","choices":["−17","0","17","34"],"ans":2,"exp":"Absolute value is distance from zero, so |−17|=17."},
-{"cat":"Math","q":"Which mathematician developed calculus independently of Newton?","choices":["Leibniz","Archimedes","Riemann","Cantor"],"ans":0,"exp":"Gottfried Wilhelm Leibniz developed calculus independently of Isaac Newton."},
-{"cat":"Math","q":"In a normal distribution, approximately what percentage of values lie within one standard deviation of the mean?","choices":["50%","68%","80%","95%"],"ans":1,"exp":"About 68% of values in a normal distribution lie within one standard deviation of the mean."},
+  if (window.__sushiQuizBankEntrypointStarted) return;
+  window.__sushiQuizBankEntrypointStarted = true;
 
-{"cat":"Literature","q":"Who wrote Pride and Prejudice?","choices":["Charlotte Brontë","Jane Austen","George Eliot","Virginia Woolf"],"ans":1,"exp":"Jane Austen wrote Pride and Prejudice."},
-{"cat":"Literature","q":"Who wrote The Old Man and the Sea?","choices":["Ernest Hemingway","John Steinbeck","F. Scott Fitzgerald","William Faulkner"],"ans":0,"exp":"Ernest Hemingway wrote The Old Man and the Sea."},
-{"cat":"Literature","q":"Who wrote Les Misérables?","choices":["Émile Zola","Victor Hugo","Gustave Flaubert","Alexandre Dumas"],"ans":1,"exp":"Victor Hugo wrote Les Misérables."},
-{"cat":"Literature","q":"Who wrote The Stranger?","choices":["Jean-Paul Sartre","Albert Camus","Franz Kafka","André Gide"],"ans":1,"exp":"Albert Camus wrote The Stranger (L'Étranger)."},
-{"cat":"Literature","q":"Who wrote The Brothers Karamazov?","choices":["Leo Tolstoy","Anton Chekhov","Fyodor Dostoevsky","Ivan Turgenev"],"ans":2,"exp":"Fyodor Dostoevsky wrote The Brothers Karamazov."},
-{"cat":"Literature","q":"Who wrote The Divine Comedy?","choices":["Dante Alighieri","Petrarch","Boccaccio","Cervantes"],"ans":0,"exp":"Dante Alighieri wrote The Divine Comedy."},
-{"cat":"Literature","q":"Who wrote Don Quixote?","choices":["Federico García Lorca","Miguel de Cervantes","Lope de Vega","Jorge Luis Borges"],"ans":1,"exp":"Miguel de Cervantes wrote Don Quixote."},
-{"cat":"Literature","q":"Who wrote War and Peace?","choices":["Dostoevsky","Tolstoy","Turgenev","Gogol"],"ans":1,"exp":"Leo Tolstoy wrote War and Peace."},
-{"cat":"Literature","q":"Who wrote Madame Bovary?","choices":["Victor Hugo","Gustave Flaubert","Honoré de Balzac","Émile Zola"],"ans":1,"exp":"Gustave Flaubert wrote Madame Bovary."},
-{"cat":"Literature","q":"Who wrote The Great Gatsby?","choices":["F. Scott Fitzgerald","Ernest Hemingway","John Steinbeck","J. D. Salinger"],"ans":0,"exp":"F. Scott Fitzgerald wrote The Great Gatsby."},
-{"cat":"Literature","q":"Who wrote Moby-Dick?","choices":["Mark Twain","Herman Melville","Nathaniel Hawthorne","Walt Whitman"],"ans":1,"exp":"Herman Melville wrote Moby-Dick."},
-{"cat":"Literature","q":"Who wrote The Catcher in the Rye?","choices":["J. D. Salinger","Jack Kerouac","Truman Capote","Kurt Vonnegut"],"ans":0,"exp":"J. D. Salinger wrote The Catcher in the Rye."},
-{"cat":"Literature","q":"Who wrote Brave New World?","choices":["George Orwell","Aldous Huxley","H. G. Wells","Ray Bradbury"],"ans":1,"exp":"Aldous Huxley wrote Brave New World."},
-{"cat":"Literature","q":"Who wrote Fahrenheit 451?","choices":["Isaac Asimov","Ray Bradbury","Arthur C. Clarke","Philip K. Dick"],"ans":1,"exp":"Ray Bradbury wrote Fahrenheit 451."},
-{"cat":"Literature","q":"Who wrote Frankenstein?","choices":["Mary Shelley","Emily Brontë","Jane Austen","George Eliot"],"ans":0,"exp":"Mary Shelley wrote Frankenstein."},
-{"cat":"Literature","q":"Who wrote Dracula?","choices":["Oscar Wilde","Bram Stoker","Robert Louis Stevenson","Arthur Conan Doyle"],"ans":1,"exp":"Bram Stoker wrote Dracula."},
-{"cat":"Literature","q":"Who wrote The Picture of Dorian Gray?","choices":["Oscar Wilde","James Joyce","W. B. Yeats","Samuel Beckett"],"ans":0,"exp":"Oscar Wilde wrote The Picture of Dorian Gray."},
-{"cat":"Literature","q":"Who wrote Ulysses?","choices":["T. S. Eliot","James Joyce","Samuel Beckett","D. H. Lawrence"],"ans":1,"exp":"James Joyce wrote Ulysses."},
-{"cat":"Literature","q":"Who wrote Mrs Dalloway?","choices":["Virginia Woolf","George Eliot","Doris Lessing","Iris Murdoch"],"ans":0,"exp":"Virginia Woolf wrote Mrs Dalloway."},
-{"cat":"Literature","q":"Who wrote Wuthering Heights?","choices":["Anne Brontë","Charlotte Brontë","Emily Brontë","Jane Austen"],"ans":2,"exp":"Emily Brontë wrote Wuthering Heights."},
-{"cat":"Literature","q":"Who wrote Jane Eyre?","choices":["Emily Brontë","Charlotte Brontë","Anne Brontë","Elizabeth Gaskell"],"ans":1,"exp":"Charlotte Brontë wrote Jane Eyre."},
-{"cat":"Literature","q":"Who wrote A Tale of Two Cities?","choices":["Charles Dickens","Thomas Hardy","George Eliot","William Thackeray"],"ans":0,"exp":"Charles Dickens wrote A Tale of Two Cities."},
-{"cat":"Literature","q":"Who wrote The Adventures of Huckleberry Finn?","choices":["Mark Twain","Herman Melville","Jack London","Henry James"],"ans":0,"exp":"Mark Twain wrote The Adventures of Huckleberry Finn."},
-{"cat":"Literature","q":"Who wrote The Grapes of Wrath?","choices":["John Steinbeck","William Faulkner","Ernest Hemingway","Sinclair Lewis"],"ans":0,"exp":"John Steinbeck wrote The Grapes of Wrath."},
-{"cat":"Literature","q":"Who wrote To Kill a Mockingbird?","choices":["Harper Lee","Toni Morrison","Flannery O'Connor","Sylvia Plath"],"ans":0,"exp":"Harper Lee wrote To Kill a Mockingbird."},
-{"cat":"Literature","q":"Who wrote Beloved?","choices":["Alice Walker","Toni Morrison","Maya Angelou","Zora Neale Hurston"],"ans":1,"exp":"Toni Morrison wrote Beloved."},
-{"cat":"Literature","q":"Who wrote The Trial?","choices":["Thomas Mann","Franz Kafka","Hermann Hesse","Robert Musil"],"ans":1,"exp":"Franz Kafka wrote The Trial."},
-{"cat":"Literature","q":"Who wrote Siddhartha?","choices":["Hermann Hesse","Thomas Mann","Bertolt Brecht","Günter Grass"],"ans":0,"exp":"Hermann Hesse wrote Siddhartha."},
-{"cat":"Literature","q":"Who wrote The Name of the Rose?","choices":["Italo Calvino","Umberto Eco","Primo Levi","Alberto Moravia"],"ans":1,"exp":"Umberto Eco wrote The Name of the Rose."},
-{"cat":"Literature","q":"Who wrote The Little Prince?","choices":["Jules Verne","Antoine de Saint-Exupéry","Marcel Proust","Albert Camus"],"ans":1,"exp":"Antoine de Saint-Exupéry wrote The Little Prince."},
-{"cat":"Literature","q":"Who wrote The Count of Monte Cristo?","choices":["Alexandre Dumas","Victor Hugo","Stendhal","Balzac"],"ans":0,"exp":"Alexandre Dumas wrote The Count of Monte Cristo."},
-{"cat":"Literature","q":"Who wrote Gulliver's Travels?","choices":["Daniel Defoe","Jonathan Swift","Samuel Johnson","John Milton"],"ans":1,"exp":"Jonathan Swift wrote Gulliver's Travels."},
-{"cat":"Literature","q":"Who wrote Robinson Crusoe?","choices":["Jonathan Swift","Daniel Defoe","Henry Fielding","Laurence Sterne"],"ans":1,"exp":"Daniel Defoe wrote Robinson Crusoe."},
-{"cat":"Literature","q":"Who wrote Paradise Lost?","choices":["John Milton","Geoffrey Chaucer","John Donne","Alexander Pope"],"ans":0,"exp":"John Milton wrote Paradise Lost."},
-{"cat":"Literature","q":"Who wrote The Canterbury Tales?","choices":["William Blake","Geoffrey Chaucer","John Milton","Edmund Spenser"],"ans":1,"exp":"Geoffrey Chaucer wrote The Canterbury Tales."},
-{"cat":"Literature","q":"Who wrote The Odyssey?","choices":["Virgil","Homer","Sophocles","Ovid"],"ans":1,"exp":"The Odyssey is traditionally attributed to Homer."},
-{"cat":"Literature","q":"Who wrote The Aeneid?","choices":["Homer","Virgil","Ovid","Horace"],"ans":1,"exp":"Virgil wrote The Aeneid."},
-{"cat":"Literature","q":"Who wrote Oedipus Rex?","choices":["Sophocles","Euripides","Aeschylus","Aristophanes"],"ans":0,"exp":"Sophocles wrote Oedipus Rex."},
-{"cat":"Literature","q":"Who wrote The Tale of Genji?","choices":["Sei Shonagon","Murasaki Shikibu","Izumi Shikibu","Ki no Tsurayuki"],"ans":1,"exp":"Murasaki Shikibu wrote The Tale of Genji."},
-{"cat":"Literature","q":"Who wrote Kokoro?","choices":["Natsume Soseki","Mori Ogai","Akutagawa Ryunosuke","Shimazaki Toson"],"ans":0,"exp":"Natsume Soseki wrote Kokoro."},
-{"cat":"Literature","q":"Who wrote Rashomon?","choices":["Dazai Osamu","Akutagawa Ryunosuke","Natsume Soseki","Tanizaki Junichiro"],"ans":1,"exp":"Akutagawa Ryunosuke wrote Rashomon."},
-{"cat":"Literature","q":"Who wrote No Longer Human?","choices":["Dazai Osamu","Mishima Yukio","Kawabata Yasunari","Abe Kobo"],"ans":0,"exp":"Dazai Osamu wrote No Longer Human (Ningen Shikkaku)."},
-{"cat":"Literature","q":"Who wrote Snow Country?","choices":["Tanizaki Junichiro","Kawabata Yasunari","Mishima Yukio","Oe Kenzaburo"],"ans":1,"exp":"Kawabata Yasunari wrote Snow Country."},
-{"cat":"Literature","q":"Who wrote The Temple of the Golden Pavilion?","choices":["Mishima Yukio","Kawabata Yasunari","Dazai Osamu","Endo Shusaku"],"ans":0,"exp":"Mishima Yukio wrote The Temple of the Golden Pavilion."},
-{"cat":"Literature","q":"Who wrote The Makioka Sisters?","choices":["Tanizaki Junichiro","Mori Ogai","Abe Kobo","Kobo Daishi"],"ans":0,"exp":"Tanizaki Junichiro wrote The Makioka Sisters."},
-{"cat":"Literature","q":"Who wrote The Woman in the Dunes?","choices":["Abe Kobo","Oe Kenzaburo","Endo Shusaku","Mishima Yukio"],"ans":0,"exp":"Abe Kobo wrote The Woman in the Dunes."},
-{"cat":"Literature","q":"Who wrote Silence?","choices":["Endo Shusaku","Dazai Osamu","Akutagawa Ryunosuke","Kawabata Yasunari"],"ans":0,"exp":"Endo Shusaku wrote Silence (Chinmoku)."},
-{"cat":"Literature","q":"Who wrote The Setting Sun?","choices":["Natsume Soseki","Dazai Osamu","Mishima Yukio","Tanizaki Junichiro"],"ans":1,"exp":"Dazai Osamu wrote The Setting Sun (Shayo)."},
-{"cat":"Literature","q":"Who wrote I Am a Cat?","choices":["Mori Ogai","Natsume Soseki","Akutagawa Ryunosuke","Dazai Osamu"],"ans":1,"exp":"Natsume Soseki wrote I Am a Cat."},
-{"cat":"Literature","q":"Who wrote The Dancing Girl (Maihime)?","choices":["Mori Ogai","Natsume Soseki","Shimazaki Toson","Higuchi Ichiyo"],"ans":0,"exp":"Mori Ogai wrote The Dancing Girl (Maihime)."}
-];
+  const load = (src) => new Promise((resolve,reject) => {
+    const s=document.createElement('script');
+    s.src=src;
+    s.async=false;
+    s.onload=resolve;
+    s.onerror=reject;
+    document.head.appendChild(s);
+  });
 
-function merge(){
-  if(typeof QUESTIONS==='undefined' || !Array.isArray(QUESTIONS)) return false;
-  const existing=new Set(QUESTIONS.map(q=>`${q.cat}::${q.q}`));
-  const additions=EXTRA.filter(q=>!existing.has(`${q.cat}::${q.q}`));
-  QUESTIONS.push(...additions);
-  if(typeof renderCategoryCards==='function') ['soloCatCards','localCatCards','onlineCatCards','buzzerCatCards'].forEach(renderCategoryCards);
-  window.__sushiQuizMathLiteratureLoaded=true;
-  console.info(`Sushi Quiz: added ${additions.length} math/literature questions (${QUESTIONS.length} total).`);
-  return true;
-}
-if(!merge()) setTimeout(merge,500);
+  (async()=>{
+    try{
+      await load('/sushi_quiz_math_literature_bank.js?v=20260915-1');
+      await load('/sushi_quiz_classical_music.js?v=20260915-2');
+      if(typeof renderCategoryCards==='function'){
+        ['soloCatCards','localCatCards','onlineCatCards','buzzerCatCards'].forEach(renderCategoryCards);
+      }
+      console.info(`Sushi Quiz banks loaded. Total questions: ${typeof QUESTIONS!=='undefined' ? QUESTIONS.length : 'unknown'}`);
+    }catch(err){
+      console.warn('Sushi Quiz bank loading failed:',err);
+    }
+  })();
 })();
