@@ -45,4 +45,9 @@
     s.src='/sushigacha/site-taskbar.js?v=20260914-4';
     document.head.appendChild(s);
   }
+  if(!document.querySelector('script[src*="daily-quest-click-bridge.js"]')){
+    const s=document.createElement('script');
+    s.src='/sushigacha/daily-quest-click-bridge.js?v=20260914-1';
+    document.head.appendChild(s);
+  }
 })();
