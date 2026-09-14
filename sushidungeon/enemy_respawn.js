@@ -4,15 +4,17 @@
   const CHECK_EVERY=18;
   const RESPAWN_CHANCE=.42;
   const MAX_LIVING=8;
+  const REMOVED_ENEMIES=new Set(['毒蜘蛛']);
 
+  function purgeRemovedEnemies(){if(game&&Array.isArray(game.enemies))game.enemies=game.enemies.filter(e=>!REMOVED_ENEMIES.has(e.name))}
   function floorPool(){
     if(!game)return [];
     if(typeof window.sushiEnemyPoolForFloor==='function'){
       const custom=window.sushiEnemyPoolForFloor(game.floor);
-      if(Array.isArray(custom)&&custom.length)return custom;
+      if(Array.isArray(custom)&&custom.length)return custom.filter(e=>!REMOVED_ENEMIES.has(e.name));
     }
     const tierFloor=((game.floor-1)%10)+1;
-    return ENEMIES.filter(e=>tierFloor>=e.min&&tierFloor<=e.max);
+    return ENEMIES.filter(e=>!REMOVED_ENEMIES.has(e.name)&&tierFloor>=e.min&&tierFloor<=e.max);
   }
 
   function scaleEnemy(base){
@@ -49,8 +51,8 @@
   }
 
   const baseGenerate=generateFloor;
-  generateFloor=function(){const r=baseGenerate.apply(this,arguments);game.respawnCount=0;game.lastRespawnCheck=game.turn||0;return r};
+  generateFloor=function(){const r=baseGenerate.apply(this,arguments);purgeRemovedEnemies();game.respawnCount=0;game.lastRespawnCheck=game.turn||0;return r};
   const baseEndTurn=endTurn;
-  endTurn=function(){const r=baseEndTurn.apply(this,arguments);if(game&&!game.dead){tryRespawn();render()}return r};
-  window.sushiEnemyRespawn={limit:RESPAWN_LIMIT,tryRespawn};
+  endTurn=function(){purgeRemovedEnemies();const r=baseEndTurn.apply(this,arguments);if(game&&!game.dead){purgeRemovedEnemies();tryRespawn();render()}return r};
+  window.sushiEnemyRespawn={limit:RESPAWN_LIMIT,tryRespawn,purgeRemovedEnemies};
 })();
