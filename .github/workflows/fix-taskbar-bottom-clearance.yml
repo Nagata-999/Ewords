@@ -1,0 +1,52 @@
+name: Fix taskbar bottom clearance
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-taskbar-bottom-clearance.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Patch taskbar clearance and bust cache
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          taskbar = Path('sushigacha/site-taskbar.js')
+          text = taskbar.read_text(encoding='utf-8')
+
+          old = "body.sushi-taskbar-on{padding-bottom:max(124px,calc(96px + env(safe-area-inset-bottom)));scroll-padding-bottom:max(124px,calc(96px + env(safe-area-inset-bottom)))}"
+          new = "body.sushi-taskbar-on{padding-bottom:max(124px,calc(96px + env(safe-area-inset-bottom)));scroll-padding-bottom:max(124px,calc(96px + env(safe-area-inset-bottom)))}body.sushi-taskbar-on .modal{padding-bottom:max(124px,calc(96px + env(safe-area-inset-bottom)))!important;scroll-padding-bottom:max(124px,calc(96px + env(safe-area-inset-bottom)))}"
+          if old in text and 'body.sushi-taskbar-on .modal{' not in text:
+              text = text.replace(old, new, 1)
+          taskbar.write_text(text, encoding='utf-8')
+
+          version = '20260915-1'
+          for p in Path('.').rglob('*.html'):
+              s = p.read_text(encoding='utf-8', errors='ignore')
+              if 'site-taskbar.js' not in s:
+                  continue
+              ns = re.sub(r'(site-taskbar\.js)(?:\?v=[^\"\']+)?', rf'\1?v={version}', s)
+              if ns != s:
+                  p.write_text(ns, encoding='utf-8')
+          PY
+      - name: Commit changes
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No changes needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add sushigacha/site-taskbar.js '*.html' '**/*.html' 2>/dev/null || true
+          git commit -m 'Keep bottom actions clear of taskbar'
+          git push
