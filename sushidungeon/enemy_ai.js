@@ -13,11 +13,21 @@
   function free(nx,ny,e){
     return open(nx,ny)&&!game.enemies.some(o=>o!==e&&o.hp>0&&o.x===nx&&o.y===ny)&&!(game.player.x===nx&&game.player.y===ny);
   }
+  function faceFromStep(mx,my,current='s'){
+    if(Math.abs(mx)>=Math.abs(my)&&mx!==0)return mx>0?'e':'w';
+    if(my!==0)return my>0?'s':'n';
+    return current;
+  }
+  function facePlayer(e){
+    const dx=game.player.x-e.x,dy=game.player.y-e.y;
+    e.facing=faceFromStep(dx,dy,e.facing||'s');
+  }
   function step(e,mx,my){
     if(!mx&&!my)return false;
     const nx=e.x+mx,ny=e.y+my;
     if(Math.abs(mx)===1&&Math.abs(my)===1&&!cornerClear(e.x,e.y,nx,ny))return false;
     if(!free(nx,ny,e))return false;
+    e.facing=faceFromStep(mx,my,e.facing||'s');
     e.x=nx;e.y=ny;return true;
   }
   function pause(ms){return new Promise(r=>setTimeout(r,ms))}
@@ -26,6 +36,7 @@
     document.body.classList.toggle('turnBusy',!!v);
   }
   function attackPlayer(e){
+    facePlayer(e);
     const def=(game.shield?.power||0)+(game.shield?.plus||0)+(game.accessory?.effect==='defense'?2:0);
     const dmg=Math.max(1,e.atk+Math.floor(game.floor/4)-Math.floor(def*.55)+rnd(3)-1);
     game.hp-=dmg;
@@ -47,13 +58,12 @@
     return false;
   }
 
-  // One enemy = one action. Actions are presented one-by-one so the player can read the turn.
+  // One enemy = one action. Movement direction owns facing; only attacks turn toward the player.
   enemyTurn=function(){
     if(window.sushiTurnBusy)return;
     const actors=game.enemies.filter(e=>e.hp>0);
     setBusy(true);
     (async()=>{
-      // Let the player's attack / movement land visually before enemies answer.
       await pause(300);
       for(const e of actors){
         if(!game||game.dead||e.hp<=0)break;
