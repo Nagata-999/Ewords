@@ -38,16 +38,11 @@
   }
   window.SushiGem={awardScore,balance};
 
-  // The gem system is already shared by the main learning games, so it also mounts
-  // the persistent navigation/daily-quest bar without editing every game page.
-  if(!document.querySelector('script[src*="site-taskbar.js"]')){
-    const s=document.createElement('script');
-    s.src='/sushigacha/site-taskbar.js?v=20260914-4';
-    document.head.appendChild(s);
+  function loadOnce(match,src){
+    if(document.querySelector(`script[src*="${match}"]`))return;
+    const s=document.createElement('script');s.src=src;document.head.appendChild(s);
   }
-  if(!document.querySelector('script[src*="daily-quest-click-bridge.js"]')){
-    const s=document.createElement('script');
-    s.src='/sushigacha/daily-quest-click-bridge.js?v=20260914-1';
-    document.head.appendChild(s);
-  }
+  loadOnce('site-taskbar.js','/sushigacha/site-taskbar.js?v=20260914-5');
+  loadOnce('daily-quest-click-bridge.js','/sushigacha/daily-quest-click-bridge.js?v=20260914-5');
+  loadOnce('daily-quest-links.js','/sushigacha/daily-quest-links.js?v=20260914-1');
 })();
