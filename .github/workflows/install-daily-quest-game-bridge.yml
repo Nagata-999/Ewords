@@ -89,7 +89,6 @@ jobs:
                   raise SystemExit('correct-answer marker not found')
               text = text.replace(needle, replacement, 1)
 
-          # Keep the normal shared UI scripts, but direct tracking no longer depends on the bridge.
           p.write_text(text, encoding='utf-8')
           print('patched antonitan.html direct correct-answer tracking')
           PY
@@ -106,3 +105,5 @@ jobs:
           git add antonitan.html
           git commit -m 'Track antoni daily quest inside correct answer handler'
           git push origin HEAD
+
+# branch trigger 20260914-2237
