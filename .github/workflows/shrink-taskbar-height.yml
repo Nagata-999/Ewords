@@ -1,0 +1,48 @@
+name: Shrink taskbar height
+
+on:
+  push:
+    paths:
+      - '.github/workflows/shrink-taskbar-height.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Shrink mobile taskbar and bust cache
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('sushigacha/site-taskbar.js')
+          text = p.read_text(encoding='utf-8')
+          text = text.replace('height:62px;border-radius:16px 16px 0 0', 'height:52px;border-radius:14px 14px 0 0')
+          text = text.replace('@media(max-width:600px){#sushiTaskbar{left:0;right:0;bottom:0;transform:none;width:100%;height:52px;', '@media(max-width:600px){#sushiTaskbar{left:0;right:0;bottom:0;transform:none;width:100%;height:52px;')
+          text = text.replace('#sushiTaskbar .ico{font-size:21px}', '#sushiTaskbar .ico{font-size:18px}')
+          text = text.replace('#sushiTaskToast{bottom:76px}', '#sushiTaskToast{bottom:64px}')
+          p.write_text(text, encoding='utf-8')
+
+          for hp in [Path('sushitan.html')]:
+              if hp.exists():
+                  h = hp.read_text(encoding='utf-8')
+                  import re
+                  h = re.sub(r'sushigacha/site-taskbar\.js\?v=[^\"\']+', 'sushigacha/site-taskbar.js?v=20260915-1', h)
+                  hp.write_text(h, encoding='utf-8')
+          PY
+      - name: Commit changes
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No changes needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add sushigacha/site-taskbar.js sushitan.html
+          git commit -m 'Shrink mobile bottom taskbar height'
+          git push
