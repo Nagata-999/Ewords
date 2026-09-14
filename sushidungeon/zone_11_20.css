@@ -17,3 +17,5 @@ body.zone-waterway .wall-3::before{background:linear-gradient(150deg,#536f69,#39
 body.zone-waterway .wall.edge-s::after,body.zone-waterway .wall-south-face::after,body.zone-waterway .wall-corner-sw::after,body.zone-waterway .wall-corner-se::after{background:linear-gradient(#31534f 0 10%,#173331 12% 58%,#091b1c 60% 100%)!important;box-shadow:inset 0 4px 0 #64827b55!important}
 body.zone-waterway .memory{filter:brightness(.24) saturate(.55) hue-rotate(8deg)!important}
 body.zone-waterway #boardWrap{box-shadow:0 0 0 1px #315d5b55,0 12px 32px #04141666!important}
+.entity.enemy .zone2Sprite,.entity.enemy .zone3Sprite{display:block!important;width:100%!important;height:100%!important;min-width:100%!important;min-height:100%!important;opacity:1!important;visibility:visible!important;overflow:visible!important;pointer-events:none}
+.entity.enemy .zone2Rendered,.entity.enemy .zone3Rendered{opacity:1!important;visibility:visible!important}
