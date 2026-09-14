@@ -118,7 +118,7 @@
     document.head.appendChild(s);
   };
 
-  loadScript('/sushi_quiz_extra_questions.js?v=20260914-1',()=>{
+  loadScript('/sushi_quiz_extra_questions.js?v=20260915-1',()=>{
     try{
       if(typeof QUESTIONS==='undefined' || !Array.isArray(QUESTIONS)) return;
       if(typeof SUSHI_QUIZ_EXTRA_QUESTIONS!=='undefined' && Array.isArray(SUSHI_QUIZ_EXTRA_QUESTIONS)){
@@ -136,10 +136,20 @@
       refresh();
       window.__sushiQuizExtraQuestionsLoaded=true;
 
-      loadScript('/sushi_quiz_math_literature.js?v=20260914-1',()=>{
-        refresh();
-        loadScript('/sushi_quiz_classical_music.js?v=20260914-1',refresh);
-      });
+      // Load later banks independently so one failed extension cannot block another.
+      loadScript('/sushi_quiz_math_literature.js?v=20260915-1',refresh);
+      loadScript('/sushi_quiz_classical_music.js?v=20260915-2',refresh);
     }catch(err){ console.warn('Sushi Quiz extra questions failed to load:',err); }
   });
+
+  // Safety net: classical bank gets another direct chance even if the chain above is interrupted.
+  setTimeout(()=>{
+    if(window.__sushiQuizClassicalMusicMerged) return;
+    const s=document.createElement('script');
+    s.src='/sushi_quiz_classical_music.js?v=20260915-rescue';
+    s.async=false;
+    s.onload=refresh;
+    s.onerror=()=>console.warn('Sushi Quiz classical music rescue load failed.');
+    document.head.appendChild(s);
+  },1200);
 })();
