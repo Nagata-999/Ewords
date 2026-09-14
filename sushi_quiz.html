@@ -12,7 +12,7 @@ html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,"Segoe UI
 <body><div id="boot">🍣 Sushi Quiz loading…</div>
 <script>
 (async()=>{
-  const V='20260915-BOOT2';
+  const V='20260915-BOOT3';
   try{
     const res=await fetch('/sushi_quiz_core.html?v='+V,{cache:'no-store'});
     if(!res.ok) throw new Error('core '+res.status);
@@ -24,7 +24,7 @@ html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,"Segoe UI
     const fresh=`
 <script src="/sushigacha/multi-game-lucky-gems.js?v=${V}"><\/script>
 <script src="/sushi_quiz_math_literature.js?v=${V}"><\/script>
-<script src="/sushi_quiz_latest_loader.js?v=20260915-modern-1"><\/script>
+<script src="/sushi_quiz_latest_loader.js?v=20260915-modern-2"><\/script>
 <script>
 window.__sushiQuizBootstrapVersion='${V}';
 setTimeout(()=>{
