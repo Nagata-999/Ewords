@@ -1,4 +1,4 @@
-name: Install direct daily quest tracking
+name: Extend direct daily tracking and navigation
 
 on:
   push:
@@ -15,68 +15,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Inline daily tracking in Quiz Talk World
-        shell: bash
+      - name: Apply patch scripts
         run: |
-          python - <<'PY'
-          from pathlib import Path
-          import re
-
-          configs = {
-            'sushi_quiz.html': ('quiz','すしクイズ',10,4,'quiz'),
-            'sushitalk.html': ('talk','すしTalk',10,3,'talk'),
-            'sukaishi_world_study_v03.html': ('world','す界し',5,3,'world'),
-          }
-
-          base = r'''<script>
-          (()=>{
-            const KEY='sushitan_login_bonus_v1', ACTIVE_KEY='sushitan_daily_active_v1';
-            const TYPE='__TYPE__', LABEL='__LABEL__', GOAL=__GOAL__, REWARD=__REWARD__;
-            function day(){const d=new Date();d.setHours(d.getHours()-6);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
-            function toast(text){let x=document.getElementById('directDailyToast');if(!x){x=document.createElement('div');x.id='directDailyToast';x.style.cssText='position:fixed;left:50%;bottom:82px;transform:translateX(-50%);z-index:1000000;background:#173f37;color:#fff;padding:10px 15px;border-radius:999px;font:900 12px/1.2 system-ui;box-shadow:0 8px 24px #0004;pointer-events:none;white-space:nowrap';document.body.appendChild(x)}x.textContent=text;clearTimeout(x._t);x._t=setTimeout(()=>x.remove(),1500)}
-            function add(){
-              const today=day(); let active=[];
-              try{const a=JSON.parse(localStorage.getItem(ACTIVE_KEY)||'null');if(a&&a.day===today&&Array.isArray(a.active))active=a.active}catch(e){}
-              let l={};try{l=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){}
-              if(!active.length&&l.dailyQuests?.day===today&&Array.isArray(l.dailyQuests.active))active=l.dailyQuests.active;
-              if(!active.includes(TYPE))return;
-              let q=l.dailyQuests;
-              if(!q||q.day!==today)q=l.dailyQuests={day:today,active:[...active],progress:{},claimed:{},chestClaimed:false,chestReward:0};
-              q.progress=q.progress&&typeof q.progress==='object'?q.progress:{};q.claimed=q.claimed&&typeof q.claimed==='object'?q.claimed:{};
-              if(q.claimed[TYPE])return;
-              const before=Math.max(0,Number(q.progress[TYPE])||0), after=Math.min(GOAL,before+1); if(after<=before)return;
-              q.progress[TYPE]=after; let done=false;
-              if(after>=GOAL){q.claimed[TYPE]=true;l.gems=(Number.isSafeInteger(l.gems)?l.gems:0)+REWARD;done=true}
-              localStorage.setItem(KEY,JSON.stringify(l));window.dispatchEvent(new CustomEvent('sushi-daily-quest-change'));
-              toast(done?`✅ デイリー ${LABEL} ${after}/${GOAL}問  +${REWARD}💎`:`デイリー ${LABEL} ${after}/${GOAL}問`);
-            }
-            __HOOK__
-          })();
-          </script>'''
-
-          hooks = {
-            'quiz': r'''let last='';const check=()=>{const el=document.getElementById('soloRes');if(!el)return;const t=(el.textContent||'').trim();if(!t||t===last)return;last=t;if(/^✅\s*Correct!/i.test(t))add()};new MutationObserver(check).observe(document.documentElement,{subtree:true,childList:true,characterData:true});check();''',
-            'talk': r'''document.addEventListener('click',e=>{const b=e.target.closest?.('.choice');if(!b||b.dataset.directDailyDone==='1')return;setTimeout(()=>{const el=document.querySelector('#feedback .delta');if(!el)return;const n=Number((el.textContent||'').replace(/[^+\-\d.]/g,''));if(n>0){b.dataset.directDailyDone='1';add()}},60)},true);''',
-            'world': r'''let was=false;const check=()=>{const el=document.getElementById('judge');if(!el)return;const now=/✓\s*CORRECT|\bCORRECT\b/i.test(el.textContent||'');if(now&&!was)add();was=now};new MutationObserver(check).observe(document.documentElement,{subtree:true,childList:true,characterData:true});check();'''
-          }
-
-          for name,(typ,label,goal,reward,hookkey) in configs.items():
-            p=Path(name)
-            if not p.exists():
-              print('skip missing',name); continue
-            text=p.read_text(encoding='utf-8')
-            inline=(base.replace('__TYPE__',typ).replace('__LABEL__',label).replace('__GOAL__',str(goal)).replace('__REWARD__',str(reward)).replace('__HOOK__',hooks[hookkey]))
-            text=re.sub(r'\n?<script src="sushigacha/daily-quest-click-bridge\.js\?v=[^"]+"></script>', '', text)
-            text=re.sub(r'\n?<script>\s*\(\(\)=>\{\s*const KEY=\'sushitan_login_bonus_v1\'.*?</script>', '', text, flags=re.S)
-            if '</body>' not in text: raise SystemExit(f'{name}: body end missing')
-            text=text.replace('</body>', inline+'\n</body>',1)
-            p.write_text(text,encoding='utf-8')
-            print('patched',name)
-          PY
-
-      - name: Commit changes
-        shell: bash
+          python .github/scripts/patch_daily_rest_world_nav.py
+          python .github/scripts/limit_bridge_autoload.py
+      - name: Commit generated changes
         run: |
           if git diff --quiet; then
             echo 'No changes needed.'
@@ -84,6 +27,6 @@ jobs:
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add sushi_quiz.html sushitalk.html sukaishi_world_study_v03.html
-          git commit -m 'Inline daily quest tracking in Quiz Talk and World'
+          git add --all
+          git commit -m 'Complete direct daily tracking and restore world quick quiz'
           git push origin HEAD
