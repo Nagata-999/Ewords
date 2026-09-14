@@ -42,7 +42,7 @@
   // the persistent navigation/daily-quest bar without editing every game page.
   if(!document.querySelector('script[src*="site-taskbar.js"]')){
     const s=document.createElement('script');
-    s.src='/sushigacha/site-taskbar.js?v=20260914-1';
+    s.src='/sushigacha/site-taskbar.js?v=20260914-4';
     document.head.appendChild(s);
   }
 })();
