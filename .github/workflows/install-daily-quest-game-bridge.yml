@@ -1,0 +1,70 @@
+name: Install daily quest game bridge
+
+on:
+  push:
+    paths:
+      - '.github/workflows/install-daily-quest-game-bridge.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Inject daily quest scripts
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          targets = [
+              'sushitan.html',
+              'antonitan.html',
+              'sushi_idiom (1).html',
+              'sushi_quiz.html',
+              'sushitalk.html',
+              'sukaishi_world_study_v03.html',
+              'sukaishi.html',
+              'sushi_run.html',
+          ]
+
+          taskbar = '<script src="sushigacha/site-taskbar.js?v=20260914-1"></script>'
+          bridge = '<script src="sushigacha/daily-quest-click-bridge.js?v=20260914-1"></script>'
+
+          for name in targets:
+              p = Path(name)
+              if not p.exists():
+                  print('skip missing', name)
+                  continue
+
+              text = p.read_text(encoding='utf-8')
+              text = re.sub(r'\n?<script src="sushigacha/site-taskbar\.js\?v=[^"]+"></script>', '', text)
+              text = re.sub(r'\n?<script src="sushigacha/daily-quest-click-bridge\.js\?v=[^"]+"></script>', '', text)
+
+              if '</body>' not in text:
+                  raise SystemExit(f'{name}: </body> not found')
+
+              block = taskbar + '\n' + bridge + '\n'
+              text = text.replace('</body>', block + '</body>', 1)
+              p.write_text(text, encoding='utf-8')
+              print('patched', name)
+          PY
+
+      - name: Commit changes
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No changes needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- '*.html'
+          git commit -m 'Enable daily quests across sushi games'
+          git push origin HEAD
