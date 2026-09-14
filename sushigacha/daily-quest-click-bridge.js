@@ -3,50 +3,67 @@
   if(window.__sushiDailyClickBridgeLoaded)return;
   window.__sushiDailyClickBridgeLoaded=true;
 
-  const KEY='sushitan_login_bonus_v1';
   const page=decodeURIComponent((location.pathname.split('/').pop()||'').toLowerCase());
   const map={
-    'sushitan.html':{key:'sushitan',goal:30,reward:5},
-    'shinotan.html':{key:'shino',goal:20,reward:5},
-    'antonitan.html':{key:'antoni',goal:20,reward:5},
-    'sushi_idiom (1).html':{key:'idiom',goal:10,reward:4},
-    'sushi_idiom.html':{key:'idiom',goal:10,reward:4},
-    'sushi_quiz.html':{key:'quiz',goal:10,reward:4},
-    'sushitalk.html':{key:'talk',goal:10,reward:3},
-    'sukaishi_world_study_v03.html':{key:'world',goal:5,reward:3},
-    'sukaishi.html':{key:'world',goal:5,reward:3}
+    'sushitan.html':'sushitan',
+    'antonitan.html':'antoni',
+    'sushi_idiom (1).html':'idiom',
+    'sushi_idiom.html':'idiom',
+    'sushi_quiz.html':'quiz',
+    'sushitalk.html':'talk',
+    'sukaishi_world_study_v03.html':'world',
+    'sukaishi.html':'world',
+    'sushi_run.html':'run'
   };
-  const cfg=map[page];
-  if(!cfg)return;
-  if(cfg.key==='shino'&&window.__sushiDirectDailyTrackerFor==='shino')return;
+  const key=map[page];
+  if(!key)return;
 
-  function day(){const d=new Date();d.setHours(d.getHours()-6);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
-  function read(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch{return {}}}
-  function write(l){localStorage.setItem(KEY,JSON.stringify(l));window.dispatchEvent(new CustomEvent('sushi-daily-quest-change'))}
-  function toast(text){let t=document.getElementById('sushiDirectDailyToast');if(!t){t=document.createElement('div');t.id='sushiDirectDailyToast';t.style.cssText='position:fixed;left:50%;bottom:80px;transform:translateX(-50%);z-index:100002;background:#173f37;color:#fff;padding:9px 14px;border-radius:999px;font:900 12px/1.2 system-ui;box-shadow:0 8px 24px #0004;pointer-events:none;transition:.2s';document.body.appendChild(t)}t.textContent=text;t.style.opacity='1';clearTimeout(t._timer);t._timer=setTimeout(()=>t.style.opacity='0',1200)}
-  function add(){const l=read(),q=l.dailyQuests;if(!q||q.day!==day()||!Array.isArray(q.active)||!q.active.includes(cfg.key))return;q.progress=q.progress&&typeof q.progress==='object'?q.progress:{};q.claimed=q.claimed&&typeof q.claimed==='object'?q.claimed:{};if(q.claimed[cfg.key])return;q.progress[cfg.key]=Math.min(cfg.goal,(Number(q.progress[cfg.key])||0)+1);if(q.progress[cfg.key]>=cfg.goal){q.claimed[cfg.key]=true;l.gems=(Number.isSafeInteger(l.gems)?l.gems:0)+cfg.reward}write(l);toast(`デイリー ${q.progress[cfg.key]}/${cfg.goal}`)}
+  function api(fn){
+    const q=window.SushiDailyQuest;
+    if(!q||typeof q[fn]!=='function')return false;
+    return q;
+  }
+  function add(n=1){const q=api('add');if(q)q.add(key,n)}
 
-  if(['sushitan','shino','antoni'].includes(cfg.key)){
-    document.addEventListener('click',e=>{const b=e.target.closest?.('.balloon[data-type="correct"]');if(!b||b.dataset.dailyQuestChecked==='1')return;b.dataset.dailyQuestChecked='1';add()},true);return;
+  if(key==='sushitan'||key==='antoni'){
+    document.addEventListener('click',e=>{
+      const b=e.target.closest?.('.balloon[data-type="correct"]');
+      if(!b||b.dataset.dailyQuestChecked==='1')return;
+      b.dataset.dailyQuestChecked='1';
+      add();
+    },true);
+    return;
   }
 
-  if(cfg.key==='quiz'){
+  if(key==='quiz'){
     document.addEventListener('click',e=>{
       const b=e.target.closest?.('#soloChoices .choice');
       if(!b||b.dataset.dailyQuestChecked==='1')return;
       setTimeout(()=>{
         if(b.dataset.dailyQuestChecked==='1')return;
-        if(b.classList.contains('correct')){b.dataset.dailyQuestChecked='1';add()}
+        if(b.classList.contains('correct')){
+          b.dataset.dailyQuestChecked='1';
+          add();
+        }
       },0);
     },true);
     return;
   }
 
-  if(cfg.key==='idiom'){
-    document.addEventListener('click',e=>{const b=e.target.closest?.('.choice,button');if(!b||b.dataset.dailyQuestChecked==='1')return;setTimeout(()=>{if(b.dataset.dailyQuestChecked==='1')return;const ok=b.classList.contains('good')||b.classList.contains('correct')||b.classList.contains('correct-flash')||b.getAttribute('data-correct')==='true';if(ok){b.dataset.dailyQuestChecked='1';add()}},100)},true);return;
+  if(key==='idiom'){
+    document.addEventListener('click',e=>{
+      const b=e.target.closest?.('.choice,button');
+      if(!b||b.dataset.dailyQuestChecked==='1')return;
+      setTimeout(()=>{
+        if(b.dataset.dailyQuestChecked==='1')return;
+        const ok=b.classList.contains('good')||b.classList.contains('correct')||b.classList.contains('correct-flash')||b.getAttribute('data-correct')==='true';
+        if(ok){b.dataset.dailyQuestChecked='1';add()}
+      },100);
+    },true);
+    return;
   }
 
-  if(cfg.key==='talk'){
+  if(key==='talk'){
     document.addEventListener('click',e=>{
       const b=e.target.closest?.('.choice');
       if(!b||b.dataset.dailyQuestChecked==='1')return;
@@ -61,7 +78,46 @@
     return;
   }
 
-  if(cfg.key==='world'){
-    let was=false;const check=()=>{const el=document.getElementById('judge');if(!el)return;const now=/✓\s*CORRECT|CORRECT/i.test(el.textContent||'');if(now&&!was)add();was=now};new MutationObserver(check).observe(document.documentElement,{subtree:true,childList:true,characterData:true});check();
+  if(key==='world'){
+    let was=false;
+    const check=()=>{
+      const el=document.getElementById('judge');
+      if(!el)return;
+      const now=/✓\s*CORRECT|CORRECT/i.test(el.textContent||'');
+      if(now&&!was)add();
+      was=now;
+    };
+    new MutationObserver(check).observe(document.documentElement,{subtree:true,childList:true,characterData:true});
+    check();
+    return;
+  }
+
+  if(key==='run'){
+    let last=0,pending=0,timer=null;
+    const flush=()=>{
+      timer=null;
+      if(pending<=0)return;
+      const n=pending;
+      pending=0;
+      add(n);
+    };
+    const check=()=>{
+      const el=document.getElementById('distance');
+      if(!el)return;
+      const current=Math.max(0,Number((el.textContent||'').replace(/[^\d.]/g,''))||0);
+      if(current<last){last=current;return}
+      const delta=current-last;
+      last=current;
+      if(delta<=0)return;
+      pending+=delta;
+      if(!timer)timer=setTimeout(flush,500);
+    };
+    const start=()=>{
+      const el=document.getElementById('distance');
+      if(!el){setTimeout(start,250);return}
+      new MutationObserver(check).observe(el,{childList:true,subtree:true,characterData:true});
+      check();
+    };
+    start();
   }
 })();
