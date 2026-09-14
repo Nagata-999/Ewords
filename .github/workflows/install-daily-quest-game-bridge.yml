@@ -15,8 +15,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Apply patch script
-        run: python .github/scripts/patch_daily_rest_world_nav.py
+      - name: Apply patch scripts
+        run: |
+          python .github/scripts/patch_daily_rest_world_nav.py
+          python .github/scripts/limit_bridge_autoload.py
       - name: Commit generated changes
         run: |
           if git diff --quiet; then
