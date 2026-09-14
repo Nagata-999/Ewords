@@ -29,12 +29,38 @@
   if(['sushitan','shino','antoni'].includes(cfg.key)){
     document.addEventListener('click',e=>{const b=e.target.closest?.('.balloon[data-type="correct"]');if(!b||b.dataset.dailyQuestChecked==='1')return;b.dataset.dailyQuestChecked='1';add()},true);return;
   }
-  if(cfg.key==='idiom'||cfg.key==='quiz'){
+
+  if(cfg.key==='quiz'){
+    document.addEventListener('click',e=>{
+      const b=e.target.closest?.('#soloChoices .choice');
+      if(!b||b.dataset.dailyQuestChecked==='1')return;
+      setTimeout(()=>{
+        if(b.dataset.dailyQuestChecked==='1')return;
+        if(b.classList.contains('correct')){b.dataset.dailyQuestChecked='1';add()}
+      },0);
+    },true);
+    return;
+  }
+
+  if(cfg.key==='idiom'){
     document.addEventListener('click',e=>{const b=e.target.closest?.('.choice,button');if(!b||b.dataset.dailyQuestChecked==='1')return;setTimeout(()=>{if(b.dataset.dailyQuestChecked==='1')return;const ok=b.classList.contains('good')||b.classList.contains('correct')||b.classList.contains('correct-flash')||b.getAttribute('data-correct')==='true';if(ok){b.dataset.dailyQuestChecked='1';add()}},100)},true);return;
   }
+
   if(cfg.key==='talk'){
-    const seen=new WeakSet();const scan=()=>document.querySelectorAll('.delta').forEach(el=>{if(seen.has(el))return;const n=Number((el.textContent||'').replace(/[^+\-\d.]/g,''));if(n>0){seen.add(el);add()}});new MutationObserver(scan).observe(document.documentElement,{subtree:true,childList:true,characterData:true});scan();return;
+    document.addEventListener('click',e=>{
+      const b=e.target.closest?.('.choice');
+      if(!b||b.dataset.dailyQuestChecked==='1')return;
+      setTimeout(()=>{
+        if(b.dataset.dailyQuestChecked==='1')return;
+        const el=document.querySelector('#feedback .delta');
+        if(!el)return;
+        const n=Number((el.textContent||'').replace(/[^+\-\d.]/g,''));
+        if(n>0){b.dataset.dailyQuestChecked='1';add()}
+      },0);
+    },true);
+    return;
   }
+
   if(cfg.key==='world'){
     let was=false;const check=()=>{const el=document.getElementById('judge');if(!el)return;const now=/✓\s*CORRECT|CORRECT/i.test(el.textContent||'');if(now&&!was)add();was=now};new MutationObserver(check).observe(document.documentElement,{subtree:true,childList:true,characterData:true});check();
   }
