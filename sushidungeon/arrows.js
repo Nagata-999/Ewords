@@ -1,6 +1,7 @@
 'use strict';
 (function(){
   const RANGE=7;
+  const VIEW_W=11,VIEW_H=7,HALF_W=5,HALF_H=3;
   const DIR_FROM_CLASS={
     'facing-n':[0,-1],'facing-ne':[1,-1],'facing-e':[1,0],'facing-se':[1,1],
     'facing-s':[0,1],'facing-sw':[-1,1],'facing-w':[-1,0],'facing-nw':[-1,-1]
@@ -22,7 +23,14 @@
     for(const [c,d] of Object.entries(DIR_FROM_CLASS))if(p.classList.contains(c)){facing=d;break}
   }
   function enemyAt(x,y){return game.enemies.find(e=>e.hp>0&&e.x===x&&e.y===y)}
-  function visibleCell(x,y){return document.querySelector(`#board .cell[data-x="${x}"][data-y="${y}"]`)}
+  function visibleCell(x,y){
+    try{
+      if(!game?.player)return null;
+      const vx=x-(game.player.x-HALF_W),vy=y-(game.player.y-HALF_H);
+      if(vx<0||vy<0||vx>=VIEW_W||vy>=VIEW_H)return null;
+      return document.getElementById('board')?.children?.[vy*VIEW_W+vx]||null;
+    }catch{return null}
+  }
   function pointFor(x,y){
     const wrap=document.getElementById('boardWrap'),cell=visibleCell(x,y);
     if(!wrap||!cell)return null;
