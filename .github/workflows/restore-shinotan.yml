@@ -1,0 +1,22 @@
+name: Restore shinotan
+on:
+  push:
+    paths:
+      - '.github/workflows/restore-shinotan.yml'
+permissions:
+  contents: write
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 3
+      - name: Restore shinotan from commit before accidental replacement
+        run: |
+          git show 8ae84e1292e300605b27274dfba5e62b66042363^:shinotan.html > shinotan.html
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add shinotan.html
+          git commit -m "Restore shinotan after accidental replacement"
+          git push
