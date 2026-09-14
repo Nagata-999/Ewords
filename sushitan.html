@@ -4326,8 +4326,31 @@ html, body {
 <script src="sushigacha/gem-system.js?v=20260912-1"></script>
 <script src="sushigacha/sushitan-lucky-gems.js?v=20260913-2"></script>
 <script src="sushigacha/avatar-widget.js?v=20260912-3"></script>
-<script src="sushigacha/site-taskbar.js?v=20260914-1"></script>
-<script src="sushigacha/daily-quest-click-bridge.js?v=20260914-3"></script>
+<script src="sushigacha/site-taskbar.js?v=20260914-2"></script>
+<script>
+(()=>{
+  const KEY='sushitan_login_bonus_v1', ACTIVE_KEY='sushitan_daily_active_v1';
+  const TYPE='sushitan', LABEL='すし単', GOAL=30, REWARD=5, UNIT='問';
+  function day(){const d=new Date();d.setHours(d.getHours()-6);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+  function toast(text){let x=document.getElementById('directDailyToast');if(!x){x=document.createElement('div');x.id='directDailyToast';x.style.cssText='position:fixed;left:50%;bottom:82px;transform:translateX(-50%);z-index:1000000;background:#173f37;color:#fff;padding:10px 15px;border-radius:999px;font:900 12px/1.2 system-ui;box-shadow:0 8px 24px #0004;pointer-events:none;white-space:nowrap';document.body.appendChild(x)}x.textContent=text;clearTimeout(x._t);x._t=setTimeout(()=>x.remove(),1500)}
+  function add(n=1,silent=false){
+    const today=day();let active=[];
+    try{const a=JSON.parse(localStorage.getItem(ACTIVE_KEY)||'null');if(a&&a.day===today&&Array.isArray(a.active))active=a.active}catch(e){}
+    let l={};try{l=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){}
+    if(!active.length&&l.dailyQuests?.day===today&&Array.isArray(l.dailyQuests.active))active=l.dailyQuests.active;
+    if(!active.includes(TYPE))return null;
+    let q=l.dailyQuests;if(!q||q.day!==today)q=l.dailyQuests={day:today,active:[...active],progress:{},claimed:{},chestClaimed:false,chestReward:0};
+    q.progress=q.progress&&typeof q.progress==='object'?q.progress:{};q.claimed=q.claimed&&typeof q.claimed==='object'?q.claimed:{};
+    if(q.claimed[TYPE])return {progress:GOAL,done:true};
+    const before=Math.max(0,Number(q.progress[TYPE])||0),after=Math.min(GOAL,before+Math.max(0,Number(n)||0));if(after<=before)return null;
+    q.progress[TYPE]=after;let done=false;if(after>=GOAL){q.claimed[TYPE]=true;l.gems=(Number.isSafeInteger(l.gems)?l.gems:0)+REWARD;done=true}
+    localStorage.setItem(KEY,JSON.stringify(l));window.dispatchEvent(new CustomEvent('sushi-daily-quest-change'));
+    if(!silent)toast(done?`✅ デイリー ${LABEL} ${Math.floor(after)}/${GOAL}${UNIT}  +${REWARD}💎`:`デイリー ${LABEL} ${Math.floor(after)}/${GOAL}${UNIT}`);
+    return {progress:after,done};
+  }
+  document.addEventListener('click',e=>{const b=e.target.closest?.('.balloon[data-type="correct"]');if(!b||b.dataset.directDailyDone==='1')return;b.dataset.directDailyDone='1';add()},true);
+})();
+</script>
 </body>
 </html>
 
