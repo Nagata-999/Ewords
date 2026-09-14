@@ -101,3 +101,46 @@
     };
   }
 })();
+
+// Sushi Quiz: load the 100-question medium/hard extension without replacing the huge HTML file.
+(() => {
+  if (!/sushi_quiz\.html$/i.test(location.pathname)) return;
+  if (window.__sushiQuizExtraLoaderStarted) return;
+  window.__sushiQuizExtraLoaderStarted = true;
+
+  const script=document.createElement('script');
+  script.src='/sushi_quiz_extra_questions.js?v=20260914-1';
+  script.async=false;
+  script.onload=()=>{
+    try{
+      if(typeof QUESTIONS==='undefined' || !Array.isArray(QUESTIONS)) return;
+      if(typeof SUSHI_QUIZ_EXTRA_QUESTIONS==='undefined' || !Array.isArray(SUSHI_QUIZ_EXTRA_QUESTIONS)) return;
+
+      // Do not add an identical category+question twice.
+      const existing=new Set(QUESTIONS.map(q=>`${q.cat}::${q.q}`));
+      const additions=SUSHI_QUIZ_EXTRA_QUESTIONS.filter(q=>!existing.has(`${q.cat}::${q.q}`));
+      QUESTIONS.push(...additions);
+
+      // Repair confirmed explanation mismatches in the original bank.
+      const fixes=new Map([
+        ['Which river flows through Budapest?','Budapest lies on the Danube River.'],
+        ['Which Asian country was formerly known as Siam?','Thailand was formerly known as Siam.'],
+        ['Which element has the chemical symbol W?','W is the symbol for tungsten, from its historical name wolfram.'],
+        ['Which element is liquid at room temperature?','Mercury is liquid at typical room temperatures.'],
+        ['Which branch of AI focuses on training models using large datasets?','Machine learning trains models to identify patterns from data.']
+      ]);
+      QUESTIONS.forEach(q=>{ if(fixes.has(q.q)) q.exp=fixes.get(q.q); });
+
+      // setup() ran before this async file arrived, so refresh all category cards.
+      if(typeof renderCategoryCards==='function'){
+        ['soloCatCards','localCatCards','onlineCatCards','buzzerCatCards'].forEach(renderCategoryCards);
+      }
+      window.__sushiQuizExtraQuestionsLoaded = true;
+      console.info(`Sushi Quiz: added ${additions.length} extra questions (${QUESTIONS.length} total).`);
+    }catch(err){
+      console.warn('Sushi Quiz extra questions failed to load:',err);
+    }
+  };
+  script.onerror=()=>console.warn('Sushi Quiz extra question file could not be loaded.');
+  document.head.appendChild(script);
+})();
