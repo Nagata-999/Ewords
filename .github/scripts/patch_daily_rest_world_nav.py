@@ -1,0 +1,75 @@
+from pathlib import Path
+import re
+
+BASE = r'''<script>
+(()=>{
+  const KEY='sushitan_login_bonus_v1', ACTIVE_KEY='sushitan_daily_active_v1';
+  const TYPE='__TYPE__', LABEL='__LABEL__', GOAL=__GOAL__, REWARD=__REWARD__, UNIT='__UNIT__';
+  function day(){const d=new Date();d.setHours(d.getHours()-6);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+  function toast(text){let x=document.getElementById('directDailyToast');if(!x){x=document.createElement('div');x.id='directDailyToast';x.style.cssText='position:fixed;left:50%;bottom:82px;transform:translateX(-50%);z-index:1000000;background:#173f37;color:#fff;padding:10px 15px;border-radius:999px;font:900 12px/1.2 system-ui;box-shadow:0 8px 24px #0004;pointer-events:none;white-space:nowrap';document.body.appendChild(x)}x.textContent=text;clearTimeout(x._t);x._t=setTimeout(()=>x.remove(),1500)}
+  function add(n=1,silent=false){
+    const today=day();let active=[];
+    try{const a=JSON.parse(localStorage.getItem(ACTIVE_KEY)||'null');if(a&&a.day===today&&Array.isArray(a.active))active=a.active}catch(e){}
+    let l={};try{l=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){}
+    if(!active.length&&l.dailyQuests?.day===today&&Array.isArray(l.dailyQuests.active))active=l.dailyQuests.active;
+    if(!active.includes(TYPE))return null;
+    let q=l.dailyQuests;if(!q||q.day!==today)q=l.dailyQuests={day:today,active:[...active],progress:{},claimed:{},chestClaimed:false,chestReward:0};
+    q.progress=q.progress&&typeof q.progress==='object'?q.progress:{};q.claimed=q.claimed&&typeof q.claimed==='object'?q.claimed:{};
+    if(q.claimed[TYPE])return {progress:GOAL,done:true};
+    const before=Math.max(0,Number(q.progress[TYPE])||0),after=Math.min(GOAL,before+Math.max(0,Number(n)||0));if(after<=before)return null;
+    q.progress[TYPE]=after;let done=false;if(after>=GOAL){q.claimed[TYPE]=true;l.gems=(Number.isSafeInteger(l.gems)?l.gems:0)+REWARD;done=true}
+    localStorage.setItem(KEY,JSON.stringify(l));window.dispatchEvent(new CustomEvent('sushi-daily-quest-change'));
+    if(!silent)toast(done?`✅ デイリー ${LABEL} ${Math.floor(after)}/${GOAL}${UNIT}  +${REWARD}💎`:`デイリー ${LABEL} ${Math.floor(after)}/${GOAL}${UNIT}`);
+    return {progress:after,done};
+  }
+  __HOOK__
+})();
+</script>'''
+
+configs = {
+  'sushitan.html': ('sushitan','すし単',30,5,'問', '''document.addEventListener('click',e=>{const b=e.target.closest?.('.balloon[data-type="correct"]');if(!b||b.dataset.directDailyDone==='1')return;b.dataset.directDailyDone='1';add()},true);'''),
+  'antonitan.html': ('antoni','あんとに単',20,5,'問', '''document.addEventListener('click',e=>{const b=e.target.closest?.('.balloon[data-type="correct"]');if(!b||b.dataset.directDailyDone==='1')return;b.dataset.directDailyDone='1';add()},true);'''),
+  'sushi_run.html': ('run','すしRUN',1500,5,'m', '''let last=0,pending=0,lastBucket=-1,timer=null;const flush=()=>{timer=null;if(pending<=0)return;const n=pending;pending=0;const r=add(n,true);if(!r)return;const bucket=Math.floor(r.progress/100);if(bucket!==lastBucket||r.done){lastBucket=bucket;toast(r.done?`✅ デイリー ${LABEL} ${Math.floor(r.progress)}/${GOAL}m  +${REWARD}💎`:`デイリー ${LABEL} ${Math.floor(r.progress)}/${GOAL}m`)}};const check=()=>{const el=document.getElementById('distance');if(!el)return;const cur=Math.max(0,Number((el.textContent||'').replace(/[^\\d.]/g,''))||0);if(cur<last){last=cur;return}const d=cur-last;last=cur;if(d>0){pending+=d;if(!timer)timer=setTimeout(flush,450)}};const start=()=>{const el=document.getElementById('distance');if(!el){setTimeout(start,250);return}new MutationObserver(check).observe(el,{childList:true,subtree:true,characterData:true});check()};start();''')
+}
+
+for name,(typ,label,goal,reward,unit,hook) in configs.items():
+  p=Path(name)
+  if not p.exists():
+    continue
+  text=p.read_text(encoding='utf-8')
+  text=re.sub(r'\n?<script src="sushigacha/daily-quest-click-bridge\.js\?v=[^"]+"></script>', '', text)
+  marker=f"const TYPE='{typ}', LABEL='{label}', GOAL={goal}, REWARD={reward}, UNIT='{unit}'"
+  if marker not in text:
+    inline=(BASE.replace('__TYPE__',typ).replace('__LABEL__',label).replace('__GOAL__',str(goal)).replace('__REWARD__',str(reward)).replace('__UNIT__',unit).replace('__HOOK__',hook))
+    text=text.replace('</body>',inline+'\n</body>',1)
+  p.write_text(text,encoding='utf-8')
+
+wp=Path('sukaishi_world_study_v03.html')
+if wp.exists():
+  text=wp.read_text(encoding='utf-8')
+  if 'id="quickQuizPanel"' not in text:
+    quick_html='''\n<section id="quickQuizPanel" class="hidden"><div class="panel"><div class="mode"><div><span class="badge">⚡ 1問1答</span><span class="badge" id="quickScore">0 / 0</span></div><button class="ghost" onclick="quickBackHome()">← HOME</button></div><div class="progress"><div id="quickBar"></div></div><div class="tiny" id="quickMeta"></div><div class="qen" id="quickQ"></div><div class="qja" id="quickQja"></div><div class="choices" id="quickChoices"></div><div class="feedback" id="quickFeedback"><b id="quickJudge"></b><div id="quickExp"></div><div class="ja" id="quickExpJa"></div></div><div class="actions"><button class="ghost" onclick="quickBackHome()">終了</button><button id="quickNext" class="primary hidden" onclick="quickNextQ()">NEXT →</button></div></div></section>\n'''
+    text=text.replace('</main>',quick_html+'</main>',1)
+    quick_script='''<script>\nlet QUICK_POOL=[],quickIndex=0,quickCorrect=0,quickAnswered=0,quickLocked=false;function quickShuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}function startQuickQuiz(){['home','category','study','game','clear'].forEach(id=>document.getElementById(id)?.classList.add('hidden'));document.getElementById('quickQuizPanel')?.classList.remove('hidden');QUICK_POOL=quickShuffle(DATA.sets.flatMap(s=>(s.questions||[]).map(q=>({...q,_theme:s.title,_era:s.era}))));quickIndex=0;quickCorrect=0;quickAnswered=0;quickRender()}function quickRender(){if(!QUICK_POOL.length)return;if(quickIndex>=QUICK_POOL.length){QUICK_POOL=quickShuffle(QUICK_POOL);quickIndex=0}const q=QUICK_POOL[quickIndex];quickLocked=false;document.getElementById('judge').textContent='';document.getElementById('quickMeta').textContent=`${q._era||''} / ${q._theme||''} / ${q.type||''}`;document.getElementById('quickQ').textContent=q.q||'';document.getElementById('quickQja').textContent=q.q_ja||'';document.getElementById('quickFeedback').classList.remove('show');document.getElementById('quickNext').classList.add('hidden');document.getElementById('quickScore').textContent=`${quickCorrect} / ${quickAnswered}`;document.getElementById('quickBar').style.width=`${Math.min(100,(quickAnswered%20)/20*100)}%`;const box=document.getElementById('quickChoices');box.innerHTML='';(q.choices||[]).forEach((c,i)=>{const b=document.createElement('button');b.className='choice';b.textContent=c;b.onclick=()=>quickAnswer(i,b);box.appendChild(b)})}function quickAnswer(i,b){if(quickLocked)return;quickLocked=true;const q=QUICK_POOL[quickIndex];quickAnswered++;const buttons=[...document.querySelectorAll('#quickChoices .choice')];buttons.forEach((x,n)=>{if(n===q.answer)x.classList.add('correct')});const ok=i===q.answer;if(!ok)b.classList.add('wrong');else{quickCorrect++;document.getElementById('judge').textContent='✓ CORRECT'}document.getElementById('quickJudge').textContent=ok?'✓ CORRECT':'✕ WRONG';document.getElementById('quickExp').textContent=q.explanation_en||'';document.getElementById('quickExpJa').textContent=q.explanation_ja||'';document.getElementById('quickFeedback').classList.add('show');document.getElementById('quickNext').classList.remove('hidden');document.getElementById('quickScore').textContent=`${quickCorrect} / ${quickAnswered}`}function quickNextQ(){quickIndex++;quickRender()}function quickBackHome(){document.getElementById('quickQuizPanel')?.classList.add('hidden');document.getElementById('home')?.classList.remove('hidden');document.getElementById('judge').textContent=''}window.startQuickQuiz=startQuickQuiz;window.quickNextQ=quickNextQ;window.quickBackHome=quickBackHome;\n</script>'''
+    text=text.replace('</body>',quick_script+'\n</body>',1)
+  if '⚡ 1問1答モード / Quick Quiz' not in text:
+    needle='<div id="catgrid" class="catgrid"></div>'
+    button='<div class="panel"><button class="primary" style="width:100%;font-size:18px" onclick="startQuickQuiz()">⚡ 1問1答モード / Quick Quiz</button><p class="tiny">全時代からランダム出題。時間制限なし・正解数を記録します。</p></div>'
+    text=text.replace(needle,button+'\n'+needle,1)
+  wp.write_text(text,encoding='utf-8')
+
+tp=Path('sushigacha/site-taskbar.js')
+if tp.exists():
+  t=tp.read_text(encoding='utf-8')
+  marker="sheet.querySelector('#sdqChest').onclick=chest;"
+  nav="sheet.querySelector('#sdqChest').onclick=chest;sheet.querySelector('#sdqRows').addEventListener('click',e=>{const row=e.target.closest?.('.sdq-row');if(!row)return;e.preventDefault();e.stopPropagation();const href=row.getAttribute('href');if(href){sheet.classList.remove('open');window.location.assign(new URL(href,window.location.origin).href)}});"
+  if 'window.location.assign(new URL(href,window.location.origin).href)' not in t:
+    if marker not in t: raise SystemExit('taskbar marker missing')
+    t=t.replace(marker,nav,1)
+  tp.write_text(t,encoding='utf-8')
+
+for p in Path('.').rglob('*.html'):
+  text=p.read_text(encoding='utf-8')
+  new=re.sub(r'sushigacha/site-taskbar\.js\?v=[^"\']+', 'sushigacha/site-taskbar.js?v=20260914-2', text)
+  if new!=text:
+    p.write_text(new,encoding='utf-8')
