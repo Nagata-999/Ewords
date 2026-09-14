@@ -16,44 +16,82 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Inject daily quest scripts
+      - name: Inject direct antoni daily quest tracking
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
-          import re
 
-          targets = [
-              'sushitan.html',
-              'antonitan.html',
-              'sushi_idiom (1).html',
-              'sushi_quiz.html',
-              'sushitalk.html',
-              'sukaishi_world_study_v03.html',
-              'sukaishi.html',
-              'sushi_run.html',
-          ]
+          p = Path('antonitan.html')
+          text = p.read_text(encoding='utf-8')
 
-          taskbar = '<script src="sushigacha/site-taskbar.js?v=20260914-1"></script>'
-          bridge = '<script src="sushigacha/daily-quest-click-bridge.js?v=20260914-3"></script>'
+          helper = r'''
+    // ===== あんとに単 デイリークエスト直結 =====
+    function recordAntoniDailyQuest() {
+      const KEY='sushitan_login_bonus_v1';
+      const ACTIVE_KEY='sushitan_daily_active_v1';
+      const GOAL=20, REWARD=5;
+      const d=new Date(); d.setHours(d.getHours()-6);
+      const today=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+      let active=[];
+      try {
+        const a=JSON.parse(localStorage.getItem(ACTIVE_KEY)||'null');
+        if(a&&a.day===today&&Array.isArray(a.active)) active=a.active;
+      } catch(e) {}
+      if(!active.includes('antoni')) return;
 
-          for name in targets:
-              p = Path(name)
-              if not p.exists():
-                  print('skip missing', name)
-                  continue
+      let l={};
+      try { l=JSON.parse(localStorage.getItem(KEY)||'{}')||{}; } catch(e) {}
+      let q=l.dailyQuests;
+      if(!q||q.day!==today){
+        q=l.dailyQuests={day:today,active:[...active],progress:{},claimed:{},chestClaimed:false,chestReward:0};
+      } else {
+        q.active=[...active];
+      }
+      q.progress=q.progress&&typeof q.progress==='object'?q.progress:{};
+      q.claimed=q.claimed&&typeof q.claimed==='object'?q.claimed:{};
+      if(q.claimed.antoni) return;
 
-              text = p.read_text(encoding='utf-8')
-              text = re.sub(r'\n?<script src="sushigacha/site-taskbar\.js\?v=[^"]+"></script>', '', text)
-              text = re.sub(r'\n?<script src="sushigacha/daily-quest-click-bridge\.js\?v=[^"]+"></script>', '', text)
+      q.progress.antoni=Math.min(GOAL,(Number(q.progress.antoni)||0)+1);
+      let achieved=false;
+      if(q.progress.antoni>=GOAL){
+        q.claimed.antoni=true;
+        l.gems=(Number.isSafeInteger(l.gems)?l.gems:0)+REWARD;
+        achieved=true;
+      }
+      localStorage.setItem(KEY,JSON.stringify(l));
+      window.dispatchEvent(new CustomEvent('sushi-daily-quest-change'));
 
-              if '</body>' not in text:
-                  raise SystemExit(f'{name}: </body> not found')
+      let x=document.getElementById('antoniDailyToast');
+      if(!x){
+        x=document.createElement('div');
+        x.id='antoniDailyToast';
+        x.style.cssText='position:fixed;left:50%;bottom:80px;transform:translateX(-50%);z-index:1000000;background:#173f37;color:#fff;padding:9px 14px;border-radius:999px;font:900 12px system-ui;box-shadow:0 6px 18px #0003;pointer-events:none;white-space:nowrap';
+        document.body.appendChild(x);
+      }
+      x.textContent=achieved ? '✅ デイリー あんとに単 '+GOAL+'/'+GOAL+'　+'+REWARD+'💎' : 'デイリー あんとに単 '+q.progress.antoni+'/'+GOAL;
+      clearTimeout(x._t);
+      x._t=setTimeout(()=>x.remove(),1400);
+    }
+    // ===== デイリークエスト直結ここまで =====
+'''
 
-              block = taskbar + '\n' + bridge + '\n'
-              text = text.replace('</body>', block + '</body>', 1)
-              p.write_text(text, encoding='utf-8')
-              print('patched', name)
+          marker = "    function handleTap(button) {"
+          if 'function recordAntoniDailyQuest()' not in text:
+              if marker not in text:
+                  raise SystemExit('handleTap marker not found')
+              text = text.replace(marker, helper + '\n' + marker, 1)
+
+          needle = "        GAME.correctCount += 1;\n        handleComboOnCorrect(now);"
+          replacement = "        GAME.correctCount += 1;\n        recordAntoniDailyQuest();\n        handleComboOnCorrect(now);"
+          if 'recordAntoniDailyQuest();' not in text:
+              if needle not in text:
+                  raise SystemExit('correct-answer marker not found')
+              text = text.replace(needle, replacement, 1)
+
+          # Keep the normal shared UI scripts, but direct tracking no longer depends on the bridge.
+          p.write_text(text, encoding='utf-8')
+          print('patched antonitan.html direct correct-answer tracking')
           PY
 
       - name: Commit changes
@@ -65,6 +103,6 @@ jobs:
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -- '*.html'
-          git commit -m 'Enable daily quests across sushi games'
+          git add antonitan.html
+          git commit -m 'Track antoni daily quest inside correct answer handler'
           git push origin HEAD
