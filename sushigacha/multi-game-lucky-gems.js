@@ -102,54 +102,123 @@
   }
 })();
 
-// Sushi Quiz expansion loader.
+// Sushi Quiz: independent bank loading, weighted selection, and visible diagnostics.
 (() => {
   if (!/sushi_quiz\.html$/i.test(location.pathname)) return;
-  if (window.__sushiQuizExtraLoaderStarted) return;
-  window.__sushiQuizExtraLoaderStarted = true;
+  if (window.__sushiQuizReliableLoaderStarted) return;
+  window.__sushiQuizReliableLoaderStarted = true;
 
-  const refresh=()=>{
-    if(typeof renderCategoryCards==='function') ['soloCatCards','localCatCards','onlineCatCards','buzzerCatCards'].forEach(renderCategoryCards);
-  };
-  const loadScript=(src,onload)=>{
-    const s=document.createElement('script');
-    s.src=src; s.async=false; if(onload) s.onload=onload;
-    s.onerror=()=>console.warn(`Sushi Quiz extension could not be loaded: ${src}`);
-    document.head.appendChild(s);
+  const VERSION='20260915-4';
+  const bankState={extra:'loading',mathLiterature:'loading',classical:'loading'};
+
+  const refreshCards=()=>{
+    if(typeof renderCategoryCards==='function'){
+      ['soloCatCards','localCatCards','onlineCatCards','buzzerCatCards'].forEach(renderCategoryCards);
+    }
   };
 
-  loadScript('/sushi_quiz_extra_questions.js?v=20260915-1',()=>{
+  const countCat=(name)=>{
+    try{return Array.isArray(QUESTIONS)?QUESTIONS.filter(q=>q.cat===name).length:0}catch(_e){return 0}
+  };
+
+  const musicCount=()=>{
     try{
-      if(typeof QUESTIONS==='undefined' || !Array.isArray(QUESTIONS)) return;
-      if(typeof SUSHI_QUIZ_EXTRA_QUESTIONS!=='undefined' && Array.isArray(SUSHI_QUIZ_EXTRA_QUESTIONS)){
-        const existing=new Set(QUESTIONS.map(q=>`${q.cat}::${q.q}`));
-        QUESTIONS.push(...SUSHI_QUIZ_EXTRA_QUESTIONS.filter(q=>!existing.has(`${q.cat}::${q.q}`)));
+      if(!Array.isArray(QUESTIONS)) return 0;
+      return QUESTIONS.filter(q=>/music|instrument/i.test(q.cat||'')).length;
+    }catch(_e){return 0}
+  };
+
+  function renderDiagnostics(){
+    if(typeof QUESTIONS==='undefined' || !Array.isArray(QUESTIONS)) return;
+    let el=document.getElementById('quizBankDiagnostics');
+    if(!el){
+      const target=document.querySelector('#soloSetup .notice') || document.getElementById('soloSetup');
+      if(!target) return;
+      el=document.createElement('div');
+      el.id='quizBankDiagnostics';
+      el.style.cssText='margin-top:10px;padding:9px 12px;border-radius:12px;background:#ecfeff;border:1px solid #67e8f9;color:#155e75;font:900 13px/1.45 system-ui';
+      target.insertAdjacentElement('afterend',el);
+    }
+    const status=Object.entries(bankState).map(([k,v])=>`${k}:${v==='ok'?'✓':v==='loading'?'…':'×'}`).join(' / ');
+    el.textContent=`BANK CHECK  Total ${QUESTIONS.length}｜Math ${countCat('Math')}｜Literature ${countCat('Literature')}｜Music ${musicCount()}｜${status}`;
+  }
+
+  function loadScriptOnce(id,src){
+    return new Promise((resolve,reject)=>{
+      const old=document.getElementById(id);
+      if(old){
+        if(old.dataset.loaded==='1') return resolve();
+        old.addEventListener('load',()=>resolve(),{once:true});
+        old.addEventListener('error',()=>reject(new Error(src)),{once:true});
+        return;
       }
-      const fixes=new Map([
-        ['Which river flows through Budapest?','Budapest lies on the Danube River.'],
-        ['Which Asian country was formerly known as Siam?','Thailand was formerly known as Siam.'],
-        ['Which element has the chemical symbol W?','W is the symbol for tungsten, from its historical name wolfram.'],
-        ['Which element is liquid at room temperature?','Mercury is liquid at typical room temperatures.'],
-        ['Which branch of AI focuses on training models using large datasets?','Machine learning trains models to identify patterns from data.']
-      ]);
-      QUESTIONS.forEach(q=>{ if(fixes.has(q.q)) q.exp=fixes.get(q.q); });
-      refresh();
-      window.__sushiQuizExtraQuestionsLoaded=true;
+      const s=document.createElement('script');
+      s.id=id;
+      s.src=src;
+      s.async=false;
+      s.onload=()=>{s.dataset.loaded='1';resolve();};
+      s.onerror=()=>reject(new Error(src));
+      document.head.appendChild(s);
+    });
+  }
 
-      // Load later banks independently so one failed extension cannot block another.
-      loadScript('/sushi_quiz_math_literature.js?v=20260915-1',refresh);
-      loadScript('/sushi_quiz_classical_music.js?v=20260915-2',refresh);
-    }catch(err){ console.warn('Sushi Quiz extra questions failed to load:',err); }
-  });
+  function installWeightedPick(){
+    if(typeof QUESTIONS==='undefined' || !Array.isArray(QUESTIONS)) return;
+    const fallbackWeights={
+      'Anime & Manga':4,'Popular Music':4,'Music History':4,'Music':4,'Classical Music':4,
+      'Musical Instruments':4,'Disney':3,'World Capitals':2,'Retro Games':3,
+      'Sports General':3,'Western Movies':3,'Math':2,'Literature':2,'World Literature':2
+    };
+    window.pick=function(cat,used=[]){
+      let sourcePool;
+      if(Array.isArray(cat)) sourcePool=QUESTIONS.filter(q=>cat.includes(q.cat));
+      else sourcePool=QUESTIONS.filter(q=>cat==='Random' || q.cat===cat);
+      let available=sourcePool.filter(q=>!used.includes(q.q));
+      if(!available.length) available=sourcePool;
+      if(!available.length) return undefined;
 
-  // Safety net: classical bank gets another direct chance even if the chain above is interrupted.
-  setTimeout(()=>{
-    if(window.__sushiQuizClassicalMusicMerged) return;
-    const s=document.createElement('script');
-    s.src='/sushi_quiz_classical_music.js?v=20260915-rescue';
-    s.async=false;
-    s.onload=refresh;
-    s.onerror=()=>console.warn('Sushi Quiz classical music rescue load failed.');
-    document.head.appendChild(s);
-  },1200);
+      const weighted=[];
+      available.forEach(q=>{
+        let w=fallbackWeights[q.cat]||1;
+        try{ if(typeof CATEGORY_WEIGHTS!=='undefined' && CATEGORY_WEIGHTS[q.cat]) w=CATEGORY_WEIGHTS[q.cat]; }catch(_e){}
+        for(let i=0;i<w;i++) weighted.push(q);
+      });
+      return weighted[Math.floor(Math.random()*weighted.length)] || available[Math.floor(Math.random()*available.length)];
+    };
+    window.__sushiQuizWeightedPickInstalled=true;
+  }
+
+  async function loadBank(key,id,src){
+    try{
+      await loadScriptOnce(id,src);
+      bankState[key]='ok';
+    }catch(err){
+      bankState[key]='error';
+      console.warn(`Sushi Quiz bank failed: ${src}`,err);
+    }
+    refreshCards();
+    installWeightedPick();
+    renderDiagnostics();
+  }
+
+  const start=()=>{
+    if(typeof QUESTIONS==='undefined' || !Array.isArray(QUESTIONS)){
+      setTimeout(start,120);
+      return;
+    }
+
+    installWeightedPick();
+    renderDiagnostics();
+
+    // All banks load independently: one failure cannot block the others.
+    loadBank('extra','sq-bank-extra',`/sushi_quiz_extra_questions.js?v=${VERSION}`);
+    loadBank('mathLiterature','sq-bank-math-lit',`/sushi_quiz_math_literature.js?v=${VERSION}`);
+    loadBank('classical','sq-bank-classical',`/sushi_quiz_classical_music.js?v=${VERSION}`);
+
+    // Refresh diagnostics once more after nested entrypoint scripts have had time to merge.
+    setTimeout(()=>{refreshCards();installWeightedPick();renderDiagnostics();},700);
+    setTimeout(()=>{refreshCards();installWeightedPick();renderDiagnostics();},1800);
+  };
+
+  start();
 })();
