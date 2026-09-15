@@ -14,8 +14,28 @@
   function avatar(){try{const l=JSON.parse(localStorage.getItem(LEDGER)||'{}');const a={...(window.DEFAULT_AVATAR||{}),...(l?.gacha?.avatar||{})};if(!a.top&&a.outfit)a.top=a.outfit;return a;}catch(_e){return {...(window.DEFAULT_AVATAR||{})};}}
   const gameDay=()=>{const d=new Date();d.setHours(d.getHours()-6);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
   const rewardIds=['salmon','tea','sky','lemon','berry','navy','sailor','explorer','chef','varsity','royal','cosmic','school-blazer-m','school-blazer-f','school-slacks-m','school-skirt-f','hat-cap','hat-beanie','hat-chef','hat-explorer','hat-crown','hat-wizard','acc-glasses','acc-scarf','acc-headphones','acc-bag','acc-star','acc-wings'];
+  function readLedger(){try{return JSON.parse(localStorage.getItem(LEDGER)||'{}')||{}}catch(_e){return {}}}
+  function installStampCard(){
+    const host=document.getElementById('loginBonus');if(!host)return;
+    let card=document.getElementById('loginStampCard');
+    if(!card){
+      card=document.createElement('div');card.id='loginStampCard';card.className='login-stamp-card';
+      const claim=document.getElementById('loginClaim');host.insertBefore(card,claim||null);
+      const css=document.createElement('style');css.textContent=`.login-stamp-card{margin-top:14px;padding:14px;border-radius:18px;background:rgba(255,255,255,.88);border:1px solid #fed7aa}.login-stamp-summary{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}.login-stamp-summary strong{font-size:15px;color:#9a3412}.login-stamp-summary span{font-size:12px;font-weight:900;color:#64748b}.login-stamps{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.login-stamp{position:relative;min-height:76px;padding:8px 5px;border-radius:15px;border:2px dashed #fdba74;background:#fff7ed;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}.login-stamp .stamp-icon{font-size:25px;line-height:1}.login-stamp .stamp-day{margin-top:4px;font-size:11px;font-weight:1000;color:#9a3412}.login-stamp.done{border-style:solid;border-color:#fb923c;background:#ffedd5}.login-stamp.done .stamp-icon{filter:none;transform:rotate(-7deg)}.login-stamp.today{box-shadow:0 0 0 3px rgba(244,81,30,.13)}.login-stamp.reward{border-color:#38bdf8;background:#f0f9ff}.login-stamp.reward .stamp-day{color:#0369a1}.login-stamp-next{margin-top:10px;text-align:center;font-size:13px;font-weight:1000;color:#ea580c}.login-total-progress{margin-top:12px;padding-top:11px;border-top:1px solid #fed7aa;display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:12px;font-weight:900;color:#64748b}.login-total-progress strong{font-size:16px;color:#172033}@media(max-width:420px){.login-stamp-card{padding:11px}.login-stamp{min-height:68px}.login-stamp .stamp-icon{font-size:22px}}`;
+      document.head.appendChild(css);
+    }
+    renderStampCard();
+  }
+  function renderStampCard(){
+    const card=document.getElementById('loginStampCard');if(!card)return;
+    const l=readLedger(),streak=Math.max(0,Number(l.streak)||0),total=Math.max(0,Number(l.total)||0),pos=streak?((streak-1)%3)+1:0,remain=pos===0?3:3-pos;
+    const cycleStart=streak?streak-pos+1:1;
+    const stamps=[1,2,3].map(i=>{const absolute=cycleStart+i-1,done=i<=pos,reward=i===3;return `<div class="login-stamp ${done?'done ':''}${i===pos?'today ':''}${reward?'reward':''}"><div class="stamp-icon">${done?'🍣':reward?'🎁':'○'}</div><div class="stamp-day">${absolute}日目${reward?' · 100💎':''}</div></div>`}).join('');
+    const nextAvatar=total>0&&total%10===0?total:Math.ceil((total+1)/10)*10;
+    card.innerHTML=`<div class="login-stamp-summary"><strong>🔥 ${streak}日連続ログイン中</strong><span>累計 ${total}日</span></div><div class="login-stamps">${stamps}</div><div class="login-stamp-next">${l.pending?'🎉 3日達成！100ジェム＋宝箱ラッシュ！':`あと${remain}日で100ジェム＋宝箱ラッシュ！`}</div><div class="login-total-progress"><span>📅 累計ログイン <strong>${total}日</strong></span><span>👤 ${nextAvatar}日でアバター報酬</span></div>`;
+  }
   function grantLoginRewards(){
-    let l={};try{l=JSON.parse(localStorage.getItem(LEDGER)||'{}')||{}}catch(_e){}
+    let l=readLedger();
     const today=gameDay();l.dailyGemClaims=Array.isArray(l.dailyGemClaims)?l.dailyGemClaims:[];l.loginAvatarMilestones=Array.isArray(l.loginAvatarMilestones)?l.loginAvatarMilestones:[];
     const messages=[];
     if(!l.dailyGemClaims.includes(today)){
@@ -34,6 +54,7 @@
     localStorage.setItem(LEDGER,JSON.stringify(l));
     const gem=document.getElementById('gemBalance');if(gem)gem.textContent=l.gems||0;
     const next=document.getElementById('loginNext');if(next){const until=10-(total%10||10);next.textContent=total%10===0&&total>0?'🎉 10日ごとにランダムアバターアイテム！':`毎日10ジェム！ 累計${total+until}日でランダムアバターアイテム`;} 
+    renderStampCard();
     if(messages.length)setTimeout(()=>say(messages.join(' / ')),450);
   }
   let x=18,dir='right',walking=true,frame=0,lastFrame=0,lastTurn=0,speed=26,raf=0,idleDir='front',idleAction='look',idleTimer=0;
@@ -44,6 +65,6 @@
   function resumeWalk(){clearIdleClass();walking=true;dir=Math.random()<.5?'left':'right';speed=20+Math.random()*16;render();}
   function chooseIdle(){walking=false;frame=0;idleDir=Math.random()<.55?'front':(Math.random()<.5?'back':dir);idleAction=actions[Math.floor(Math.random()*actions.length)];clearIdleClass();render();requestAnimationFrame(()=>char.classList.add('idle-'+idleAction));const wait=idleAction==='sleep'?1900:idleAction==='sit'?1500:900;clearTimeout(idleTimer);idleTimer=setTimeout(resumeWalk,wait+Math.random()*700);}
   function tick(t){raf=requestAnimationFrame(tick);const dt=Math.min(.05,(t-(tick.last||t))/1000);tick.last=t;const max=Math.max(18,innerWidth-char.offsetWidth-18);if(walking){x+=(dir==='right'?1:-1)*speed*dt;if(x<=18){x=18;dir='right'}if(x>=max){x=max;dir='left'}char.style.left=x+'px';if(t-lastFrame>135){frame=(frame+1)%4;lastFrame=t;render();}}if(t-lastTurn>4300+Math.random()*2800){lastTurn=t;chooseIdle();if(Math.random()<.5)say(lines[Math.floor(Math.random()*lines.length)]);}}
-  char.addEventListener('click',()=>location.href='sushigacha/sushi-avatar.html');window.addEventListener('resize',()=>{x=Math.min(x,Math.max(18,innerWidth-char.offsetWidth-18))});window.addEventListener('storage',e=>{if(e.key===LEDGER)render()});window.addEventListener('focus',render);
-  (async()=>{try{if(!document.querySelector('script[src*="site-taskbar.js"]'))await load('/sushigacha/site-taskbar.js?v=20260914-2');if(typeof window.avatarSVG!=='function')await load('sushigacha/avatar.js?v=20260914-home6');await load('sushigacha/avatar-polish.js?v=20260913-4');await load('sushigacha/avatar-character-2d.js?v=20260913-1');await load('sushigacha/avatar-character-2d-v2.js?v=20260913-2');grantLoginRewards();render();raf=requestAnimationFrame(tick);}catch(e){console.warn('home avatar walker unavailable',e);root.remove();}})();
+  char.addEventListener('click',()=>location.href='sushigacha/sushi-avatar.html');window.addEventListener('resize',()=>{x=Math.min(x,Math.max(18,innerWidth-char.offsetWidth-18))});window.addEventListener('storage',e=>{if(e.key===LEDGER){render();renderStampCard()}});window.addEventListener('focus',()=>{render();renderStampCard()});
+  (async()=>{try{if(!document.querySelector('script[src*="site-taskbar.js"]'))await load('/sushigacha/site-taskbar.js?v=20260914-2');if(typeof window.avatarSVG!=='function')await load('sushigacha/avatar.js?v=20260914-home6');await load('sushigacha/avatar-polish.js?v=20260913-4');await load('sushigacha/avatar-character-2d.js?v=20260913-1');await load('sushigacha/avatar-character-2d-v2.js?v=20260913-2');installStampCard();grantLoginRewards();render();raf=requestAnimationFrame(tick);}catch(e){console.warn('home avatar walker unavailable',e);root.remove();}})();
 })();
