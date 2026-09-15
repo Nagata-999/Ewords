@@ -14,16 +14,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Wire Sushi Giri into shared vocabulary and home page
+      - name: Integrate Sushi Giri
+        shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
 
           game = Path('sushigiri.html')
           s = game.read_text(encoding='utf-8')
+          s = s.replace('https://sushitan.net/sushizan.html', 'https://sushitan.net/sushigiri.html')
           s = s.replace('./data/words_2000.json', './data/words_master_v1.json')
           s = s.replace('./audio/bgm/bgm.mp3', './Marketplace_Sprint.mp3')
-          s = s.replace('./audio/bgm/Marketplace_Sprint.mp3', './Marketplace_Sprint.mp3')
           old = '''    if(!Array.isArray(data)||data.length<2000)throw new Error("2000語データ不足");
     words=data.slice(0,2000).map(x=>[String(x.word||"").trim(),String(x.meaning||x.ja||"").trim()]).filter(x=>x[0]&&x[1]);'''
           new = '''    if(!Array.isArray(data))throw new Error("共通辞書の形式エラー");
@@ -44,11 +45,15 @@ jobs:
               h = h.replace(marker, card + marker, 1)
               home.write_text(h, encoding='utf-8')
           PY
-      - name: Commit integration
+      - name: Commit changes
+        shell: bash
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo 'No changes needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add sushigiri.html index.html
-          git diff --cached --quiet && exit 0
-          git commit -m "Integrate Sushi Giri into site"
+          git commit -m 'Integrate Sushi Giri into site'
           git push
