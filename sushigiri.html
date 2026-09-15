@@ -2058,11 +2058,15 @@ document.querySelector("#rankingBackBtn")?.addEventListener("click",()=>{
 loadVocab();
 
 document.querySelector("#startBtn").onclick=async()=>{
+ // iOS: focus MUST happen synchronously inside this user tap, before any await.
+ if(mobileTypingMode){
+   mobileTypingInput.value="";
+   try{mobileTypingInput.focus({preventScroll:true})}catch(e){mobileTypingInput.focus()}
+ }
  const ok=await loadVocab();
- if(!ok || words.length!==2000)return;
+ if(!ok || words.length!==2000){ mobileTypingInput.blur(); return; }
  usedWordIndexes.clear();
  startSushiSlashBgm();
-  setTimeout(focusMobileTyping,0);
  ac().resume();prepareFinishSlash();document.querySelector("#start").classList.add("hidden");
  running=true;paused=false;score=0;combo=0;fever=0;time=30;lastTs=0;kills=0;maxCombo=0;misses=0;typoMisses=0;breaks=0;criticals=0;
  clearComboGrace();newWord();updateHud();requestAnimationFrame(loop);
