@@ -14,24 +14,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Add Sushi Giri home card
+      - name: Add mobile typing support
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          p=Path('index.html')
+          p=Path('sushigiri.html')
           s=p.read_text(encoding='utf-8')
-          if 'href="sushigiri.html"' not in s:
-              marker='<div class="game-item"><a class="card green" href="sushitype.html">'
-              card='<div class="game-item"><a class="card orange" href="sushigiri.html">すし斬り<small>英語タイピング × 30秒斬撃</small></a><button aria-label="説明を開く" class="game-info-toggle" type="button">▽</button><div class="game-info"><h3>すし斬り</h3><p>迫ってくる寿司を英単語タイピングで斬る30秒スコアアタック。並は1〜1000番、上は1001〜2000番の英単語から出題されます。</p><h4>このゲームで身につくこと</h4><ul><li>英単語のスペル</li><li>英語タイピングの速度</li><li>語彙の瞬発力</li><li>集中して英語を処理する力</li></ul></div></div>\n'
-              if marker not in s:
-                  raise SystemExit('sushitype marker not found')
-              s=s.replace(marker,card+marker,1)
-              p.write_text(s,encoding='utf-8')
+          marker='const arena=document.querySelector("#arena"), game=document.querySelector("#game"), msg=document.querySelector("#message");'
+          if 'id="mobileTypingInput"' not in s:
+              mobile='''\n/* ===== MOBILE SOFTWARE KEYBOARD SUPPORT ===== */\nconst mobileTypingInput=document.createElement("input");\nmobileTypingInput.id="mobileTypingInput";\nmobileTypingInput.type="text";\nmobileTypingInput.inputMode="text";\nmobileTypingInput.autocapitalize="none";\nmobileTypingInput.autocomplete="off";\nmobileTypingInput.autocorrect="off";\nmobileTypingInput.spellcheck=false;\nmobileTypingInput.setAttribute("aria-label","英語タイピング入力");\nObject.assign(mobileTypingInput.style,{position:"fixed",left:"50%",bottom:"0",width:"2px",height:"2px",opacity:"0.01",zIndex:"99999",fontSize:"16px",transform:"translateX(-50%)"});\ndocument.body.appendChild(mobileTypingInput);\nconst mobileTypingMode=matchMedia("(pointer: coarse)").matches || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);\nfunction focusMobileTyping(){\n  if(!mobileTypingMode || !running || paused)return;\n  mobileTypingInput.value="";\n  try{mobileTypingInput.focus({preventScroll:true})}catch(e){mobileTypingInput.focus()}\n}\nfunction feedMobileKey(ch){\n  if(!running||paused||!ch)return;\n  document.dispatchEvent(new KeyboardEvent("keydown",{key:ch,bubbles:true}));\n}\nmobileTypingInput.addEventListener("input",()=>{\n  const v=mobileTypingInput.value;\n  mobileTypingInput.value="";\n  for(const ch of v)feedMobileKey(ch);\n});\nmobileTypingInput.addEventListener("blur",()=>{if(running&&!paused)setTimeout(focusMobileTyping,80)});\ndocument.addEventListener("touchend",()=>{if(running&&!paused)focusMobileTyping()},{passive:true});\nif(mobileTypingMode){\n  document.documentElement.classList.add("mobileTyping");\n  const st=document.createElement("style");\n  st.textContent=`@media (max-width:900px),(pointer:coarse){html.mobileTyping #game{height:56dvh;min-height:360px}html.mobileTyping #arena{transform:scale(.88);transform-origin:center top}html.mobileTyping .word{font-size:clamp(22px,6vw,38px)!important}html.mobileTyping .jp{font-size:clamp(12px,3.4vw,18px)!important}}`;\n  document.head.appendChild(st);\n}\n'''
+              if marker not in s: raise SystemExit('arena marker not found')
+              s=s.replace(marker,mobile+'\n'+marker,1)
+          # focus keyboard whenever gameplay starts / resumes and after each new sushi
+          nw='''  renderEnemy();\n  startComboGrace();'''
+          if 'focusMobileTyping();\n  startComboGrace();' not in s:
+              s=s.replace(nw,'''  renderEnemy();\n  focusMobileTyping();\n  startComboGrace();''',1)
+          # iOS requires focus to originate from the user's start tap. Inject into likely start function paths.
+          s=s.replace('startSushiSlashBgm();','startSushiSlashBgm();\n  setTimeout(focusMobileTyping,0);',1)
+          p.write_text(s,encoding='utf-8')
           PY
       - name: Commit
         run: |
           git config user.name github-actions-bot
           git config user.email github-actions-bot@users.noreply.github.com
-          git add index.html
-          git diff --cached --quiet || git commit -m 'Add Sushi Giri to home page'
+          git add sushigiri.html
+          git diff --cached --quiet || git commit -m 'Enable mobile keyboard typing in Sushi Giri'
           git push
