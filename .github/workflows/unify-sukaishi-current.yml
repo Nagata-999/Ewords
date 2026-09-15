@@ -1,0 +1,63 @@
+name: Unify Sukaishi current version
+
+on:
+  push:
+    paths:
+      - '.github/workflows/unify-sukaishi-current.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Use daily Sukaishi as current and randomize Quick Quiz choices
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          # 1) Main/home route: use the same current version as Daily Quest.
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          old = 'href="sukaishi/sukaishi.html">す界し'
+          new = 'href="sukaishi_world_study_v03.html">す界し'
+          if old in s:
+              s = s.replace(old, new, 1)
+          elif new not in s:
+              raise SystemExit('Could not find Sukaishi home link')
+          p.write_text(s, encoding='utf-8')
+
+          # 2) Quick Quiz: shuffle choices while preserving the correct answer.
+          p = Path('sukaishi_world_study_v03.html')
+          s = p.read_text(encoding='utf-8')
+          old_render = "const box=document.getElementById('quickChoices');box.innerHTML='';(q.choices||[]).forEach((c,i)=>{const b=document.createElement('button');b.className='choice';b.textContent=c;b.onclick=()=>quickAnswer(i,b);box.appendChild(b)})"
+          new_render = "const box=document.getElementById('quickChoices');box.innerHTML='';const displayed=quickShuffle((q.choices||[]).map((c,i)=>({text:c,correct:i===q.answer})));q._quickDisplayed=displayed;displayed.forEach((item,i)=>{const b=document.createElement('button');b.className='choice';b.textContent=item.text;b.onclick=()=>quickAnswer(i,b);box.appendChild(b)})"
+          old_answer = "const q=QUICK_POOL[quickIndex];quickAnswered++;const buttons=[...document.querySelectorAll('#quickChoices .choice')];buttons.forEach((x,n)=>{if(n===q.answer)x.classList.add('correct')});const ok=i===q.answer;"
+          new_answer = "const q=QUICK_POOL[quickIndex];quickAnswered++;const displayed=q._quickDisplayed||[];const buttons=[...document.querySelectorAll('#quickChoices .choice')];buttons.forEach((x,n)=>{if(displayed[n]?.correct)x.classList.add('correct')});const ok=!!displayed[i]?.correct;"
+          if old_render in s:
+              s = s.replace(old_render, new_render, 1)
+          elif new_render not in s:
+              raise SystemExit('Could not find Quick Quiz render block')
+          if old_answer in s:
+              s = s.replace(old_answer, new_answer, 1)
+          elif new_answer not in s:
+              raise SystemExit('Could not find Quick Quiz answer block')
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit changes
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo 'No changes needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html sukaishi_world_study_v03.html
+          git commit -m 'Unify Sukaishi route and randomize Quick Quiz answers'
+          git push origin HEAD
