@@ -11,6 +11,34 @@
   function poolFor(t){const pool=words.slice(t.min,Math.min(t.max,words.length));return pool.length?pool:words}
   function fourChoices(q,pool){const wrong=[];while(wrong.length<3&&pool.length>1){const w=pool[rnd(pool.length)];if(w&&w.jp!==q.jp&&!wrong.includes(w.jp))wrong.push(w.jp)}while(wrong.length<3){const w=words[rnd(words.length)];if(w&&w.jp!==q.jp&&!wrong.includes(w.jp))wrong.push(w.jp)}return [q.jp,...wrong].sort(()=>Math.random()-.5)}
   function ensureChestTier(){if(game?.chest&&!game.chest.tier)game.chest.tier=chooseTier()}
+  function weightedCopy(arr){return weighted(arr)}
+  function consumableByType(types){const pool=CONSUMABLES.filter(x=>types.includes(x.type));return weightedCopy(pool.length?pool:CONSUMABLES)}
+  function strongWeapon(){const pool=WEAPONS.filter(x=>(x.power||0)>=5);return weightedCopy(pool.length?pool:WEAPONS)}
+  function strongShield(){const pool=SHIELDS.filter(x=>(x.power||0)>=5);return weightedCopy(pool.length?pool:SHIELDS)}
+  function rewardForTier(t){
+    const r=Math.random();
+    if(t===TIERS.low){
+      // Survival / growth chest: food, tea and upgrade materials dominate.
+      if(r<.30)return consumableByType(['sushi']);
+      if(r<.60)return consumableByType(['tea']);
+      if(r<.78)return consumableByType(['whetstone']);
+      if(r<.96)return consumableByType(['reinforce']);
+      return weightedCopy(CONSUMABLES);
+    }
+    if(t===TIERS.mid){
+      // Equipment chest: still has useful items, but weapons and shields are the main prize.
+      if(r<.34)return weightedCopy(WEAPONS);
+      if(r<.68)return weightedCopy(SHIELDS);
+      if(r<.80)return weightedCopy(ACCESSORIES);
+      return weightedCopy(CONSUMABLES);
+    }
+    // Hard chest: two questions, with a strong bias toward high-tier gear.
+    if(r<.45)return strongWeapon();
+    if(r<.78)return strongShield();
+    if(r<.90)return weightedCopy(ACCESSORIES);
+    if(r<.96)return weightedCopy(WEAPONS);
+    return weightedCopy(SHIELDS);
+  }
 
   const baseGenerate=generateFloor;
   generateFloor=function(){const r=baseGenerate.apply(this,arguments);ensureChestTier();return r};
@@ -36,7 +64,7 @@
     function reward(){
       finished=true;const result=document.createElement('button');result.type='button';result.className='treasureResult';
       if(game.inventory.length>=20){result.innerHTML=`<strong>✓ ${t.questions===2?'2問正解！':'正解！'}</strong><em>持ち物がいっぱいで受け取れなかった。</em><small>タップして閉じる</small>`;msg(`✓ ${t.label}宝箱：正解！ しかし持ち物がいっぱいだ。`)}
-      else{const prize=randomItem(true);game.inventory.push(prize);if(gearTypes.has(prize.type))game.foundGear.push({...prize});const plus=prize.plus?` +${prize.plus}`:'';result.innerHTML=`<strong>✓ ${t.questions===2?'2問正解！':'正解！'}</strong><em>🎁 ${prize.icon} ${prize.name}${plus} を手に入れた</em><small>タップして閉じる</small>`;msg(`✓ ${t.label}宝箱：正解！`);log(`${t.label}宝箱クリア → ${prize.name}`)}
+      else{const prize=rewardForTier(t);game.inventory.push(prize);if(gearTypes.has(prize.type))game.foundGear.push({...prize});const plus=prize.plus?` +${prize.plus}`:'';result.innerHTML=`<strong>✓ ${t.questions===2?'2問正解！':'正解！'}</strong><em>🎁 ${prize.icon} ${prize.name}${plus} を手に入れた</em><small>タップして閉じる</small>`;msg(`✓ ${t.label}宝箱：正解！`);log(`${t.label}宝箱クリア → ${prize.name}`)}
       result.onclick=closeTurn;grid.replaceChildren(result);const n=$('invCount');if(n)n.textContent=`${game.inventory.length}/20`;
     }
     function ask(){
