@@ -14,13 +14,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Patch game
+      - name: Add Sushi Giri home card
         run: |
-          python3 -c 'from pathlib import Path; p=Path("sushigiri.html"); s=p.read_text(); s=s.replace("https://sushitan.net/sushizan.html","https://sushitan.net/sushigiri.html").replace("./data/words_2000.json","./data/words_master_v1.json").replace("./audio/bgm/bgm.mp3","./Marketplace_Sprint.mp3").replace("if(!Array.isArray(data)||data.length<2000)throw new Error(\"2000語データ不足\");\n    words=data.slice(0,2000).map(x=>[String(x.word||\"\").trim(),String(x.meaning||x.ja||\"\").trim()]).filter(x=>x[0]&&x[1]);","if(!Array.isArray(data))throw new Error(\"共通辞書の形式エラー\");\n    const pool=data.filter(x=>Array.isArray(x.games)&&x.games.includes(\"sushitan\")&&String(x.word||\"\").trim()&&String(x.ja||\"\").trim());\n    if(pool.length<2000)throw new Error(`すし単語彙不足 ${pool.length}`);\n    words=pool.slice(0,2000).map(x=>[String(x.word).trim(),String(x.ja).trim()]);").replace("data/words_2000.json の配置を確認してください。","data/words_master_v1.json を確認してください。"); p.write_text(s)'
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          if 'href="sushigiri.html"' not in s:
+              marker='<div class="game-item"><a class="card green" href="sushitype.html">'
+              card='<div class="game-item"><a class="card orange" href="sushigiri.html">すし斬り<small>英語タイピング × 30秒斬撃</small></a><button aria-label="説明を開く" class="game-info-toggle" type="button">▽</button><div class="game-info"><h3>すし斬り</h3><p>迫ってくる寿司を英単語タイピングで斬る30秒スコアアタック。並は1〜1000番、上は1001〜2000番の英単語から出題されます。</p><h4>このゲームで身につくこと</h4><ul><li>英単語のスペル</li><li>英語タイピングの速度</li><li>語彙の瞬発力</li><li>集中して英語を処理する力</li></ul></div></div>\n'
+              if marker not in s:
+                  raise SystemExit('sushitype marker not found')
+              s=s.replace(marker,card+marker,1)
+              p.write_text(s,encoding='utf-8')
+          PY
       - name: Commit
         run: |
           git config user.name github-actions-bot
           git config user.email github-actions-bot@users.noreply.github.com
-          git add sushigiri.html
-          git diff --cached --quiet || git commit -m 'Fix Sushi Giri assets vocabulary and SEO'
+          git add index.html
+          git diff --cached --quiet || git commit -m 'Add Sushi Giri to home page'
           git push
