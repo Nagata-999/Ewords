@@ -1,0 +1,6 @@
+/* English treasure difficulty: low=green, mid=blue, hard=red/gold. */
+.entity.treasure.chestLow{filter:hue-rotate(72deg) saturate(1.45);text-shadow:0 0 8px #65ef79,0 0 15px #38b94f}
+.entity.treasure.chestMid{filter:hue-rotate(175deg) saturate(1.5);text-shadow:0 0 8px #69c9ff,0 0 16px #298de0}
+.entity.treasure.chestHard{filter:hue-rotate(320deg) saturate(1.65);text-shadow:0 0 9px #ff765f,0 0 18px #ffb02e;animation:hardChestPulse 1.15s ease-in-out infinite}
+@keyframes hardChestPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+@media(prefers-reduced-motion:reduce){.entity.treasure.chestHard{animation:none}}
