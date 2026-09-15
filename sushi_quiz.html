@@ -3,7 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sushi Quiz v2</title>
+<title>すしクイズ｜無料クイズゲーム・英語クイズ・一般常識クイズ | すし単</title>
+<meta name="description" content="すしクイズは無料で遊べるブラウザクイズゲーム。英語、地理、音楽、スポーツ、文化、数学、文学など幅広い問題に挑戦できます。英語クイズや一般常識クイズをゲーム感覚で楽しめます。">
+<meta name="keywords" content="クイズ,クイズゲーム,無料クイズ,英語クイズ,英語ゲーム,一般常識クイズ,ブラウザゲーム,すしクイズ,すし単">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<link rel="canonical" href="https://sushitan.net/sushi_quiz.html">
+<meta property="og:type" content="website"><meta property="og:site_name" content="すし単"><meta property="og:title" content="すしクイズ｜無料クイズゲーム・英語クイズ"><meta property="og:description" content="英語・地理・音楽・スポーツ・文化など幅広い問題で遊べる無料クイズゲーム。"><meta property="og:url" content="https://sushitan.net/sushi_quiz.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":["WebApplication","Game"],"name":"すしクイズ","url":"https://sushitan.net/sushi_quiz.html","description":"英語や一般常識など幅広い問題を無料で楽しめるブラウザクイズゲーム。","applicationCategory":"EducationalApplication","operatingSystem":"Web Browser","isAccessibleForFree":true,"inLanguage":"ja"}</script>
 <style>
 html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#fff7e8;color:#9a4b08}
 #boot{display:grid;place-items:center;min-height:100vh;font-weight:900;font-size:22px;text-align:center;padding:24px}
@@ -17,10 +23,7 @@ html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,"Segoe UI
     const res=await fetch('/sushi_quiz_core.html?v='+V,{cache:'no-store'});
     if(!res.ok) throw new Error('core '+res.status);
     let html=await res.text();
-
-    // Remove the old shared-loader tag so a stale cached URL cannot win.
     html=html.replace(/<script[^>]+src=["'][^"']*sushigacha\/multi-game-lucky-gems\.js[^"']*["'][^>]*><\/script>/gi,'');
-
     const fresh=`
 <script src="/sushigacha/multi-game-lucky-gems.js?v=${V}"><\/script>
 <script src="/sushi_quiz_math_literature.js?v=${V}"><\/script>
@@ -30,29 +33,16 @@ window.__sushiQuizBootstrapVersion='${V}';
 setTimeout(()=>{
   try{
     const qs=(typeof QUESTIONS!=='undefined'&&Array.isArray(QUESTIONS))?QUESTIONS:[];
-    const counts={
-      total:qs.length,
-      math:qs.filter(q=>q.cat==='Math').length,
-      literature:qs.filter(q=>/Literature/i.test(q.cat||'')).length,
-      music:qs.filter(q=>/Music/i.test(q.cat||'')).length,
-      modernWorld:qs.filter(q=>q.cat==='Modern World').length,
-      currentCompanies:qs.filter(q=>q.cat==='Current Companies').length
-    };
+    const counts={total:qs.length,math:qs.filter(q=>q.cat==='Math').length,literature:qs.filter(q=>/Literature/i.test(q.cat||'')).length,music:qs.filter(q=>/Music/i.test(q.cat||'')).length,modernWorld:qs.filter(q=>q.cat==='Modern World').length,currentCompanies:qs.filter(q=>q.cat==='Current Companies').length};
     console.info('Sushi Quiz bootstrap',counts);
     const pool=document.getElementById('soloPool')||document.querySelector('[data-pool]');
     if(pool && qs.length) pool.textContent=qs.length;
   }catch(e){console.warn('Sushi Quiz bootstrap diagnostic failed',e);}
 },1200);
 <\/script>`;
-
-    if(/<\/body>/i.test(html)) html=html.replace(/<\/body>/i,fresh+'</body>');
-    else html+=fresh;
-    document.open();
-    document.write(html);
-    document.close();
-  }catch(err){
-    document.body.innerHTML='<div style="padding:24px;text-align:center;font-weight:800">Sushi Quiz failed to load.<br>ページを再読み込みしてください。<br><small>'+String(err)+'</small></div>';
-  }
+    if(/<\/body>/i.test(html)) html=html.replace(/<\/body>/i,fresh+'</body>'); else html+=fresh;
+    document.open();document.write(html);document.close();
+  }catch(err){document.body.innerHTML='<div style="padding:24px;text-align:center;font-weight:800">Sushi Quiz failed to load.<br>ページを再読み込みしてください。<br><small>'+String(err)+'</small></div>';}
 })();
 </script>
 </body>
