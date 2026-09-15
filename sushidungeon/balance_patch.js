@@ -1,5 +1,31 @@
 'use strict';
 (function(){
+  // Loot balance: ordinary weapons/shields are a little rarer, while upgrade
+  // materials are more useful to find. Add two rare top-tier pieces of gear.
+  if(!WEAPONS.some(x=>x.name==='すし斬り'))WEAPONS.push({name:'すし斬り',type:'weapon',power:10,icon:'🗡️',weight:2});
+  if(!SHIELDS.some(x=>x.name==='鉄板'))SHIELDS.push({name:'鉄板',type:'shield',power:10,icon:'🛡️',weight:2});
+  for(const it of CONSUMABLES){
+    if(it.type==='whetstone'||it.type==='reinforce')it.weight=12;
+  }
+
+  // Replace the original category roll. Normal floor loot now favors
+  // consumables; English treasure remains better, but gear is less dominant.
+  randomItem=function(good){
+    const luck=game&&game.accessory?.effect==='luck';
+    const boosted=good||(luck&&Math.random()<.25);
+    const roll=Math.random();
+    if(boosted){
+      if(roll<.32)return weighted(WEAPONS.slice(2));
+      if(roll<.62)return weighted(SHIELDS.slice(2));
+      if(roll<.78)return weighted(ACCESSORIES);
+      return weighted(CONSUMABLES);
+    }
+    if(roll<.18)return weighted(WEAPONS);
+    if(roll<.36)return weighted(SHIELDS);
+    if(roll<.47)return weighted(ACCESSORIES);
+    return weighted(CONSUMABLES);
+  };
+
   function roomContains(r,x,y){return x>=r.x&&x<r.x+r.w&&y>=r.y&&y<r.y+r.h}
   function carveRoomLocal(grid,x,y,w,h){for(let yy=y;yy<y+h;yy++)for(let xx=x;xx<x+w;xx++)grid[yy][xx]=1}
   function carveCorridorLocal(grid,a,b){
