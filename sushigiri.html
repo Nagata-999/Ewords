@@ -1389,6 +1389,43 @@ async function loadVocab(){
     return false;
   }
 }
+
+/* ===== MOBILE SOFTWARE KEYBOARD SUPPORT ===== */
+const mobileTypingInput=document.createElement("input");
+mobileTypingInput.id="mobileTypingInput";
+mobileTypingInput.type="text";
+mobileTypingInput.inputMode="text";
+mobileTypingInput.autocapitalize="none";
+mobileTypingInput.autocomplete="off";
+mobileTypingInput.autocorrect="off";
+mobileTypingInput.spellcheck=false;
+mobileTypingInput.setAttribute("aria-label","英語タイピング入力");
+Object.assign(mobileTypingInput.style,{position:"fixed",left:"50%",bottom:"0",width:"2px",height:"2px",opacity:"0.01",zIndex:"99999",fontSize:"16px",transform:"translateX(-50%)"});
+document.body.appendChild(mobileTypingInput);
+const mobileTypingMode=matchMedia("(pointer: coarse)").matches || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+function focusMobileTyping(){
+  if(!mobileTypingMode || !running || paused)return;
+  mobileTypingInput.value="";
+  try{mobileTypingInput.focus({preventScroll:true})}catch(e){mobileTypingInput.focus()}
+}
+function feedMobileKey(ch){
+  if(!running||paused||!ch)return;
+  document.dispatchEvent(new KeyboardEvent("keydown",{key:ch,bubbles:true}));
+}
+mobileTypingInput.addEventListener("input",()=>{
+  const v=mobileTypingInput.value;
+  mobileTypingInput.value="";
+  for(const ch of v)feedMobileKey(ch);
+});
+mobileTypingInput.addEventListener("blur",()=>{if(running&&!paused)setTimeout(focusMobileTyping,80)});
+document.addEventListener("touchend",()=>{if(running&&!paused)focusMobileTyping()},{passive:true});
+if(mobileTypingMode){
+  document.documentElement.classList.add("mobileTyping");
+  const st=document.createElement("style");
+  st.textContent=`@media (max-width:900px),(pointer:coarse){html.mobileTyping #game{height:56dvh;min-height:360px}html.mobileTyping #arena{transform:scale(.88);transform-origin:center top}html.mobileTyping .word{font-size:clamp(22px,6vw,38px)!important}html.mobileTyping .jp{font-size:clamp(12px,3.4vw,18px)!important}}`;
+  document.head.appendChild(st);
+}
+
 const arena=document.querySelector("#arena"), game=document.querySelector("#game"), msg=document.querySelector("#message");
 let current="", jp="", pos=0, score=0, combo=0, fever=0, time=60, running=false, feverMode=false, lastTs=0, audioCtx;
 let difficulty="easy", enemyLife=0, enemyLimit=7.5, kills=0, boss=false, paused=false, maxCombo=0, misses=0, typoMisses=0, breaks=0, criticals=0;
@@ -2025,6 +2062,7 @@ document.querySelector("#startBtn").onclick=async()=>{
  if(!ok || words.length!==2000)return;
  usedWordIndexes.clear();
  startSushiSlashBgm();
+  setTimeout(focusMobileTyping,0);
  ac().resume();prepareFinishSlash();document.querySelector("#start").classList.add("hidden");
  running=true;paused=false;score=0;combo=0;fever=0;time=30;lastTs=0;kills=0;maxCombo=0;misses=0;typoMisses=0;breaks=0;criticals=0;
  clearComboGrace();newWord();updateHud();requestAnimationFrame(loop);
