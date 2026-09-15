@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Inject home avatar walker
+      - name: Inline login stamp card
         shell: bash
         run: |
           python - <<'PY'
@@ -21,13 +21,72 @@ jobs:
           import re
           p=Path('index.html')
           text=p.read_text(encoding='utf-8')
-          tag='<script src="sushigacha/home-avatar-walker.js?v=20260916-stamp1"></script>'
+
+          # Keep the avatar walker loaded, but the login stamp UI itself lives in index.html.
+          tag='<script src="sushigacha/home-avatar-walker.js?v=20260916-stamp2"></script>'
           if 'sushigacha/home-avatar-walker.js' in text:
               text=re.sub(r'<script src="sushigacha/home-avatar-walker\.js\?v=[^"]+"></script>',tag,text)
           else:
-              if '</body>' not in text:
-                  raise SystemExit('index.html: </body> not found')
               text=text.replace('</body>',tag+'\n</body>',1)
+
+          css='''
+<style id="loginStampInlineStyle">
+.login-stamp-card{margin-top:14px;padding:14px;border-radius:18px;background:rgba(255,255,255,.86);border:1px solid #f1d7bc}
+.login-stamp-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;font-size:13px;font-weight:900;color:#475569}
+.login-stamps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.login-stamp{min-height:74px;border:2px dashed #fdba74;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fffaf2;color:#9a3412;font-weight:1000;position:relative}
+.login-stamp .stamp-icon{font-size:26px;line-height:1}.login-stamp small{margin-top:4px;font-size:11px;color:#78716c}
+.login-stamp.done{border-style:solid;background:linear-gradient(145deg,#fff7ed,#ffedd5);box-shadow:inset 0 0 0 2px rgba(251,146,60,.08)}
+.login-stamp.done .stamp-icon{filter:none}.login-stamp.current{outline:3px solid rgba(244,81,30,.14)}
+.login-stamp-reward{margin-top:9px;text-align:center;font-size:12px;font-weight:900;color:#c2410c}
+@media(max-width:420px){.login-stamp{min-height:66px}.login-stamp .stamp-icon{font-size:23px}}
+</style>'''
+          if 'id="loginStampInlineStyle"' not in text:
+              text=text.replace('</head>',css+'\n</head>',1)
+
+          markup='''
+<div class="login-stamp-card" id="loginStampCard">
+  <div class="login-stamp-title"><span>🔥 連続ログインスタンプ</span><span id="loginStampCount">1日連続</span></div>
+  <div class="login-stamps" id="loginStamps">
+    <div class="login-stamp" data-slot="1"><span class="stamp-icon">🍣</span><small>DAY 1</small></div>
+    <div class="login-stamp" data-slot="2"><span class="stamp-icon">🍣</span><small>DAY 2</small></div>
+    <div class="login-stamp" data-slot="3"><span class="stamp-icon">💎</span><small>DAY 3</small></div>
+  </div>
+  <div class="login-stamp-reward">3日ごとに 💎100ジェム＋宝箱ラッシュ！</div>
+</div>'''
+          if 'id="loginStampCard"' not in text:
+              text=text.replace('<p class="login-next" id="loginNext">',markup+'\n  <p class="login-next" id="loginNext">',1)
+
+          js='''
+<script id="loginStampInlineScript">
+(() => {
+  const KEY='sushitan_login_bonus_v1';
+  function drawLoginStamps(){
+    let d={streak:1,total:1};
+    try{d={...d,...JSON.parse(localStorage.getItem(KEY)||'{}')}}catch(e){}
+    const streak=Math.max(1,Number(d.streak)||1);
+    const pos=((streak-1)%3)+1;
+    const base=streak-pos;
+    const count=document.getElementById('loginStampCount');
+    if(count) count.textContent=`${streak}日連続・累計${Number(d.total)||1}日`;
+    document.querySelectorAll('#loginStamps .login-stamp').forEach((el,i)=>{
+      const slot=i+1, day=base+slot;
+      el.classList.toggle('done',slot<=pos);
+      el.classList.toggle('current',slot===pos);
+      const small=el.querySelector('small');
+      if(small) small.textContent=`DAY ${day}`;
+      const icon=el.querySelector('.stamp-icon');
+      if(icon) icon.textContent=slot===3?'💎':(slot<=pos?'✅':'🍣');
+    });
+  }
+  drawLoginStamps();
+  window.addEventListener('pageshow',drawLoginStamps);
+  window.addEventListener('storage',drawLoginStamps);
+})();
+</script>'''
+          if 'id="loginStampInlineScript"' not in text:
+              text=text.replace('</body>',js+'\n</body>',1)
+
           p.write_text(text,encoding='utf-8')
           PY
       - name: Commit changes
@@ -40,5 +99,5 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html
-          git commit -m 'Load current login stamp card on home screen'
+          git commit -m 'Show login stamp card directly on home page'
           git push
