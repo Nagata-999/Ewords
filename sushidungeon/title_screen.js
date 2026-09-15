@@ -6,6 +6,18 @@
   function readSave(){try{const raw=localStorage.getItem(SAVE_KEY);if(!raw)return null;const data=JSON.parse(raw);if(!data||!data.game||data.game.dead)return null;return data}catch{return null}}
   function writeSave(){try{if(!game||game.dead)return;localStorage.setItem(SAVE_KEY,JSON.stringify({version:1,savedAt:Date.now(),game}));updateContinue()}catch{}}
   function clearSave(){try{localStorage.removeItem(SAVE_KEY)}catch{}updateContinue()}
+  function sameGear(a,b){return !!a&&!!b&&a.type===b.type&&a.name===b.name&&(a.plus||0)===(b.plus||0)&&(a.power||0)===(b.power||0)}
+  function relinkEquippedGear(g){
+    if(!g||!Array.isArray(g.inventory))return g;
+    // JSON saves duplicate object references. Reconnect equipment to the actual
+    // inventory objects so the E badge, sorting and dropping stay consistent.
+    for(const slot of ['weapon','shield','accessory']){
+      const saved=g[slot];if(!saved)continue;
+      const live=g.inventory.find(it=>sameGear(it,saved));
+      if(live)g[slot]=live;
+    }
+    return g;
+  }
 
   function build(){
     if(overlay)return overlay;
@@ -13,7 +25,7 @@
     overlay.innerHTML=`<div class="titleBackdrop" aria-hidden="true"><span class="titleLantern left">🏮</span><span class="titleLantern right">🏮</span><div class="titleDungeonGlow"></div></div><div class="titlePanel"><div class="titleSushi">🍣</div><p class="titleKicker">SUSHI MYSTERY DUNGEON</p><h1>すしの<br><span>不思議なダンジョン</span></h1><p class="titleTagline">剣と寿司と英単語。30Fを目指せ。</p><div class="titleButtons"><button id="titleNew" type="button" class="titleBtn primary">はじめから</button><button id="titleContinue" type="button" class="titleBtn">つづきから</button><a class="titleBtn titleHomeBtn" href="../sushitan.html">🍣 すし単へ戻る</a></div><p id="titleSaveInfo" class="titleSaveInfo"></p></div>`;
     document.body.appendChild(overlay);
     overlay.querySelector('#titleNew').addEventListener('click',()=>{clearSave();startGame();writeSave();close()});
-    overlay.querySelector('#titleContinue').addEventListener('click',()=>{const save=readSave();if(!save)return;game=save.game;render();close()});
+    overlay.querySelector('#titleContinue').addEventListener('click',()=>{const save=readSave();if(!save)return;game=relinkEquippedGear(save.game);render();writeSave();close()});
     updateContinue();return overlay;
   }
   function updateContinue(){if(!overlay)return;const save=readSave(),btn=overlay.querySelector('#titleContinue'),info=overlay.querySelector('#titleSaveInfo');btn.disabled=!save;if(!save){info.textContent='セーブデータはありません';return}const g=save.game;info.textContent=`${g.floor}F  /  Lv ${g.level}  /  HP ${Math.max(0,g.hp)}/${g.maxHp}`}
@@ -42,5 +54,5 @@
   }
   function init(){build();addSuspendButton();hookSaves();open();loadRankingAssets()}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
-  window.sushiTitleScreen={open,close,save:writeSave,clearSave,suspend};
+  window.sushiTitleScreen={open,close,save:writeSave,clear:clearSave,suspend};
 })();
