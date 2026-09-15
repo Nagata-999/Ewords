@@ -9,14 +9,14 @@
 <meta name="theme-color" content="#ffffff">
 
 <!-- Canonical: change this path if you publish the game at a different URL -->
-<link rel="canonical" href="https://sushitan.net/sushizan.html">
+<link rel="canonical" href="https://sushitan.net/sushigiri.html">
 
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:site_name" content="すし単">
 <meta property="og:title" content="すし斬り｜無料の英語タイピングゲーム・英単語練習 | すし単">
 <meta property="og:description" content="英単語をタイピングして寿司を斬る無料ブラウザゲーム「すし斬り」。英語タイピング、英単語練習、タイピングゲームを楽しく続けたい人向け。並・上の2レベル、オンラインランキング対応。">
-<meta property="og:url" content="https://sushitan.net/sushizan.html">
+<meta property="og:url" content="https://sushitan.net/sushigiri.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="すし斬り｜無料の英語タイピングゲーム・英単語練習 | すし単">
 <meta name="twitter:description" content="英単語をタイピングして寿司を斬る無料ブラウザゲーム「すし斬り」。英語タイピング、英単語練習、タイピングゲームを楽しく続けたい人向け。並・上の2レベル、オンラインランキング対応。">
@@ -27,7 +27,7 @@
   "@type": ["WebApplication","Game"],
   "name": "すし斬り",
   "alternateName": ["Sushi Slash","英語タイピングゲーム すし斬り"],
-  "url": "https://sushitan.net/sushizan.html",
+  "url": "https://sushitan.net/sushigiri.html",
   "description": "英単語をタイピングして寿司を斬る無料ブラウザゲーム「すし斬り」。英語タイピング、英単語練習、タイピングゲームを楽しく続けたい人向け。並・上の2レベル、オンラインランキング対応。",
   "applicationCategory": "EducationalApplication",
   "operatingSystem": "Web Browser",
@@ -1371,11 +1371,13 @@ let vocabReady=false;
 async function loadVocab(){
   if(vocabReady && words.length===2000)return true;
   try{
-    const r=await fetch("./data/words_2000.json",{cache:"no-cache"});
+    const r=await fetch("./data/words_master_v1.json",{cache:"no-cache"});
     if(!r.ok)throw new Error(`HTTP ${r.status}`);
     const data=await r.json();
-    if(!Array.isArray(data)||data.length<2000)throw new Error("2000語データ不足");
-    words=data.slice(0,2000).map(x=>[String(x.word||"").trim(),String(x.meaning||x.ja||"").trim()]).filter(x=>x[0]&&x[1]);
+    if(!Array.isArray(data))throw new Error("共通辞書の形式エラー");
+    const pool=data.filter(x=>Array.isArray(x.games)&&x.games.includes("sushitan")&&String(x.word||"").trim()&&String(x.ja||"").trim());
+    if(pool.length<2000)throw new Error(`すし単語彙不足 ${pool.length}`);
+    words=pool.slice(0,2000).map(x=>[String(x.word).trim(),String(x.ja).trim()]);
     if(words.length!==2000)throw new Error(`有効語数 ${words.length}`);
     vocabReady=true;
     console.info("🍣 すし斬り vocabulary loaded:",words.length);
@@ -1383,7 +1385,7 @@ async function loadVocab(){
   }catch(e){
     console.error("Vocabulary load failed",e);
     words=FALLBACK_WORDS.slice();
-    alert("単語データを読み込めませんでした。data/words_2000.json の配置を確認してください。");
+    alert("単語データを読み込めませんでした。data/words_master_v1.json を確認してください。");
     return false;
   }
 }
@@ -1785,7 +1787,7 @@ function startFever(){
 
 
 /* ===== v32 BGM: Marketplace Sprint ===== */
-const sushiSlashBgm = new Audio("./audio/bgm/bgm.mp3");
+const sushiSlashBgm = new Audio("./Marketplace_Sprint.mp3");
 sushiSlashBgm.loop = true;
 sushiSlashBgm.volume = 0.32;
 function startSushiSlashBgm(){
