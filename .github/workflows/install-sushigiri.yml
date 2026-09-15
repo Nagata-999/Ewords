@@ -18,11 +18,12 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          import re
 
           game = Path('sushigiri.html')
           s = game.read_text(encoding='utf-8')
           s = s.replace('./data/words_2000.json', './data/words_master_v1.json')
+          s = s.replace('./audio/bgm/bgm.mp3', './Marketplace_Sprint.mp3')
+          s = s.replace('./audio/bgm/Marketplace_Sprint.mp3', './Marketplace_Sprint.mp3')
           old = '''    if(!Array.isArray(data)||data.length<2000)throw new Error("2000語データ不足");
     words=data.slice(0,2000).map(x=>[String(x.word||"").trim(),String(x.meaning||x.ja||"").trim()]).filter(x=>x[0]&&x[1]);'''
           new = '''    if(!Array.isArray(data))throw new Error("共通辞書の形式エラー");
