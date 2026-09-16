@@ -36,7 +36,7 @@
     }catch(e){console.warn('[dungeon ranking]',e);list.innerHTML='<div class="dungeonRankingEmpty">ランキングに接続できませんでした。ゲームはそのまま遊べます。</div>'}
   }
   async function saveSnapshot(snapshot){
-    if(saving||!snapshot)return;saving=true;
+    if(saving||!snapshot||snapshot.testMode)return;saving=true;
     try{
       const c=db();if(!c)return;
       let name=localStorage.getItem(NAME_KEY)||localStorage.getItem('sushitan_player_name')||'';
@@ -48,7 +48,7 @@
       if(error)throw error;
     }catch(e){console.warn('[dungeon ranking save]',e)}finally{saving=false}
   }
-  function snap(){if(!window.game)return null;return {floor:Math.max(1,Math.min(30,game.floor||1)),turn:Math.max(0,game.turn||0),level:Math.max(1,game.level||1)}}
+  function snap(){if(!game)return null;return {floor:Math.max(1,Math.min(30,game.floor||1)),turn:Math.max(0,game.turn||0),level:Math.max(1,game.level||1),testMode:!!game.testMode}}
   function hookResults(){
     if(typeof window.die==='function'&&!window.die.__dungeonRank){const base=window.die;window.die=function(){const s=snap(),r=base.apply(this,arguments);setTimeout(()=>saveSnapshot(s),120);return r};window.die.__dungeonRank=true}
     if(typeof window.finishClear==='function'&&!window.finishClear.__dungeonRank){const base=window.finishClear;window.finishClear=function(){const s=snap(),r=base.apply(this,arguments);setTimeout(()=>saveSnapshot(s),120);return r};window.finishClear.__dungeonRank=true}
