@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '.github/workflows/install-sushigiri.yml'
+      - 'scripts/patch_sushigiri.py'
   workflow_dispatch:
 
 permissions:
@@ -21,5 +22,5 @@ jobs:
           git config user.name github-actions-bot
           git config user.email github-actions-bot@users.noreply.github.com
           git add sushigiri.html
-          git diff --cached --quiet || git commit -m "Fix Sushi Giri layout and personal best ranking"
+          git diff --cached --quiet || git commit -m "Update Sushi Giri countdown and fixes"
           git push
