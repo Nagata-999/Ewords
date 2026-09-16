@@ -1,0 +1,67 @@
+from pathlib import Path
+
+p=Path('sushigiri.html')
+s=p.read_text(encoding='utf-8')
+
+# Desktop: do not classify touch-capable PCs as mobile.
+s=s.replace('const mobileTypingMode=matchMedia("(pointer: coarse)").matches || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);','const mobileTypingMode=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent) && matchMedia("(max-width: 900px)").matches;')
+s=s.replace('@media (max-width:900px),(pointer:coarse){html.mobileTyping #game{height:56dvh;min-height:360px}','@media (max-width:900px){html.mobileTyping #game{height:56dvh;min-height:360px}')
+
+# Larger Japanese meaning.
+style='''\n<style id="sushiGiriMeaningSize">\n.jp{font-size:clamp(20px,2.1vw,30px)!important;font-weight:800!important;line-height:1.35!important;opacity:.9!important}\n@media(max-width:900px){html.mobileTyping .jp{font-size:clamp(18px,5vw,25px)!important}}\n</style>\n'''
+if 'id="sushiGiriMeaningSize"' not in s:
+    s=s.replace('</head>',style+'</head>',1)
+
+# Same player name: keep one personal best. Lower/equal scores are silent.
+start=s.index('async function saveSlashRanking(){')
+end=s.index('\nfunction initRankingResult(){',start)
+new='''async function saveSlashRanking(){
+  if(rankingSaved)return;
+  const input=document.querySelector("#slashPlayerName");
+  const st=document.querySelector("#slashRankStatus");
+  const btn=document.querySelector("#slashSaveBtn");
+  let rawName=(input?.value||"").trim().slice(0,16);
+  if(!rawName){
+    const ok=window.confirm("名前が未入力です。\\n「名無しすし」でランキング登録しますか？");
+    if(!ok){ input?.focus(); return; }
+    rawName="名無しすし";
+  }
+  const name=rawName;
+  if(!slashDb)return;
+  if(st)st.textContent="";
+  if(btn)btn.disabled=true;
+  try{
+    if(name!=="名無しすし") localStorage.setItem("sushiSlashName",name);
+    const {data:rows,error:findError}=await slashDb.from(SLASH_RANK_TABLE)
+      .select("score")
+      .eq("mode",slashMode())
+      .eq("player_name",name)
+      .limit(1);
+    if(findError)throw findError;
+    const existing=rows?.[0]||null;
+    const oldScore=Number(existing?.score||0);
+    if(existing && score<=oldScore){
+      if(btn)btn.disabled=false;
+      return;
+    }
+    const payload={player_name:name,score:Math.max(0,Math.round(score)),max_combo:Math.max(0,Math.round(maxCombo)),accuracy:100,mode:slashMode()};
+    let error;
+    if(existing){
+      ({error}=await slashDb.from(SLASH_RANK_TABLE).update(payload).eq("mode",slashMode()).eq("player_name",name));
+    }else{
+      ({error}=await slashDb.from(SLASH_RANK_TABLE).insert(payload));
+    }
+    if(error)throw error;
+    rankingSaved=true;
+    if(st)st.textContent=existing ? "自己ベスト更新！" : "総合ランキングに保存しました！";
+    await showSlashRanking();
+  }catch(e){
+    console.warn("ranking save",e);
+    if(st)st.textContent="";
+    if(btn)btn.disabled=false;
+  }
+}'''
+s=s[:start]+new+s[end:]
+
+p.write_text(s,encoding='utf-8')
+print('patched sushigiri.html')
