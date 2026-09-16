@@ -1278,6 +1278,11 @@ h1 span{color:#e44b2a !important;text-shadow:none !important}
 @keyframes comboText{from{opacity:.68;transform:translateX(-50%) scale(.96)}to{opacity:1;transform:translateX(-50%) scale(1.08)}}
 @keyframes comboArenaGlow{from{filter:brightness(1) saturate(1)}to{filter:brightness(1.10) saturate(1.22)}}
 </style>
+
+<style id="sushiGiriMeaningSize">
+.jp{font-size:clamp(20px,2.1vw,30px)!important;font-weight:800!important;line-height:1.35!important;opacity:.9!important}
+@media(max-width:900px){html.mobileTyping .jp{font-size:clamp(18px,5vw,25px)!important}}
+</style>
 </head>
 <body>
 <div id="game">
@@ -1402,7 +1407,7 @@ mobileTypingInput.spellcheck=false;
 mobileTypingInput.setAttribute("aria-label","英語タイピング入力");
 Object.assign(mobileTypingInput.style,{position:"fixed",left:"50%",bottom:"0",width:"2px",height:"2px",opacity:"0.01",zIndex:"99999",fontSize:"16px",transform:"translateX(-50%)"});
 document.body.appendChild(mobileTypingInput);
-const mobileTypingMode=matchMedia("(pointer: coarse)").matches || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+const mobileTypingMode=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent) && matchMedia("(max-width: 900px)").matches;
 function focusMobileTyping(){
   if(!mobileTypingMode || !running || paused)return;
   mobileTypingInput.value="";
@@ -1422,7 +1427,7 @@ document.addEventListener("touchend",()=>{if(running&&!paused)focusMobileTyping(
 if(mobileTypingMode){
   document.documentElement.classList.add("mobileTyping");
   const st=document.createElement("style");
-  st.textContent=`@media (max-width:900px),(pointer:coarse){html.mobileTyping #game{height:56dvh;min-height:360px}html.mobileTyping #arena{transform:scale(.88);transform-origin:center top}html.mobileTyping .word{font-size:clamp(22px,6vw,38px)!important}html.mobileTyping .jp{font-size:clamp(12px,3.4vw,18px)!important}}`;
+  st.textContent=`@media (max-width:900px){html.mobileTyping #game{height:56dvh;min-height:360px}html.mobileTyping #arena{transform:scale(.88);transform-origin:center top}html.mobileTyping .word{font-size:clamp(22px,6vw,38px)!important}html.mobileTyping .jp{font-size:clamp(12px,3.4vw,18px)!important}}`;
   document.head.appendChild(st);
 }
 
@@ -1896,34 +1901,41 @@ async function saveSlashRanking(){
   let rawName=(input?.value||"").trim().slice(0,16);
   if(!rawName){
     const ok=window.confirm("名前が未入力です。\n「名無しすし」でランキング登録しますか？");
-    if(!ok){
-      if(st)st.textContent="名前を入力してから登録してください。";
-      input?.focus();
-      return;
-    }
+    if(!ok){ input?.focus(); return; }
     rawName="名無しすし";
   }
   const name=rawName;
-  if(!slashDb){if(st)st.textContent="オンライン保存を利用できません。";return}
-  if(st)st.textContent="保存中...";
+  if(!slashDb)return;
+  if(st)st.textContent="";
   if(btn)btn.disabled=true;
   try{
     if(name!=="名無しすし") localStorage.setItem("sushiSlashName",name);
-    const payload={
-      player_name:name,
-      score:Math.max(0,Math.round(score)),
-      max_combo:Math.max(0,Math.round(maxCombo)),
-      accuracy:100,
-      mode:slashMode()
-    };
-    const {error}=await slashDb.from(SLASH_RANK_TABLE).insert(payload);
+    const {data:rows,error:findError}=await slashDb.from(SLASH_RANK_TABLE)
+      .select("score")
+      .eq("mode",slashMode())
+      .eq("player_name",name)
+      .limit(1);
+    if(findError)throw findError;
+    const existing=rows?.[0]||null;
+    const oldScore=Number(existing?.score||0);
+    if(existing && score<=oldScore){
+      if(btn)btn.disabled=false;
+      return;
+    }
+    const payload={player_name:name,score:Math.max(0,Math.round(score)),max_combo:Math.max(0,Math.round(maxCombo)),accuracy:100,mode:slashMode()};
+    let error;
+    if(existing){
+      ({error}=await slashDb.from(SLASH_RANK_TABLE).update(payload).eq("mode",slashMode()).eq("player_name",name));
+    }else{
+      ({error}=await slashDb.from(SLASH_RANK_TABLE).insert(payload));
+    }
     if(error)throw error;
     rankingSaved=true;
-    if(st)st.textContent=`総合ランキングに保存しました！`;
+    if(st)st.textContent=existing ? "自己ベスト更新！" : "総合ランキングに保存しました！";
     await showSlashRanking();
   }catch(e){
     console.warn("ranking save",e);
-    if(st)st.textContent="保存できませんでした。通信状態を確認してください。";
+    if(st)st.textContent="";
     if(btn)btn.disabled=false;
   }
 }
