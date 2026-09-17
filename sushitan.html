@@ -2312,6 +2312,9 @@ html, body {
 }
 
 </style>
+<script src="shared/word-registry.js"></script>
+<script src="shared/learning.js"></script>
+<script src="shared/review-ui.js"></script>
 </head>
 <body>
 
@@ -2548,7 +2551,7 @@ html, body {
           <section class="home-section" aria-label="復習リスト">
             <h3>📝 間違えた単語 <span id="savedReviewCount">0</span>語</h3>
             <div id="savedReviewList" class="mistake-list"></div>
-            <p class="small">このブラウザに自動保存。全レベルの苦手単語を、時間制限なしで復習できます。2回連続正解でリストから外れます。</p>
+            <p class="small">このブラウザに自動保存。全レベルの苦手単語を、時間制限なしで復習できます。繰り返し正解でリストから外れます。</p>
             <div class="menu-btns"><button class="btn green" id="startReviewBtn" disabled>復習する</button><button class="btn secondary" id="clearReviewBtn">リストを消去</button></div>
             <p class="small" id="reviewStorageStatus" role="status"></p>
           </section>
@@ -3092,15 +3095,18 @@ html, body {
       renderReviewList();
     }
     function availableReviewWords() {
+      if (window.SushiLearning) return SushiLearning.getReviewWords(3440);
       const data = readReview();
       return [...new Map(WORDS.filter(w => Object.hasOwn(data, reviewKey(w))).map(w => [reviewKey(w), w])).values()];
     }
     function rememberReviewMiss(word) {
+      if (window.SushiLearning) { SushiLearning.recordAnswer(SushiLearning.resolveWordId(word), false, "sushitan"); renderReviewList(); return; }
       const data = readReview(), key = reviewKey(word), previous = data[key];
       data[key] = {en: word.en, jp: word.jp, misses: (previous?.misses || 0) + 1, streak: 0};
       writeReview(data);
     }
     function reviewCorrect(word) {
+      if (window.SushiLearning) { const p=SushiLearning.recordAnswer(SushiLearning.resolveWordId(word), true, "sushitan"); renderReviewList(); return p?.status === "mastered"; }
       const data = readReview(), key = reviewKey(word);
       if (!data[key]) return true;
       data[key].streak += 1;
@@ -3113,10 +3119,10 @@ html, body {
       const box = document.getElementById('savedReviewList');
       if (!box) return;
       const data = readReview();
-      const rows = availableReviewWords().map(w => data[reviewKey(w)]).sort((a,b) => b.misses-a.misses);
+      const rows = window.SushiLearning ? availableReviewWords().map(w => ({...w,misses:w.wrong_count})) : availableReviewWords().map(w => data[reviewKey(w)]).sort((a,b) => b.misses-a.misses);
       document.getElementById('savedReviewCount').textContent = rows.length;
       document.getElementById('startReviewBtn').disabled = !rows.length;
-      box.innerHTML = rows.length ? rows.map(w => `<div class="mistake-row"><div><b>${escapeHtml(w.en)}</b><br>${escapeHtml(w.jp)}</div><div>ミス ${w.misses}回<br>${w.streak}/2</div></div>`).join('') : '<p class="small">復習する単語はありません。</p>';
+      box.innerHTML = rows.length ? rows.map(w => `<div class="mistake-row"><div><b>${escapeHtml(w.en)}</b><br>${escapeHtml(w.jp)}</div><div>ミス ${w.misses}回<br>連続正解 ${w.streak}回</div></div>`).join('') : '<p class="small">復習する単語はありません。</p>';
       document.getElementById('reviewStorageStatus').textContent = reviewStorageFailed ? 'ブラウザに保存できません。この画面を閉じると復習記録が失われる場合があります。' : '';
     }
     function handleReviewTap(button) {
@@ -3127,7 +3133,7 @@ html, body {
       if (correct) {
         GAME.correctCount++;
         const graduated = reviewCorrect(GAME.currentQuestion);
-        setFeedback(graduated ? '復習完了！リストから外れました。' : '正解！あと1回連続正解で復習完了。', 'good');
+        setFeedback(graduated ? '復習完了！リストから外れました。' : '正解！共通の苦手度が下がりました。', 'good');
         soundCorrect();
       } else {
         recordMistake(button);
@@ -3286,7 +3292,7 @@ html, body {
 
     function pickQuestion() {
       if (GAME.reviewMode) {
-        const words = availableReviewWords();
+        const words = availableReviewWords().slice(0, window.SushiLearning?.CONFIG.reviewBatch || 20);
         if (!words.length) return null;
         const alternatives = words.filter(w => reviewKey(w) !== (GAME.currentQuestion && reviewKey(GAME.currentQuestion)));
         const pool = alternatives.length ? alternatives : words;
@@ -3449,7 +3455,7 @@ html, body {
 
     function recordMistake(button) {
       if (!GAME.currentQuestion) return;
-      if (currentMode === MODE_SUSHI) rememberReviewMiss(GAME.currentQuestion);
+      if (currentMode === MODE_SUSHI && !GAME.currentQuestion._learningMissed) { rememberReviewMiss(GAME.currentQuestion); GAME.currentQuestion._learningMissed=true; }
       const correct = getAnswerValue(GAME.currentQuestion);
       const picked = button ? button.dataset.value : "";
       GAME.mistakes.push({
@@ -3672,6 +3678,7 @@ html, body {
       const type = button.dataset.type;
 
       if (type === 'correct') {
+        if (currentMode === MODE_SUSHI && !GAME.currentQuestion._learningMissed) window.SushiLearning?.recordAnswer(SushiLearning.resolveWordId(GAME.currentQuestion), true, 'sushitan');
         GAME.questionLocked = true;
         GAME.attemptCount += 1;
         ensureAudio();
@@ -3810,7 +3817,7 @@ html, body {
 
       clearInterval(GAME.tickTimer);
       if (!GAME.reviewMode) GAME.tickTimer = setInterval(tick, 100);
-      else setFeedback('時間制限なし。同じ単語に2回連続正解で復習完了。');
+      else setFeedback('時間制限なし。同じ単語に繰り返し正解で復習完了。');
     }
 
 
@@ -4351,6 +4358,7 @@ html, body {
   document.addEventListener('click',e=>{const b=e.target.closest?.('.balloon[data-type="correct"]');if(!b||b.dataset.directDailyDone==='1')return;b.dataset.directDailyDone='1';add()},true);
 })();
 </script>
+<script>window.addEventListener('sushi-learning-change',()=>renderReviewList());if(new URLSearchParams(location.search).get('review')==='weak') WORD_DATA_READY.then(()=>document.getElementById('startReviewBtn')?.click());</script>
 </body>
 </html>
 
