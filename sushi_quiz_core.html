@@ -2242,10 +2242,13 @@ QUESTIONS.push(
     leaderEffect('online', window.online && online.players);
     const t=document.getElementById('onlineTable');
     if(t){
-      const div=document.createElement('div');
-      div.className='chase-message hot';
+      let div=t.parentNode.querySelector('.ranking-chase-message');
+      if(!div){
+        div=document.createElement('div');
+        div.className='chase-message hot ranking-chase-message';
+        t.parentNode.insertBefore(div,t);
+      }
       div.textContent=buildChaseMessage((window.online&&online.players)||[]);
-      t.parentNode.insertBefore(div,t);
     }
   };
 
@@ -2255,10 +2258,13 @@ QUESTIONS.push(
     leaderEffect('buzzer', window.buzzer && buzzer.players);
     const t=document.getElementById('buzzerRankTable');
     if(t){
-      const div=document.createElement('div');
-      div.className='chase-message hot';
+      let div=t.parentNode.querySelector('.ranking-chase-message');
+      if(!div){
+        div=document.createElement('div');
+        div.className='chase-message hot ranking-chase-message';
+        t.parentNode.insertBefore(div,t);
+      }
       div.textContent=buildChaseMessage((window.buzzer&&buzzer.players)||[]);
-      t.parentNode.insertBefore(div,t);
     }
   };
 
