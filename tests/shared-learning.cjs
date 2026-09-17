@@ -46,4 +46,5 @@ const score=timed.getWordProgress(id).weakness_score;now+=10*86400000;assert(tim
 const duplicateLegacy=new Map([['sushitan_word_review_v1',JSON.stringify({a:{en:'available',jp:'A',misses:2},b:{en:'available',jp:'B',misses:3}})]]);
 assert.equal(boot(duplicateLegacy).api.getWordProgress(id).wrong_count,5);
 const future=new Map([['sushitan_learning_v1:event:future',JSON.stringify({version:2,id:'future'})]]);boot(future);assert.equal(JSON.parse(future.get('sushitan_learning_v1:event:future')).version,2);
+const invalidDate=new Map([['sushitan_learning_v1:event:invalid',JSON.stringify({version:1,id:'invalid',word_id:id,game_id:'run',correct:false,count:1,at:1e99})]]);assert.equal(boot(invalidDate).api.getWordProgress(id),null);
 console.log('PASS: stable IDs, cross-game learning, mastery/relapse, persistence, interleaved tabs, migration, corruption, storage failure, all source vocabularies');

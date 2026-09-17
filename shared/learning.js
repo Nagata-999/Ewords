@@ -33,7 +33,7 @@
     return event && event.version === VERSION && typeof event.id === 'string' &&
       byId.has(event.word_id) && typeof event.correct === 'boolean' &&
       typeof event.game_id === 'string' && /^[a-z0-9_-]{1,40}$/.test(event.game_id) &&
-      Number.isFinite(event.at) && Number.isSafeInteger(event.count) && event.count > 0;
+      Number.isFinite(event.at) && event.at>=0 && event.at<8640000000000000 && Number.isSafeInteger(event.count) && event.count > 0;
   }
   function ingest(event) {
     if (!valid(event) || events.has(event.id)) return;
