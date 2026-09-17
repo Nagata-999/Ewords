@@ -201,6 +201,9 @@ overflow:hidden;
 .shake{animation:shake .18s ease}@keyframes shake{0%{transform:translateX(-50%) scale(1)}25%{transform:translateX(calc(-50% - 10px)) scale(1.02)}50%{transform:translateX(calc(-50% + 10px)) scale(1.02)}100%{transform:translateX(-50%) scale(1)}}
 @media(max-width:700px){#hud{width:min(94vw,420px)}.box{padding:7px}.value{font-size:19px}.choice{font-size:clamp(13px,3.6vw,21px);min-height:76px;padding:5px}.choice.long{font-size:clamp(10px,2.6vw,15px)}#player{height:72px;bottom:76px}#trail{bottom:84px;height:54px}#questionBox{position:absolute;top:58px;left:50%;transform:translateX(-50%);width:min(92vw,620px);z-index:55;text-align:center;pointer-events:none}.modeBtn{font-size:11px;padding:8px 2px}}
 </style>
+<script src="shared/word-registry.js"></script>
+<script src="shared/learning.js"></script>
+<script src="shared/review-ui.js"></script>
 </head>
 <body>
 <div id="game">
@@ -258,9 +261,10 @@ function playMoveSound(){tone(280,.035,'square',.025)}function playHitSound(){to
 function startBgm(){bgm.volume=.45;bgm.currentTime=0;bgm.play().catch(()=>{})}function stopBgm(){bgm.pause();bgm.currentTime=0}
 function setPlayerMiss(){playerState='miss';setPlayerBg('assets/player_miss.png');setTimeout(()=>{playerState='walk'},360)}
 
-function pool(){return WORDS}
+let learningQuestion=null;
+function pool(){return window.SushiReview?.active ? SushiReview.words() : WORDS}
 function updateHUD(){document.getElementById('distance').textContent=Math.floor(distance)+'m';document.getElementById('combo').textContent=combo;document.getElementById('life').textContent='❤'.repeat(Math.max(0,life));boostFill.style.width=Math.max(0,Math.min(100,boostCharge))+'%';boostBtn.classList.toggle('ready',boostCharge>=100)}
-function startGame(){initAudio();startBgm();if(animationFrame)cancelAnimationFrame(animationFrame);document.getElementById('overlay').style.display='none';distance=0;combo=0;speed=1;life=3;lane=1;lineOffset=0;hitLocked=false;currentWord=null;nextWord=null;gameRunning=true;fever=0;boostHeld=false;boostCharge=0;superReady=false;lastSaved=false;game.className='';road.className='';player.style.left=lanePositions[lane]+'%';trail.style.left=lanePositions[lane]+'%';playerState='walk';clearChoices();updateHUD();spawnQuestion();animate()}
+function startGame(){if(window.SushiReview?.begin()===false)return;initAudio();startBgm();if(animationFrame)cancelAnimationFrame(animationFrame);document.getElementById('overlay').style.display='none';distance=0;combo=0;speed=1;life=3;lane=1;lineOffset=0;hitLocked=false;currentWord=null;nextWord=null;gameRunning=true;fever=0;boostHeld=false;boostCharge=0;superReady=false;lastSaved=false;game.className='';road.className='';player.style.left=lanePositions[lane]+'%';trail.style.left=lanePositions[lane]+'%';playerState='walk';clearChoices();updateHUD();spawnQuestion();animate()}
 function clearChoices(){activeChoices.forEach(o=>o.el.remove());activeChoices=[];hitLocked=false}
 function pickWord(){
   const p=pool();
@@ -275,12 +279,13 @@ function setQuestionText(){
 }
 function spawnQuestion(){
   if(!gameRunning)return;
+  if(window.SushiReview?.active && !SushiReview.words().length){gameOver();return;}
   clearChoices();
   if(!currentWord) currentWord=pickWord();
   if(!nextWord) nextWord=pickWord();
-  const correct=currentWord;
+  const correct=currentWord; learningQuestion=correct;
   setQuestionText();
-  const p=pool();
+  const p=WORDS;
   const distractors=shuffle(p.filter(w=>w.en!==correct.en)).slice(0,2);
   const answers=shuffle([correct,...distractors]);
   answers.forEach((item,i)=>{
@@ -347,8 +352,8 @@ function activateSuperBoost(){
   updateHUD();
 }
 
-function success(obj){playHitSound();const rect=obj.el.getBoundingClientRect();obj.el.classList.add('good');burst(rect.left+rect.width/2,rect.top+rect.height/2,'#facc15');showHit(combo>=9?'BREAK!':'HIT!','good');player.classList.add('dash');setTimeout(()=>player.classList.remove('dash'),120);distance+=(18+combo*2)*(game.classList.contains('fever')?2:1);if(boostHeld){boostCharge=Math.min(100,boostCharge+4)}combo++;if(combo%5===0){speed+=.06;playComboSound();comboText.textContent=combo+' COMBO!';comboText.classList.remove('comboShow');void comboText.offsetWidth;comboText.classList.add('comboShow')}if(combo>0&&combo%10===0){playFeverSound();fever=300;game.classList.add('fever');showHit('FEVER!','fever');const bonus=100+combo*10;distance+=bonus;bonusText.textContent='+'+bonus+'m BONUS!';bonusText.classList.remove('bonusShow');void bonusText.offsetWidth;bonusText.classList.add('bonusShow')}updateHUD();setTimeout(()=>spawnQuestion(),230)}
-function fail(obj){playMissSound();if(obj)obj.el.classList.add('bad');const rect=obj?obj.el.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0};burst(rect.left+rect.width/2,rect.top+rect.height/2,'#fb7185');setPlayerMiss();showHit('CRASH!','bad');combo=0;speed=1;fever=0;game.classList.remove('fever');life--;road.classList.remove('shake');void road.offsetWidth;road.classList.add('shake');updateHUD();if(life<=0){setTimeout(gameOver,350);return}setTimeout(()=>spawnQuestion(),380)}
+function success(obj){window.SushiReview?.record(learningQuestion,true,'run');playHitSound();const rect=obj.el.getBoundingClientRect();obj.el.classList.add('good');burst(rect.left+rect.width/2,rect.top+rect.height/2,'#facc15');showHit(combo>=9?'BREAK!':'HIT!','good');player.classList.add('dash');setTimeout(()=>player.classList.remove('dash'),120);distance+=(18+combo*2)*(game.classList.contains('fever')?2:1);if(boostHeld){boostCharge=Math.min(100,boostCharge+4)}combo++;if(combo%5===0){speed+=.06;playComboSound();comboText.textContent=combo+' COMBO!';comboText.classList.remove('comboShow');void comboText.offsetWidth;comboText.classList.add('comboShow')}if(combo>0&&combo%10===0){playFeverSound();fever=300;game.classList.add('fever');showHit('FEVER!','fever');const bonus=100+combo*10;distance+=bonus;bonusText.textContent='+'+bonus+'m BONUS!';bonusText.classList.remove('bonusShow');void bonusText.offsetWidth;bonusText.classList.add('bonusShow')}updateHUD();setTimeout(()=>spawnQuestion(),230)}
+function fail(obj){window.SushiReview?.record(learningQuestion,false,'run');playMissSound();if(obj)obj.el.classList.add('bad');const rect=obj?obj.el.getBoundingClientRect():{left:innerWidth/2,top:innerHeight/2,width:0,height:0};burst(rect.left+rect.width/2,rect.top+rect.height/2,'#fb7185');setPlayerMiss();showHit('CRASH!','bad');combo=0;speed=1;fever=0;game.classList.remove('fever');life--;road.classList.remove('shake');void road.offsetWidth;road.classList.add('shake');updateHUD();if(life<=0){setTimeout(gameOver,350);return}setTimeout(()=>spawnQuestion(),380)}
 
 async function loadRanking(){
   const box=document.getElementById('rankingList');
@@ -366,6 +371,7 @@ async function loadRanking(){
 }
 
 async function saveRanking(){
+  if(window.SushiReview?.active){document.getElementById('saveStatus').textContent='苦手復習の記録はランキングに保存しません。';return;}
   if(lastSaved) return;
   const input=document.getElementById('playerName');
   const status=document.getElementById('saveStatus');
@@ -432,7 +438,7 @@ function gameOver(){
   stopBgm();gameRunning=false;
   if(animationFrame)cancelAnimationFrame(animationFrame);
   clearChoices();
-  if(distance>best){best=Math.floor(distance);localStorage.setItem('wordrush_best_distance',best)}
+  if(!window.SushiReview?.active && distance>best){best=Math.floor(distance);localStorage.setItem('wordrush_best_distance',best)}
   document.getElementById('overlay').style.display='flex';
   document.getElementById('menu').innerHTML=`
     <div id="title">GAME OVER</div>

@@ -82,7 +82,10 @@ h1 span{color:var(--accent)}
   #speedValue{display:none}
 }
 </style>
-<style>.sushi-return{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 14px;border:1px solid #d8d3c5;border-radius:10px;background:#fffaf2;color:#0f766e;font:700 12px system-ui,sans-serif;text-decoration:none;box-sizing:border-box}.sushi-return:focus-visible{outline:3px solid #f4511e;outline-offset:3px}</style></head>
+<style>.sushi-return{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 14px;border:1px solid #d8d3c5;border-radius:10px;background:#fffaf2;color:#0f766e;font:700 12px system-ui,sans-serif;text-decoration:none;box-sizing:border-box}.sushi-return:focus-visible{outline:3px solid #f4511e;outline-offset:3px}</style><script src="shared/word-registry.js"></script>
+<script src="shared/learning.js"></script>
+<script src="shared/review-ui.js"></script>
+</head>
 <body><a class="sushi-return" style="position:fixed;top:max(12px,env(safe-area-inset-top));left:12px;z-index:1000" href="index.html">← トップに戻る</a>
 <section id="startScreen" class="screen">
   <div class="start-card">
@@ -199,6 +202,10 @@ const el={
  exitBtn:document.getElementById("exitBtn")
 };
 
+let assessmentWord=null,assessmentDone=false;
+const assessment=document.createElement('div');assessment.id='flowAssessment';assessment.style.cssText='position:fixed;bottom:84px;left:0;right:0;z-index:50;display:flex;justify-content:center;gap:10px;flex-wrap:wrap';
+for(const [correct,label] of [[true,'思い出せた'],[false,'まだ苦手']]){const button=document.createElement('button');button.type='button';button.textContent=label;button.style.cssText='padding:12px 16px;border-radius:12px;border:1px solid #8295a966;background:#13222d;color:#fff';button.onclick=()=>{if(!assessmentWord||assessmentDone)return;assessmentDone=true;window.SushiReview?.record(assessmentWord,correct,'flow');assessment.querySelectorAll('button').forEach(b=>b.disabled=true);};assessment.appendChild(button);}
+el.flowScreen.appendChild(assessment);
 let level=1,active=[],pool=[],recent=[];
 let speed=2.5,paused=false;
 let nextTimer=null,revealTimer=null,swapTimer=null,controlsTimer=null;
@@ -213,6 +220,7 @@ function shuffle(a){
 }
 function refill(){pool=shuffle(active)}
 function nextWord(){
+ if(window.SushiReview?.active){const weak=SushiReview.words();if(!weak.length){stopFlow();el.status.textContent='今回の苦手単語を克服しました。';return null;}const w=weak[Math.floor(Math.random()*Math.min(20,weak.length))];return {english:w.en,japanese:w.jp,word_id:w.word_id};}
  const repeat=recent.length>=5&&Math.random()<.10;
  let word;
  if(repeat){
@@ -244,7 +252,7 @@ function runCycle(){
  if(paused)return;
  clearTimers();
 
- const word=nextWord();
+ const word=nextWord();if(!word)return;assessmentWord=null;assessment.querySelectorAll("button").forEach(b=>b.disabled=true);
  const japaneseFirst=Math.random()<.35;
  const first=japaneseFirst?el.japanese:el.english;
  const second=japaneseFirst?el.english:el.japanese;
@@ -256,7 +264,8 @@ function runCycle(){
  // 2. 完全に消えた後で、両方を非表示にして内容を差し替える
  swapTimer=setTimeout(()=>{
    hideBothImmediately();
-   el.english.textContent=word.english;
+   assessmentWord=word;assessmentDone=false;assessment.querySelectorAll("button").forEach(b=>b.disabled=false);
+    el.english.textContent=word.english;
    el.japanese.textContent=word.japanese;
 
    // 3. 先に出す側だけを可視状態にしてからカードを戻す
@@ -276,6 +285,7 @@ function runCycle(){
 }
 
 function startFlow(){
+ if(window.SushiReview?.begin()===false)return;
  active=words.filter(w=>w.level===level);
  if(!active.length){el.status.textContent=`LV${level} の単語がありません`;return}
  pool=[];recent=[];paused=false;
@@ -287,6 +297,7 @@ function startFlow(){
  runCycle();
 }
 function stopFlow(){
+ assessmentWord=null;
  clearTimers();
  paused=false;
  el.pauseBtn.textContent="Ⅱ";

@@ -3,6 +3,10 @@ const APP_SHELL = [
   "/",
   "/index.html",
   "/manifest.json",
+  "/shared/word-registry.js",
+  "/shared/learning.js",
+  "/shared/review-ui.js",
+  "/shared/learning-home.js",
   "/icon-192.png",
   "/icon-512.png"
 ];
