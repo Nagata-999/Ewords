@@ -68,6 +68,23 @@ const server=http.createServer((req,res)=>{let file=path.resolve(root,'.'+decode
   await page.waitForTimeout(250);
   const second=await page.evaluate(()=>({word:current,p:SushiLearning.getWordProgress(current)}));await page.keyboard.type(second.word);
   assert.equal((await page.evaluate(w=>SushiLearning.getWordProgress(w),second.word)).games.sushigiri.correct_count,1);
+  const transition=await page.evaluate(()=>{
+   // Force the actual fever/critical timing: next word at 70ms, hit-stop ends at 72ms.
+   running=true;time=30;newWord();feverMode=true;enemyLife=0;
+   SushiLearning.recordAnswer('available',false,'sushigiri');current='available';jp=SushiLearning.getWord(current).jp;
+   const word=current,before=SushiLearning.getWordProgress(word),beforeCritical=criticals;pos=current.length;
+   hitComplete();const after=SushiLearning.getWordProgress(word);
+   enemyAttack();const late=SushiLearning.getWordProgress(word);
+   // A pending spawn must work while hit-stop has running=false.
+   running=false;newWord();
+   return {before,after,late,pos,answered:learningAnswered,critical:criticals-beforeCritical};
+  });
+  assert.equal(transition.after.correct_count,transition.before.correct_count+1);
+  assert.equal(transition.late.wrong_count,transition.after.wrong_count);
+  assert.equal(transition.pos,0);assert.equal(transition.answered,false);
+  assert.equal(transition.critical,1);
+  const ended=await page.evaluate(async()=>{running=true;hitStop(30);end();await new Promise(r=>setTimeout(r,60));return running;});
+  assert.equal(ended,false,'hit-stop must not restart an ended review round');
   await page.goto(origin+'/sushigiri.html');await page.locator('#startBtn').click();await page.waitForFunction(()=>running);
   const normal=await page.evaluate(()=>{const w=current;enemyAttack();return SushiLearning.getWordProgress(w);});assert.equal(normal.games.sushigiri.wrong_count,1);
   console.log('PASS browser sushigiri: real typing, one error per word, corrected spelling not clean success, clean completion, normal timeout');
@@ -97,6 +114,3 @@ const server=http.createServer((req,res)=>{let file=path.resolve(root,'.'+decode
  console.log('Page errors (known upstream avatar syntax only):',errors);assert(errors.every(e=>e==="Unexpected token 'function'"));assert.equal(errors.length,knownAvatarErrors);
  await browser.close();server.close();
 })().catch(e=>{console.error(e);server.close();process.exit(1);});
-
-
-

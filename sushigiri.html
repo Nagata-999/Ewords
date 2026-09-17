@@ -1527,7 +1527,7 @@ function missSound(){
 }
 
 /* ===== v35 WORD BANDS: NORMAL / ADVANCED ===== */
-let learningMistaken=false;
+let learningMistaken=false,learningAnswered=false,learningRoundActive=false;
 let wordLevel="normal";
 let usedWordIndexes=new Set();
 function wordPoolForLevel(){
@@ -1551,9 +1551,10 @@ function pickUnusedWord(pool){
 }
 
 function newWord(){
- if(!running)return;
+ // Hit-stop may still be active when the next-word timer fires (70ms vs 72ms).
+ if(!learningRoundActive || time<=0)return;
  if(window.SushiReview?.active && !SushiReview.words().length){end();return;}
- learningMistaken=false;
+ learningMistaken=false;learningAnswered=false;
  stage=Math.min(4,1+Math.floor(kills/10)); setStage(stage);
  const pools={
    easy: combo<8 ? words.slice(0,10) : combo<20 ? words.slice(3,18) : words,
@@ -1713,9 +1714,11 @@ function isCritical(){
 }
 function hitStop(ms=55){
  const old=running; running=false;
- setTimeout(()=>{ if(!paused && time>0){running=old;lastTs=performance.now();requestAnimationFrame(loop)} },ms);
+ setTimeout(()=>{ if(!paused && time>0 && learningRoundActive){running=old;lastTs=performance.now();requestAnimationFrame(loop)} },ms);
 }
 function enemyAttack(){
+ if(learningAnswered)return;
+ learningAnswered=true;
  if(!learningMistaken){window.SushiReview?.record(current,false,'sushigiri');learningMistaken=true;}
  clearComboGrace();
  misses++; breaks++; combo=0; fever=Math.max(0,fever-22);
@@ -1815,6 +1818,8 @@ function juicyCutFX(){
 }
 
 function hitComplete(){
+ if(learningAnswered)return;
+ learningAnswered=true;
  if(!learningMistaken)window.SushiReview?.record(current,true,'sushigiri');
  const crit=isCritical(); if(crit)criticals++;
  combo++;maxCombo=Math.max(maxCombo,combo);kills++;
@@ -1981,6 +1986,7 @@ async function loadTopMenuRanking(){
 window.addEventListener("load",loadTopMenuRanking);
 
 function end(){
+ learningRoundActive=false;
  running=false;
  stopSushiSlashBgm();
  let rank="C";
@@ -2093,7 +2099,7 @@ document.querySelector("#startBtn").onclick=async()=>{
  for(const n of [3,2,1]){cd.classList.remove("go");cd.textContent=n;tone(440,.08,"square",.035);await new Promise(r=>setTimeout(r,700));}
  cd.textContent="START!";cd.classList.add("go");tone(760,.12,"square",.05);
  startSushiSlashBgm();
- running=true;lastTs=0;newWord();updateHud();requestAnimationFrame(loop);
+ learningRoundActive=true;running=true;lastTs=0;newWord();updateHud();requestAnimationFrame(loop);
  setTimeout(()=>{cd.classList.remove("show","go");cd.textContent="";},420);
 };
 
