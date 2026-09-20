@@ -23,6 +23,17 @@
   #toast{position:fixed;left:50%;top:27%;transform:translate(-50%,-10px) scale(.9);opacity:0;pointer-events:none;font-weight:1000;font-size:clamp(24px,7vw,42px);text-shadow:0 4px 0 #000,0 7px 14px #000;z-index:4;transition:.18s}.show{opacity:1!important;transform:translate(-50%,0) scale(1)!important}
   .word-swap{animation:wordSwap .34s cubic-bezier(.2,1.5,.4,1)}@keyframes wordSwap{0%{transform:scale(.62);opacity:.25}100%{transform:scale(1);opacity:1}}
   @media(max-width:620px){#controls{width:204px;height:134px;right:10px;bottom:max(14px,env(safe-area-inset-bottom))}.key{min-height:62px}.help{max-width:105px}.pill{padding:7px 10px}.wordbox{min-width:78vw}.wordbox span{display:block}}
+
+  #overlay{overflow-y:auto;touch-action:pan-y}.card{margin:auto}
+  .cross-secondary{border:1px solid #ffffff40;border-radius:12px;padding:11px 16px;background:#17364d;color:white;font:700 14px system-ui;cursor:pointer;margin-top:14px}
+  #crossSaveForm{margin:14px 0 20px;padding:12px;border:1px solid #ffffff30;border-radius:14px;background:#ffffff0c}
+  #crossSaveForm[hidden]{display:none}#crossSaveForm label{display:block;font-size:12px;text-align:left;margin-bottom:6px}
+  #crossPlayerName{width:100%;font:16px system-ui;padding:10px;border-radius:9px;border:1px solid #8fdef7;background:#061523;color:white}
+  #crossSaveStatus,#crossRankingStatus{font-size:12px;line-height:1.6;margin:8px 0 0;min-height:1.6em}
+  #crossRankingDialog{width:min(92vw,520px);max-height:85dvh;border:1px solid #8fdef755;border-radius:20px;padding:20px;background:#091e30;color:white;overflow:auto;touch-action:pan-y}
+  #crossRankingDialog::backdrop{background:#000a}#crossRankingDialog h2{margin:0;font-size:22px}
+  #crossRankingDialog table{width:100%;border-collapse:collapse;font-size:14px;margin-top:12px}#crossRankingDialog th,#crossRankingDialog td{padding:10px 4px;border-bottom:1px solid #ffffff20;text-align:right}#crossRankingDialog td:nth-child(2),#crossRankingDialog th:nth-child(2){text-align:left;overflow-wrap:anywhere;max-width:180px}
+  #crossSave:disabled{opacity:.6;cursor:default}
 </style>
 </head>
 <body>
@@ -50,10 +61,25 @@
     <div class="how" id="how">
       <div><b>🚕</b>車をよける</div><div><b>🚃</b>電車に注意</div><div><b>🔤</b>意味を選ぶ</div>
     </div>
+    <form id="crossSaveForm" hidden>
+      <label for="crossPlayerName">ランキングに公開する名前（20文字まで）</label>
+      <input id="crossPlayerName" maxlength="20" autocomplete="nickname" placeholder="名前を入力">
+      <button type="submit" class="cross-secondary" id="crossSave">この記録を登録</button>
+      <p id="crossSaveStatus" role="status" aria-live="polite"></p>
+    </form>
     <button id="start">ゲームスタート</button>
+    <button type="button" class="cross-secondary" id="crossShowRanking">🏆 ランキング</button>
     <div class="credit">SUSHITAN.NET • ORIGINAL LEARNING GAME</div>
   </div>
 </div>
+<dialog id="crossRankingDialog" aria-labelledby="crossRankingTitle">
+  <h2 id="crossRankingTitle">すしクロス ランキング</h2>
+  <p id="crossRankingStatus" role="status" aria-live="polite"></p>
+  <table><thead><tr><th scope="col">順位</th><th scope="col">名前</th><th scope="col">スコア</th><th scope="col">正答率</th></tr></thead><tbody id="crossRankingRows"></tbody></table>
+  <button type="button" class="cross-secondary" id="crossReloadRanking">再読み込み</button>
+  <button type="button" class="cross-secondary" id="crossCloseRanking">閉じる</button>
+</dialog>
+<script src="sushicross-ranking.js"></script>
 <script>
 (()=>{
 "use strict";
@@ -79,6 +105,8 @@ const THEMES=[
  {sky1:"#a8dced",sky2:"#edf8ff",ground:"#47636d",grass1:"#73a886",grass2:"#84ba95",grassSide:"#4b735d",water:"#56a4c4",quiz:"#695886"}
 ];
 let W,H,dpr,tileX,tileY,centerX,baseY;
+let answerCount=0,correctCount=0,combo=0,maxCombo=0;
+function rankingResult(){return {score, maxCombo, accuracy:answerCount?Math.round(correctCount/answerCount*100):0};}
 let state="menu",stage=1,stageLength=30,lanes=[],player,score,distance,hearts,best=+(safeStorage.get("sushiCrossBest","0")||0),camera=0,scrollAge=0,pressureWarned=false,last=0,shake=0,quiz=null,toastTimer=0,particles=[],ripples=[],screenFlash=0,flashColor="255,255,255",wordDeck=[],lastQuizWord="";
 const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)],clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const theme=()=>THEMES[(stage-1)%THEMES.length],difficulty=()=>Math.min(stage-1,10);
@@ -99,11 +127,11 @@ function buildWorld(){
 }
 function ensureWorld(){/* ステージはゴールまでの固定盤面 */}
 
-function begin(){if(state==="stageclear")stage++;else{stage=1;score=0;hearts=3;wordDeck=[];lastQuizWord=""}state="playing";distance=0;camera=0;scrollAge=0;pressureWarned=false;quiz=null;particles=[];ripples=[];screenFlash=0;player={x:0,row:0,px:0,prow:0,move:1,hop:0,hidden:false};buildWorld();primeQuizzes();ui.result.style.display="none";ui.how.style.display="block";ui.overlay.style.display="none";updateHUD();last=performance.now()}
+function begin(){if(state==="stageclear")stage++;else{stage=1;score=0;hearts=3;answerCount=0;correctCount=0;combo=0;maxCombo=0;wordDeck=[];lastQuizWord=""}window.SushiCrossRanking?.setResult(null);state="playing";distance=0;camera=0;scrollAge=0;pressureWarned=false;quiz=null;particles=[];ripples=[];screenFlash=0;player={x:0,row:0,px:0,prow:0,move:1,hop:0,hidden:false};buildWorld();primeQuizzes();ui.result.style.display="none";ui.how.style.display="block";ui.overlay.style.display="none";updateHUD();last=performance.now()}
 function updateHUD(){ui.score.textContent="STAGE "+stage+"　🍣 "+score;ui.best.textContent="BEST "+best;ui.hearts.textContent="❤️".repeat(hearts)+"🖤".repeat(3-hearts)}
 function showToast(text,color="#fff"){ui.toast.textContent=text;ui.toast.style.color=color;ui.toast.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>ui.toast.classList.remove("show"),650)}
-function end(reason){if(state!=="playing")return;state="over";best=Math.max(best,score);safeStorage.set("sushiCrossBest",best);updateHUD();ui.finalScore.textContent=score;ui.finalReason.textContent=reason;ui.result.style.display="block";ui.how.style.display="none";ui.start.textContent="もう一度あそぶ";setTimeout(()=>ui.overlay.style.display="grid",950)}
-function clearStage(){if(state!=="playing")return;state="stageclear";best=Math.max(best,score);safeStorage.set("sushiCrossBest",best);updateHUD();showToast("STAGE CLEAR!","#ffe36e");ui.finalScore.textContent="CLEAR!";ui.finalReason.textContent="STAGE "+stage+"　SCORE "+score;ui.result.style.display="block";ui.how.style.display="none";ui.start.textContent="次のステージ";setTimeout(()=>ui.overlay.style.display="grid",650)}
+function end(reason){if(state!=="playing")return;state="over";window.SushiCrossRanking?.setResult(rankingResult());best=Math.max(best,score);safeStorage.set("sushiCrossBest",best);updateHUD();ui.finalScore.textContent=score;ui.finalReason.textContent=reason;ui.result.style.display="block";ui.how.style.display="none";ui.start.textContent="もう一度あそぶ";setTimeout(()=>ui.overlay.style.display="grid",950)}
+function clearStage(){if(state!=="playing")return;state="stageclear";window.SushiCrossRanking?.setResult(rankingResult());best=Math.max(best,score);safeStorage.set("sushiCrossBest",best);updateHUD();showToast("STAGE CLEAR!","#ffe36e");ui.finalScore.textContent="CLEAR!";ui.finalReason.textContent="STAGE "+stage+"　SCORE "+score;ui.result.style.display="block";ui.how.style.display="none";ui.start.textContent="次のステージ";setTimeout(()=>ui.overlay.style.display="grid",650)}
 
 function nextWordEntry(){
  if(!wordDeck.length){wordDeck=[...WORDS];for(let i=wordDeck.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[wordDeck[i],wordDeck[j]]=[wordDeck[j],wordDeck[i]]}if(wordDeck.length>1&&wordDeck[wordDeck.length-1][0]===lastQuizWord)[wordDeck[0],wordDeck[wordDeck.length-1]]=[wordDeck[wordDeck.length-1],wordDeck[0]]}let w=wordDeck.pop();lastQuizWord=w[0];return w
@@ -177,7 +205,7 @@ function drawFX(){
  for(let p of particles){ctx.globalAlpha=clamp(p.life/.35,0,1);ctx.fillStyle=p.color;if(p.round){ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fill()}else{ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.life*7);ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size);ctx.restore()}}ctx.globalAlpha=1;if(screenFlash>0){ctx.fillStyle=`rgba(${flashColor},${screenFlash})`;ctx.fillRect(0,0,W,H)}
 }
 
-function answerCheck(){let l=laneFor(player.row);if(!l||l.type!==TYPES.QUIZ||!l.quiz||l.quiz.answered)return;let c=l.quiz.choices.find(c=>Math.abs(c.x-player.x)<.7);if(!c)return;l.quiz.answered=true;l.quiz.crushed=true;l.quiz.choices.forEach(q=>q.answered=true);if(c.correct){score+=5;showToast("GOOD! +5","#78ff9f")}else{hearts--;showToast("正解："+l.quiz.correct,"#ff9da2");shake=10;if(hearts<=0){updateHUD();setTimeout(()=>end("英単語で3回ミス！"),350);return}}updateHUD();primeQuizzes()}
+function answerCheck(){let l=laneFor(player.row);if(!l||l.type!==TYPES.QUIZ||!l.quiz||l.quiz.answered)return;let c=l.quiz.choices.find(c=>Math.abs(c.x-player.x)<.7);if(!c)return;l.quiz.answered=true;l.quiz.crushed=true;l.quiz.choices.forEach(q=>q.answered=true);answerCount++;if(c.correct){correctCount++;combo++;maxCombo=Math.max(maxCombo,combo);score+=5;showToast("GOOD! +5","#78ff9f")}else{combo=0;hearts--;showToast("正解："+l.quiz.correct,"#ff9da2");shake=10;if(hearts<=0){updateHUD();setTimeout(()=>end("英単語で3回ミス！"),350);return}}updateHUD();primeQuizzes()}
 function update(dt){
  updateFX(dt);if(state!=="playing")return;player.move=Math.min(1,player.move+dt*6.8);if(player.move>=.72){answerCheck();let ahead=laneFor(player.row+1);if(ahead&&ahead.type===TYPES.QUIZ&&!ahead.quiz)startQuiz(ahead)}scrollAge+=dt;let follow=Math.max(0,player.row-3),scrollSpeed=.28+difficulty()*.025+Math.min(.12,Math.max(0,scrollAge-18)*.0025),forced=scrollAge>4?scrollSpeed*dt:0;camera=Math.max(camera+forced,camera+(follow-camera)*Math.min(1,dt*4));let pressure=camera-player.row;if(pressure>2.7&&!pressureWarned){pressureWarned=true;showToast("急いで！","#ff9b72")}else if(pressure<2.1)pressureWarned=false;if(pressure>4.4){player.hidden=true;shake=12;screenFlash=.35;flashColor="255,92,72";return end("画面外に押し出された！")}
  for(let l of lanes){l.phase+=dt;if(l.type===TYPES.ROAD){for(let o of l.objects){o.x+=l.dir*l.speed*dt;if(o.x>8)o.x=-8;if(o.x<-8)o.x=8}}
@@ -200,7 +228,7 @@ function quizPointer(x,y,warp=false){
 }
 
 const keymap={ArrowUp:"up",w:"up",W:"up",ArrowDown:"down",s:"down",S:"down",ArrowLeft:"left",a:"left",A:"left",ArrowRight:"right",d:"right",D:"right"};
-addEventListener("keydown",e=>{if(keymap[e.key]){e.preventDefault();move(keymap[e.key])}});document.querySelectorAll(".key").forEach(b=>b.addEventListener("pointerdown",e=>{e.preventDefault();move(b.dataset.dir)}));
+addEventListener("keydown",e=>{if(e.target.closest?.("input,textarea,[contenteditable]")||document.querySelector("#crossRankingDialog[open]"))return;if(keymap[e.key]){e.preventDefault();move(keymap[e.key])}});document.querySelectorAll(".key").forEach(b=>b.addEventListener("pointerdown",e=>{e.preventDefault();move(b.dataset.dir)}));
 let sx=0,sy=0;canvas.addEventListener("pointerdown",e=>{sx=e.clientX;sy=e.clientY});canvas.addEventListener("pointermove",e=>{canvas.style.cursor=quizPointer(e.clientX,e.clientY,false)?"pointer":"default"});canvas.addEventListener("pointerup",e=>{let dx=e.clientX-sx,dy=e.clientY-sy;if(Math.hypot(dx,dy)<22){if(quizPointer(e.clientX,e.clientY,true))return;return move("up")}move(Math.abs(dx)>Math.abs(dy)?(dx>0?"right":"left"):(dy>0?"down":"up"))});
 ui.start.addEventListener("click",begin);
 buildWorld();player={x:0,row:0,px:0,prow:0,move:1,hop:0};
