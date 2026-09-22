@@ -6,18 +6,18 @@
   <meta name="google-adsense-account" content="ca-pub-4726251793577317">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>しの単｜無料英語ゲーム・synonym game｜すし単</title>
+  <title>しの単｜英語の類義語・シノニムゲーム｜すし単</title>
 
   <meta name="description" content="英単語と意味が近い語をタップする無料シノニムゲームです。英検・IELTS・高校英語の言い換え力を鍛えます。" />
 
   <meta name="keywords" content="すし単,すし英語,しの単,あんとに単,すしタイプ,すしRUN,すしParts,すしTalk,すし早押し,すしクイズ,すし勘,英語ゲーム,無料英語ゲーム,英単語ゲーム,語源ゲーム,リスニングゲーム,英語タイピング,IELTS,英検,高校英語,無料英語学習" />
 
-  <meta property="og:title" content="すし単｜無料英語ゲームで学ぶ英単語・語源・タイピング" />
-  <meta property="og:description" content="英単語・シノニム・アントニム・語源・タイピング・ランゲームで楽しく英語を学べる無料学習サイト。" />
+  <meta property="og:title" content="しの単｜英語の類義語・シノニムゲーム｜すし単" />
+  <meta property="og:description" content="英単語と意味が近い語をタップする無料シノニムゲームです。英検・IELTS・高校英語の言い換え力を鍛えます。" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://sushitan.net/" />
+  <meta property="og:url" content="https://sushitan.net/shinotan" />
   <meta name="twitter:card" content="summary_large_image" />
-  <link rel="canonical" href="https://sushitan.net/sushitan.html" />
+  
   <style>
     :root {
       --bg1: #0f172a;
@@ -2147,6 +2147,8 @@ html, body {
 
 
 </style>
+
+<link rel="canonical" href="https://sushitan.net/shinotan">
 </head>
 <body><script>(()=>{const KEY='sushitan_login_bonus_v1',ACTIVE_KEY='sushitan_daily_active_v1',ALL=['sushitan','shino','antoni','idiom','quiz','talk','world','run'];const day=()=>{const d=new Date();d.setHours(d.getHours()-6);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}function pick(date){let seed=hash('sushitan-daily-'+date),a=[...ALL];for(let i=a.length-1;i>0;i--){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const j=seed%(i+1);[a[i],a[j]]=[a[j],a[i]]}return a.slice(0,4)}function activeFor(today){try{const s=JSON.parse(localStorage.getItem(ACTIVE_KEY)||'null');if(s&&s.day===today&&Array.isArray(s.active)&&s.active.length===4)return s.active}catch(e){}const a=pick(today);localStorage.setItem(ACTIVE_KEY,JSON.stringify({day:today,active:a}));return a}function flash(n){let x=document.getElementById('shinoDailyToast');if(!x){x=document.createElement('div');x.id='shinoDailyToast';x.style.cssText='position:fixed;left:50%;bottom:80px;transform:translateX(-50%);z-index:999999;background:#173f37;color:#fff;padding:9px 14px;border-radius:999px;font:900 12px system-ui;box-shadow:0 6px 18px #0003;pointer-events:none';document.body.appendChild(x)}x.textContent='デイリー しの単 '+n+'/20';clearTimeout(x._t);x._t=setTimeout(()=>x.remove(),1200)}function add(){const today=day(),active=activeFor(today);if(!active.includes('shino'))return;let l={};try{l=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){};let q=l.dailyQuests;if(!q||q.day!==today){q=l.dailyQuests={day:today,active:[...active],progress:{},claimed:{},chestClaimed:false,chestReward:0}}else{q.active=[...active]}q.progress=q.progress&&typeof q.progress==='object'?q.progress:{};q.claimed=q.claimed&&typeof q.claimed==='object'?q.claimed:{};if(q.claimed.shino)return;q.progress.shino=Math.min(20,(Number(q.progress.shino)||0)+1);if(q.progress.shino>=20){q.claimed.shino=true;l.gems=(Number.isSafeInteger(l.gems)?l.gems:0)+10}localStorage.setItem(KEY,JSON.stringify(l));window.dispatchEvent(new CustomEvent('sushi-daily-quest-change'));flash(q.progress.shino)}function hit(e){const b=e.target.closest?.('.balloon[data-type="correct"]');if(!b||b.dataset.shinoDailyCounted==='1')return;b.dataset.shinoDailyCounted='1';add()}document.addEventListener('pointerdown',hit,true);document.addEventListener('click',hit,true)})();</script>
 

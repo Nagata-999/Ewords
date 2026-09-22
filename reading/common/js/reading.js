@@ -289,6 +289,15 @@ function neighbourLinks(){
 function renderApp(){
   seconds=(data.durationMinutes||20)*60;
   document.title=`${data.id} ${data.title} | 共通 Reading`;
+  document.title+='｜すし単';
+  // Keep each real passage distinct; ignore unrelated tracking/query parameters.
+  let canonical=document.querySelector('link[rel="canonical"]');
+  if(!canonical){canonical=document.createElement('link');canonical.rel='canonical';document.head.appendChild(canonical);}
+  canonical.href='https://sushitan.net/reading/common/reading?id='+encodeURIComponent(data.id);
+  let description=document.querySelector('meta[name="description"]');
+  if(!description){description=document.createElement('meta');description.name='description';document.head.appendChild(description);}
+  description.content=`共通テスト英語リーディングの練習問題 ${data.id}「${data.title}」。本文・設問・採点・解説を使って学習できます。すし単の無料英語教材です。`;
+
   const {prev,next}=neighbourLinks();
   $('#app').innerHTML = `
     <header class="appHeader">
