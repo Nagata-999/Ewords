@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Sushi Quiz v2</title>
+<link rel="canonical" href="https://sushitan.net/sushi_quiz.html">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 window.addEventListener("error", (e) => {
@@ -2289,30 +2290,6 @@ QUESTIONS.push(
 <script src="sushigacha/gem-system.js?v=20260913-2"></script>
 <script src="sushigacha/multi-game-lucky-gems.js?v=20260913-1"></script>
 <script src="sushigacha/site-taskbar.js?v=20260915-1"></script>
-<script>
-(()=>{
-  const KEY='sushitan_login_bonus_v1', ACTIVE_KEY='sushitan_daily_active_v1';
-  const TYPE='quiz', LABEL='すしクイズ', GOAL=10, REWARD=4;
-  function day(){const d=new Date();d.setHours(d.getHours()-6);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
-  function toast(text){let x=document.getElementById('directDailyToast');if(!x){x=document.createElement('div');x.id='directDailyToast';x.style.cssText='position:fixed;left:50%;bottom:82px;transform:translateX(-50%);z-index:1000000;background:#173f37;color:#fff;padding:10px 15px;border-radius:999px;font:900 12px/1.2 system-ui;box-shadow:0 8px 24px #0004;pointer-events:none;white-space:nowrap';document.body.appendChild(x)}x.textContent=text;clearTimeout(x._t);x._t=setTimeout(()=>x.remove(),1500)}
-  function add(){
-    const today=day(); let active=[];
-    try{const a=JSON.parse(localStorage.getItem(ACTIVE_KEY)||'null');if(a&&a.day===today&&Array.isArray(a.active))active=a.active}catch(e){}
-    let l={};try{l=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){}
-    if(!active.length&&l.dailyQuests?.day===today&&Array.isArray(l.dailyQuests.active))active=l.dailyQuests.active;
-    if(!active.includes(TYPE))return;
-    let q=l.dailyQuests;
-    if(!q||q.day!==today)q=l.dailyQuests={day:today,active:[...active],progress:{},claimed:{},chestClaimed:false,chestReward:0};
-    q.progress=q.progress&&typeof q.progress==='object'?q.progress:{};q.claimed=q.claimed&&typeof q.claimed==='object'?q.claimed:{};
-    if(q.claimed[TYPE])return;
-    const before=Math.max(0,Number(q.progress[TYPE])||0), after=Math.min(GOAL,before+1); if(after<=before)return;
-    q.progress[TYPE]=after; let done=false;
-    if(after>=GOAL){q.claimed[TYPE]=true;l.gems=(Number.isSafeInteger(l.gems)?l.gems:0)+REWARD;done=true}
-    localStorage.setItem(KEY,JSON.stringify(l));window.dispatchEvent(new CustomEvent('sushi-daily-quest-change'));
-    toast(done?`✅ デイリー ${LABEL} ${after}/${GOAL}問  +${REWARD}💎`:`デイリー ${LABEL} ${after}/${GOAL}問`);
-  }
-  let last='';const check=()=>{const el=document.getElementById('soloRes');if(!el)return;const t=(el.textContent||'').trim();if(!t||t===last)return;last=t;if(/^✅\s*Correct!/i.test(t))add()};new MutationObserver(check).observe(document.documentElement,{subtree:true,childList:true,characterData:true});check();
-})();
-</script>
+
 </body>
 </html>

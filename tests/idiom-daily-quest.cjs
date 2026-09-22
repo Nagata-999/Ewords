@@ -86,5 +86,5 @@ assert.equal(game.saved().dailyQuests.day, '2026-09-23');
 assert.equal(game.saved().dailyQuests.progress.idiom, 1);
 assert.equal(game.saved().dailyQuests.claimed.idiom, undefined);
 assert.equal(game.saved().gems, 10);
-assert(html.includes('daily-quest-click-bridge.js?v=20260922-2'));
+assert(html.includes('daily-quest-click-bridge.js?v=20260922-3'));
 console.log('PASS: wrong/revealed answer, correct, repeated click, ended game, 10-answer reward, cap, reload, inactive daily, review, next day');

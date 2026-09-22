@@ -29,6 +29,5 @@
   function ledger(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch{return {}}}
   function save(key,value){const l=ledger();l.gacha=l.gacha||{};l.gacha.avatar=l.gacha.avatar||{};l.gacha.avatar[key]=value;localStorage.setItem(KEY,JSON.stringify(l));window.dispatchEvent(new Event('focus'));}
   function addControls(){const box=document.getElementById('customizer');if(!box||box.querySelector('.avatarFunControl'))return;const l=ledger(),a=l.gacha?.avatar||{};[['expression','表情',EXPRESSIONS],['pet','ペット',PETS],['aura','オーラ',AURAS]].forEach(([key,label,names])=>{const v=Math.max(0,Math.min(names.length-1,Number(a[key])||0)),b=document.createElement('button');b.className='part avatarFunControl';b.innerHTML=`<small>${esc(label)} ↻</small><b>${esc(names[v])}</b>`;b.onclick=()=>save(key,(v+1)%names.length);box.append(b);});}
-  }
   addControls();new MutationObserver(addControls).observe(document.documentElement,{childList:true,subtree:true});
 })();

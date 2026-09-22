@@ -94,34 +94,10 @@ function finish(){let s=DATA.sets[setIndex];if(!saved.includes(s.id)){saved.push
 function nextTheme(){let c=DATA.categories.find(x=>x.id===catId),cur=c.sets.indexOf(DATA.sets[setIndex].id),sid=c.sets[(cur+1)%c.sets.length];openStudy(DATA.sets.findIndex(s=>s.id===sid))}
 function backCategory(){openCategory(catId)}function goHome(){renderHome();show("home")}
 renderHome();
-</script><script src="sushigacha/gem-system.js?v=20260913-2"></script>
+</script><script src="sushigacha/gem-system.js?v=20260922-2"></script>
 <script src="sushigacha/multi-game-lucky-gems.js?v=20260913-2"></script>
 <script src="sushigacha/site-taskbar.js?v=20260915-1"></script>
-<script>
-(()=>{
-  const KEY='sushitan_login_bonus_v1', ACTIVE_KEY='sushitan_daily_active_v1';
-  const TYPE='world', LABEL='す界し', GOAL=5, REWARD=3;
-  function day(){const d=new Date();d.setHours(d.getHours()-6);return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
-  function toast(text){let x=document.getElementById('directDailyToast');if(!x){x=document.createElement('div');x.id='directDailyToast';x.style.cssText='position:fixed;left:50%;bottom:82px;transform:translateX(-50%);z-index:1000000;background:#173f37;color:#fff;padding:10px 15px;border-radius:999px;font:900 12px/1.2 system-ui;box-shadow:0 8px 24px #0004;pointer-events:none;white-space:nowrap';document.body.appendChild(x)}x.textContent=text;clearTimeout(x._t);x._t=setTimeout(()=>x.remove(),1500)}
-  function add(){
-    const today=day(); let active=[];
-    try{const a=JSON.parse(localStorage.getItem(ACTIVE_KEY)||'null');if(a&&a.day===today&&Array.isArray(a.active))active=a.active}catch(e){}
-    let l={};try{l=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){}
-    if(!active.length&&l.dailyQuests?.day===today&&Array.isArray(l.dailyQuests.active))active=l.dailyQuests.active;
-    if(!active.includes(TYPE))return;
-    let q=l.dailyQuests;
-    if(!q||q.day!==today)q=l.dailyQuests={day:today,active:[...active],progress:{},claimed:{},chestClaimed:false,chestReward:0};
-    q.progress=q.progress&&typeof q.progress==='object'?q.progress:{};q.claimed=q.claimed&&typeof q.claimed==='object'?q.claimed:{};
-    if(q.claimed[TYPE])return;
-    const before=Math.max(0,Number(q.progress[TYPE])||0), after=Math.min(GOAL,before+1); if(after<=before)return;
-    q.progress[TYPE]=after; let done=false;
-    if(after>=GOAL){q.claimed[TYPE]=true;l.gems=(Number.isSafeInteger(l.gems)?l.gems:0)+REWARD;done=true}
-    localStorage.setItem(KEY,JSON.stringify(l));window.dispatchEvent(new CustomEvent('sushi-daily-quest-change'));
-    toast(done?`✅ デイリー ${LABEL} ${after}/${GOAL}問  +${REWARD}💎`:`デイリー ${LABEL} ${after}/${GOAL}問`);
-  }
-  let was=false;const check=()=>{const el=document.getElementById('judge');if(!el)return;const now=/✓\s*CORRECT|\bCORRECT\b/i.test(el.textContent||'');if(now&&!was)add();was=now};new MutationObserver(check).observe(document.documentElement,{subtree:true,childList:true,characterData:true});check();
-})();
-</script>
+
 <script>
 let QUICK_POOL=[],quickIndex=0,quickCorrect=0,quickAnswered=0,quickLocked=false;function quickShuffle(a){const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}function startQuickQuiz(){['home','category','study','game','clear'].forEach(id=>document.getElementById(id)?.classList.add('hidden'));document.getElementById('quickQuizPanel')?.classList.remove('hidden');QUICK_POOL=quickShuffle(DATA.sets.flatMap(s=>(s.questions||[]).map(q=>({...q,_theme:s.title,_era:s.era}))));quickIndex=0;quickCorrect=0;quickAnswered=0;quickRender()}function quickRender(){if(!QUICK_POOL.length)return;if(quickIndex>=QUICK_POOL.length){QUICK_POOL=quickShuffle(QUICK_POOL);quickIndex=0}const q=QUICK_POOL[quickIndex];quickLocked=false;document.getElementById('judge').textContent='';document.getElementById('quickMeta').textContent=`${q._era||''} / ${q._theme||''} / ${q.type||''}`;document.getElementById('quickQ').textContent=q.q||'';document.getElementById('quickQja').textContent=q.q_ja||'';document.getElementById('quickFeedback').classList.remove('show');document.getElementById('quickNext').classList.add('hidden');document.getElementById('quickScore').textContent=`${quickCorrect} / ${quickAnswered}`;document.getElementById('quickBar').style.width=`${Math.min(100,(quickAnswered%20)/20*100)}%`;const box=document.getElementById('quickChoices');box.innerHTML='';const displayed=quickShuffle((q.choices||[]).map((c,i)=>({text:c,correct:i===q.answer})));q._quickDisplayed=displayed;displayed.forEach((item,i)=>{const b=document.createElement('button');b.className='choice';b.textContent=item.text;b.onclick=()=>quickAnswer(i,b);box.appendChild(b)})}function quickAnswer(i,b){if(quickLocked)return;quickLocked=true;const q=QUICK_POOL[quickIndex];quickAnswered++;const displayed=q._quickDisplayed||[];const buttons=[...document.querySelectorAll('#quickChoices .choice')];buttons.forEach((x,n)=>{if(displayed[n]?.correct)x.classList.add('correct')});const ok=!!displayed[i]?.correct;if(!ok)b.classList.add('wrong');else{quickCorrect++;document.getElementById('judge').textContent='✓ CORRECT'}document.getElementById('quickJudge').textContent=ok?'✓ CORRECT':'✕ WRONG';document.getElementById('quickExp').textContent=q.explanation_en||'';document.getElementById('quickExpJa').textContent=q.explanation_ja||'';document.getElementById('quickFeedback').classList.add('show');document.getElementById('quickNext').classList.remove('hidden');document.getElementById('quickScore').textContent=`${quickCorrect} / ${quickAnswered}`}function quickNextQ(){quickIndex++;quickRender()}function quickBackHome(){document.getElementById('quickQuizPanel')?.classList.add('hidden');document.getElementById('home')?.classList.remove('hidden');document.getElementById('judge').textContent=''}window.startQuickQuiz=startQuickQuiz;window.quickNextQ=quickNextQ;window.quickBackHome=quickBackHome;
 </script>
