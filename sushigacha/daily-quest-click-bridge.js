@@ -17,7 +17,9 @@
     run:{label:'すしRUN',goal:1500,reward:10,unit:'m'}
   };
 
-  const page=decodeURIComponent((location.pathname.split('/').pop()||'').toLowerCase());
+  // Cloudflare Pages redirects .html URLs to extensionless paths.
+  const name=decodeURIComponent(location.pathname.replace(/\/+$/,'').split('/').pop()||'').toLowerCase();
+  const page=name.endsWith('.html')?name:name+'.html';
   const map={
     'sushitan.html':'sushitan','antonitan.html':'antoni','sushi_idiom (1).html':'idiom','sushi_idiom.html':'idiom','sushi_quiz.html':'quiz','sushitalk.html':'talk','sukaishi_world_study_v03.html':'world','sukaishi.html':'world','sushi_run.html':'run'
   };
