@@ -7,7 +7,7 @@ const html = fs.readFileSync(path.join(root, 'sushi_idiom (1).html'), 'utf8');
 const script = [...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)].map(m => m[1]).find(s => s.includes('function answer('));
 const bridge = fs.readFileSync(path.join(root, 'sushigacha/daily-quest-click-bridge.js'), 'utf8');
 const KEY = 'sushitan_login_bonus_v1', ACTIVE = 'sushitan_daily_active_v1';
-function boot(store = new Map(), active = true) {
+function boot(store = new Map(), active = true, pathname = '/Ewords/sushi_idiom%20(1).html') {
   let now = new Date(2026, 8, 22, 12).getTime();
   class Clock extends Date { constructor(...args) { super(...(args.length ? args : [now])); } static now() { return now; } }
   const nodes = new Map(), listeners = new Map(), observers = [];
@@ -21,7 +21,7 @@ function boot(store = new Map(), active = true) {
   }
   const ctx = { console, Date: Clock, Math, performance: { now: () => 0 },
     setTimeout: () => 1, clearTimeout() {}, requestAnimationFrame: () => 1, cancelAnimationFrame() {},
-    alert() {}, confirm: () => true, location: { pathname: '/Ewords/sushi_idiom%20(1).html' },
+    alert() {}, confirm: () => true, location: { pathname },
     localStorage: { getItem: k => store.get(k) || null, setItem: (k, v) => store.set(k, String(v)), removeItem: k => store.delete(k) },
     CustomEvent: class { constructor(type) { this.type = type; } },
     addEventListener(type, fn) { if (!listeners.has(type)) listeners.set(type, []); listeners.get(type).push(fn); },
@@ -45,6 +45,13 @@ function boot(store = new Map(), active = true) {
     },
     saved() { return JSON.parse(store.get(KEY) || '{}'); }
   };
+}
+for (const pathname of ['/sushi_idiom%20(1)', '/sushi_idiom%20(1)/', '/sushi_idiom%20(1).html', '/sushi_idiom', '/sushi_idiom.html']) {
+  const routed = boot(new Map(), true, pathname);
+  routed.answer(false);
+  assert.equal(routed.saved().dailyQuests?.progress.idiom || 0, 0, pathname);
+  routed.answer(true, true);
+  assert.equal(routed.saved().dailyQuests?.progress.idiom, 1, pathname);
 }
 const game = boot();
 game.answer(false);
@@ -79,5 +86,5 @@ assert.equal(game.saved().dailyQuests.day, '2026-09-23');
 assert.equal(game.saved().dailyQuests.progress.idiom, 1);
 assert.equal(game.saved().dailyQuests.claimed.idiom, undefined);
 assert.equal(game.saved().gems, 10);
-assert(html.includes('daily-quest-click-bridge.js?v=20260922-1'));
+assert(html.includes('daily-quest-click-bridge.js?v=20260922-3'));
 console.log('PASS: wrong/revealed answer, correct, repeated click, ended game, 10-answer reward, cap, reload, inactive daily, review, next day');
