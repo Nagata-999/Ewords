@@ -14,6 +14,7 @@
   .top{display:grid;grid-template-columns:1fr auto 1fr;align-items:start;gap:10px}
   .pill{background:rgba(3,13,24,.74);border:1px solid rgba(255,255,255,.15);box-shadow:0 8px 24px rgba(0,0,0,.22);backdrop-filter:blur(8px);border-radius:16px;padding:8px 13px;font-weight:900;text-shadow:0 2px 4px #0005}
   #score{grid-column:1;grid-row:1;justify-self:start}.wordbox{grid-column:1/-1;grid-row:2;justify-self:center;text-align:center;min-width:min(82vw,520px);padding:10px 20px}.wordbox small{display:block;font-size:10px;color:#8fdef7;letter-spacing:.14em}.wordbox b{display:block;font-size:clamp(32px,8vw,50px);line-height:1.05;letter-spacing:.025em}.wordbox span{font-size:12px;color:#cbd9e4}
+  #bgmToggle{position:fixed;right:14px;top:max(58px,calc(env(safe-area-inset-top) + 46px));z-index:6;border:1px solid #ffffff40;border-radius:10px;background:#061523dd;color:#fff;padding:7px 10px;font:700 12px system-ui;cursor:pointer;touch-action:manipulation}
   #best{grid-column:3;grid-row:1;justify-self:end}.bottom{display:flex;align-items:end;justify-content:space-between;gap:12px}.help{font-size:11px;color:#cee4ef;background:#061523aa;border-radius:12px;padding:7px 10px}.hearts{font-size:22px;letter-spacing:2px;filter:drop-shadow(0 2px 3px #000)}
   #controls{position:fixed;right:18px;bottom:max(22px,env(safe-area-inset-bottom));width:210px;height:138px;pointer-events:auto;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:7px}
   .key{min-width:0;min-height:64px;padding:0;border:2px solid #ffffff42;background:#081a2de8;color:#fff;border-radius:17px;font-size:29px;font-weight:900;box-shadow:0 5px 0 #020a12bb;backdrop-filter:blur(5px);touch-action:manipulation;cursor:pointer}.key:active{transform:translateY(3px);box-shadow:0 2px 0 #020a12aa;background:#173752f2}.up{grid-column:2}.left{grid-column:1;grid-row:2}.down{grid-column:2;grid-row:2}.right{grid-column:3;grid-row:2}
@@ -45,6 +46,8 @@
   <button class="key down" data-dir="down" aria-label="後ろへ">▼</button>
   <button class="key right" data-dir="right" aria-label="右へ">▶</button>
 </div>
+<audio id="bgm" src="One_More_Quarter.mp3" loop preload="none"></audio>
+<button id="bgmToggle" type="button" aria-label="BGMをオフにする" aria-pressed="true">BGM ON</button>
 <div id="toast">GOOD!</div>
 <div id="overlay">
   <div class="card">
@@ -84,6 +87,34 @@ const THEMES=[
 ];
 let W,H,dpr,tileX,tileY,centerX,baseY;
 let state="menu",stage=1,stageLength=30,lanes=[],player,score,distance,hearts,best=+(safeStorage.get("sushiCrossBest","0")||0),camera=0,scrollAge=0,pressureWarned=false,last=0,shake=0,quiz=null,toastTimer=0,particles=[],ripples=[],screenFlash=0,flashColor="255,255,255",wordDeck=[],lastQuizWord="";
+
+const bgm=document.querySelector("#bgm");
+bgm.loop=true;
+bgm.volume=0.35;
+bgm.preload="none";
+const bgmToggle=document.querySelector("#bgmToggle");
+let bgmEnabled=safeStorage.get("sushiCrossBgm","on")!=="off";
+function updateBgmButton(){
+ bgmToggle.textContent=bgmEnabled?"BGM ON":"BGM OFF";
+ bgmToggle.setAttribute("aria-pressed",String(bgmEnabled));
+ bgmToggle.setAttribute("aria-label",bgmEnabled?"BGMをオフにする":"BGMをオンにする");
+}
+function syncBgm(){
+ if(!bgmEnabled||document.hidden||state!=="playing"){bgm.pause();return}
+ const playing=bgm.play();
+ if(playing)playing.catch(()=>{/* 再生できない場合もゲームは継続する */});
+}
+bgmToggle.addEventListener("click",()=>{
+ bgmEnabled=!bgmEnabled;
+ safeStorage.set("sushiCrossBgm",bgmEnabled?"on":"off");
+ updateBgmButton();
+ syncBgm();
+});
+document.addEventListener("visibilitychange",syncBgm);
+addEventListener("pagehide",()=>bgm.pause());
+addEventListener("pageshow",syncBgm);
+updateBgmButton();
+
 const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)],clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const theme=()=>THEMES[(stage-1)%THEMES.length],difficulty=()=>Math.min(stage-1,10);
 
@@ -103,11 +134,11 @@ function buildWorld(){
 }
 function ensureWorld(){/* ステージはゴールまでの固定盤面 */}
 
-function begin(){if(state==="stageclear")stage++;else{stage=1;score=0;hearts=3;wordDeck=[];lastQuizWord=""}state="playing";distance=0;camera=0;scrollAge=0;pressureWarned=false;quiz=null;particles=[];ripples=[];screenFlash=0;player={x:0,row:0,px:0,prow:0,move:1,hop:0,hidden:false};buildWorld();primeQuizzes();ui.result.style.display="none";ui.how.style.display="block";ui.overlay.style.display="none";updateHUD();last=performance.now()}
+function begin(){if(state==="stageclear")stage++;else{stage=1;score=0;hearts=3;wordDeck=[];lastQuizWord=""}state="playing";syncBgm();distance=0;camera=0;scrollAge=0;pressureWarned=false;quiz=null;particles=[];ripples=[];screenFlash=0;player={x:0,row:0,px:0,prow:0,move:1,hop:0,hidden:false};buildWorld();primeQuizzes();ui.result.style.display="none";ui.how.style.display="block";ui.overlay.style.display="none";updateHUD();last=performance.now()}
 function updateHUD(){ui.score.textContent="STAGE "+stage+"　🍣 "+score;ui.best.textContent="BEST "+best;ui.hearts.textContent="❤️".repeat(hearts)+"🖤".repeat(3-hearts)}
 function showToast(text,color="#fff"){ui.toast.textContent=text;ui.toast.style.color=color;ui.toast.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>ui.toast.classList.remove("show"),650)}
-function end(reason){if(state!=="playing")return;state="over";best=Math.max(best,score);safeStorage.set("sushiCrossBest",best);updateHUD();ui.finalScore.textContent=score;ui.finalReason.textContent=reason;ui.result.style.display="block";ui.how.style.display="none";ui.start.textContent="もう一度あそぶ";setTimeout(()=>ui.overlay.style.display="grid",950)}
-function clearStage(){if(state!=="playing")return;state="stageclear";best=Math.max(best,score);safeStorage.set("sushiCrossBest",best);updateHUD();showToast("STAGE CLEAR!","#ffe36e");ui.finalScore.textContent="CLEAR!";ui.finalReason.textContent="STAGE "+stage+"　SCORE "+score;ui.result.style.display="block";ui.how.style.display="none";ui.start.textContent="次のステージ";setTimeout(()=>ui.overlay.style.display="grid",650)}
+function end(reason){if(state!=="playing")return;state="over";syncBgm();best=Math.max(best,score);safeStorage.set("sushiCrossBest",best);updateHUD();ui.finalScore.textContent=score;ui.finalReason.textContent=reason;ui.result.style.display="block";ui.how.style.display="none";ui.start.textContent="もう一度あそぶ";setTimeout(()=>ui.overlay.style.display="grid",950)}
+function clearStage(){if(state!=="playing")return;state="stageclear";syncBgm();best=Math.max(best,score);safeStorage.set("sushiCrossBest",best);updateHUD();showToast("STAGE CLEAR!","#ffe36e");ui.finalScore.textContent="CLEAR!";ui.finalReason.textContent="STAGE "+stage+"　SCORE "+score;ui.result.style.display="block";ui.how.style.display="none";ui.start.textContent="次のステージ";setTimeout(()=>ui.overlay.style.display="grid",650)}
 
 function nextWordEntry(){
  if(!wordDeck.length){wordDeck=[...WORDS];for(let i=wordDeck.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[wordDeck[i],wordDeck[j]]=[wordDeck[j],wordDeck[i]]}if(wordDeck.length>1&&wordDeck[wordDeck.length-1][0]===lastQuizWord)[wordDeck[0],wordDeck[wordDeck.length-1]]=[wordDeck[wordDeck.length-1],wordDeck[0]]}let w=wordDeck.pop();lastQuizWord=w[0];return w
