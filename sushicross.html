@@ -24,6 +24,22 @@
   #toast{position:fixed;left:50%;top:27%;transform:translate(-50%,-10px) scale(.9);opacity:0;pointer-events:none;font-weight:1000;font-size:clamp(24px,7vw,42px);text-shadow:0 4px 0 #000,0 7px 14px #000;z-index:4;transition:.18s}.show{opacity:1!important;transform:translate(-50%,0) scale(1)!important}
   .word-swap{animation:wordSwap .34s cubic-bezier(.2,1.5,.4,1)}@keyframes wordSwap{0%{transform:scale(.62);opacity:.25}100%{transform:scale(1);opacity:1}}
   @media(max-width:620px){#controls{width:204px;height:134px;right:10px;bottom:max(14px,env(safe-area-inset-bottom))}.key{min-height:62px}.help{max-width:105px}.pill{padding:7px 10px}.wordbox{min-width:78vw}.wordbox span{display:block}}
+
+  #overlay .card{max-height:calc(100dvh - 48px);overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;padding:0 4px 12px}
+  #start:disabled{opacity:.65;cursor:wait}
+  .cross-note{font-size:12px;color:#c0d7e4;line-height:1.6;margin:12px 0}
+  .cross-secondary{border:1px solid #ffffff40;background:#102b40;color:#fff;border-radius:12px;padding:10px 16px;font:700 14px system-ui;cursor:pointer}
+  #openRanking{margin-top:17px}
+  #saveRanking{margin:18px 0 12px;padding:12px;border:1px solid #ffffff25;border-radius:12px;text-align:left}
+  #saveRanking label{display:block;font-size:13px;margin-bottom:6px}
+  #playerName{width:100%;padding:10px;border:1px solid #8cabbf;border-radius:8px;background:#fff;color:#17202b;font:16px system-ui;touch-action:manipulation}
+  #saveScore{width:100%;margin-top:8px}#saveScore:disabled{opacity:.65}
+  #rankingDialog{background:#071a2b;color:#fff;border:1px solid #456176;border-radius:18px;width:min(94vw,520px);max-height:85dvh;padding:18px;overflow:auto;touch-action:pan-y}
+  #rankingDialog::backdrop{background:#000a}#rankingDialog h2{font-size:22px;margin:0 0 12px}
+  #rankingDialog table{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}
+  #rankingDialog th,#rankingDialog td{padding:10px 4px;border-bottom:1px solid #ffffff22;text-align:right;overflow-wrap:anywhere}
+  #rankingDialog th:nth-child(2),#rankingDialog td:nth-child(2){text-align:left;width:42%}
+  #rankingDialog th:first-child{width:12%}.ranking-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
 </style>
 
 <link rel="canonical" href="https://sushitan.net/sushicross">
@@ -57,10 +73,26 @@
     <div class="how" id="how">
       <div><b>🚕</b>車をよける</div><div><b>🚃</b>電車に注意</div><div><b>🔤</b>意味を選ぶ</div>
     </div>
-    <button id="start">ゲームスタート</button>
+    <button id="start" disabled>単語を読み込み中…</button>
+    <p id="wordStatus" class="cross-note" role="status">すし単と共通の辞書を読み込み中…</p>
+    <form id="saveRanking" hidden>
+      <label for="playerName">ランキングに表示する名前（20文字以内）</label>
+      <input id="playerName" name="playerName" maxlength="20" autocomplete="nickname" placeholder="名前" required>
+      <button id="saveScore" class="cross-secondary" type="submit">記録を登録</button>
+      <p id="saveStatus" class="cross-note" role="status"></p>
+    </form>
+    <button id="openRanking" class="cross-secondary" type="button">ランキング</button>
     <div class="credit">SUSHITAN.NET • ORIGINAL LEARNING GAME</div>
   </div>
 </div>
+<dialog id="rankingDialog" aria-labelledby="rankingHeading">
+  <h2 id="rankingHeading">すしクロス ランキング</h2>
+  <p id="rankingStatus" class="cross-note" role="status"></p>
+  <table><thead><tr><th scope="col">順位</th><th scope="col">名前</th><th scope="col">スコア</th><th scope="col">到達<br>ステージ</th></tr></thead><tbody id="rankingRows"></tbody></table>
+  <div class="ranking-actions"><button id="refreshRanking" class="cross-secondary" type="button">更新</button><button id="closeRanking" class="cross-secondary" type="button">閉じる</button></div>
+</dialog>
+<script src="sushicross-words.js?v=20260923-1"></script>
+<script src="sushicross-ranking.js?v=20260923-1"></script>
 <script>
 (()=>{
 "use strict";
@@ -70,14 +102,20 @@ const safeStorage={
  get(key,fallback="0"){try{return localStorage.getItem(key)??fallback}catch(_){return fallback}},
  set(key,value){try{localStorage.setItem(key,String(value))}catch(_){/* プレビュー環境では保存せず続行 */}}
 };
-const WORDS=[
- ["accept","受け入れる","断る","調べる"],["achieve","達成する","避ける","説明する"],["ancient","古代の","現代の","危険な"],["appear","現れる","隠す","支払う"],["available","利用できる","壊れている","有名な"],
- ["benefit","利益・恩恵","原因","約束"],["compare","比較する","完成する","含める"],["consider","よく考える","運ぶ","祝う"],["contain","含む","続ける","集める"],["create","創造する","減少する","借りる"],
- ["decide","決める","依存する","守る"],["develop","発達させる","発見する","破壊する"],["environment","環境","政府","設備"],["experience","経験","実験","証拠"],["increase","増加する","想像する","改善する"],
- ["instead","その代わりに","突然","おそらく"],["necessary","必要な","自然な","否定的な"],["opportunity","機会","意見","目的"],["prevent","防ぐ","予測する","準備する"],["provide","提供する","証明する","生産する"],
- ["reduce","減らす","再利用する","気づく"],["require","必要とする","要求を断る","救助する"],["society","社会","科学","状況"],["solution","解決策","結論","伝統"],["various","さまざまな","貴重な","明らかな"],
- ["affect","影響を与える","効果","努力する"],["likely","ありそうな","孤独な","活発な"],["improve","改善する","印象づける","輸入する"],["purpose","目的","購入","提案"],["responsible","責任がある","反応がよい","合理的な"]
-];
+let WORDS=[],wordDeck=null,loadingWords=false,answeredCount=0,correctCount=0;
+const ranking=SushiCrossRanking.init(safeStorage);
+async function loadWords(){
+ if(loadingWords)return;loadingWords=true;ui.start.disabled=true;
+ const status=document.querySelector("#wordStatus");
+ ui.start.textContent="単語を読み込み中…";
+ try{
+  WORDS=await SushiCrossWords.load();wordDeck=SushiCrossWords.createDeck(WORDS);
+  status.textContent="すし単と共通の辞書・"+WORDS.length.toLocaleString("ja-JP")+"語から出題";
+  ui.start.textContent="ゲームスタート";
+ }catch(_){status.textContent="単語を読み込めませんでした。通信を確認して再試行してください。";ui.start.textContent="再読み込み"}
+ finally{loadingWords=false;ui.start.disabled=false}
+}
+function presentScore(){ranking.present({score:Math.round(score),stage,accuracy:answeredCount?Math.round(correctCount/answeredCount*100):0})}
 const TYPES={GRASS:0,ROAD:1,WATER:2,RAIL:3,QUIZ:4,GOAL:5};
 const THEMES=[
  {sky1:"#7ed6ed",sky2:"#c5f1dc",ground:"#183a46",grass1:"#48b968",grass2:"#54c877",grassSide:"#257645",water:"#1599cf",quiz:"#583f7d"},
@@ -86,7 +124,7 @@ const THEMES=[
  {sky1:"#a8dced",sky2:"#edf8ff",ground:"#47636d",grass1:"#73a886",grass2:"#84ba95",grassSide:"#4b735d",water:"#56a4c4",quiz:"#695886"}
 ];
 let W,H,dpr,tileX,tileY,centerX,baseY;
-let state="menu",stage=1,stageLength=30,lanes=[],player,score,distance,hearts,best=+(safeStorage.get("sushiCrossBest","0")||0),camera=0,scrollAge=0,pressureWarned=false,last=0,shake=0,quiz=null,toastTimer=0,particles=[],ripples=[],screenFlash=0,flashColor="255,255,255",wordDeck=[],lastQuizWord="";
+let state="menu",stage=1,stageLength=30,lanes=[],player,score,distance,hearts,best=+(safeStorage.get("sushiCrossBest","0")||0),camera=0,scrollAge=0,pressureWarned=false,last=0,shake=0,quiz=null,toastTimer=0,particles=[],ripples=[],screenFlash=0,flashColor="255,255,255";
 
 const bgm=document.querySelector("#bgm");
 bgm.loop=true;
@@ -134,24 +172,22 @@ function buildWorld(){
 }
 function ensureWorld(){/* ステージはゴールまでの固定盤面 */}
 
-function begin(){if(state==="stageclear")stage++;else{stage=1;score=0;hearts=3;wordDeck=[];lastQuizWord=""}state="playing";syncBgm();distance=0;camera=0;scrollAge=0;pressureWarned=false;quiz=null;particles=[];ripples=[];screenFlash=0;player={x:0,row:0,px:0,prow:0,move:1,hop:0,hidden:false};buildWorld();primeQuizzes();ui.result.style.display="none";ui.how.style.display="block";ui.overlay.style.display="none";updateHUD();last=performance.now()}
+function begin(){if(!WORDS.length){loadWords();return}ranking.reset();if(state==="stageclear")stage++;else{stage=1;score=0;hearts=3;wordDeck=SushiCrossWords.createDeck(WORDS);answeredCount=0;correctCount=0}state="playing";syncBgm();distance=0;camera=0;scrollAge=0;pressureWarned=false;quiz=null;particles=[];ripples=[];screenFlash=0;player={x:0,row:0,px:0,prow:0,move:1,hop:0,hidden:false};buildWorld();primeQuizzes();ui.result.style.display="none";ui.how.style.display="block";ui.overlay.style.display="none";updateHUD();last=performance.now()}
 function updateHUD(){ui.score.textContent="STAGE "+stage+"　🍣 "+score;ui.best.textContent="BEST "+best;ui.hearts.textContent="❤️".repeat(hearts)+"🖤".repeat(3-hearts)}
 function showToast(text,color="#fff"){ui.toast.textContent=text;ui.toast.style.color=color;ui.toast.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>ui.toast.classList.remove("show"),650)}
-function end(reason){if(state!=="playing")return;state="over";syncBgm();best=Math.max(best,score);safeStorage.set("sushiCrossBest",best);updateHUD();ui.finalScore.textContent=score;ui.finalReason.textContent=reason;ui.result.style.display="block";ui.how.style.display="none";ui.start.textContent="もう一度あそぶ";setTimeout(()=>ui.overlay.style.display="grid",950)}
-function clearStage(){if(state!=="playing")return;state="stageclear";syncBgm();best=Math.max(best,score);safeStorage.set("sushiCrossBest",best);updateHUD();showToast("STAGE CLEAR!","#ffe36e");ui.finalScore.textContent="CLEAR!";ui.finalReason.textContent="STAGE "+stage+"　SCORE "+score;ui.result.style.display="block";ui.how.style.display="none";ui.start.textContent="次のステージ";setTimeout(()=>ui.overlay.style.display="grid",650)}
+function end(reason){if(state!=="playing")return;state="over";syncBgm();best=Math.max(best,score);safeStorage.set("sushiCrossBest",best);updateHUD();ui.finalScore.textContent=score;ui.finalReason.textContent=reason;ui.result.style.display="block";ui.how.style.display="none";ui.start.textContent="もう一度あそぶ";presentScore();setTimeout(()=>ui.overlay.style.display="grid",950)}
+function clearStage(){if(state!=="playing")return;state="stageclear";syncBgm();best=Math.max(best,score);safeStorage.set("sushiCrossBest",best);updateHUD();showToast("STAGE CLEAR!","#ffe36e");ui.finalScore.textContent="CLEAR!";ui.finalReason.textContent="STAGE "+stage+"　SCORE "+score;ui.result.style.display="block";ui.how.style.display="none";ui.start.textContent="次のステージ";presentScore();setTimeout(()=>ui.overlay.style.display="grid",650)}
 
-function nextWordEntry(){
- if(!wordDeck.length){wordDeck=[...WORDS];for(let i=wordDeck.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[wordDeck[i],wordDeck[j]]=[wordDeck[j],wordDeck[i]]}if(wordDeck.length>1&&wordDeck[wordDeck.length-1][0]===lastQuizWord)[wordDeck[0],wordDeck[wordDeck.length-1]]=[wordDeck[wordDeck.length-1],wordDeck[0]]}let w=wordDeck.pop();lastQuizWord=w[0];return w
-}
+function nextWordEntry(){return wordDeck.next()}
 function startQuiz(lane,activate=true){
- if(!lane.quiz){let w=nextWordEntry(),answers=[w[1],w[2],w[3]].sort(()=>Math.random()-.5),xs=[-3,0,3],choices=answers.map((a,i)=>({x:xs[i],text:a,correct:a===w[1]}));lane.quiz={word:w[0],correct:w[1],choices,answered:false,aim:1}}
+ if(!lane.quiz){let w=nextWordEntry(),answers=SushiCrossWords.choices(w,WORDS),xs=[-3,0,3],choices=answers.map((a,i)=>({...a,x:xs[i]}));lane.quiz={word:w.en,correct:w.label,choices,answered:false,aim:1}}
  if(activate){let changed=!quiz||quiz!==lane.quiz;quiz=lane.quiz;ui.word.textContent=lane.quiz.word;if(changed){ui.word.classList.remove("word-swap");void ui.word.offsetWidth;ui.word.classList.add("word-swap")}}
 }
 function primeQuizzes(){
  let future=lanes.filter(l=>l.type===TYPES.QUIZ&&l.row>player.row&&!l.quiz?.answered).sort((a,b)=>a.row-b.row);future.slice(0,2).forEach(l=>startQuiz(l,false));let active=future.find(l=>l.quiz&&!l.quiz.answered);if(active)startQuiz(active,true)
 }
 function move(dir){
- if(state!=="playing"||player.move<1)return;let nx=player.x,nr=player.row,ahead=laneFor(player.row+1);
+ if(state!=="playing"||ranking.isOpen()||player.move<1)return;let nx=player.x,nr=player.row,ahead=laneFor(player.row+1);
  if(ahead&&ahead.type===TYPES.QUIZ&&!ahead.quiz?.answered){
   startQuiz(ahead);
   if(dir==="up"){let best=0;for(let i=1;i<ahead.quiz.choices.length;i++)if(Math.abs(ahead.quiz.choices[i].x-player.x)<Math.abs(ahead.quiz.choices[best].x-player.x))best=i;if(Math.abs(ahead.quiz.choices[best].x-player.x)>1.15){showToast("単語の正面へ！","#ffe36e");return}ahead.quiz.aim=best;nr++;nx=ahead.quiz.choices[best].x}else{if(dir==="down")nr--;if(dir==="left")nx--;if(dir==="right")nx++}
@@ -175,6 +211,18 @@ function box3D(x,y,w,d,h,front,top,side="#24303a",shadow=true){
 }
 function textFit(txt,x,y,max,size=16){ctx.font=`900 ${size}px system-ui`;let width=ctx.measureText(txt).width;if(width>max)ctx.font=`900 ${Math.max(10,size*max/width)}px system-ui`;ctx.textAlign="center";ctx.textBaseline="middle";ctx.lineWidth=4;ctx.strokeStyle="#07121c";ctx.strokeText(txt,x,y);ctx.fillStyle="#fff";ctx.fillText(txt,x,y)}
 
+function choiceText(text,x,y,width,height,size){
+ let lines=[];
+ for(let font=size;;font=Math.max(6,font-.5)){
+  ctx.font=`900 ${font}px system-ui`;lines=[];let line="";
+  for(const ch of text){if(line&&ctx.measureText(line+ch).width>width){lines.push(line);line=ch}else line+=ch}if(line)lines.push(line);
+  if(lines.length*font*1.12<=height||font<=6){
+   ctx.textAlign="center";ctx.textBaseline="middle";ctx.lineWidth=3;ctx.strokeStyle="#07121c";ctx.fillStyle="#fff";
+   lines.forEach((value,i)=>{const cy=y+(i-(lines.length-1)/2)*font*1.12;ctx.strokeText(value,x,cy);ctx.fillText(value,x,cy)});return;
+  }
+ }
+}
+
 function drawLane(l){
  const p=iso(0,l.row),s=scaleAt(l.row),farL=iso(-5.5,l.row+.5),farR=iso(5.5,l.row+.5),nearR=iso(5.5,l.row-.5),nearL=iso(-5.5,l.row-.5);
  const th=theme(),color=l.type===TYPES.ROAD?"#414954":l.type===TYPES.WATER?th.water:l.type===TYPES.RAIL?"#766d62":l.type===TYPES.QUIZ?th.quiz:l.type===TYPES.GOAL?"#f2f0e6":((l.row%2)?th.grass1:th.grass2);
@@ -192,7 +240,7 @@ function drawObjects(l){
  if(l.type===TYPES.ROAD){for(let o of l.objects){let p=iso(o.x,l.row),w=tileX*(o.kind==="truck"?1.7:1.18)*s;box3D(p.x,p.y,w,tileY*.63*s,tileY*.55*s,o.color,"#f3cc52","#26333e");if(o.kind!=="truck")box3D(p.x+w*.08,p.y-tileY*.47*s,w*.48,tileY*.46*s,tileY*.34*s,"#8bcfe8","#dff8ff","#4b8298",false);ctx.fillStyle="#18212b";for(let dx of [-.32,.32]){ctx.beginPath();ctx.arc(p.x+w*dx,p.y+tileY*.37*s,5*s,0,7);ctx.fill()}}}
  if(l.type===TYPES.WATER){for(let o of l.objects){let p=iso(o.x,l.row);box3D(p.x,p.y,o.len*tileX*s,tileY*.34*s,tileY*.18*s,"#70401f","#ae6e37","#4c2a16")}}
  if(l.type===TYPES.RAIL&&l.trainActive){let p=iso(l.trainX,l.row),w=tileX*5.6*s;box3D(p.x,p.y,w,tileY*.85*s,tileY*1.12*s,"#d94343","#ffe155","#922c34");for(let i=-2;i<=2;i++){ctx.fillStyle="#bcefff";ctx.fillRect(p.x+i*tileX*s-tileX*.22*s,p.y-tileY*1.02*s,tileX*.42*s,tileY*.3*s)}}
- if(l.type===TYPES.QUIZ&&l.quiz){for(let i=0;i<l.quiz.choices.length;i++){let c=l.quiz.choices[i],p=iso(c.x,l.row),active=!l.quiz.answered&&l.quiz===quiz,ready=active&&player&&Math.abs(player.row-(l.row-1))<.01,selected=ready&&i===l.quiz.aim,future=!l.quiz.answered&&!ready,flat=l.quiz.answered,color=c.answered?(c.correct?"#2fcb6d":"#e84b55"):(future?"#55486f":"#7355a6"),height=flat?1.5*s:7*s,top=flat?(c.correct?"#75e9a0":"#f57f87"):(future?"#796993":"#a080d0");box3D(p.x,p.y,tileX*2.12*s,tileY*1.46*s,height,color,top,flat?color:"#49336f",false);textFit(c.text,p.x,p.y-(flat?3:8)*s,tileX*1.9*s,18*s);if(selected){ctx.strokeStyle="#e7e2f2";ctx.lineWidth=2*s;ctx.beginPath();ctx.rect(p.x-tileX*1.08*s,p.y-tileY*.78*s,tileX*2.16*s,tileY*1.56*s);ctx.stroke()}}}
+ if(l.type===TYPES.QUIZ&&l.quiz){for(let i=0;i<l.quiz.choices.length;i++){let c=l.quiz.choices[i],p=iso(c.x,l.row),active=!l.quiz.answered&&l.quiz===quiz,ready=active&&player&&Math.abs(player.row-(l.row-1))<.01,selected=ready&&i===l.quiz.aim,future=!l.quiz.answered&&!ready,flat=l.quiz.answered,color=c.answered?(c.correct?"#2fcb6d":"#e84b55"):(future?"#55486f":"#7355a6"),height=flat?1.5*s:7*s,top=flat?(c.correct?"#75e9a0":"#f57f87"):(future?"#796993":"#a080d0");box3D(p.x,p.y,tileX*2.12*s,tileY*1.46*s,height,color,top,flat?color:"#49336f",false);choiceText(c.text,p.x,p.y-(flat?3:8)*s,tileX*1.9*s,tileY*1.22*s,16*s);if(selected){ctx.strokeStyle="#e7e2f2";ctx.lineWidth=2*s;ctx.beginPath();ctx.rect(p.x-tileX*1.08*s,p.y-tileY*.78*s,tileX*2.16*s,tileY*1.56*s);ctx.stroke()}}}
  if(l.type===TYPES.GOAL){for(let x of [-4.6,4.6]){let p=iso(x,l.row);box3D(p.x,p.y,tileX*.16*s,tileY*.2*s,tileY*2.4*s,"#c5c7cc","#fff","#777",false)}let p=iso(0,l.row);box3D(p.x,p.y-tileY*1.7*s,tileX*6.9*s,tileY*.18*s,tileY*.55*s,"#e74646","#ffed75","#8e2525",false);textFit("GOAL",p.x,p.y-tileY*1.98*s,tileX*3*s,20*s)}
 }
 function drawSushi(){if(player.hidden)return;let t=player.move<1?player.move:1,x=player.px+(player.x-player.px)*ease(t),r=player.prow+(player.row-player.prow)*ease(t),p=iso(x,r),s=scaleAt(r),hop=Math.sin(Math.PI*t)*tileY*.72*s;ctx.save();ctx.fillStyle="#07121c55";ctx.beginPath();ctx.ellipse(p.x+5*s,p.y+7*s,tileX*.3*s,tileY*.2*s,0,0,7);ctx.fill();ctx.translate(0,-hop);box3D(p.x,p.y,tileX*.64*s,tileY*.55*s,tileY*.68*s,"#f7f0dc","#ff6954","#c9c0aa",false);ctx.fillStyle="#18212b";ctx.fillRect(p.x-tileX*.32*s,p.y-tileY*.31*s,tileX*.64*s,tileY*.22*s);ctx.fillStyle="#fff";for(let dx of [-.13,.13]){ctx.beginPath();ctx.arc(p.x+tileX*dx*s,p.y-tileY*.48*s,4*s,0,7);ctx.fill();ctx.fillStyle="#18212b";ctx.beginPath();ctx.arc(p.x+tileX*dx*s,p.y-tileY*.48*s,2*s,0,7);ctx.fill();ctx.fillStyle="#fff"}ctx.restore()}
@@ -212,9 +260,9 @@ function drawFX(){
  for(let p of particles){ctx.globalAlpha=clamp(p.life/.35,0,1);ctx.fillStyle=p.color;if(p.round){ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fill()}else{ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.life*7);ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size);ctx.restore()}}ctx.globalAlpha=1;if(screenFlash>0){ctx.fillStyle=`rgba(${flashColor},${screenFlash})`;ctx.fillRect(0,0,W,H)}
 }
 
-function answerCheck(){let l=laneFor(player.row);if(!l||l.type!==TYPES.QUIZ||!l.quiz||l.quiz.answered)return;let c=l.quiz.choices.find(c=>Math.abs(c.x-player.x)<.7);if(!c)return;l.quiz.answered=true;l.quiz.crushed=true;l.quiz.choices.forEach(q=>q.answered=true);if(c.correct){score+=5;showToast("GOOD! +5","#78ff9f")}else{hearts--;showToast("正解："+l.quiz.correct,"#ff9da2");shake=10;if(hearts<=0){updateHUD();setTimeout(()=>end("英単語で3回ミス！"),350);return}}updateHUD();primeQuizzes()}
+function answerCheck(){let l=laneFor(player.row);if(!l||l.type!==TYPES.QUIZ||!l.quiz||l.quiz.answered)return;let c=l.quiz.choices.find(c=>Math.abs(c.x-player.x)<.7);if(!c)return;l.quiz.answered=true;l.quiz.crushed=true;l.quiz.choices.forEach(q=>q.answered=true);answeredCount++;if(c.correct){correctCount++;score+=5;showToast("GOOD! +5","#78ff9f")}else{hearts--;showToast("正解："+l.quiz.correct,"#ff9da2");shake=10;if(hearts<=0){updateHUD();end("英単語で3回ミス！");return}}updateHUD();primeQuizzes()}
 function update(dt){
- updateFX(dt);if(state!=="playing")return;player.move=Math.min(1,player.move+dt*6.8);if(player.move>=.72){answerCheck();let ahead=laneFor(player.row+1);if(ahead&&ahead.type===TYPES.QUIZ&&!ahead.quiz)startQuiz(ahead)}scrollAge+=dt;let follow=Math.max(0,player.row-3),scrollSpeed=.28+difficulty()*.025+Math.min(.12,Math.max(0,scrollAge-18)*.0025),forced=scrollAge>4?scrollSpeed*dt:0;camera=Math.max(camera+forced,camera+(follow-camera)*Math.min(1,dt*4));let pressure=camera-player.row;if(pressure>2.7&&!pressureWarned){pressureWarned=true;showToast("急いで！","#ff9b72")}else if(pressure<2.1)pressureWarned=false;if(pressure>4.4){player.hidden=true;shake=12;screenFlash=.35;flashColor="255,92,72";return end("画面外に押し出された！")}
+ updateFX(dt);if(state!=="playing")return;player.move=Math.min(1,player.move+dt*6.8);if(player.move>=.72){answerCheck();if(state!=="playing")return;let ahead=laneFor(player.row+1);if(ahead&&ahead.type===TYPES.QUIZ&&!ahead.quiz)startQuiz(ahead)}scrollAge+=dt;let follow=Math.max(0,player.row-3),scrollSpeed=.28+difficulty()*.025+Math.min(.12,Math.max(0,scrollAge-18)*.0025),forced=scrollAge>4?scrollSpeed*dt:0;camera=Math.max(camera+forced,camera+(follow-camera)*Math.min(1,dt*4));let pressure=camera-player.row;if(pressure>2.7&&!pressureWarned){pressureWarned=true;showToast("急いで！","#ff9b72")}else if(pressure<2.1)pressureWarned=false;if(pressure>4.4){player.hidden=true;shake=12;screenFlash=.35;flashColor="255,92,72";return end("画面外に押し出された！")}
  for(let l of lanes){l.phase+=dt;if(l.type===TYPES.ROAD){for(let o of l.objects){o.x+=l.dir*l.speed*dt;if(o.x>8)o.x=-8;if(o.x<-8)o.x=8}}
   if(l.type===TYPES.WATER){for(let o of l.objects){o.x+=l.speed*dt;if(o.x>8)o.x=-8;if(o.x<-8)o.x=8}}
   if(l.type===TYPES.RAIL){l.timer-=dt;if(!l.trainActive&&l.timer<1.35)l.warning=true;if(!l.trainActive&&l.timer<=0){l.trainActive=true;l.warning=false;l.trainX=-11*l.dir}if(l.trainActive){l.trainX+=l.dir*12*(1+difficulty()*.06)*dt;if(Math.abs(l.trainX)>12){l.trainActive=false;l.timer=rand(Math.max(2.8,4-difficulty()*.12),Math.max(4.2,7-difficulty()*.18))}}}
@@ -235,11 +283,13 @@ function quizPointer(x,y,warp=false){
 }
 
 const keymap={ArrowUp:"up",w:"up",W:"up",ArrowDown:"down",s:"down",S:"down",ArrowLeft:"left",a:"left",A:"left",ArrowRight:"right",d:"right",D:"right"};
-addEventListener("keydown",e=>{if(keymap[e.key]){e.preventDefault();move(keymap[e.key])}});document.querySelectorAll(".key").forEach(b=>b.addEventListener("pointerdown",e=>{e.preventDefault();move(b.dataset.dir)}));
+addEventListener("keydown",e=>{if(state!=="playing"||ranking.isOpen())return;if(keymap[e.key]){e.preventDefault();move(keymap[e.key])}});document.querySelectorAll(".key").forEach(b=>b.addEventListener("pointerdown",e=>{e.preventDefault();move(b.dataset.dir)}));
 let sx=0,sy=0;canvas.addEventListener("pointerdown",e=>{sx=e.clientX;sy=e.clientY});canvas.addEventListener("pointermove",e=>{canvas.style.cursor=quizPointer(e.clientX,e.clientY,false)?"pointer":"default"});canvas.addEventListener("pointerup",e=>{let dx=e.clientX-sx,dy=e.clientY-sy;if(Math.hypot(dx,dy)<22){if(quizPointer(e.clientX,e.clientY,true))return;return move("up")}move(Math.abs(dx)>Math.abs(dy)?(dx>0?"right":"left"):(dy>0?"down":"up"))});
 ui.start.addEventListener("click",begin);
+loadWords();
 buildWorld();player={x:0,row:0,px:0,prow:0,move:1,hop:0};
 })();
 </script>
 </body>
 </html>
+
