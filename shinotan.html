@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<script src="shared/player.js?v=20260923-1"></script>
+<script src="shared/scores.js?v=20260923-1"></script>
+
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4726251793577317"
      crossorigin="anonymous"></script>
   <meta name="google-adsense-account" content="ca-pub-4726251793577317">
@@ -2335,7 +2338,7 @@ html, body {
 
     <div class="overlay" id="menuOverlay">
       <div class="modal home-modal">
-        <div id="homePanel">
+        <div id="homePanel"><div data-sushi-player></div>
           <div class="brand-hero">
             <span class="brand-mark">🍣 synonym game</span>
             <h1 id="gameTitle" class="brand-title">
@@ -3637,38 +3640,11 @@ html, body {
       await loadRanking(rankingMode, rankingScreenList);
     }
 
-    async function saveHighScore(finalScoreValue, accuracy) {
-      if (!supabaseClient || GAME.scoreSavedThisRound) return;
-
-      const input = prompt("名前を入力してください", localStorage.getItem("speed_vocab_name") || "");
-      if (input === null) {
-        saveStatus.textContent = "保存をスキップしました";
-        await loadRanking(currentMode, rankingList);
-        return;
-      }
-
-      const playerName = (input.normalize("NFKC").trim() || "NO NAME").slice(0, 20);
-      localStorage.setItem("speed_vocab_name", playerName);
-      localStorage.setItem("sushitan_player_name", playerName);
-      saveStatus.textContent = "保存中...";
-
-      const { error } = await supabaseClient.rpc("save_high_score", {
-  p_player_name: playerName,
-  p_score: finalScoreValue,
-  p_max_combo: GAME.maxCombo,
-  p_accuracy: accuracy,
-  p_mode: normalizeModeForDb(currentMode)
-});
-
-      if (error) {
-        console.error("save error:", error);
-        saveStatus.textContent = "保存失敗: " + error.message;
-      } else {
-        GAME.scoreSavedThisRound = true;
-        rankingMode = normalizeModeForDb(currentMode);
-        saveStatus.textContent = `${playerName} の記録を保存しました`;
-      }
-    }
+    async function saveHighScore(finalScoreValue,accuracy){
+ if(GAME.scoreSavedThisRound||GAME.reviewMode)return;
+ GAME.scoreSavedThisRound=true;
+ return SushiScores.save({p_score:finalScoreValue,p_max_combo:GAME.maxCombo,p_accuracy:accuracy,p_mode:normalizeModeForDb(currentMode)},{status:saveStatus});
+}
     async function endPerfectClear() {
       ensureAudio();
       GAME.running = false;

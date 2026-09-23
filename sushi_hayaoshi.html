@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<script src="shared/player.js?v=20260923-1"></script>
+<script src="shared/scores.js?v=20260923-1"></script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>すし早押し｜英英定義タッチ対戦ゲーム｜すし英語</title>
@@ -751,7 +754,7 @@
 <body>
   <audio id="bgm" src="music-def.mp3" loop preload="auto"></audio>
   <a class="sushi-home-link" href="/index.html">🍣 すし英語トップ</a>
-  <main id="titleScreen" class="screen active">
+  <main id="titleScreen" class="screen active"><div data-sushi-player></div>
     <div class="title-card">
       <h1>すし早押し</h1>
       <div class="subtitle">英英定義を見て、正しい単語を先にタップ！</div>
@@ -903,7 +906,7 @@
       <div class="hayaoshi-status" id="saveStatus"></div>
       <div class="final-actions" id="finalActions" style="display:none;">
         <button class="primary" id="againBtn">もう一度</button>
-        <button class="hayaoshi-save-btn" id="saveSoloScoreBtn" style="display:none;">ランキングに保存</button>
+        <button class="hayaoshi-save-btn" id="saveSoloScoreBtn" data-auto-score-button hidden style="display:none;">ランキングに保存</button>
         <button id="menuBtn">メニューへ</button>
       </div>
     </div>
@@ -1562,26 +1565,9 @@ async function loadHayaoshiRanking(level = rankingLevel){
 }
 
 async function saveSoloScore(){
-  if(!supabaseClient || !lastSoloResult) return;
-  const input = prompt("名前を入力してください", getSavedPlayerName());
-  if(input === null){ $('saveStatus').textContent = "保存をスキップしました"; return; }
-  const playerName = (input.normalize("NFKC").trim() || "NO NAME").slice(0,20);
-  localStorage.setItem("sushitan_player_name", playerName);
-  localStorage.setItem("speed_vocab_name", playerName);
-  $('saveStatus').textContent = "保存中...";
-  const { error } = await supabaseClient.rpc("save_high_score", {
-    p_player_name: playerName,
-    p_score: lastSoloResult.score,
-    p_max_combo: lastSoloResult.correct,
-    p_accuracy: lastSoloResult.accuracy,
-    p_mode: getHayaoshiMode(lastSoloResult.level)
-  });
-  if(error){ console.error("hayaoshi save error:", error); $('saveStatus').textContent = "保存失敗: " + error.message; return; }
-  $('saveStatus').textContent = `${playerName} の記録を保存しました`;
-  const btn = $('saveSoloScoreBtn'); if(btn) btn.style.display = "none";
-  rankingLevel = lastSoloResult.level; setRankingTabUI(); await loadHayaoshiRanking(rankingLevel);
-initTeamEntryInputs();
-toggleTeamEntryBox();
+ const result=lastSoloResult;if(!result||result.autoSaved)return;result.autoSaved=true;
+ await SushiScores.save({p_score:result.score,p_max_combo:result.correct,p_accuracy:result.accuracy,p_mode:getHayaoshiMode(result.level)},{status:$('saveStatus')});
+ if(lastSoloResult===result){rankingLevel=result.level;setRankingTabUI();loadHayaoshiRanking(rankingLevel)}
 }
 
 
@@ -2288,7 +2274,7 @@ function endGame(){
     const accuracy = Math.round((correct / totalAttempts) * 100);
     lastSoloResult = { score:Number(state.redScore || 0), correct, accuracy, level:state.level };
     $('resultSub').textContent = `${state.redScore} points / Acc ${accuracy}%`;
-    if(saveBtn) saveBtn.style.display = 'inline-block';
+    saveSoloScore();
   }
 
   $('finalActions').style.display = 'flex';

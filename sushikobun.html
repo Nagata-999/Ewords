@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<script src="shared/player.js?v=20260923-1"></script>
+<script src="shared/scores.js?v=20260923-1"></script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="古文・英語・現代語をつなげて覚える学習ゲーム。古文1語から英語4択、現代語4択に挑戦。">
@@ -99,7 +102,7 @@ th,td{padding:12px;border-bottom:1px solid var(--line);text-align:left;vertical-
   <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="link" href="kobun-list.html">古文単語一覧</a><a class="link" href="index.html">トップページに戻る</a></div>
 </header>
 
-<section id="home" class="screen active panel hero">
+<section id="home" class="screen active panel hero"><div data-sushi-player></div>
   <h1>すし<span>こぶ</span>単</h1>
   <p>古文を見て英語を選び、次に現代語を選ぼう。どちらかを一度でも間違えたらゲーム終了。</p>
   <div class="actions">
@@ -164,7 +167,7 @@ th,td{padding:12px;border-bottom:1px solid var(--line);text-align:left;vertical-
     <div class="row"><div class="key">現代語</div><div id="rModern" class="val"></div></div>
     <div class="row"><div class="key">解説</div><div id="rExplain" class="val"></div></div>
   </div>
-  <div class="entry"><input id="name" maxlength="20" placeholder="ランキング登録名"><button class="btn primary" id="save">ランキング登録</button></div>
+  <div class="entry"><input id="name" data-sushi-name maxlength="20" placeholder="ランキング登録名"><button class="btn primary" id="save" data-auto-score-button hidden>ランキング登録</button></div>
   <div id="saveStatus" class="status"></div>
   <div class="result-actions">
     <button class="btn secondary" id="retry">もう一度</button>
@@ -287,19 +290,15 @@ function endGame(){
   $("resultScore").textContent=score+"問正解！";
   $("rKobun").textContent=w.kobun;$("rEnglish").textContent=w.english_display;$("rModern").textContent=w.modern_display;
   $("rExplain").textContent=w.explanation||"解説は登録されていません。";
-  $("saveStatus").textContent="";$("save").disabled=false;show("result");
+  $("saveStatus").textContent="";$("save").disabled=false;show("result");saveScore();
 }
 
 function localRanks(){try{return JSON.parse(localStorage.getItem("sushikobutanRankingV2")||"[]")}catch{return[]}}
-function saveLocal(e){const a=localRanks();a.push(e);a.sort((x,y)=>y.score-x.score||new Date(x.created_at)-new Date(y.created_at));localStorage.setItem("sushikobutanRankingV2",JSON.stringify(a.slice(0,100)))}
+function saveLocal(e){const a=localRanks().filter(row=>row.player_name!==e.player_name);const old=localRanks().filter(row=>row.player_name===e.player_name).sort((x,y)=>y.score-x.score)[0];a.push(old&&old.score>=e.score?old:e);a.sort((x,y)=>y.score-x.score);localStorage.setItem("sushikobutanRankingV2",JSON.stringify(a.slice(0,100)))}
 async function saveScore(){
-  const n=$("name").value.trim();if(!n){$("saveStatus").textContent="名前を入力してください。";return}
-  $("save").disabled=true;$("saveStatus").textContent="登録中...";
-  const e={player_name:n,score,max_combo:score,accuracy:score/(score+1),mode:MODE,created_at:new Date().toISOString()};
-  try{
-    if(db){const {error}=await db.from("scores").insert([{player_name:n,score,max_combo:score,accuracy:e.accuracy,mode:MODE}]);if(error)throw error;$("saveStatus").textContent="ランキングに登録しました。"}
-    else{saveLocal(e);$("saveStatus").textContent="この端末のランキングに登録しました。"}
-  }catch(err){console.error(err);saveLocal(e);$("saveStatus").textContent="オンライン登録に失敗したため、この端末に保存しました。"}
+ if($("save").disabled)return;$("save").disabled=true;
+ const e={player_name:SushiPlayer.getName(),score,max_combo:score,accuracy:Math.round(score/(score+1)*100),mode:MODE,created_at:new Date().toISOString()};
+ saveLocal(e);$("saveStatus").textContent=e.player_name+" の記録を端末ランキングに自動保存しました。";
 }
 async function openRanking(){
   show("ranking");$("rankingBody").innerHTML="";let a=[];

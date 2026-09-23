@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="ja">
 <head>
+<script src="shared/player.js?v=20260923-1"></script>
+<script src="shared/scores.js?v=20260923-1"></script>
+
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>すしクロック｜時計の読み方・英語の時刻表現｜すし単</title>
@@ -29,7 +32,7 @@
 <option value="5" selected>Lv5 MIX</option>
 </select>選択肢：<select id="choiceCount"><option value="4">4択</option><option value="5">5択</option><option value="6" selected>6択</option></select>Team各カード：<select id="roundsEach"><option value="1">1問</option><option value="2">2問</option><option value="3" selected>3問</option><option value="4">4問</option></select><button class="btn small" onclick="toggleTeamEntry()">メンバー入力</button></div><div class="team-entry" id="teamEntry"><div class="team-grid"><div class="team-col"><div class="team-head red">RED TEAM</div><div class="name-list" id="redNames"></div></div><div class="team-col"><div class="team-head blue">BLUE TEAM</div><div class="name-list" id="blueNames"></div></div></div><div class="match-preview" id="matchPreview"></div><div class="controls" style="justify-content:flex-start;margin-top:10px"><button class="btn" onclick="startGame('team')">このメンバーで開始</button><button class="btn small" onclick="previewSchedule()">🎲 対戦カード確認</button></div></div><div class="ranking-box"><div class="ranking-title">🏆 すしクロック Ranking</div><div id="homeRanking"><div class="status-msg">読み込み中...</div></div></div></section></main>
 <main id="game" class="screen"><div class="topbar"><button class="btn ghost" onclick="goHome()">← MENU</button><div class="stats"><div class="stat" id="modeStat">Mode</div><div class="stat">Score <span id="score">0</span></div><div class="stat">Combo <span id="combo">0</span></div><div class="stat" id="timerWrap">Time <span id="timer">60</span></div><div class="stat">Q <span id="qnum">1</span>/<span id="qtotal">10</span></div></div></div><section class="match-card" id="matchCard"><div class="side-card red"><div class="side-label">RED NOW</div><div class="side-name" id="redNow">RED</div></div><div class="vs" id="vsText">VS</div><div class="side-card blue"><div class="side-label">BLUE NOW</div><div class="side-name" id="blueNow">BLUE</div></div></section><section class="panel question-panel"><div class="level-line" id="levelLine"></div><div class="question" id="questionText"></div><div class="hint" id="hintText">正しい時計を選ぼう</div></section><section class="clock-grid" id="choices"></section><section class="typing-box" id="typingBox"><div class="typing-clock"><canvas id="typingCanvas" width="260" height="260"></canvas></div><input id="typingInput" class="typing-input" autocomplete="off" placeholder="例：twenty to ten" /><div class="controls"><button class="btn" onclick="checkTyping()">チェック</button></div></section><section class="panel result-box" id="resultBox"><div class="result-title" id="resultTitle"></div><div class="explain" id="explainText"></div><div class="controls"><button class="btn" onclick="nextQuestion()">次へ</button><button class="btn dark" onclick="finishGame()">終了</button></div></section><section class="battle-board" id="battleBoard" style="display:none"><div class="panel"><h3 style="margin:0 0 8px">🏆 Score</h3><div id="battleRanks"></div></div><div class="panel"><h3 style="margin:0 0 8px">おさらい</h3><p class="small" id="miniReview">正解後にここへ説明が出ます。</p></div></section></main>
-<main id="finish" class="screen"><section class="hero finish"><h2 style="margin:0">結果発表 🍣</h2><div class="final-score" id="finalScore">0</div><p class="small" id="finalText"></p><div class="save-row" id="saveRow" style="display:none"><input id="playerName" placeholder="ランキング名" maxlength="20"><button class="btn" onclick="saveRanking()">ランキング保存</button></div><div class="status-msg" id="saveStatus"></div><div class="controls"><button class="btn" onclick="startGame(currentMode)">もう一回</button><button class="btn dark" onclick="goHome()">ホームへ</button></div></section></main></div>
+<main id="finish" class="screen"><section class="hero finish"><h2 style="margin:0">結果発表 🍣</h2><div class="final-score" id="finalScore">0</div><p class="small" id="finalText"></p><div class="save-row" id="saveRow" style="display:none"><input id="playerName" data-sushi-name placeholder="ランキング名" maxlength="20"><button class="btn" onclick="saveRanking()" data-auto-score-button hidden>ランキング保存</button></div><div class="status-msg" id="saveStatus"></div><div class="controls"><button class="btn" onclick="startGame(currentMode)">もう一回</button><button class="btn dark" onclick="goHome()">ホームへ</button></div></section></main></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const SUPABASE_URL="https://rxyoyveykxdfrpomkltl.supabase.co";
@@ -144,7 +147,7 @@ function showBattleAnswer(side,ok){
 }
 function answer(btn,o){if(lock||state.answered)return;const ok=o.h===state.current.h&&o.m===state.current.m;const speed=Math.max(0,Math.round(100-(Date.now()-state.start)/120));state.answered=true;[...document.querySelectorAll('.choice')].forEach(c=>{c.classList.add('disabled');if(+c.dataset.h===state.current.h&&+c.dataset.m===state.current.m)c.classList.add('correct')});if(!ok)btn.classList.add('wrong');let title,pts=0;if(ok){state.combo++;pts=100+speed+state.combo*10;state.score+=pts;title=`正解！ +${pts}`;if(state.combo>=3)flash(`${state.combo} COMBO!`)}else{state.combo=0;title='おしい！'}if(state.mode==='vs'||state.mode==='team'){const side=decideSide(btn);showBattleAnswer(side,ok);if(ok){const p=100+speed+(side==='red'?state.redCombo:state.blueCombo)*10;if(side==='red'){state.red+=p;state.redCombo++;state.blueCombo=0}else{state.blue+=p;state.blueCombo++;state.redCombo=0}if(Math.max(state.redCombo,state.blueCombo)>=3)flash(`${side.toUpperCase()} ${Math.max(state.redCombo,state.blueCombo)} COMBO!`)}else{if(side==='red')state.redCombo=0;else state.blueCombo=0}}$('score').textContent=state.score;$('combo').textContent=state.combo;$('resultTitle').textContent=title;$('explainText').innerHTML=explain(state.current);$('miniReview').innerHTML=explain(state.current);$('resultBox').classList.add('show');updateRanks();if(state.mode!=='study')setTimeout(()=>{if(state.answered)nextQuestion()},1350)}
 function decideSide(btn){return btn.dataset.side || ((btn.getBoundingClientRect().left+btn.getBoundingClientRect().width/2 < innerWidth/2)?'red':'blue')}function updateRanks(){if(state.mode==='vs'||state.mode==='team'){$('battleRanks').innerHTML=`<div class="rank-row"><span>🔴 RED</span><span>${state.red} <span class="tag">combo ${state.redCombo}</span></span></div><div class="rank-row"><span>🔵 BLUE</span><span>${state.blue} <span class="tag">combo ${state.blueCombo}</span></span></div>`}}
-function finishGame(){clearInterval(timerId);timerId=null;stopBGM();showScreen('finish');let text='';if(state.mode==='vs'||state.mode==='team'){const win=state.red===state.blue?'DRAW':state.red>state.blue?'RED WIN!':'BLUE WIN!';$('finalScore').textContent=`${win}`;text=`RED ${state.red} / BLUE ${state.blue}`;$('saveRow').style.display='none';}else{$('finalScore').textContent=state.score;text=state.mode==='typing'?`60秒で${state.q}問に挑戦。最大コンボ ${state.combo}`:`${state.q}問に挑戦。最大コンボ ${state.combo}`;$('saveRow').style.display=(state.mode==='solo'||state.mode==='typing')?'flex':'none';}$('finalText').textContent=text;$('saveStatus').textContent='';}
+function finishGame(){clearInterval(timerId);timerId=null;stopBGM();showScreen('finish');let text='';if(state.mode==='vs'||state.mode==='team'){const win=state.red===state.blue?'DRAW':state.red>state.blue?'RED WIN!':'BLUE WIN!';$('finalScore').textContent=`${win}`;text=`RED ${state.red} / BLUE ${state.blue}`;$('saveRow').style.display='none';}else{$('finalScore').textContent=state.score;text=state.mode==='typing'?`60秒で${state.q}問に挑戦。最大コンボ ${state.combo}`:`${state.q}問に挑戦。最大コンボ ${state.combo}`;$('saveRow').style.display=(state.mode==='solo'||state.mode==='typing')?'flex':'none';}$('finalText').textContent=text;$('saveStatus').textContent='';saveRanking();}
 function flash(t){$('comboText').textContent=t;$('comboFlash').classList.add('show');setTimeout(()=>$('comboFlash').classList.remove('show'),900)}
 function fmt(h,m){return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`}function to12(h){h%=12;return h===0?12:h}function cap(s){return s.charAt(0).toUpperCase()+s.slice(1)}const nums=['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty','twenty-one','twenty-two','twenty-three','twenty-four','twenty-five','twenty-six','twenty-seven','twenty-eight','twenty-nine'];function phrase(h,m,type){const hh=to12(h),next=to12(h+1);if(type==='digital')return `${hh}:${String(m).padStart(2,'0')}`;if(m===0)return `${nums[hh]} o'clock`;if(m===30)return `half past ${nums[hh]}`;if(m===15)return `quarter past ${nums[hh]}`;if(m===45)return `quarter to ${nums[next]}`;if(m<30)return `${nums[m]} past ${nums[hh]}`;return `${nums[60-m]} to ${nums[next]}`}
 function makeQuestion(level){let h=1+Math.floor(Math.random()*12),mins,type='word';
@@ -193,63 +196,9 @@ async function loadRanking(){
   }
 }
 async function saveRanking(){
-  const name=($('playerName').value||'名無しすし').trim().slice(0,20);
-  const mode=state.mode==='typing'?'clock_typing':'clock';
-  $('saveStatus').textContent='保存中...';
-  try{
-    const payload={
-      player_name:name,
-      score:state.score||0,
-      max_combo:state.combo||0,
-      accuracy:100,
-      mode:mode
-    };
-
-    // UNIQUE制約やupsertは使わない。
-    // 同じ名前・同じモードの最高点を探し、今回の点が高い時だけその行をUPDATEする。
-    const {data:existingRows,error:findError}=await supabaseClient
-      .from(RANKING_TABLE)
-      .select('id,player_name,score,max_combo,accuracy,mode,created_at')
-      .eq('player_name',name)
-      .eq('mode',mode)
-      .order('score',{ascending:false})
-      .limit(1);
-
-    if(findError)throw findError;
-    const existing=existingRows&&existingRows.length?existingRows[0]:null;
-
-    if(!existing){
-      const {error:insertError}=await supabaseClient
-        .from(RANKING_TABLE)
-        .insert(payload);
-      if(insertError)throw insertError;
-      $('saveStatus').textContent='ランキングに保存しました。';
-      loadRanking();
-      return;
-    }
-
-    if(Number(existing.score||0) >= Number(payload.score||0)){
-      $('saveStatus').textContent=`自己ベストは ${existing.score}pt です。ランキングは最高点のみ更新します。`;
-      loadRanking();
-      return;
-    }
-
-    const {error:updateError}=await supabaseClient
-      .from(RANKING_TABLE)
-      .update({
-        score:payload.score,
-        max_combo:payload.max_combo,
-        accuracy:payload.accuracy
-      })
-      .eq('id',existing.id);
-
-    if(updateError)throw updateError;
-    $('saveStatus').textContent='自己ベストを更新しました。';
-    loadRanking();
-  }catch(e){
-    console.error(e);
-    $('saveStatus').textContent='保存できませんでした。scores テーブルの SELECT / INSERT / UPDATE policy を確認してください。';
-  }
+ if(!['solo','typing'].includes(state.mode)||state.autoRankSaved)return;state.autoRankSaved=true;
+ await SushiScores.save({p_score:state.score,p_max_combo:state.combo,p_accuracy:100,p_mode:state.mode==='typing'?'clock_typing':'clock'},{status:$('saveStatus')});
+ loadRanking();
 }
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
 window.addEventListener('load',loadRanking);

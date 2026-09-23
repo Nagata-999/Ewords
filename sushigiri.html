@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<script src="shared/player.js?v=20260923-1"></script>
+<script src="shared/scores.js?v=20260923-1"></script>
+
 
 <meta name="description" content="英単語をタイピングして寿司を斬る無料ブラウザゲーム「すし斬り」。英語タイピング、英単語練習、タイピングゲームを楽しく続けたい人向け。並・上の2レベル、オンラインランキング対応。">
 <meta name="keywords" content="英語 タイピング, 英語 ゲーム, 英単語 タイピング, タイピングゲーム, 英単語 ゲーム, 英語学習 ゲーム, 無料 英語ゲーム, ブラウザゲーム, すし斬り, すし単">
@@ -1885,8 +1888,8 @@ function rankingPanelHTML(){
       <div class="rankTitle"><span>🏆 ONLINE TOP 10</span><span>総合ランキング</span></div>
       <div id="slashRankRows" class="rankRows"><div class="rankStatus">読み込み中...</div></div>
       <div class="rankSave">
-        <input id="slashPlayerName" maxlength="16" autocomplete="nickname" placeholder="名前を入力">
-        <button id="slashSaveBtn" onclick="saveSlashRanking()">ランキング登録</button>
+        <input id="slashPlayerName" data-sushi-name maxlength="16" autocomplete="nickname" placeholder="名前を入力">
+        <button id="slashSaveBtn" data-auto-score-button hidden onclick="saveSlashRanking()">ランキング登録</button>
       </div>
       <div id="slashRankStatus" class="rankStatus"></div>
     </div>`;
@@ -1918,43 +1921,16 @@ async function showSlashRanking(){
   }
 }
 async function saveSlashRanking(){
- if(window.SushiReview?.active){const status=document.querySelector('.rankStatus');if(status)status.textContent='苦手復習の記録はランキングに保存しません。';return;}
-  if(rankingSaved)return;
-  const input=document.querySelector("#slashPlayerName");
-  const st=document.querySelector("#slashRankStatus");
-  const btn=document.querySelector("#slashSaveBtn");
-  let rawName=(input?.value||"").trim().slice(0,16);
-  if(!rawName){
-    const ok=window.confirm("名前が未入力です。\n「名無しすし」でランキング登録しますか？");
-    if(!ok){ input?.focus(); return; }
-    rawName="名無しすし";
-  }
-  const name=rawName;
-  if(!slashDb)return;
-  if(st)st.textContent="";
-  if(btn)btn.disabled=true;
-  try{
-    if(name!=="名無しすし") localStorage.setItem("sushiSlashName",name);
-    const {data:rows,error:findError}=await slashDb.from(SLASH_RANK_TABLE).select("score").eq("mode",slashMode()).eq("player_name",name).limit(1);
-    if(findError)throw findError;
-    const existing=rows?.[0]||null;
-    const oldScore=Number(existing?.score||0);
-    if(existing && score<=oldScore){if(btn)btn.disabled=false;return;}
-    const payload={player_name:name,score:Math.max(0,Math.round(score)),max_combo:Math.max(0,Math.round(maxCombo)),accuracy:100,mode:slashMode()};
-    let error;
-    if(existing){({error}=await slashDb.from(SLASH_RANK_TABLE).update(payload).eq("mode",slashMode()).eq("player_name",name));}
-    else{({error}=await slashDb.from(SLASH_RANK_TABLE).insert(payload));}
-    if(error)throw error;
-    rankingSaved=true;
-    if(st)st.textContent=existing ? "自己ベスト更新！" : "総合ランキングに保存しました！";
-    await showSlashRanking();
-  }catch(e){console.warn("ranking save",e);if(st)st.textContent="";if(btn)btn.disabled=false;}
+ if(window.SushiReview?.active||rankingSaved)return;rankingSaved=true;
+ await SushiScores.save({p_score:score,p_max_combo:maxCombo,p_accuracy:100,p_mode:slashMode()},{status:document.querySelector('#slashRankStatus')});
+ showSlashRanking();
 }
 function initRankingResult(){
   rankingSaved=false;
   const name=document.querySelector("#slashPlayerName");
   if(name)name.value=localStorage.getItem("sushiSlashName")||"";
   showSlashRanking();
+  saveSlashRanking();
 }
 
 

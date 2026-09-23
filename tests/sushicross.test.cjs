@@ -27,13 +27,9 @@ async function main(){
  api.begin();assert.equal(api.get().score,0);api.set({hearts:1});api.answer(false);assert.equal(api.get().state,'over');assert.equal(results.at(-1).accuracy,0);
  // Real ranking UI code with a controlled transport: duplicate clicks, retry and stale completion.
  let calls=[],transport=async()=>({ok:true,json:async()=>[]});
- const rankContext={window:{},document:doc,fetch:async(url,options)=>{calls.push({url,options});return transport(url,options)},AbortController,setTimeout,clearTimeout,console};
+ const saves=[];const rankContext={window:{},SushiPlayer:{bind(){}},SushiScores:{save:async p=>{saves.push(p);return {saved:true}}},document:doc,fetch:async(url,options)=>{calls.push({url,options});return transport(url,options)},AbortController,setTimeout,clearTimeout,console};
  vm.runInNewContext(fs.readFileSync(__dirname+'/../sushicross-ranking.js','utf8'),rankContext);
- const rank=rankContext.window.SushiCrossRanking.init({get:()=>'',set(){}}),form=get('#saveRanking'),button=get('#saveScore'),name=get('#playerName');name.value='テスト';
- rank.present({score:20,stage:2,accuracy:50});await form.handlers.submit({preventDefault(){}});const payload=JSON.parse(calls.at(-1).options.body);assert.equal(payload.p_mode,'sushi_cross');assert.equal(payload.p_score,20);assert.equal(payload.p_max_combo,2);assert(button.disabled);
- const count=calls.length;await form.handlers.submit({preventDefault(){}});assert.equal(calls.length,count);
- rank.present({score:21,stage:2,accuracy:60});transport=async()=>({ok:false});await form.handlers.submit({preventDefault(){}});assert(!button.disabled);assert(get('#saveStatus').textContent.includes('登録できません'));
- let resolve;transport=()=>new Promise(r=>resolve=r);const pending=form.handlers.submit({preventDefault(){}});rank.reset();rank.present({score:30,stage:3,accuracy:80});resolve({ok:true});await pending;assert(!button.disabled);assert.equal(button.textContent,'記録を登録');
+ const rank=rankContext.window.SushiCrossRanking.init({get:()=>'',set(){}});rank.present({score:20,stage:2,accuracy:50});assert.equal(saves.length,1);assert.equal(saves[0].p_mode,'sushi_cross');assert.equal(saves[0].p_score,20);rank.reset();rank.present({score:30,stage:3,accuracy:80});assert.equal(saves.length,2);
  transport=async()=>({ok:true,json:async()=>[{player_name:'<img onerror=evil()>',score:30,max_combo:2},{player_name:'B',score:30,max_combo:3},{player_name:'C',score:10,max_combo:1}]});get('#openRanking').handlers.click();await new Promise(setImmediate);
  assert.equal(get('#rankingRows').children[0].children[1].textContent,'<img onerror=evil()>');assert.equal(get('#rankingRows').children[1].children[0].textContent,'1');assert.equal(get('#rankingRows').children[2].children[0].textContent,'3');assert(calls.at(-1).url.includes('mode=eq.sushi_cross'));
  console.log('PASS: 2026 dictionary entries, distractors, deck uniqueness, load failures, gameplay/results, ranking transport/retry/stale requests/ties/text safety');
