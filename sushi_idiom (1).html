@@ -1,5 +1,8 @@
 <!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<html lang="ja"><head>
+<script src="shared/player.js?v=20260923-1"></script>
+<script src="shared/scores.js?v=20260923-1"></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>すしイディオム｜英熟語の4択・復習ゲーム｜すし単</title>
 <style>
 :root{--orange:#ff7a18;--deep:#e85d04;--cream:#fff8ef;--ink:#2e2925;--muted:#7f746c;--line:#eadfd4;--good:#159447;--bad:#d33b31}
@@ -10,7 +13,7 @@
 <meta name="description" content="英語→日本語・日本語→英語の4択で熟語を練習します。通常モードは60秒で、誤答すると残り時間が2秒減ります。連続正解でスコア倍率が上がります。">
 </head>
 <body><div class="wrap"><div class="top"><div class="brand">🍣 すし<b>イディオム</b></div><button class="ghost" onclick="location.href='index.html'">トップへ</button></div>
-<section id="intro" class="panel intro"><div class="sushi">🍣</div><h1></h1><p>日本語→英語、英語→日本語の2方向で出題。<br>連続正解でスコア倍率アップ。10コンボから <b>SUSHI FEVER!</b></p><input id="playerName" class="name" maxlength="14" placeholder="名前を入力" autocomplete="off"><div style="margin-top:16px"><button class="main" onclick="startGame()">ゲームスタート</button></div><p class="small">ベストスコア <b id="bestScore">0</b>　｜　覚えたイディオム <b id="mastered">0</b>　｜　復習リスト <b id="wrongCountTop">0</b></p><div class="reviewBox"><div class="reviewHead"><b>📝 間違えたイディオム</b><span class="reviewCount"><span id="wrongCount">0</span>個</span></div><div id="wrongList" class="reviewList"></div><div class="reviewActions"><button id="reviewBtn" class="main" onclick="startReview()">復習する</button><button class="ghost" onclick="showRanking()">ランキングを見る</button><button class="ghost" onclick="clearWrongList()">リストを消去</button></div><p class="small">間違えたイディオムはこのブラウザに保存されます。復習で同じイディオムに2回連続正解するとリストから外れます。</p></div></section>
+<section id="intro" class="panel intro"><div class="sushi">🍣</div><h1></h1><p>日本語→英語、英語→日本語の2方向で出題。<br>連続正解でスコア倍率アップ。10コンボから <b>SUSHI FEVER!</b></p><input id="playerName" data-sushi-name class="name" maxlength="20" placeholder="名前を入力" autocomplete="off"><div style="margin-top:16px"><button class="main" onclick="startGame()">ゲームスタート</button></div><p class="small">ベストスコア <b id="bestScore">0</b>　｜　覚えたイディオム <b id="mastered">0</b>　｜　復習リスト <b id="wrongCountTop">0</b></p><div class="reviewBox"><div class="reviewHead"><b>📝 間違えたイディオム</b><span class="reviewCount"><span id="wrongCount">0</span>個</span></div><div id="wrongList" class="reviewList"></div><div class="reviewActions"><button id="reviewBtn" class="main" onclick="startReview()">復習する</button><button class="ghost" onclick="showRanking()">ランキングを見る</button><button class="ghost" onclick="clearWrongList()">リストを消去</button></div><p class="small">間違えたイディオムはこのブラウザに保存されます。復習で同じイディオムに2回連続正解するとリストから外れます。</p></div></section>
 <section id="game" class="panel game"><div class="stats"><div class="stat"><b id="time">60.0</b><span>TIME</span></div><div class="stat"><b id="score">0</b><span>SCORE</span></div><div class="stat"><b id="combo">0</b><span>COMBO</span></div><div class="stat"><b id="mult">×1.0</b><span>MULTIPLIER</span></div></div><div class="bar"><i id="timebar"></i></div><div id="gamebox"><div class="question"><div class="qtype" id="qtype"></div><div id="reviewBadge" class="small hidden" style="margin-top:6px;color:var(--orange);font-weight:900">📝 復習モード　<button class="ghost" style="padding:5px 10px;margin-left:8px" onclick="finish()">終了</button></div><div class="prompt" id="prompt"></div><div class="hint" id="hint"></div></div><div id="choices" class="choices"></div><div id="feedback" class="feedback"></div></div></section>
 <section id="result" class="panel result"><div style="font-size:50px">🏁</div><h2>FINISH!</h2><div class="bigscore" id="finalScore">0</div><p>正解 <b id="finalCorrect"></b>　/　ミス <b id="finalWrong"></b>　/　MAX COMBO <b id="finalCombo"></b></p><p id="rankMsg"></p><button class="main" onclick="startGame()">もう一回</button> <button class="ghost" onclick="goHome()">復習リストへ</button><div class="tabs"><button class="ghost" onclick="loadRanking('today')">TODAY</button><button class="ghost" onclick="loadRanking('all')">ALL TIME</button></div><div id="rankStatus" class="small"></div><table class="ranktable"><thead><tr><th>順位</th><th>NAME</th><th>SCORE</th><th>COMBO</th></tr></thead><tbody id="rankBody"></tbody></table></section></div><div id="comboPop" class="comboPop"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -38,7 +41,7 @@ function renderWrongList(){let d=getWrongData(),keys=Object.keys(d);if($('wrongC
 function clearWrongList(){if(!Object.keys(getWrongData()).length)return;if(confirm('復習リストをすべて消去しますか？')){localStorage.removeItem(WRONG_KEY);localStorage.removeItem(REVIEW_STREAK_KEY);renderWrongList()}}
 function init(){$('playerName').value=localStorage.getItem('sushiIdiomName')||'';$('bestScore').textContent=localStorage.getItem('sushiIdiomBest')||0;updateMastered();renderWrongList()}
 function updateMastered(){const m=JSON.parse(localStorage.getItem('sushiIdiomMastery')||'{}');$('mastered').textContent=Object.values(m).filter(v=>v>=3).length}
-function begin(mode){roundId++;clearTimeout(nextTimer);cancelAnimationFrame(tickFrame);let name=$('playerName').value.trim()||localStorage.getItem('sushiIdiomName')||'GUEST';localStorage.setItem('sushiIdiomName',name);$('playerName').value=name;state={time:mode==='review'?0:60,score:0,combo:0,maxCombo:0,correct:0,wrong:0,playing:true,current:null,locked:false,last:performance.now(),mode};$('intro').style.display='none';$('result').style.display='none';$('game').style.display='block';$('gamebox').classList.remove('fever');$('reviewBadge').classList.toggle('hidden',mode!=='review');renderStats();nextQ();if(mode!=='review')tickFrame=requestAnimationFrame(tick)}
+function begin(mode){roundId++;clearTimeout(nextTimer);cancelAnimationFrame(tickFrame);let name=SushiPlayer.setName($('playerName').value);localStorage.setItem('sushiIdiomName',name);$('playerName').value=name;state={time:mode==='review'?0:60,score:0,combo:0,maxCombo:0,correct:0,wrong:0,playing:true,current:null,locked:false,last:performance.now(),mode};$('intro').style.display='none';$('result').style.display='none';$('game').style.display='block';$('gamebox').classList.remove('fever');$('reviewBadge').classList.toggle('hidden',mode!=='review');renderStats();nextQ();if(mode!=='review')tickFrame=requestAnimationFrame(tick)}
 function startGame(){begin('normal')}
 function startReview(){if(!Object.keys(getWrongData()).length){alert('復習するイディオムはありません。');return}begin('review')}
 function goHome(){state.playing=false;roundId++;clearTimeout(nextTimer);cancelAnimationFrame(tickFrame);$('result').style.display='none';$('game').style.display='none';$('intro').style.display='block';renderWrongList()}
@@ -51,14 +54,9 @@ function answer(choice,btn){if(state.locked||!state.playing)return;state.locked=
 function pop(t){let p=$('comboPop');p.textContent=t;p.classList.remove('show');void p.offsetWidth;p.classList.add('show')}
 async function finish(){if(!state.playing)return;const round=roundId;state.playing=false;clearTimeout(nextTimer);cancelAnimationFrame(tickFrame);$('game').style.display='none';$('result').style.display='block';$('finalScore').textContent=state.score.toLocaleString();$('finalCorrect').textContent=state.correct;$('finalWrong').textContent=state.wrong;$('finalCombo').textContent=state.maxCombo;let best=+(localStorage.getItem('sushiIdiomBest')||0);if(state.mode!=='review'&&state.score>best){localStorage.setItem('sushiIdiomBest',state.score);$('rankMsg').textContent='🎉 NEW PERSONAL BEST!'}else $('rankMsg').textContent='';updateMastered();renderWrongList();if(state.mode==='review'){$('rankMsg').textContent='📝 復習モード終了。残り '+Object.keys(getWrongData()).length+' 個';$('rankStatus').textContent='復習モードのスコアはランキングに送信されません。';loadRanking('today')}else{await submitScore();if(round===roundId)loadRanking('today')}}
 async function submitScore(){
-  if(!dbReady || state.mode==='review')return;
-  const round=roundId;
-  const accuracy=(state.correct+state.wrong)?Math.round(state.correct/(state.correct+state.wrong)*100):0;
-  const payload={p_player_name:(localStorage.getItem('sushiIdiomName')||'GUEST').slice(0,14),p_score:state.score,p_max_combo:state.maxCombo,p_accuracy:accuracy,p_mode:MODE_NAME};
-  try{
-    const {error}=await sb.rpc('save_score_with_daily',payload);
-    if(error)throw error;
-  }catch(e){console.warn(e);if(round===roundId)$('rankMsg').textContent='ランキング送信に失敗しました。記録は保存されていません。';}
+ if(state.mode==='review'||state.autoRankSaved)return;state.autoRankSaved=true;
+ const accuracy=(state.correct+state.wrong)?Math.round(state.correct/(state.correct+state.wrong)*100):0;
+ return SushiScores.save({p_score:state.score,p_max_combo:state.maxCombo,p_accuracy:accuracy,p_mode:MODE_NAME},{daily:true,status:$('rankMsg')});
 }
 async function loadRanking(mode='today'){
   const request=++rankRequest;

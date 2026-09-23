@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<script src="shared/player.js?v=20260923-1"></script>
+<script src="shared/scores.js?v=20260923-1"></script>
+
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>すしParts｜英単語の部品を組み合わせるゲーム｜すし単</title>
@@ -790,7 +793,7 @@
 <body>
 <div class="wrap">
  <div class="top"><div class="brand" id="brandHome" title="すし単トップへ戻る">🍣 すし<span>Parts Rogue</span></div></div>
- <section id="startPanel" class="panel start"><h2>プレイヤー名</h2><input id="playerName" placeholder="名前を入力" maxlength="20" /><button id="startBtn">新しくゲーム開始</button><button id="startLeaderBtn" class="secondary">🏆ランキングを見る</button><button id="topBtn" class="secondary homeButton">🏠すし単トップへ戻る</button><div id="resumeBox" class="hidden"><button id="resumeBtn" class="secondary">前回の続きから始める</button></div><div class="small">カードを組み合わせて英単語を作ろう。正解すると攻撃、ステージクリアで新しい部品が手に入ります。</div></section>
+ <section id="startPanel" class="panel start"><h2>プレイヤー名</h2><input id="playerName" data-sushi-name placeholder="名前を入力" maxlength="20" /><button id="startBtn">新しくゲーム開始</button><button id="startLeaderBtn" class="secondary">🏆ランキングを見る</button><button id="topBtn" class="secondary homeButton">🏠すし単トップへ戻る</button><div id="resumeBox" class="hidden"><button id="resumeBtn" class="secondary">前回の続きから始める</button></div><div class="small">カードを組み合わせて英単語を作ろう。正解すると攻撃、ステージクリアで新しい部品が手に入ります。</div></section>
  <div id="game" class="grid hidden"><main class="panel"><div class="stats"><div class="stat">Score<b id="score">0</b></div><div class="stat">Round<b id="round">1</b></div><div class="stat hidden" id="goalStat">Goal<b id="goal">0/120</b></div><div class="stat">Energy<b id="energy">3/3</b></div><div class="stat hidden" id="rpStat">RP<b id="rp">0</b></div><div class="stat">Hand<b id="handCount">0/20</b></div></div><hr style="border:0;border-top:1px solid var(--line);margin:14px 0"><div class="enemy"><div class="monster" id="monster">👹</div><div style="flex:1"><b id="enemyName">Word Goblin</b><div class="hpbar"><div class="hp" id="hp"></div></div><div class="small"><span id="hpText"></span></div></div></div><hr style="border:0;border-top:1px solid var(--line);margin:14px 0"><div class="stageTitle" id="stageTitle">カードを2〜4枚選んでSUBMIT</div><div class="build" id="build"></div><div class="cards" id="cards"></div><div class="actions"><button id="submitBtn" disabled>SUBMIT</button><button id="drawBtn" class="secondary">1枚ドロー（Energy 1）</button><button id="labBtn" class="secondary hidden">🧪</button><button id="dexBtn" class="secondary">📘図鑑</button><button id="leaderBtn" class="secondary">🏆ランキング</button><button id="homeBtn" class="secondary homeButton">🏠トップ</button><button id="clearBtn" class="secondary hidden">選び直す</button><button id="endBtn" class="secondary">🔥 I'm Cooked</button></div><div id="msg" class="msg"></div><div id="result" class="result hidden"></div></main><aside class="panel"><h3>ジョーカー</h3><div id="jokers" class="log"></div><h3>ログ</h3><div id="log" class="log"></div></aside></div>
 </div>
 <div id="shop" class="overlay hidden"><div class="modal"><h2 id="shopTitle">ショップ：報酬を1つ選ぶ</h2><p id="shopHelp" class="small">カードを増やすか、ジョーカーでルールを書き換えよう。</p><div id="shopItems" class="shopGrid"></div><div class="actions"><button id="shopCloseBtn" class="secondary">閉じる</button></div></div></div>
@@ -1149,8 +1152,8 @@ function renderShopChoices(choices){$('shopItems').innerHTML=choices.map((it,i)=
 function openShop(){shopOpen=true;$('shopTitle').textContent='ショップ：報酬を1つ選ぶ';$('shopHelp').textContent='カードを増やすか、ジョーカーでルールを書き換えよう。レア色のカードは得点倍率が高い。';const unused=JOKER_POOL.filter(j=>!jokers.some(x=>x.id===j.id));const weighted=shuffle(PARTS).sort((a,b)=>rarityMult(rarityOf(a.id))-rarityMult(rarityOf(b.id))+Math.random()*.8);const choices=[...weighted.slice(-2).map(p=>({kind:'card',p})),{kind:'joker',j:rand(unused.length?unused:JOKER_POOL)}];if(rp>=3)choices.push({kind:'research',cost:3,p:rand(PARTS)});renderShopChoices(choices);$('shop').classList.remove('hidden')}
 function openLab(){shopOpen=true;$('shopTitle').textContent='';$('shopHelp').textContent=`手札補充ができます。`;const choices=[{kind:'labDraw',name:'手札を2枚ドロー',desc:'手札を戻す。',cost:2},{kind:'labFull',name:'手札を最大まで補充',desc:'危ない時の立て直し。',cost:6},...shuffle(PARTS).slice(0,3).map(p=>({kind:'research',cost:4+(rarityOf(p.id)==="rare"?2:rarityOf(p.id)==="epic"?5:rarityOf(p.id)==="legendary"?9:0),p}))];renderShopChoices(choices);$('shop').classList.remove('hidden')}
 function takeShop(i){const it=window.__shopChoices[i];const isLab=$('shopTitle').textContent.includes('研究所');if(it.kind==='card')deck.push(it.p.id);else if(it.kind==='joker')jokers.push(it.j);else if(it.kind==='labDraw'){if(rp<it.cost)return;rp-=it.cost;drawCards(2)}else if(it.kind==='labFull'){if(rp<it.cost)return;rp-=it.cost;drawCards(MAX_HAND)}else{if(rp<it.cost)return;rp-=it.cost;deck.push(it.p.id,it.p.id)}if(!isLab){round++;roundScore=0;energy=Math.min(maxEnergy,energy+2)}shopOpen=false;$('shop').classList.add('hidden');render()}
-function saveRunState(){if(!player)return;localStorage.setItem(RUN_KEY,JSON.stringify({player,score,round,roundScore,hand,energy,maxEnergy,rp,wordCounts,deck,jokers,log:$('log').innerHTML}))} function loadRunState(){try{const s=JSON.parse(localStorage.getItem(RUN_KEY)||'null');if(!s||!s.player)return false;player=s.player;score=s.score||0;round=s.round||1;roundScore=s.roundScore||0;selected=[];hand=s.hand||[];energy=s.energy??3;maxEnergy=s.maxEnergy||3;rp=s.rp||0;wordCounts=s.wordCounts||{};deck=s.deck&&s.deck.length?s.deck:[];jokers=(s.jokers||[]).map(j=>JOKER_POOL.find(x=>x.id===j.id)||j);$('log').innerHTML=s.log||'';if(!deck.length)initDeck();return hand.length>0}catch(e){return false}}
-function start(fresh=true){player=$('playerName').value.trim()||'guest';localStorage.setItem(PLAYER_KEY,player);if(fresh){score=0;round=1;roundScore=0;selected=[];wordCounts={};energy=3;maxEnergy=3;rp=0;jokers=[];initDeck();dealOpeningHand();localStorage.removeItem(RUN_KEY);$('log').innerHTML=''}$('startPanel').classList.add('hidden');$('game').classList.remove('hidden');$('cookedScreen')?.classList.add('hidden');render()}
+function saveRunState(){if(!player)return;localStorage.setItem(RUN_KEY,JSON.stringify({player,score,round,roundScore,hand,energy,maxEnergy,rp,wordCounts,deck,jokers,log:$('log').innerHTML}))} function loadRunState(){try{const s=JSON.parse(localStorage.getItem(RUN_KEY)||'null');if(!s||!s.player)return false;player=SushiPlayer.getName();score=s.score||0;round=s.round||1;roundScore=s.roundScore||0;selected=[];hand=s.hand||[];energy=s.energy??3;maxEnergy=s.maxEnergy||3;rp=s.rp||0;wordCounts=s.wordCounts||{};deck=s.deck&&s.deck.length?s.deck:[];jokers=(s.jokers||[]).map(j=>JOKER_POOL.find(x=>x.id===j.id)||j);$('log').innerHTML=s.log||'';if(!deck.length)initDeck();return hand.length>0}catch(e){return false}}
+function start(fresh=true){player=SushiPlayer.setName($('playerName').value);localStorage.setItem(PLAYER_KEY,player);if(fresh){score=0;round=1;roundScore=0;selected=[];wordCounts={};energy=3;maxEnergy=3;rp=0;jokers=[];initDeck();dealOpeningHand();localStorage.removeItem(RUN_KEY);$('log').innerHTML=''}$('startPanel').classList.add('hidden');$('game').classList.remove('hidden');$('cookedScreen')?.classList.add('hidden');render()}
 function cookedComment(){if(score>=10000)return 'Bro is fluent.';if(score>=5000)return 'Actually cracked.';if(score>=2000)return 'No cap.';if(score>=700)return 'Not bad.';return "Nah, I'd fail."}
 function endGame(){localStorage.removeItem(RUN_KEY);const f=document.createElement('div');f.className='cookFlash';document.body.appendChild(f);setTimeout(()=>f.remove(),700);$('cookedStage').textContent=round;$('cookedScore').textContent=score.toLocaleString();$('cookedWords').textContent=Object.keys(wordCounts||{}).length;$('cookedRp').textContent=rp;$('cookedComment').textContent=cookedComment();$('cookedJokers').innerHTML=jokers.length?jokers.map(j=>`<span class="badge">${j.icon||'🃏'} ${j.name}</span>`).join(' '):'No Jokers';$('cookedScreen').classList.remove('hidden')}
 
@@ -1449,7 +1452,7 @@ loadRunState = function(){
   try{
     const s=JSON.parse(localStorage.getItem(RUN_KEY)||'null');
     if(!s||!s.player)return false;
-    player=s.player;score=s.score||0;round=s.round||1;roundScore=s.roundScore||0;
+    player=SushiPlayer.getName();score=s.score||0;round=s.round||1;roundScore=s.roundScore||0;
     selected=[];hand=s.hand||[];energy=s.energy??3;maxEnergy=s.maxEnergy||3;rp=s.rp||0;
     wordCounts=s.wordCounts||{};deck=s.deck&&s.deck.length?s.deck:[];
     unlockedParts=new Set((s.unlockedParts&&s.unlockedParts.length?s.unlockedParts:STARTER_PARTS).filter(isUnlockablePartId));
@@ -1461,7 +1464,7 @@ loadRunState = function(){
 };
 
 start = function(fresh=true){
-  player=$("playerName").value.trim()||'guest';
+  player=SushiPlayer.setName($("playerName").value);
   localStorage.setItem(PLAYER_KEY,player);
   if(fresh){
     score=0;round=1;roundScore=0;selected=[];wordCounts={};energy=3;maxEnergy=3;rp=0;jokers=[];
@@ -1860,9 +1863,7 @@ function getPlayerId(){
   }
   return id;
 }
-function currentPlayerName(){
-  return player || $("playerName")?.value?.trim() || localStorage.getItem(PLAYER_KEY) || "guest";
-}
+function currentPlayerName(){return SushiPlayer.getName()}
 function primaryRootOf(wordObj){
   if(!wordObj || !wordObj.parts) return "";
   const rootPart = wordObj.parts.map(id=>part(id)).find(p=>p && p.type==="root");
@@ -55758,12 +55759,12 @@ coburg`;
   }
   function restoreSaveData(data){
     if(!data || typeof data !== 'object') throw new Error('セーブデータ形式が不正です');
-    const name = data.player_name || data.run_state?.player || 'guest';
+    const name = SushiPlayer.getName();
     const id = data.player_id || ('sp_import_' + Date.now() + '_' + Math.random().toString(36).slice(2));
     localStorage.setItem(PLAYER_ID_KEY_SAFE, id);
     localStorage.setItem(PLAYER_KEY_SAFE, name);
     if(data.run_state){
-      data.run_state.player = data.run_state.player || name;
+      data.run_state.player = name;
       localStorage.setItem(RUN_KEY_SAFE, JSON.stringify(data.run_state));
     }
     if(data.word_stores && typeof data.word_stores === 'object'){
@@ -55773,6 +55774,7 @@ coburg`;
     }else if(Array.isArray(data.active_words)){
       localStorage.setItem('sushi_parts_words_'+name, JSON.stringify(data.active_words));
     }
+    try{ const old=data.player_name||data.run_state?.player;if(old&&old!==name){const from=JSON.parse(localStorage.getItem('sushi_parts_words_'+old)||'[]'),to=JSON.parse(localStorage.getItem('sushi_parts_words_'+name)||'[]');localStorage.setItem('sushi_parts_words_'+name,JSON.stringify([...new Set([...to,...from])]))} }catch(e){}
     try{ if(q('playerName')) q('playerName').value=name; }catch(e){}
     try{ if(q('resumeBox') && localStorage.getItem(RUN_KEY_SAFE)) q('resumeBox').classList.remove('hidden'); }catch(e){}
   }

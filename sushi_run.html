@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<script src="shared/player.js?v=20260923-1"></script>
+<script src="shared/scores.js?v=20260923-1"></script>
+
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 <title>すしRUN｜英単語を選ぶランゲーム｜すし単</title>
@@ -218,7 +221,7 @@ overflow:hidden;
   
   <button id="leftBtn">←</button><button id="rightBtn">→</button>
   <div id="controlBar"><button id="leftBtn2" class="ctrlBtn">←</button><button id="boostBtn" class="ctrlBtn">◎</button><button id="rightBtn2" class="ctrlBtn">→</button><div id="boostGauge"><div id="boostFill"></div></div></div><div id="overlay"><div id="menu">
-    <div id="title">すしRUN</div>
+    <div id="title">すしRUN</div><div data-sushi-player></div>
     <div id="subtitle">英単語を選びながら走る、スピード型の単語ゲーム。</div>
     <button id="startBtn" onclick="startGame()">START</button>
     <button id="rankingBtn" onclick="showTopRanking()">ランキング確認</button><br>
@@ -367,37 +370,9 @@ async function loadRanking(){
 }
 
 async function saveRanking(){
-  if(window.SushiReview?.active){document.getElementById('saveStatus').textContent='苦手復習の記録はランキングに保存しません。';return;}
-  if(lastSaved) return;
-  const input=document.getElementById('playerName');
-  const status=document.getElementById('saveStatus');
-  const name=(input?.value||'').trim().slice(0,20);
-  if(!name){status.textContent='名前を入力してね';return;}
-  if(!supabaseClient){status.textContent='Supabase未接続';return;}
-  status.textContent='保存中...';
-  const payload={player_name:name,score:Math.floor(distance),max_combo:combo,accuracy:0,mode:'wordrush'};
-  let error=null;
-  try{
-    const res=await supabaseClient.rpc('save_high_score',{
-      p_player_name:name,
-      p_score:Math.floor(distance),
-      p_max_combo:combo,
-      p_accuracy:0,
-      p_mode:'wordrush'
-    });
-    error=res.error;
-    if(error){
-      const fallback=await supabaseClient.from('scores').insert(payload);
-      error=fallback.error;
-    }
-  }catch(e){
-    const fallback=await supabaseClient.from('scores').insert(payload);
-    error=fallback.error;
-  }
-  if(error){status.textContent='保存失敗：Supabase設定を確認';return;}
-  lastSaved=true;
-  status.textContent='保存しました';
-  await loadRanking();
+ if(window.SushiReview?.active||lastSaved)return;lastSaved=true;
+ await SushiScores.save({p_score:Math.floor(distance),p_max_combo:combo,p_accuracy:0,p_mode:'wordrush'},{status:document.getElementById('saveStatus')});
+ loadRanking();
 }
 
 function escapeHtml(s){
@@ -423,7 +398,7 @@ function showTopMenu(){
   clearChoices();
   document.getElementById('overlay').style.display='flex';
   document.getElementById('menu').innerHTML=`
-    <div id="title">すしRUN</div>
+    <div id="title">すしRUN</div><div data-sushi-player></div>
     <button id="startBtn" onclick="startGame()">START</button>
     <button id="rankingBtn" onclick="showTopRanking()">ランキング確認</button><br>
     <button id="sushitanLink" onclick="location.href='index.html'">すし単へ</button>
@@ -439,8 +414,8 @@ function gameOver(){
   document.getElementById('menu').innerHTML=`
     <div id="title">GAME OVER</div>
     <div id="subtitle">DISTANCE : ${Math.floor(distance)}m<br>BEST : ${Math.floor(best)}m</div>
-    <input id="playerName" class="nameInput" maxlength="20" placeholder="名前を入力">
-    <button class="saveBtn" onclick="saveRanking()">ランキングに保存</button>
+    <input id="playerName" data-sushi-name class="nameInput" maxlength="20" placeholder="名前を入力">
+    <button class="saveBtn" onclick="saveRanking()" data-auto-score-button hidden>ランキングに保存</button>
     <div id="saveStatus" class="statusLine"></div>
     <button id="startBtn" onclick="startGame()">RETRY</button>
     <button onclick="showTopMenu()">トップへ戻る</button><br>
@@ -448,6 +423,7 @@ function gameOver(){
     <div id="rankingList" class="rankingBox"><div class="rankingTitle">RANKING</div><div class="statusLine">読み込み中...</div></div>
   `;
   updateHUD();
+  saveRanking();
   loadRanking();
 }
 function shuffle(arr){return[...arr].sort(()=>Math.random()-.5)}

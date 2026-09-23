@@ -35,25 +35,14 @@ function init(storage){
  document.querySelector("#openRanking").addEventListener("click",()=>{dialog.showModal();load()});
  document.querySelector("#closeRanking").addEventListener("click",()=>dialog.close());
  document.querySelector("#refreshRanking").addEventListener("click",load);
- form.addEventListener("submit",async event=>{
-  event.preventDefault();const current=snapshot;if(!current||current.pending||current.saved)return;
-  const name=Array.from(nameInput.value.normalize("NFKC").trim().replace(/\s+/g," ")).slice(0,20).join("");
-  if(!name){saveStatus.textContent="ランキングに表示する名前を入力してください。";nameInput.focus();return}
-  current.pending=true;saveButton.disabled=true;saveStatus.textContent="登録中…";
-  storage.set("sushiCrossPlayerName",name);
-  try{
-   await request("/rpc/save_high_score",{method:"POST",body:JSON.stringify({p_player_name:name,p_score:current.score,p_max_combo:current.stage,p_accuracy:current.accuracy,p_mode:MODE})});
-   current.saved=true;
-   if(snapshot===current){saveStatus.textContent="登録しました。同じ名前の最高スコアがランキングに残ります。";saveButton.textContent="登録済み"}
-  }catch(_){if(snapshot===current)saveStatus.textContent="登録できませんでした。もう一度「記録を登録」を押してください。"}
-  finally{current.pending=false;if(snapshot===current)saveButton.disabled=current.saved}
- });
+ form.addEventListener("submit",event=>event.preventDefault());
+ SushiPlayer.bind(nameInput);
  return {
   isOpen:()=>dialog.open,
   reset(){snapshot=null;form.hidden=true;saveStatus.textContent=""},
   present(result){
-   snapshot={...result,pending:false,saved:false};form.hidden=false;saveButton.disabled=false;saveButton.textContent="記録を登録";
-   saveStatus.textContent="名前とスコアを公開します。同じ名前は最高記録のみ登録されます。";
+   snapshot={...result};form.hidden=false;
+   SushiScores.save({p_score:snapshot.score,p_max_combo:snapshot.stage,p_accuracy:snapshot.accuracy,p_mode:MODE},{status:saveStatus});
   }
  };
 }

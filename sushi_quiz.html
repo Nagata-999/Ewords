@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<script src="shared/player.js?v=20260923-1"></script>
+<script src="shared/scores.js?v=20260923-1"></script>
+
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>すしクイズ｜無料クイズゲーム・英語クイズ・一般常識クイズ | すし単</title>
 <meta name="description" content="すしクイズは無料で遊べるブラウザクイズゲーム。英語、地理、音楽、スポーツ、文化、数学、文学など幅広い問題に挑戦できます。英語クイズや一般常識クイズをゲーム感覚で楽しめます。">
@@ -535,14 +538,14 @@ label{
   </div>
 </section>
 
-<section id="soloSetup" class="panel hidden"><div class="setup-top-actions" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;"><button onclick="startSolo()">Start</button><button class="secondary" onclick="home()">Back</button></div><div class="notice">音楽・楽器・アニメ漫画・ディズニー・洋画・レトロゲーム・スポーツは出題率アップ中です。</div><span class="badge">Solo</span><h2>一人でプレイ</h2><div class="setup"><div><label>Categories</label><div class="category-card-toolbar"><button type="button" class="secondary" onclick="setCategoryCards('soloCatCards',true)">All ON</button><button type="button" class="secondary" onclick="setCategoryCards('soloCatCards',false)">All OFF</button></div><div id="soloCatCards" class="category-card-grid"></div></div><div><label>Rule</label><input value="One mistake ends the game" disabled></div></div></section>
+<section id="soloSetup" class="panel hidden"><div data-sushi-player></div><div class="setup-top-actions" style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;"><button onclick="startSolo()">Start</button><button class="secondary" onclick="home()">Back</button></div><div class="notice">音楽・楽器・アニメ漫画・ディズニー・洋画・レトロゲーム・スポーツは出題率アップ中です。</div><span class="badge">Solo</span><h2>一人でプレイ</h2><div class="setup"><div><label>Categories</label><div class="category-card-toolbar"><button type="button" class="secondary" onclick="setCategoryCards('soloCatCards',true)">All ON</button><button type="button" class="secondary" onclick="setCategoryCards('soloCatCards',false)">All OFF</button></div><div id="soloCatCards" class="category-card-grid"></div></div><div><label>Rule</label><input value="One mistake ends the game" disabled></div></div></section>
 <section id="soloGame" class="hidden"><section class="stats"><div class="stat"><div id="streak" class="num">0</div><div class="cap">Streak</div></div><div class="stat"><div id="best" class="num">0</div><div class="cap">Best</div></div><div class="stat"><div id="level" class="num">∞</div><div class="cap">Pool</div></div><div class="stat"><div id="count" class="num">0</div><div class="cap">Answered</div></div></section><section class="panel"><span id="soloBadge" class="badge"></span><div id="soloQ" class="question"></div><div id="soloChoices" class="choices"></div><div id="soloRes" class="result"></div><button id="soloNext" class="hidden" onclick="nextSolo()">Next</button><button class="secondary" onclick="home()">Home</button></section></section>
 <section id="soloOver" class="panel hidden" style="text-align:center">
 <h2>I'm cooked... 🍣</h2>
 <p id="soloFinal"></p>
-<div id="soloSaveBox">
-<input id="soloRankName" placeholder="Your name" style="max-width:300px;margin:10px auto;display:block">
-<button onclick="saveSoloScore()">Save Score</button>
+<div id="soloSaveBox"><p id="soloSaveStatus" role="status"></p>
+<input id="soloRankName" data-sushi-name placeholder="Your name" style="max-width:300px;margin:10px auto;display:block">
+<button onclick="saveSoloScore()" data-auto-score-button hidden>Save Score</button>
 </div>
 <div id="soloRankingWrap" class="hidden">
 <h3>🏆 Solo Ranking</h3>
@@ -564,7 +567,7 @@ label{
 <section id="onlineLobby" class="panel hidden"><span class="badge">Host Lobby</span><h2>Session ID</h2><div id="code" class="code"></div><h3>Players</h3><div id="onlinePlayers" class="players"></div><button onclick="startOnline()">Start Quiz</button></section>
 <section id="onlineHostGame" class="panel hidden"><span id="ohBadge" class="badge"></span><div id="ohProg" class="small"></div><div id="hostTimer" class="timer-ring" style="--timePct:100">20</div><div id="ohQ" class="question"></div><div id="ohChoices" class="choices"></div><div id="ohStatus" class="notice"></div><div id="hostAnsweredBar" class="answered-bar"></div><button onclick="revealOnline()">Reveal / Score</button><button class="secondary" onclick="home()">End</button></section>
 <section id="onlineResult" class="panel hidden"><span class="badge">Answer Check</span><div id="onlineAns" class="result show"></div><div id="onlineBreakdown" class="answer-breakdown"></div><button onclick="showOnlineRanking()">Show Ranking</button><button class="secondary" onclick="home()">End</button></section><section id="onlineRanking" class="panel hidden"><span class="badge">Current Ranking</span><table id="onlineTable" class="rank"></table><button onclick="nextOnline()">Next Question</button><button class="secondary" onclick="home()">End</button></section>
-<section id="join" class="panel hidden"><span class="badge">Join</span><h2>参加する</h2><div class="setup"><div><label>Session ID</label><input id="joinCode" maxlength="4" placeholder="5832"></div><div><label>Name</label><input id="joinName" placeholder="Jeff"></div></div><button onclick="joinSession()">Join</button><button class="secondary" onclick="showOnlineMenu()">Back</button></section>
+<section id="join" class="panel hidden"><span class="badge">Join</span><h2>参加する</h2><div class="setup"><div><label>Session ID</label><input id="joinCode" maxlength="4" placeholder="5832"></div><div><label>Name</label><input id="joinName" data-sushi-name placeholder="Jeff"></div></div><button onclick="joinSession()">Join</button><button class="secondary" onclick="showOnlineMenu()">Back</button></section>
 <section id="playerWait" class="panel hidden"><span class="badge">Player</span><h2 id="pStatus">Waiting...</h2><p class="small">ホスト画面を見て、問題が始まるまで待ってください。</p></section>
 <section id="playerGame" class="panel hidden"><span class="badge">Choose Answer</span><h2 id="pName"></h2><div class="pad kahoot-pad"><button id="pa" onclick="submitPlayer(0)"><span class="kahoot-symbol">▲</span><span class="kahoot-letter">A</span></button><button id="pb" onclick="submitPlayer(1)"><span class="kahoot-symbol">◆</span><span class="kahoot-letter">B</span></button><button id="pc" onclick="submitPlayer(2)"><span class="kahoot-symbol">●</span><span class="kahoot-letter">C</span></button><button id="pd" onclick="submitPlayer(3)"><span class="kahoot-symbol">■</span><span class="kahoot-letter">D</span></button></div><div id="pMsg" class="notice">問題文はホスト画面を見てください。</div><div id="playerAnsweredBar" class="answered-bar"></div></section>
 
@@ -593,7 +596,7 @@ label{
   <h2>参加する</h2>
   <div class="setup">
     <div><label>Session ID</label><input id="buzzerJoinCode" maxlength="4" placeholder="5832"></div>
-    <div><label>Name</label><input id="buzzerJoinName" placeholder="Jeff"></div>
+    <div><label>Name</label><input id="buzzerJoinName" data-sushi-name placeholder="Jeff"></div>
   </div>
   <button onclick="joinBuzzer()">Join</button>
   <button class="secondary" onclick="showBuzzerMenu()">Back</button>
@@ -757,10 +760,10 @@ async function loadHomeRanking(){
  }
  msg.textContent=`上位${rows.length}件を表示中`;
  top.innerHTML=rows.slice(0,3).map((r,i)=>
-   `<div style="font-size:clamp(22px,3vw,34px);font-weight:1000">${['🥇','🥈','🥉'][i]} ${r.player_name} ${r.score}</div>`
+   `<div style="font-size:clamp(22px,3vw,34px);font-weight:1000">${['🥇','🥈','🥉'][i]} ${String(r.player_name||"名無し").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))} ${r.score}</div>`
  ).join('');
  table.innerHTML=rows.map((r,i)=>
-   `<tr class="ranking-big-row"><td>${i+1}</td><td>${r.player_name}</td><td>${r.score}</td></tr>`
+   `<tr class="ranking-big-row"><td>${i+1}</td><td>${String(r.player_name||"名無し").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}</td><td>${r.score}</td></tr>`
  ).join('');
 }
 function showHomeRanking(){
@@ -769,45 +772,14 @@ function showHomeRanking(){
 }
 
 async function saveSoloScore(){
- if(!HAS_SUPABASE){return;}
- const name=(document.getElementById('soloRankName').value||'Anonymous').trim();
- const streak=Number(solo.streak||0);
-
- const {data:old}=await sb.from('scores')
- .select('*')
- .eq('player_name',name)
- .eq('mode','sushi_quiz_solo')
- .maybeSingle();
-
- let record=false;
- if(!old || streak>Number(old.score||0)){
-   record=true;
-   await sb.from('scores').upsert({
-     player_name:name,
-     score:streak,
-     max_combo:streak,
-     accuracy:100,
-     mode:'sushi_quiz_solo'
-   });
- }
-
- const {data}=await sb.from('scores')
- .select('*')
- .eq('mode','sushi_quiz_solo')
- .order('score',{ascending:false})
- .limit(20);
-
- document.getElementById('soloTop3').innerHTML=(data||[]).slice(0,3).map((r,i)=>
- `<div style="font-size:24px;font-weight:900">${['🥇','🥈','🥉'][i]} ${r.player_name} ${r.score}</div>`).join('');
-
- document.getElementById('soloRanking').innerHTML=(data||[]).map((r,i)=>
- `<tr><td>${i+1}</td><td>${r.player_name}</td><td>${r.score}</td></tr>`).join('');
-
- if(record){
-   document.getElementById('soloFinal').innerHTML += '<br><b>🏆 NEW RECORD!</b>';
- }
-
- document.getElementById('soloSaveBox').classList.add('hidden');
+ const result=solo;if(result.autoSaved)return;result.autoSaved=true;
+ const saved=await SushiScores.save({p_score:Number(result.streak||0),p_max_combo:Number(result.streak||0),p_accuracy:Math.round((result.streak||0)/Math.max(1,result.count||0)*100),p_mode:'sushi_quiz_solo'},{status:document.getElementById('soloSaveStatus')});
+ if(solo!==result||!saved.saved)return;
+ const {data,error}=await sb.from('scores').select('*').eq('mode','sushi_quiz_solo').order('score',{ascending:false}).limit(20);
+ if(solo!==result||error)return;
+ document.getElementById('soloTop3').textContent='';
+ const table=document.getElementById('soloRanking');table.replaceChildren();
+ (data||[]).forEach((row,i)=>{const tr=document.createElement('tr');[i+1,row.player_name,row.score].forEach(v=>{const td=document.createElement('td');td.textContent=String(v??'');tr.appendChild(td)});table.appendChild(tr)});
  document.getElementById('soloRankingWrap').classList.remove('hidden');
 }
 
@@ -994,6 +966,7 @@ function ansSolo(i,el){
     el.classList.add("wrong");
     soloRes.className="result show";
     soloRes.innerHTML=`❌ Wrong!<br>Answer: <b>${c.choices[c.ans]}</b><br>${c.exp}<br><br><span class="small">Read the answer, then press the button.</span>`;
+    saveSoloScore();
     soloNext.textContent="See Result";
     soloNext.onclick=()=>{
       soloFinal.innerHTML=`Your streak: <b>${solo.streak}</b><br>Best: <b>${solo.best}</b><br>Answered: <b>${solo.count}</b>`;
@@ -1142,7 +1115,7 @@ async function revealOnline(){
 async function nextOnline(){stopHostTimer();online.idx++;if(online.idx>=online.len)return alert("Quiz finished");runQuizCountdown(async()=>{await setOnlineQ();show("onlineHostGame");renderOnlineHost();});}
 async function joinSession(){
   let c=joinCode.value.trim();
-  let n=joinName.value.trim();
+  let n=SushiPlayer.setName(joinName.value);
   if(!c||!n)return alert("Enter code and name");
 
   online={role:"player",code:c,name:n,id:crypto.randomUUID(),seen:-1};
@@ -1277,7 +1250,7 @@ function pollBuzzerHost(){
 
 async function joinBuzzer(){
   const c=buzzerJoinCode.value.trim();
-  const n=cleanPlayerName(buzzerJoinName.value.trim());
+  const n=cleanPlayerName(SushiPlayer.setName(buzzerJoinName.value));
   if(!c||!n) return alert("Enter code and name");
   buzzer={role:"player",code:c,name:n,id:crypto.randomUUID(),seen:-1,locked:false};
   if(HAS_SUPABASE){

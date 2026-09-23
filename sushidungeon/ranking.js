@@ -36,17 +36,10 @@
     }catch(e){console.warn('[dungeon ranking]',e);list.innerHTML='<div class="dungeonRankingEmpty">ランキングに接続できませんでした。ゲームはそのまま遊べます。</div>'}
   }
   async function saveSnapshot(snapshot){
-    if(saving||!snapshot||snapshot.testMode)return;saving=true;
-    try{
-      const c=db();if(!c)return;
-      let name=localStorage.getItem(NAME_KEY)||localStorage.getItem('sushitan_player_name')||'';
-      const input=prompt('ランキングに登録する名前を入力してください',name);
-      if(input===null)return;
-      name=String(input).normalize('NFKC').trim().replace(/\s+/g,' ').slice(0,20)||'NO NAME';localStorage.setItem(NAME_KEY,name);
-      const params={p_player_name:name,p_score:encode(snapshot.floor,snapshot.turn),p_max_combo:Math.max(1,snapshot.level||1),p_accuracy:0,p_mode:MODE};
-      const {error}=await c.rpc('save_high_score',params);
-      if(error)throw error;
-    }catch(e){console.warn('[dungeon ranking save]',e)}finally{saving=false}
+    if(!snapshot||snapshot.testMode)return;
+    let status=document.querySelector('#dungeonAutoSave');
+    if(!status){status=document.createElement('p');status.id='dungeonAutoSave';status.setAttribute('role','status');(document.querySelector('#titleScreen .titlePanel')||document.body).appendChild(status)}
+    await SushiScores.save({p_score:encode(snapshot.floor,snapshot.turn),p_max_combo:Math.max(1,snapshot.level||1),p_accuracy:0,p_mode:MODE},{status});
   }
   function snap(){if(!game)return null;return {floor:Math.max(1,Math.min(30,game.floor||1)),turn:Math.max(0,game.turn||0),level:Math.max(1,game.level||1),testMode:!!game.testMode}}
   function hookResults(){
@@ -55,7 +48,7 @@
   }
   function addButton(){
     const buttons=document.querySelector('#titleScreen .titleButtons');if(!buttons||buttons.querySelector('.rankBtn'))return;
-    const b=document.createElement('button');b.type='button';b.className='titleBtn rankBtn';b.textContent='🏆 ランキング';b.onclick=load;buttons.appendChild(b);
+    const b=document.createElement('button');b.type='button';b.className='titleBtn rankBtn';b.textContent='🏆 ランキング';b.onclick=load;buttons.appendChild(b);SushiPlayer.mount(buttons.parentElement);
   }
   function init(){build();addButton();hookResults();setTimeout(()=>{addButton();hookResults()},300)}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
