@@ -1,7 +1,9 @@
-const CACHE_NAME = "sushitan-v2";
+const CACHE_NAME = "sushitan-v3-blast";
 const APP_SHELL = [
   "/",
   "/index.html",
+  "/sushi_blast",
+  "/shared/player.js",
   "/manifest.json",
   "/shared/word-registry.js",
   "/shared/learning.js",
@@ -37,3 +39,4 @@ self.addEventListener("fetch", event => {
       .catch(() => caches.match(event.request).then(cached => cached || caches.match("/index.html")))
   );
 });
+
