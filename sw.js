@@ -1,4 +1,4 @@
-const CACHE_NAME = "sushitan-v3-blast";
+const CACHE_NAME = "sushitan-v4-blast";
 const APP_SHELL = [
   "/",
   "/index.html",
