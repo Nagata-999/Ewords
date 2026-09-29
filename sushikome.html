@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#f4511e">
 <title>すし米｜授業リアルタイムコメント | すし単</title>
 <meta name="description" content="授業中にスマホから送ったコメントを教室画面へリアルタイムに流せる、すし単の授業サポート機能です。">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
+
 <style>
 :root{--bg:#fbf4ea;--card:#fffaf2;--line:#f1d7bc;--text:#172033;--muted:#64748b;--orange:#f4511e;--teal:#0f766e}
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 15% 8%,#ffedd5,transparent 32%),radial-gradient(circle at 88% 10%,#ccfbf1,transparent 28%),var(--bg);color:var(--text)}
@@ -43,7 +43,12 @@ button,input{font:inherit}.page{width:min(100% - 28px,980px);margin:auto;padding
 'use strict';
 const URL='https://rxyoyveykxdfrpomkltl.supabase.co';
 const KEY='sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7';
-const db=window.supabase.createClient(URL,KEY);
+const api=async(path,options={})=>{
+ const headers={apikey:KEY,'Content-Type':'application/json',...(options.headers||{})};
+ const res=await fetch(URL+'/rest/v1/'+path,{...options,headers});
+ if(!res.ok)throw new Error('HTTP '+res.status);
+ const text=await res.text(); return text?JSON.parse(text):null;
+};
 const $=s=>document.querySelector(s);
 let teacherRoom='',studentRoom='',channel=null,paused=false,fontSize=38,speed=11,lane=0,queue=[];
 const show=id=>{['#rolePanel','#teacherPanel','#studentPanel'].forEach(x=>$(x).classList.add('hidden'));$(id).classList.remove('hidden')};
@@ -51,14 +56,15 @@ async function createRoom(){
  $('#teacherStatus').textContent='部屋を作成しています…';
  for(let i=0;i<8;i++){
   const code=String(Math.floor(1000+Math.random()*9000));
-  const {error}=await db.from('sushi_kome_rooms').insert({room_code:code});
-  if(!error){teacherRoom=code;$('#teacherCode').textContent=code;$('#teacherStatus').textContent='準備OK。教室画面を開けます。';return}
+  try{
+   await api('sushi_kome_rooms',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({room_code:code})});
+   teacherRoom=code;$('#teacherCode').textContent=code;$('#teacherStatus').textContent='準備OK。教室画面を開けます。';return;
+  }catch(_){}
  }
  $('#teacherStatus').textContent='部屋を作れませんでした。もう一度お試しください。';
 }
 async function roomExists(code){
- const {data,error}=await db.from('sushi_kome_rooms').select('room_code,active').eq('room_code',code).maybeSingle();
- return !error&&data&&data.active;
+ try{const data=await api('sushi_kome_rooms?select=room_code,active&room_code=eq.'+encodeURIComponent(code)+'&limit=1');return !!(data&&data[0]&&data[0].active)}catch(_){return false}
 }
 function unsubscribe(){if(channel){db.removeChannel(channel);channel=null}}
 function subscribeRoom(code){
@@ -94,7 +100,7 @@ $('#commentInput').addEventListener('input',()=>$('#count').textContent=$('#comm
 $('#sendBtn').onclick=async()=>{
  const body=$('#commentInput').value.trim();if(!body)return;
  $('#sendBtn').disabled=true;$('#sendStatus').textContent='送信中…';
- const {error}=await db.from('sushi_kome_comments').insert({room_code:studentRoom,body});
+ let error=null;try{await api('sushi_kome_comments',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({room_code:studentRoom,body})})}catch(e){error=e}
  $('#sendBtn').disabled=false;
  if(error){$('#sendStatus').textContent='送信できませんでした。もう一度お試しください。';return}
  $('#commentInput').value='';$('#count').textContent='0';$('#sendStatus').textContent='送信しました 🍚';$('#sendBtn').classList.remove('sent');void $('#sendBtn').offsetWidth;$('#sendBtn').classList.add('sent');$('#commentInput').focus();
