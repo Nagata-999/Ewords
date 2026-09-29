@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f4511e">
+<title>すし米｜授業リアルタイムコメント | すし単</title>
+<meta name="description" content="授業中にスマホから送ったコメントを教室画面へリアルタイムに流せる、すし単の授業サポート機能です。">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.min.js"></script>
+<style>
+:root{--bg:#fbf4ea;--card:#fffaf2;--line:#f1d7bc;--text:#172033;--muted:#64748b;--orange:#f4511e;--teal:#0f766e}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 15% 8%,#ffedd5,transparent 32%),radial-gradient(circle at 88% 10%,#ccfbf1,transparent 28%),var(--bg);color:var(--text)}
+button,input{font:inherit}.page{width:min(100% - 28px,980px);margin:auto;padding:20px 0 48px}.home{color:var(--teal);font-weight:900;text-decoration:none}.hero{text-align:center;padding:32px 0 22px}.hero .rice{font-size:62px}.hero h1{font-size:clamp(48px,9vw,78px);margin:4px 0;color:var(--orange);letter-spacing:-.06em}.hero p{color:#475569;margin:8px auto;max-width:650px;line-height:1.7}.panel{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:0 14px 34px rgba(15,23,42,.08)}.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.role{min-height:150px;border:2px solid var(--line);border-radius:20px;background:white;cursor:pointer;padding:22px;text-align:center}.role:hover{border-color:#fb923c;transform:translateY(-2px)}.role b{display:block;font-size:24px;margin:8px}.role span{color:var(--muted)}.hidden{display:none!important}.room-code{font-size:clamp(54px,12vw,92px);font-weight:1000;letter-spacing:.12em;color:var(--orange);text-align:center}.teacher-actions,.student-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:16px}.btn{border:0;border-radius:14px;padding:12px 17px;font-weight:1000;cursor:pointer}.primary{background:linear-gradient(135deg,#f4511e,#fb923c);color:#fff}.secondary{background:#fff;border:2px solid #fed7aa;color:#c2410c}.dark{background:#172033;color:white}.field{width:100%;min-height:54px;border:2px solid #e7c9ab;border-radius:14px;padding:12px 15px;background:white}.join{max-width:420px;margin:auto}.join input{text-align:center;font-size:32px;font-weight:1000;letter-spacing:.18em}.status{text-align:center;color:var(--muted);font-size:13px;min-height:20px;margin-top:10px}.display{position:fixed;inset:0;background:#08111f;color:white;z-index:50;overflow:hidden}.display-top{position:absolute;z-index:4;top:0;left:0;right:0;display:flex;align-items:center;gap:12px;padding:12px 16px;background:linear-gradient(#08111f,rgba(8,17,31,.72),transparent)}.display-code{font-weight:1000}.display-status{font-size:12px;color:#cbd5e1}.display-controls{margin-left:auto;display:flex;gap:7px}.display-controls button{border:1px solid #475569;background:#172033;color:#fff;border-radius:10px;padding:8px 10px;cursor:pointer}.stage{position:absolute;inset:64px 0 0;overflow:hidden}.comment{position:absolute;left:100%;white-space:nowrap;font-weight:1000;text-shadow:0 3px 8px #000;animation-name:flow;animation-timing-function:linear;animation-fill-mode:forwards;will-change:transform;max-width:none}.comment:nth-child(3n+1){color:#fff}.comment:nth-child(3n+2){color:#fde68a}.comment:nth-child(3n){color:#99f6e4}@keyframes flow{from{transform:translateX(0)}to{transform:translateX(calc(-100vw - 120%))}}.composer{max-width:600px;margin:0 auto}.composer textarea{width:100%;min-height:120px;resize:none;border:2px solid #e7c9ab;border-radius:16px;padding:15px;font:inherit;font-size:18px}.counter{text-align:right;color:var(--muted);font-size:12px}.send{width:100%;min-height:56px;margin-top:10px}.sent{animation:pop .25s ease}@keyframes pop{50%{transform:scale(1.03)}}@media(max-width:620px){.role-grid{grid-template-columns:1fr}.panel{padding:18px}.display-top{flex-wrap:wrap}.display-controls{width:100%;margin-left:0}.stage{inset:104px 0 0}}
+</style>
+</head>
+<body>
+<div class="page" id="mainPage">
+<a class="home" href="index.html">← すし単トップ</a>
+<header class="hero"><div class="rice">🍚</div><h1>すし米</h1><p>授業中の「わかった！」「もう一回！」「質問！」を、その場で教室の画面へ。</p></header>
+<section class="panel" id="rolePanel">
+<h2>使い方を選ぶ</h2>
+<div class="role-grid">
+<button class="role" id="teacherBtn"><div style="font-size:42px">🧑‍🏫</div><b>先生</b><span>4桁コードを作ってコメントを表示</span></button>
+<button class="role" id="studentBtn"><div style="font-size:42px">📱</div><b>生徒</b><span>コードを入力してコメントを送信</span></button>
+</div>
+</section>
+<section class="panel hidden" id="teacherPanel">
+<h2 style="text-align:center">このコードを生徒に見せてください</h2>
+<div class="room-code" id="teacherCode">----</div>
+<p class="status" id="teacherStatus">部屋を作成しています…</p>
+<div class="teacher-actions"><button class="btn primary" id="openDisplay">教室画面を開く</button><button class="btn secondary" id="newRoom">新しい部屋</button><button class="btn secondary" id="teacherBack">戻る</button></div>
+</section>
+<section class="panel hidden" id="studentPanel">
+<div class="join" id="joinBox"><h2 style="text-align:center">授業コード</h2><input class="field" id="roomInput" maxlength="4" inputmode="numeric" pattern="[0-9]*" placeholder="1234"><button class="btn primary send" id="joinBtn">入室する</button><p class="status" id="joinStatus"></p></div>
+<div class="composer hidden" id="composer"><h2>🍚 コメントを送る</h2><p>授業コード <strong id="studentCode"></strong></p><textarea id="commentInput" maxlength="120" placeholder="コメントを入力…"></textarea><div class="counter"><span id="count">0</span> / 120</div><button class="btn primary send" id="sendBtn">送信</button><p class="status" id="sendStatus"></p><button class="btn secondary" id="leaveBtn">別の部屋に入る</button></div>
+</section>
+</div>
+<div class="display hidden" id="display">
+<div class="display-top"><span>🍚 <b>すし米</b></span><span class="display-code">CODE <span id="displayCode"></span></span><span class="display-status" id="liveStatus">接続中…</span><div class="display-controls"><button id="pauseBtn">⏸ 一時停止</button><button id="clearBtn">🧹 画面クリア</button><button id="sizeBtn">文字 大</button><button id="speedBtn">速度 普通</button><button id="closeDisplay">✕ 戻る</button></div></div>
+<div class="stage" id="stage"></div>
+</div>
+<script>
+'use strict';
+const URL='https://rxyoyveykxdfrpomkltl.supabase.co';
+const KEY='sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7';
+const db=window.supabase.createClient(URL,KEY);
+const $=s=>document.querySelector(s);
+let teacherRoom='',studentRoom='',channel=null,paused=false,fontSize=38,speed=11,lane=0,queue=[];
+const show=id=>{['#rolePanel','#teacherPanel','#studentPanel'].forEach(x=>$(x).classList.add('hidden'));$(id).classList.remove('hidden')};
+async function createRoom(){
+ $('#teacherStatus').textContent='部屋を作成しています…';
+ for(let i=0;i<8;i++){
+  const code=String(Math.floor(1000+Math.random()*9000));
+  const {error}=await db.from('sushi_kome_rooms').insert({room_code:code});
+  if(!error){teacherRoom=code;$('#teacherCode').textContent=code;$('#teacherStatus').textContent='準備OK。教室画面を開けます。';return}
+ }
+ $('#teacherStatus').textContent='部屋を作れませんでした。もう一度お試しください。';
+}
+async function roomExists(code){
+ const {data,error}=await db.from('sushi_kome_rooms').select('room_code,active').eq('room_code',code).maybeSingle();
+ return !error&&data&&data.active;
+}
+function unsubscribe(){if(channel){db.removeChannel(channel);channel=null}}
+function subscribeRoom(code){
+ unsubscribe();$('#liveStatus').textContent='接続中…';
+ channel=db.channel('sushi-kome-'+code+'-'+Date.now())
+  .on('postgres_changes',{event:'INSERT',schema:'public',table:'sushi_kome_comments',filter:'room_code=eq.'+code},p=>receive(p.new.body))
+  .subscribe((status)=>{$('#liveStatus').textContent=status==='SUBSCRIBED'?'● LIVE':'接続: '+status});
+}
+function receive(text){if(paused){queue.push(text);return}flow(text)}
+function flow(text){
+ const el=document.createElement('div');el.className='comment';el.textContent=text;el.style.fontSize=fontSize+'px';
+ const stage=$('#stage'),lanes=Math.max(3,Math.floor(stage.clientHeight/(fontSize*1.65)));lane=(lane+1)%lanes;
+ el.style.top=(lane*(stage.clientHeight/lanes)+8)+'px';el.style.animationDuration=speed+'s';stage.appendChild(el);el.addEventListener('animationend',()=>el.remove());
+}
+$('#teacherBtn').onclick=()=>{show('#teacherPanel');createRoom()};
+$('#studentBtn').onclick=()=>show('#studentPanel');
+$('#teacherBack').onclick=()=>show('#rolePanel');
+$('#newRoom').onclick=createRoom;
+$('#openDisplay').onclick=()=>{if(!teacherRoom)return;$('#displayCode').textContent=teacherRoom;$('#display').classList.remove('hidden');subscribeRoom(teacherRoom)};
+$('#closeDisplay').onclick=()=>{$('#display').classList.add('hidden');unsubscribe()};
+$('#pauseBtn').onclick=()=>{paused=!paused;$('#pauseBtn').textContent=paused?'▶ 再開':'⏸ 一時停止';if(!paused){const q=queue.splice(0);q.forEach((x,i)=>setTimeout(()=>flow(x),i*450))}};
+$('#clearBtn').onclick=()=>{$('#stage').replaceChildren();queue=[]};
+$('#sizeBtn').onclick=()=>{fontSize=fontSize===38?52:fontSize===52?30:38;$('#sizeBtn').textContent='文字 '+(fontSize===52?'特大':fontSize===38?'大':'小')};
+$('#speedBtn').onclick=()=>{speed=speed===11?7:speed===7?15:11;$('#speedBtn').textContent='速度 '+(speed===7?'速い':speed===15?'遅い':'普通')};
+$('#roomInput').addEventListener('input',e=>e.target.value=e.target.value.replace(/\D/g,'').slice(0,4));
+$('#joinBtn').onclick=async()=>{
+ const code=$('#roomInput').value;if(!/^\d{4}$/.test(code)){ $('#joinStatus').textContent='4桁の数字を入力してください。';return}
+ $('#joinStatus').textContent='確認中…';
+ if(!(await roomExists(code))){$('#joinStatus').textContent='その授業コードは見つかりません。';return}
+ studentRoom=code;$('#studentCode').textContent=code;$('#joinBox').classList.add('hidden');$('#composer').classList.remove('hidden');$('#commentInput').focus();
+};
+$('#commentInput').addEventListener('input',()=>$('#count').textContent=$('#commentInput').value.length);
+$('#sendBtn').onclick=async()=>{
+ const body=$('#commentInput').value.trim();if(!body)return;
+ $('#sendBtn').disabled=true;$('#sendStatus').textContent='送信中…';
+ const {error}=await db.from('sushi_kome_comments').insert({room_code:studentRoom,body});
+ $('#sendBtn').disabled=false;
+ if(error){$('#sendStatus').textContent='送信できませんでした。もう一度お試しください。';return}
+ $('#commentInput').value='';$('#count').textContent='0';$('#sendStatus').textContent='送信しました 🍚';$('#sendBtn').classList.remove('sent');void $('#sendBtn').offsetWidth;$('#sendBtn').classList.add('sent');$('#commentInput').focus();
+};
+$('#commentInput').addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')$('#sendBtn').click()});
+$('#leaveBtn').onclick=()=>{studentRoom='';$('#composer').classList.add('hidden');$('#joinBox').classList.remove('hidden');$('#roomInput').value='';$('#joinStatus').textContent=''};
+window.addEventListener('beforeunload',unsubscribe);
+</script>
+</body></html>
