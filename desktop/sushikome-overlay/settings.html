@@ -34,7 +34,20 @@ button{border:0;border-radius:12px;padding:13px;font-size:15px;font-weight:800;c
 <p class="hint">Ctrl + Shift + K：表示/非表示　／　Ctrl + Shift + S：この設定画面を開く</p>
 </div>
 <script>
-const { ipcRenderer } = require('electron');
+const room=document.getElementById('room'), status=document.getElementById('status');
+document.getElementById('connect').onclick=()=>{
+  const code=room.value.replace(/\D/g,'').slice(0,4);
+  if(code.length!==4){status.textContent='4桁の部屋番号を入力してください';return}
+  window.sushiKome.setRoom(code);
+  status.textContent='● '+code+' に接続中';
+};
+document.getElementById('show').onclick=()=>window.sushiKome.command('show');
+document.getElementById('hide').onclick=()=>window.sushiKome.command('hide');
+document.getElementById('clear').onclick=()=>window.sushiKome.command('clear');
+function sync(){window.sushiKome.setSettings({fontSize:document.getElementById('size').value,speed:document.getElementById('speed').value})}
+document.getElementById('size').onchange=sync;
+document.getElementById('speed').onchange=sync;
+window.sushiKome.getRoom().then(code=>{if(code){room.value=code;status.textContent='● '+code+' に接続中'}});
 </script>
 </body>
 </html>
