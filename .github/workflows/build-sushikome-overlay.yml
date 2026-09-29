@@ -1,0 +1,41 @@
+name: Build Sushi Kome Overlay
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "desktop/sushikome-overlay/**"
+      - ".github/workflows/build-sushikome-overlay.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: desktop/sushikome-overlay
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: desktop/sushikome-overlay/package.json
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Windows installer
+        run: npm run dist
+
+      - name: Upload installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: Sushi-Kome-Overlay-Windows
+          path: desktop/sushikome-overlay/dist/*.exe
+          if-no-files-found: error
