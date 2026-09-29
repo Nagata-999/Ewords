@@ -20,7 +20,7 @@ function createOverlay() {
     hasShadow: false,
     backgroundColor: '#00000000',
     webPreferences: {
-      preload: undefined,
+      preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false
     }
@@ -41,6 +41,7 @@ function createSettings() {
     title: 'すし米 Overlay',
     autoHideMenuBar: true,
     webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false
     }
