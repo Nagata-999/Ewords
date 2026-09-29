@@ -19,6 +19,8 @@
   </style>
 <script src="shared/word-registry.js"></script>
 <script src="shared/learning.js"></script>
+<script src="shared/word-notes.js"></script>
+<link rel="stylesheet" href="shared/word-notes.css">
 <script src="shared/review-ui.js"></script>
 
 <link rel="canonical" href="https://sushitan.net/sushian">
@@ -108,7 +110,7 @@
   function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
   function escapeAttr(v){return escapeHtml(v);}
   function updateWeak(item,kind){if(window.SushiLearning)return SushiLearning.getWordProgress(item)?.status==="mastered";const state=loadState();const key=String(item.id);const old=state.weakWords[key]||{id:item.id,word:item.word,meaning:item.meaning,misses:0,streak:0,lastMissedAt:null};if(kind==='correct'){old.streak=(old.streak||0)+1;if(old.streak>=2)delete state.weakWords[key];else state.weakWords[key]=old;}else{old.word=item.word;old.meaning=item.meaning;old.misses=(old.misses||0)+1;old.streak=0;old.lastMissedAt=new Date().toISOString();state.weakWords[key]=old;}saveState(state);return kind==='correct'&&old.streak>=2;}
-  function answer(selected,kind,clicked){if(session.answered)return;session.answered=true;const item=session.items[session.index];const correct=kind==='choice'&&selected===item.meaning;window.SushiLearning?.recordAnswer(SushiLearning.resolveWordId(item),correct,'sushian');updateWeakCounts();document.querySelectorAll('.choice').forEach(btn=>{btn.disabled=true;if(btn.dataset.meaning===item.meaning)btn.classList.add('correct');});$('unknownBtn').disabled=true;if(clicked&&!correct)clicked.classList.add('wrong');let removed=false;if(correct){session.stats.correct++;if(session.mode==='weak')removed=updateWeak(item,'correct');}else{session.stats[kind==='unknown'?'unknown':'wrong']++;updateWeak(item,kind);}$('feedback').className=`feedback ${correct?'good':'bad'}`;$('feedback').innerHTML=correct?`<strong>正解</strong>${escapeHtml(item.word)}：${escapeHtml(item.meaning)}${session.mode==='weak'?(removed?'<br>克服しました。学習履歴は保持されます。':'<br>共通の苦手度が下がりました。繰り返し復習しましょう。'):''}`:`<strong>${kind==='unknown'?'正解を確認':'不正解'}</strong>${escapeHtml(item.word)}：${escapeHtml(item.meaning)}<br>苦手単語リストに追加しました。`;$('nextBtn').textContent=session.index===session.items.length-1?'結果を見る':'次の問題へ';$('nextBtn').classList.remove('hidden');$('nextBtn').focus();}
+  function answer(selected,kind,clicked){if(session.answered)return;session.answered=true;const item=session.items[session.index];const correct=kind==='choice'&&selected===item.meaning;window.SushiLearning?.recordAnswer(SushiLearning.resolveWordId(item),correct,'sushian');updateWeakCounts();document.querySelectorAll('.choice').forEach(btn=>{btn.disabled=true;if(btn.dataset.meaning===item.meaning)btn.classList.add('correct');});$('unknownBtn').disabled=true;if(clicked&&!correct)clicked.classList.add('wrong');let removed=false;if(correct){session.stats.correct++;if(session.mode==='weak')removed=updateWeak(item,'correct');}else{session.stats[kind==='unknown'?'unknown':'wrong']++;updateWeak(item,kind);}$('feedback').className=`feedback ${correct?'good':'bad'}`;$('feedback').innerHTML=correct?`<strong>正解</strong>${escapeHtml(item.word)}：${escapeHtml(item.meaning)}${session.mode==='weak'?(removed?'<br>克服しました。学習履歴は保持されます。':'<br>共通の苦手度が下がりました。繰り返し復習しましょう。'):''}`:`<strong>${kind==='unknown'?'正解を確認':'不正解'}</strong>${escapeHtml(item.word)}：${escapeHtml(item.meaning)}<br>苦手単語リストに追加しました。`;$('feedback').insertAdjacentHTML('beforeend',window.SushiWordNotes?.html(item.word)||'');$('nextBtn').textContent=session.index===session.items.length-1?'結果を見る':'次の問題へ';$('nextBtn').classList.remove('hidden');$('nextBtn').focus();}
   const answerAndTrack=answer;
   answer=function(selected,kind,clicked){if(!session.answered){const item=session.items[session.index];const correct=kind==='choice'&&selected===item.meaning;updateMastery(item,correct);}return answerAndTrack(selected,kind,clicked);};
   function nextQuestion(){if(!session.answered)return;if(session.index<session.items.length-1){session.index++;renderQuestion();}else showResults();}
@@ -126,3 +128,5 @@
   </script>
 </body>
 </html>
+
+
