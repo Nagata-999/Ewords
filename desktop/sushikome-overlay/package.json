@@ -1,0 +1,30 @@
+{
+  "name": "sushikome-overlay",
+  "version": "0.1.0",
+  "description": "Sushi Kome classroom comment overlay for Windows",
+  "main": "main.js",
+  "author": "sushitan.net",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis"
+  },
+  "devDependencies": {
+    "electron": "^38.1.2",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "net.sushitan.sushikome.overlay",
+    "productName": "Sushi Kome Overlay",
+    "directories": { "output": "dist" },
+    "files": ["main.js", "settings.html", "overlay.html"],
+    "win": { "target": ["nsis"] },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Sushi Kome Overlay"
+    }
+  }
+}
