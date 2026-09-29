@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://rxyoyveykxdfrpomkltl.supabase.co; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'">
+<title>すし米 Overlay</title>
+<style>
+html,body{width:100%;height:100%;margin:0;overflow:hidden;background:transparent!important;pointer-events:none}
+#stage{position:fixed;inset:0;overflow:hidden;pointer-events:none}
+.comment{position:absolute;left:100vw;white-space:nowrap;font-family:"Yu Gothic UI","Meiryo",sans-serif;font-weight:900;color:white;text-shadow:-2px -2px 0 #111,2px -2px 0 #111,-2px 2px 0 #111,2px 2px 0 #111,0 3px 8px rgba(0,0,0,.75);will-change:transform;animation-name:fly;animation-timing-function:linear;animation-fill-mode:forwards}
+@keyframes fly{from{transform:translateX(0)}to{transform:translateX(calc(-100vw - 120%))}}
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script>
+const URL='https://rxyoyveykxdfrpomkltl.supabase.co';
+const KEY='sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7';
+let room='',lastSeen=0,timer=null,fontSize=42,speed=11,lane=0;
+const stage=document.getElementById('stage');
+
+function clearAll(){stage.innerHTML='';lane=0}
+function showComment(body){
+  const el=document.createElement('div');
+  el.className='comment';
+  el.textContent=String(body||'');
+  el.style.fontSize=fontSize+'px';
+  const laneHeight=Math.max(fontSize+18,58);
+  const lanes=Math.max(2,Math.floor((innerHeight-20)/laneHeight));
+  el.style.top=(10+(lane++%lanes)*laneHeight)+'px';
+  el.style.animationDuration=speed+'s';
+  stage.appendChild(el);
+  el.addEventListener('animationend',()=>el.remove());
+}
+async function poll(){
+  if(!room)return;
+  try{
+    const q=URL+'/rest/v1/sushi_kome_comments?select=id,body&room_code=eq.'+encodeURIComponent(room)+'&order=id.asc&limit=100';
+    const res=await fetch(q,{headers:{apikey:KEY}});
+    if(!res.ok)return;
+    const rows=await res.json();
+    rows.forEach(row=>{const id=Number(row.id)||0;if(id>lastSeen){lastSeen=id;showComment(row.body)}});
+  }catch(_){}
+}
+function connect(code){
+  room=String(code||'').replace(/\D/g,'').slice(0,4);
+  lastSeen=0;
+  if(timer)clearInterval(timer);
+  clearAll();
+  if(room){poll();timer=setInterval(poll,900)}
+}
+window.sushiKome.onRoomChanged(connect);
+window.sushiKome.onClear(clearAll);
+window.sushiKome.onSettings(v=>{if(v.fontSize)fontSize=Number(v.fontSize);if(v.speed)speed=Number(v.speed)});
+window.sushiKome.getRoom().then(connect);
+</script>
+</body>
+</html>
