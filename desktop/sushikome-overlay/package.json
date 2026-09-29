@@ -17,7 +17,7 @@
     "appId": "net.sushitan.sushikome.overlay",
     "productName": "Sushi Kome Overlay",
     "directories": { "output": "dist" },
-    "files": ["main.js", "settings.html", "overlay.html"],
+    "files": ["main.js", "preload.js", "settings.html", "overlay.html"],
     "win": { "target": ["nsis"] },
     "nsis": {
       "oneClick": false,
