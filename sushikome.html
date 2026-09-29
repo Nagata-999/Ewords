@@ -70,10 +70,15 @@ async function roomExists(code){
 function unsubscribe(){if(pollTimer){clearInterval(pollTimer);pollTimer=null}}
 async function pollComments(code){
  try{
-  const data=await api('sushi_kome_comments?select=id,body&id=gt.'+lastSeen+'&room_code=eq.'+encodeURIComponent(code)+'&order=id.asc&limit=50');
-  (data||[]).forEach(function(row){lastSeen=Math.max(lastSeen,Number(row.id)||0);receive(row.body)});
+  const data=await api('sushi_kome_comments?select=id,body&room_code=eq.'+encodeURIComponent(code)+'&order=id.asc&limit=100');
+  (data||[]).forEach(function(row){
+   var id=Number(row.id)||0;
+   if(id>lastSeen){lastSeen=id;receive(row.body)}
+  });
   $('#liveStatus').textContent='● LIVE';
- }catch(e){$('#liveStatus').textContent='再接続中…'}
+ }catch(e){
+  $('#liveStatus').textContent='再接続中…';
+ }
 }
 function subscribeRoom(code){
  unsubscribe();lastSeen=0;$('#liveStatus').textContent='接続中…';
