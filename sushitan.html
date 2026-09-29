@@ -2317,6 +2317,8 @@ html, body {
 </style>
 <script src="shared/word-registry.js"></script>
 <script src="shared/learning.js"></script>
+<script src="shared/word-notes.js"></script>
+<link rel="stylesheet" href="shared/word-notes.css">
 <script src="shared/review-ui.js"></script>
 
 <link rel="canonical" href="https://sushitan.net/sushitan">
@@ -3449,7 +3451,8 @@ html, body {
       GAME.mistakes.push({
         prompt: getQuestionPrompt(GAME.currentQuestion),
         correct,
-        picked
+        picked,
+        noteWord: currentMode === MODE_SUSHI ? GAME.currentQuestion.en : null
       });
     }
 
@@ -3468,7 +3471,7 @@ html, body {
             <strong>${escapeHtml(m.prompt)}</strong><br>
             <span class="small">your answer: ${escapeHtml(m.picked || "-")}</span>
           </div>
-          <div class="mistake-answer">${escapeHtml(m.correct)}</div>
+          <div class="mistake-answer">${escapeHtml(m.correct)}${m.noteWord ? (window.SushiWordNotes?.html(m.noteWord) || "") : ""}</div>
         </div>
       `).join("");
 
@@ -3477,7 +3480,7 @@ html, body {
         : "";
 
       mistakeList.classList.remove('hidden');
-      mistakeListBody.innerHTML = rows + more;
+      mistakeListBody.innerHTML = rows + more + (currentMode === MODE_SUSHI ? '<p><a href="sushian.html?review=weak">苦手単語をすし暗で復習する</a> · <a href="word-notes.html">例文・用法の教材を読む</a></p>' : "");
     }
 
 
@@ -4294,4 +4297,6 @@ html, body {
 <script>window.addEventListener('sushi-learning-change',()=>renderReviewList());if(new URLSearchParams(location.search).get('review')==='weak') WORD_DATA_READY.then(()=>document.getElementById('startReviewBtn')?.click());</script>
 </body>
 </html>
+
+
 
