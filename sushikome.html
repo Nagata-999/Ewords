@@ -44,13 +44,14 @@ button,input{font:inherit}.page{width:min(100% - 28px,980px);margin:auto;padding
 const URL='https://rxyoyveykxdfrpomkltl.supabase.co';
 const KEY='sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7';
 const api=async(path,options={})=>{
- const headers={apikey:KEY,'Content-Type':'application/json',...(options.headers||{})};
+ const headers={apikey:KEY,'Content-Type':'application/json'};
+ if(options.headers){Object.keys(options.headers).forEach(function(k){headers[k]=options.headers[k]})}
  const res=await fetch(URL+'/rest/v1/'+path,{...options,headers});
  if(!res.ok)throw new Error('HTTP '+res.status);
  const text=await res.text(); return text?JSON.parse(text):null;
 };
 const $=s=>document.querySelector(s);
-let teacherRoom='',studentRoom='',channel=null,paused=false,fontSize=38,speed=11,lane=0,queue=[];
+let teacherRoom='',studentRoom='',paused=false,fontSize=38,speed=11,lane=0,queue=[],pollTimer=null,lastSeen=0;
 const show=id=>{['#rolePanel','#teacherPanel','#studentPanel'].forEach(x=>$(x).classList.add('hidden'));$(id).classList.remove('hidden')};
 async function createRoom(){
  $('#teacherStatus').textContent='部屋を作成しています…';
@@ -66,12 +67,17 @@ async function createRoom(){
 async function roomExists(code){
  try{const data=await api('sushi_kome_rooms?select=room_code,active&room_code=eq.'+encodeURIComponent(code)+'&limit=1');return !!(data&&data[0]&&data[0].active)}catch(_){return false}
 }
-function unsubscribe(){if(channel){db.removeChannel(channel);channel=null}}
+function unsubscribe(){if(pollTimer){clearInterval(pollTimer);pollTimer=null}}
+async function pollComments(code){
+ try{
+  const data=await api('sushi_kome_comments?select=id,body&id=gt.'+lastSeen+'&room_code=eq.'+encodeURIComponent(code)+'&order=id.asc&limit=50');
+  (data||[]).forEach(function(row){lastSeen=Math.max(lastSeen,Number(row.id)||0);receive(row.body)});
+  $('#liveStatus').textContent='● LIVE';
+ }catch(e){$('#liveStatus').textContent='再接続中…'}
+}
 function subscribeRoom(code){
- unsubscribe();$('#liveStatus').textContent='接続中…';
- channel=db.channel('sushi-kome-'+code+'-'+Date.now())
-  .on('postgres_changes',{event:'INSERT',schema:'public',table:'sushi_kome_comments',filter:'room_code=eq.'+code},p=>receive(p.new.body))
-  .subscribe((status)=>{$('#liveStatus').textContent=status==='SUBSCRIBED'?'● LIVE':'接続: '+status});
+ unsubscribe();lastSeen=0;$('#liveStatus').textContent='接続中…';
+ pollComments(code);pollTimer=setInterval(function(){pollComments(code)},900);
 }
 function receive(text){if(paused){queue.push(text);return}flow(text)}
 function flow(text){
