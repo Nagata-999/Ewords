@@ -1,0 +1,24 @@
+// Generate static lessons from the same data used by the games.
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
+const root=path.join(__dirname,'..'),ctx={window:{}};
+vm.runInNewContext(fs.readFileSync(path.join(root,'shared/word-notes.js'),'utf8'),ctx);
+const entries=Array.from(ctx.window.SushiWordNotes.entries());
+const vocab=JSON.parse(fs.readFileSync(path.join(root,'sushian.html'),'utf8').match(/const VOCAB=(\[[^\n]+\]);/)[1]);
+if(!entries.length||entries.length>2000)throw Error('Coverage must be within the first 2000 words');
+entries.forEach((e,i)=>{if(e.word!==vocab[i].word)throw Error('Missing or misplaced word at '+(i+1));});
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const anchor=e=>esc(e.word.replace(/ /g,'-'));
+const count=entries.length;
+const chunks=Array.from({length:Math.ceil(count/100)},(_,i)=>({start:i*100+1,end:Math.min(count,(i+1)*100),items:entries.slice(i*100,(i+1)*100),file:`${String(i*100+1).padStart(4,'0')}-${String(Math.min(count,(i+1)*100)).padStart(4,'0')}.html`}));
+function page(title,body,prefix,canonical){return `<!doctype html>\n<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}｜すし単</title><meta name="description" content="${esc(title)}。自作例文・和訳・文型や似た表現との違いを確認して、すし暗で復習できます。"><link rel="canonical" href="https://sushitan.net/${canonical}"><link rel="stylesheet" href="${prefix}shared/word-notes.css"></head><body class="word-notes-page"><main><nav><a href="${prefix}index.html">すし単トップ</a> · <a href="${prefix}sushitan.html">すし単</a> · <a href="${prefix}sushian.html">すし暗</a> · <a href="${prefix}word-notes.html">解説の範囲一覧</a></nav><h1>${esc(title)}</h1>${body}<footer><p>各語のすべての意味を網羅する辞書ではなく、一つの使い方を学ぶ例文と解説です。解説の閲覧では学習記録は変わりません。</p><a href="${prefix}contact.html">誤り・分かりにくい点を知らせる</a> · <a href="${prefix}about.html">運営者情報</a> · <a href="${prefix}privacy.html">プライバシーポリシー</a></footer></main></body></html>\n`;}
+const rangeLinks=chunks.map(c=>`<li><a href="word-notes/${c.file}">${c.start}〜${c.end}番：${esc(c.items[0].word)} 〜 ${esc(c.items.at(-1).word)}</a></li>`).join('\n');
+const index=page(`基本英単語${count}語の例文と使い方`,`<p>意味を選べても、自分で英文にすると迷うことがあります。例文・和訳・用法の注意を読み、英語を隠して和訳から言い直してみてください。</p><p>掲載範囲：すし暗の1〜${count}番。100語ごとのページ内を、さらに20語ずつに分けています。</p><h2>学習の進め方</h2><ol><li><a href="sushian.html">すし暗</a>で20語程度の範囲を指定して解く。</li><li>答え合わせで例文・使い方を確認する。</li><li><a href="sushian.html?review=weak">苦手復習</a>で意味を思い出し、後日もう一度確かめる。</li></ol><p>苦手復習には、このブラウザでほかのゲームから記録された語も含まれます。</p><h2 id="contents">範囲から探す</h2><ul>${rangeLinks}</ul><details><summary>単語名から探す（番号順）</summary>${chunks.map(c=>`<section><h3>${c.start}〜${c.end}番</h3><p>${c.items.map((e,i)=>`<a id="${anchor(e)}" href="word-notes/${c.file}#${anchor(e)}">${c.start+i}. ${esc(e.word)}</a>`).join(' · ')}</p></section>`).join('')}</details>`,'','word-notes');
+const output=new Map([['word-notes.html',index]]);
+for(let n=0;n<chunks.length;n++){
+ const c=chunks[n],groups=Array.from({length:Math.ceil(c.items.length/20)},(_,i)=>({start:c.start+i*20,end:Math.min(c.end,c.start+i*20+19),items:c.items.slice(i*20,i*20+20)}));
+ const sections=groups.map(g=>`<section aria-labelledby="range-${g.start}"><h2 id="range-${g.start}">${g.start}〜${g.end}番</h2><nav aria-label="${g.start}〜${g.end}番の単語">${g.items.map(e=>`<a href="#${anchor(e)}">${esc(e.word)}</a>`).join(' · ')}</nav>${g.items.map((e,i)=>`<article id="${anchor(e)}"><h3>${g.start+i}. ${esc(e.word)}</h3><p lang="en">${esc(e.example)}</p><p>${esc(e.translation)}</p><p>${esc(e.note)}</p><p>確認練習：上の英文を手で隠し、和訳を英語で言い直してください。</p><details><summary>例文をもう一度確認する</summary><p lang="en">${esc(e.example)}</p><p>単語だけでなく前置詞や動詞の形も比べましょう。別の英文が正しい場合もあります。</p></details></article>`).join('\n')}<p><a href="#contents">このページの範囲一覧へ</a> · <a href="../sushian.html">すし暗で復習する</a></p></section>`).join('\n');
+ const pager=`<nav aria-label="前後の範囲">${n?`<a href="${chunks[n-1].file}">← ${chunks[n-1].start}〜${chunks[n-1].end}番</a>`:''} · <a href="../word-notes.html">全範囲</a>${n+1<chunks.length?` · <a href="${chunks[n+1].file}">${chunks[n+1].start}〜${chunks[n+1].end}番 →</a>`:''}</nav>`;
+ output.set('word-notes/'+c.file,page(`英単語${c.start}〜${c.end}番の例文と使い方`,`<p>すし暗で同じ番号の範囲を指定すると練習できます。初めての語は20語ずつ確認してみましょう。</p>${pager}<h2 id="contents">このページの範囲</h2><nav aria-label="範囲一覧">${groups.map(g=>`<a href="#range-${g.start}">${g.start}〜${g.end}番</a>`).join(' · ')}</nav>${sections}${pager}`,'../','word-notes/'+c.file.replace(/\.html$/,'')));
+}
+for(const [file,html] of output){const dest=path.join(root,file);if(process.argv.includes('--check')){if(!fs.existsSync(dest)||fs.readFileSync(dest,'utf8').trim()!==html.trim())throw Error('Regenerate '+file);}else{fs.mkdirSync(path.dirname(dest),{recursive:true});fs.writeFileSync(dest,html);}}
+console.log(`PASS: ${count} notes; ${chunks.length} lesson pages match game notes`);
