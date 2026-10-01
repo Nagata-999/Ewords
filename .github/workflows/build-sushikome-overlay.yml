@@ -8,7 +8,7 @@ on:
       - ".github/workflows/build-sushikome-overlay.yml"
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build-windows:
@@ -39,3 +39,14 @@ jobs:
           name: Sushi-Kome-Overlay-Windows
           path: desktop/sushikome-overlay/dist/*.exe
           if-no-files-found: error
+
+      - name: Publish latest installer
+        uses: ncipollo/release-action@v1
+        with:
+          tag: sushikome-overlay-latest
+          name: Sushi Kome Overlay for Windows
+          artifacts: desktop/sushikome-overlay/dist/Sushi-Kome-Overlay-Setup.exe
+          allowUpdates: true
+          replacesArtifacts: true
+          makeLatest: true
+          body: "すし米 教員用 Windows オーバーレイ。PowerPointや教材の上に授業コメントを表示します。"
