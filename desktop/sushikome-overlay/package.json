@@ -16,15 +16,27 @@
   "build": {
     "appId": "net.sushitan.sushikome.overlay",
     "productName": "Sushi Kome Overlay",
-    "directories": { "output": "dist" },
-    "files": ["main.js", "preload.js", "settings.html", "overlay.html"],
-    "win": { "target": ["nsis"] },
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "settings.html",
+      "overlay.html"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "shortcutName": "Sushi Kome Overlay"
-    }
+    },
+    "artifactName": "Sushi-Kome-Overlay-Setup.${ext}"
   }
 }
