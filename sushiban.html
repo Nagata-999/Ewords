@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#0f766e">
+<title>すし板｜全員で指さす共有黒板 | すし単</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--bg:#f5f1e8;--card:#fffdf8;--line:#ded6c8;--ink:#172033;--muted:#64748b;--teal:#0f766e;--orange:#f4511e}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);touch-action:manipulation}
+button,input,textarea{font:inherit}.page{width:min(100% - 24px,1000px);margin:auto;padding:16px 0 40px}.home{color:var(--teal);font-weight:900;text-decoration:none}.hero{text-align:center;padding:22px 0 16px}.hero .icon{font-size:54px}.hero h1{font-size:clamp(42px,9vw,72px);margin:0;color:var(--teal);letter-spacing:-.06em}.hero p{margin:7px auto;color:#475569;line-height:1.6}.panel{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px;box-shadow:0 12px 30px #0f172a12}.hidden{display:none!important}.roles{display:grid;grid-template-columns:1fr 1fr;gap:14px}.role{border:2px solid var(--line);border-radius:18px;background:#fff;padding:24px 12px;min-height:135px;font-weight:1000;font-size:22px}.role small{display:block;color:var(--muted);font-size:13px;margin-top:8px}.code{text-align:center;font-size:clamp(56px,13vw,92px);font-weight:1000;letter-spacing:.12em;color:var(--orange)}.btn{border:0;border-radius:14px;padding:12px 16px;font-weight:1000;cursor:pointer}.primary{background:var(--teal);color:white}.secondary{background:white;border:2px solid #b8ddd7;color:var(--teal)}.orange{background:var(--orange);color:white}.actions{display:flex;gap:9px;flex-wrap:wrap;justify-content:center}.status{text-align:center;color:var(--muted);font-size:13px;min-height:20px}.field{width:100%;border:2px solid var(--line);border-radius:14px;padding:12px;background:white}.join{max-width:400px;margin:auto}.join input{text-align:center;font-size:34px;font-weight:1000;letter-spacing:.18em}.teacher-tools{display:grid;grid-template-columns:1fr auto;gap:8px;margin:12px 0}.teacher-tools textarea{min-height:92px;resize:vertical}.modebar{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:10px 0}.mode{border:1px solid #cbd5e1;background:#fff;border-radius:999px;padding:8px 12px;font-weight:900}.mode.active{background:#172033;color:white}.board-shell{position:relative;width:100%;aspect-ratio:16/9;background:#fff;border:2px solid #cbd5e1;border-radius:18px;overflow:hidden;user-select:none;-webkit-user-select:none}.board{position:absolute;inset:0;padding:5%;overflow:hidden;display:flex;align-items:center;justify-content:center}.board-text{white-space:pre-wrap;font-weight:800;line-height:1.65;font-size:clamp(17px,3.2vw,36px);width:100%;max-height:100%;overflow:auto}.board img{width:100%;height:100%;object-fit:contain}.tap-layer{position:absolute;inset:0;z-index:3;cursor:crosshair}.pointer{position:absolute;transform:translate(-50%,-65%);font-size:34px;filter:drop-shadow(0 2px 3px #fff);animation:pop .22s ease;pointer-events:none}.pulse{position:absolute;width:52px;height:52px;border-radius:50%;border:5px solid #f4511e;transform:translate(-50%,-50%);animation:pulse .9s ease forwards;pointer-events:none}.heat{position:absolute;width:70px;height:70px;border-radius:50%;background:radial-gradient(circle,#ef444488,#f9731638,transparent 70%);transform:translate(-50%,-50%);pointer-events:none}.count{position:absolute;right:10px;bottom:8px;z-index:5;background:#172033dd;color:#fff;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:900}.prompt{text-align:center;font-size:clamp(18px,4vw,28px);font-weight:1000;margin:10px 0;color:var(--teal)}.student-note{text-align:center;color:var(--muted);font-size:13px;margin:8px}.student-board{position:fixed;inset:0;background:#eef6f4;z-index:20;padding:8px;display:flex;flex-direction:column}.student-top{display:flex;align-items:center;gap:8px;padding:5px}.student-top b{font-size:14px}.student-top button{margin-left:auto}.student-board .prompt{margin:4px 0 8px}.student-board .board-shell{flex:1;aspect-ratio:auto;min-height:0}.student-board .board-text{font-size:clamp(18px,5vw,32px)}@keyframes pop{from{transform:translate(-50%,-65%) scale(.3)}to{transform:translate(-50%,-65%) scale(1)}}@keyframes pulse{0%{opacity:1;scale:.35}100%{opacity:0;scale:1.7}}@media(max-width:620px){.roles{grid-template-columns:1fr}.panel{padding:16px}.teacher-tools{grid-template-columns:1fr}.board-shell{aspect-ratio:4/3}}
+</style>
+</head>
+<body>
+<div class="page" id="main">
+<a class="home" href="index.html">← すし単トップ</a>
+<header class="hero"><div class="icon">☝️</div><h1>すし板</h1><p>全員が、同時に黒板を指させる。</p></header>
+<section class="panel" id="roles">
+<div class="roles">
+<button class="role" id="teacherBtn">🧑‍🏫 先生<small>黒板を出して全員の指を見る</small></button>
+<button class="role" id="studentBtn">📱 生徒<small>4桁コードで入ってタップするだけ</small></button>
+</div>
+</section>
+<section class="panel hidden" id="teacher">
+<h2 style="text-align:center;margin:0">授業コード</h2><div class="code" id="teacherCode">----</div><p class="status" id="teacherStatus">作成中…</p>
+<div class="teacher-tools"><textarea class="field" id="boardInput" placeholder="英文・設問・文章をここに貼り付け"></textarea><button class="btn primary" id="showText">黒板に表示</button></div>
+<div class="actions"><label class="btn secondary" style="cursor:pointer">🖼️ 画像を表示<input type="file" id="imageInput" accept="image/*" hidden></label><button class="btn secondary" id="clearBoard">黒板クリア</button><button class="btn secondary" id="clearPointers">指をクリア</button></div>
+<div class="modebar"><button class="mode active" data-mode="pointer">☝️ 指</button><button class="mode" data-mode="heat">🔥 ヒート</button><button class="mode" data-mode="both">☝️＋🔥</button></div>
+<input class="field" id="promptInput" maxlength="80" value="わからない・重要だと思う場所をタップ！" style="text-align:center;font-weight:900">
+<div class="prompt" id="teacherPrompt">わからない・重要だと思う場所をタップ！</div>
+<div class="board-shell" id="teacherShell"><div class="board" id="teacherBoard"><div class="board-text">ここが共有黒板です。\n英文や画像を表示してください。</div></div><div class="tap-layer" id="teacherLayer"></div><div class="count" id="tapCount">TAP 0</div></div>
+<div class="actions" style="margin-top:12px"><button class="btn orange" id="fullscreenBtn">⛶ 教室画面</button><button class="btn secondary" id="newRoom">新しい部屋</button><button class="btn secondary" id="teacherBack">戻る</button></div>
+</section>
+<section class="panel hidden" id="student">
+<div class="join" id="joinBox"><h2 style="text-align:center">授業コード</h2><input class="field" id="roomInput" maxlength="4" inputmode="numeric" placeholder="1234"><button class="btn primary" id="joinBtn" style="width:100%;margin-top:10px">入室する</button><p class="status" id="joinStatus"></p></div>
+</section>
+</div>
+<div class="student-board hidden" id="studentBoard">
+<div class="student-top"><b>☝️ すし板　CODE <span id="studentCode"></span></b><button class="btn secondary" id="leaveBtn">退出</button></div>
+<div class="prompt" id="studentPrompt">先生の黒板を待っています…</div>
+<div class="board-shell" id="studentShell"><div class="board" id="studentContent"><div class="board-text">先生の黒板を待っています…</div></div><div class="tap-layer" id="studentLayer"></div></div>
+<p class="student-note">黒板の気になる場所をタップ。何度でも変更できます。</p>
+</div>
+<script>
+'use strict';
+const SB_URL='https://rxyoyveykxdfrpomkltl.supabase.co';
+const SB_KEY='sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7';
+const sb=window.supabase.createClient(SB_URL,SB_KEY);
+const $=s=>document.querySelector(s);
+const api=async(path,options={})=>{const headers={apikey:SB_KEY,'Content-Type':'application/json',...(options.headers||{})};const r=await fetch(SB_URL+'/rest/v1/'+path,{...options,headers});if(!r.ok)throw new Error('HTTP '+r.status);const t=await r.text();return t?JSON.parse(t):null};
+let room='',channel=null,role='',mode='pointer',boardState={type:'text',content:'ここが共有黒板です。\n英文や画像を表示してください。'},promptText='わからない・重要だと思う場所をタップ！',taps=0;
+const showPanel=id=>{['#roles','#teacher','#student'].forEach(x=>$(x).classList.add('hidden'));$(id).classList.remove('hidden')};
+async function createRoom(){leaveChannel();$('#teacherStatus').textContent='作成中…';for(let i=0;i<8;i++){const c=String(Math.floor(1000+Math.random()*9000));try{await api('sushi_kome_rooms',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({room_code:c})});room=c;role='teacher';$('#teacherCode').textContent=c;connect(c,'teacher');$('#teacherStatus').textContent='準備OK。生徒はこの4桁で入室。';return}catch(e){}}$('#teacherStatus').textContent='部屋を作れませんでした。'};
+async function roomExists(c){try{const d=await api('sushi_kome_rooms?select=room_code,active&room_code=eq.'+encodeURIComponent(c)+'&limit=1');return !!(d&&d[0]&&d[0].active)}catch(e){return false}}
+function leaveChannel(){if(channel){sb.removeChannel(channel);channel=null}}
+function connect(c,r){leaveChannel();channel=sb.channel('sushiban:'+c,{config:{broadcast:{self:false,ack:false}}});
+ channel.on('broadcast',{event:'pointer'},({payload})=>{if(r==='teacher')renderPointer(payload)})
+ .on('broadcast',{event:'board'},({payload})=>{if(r==='student')applyBoard(payload)})
+ .on('broadcast',{event:'prompt'},({payload})=>{if(r==='student'){promptText=payload.text||'';$('#studentPrompt').textContent=promptText}})
+ .on('broadcast',{event:'mode'},({payload})=>{if(r==='student')mode=payload.mode||'pointer'})
+ .on('broadcast',{event:'request-state'},()=>{if(r==='teacher')sendState()})
+ .subscribe(status=>{if(status==='SUBSCRIBED'){if(r==='student')channel.send({type:'broadcast',event:'request-state',payload:{}})}});
+}
+function send(event,payload){if(channel)channel.send({type:'broadcast',event,payload})}
+function sendState(){send('board',boardState);send('prompt',{text:promptText});send('mode',{mode})}
+function setBoard(state,broadcast=true){boardState=state;renderBoard($('#teacherBoard'),state);if(broadcast)send('board',state)}
+function renderBoard(el,state){el.replaceChildren();if(state.type==='image'){const img=document.createElement('img');img.src=state.content;img.alt='共有教材';el.appendChild(img)}else{const d=document.createElement('div');d.className='board-text';d.textContent=state.content||'';el.appendChild(d)}}
+function applyBoard(state){boardState=state;renderBoard($('#studentContent'),state)}
+function coords(ev,el){const r=el.getBoundingClientRect();return{x:Math.max(0,Math.min(1,(ev.clientX-r.left)/r.width)),y:Math.max(0,Math.min(1,(ev.clientY-r.top)/r.height))}}
+function renderPointer(p){if(!p||typeof p.x!=='number')return;taps++;$('#tapCount').textContent='TAP '+taps;const layer=$('#teacherLayer');
+ if(mode==='pointer'||mode==='both'){const e=document.createElement('div');e.className='pointer';e.textContent='☝️';e.style.left=(p.x*100)+'%';e.style.top=(p.y*100)+'%';layer.appendChild(e);setTimeout(()=>e.remove(),5000)}
+ if(mode==='heat'||mode==='both'){const h=document.createElement('div');h.className='heat';h.style.left=(p.x*100)+'%';h.style.top=(p.y*100)+'%';layer.appendChild(h)}
+ const pulse=document.createElement('div');pulse.className='pulse';pulse.style.left=(p.x*100)+'%';pulse.style.top=(p.y*100)+'%';layer.appendChild(pulse);setTimeout(()=>pulse.remove(),1000)
+}
+$('#teacherBtn').onclick=()=>{showPanel('#teacher');createRoom()};
+$('#studentBtn').onclick=()=>showPanel('#student');
+$('#teacherBack').onclick=()=>{leaveChannel();showPanel('#roles')};
+$('#newRoom').onclick=createRoom;
+$('#showText').onclick=()=>setBoard({type:'text',content:$('#boardInput').value||' '});
+$('#imageInput').onchange=e=>{const f=e.target.files&&e.target.files[0];if(!f)return;if(f.size>700000){$('#teacherStatus').textContent='画像が大きすぎます。700KB以下にしてください。';return}const rd=new FileReader();rd.onload=()=>setBoard({type:'image',content:rd.result});rd.readAsDataURL(f)};
+$('#clearBoard').onclick=()=>{setBoard({type:'text',content:' '});$('#boardInput').value=''};
+$('#clearPointers').onclick=()=>{$('#teacherLayer').replaceChildren();taps=0;$('#tapCount').textContent='TAP 0'};
+document.querySelectorAll('.mode').forEach(b=>b.onclick=()=>{mode=b.dataset.mode;document.querySelectorAll('.mode').forEach(x=>x.classList.toggle('active',x===b));send('mode',{mode})});
+$('#promptInput').oninput=e=>{promptText=e.target.value;$('#teacherPrompt').textContent=promptText;send('prompt',{text:promptText})};
+$('#fullscreenBtn').onclick=()=>{const el=$('#teacherShell');if(document.fullscreenElement)document.exitFullscreen();else el.requestFullscreen?.()};
+$('#roomInput').oninput=e=>e.target.value=e.target.value.replace(/\D/g,'').slice(0,4);
+$('#joinBtn').onclick=async()=>{const c=$('#roomInput').value;if(!/^\d{4}$/.test(c)){ $('#joinStatus').textContent='4桁の数字を入力してください。';return}$('#joinStatus').textContent='確認中…';if(!(await roomExists(c))){$('#joinStatus').textContent='その授業コードは見つかりません。';return}room=c;role='student';$('#studentCode').textContent=c;$('#studentBoard').classList.remove('hidden');connect(c,'student')};
+$('#studentLayer').addEventListener('pointerdown',e=>{e.preventDefault();const p=coords(e,$('#studentLayer'));send('pointer',{...p,id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),at:Date.now()});const pulse=document.createElement('div');pulse.className='pulse';pulse.style.left=(p.x*100)+'%';pulse.style.top=(p.y*100)+'%';$('#studentLayer').appendChild(pulse);setTimeout(()=>pulse.remove(),900)});
+$('#leaveBtn').onclick=()=>{leaveChannel();$('#studentBoard').classList.add('hidden');$('#roomInput').value='';$('#joinStatus').textContent=''};
+window.addEventListener('beforeunload',leaveChannel);
+</script>
+</body>
+</html>
