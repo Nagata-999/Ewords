@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>すし米 ミニ送信</title>
+<style>
+:root{--orange:#f4511e;--teal:#0f766e;--bg:#fffaf3;--line:#fed7aa;--muted:#64748b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Yu Gothic UI",sans-serif;color:#172033}
+.wrap{padding:14px;max-width:420px;margin:auto}h1{font-size:20px;margin:0 0 3px}.room{font-size:12px;color:var(--muted);margin-bottom:12px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+button{font:inherit;border:1px solid var(--line);background:white;border-radius:12px;min-height:48px;font-weight:900;cursor:pointer}.emoji{font-size:22px}.random{grid-column:span 3;background:#ecfeff;border-color:#99f6e4;color:var(--teal)}
+textarea{width:100%;min-height:72px;margin-top:10px;border:2px solid #e7c9ab;border-radius:12px;padding:10px;font:inherit;resize:vertical}.send{width:100%;margin-top:7px;background:linear-gradient(135deg,#f4511e,#fb923c);color:white;border:0}.status{text-align:center;min-height:18px;font-size:12px;color:var(--muted);margin:7px 0 0}
+button:disabled{opacity:.5}
+</style>
+</head>
+<body><div class="wrap"><h1>🍚 すし米 ミニ送信</h1><div class="room">授業コード <b id="room">----</b></div>
+<div class="grid" id="quick">
+<button data-message="こんにちは！">こんにちは</button><button data-message="待って！">待って</button><button data-message="質問！">質問</button>
+<button class="emoji" data-message="👍">👍</button><button class="emoji" data-message="👏">👏</button><button class="emoji" data-message="🙋">🙋</button>
+<button class="emoji" data-message="❓">❓</button><button class="emoji" data-message="💡">💡</button><button class="emoji" data-message="😂">😂</button>
+<button class="emoji" data-message="🔥">🔥</button><button class="emoji" data-message="✨">✨</button><button class="emoji" data-message="🤔">🤔</button>
+<button class="random" id="random">🎲 ランダム</button></div>
+<textarea id="text" maxlength="120" placeholder="自由入力…"></textarea><button class="send" id="send">送信</button><p class="status" id="status"></p></div>
+<script>
+'use strict';
+const URL='https://rxyoyveykxdfrpomkltl.supabase.co',KEY='sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7';
+const room=new URLSearchParams(location.search).get('room')||'';document.getElementById('room').textContent=room||'未設定';
+const randomMessages=[
+'なるほど！','わかった！','もう一回お願いします！','そこ大事そう！','メモします！','ちょっと待って！','いい質問！','それ気になってた！','おもしろい！','初めて知った！',
+'そういうことか！','理解できた！','あと少しでわかりそう','例がほしいです！','もう少しゆっくりお願いします','ここテストに出ますか？','今のところ好きです','それ覚えたい！','たしかに！','納得！',
+'なるほどなるほど','頭に入ってきた','今つながった！','そこ難しい！','考え中です…','わかる気がする','ちょっと混乱中','復習したいです','あとで見直します','先生それ何ですか？',
+'具体例お願いします！','別の言い方ありますか？','英語だとどう言いますか？','意味をもう一度お願いします','スペル知りたいです','発音お願いします！','使い方知りたいです','違いが気になります','なぜですか？','どうしてそうなるんですか？',
+'これは覚える！','重要ポイント発見','今日の収穫！','使ってみたい！','これは便利！','いい表現！','その例わかりやすい！','今の説明よかった！','理解度アップ！','レベルアップした！',
+'脳が動いてる🧠','ひらめいた💡','きた！','おお！','すごい！','いいね！','ナイス！','最高！','拍手👏','わくわくしてきた',
+'集中してます','ちゃんと聞いてます','メモ中✍️','考えています🤔','追いついてます！','まだ大丈夫！','少し休憩ほしいです','水飲みたいです','目が覚めました','眠気と戦っています',
+'今日むずかしい！','今日は調子いい！','がんばります！','もうひと踏ん張り！','あとちょっと！','できそう！','挑戦します！','間違えてもやる！','次いけます！','準備OK！',
+'先生見えてます！','聞こえてます！','画面見えてます！','文字大丈夫です！','もう少し大きく！','前の画面に戻って！','そこ写真撮りたい！','時間ください！','書き終わりました！','まだ書いてます！',
+'賛成！','反対かも！','どっちだろう？','みんなはどう思う？','それもあり！','別の考えがあります','比べてみたい！','もっと知りたい！','今日これ覚えて帰る','授業についていくぞ！'
+];
+const status=document.getElementById('status');
+async function send(body){
+ body=String(body||'').trim();if(!/^\d{4}$/.test(room)){status.textContent='授業コードがありません';return}
+ if(!body)return;document.querySelectorAll('button').forEach(b=>b.disabled=true);status.textContent='送信中…';
+ try{const res=await fetch(URL+'/rest/v1/sushi_kome_comments',{method:'POST',headers:{apikey:KEY,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify({room_code:room,body})});if(!res.ok)throw new Error();status.textContent='送信しました 🍚'}catch(e){status.textContent='送信できませんでした'}finally{document.querySelectorAll('button').forEach(b=>b.disabled=false)}
+}
+document.querySelectorAll('[data-message]').forEach(b=>b.onclick=()=>send(b.dataset.message));
+document.getElementById('random').onclick=()=>send(randomMessages[Math.floor(Math.random()*randomMessages.length)]);
+document.getElementById('send').onclick=()=>{const t=document.getElementById('text');send(t.value).then(()=>{t.value='';t.focus()})};
+document.getElementById('text').addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')document.getElementById('send').click()});
+</script></body></html>
