@@ -25,7 +25,7 @@ button,input,textarea{font:inherit}.page{width:min(100% - 24px,1000px);margin:au
 <section class="panel hidden" id="teacher">
 <h2 style="text-align:center;margin:0">授業コード</h2><div class="code" id="teacherCode">----</div><p class="status" id="teacherStatus">作成中…</p>
 <div class="teacher-tools"><textarea class="field" id="boardInput" placeholder="英文・設問・文章をここに貼り付け"></textarea><button class="btn primary" id="showText">黒板に表示</button></div>
-<div class="actions"><label class="btn secondary" style="cursor:pointer">🖼️ 画像を表示<input type="file" id="imageInput" accept="image/*" hidden></label><button class="btn secondary" id="clearBoard">黒板クリア</button><button class="btn secondary" id="clearPointers">指をクリア</button><button class="btn secondary" id="penToggle">✏️ 生徒ペン OFF</button><button class="btn secondary" id="clearInk">🧽 ペン全消去</button></div>
+<div class="actions"><button class="btn orange" id="shareScreen">🖥️ 今の画面を教材にする</button><button class="btn secondary hidden" id="captureScreen">📸 画面を更新</button><button class="btn secondary hidden" id="stopScreen">共有終了</button><label class="btn secondary" style="cursor:pointer">🖼️ 画像を表示<input type="file" id="imageInput" accept="image/*" hidden></label><button class="btn secondary" id="clearBoard">黒板クリア</button><button class="btn secondary" id="clearPointers">指をクリア</button><button class="btn secondary" id="penToggle">✏️ 生徒ペン OFF</button><button class="btn secondary" id="clearInk">🧽 ペン全消去</button></div>
 <div class="modebar"><button class="mode active" data-mode="pointer">☝️ 指</button><button class="mode" data-mode="heat">🔥 ヒート</button><button class="mode" data-mode="both">☝️＋🔥</button></div>
 <input class="field" id="promptInput" maxlength="80" value="わからない・重要だと思う場所をタップ！" style="text-align:center;font-weight:900">
 <div class="prompt" id="teacherPrompt">わからない・重要だと思う場所をタップ！</div>
@@ -49,7 +49,7 @@ const SB_KEY='sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7';
 const sb=window.supabase.createClient(SB_URL,SB_KEY);
 const $=s=>document.querySelector(s);
 const api=async(path,options={})=>{const headers={apikey:SB_KEY,'Content-Type':'application/json',...(options.headers||{})};const r=await fetch(SB_URL+'/rest/v1/'+path,{...options,headers});if(!r.ok)throw new Error('HTTP '+r.status);const t=await r.text();return t?JSON.parse(t):null};
-let room='',channel=null,role='',mode='pointer',penAllowed=false,studentTool='point',drawing=false,lastPt=null,boardState={type:'text',content:'ここが共有黒板です。\n英文や画像を表示してください。'},promptText='わからない・重要だと思う場所をタップ！',taps=0;
+let room='',channel=null,role='',mode='pointer',penAllowed=false,studentTool='point',drawing=false,lastPt=null,screenStream=null,boardState={type:'text',content:'ここが共有黒板です。\n英文や画像を表示してください。'},promptText='わからない・重要だと思う場所をタップ！',taps=0;
 const showPanel=id=>{['#roles','#teacher','#student'].forEach(x=>$(x).classList.add('hidden'));$(id).classList.remove('hidden')};
 async function createRoom(){leaveChannel();$('#teacherStatus').textContent='作成中…';for(let i=0;i<8;i++){const c=String(Math.floor(1000+Math.random()*9000));try{await api('sushi_kome_rooms',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({room_code:c})});room=c;role='teacher';$('#teacherCode').textContent=c;connect(c,'teacher');$('#teacherStatus').textContent='準備OK。生徒はこの4桁で入室。';return}catch(e){}}$('#teacherStatus').textContent='部屋を作れませんでした。'};
 async function roomExists(c){try{const d=await api('sushi_kome_rooms?select=room_code,active&room_code=eq.'+encodeURIComponent(c)+'&limit=1');return !!(d&&d[0]&&d[0].active)}catch(e){return false}}
@@ -66,6 +66,9 @@ function connect(c,r){leaveChannel();channel=sb.channel('sushiban:'+c,{config:{b
  .subscribe(status=>{if(status==='SUBSCRIBED'){if(r==='student')channel.send({type:'broadcast',event:'request-state',payload:{}})}});
 }
 function send(event,payload){if(channel)channel.send({type:'broadcast',event,payload})}
+async function startScreenShare(){try{screenStream=await navigator.mediaDevices.getDisplayMedia({video:{frameRate:5},audio:false});$('#captureScreen').classList.remove('hidden');$('#stopScreen').classList.remove('hidden');$('#shareScreen').textContent='🖥️ 共有中';screenStream.getVideoTracks()[0].addEventListener('ended',stopScreenShare);await captureCurrentScreen()}catch(e){$('#teacherStatus').textContent='画面共有はキャンセルされました。'}}
+async function captureCurrentScreen(){if(!screenStream)return;const v=document.createElement('video');v.srcObject=screenStream;v.muted=true;v.playsInline=true;await v.play();await new Promise(r=>setTimeout(r,120));const maxW=1280,scale=Math.min(1,maxW/v.videoWidth),w=Math.max(1,Math.round(v.videoWidth*scale)),h=Math.max(1,Math.round(v.videoHeight*scale)),cv=document.createElement('canvas');cv.width=w;cv.height=h;cv.getContext('2d').drawImage(v,0,0,w,h);const data=cv.toDataURL('image/jpeg',.62);setBoard({type:'image',content:data});clearCanvas($('#teacherCanvas'));send('clear-ink',{});$('#teacherStatus').textContent='現在の画面を教材として配信しました。'}
+function stopScreenShare(){if(screenStream){screenStream.getTracks().forEach(t=>t.stop());screenStream=null}$('#captureScreen').classList.add('hidden');$('#stopScreen').classList.add('hidden');$('#shareScreen').textContent='🖥️ 今の画面を教材にする'}
 function sendState(){send('board',boardState);send('prompt',{text:promptText});send('mode',{mode});send('pen-permission',{allowed:penAllowed})}
 function setBoard(state,broadcast=true){boardState=state;renderBoard($('#teacherBoard'),state);if(broadcast)send('board',state)}
 function renderBoard(el,state){el.replaceChildren();if(state.type==='image'){const img=document.createElement('img');img.src=state.content;img.alt='共有教材';el.appendChild(img)}else{const d=document.createElement('div');d.className='board-text';d.textContent=state.content||'';el.appendChild(d)}}
@@ -81,7 +84,7 @@ function renderPointer(p){if(!p||typeof p.x!=='number')return;taps++;$('#tapCoun
  if(mode==='heat'||mode==='both'){const h=document.createElement('div');h.className='heat';h.style.left=(p.x*100)+'%';h.style.top=(p.y*100)+'%';layer.appendChild(h)}
  const pulse=document.createElement('div');pulse.className='pulse';pulse.style.left=(p.x*100)+'%';pulse.style.top=(p.y*100)+'%';layer.appendChild(pulse);setTimeout(()=>pulse.remove(),1000)
 }
-$('#teacherBtn').onclick=()=>{showPanel('#teacher');createRoom()};
+$('#teacherBtn').onclick=()=>{showPanel('#teacher');createRoom()};$('#shareScreen').onclick=startScreenShare;$('#captureScreen').onclick=captureCurrentScreen;$('#stopScreen').onclick=stopScreenShare;
 $('#studentBtn').onclick=()=>showPanel('#student');
 $('#teacherBack').onclick=()=>{leaveChannel();showPanel('#roles')};
 $('#newRoom').onclick=createRoom;
@@ -101,7 +104,7 @@ $('#studentLayer').addEventListener('pointerdown',e=>{e.preventDefault();const p
 $('#studentLayer').addEventListener('pointermove',e=>{if(!drawing||studentTool!=='pen'||!penAllowed)return;e.preventDefault();const p=coords(e,$('#studentLayer'));if(!lastPt)return;const stroke={x1:lastPt.x,y1:lastPt.y,x2:p.x,y2:p.y};drawStroke($('#studentCanvas'),stroke);send('stroke',stroke);lastPt=p});
 const stopDraw=()=>{drawing=false;lastPt=null};$('#studentLayer').addEventListener('pointerup',stopDraw);$('#studentLayer').addEventListener('pointercancel',stopDraw);
 $('#leaveBtn').onclick=()=>{leaveChannel();$('#studentBoard').classList.add('hidden');$('#roomInput').value='';$('#joinStatus').textContent=''};
-window.addEventListener('resize',()=>{fitCanvas($('#teacherCanvas'));fitCanvas($('#studentCanvas'))});window.addEventListener('beforeunload',leaveChannel);
+window.addEventListener('resize',()=>{fitCanvas($('#teacherCanvas'));fitCanvas($('#studentCanvas'))});window.addEventListener('beforeunload',()=>{stopScreenShare();leaveChannel()});
 </script>
 </body>
 </html>
