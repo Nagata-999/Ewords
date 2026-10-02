@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f3eb"><title>すしアバター｜すし単</title><link rel="stylesheet" href="avatar-studio.css?v=20261002-1"></head>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f3eb"><title>すしアバター｜すし単</title><link rel="stylesheet" href="avatar-studio.css?v=20261002-2"></head>
 <body>
 <header class="site-header"><a class="brand" href="../index.html"><svg width="31" height="26" viewBox="0 0 36 28" aria-hidden="true"><path d="M5 15Q1 27 17 26Q33 28 32 14Z" fill="#fffaf0" stroke="#3e332e" stroke-width="2"/><path d="M3 16Q1 2 17 3Q35 1 34 16Z" fill="#ee9857" stroke="#3e332e" stroke-width="2"/><path d="M11 6L17 12M20 5L26 12" stroke="#fff3dc" stroke-width="2"/></svg>すし単<span>アバター</span></a><a href="sushi-gacha.html" class="text-button">すしジェム <b id="gemBalance">0</b></a></header>
 <main>
@@ -8,15 +8,16 @@
 <div class="workspace">
 <section class="fitting" aria-label="アバターのプレビュー">
 <div class="section-heading"><h2>コーデ</h2><span class="live-dot">動きをプレビュー</span></div>
+<div id="genderControls" class="gender-controls" role="group" aria-label="性別"><button data-gender="male" aria-pressed="false">男性</button><button data-gender="female" aria-pressed="false">女性</button></div>
 <div class="stage"><div class="stage-disc"></div><div id="hero" class="hero"></div></div>
 <div id="directionControls" class="directions" aria-label="向き"><button data-direction="left" aria-label="左向き">←</button><button data-direction="front" aria-pressed="true">前</button><button data-direction="back">後ろ</button><button data-direction="right" aria-label="右向き">→</button></div>
 <div id="motionControls" class="motion-grid" aria-label="動き"><button data-action="walk">歩く</button><button data-action="idle" aria-pressed="true">待つ</button><button data-action="wave">手を振る</button><button data-action="sit">座る</button><button data-action="celebrate">喜ぶ</button></div>
 <div class="worn"><span>選択中</span><p id="wearing"></p></div>
 <div class="save-row"><button id="equipLook">このコーデを保存</button><button id="cancelLook">着用中に戻す</button></div><p id="equipHelp" class="collection-info"></p>
+<div class="equipment"><div class="section-heading"><h3>衣装</h3><button id="resetLook" class="text-button">基本に戻す</button></div><div id="equipmentControls"></div></div>
 <div class="appearance"><button id="appearanceToggle" aria-expanded="true" aria-controls="appearancePanel">顔・表情・髪 <span>−</span></button><div id="appearancePanel">
 <label>輪郭<select id="faceShape"><option value="0">標準</option><option value="1">丸顔</option><option value="2">シャープ</option><option value="3">面長</option></select></label>
 <label>表情<select id="expression"><option value="0">ふつう</option><option value="1">笑顔</option><option value="2">得意顔</option><option value="3">びっくり</option><option value="4">眠そう</option><option value="5">真剣</option></select></label>
-<label>髪のタイプ<select id="gender"><option value="male">ショート系</option><option value="female">ロング系</option></select></label>
 <label>髪型<select id="hair"></select></label>
 <label>髪色<select id="hairColor"><option value="0">ブラウン</option><option value="1">キャラメル</option><option value="2">ブルーブラック</option></select></label>
 <label>肌の色<select id="skin"><option value="0">ライト</option><option value="1">ミディアム</option><option value="2">ディープ</option></select></label>
@@ -26,12 +27,6 @@
 </div></div>
 <div class="saved-heading"><h3>お気に入りコーデ</h3><span>3つまで保存</span></div><div id="savedLooks" class="saved-looks"></div>
 </section>
-<section class="closet" aria-label="衣装を選ぶ">
-<div class="section-heading"><h2>クローゼット</h2><button id="resetLook" class="text-button">基本に戻す</button></div>
-<div class="set-grid" id="sets"><button data-set="chef"><span class="set-art"></span><strong>すし職人</strong></button><button data-set="casual"><span class="set-art"></span><strong>放課後</strong></button><button data-set="wizard"><span class="set-art"></span><strong>星の魔法使い</strong></button></div>
-<p id="collectionCount" class="collection-info"></p><div class="closet-toolbar"><div class="tabs" id="slotTabs" aria-label="衣装の種類"></div><label class="legacy-toggle"><input type="checkbox" id="showLegacy" checked> 未所持アイテムも表示</label></div>
-<div class="item-grid" id="itemGrid"></div>
-</section>
 </div>
 <section class="home-preview" aria-label="画面下での見え方"><div class="section-heading"><h2>歩行プレビュー</h2><span>タップで手を振る</span></div>
 <div class="sample-home"><div class="sample-home-top"><strong>すし単</strong><span>ホームの表示イメージ</span></div><div class="sample-cards"><div><span>01</span><strong>単語学習</strong></div><div><span>02</span><strong>復習</strong></div><div><span>03</span><strong>ゲーム</strong></div></div>
@@ -40,5 +35,5 @@
 </section>
 <footer><p>衣装・アバターはこのブラウザに保存されます。未所持アイテムはガチャで入手できます。</p><p id="status" role="status" aria-live="polite"></p></footer>
 </main>
-<script src="avatar.js?v=20261002-1"></script><script src="avatar-engine.js?v=20261002-1"></script><script src="avatar-state.js?v=20261002-1"></script><script src="avatar-studio.js?v=20261002-1"></script>
+<script src="avatar.js?v=20261002-1"></script><script src="avatar-engine.js?v=20261002-1"></script><script src="avatar-state.js?v=20261002-1"></script><script src="avatar-studio.js?v=20261002-2"></script>
 </body></html>
