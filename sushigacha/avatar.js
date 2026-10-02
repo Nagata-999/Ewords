@@ -30,7 +30,18 @@ const ITEMS=[
   {id:'acc-headphones',name:'音楽ヘッドホン',rarity:'R',slot:'accessory',kind:'headphones'},
   {id:'acc-bag',name:'おでかけポシェット',rarity:'R',slot:'accessory',kind:'bag'},
   {id:'acc-star',name:'きらめく星のペンダント',rarity:'SR',slot:'accessory',kind:'star'},
-  {id:'acc-wings',name:'夢みる天使の羽',rarity:'SR',slot:'accessory',kind:'wings'}
+  {id:'acc-wings',name:'夢みる天使の羽',rarity:'SR',slot:'accessory',kind:'wings'},
+  {"id":"studio-chef","name":"すし職人の上着","slot":"top","kind":"chef","color":"#fff9ec","accent":"#39877e","rarity":"R"},
+  {"id":"studio-hoodie","name":"放課後パーカー","slot":"top","kind":"hoodie","color":"#ee9857","accent":"#cf7440","rarity":"N"},
+  {"id":"studio-wizard","name":"星のチュニック","slot":"top","kind":"cosmic","color":"#425875","accent":"#e8b557","rarity":"SR"},
+  {"id":"studio-headband","name":"職人の鉢巻き","slot":"hat","kind":"headband","rarity":"N"},
+  {"id":"studio-wizard-hat","name":"星のとんがり帽子","slot":"hat","kind":"wizard","rarity":"SR"},
+  {"id":"studio-backpack","name":"青緑のリュック","slot":"back","kind":"backpack","rarity":"R"},
+  {"id":"studio-cape","name":"星のマント","slot":"back","kind":"cape","rarity":"SR"},
+  {"id":"studio-boots","name":"冒険のブーツ","slot":"shoes","kind":"boots","rarity":"R"},
+  {"id":"studio-sneakers","name":"いつものスニーカー","slot":"shoes","kind":"sneakers","rarity":"STARTER"},
+  {"id":"studio-wand","name":"星の杖","slot":"hand","kind":"wand","rarity":"SR"},
+  {"id":"studio-tea","name":"お茶の湯のみ","slot":"hand","kind":"tea","rarity":"N"}
 ];
 
 const HAIR_NAMES={
