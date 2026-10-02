@@ -5,7 +5,7 @@
   const status=(text,error=false)=>{$('status').textContent=text;$('status').classList.toggle('error',error);};
   try{state=Store.load();}catch(e){storageBlocked=true;state={avatar:A.normalize(),looks:[null,null,null],settings:{size:96,reduced:false,hidden:false}};status(e.message,true);}
   equipped={...state.avatar};
-  let action='idle',direction='front',slot='top',showLegacy=true;
+  let action='idle',direction='front',slot='top';
   const hero=A.mount($('hero'),state.avatar),walker=A.mount($('walkerArt'),state.avatar,{action:'walk',direction:'right'});
   function refreshBalance(){const current=Store.load();state.owned=current.owned;state.gems=current.gems;$('gemBalance').textContent=state.gems.toLocaleString();return current;}
   async function persist(message){try{await Store.saveSettings(state.settings);if(message)status(message);}catch(e){status(e.message,true);}}
@@ -18,15 +18,11 @@
   function renderWardrobe(){
     const missing=Store.missing(state.avatar,state.owned||[]);$('equipLook').disabled=saving||storageBlocked||missing.length>0;$('equipHelp').textContent=missing.length?'未所持のアイテムを試着中です。所持品だけのコーデを保存できます。':'顔・衣装を選び、「このコーデを保存」で反映します。';$('collectionCount').textContent=(state.owned||[]).filter(id=>A.item(id)).length+' / '+A.catalog.length+' 点 所持';
     $('wearing').textContent=Object.keys(A.slots).map(k=>A.item(state.avatar[k])?.name).filter(Boolean).join(' ・ ');
-    for(const button of $('sets').querySelectorAll('[data-set]')){
-      const set=A.sets[button.dataset.set];button.querySelector('.set-art').innerHTML=A.render({...state.avatar,...set});
-      button.setAttribute('aria-pressed',String(Object.keys(set).every(k=>state.avatar[k]===set[k])));
-    }
     $('itemGrid').replaceChildren();
-    let items=A.catalog.filter(i=>i.slot===slot&&(showLegacy||(state.owned||[]).includes(i.id)));
+    let items=A.catalog.filter(i=>i.slot===slot&&(state.owned||[]).includes(i.id));
     items.sort((a,b)=>Number((state.owned||[]).includes(b.id))-Number((state.owned||[]).includes(a.id)));
     if(!['top','bottom'].includes(slot))items=[{id:null,name:'つけない',slot},...items];
-    if(!items.length){const p=document.createElement('p');p.textContent='「未所持アイテムも表示」で試着できます。';$('itemGrid').append(p);}
+    if(!items.length){const p=document.createElement('p');p.textContent='この種類のアイテムはまだ持っていません。ガチャなどで入手すると表示されます。';$('itemGrid').append(p);}
     for(const i of items){
       const b=document.createElement('button');b.className='item-card';b.dataset.item=i.id||'none';b.setAttribute('aria-pressed',String(state.avatar[slot]===i.id));b.setAttribute('aria-label',i.name);
       const art=document.createElement('span');art.className='item-art';art.innerHTML=A.render({...state.avatar,[slot]:i.id});
@@ -37,9 +33,7 @@
     renderAppearance();
   }
   for(const [key,label] of Object.entries(A.slots)){const b=document.createElement('button');b.textContent=label;b.dataset.slot=key;b.setAttribute('aria-pressed',String(key===slot));b.onclick=()=>{slot=key;for(const x of $('slotTabs').children)x.setAttribute('aria-pressed',String(x===b));renderWardrobe();};$('slotTabs').append(b);}
-  $('sets').addEventListener('click',e=>{const b=e.target.closest('[data-set]');if(b)setAvatar({...state.avatar,...A.sets[b.dataset.set]});});
   $('resetLook').onclick=()=>setAvatar({...state.avatar,...A.sets.basic});
-  $('showLegacy').onchange=e=>{showLegacy=e.target.checked;renderWardrobe();};
   $('genderControls').onclick=e=>{const button=e.target.closest('[data-gender]');if(button)setAvatar({...state.avatar,gender:button.dataset.gender});};
   function renderAppearance(){
     $('genderControls').querySelectorAll('[data-gender]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.gender===state.avatar.gender))); $('hair').replaceChildren();
