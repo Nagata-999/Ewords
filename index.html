@@ -91,7 +91,7 @@ button,.login-claim,.chest,.chest-start,.chest-modal{touch-action:manipulation!i
 .weak-review-modal[hidden]{display:none}.weak-review-card{width:min(94vw,430px);padding:24px;border-radius:24px;background:#fffaf2;border:1px solid #f1d7bc;box-shadow:0 24px 70px rgba(0,0,0,.28)}
 .weak-review-card h2{margin:0 0 18px;text-align:center;font-size:22px}.weak-review-word{text-align:center;font-size:32px;font-weight:1000;margin:8px 0 20px}
 .weak-review-choices{display:grid;gap:10px}.weak-review-choice{width:100%;padding:13px 14px;border:1px solid #ead7bf;border-radius:14px;background:#fff;color:#172033;font-weight:900;font-size:15px;cursor:pointer}
-.weak-review-choice:disabled{cursor:default;opacity:.8}.weak-review-result{min-height:24px;margin:15px 0 0;text-align:center;font-weight:1000}.weak-review-close{width:100%;margin-top:12px;padding:12px;border:0;border-radius:14px;background:#172033;color:#fff;font-weight:900;cursor:pointer}
+.weak-review-choice:disabled{cursor:default;opacity:.8}.weak-review-start{width:100%;margin:10px 0 4px;padding:12px 14px;border:0;border-radius:14px;background:#0f766e;color:#fff;font-weight:1000;font-size:15px;cursor:pointer}.weak-review-actions{display:flex;gap:10px;margin-top:12px}.weak-review-actions button{flex:1;margin-top:0}.weak-review-result{min-height:24px;margin:15px 0 0;text-align:center;font-weight:1000}.weak-review-close{width:100%;margin-top:12px;padding:12px;border:0;border-radius:14px;background:#172033;color:#fff;font-weight:900;cursor:pointer}
 </style>
 </head>
 <body>
@@ -101,7 +101,7 @@ button,.login-claim,.chest,.chest-start,.chest-modal{touch-action:manipulation!i
 <div class="weak-review-word" id="weakReviewWord"></div>
 <div class="weak-review-choices" id="weakReviewChoices"></div>
 <div class="weak-review-result" id="weakReviewResult" aria-live="polite"></div>
-<button class="weak-review-close" id="weakReviewClose" type="button" hidden>閉じる</button>
+<div class="weak-review-actions"><button class="weak-review-close" id="weakReviewNext" type="button" hidden>次へ</button><button class="weak-review-close" id="weakReviewClose" type="button" hidden>閉じる</button></div>
 </div></div>
 <div aria-hidden="true" class="app-splash" id="appSplash">
 <div class="app-splash-inner">
@@ -173,6 +173,7 @@ button,.login-claim,.chest,.chest-start,.chest-modal{touch-action:manipulation!i
 <section class="shared-learning-home" id="sharedLearning" aria-label="全ゲーム共通の復習">
 <strong>📚 全ゲーム共通・苦手単語</strong>
 <p class="learning-counts"><span>苦手単語 <b data-learning="weak">0</b>語</span><span>今日の復習 <b data-learning="today">0</b>語</span><span>今日克服 <b data-learning="mastered">0</b>語</span></p>
+<button class="weak-review-start" id="weakReviewStart" type="button">苦手単語を復習</button>
 <details><summary>苦手単語を復習</summary><p>復習するゲームを選んでください。</p>
 <a href="sushitan.html?review=weak">すし単</a><a href="sushi_run.html?review=weak">RUN</a><a href="sushian.html?review=weak">すし暗</a><a href="sushiflow.html?review=weak">flow</a><a href="sushigiri.html?review=weak">すし斬り</a><a href="sushi-run3D.html?review=weak">3D</a>
 <p style="font-size:12px">このブラウザの対応ゲームで学習履歴を共有します。今日の復習は、日本時間で今日まだ復習していない苦手単語の数です。</p></details>
@@ -432,64 +433,36 @@ if ("serviceWorker" in navigator) {
 <script>
 (function(){
   'use strict';
-  const SLOT_KEY='sushitan_weak_review_slots_v1';
-  const GAME_ID='home_review';
-  const REWARD=10;
-  const jstParts=()=>{
-    const d=new Date(Date.now()+9*3600000);
-    return {date:d.toISOString().slice(0,10),hour:d.getUTCHours()};
-  };
+  const SLOT_KEY='sushitan_weak_review_slots_v1', GAME_ID='home_review', REWARD=10;
+  let continuous=false;
+  const jstParts=()=>{const d=new Date(Date.now()+9*3600000);return {date:d.toISOString().slice(0,10),hour:d.getUTCHours()};};
   const slotFor=h=>h<12?'morning':h<18?'day':'night';
   const readSlots=()=>{try{return JSON.parse(localStorage.getItem(SLOT_KEY)||'{}')||{};}catch{return {};}};
-  const markSlot=(date,slot)=>{
-    const data=readSlots();
-    if(data.date!==date){data.date=date;data.slots={};}
-    data.slots=data.slots||{};data.slots[slot]=true;
-    localStorage.setItem(SLOT_KEY,JSON.stringify(data));
-  };
-  const alreadyShown=(date,slot)=>{
-    const data=readSlots();return data.date===date&&!!data.slots?.[slot];
-  };
-  const shuffle=a=>{
-    a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;
-  };
-  function start(){
-    const learning=window.SushiLearning,gem=window.SushiGem;
-    if(!learning||!gem?.awardGems)return;
-    const {date,hour}=jstParts(),slot=slotFor(hour);
-    if(alreadyShown(date,slot))return;
-    const weak=learning.getWeakWords();
-    if(!weak.length)return;
-    const target=weak[Math.floor(Math.random()*weak.length)];
-    const registry=window.SushiWordRegistry?.words||[];
-    const meaning=w=>w.ja||w.jp||w.meaning||w.meaning_ja||w.japanese||'';
-    const correct=meaning(target);
-    if(!correct)return;
-    const distractors=shuffle(registry.filter(w=>w.word_id!==target.word_id&&meaning(w)&&meaning(w)!==correct)).slice(0,3);
-    if(distractors.length<3)return;
-    const choices=shuffle([target,...distractors]);
-    const modal=document.getElementById('weakReviewModal'),word=document.getElementById('weakReviewWord');
-    const list=document.getElementById('weakReviewChoices'),result=document.getElementById('weakReviewResult'),close=document.getElementById('weakReviewClose');
-    word.textContent=target.en||target.word||'';list.innerHTML='';result.textContent='';close.hidden=true;
-    choices.forEach(choice=>{
-      const b=document.createElement('button');b.type='button';b.className='weak-review-choice';b.textContent=meaning(choice);
-      b.addEventListener('click',()=>{
-        list.querySelectorAll('button').forEach(x=>x.disabled=true);
-        const ok=choice.word_id===target.word_id;
-        learning.recordAnswer(target.word_id,ok,GAME_ID);
-        if(ok){
-          const reward=gem.awardGems('weak-review',REWARD,`weak-review:${date}:${slot}`);
-          result.textContent=reward.duplicate?'正解！':'正解！ +10💎';
-        }else result.textContent=`不正解　${correct}`;
-        close.hidden=false;
-      },{once:true});
-      list.appendChild(b);
-    });
-    markSlot(date,slot);
-    modal.hidden=false;
-    close.onclick=()=>{modal.hidden=true;};
+  const markSlot=(date,slot)=>{const data=readSlots();if(data.date!==date){data.date=date;data.slots={};}data.slots=data.slots||{};data.slots[slot]=true;localStorage.setItem(SLOT_KEY,JSON.stringify(data));};
+  const alreadyShown=(date,slot)=>{const data=readSlots();return data.date===date&&!!data.slots?.[slot];};
+  const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+  const meaning=w=>w.ja||w.jp||w.meaning||w.meaning_ja||w.japanese||'';
+  function showQuestion(rewarded=false){
+    const learning=window.SushiLearning,gem=window.SushiGem;if(!learning)return false;
+    const weak=learning.getWeakWords();if(!weak.length){alert('苦手単語はありません。');return false;}
+    const target=weak[Math.floor(Math.random()*weak.length)],correct=meaning(target),registry=window.SushiWordRegistry?.words||[];
+    if(!correct)return false;
+    const distractors=shuffle(registry.filter(w=>w.word_id!==target.word_id&&meaning(w)&&meaning(w)!==correct)).slice(0,3);if(distractors.length<3)return false;
+    const modal=document.getElementById('weakReviewModal'),word=document.getElementById('weakReviewWord'),list=document.getElementById('weakReviewChoices');
+    const result=document.getElementById('weakReviewResult'),close=document.getElementById('weakReviewClose'),next=document.getElementById('weakReviewNext');
+    word.textContent=target.en||target.word||'';list.innerHTML='';result.textContent='';close.hidden=false;next.hidden=true;
+    shuffle([target,...distractors]).forEach(choice=>{const b=document.createElement('button');b.type='button';b.className='weak-review-choice';b.textContent=meaning(choice);
+      b.onclick=()=>{list.querySelectorAll('button').forEach(x=>x.disabled=true);const ok=choice.word_id===target.word_id;learning.recordAnswer(target.word_id,ok,GAME_ID);
+        if(ok&&rewarded&&gem?.awardGems){const {date,hour}=jstParts(),slot=slotFor(hour);const r=gem.awardGems('weak-review',REWARD,`weak-review:${date}:${slot}`);result.textContent=r.duplicate?'正解！':'正解！ +10💎';}
+        else result.textContent=ok?'正解！':`不正解　${correct}`;
+        next.hidden=!continuous;};list.appendChild(b);});
+    modal.hidden=false;return true;
   }
-  window.addEventListener('load',()=>setTimeout(start,350));
+  function dailyStart(){const learning=window.SushiLearning,gem=window.SushiGem;if(!learning||!gem?.awardGems)return;const {date,hour}=jstParts(),slot=slotFor(hour);if(alreadyShown(date,slot)||!learning.getWeakWords().length)return;continuous=false;if(showQuestion(true))markSlot(date,slot);}
+  window.addEventListener('load',()=>setTimeout(dailyStart,350));
+  document.getElementById('weakReviewStart')?.addEventListener('click',()=>{continuous=true;showQuestion(false);});
+  document.getElementById('weakReviewNext')?.addEventListener('click',()=>showQuestion(false));
+  document.getElementById('weakReviewClose')?.addEventListener('click',()=>{document.getElementById('weakReviewModal').hidden=true;continuous=false;});
 })();
 </script>
 </body>
