@@ -36,7 +36,18 @@
     if(gems>0)window.dispatchEvent(new CustomEvent('sushi-avatar-reaction',{detail:{kind:'combo',text:`+${gems} GEM${gems===1?'':'S'}!`}}));
     return {gems,remainder,balance:ledger.gems,duplicate:false};
   }
-  window.SushiGem={awardScore,balance};
+  function awardGems(source,amount,awardId){
+    source=String(source||'reward');amount=Math.max(0,Math.floor(Number(amount)||0));
+    const ledger=read(),r=rewards(ledger),id=awardId?String(awardId):'';
+    if(id&&r.awardIds.includes(id))return {gems:0,balance:balance(),duplicate:true};
+    if(id){r.awardIds.push(id);if(r.awardIds.length>MAX_AWARD_IDS)r.awardIds.splice(0,r.awardIds.length-MAX_AWARD_IDS);}
+    ledger.gems=(Number.isSafeInteger(ledger.gems)&&ledger.gems>=0?ledger.gems:0)+amount;
+    write(ledger);
+    window.dispatchEvent(new CustomEvent('sushi-gems-earned',{detail:{source,gems:amount,balance:ledger.gems}}));
+    if(amount>0)window.dispatchEvent(new CustomEvent('sushi-avatar-reaction',{detail:{kind:'combo',text:`+${amount} GEM${amount===1?'':'S'}!`}}));
+    return {gems:amount,balance:ledger.gems,duplicate:false};
+  }
+  window.SushiGem={awardScore,awardGems,balance};
 
   function loadOnce(match,src){
     if(document.querySelector(`script[src*="${match}"]`))return;
