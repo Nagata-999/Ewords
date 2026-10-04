@@ -1,0 +1,23 @@
+name: Check dictionary beta
+on:
+  push:
+    paths: ['data/dictionary/**', 'scripts/*dictionary*', 'shared/dictionary*', 'shared/learning.js', 'dictionary/**', 'sushian.html', 'tests/dictionary*']
+  pull_request:
+    paths: ['data/dictionary/**', 'scripts/*dictionary*', 'shared/dictionary*', 'shared/learning.js', 'dictionary/**', 'sushian.html', 'tests/dictionary*']
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: python scripts/build-dictionary.py
+      - run: git diff --exit-code -- dictionary data/dictionary-generated.json data/dictionary-build-report.json 404.html
+      - run: python scripts/check-dictionary.py
+      - run: node tests/dictionary.cjs
+      - run: node tests/shared-learning.cjs

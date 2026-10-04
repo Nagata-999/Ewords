@@ -1,4 +1,4 @@
-const CACHE_NAME = "sushitan-v4-blast";
+const CACHE_NAME = "sushitan-v5-dictionary";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -29,6 +29,8 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("fetch", event => {
   if (event.request.method !== "GET") return;
+  // Keep dictionary 404 responses intact and avoid caching thousands of word pages.
+  if (new URL(event.request.url).pathname.startsWith('/dictionary/')) return;
   event.respondWith(
     fetch(event.request)
       .then(response => {
