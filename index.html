@@ -93,6 +93,10 @@ button,.login-claim,.chest,.chest-start,.chest-modal{touch-action:manipulation!i
 .weak-review-choices{display:grid;gap:10px}.weak-review-choice{width:100%;padding:13px 14px;border:1px solid #ead7bf;border-radius:14px;background:#fff;color:#172033;font-weight:900;font-size:15px;cursor:pointer}
 .weak-review-choice:disabled{cursor:default;opacity:.8}.weak-review-start{width:100%;margin:10px 0 4px;padding:12px 14px;border:0;border-radius:14px;background:#0f766e;color:#fff;font-weight:1000;font-size:15px;cursor:pointer}.weak-review-actions{display:flex;gap:10px;margin-top:12px}.weak-review-actions button{flex:1;margin-top:0}.weak-review-result{min-height:24px;margin:15px 0 0;text-align:center;font-weight:1000}.weak-review-close{width:100%;margin-top:12px;padding:12px;border:0;border-radius:14px;background:#172033;color:#fff;font-weight:900;cursor:pointer}
 </style>
+<style>
+.dictionary-entry{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:20px 0 8px;padding:18px 20px;border:1px solid #99d5c5;border-radius:18px;background:#f0fdf8;color:#115e59;text-decoration:none;box-shadow:0 4px 14px rgba(15,118,110,.06)}
+.dictionary-entry strong{display:block;font-size:21px}.dictionary-entry small{display:block;margin-top:6px;font-size:13px;line-height:1.6;color:#475569}.dictionary-entry .dictionary-beta{display:inline-block;margin-left:6px;padding:2px 7px;border-radius:8px;background:#fff;font-size:12px;vertical-align:middle}.dictionary-entry:hover{background:#dcfce7}.dictionary-entry:focus-visible{outline:3px solid #0f766e;outline-offset:3px}.dictionary-entry-arrow{font-size:24px;flex-shrink:0}
+</style>
 </head>
 <body>
 <div class="weak-review-modal" id="weakReviewModal" hidden role="dialog" aria-modal="true" aria-labelledby="weakReviewTitle">
@@ -114,6 +118,8 @@ button,.login-claim,.chest,.chest-start,.chest-modal{touch-action:manipulation!i
 <div class="hamburger-overlay" id="hamburgerOverlay"></div>
 <aside aria-label="すし単サイトメニュー" class="side-menu" id="sideMenu">
 <h2>🍣 すし単</h2>
+<div class="menu-group-title">Dictionary｜辞書</div>
+<a class="menu-link" href="/dictionary/">📖 すし辞書 β<small>英単語の意味・発音・例文を調べる</small></a>
 <div class="menu-group-title">Games｜ゲーム</div>
 <a class="menu-link" href="sushian.html">すし暗<small>範囲指定・苦手単語復習</small></a>
 <a class="menu-link" href="sushitan.html">すし単<small>英単語ゲーム</small></a>
@@ -160,6 +166,10 @@ button,.login-claim,.chest,.chest-start,.chest-modal{touch-action:manipulation!i
 <span class="brand-mark">🍣 ENGLISH GAMES</span>
 <h1 class="title"><img alt="満点侍" src="/images/manten.png"/><span><span class="title-main">すし単</span><span class="title-sub">無料で遊べる英語ゲーム</span></span></h1>
 <p class="lead">すし単（すしたん）は、英検・IELTS・高校英語に対応した無料英語ゲーム集です。英単語ゲーム、語源ゲーム、英語タイピング、音読教材で学習できます。</p>
+<a class="dictionary-entry" href="/dictionary/">
+<span><strong>📖 すし辞書<span class="dictionary-beta">β版</span></strong><small>英単語の意味・発音・例文を検索。<br>調べた単語を、そのまま「すし暗」で覚えよう。</small></span>
+<span class="dictionary-entry-arrow" aria-hidden="true">→</span>
+</a>
 </section>
 
 <section class="login-bonus" id="loginBonus">
