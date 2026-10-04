@@ -143,6 +143,7 @@ $('#sendBtn').onclick=async()=>{
 };
 $('#commentInput').addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')$('#sendBtn').click()});
 $('#leaveBtn').onclick=()=>{studentRoom='';$('#composer').classList.add('hidden');$('#joinBox').classList.remove('hidden');$('#roomInput').value='';$('#joinStatus').textContent=''};
+const params=new URLSearchParams(location.search),presetRoom=params.get('room');if(presetRoom&&/^\d{4}$/.test(presetRoom)){show('#studentPanel');$('#roomInput').value=presetRoom;setTimeout(()=>$('#joinBtn').click(),0)}
 window.addEventListener('beforeunload',unsubscribe);
 </script>
 </body></html>
