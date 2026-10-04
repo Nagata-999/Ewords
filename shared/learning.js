@@ -44,6 +44,14 @@
   function refresh() {
     try {
       const length=localStorage.length;
+      // Load only dictionary cards that this browser has actually studied.
+      for(let i=0;scannedLength!==length && i<length;i++){
+        const key=localStorage.key(i);
+        if(key?.startsWith(PREFIX+'card:'))try{
+          const card=JSON.parse(localStorage.getItem(key));
+          if(key===PREFIX+'card:'+card.word_id)registerDictionaryWord(card,false);
+        }catch{}
+      }
       for (let i=0; scannedLength!==length && i<length; i++) {
         const key=localStorage.key(i);
         if (!key?.startsWith(EVENT) || events.has(key.slice(EVENT.length))) continue;
@@ -152,12 +160,24 @@
       if (saved) localStorage.setItem(marker,JSON.stringify({version:VERSION,at:Date.now()}));
     } catch { warn('以前の苦手記録を読み込めませんでした。元データは保持しています。'); }
   }
+  function registerDictionaryWord(card, save=true){
+    if(!card || !/^dictionary:sw-\d{5,}$/.test(card.word_id) ||
+       typeof card.en!=='string' || !card.en.trim() || card.en.length>150 ||
+       typeof card.jp!=='string' || !card.jp.trim() || card.jp.length>10000)return null;
+    const existing=resolveWordId(card.en);if(existing)return existing;
+    const clean={word_id:card.word_id,en:card.en,jp:card.jp,source_number:null};
+    if(byId.has(clean.word_id))return byId.get(clean.word_id).en===clean.en?clean.word_id:null;
+    byId.set(clean.word_id,clean);aliases.set(normalize(clean.en),clean.word_id);
+    if(save)try{localStorage.setItem(PREFIX+'card:'+clean.word_id,JSON.stringify(clean));}
+    catch{warn('この単語を保存できません。このページ内だけで学習を続けます。');}
+    return clean.word_id;
+  }
   refresh();
   importLegacy('sushitan','sushitan_word_review_v1',data=>data);
   // v2 supersedes v1: never import both versions of the same legacy state.
   let hasV2=false;try{hasV2=!!localStorage.getItem('sushian:v2:learningState');}catch{}
   importLegacy('sushian',hasV2?'sushian:v2:learningState':'sushian:v1:learningState',data=>data?.weakWords);
-  global.SushiLearning=Object.freeze({version:VERSION,CONFIG,resolveWordId,recordAnswer,getWeakWords,getReviewWords,getWordProgress,getStats,
+  global.SushiLearning=Object.freeze({version:VERSION,CONFIG,resolveWordId,recordAnswer,getWeakWords,getReviewWords,getWordProgress,getStats,registerDictionaryWord,
     getWord:id=>clone(byId.get(resolveWordId(id))),getStorageStatus:()=>({ok:!storageError,message:storageError}),
     exportData:()=>{refresh();return {version:VERSION,registry_version:global.SushiWordRegistry.version,events:clone([...events.values()]),words:clone([...progress.values()])};}});
   global.addEventListener('storage',event=>{if(event.key?.startsWith(PREFIX)){scannedLength=-1;refresh();global.dispatchEvent(new CustomEvent('sushi-learning-change'));}});
