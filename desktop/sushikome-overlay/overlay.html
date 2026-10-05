@@ -19,7 +19,7 @@ const KEY='sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7';
 let room='',lastSeen=0,timer=null,fontSize=42,speed=11,lane=0,mode='both',banChannel=null;
 
 const stage=document.getElementById('stage'),banStage=document.getElementById('banStage'),banItems=document.getElementById('banItems'),banCanvas=document.getElementById('banCanvas');
-function applyMode(){stage.style.display=mode==='ban'?'none':'block';banStage.style.display=mode==='kome'?'none':'block'}
+function applyMode(){stage.style.display='block';banStage.style.display=mode==='kome'?'none':'block'}
 function fitCanvas(){const d=devicePixelRatio||1;banCanvas.width=Math.round(innerWidth*d);banCanvas.height=Math.round(innerHeight*d);banCanvas.getContext('2d').setTransform(d,0,0,d,0,0)}
 function clearBan(){banItems.innerHTML='';fitCanvas();banCanvas.getContext('2d').clearRect(0,0,innerWidth,innerHeight)}
 function pointer(p){if(!p||typeof p.x!=='number')return;const e=document.createElement('div');e.className='pointer';e.style.left=p.x*100+'%';e.style.top=p.y*100+'%';const f=document.createElement('span');f.textContent='☝️';e.appendChild(f);if(p.name){const n=document.createElement('span');n.className='pointer-name';n.textContent=p.name;e.appendChild(n)}banItems.appendChild(e);setTimeout(()=>e.remove(),5000)}
