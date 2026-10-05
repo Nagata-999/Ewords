@@ -1,6 +1,6 @@
 {
   "name": "sushikome-overlay",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Sushi classroom comment and shared-board overlay for Windows",
   "main": "main.js",
   "author": "sushitan.net",
@@ -24,8 +24,7 @@
       "preload.js",
       "settings.html",
       "overlay.html",
-      "node_modules/@supabase/**",
-      "node_modules/@supabase/*/**"
+      "node_modules/**/*"
     ],
     "win": {
       "target": [
