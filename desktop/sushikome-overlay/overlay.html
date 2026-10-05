@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://rxyoyveykxdfrpomkltl.supabase.co wss://rxyoyveykxdfrpomkltl.supabase.co; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'">
 <title>すし米 Overlay</title>
 <style>
-html,body{width:100%;height:100%;margin:0;overflow:hidden;background:transparent!important;pointer-events:none}
+html,body{width:100%;height:100%;margin:0;overflow:hidden;background:transparent!important;pointer-events:none}body.teacher-pen{pointer-events:auto;cursor:crosshair}body.teacher-pen #banStage,body.teacher-pen #banCanvas{pointer-events:auto}
 #stage,#banStage{position:fixed;inset:0;overflow:hidden;pointer-events:none}#banCanvas{position:absolute;inset:0;width:100%;height:100%}.pointer{position:absolute;transform:translate(-50%,-65%);display:flex;align-items:center;gap:4px;font-size:34px;filter:drop-shadow(0 2px 3px #fff)}.pointer-name{font:900 13px "Yu Gothic UI","Meiryo",sans-serif;background:#172033;color:#fff;padding:3px 7px;border-radius:999px;white-space:nowrap}.pen-name{position:absolute;transform:translate(5px,-18px);font:900 12px "Yu Gothic UI","Meiryo",sans-serif;background:#fff;color:#be123c;padding:2px 6px;border-radius:6px}.sticky{position:absolute;transform:translate(-50%,-50%);max-width:38%;padding:7px 9px;border-radius:9px;background:#fff7a8;border:1px solid #eab308;box-shadow:0 2px 8px #0003;color:#172033;font:800 16px "Yu Gothic UI","Meiryo",sans-serif;white-space:pre-wrap}
 .comment{position:absolute;left:100vw;white-space:nowrap;font-family:"Yu Gothic UI","Meiryo",sans-serif;font-weight:900;color:white;text-shadow:-2px -2px 0 #111,2px -2px 0 #111,-2px 2px 0 #111,2px 2px 0 #111,0 3px 8px rgba(0,0,0,.75);will-change:transform;animation-name:fly;animation-timing-function:linear;animation-fill-mode:forwards}
 @keyframes fly{from{transform:translateX(0)}to{transform:translateX(calc(-100vw - 120%))}}
@@ -16,7 +16,7 @@ html,body{width:100%;height:100%;margin:0;overflow:hidden;background:transparent
 <script>
 const URL='https://rxyoyveykxdfrpomkltl.supabase.co';
 const KEY='sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7';
-let room='',lastSeen=0,timer=null,fontSize=42,speed=11,lane=0,mode='both',banChannel=null;
+let room='',lastSeen=0,timer=null,fontSize=42,speed=11,lane=0,mode='both',banChannel=null,teacherPen=false,drawing=false,lastPoint=null,teacherStrokeId='';
 
 const stage=document.getElementById('stage'),banStage=document.getElementById('banStage'),banItems=document.getElementById('banItems'),banCanvas=document.getElementById('banCanvas');
 function applyMode(){stage.style.display='block';banStage.style.display=mode==='kome'?'none':'block'}
@@ -25,6 +25,12 @@ function clearBan(){banItems.innerHTML='';fitCanvas();banCanvas.getContext('2d')
 function pointer(p){if(!p||typeof p.x!=='number')return;const e=document.createElement('div');e.className='pointer';e.style.left=p.x*100+'%';e.style.top=p.y*100+'%';const f=document.createElement('span');f.textContent='☝️';e.appendChild(f);if(p.name){const n=document.createElement('span');n.className='pointer-name';n.textContent=p.name;e.appendChild(n)}banItems.appendChild(e);setTimeout(()=>e.remove(),5000)}
 function stroke(p){if(!p)return;const ctx=banCanvas.getContext('2d');ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle='#e11d48';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(p.x1*innerWidth,p.y1*innerHeight);ctx.lineTo(p.x2*innerWidth,p.y2*innerHeight);ctx.stroke();if(p.name&&p.strokeId&&!banItems.querySelector('[data-pen="'+CSS.escape(p.strokeId)+'"]')){const n=document.createElement('div');n.className='pen-name';n.dataset.pen=p.strokeId;n.textContent=p.name;n.style.left=p.x1*100+'%';n.style.top=p.y1*100+'%';banItems.appendChild(n)}}
 function sticky(p){if(!p||!p.id)return;let e=banItems.querySelector('[data-sticky="'+CSS.escape(p.id)+'"]');if(!e){e=document.createElement('div');e.className='sticky';e.dataset.sticky=p.id;banItems.appendChild(e)}e.textContent=(p.name?p.name+'：':'')+(p.text||'');e.style.left=p.x*100+'%';e.style.top=p.y*100+'%'}
+function setTeacherPen(v){teacherPen=!!v;document.body.classList.toggle('teacher-pen',teacherPen);if(!teacherPen){drawing=false;lastPoint=null}}
+function penPoint(e){return{x:Math.max(0,Math.min(1,e.clientX/innerWidth)),y:Math.max(0,Math.min(1,e.clientY/innerHeight))}}
+banCanvas.addEventListener('pointerdown',e=>{if(!teacherPen)return;drawing=true;lastPoint=penPoint(e);teacherStrokeId='teacher-'+Date.now()+'-'+Math.random().toString(36).slice(2,7);banCanvas.setPointerCapture?.(e.pointerId);e.preventDefault()});
+banCanvas.addEventListener('pointermove',e=>{if(!teacherPen||!drawing||!lastPoint)return;const p=penPoint(e);const payload={x1:lastPoint.x,y1:lastPoint.y,x2:p.x,y2:p.y,name:'先生',strokeId:teacherStrokeId};stroke(payload);window.sushiKome.sendBan('stroke',payload);lastPoint=p;e.preventDefault()});
+function endTeacherStroke(e){if(!drawing)return;drawing=false;lastPoint=null;try{banCanvas.releasePointerCapture?.(e.pointerId)}catch(_){}}
+banCanvas.addEventListener('pointerup',endTeacherStroke);banCanvas.addEventListener('pointercancel',endTeacherStroke);
 function clearAll(){stage.innerHTML='';lane=0}
 function showComment(body){
   const el=document.createElement('div');
@@ -55,7 +61,7 @@ function connect(code){
   clearAll();
   window.sushiKome.connectBan(room);if(room){poll();timer=setInterval(poll,900)}
 }
-window.sushiKome.onRoomChanged(connect);
+window.sushiKome.onRoomChanged(connect);window.sushiKome.onTeacherPenChanged(setTeacherPen);window.sushiKome.getTeacherPen().then(setTeacherPen);
 window.sushiKome.onBan('pointer',pointer);window.sushiKome.onBan('stroke',stroke);window.sushiKome.onBan('sticky',sticky);window.sushiKome.onBan('clearSticky',()=>banItems.querySelectorAll('.sticky').forEach(x=>x.remove()));window.sushiKome.onBan('clearInk',()=>{fitCanvas();banCanvas.getContext('2d').clearRect(0,0,innerWidth,innerHeight);banItems.querySelectorAll('.pen-name').forEach(x=>x.remove())});window.sushiKome.onClear(clearAll);window.sushiKome.onClearBoard(clearBan);window.sushiKome.onModeChanged(v=>{mode=v||'both';applyMode()});window.sushiKome.getMode().then(v=>{mode=v||'both';applyMode()});window.addEventListener('resize',fitCanvas);fitCanvas();
 window.sushiKome.onSettings(v=>{if(v.fontSize)fontSize=Number(v.fontSize);if(v.speed)speed=Number(v.speed)});
 window.sushiKome.getRoom().then(connect);
