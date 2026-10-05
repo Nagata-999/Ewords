@@ -1,4 +1,4 @@
-const CACHE_NAME = "sushitan-v5-dictionary";
+const CACHE_NAME = "sushitan-v6-writing";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -29,6 +29,10 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("fetch", event => {
   if (event.request.method !== "GET") return;
+  const requestUrl = new URL(event.request.url);
+  if (requestUrl.hostname.endsWith('.supabase.co') ||
+      requestUrl.hostname.endsWith('.supabase.in') ||
+      (requestUrl.origin === self.location.origin && /\/writing(?:\/|$)/.test(requestUrl.pathname))) return;
   // Keep dictionary 404 responses intact and avoid caching thousands of word pages.
   if (new URL(event.request.url).pathname.startsWith('/dictionary/')) return;
   event.respondWith(
