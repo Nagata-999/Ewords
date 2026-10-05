@@ -1,10 +1,9 @@
 const { contextBridge, ipcRenderer } = require('electron');
-const { createClient } = require('@supabase/supabase-js');
 const SB_URL='https://rxyoyveykxdfrpomkltl.supabase.co';
 const SB_KEY='sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7';
 let banChannel=null;
 const banListeners={pointer:[],stroke:[],sticky:[],clearSticky:[],clearInk:[]};
-function connectBan(room){if(banChannel){banChannel.unsubscribe();banChannel=null}const code=String(room||'').replace(/\D/g,'').slice(0,4);if(!code)return;const sb=createClient(SB_URL,SB_KEY);banChannel=sb.channel('sushiban:'+code,{config:{broadcast:{self:false,ack:false}}});[['pointer','pointer'],['stroke','stroke'],['sticky','sticky'],['clear-sticky','clearSticky'],['clear-ink','clearInk']].forEach(([event,key])=>banChannel.on('broadcast',{event},({payload})=>banListeners[key].forEach(fn=>fn(payload||{}))));banChannel.subscribe()}
+function connectBan(room){if(banChannel){banChannel.unsubscribe();banChannel=null}const code=String(room||'').replace(/\D/g,'').slice(0,4);if(!code)return;let createClient;try{({createClient}=require('@supabase/supabase-js'))}catch(e){console.error('Sushi Ban realtime unavailable',e);return}const sb=createClient(SB_URL,SB_KEY);banChannel=sb.channel('sushiban:'+code,{config:{broadcast:{self:false,ack:false}}});[['pointer','pointer'],['stroke','stroke'],['sticky','sticky'],['clear-sticky','clearSticky'],['clear-ink','clearInk']].forEach(([event,key])=>banChannel.on('broadcast',{event},({payload})=>banListeners[key].forEach(fn=>fn(payload||{}))));banChannel.subscribe()}
 
 contextBridge.exposeInMainWorld('sushiKome', {
   setRoom: room => ipcRenderer.send('set-room', room),
