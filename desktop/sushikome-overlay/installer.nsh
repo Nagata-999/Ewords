@@ -1,40 +1,33 @@
 !include "nsDialogs.nsh"
 
+Var SushiDesktopPage
 Var SushiDesktopShortcutCheckbox
 Var SushiDesktopShortcutState
 
-Function CreateSushiDesktopShortcut
-  CreateShortCut "$DESKTOP\Sushi Kome Overlay.lnk" "$INSTDIR\Sushi Kome Overlay.exe" "" "$INSTDIR\Sushi Kome Overlay.exe" 0
-  System::Call 'Shell32::SHChangeNotify(i 0x1002, i 0, i 0, i 0)'
-FunctionEnd
-
-Function SushiFinishShow
-  ${NSD_CreateCheckbox} 120u 110u 195u 10u "デスクトップにアイコンを作成する"
+Function SushiDesktopPageCreate
+  nsDialogs::Create 1018
+  Pop $SushiDesktopPage
+  ${If} $SushiDesktopPage == error
+    Abort
+  ${EndIf}
+  ${NSD_CreateLabel} 0 0 100% 24u "ショートカット"
+  Pop $0
+  ${NSD_CreateCheckbox} 0 34u 100% 14u "デスクトップにすし授業のアイコンを作成する"
   Pop $SushiDesktopShortcutCheckbox
   ${NSD_SetState} $SushiDesktopShortcutCheckbox ${BST_CHECKED}
+  nsDialogs::Show
 FunctionEnd
 
-Function SushiFinishLeave
+Function SushiDesktopPageLeave
   ${NSD_GetState} $SushiDesktopShortcutCheckbox $SushiDesktopShortcutState
-  ${If} $SushiDesktopShortcutState == ${BST_CHECKED}
-    Call CreateSushiDesktopShortcut
-  ${EndIf}
 FunctionEnd
 
-!macro customFinishPage
-  !ifndef HIDE_RUN_AFTER_FINISH
-    Function StartApp
-      ${if} ${isUpdated}
-        StrCpy $1 "--updated"
-      ${else}
-        StrCpy $1 ""
-      ${endif}
-      ${StdUtils.ExecShellAsUser} $0 "$launchLink" "open" "$1"
-    FunctionEnd
-    !define MUI_FINISHPAGE_RUN
-    !define MUI_FINISHPAGE_RUN_FUNCTION "StartApp"
-  !endif
-  !define MUI_PAGE_CUSTOMFUNCTION_SHOW SushiFinishShow
-  !define MUI_PAGE_CUSTOMFUNCTION_LEAVE SushiFinishLeave
-  !insertmacro MUI_PAGE_FINISH
+!macro customPageAfterChangeDir
+  Page custom SushiDesktopPageCreate SushiDesktopPageLeave
+!macroend
+
+!macro customInstall
+  ${If} $SushiDesktopShortcutState == ${BST_CHECKED}
+    CreateShortCut "$DESKTOP\Sushi Kome Overlay.lnk" "$INSTDIR\Sushi Kome Overlay.exe" "" "$INSTDIR\Sushi Kome Overlay.exe" 0
+  ${EndIf}
 !macroend
