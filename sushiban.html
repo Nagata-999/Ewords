@@ -58,7 +58,7 @@ function leaveChannel(){if(channel){sb.removeChannel(channel);channel=null}}
 function connect(c,r){leaveChannel();channel=sb.channel('sushiban:'+c,{config:{broadcast:{self:false,ack:false}}});
  channel.on('broadcast',{event:'pointer'},({payload})=>{if(r==='teacher')renderPointer(payload)})
  .on('broadcast',{event:'board'},({payload})=>{if(r==='student')applyBoard(payload)})
- .on('broadcast',{event:'stroke'},({payload})=>{drawStroke(r==='teacher'?$('#teacherCanvas'):$('#studentCanvas'),payload)})
+ .on('broadcast',{event:'stroke'},({payload})=>{drawStroke(r==='teacher'?$('#teacherCanvas'):$('#studentCanvas'),payload);if(r==='teacher'&&payload?.name&&typeof payload.x2==='number'){let tag=$('#teacherLayer').querySelector('[data-pen-name="'+CSS.escape(payload.name)+'"]');if(!tag){tag=document.createElement('div');tag.className='pen-name';tag.dataset.penName=payload.name;tag.textContent=payload.name;$('#teacherLayer').appendChild(tag)}tag.style.left=(payload.x2*100)+'%';tag.style.top=(payload.y2*100)+'%';clearTimeout(tag._timer);tag._timer=setTimeout(()=>tag.remove(),1800)}})
  .on('broadcast',{event:'sticky'},({payload})=>{if(r==='teacher'&&payload?.id)stickyStates.set(payload.id,payload);renderSticky(r==='teacher'?$('#teacherLayer'):$('#studentLayer'),payload)})
  .on('broadcast',{event:'clear-sticky'},()=>{document.querySelectorAll('.sticky-note').forEach(x=>x.remove())})
  .on('broadcast',{event:'clear-ink'},()=>{clearCanvas($('#teacherCanvas'));clearCanvas($('#studentCanvas'))})
