@@ -5,6 +5,7 @@ let settingsWindow = null;
 let overlayWindow = null;
 let currentRoom = '';
 let currentMode = 'both';
+let teacherPen = false;
 
 function createOverlay() {
   const display = screen.getPrimaryDisplay();
@@ -91,6 +92,15 @@ ipcMain.on('set-mode', (_event, mode) => {
   currentMode = ['kome','ban','both'].includes(mode) ? mode : 'both';
   if (overlayWindow) overlayWindow.webContents.send('mode-changed', currentMode);
 });
+ipcMain.on('set-teacher-pen', (_event, enabled) => {
+  teacherPen = !!enabled;
+  if (!overlayWindow) return;
+  overlayWindow.setIgnoreMouseEvents(!teacherPen, { forward: true });
+  overlayWindow.setFocusable(teacherPen);
+  overlayWindow.webContents.send('teacher-pen-changed', teacherPen);
+  if (teacherPen) overlayWindow.show();
+});
+ipcMain.handle('get-teacher-pen', () => teacherPen);
 ipcMain.handle('get-room', () => currentRoom);
 ipcMain.handle('get-mode', () => currentMode);
 
