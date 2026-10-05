@@ -4,6 +4,7 @@ const path = require('path');
 let settingsWindow = null;
 let overlayWindow = null;
 let currentRoom = '';
+let currentMode = 'both';
 
 function createOverlay() {
   const display = screen.getPrimaryDisplay();
@@ -79,13 +80,19 @@ ipcMain.on('overlay-command', (_event, command) => {
   if (command === 'show') overlayWindow.showInactive();
   if (command === 'hide') overlayWindow.hide();
   if (command === 'clear') overlayWindow.webContents.send('clear-comments');
+  if (command === 'clear-board') overlayWindow.webContents.send('clear-board-overlay');
 });
 
 ipcMain.on('overlay-settings', (_event, value) => {
   if (overlayWindow) overlayWindow.webContents.send('overlay-settings', value || {});
 });
 
+ipcMain.on('set-mode', (_event, mode) => {
+  currentMode = ['kome','ban','both'].includes(mode) ? mode : 'both';
+  if (overlayWindow) overlayWindow.webContents.send('mode-changed', currentMode);
+});
 ipcMain.handle('get-room', () => currentRoom);
+ipcMain.handle('get-mode', () => currentMode);
 
 app.on('will-quit', () => globalShortcut.unregisterAll());
 app.on('window-all-closed', () => { if (process.platform !== 'darwin') app.quit(); });
