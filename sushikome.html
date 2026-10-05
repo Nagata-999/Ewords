@@ -31,7 +31,7 @@ button,input{font:inherit}.page{width:min(100% - 28px,980px);margin:auto;padding
 <div class="teacher-actions"><button class="btn primary" id="openDisplay">🍚 コメント教室画面</button><button class="btn primary" id="openBoardTeacher">☝️ すし板を開く</button><a class="btn dark" href="https://github.com/Nagata-999/Ewords/releases/download/sushikome-overlay-latest/Sushi-Kome-Overlay-Setup.exe" style="text-decoration:none">🪟 Windows版をダウンロード</a><button class="btn secondary" id="newRoom">新しい部屋</button><button class="btn secondary" id="teacherBack">戻る</button></div><p class="status">Windows版はPowerPointなどの上にコメントを重ねて表示できます。</p>
 </section>
 <section class="panel hidden" id="studentPanel">
-<div class="join" id="joinBox"><h2 style="text-align:center">授業コード</h2><input class="field" id="roomInput" maxlength="4" inputmode="numeric" pattern="[0-9]*" placeholder="1234"><button class="btn primary send" id="joinBtn">入室する</button><p class="status" id="joinStatus"></p></div>
+<div class="join" id="joinBox"><h2 style="text-align:center">授業コード</h2><input class="field" id="roomInput" maxlength="4" inputmode="numeric" pattern="[0-9]*" placeholder="1234"><input class="field" id="studentNameInput" maxlength="20" placeholder="名前（任意）" style="margin-top:10px"><button class="btn primary send" id="joinBtn">入室する</button><p class="status" id="joinStatus"></p></div>
 <div class="composer hidden" id="composer"><h2>授業に参加</h2><p>授業コード <strong id="studentCode"></strong></p><div class="feature-switch"><button class="feature-card" id="commentMode">🍚 コメント<br><small>すし米</small></button><button class="feature-card board" id="boardMode">☝️ 共有黒板<br><small>すし板</small></button></div><h2>🍚 コメントを送る</h2><div class="quick-label">定型メッセージ</div><div class="quick-buttons" id="quickMessages"><button class="quick-btn" data-message="こんにちは！">こんにちは</button><button class="quick-btn" data-message="待って！">待って</button><button class="quick-btn" data-message="質問！">質問</button><button class="quick-btn emoji" data-message="👍">👍</button><button class="quick-btn emoji" data-message="👏">👏</button><button class="quick-btn emoji" data-message="🙋">🙋</button><button class="quick-btn emoji" data-message="❓">❓</button><button class="quick-btn emoji" data-message="💡">💡</button><button class="quick-btn emoji" data-message="😂">😂</button><button class="quick-btn emoji" data-message="🔥">🔥</button><button class="quick-btn emoji" data-message="✨">✨</button><button class="quick-btn emoji" data-message="🤔">🤔</button><button class="quick-btn random" id="randomMessage">🎲 ランダム</button></div><button class="btn secondary" id="openMini" style="width:100%;margin:10px 0 12px">📌 ミニ送信画面を開く</button><textarea id="commentInput" maxlength="120" placeholder="コメントを入力…"></textarea><div class="counter"><span id="count">0</span> / 120</div><button class="btn primary send" id="sendBtn">送信</button><p class="status" id="sendStatus"></p><button class="btn secondary" id="leaveBtn">別の部屋に入る</button></div>
 </section>
 </div>
@@ -51,7 +51,7 @@ const api=async(path,options={})=>{
  const text=await res.text(); return text?JSON.parse(text):null;
 };
 const $=s=>document.querySelector(s);
-let teacherRoom='',studentRoom='',paused=false,fontSize=38,speed=11,lane=0,queue=[],pollTimer=null,lastSeen=0;
+let teacherRoom='',studentRoom='',studentName=sessionStorage.getItem('sushiClassName')||'',paused=false,fontSize=38,speed=11,lane=0,queue=[],pollTimer=null,lastSeen=0;
 const show=id=>{['#rolePanel','#teacherPanel','#studentPanel'].forEach(x=>$(x).classList.add('hidden'));$(id).classList.remove('hidden')};
 async function createRoom(){
  $('#teacherStatus').textContent='部屋を作成しています…';
@@ -105,7 +105,7 @@ $('#joinBtn').onclick=async()=>{
  const code=$('#roomInput').value;if(!/^\d{4}$/.test(code)){ $('#joinStatus').textContent='4桁の数字を入力してください。';return}
  $('#joinStatus').textContent='確認中…';
  if(!(await roomExists(code))){$('#joinStatus').textContent='その授業コードは見つかりません。';return}
- studentRoom=code;$('#studentCode').textContent=code;$('#joinBox').classList.add('hidden');$('#composer').classList.remove('hidden');$('#commentInput').focus();
+ studentRoom=code;studentName=$('#studentNameInput').value.trim().slice(0,20);if(studentName)sessionStorage.setItem('sushiClassName',studentName);else sessionStorage.removeItem('sushiClassName');$('#studentCode').textContent=code;$('#joinBox').classList.add('hidden');$('#composer').classList.remove('hidden');$('#commentInput').focus();
 };
 const randomMessages=[
 'なるほど！','わかった！','もう一回お願いします！','そこ大事そう！','メモします！','ちょっと待って！','いい質問！','それ気になってた！','おもしろい！','初めて知った！',
@@ -120,9 +120,9 @@ const randomMessages=[
 '賛成！','反対かも！','どっちだろう？','みんなはどう思う？','それもあり！','別の考えがあります','比べてみたい！','もっと知りたい！','今日これ覚えて帰る','授業についていくぞ！'
 ];
 async function sendComment(body){
- body=String(body||'').trim();if(!body||!studentRoom)return false;
+ body=String(body||'').trim();if(!body||!studentRoom)return false;const displayBody=studentName?studentName+'：'+body:body;
  const buttons=[...document.querySelectorAll('#quickMessages button'),$('#sendBtn')];buttons.forEach(b=>b.disabled=true);$('#sendStatus').textContent='送信中…';
- let error=null;try{await api('sushi_kome_comments',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({room_code:studentRoom,body})})}catch(e){error=e}
+ let error=null;try{await api('sushi_kome_comments',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({room_code:studentRoom,body:displayBody})})}catch(e){error=e}
  buttons.forEach(b=>b.disabled=false);
  if(error){$('#sendStatus').textContent='送信できませんでした。もう一度お試しください。';return false}
  $('#sendStatus').textContent='送信しました 🍚';return true;
@@ -143,7 +143,7 @@ $('#sendBtn').onclick=async()=>{
 };
 $('#commentInput').addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter')$('#sendBtn').click()});
 $('#leaveBtn').onclick=()=>{studentRoom='';$('#composer').classList.add('hidden');$('#joinBox').classList.remove('hidden');$('#roomInput').value='';$('#joinStatus').textContent=''};
-const params=new URLSearchParams(location.search),presetRoom=params.get('room');if(presetRoom&&/^\d{4}$/.test(presetRoom)){show('#studentPanel');$('#roomInput').value=presetRoom;setTimeout(()=>$('#joinBtn').click(),0)}
+$('#studentNameInput').value=studentName;const params=new URLSearchParams(location.search),presetRoom=params.get('room');if(presetRoom&&/^\d{4}$/.test(presetRoom)){show('#studentPanel');$('#roomInput').value=presetRoom;setTimeout(()=>$('#joinBtn').click(),0)}
 window.addEventListener('beforeunload',unsubscribe);
 </script>
 </body></html>
