@@ -29,9 +29,9 @@ button{border:0;border-radius:12px;padding:13px;font-size:15px;font-weight:800;c
 <select id="size"><option value="32">小</option><option value="42" selected>標準</option><option value="54">大</option><option value="68">特大</option></select>
 <label for="speed">流れる速さ</label>
 <select id="speed"><option value="16">ゆっくり</option><option value="11" selected>標準</option><option value="7">速い</option></select>
-<div class="row"><button id="show" class="secondary">表示</button><button id="hide" class="danger">非表示</button></div>
+<button id="teacherPen" class="secondary" style="width:100%;margin-top:18px">✏️ 教員ペン OFF</button><div class="row"><button id="show" class="secondary">表示</button><button id="hide" class="danger">非表示</button></div>
 <button id="clear" class="danger" style="width:100%;margin-top:10px">画面上のコメントを消す</button><button id="clearBoard" class="danger" style="width:100%;margin-top:10px">画面上の指・ペン・テキストを消す</button>
-<p class="hint">Ctrl + Shift + K：表示/非表示　／　Ctrl + Shift + S：この設定画面を開く</p>
+<p class="hint">Ctrl + Shift + P：教員ペン ON/OFF<br>Ctrl + Shift + K：表示/非表示　／　Ctrl + Shift + S：設定画面</p>
 </div>
 <script>
 const room=document.getElementById('room'), status=document.getElementById('status');
@@ -46,6 +46,7 @@ document.getElementById('hide').onclick=()=>window.sushiKome.command('hide');
 document.getElementById('clear').onclick=()=>window.sushiKome.command('clear');
 document.getElementById('clearBoard').onclick=()=>window.sushiKome.command('clear-board');
 document.getElementById('mode').onchange=e=>window.sushiKome.setMode(e.target.value);
+const penBtn=document.getElementById('teacherPen');function showPen(v){penBtn.textContent=v?'✏️ 教員ペン ON（描画中）':'✏️ 教員ペン OFF';penBtn.className=v?'primary':'secondary'}penBtn.onclick=async()=>{const v=await window.sushiKome.getTeacherPen();window.sushiKome.setTeacherPen(!v);showPen(!v)};window.sushiKome.onTeacherPenChanged(showPen);window.sushiKome.getTeacherPen().then(showPen);
 function sync(){window.sushiKome.setSettings({fontSize:document.getElementById('size').value,speed:document.getElementById('speed').value})}
 document.getElementById('size').onchange=sync;
 document.getElementById('speed').onchange=sync;
