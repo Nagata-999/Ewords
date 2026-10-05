@@ -8,6 +8,9 @@ function connectBan(room){if(banChannel){banChannel.unsubscribe();banChannel=nul
 contextBridge.exposeInMainWorld('sushiKome', {
   setRoom: room => ipcRenderer.send('set-room', room),
   setMode: mode => ipcRenderer.send('set-mode', mode),
+  setTeacherPen: enabled => ipcRenderer.send('set-teacher-pen', !!enabled),
+  getTeacherPen: () => ipcRenderer.invoke('get-teacher-pen'),
+  onTeacherPenChanged: callback => ipcRenderer.on('teacher-pen-changed', (_event, value) => callback(value)),
   getMode: () => ipcRenderer.invoke('get-mode'),
   getRoom: () => ipcRenderer.invoke('get-room'),
   command: command => ipcRenderer.send('overlay-command', command),
@@ -18,5 +21,6 @@ contextBridge.exposeInMainWorld('sushiKome', {
   onClear: callback => ipcRenderer.on('clear-comments', () => callback()),
   onSettings: callback => ipcRenderer.on('overlay-settings', (_event, value) => callback(value)),
   connectBan,
+  sendBan: (event,payload)=>{if(banChannel)banChannel.send({type:'broadcast',event,payload})},
   onBan: (event,callback)=>{if(banListeners[event])banListeners[event].push(callback)}
 });
