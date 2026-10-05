@@ -4,9 +4,7 @@ Var SushiDesktopShortcutCheckbox
 Var SushiDesktopShortcutState
 
 Function CreateSushiDesktopShortcut
-  CreateShortCut "$newDesktopLink" "$appExe" "" "$appExe" 0 "" "" "${APP_DESCRIPTION}"
-  ClearErrors
-  WinShell::SetLnkAUMI "$newDesktopLink" "${APP_ID}"
+  CreateShortCut "$DESKTOP\Sushi Kome Overlay.lnk" "$INSTDIR\Sushi Kome Overlay.exe" "" "$INSTDIR\Sushi Kome Overlay.exe" 0
   System::Call 'Shell32::SHChangeNotify(i 0x1002, i 0, i 0, i 0)'
 FunctionEnd
 
