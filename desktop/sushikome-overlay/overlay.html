@@ -17,7 +17,7 @@ html,body{width:100%;height:100%;margin:0;overflow:hidden;background:transparent
 const URL='https://rxyoyveykxdfrpomkltl.supabase.co';
 const KEY='sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7';
 let room='',lastSeen=0,timer=null,fontSize=42,speed=11,lane=0,mode='both',banChannel=null;
-const {createClient}=require('@supabase/supabase-js');const sb=createClient(URL,KEY);
+
 const stage=document.getElementById('stage'),banStage=document.getElementById('banStage'),banItems=document.getElementById('banItems'),banCanvas=document.getElementById('banCanvas');
 function applyMode(){stage.style.display=mode==='ban'?'none':'block';banStage.style.display=mode==='kome'?'none':'block'}
 function fitCanvas(){const d=devicePixelRatio||1;banCanvas.width=Math.round(innerWidth*d);banCanvas.height=Math.round(innerHeight*d);banCanvas.getContext('2d').setTransform(d,0,0,d,0,0)}
@@ -25,8 +25,6 @@ function clearBan(){banItems.innerHTML='';fitCanvas();banCanvas.getContext('2d')
 function pointer(p){if(!p||typeof p.x!=='number')return;const e=document.createElement('div');e.className='pointer';e.style.left=p.x*100+'%';e.style.top=p.y*100+'%';const f=document.createElement('span');f.textContent='☝️';e.appendChild(f);if(p.name){const n=document.createElement('span');n.className='pointer-name';n.textContent=p.name;e.appendChild(n)}banItems.appendChild(e);setTimeout(()=>e.remove(),5000)}
 function stroke(p){if(!p)return;const ctx=banCanvas.getContext('2d');ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle='#e11d48';ctx.lineWidth=4;ctx.beginPath();ctx.moveTo(p.x1*innerWidth,p.y1*innerHeight);ctx.lineTo(p.x2*innerWidth,p.y2*innerHeight);ctx.stroke();if(p.name&&p.strokeId&&!banItems.querySelector('[data-pen="'+CSS.escape(p.strokeId)+'"]')){const n=document.createElement('div');n.className='pen-name';n.dataset.pen=p.strokeId;n.textContent=p.name;n.style.left=p.x1*100+'%';n.style.top=p.y1*100+'%';banItems.appendChild(n)}}
 function sticky(p){if(!p||!p.id)return;let e=banItems.querySelector('[data-sticky="'+CSS.escape(p.id)+'"]');if(!e){e=document.createElement('div');e.className='sticky';e.dataset.sticky=p.id;banItems.appendChild(e)}e.textContent=(p.name?p.name+'：':'')+(p.text||'');e.style.left=p.x*100+'%';e.style.top=p.y*100+'%'}
-function connectBan(code){if(banChannel){sb.removeChannel(banChannel);banChannel=null}if(!code)return;banChannel=sb.channel('sushiban:'+code,{config:{broadcast:{self:false,ack:false}}}).on('broadcast',{event:'pointer'},({payload})=>pointer(payload)).on('broadcast',{event:'stroke'},({payload})=>stroke(payload)).on('broadcast',{event:'sticky'},({payload})=>sticky(payload)).on('broadcast',{event:'clear-sticky'},()=>banItems.querySelectorAll('.sticky').forEach(x=>x.remove())).on('broadcast',{event:'clear-ink'},()=>{fitCanvas();banCanvas.getContext('2d').clearRect(0,0,innerWidth,innerHeight);banItems.querySelectorAll('.pen-name').forEach(x=>x.remove())}).subscribe();}
-
 function clearAll(){stage.innerHTML='';lane=0}
 function showComment(body){
   const el=document.createElement('div');
@@ -55,10 +53,10 @@ function connect(code){
   lastSeen=0;
   if(timer)clearInterval(timer);
   clearAll();
-  connectBan(room);if(room){poll();timer=setInterval(poll,900)}
+  window.sushiKome.connectBan(room);if(room){poll();timer=setInterval(poll,900)}
 }
 window.sushiKome.onRoomChanged(connect);
-window.sushiKome.onClear(clearAll);window.sushiKome.onClearBoard(clearBan);window.sushiKome.onModeChanged(v=>{mode=v||'both';applyMode()});window.sushiKome.getMode().then(v=>{mode=v||'both';applyMode()});window.addEventListener('resize',fitCanvas);fitCanvas();
+window.sushiKome.onBan('pointer',pointer);window.sushiKome.onBan('stroke',stroke);window.sushiKome.onBan('sticky',sticky);window.sushiKome.onBan('clearSticky',()=>banItems.querySelectorAll('.sticky').forEach(x=>x.remove()));window.sushiKome.onBan('clearInk',()=>{fitCanvas();banCanvas.getContext('2d').clearRect(0,0,innerWidth,innerHeight);banItems.querySelectorAll('.pen-name').forEach(x=>x.remove())});window.sushiKome.onClear(clearAll);window.sushiKome.onClearBoard(clearBan);window.sushiKome.onModeChanged(v=>{mode=v||'both';applyMode()});window.sushiKome.getMode().then(v=>{mode=v||'both';applyMode()});window.addEventListener('resize',fitCanvas);fitCanvas();
 window.sushiKome.onSettings(v=>{if(v.fontSize)fontSize=Number(v.fontSize);if(v.speed)speed=Number(v.speed)});
 window.sushiKome.getRoom().then(connect);
 </script>
