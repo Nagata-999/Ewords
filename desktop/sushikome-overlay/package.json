@@ -1,6 +1,6 @@
 {
   "name": "sushikome-overlay",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Sushi classroom comment and shared-board overlay for Windows",
   "main": "main.js",
   "author": "sushitan.net",
@@ -24,19 +24,23 @@
       "preload.js",
       "settings.html",
       "overlay.html",
-      "node_modules/**/*"
+      "node_modules/**/*",
+      "icon-512.png",
+      "installer.nsh"
     ],
     "win": {
       "target": [
         "nsis"
-      ]
+      ],
+      "icon": "icon-512.png"
     },
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
-      "createDesktopShortcut": true,
+      "createDesktopShortcut": false,
       "createStartMenuShortcut": true,
-      "shortcutName": "Sushi Kome Overlay"
+      "shortcutName": "Sushi Kome Overlay",
+      "include": "installer.nsh"
     },
     "artifactName": "Sushi-Kome-Overlay-Setup.${ext}"
   },
