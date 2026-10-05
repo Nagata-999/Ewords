@@ -27,8 +27,8 @@ button,input,textarea{font:inherit}.page{width:min(100% - 24px,1000px);margin:au
 <div class="teacher-tools"><textarea class="field" id="boardInput" placeholder="英文・設問・文章をここに貼り付け"></textarea><button class="btn primary" id="showText">黒板に表示</button></div>
 <div class="actions"><button class="btn orange" id="shareScreen">🖥️ 今の画面を教材にする</button><button class="btn secondary hidden" id="captureScreen">📸 画面を更新</button><button class="btn secondary hidden" id="stopScreen">共有終了</button><label class="btn secondary" style="cursor:pointer">🖼️ 画像を表示<input type="file" id="imageInput" accept="image/*" hidden></label><button class="btn secondary" id="clearBoard">黒板クリア</button><button class="btn secondary" id="clearPointers">指をクリア</button><button class="btn secondary" id="penToggle">✏️ 生徒ペン OFF</button><button class="btn secondary" id="clearInk">🧽 ペン全消去</button><button class="btn secondary" id="clearSticky">🗑️ テキスト全消去</button></div>
 <div class="modebar"><button class="mode active" data-mode="pointer">☝️ 指</button><button class="mode" data-mode="heat">🔥 ヒート</button><button class="mode" data-mode="both">☝️＋🔥</button></div>
-<input class="field" id="promptInput" maxlength="80" value="わからない・重要だと思う場所をタップ！" style="text-align:center;font-weight:900">
-<div class="prompt" id="teacherPrompt">わからない・重要だと思う場所をタップ！</div>
+
+
 <div class="board-shell" id="teacherShell"><div class="board" id="teacherBoard"><div class="board-text">ここが共有黒板です。\n英文や画像を表示してください。</div></div><canvas class="draw-layer" id="teacherCanvas"></canvas><div class="tap-layer" id="teacherLayer"></div><div class="count" id="tapCount">TAP 0</div></div>
 <div class="actions" style="margin-top:12px"><button class="btn orange" id="fullscreenBtn">⛶ 教室画面</button><button class="btn secondary" id="newRoom">新しい部屋</button><button class="btn secondary" id="teacherBack">戻る</button></div>
 </section>
@@ -49,7 +49,7 @@ const SB_KEY='sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7';
 const sb=window.supabase.createClient(SB_URL,SB_KEY);
 const $=s=>document.querySelector(s);
 const api=async(path,options={})=>{const headers={apikey:SB_KEY,'Content-Type':'application/json',...(options.headers||{})};const r=await fetch(SB_URL+'/rest/v1/'+path,{...options,headers});if(!r.ok)throw new Error('HTTP '+r.status);const t=await r.text();return t?JSON.parse(t):null};
-let room='',channel=null,role='',studentName=sessionStorage.getItem('sushiClassName')||'',mode='pointer',penAllowed=false,studentTool='point',drawing=false,lastPt=null,screenStream=null,stickyStates=new Map(),myStickyIds=new Set(),dragSticky=null,boardState={type:'text',content:'ここが共有黒板です。\n英文や画像を表示してください。'},promptText='わからない・重要だと思う場所をタップ！',taps=0;
+let room='',channel=null,role='',studentName=sessionStorage.getItem('sushiClassName')||'',mode='pointer',penAllowed=false,studentTool='point',drawing=false,lastPt=null,screenStream=null,stickyStates=new Map(),myStickyIds=new Set(),dragSticky=null,boardState={type:'text',content:'ここが共有黒板です。\n英文や画像を表示してください。'},promptText='',taps=0;
 const showPanel=id=>{['#roles','#teacher','#student'].forEach(x=>$(x).classList.add('hidden'));$(id).classList.remove('hidden')};
 async function openTeacherRoom(c){leaveChannel();room=c;role='teacher';$('#teacherCode').textContent=c;connect(c,'teacher');$('#teacherStatus').textContent='準備OK。すし米と同じ4桁コードです。'}
 async function createRoom(){leaveChannel();$('#teacherStatus').textContent='作成中…';for(let i=0;i<8;i++){const c=String(Math.floor(1000+Math.random()*9000));try{await api('sushi_kome_rooms',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({room_code:c})});room=c;role='teacher';$('#teacherCode').textContent=c;connect(c,'teacher');$('#teacherStatus').textContent='準備OK。生徒はこの4桁で入室。';return}catch(e){}}$('#teacherStatus').textContent='部屋を作れませんでした。'};
