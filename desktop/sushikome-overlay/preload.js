@@ -1,4 +1,10 @@
 const { contextBridge, ipcRenderer } = require('electron');
+const { createClient } = require('@supabase/supabase-js');
+const SB_URL='https://rxyoyveykxdfrpomkltl.supabase.co';
+const SB_KEY='sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7';
+let banChannel=null;
+const banListeners={pointer:[],stroke:[],sticky:[],clearSticky:[],clearInk:[]};
+function connectBan(room){if(banChannel){banChannel.unsubscribe();banChannel=null}const code=String(room||'').replace(/\D/g,'').slice(0,4);if(!code)return;const sb=createClient(SB_URL,SB_KEY);banChannel=sb.channel('sushiban:'+code,{config:{broadcast:{self:false,ack:false}}});[['pointer','pointer'],['stroke','stroke'],['sticky','sticky'],['clear-sticky','clearSticky'],['clear-ink','clearInk']].forEach(([event,key])=>banChannel.on('broadcast',{event},({payload})=>banListeners[key].forEach(fn=>fn(payload||{}))));banChannel.subscribe()}
 
 contextBridge.exposeInMainWorld('sushiKome', {
   setRoom: room => ipcRenderer.send('set-room', room),
@@ -11,5 +17,7 @@ contextBridge.exposeInMainWorld('sushiKome', {
   onModeChanged: callback => ipcRenderer.on('mode-changed', (_event, value) => callback(value)),
   onClearBoard: callback => ipcRenderer.on('clear-board-overlay', () => callback()),
   onClear: callback => ipcRenderer.on('clear-comments', () => callback()),
-  onSettings: callback => ipcRenderer.on('overlay-settings', (_event, value) => callback(value))
+  onSettings: callback => ipcRenderer.on('overlay-settings', (_event, value) => callback(value)),
+  connectBan,
+  onBan: (event,callback)=>{if(banListeners[event])banListeners[event].push(callback)}
 });
