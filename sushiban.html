@@ -51,6 +51,7 @@ const $=s=>document.querySelector(s);
 const api=async(path,options={})=>{const headers={apikey:SB_KEY,'Content-Type':'application/json',...(options.headers||{})};const r=await fetch(SB_URL+'/rest/v1/'+path,{...options,headers});if(!r.ok)throw new Error('HTTP '+r.status);const t=await r.text();return t?JSON.parse(t):null};
 let room='',channel=null,role='',mode='pointer',penAllowed=false,studentTool='point',drawing=false,lastPt=null,screenStream=null,stickyStates=new Map(),myStickyIds=new Set(),dragSticky=null,boardState={type:'text',content:'ここが共有黒板です。\n英文や画像を表示してください。'},promptText='わからない・重要だと思う場所をタップ！',taps=0;
 const showPanel=id=>{['#roles','#teacher','#student'].forEach(x=>$(x).classList.add('hidden'));$(id).classList.remove('hidden')};
+async function openTeacherRoom(c){leaveChannel();room=c;role='teacher';$('#teacherCode').textContent=c;connect(c,'teacher');$('#teacherStatus').textContent='準備OK。すし米と同じ4桁コードです。'}
 async function createRoom(){leaveChannel();$('#teacherStatus').textContent='作成中…';for(let i=0;i<8;i++){const c=String(Math.floor(1000+Math.random()*9000));try{await api('sushi_kome_rooms',{method:'POST',headers:{Prefer:'return=minimal'},body:JSON.stringify({room_code:c})});room=c;role='teacher';$('#teacherCode').textContent=c;connect(c,'teacher');$('#teacherStatus').textContent='準備OK。生徒はこの4桁で入室。';return}catch(e){}}$('#teacherStatus').textContent='部屋を作れませんでした。'};
 async function roomExists(c){try{const d=await api('sushi_kome_rooms?select=room_code,active&room_code=eq.'+encodeURIComponent(c)+'&limit=1');return !!(d&&d[0]&&d[0].active)}catch(e){return false}}
 function leaveChannel(){if(channel){sb.removeChannel(channel);channel=null}}
@@ -109,7 +110,7 @@ $('#studentLayer').addEventListener('pointerdown',e=>{e.preventDefault();const p
 $('#studentLayer').addEventListener('pointermove',e=>{if(!drawing||studentTool!=='pen'||!penAllowed)return;e.preventDefault();const p=coords(e,$('#studentLayer'));if(!lastPt)return;const stroke={x1:lastPt.x,y1:lastPt.y,x2:p.x,y2:p.y};drawStroke($('#studentCanvas'),stroke);send('stroke',stroke);lastPt=p});
 const stopDraw=()=>{drawing=false;lastPt=null};$('#studentLayer').addEventListener('pointerup',stopDraw);$('#studentLayer').addEventListener('pointercancel',stopDraw);
 $('#leaveBtn').onclick=()=>{leaveChannel();$('#studentBoard').classList.add('hidden');$('#roomInput').value='';$('#joinStatus').textContent=''};
-const params=new URLSearchParams(location.search),presetRoom=params.get('room');if(presetRoom&&/^\d{4}$/.test(presetRoom)){showPanel('#student');$('#roomInput').value=presetRoom;setTimeout(()=>$('#joinBtn').click(),0)}
+const params=new URLSearchParams(location.search),presetRoom=params.get('room'),presetRole=params.get('role');if(presetRoom&&/^\d{4}$/.test(presetRoom)){if(presetRole==='teacher'){showPanel('#teacher');openTeacherRoom(presetRoom)}else{showPanel('#student');$('#roomInput').value=presetRoom;setTimeout(()=>$('#joinBtn').click(),0)}}
 window.addEventListener('resize',()=>{fitCanvas($('#teacherCanvas'));fitCanvas($('#studentCanvas'))});window.addEventListener('beforeunload',()=>{stopScreenShare();leaveChannel()});
 </script>
 </body>
