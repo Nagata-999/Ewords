@@ -60,6 +60,16 @@ app.whenReady().then(() => {
     if (!overlayWindow) createOverlay();
     else overlayWindow.isVisible() ? overlayWindow.hide() : overlayWindow.showInactive();
   });
+  globalShortcut.register('CommandOrControl+Shift+P', () => {
+    teacherPen = !teacherPen;
+    if (!overlayWindow) createOverlay();
+    if (overlayWindow) {
+      overlayWindow.setIgnoreMouseEvents(!teacherPen, { forward: true });
+      overlayWindow.setFocusable(teacherPen);
+      overlayWindow.webContents.send('teacher-pen-changed', teacherPen);
+      if (teacherPen) overlayWindow.show();
+    }
+  });
   globalShortcut.register('CommandOrControl+Shift+S', () => {
     if (!settingsWindow) createSettings();
     else { settingsWindow.show(); settingsWindow.focus(); }
