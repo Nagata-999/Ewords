@@ -2538,6 +2538,7 @@ html, body {
             <p id="sushiLevelNote" class="level-note">選んだレベルの単語だけでプレイします。</p>
           </div>
 
+          <p style="font-size:12px;opacity:.65;margin:8px 0">1,500点超で限定アバターゲット（全レベル共通）</p>
           <section class="home-section" aria-label="復習リスト">
             <h3>📝 間違えた単語 <span id="savedReviewCount">0</span>語</h3>
             <div id="savedReviewList" class="mistake-list"></div>
@@ -2655,6 +2656,7 @@ html, body {
             <div class="v" id="clearMaxCombo">0</div>
           </div>
         </div>
+        <div id="clearAvatarReward"></div>
         <div style="margin-top:16px; display:flex; gap:10px; flex-wrap:wrap;">
           <button class="btn primary" id="clearPlayAgainBtn">もう一回</button>
           <button class="btn secondary" id="clearBackToMenuBtn">Menu</button>
@@ -2684,6 +2686,7 @@ html, body {
           </div>
         </div>
 
+        <div id="resultAvatarReward"></div>
         <div class="growth-card" id="resultGrowthCard">
           <div class="growth-head">
             <div class="growth-rank" id="resultAnimalRank">🐹 ハムスター</div>
@@ -2722,6 +2725,10 @@ html, body {
   <div class="overlay hidden" id="reviewDoneOverlay"><div class="modal"><h2>復習終了</h2><p id="reviewSummary"></p><p class="small">復習はランキング・累計スコアに加算されません。</p><button class="btn primary" id="reviewDoneHome">復習リストへ</button></div></div>
   <audio id="bgm" src="music.mp3" loop preload="auto"></audio>
 
+  <script src="sushigacha/avatar.js?v=20261006-2"></script>
+  <script src="sushigacha/avatar-engine.js?v=20261006-2"></script>
+  <script src="sushigacha/avatar-state.js?v=20261006-2"></script>
+  <script src="sushigacha/game-avatar-rewards.js?v=20261006-2"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     const SUPABASE_URL = "https://rxyoyveykxdfrpomkltl.supabase.co";
@@ -4114,6 +4121,8 @@ html, body {
         renderGrowthCard("home", getStoredTotalScore());
       }
       if (clearOverlay) clearOverlay.classList.remove('hidden');
+      document.getElementById('clearAvatarReward').replaceChildren();
+      if(currentMode===MODE_SUSHI)window.SushiGameAvatarRewards?.showResult(document.getElementById('clearAvatarReward'),'sushitan',bonusScore);
 
       await saveHighScore(bonusScore, accuracy);
     }
@@ -4164,6 +4173,8 @@ html, body {
 
       renderMistakeList();
       resultOverlay.classList.remove('hidden');
+      document.getElementById('resultAvatarReward').replaceChildren();
+      if(currentMode===MODE_SUSHI)window.SushiGameAvatarRewards?.showResult(document.getElementById('resultAvatarReward'),'sushitan',bonusScore);
 
       await saveHighScore(bonusScore, accuracy);
       if (round === GAME.roundId) await loadRanking(currentMode, rankingList, currentSushiLevel);
@@ -4291,12 +4302,13 @@ html, body {
 </script>
 <script src="sushigacha/gem-system.js?v=20260922-2"></script>
 <script src="sushigacha/sushitan-lucky-gems.js?v=20260913-2"></script>
-<script src="sushigacha/avatar-widget.js?v=20260912-3"></script>
+<script src="sushigacha/avatar-widget.js?v=20261006-2"></script>
 <script src="sushigacha/site-taskbar.js?v=20260915-1"></script>
 
 <script>window.addEventListener('sushi-learning-change',()=>renderReviewList());if(new URLSearchParams(location.search).get('review')==='weak') WORD_DATA_READY.then(()=>document.getElementById('startReviewBtn')?.click());</script>
 </body>
 </html>
+
 
 
 

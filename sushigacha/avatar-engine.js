@@ -16,9 +16,9 @@
     {id:'studio-tea',name:'お茶の湯のみ',slot:'hand',kind:'tea'}
   ].map(x=>({...x,rarity:'PREVIEW'}));
   const catalog=[...(typeof ITEMS!=='undefined'?ITEMS:[]),...additions.filter(x=>!(typeof ITEMS!=='undefined'&&ITEMS.some(i=>i.id===x.id)))];
-  const slots={top:'トップス',bottom:'ボトムス',hat:'帽子',accessory:'アクセサリー',back:'背中',shoes:'靴',hand:'手持ち'};
-  const defaults={gender:'male',hair:0,eyes:0,mouth:0,skin:0,hairColor:0,faceShape:0,expression:0,top:'starter',bottom:'basic-bottom',hat:null,accessory:null,back:null,shoes:'studio-sneakers',hand:null};
-  const baseSet={top:'starter',bottom:'basic-bottom',hat:null,accessory:null,back:null,shoes:'studio-sneakers',hand:null};
+  const slots={top:'トップス',bottom:'ボトムス',hat:'帽子',accessory:'アクセサリー',back:'背中',shoes:'靴',hand:'手持ち',auraEffect:'限定オーラ'};
+  const defaults={gender:'male',hair:0,eyes:0,mouth:0,skin:0,hairColor:0,faceShape:0,expression:0,top:'starter',bottom:'basic-bottom',hat:null,accessory:null,back:null,shoes:'studio-sneakers',hand:null,auraEffect:null};
+  const baseSet={top:'starter',bottom:'basic-bottom',hat:null,accessory:null,back:null,shoes:'studio-sneakers',hand:null,auraEffect:null};
   const sets={basic:{...baseSet},chef:{...baseSet,top:'studio-chef',hat:'studio-headband'},casual:{...baseSet,top:'studio-hoodie',back:'studio-backpack'},wizard:{...baseSet,top:'studio-wizard',hat:'studio-wizard-hat',back:'studio-cape',shoes:'studio-boots',hand:'studio-wand'}};
   const int=(v,n)=>Number.isInteger(v)&&v>=0&&v<n?v:0;
   const item=(id,slot)=>catalog.find(x=>x.id===id&&(!slot||x.slot===slot));
@@ -166,8 +166,16 @@
     if(direction==='left')character=group(character,'translate(160 0) scale(-1 1)');
     let extras='';
     if(a.pet){const pet=['','ねこ','すし','スライム','恐竜'][a.pet];extras=`<g aria-label="${pet}" transform="translate(123 157)">`+path('M0 14Q-2 1 10 1Q23 1 23 14V24H0Z',a.pet===2?'#fff9ec':a.pet===3?'#87ae91':a.pet===4?'#61917d':'#c19470')+(a.pet===1?path('M0 7L1 -3L9 2M14 2L23 -3L23 8','#c19470'):a.pet===2?path('M0 9Q-1 -3 12 0Q23 -3 24 9Z','#ed955e'):'')+circle(6,12,1.3,INK)+circle(17,12,1.3,INK)+'</g>';}
-    if(a.aura)extras+=group(star(26,106,4,['','#e8b557','#e28a56','#e8b557','#d9a3ac'][a.aura])+star(132,115,4,['','#e8b557','#e28a56','#e8b557','#d9a3ac'][a.aura]),'','opacity=".75"');
-    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 204" role="img" aria-label="すし単アバター" data-action="${action}" data-direction="${direction}"><ellipse cx="80" cy="190" rx="33" ry="5" fill="#ded8c9"/><g stroke="${INK}" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round">${character}${extras}</g></svg>`;
+    if(a.aura&&!a.auraEffect)extras+=group(star(26,106,4,['','#e8b557','#e28a56','#e8b557','#d9a3ac'][a.aura])+star(132,115,4,['','#e8b557','#e28a56','#e8b557','#d9a3ac'][a.aura]),'','opacity=".75"');
+    const heat=reduced?0:Math.sin(time*2.4);
+    const aura=item(a.auraEffect)?.kind==='blazing'?`<g data-item-art="reward-sushitan-aura" aria-label="烈火のオーラ" transform="translate(80 188) scale(1 ${(1+heat*.015).toFixed(3)}) translate(-80 -188)">
+      <path d="M35 184Q9 155 20 124L13 107L32 121Q18 85 40 55L38 86Q49 62 55 28L67 47L80 8L93 49L107 29L106 69L126 48Q123 90 139 109L131 112L145 143Q143 172 125 184Z" fill="#e7512f" opacity=".76"/>
+      <path d="M40 183Q20 155 35 122L30 110L43 113Q37 89 52 64L53 90L70 54L79 28L91 69L100 57L109 98L122 81L119 123L132 137Q140 164 118 183Z" fill="#ffb82e" opacity=".9"/>
+      <path d="M49 184Q31 161 45 129L53 140L57 100L68 122L80 74L94 122L104 104L112 143L123 136Q127 167 112 184Z" fill="#fff1a1"/>
+      <ellipse cx="80" cy="187" rx="52" ry="7" fill="#ffc53e" opacity=".3"/>
+      <path d="M22 79L17 67L26 71M135 63L142 51L141 69M19 158L12 148M140 174L148 163" fill="none" stroke="#e99e22" stroke-width="3" stroke-linecap="round"/>
+    </g>`:'';
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 204" role="img" aria-label="すし単アバター" data-action="${action}" data-direction="${direction}">${aura}<ellipse cx="80" cy="190" rx="33" ry="5" fill="#ded8c9"/><g stroke="${INK}" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round">${character}${extras}</g></svg>`;
   }
   // Incremental DOM updates retain the SVG tree and avoid replacing it every frame.
   function patchNode(target,source){
@@ -191,4 +199,5 @@
   }
   window.SushiAvatarV2={catalog,slots,defaults,sets,normalize,render,mount,item};
 })();
+
 
