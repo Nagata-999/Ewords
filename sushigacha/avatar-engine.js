@@ -44,6 +44,32 @@
     }
     return a.hair===6?path('M47 55H113L121 100L107 96L101 108L91 99H65L53 105L52 94L40 98Z',h):'';
   }
+  function femaleTail(a,h,direction,time,reduced){
+    if(a.gender!=='female'||![4,5,6,7].includes(a.hair))return '';
+    const side=direction==='left'||direction==='right', back=direction==='back';
+    const sway=reduced?0:Math.sin(time*5)*3;
+    if(a.hair===4){
+      if(back)return circle(103,48,7,h)+path(`M101 51Q130 ${55+sway} 124 ${92+sway}Q119 111 106 103Q116 77 101 51Z`,h);
+      if(side)return circle(108,47,6,h)+path(`M108 49Q139 ${50+sway} 134 ${83+sway}Q130 105 116 99Q126 72 108 49Z`,h);
+      return circle(108,48,6,h)+path(`M108 50Q136 ${47+sway} 132 ${80+sway}Q128 104 116 99Q124 72 108 50Z`,h);
+    }
+    if(a.hair===5){
+      if(back)return circle(48,51,6,h)+circle(112,51,6,h)+path(`M48 54Q24 ${59+sway} 31 ${96+sway}Q38 112 49 101Q39 75 48 54Z`,h)+path(`M112 54Q136 ${59-sway} 129 ${96-sway}Q122 112 111 101Q121 75 112 54Z`,h);
+      if(side)return circle(109,49,6,h)+path(`M109 52Q139 ${58+sway} 132 ${96+sway}Q126 112 115 101Q124 73 109 52Z`,h);
+      return path(`M49 55Q28 ${59+sway} 34 ${96+sway}Q39 108 48 100Q40 74 49 55Z`,h)+path(`M111 55Q132 ${59-sway} 126 ${96-sway}Q121 108 112 100Q120 74 111 55Z`,h);
+    }
+    if(a.hair===6){
+      if(back)return path('M55 46Q80 30 105 46L103 72Q98 104 80 116Q61 104 56 72Z',h)+path('M61 49Q80 64 99 49','none','stroke="#fff" stroke-opacity=".12"');
+      if(side)return path(`M104 45Q127 48 124 ${77+sway}Q121 102 108 111Q113 77 104 45Z`,h);
+      return path('M53 49Q80 37 107 49L105 70Q101 96 94 107Q96 72 80 57Q64 72 66 107Q57 95 55 70Z',h);
+    }
+    if(a.hair===7){
+      if(back)return circle(80,24,17,h)+circle(80,28,8,h);
+      if(side)return circle(105,27,16,h)+circle(101,31,7,h);
+      return circle(80,24,16,h);
+    }
+    return '';
+  }
   function hairFront(a,h,back,side=false){
     if(back){
       const backs=[
@@ -193,7 +219,7 @@
     if(accessory==='bag')extra+=path('M58 99L101 134','none','stroke="#916448" stroke-width="4"')+path('M93 124H113V144H92Z','#b18a61');
     if(bk==='cape'&&!back)extra+=path('M58 99L77 108L103 99','none','stroke="#e8b557" stroke-width="3"')+star(80,107,5);
     const far=side?arm(69,false):arm(54,false),near=arm(side?97:107,true);
-    let upper=rear+hairBack(a,h)+far+body+near+face+extra;
+    let upper=rear+hairBack(a,h)+femaleTail(a,h,direction,time,reduced)+far+body+near+face+extra;
     let character=group(legs+group(upper,`translate(0 ${torsoY.toFixed(2)})`),`translate(0 ${sitting?0:bounce.toFixed(2)})`);
     if(direction==='left')character=group(character,'translate(160 0) scale(-1 1)');
     let extras='';
