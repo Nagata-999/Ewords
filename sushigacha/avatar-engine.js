@@ -49,14 +49,17 @@
     const side=direction==='left'||direction==='right', back=direction==='back';
     const sway=reduced?0:Math.sin(time*5)*3;
     if(a.hair===4){
-      if(back)return circle(103,48,7,h)+path(`M101 51Q130 ${55+sway} 124 ${92+sway}Q119 111 106 103Q116 77 101 51Z`,h);
-      if(side)return circle(108,47,6,h)+path(`M108 49Q139 ${50+sway} 134 ${83+sway}Q130 105 116 99Q126 72 108 49Z`,h);
-      return circle(108,48,6,h)+path(`M108 50Q136 ${47+sway} 132 ${80+sway}Q128 104 116 99Q124 72 108 50Z`,h);
+      // The engine draws right-facing side art, then mirrors the whole avatar for left.
+      // Keep the pony anchored behind the skull (left side in the unmirrored side view).
+      if(back)return circle(80,43,7,h)+path(`M79 48Q91 ${62+sway} 86 ${91+sway}Q81 111 70 103Q78 77 79 48Z`,h);
+      if(side)return circle(53,47,6,h)+path(`M54 50Q24 ${54+sway} 29 ${84+sway}Q33 104 46 98Q38 72 54 50Z`,h);
+      return '';
     }
     if(a.hair===5){
-      if(back)return circle(48,51,6,h)+circle(112,51,6,h)+path(`M48 54Q24 ${59+sway} 31 ${96+sway}Q38 112 49 101Q39 75 48 54Z`,h)+path(`M112 54Q136 ${59-sway} 129 ${96-sway}Q122 112 111 101Q121 75 112 54Z`,h);
-      if(side)return circle(109,49,6,h)+path(`M109 52Q139 ${58+sway} 132 ${96+sway}Q126 112 115 101Q124 73 109 52Z`,h);
-      return path(`M49 55Q28 ${59+sway} 34 ${96+sway}Q39 108 48 100Q40 74 49 55Z`,h)+path(`M111 55Q132 ${59-sway} 126 ${96-sway}Q121 108 112 100Q120 74 111 55Z`,h);
+      if(back)return circle(55,51,6,h)+circle(105,51,6,h)+path(`M54 55Q31 ${62+sway} 36 ${94+sway}Q40 108 50 101Q43 76 54 55Z`,h)+path(`M106 55Q129 ${62-sway} 124 ${94-sway}Q120 108 110 101Q117 76 106 55Z`,h);
+      // In profile, the far tail is mostly hidden by the head; show one rear tail only.
+      if(side)return circle(52,50,5,h)+path(`M52 53Q27 ${61+sway} 33 ${94+sway}Q38 108 48 99Q40 74 52 53Z`,h);
+      return '';
     }
     if(a.hair===6){
       if(back)return path('M55 46Q80 30 105 46L103 72Q98 104 80 116Q61 104 56 72Z',h)+path('M61 49Q80 64 99 49','none','stroke="#fff" stroke-opacity=".12"');
