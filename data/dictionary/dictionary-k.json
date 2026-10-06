@@ -2785,12 +2785,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "種類；親切な",
-            "definition": "a person, thing, idea, or concept connected with '種類；親切な'",
+            "ja": "種類",
+            "definition": "a type or sort of person or thing",
             "examples": [
               {
-                "en": "This kind is important.",
-                "ja": "この「種類」は重要です。"
+                "en": "What kind of music do you usually listen to?",
+                "ja": "普段どんな種類の音楽を聴きますか。"
               }
             ]
           }
@@ -2804,8 +2804,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "kind"
     ],
@@ -4483,12 +4485,22 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "知っている",
-            "definition": "to do or express the action '知っている'",
+            "ja": "知っている；分かっている",
+            "definition": "to have information or understanding in your mind",
             "examples": [
               {
-                "en": "We often know this in everyday life.",
-                "ja": "私たちは日常生活でよく「知っている」します。"
+                "en": "Do you know where the nearest station is?",
+                "ja": "最寄り駅がどこにあるか知っていますか。"
+              }
+            ]
+          },
+          {
+            "ja": "知り合いである",
+            "definition": "to be familiar with a person",
+            "examples": [
+              {
+                "en": "I've known her since high school.",
+                "ja": "私は高校時代から彼女を知っています。"
               }
             ]
           }
@@ -4496,24 +4508,29 @@
       }
     ],
     "forms": {
+      "third_person": "knows",
       "past": "knew",
       "past_participle": "known",
-      "third_person": "knows",
       "ing": "knowing"
     },
-    "phrases": [],
+    "phrases": [
+      "know how to",
+      "as far as I know"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.28-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "know",
+      "knows",
       "knew",
       "known",
-      "knows",
       "knowing"
     ],
     "pronunciation": {
@@ -4578,11 +4595,11 @@
         "meanings": [
           {
             "ja": "知識",
-            "definition": "a thing, person, idea, or state related to 知識",
+            "definition": "information and understanding gained through learning or experience",
             "examples": [
               {
-                "en": "This knowledge is important.",
-                "ja": "この「知識」は重要です。"
+                "en": "Reading widely helps you build background knowledge.",
+                "ja": "幅広く読むことは背景知識を増やすのに役立ちます。"
               }
             ]
           }
@@ -4596,8 +4613,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "knowledge"
     ],

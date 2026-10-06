@@ -2319,12 +2319,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "仕事",
-            "definition": "a person, thing, idea, or concept connected with '仕事'",
+            "ja": "仕事；職",
+            "definition": "paid work that a person does regularly",
             "examples": [
               {
-                "en": "This job is important.",
-                "ja": "この「仕事」は重要です。"
+                "en": "He found a new job closer to his home.",
+                "ja": "彼は自宅により近い場所で新しい仕事を見つけました。"
               }
             ]
           }
@@ -2338,8 +2338,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "job"
     ],
@@ -2745,29 +2747,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "参加する",
-            "definition": "to do or express the action '参加する'",
+            "ja": "参加する；加わる",
+            "definition": "to become a member of a group or take part in an activity",
             "examples": [
               {
-                "en": "We often join this in everyday life.",
-                "ja": "私たちは日常生活でよく「参加する」します。"
+                "en": "More than fifty students joined the volunteer project.",
+                "ja": "50人以上の生徒がボランティア活動に参加しました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "joins",
+      "past": "joined",
+      "past_participle": "joined",
+      "ing": "joining"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "join"
+      "join",
+      "joins",
+      "joined",
+      "joining"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -3604,7 +3616,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "judge"
@@ -3613,7 +3627,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin jus / juris; judex",
+      "history": "judex（jus「法」+ dicere「言う」）から、判断を下す人を表す。",
+      "roots": [
+        {
+          "form": "jur / jud",
+          "meaning": "法・裁く"
+        }
+      ],
+      "related": [
+        "jurisdiction",
+        "justice",
+        "judicial"
+      ]
+    }
   },
   {
     "id": "sw-01900",
@@ -3693,7 +3722,8 @@
     },
     "usage_note": "",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "etymology-v1"
     ],
     "status": "needs_enrichment",
     "search_terms": [
@@ -3703,7 +3733,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin jus / juris; judex",
+      "history": "judicialis / judex「裁判官」に由来し、裁判・司法に関することを表す。",
+      "roots": [
+        {
+          "form": "jur / jud",
+          "meaning": "法・裁く"
+        }
+      ],
+      "related": [
+        "jurisdiction",
+        "justice",
+        "judge"
+      ]
+    }
   },
   {
     "id": "sw-12826",
@@ -4712,7 +4757,8 @@
     },
     "usage_note": "",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "etymology-v1"
     ],
     "status": "needs_enrichment",
     "search_terms": [
@@ -4722,7 +4768,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin jus / juris; judex",
+      "history": "juris「法」+ dictio「言うこと」から、法を述べ適用する権限を表す。",
+      "roots": [
+        {
+          "form": "jur / jud",
+          "meaning": "法・裁く"
+        }
+      ],
+      "related": [
+        "justice",
+        "judicial",
+        "judge"
+      ]
+    }
   },
   {
     "id": "sw-11226",
@@ -4842,7 +4903,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "justice"
@@ -4851,7 +4914,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin jus / juris; judex",
+      "history": "justitia / jus「法・権利」に由来し、公正・正義を表す。",
+      "roots": [
+        {
+          "form": "jur / jud",
+          "meaning": "法・裁く"
+        }
+      ],
+      "related": [
+        "jurisdiction",
+        "judicial",
+        "judge"
+      ]
+    }
   },
   {
     "id": "sw-02724",
@@ -4921,19 +4999,44 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "正当化する；根拠を示す",
+            "definition": "to give a good reason for a decision, action, or belief",
+            "examples": [
+              {
+                "en": "You need evidence to justify your conclusion.",
+                "ja": "結論の根拠を示すには証拠が必要です。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "justifies",
+      "past": "justified",
+      "past_participle": "justified",
+      "ing": "justifying"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "justify"
+      "justify",
+      "justifies",
+      "justified",
+      "justifying"
     ],
     "pronunciation": {
       "ipa_us": null,

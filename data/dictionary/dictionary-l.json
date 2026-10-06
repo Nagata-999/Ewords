@@ -201,7 +201,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "labor"
@@ -210,7 +212,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin labor / laborare",
+      "history": "Latin labor「労働・苦労」に由来する。",
+      "roots": [
+        {
+          "form": "labor",
+          "meaning": "働く・労働"
+        }
+      ],
+      "related": [
+        "laboratory",
+        "collaborate",
+        "collaboration"
+      ]
+    }
   },
   {
     "id": "sw-07901",
@@ -327,7 +344,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "laboratory"
@@ -336,7 +355,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin labor / laborare",
+      "history": "Medieval Latin laboratorium に由来し、作業・実験を行う場所を表す。",
+      "roots": [
+        {
+          "form": "labor",
+          "meaning": "働く・労働"
+        }
+      ],
+      "related": [
+        "labor",
+        "collaborate",
+        "collaboration"
+      ]
+    }
   },
   {
     "id": "sw-12014",
@@ -2437,12 +2471,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "言語",
-            "definition": "a person, thing, idea, or concept connected with '言語'",
+            "ja": "言語；言葉",
+            "definition": "a system of words and grammar used by a particular group of people",
             "examples": [
               {
-                "en": "This language is important.",
-                "ja": "この「言語」は重要です。"
+                "en": "Learning a language takes more time than many people expect.",
+                "ja": "言語を学ぶことは多くの人が思う以上に時間がかかります。"
               }
             ]
           }
@@ -2450,14 +2484,19 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "foreign language",
+      "body language"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.28-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "language"
     ],
@@ -3099,12 +3138,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "大きい",
-            "definition": "having the quality described as '大きい'",
+            "ja": "大きい；大規模な",
+            "definition": "big in size, amount, or number",
             "examples": [
               {
-                "en": "This is large.",
-                "ja": "これは「大きい」です。"
+                "en": "A large crowd gathered in front of the station.",
+                "ja": "駅前に大勢の人が集まりました。"
               }
             ]
           }
@@ -3118,8 +3157,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "large"
     ],
@@ -3143,12 +3184,12 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "主として",
-            "definition": "in the manner or degree expressed by 主として",
+            "ja": "主に；大部分は",
+            "definition": "mostly or to a great extent",
             "examples": [
               {
-                "en": "The word 'largely' is commonly used in this kind of context.",
-                "ja": "「largely」は「主として」に関する文脈でよく使われます。"
+                "en": "The project's success was largely due to student participation.",
+                "ja": "プロジェクトの成功は主に生徒の参加によるものでした。"
               }
             ]
           }
@@ -3162,8 +3203,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "largely"
     ],
@@ -3602,12 +3645,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "最後の；前の",
-            "definition": "having the quality described as '最後の；前の'",
+            "ja": "最後の；前回の",
+            "definition": "coming after all others or most recent before now",
             "examples": [
               {
-                "en": "This is last.",
-                "ja": "これは「最後の」です。"
+                "en": "I finished the last chapter yesterday.",
+                "ja": "昨日最後の章を読み終えました。"
               }
             ]
           }
@@ -3621,8 +3664,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "last"
     ],
@@ -3777,12 +3822,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "遅い",
-            "definition": "having the quality described as '遅い'",
+            "ja": "遅い；遅れた",
+            "definition": "happening after the expected or usual time",
             "examples": [
               {
-                "en": "This is late.",
-                "ja": "これは「遅い」です。"
+                "en": "The train was twenty minutes late because of heavy rain.",
+                "ja": "大雨のため電車は20分遅れました。"
               }
             ]
           }
@@ -3796,8 +3841,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "late"
     ],
@@ -3941,15 +3988,15 @@
     "frequency": 5,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adverb",
         "meanings": [
           {
-            "ja": "後で",
-            "definition": "a person, thing, idea, or concept connected with '後で'",
+            "ja": "後で；より遅く",
+            "definition": "at a time after the present or the time being discussed",
             "examples": [
               {
-                "en": "This later is important.",
-                "ja": "この「後で」は重要です。"
+                "en": "We can discuss the details later.",
+                "ja": "詳細は後で話し合えます。"
               }
             ]
           }
@@ -3963,8 +4010,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "later"
     ],
@@ -4754,12 +4803,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "法律",
-            "definition": "a person, thing, idea, or concept connected with '法律'",
+            "ja": "法律；法",
+            "definition": "a rule officially made and enforced by a government",
             "examples": [
               {
-                "en": "This law is important.",
-                "ja": "この「法律」は重要です。"
+                "en": "The law requires drivers to stop at a red light.",
+                "ja": "法律は運転者に赤信号で停止することを求めています。"
               }
             ]
           }
@@ -4773,8 +4822,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "law"
     ],
@@ -6357,12 +6408,12 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "学ぶ；習得する",
-            "definition": "to gain knowledge or a skill through study or experience",
+            "ja": "学ぶ；身につける",
+            "definition": "to gain knowledge or skill through study, practice, or experience",
             "examples": [
               {
-                "en": "We learn a new song every week.",
-                "ja": "私たちは毎週、新しい歌を習います。"
+                "en": "You learn a language faster when you use it regularly.",
+                "ja": "言語は定期的に使うとより速く身につきます。"
               }
             ]
           }
@@ -6370,9 +6421,9 @@
       }
     ],
     "forms": {
-      "past": "learned/learnt",
-      "past_participle": "learned/learnt",
       "third_person": "learns",
+      "past": "learned",
+      "past_participle": "learned",
       "ing": "learning"
     },
     "phrases": [],
@@ -6381,14 +6432,16 @@
       "antonyms": []
     },
     "usage_note": "過去形・過去分詞は learned と learnt。learnt は特に英式で使われる。",
-    "tags": [],
+    "tags": [
+      "v2.30-curated"
+    ],
     "status": "basic",
     "search_terms": [
       "learn",
-      "learned",
-      "learnt",
       "learns",
-      "learning"
+      "learned",
+      "learning",
+      "learnt"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -6411,11 +6464,11 @@
         "meanings": [
           {
             "ja": "学習",
-            "definition": "the process of gaining knowledge or skill",
+            "definition": "the process of gaining knowledge or skills",
             "examples": [
               {
-                "en": "The discussion focused on learning.",
-                "ja": "議論では「学習」に焦点が当てられた。"
+                "en": "Active learning often leads to better understanding.",
+                "ja": "能動的な学習はより深い理解につながることが多いです。"
               }
             ]
           }
@@ -6430,9 +6483,10 @@
     },
     "usage_note": "",
     "tags": [
-      "learner-core-gap"
+      "learner-core-gap",
+      "v2.33-curated"
     ],
-    "status": "needs_enrichment",
+    "status": "basic",
     "search_terms": [
       "learning"
     ],
@@ -6588,41 +6642,78 @@
             "definition": "to go away from a place",
             "examples": [
               {
-                "en": "We leave at seven.",
-                "ja": "私たちは7時に出発します。"
+                "en": "We left the station at six.",
+                "ja": "私たちは6時に駅を出ました。"
               }
             ]
           },
           {
-            "ja": "残す",
-            "definition": "to cause something to remain",
+            "ja": "残す；置いていく",
+            "definition": "to let something remain in a place or condition",
             "examples": [
               {
-                "en": "Leave the door open.",
-                "ja": "ドアを開けたままにしてください。"
+                "en": "I left my umbrella on the train.",
+                "ja": "電車に傘を置き忘れました。"
+              }
+            ]
+          },
+          {
+            "ja": "〜のままにしておく",
+            "definition": "to cause someone or something to remain in a particular state",
+            "examples": [
+              {
+                "en": "Leave the window open for a while.",
+                "ja": "しばらく窓を開けたままにしてください。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "leaves",
+      "past": "left",
+      "past_participle": "left",
+      "ing": "leaving"
+    },
+    "phrases": [
+      {
+        "phrase": "leave for",
+        "ja": "〜へ向けて出発する"
+      },
+      {
+        "phrase": "leave behind",
+        "ja": "〜を置き去りにする；残す"
+      },
+      {
+        "phrase": "leave out",
+        "ja": "〜を除外する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "v2.43-curated"
+    ],
     "status": "basic",
     "search_terms": [
-      "leave"
+      "leave",
+      "leaves",
+      "left",
+      "leaving"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "leave home",
+      "leave a message",
+      "leave someone alone"
+    ]
   },
   {
     "id": "sw-09821",
@@ -6903,7 +6994,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "lecture"
@@ -6912,7 +7005,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin legere / lectus",
+      "history": "lectura / legere「読む」に由来し、もとは文章を読み上げることを表した。",
+      "roots": [
+        {
+          "form": "leg / lect",
+          "meaning": "読む・選ぶ・集める"
+        }
+      ],
+      "related": [
+        "legible",
+        "collect",
+        "collection",
+        "elect",
+        "election"
+      ]
+    }
   },
   {
     "id": "sw-10373",
@@ -7373,12 +7483,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "法律上の；合法の",
-            "definition": "a common English word connected with 法律上の",
+            "ja": "法律の；合法の",
+            "definition": "related to law or allowed by law",
             "examples": [
               {
-                "en": "The word 'legal' is commonly used in this context.",
-                "ja": "「legal」は「法律上の」に関する文脈で使われます。"
+                "en": "The legal age of adulthood in Japan is eighteen.",
+                "ja": "日本の成人年齢は法律上18歳です。"
               }
             ]
           }
@@ -7392,8 +7502,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "legal"
     ],
@@ -7401,7 +7514,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin lex / legis",
+      "history": "Latin lex / legalis「法律」に由来し、「法律に関する」を表す。",
+      "roots": [
+        {
+          "form": "leg / legis",
+          "meaning": "法律"
+        }
+      ],
+      "related": [
+        "illegal",
+        "legislation",
+        "legislative",
+        "legitimate"
+      ]
+    }
   },
   {
     "id": "sw-13176",
@@ -7607,9 +7736,27 @@
     },
     "usage_note": "",
     "tags": [
-      "judgment-and-relations"
+      "judgment-and-relations",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin legere / lectus",
+      "history": "legere「読む」に由来し、「読むことができる」を表す。",
+      "roots": [
+        {
+          "form": "leg / lect",
+          "meaning": "読む・選ぶ・集める"
+        }
+      ],
+      "related": [
+        "lecture",
+        "collect",
+        "collection",
+        "elect",
+        "election"
+      ]
+    }
   },
   {
     "id": "sw-01910",
@@ -7644,7 +7791,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "legislation"
@@ -7653,7 +7802,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin lex / legis",
+      "history": "Latin lex「法律」と legislatio 系に由来し、法律を制定することを表す。",
+      "roots": [
+        {
+          "form": "leg / legis",
+          "meaning": "法律"
+        }
+      ],
+      "related": [
+        "legal",
+        "illegal",
+        "legislative",
+        "legitimate"
+      ]
+    }
   },
   {
     "id": "sw-02940",
@@ -7689,7 +7854,8 @@
     },
     "usage_note": "",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "etymology-v1"
     ],
     "status": "needs_enrichment",
     "search_terms": [
@@ -7699,7 +7865,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin lex / legis",
+      "history": "legislation と同じ lex/legis「法律」の語族で、立法に関することを表す。",
+      "roots": [
+        {
+          "form": "leg / legis",
+          "meaning": "法律"
+        }
+      ],
+      "related": [
+        "legal",
+        "illegal",
+        "legislation",
+        "legitimate"
+      ]
+    }
   },
   {
     "id": "sw-02988",
@@ -7826,7 +8008,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "legitimate"
@@ -7835,7 +8019,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin lex / legis",
+      "history": "Latin legitimus「法律にかなった」に由来し、正当な・合法的な意味へ広がった。",
+      "roots": [
+        {
+          "form": "leg / legis",
+          "meaning": "法律"
+        }
+      ],
+      "related": [
+        "legal",
+        "illegal",
+        "legislation",
+        "legislative"
+      ]
+    }
   },
   {
     "id": "sw-07647",
@@ -9156,12 +9356,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "水準；段階",
-            "definition": "a thing, person, idea, or state related to 水準",
+            "ja": "水準；段階；レベル",
+            "definition": "a particular position on a scale of amount, quality, or difficulty",
             "examples": [
               {
-                "en": "This level is important.",
-                "ja": "この「水準」は重要です。"
+                "en": "This book is suitable for learners at an intermediate level.",
+                "ja": "この本は中級レベルの学習者に適しています。"
               }
             ]
           }
@@ -9175,8 +9375,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "level"
     ],
@@ -10091,7 +10293,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "liberal"
@@ -10100,7 +10304,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin liber",
+      "history": "liber「自由な」に由来し、自由人にふさわしい→自由主義的な、などへ意味が広がった。",
+      "roots": [
+        {
+          "form": "liber",
+          "meaning": "自由"
+        }
+      ],
+      "related": [
+        "deliver"
+      ]
+    }
   },
   {
     "id": "sw-03359",
@@ -10959,22 +11176,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "人生；生涯",
-            "definition": "the period during which someone is alive",
+            "ja": "人生；生命；生活",
+            "definition": "the period during which a person or living thing is alive, or the way someone lives",
             "examples": [
               {
-                "en": "He spent most of his life near the sea.",
-                "ja": "彼は人生の大半を海の近くで過ごしました。"
-              }
-            ]
-          },
-          {
-            "ja": "生命",
-            "definition": "the state of being alive",
-            "examples": [
-              {
-                "en": "Scientists look for signs of life on other planets.",
-                "ja": "科学者たちは他の惑星に生命の痕跡を探しています。"
+                "en": "Living abroad changed the way she looked at life.",
+                "ja": "海外生活は彼女の人生の見方を変えました。"
               }
             ]
           }
@@ -10984,13 +11191,18 @@
     "forms": {
       "plural": "lives"
     },
-    "phrases": [],
+    "phrases": [
+      "daily life",
+      "quality of life"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "v2.30-curated"
+    ],
     "status": "basic",
     "search_terms": [
       "life",
@@ -11926,17 +12138,36 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "可能性が高い",
+            "definition": "expected or probable to happen or be true",
+            "examples": [
+              {
+                "en": "Rain is likely this afternoon.",
+                "ja": "今日の午後は雨が降る可能性が高いです。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "be likely to do"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "likely"
     ],
@@ -12396,6 +12627,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "限界；制限",
+            "definition": "the greatest amount allowed or possible",
+            "examples": [
+              {
+                "en": "There is a time limit of thirty minutes.",
+                "ja": "制限時間は30分です。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -12405,8 +12651,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "limit"
     ],
@@ -14132,7 +14380,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "literacy"
@@ -14141,7 +14391,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin littera",
+      "history": "littera「文字」に関係し、文字を読み書きできる能力を表す。",
+      "roots": [
+        {
+          "form": "liter",
+          "meaning": "文字"
+        }
+      ],
+      "related": [
+        "literature",
+        "literary"
+      ]
+    }
   },
   {
     "id": "sw-09212",
@@ -14217,7 +14481,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "literary"
@@ -14226,7 +14492,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin littera",
+      "history": "literature と同じ littera「文字」の語族で、文学に関することを表す。",
+      "roots": [
+        {
+          "form": "liter",
+          "meaning": "文字"
+        }
+      ],
+      "related": [
+        "literature",
+        "literacy"
+      ]
+    }
   },
   {
     "id": "sw-01919",
@@ -14261,7 +14541,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "literature"
@@ -14270,7 +14552,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin littera",
+      "history": "litteratura / littera「文字」に由来し、文字で書かれたもの・文学を表す。",
+      "roots": [
+        {
+          "form": "liter",
+          "meaning": "文字"
+        }
+      ],
+      "related": [
+        "literary",
+        "literacy"
+      ]
+    }
   },
   {
     "id": "sw-10519",
@@ -14492,11 +14788,11 @@
         "meanings": [
           {
             "ja": "小さい；少しの",
-            "definition": "having the quality described as '小さい；少しの'",
+            "definition": "small in size or amount",
             "examples": [
               {
-                "en": "This is little.",
-                "ja": "これは「小さい」です。"
+                "en": "We have very little time left, so let's start now.",
+                "ja": "残り時間がほとんどないので今始めましょう。"
               }
             ]
           }
@@ -14510,8 +14806,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "little"
     ],
@@ -14577,28 +14875,38 @@
         "meanings": [
           {
             "ja": "住む；生きる",
-            "definition": "to do or express the action '住む；生きる'",
+            "definition": "to have your home somewhere or remain alive",
             "examples": [
               {
-                "en": "We often live this in everyday life.",
-                "ja": "私たちは日常生活でよく「住む」します。"
+                "en": "More than a million people live in the city.",
+                "ja": "その都市には100万人以上が住んでいます。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "lives",
+      "past": "lived",
+      "past_participle": "lived",
+      "ing": "living"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "live"
+      "live",
+      "lives",
+      "lived",
+      "living"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -15544,12 +15852,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "地元の",
-            "definition": "having the quality described as '地元の'",
+            "ja": "地元の；地域の",
+            "definition": "relating to a particular nearby area",
             "examples": [
               {
-                "en": "This is local.",
-                "ja": "これは「地元の」です。"
+                "en": "We bought fresh vegetables at the local market.",
+                "ja": "私たちは地元の市場で新鮮な野菜を買いました。"
               }
             ]
           }
@@ -15563,8 +15871,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "local"
     ],
@@ -15572,7 +15883,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin locus / locare",
+      "history": "Latin locus「場所」に由来し、「ある場所の」を表す。",
+      "roots": [
+        {
+          "form": "loc",
+          "meaning": "場所・置く"
+        }
+      ],
+      "related": [
+        "location",
+        "allocate",
+        "allocation"
+      ]
+    }
   },
   {
     "id": "sw-13255",
@@ -15735,7 +16061,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "location"
@@ -15744,7 +16072,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin locus / locare",
+      "history": "Latin locare「置く」/ locus「場所」に由来し、場所・位置を表す。",
+      "roots": [
+        {
+          "form": "loc",
+          "meaning": "場所・置く"
+        }
+      ],
+      "related": [
+        "local",
+        "allocate",
+        "allocation"
+      ]
+    }
   },
   {
     "id": "sw-10359",
@@ -17210,11 +17553,11 @@
         "meanings": [
           {
             "ja": "長い",
-            "definition": "having a large length or lasting a large amount of time",
+            "definition": "measuring a great distance or continuing for a large amount of time",
             "examples": [
               {
-                "en": "It was a long journey, but we enjoyed it.",
-                "ja": "長い旅でしたが、私たちは楽しみました。"
+                "en": "It was a long journey, but the scenery was beautiful.",
+                "ja": "長い旅でしたが景色は美しかったです。"
               }
             ]
           }
@@ -17231,7 +17574,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "v2.30-curated"
+    ],
     "status": "basic",
     "search_terms": [
       "long",
@@ -19342,29 +19687,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "失う",
-            "definition": "to do or express the action '失う'",
+            "ja": "失う；負ける",
+            "definition": "to no longer have something or fail to win",
             "examples": [
               {
-                "en": "We often lose this in everyday life.",
-                "ja": "私たちは日常生活でよく「失う」します。"
+                "en": "Back up your files so that you do not lose your work.",
+                "ja": "作業内容を失わないようファイルをバックアップしてください。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "loses",
+      "past": "lost",
+      "past_participle": "lost",
+      "ing": "losing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "lose"
+      "lose",
+      "loses",
+      "lost",
+      "losing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -19926,28 +20281,38 @@
         "meanings": [
           {
             "ja": "愛する；大好きである",
-            "definition": "to do or express the action '愛する；大好きである'",
+            "definition": "to care deeply about someone or like something very much",
             "examples": [
               {
-                "en": "We often love this in everyday life.",
-                "ja": "私たちは日常生活でよく「愛する」します。"
+                "en": "She loves reading historical novels.",
+                "ja": "彼女は歴史小説を読むのが大好きです。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "loves",
+      "past": "loved",
+      "past_participle": "loved",
+      "ing": "loving"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "love"
+      "love",
+      "loves",
+      "loved",
+      "loving"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -21087,9 +21452,26 @@
     },
     "usage_note": "",
     "tags": [
-      "descriptive"
+      "descriptive",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin lux / lumen / lucere",
+      "history": "lumen「光」に由来し、「光を発する・明るい」を表す。",
+      "roots": [
+        {
+          "form": "luc / lumin",
+          "meaning": "光"
+        }
+      ],
+      "related": [
+        "light",
+        "illustrate",
+        "illustration",
+        "translucent"
+      ]
+    }
   },
   {
     "id": "sw-09067",

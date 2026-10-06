@@ -476,12 +476,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "損害",
-            "definition": "a thing, person, idea, or state related to 損害",
+            "ja": "損害；被害",
+            "definition": "physical harm that makes something less useful or valuable",
             "examples": [
               {
-                "en": "This damage is important.",
-                "ja": "この「損害」は重要です。"
+                "en": "The storm caused serious damage to several houses.",
+                "ja": "嵐は数軒の家に深刻な被害を与えました。"
               }
             ]
           }
@@ -495,8 +495,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "damage"
     ],
@@ -866,11 +868,11 @@
         "meanings": [
           {
             "ja": "危険",
-            "definition": "a thing, person, idea, or state related to 危険",
+            "definition": "the possibility that someone or something may be harmed",
             "examples": [
               {
-                "en": "This danger is important.",
-                "ja": "この「危険」は重要です。"
+                "en": "The signs warn hikers of the danger of falling rocks.",
+                "ja": "標識は登山者に落石の危険を警告しています。"
               }
             ]
           }
@@ -884,8 +886,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "danger"
     ],
@@ -910,11 +914,11 @@
         "meanings": [
           {
             "ja": "危険な",
-            "definition": "having the quality or state expressed by 危険な",
+            "definition": "likely to cause harm or injury",
             "examples": [
               {
-                "en": "It is dangerous.",
-                "ja": "それは「危険な」です。"
+                "en": "It is dangerous to run on this road after dark.",
+                "ja": "暗くなってからこの道路を走るのは危険です。"
               }
             ]
           }
@@ -928,8 +932,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "dangerous"
     ],
@@ -1438,12 +1444,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "データ",
-            "definition": "a thing, person, idea, or state related to データ",
+            "ja": "データ；資料",
+            "definition": "facts or information collected for examination or use",
             "examples": [
               {
-                "en": "This data is important.",
-                "ja": "この「データ」は重要です。"
+                "en": "The researchers collected data from more than a thousand students.",
+                "ja": "研究者たちは1000人以上の生徒からデータを集めました。"
               }
             ]
           }
@@ -1457,8 +1463,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "data"
     ],
@@ -2085,21 +2093,11 @@
         "meanings": [
           {
             "ja": "日；一日",
-            "definition": "a period of twenty-four hours",
+            "definition": "a period of twenty-four hours or the time between morning and night",
             "examples": [
               {
-                "en": "The journey takes two days.",
-                "ja": "その旅には二日かかります。"
-              }
-            ]
-          },
-          {
-            "ja": "昼；日中",
-            "definition": "the part of the day when there is natural light",
-            "examples": [
-              {
-                "en": "Owls often sleep during the day.",
-                "ja": "フクロウは昼間に眠ることがよくあります。"
+                "en": "I try to walk at least thirty minutes every day.",
+                "ja": "私は毎日少なくとも30分歩くようにしています。"
               }
             ]
           }
@@ -2115,7 +2113,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "v2.30-curated"
+    ],
     "status": "basic",
     "search_terms": [
       "day",
@@ -2817,32 +2817,63 @@
     "frequency": 3,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "verb",
         "meanings": [
           {
             "ja": "対処する",
-            "definition": "a person, thing, idea, or concept connected with '対処する'",
+            "definition": "to take action to handle a problem",
             "examples": [
               {
-                "en": "This deal is important.",
-                "ja": "この「対処する」は重要です。"
+                "en": "We need to deal with the problem quickly.",
+                "ja": "その問題に迅速に対処する必要があります。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "取引；取り決め",
+            "definition": "an agreement, especially in business",
+            "examples": [
+              {
+                "en": "The two companies reached a deal.",
+                "ja": "2社は合意に達しました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "deals",
+      "past": "dealt",
+      "past_participle": "dealt",
+      "ing": "dealing"
+    },
+    "phrases": [
+      {
+        "phrase": "deal with",
+        "ja": "〜に対処する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "deal"
+      "deal",
+      "deals",
+      "dealt",
+      "dealing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -3329,19 +3360,44 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "討論；議論",
+            "definition": "a formal or public discussion in which different opinions are expressed",
+            "examples": [
+              {
+                "en": "The class held a debate on the use of AI in education.",
+                "ja": "クラスは教育でのAI利用について討論を行いました。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "debates",
+      "past": "debated",
+      "past_participle": "debated",
+      "ing": "debating"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "debate"
+      "debate",
+      "debates",
+      "debated",
+      "debating"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -4268,35 +4324,66 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "決める",
-            "definition": "to do or express the action '決める'",
+            "ja": "決める；決定する",
+            "definition": "to choose something after thinking about the possibilities",
             "examples": [
               {
-                "en": "We often decide this in everyday life.",
-                "ja": "私たちは日常生活でよく「決める」します。"
+                "en": "We decided to postpone the event because of the storm.",
+                "ja": "嵐のためイベントを延期することに決めました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "decides",
+      "past": "decided",
+      "past_participle": "decided",
+      "ing": "deciding"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
-      "decide"
+      "decide",
+      "decides",
+      "decided",
+      "deciding"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin caedere / cadere (distinct roots)",
+      "history": "de- + caedere「切る」に由来し、選択肢を切り分ける→決定する、へ発展した。",
+      "roots": [
+        {
+          "form": "de-",
+          "meaning": "離して・明確に"
+        },
+        {
+          "form": "cid / cis; cad",
+          "meaning": "切る／落ちる"
+        }
+      ],
+      "related": [
+        "decision",
+        "precision",
+        "incident",
+        "accident"
+      ]
+    }
   },
   {
     "id": "sw-06262",
@@ -4353,12 +4440,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "決定",
-            "definition": "a thing, person, idea, or state related to 決定",
+            "ja": "決定；判断",
+            "definition": "a choice made after considering different possibilities",
             "examples": [
               {
-                "en": "This decision is important.",
-                "ja": "この「決定」は重要です。"
+                "en": "It was a difficult decision, but I think it was the right one.",
+                "ja": "難しい決断でしたが、正しかったと思います。"
               }
             ]
           }
@@ -4366,14 +4453,19 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "make a decision"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "decision"
     ],
@@ -4381,7 +4473,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin decidere",
+      "history": "de- と caedere「切る」に由来し、選択肢を「切り分ける・決着させる」という発想を持つ。",
+      "roots": [
+        {
+          "form": "-cide / cis",
+          "meaning": "切る"
+        }
+      ],
+      "related": [
+        "decide",
+        "precise",
+        "incision"
+      ]
+    }
   },
   {
     "id": "sw-03673",
@@ -4706,25 +4813,68 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "減少する；断る",
+            "definition": "to become smaller or weaker, or politely refuse something",
+            "examples": [
+              {
+                "en": "The number of visitors declined during the winter.",
+                "ja": "冬の間、来場者数は減少しました。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "declines",
+      "past": "declined",
+      "past_participle": "declined",
+      "ing": "declining"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
-      "decline"
+      "decline",
+      "declines",
+      "declined",
+      "declining"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin declinare",
+      "history": "de-「下へ・離れて」+ clinare「傾ける」から、下向きに傾く→減少する、へ発展した。",
+      "roots": [
+        {
+          "form": "de-",
+          "meaning": "下へ・離れて"
+        },
+        {
+          "form": "clin",
+          "meaning": "傾く"
+        }
+      ],
+      "related": [
+        "climate"
+      ]
+    }
   },
   {
     "id": "sw-11478",
@@ -5112,15 +5262,15 @@
     "frequency": 3,
     "parts_of_speech": [
       {
-        "pos": "verb",
+        "pos": "noun",
         "meanings": [
           {
-            "ja": "減少する；減少",
-            "definition": "to perform or cause the action expressed by 減少する",
+            "ja": "減少",
+            "definition": "a reduction in size, number, or amount",
             "examples": [
               {
-                "en": "The word 'decrease' is commonly used in this context.",
-                "ja": "「decrease」は「減少する」に関する文脈で使われます。"
+                "en": "There was a decrease in traffic after the new railway opened.",
+                "ja": "新しい鉄道の開通後、交通量が減少しました。"
               }
             ]
           }
@@ -5134,8 +5284,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "decrease"
     ],
@@ -6243,34 +6395,73 @@
         "meanings": [
           {
             "ja": "定義する",
-            "definition": "to perform or cause the action expressed by 定義する",
+            "definition": "to state the exact meaning of something",
             "examples": [
               {
-                "en": "The word 'define' is commonly used in this context.",
-                "ja": "「define」は「定義する」に関する文脈で使われます。"
+                "en": "How would you define success?",
+                "ja": "成功をどのように定義しますか。"
+              }
+            ]
+          },
+          {
+            "ja": "特徴づける",
+            "definition": "to be an important feature that makes something what it is",
+            "examples": [
+              {
+                "en": "Trust defines their relationship.",
+                "ja": "信頼が彼らの関係を特徴づけています。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "defines",
+      "past": "defined",
+      "past_participle": "defined",
+      "ing": "defining"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "define"
+      "define",
+      "defines",
+      "defined",
+      "defining"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin finis / finire",
+      "history": "de- + finire「境界を定める」に由来し、意味の範囲をはっきり定めることから「定義する」を表す。",
+      "roots": [
+        {
+          "form": "fin",
+          "meaning": "終わり・境界"
+        }
+      ],
+      "related": [
+        "final",
+        "finally",
+        "finish",
+        "definition",
+        "finite"
+      ]
+    }
   },
   {
     "id": "sw-02633",
@@ -6349,7 +6540,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "definition"
@@ -6358,7 +6551,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin finis / finire",
+      "history": "define の名詞形で、意味の境界を定めることを表す。",
+      "roots": [
+        {
+          "form": "fin",
+          "meaning": "終わり・境界"
+        }
+      ],
+      "related": [
+        "final",
+        "finally",
+        "finish",
+        "define",
+        "finite"
+      ]
+    }
   },
   {
     "id": "sw-12717",
@@ -6569,12 +6779,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "程度；学位",
-            "definition": "a thing, person, idea, or state related to 程度",
+            "ja": "程度；学位；度",
+            "definition": "an amount or level, an academic qualification, or a unit of measurement",
             "examples": [
               {
-                "en": "This degree is important.",
-                "ja": "この「程度」は重要です。"
+                "en": "The policy was successful to some degree.",
+                "ja": "その政策はある程度成功しました。"
               }
             ]
           }
@@ -6588,8 +6798,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "degree"
     ],
@@ -6597,7 +6810,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Old French degré, ultimately Latin gradus",
+      "history": "Latin gradus「段・歩み」にさかのぼり、段階・程度や学位の意味へ発展した。",
+      "roots": [
+        {
+          "form": "grad / gress",
+          "meaning": "歩み・段階"
+        }
+      ],
+      "related": [
+        "gradual",
+        "graduate",
+        "progress"
+      ]
+    }
   },
   {
     "id": "sw-11723",
@@ -7648,12 +7876,27 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "需要；要求",
-            "definition": "a thing, person, idea, or state related to 需要",
+            "ja": "需要",
+            "definition": "the amount of a product or service that people want",
             "examples": [
               {
-                "en": "This demand is important.",
-                "ja": "この「需要」は重要です。"
+                "en": "Demand for electric cars is growing.",
+                "ja": "電気自動車の需要は増えています。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "要求する",
+            "definition": "to ask strongly for something",
+            "examples": [
+              {
+                "en": "Workers demanded better conditions.",
+                "ja": "労働者たちはより良い労働条件を要求しました。"
               }
             ]
           }
@@ -7661,14 +7904,19 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "demand for"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "demand"
     ],
@@ -7676,7 +7924,10 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "high demand",
+      "meet demand"
+    ]
   },
   {
     "id": "sw-11311",
@@ -7875,7 +8126,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "democracy"
@@ -7884,7 +8137,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Greek demokratia",
+      "history": "dēmos「民衆」と kratos「支配・力」から、「民衆による統治」を表す。",
+      "roots": [
+        {
+          "form": "demo-",
+          "meaning": "民衆"
+        },
+        {
+          "form": "-cracy",
+          "meaning": "統治・支配"
+        }
+      ],
+      "related": [
+        "democratic",
+        "demographic"
+      ]
+    }
   },
   {
     "id": "sw-01697",
@@ -8126,19 +8397,44 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "示す；実演する",
+            "definition": "to show clearly that something is true or how something works",
+            "examples": [
+              {
+                "en": "The experiment demonstrates the effect of temperature on pressure.",
+                "ja": "その実験は温度が圧力に与える影響を示しています。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "demonstrates",
+      "past": "demonstrated",
+      "past_participle": "demonstrated",
+      "ing": "demonstrating"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "demonstrate"
+      "demonstrate",
+      "demonstrates",
+      "demonstrated",
+      "demonstrating"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -9262,11 +9558,11 @@
         "meanings": [
           {
             "ja": "部門；学科",
-            "definition": "a thing, person, idea, or state related to 部門",
+            "definition": "a section of an organization responsible for a particular area",
             "examples": [
               {
-                "en": "This department is important.",
-                "ja": "この「部門」は重要です。"
+                "en": "She works in the marketing department.",
+                "ja": "彼女はマーケティング部門で働いています。"
               }
             ]
           }
@@ -9280,8 +9576,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "department"
     ],
@@ -9434,35 +9732,69 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "依存する；〜次第である",
-            "definition": "to perform or cause the action expressed by 依存する",
+            "ja": "〜次第である；依存する",
+            "definition": "to be decided or influenced by something else",
             "examples": [
               {
-                "en": "People often depend in this situation.",
-                "ja": "この状況では人々はしばしば「依存する」します。"
+                "en": "The result depends on how much time we have.",
+                "ja": "結果はどれだけ時間があるか次第です。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "depends",
+      "past": "depended",
+      "past_participle": "depended",
+      "ing": "depending"
+    },
+    "phrases": [
+      {
+        "phrase": "depend on",
+        "ja": "〜次第である；〜に依存する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "depend"
+      "depend",
+      "depends",
+      "depended",
+      "depending"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin pendere / pensus",
+      "history": "de-「下に」+ pendere「ぶら下がる」に由来し、何かに「ぶら下がって頼る」発想から「依存する」へ発展した。",
+      "roots": [
+        {
+          "form": "pend / pens",
+          "meaning": "ぶら下がる・量る"
+        }
+      ],
+      "related": [
+        "dependent",
+        "independent",
+        "spend",
+        "expense",
+        "expensive"
+      ]
+    }
   },
   {
     "id": "sw-04847",
@@ -9720,7 +10052,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "dependent"
@@ -9729,7 +10063,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin pendere / pensus",
+      "history": "depend からできた形容詞で、何かに頼っている状態を表す。",
+      "roots": [
+        {
+          "form": "pend / pens",
+          "meaning": "ぶら下がる・量る"
+        }
+      ],
+      "related": [
+        "depend",
+        "independent",
+        "spend",
+        "expense",
+        "expensive"
+      ]
+    }
   },
   {
     "id": "sw-03221",
@@ -9851,7 +10202,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "deposit"
@@ -9860,7 +10213,27 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin ponere / positus",
+      "history": "de-「下へ」+ ponere「置く」に由来し、置いて預ける意味へ発展した。",
+      "roots": [
+        {
+          "form": "de-",
+          "meaning": "下へ"
+        },
+        {
+          "form": "pon / pos",
+          "meaning": "置く"
+        }
+      ],
+      "related": [
+        "component",
+        "opponent",
+        "expose",
+        "exposure"
+      ]
+    }
   },
   {
     "id": "sw-11809",
@@ -10059,7 +10432,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "depression"
@@ -10068,7 +10443,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin premere / pressus",
+      "history": "de-「下へ」+ premere「押す」に関係し、押し下げられた状態を表す。",
+      "roots": [
+        {
+          "form": "de-",
+          "meaning": "下へ"
+        },
+        {
+          "form": "press",
+          "meaning": "押す"
+        }
+      ],
+      "related": [
+        "compression",
+        "suppress"
+      ]
+    }
   },
   {
     "id": "sw-03089",
@@ -10727,19 +11120,44 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "得る；由来する",
+            "definition": "to obtain something from a source or develop from something else",
+            "examples": [
+              {
+                "en": "Many English words derive from Latin.",
+                "ja": "多くの英単語はラテン語に由来します。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "derives",
+      "past": "derived",
+      "past_participle": "derived",
+      "ing": "deriving"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "derive"
+      "derive",
+      "derives",
+      "derived",
+      "deriving"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -10825,25 +11243,66 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "説明する；描写する",
+            "definition": "to say or write what someone or something is like",
+            "examples": [
+              {
+                "en": "Describe the main trend shown in the graph.",
+                "ja": "グラフに示された主な傾向を説明してください。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "describes",
+      "past": "described",
+      "past_participle": "described",
+      "ing": "describing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
-      "describe"
+      "describe",
+      "describes",
+      "described",
+      "describing"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin describere",
+      "history": "de- と scribere「書く」から、もとは「書き記す・写し取る」という意味を持った。",
+      "roots": [
+        {
+          "form": "scrib / script",
+          "meaning": "書く"
+        }
+      ],
+      "related": [
+        "description",
+        "script",
+        "manuscript"
+      ]
+    }
   },
   {
     "id": "sw-01395",
@@ -10878,7 +11337,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "description"
@@ -10887,7 +11348,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin scribere / scriptus",
+      "history": "describe の名詞形で、「書く」を表す scrib/script の語族。",
+      "roots": [
+        {
+          "form": "scrib / script",
+          "meaning": "書く"
+        }
+      ],
+      "related": [
+        "describe",
+        "prescription",
+        "subscription",
+        "manuscript"
+      ]
+    }
   },
   {
     "id": "sw-08221",
@@ -11074,11 +11551,11 @@
         "meanings": [
           {
             "ja": "設計；デザイン",
-            "definition": "a thing, person, idea, or state related to 設計",
+            "definition": "the plan or appearance of something that is created",
             "examples": [
               {
-                "en": "This design is important.",
-                "ja": "この「設計」は重要です。"
+                "en": "The new website has a simpler design.",
+                "ja": "新しいウェブサイトはよりシンプルなデザインです。"
               }
             ]
           }
@@ -11092,8 +11569,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "design"
     ],
@@ -11101,7 +11581,27 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin signum / signare",
+      "history": "de- + signare「印をつける」に由来し、計画として形を与える意味へ発展した.",
+      "roots": [
+        {
+          "form": "de-",
+          "meaning": "下へ・明確に"
+        },
+        {
+          "form": "sign",
+          "meaning": "印・しるし"
+        }
+      ],
+      "related": [
+        "sign",
+        "signal",
+        "significant",
+        "assign"
+      ]
+    }
   },
   {
     "id": "sw-03222",
@@ -11547,11 +12047,11 @@
         "meanings": [
           {
             "ja": "〜にもかかわらず",
-            "definition": "used to express a relationship connected with 〜にもかかわらず",
+            "definition": "without being prevented by something",
             "examples": [
               {
-                "en": "The word 'despite' is commonly used in this context.",
-                "ja": "「despite」は「〜にもかかわらず」に関する文脈で使われます。"
+                "en": "Despite the rain, the event attracted many visitors.",
+                "ja": "雨にもかかわらずイベントには多くの来場者が集まりました。"
               }
             ]
           }
@@ -11559,14 +12059,18 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "despite the fact that"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "despite"
     ],
@@ -11826,7 +12330,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "destruction"
@@ -11835,7 +12341,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin struere / structus",
+      "history": "destruere「壊す」に由来し、de- と struere 系の要素を含む。",
+      "roots": [
+        {
+          "form": "struct",
+          "meaning": "組み立てる"
+        }
+      ],
+      "related": [
+        "construct",
+        "construction",
+        "structure",
+        "instruction",
+        "instructor",
+        "destroy"
+      ]
+    }
   },
   {
     "id": "sw-08389",
@@ -11989,6 +12513,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "詳細；細部",
+            "definition": "a small piece of information about something",
+            "examples": [
+              {
+                "en": "Check every detail before submitting the form.",
+                "ja": "用紙を提出する前にすべての詳細を確認してください。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -11998,8 +12537,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "detail"
     ],
@@ -12384,34 +12925,71 @@
         "meanings": [
           {
             "ja": "決定する",
-            "definition": "to do or express the action '決定する'",
+            "definition": "to decide or control what happens",
             "examples": [
               {
-                "en": "We often determine this in everyday life.",
-                "ja": "私たちは日常生活でよく「決定する」します。"
+                "en": "Several factors determine the final price.",
+                "ja": "いくつかの要因が最終価格を決定します。"
+              }
+            ]
+          },
+          {
+            "ja": "突き止める",
+            "definition": "to discover something by investigation",
+            "examples": [
+              {
+                "en": "The test can determine whether the water is safe.",
+                "ja": "その検査で水が安全かどうかを判定できます。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "determines",
+      "past": "determined",
+      "past_participle": "determined",
+      "ing": "determining"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "determine"
+      "determine",
+      "determines",
+      "determined",
+      "determining"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin terminus / terminare",
+      "history": "de- + terminare「境界を定める」に由来し、範囲を確定することから「決定する」へ発展した。",
+      "roots": [
+        {
+          "form": "termin",
+          "meaning": "終わり・境界"
+        }
+      ],
+      "related": [
+        "term",
+        "terminal",
+        "terminate"
+      ]
+    }
   },
   {
     "id": "sw-04992",
@@ -12614,35 +13192,79 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "発展させる",
-            "definition": "to do or express the action '発展させる'",
+            "ja": "発達する；発展する",
+            "definition": "to grow or change gradually",
             "examples": [
               {
-                "en": "We often develop this in everyday life.",
-                "ja": "私たちは日常生活でよく「発展させる」します。"
+                "en": "The town developed rapidly after the new railway opened.",
+                "ja": "新しい鉄道の開通後、その町は急速に発展しました。"
+              }
+            ]
+          },
+          {
+            "ja": "開発する；作り上げる",
+            "definition": "to create or improve something over time",
+            "examples": [
+              {
+                "en": "The company is developing a new battery.",
+                "ja": "その会社は新しい電池を開発しています。"
+              }
+            ]
+          },
+          {
+            "ja": "身につける；育てる",
+            "definition": "to gain or strengthen a skill, quality, or habit",
+            "examples": [
+              {
+                "en": "Reading widely helps students develop critical thinking.",
+                "ja": "幅広く読むことは生徒が批判的思考力を身につける助けになります。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "develops",
+      "past": "developed",
+      "past_participle": "developed",
+      "ing": "developing"
+    },
+    "phrases": [
+      {
+        "phrase": "develop into",
+        "ja": "〜へ発展する"
+      },
+      {
+        "phrase": "develop a skill",
+        "ja": "技能を身につける"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "v2.43-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "develop"
+      "develop",
+      "develops",
+      "developed",
+      "developing"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "develop a product",
+      "develop a habit",
+      "develop a strategy"
+    ]
   },
   {
     "id": "sw-03272",
@@ -12705,11 +13327,11 @@
         "meanings": [
           {
             "ja": "発展；開発",
-            "definition": "a person, thing, state, process, or idea connected with 発展",
+            "definition": "the process of growing, changing, or becoming more advanced",
             "examples": [
               {
-                "en": "The word 'development' is commonly used in this context.",
-                "ja": "「development」は「発展」に関する文脈で使われます。"
+                "en": "The area has experienced rapid economic development.",
+                "ja": "その地域は急速な経済発展を経験しました。"
               }
             ]
           }
@@ -12723,8 +13345,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "development"
     ],
@@ -12802,6 +13426,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "装置；機器",
+            "definition": "a piece of equipment designed for a particular purpose",
+            "examples": [
+              {
+                "en": "Students can use any device with a web browser.",
+                "ja": "生徒はウェブブラウザのあるどの端末でも利用できます。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -12811,8 +13450,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "device"
     ],
@@ -14171,9 +14812,28 @@
     },
     "usage_note": "",
     "tags": [
-      "work-actions"
+      "work-actions",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin dicere / dictare",
+      "history": "dicere「言う」に関係する dictare「繰り返し言う・口述する」に由来する。",
+      "roots": [
+        {
+          "form": "dict / dic",
+          "meaning": "言う"
+        }
+      ],
+      "related": [
+        "dictation",
+        "dictionary",
+        "predict",
+        "prediction",
+        "contradict",
+        "contradiction"
+      ]
+    }
   },
   {
     "id": "sw-07243",
@@ -14212,9 +14872,28 @@
     },
     "usage_note": "",
     "tags": [
-      "digital-office"
+      "digital-office",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin dicere / dictare",
+      "history": "dictate と同じく、「言う」を表すラテン語系の語族に属する。",
+      "roots": [
+        {
+          "form": "dict / dic",
+          "meaning": "言う"
+        }
+      ],
+      "related": [
+        "dictate",
+        "dictionary",
+        "predict",
+        "prediction",
+        "contradict",
+        "contradiction"
+      ]
+    }
   },
   {
     "id": "sw-12950",
@@ -14290,7 +14969,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "dictionary"
@@ -14299,7 +14980,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Medieval Latin dictionarium",
+      "history": "Latin dictio「言葉・表現」に由来し、dictio は dicere「言う」に関係する。",
+      "roots": [
+        {
+          "form": "dict / dic",
+          "meaning": "言う"
+        }
+      ],
+      "related": [
+        "dictate",
+        "predict",
+        "diction"
+      ]
+    }
   },
   {
     "id": "sw-10399",
@@ -14356,29 +15052,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "死ぬ",
-            "definition": "to do or express the action '死ぬ'",
+            "ja": "死ぬ；枯れる",
+            "definition": "to stop being alive",
             "examples": [
               {
-                "en": "We often die this in everyday life.",
-                "ja": "私たちは日常生活でよく「死ぬ」します。"
+                "en": "Many plants die if they do not receive enough water.",
+                "ja": "十分な水がないと多くの植物は枯れます。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "dies",
+      "past": "died",
+      "past_participle": "died",
+      "ing": "dying"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "die"
+      "die",
+      "dies",
+      "died",
+      "dying"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -14674,7 +15380,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "differ"
@@ -14683,7 +15391,29 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin ferre / latus",
+      "history": "dis-「離れて」+ ferre「運ぶ」に関係し、別方向に分かれる→異なる、となった.",
+      "roots": [
+        {
+          "form": "dis-",
+          "meaning": "離れて"
+        },
+        {
+          "form": "fer",
+          "meaning": "運ぶ・持つ"
+        }
+      ],
+      "related": [
+        "transfer",
+        "reference",
+        "prefer",
+        "preference",
+        "offer",
+        "difference"
+      ]
+    }
   },
   {
     "id": "sw-00203",
@@ -14699,12 +15429,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "違い",
-            "definition": "a person, thing, idea, or concept connected with '違い'",
+            "ja": "違い；差",
+            "definition": "the way in which two or more things are not the same",
             "examples": [
               {
-                "en": "This difference is important.",
-                "ja": "この「違い」は重要です。"
+                "en": "There is a big difference between knowing a word and being able to use it.",
+                "ja": "単語を知っていることと使えることには大きな違いがあります。"
               }
             ]
           }
@@ -14712,14 +15442,20 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "make a difference",
+      "the difference between A and B"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "difference"
     ],
@@ -14727,7 +15463,29 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin ferre / latus",
+      "history": "differ の名詞形で、別々であること・相違を表す.",
+      "roots": [
+        {
+          "form": "dis-",
+          "meaning": "離れて"
+        },
+        {
+          "form": "fer",
+          "meaning": "運ぶ・持つ"
+        }
+      ],
+      "related": [
+        "transfer",
+        "reference",
+        "prefer",
+        "preference",
+        "offer",
+        "differ"
+      ]
+    }
   },
   {
     "id": "sw-00204",
@@ -14743,12 +15501,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "異なる",
-            "definition": "having the quality described as '異なる'",
+            "ja": "異なる；さまざまな",
+            "definition": "not the same as someone or something else",
             "examples": [
               {
-                "en": "This is different.",
-                "ja": "これは「異なる」です。"
+                "en": "People learn languages in different ways.",
+                "ja": "人はさまざまな方法で言語を学びます。"
               }
             ]
           }
@@ -14762,8 +15520,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "different"
     ],
@@ -14833,12 +15593,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "難しい",
-            "definition": "needing much effort, skill, or thought",
+            "ja": "難しい；困難な",
+            "definition": "not easy to do, understand, or deal with",
             "examples": [
               {
-                "en": "It was difficult to find the entrance.",
-                "ja": "入り口を見つけるのは難しかったです。"
+                "en": "The last question was much more difficult than the others.",
+                "ja": "最後の問題はほかよりずっと難しかったです。"
               }
             ]
           }
@@ -14855,7 +15615,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "v2.30-curated"
+    ],
     "status": "basic",
     "search_terms": [
       "difficult",
@@ -15175,11 +15937,11 @@
         "meanings": [
           {
             "ja": "デジタルの",
-            "definition": "having the quality expressed by デジタルの",
+            "definition": "using electronic technology to store or process information",
             "examples": [
               {
-                "en": "The word 'digital' is often useful in formal or everyday English.",
-                "ja": "「digital」は「デジタルの」の意味で使われます。"
+                "en": "The school is expanding its digital learning resources.",
+                "ja": "学校はデジタル学習資料を拡充しています。"
               }
             ]
           }
@@ -15193,8 +15955,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "digital"
     ],
@@ -16874,12 +17638,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "直接の",
-            "definition": "having the quality or state expressed by 直接の",
+            "ja": "直接の；率直な",
+            "definition": "going straight to a person or place without an intermediate step",
             "examples": [
               {
-                "en": "It is direct.",
-                "ja": "それは「直接の」です。"
+                "en": "There is a direct train from the airport to the city center.",
+                "ja": "空港から市中心部まで直通電車があります。"
               }
             ]
           }
@@ -16893,8 +17657,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "direct"
     ],
@@ -16902,7 +17669,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin regere / rectus",
+      "history": "di-/dis- 系 + regere「まっすぐ導く」に由来し、まっすぐ導く→直接の、となった。",
+      "roots": [
+        {
+          "form": "reg / rect",
+          "meaning": "まっすぐ導く"
+        }
+      ],
+      "related": [
+        "direction",
+        "correct"
+      ]
+    }
   },
   {
     "id": "sw-00816",
@@ -16919,11 +17700,11 @@
         "meanings": [
           {
             "ja": "方向；指示",
-            "definition": "a thing, person, idea, or state related to 方向",
+            "definition": "the position toward which something moves or an instruction about what to do",
             "examples": [
               {
-                "en": "This direction is important.",
-                "ja": "この「方向」は重要です。"
+                "en": "The project is moving in the right direction.",
+                "ja": "そのプロジェクトは正しい方向に進んでいます。"
               }
             ]
           }
@@ -16937,8 +17718,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "direction"
     ],
@@ -16946,7 +17730,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin regere / rectus",
+      "history": "direct の名詞形で、向き・指示を表す。",
+      "roots": [
+        {
+          "form": "reg / rect",
+          "meaning": "まっすぐ導く"
+        }
+      ],
+      "related": [
+        "direct",
+        "correct"
+      ]
+    }
   },
   {
     "id": "sw-02634",
@@ -16962,12 +17760,12 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "直接",
-            "definition": "in the manner or degree expressed by 直接",
+            "ja": "直接；まっすぐに",
+            "definition": "without another person or thing in between",
             "examples": [
               {
-                "en": "The word 'directly' is commonly used in this kind of context.",
-                "ja": "「directly」は「直接」に関する文脈でよく使われます。"
+                "en": "Students can contact the teacher directly.",
+                "ja": "生徒は教員に直接連絡できます。"
               }
             ]
           }
@@ -16981,8 +17779,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "directly"
     ],
@@ -17238,6 +18038,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "不利な点；欠点",
+            "definition": "a feature that makes something less useful or successful",
+            "examples": [
+              {
+                "en": "One disadvantage of the plan is its high cost.",
+                "ja": "その計画の欠点の一つは費用が高いことです。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -17247,8 +18062,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "disadvantage"
     ],
@@ -18346,29 +19163,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "発見する",
-            "definition": "to perform or cause the action expressed by 発見する",
+            "ja": "発見する；気づく",
+            "definition": "to find something that was not known before",
             "examples": [
               {
-                "en": "People often discover in this situation.",
-                "ja": "この状況では人々はしばしば「発見する」します。"
+                "en": "Scientists discovered a new species on the island.",
+                "ja": "科学者たちは島で新種を発見しました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "discovers",
+      "past": "discovered",
+      "past_participle": "discovered",
+      "ing": "discovering"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "discover"
+      "discover",
+      "discovers",
+      "discovered",
+      "discovering"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -18834,19 +19661,44 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "話し合う；論じる",
+            "definition": "to talk or write about a subject in detail",
+            "examples": [
+              {
+                "en": "Discuss your ideas with your group before writing.",
+                "ja": "書く前にグループで考えを話し合ってください。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "discusses",
+      "past": "discussed",
+      "past_participle": "discussed",
+      "ing": "discussing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "discuss"
+      "discuss",
+      "discusses",
+      "discussed",
+      "discussing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -18878,6 +19730,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "議論；話し合い",
+            "definition": "a conversation or written examination of a subject",
+            "examples": [
+              {
+                "en": "The question led to a lively class discussion.",
+                "ja": "その質問から活発なクラス討論が始まりました。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -18887,8 +19754,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "discussion"
     ],
@@ -18912,12 +19781,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "病気",
-            "definition": "a thing, person, idea, or state related to 病気",
+            "ja": "病気；疾患",
+            "definition": "an illness that affects people, animals, or plants",
             "examples": [
               {
-                "en": "This disease is important.",
-                "ja": "この「病気」は重要です。"
+                "en": "The vaccine helps prevent the disease.",
+                "ja": "そのワクチンは病気の予防に役立ちます。"
               }
             ]
           }
@@ -18931,8 +19800,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "disease"
     ],
@@ -20686,7 +21557,8 @@
     },
     "usage_note": "",
     "tags": [
-      "academic-expansion"
+      "academic-expansion",
+      "etymology-v1"
     ],
     "status": "needs_enrichment",
     "search_terms": [
@@ -20696,7 +21568,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin rumpere / ruptus",
+      "history": "disrupt の名詞形で、「破る」を表す rupt の語族。秩序や流れが壊れることを表す。",
+      "roots": [
+        {
+          "form": "rupt",
+          "meaning": "破る・壊す"
+        }
+      ],
+      "related": [
+        "interrupt",
+        "interruption"
+      ]
+    }
   },
   {
     "id": "sw-03229",
@@ -21023,7 +21909,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "distance"
@@ -21032,7 +21920,29 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin stare / status",
+      "history": "Latin distantia / distare に由来し、dis-「離れて」+ stare「立つ」から隔たりを表す.",
+      "roots": [
+        {
+          "form": "dis-",
+          "meaning": "離れて"
+        },
+        {
+          "form": "sta / stat",
+          "meaning": "立つ"
+        }
+      ],
+      "related": [
+        "state",
+        "status",
+        "station",
+        "stable",
+        "establish",
+        "instance"
+      ]
+    }
   },
   {
     "id": "sw-08524",
@@ -21233,19 +22143,46 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "区別する；見分ける",
+            "definition": "to recognize or show the difference between things",
+            "examples": [
+              {
+                "en": "Learners need to distinguish fact from opinion.",
+                "ja": "学習者は事実と意見を区別する必要があります。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "distinguishes",
+      "past": "distinguished",
+      "past_participle": "distinguished",
+      "ing": "distinguishing"
+    },
+    "phrases": [
+      "distinguish A from B"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "distinguish"
+      "distinguish",
+      "distinguishes",
+      "distinguished",
+      "distinguishing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -22042,6 +22979,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "多様な",
+            "definition": "including many different types of people or things",
+            "examples": [
+              {
+                "en": "The city has a culturally diverse population.",
+                "ja": "その都市には文化的に多様な人々が住んでいます。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -22051,8 +23003,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "diverse"
     ],
@@ -22060,7 +23015,29 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin vertere / versus",
+      "history": "di-/dis-「離れて」+ vertere「向く」から、異なる方向を向く→多様な、へ発展した.",
+      "roots": [
+        {
+          "form": "dis-",
+          "meaning": "離れて・別々に"
+        },
+        {
+          "form": "vert / vers",
+          "meaning": "向きを変える"
+        }
+      ],
+      "related": [
+        "convert",
+        "conversion",
+        "reverse",
+        "version",
+        "diversity",
+        "controversy"
+      ]
+    }
   },
   {
     "id": "sw-03231",
@@ -22228,7 +23205,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "diversity"
@@ -22237,7 +23216,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin vertere / versus",
+      "history": "diverse の名詞形で、異なる方向・種類が存在することを表す.",
+      "roots": [
+        {
+          "form": "vert / vers",
+          "meaning": "向きを変える"
+        }
+      ],
+      "related": [
+        "convert",
+        "conversion",
+        "reverse",
+        "version",
+        "diverse",
+        "controversy"
+      ]
+    }
   },
   {
     "id": "sw-07773",
@@ -22335,29 +23332,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "分ける",
-            "definition": "to perform or cause the action expressed by 分ける",
+            "ja": "分ける；割る",
+            "definition": "to separate something into parts or groups",
             "examples": [
               {
-                "en": "People often divide in this situation.",
-                "ja": "この状況では人々はしばしば「分ける」します。"
+                "en": "Divide the class into groups of four.",
+                "ja": "クラスを4人ずつのグループに分けてください。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "divides",
+      "past": "divided",
+      "past_participle": "divided",
+      "ing": "dividing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "divide"
+      "divide",
+      "divides",
+      "divided",
+      "dividing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -23105,11 +24112,11 @@
         "meanings": [
           {
             "ja": "医師",
-            "definition": "a person, thing, idea, or concept connected with '医師'",
+            "definition": "a person trained and qualified to treat illness and injury",
             "examples": [
               {
-                "en": "This doctor is important.",
-                "ja": "この「医師」は重要です。"
+                "en": "You should see a doctor if the pain continues.",
+                "ja": "痛みが続くなら医師に診てもらうべきです。"
               }
             ]
           }
@@ -23123,8 +24130,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "doctor"
     ],
@@ -23132,7 +24142,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin docere",
+      "history": "docere「教える」に由来し、もとは「教師・学者」を表した。",
+      "roots": [
+        {
+          "form": "doc / doct",
+          "meaning": "教える"
+        }
+      ],
+      "related": [
+        "document",
+        "documentary",
+        "doctrine"
+      ]
+    }
   },
   {
     "id": "sw-10650",
@@ -23209,7 +24234,8 @@
     },
     "usage_note": "",
     "tags": [
-      "academic-expansion"
+      "academic-expansion",
+      "etymology-v1"
     ],
     "status": "needs_enrichment",
     "search_terms": [
@@ -23219,7 +24245,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin docere",
+      "history": "doctrina / docere「教える」に由来し、教え・教義を表す。",
+      "roots": [
+        {
+          "form": "doc / doct",
+          "meaning": "教える"
+        }
+      ],
+      "related": [
+        "doctor",
+        "document",
+        "documentary"
+      ]
+    }
   },
   {
     "id": "sw-00822",
@@ -23254,7 +24295,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "document"
@@ -23263,7 +24306,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin docere",
+      "history": "docere「教える」に関係し、証拠・教示となる文書を表すようになった。",
+      "roots": [
+        {
+          "form": "doc / doct",
+          "meaning": "教える"
+        }
+      ],
+      "related": [
+        "doctor",
+        "documentary",
+        "doctrine"
+      ]
+    }
   },
   {
     "id": "sw-02987",
@@ -23299,7 +24357,8 @@
     },
     "usage_note": "",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "etymology-v1"
     ],
     "status": "needs_enrichment",
     "search_terms": [
@@ -23309,7 +24368,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin docere",
+      "history": "document からできた語で、事実を文書・映像で記録するものを表す。",
+      "roots": [
+        {
+          "form": "doc / doct",
+          "meaning": "教える"
+        }
+      ],
+      "related": [
+        "doctor",
+        "document",
+        "doctrine"
+      ]
+    }
   },
   {
     "id": "sw-02713",
@@ -23980,11 +25054,11 @@
         "meanings": [
           {
             "ja": "国内の；家庭の",
-            "definition": "having the quality or characteristic expressed by 国内の",
+            "definition": "related to one country rather than foreign countries",
             "examples": [
               {
-                "en": "The word 'domestic' is commonly used in this kind of context.",
-                "ja": "「domestic」は「国内の」に関する文脈でよく使われます。"
+                "en": "Domestic travel increased during the holiday period.",
+                "ja": "休暇期間中に国内旅行が増えました。"
               }
             ]
           }
@@ -23998,8 +25072,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "domestic"
     ],
@@ -27777,29 +28853,40 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "描く",
-            "definition": "to do or express the action '描く'",
+            "ja": "描く；引き出す",
+            "definition": "to make a picture or reach a conclusion from information",
             "examples": [
               {
-                "en": "We often draw this in everyday life.",
-                "ja": "私たちは日常生活でよく「描く」します。"
+                "en": "We cannot draw a firm conclusion from this small sample.",
+                "ja": "この小さな標本から確かな結論を出すことはできません。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "draws",
+      "past": "drew",
+      "past_participle": "drawn",
+      "ing": "drawing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "draw"
+      "draw",
+      "draws",
+      "drew",
+      "drawn",
+      "drawing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -32370,11 +33457,11 @@
         "meanings": [
           {
             "ja": "〜の間に",
-            "definition": "a word showing a relationship with the sense '〜の間に'",
+            "definition": "throughout or at some point in a period of time",
             "examples": [
               {
-                "en": "The word 'during' is common in English.",
-                "ja": "「during」は英語でよく使われる語です。"
+                "en": "Students must remain quiet during the test.",
+                "ja": "テスト中、生徒は静かにしていなければなりません。"
               }
             ]
           }
@@ -32388,8 +33475,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "during"
     ],

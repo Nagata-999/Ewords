@@ -21,7 +21,13 @@ const server=http.createServer((req,res)=>{let file=path.resolve(root,'.'+decode
  const response=await page.goto(origin+'/dictionary/abndon/');assert.equal(response.status(),404);assert((await page.locator('h1').textContent()).includes('まだすし辞書'));await page.locator('#search-results a',{hasText:'abandon'}).first().waitFor();
  await page.goto(origin+'/dictionary/environment/');await page.screenshot({path:process.env.DICTIONARY_SCREENSHOT||path.join(root,'dictionary-mobile.png'),fullPage:true});
  await page.setViewportSize({width:320,height:700});await page.goto(origin+'/dictionary/');assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+ await page.goto(origin+'/dictionary/vacancy/');
+ assert((await page.locator('.etymology').textContent()).includes('vacare'));
+ if(process.env.DICTIONARY_ETYMOLOGY_SCREENSHOT)await page.screenshot({path:process.env.DICTIONARY_ETYMOLOGY_SCREENSHOT,fullPage:true});
+ assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
+ await page.locator('.etymology a[href="/dictionary/vacation/"]').click();await page.waitForURL('**/dictionary/vacation/');
+ await page.reload();assert((await page.locator('.etymology').textContent()).includes('vacatio'));
  assert.deepEqual(errors,[]);
- const noJS=await browser.newContext({javaScriptEnabled:false});const plain=await noJS.newPage();await plain.goto(origin+'/dictionary/significant/');assert.equal(await plain.locator('h1').textContent(),'significant');assert(await plain.locator('.meaning').count());
+ const noJS=await browser.newContext({javaScriptEnabled:false});const plain=await noJS.newPage();await plain.goto(origin+'/dictionary/significant/');assert.equal(await plain.locator('h1').textContent(),'significant');assert(await plain.locator('.meaning').count());await plain.goto(origin+'/dictionary/vacancy/');assert((await plain.locator('.etymology').textContent()).includes('vacare'));
  console.log('PASS browser: search, exact navigation, reload, 390px layout, related links, dictionary and existing study IDs, persistence, retry, weak review, true 404 and spelling suggestions, no-JS content');
 }finally{await browser?.close();server.close();}})().catch(e=>{console.error(e);process.exitCode=1;});

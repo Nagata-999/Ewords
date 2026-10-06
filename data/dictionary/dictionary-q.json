@@ -340,7 +340,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "qualification"
@@ -349,7 +351,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin qualis / qualitas",
+      "history": "qualify の名詞形で、必要な条件・資格を表す。",
+      "roots": [
+        {
+          "form": "qual",
+          "meaning": "どのような・性質"
+        }
+      ],
+      "related": [
+        "quality",
+        "qualify",
+        "equal"
+      ]
+    }
   },
   {
     "id": "sw-02573",
@@ -384,7 +401,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "qualify"
@@ -393,7 +412,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin qualis / qualitas",
+      "history": "qualis「どのような」から、一定の性質・条件を満たす意味へ発展した。",
+      "roots": [
+        {
+          "form": "qual",
+          "meaning": "どのような・性質"
+        }
+      ],
+      "related": [
+        "quality",
+        "qualification",
+        "equal"
+      ]
+    }
   },
   {
     "id": "sw-03254",
@@ -455,12 +489,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "質",
-            "definition": "a thing, person, idea, or state related to 質",
+            "ja": "質；品質",
+            "definition": "how good or bad something is",
             "examples": [
               {
-                "en": "This quality is important.",
-                "ja": "この「質」は重要です。"
+                "en": "The sound quality is much better with headphones.",
+                "ja": "ヘッドホンを使うと音質がずっとよくなります。"
               }
             ]
           }
@@ -468,14 +502,19 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "quality of life"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "quality"
     ],
@@ -483,7 +522,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin qualis / qualitas",
+      "history": "qualis「どのような」に由来し、物事がどのような性質かを表す。",
+      "roots": [
+        {
+          "form": "qual",
+          "meaning": "どのような・性質"
+        }
+      ],
+      "related": [
+        "qualify",
+        "qualification",
+        "equal"
+      ]
+    }
   },
   {
     "id": "sw-08055",
@@ -568,9 +622,23 @@
     },
     "usage_note": "",
     "tags": [
-      "scale-50k"
+      "scale-50k",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin quantus / quantitas",
+      "history": "quantity と同じ quant 語族で、量に関することを表す。",
+      "roots": [
+        {
+          "form": "quant",
+          "meaning": "どれほど・量"
+        }
+      ],
+      "related": [
+        "quantity"
+      ]
+    }
   },
   {
     "id": "sw-02876",
@@ -590,8 +658,8 @@
             "definition": "an amount or number of something",
             "examples": [
               {
-                "en": "The word 'quantity' is useful in this context.",
-                "ja": "この文脈では「量」という意味で使われる。"
+                "en": "The recipe uses only a small quantity of sugar.",
+                "ja": "そのレシピでは砂糖を少量しか使いません。"
               }
             ]
           }
@@ -606,9 +674,11 @@
     },
     "usage_note": "",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "v2.31-curated",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment",
+    "status": "basic",
     "search_terms": [
       "quantity"
     ],
@@ -616,7 +686,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin quantus / quantitas",
+      "history": "quantus「どれほど多い」に由来し、量を表す。",
+      "roots": [
+        {
+          "form": "quant",
+          "meaning": "どれほど・量"
+        }
+      ],
+      "related": [
+        "quantitative"
+      ]
+    }
   },
   {
     "id": "sw-08413",
@@ -714,12 +797,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "4分の1；四半期",
-            "definition": "one of four equal parts or a three-month period",
+            "ja": "4分の1；15分；四半期",
+            "definition": "one of four equal parts of something",
             "examples": [
               {
-                "en": "The word 'quarter' is useful in this context.",
-                "ja": "この文脈では「4分の1」という意味で使われる。"
+                "en": "About a quarter of the students walk to school.",
+                "ja": "生徒のおよそ4分の1が徒歩で通学しています。"
               }
             ]
           }
@@ -734,9 +817,10 @@
     },
     "usage_note": "",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "v2.31-curated"
     ],
-    "status": "needs_enrichment",
+    "status": "basic",
     "search_terms": [
       "quarter"
     ],
@@ -1321,12 +1405,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "質問",
-            "definition": "a person, thing, idea, or concept connected with '質問'",
+            "ja": "質問；問い",
+            "definition": "a sentence or phrase used to ask for information",
             "examples": [
               {
-                "en": "This question is important.",
-                "ja": "この「質問」は重要です。"
+                "en": "If you have a question, raise your hand.",
+                "ja": "質問があれば手を挙げてください。"
+              }
+            ]
+          },
+          {
+            "ja": "問題；論点",
+            "definition": "a matter that needs to be considered or decided",
+            "examples": [
+              {
+                "en": "The question is whether the plan will actually work.",
+                "ja": "問題はその計画が本当に機能するかどうかです。"
               }
             ]
           }
@@ -1334,14 +1428,20 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "ask a question",
+      "answer a question"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.28-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "question"
     ],
@@ -1349,7 +1449,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin quaerere / quaesitus",
+      "history": "quaerere「尋ねる・探す」に由来し、尋ねる内容を表す。",
+      "roots": [
+        {
+          "form": "quer / quir / quis",
+          "meaning": "尋ねる・求める"
+        }
+      ],
+      "related": [
+        "require",
+        "inquiry",
+        "acquire",
+        "acquisition"
+      ]
+    }
   },
   {
     "id": "sw-10129",
@@ -1629,12 +1745,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "速い",
-            "definition": "having the quality described as '速い'",
+            "ja": "速い；素早い",
+            "definition": "done or happening in a short time",
             "examples": [
               {
-                "en": "This is quick.",
-                "ja": "これは「速い」です。"
+                "en": "Let's take a quick break before the next activity.",
+                "ja": "次の活動の前に短い休憩を取りましょう。"
               }
             ]
           }
@@ -1648,8 +1764,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "quick"
     ],
@@ -1714,12 +1832,12 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "素早く",
-            "definition": "in the manner or degree expressed by 素早く",
+            "ja": "素早く；すぐに",
+            "definition": "at a fast speed or after a short time",
             "examples": [
               {
-                "en": "The word 'quickly' is commonly used in this context.",
-                "ja": "「quickly」は「素早く」に関する文脈で使われます。"
+                "en": "The students quickly adapted to the new system.",
+                "ja": "生徒たちは新しいシステムにすぐ適応しました。"
               }
             ]
           }
@@ -1733,8 +1851,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "quickly"
     ],
@@ -1755,15 +1875,15 @@
     "frequency": 4,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
             "ja": "静かな",
-            "definition": "a person, thing, state, or idea related to 静かな",
+            "definition": "making little or no noise",
             "examples": [
               {
-                "en": "This is a common example of 'quiet'.",
-                "ja": "これは「静かな」の一般的な例です。"
+                "en": "The library is usually quiet in the morning.",
+                "ja": "図書館は朝はたいてい静かです。"
               }
             ]
           }
@@ -1777,8 +1897,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "quiet"
     ],
@@ -2411,28 +2533,38 @@
         "meanings": [
           {
             "ja": "引用する",
-            "definition": "to perform or cause the action expressed by 引用する",
+            "definition": "to repeat the exact words that someone else has said or written",
             "examples": [
               {
-                "en": "The word 'quote' is often useful in formal or everyday English.",
-                "ja": "「quote」は「引用する」の意味で使われます。"
+                "en": "The essay quotes a line from the original article.",
+                "ja": "その作文は元の記事から一文を引用しています。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "quotes",
+      "past": "quoted",
+      "past_participle": "quoted",
+      "ing": "quoting"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "quote"
+      "quote",
+      "quotes",
+      "quoted",
+      "quoting"
     ],
     "pronunciation": {
       "ipa_us": null,

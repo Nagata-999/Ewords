@@ -16,7 +16,18 @@ SEARCH = '<form action="/dictionary/" role="search"><label for="dictionary-query
 def page(title, desc, body, canonical=None, card=None, schema=None, noindex=False):
     return '<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' + f'<title>{esc(title)}</title><meta name="description" content="{esc(desc)}">' + (f'<link rel="canonical" href="{BASE}{canonical}"><meta property="og:url" content="{BASE}{canonical}">' if canonical else '') + f'<meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(desc)}"><meta property="og:type" content="website"><meta property="og:site_name" content="すし単"><meta property="og:image" content="{BASE}/icon-512.png">' + ('<meta name="robots" content="noindex,follow">' if noindex else '') + '<link rel="stylesheet" href="/shared/dictionary.css"><script defer src="/shared/dictionary.js"></script>' + (f'<script type="application/ld+json">{dump(schema)}</script>' if schema else '') + '</head><body><header><a href="/">🍣 すし単</a><a href="/dictionary/">すし辞書 <small>β</small></a><a href="/sushian.html">すし暗</a></header><main>' + body + '<footer><p>すし辞書 β — 収録内容は順次充実させています。</p><a href="/">すし単で英単語をゲーム感覚で覚える</a><p><a href="/contact.html">誤りを知らせる</a> · <a href="/privacy.html">プライバシーポリシー</a></p></footer></main>' + (f'<script id="dictionary-card" type="application/json">{dump(card)}</script>' if card else '') + '</body></html>\n'
 
+def render_etymology(etymology, link):
+    if not etymology: return ''
+    body='<section class="etymology" aria-label="語源"><h2>語源</h2>'
+    if etymology.get('origin'): body+='<p><strong>由来：</strong><span lang="en">'+esc(etymology['origin'])+'</span></p>'
+    if etymology.get('history'): body+='<p>'+esc(etymology['history'])+'</p>'
+    if etymology.get('roots'):
+        body+='<h3>語根・語の要素</h3><dl>'+''.join('<dt lang="en">'+esc(r['form'])+'</dt><dd>'+esc(r['meaning'])+'</dd>' for r in etymology['roots'])+'</dl>'
+    if etymology.get('related'): body+='<h3>語源に関連する単語</h3><p>'+ ' · '.join(link(w) for w in etymology['related'])+'</p>'
+    return body+'</section>'
+
 def build(source):
+    runpy.run_path(str(ROOT/'scripts/dictionary-data.py'))['refresh'](source)
     entries = [e for p in sorted(source.glob('dictionary-*.json')) for e in json.loads(p.read_text(encoding='utf-8'))]
     assert entries, 'No dictionary entries'
     lookup = {e['word'].lower(): e for e in entries}
@@ -60,7 +71,8 @@ def build(source):
         for key,label in [('phrases','熟語・表現'),('collocations','よく使う組み合わせ')]:
             vals=e.get(key,[])
             if vals: body+='<section><h2>'+label+'</h2><ul>'+''.join('<li>'+ (link(v) if isinstance(v,str) else link(v.get('phrase',v.get('en',''))) + '：'+esc(v.get('ja','')))+'</li>' for v in vals)+'</ul></section>'
-        if e.get('usage_note'): body+='<p>'+esc(e['usage_note'])+'</p>'
+        if e.get('usage_note'): body+='<section class="usage-note"><h2>使い方・語法</h2><p>'+esc(e['usage_note'])+'</p></section>'
+        body+=render_etymology(e.get('etymology'),link)
         body+=f'<a class="learn" href="/sushian.html?dictionary={quote(slug(word))}">この単語を覚える</a><p class="muted">すし暗で意味を選んで練習。間違えた語は、このブラウザの苦手復習に残ります。</p></article>'+SEARCH
         card={'word_id':'dictionary:'+e['id'],'en':word,'jp':'；'.join(meanings),'source_number':None}
         schema={'@context':'https://schema.org','@type':'DefinedTerm','name':word,'description':'；'.join(meanings),'url':BASE+url(word),'inDefinedTermSet':{'@type':'DefinedTermSet','name':'すし辞書','url':BASE+'/dictionary/'}}

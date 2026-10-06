@@ -51,32 +51,44 @@
     "frequency": 5,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "verb",
         "meanings": [
           {
-            "ja": "顔；直面する",
-            "definition": "a person, thing, idea, or concept connected with '顔；直面する'",
+            "ja": "直面する",
+            "definition": "to have to deal with a difficult situation",
             "examples": [
               {
-                "en": "This face is important.",
-                "ja": "この「顔」は重要です。"
+                "en": "Many rural communities face a shortage of doctors.",
+                "ja": "多くの地方社会は医師不足に直面しています。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "faces",
+      "past": "faced",
+      "past_participle": "faced",
+      "ing": "facing"
+    },
+    "phrases": [
+      "face a problem"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "face"
+      "face",
+      "faces",
+      "faced",
+      "facing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -482,11 +494,11 @@
         "meanings": [
           {
             "ja": "事実",
-            "definition": "a person, thing, idea, or concept connected with '事実'",
+            "definition": "something that is known or proved to be true",
             "examples": [
               {
-                "en": "This fact is important.",
-                "ja": "この「事実」は重要です。"
+                "en": "We should separate facts from opinions when evaluating the article.",
+                "ja": "その記事を評価するときは事実と意見を分けるべきです。"
               }
             ]
           }
@@ -494,14 +506,18 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "in fact"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "fact"
     ],
@@ -535,6 +551,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "要因；因子",
+            "definition": "one of several things that influence a result",
+            "examples": [
+              {
+                "en": "Sleep is an important factor in athletic recovery.",
+                "ja": "睡眠は運動後の回復に重要な要因です。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -544,8 +575,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "factor"
     ],
@@ -741,29 +774,55 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "失敗する",
-            "definition": "to perform or cause the action expressed by 失敗する",
+            "ja": "失敗する；できない",
+            "definition": "to be unsuccessful or not do something expected",
             "examples": [
               {
-                "en": "People often fail in this situation.",
-                "ja": "この状況では人々はしばしば「失敗する」します。"
+                "en": "The plan failed to reduce costs.",
+                "ja": "その計画は費用を削減できませんでした。"
+              }
+            ]
+          },
+          {
+            "ja": "不合格になる",
+            "definition": "to not pass a test or course",
+            "examples": [
+              {
+                "en": "He failed the driving test.",
+                "ja": "彼は運転試験に落ちました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "fails",
+      "past": "failed",
+      "past_participle": "failed",
+      "ing": "failing"
+    },
+    "phrases": [
+      {
+        "phrase": "fail to do",
+        "ja": "〜できない"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "fail"
+      "fail",
+      "fails",
+      "failed",
+      "failing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -2345,11 +2404,11 @@
         "meanings": [
           {
             "ja": "家族",
-            "definition": "a group of people connected by relationships such as parenthood, marriage, or shared upbringing",
+            "definition": "a group of people related to one another, especially parents and children",
             "examples": [
               {
-                "en": "Our family gets together every winter.",
-                "ja": "私たちの家族は毎年冬に集まります。"
+                "en": "My family usually eats dinner together on Sundays.",
+                "ja": "私の家族は日曜日にはたいてい一緒に夕食を食べます。"
               }
             ]
           }
@@ -2365,7 +2424,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "v2.30-curated"
+    ],
     "status": "basic",
     "search_terms": [
       "family",
@@ -4642,11 +4703,26 @@
         "meanings": [
           {
             "ja": "特徴",
-            "definition": "a person, thing, idea, or concept connected with '特徴'",
+            "definition": "an important or noticeable part of something",
             "examples": [
               {
-                "en": "This feature is important.",
-                "ja": "この「特徴」は重要です。"
+                "en": "A key feature of the app is offline access.",
+                "ja": "そのアプリの重要な特徴はオフライン利用です。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "取り上げる；特色とする",
+            "definition": "to include someone or something as an important part",
+            "examples": [
+              {
+                "en": "The article features interviews with local residents.",
+                "ja": "その記事は地元住民へのインタビューを取り上げています。"
               }
             ]
           }
@@ -4660,8 +4736,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "feature"
     ],
@@ -4994,28 +5073,38 @@
         "meanings": [
           {
             "ja": "感じる",
-            "definition": "to do or express the action '感じる'",
+            "definition": "to experience an emotion or physical condition",
             "examples": [
               {
-                "en": "We often feel this in everyday life.",
-                "ja": "私たちは日常生活でよく「感じる」します。"
+                "en": "I felt tired at first, but I became more comfortable after a few kilometers.",
+                "ja": "最初は疲れを感じましたが、数キロ走ると楽になりました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "feels",
+      "past": "felt",
+      "past_participle": "felt",
+      "ing": "feeling"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "feel"
+      "feel",
+      "feels",
+      "felt",
+      "feeling"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -6704,15 +6793,15 @@
     "frequency": 5,
     "parts_of_speech": [
       {
-        "pos": "determiner",
+        "pos": "adjective",
         "meanings": [
           {
-            "ja": "少数の",
-            "definition": "a word used before a noun with the sense '少数の'",
+            "ja": "少数の；ほとんどない",
+            "definition": "a small number of people or things",
             "examples": [
               {
-                "en": "The word 'few' is common in English.",
-                "ja": "「few」は英語でよく使われる語です。"
+                "en": "Only a few students answered every question correctly.",
+                "ja": "すべての問題に正解した生徒は数人だけでした。"
               }
             ]
           }
@@ -6726,8 +6815,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "few"
     ],
@@ -7082,12 +7173,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "分野；野原",
-            "definition": "a person, thing, idea, or concept connected with '分野；野原'",
+            "ja": "分野；領域",
+            "definition": "a particular area of study or work",
             "examples": [
               {
-                "en": "This field is important.",
-                "ja": "この「分野」は重要です。"
+                "en": "She hopes to work in the field of education.",
+                "ja": "彼女は教育分野で働きたいと思っています。"
               }
             ]
           }
@@ -7101,8 +7192,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "field"
     ],
@@ -7517,12 +7610,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "数字；人物",
-            "definition": "a thing, person, idea, or state related to 数字",
+            "ja": "数字；図",
+            "definition": "a number or a diagram used to present information",
             "examples": [
               {
-                "en": "This figure is important.",
-                "ja": "この「数字」は重要です。"
+                "en": "The latest figures show a decline in the birth rate.",
+                "ja": "最新の数字は出生率の低下を示しています。"
               }
             ]
           }
@@ -7536,8 +7629,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "figure"
     ],
@@ -8110,29 +8205,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "満たす",
-            "definition": "to do or express the action '満たす'",
+            "ja": "満たす；記入する",
+            "definition": "to make a space full or write information in empty spaces",
             "examples": [
               {
-                "en": "We often fill this in everyday life.",
-                "ja": "私たちは日常生活でよく「満たす」します。"
+                "en": "Please fill in all the required fields.",
+                "ja": "必要な欄をすべて記入してください。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "fills",
+      "past": "filled",
+      "past_participle": "filled",
+      "ing": "filling"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "fill"
+      "fill",
+      "fills",
+      "filled",
+      "filling"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -8757,12 +8862,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "最終の",
-            "definition": "having the quality or state expressed by 最終の",
+            "ja": "最後の；最終的な",
+            "definition": "coming at the end of a series or process",
             "examples": [
               {
-                "en": "It is final.",
-                "ja": "それは「最終の」です。"
+                "en": "The final decision will be announced tomorrow.",
+                "ja": "最終決定は明日発表されます。"
               }
             ]
           }
@@ -8776,8 +8881,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "final"
     ],
@@ -8785,7 +8893,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin finis / finire",
+      "history": "Latin finis「終わり・境界」に由来し、「終わりの」を表す。",
+      "roots": [
+        {
+          "form": "fin",
+          "meaning": "終わり・境界"
+        }
+      ],
+      "related": [
+        "finally",
+        "finish",
+        "define",
+        "definition",
+        "finite"
+      ]
+    }
   },
   {
     "id": "sw-00863",
@@ -8801,12 +8926,12 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "ついに",
-            "definition": "in a manner or degree expressed by ついに",
+            "ja": "ついに；最後に",
+            "definition": "after a long time or as the last point in a sequence",
             "examples": [
               {
-                "en": "The word 'finally' is useful.",
-                "ja": "「finally」は役に立つ単語です。"
+                "en": "After several attempts, the program finally worked.",
+                "ja": "何度か試した後、プログラムはついに動きました。"
               }
             ]
           }
@@ -8820,8 +8945,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "finally"
     ],
@@ -8829,7 +8957,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin finis / finire",
+      "history": "final + -ly で、「最後に・ついに」を表す。",
+      "roots": [
+        {
+          "form": "fin",
+          "meaning": "終わり・境界"
+        }
+      ],
+      "related": [
+        "final",
+        "finish",
+        "define",
+        "definition",
+        "finite"
+      ]
+    }
   },
   {
     "id": "sw-01815",
@@ -8845,12 +8990,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "金融；資金を出す",
-            "definition": "a person, thing, state, or idea related to 金融",
+            "ja": "財政；金融",
+            "definition": "the management of money by people, businesses, or governments",
             "examples": [
               {
-                "en": "The word 'finance' is often useful in formal or everyday English.",
-                "ja": "「finance」は「金融」の意味で使われます。"
+                "en": "He studied economics and finance at university.",
+                "ja": "彼は大学で経済と金融を学びました。"
               }
             ]
           }
@@ -8864,8 +9009,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "finance"
     ],
@@ -8889,12 +9036,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "金融の",
-            "definition": "having the quality described as '金融の'",
+            "ja": "財政の；金銭上の",
+            "definition": "related to money or the management of money",
             "examples": [
               {
-                "en": "This is financial.",
-                "ja": "これは「金融の」です。"
+                "en": "The project received financial support from the city.",
+                "ja": "そのプロジェクトは市から財政支援を受けました。"
               }
             ]
           }
@@ -8908,8 +9055,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "financial"
     ],
@@ -9114,28 +9263,51 @@
         "meanings": [
           {
             "ja": "見つける",
-            "definition": "to do or express the action '見つける'",
+            "definition": "to discover someone or something after looking for it",
             "examples": [
               {
-                "en": "We often find this in everyday life.",
-                "ja": "私たちは日常生活でよく「見つける」します。"
+                "en": "I finally found my keys under the sofa.",
+                "ja": "ようやくソファの下で鍵を見つけました。"
+              }
+            ]
+          },
+          {
+            "ja": "〜だと分かる；感じる",
+            "definition": "to discover or experience that something is true",
+            "examples": [
+              {
+                "en": "I found the book surprisingly easy to read.",
+                "ja": "その本は意外に読みやすいと感じました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "finds",
+      "past": "found",
+      "past_participle": "found",
+      "ing": "finding"
+    },
+    "phrases": [
+      "find out",
+      "find it difficult to do"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.28-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "find"
+      "find",
+      "finds",
+      "found",
+      "finding"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -9578,7 +9750,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "finish"
@@ -9587,7 +9761,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin finis / finire",
+      "history": "Latin finis から Old French を経て、「終える」の意味になった。",
+      "roots": [
+        {
+          "form": "fin",
+          "meaning": "終わり・境界"
+        }
+      ],
+      "related": [
+        "final",
+        "finally",
+        "define",
+        "definition",
+        "finite"
+      ]
+    }
   },
   {
     "id": "sw-09720",
@@ -9749,9 +9940,27 @@
     },
     "usage_note": "",
     "tags": [
-      "study-language"
+      "study-language",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin finis / finire",
+      "history": "Latin finitus「限られた・境界のある」に由来する。",
+      "roots": [
+        {
+          "form": "fin",
+          "meaning": "終わり・境界"
+        }
+      ],
+      "related": [
+        "final",
+        "finally",
+        "finish",
+        "define",
+        "definition"
+      ]
+    }
   },
   {
     "id": "sw-08159",
@@ -15300,9 +15509,24 @@
     },
     "usage_note": "",
     "tags": [
-      "actions"
+      "actions",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin fluere; Old English flowan",
+      "history": "Old English flowan のゲルマン系語。Latin fluere と同じ印欧語族にさかのぼるが、直接の借用ではない。",
+      "roots": [
+        {
+          "form": "flu / flow",
+          "meaning": "流れる"
+        }
+      ],
+      "related": [
+        "influence",
+        "fluent"
+      ]
+    }
   },
   {
     "id": "sw-00267",
@@ -15732,9 +15956,24 @@
     },
     "usage_note": "",
     "tags": [
-      "study-language"
+      "study-language",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin fluere; Old English flowan",
+      "history": "fluere「流れる」に由来し、言葉が流れるように出る→流暢な、となった。",
+      "roots": [
+        {
+          "form": "flu / flow",
+          "meaning": "流れる"
+        }
+      ],
+      "related": [
+        "influence",
+        "flow"
+      ]
+    }
   },
   {
     "id": "sw-09400",
@@ -16797,28 +17036,59 @@
         "meanings": [
           {
             "ja": "集中する",
-            "definition": "to perform or cause the action expressed by 集中する",
+            "definition": "to give special attention to something",
             "examples": [
               {
-                "en": "People often focus in this situation.",
-                "ja": "この状況では人々はしばしば「集中する」します。"
+                "en": "The lesson focuses on speaking skills.",
+                "ja": "その授業はスピーキング技能に重点を置いています。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "焦点；重点",
+            "definition": "the main subject or center of attention",
+            "examples": [
+              {
+                "en": "Safety remains the main focus.",
+                "ja": "安全が引き続き最大の重点です。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "focuses",
+      "past": "focused",
+      "past_participle": "focused",
+      "ing": "focusing"
+    },
+    "phrases": [
+      {
+        "phrase": "focus on",
+        "ja": "〜に集中する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "focus"
+      "focus",
+      "focuses",
+      "focused",
+      "focusing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -17420,29 +17690,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "従う",
-            "definition": "to perform or cause the action expressed by 従う",
+            "ja": "従う；後について行く",
+            "definition": "to act according to instructions or move behind someone",
             "examples": [
               {
-                "en": "This is a common example of 'follow'.",
-                "ja": "これは「従う」の一般的な例です。"
+                "en": "Follow the instructions on the screen.",
+                "ja": "画面の指示に従ってください。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "follows",
+      "past": "followed",
+      "past_participle": "followed",
+      "ing": "following"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "follow"
+      "follow",
+      "follows",
+      "followed",
+      "following"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -17715,12 +17995,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "食べ物",
-            "definition": "a person, thing, idea, or concept connected with '食べ物'",
+            "ja": "食べ物；食品",
+            "definition": "things that people or animals eat",
             "examples": [
               {
-                "en": "This food is important.",
-                "ja": "この「食べ物」は重要です。"
+                "en": "The festival offers food from many different countries.",
+                "ja": "その祭りではさまざまな国の食べ物が楽しめます。"
               }
             ]
           }
@@ -17734,8 +18014,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "food"
     ],
@@ -18664,12 +18946,27 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "力；強制力",
-            "definition": "a thing, person, idea, or state related to 力",
+            "ja": "力",
+            "definition": "physical strength or power",
             "examples": [
               {
-                "en": "This force is important.",
-                "ja": "この「力」は重要です。"
+                "en": "The force of the wind damaged several trees.",
+                "ja": "風の力で数本の木が損傷しました。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "強いる",
+            "definition": "to make someone do something they do not want to do",
+            "examples": [
+              {
+                "en": "The storm forced us to cancel the trip.",
+                "ja": "嵐のため私たちは旅行を中止せざるを得ませんでした。"
               }
             ]
           }
@@ -18683,8 +18980,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "force"
     ],
@@ -19132,11 +19432,11 @@
         "meanings": [
           {
             "ja": "外国の",
-            "definition": "having the quality or state expressed by 外国の",
+            "definition": "from or connected with another country",
             "examples": [
               {
-                "en": "It is foreign.",
-                "ja": "それは「外国の」です。"
+                "en": "Learning a foreign language can change how you see your own culture.",
+                "ja": "外国語を学ぶと自文化の見方が変わることがあります。"
               }
             ]
           }
@@ -19150,8 +19450,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "foreign"
     ],
@@ -19892,12 +20194,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "形；用紙",
-            "definition": "a thing, person, idea, or state related to 形",
+            "ja": "形；形式；用紙",
+            "definition": "a particular type, shape, or official document",
             "examples": [
               {
-                "en": "This form is important.",
-                "ja": "この「形」は重要です。"
+                "en": "Please complete the application form online.",
+                "ja": "オンラインで申請用紙に記入してください。"
               }
             ]
           }
@@ -19911,8 +20213,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "form"
     ],
@@ -19920,7 +20225,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin forma / formare",
+      "history": "Latin forma「形・姿」に由来する。",
+      "roots": [
+        {
+          "form": "form",
+          "meaning": "形・形作る"
+        }
+      ],
+      "related": [
+        "formal",
+        "information",
+        "inform",
+        "reform",
+        "transform",
+        "transformation"
+      ]
+    }
   },
   {
     "id": "sw-02609",
@@ -19936,12 +20259,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "正式な",
-            "definition": "having the quality or characteristic expressed by 正式な",
+            "ja": "正式な；形式的な",
+            "definition": "official or following accepted rules and conventions",
             "examples": [
               {
-                "en": "The word 'formal' is commonly used in this context.",
-                "ja": "「formal」は「正式な」に関する文脈で使われます。"
+                "en": "Use a formal style when writing to the university.",
+                "ja": "大学に書くときは正式な文体を使ってください。"
               }
             ]
           }
@@ -19955,8 +20278,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "formal"
     ],
@@ -19964,7 +20290,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin forma / formare",
+      "history": "forma「形」に由来する form に形容詞語尾 -al が加わった語。",
+      "roots": [
+        {
+          "form": "form",
+          "meaning": "形・形作る"
+        }
+      ],
+      "related": [
+        "form",
+        "information",
+        "inform",
+        "reform",
+        "transform",
+        "transformation"
+      ]
+    }
   },
   {
     "id": "sw-02746",
@@ -21447,9 +21791,24 @@
     },
     "usage_note": "",
     "tags": [
-      "body-health"
+      "body-health",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin frangere / fractus",
+      "history": "frangere / fractus「壊す」に由来し、骨などが折れることを表す。",
+      "roots": [
+        {
+          "form": "frag / fract",
+          "meaning": "壊す・折る"
+        }
+      ],
+      "related": [
+        "fragment",
+        "fragile"
+      ]
+    }
   },
   {
     "id": "sw-04932",
@@ -21493,9 +21852,24 @@
     },
     "usage_note": "",
     "tags": [
-      "description"
+      "description",
+      "etymology-v1"
     ],
-    "status": "basic"
+    "status": "basic",
+    "etymology": {
+      "origin": "Latin frangere / fractus",
+      "history": "fragilis / frangere に由来し、「壊れやすい」を表す。",
+      "roots": [
+        {
+          "form": "frag / fract",
+          "meaning": "壊す・折る"
+        }
+      ],
+      "related": [
+        "fragment",
+        "fracture"
+      ]
+    }
   },
   {
     "id": "sw-03115",
@@ -21531,7 +21905,8 @@
     },
     "usage_note": "",
     "tags": [
-      "academic-expansion"
+      "academic-expansion",
+      "etymology-v1"
     ],
     "status": "needs_enrichment",
     "search_terms": [
@@ -21541,7 +21916,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin frangere / fractus",
+      "history": "frangere「壊す」に由来し、壊れて分かれた一部分を表す。",
+      "roots": [
+        {
+          "form": "frag / fract",
+          "meaning": "壊す・折る"
+        }
+      ],
+      "related": [
+        "fracture",
+        "fragile"
+      ]
+    }
   },
   {
     "id": "sw-03353",
@@ -21705,6 +22094,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "枠組み；骨組み",
+            "definition": "a basic structure of ideas, rules, or parts used to organize something",
+            "examples": [
+              {
+                "en": "The framework helps teachers evaluate student writing consistently.",
+                "ja": "その枠組みは教員が生徒の作文を一貫して評価するのに役立ちます。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -21714,8 +22118,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "framework"
     ],
@@ -22341,12 +22747,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "自由な；無料の",
-            "definition": "having the quality described as '自由な；無料の'",
+            "ja": "無料の；自由な",
+            "definition": "not costing money or not controlled or occupied",
             "examples": [
               {
-                "en": "This is free.",
-                "ja": "これは「自由な」です。"
+                "en": "The museum offers free admission to students.",
+                "ja": "その博物館は生徒の入場料が無料です。"
               }
             ]
           }
@@ -22360,8 +22766,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "free"
     ],
@@ -23903,11 +24311,11 @@
         "meanings": [
           {
             "ja": "友人；友達",
-            "definition": "someone you know well and enjoy spending time with",
+            "definition": "a person you know well and like",
             "examples": [
               {
-                "en": "My friend helped me carry the boxes.",
-                "ja": "友人が箱を運ぶのを手伝ってくれました。"
+                "en": "An old friend invited me to go camping this weekend.",
+                "ja": "昔からの友人が今週末キャンプに誘ってくれました。"
               }
             ]
           }
@@ -23923,7 +24331,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "v2.30-curated"
+    ],
     "status": "basic",
     "search_terms": [
       "friend",
@@ -26078,12 +26488,27 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "機能",
-            "definition": "a person, thing, idea, or concept connected with '機能'",
+            "ja": "機能；役割",
+            "definition": "the purpose or job of something",
             "examples": [
               {
-                "en": "This function is important.",
-                "ja": "この「機能」は重要です。"
+                "en": "The main function of the heart is to pump blood.",
+                "ja": "心臓の主な機能は血液を送り出すことです。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "機能する",
+            "definition": "to work or operate",
+            "examples": [
+              {
+                "en": "The system cannot function without electricity.",
+                "ja": "そのシステムは電気なしでは機能しません。"
               }
             ]
           }
@@ -26097,8 +26522,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "function"
     ],
@@ -27465,12 +27893,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "未来",
-            "definition": "a person, thing, idea, or concept connected with '未来'",
+            "ja": "未来；将来",
+            "definition": "the time that comes after the present",
             "examples": [
               {
-                "en": "This future is important.",
-                "ja": "この「未来」は重要です。"
+                "en": "Nobody can know exactly what will happen in the future.",
+                "ja": "将来何が起こるかを正確に知ることは誰にもできません。"
               }
             ]
           }
@@ -27484,8 +27912,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "future"
     ],

@@ -486,15 +486,15 @@
     "frequency": 5,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adverb",
         "meanings": [
           {
-            "ja": "早く",
-            "definition": "a person, thing, idea, or concept connected with '早く'",
+            "ja": "早く；早い時期に",
+            "definition": "before the usual or expected time",
             "examples": [
               {
-                "en": "This early is important.",
-                "ja": "この「早く」は重要です。"
+                "en": "We arrived early enough to get good seats.",
+                "ja": "私たちは良い席を取れるくらい早く到着しました。"
               }
             ]
           }
@@ -508,8 +508,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "early"
     ],
@@ -790,12 +792,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "地球；土",
-            "definition": "a thing, person, idea, or state related to 地球",
+            "ja": "地球；大地",
+            "definition": "the planet on which we live, or the ground",
             "examples": [
               {
-                "en": "This earth is important.",
-                "ja": "この「地球」は重要です。"
+                "en": "About seventy percent of the Earth's surface is covered by water.",
+                "ja": "地球表面のおよそ70パーセントは水で覆われています。"
               }
             ]
           }
@@ -809,8 +811,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "earth"
     ],
@@ -1214,12 +1218,12 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "容易に",
-            "definition": "in the manner or degree expressed by 容易に",
+            "ja": "簡単に；容易に",
+            "definition": "without difficulty",
             "examples": [
               {
-                "en": "The word 'easily' is commonly used in this context.",
-                "ja": "「easily」は「容易に」に関する文脈で使われます。"
+                "en": "The page can be easily viewed on a smartphone.",
+                "ja": "そのページはスマートフォンでも簡単に閲覧できます。"
               }
             ]
           }
@@ -1233,8 +1237,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "easily"
     ],
@@ -1344,7 +1350,7 @@
         "meanings": [
           {
             "ja": "簡単な；容易な",
-            "definition": "needing little effort or difficulty",
+            "definition": "not difficult and requiring little effort",
             "examples": [
               {
                 "en": "The instructions are easy to follow.",
@@ -1365,7 +1371,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "v2.30-curated"
+    ],
     "status": "basic",
     "search_terms": [
       "easy",
@@ -1829,9 +1837,30 @@
     },
     "usage_note": "",
     "tags": [
-      "materials-properties"
+      "materials-properties",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Greek kentron / Latin centrum",
+      "history": "ec-/ex-「外へ」+ center に関係し、中心から外れた→風変わりな、へ発展した.",
+      "roots": [
+        {
+          "form": "ex-",
+          "meaning": "外へ"
+        },
+        {
+          "form": "centr",
+          "meaning": "中心"
+        }
+      ],
+      "related": [
+        "center",
+        "central",
+        "concentrate",
+        "concentration"
+      ]
+    }
   },
   {
     "id": "sw-11628",
@@ -2311,12 +2340,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "経済の",
-            "definition": "having the quality described as '経済の'",
+            "ja": "経済の；経済的な",
+            "definition": "related to the economy, trade, or money",
             "examples": [
               {
-                "en": "This is economic.",
-                "ja": "これは「経済の」です。"
+                "en": "The report discusses the economic effects of tourism.",
+                "ja": "その報告書は観光の経済的影響を論じています。"
               }
             ]
           }
@@ -2330,8 +2359,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "economic"
     ],
@@ -2548,11 +2579,11 @@
         "meanings": [
           {
             "ja": "経済",
-            "definition": "a person, thing, state, process, or idea connected with 経済",
+            "definition": "the system by which a country produces and uses goods and services",
             "examples": [
               {
-                "en": "The word 'economy' is commonly used in this context.",
-                "ja": "「economy」は「経済」に関する文脈で使われます。"
+                "en": "Tourism plays an important role in the local economy.",
+                "ja": "観光は地域経済で重要な役割を果たしています。"
               }
             ]
           }
@@ -2566,8 +2597,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "economy"
     ],
@@ -2575,7 +2609,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Greek oikonomia",
+      "history": "oikos「家」と nomos「管理・規則」に関係し、もとは「家政・家の管理」を表した。",
+      "roots": [
+        {
+          "form": "eco / oiko",
+          "meaning": "家・生活の場"
+        },
+        {
+          "form": "nom",
+          "meaning": "管理・規則"
+        }
+      ],
+      "related": [
+        "economic",
+        "economics"
+      ]
+    }
   },
   {
     "id": "sw-02814",
@@ -3117,7 +3169,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "educate"
@@ -3126,7 +3180,27 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin ducere / ductus",
+      "history": "Latin educare「育てる・訓練する」に由来し、ducere 系の educere とも歴史的に関連する。",
+      "roots": [
+        {
+          "form": "duc / duct",
+          "meaning": "導く"
+        }
+      ],
+      "related": [
+        "produce",
+        "product",
+        "production",
+        "reduce",
+        "reduction",
+        "introduce",
+        "introduction",
+        "conduct"
+      ]
+    }
   },
   {
     "id": "sw-00223",
@@ -3143,11 +3217,11 @@
         "meanings": [
           {
             "ja": "教育",
-            "definition": "a person, thing, state, process, or idea connected with 教育",
+            "definition": "the process of teaching and learning, especially at a school or university",
             "examples": [
               {
-                "en": "The word 'education' is commonly used in this kind of context.",
-                "ja": "「education」は「教育」に関する文脈でよく使われます。"
+                "en": "Education can give people more choices in life.",
+                "ja": "教育は人々に人生のより多くの選択肢を与えます。"
               }
             ]
           }
@@ -3161,8 +3235,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "education"
     ],
@@ -3170,7 +3247,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin educatio / educare",
+      "history": "ラテン語 educare「育てる・訓練する」に由来する。educere「外へ導く」とも関連するが、education を単純に「才能を外へ引き出す」と分解する説明は避ける。",
+      "roots": [
+        {
+          "form": "duc / duct",
+          "meaning": "導く"
+        }
+      ],
+      "related": [
+        "educate",
+        "educator",
+        "educational"
+      ]
+    }
   },
   {
     "id": "sw-01398",
@@ -3186,12 +3278,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "教育の",
-            "definition": "having the quality or characteristic expressed by 教育の",
+            "ja": "教育の；教育的な",
+            "definition": "related to teaching, learning, or schools",
             "examples": [
               {
-                "en": "The word 'educational' is commonly used in this context.",
-                "ja": "「educational」は「教育の」に関する文脈で使われます。"
+                "en": "The website provides free educational materials.",
+                "ja": "そのウェブサイトは無料の教育教材を提供しています。"
               }
             ]
           }
@@ -3205,8 +3297,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "educational"
     ],
@@ -3214,7 +3309,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "education + -al",
+      "history": "education に「〜に関する」を表す形容詞語尾 -al が付いた語。",
+      "roots": [
+        {
+          "form": "-al",
+          "meaning": "〜に関する"
+        }
+      ],
+      "related": [
+        "education",
+        "educate"
+      ]
+    }
   },
   {
     "id": "sw-05228",
@@ -3271,12 +3380,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "影響",
-            "definition": "a person, thing, idea, or concept connected with '影響'",
+            "ja": "影響；効果",
+            "definition": "a change caused by something",
             "examples": [
               {
-                "en": "This effect is important.",
-                "ja": "この「影響」は重要です。"
+                "en": "The new law had little effect on prices.",
+                "ja": "新しい法律は価格にほとんど影響を与えませんでした。"
               }
             ]
           }
@@ -3284,14 +3393,20 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "have an effect on"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "etymology-v1",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "effect"
     ],
@@ -3299,7 +3414,26 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "have an effect on",
+      "long-term effect"
+    ],
+    "etymology": {
+      "origin": "Latin facere / factus",
+      "history": "Latin efficere に由来し、ex-「外へ」+ facere「する・作る」から、作り出された結果を表す。",
+      "roots": [
+        {
+          "form": "fac / fect",
+          "meaning": "する・作る"
+        }
+      ],
+      "related": [
+        "affect",
+        "effective",
+        "perfect",
+        "infection"
+      ]
+    }
   },
   {
     "id": "sw-01287",
@@ -3316,11 +3450,11 @@
         "meanings": [
           {
             "ja": "効果的な",
-            "definition": "having the quality or characteristic expressed by 効果的な",
+            "definition": "successful in producing the intended result",
             "examples": [
               {
-                "en": "The word 'effective' is commonly used in this context.",
-                "ja": "「effective」は「効果的な」に関する文脈で使われます。"
+                "en": "Regular review is an effective way to remember vocabulary.",
+                "ja": "定期的な復習は語彙を覚える効果的な方法です。"
               }
             ]
           }
@@ -3334,8 +3468,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "effective"
     ],
@@ -3343,7 +3480,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin facere / factus",
+      "history": "effect からできた形容詞で、実際に結果を「作り出す」ことを表す。",
+      "roots": [
+        {
+          "form": "fac / fect",
+          "meaning": "する・作る"
+        }
+      ],
+      "related": [
+        "affect",
+        "effect",
+        "perfect",
+        "infection"
+      ]
+    }
   },
   {
     "id": "sw-02636",
@@ -3581,11 +3734,11 @@
         "meanings": [
           {
             "ja": "効率的な",
-            "definition": "having the quality or characteristic expressed by 効率的な",
+            "definition": "working well without wasting time, energy, or resources",
             "examples": [
               {
-                "en": "The word 'efficient' is commonly used in this kind of context.",
-                "ja": "「efficient」は「効率的な」に関する文脈でよく使われます。"
+                "en": "The new system is faster and more efficient.",
+                "ja": "新しいシステムはより速く効率的です。"
               }
             ]
           }
@@ -3599,8 +3752,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "efficient"
     ],
@@ -3625,11 +3780,11 @@
         "meanings": [
           {
             "ja": "努力",
-            "definition": "a thing, person, idea, or state related to 努力",
+            "definition": "physical or mental energy used to achieve something",
             "examples": [
               {
-                "en": "This effort is important.",
-                "ja": "この「努力」は重要です。"
+                "en": "Improving your speaking takes time and effort.",
+                "ja": "スピーキングの上達には時間と努力が必要です。"
               }
             ]
           }
@@ -3643,8 +3798,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "effort"
     ],
@@ -4634,7 +4791,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "elect"
@@ -4643,7 +4802,28 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin legere / lectus",
+      "history": "e-/ex-「外へ」+ legere「選ぶ」に由来し、選び出すことを表す。",
+      "roots": [
+        {
+          "form": "ex-",
+          "meaning": "外へ"
+        },
+        {
+          "form": "leg / lect",
+          "meaning": "読む・選ぶ・集める"
+        }
+      ],
+      "related": [
+        "legible",
+        "lecture",
+        "collect",
+        "collection",
+        "election"
+      ]
+    }
   },
   {
     "id": "sw-00828",
@@ -4660,11 +4840,11 @@
         "meanings": [
           {
             "ja": "選挙",
-            "definition": "a thing, person, idea, or state related to 選挙",
+            "definition": "a process in which people vote to choose a person for a public position",
             "examples": [
               {
-                "en": "This election is important.",
-                "ja": "この「選挙」は重要です。"
+                "en": "Young people participated actively in the election.",
+                "ja": "若者たちは選挙に積極的に参加しました。"
               }
             ]
           }
@@ -4678,8 +4858,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "election"
     ],
@@ -4687,7 +4870,28 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin legere / lectus",
+      "history": "elect の名詞形で、選び出すことを表す。",
+      "roots": [
+        {
+          "form": "ex-",
+          "meaning": "外へ"
+        },
+        {
+          "form": "leg / lect",
+          "meaning": "読む・選ぶ・集める"
+        }
+      ],
+      "related": [
+        "legible",
+        "lecture",
+        "collect",
+        "collection",
+        "elect"
+      ]
+    }
   },
   {
     "id": "sw-03348",
@@ -4794,11 +4998,11 @@
         "meanings": [
           {
             "ja": "電気の",
-            "definition": "relating to electricity or electrical equipment",
+            "definition": "related to electricity",
             "examples": [
               {
-                "en": "The word 'electrical' is useful in this context.",
-                "ja": "この文脈では「電気の」という意味で使われる。"
+                "en": "The fire was caused by an electrical problem.",
+                "ja": "火災は電気系統の問題が原因でした。"
               }
             ]
           }
@@ -4813,9 +5017,10 @@
     },
     "usage_note": "",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "v2.33-curated"
     ],
-    "status": "needs_enrichment",
+    "status": "basic",
     "search_terms": [
       "electrical"
     ],
@@ -6888,19 +7093,44 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "現れる；明らかになる",
+            "definition": "to appear or become known",
+            "examples": [
+              {
+                "en": "A clear pattern emerged from the data.",
+                "ja": "データから明確なパターンが現れました。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "emerges",
+      "past": "emerged",
+      "past_participle": "emerged",
+      "ing": "emerging"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "emerge"
+      "emerge",
+      "emerges",
+      "emerged",
+      "emerging"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -7111,7 +7341,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "emotion"
@@ -7120,7 +7352,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin movere / motus",
+      "history": "Latin emovere「外へ動かす・かき立てる」に由来し、心が動かされることから感情を表すようになった。",
+      "roots": [
+        {
+          "form": "mov / mot",
+          "meaning": "動く・動かす"
+        }
+      ],
+      "related": [
+        "move",
+        "remove",
+        "remote",
+        "motivation"
+      ]
+    }
   },
   {
     "id": "sw-01760",
@@ -7136,12 +7384,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "感情的な",
-            "definition": "having the quality expressed by 感情的な",
+            "ja": "感情の；感情的な",
+            "definition": "related to feelings or showing strong feelings",
             "examples": [
               {
-                "en": "The word 'emotional' is often useful in formal or everyday English.",
-                "ja": "「emotional」は「感情的な」の意味で使われます。"
+                "en": "The final scene had a strong emotional impact on the audience.",
+                "ja": "最後の場面は観客に強い感情的な影響を与えました。"
               }
             ]
           }
@@ -7155,8 +7403,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "emotional"
     ],
@@ -7432,32 +7682,42 @@
     "frequency": 2,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "verb",
         "meanings": [
           {
             "ja": "雇う",
-            "definition": "a person, thing, state, process, or idea connected with 雇う",
+            "definition": "to pay someone to work for you",
             "examples": [
               {
-                "en": "The word 'employ' is commonly used in this context.",
-                "ja": "「employ」は「雇う」に関する文脈で使われます。"
+                "en": "The company employs more than two hundred people.",
+                "ja": "その会社は200人以上を雇っています。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "employs",
+      "past": "employed",
+      "past_participle": "employed",
+      "ing": "employing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "employ"
+      "employ",
+      "employs",
+      "employed",
+      "employing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -7521,11 +7781,11 @@
         "meanings": [
           {
             "ja": "従業員",
-            "definition": "a thing, person, idea, or state related to 従業員",
+            "definition": "a person who is paid to work for an organization",
             "examples": [
               {
-                "en": "This employee is important.",
-                "ja": "この「従業員」は重要です。"
+                "en": "Employees can work from home twice a week.",
+                "ja": "従業員は週2回在宅勤務ができます。"
               }
             ]
           }
@@ -7539,8 +7799,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "employee"
     ],
@@ -8433,29 +8695,41 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "励ます",
-            "definition": "to perform or cause the action expressed by 励ます",
+            "ja": "励ます；促す",
+            "definition": "to give someone confidence or persuade them to do something",
             "examples": [
               {
-                "en": "People often encourage in this situation.",
-                "ja": "この状況では人々はしばしば「励ます」します。"
+                "en": "Teachers should encourage students to ask questions.",
+                "ja": "教員は生徒が質問するよう促すべきです。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "encourages",
+      "past": "encouraged",
+      "past_participle": "encouraged",
+      "ing": "encouraging"
+    },
+    "phrases": [
+      "encourage someone to do"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "encourage"
+      "encourage",
+      "encourages",
+      "encouraged",
+      "encouraging"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -8652,12 +8926,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "終わり；終える",
-            "definition": "a person, thing, idea, or concept connected with '終わり；終える'",
+            "ja": "終わり；端",
+            "definition": "the final part of a period, activity, or object",
             "examples": [
               {
-                "en": "This end is important.",
-                "ja": "この「終わり」は重要です。"
+                "en": "There will be a short quiz at the end of the lesson.",
+                "ja": "授業の最後に短い小テストがあります。"
               }
             ]
           }
@@ -8671,8 +8945,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "end"
     ],
@@ -9078,12 +9354,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "エネルギー",
-            "definition": "a thing, person, idea, or state related to エネルギー",
+            "ja": "エネルギー；活力",
+            "definition": "power used to provide heat, light, or movement",
             "examples": [
               {
-                "en": "This energy is important.",
-                "ja": "この「エネルギー」は重要です。"
+                "en": "The school is trying to reduce its energy use.",
+                "ja": "学校はエネルギー使用量を減らそうとしています。"
               }
             ]
           }
@@ -9097,8 +9373,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "energy"
     ],
@@ -9815,28 +10093,38 @@
         "meanings": [
           {
             "ja": "楽しむ",
-            "definition": "to perform or cause the action expressed by 楽しむ",
+            "definition": "to get pleasure from doing or experiencing something",
             "examples": [
               {
-                "en": "People often enjoy in this situation.",
-                "ja": "この状況では人々はしばしば「楽しむ」します。"
+                "en": "I enjoy running more when the weather is cool.",
+                "ja": "涼しい天気のほうがランニングを楽しめます。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "enjoys",
+      "past": "enjoyed",
+      "past_participle": "enjoyed",
+      "ing": "enjoying"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "enjoy"
+      "enjoy",
+      "enjoys",
+      "enjoyed",
+      "enjoying"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -9984,15 +10272,15 @@
     "frequency": 5,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
             "ja": "十分な",
-            "definition": "a person, thing, idea, or concept connected with '十分な'",
+            "definition": "as much or as many as needed",
             "examples": [
               {
-                "en": "This enough is important.",
-                "ja": "この「十分な」は重要です。"
+                "en": "Make sure you have enough water for the whole run.",
+                "ja": "ランニング中ずっと足りるだけの水があるか確認してください。"
               }
             ]
           }
@@ -10006,8 +10294,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "enough"
     ],
@@ -11220,9 +11510,24 @@
     },
     "usage_note": "",
     "tags": [
-      "thinking-communication"
+      "thinking-communication",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin numerus",
+      "history": "e-/ex- + numerare「数える」に由来し、一つずつ数え上げることを表す。",
+      "roots": [
+        {
+          "form": "numer",
+          "meaning": "数"
+        }
+      ],
+      "related": [
+        "number",
+        "numerous"
+      ]
+    }
   },
   {
     "id": "sw-08969",
@@ -11411,11 +11716,11 @@
         "meanings": [
           {
             "ja": "環境",
-            "definition": "a person, thing, idea, or concept connected with '環境'",
+            "definition": "the natural world or the conditions in which people, animals, or plants live",
             "examples": [
               {
-                "en": "This environment is important.",
-                "ja": "この「環境」は重要です。"
+                "en": "Plastic waste is a serious problem for the marine environment.",
+                "ja": "プラスチックごみは海洋環境にとって深刻な問題です。"
               }
             ]
           }
@@ -11429,8 +11734,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "environment"
     ],
@@ -11455,11 +11762,11 @@
         "meanings": [
           {
             "ja": "環境の",
-            "definition": "having the quality expressed by 環境の",
+            "definition": "related to the natural world and the effects of human activity on it",
             "examples": [
               {
-                "en": "The word 'environmental' is often useful in formal or everyday English.",
-                "ja": "「environmental」は「環境の」の意味で使われます。"
+                "en": "The project aims to reduce environmental damage.",
+                "ja": "そのプロジェクトは環境被害を減らすことを目指しています。"
               }
             ]
           }
@@ -11473,8 +11780,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "environmental"
     ],
@@ -12258,11 +12567,11 @@
         "meanings": [
           {
             "ja": "等しい；平等な",
-            "definition": "having the quality or characteristic expressed by 等しい",
+            "definition": "the same in amount, value, or status",
             "examples": [
               {
-                "en": "The word 'equal' is commonly used in this context.",
-                "ja": "「equal」は「等しい」に関する文脈で使われます。"
+                "en": "All students should have equal access to learning opportunities.",
+                "ja": "すべての生徒が学習機会に平等にアクセスできるべきです。"
               }
             ]
           }
@@ -12276,8 +12585,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "equal"
     ],
@@ -12285,7 +12597,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin aequus / aequare",
+      "history": "Latin aequalis / aequus「等しい」に由来する.",
+      "roots": [
+        {
+          "form": "equ",
+          "meaning": "等しい"
+        }
+      ],
+      "related": [
+        "equality",
+        "equivalent",
+        "equation",
+        "adequate"
+      ]
+    }
   },
   {
     "id": "sw-01773",
@@ -12320,7 +12648,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "equality"
@@ -12329,7 +12659,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin aequus / aequare",
+      "history": "equal の名詞形で、等しい状態を表す.",
+      "roots": [
+        {
+          "form": "equ",
+          "meaning": "等しい"
+        }
+      ],
+      "related": [
+        "equal",
+        "equivalent",
+        "equation",
+        "adequate"
+      ]
+    }
   },
   {
     "id": "sw-09677",
@@ -12406,7 +12752,8 @@
     },
     "usage_note": "",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "etymology-v1"
     ],
     "status": "needs_enrichment",
     "search_terms": [
@@ -12416,7 +12763,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin aequus / aequare",
+      "history": "Latin aequare「等しくする」に由来し、二つの量が等しいことを示す式を表す.",
+      "roots": [
+        {
+          "form": "equ",
+          "meaning": "等しい"
+        }
+      ],
+      "related": [
+        "equal",
+        "equality",
+        "equivalent",
+        "adequate"
+      ]
+    }
   },
   {
     "id": "sw-11004",
@@ -12879,7 +13242,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "equivalent"
@@ -12888,7 +13253,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin aequus / aequare",
+      "history": "Latin aequus「等しい」+ valere「価値がある」に関係し、同じ価値を持つことを表す.",
+      "roots": [
+        {
+          "form": "equ",
+          "meaning": "等しい"
+        }
+      ],
+      "related": [
+        "equal",
+        "equality",
+        "equation",
+        "adequate"
+      ]
+    }
   },
   {
     "id": "sw-06419",
@@ -13758,11 +14139,11 @@
         "meanings": [
           {
             "ja": "特に",
-            "definition": "in a manner or degree expressed by 特に",
+            "definition": "more than usual or more than other things",
             "examples": [
               {
-                "en": "The word 'especially' is useful.",
-                "ja": "「especially」は役に立つ単語です。"
+                "en": "The road is dangerous, especially at night.",
+                "ja": "その道は特に夜は危険です。"
               }
             ]
           }
@@ -13776,8 +14157,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "especially"
     ],
@@ -13924,15 +14307,15 @@
     "frequency": 3,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
-            "ja": "不可欠な",
-            "definition": "a person, thing, state, process, or idea connected with 不可欠な",
+            "ja": "不可欠な；非常に重要な",
+            "definition": "completely necessary for something to succeed or exist",
             "examples": [
               {
-                "en": "The word 'essential' is commonly used in this kind of context.",
-                "ja": "「essential」は「不可欠な」に関する文脈でよく使われます。"
+                "en": "Water is essential for human life.",
+                "ja": "水は人間の生命に不可欠です。"
               }
             ]
           }
@@ -13946,8 +14329,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "essential"
     ],
@@ -14015,35 +14400,78 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "確立する",
-            "definition": "to do or express the action '確立する'",
+            "ja": "設立する",
+            "definition": "to start an organization or system",
             "examples": [
               {
-                "en": "We often establish this in everyday life.",
-                "ja": "私たちは日常生活でよく「確立する」します。"
+                "en": "The organization was established in 1995.",
+                "ja": "その団体は1995年に設立されました。"
+              }
+            ]
+          },
+          {
+            "ja": "確立する；明らかにする",
+            "definition": "to make something accepted or prove a fact",
+            "examples": [
+              {
+                "en": "Researchers established a link between the two factors.",
+                "ja": "研究者たちは2つの要因の関連を明らかにしました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "establishes",
+      "past": "established",
+      "past_participle": "established",
+      "ing": "establishing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "establish"
+      "establish",
+      "establishes",
+      "established",
+      "establishing"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "establish a system",
+      "establish a relationship"
+    ],
+    "etymology": {
+      "origin": "Latin stare / status",
+      "history": "Latin stabilire 系から Old French を経て、「安定させる・しっかり立てる」→確立する、となった.",
+      "roots": [
+        {
+          "form": "sta / stat",
+          "meaning": "立つ"
+        }
+      ],
+      "related": [
+        "state",
+        "status",
+        "station",
+        "stable",
+        "distance",
+        "instance"
+      ]
+    }
   },
   {
     "id": "sw-01403",
@@ -14144,32 +14572,42 @@
     "frequency": 2,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "verb",
         "meanings": [
           {
-            "ja": "見積もる；推定",
-            "definition": "a person, thing, state, process, or idea connected with 見積もる",
+            "ja": "見積もる；推定する",
+            "definition": "to make an approximate calculation or judgment",
             "examples": [
               {
-                "en": "The word 'estimate' is commonly used in this context.",
-                "ja": "「estimate」は「見積もる」に関する文脈で使われます。"
+                "en": "Experts estimate that repairs will take three months.",
+                "ja": "専門家は修理に3か月かかると見積もっています。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "estimates",
+      "past": "estimated",
+      "past_participle": "estimated",
+      "ing": "estimating"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "estimate"
+      "estimate",
+      "estimates",
+      "estimated",
+      "estimating"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -14524,15 +14962,15 @@
     "frequency": 2,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
             "ja": "倫理的な",
-            "definition": "a person, thing, state, process, or idea connected with 倫理的な",
+            "definition": "related to principles of right and wrong behavior",
             "examples": [
               {
-                "en": "The word 'ethical' is commonly used in this kind of context.",
-                "ja": "「ethical」は「倫理的な」に関する文脈でよく使われます。"
+                "en": "The use of personal data raises ethical questions.",
+                "ja": "個人データの利用は倫理的な問題を提起します。"
               }
             ]
           }
@@ -14546,8 +14984,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "ethical"
     ],
@@ -15210,25 +15650,68 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "評価する",
+            "definition": "to judge the quality, value, or effectiveness of something",
+            "examples": [
+              {
+                "en": "Students should evaluate the reliability of online sources.",
+                "ja": "生徒はオンライン情報源の信頼性を評価すべきです。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "evaluates",
+      "past": "evaluated",
+      "past_participle": "evaluated",
+      "ing": "evaluating"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
-      "evaluate"
+      "evaluate",
+      "evaluates",
+      "evaluated",
+      "evaluating"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin valere / validus",
+      "history": "value 系の語として、価値を見積もる→評価する、を表す。",
+      "roots": [
+        {
+          "form": "val",
+          "meaning": "強い・価値がある"
+        }
+      ],
+      "related": [
+        "value",
+        "valuable",
+        "valid",
+        "validity",
+        "equivalent"
+      ]
+    }
   },
   {
     "id": "sw-01784",
@@ -15585,11 +16068,11 @@
         "meanings": [
           {
             "ja": "出来事；行事",
-            "definition": "a thing, person, idea, or state related to 出来事",
+            "definition": "something that happens, especially an organized public or social occasion",
             "examples": [
               {
-                "en": "This event is important.",
-                "ja": "この「出来事」は重要です。"
+                "en": "More than five hundred people attended the school event.",
+                "ja": "500人以上が学校行事に参加しました。"
               }
             ]
           }
@@ -15603,8 +16086,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "event"
     ],
@@ -15612,7 +16098,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin venire / ventus",
+      "history": "Latin evenire に由来し、e-/ex-「外へ」+ venire「来る」から、「起こって出てくること」を表すようになった。",
+      "roots": [
+        {
+          "form": "ven / vent",
+          "meaning": "来る"
+        }
+      ],
+      "related": [
+        "prevent",
+        "prevention",
+        "invent",
+        "convention",
+        "adventure"
+      ]
+    }
   },
   {
     "id": "sw-12094",
@@ -15986,17 +16489,38 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "証拠；根拠",
+            "definition": "facts or information that support or disprove an idea",
+            "examples": [
+              {
+                "en": "There is strong evidence that smoking harms health.",
+                "ja": "喫煙が健康を害するという強い証拠があります。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "evidence for",
+      "evidence that"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "evidence"
     ],
@@ -16004,7 +16528,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin evidentia / evidens",
+      "history": "e-「外へ」と videre「見る」に関係し、「はっきり見えること」から「証拠」の意味へつながった。",
+      "roots": [
+        {
+          "form": "vid / vis",
+          "meaning": "見る"
+        }
+      ],
+      "related": [
+        "evident",
+        "video",
+        "vision"
+      ]
+    }
   },
   {
     "id": "sw-01786",
@@ -16552,35 +17091,49 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "調べる；試験する",
-            "definition": "to perform or cause the action expressed by 調べる",
+            "ja": "詳しく調べる",
+            "definition": "to look at or study something carefully",
             "examples": [
               {
-                "en": "The word 'examine' is commonly used in this context.",
-                "ja": "「examine」は「調べる」に関する文脈で使われます。"
+                "en": "The study examines how children use social media.",
+                "ja": "その研究は子どもたちのSNS利用を詳しく調べています。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "examines",
+      "past": "examined",
+      "past_participle": "examined",
+      "ing": "examining"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "examine"
+      "examine",
+      "examines",
+      "examined",
+      "examining"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "examine evidence",
+      "examine the relationship"
+    ]
   },
   {
     "id": "sw-00240",
@@ -16596,12 +17149,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "例",
-            "definition": "a person, thing, idea, or concept connected with '例'",
+            "ja": "例；実例",
+            "definition": "something that shows what a general idea or type is like",
             "examples": [
               {
-                "en": "This example is important.",
-                "ja": "この「例」は重要です。"
+                "en": "Can you give me an example of how this expression is used?",
+                "ja": "この表現がどのように使われるか例を挙げてもらえますか。"
               }
             ]
           }
@@ -16615,8 +17168,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "example"
     ],
@@ -16700,7 +17255,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "exceed"
@@ -16709,7 +17266,28 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin cedere / cessus",
+      "history": "ex-「外へ・越えて」+ cedere「進む」から、限界を越える意味になった.",
+      "roots": [
+        {
+          "form": "ex-",
+          "meaning": "外へ・越えて"
+        },
+        {
+          "form": "ced / ceed / cess",
+          "meaning": "進む・譲る"
+        }
+      ],
+      "related": [
+        "proceed",
+        "process",
+        "procedure",
+        "succeed",
+        "success"
+      ]
+    }
   },
   {
     "id": "sw-00841",
@@ -16832,7 +17410,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "exception"
@@ -16841,7 +17421,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin capere / captus",
+      "history": "ex-「外へ」+ capere「取る」に関係し、一般の規則から「取り出されたもの」を表す。",
+      "roots": [
+        {
+          "form": "cap / cept",
+          "meaning": "取る・つかむ"
+        }
+      ],
+      "related": [
+        "accept",
+        "acceptance",
+        "concept",
+        "receive",
+        "reception",
+        "perception"
+      ]
+    }
   },
   {
     "id": "sw-01791",
@@ -17223,9 +17821,29 @@
     },
     "usage_note": "",
     "tags": [
-      "thinking-communication"
+      "thinking-communication",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin clamare",
+      "history": "ex-「外へ」+ clamare「叫ぶ」から、声を上げることを表す。",
+      "roots": [
+        {
+          "form": "ex-",
+          "meaning": "外へ"
+        },
+        {
+          "form": "claim / clam",
+          "meaning": "叫ぶ・呼ぶ"
+        }
+      ],
+      "related": [
+        "claim",
+        "proclaim",
+        "acclaim"
+      ]
+    }
   },
   {
     "id": "sw-10123",
@@ -17342,25 +17960,69 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "除外する",
+            "definition": "to deliberately leave someone or something out",
+            "examples": [
+              {
+                "en": "The analysis excluded incomplete responses.",
+                "ja": "分析では不完全な回答を除外しました。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "excludes",
+      "past": "excluded",
+      "past_participle": "excluded",
+      "ing": "excluding"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
-      "exclude"
+      "exclude",
+      "excludes",
+      "excluded",
+      "excluding"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin excludere",
+      "history": "ex-「外へ」と claudere「閉じる」から、「外に締め出す」という発想。",
+      "roots": [
+        {
+          "form": "ex-",
+          "meaning": "外へ"
+        },
+        {
+          "form": "clud",
+          "meaning": "閉じる"
+        }
+      ],
+      "related": [
+        "include",
+        "conclusion"
+      ]
+    }
   },
   {
     "id": "sw-02716",
@@ -17935,28 +18597,39 @@
         "meanings": [
           {
             "ja": "存在する",
-            "definition": "to perform or cause the action expressed by 存在する",
+            "definition": "to be real or present",
             "examples": [
               {
-                "en": "People often exist in this situation.",
-                "ja": "この状況では人々はしばしば「存在する」します。"
+                "en": "Large differences still exist between regions.",
+                "ja": "地域間には依然として大きな差が存在します。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "exists",
+      "past": "existed",
+      "past_participle": "existed",
+      "ing": "existing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "exist"
+      "exist",
+      "exists",
+      "existed",
+      "existing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -18525,29 +19198,40 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "予期する",
-            "definition": "to perform or cause the action expressed by 予期する",
+            "ja": "予想する；期待する",
+            "definition": "to think that something will probably happen",
             "examples": [
               {
-                "en": "People often expect in this situation.",
-                "ja": "この状況では人々はしばしば「予期する」します。"
+                "en": "We expect demand to increase next year.",
+                "ja": "来年は需要が増えると予想しています。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "expects",
+      "past": "expected",
+      "past_participle": "expected",
+      "ing": "expecting"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "v2.43-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "expect"
+      "expect",
+      "expects",
+      "expected",
+      "expecting"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -18758,7 +19442,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "expense"
@@ -18767,7 +19453,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin pendere / pensus",
+      "history": "ex- + pendere「重さを量る・支払う」に関係し、支出・費用を表す。",
+      "roots": [
+        {
+          "form": "pend / pens",
+          "meaning": "ぶら下がる・量る"
+        }
+      ],
+      "related": [
+        "depend",
+        "dependent",
+        "independent",
+        "spend",
+        "expensive"
+      ]
+    }
   },
   {
     "id": "sw-00847",
@@ -18802,7 +19505,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "expensive"
@@ -18811,7 +19516,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin pendere / pensus",
+      "history": "expense からできた形容詞で、多くの費用がかかることを表す。",
+      "roots": [
+        {
+          "form": "pend / pens",
+          "meaning": "ぶら下がる・量る"
+        }
+      ],
+      "related": [
+        "depend",
+        "dependent",
+        "independent",
+        "spend",
+        "expense"
+      ]
+    }
   },
   {
     "id": "sw-00241",
@@ -18827,12 +19549,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "経験",
-            "definition": "a person, thing, idea, or concept connected with '経験'",
+            "ja": "経験；体験",
+            "definition": "knowledge or skill gained by doing or living through something",
             "examples": [
               {
-                "en": "This experience is important.",
-                "ja": "この「経験」は重要です。"
+                "en": "Working abroad was a valuable experience for her.",
+                "ja": "海外で働いたことは彼女にとって貴重な経験でした。"
               }
             ]
           }
@@ -18840,14 +19562,19 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "have experience in",
+      "from experience"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "experience"
     ],
@@ -19092,28 +19819,39 @@
         "meanings": [
           {
             "ja": "説明する",
-            "definition": "to perform or cause the action expressed by 説明する",
+            "definition": "to make something clear by giving details or reasons",
             "examples": [
               {
-                "en": "People often explain in this situation.",
-                "ja": "この状況では人々はしばしば「説明する」します。"
+                "en": "Can you explain how the system works?",
+                "ja": "そのシステムがどう動くのか説明してもらえますか。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "explains",
+      "past": "explained",
+      "past_participle": "explained",
+      "ing": "explaining"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "explain"
+      "explain",
+      "explains",
+      "explained",
+      "explaining"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -19189,6 +19927,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "明確な；はっきり述べた",
+            "definition": "stated clearly and directly, leaving no doubt",
+            "examples": [
+              {
+                "en": "The instructions should be explicit about the word limit.",
+                "ja": "指示は語数制限について明確であるべきです。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -19198,8 +19951,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "explicit"
     ],
@@ -19401,29 +20156,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "探究する",
-            "definition": "to perform or cause the action expressed by 探究する",
+            "ja": "探究する；探索する",
+            "definition": "to examine a subject or place carefully in order to learn about it",
             "examples": [
               {
-                "en": "The word 'explore' appears in many kinds of English texts.",
-                "ja": "「explore」はさまざまな英文で使われます。"
+                "en": "The project allows students to explore questions they care about.",
+                "ja": "そのプロジェクトでは生徒が関心のある問いを探究できます。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "explores",
+      "past": "explored",
+      "past_participle": "explored",
+      "ing": "exploring"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "explore"
+      "explore",
+      "explores",
+      "explored",
+      "exploring"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -19505,7 +20270,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "expose"
@@ -19514,7 +20281,27 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin ponere / positus",
+      "history": "ex-「外へ」+ ponere「置く」に由来し、外にさらすことを表す。",
+      "roots": [
+        {
+          "form": "ex-",
+          "meaning": "外へ"
+        },
+        {
+          "form": "pon / pos",
+          "meaning": "置く"
+        }
+      ],
+      "related": [
+        "component",
+        "deposit",
+        "opponent",
+        "exposure"
+      ]
+    }
   },
   {
     "id": "sw-01805",
@@ -19549,7 +20336,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "exposure"
@@ -19558,7 +20347,27 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin ponere / positus",
+      "history": "expose の名詞形で、外にさらされることを表す。",
+      "roots": [
+        {
+          "form": "ex-",
+          "meaning": "外へ"
+        },
+        {
+          "form": "pon / pos",
+          "meaning": "置く"
+        }
+      ],
+      "related": [
+        "component",
+        "deposit",
+        "opponent",
+        "expose"
+      ]
+    }
   },
   {
     "id": "sw-06331",
@@ -19616,34 +20425,63 @@
         "meanings": [
           {
             "ja": "表現する",
-            "definition": "to perform or cause the action expressed by 表現する",
+            "definition": "to show or communicate a thought or feeling",
             "examples": [
               {
-                "en": "People often express in this situation.",
-                "ja": "この状況では人々はしばしば「表現する」します。"
+                "en": "Students should be able to express their opinions clearly.",
+                "ja": "生徒は自分の意見を明確に表現できるべきです。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "expresses",
+      "past": "expressed",
+      "past_participle": "expressed",
+      "ing": "expressing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "express"
+      "express",
+      "expresses",
+      "expressed",
+      "expressing"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin premere / pressus",
+      "history": "ex-「外へ」と premere「押す」に関係し、内にあるものを「外へ押し出す」ことから「表現する」へ発展した。",
+      "roots": [
+        {
+          "form": "press",
+          "meaning": "押す"
+        }
+      ],
+      "related": [
+        "press",
+        "pressure",
+        "expression",
+        "impress",
+        "impression"
+      ]
+    }
   },
   {
     "id": "sw-13254",
@@ -19700,12 +20538,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "表現",
-            "definition": "a person, thing, state, process, or idea connected with 表現",
+            "ja": "表現；言い回し",
+            "definition": "a word or phrase used to communicate an idea",
             "examples": [
               {
-                "en": "The word 'expression' is commonly used in this context.",
-                "ja": "「expression」は「表現」に関する文脈で使われます。"
+                "en": "This expression is common in everyday conversation.",
+                "ja": "この表現は日常会話でよく使われます。"
               }
             ]
           }
@@ -19719,8 +20557,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "expression"
     ],
@@ -19728,7 +20569,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin premere / pressus",
+      "history": "express の名詞形で、考えや感情を外に表すことを意味する。",
+      "roots": [
+        {
+          "form": "press",
+          "meaning": "押す"
+        }
+      ],
+      "related": [
+        "press",
+        "pressure",
+        "express",
+        "impress",
+        "impression"
+      ]
+    }
   },
   {
     "id": "sw-09418",
@@ -19886,7 +20744,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "extend"
@@ -19895,7 +20755,26 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin tendere / tentus",
+      "history": "ex-「外へ」+ tendere「伸ばす」から、「外へ伸ばす」を表す。",
+      "roots": [
+        {
+          "form": "tend / tens",
+          "meaning": "伸ばす・向ける"
+        }
+      ],
+      "related": [
+        "tend",
+        "tendency",
+        "extension",
+        "intend",
+        "intention",
+        "attend",
+        "attention"
+      ]
+    }
   },
   {
     "id": "sw-13408",
@@ -20012,7 +20891,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "extension"
@@ -20021,7 +20902,26 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin tendere / tentus",
+      "history": "extend の名詞形で、伸ばすこと・広げることを表す。",
+      "roots": [
+        {
+          "form": "tend / tens",
+          "meaning": "伸ばす・向ける"
+        }
+      ],
+      "related": [
+        "tend",
+        "tendency",
+        "extend",
+        "intend",
+        "intention",
+        "attend",
+        "attention"
+      ]
+    }
   },
   {
     "id": "sw-02928",
@@ -20446,7 +21346,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "extra"
@@ -20455,7 +21357,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin extra",
+      "history": "Latin extra「外側に」に由来し、通常の範囲を越えた追加のものを表す。",
+      "roots": [
+        {
+          "form": "extra-",
+          "meaning": "外に・範囲外"
+        },
+        {
+          "form": "extra",
+          "meaning": "外側"
+        }
+      ],
+      "related": [
+        "extraordinary"
+      ]
+    }
   },
   {
     "id": "sw-02973",
@@ -20491,7 +21410,8 @@
     },
     "usage_note": "",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "etymology-v1"
     ],
     "status": "needs_enrichment",
     "search_terms": [
@@ -20501,7 +21421,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin trahere / tractus",
+      "history": "ex-「外へ」と trahere「引く」から、「引き出す」を表す。",
+      "roots": [
+        {
+          "form": "tract",
+          "meaning": "引く"
+        }
+      ],
+      "related": [
+        "attract",
+        "attraction",
+        "contract",
+        "tractor"
+      ]
+    }
   },
   {
     "id": "sw-01808",
@@ -20536,7 +21472,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "extraordinary"
@@ -20545,7 +21483,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "extra- + ordinary",
+      "history": "extra-「〜の外に」+ ordinary「通常の」から、通常の範囲を越えた→並外れた、となった。",
+      "roots": [
+        {
+          "form": "extra-",
+          "meaning": "外に・範囲外"
+        },
+        {
+          "form": "extra",
+          "meaning": "外側"
+        }
+      ],
+      "related": [
+        "extra"
+      ]
+    }
   },
   {
     "id": "sw-08341",
