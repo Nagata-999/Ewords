@@ -37,9 +37,9 @@
     if(a.gender==='female'){
       const length=[104,132,123,148,104,104,127,104][a.hair];
       let s=path(`M48 66Q43 24 80 25Q118 25 112 67L119 ${length}Q106 ${length+10} 94 ${length-3}H65Q49 ${length+10} 41 ${length}Z`,h);
-      if(a.hair===4)s+=path('M108 49Q140 34 132 83L122 115Q111 113 114 96L115 59Z',h);
-      if(a.hair===5)s+=path('M49 57Q25 40 29 85L38 112L47 105L42 65M111 57Q135 40 131 85L122 112L113 105L118 65',h);
-      if(a.hair===7)s+=circle(80,26,15,h);
+
+
+
       return s;
     }
     return a.hair===6?path('M47 55H113L121 100L107 96L101 108L91 99H65L53 105L52 94L40 98Z',h):'';
