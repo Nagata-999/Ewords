@@ -222,7 +222,7 @@
     if(accessory==='bag')extra+=path('M58 99L101 134','none','stroke="#916448" stroke-width="4"')+path('M93 124H113V144H92Z','#b18a61');
     if(bk==='cape'&&!back)extra+=path('M58 99L77 108L103 99','none','stroke="#e8b557" stroke-width="3"')+star(80,107,5);
     const far=side?arm(69,false):arm(54,false),near=arm(side?97:107,true);
-    let upper=rear+hairBack(a,h)+femaleTail(a,h,direction,time,reduced)+far+body+near+face+extra;
+    const rearHair=(a.gender==='female'&&side)?'':hairBack(a,h);\n    let upper=rear+rearHair+femaleTail(a,h,direction,time,reduced)+far+body+near+face+extra;
     let character=group(legs+group(upper,`translate(0 ${torsoY.toFixed(2)})`),`translate(0 ${sitting?0:bounce.toFixed(2)})`);
     if(direction==='left')character=group(character,'translate(160 0) scale(-1 1)');
     let extras='';
