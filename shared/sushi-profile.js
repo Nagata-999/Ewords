@@ -1,109 +1,45 @@
 'use strict';
 (() => {
   if (window.SushiProfileSync) return;
-
-  const SUPABASE_URL = 'https://rxyoyveykxdfrpomkltl.supabase.co';
-  const SUPABASE_KEY = 'sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7';
-  const LEDGER_KEY = 'sushitan_login_bonus_v1';
-  const NAME_KEY = 'sushitan_shared_player_name_v1';
-  const SCRIPT_ID = 'sushi-supabase-js';
-  let client = null;
-
-  const object = v => v && typeof v === 'object' && !Array.isArray(v);
-  const readJSON = key => { try { const v=JSON.parse(localStorage.getItem(key)||'{}'); return object(v)?v:{}; } catch { return {}; } };
-  const unique = a => [...new Set((Array.isArray(a)?a:[]).filter(x => typeof x === 'string'))];
-
-  function mergeLedger(cloud, local) {
-    cloud=object(cloud)?cloud:{}; local=object(local)?local:{};
-    const out={...cloud,...local};
-    out.gems=Math.max(0, Number.isSafeInteger(cloud.gems)?cloud.gems:0, Number.isSafeInteger(local.gems)?local.gems:0);
-    const cg=object(cloud.gacha)?cloud.gacha:{}, lg=object(local.gacha)?local.gacha:{};
-    out.gacha={...cg,...lg,owned:unique([...(cg.owned||[]),...(lg.owned||[])])};
-    for(const key of ['loginManualClaims','dailyGemClaims']){
-      out[key]=unique([...(cloud[key]||[]),...(local[key]||[])]).slice(-400);
-    }
-    out.loginBonusTotal=Math.max(Number(cloud.loginBonusTotal)||0,Number(local.loginBonusTotal)||0);
-    out.loginBonusStreak=Math.max(Number(cloud.loginBonusStreak)||0,Number(local.loginBonusStreak)||0);
-    const cloudDay=String(cloud.loginBonusLastDay||''),localDay=String(local.loginBonusLastDay||'');
-    out.loginBonusLastDay=cloudDay>localDay?cloudDay:localDay;
-    return out;
+  const URL='https://rxyoyveykxdfrpomkltl.supabase.co/functions/v1/sushi-id-sync';
+  const KEY='sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7';
+  const LEDGER_KEY='sushitan_login_bonus_v1',NAME_KEY='sushitan_shared_player_name_v1';
+  const ID_KEY='sushitan_sync_id_v1',PIN_KEY='sushitan_sync_pin_v1';
+  const readJSON=k=>{try{const v=JSON.parse(localStorage.getItem(k)||'{}');return v&&typeof v==='object'&&!Array.isArray(v)?v:{}}catch{return{}}};
+  const creds=()=>({sushi_id:(localStorage.getItem(ID_KEY)||'').trim().toLowerCase(),pin:sessionStorage.getItem(PIN_KEY)||''});
+  async function call(action,id,pin){
+    const r=await fetch(URL,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY},body:JSON.stringify({action,sushi_id:id,pin,player_name:window.SushiPlayer?.getName?.()||localStorage.getItem(NAME_KEY)||'',ledger:readJSON(LEDGER_KEY)})});
+    const data=await r.json().catch(()=>({error:'network'})); if(!r.ok)throw Object.assign(new Error(data.error||'sync_failed'),{code:data.error,status:r.status}); return data;
   }
-
-  function loadSdk(){
-    if(window.supabase?.createClient)return Promise.resolve();
-    return new Promise((resolve,reject)=>{
-      const old=document.getElementById(SCRIPT_ID);
-      if(old){old.addEventListener('load',resolve,{once:true});old.addEventListener('error',reject,{once:true});return;}
-      const s=document.createElement('script');s.id=SCRIPT_ID;
-      s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js';
-      s.onload=resolve;s.onerror=()=>reject(new Error('同期ライブラリを読み込めませんでした。'));
-      document.head.appendChild(s);
-    });
-  }
-  async function getClient(){
-    if(client)return client;
-    await loadSdk();
-    client=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
-    return client;
-  }
-
-  async function syncNow(){
-    const sb=await getClient();
-    const {data:{user},error:userError}=await sb.auth.getUser();
-    if(userError||!user)return {signedIn:false};
-    const localLedger=readJSON(LEDGER_KEY);
-    const localName=window.SushiPlayer?.getName?.()||localStorage.getItem(NAME_KEY)||null;
-    const {data:cloud,error:readError}=await sb.from('sushi_user_profiles').select('player_name,ledger,learning,profile_version,updated_at').eq('user_id',user.id).maybeSingle();
-    if(readError)throw readError;
-    const mergedLedger=mergeLedger(cloud?.ledger,localLedger);
-    const mergedName=(cloud?.player_name||localName||'').slice(0,20)||null;
-    const {error:writeError}=await sb.from('sushi_user_profiles').upsert({
-      user_id:user.id,player_name:mergedName,ledger:mergedLedger,learning:object(cloud?.learning)?cloud.learning:{},profile_version:1,updated_at:new Date().toISOString()
-    },{onConflict:'user_id'});
-    if(writeError)throw writeError;
-    localStorage.setItem(LEDGER_KEY,JSON.stringify(mergedLedger));
-    if(mergedName){localStorage.setItem(NAME_KEY,mergedName);window.SushiPlayer?.setName?.(mergedName);}
+  function apply(data){
+    if(data.ledger)localStorage.setItem(LEDGER_KEY,JSON.stringify(data.ledger));
+    if(data.player_name){localStorage.setItem(NAME_KEY,data.player_name);window.SushiPlayer?.setName?.(data.player_name)}
     window.dispatchEvent(new Event('sushi-avatar-changed'));
-    window.dispatchEvent(new CustomEvent('sushi-profile-synced',{detail:{userId:user.id}}));
-    return {signedIn:true,user};
+    window.dispatchEvent(new CustomEvent('sushi-profile-synced',{detail:{sushiId:data.sushi_id}}));
   }
-
-  async function signIn(){
-    const sb=await getClient();
-    const redirectTo=location.origin+location.pathname;
-    const {error}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo}});
-    if(error)throw error;
+  async function syncNow(){
+    const c=creds(); if(!c.sushi_id||!c.pin)return {connected:false};
+    const data=await call('sync',c.sushi_id,c.pin); apply(data); return {connected:true,sushiId:c.sushi_id};
   }
-  async function signOut(){
-    const sb=await getClient(); const {error}=await sb.auth.signOut(); if(error)throw error; render();
+  async function connect(id,pin,create=false){
+    id=String(id||'').normalize('NFKC').trim().toLowerCase();pin=String(pin||'').trim();
+    if(!/^[a-z0-9_-]{4,24}$/.test(id))throw new Error('IDは4〜24文字の半角英数字・_・-で入力してください');
+    if(!/^\d{4}$/.test(pin))throw new Error('PINは4桁の数字で入力してください');
+    const data=await call(create?'create':'sync',id,pin); localStorage.setItem(ID_KEY,id);sessionStorage.setItem(PIN_KEY,pin);apply(data);render();return data;
   }
-
+  function disconnect(){sessionStorage.removeItem(PIN_KEY);render()}
+  const msg=e=>({id_taken:'そのIDはすでに使われています',not_found:'そのIDは見つかりません',wrong_pin:'PINが違います',temporarily_locked:'失敗が続いたため10分間ロックされています'}[e?.code]||e?.message||'同期できませんでした');
   function ensureUI(){
     if(document.getElementById('sushiSyncButton'))return;
-    const style=document.createElement('style');
-    style.textContent=`#sushiSyncButton{position:fixed;right:14px;bottom:76px;z-index:100015;border:1px solid #fed7aa;border-radius:999px;background:#fffaf2;color:#c2410c;padding:9px 12px;font:800 12px system-ui;box-shadow:0 6px 18px #0002;cursor:pointer}#sushiSyncSheet{position:fixed;inset:0;z-index:100030;background:#1423208a;display:none;align-items:flex-end;justify-content:center;font-family:system-ui}#sushiSyncSheet.open{display:flex}.ssp-card{width:min(520px,100%);background:#fffdf8;border-radius:24px 24px 0 0;padding:20px 18px calc(28px + env(safe-area-inset-bottom));color:#243b37}.ssp-card h2{margin:0 0 8px}.ssp-card p{font-size:13px;line-height:1.7;color:#667}.ssp-actions{display:grid;gap:9px;margin-top:14px}.ssp-actions button{border:0;border-radius:14px;padding:13px;font-weight:900;cursor:pointer}.ssp-main{background:#f4511e;color:white}.ssp-sub{background:#eee8dd;color:#344}.ssp-status{padding:10px;border-radius:12px;background:#f7f2e8;font-size:12px;font-weight:800}`;
-    document.head.appendChild(style);
-    const b=document.createElement('button');b.id='sushiSyncButton';b.type='button';b.textContent='☁ データ同期';
-    const sheet=document.createElement('div');sheet.id='sushiSyncSheet';sheet.innerHTML=`<div class="ssp-card"><h2>☁ データ同期</h2><p>ログインしなくても、これまで通り遊べます。Google連携すると、名前・ジェム・取得したアバターを別の端末でも引き継げます。</p><div class="ssp-status" id="sspStatus">確認中…</div><div class="ssp-actions"><button class="ssp-main" id="sspMain" type="button">Googleで連携</button><button class="ssp-sub" id="sspClose" type="button">閉じる</button><button class="ssp-sub" id="sspOut" type="button" hidden>この端末でログアウト</button></div></div>`;
-    document.body.append(b,sheet);
-    b.onclick=()=>{sheet.classList.add('open');render();};
-    sheet.addEventListener('click',e=>{if(e.target===sheet)sheet.classList.remove('open')});
-    sheet.querySelector('#sspClose').onclick=()=>sheet.classList.remove('open');
-    sheet.querySelector('#sspMain').onclick=async()=>{try{const sb=await getClient();const {data:{user}}=await sb.auth.getUser();if(user){setStatus('同期しています…');await syncNow();setStatus('✓ 同期しました');}else await signIn();}catch(e){setStatus('同期できませんでした：'+(e?.message||e));}};
-    sheet.querySelector('#sspOut').onclick=async()=>{try{await signOut();setStatus('この端末からログアウトしました');}catch(e){setStatus('ログアウトできませんでした');}};
+    const st=document.createElement('style');st.textContent=`#sushiSyncButton{position:fixed;right:14px;bottom:76px;z-index:100015;border:1px solid #fed7aa;border-radius:999px;background:#fffaf2;color:#c2410c;padding:9px 12px;font:800 12px system-ui;box-shadow:0 6px 18px #0002;cursor:pointer}#sushiSyncSheet{position:fixed;inset:0;z-index:100030;background:#1423208a;display:none;align-items:flex-end;justify-content:center;font-family:system-ui}#sushiSyncSheet.open{display:flex}.ssp-card{width:min(520px,100%);background:#fffdf8;border-radius:24px 24px 0 0;padding:20px 18px calc(28px + env(safe-area-inset-bottom));color:#243b37}.ssp-card h2{margin:0 0 8px}.ssp-card p{font-size:13px;line-height:1.6;color:#667}.ssp-input{display:grid;gap:8px;margin:12px 0}.ssp-input input{font:700 16px system-ui;padding:12px;border:1px solid #ddd3c5;border-radius:12px}.ssp-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.ssp-actions button{border:0;border-radius:14px;padding:13px;font-weight:900;cursor:pointer}.ssp-main{background:#f4511e;color:#fff}.ssp-sub{background:#eee8dd;color:#344}.ssp-status{padding:10px;border-radius:12px;background:#f7f2e8;font-size:12px;font-weight:800}`;document.head.appendChild(st);
+    const b=document.createElement('button');b.id='sushiSyncButton';b.textContent='☁ データ同期';
+    const s=document.createElement('div');s.id='sushiSyncSheet';s.innerHTML=`<div class="ssp-card"><h2>☁ データ同期</h2><p>普段は登録なしで遊べます。別の端末でもジェム・名前・取得アバターを使いたい人だけ、すしIDと4桁PINを設定してください。</p><div class="ssp-status" id="sspStatus"></div><div class="ssp-input"><input id="sspId" autocomplete="username" maxlength="24" placeholder="すしID（例 sushi1234）"><input id="sspPin" inputmode="numeric" autocomplete="one-time-code" maxlength="4" placeholder="4桁PIN"></div><div class="ssp-actions"><button class="ssp-main" id="sspLoad">このIDで同期</button><button class="ssp-sub" id="sspCreate">新しく作る</button><button class="ssp-sub" id="sspClose">閉じる</button><button class="ssp-sub" id="sspOut">この端末から切断</button></div></div>`;document.body.append(b,s);
+    const id=s.querySelector('#sspId'),pin=s.querySelector('#sspPin');id.value=localStorage.getItem(ID_KEY)||'';
+    const run=async create=>{try{setStatus(create?'作成しています…':'同期しています…');await connect(id.value,pin.value,create);pin.value='';setStatus('✓ 同期しました：'+localStorage.getItem(ID_KEY))}catch(e){setStatus(msg(e))}};
+    b.onclick=()=>{s.classList.add('open');render()};s.onclick=e=>{if(e.target===s)s.classList.remove('open')};s.querySelector('#sspClose').onclick=()=>s.classList.remove('open');s.querySelector('#sspLoad').onclick=()=>run(false);s.querySelector('#sspCreate').onclick=()=>run(true);s.querySelector('#sspOut').onclick=()=>{disconnect();pin.value='';setStatus('この端末の同期を切断しました')};
   }
-  function setStatus(s){const el=document.getElementById('sspStatus');if(el)el.textContent=s;}
-  async function render(){
-    ensureUI();
-    try{
-      const sb=await getClient(),{data:{user}}=await sb.auth.getUser();
-      const main=document.getElementById('sspMain'),out=document.getElementById('sspOut');
-      if(user){setStatus('Google連携済み。この端末とクラウドを同期できます。');main.textContent='今すぐ同期';out.hidden=false;}
-      else{setStatus('未連携。この端末のデータだけで遊んでいます。');main.textContent='Googleで連携';out.hidden=true;}
-    }catch{setStatus('未連携。この端末のデータだけで遊べます。');}
-  }
-
-  window.SushiProfileSync={syncNow,signIn,signOut,mergeLedger};
-  const start=async()=>{ensureUI();try{const sb=await getClient();sb.auth.onAuthStateChange((_event,session)=>{if(session?.user)setTimeout(()=>syncNow().catch(()=>{}),0);render();});await syncNow();}catch{}};
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+  function setStatus(t){const e=document.getElementById('sspStatus');if(e)e.textContent=t}
+  function render(){ensureUI();const c=creds();setStatus(c.sushi_id?(c.pin?'接続中：'+c.sushi_id:'ID保存済み：'+c.sushi_id+'（PINを入力すると同期）'):'未設定。この端末だけで遊んでいます。')}
+  window.SushiProfileSync={syncNow,connect,disconnect};
+  const start=()=>{ensureUI();render();syncNow().catch(()=>{})};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 })();
