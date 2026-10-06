@@ -14,7 +14,7 @@
   function apply(data){
     if(data.ledger)localStorage.setItem(LEDGER_KEY,JSON.stringify(data.ledger));
     if(data.player_name){localStorage.setItem(NAME_KEY,data.player_name);window.SushiPlayer?.setName?.(data.player_name)}
-    window.dispatchEvent(new Event('sushi-avatar-changed'));
+    const ev=new Event('sushi-avatar-changed');ev.__fromProfileSync=true;window.dispatchEvent(ev);
     window.dispatchEvent(new CustomEvent('sushi-profile-synced',{detail:{sushiId:data.sushi_id}}));
   }
   async function syncNow(){
@@ -41,5 +41,5 @@
   function setStatus(t){const e=document.getElementById('sspStatus');if(e)e.textContent=t}
   function render(){ensureUI();const c=creds();setStatus(c.sushi_id?(c.pin?'接続中：'+c.sushi_id:'ID保存済み：'+c.sushi_id+'（PINを入力すると同期）'):'未設定。この端末だけで遊んでいます。')}
   window.SushiProfileSync={syncNow,connect,disconnect};
-  const start=()=>{ensureUI();render();syncNow().catch(()=>{})};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+  let syncTimer=null;const queueSync=()=>{clearTimeout(syncTimer);syncTimer=setTimeout(()=>syncNow().catch(()=>{}),700)};const start=()=>{ensureUI();render();syncNow().catch(()=>{});window.addEventListener('sushi-gems-earned',queueSync);window.addEventListener('sushi-avatar-changed',e=>{if(!e.__fromProfileSync)queueSync()});window.addEventListener('sushi-player-change',queueSync);window.addEventListener('sushi-daily-quest-change',queueSync);window.addEventListener('pagehide',()=>{if(creds().pin)syncNow().catch(()=>{})})};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 })();
