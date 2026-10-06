@@ -17,7 +17,8 @@ jobs:
         with:
           node-version: '22'
       - run: python scripts/build-dictionary.py
-      - run: git diff --exit-code -- dictionary data/dictionary-generated.json data/dictionary-build-report.json 404.html
+      - run: git diff --exit-code -- data/dictionary dictionary data/dictionary-generated.json data/dictionary-build-report.json 404.html
       - run: python scripts/check-dictionary.py
+      - run: python tests/dictionary-data.py
       - run: node tests/dictionary.cjs
       - run: node tests/shared-learning.cjs
