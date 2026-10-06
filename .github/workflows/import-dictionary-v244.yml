@@ -41,11 +41,11 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           Path('.github/dictionary-v244.zip').unlink()
-          Path('.github/workflows/import-dictionary-v244.yml').unlink()
           PY
+          git restore -- .github/workflows/check-dictionary.yml
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add data/dictionary data/dictionary-generated.json data/dictionary-build-report.json dictionary 404.html scripts/build-dictionary.py scripts/check-dictionary.py scripts/dictionary-data.py shared/dictionary.css tests/dictionary-browser.cjs tests/dictionary-data.py .github/workflows/check-dictionary.yml docs/dictionary-v2.44.md
-          git add -u -- .github/dictionary-v244.zip .github/workflows/import-dictionary-v244.yml
+          git add -u -- .github/dictionary-v244.zip
           git commit -m 'Integrate v2.44 dictionary and rebuild verified pages'
           git push origin HEAD:codex/dictionary-v2-44
