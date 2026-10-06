@@ -39,10 +39,13 @@
     $('genderControls').querySelectorAll('[data-gender]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.gender===state.avatar.gender))); $('hair').replaceChildren();
     HAIR_NAMES[state.avatar.gender].forEach((label,i)=>{const o=document.createElement('option');o.value=i;o.textContent=label;$('hair').append(o);});
     for(const k of ['hair','hairColor','skin','eyes','mouth','faceShape','expression','pet','aura'])$(k).value=state.avatar[k];
+    $('aura').querySelectorAll('[data-reward-aura]').forEach(o=>o.remove());
+    for(const item of A.catalog.filter(i=>i.slot==='auraEffect'&&((state.owned||[]).includes(i.id)||state.avatar.auraEffect===i.id))){const option=document.createElement('option');option.value=item.id;option.textContent=item.name;option.dataset.rewardAura='true';$('aura').append(option);}
+    $('aura').value=state.avatar.auraEffect||state.avatar.aura;
     if($('eyes').selectedIndex<0){const o=document.createElement('option');o.value=state.avatar.eyes;o.textContent='引き継いだ目';$('eyes').append(o);$('eyes').value=state.avatar.eyes;}
   }
   $('appearanceToggle').onclick=()=>{const hidden=!$('appearancePanel').hidden;$('appearancePanel').hidden=hidden;$('appearanceToggle').setAttribute('aria-expanded',String(!hidden));$('appearanceToggle').querySelector('span').textContent=hidden?'＋':'−';};
-  for(const key of ['hair','hairColor','skin','eyes','mouth','faceShape','expression','pet','aura'])$(key).onchange=e=>setAvatar({...state.avatar,[key]:Number(e.target.value)});
+  for(const key of ['hair','hairColor','skin','eyes','mouth','faceShape','expression','pet','aura'])$(key).onchange=e=>{const reward=key==='aura'&&A.item(e.target.value,'auraEffect');setAvatar({...state.avatar,[key]:reward?0:Number(e.target.value),...(key==='aura'?{auraEffect:reward?reward.id:null}:{})});};
   function renderLooks(){
     $('savedLooks').replaceChildren();state.looks.forEach((look,i)=>{
       const cell=document.createElement('div');cell.className='saved-slot';
@@ -97,3 +100,4 @@
   renderWardrobe();renderLooks();syncSettings();
   window.SushiAvatarStudio={getState:()=>structuredClone(state),getMotion:()=>({hero:hero.getState(),walker:walker.getState(),x,mode}),destroy(){cancelAnimationFrame(raf);hero.destroy();walker.destroy();}};
 })();
+
