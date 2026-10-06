@@ -1357,6 +1357,7 @@ h1 span{color:#e44b2a !important;text-shadow:none !important}
       </div>
 
       <button id="startBtn">斬</button>
+      <p style="color:#f2d591;font-size:14px">35,000点以上で限定の刀「すし斬り」を獲得</p>
       <button id="rankingBtn" type="button">ランキング</button>
 
       <div id="rankingView" aria-hidden="true">
@@ -1382,6 +1383,10 @@ h1 span{color:#e44b2a !important;text-shadow:none !important}
     </div>
   </div>
 
+<script src="sushigacha/avatar.js?v=20261006-1"></script>
+<script src="sushigacha/avatar-engine.js?v=20261006-1"></script>
+<script src="sushigacha/avatar-state.js?v=20261006-1"></script>
+<script src="sushigacha/game-avatar-rewards.js?v=20261006-1"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 let words=[];
@@ -1964,6 +1969,7 @@ async function loadTopMenuRanking(){
 window.addEventListener("load",loadTopMenuRanking);
 
 function end(){
+ const completedRound=running;
  learningRoundActive=false;
  running=false;
  stopSushiSlashBgm();
@@ -1997,6 +2003,7 @@ function end(){
    ${window.SushiReview?.active ? '<p>苦手復習の記録を共通履歴に保存しました。</p>' : rankingPanelHTML()}
 
    <button class="retryBtn" onclick="location.reload()">↻ もう一度斬る</button>`;
+ if(completedRound)SushiGameAvatarRewards.showResult(document.querySelector('.startbox'),'sushigiri',score);
  initRankingResult();
 }
 function loop(ts){
@@ -2087,3 +2094,4 @@ document.querySelector("#startBtn").onclick=async()=>{
 </script>
 </body>
 </html>
+

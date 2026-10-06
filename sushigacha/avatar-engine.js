@@ -109,8 +109,10 @@
       if(action==='wave'&&right)angle=reduced?-140:-140+Math.sin(time*10)*12;
       if(happy)angle=right?-142:142;
       if(sitting)angle=right?25:-25;
+      if(right&&hand==='katana')angle=walking?wave*6:sitting?5:0;
       let s=path('M-7 0Q0 -5 7 0L9 15H-8Z',k==='varsity'?'#fff9ec':c)+path('M-7 15H7L7 25Q11 27 8 32Q4 37 -2 34Q-8 35 -8 28Z',skin);
       if(right&&hand==='wand')s+=path('M8 8L12 66','none','stroke="#916448" stroke-width="5"')+circle(7,1,12,'#916448')+star(7,1,9);
+      if(right&&hand==='katana')s+=`<g data-item-art="reward-sushigiri" transform="translate(5 28) rotate(22)"><path d="M-3 -17L-2 -72Q0 -83 5 -91L7 -23L4 -17Z" fill="#d6f4ff" stroke="#31526c" stroke-width="1.5"/><path d="M1 -22L2 -72L5 -86" fill="none" stroke="#fff" stroke-width="2"/><path d="M-9 -18Q1 -23 11 -18L10 -13H-8Z" fill="#d7ae54" stroke="#5a4229" stroke-width="1.5"/><rect x="-3" y="-13" width="8" height="25" rx="2" fill="#202c3d" stroke="#151e2c" stroke-width="1.5"/><path d="M-2 -9L4 -5L-2 -1L4 3L-2 7" fill="none" stroke="#c7a65b" stroke-width="2"/><path d="M-3 12H5" stroke="#e1bd65" stroke-width="3"/><path d="M1 14Q14 20 10 29M2 14Q-5 21 0 27" fill="none" stroke="#b84840" stroke-width="3"/></g>`;
       if(right&&hand==='tea')s+=path('M0 22H18L16 39H2Z','#39877e')+`<ellipse cx="9" cy="22" rx="9" ry="3" fill="#f3d5b1"/>`;
       return group(s,`translate(${x} 104) rotate(${angle})`);
     };
@@ -189,3 +191,4 @@
   }
   window.SushiAvatarV2={catalog,slots,defaults,sets,normalize,render,mount,item};
 })();
+

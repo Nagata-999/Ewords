@@ -1,6 +1,7 @@
 'use strict';
 
 const ITEMS=[
+  {id:'reward-sushigiri',name:'すし斬り',rarity:'REWARD',slot:'hand',kind:'katana',reward:{game:'sushigiri',minScore:35000,label:'すし斬りで35,000点以上',url:'../sushigiri.html'}},
   {id:'starter',name:'すし単Tシャツ',rarity:'STARTER',slot:'top',kind:'tee',color:'#f6f1e4',accent:'#f4511e'},
   {id:'salmon',name:'サーモンTシャツ',rarity:'N',slot:'top',kind:'tee',color:'#f48c79',accent:'#fff2d6'},
   {id:'tea',name:'お茶のスウェット',rarity:'N',slot:'top',kind:'sweater',color:'#8baf8d',accent:'#d7e7bf'},
@@ -122,3 +123,4 @@ function avatarSVG(value=DEFAULT_AVATAR,previewId){
   if(accessory==='star')accSvg='<path d="M120 162l5 10 11 2-8 8 2 11-10-5-10 5 2-11-8-8 11-2Z" fill="#e4bd55" stroke="#8b7233" stroke-width="2"/><path d="M120 131V162" stroke="#8b7233" stroke-width="2"/>';
   return `<svg viewBox="0 0 240 280" role="img" aria-label="アバター"><g>${wings}${backHair}${cape}${legs}${bottomSvg}${body}${detail}<ellipse cx="120" cy="90" rx="48" ry="47" fill="${skin}" stroke="#354b47" stroke-width="3"/>${eyes}${mouth}${frontHair}${hatSvg}${accSvg}</g></svg>`;
 }
+
