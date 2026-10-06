@@ -67,6 +67,8 @@
     if(kind==='beanie')return path('M45 48Q42 16 79 17Q115 16 115 48Z','#bd865f')+path('M44 45H115V58H44Z','#d4a37b');
     if(kind==='explorer')return path('M47 44L54 19H103L112 44Z','#b99c70')+path('M47 37H109V46H47Z','#706044')+`<ellipse cx="80" cy="48" rx="51" ry="8" fill="#b99c70"/>`;
     if(kind==='royal')return path('M48 47L42 18L64 32L80 12L98 32L118 18L111 47Z','#e8b557')+circle(80,31,4,'#be6555');
+    if(kind==='balaclava')return path('M43 64Q40 21 80 20Q120 21 117 65L109 92Q80 105 51 91Z','#17181b')+(back?'':path('M55 58Q80 43 106 58L103 78Q80 88 57 78Z','#f3d5b1'));
+    if(kind==='cheerBow')return path('M78 36Q56 17 47 29Q43 42 72 46L80 41Q88 46 116 37Q117 22 105 22Q91 24 82 35Z','#1767c7')+path('M53 29L72 42M106 27L87 40','none','stroke="#fff" stroke-width="4"')+circle(80,39,6,'#1767c7');
     return '';
   }
   function render(value={},options={}){
@@ -82,6 +84,8 @@
     const legAngle=walking?motionWave*23:0;
     const leg=(x,angle)=>group(path('M-8 0H9L8 29H-8Z',bottom.color||'#334155')+path(sh==='boots'?'M-8 19H9V29Q20 28 20 38H-10Z':'M-9 28H9L18 33Q22 40 13 41H-11Z',sh==='boots'?'#916448':'#fff9ec')+(sh==='boots'?path('M-8 24H9','none'):path('M-10 36H19','none')),`translate(${x} 144) rotate(${angle})`);
     let legs=sitting?path('M62 151Q39 153 44 176Q49 187 78 177L93 164L100 150Z',bottom.color||'#334155')+path('M91 151Q118 149 119 171Q115 190 79 181L61 169Z',bottom.color||'#334155')+path('M54 174Q44 173 44 182Q48 190 65 183L69 176Z',sh==='boots'?'#916448':'#fff9ec')+path('M104 177Q120 174 118 184Q109 191 96 185L94 179Z',sh==='boots'?'#916448':'#fff9ec'):leg(side?77:66,legAngle)+leg(side?85:95,-legAngle);
+    if(bottom.kind==='cheerSkirt')legs+=path(sitting?'M53 153H108L119 171Q82 182 43 170Z':'M54 140H107L114 163Q81 174 46 163Z',bottom.color)+path(sitting?'M55 158H114M67 155L62 173M82 155V177M98 155L104 173':'M55 146H110M62 143L57 164M79 142V169M98 143L105 164','none','stroke="#fff" stroke-width="3"');
+    if(bottom.kind==='apocalypsePants')legs+=path(sitting?'M52 161L69 158M91 160L108 166':'M60 151L72 148M91 149L104 154','none','stroke="#9a6b4d" stroke-width="2.5"');
     if(bottom.kind==='schoolSkirt')legs+=path(sitting?'M53 153H108L120 172Q82 181 42 169Z':'M55 140H106L113 164Q82 172 47 164Z',bottom.color)+path(sitting?'M57 155L52 170M74 156L72 175M92 155L98 174M51 161H112M48 168H116':'M62 146L57 165M78 145V168M96 146L104 165M54 151H109M51 159H111','none','stroke="#77848b" stroke-width="1.5"');
     if(bottom.kind==='schoolSlacks'&&!sitting)legs+=[side?77:66,side?85:95].map((x,i)=>group(path('M0 6V24','none','stroke="#65707b" stroke-width="1.2"'),`translate(${x} 144) rotate(${i?-legAngle:legAngle})`)).join('');
     let rear='';
@@ -101,6 +105,8 @@
     if(k==='explorer')body+=path('M64 110H75V124H64ZM88 110H100V124H88Z',accent)+path('M81 98V146','none');
     if(k==='varsity')body+=path('M67 98Q80 110 94 98M55 141H107','none',`stroke="${accent}" stroke-width="4"`)+path('M81 103V145','none')+(!back?path('M65 116V126H73','none',`stroke="${accent}" stroke-width="3"`)+circle(85,119,1.5,accent)+circle(85,130,1.5,accent):'');
     if(k.startsWith('schoolBlazer'))body+=back?path('M64 107Q81 114 98 107M81 114V146','none'):path('M67 98L79 119L93 98Z','#fff9ec')+path('M64 101L72 122L80 116L88 122L98 101','none')+(k==='schoolBlazerF'?path('M80 107L69 104L70 113L80 109L91 113L91 104Z',accent):path('M78 103H83L85 120L81 124L77 120Z',accent))+path('M80 123V145','none')+circle(87,129,1.7,'#caa551')+circle(87,139,1.7,'#caa551');
+    if(k==='apocalypse')body+=path('M58 101L70 96L80 105L91 96L103 102M61 111H101M58 139H106','none','stroke="#b8b3a8" stroke-width="2"')+path('M60 99L54 108L63 110L57 117L68 116M101 99L108 108L99 111L106 118L95 116','#b8b3a8')+circle(66,105,2.4,'#d8d3c8')+circle(95,105,2.4,'#d8d3c8');
+    if(k==='cheer')body+=path('M60 101L69 111L80 103L92 111L101 101','none','stroke="#fff" stroke-width="4"')+path('M56 132H106','none','stroke="#fff" stroke-width="5"')+(!back&&!side?'<text x="80" y="126" text-anchor="middle" font-family="sans-serif" font-size="22" font-weight="900" fill="#fff" stroke="none">S</text>':'');
     if(k==='tee'&&!back&&!side)body+=`<ellipse cx="81" cy="119" rx="10" ry="5" fill="#fff9ec" stroke-width="1.5"/>`+path('M71 117Q72 107 82 109Q92 109 93 117Z',a.top==='salmon'?'#fff0db':'#ed955e','stroke-width="1.5"')+path('M77 112L81 115M83 111L88 115','none','stroke="#fff0db" stroke-width="1.5"');
     if(bk==='backpack'&&!back)body+=path(side?'M68 100L65 127':'M59 100L62 126M101 100L99 126','none','stroke="#39877e" stroke-width="5"');
     if(bk==='backpack'&&back)body+=path('M53 107Q51 99 62 99H99Q108 101 107 114V147H53Z','#39877e')+path('M59 126H101V142H59Z','#39877e');
@@ -113,6 +119,7 @@
       let s=path('M-7 0Q0 -5 7 0L9 15H-8Z',k==='varsity'?'#fff9ec':c)+path('M-7 15H7L7 25Q11 27 8 32Q4 37 -2 34Q-8 35 -8 28Z',skin);
       if(right&&hand==='wand')s+=path('M8 8L12 66','none','stroke="#916448" stroke-width="5"')+circle(7,1,12,'#916448')+star(7,1,9);
       if(right&&hand==='katana')s+=`<g data-item-art="reward-sushigiri" transform="translate(5 28) rotate(22)"><path d="M-3 -17L-2 -72Q0 -83 5 -91L7 -23L4 -17Z" fill="#d6f4ff" stroke="#31526c" stroke-width="1.5"/><path d="M1 -22L2 -72L5 -86" fill="none" stroke="#fff" stroke-width="2"/><path d="M-9 -18Q1 -23 11 -18L10 -13H-8Z" fill="#d7ae54" stroke="#5a4229" stroke-width="1.5"/><rect x="-3" y="-13" width="8" height="25" rx="2" fill="#202c3d" stroke="#151e2c" stroke-width="1.5"/><path d="M-2 -9L4 -5L-2 -1L4 3L-2 7" fill="none" stroke="#c7a65b" stroke-width="2"/><path d="M-3 12H5" stroke="#e1bd65" stroke-width="3"/><path d="M1 14Q14 20 10 29M2 14Q-5 21 0 27" fill="none" stroke="#b84840" stroke-width="3"/></g>`;
+      if(hand==='cheerPompoms')s+='<g transform="translate(0 31)" stroke="none"><circle cx="0" cy="0" r="12" fill="#1767c7"/><path d="M-12 -7L10 8M-10 9L11 -8M-2 -13L3 13M-13 1L13 -2" stroke="#fff" stroke-width="3"/></g>';
       if(right&&hand==='tea')s+=path('M0 22H18L16 39H2Z','#39877e')+`<ellipse cx="9" cy="22" rx="9" ry="3" fill="#f3d5b1"/>`;
       return group(s,`translate(${x} 104) rotate(${angle})`);
     };
