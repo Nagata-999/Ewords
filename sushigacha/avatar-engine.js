@@ -167,13 +167,24 @@
     let extras='';
     if(a.pet){const pet=['','ねこ','すし','スライム','恐竜'][a.pet];extras=`<g aria-label="${pet}" transform="translate(123 157)">`+path('M0 14Q-2 1 10 1Q23 1 23 14V24H0Z',a.pet===2?'#fff9ec':a.pet===3?'#87ae91':a.pet===4?'#61917d':'#c19470')+(a.pet===1?path('M0 7L1 -3L9 2M14 2L23 -3L23 8','#c19470'):a.pet===2?path('M0 9Q-1 -3 12 0Q23 -3 24 9Z','#ed955e'):'')+circle(6,12,1.3,INK)+circle(17,12,1.3,INK)+'</g>';}
     if(a.aura&&!a.auraEffect)extras+=group(star(26,106,4,['','#e8b557','#e28a56','#e8b557','#d9a3ac'][a.aura])+star(132,115,4,['','#e8b557','#e28a56','#e8b557','#d9a3ac'][a.aura]),'','opacity=".75"');
-    const heat=reduced?0:Math.sin(time*2.4);
-    const aura=item(a.auraEffect)?.kind==='blazing'?`<g data-item-art="reward-sushitan-aura" aria-label="烈火のオーラ" transform="translate(80 188) scale(1 ${(1+heat*.015).toFixed(3)}) translate(-80 -188)">
-      <path d="M35 184Q9 155 20 124L13 107L32 121Q18 85 40 55L38 86Q49 62 55 28L67 47L80 8L93 49L107 29L106 69L126 48Q123 90 139 109L131 112L145 143Q143 172 125 184Z" fill="#e7512f" opacity=".76"/>
-      <path d="M40 183Q20 155 35 122L30 110L43 113Q37 89 52 64L53 90L70 54L79 28L91 69L100 57L109 98L122 81L119 123L132 137Q140 164 118 183Z" fill="#ffb82e" opacity=".9"/>
-      <path d="M49 184Q31 161 45 129L53 140L57 100L68 122L80 74L94 122L104 104L112 143L123 136Q127 167 112 184Z" fill="#fff1a1"/>
-      <ellipse cx="80" cy="187" rx="52" ry="7" fill="#ffc53e" opacity=".3"/>
-      <path d="M22 79L17 67L26 71M135 63L142 51L141 69M19 158L12 148M140 174L148 163" fill="none" stroke="#e99e22" stroke-width="3" stroke-linecap="round"/>
+    const wave=(speed,phase=0)=>reduced?0:Math.sin(time*speed+phase);
+    const heat=wave(2.4),sway=wave(1.7),lick=wave(3.3,.8),spark=wave(4.1,1.4);
+    const aura=item(a.auraEffect)?.kind==='blazing'?`<g data-item-art="reward-sushitan-aura" aria-label="烈火のオーラ" transform="translate(${(sway*1.5).toFixed(2)} 0)">
+      <g transform="translate(80 188) scale(${(1+lick*.012).toFixed(3)} ${(1+heat*.035).toFixed(3)}) translate(-80 -188)">
+        <path d="M35 184Q9 155 20 124L13 107L32 121Q18 85 40 55L38 86Q49 62 55 28L67 47L80 8L93 49L107 29L106 69L126 48Q123 90 139 109L131 112L145 143Q143 172 125 184Z" fill="#e7512f" opacity=".76"/>
+      </g>
+      <g transform="translate(${(lick*2.2).toFixed(2)} ${(-Math.abs(heat)*1.8).toFixed(2)}) rotate(${(sway*1.3).toFixed(2)} 80 184)">
+        <path d="M40 183Q20 155 35 122L30 110L43 113Q37 89 52 64L53 90L70 54L79 28L91 69L100 57L109 98L122 81L119 123L132 137Q140 164 118 183Z" fill="#ffb82e" opacity=".9"/>
+      </g>
+      <g transform="translate(${(sway*-2.5).toFixed(2)} ${(-Math.abs(lick)*2.6).toFixed(2)}) scale(${(1+heat*.018).toFixed(3)} ${(1+lick*.045).toFixed(3)})">
+        <path d="M49 184Q31 161 45 129L53 140L57 100L68 122L80 74L94 122L104 104L112 143L123 136Q127 167 112 184Z" fill="#fff1a1"/>
+      </g>
+      <ellipse cx="80" cy="187" rx="${(52+heat*2).toFixed(2)}" ry="${(7+lick*.6).toFixed(2)}" fill="#ffc53e" opacity=".3"/>
+      <g transform="translate(0 ${(-Math.abs(spark)*3).toFixed(2)})" opacity="${(0.62+Math.abs(spark)*.3).toFixed(2)}">
+        <path d="M22 79L17 67L26 71M135 63L142 51L141 69M19 158L12 148M140 174L148 163" fill="none" stroke="#e99e22" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="${(34+sway*3).toFixed(2)}" cy="${(48-Math.abs(lick)*8).toFixed(2)}" r="2.2" fill="#ffd65a"/>
+        <circle cx="${(126+lick*3).toFixed(2)}" cy="${(92-Math.abs(heat)*10).toFixed(2)}" r="1.8" fill="#fff1a1"/>
+      </g>
     </g>`:'';
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 204" role="img" aria-label="すし単アバター" data-action="${action}" data-direction="${direction}">${aura}<ellipse cx="80" cy="190" rx="33" ry="5" fill="#ded8c9"/><g stroke="${INK}" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round">${character}${extras}</g></svg>`;
   }
