@@ -73,19 +73,19 @@
     const a=normalize(value), direction=['front','back','left','right'].includes(options.direction)?options.direction:'front';
     const action=['walk','idle','wave','sit','celebrate'].includes(options.action)?options.action:'idle';
     const time=Number.isFinite(options.time)?options.time:0, reduced=!!options.reduced;
-    const phase=reduced?0:time*7.8, wave=Math.sin(phase), side=direction==='left'||direction==='right', back=direction==='back';
+    const phase=reduced?0:time*7.8, motionWave=Math.sin(phase), side=direction==='left'||direction==='right', back=direction==='back';
     const top=item(a.top,'top'), bottom=item(a.bottom,'bottom'), skin=SKINS[a.skin], h=HAIRS[a.hairColor], c=top.color||'#fff9ec', accent=top.accent||'#39877e', k=top.kind;
     const accessory=item(a.accessory)?.kind, bk=item(a.back)?.kind, sh=item(a.shoes)?.kind, hand=item(a.hand)?.kind;
     const walking=action==='walk', sitting=action==='sit', happy=action==='celebrate';
     const bounce=reduced?0:walking?-Math.abs(Math.sin(phase))*2:happy?-Math.max(0,Math.sin(time*5))*13:Math.sin(time*2)*.65;
     let torsoY=sitting?29:0;
-    const legAngle=walking?wave*23:0;
+    const legAngle=walking?motionWave*23:0;
     const leg=(x,angle)=>group(path('M-8 0H9L8 29H-8Z',bottom.color||'#334155')+path(sh==='boots'?'M-8 19H9V29Q20 28 20 38H-10Z':'M-9 28H9L18 33Q22 40 13 41H-11Z',sh==='boots'?'#916448':'#fff9ec')+(sh==='boots'?path('M-8 24H9','none'):path('M-10 36H19','none')),`translate(${x} 144) rotate(${angle})`);
     let legs=sitting?path('M62 151Q39 153 44 176Q49 187 78 177L93 164L100 150Z',bottom.color||'#334155')+path('M91 151Q118 149 119 171Q115 190 79 181L61 169Z',bottom.color||'#334155')+path('M54 174Q44 173 44 182Q48 190 65 183L69 176Z',sh==='boots'?'#916448':'#fff9ec')+path('M104 177Q120 174 118 184Q109 191 96 185L94 179Z',sh==='boots'?'#916448':'#fff9ec'):leg(side?77:66,legAngle)+leg(side?85:95,-legAngle);
     if(bottom.kind==='schoolSkirt')legs+=path(sitting?'M53 153H108L120 172Q82 181 42 169Z':'M55 140H106L113 164Q82 172 47 164Z',bottom.color)+path(sitting?'M57 155L52 170M74 156L72 175M92 155L98 174M51 161H112M48 168H116':'M62 146L57 165M78 145V168M96 146L104 165M54 151H109M51 159H111','none','stroke="#77848b" stroke-width="1.5"');
     if(bottom.kind==='schoolSlacks'&&!sitting)legs+=[side?77:66,side?85:95].map((x,i)=>group(path('M0 6V24','none','stroke="#65707b" stroke-width="1.2"'),`translate(${x} 144) rotate(${i?-legAngle:legAngle})`)).join('');
     let rear='';
-    if(bk==='cape'||k==='royal')rear+=path(`M57 97L101 97Q110 122 ${125+(reduced?0:wave*3)} 151L100 159L80 150L57 158L35 148Z`,k==='royal'?'#b4524b':'#425875')+path('M38 146L57 153L80 145L100 154L121 148','none','stroke="#e8b557"');
+    if(bk==='cape'||k==='royal')rear+=path(`M57 97L101 97Q110 122 ${125+(reduced?0:motionWave*3)} 151L100 159L80 150L57 158L35 148Z`,k==='royal'?'#b4524b':'#425875')+path('M38 146L57 153L80 145L100 154L121 148','none','stroke="#e8b557"');
     if(accessory==='wings')rear+=path('M62 111Q25 88 30 115L41 126L29 124Q32 145 63 138M100 111Q139 88 132 115L123 126L135 124Q131 145 101 138','#fff9ec');
     if(bk==='backpack')rear+=side?path('M51 102Q37 97 36 116V140Q37 150 56 147L60 113Z','#39877e'):path('M50 104Q47 93 57 92H103Q114 93 113 108V145H49Z','#39877e');
     const torso=side?'M68 99Q86 94 101 104L104 145Q87 151 61 144L62 113Z':'M58 99Q79 92 103 99L108 146Q82 152 53 146Z';
@@ -105,11 +105,11 @@
     if(bk==='backpack'&&!back)body+=path(side?'M68 100L65 127':'M59 100L62 126M101 100L99 126','none','stroke="#39877e" stroke-width="5"');
     if(bk==='backpack'&&back)body+=path('M53 107Q51 99 62 99H99Q108 101 107 114V147H53Z','#39877e')+path('M59 126H101V142H59Z','#39877e');
     const arm=(x,right)=>{
-      let angle=walking?(right?-wave:wave)*25:0;
+      let angle=walking?(right?-motionWave:motionWave)*25:0;
       if(action==='wave'&&right)angle=reduced?-140:-140+Math.sin(time*10)*12;
       if(happy)angle=right?-142:142;
       if(sitting)angle=right?25:-25;
-      if(right&&hand==='katana')angle=walking?wave*6:sitting?5:0;
+      if(right&&hand==='katana')angle=walking?motionWave*6:sitting?5:0;
       let s=path('M-7 0Q0 -5 7 0L9 15H-8Z',k==='varsity'?'#fff9ec':c)+path('M-7 15H7L7 25Q11 27 8 32Q4 37 -2 34Q-8 35 -8 28Z',skin);
       if(right&&hand==='wand')s+=path('M8 8L12 66','none','stroke="#916448" stroke-width="5"')+circle(7,1,12,'#916448')+star(7,1,9);
       if(right&&hand==='katana')s+=`<g data-item-art="reward-sushigiri" transform="translate(5 28) rotate(22)"><path d="M-3 -17L-2 -72Q0 -83 5 -91L7 -23L4 -17Z" fill="#d6f4ff" stroke="#31526c" stroke-width="1.5"/><path d="M1 -22L2 -72L5 -86" fill="none" stroke="#fff" stroke-width="2"/><path d="M-9 -18Q1 -23 11 -18L10 -13H-8Z" fill="#d7ae54" stroke="#5a4229" stroke-width="1.5"/><rect x="-3" y="-13" width="8" height="25" rx="2" fill="#202c3d" stroke="#151e2c" stroke-width="1.5"/><path d="M-2 -9L4 -5L-2 -1L4 3L-2 7" fill="none" stroke="#c7a65b" stroke-width="2"/><path d="M-3 12H5" stroke="#e1bd65" stroke-width="3"/><path d="M1 14Q14 20 10 29M2 14Q-5 21 0 27" fill="none" stroke="#b84840" stroke-width="3"/></g>`;
