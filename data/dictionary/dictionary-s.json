@@ -264,15 +264,15 @@
     "frequency": 4,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
             "ja": "安全な",
-            "definition": "a person, thing, state, or idea related to 安全な",
+            "definition": "protected from danger, harm, or risk",
             "examples": [
               {
-                "en": "This is a common example of 'safe'.",
-                "ja": "これは「安全な」の一般的な例です。"
+                "en": "Make sure the road is safe before you cross.",
+                "ja": "渡る前に道路が安全か確認してください。"
               }
             ]
           }
@@ -286,8 +286,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "safe"
     ],
@@ -312,11 +314,11 @@
         "meanings": [
           {
             "ja": "安全",
-            "definition": "a thing, person, idea, or state related to 安全",
+            "definition": "the condition of being protected from danger or harm",
             "examples": [
               {
-                "en": "This safety is important.",
-                "ja": "この「安全」は重要です。"
+                "en": "Student safety is our highest priority.",
+                "ja": "生徒の安全が私たちの最優先事項です。"
               }
             ]
           }
@@ -324,14 +326,18 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "for safety"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "safety"
     ],
@@ -1035,15 +1041,15 @@
     "frequency": 3,
     "parts_of_speech": [
       {
-        "pos": "adjective",
+        "pos": "noun",
         "meanings": [
           {
-            "ja": "給料",
-            "definition": "having the quality expressed by 給料",
+            "ja": "給料；給与",
+            "definition": "a fixed amount of money paid regularly for professional work",
             "examples": [
               {
-                "en": "The word 'salary' appears in many kinds of English texts.",
-                "ja": "「salary」はさまざまな英文で使われます。"
+                "en": "The job offers a competitive salary and flexible hours.",
+                "ja": "その仕事は競争力のある給与と柔軟な勤務時間を提供しています。"
               }
             ]
           }
@@ -1057,8 +1063,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "salary"
     ],
@@ -2134,15 +2142,15 @@
     "frequency": 5,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
             "ja": "同じ",
-            "definition": "a person, thing, idea, or concept connected with '同じ'",
+            "definition": "not different; exactly like another person or thing",
             "examples": [
               {
-                "en": "This same is important.",
-                "ja": "この「同じ」は重要です。"
+                "en": "We reached the same conclusion using different methods.",
+                "ja": "異なる方法を使って同じ結論に達しました。"
               }
             ]
           }
@@ -2156,8 +2164,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "same"
     ],
@@ -2264,11 +2274,11 @@
         "meanings": [
           {
             "ja": "標本；サンプル",
-            "definition": "a smaller group or amount taken to represent a larger whole",
+            "definition": "a small amount or group taken to represent a larger whole",
             "examples": [
               {
-                "en": "The discussion focused on sample.",
-                "ja": "議論では「標本」に焦点が当てられた。"
+                "en": "The study used a sample of five hundred students.",
+                "ja": "その研究では500人の生徒を標本として用いました。"
               }
             ]
           }
@@ -2283,9 +2293,10 @@
     },
     "usage_note": "",
     "tags": [
-      "learner-core-gap"
+      "learner-core-gap",
+      "v2.31-curated"
     ],
-    "status": "needs_enrichment",
+    "status": "basic",
     "search_terms": [
       "sample"
     ],
@@ -4043,12 +4054,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "満足",
-            "definition": "a person, thing, state, process, or idea connected with 満足",
+            "ja": "満足；満足感",
+            "definition": "the pleasant feeling of getting what you wanted or completing something well",
             "examples": [
               {
-                "en": "The word 'satisfaction' is commonly used in this kind of context.",
-                "ja": "「satisfaction」は「満足」に関する文脈でよく使われます。"
+                "en": "Finishing the race gave me a strong sense of satisfaction.",
+                "ja": "レースを完走して大きな満足感を得ました。"
               }
             ]
           }
@@ -4062,8 +4073,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "satisfaction"
     ],
@@ -4084,32 +4097,42 @@
     "frequency": 2,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "verb",
         "meanings": [
           {
-            "ja": "満足させる",
-            "definition": "a person, thing, state, or idea related to 満足させる",
+            "ja": "満たす；満足させる",
+            "definition": "to meet a need, condition, or expectation",
             "examples": [
               {
-                "en": "The word 'satisfy' is often useful in formal or everyday English.",
-                "ja": "「satisfy」は「満足させる」の意味で使われます。"
+                "en": "Applicants must satisfy all three requirements.",
+                "ja": "応募者は3つの要件すべてを満たす必要があります。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "satisfies",
+      "past": "satisfied",
+      "past_participle": "satisfied",
+      "ing": "satisfying"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "satisfy"
+      "satisfy",
+      "satisfies",
+      "satisfied",
+      "satisfying"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -4751,29 +4774,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "救う；保存する；節約する",
-            "definition": "to perform or cause the action expressed by 救う",
+            "ja": "保存する；救う；節約する",
+            "definition": "to keep something for later, prevent loss or harm, or use less money or time",
             "examples": [
               {
-                "en": "People often save in this situation.",
-                "ja": "この状況では人々はしばしば「救う」します。"
+                "en": "Save the document before closing the program.",
+                "ja": "プログラムを閉じる前に文書を保存してください。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "saves",
+      "past": "saved",
+      "past_participle": "saved",
+      "ing": "saving"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "save"
+      "save",
+      "saves",
+      "saved",
+      "saving"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -5220,28 +5253,38 @@
         "meanings": [
           {
             "ja": "言う",
-            "definition": "to do or express the action '言う'",
+            "definition": "to express something using words",
             "examples": [
               {
-                "en": "We often say this in everyday life.",
-                "ja": "私たちは日常生活でよく「言う」します。"
+                "en": "She said that she would arrive a little late.",
+                "ja": "彼女は少し遅れて到着すると言いました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "says",
+      "past": "said",
+      "past_participle": "said",
+      "ing": "saying"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "say"
+      "say",
+      "says",
+      "said",
+      "saying"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -5434,9 +5477,14 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "音階；尺度",
-            "definition": "",
-            "examples": []
+            "ja": "規模；尺度；目盛り",
+            "definition": "a system for measuring, or the size or extent of something",
+            "examples": [
+              {
+                "en": "The project was successful on a small scale.",
+                "ja": "そのプロジェクトは小規模では成功しました。"
+              }
+            ]
           }
         ]
       }
@@ -5450,9 +5498,10 @@
     },
     "usage_note": "",
     "tags": [
-      "music-art"
+      "music-art",
+      "v2.31-curated"
     ],
-    "status": "needs_enrichment"
+    "status": "basic"
   },
   {
     "id": "sw-10829",
@@ -6520,12 +6569,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "想定；筋書き",
-            "definition": "a person, thing, state, or idea related to 想定",
+            "ja": "想定；シナリオ",
+            "definition": "a possible situation or sequence of events",
             "examples": [
               {
-                "en": "The word 'scenario' is often useful in formal or everyday English.",
-                "ja": "「scenario」は「想定」の意味で使われます。"
+                "en": "The team prepared for several possible scenarios.",
+                "ja": "チームはいくつかの想定される状況に備えました。"
               }
             ]
           }
@@ -6539,8 +6588,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "scenario"
     ],
@@ -7069,12 +7120,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "奨学金；学識",
-            "definition": "money given to support study or serious academic knowledge",
+            "ja": "奨学金",
+            "definition": "money given to a student to help pay for education",
             "examples": [
               {
-                "en": "The word 'scholarship' is useful in this context.",
-                "ja": "この文脈では「奨学金」という意味で使われる。"
+                "en": "She received a scholarship to study overseas.",
+                "ja": "彼女は海外留学のための奨学金を受けました。"
               }
             ]
           }
@@ -7089,9 +7140,10 @@
     },
     "usage_note": "",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "v2.31-curated"
     ],
-    "status": "needs_enrichment",
+    "status": "basic",
     "search_terms": [
       "scholarship"
     ],
@@ -7116,11 +7168,11 @@
         "meanings": [
           {
             "ja": "学校",
-            "definition": "a place where children or other students are taught",
+            "definition": "a place or institution where people, especially children, are educated",
             "examples": [
               {
-                "en": "The school is opposite the station.",
-                "ja": "その学校は駅の向かいにあります。"
+                "en": "Our school has an exchange program with a college overseas.",
+                "ja": "私たちの学校には海外の大学との交換プログラムがあります。"
               }
             ]
           }
@@ -7136,7 +7188,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "v2.29-curated"
+    ],
     "status": "basic",
     "search_terms": [
       "school",
@@ -7458,11 +7512,11 @@
         "meanings": [
           {
             "ja": "科学",
-            "definition": "a person, thing, idea, or concept connected with '科学'",
+            "definition": "the systematic study of the natural and physical world through observation and experiment",
             "examples": [
               {
-                "en": "This science is important.",
-                "ja": "この「科学」は重要です。"
+                "en": "Science begins with careful observation and questions.",
+                "ja": "科学は注意深い観察と疑問から始まります。"
               }
             ]
           }
@@ -7470,14 +7524,18 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "scientific method"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "science"
     ],
@@ -7502,11 +7560,11 @@
         "meanings": [
           {
             "ja": "科学的な",
-            "definition": "having the quality expressed by 科学的な",
+            "definition": "based on or related to systematic observation, evidence, and experiment",
             "examples": [
               {
-                "en": "The word 'scientific' is often useful in formal or everyday English.",
-                "ja": "「scientific」は「科学的な」の意味で使われます。"
+                "en": "There is little scientific evidence to support the claim.",
+                "ja": "その主張を裏付ける科学的証拠はほとんどありません。"
               }
             ]
           }
@@ -7520,8 +7578,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "scientific"
     ],
@@ -11356,29 +11416,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "探す",
-            "definition": "to perform or cause the action expressed by 探す",
+            "ja": "探す；検索する",
+            "definition": "to look carefully for someone, something, or information",
             "examples": [
               {
-                "en": "The word 'search' appears in many kinds of English texts.",
-                "ja": "「search」はさまざまな英文で使われます。"
+                "en": "I searched the website for information about the course.",
+                "ja": "その講座についての情報をウェブサイトで検索しました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "searches",
+      "past": "searched",
+      "past_participle": "searched",
+      "ing": "searching"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "search"
+      "search",
+      "searches",
+      "searched",
+      "searching"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -12041,15 +12111,15 @@
     "frequency": 5,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
-            "ja": "第2の；秒",
-            "definition": "a person, thing, idea, or concept connected with '第2の；秒'",
+            "ja": "2番目の；第二の",
+            "definition": "coming after the first in order",
             "examples": [
               {
-                "en": "This second is important.",
-                "ja": "この「第2の」は重要です。"
+                "en": "The second question was easier than the first.",
+                "ja": "2番目の問題は最初の問題より簡単でした。"
               }
             ]
           }
@@ -12063,8 +12133,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "second"
     ],
@@ -12072,7 +12145,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin sequi / secundus",
+      "history": "Latin secundus / sequi「続く」に由来し、第一の後に続くものを表す。",
+      "roots": [
+        {
+          "form": "secund",
+          "meaning": "後に続く・第二"
+        }
+      ],
+      "related": [
+        "secondary"
+      ]
+    }
   },
   {
     "id": "sw-13038",
@@ -12172,7 +12258,8 @@
     },
     "usage_note": "",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "etymology-v1"
     ],
     "status": "needs_enrichment",
     "search_terms": [
@@ -12182,7 +12269,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin sequi / secundus",
+      "history": "second からできた形容詞で、第二の・二次的な、を表す。",
+      "roots": [
+        {
+          "form": "secund",
+          "meaning": "後に続く・第二"
+        }
+      ],
+      "related": [
+        "second"
+      ]
+    }
   },
   {
     "id": "sw-10150",
@@ -12676,7 +12776,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "sector"
@@ -12685,7 +12787,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin secare / sector",
+      "history": "Latin sector「切る人」に由来し、切り分けられた部分から「部門・分野」の意味へ発展した。",
+      "roots": [
+        {
+          "form": "sec / sect",
+          "meaning": "切る"
+        }
+      ],
+      "related": [
+        "select",
+        "selection"
+      ]
+    }
   },
   {
     "id": "sw-02080",
@@ -12791,12 +12907,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "安全；安全保障",
-            "definition": "protection from danger, attack, or unauthorized access",
+            "ja": "安全；警備；セキュリティ",
+            "definition": "protection from danger, crime, or unauthorized access",
             "examples": [
               {
-                "en": "The discussion focused on security.",
-                "ja": "議論では「安全」に焦点が当てられた。"
+                "en": "Use two-factor authentication to improve account security.",
+                "ja": "アカウントの安全性を高めるため二要素認証を使ってください。"
               }
             ]
           }
@@ -12811,9 +12927,10 @@
     },
     "usage_note": "",
     "tags": [
-      "learner-core-gap"
+      "learner-core-gap",
+      "v2.31-curated"
     ],
-    "status": "needs_enrichment",
+    "status": "basic",
     "search_terms": [
       "security"
     ],
@@ -13400,29 +13517,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "求める",
-            "definition": "to perform or cause the action expressed by 求める",
+            "ja": "求める；探す",
+            "definition": "to try to find, obtain, or achieve something",
             "examples": [
               {
-                "en": "The word 'seek' is commonly used in this context.",
-                "ja": "「seek」は「求める」に関する文脈で使われます。"
+                "en": "Seek medical advice if the pain continues.",
+                "ja": "痛みが続く場合は医師の助言を求めてください。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "seeks",
+      "past": "sought",
+      "past_participle": "sought",
+      "ing": "seeking"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "seek"
+      "seek",
+      "seeks",
+      "sought",
+      "seeking"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -13445,28 +13572,38 @@
         "meanings": [
           {
             "ja": "〜のように見える",
-            "definition": "to perform or cause the action expressed by 〜のように見える",
+            "definition": "to appear to be a particular way",
             "examples": [
               {
-                "en": "This is a common example of 'seem'.",
-                "ja": "これは「〜のように見える」の一般的な例です。"
+                "en": "The task seemed difficult at first, but it became easier with practice.",
+                "ja": "その課題は最初難しそうでしたが練習すると簡単になりました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "seems",
+      "past": "seemed",
+      "past_participle": "seemed",
+      "ing": "seeming"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "seem"
+      "seem",
+      "seems",
+      "seemed",
+      "seeming"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -13574,12 +13711,17 @@
     "frequency": 3,
     "parts_of_speech": [
       {
-        "pos": "verb",
+        "pos": "noun",
         "meanings": [
           {
-            "ja": "部分に分ける",
-            "definition": "",
-            "examples": []
+            "ja": "部分；区分",
+            "definition": "one part of something that has been divided into sections",
+            "examples": [
+              {
+                "en": "The company targets a younger segment of the market.",
+                "ja": "その会社は市場のより若い層を対象にしています。"
+              }
+            ]
           }
         ]
       }
@@ -13593,9 +13735,10 @@
     },
     "usage_note": "",
     "tags": [
-      "actions-household"
+      "actions-household",
+      "v2.31-curated"
     ],
-    "status": "needs_enrichment"
+    "status": "basic"
   },
   {
     "id": "sw-10219",
@@ -13872,25 +14015,65 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "選ぶ；選択する",
+            "definition": "to choose someone or something from a group",
+            "examples": [
+              {
+                "en": "Select the best answer from the four options.",
+                "ja": "4つの選択肢から最も適切な答えを選んでください。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "selects",
+      "past": "selected",
+      "past_participle": "selected",
+      "ing": "selecting"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
-      "select"
+      "select",
+      "selects",
+      "selected",
+      "selecting"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin seligere / selectus",
+      "history": "se-「離して」+ legere「選ぶ・集める」に由来するため、見た目の sect「切る」とは別系統。学習上は selection とまとめる。",
+      "roots": [
+        {
+          "form": "sel / lect",
+          "meaning": "選ぶ"
+        }
+      ],
+      "related": [
+        "sector",
+        "selection"
+      ]
+    }
   },
   {
     "id": "sw-02082",
@@ -13925,7 +14108,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "selection"
@@ -13934,7 +14119,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin seligere / selectus",
+      "history": "select の名詞形。select は Latin seligere に由来し、「選ぶ」を表す。",
+      "roots": [
+        {
+          "form": "sel / lect",
+          "meaning": "選ぶ"
+        }
+      ],
+      "related": [
+        "sector",
+        "select"
+      ]
+    }
   },
   {
     "id": "sw-11780",
@@ -14986,9 +15185,25 @@
     },
     "usage_note": "",
     "tags": [
-      "sports-arts"
+      "sports-arts",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "semi- + final",
+      "history": "semi-「半分・準」+ final から、決勝の一段階前の「準決勝」を表す。",
+      "roots": [
+        {
+          "form": "semi-",
+          "meaning": "半分・準"
+        },
+        {
+          "form": "semi",
+          "meaning": "半分"
+        }
+      ],
+      "related": []
+    }
   },
   {
     "id": "sw-11253",
@@ -15379,28 +15594,38 @@
         "meanings": [
           {
             "ja": "送る",
-            "definition": "to do or express the action '送る'",
+            "definition": "to cause a message or object to go to another person or place",
             "examples": [
               {
-                "en": "We often send this in everyday life.",
-                "ja": "私たちは日常生活でよく「送る」します。"
+                "en": "Please send the file by email.",
+                "ja": "ファイルをメールで送ってください。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "sends",
+      "past": "sent",
+      "past_participle": "sent",
+      "ing": "sending"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "send"
+      "send",
+      "sends",
+      "sent",
+      "sending"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -15813,7 +16038,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "sense"
@@ -15822,7 +16049,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin sentire / sensus",
+      "history": "Latin sensus / sentire「感じる」に由来し、感覚・意味を表す.",
+      "roots": [
+        {
+          "form": "sent / sens",
+          "meaning": "感じる"
+        }
+      ],
+      "related": [
+        "consent",
+        "sentence"
+      ]
+    }
   },
   {
     "id": "sw-05471",
@@ -15985,7 +16226,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "sentence"
@@ -15994,7 +16237,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin sentire / sensus",
+      "history": "Latin sententia「意見・判断」に由来し、まとまった考えを表す文という意味へ発展した.",
+      "roots": [
+        {
+          "form": "sent / sens",
+          "meaning": "感じる"
+        }
+      ],
+      "related": [
+        "sense",
+        "consent"
+      ]
+    }
   },
   {
     "id": "sw-09457",
@@ -16531,7 +16788,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "sequence"
@@ -16540,7 +16799,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin sequi / secutus",
+      "history": "sequi「続く」に由来し、順に続くものを表す。",
+      "roots": [
+        {
+          "form": "sequ / secu",
+          "meaning": "続く・追う"
+        }
+      ],
+      "related": [
+        "consequence",
+        "consequently",
+        "subsequent",
+        "pursue"
+      ]
+    }
   },
   {
     "id": "sw-09657",
@@ -16966,12 +17241,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "深刻な",
-            "definition": "having the quality expressed by 深刻な",
+            "ja": "深刻な；真剣な",
+            "definition": "important, dangerous, or requiring careful attention",
             "examples": [
               {
-                "en": "This is a common example of 'serious'.",
-                "ja": "これは「深刻な」の一般的な例です。"
+                "en": "Air pollution is a serious health problem.",
+                "ja": "大気汚染は深刻な健康問題です。"
               }
             ]
           }
@@ -16985,8 +17260,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "serious"
     ],
@@ -17319,7 +17596,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "serve"
@@ -17328,7 +17607,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin servire / servare",
+      "history": "Latin servire「仕える」に由来し、奉仕する・役立つ意味へ広がった.",
+      "roots": [
+        {
+          "form": "serv",
+          "meaning": "仕える・守る"
+        }
+      ],
+      "related": [
+        "service",
+        "preserve",
+        "reserve",
+        "observe",
+        "conserve"
+      ]
+    }
   },
   {
     "id": "sw-02832",
@@ -17388,12 +17684,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "サービス",
-            "definition": "a person, thing, idea, or concept connected with 'サービス'",
+            "ja": "サービス；業務",
+            "definition": "work done for customers or the public, or a system that provides something people need",
             "examples": [
               {
-                "en": "This service is important.",
-                "ja": "この「サービス」は重要です。"
+                "en": "Train service was suspended because of heavy rain.",
+                "ja": "大雨のため列車の運行が停止されました。"
               }
             ]
           }
@@ -17407,8 +17703,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.29-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "service"
     ],
@@ -17416,7 +17715,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin servire / servare",
+      "history": "serve と同じ serv 語族で、仕えること・提供される働きを表す.",
+      "roots": [
+        {
+          "form": "serv",
+          "meaning": "仕える・守る"
+        }
+      ],
+      "related": [
+        "serve",
+        "preserve",
+        "reserve",
+        "observe",
+        "conserve"
+      ]
+    }
   },
   {
     "id": "sw-13286",
@@ -20100,29 +20416,40 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "共有する",
-            "definition": "to perform or cause the action expressed by 共有する",
+            "ja": "共有する；分け合う",
+            "definition": "to use, have, or tell something with others",
             "examples": [
               {
-                "en": "This is a common example of 'share'.",
-                "ja": "これは「共有する」の一般的な例です。"
+                "en": "Students shared their ideas in small groups.",
+                "ja": "生徒たちは小グループで考えを共有しました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "shares",
+      "past": "shared",
+      "past_participle": "shared",
+      "ing": "sharing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "v2.43-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "share"
+      "share",
+      "shares",
+      "shared",
+      "sharing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -23449,29 +23776,53 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "見せる",
-            "definition": "to do or express the action '見せる'",
+            "ja": "見せる；示す",
+            "definition": "to let someone see something or to make something clear",
             "examples": [
               {
-                "en": "We often show this in everyday life.",
-                "ja": "私たちは日常生活でよく「見せる」します。"
+                "en": "Could you show me how to use this feature?",
+                "ja": "この機能の使い方を見せてもらえますか。"
+              }
+            ]
+          },
+          {
+            "ja": "（結果などが）示す",
+            "definition": "to provide evidence or information",
+            "examples": [
+              {
+                "en": "The results show that regular practice improves performance.",
+                "ja": "結果は定期的な練習が成績を向上させることを示しています。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "shows",
+      "past": "showed",
+      "past_participle": "shown",
+      "ing": "showing"
+    },
+    "phrases": [
+      "show someone how to do",
+      "show that"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.28-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "show"
+      "show",
+      "shows",
+      "showed",
+      "shown",
+      "showing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -25143,12 +25494,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "側",
-            "definition": "a person, thing, state, or idea related to 側",
+            "ja": "側；面",
+            "definition": "one of the surfaces, edges, or positions next to something",
             "examples": [
               {
-                "en": "This is a common example of 'side'.",
-                "ja": "これは「側」の一般的な例です。"
+                "en": "There is a small café on the other side of the street.",
+                "ja": "通りの反対側に小さなカフェがあります。"
               }
             ]
           }
@@ -25162,8 +25513,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.29-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "side"
     ],
@@ -25938,7 +26291,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "sign"
@@ -25947,7 +26302,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin signum / signare",
+      "history": "Latin signum「印・しるし」に由来する.",
+      "roots": [
+        {
+          "form": "sign",
+          "meaning": "印・しるし"
+        }
+      ],
+      "related": [
+        "signal",
+        "significant",
+        "design",
+        "assign"
+      ]
+    }
   },
   {
     "id": "sw-09965",
@@ -26324,7 +26695,8 @@
     },
     "usage_note": "",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "etymology-v1"
     ],
     "status": "needs_enrichment",
     "search_terms": [
@@ -26334,7 +26706,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin signum / signare",
+      "history": "signum と同じ語族で、情報を伝えるしるし・合図を表す.",
+      "roots": [
+        {
+          "form": "sign",
+          "meaning": "印・しるし"
+        }
+      ],
+      "related": [
+        "sign",
+        "significant",
+        "design",
+        "assign"
+      ]
+    }
   },
   {
     "id": "sw-13277",
@@ -26527,6 +26915,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "重要な；かなりの",
+            "definition": "important or large enough to be noticed",
+            "examples": [
+              {
+                "en": "There was a significant improvement in reading speed.",
+                "ja": "読解速度に大きな改善がありました。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -26536,8 +26939,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "significant"
     ],
@@ -26545,7 +26951,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin signum / signare",
+      "history": "Latin significare「意味を示す」に由来し、signum「しるし」と facere「作る」に関係する.",
+      "roots": [
+        {
+          "form": "sign",
+          "meaning": "印・しるし"
+        }
+      ],
+      "related": [
+        "sign",
+        "signal",
+        "design",
+        "assign"
+      ]
+    }
   },
   {
     "id": "sw-02273",
@@ -26561,12 +26983,12 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "著しく",
-            "definition": "in the manner or degree expressed by 著しく",
+            "ja": "大幅に；著しく",
+            "definition": "by a large or important amount",
             "examples": [
               {
-                "en": "The word 'significantly' is commonly used in this kind of context.",
-                "ja": "「significantly」は「著しく」に関する文脈でよく使われます。"
+                "en": "Reading speed improved significantly after the training.",
+                "ja": "訓練後、読解速度は大幅に向上しました。"
               }
             ]
           }
@@ -26580,8 +27002,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "significantly"
     ],
@@ -27522,17 +27946,37 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "似ている",
+            "definition": "almost the same but not exactly identical",
+            "examples": [
+              {
+                "en": "The two proposals are similar in cost.",
+                "ja": "二つの提案は費用の点で似ています。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "be similar to"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "similar"
     ],
@@ -27540,7 +27984,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin similis; simplex",
+      "history": "Latin similis「似ている」に由来する。",
+      "roots": [
+        {
+          "form": "sim / simpl",
+          "meaning": "似る／単純"
+        }
+      ],
+      "related": [
+        "similarity",
+        "simple"
+      ]
+    }
   },
   {
     "id": "sw-02682",
@@ -27575,7 +28033,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "similarity"
@@ -27584,7 +28044,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin similis; simplex",
+      "history": "similar の名詞形で、似ている性質を表す。",
+      "roots": [
+        {
+          "form": "sim / simpl",
+          "meaning": "似る／単純"
+        }
+      ],
+      "related": [
+        "similar",
+        "simple"
+      ]
+    }
   },
   {
     "id": "sw-02091",
@@ -27744,15 +28218,15 @@
     "frequency": 4,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
-            "ja": "簡単な",
-            "definition": "a person, thing, state, or idea related to 簡単な",
+            "ja": "簡単な；単純な",
+            "definition": "easy to understand or not complicated",
             "examples": [
               {
-                "en": "This is a common example of 'simple'.",
-                "ja": "これは「簡単な」の一般的な例です。"
+                "en": "The teacher explained the idea in simple language.",
+                "ja": "先生はその考えを簡単な言葉で説明しました。"
               }
             ]
           }
@@ -27766,8 +28240,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "simple"
     ],
@@ -27775,7 +28252,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin similis; simplex",
+      "history": "Latin simplex「一重の・単純な」に由来する。similis「似る」とは別語形成なので、同じ語根と単純化しない。",
+      "roots": [
+        {
+          "form": "sim / simpl",
+          "meaning": "似る／単純"
+        }
+      ],
+      "related": [
+        "similar",
+        "similarity"
+      ]
+    }
   },
   {
     "id": "sw-02659",
@@ -27791,12 +28282,12 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "単に",
-            "definition": "in the manner or degree expressed by 単に",
+            "ja": "単に；簡単に",
+            "definition": "only, or in a simple way",
             "examples": [
               {
-                "en": "The word 'simply' is commonly used in this context.",
-                "ja": "「simply」は「単に」に関する文脈で使われます。"
+                "en": "The problem cannot be solved simply by spending more money.",
+                "ja": "その問題は単にお金を増やすだけでは解決できません。"
               }
             ]
           }
@@ -27810,8 +28301,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "simply"
     ],
@@ -29451,11 +29944,11 @@
         "meanings": [
           {
             "ja": "状況",
-            "definition": "a thing, person, idea, or state related to 状況",
+            "definition": "the set of conditions that exist at a particular time",
             "examples": [
               {
-                "en": "This situation is important.",
-                "ja": "この「状況」は重要です。"
+                "en": "The situation improved after the new system was introduced.",
+                "ja": "新しいシステム導入後、状況は改善しました。"
               }
             ]
           }
@@ -29469,8 +29962,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "situation"
     ],
@@ -30357,12 +30852,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "技能",
-            "definition": "a thing, person, idea, or state related to 技能",
+            "ja": "技能；能力",
+            "definition": "an ability developed through learning and practice",
             "examples": [
               {
-                "en": "This skill is important.",
-                "ja": "この「技能」は重要です。"
+                "en": "Writing is a skill that improves with practice.",
+                "ja": "ライティングは練習によって向上する技能です。"
               }
             ]
           }
@@ -30376,8 +30871,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "skill"
     ],
@@ -33734,11 +34231,11 @@
         "meanings": [
           {
             "ja": "ゆっくりと",
-            "definition": "in the manner or degree expressed by ゆっくりと",
+            "definition": "at a low speed",
             "examples": [
               {
-                "en": "The word 'slowly' is commonly used in this context.",
-                "ja": "「slowly」は「ゆっくりと」に関する文脈で使われます。"
+                "en": "Speak slowly and clearly during the recording.",
+                "ja": "録音中はゆっくりはっきり話してください。"
               }
             ]
           }
@@ -33752,8 +34249,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "slowly"
     ],
@@ -37880,12 +38379,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "社会の",
-            "definition": "having the quality described as '社会の'",
+            "ja": "社会の；社会的な",
+            "definition": "related to society or interaction between people",
             "examples": [
               {
-                "en": "This is social.",
-                "ja": "これは「社会の」です。"
+                "en": "The report examines the social effects of population decline.",
+                "ja": "その報告書は人口減少の社会的影響を調べています。"
               }
             ]
           }
@@ -37899,8 +38398,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "social"
     ],
@@ -37969,11 +38470,11 @@
         "meanings": [
           {
             "ja": "社会",
-            "definition": "a person, thing, idea, or concept connected with '社会'",
+            "definition": "people living together in an organized community and the systems they create",
             "examples": [
               {
-                "en": "This society is important.",
-                "ja": "この「社会」は重要です。"
+                "en": "Technology has changed the way our society communicates.",
+                "ja": "技術は私たちの社会のコミュニケーション方法を変えました。"
               }
             ]
           }
@@ -37987,8 +38488,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.29-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "society"
     ],
@@ -38947,7 +39450,9 @@
       "antonyms": []
     },
     "usage_note": "唯一の意味は形容詞で、通常名詞の前に置く。足の裏・靴底・魚の意味は名詞。魚の複数形にはsoleもある。",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "basic",
     "search_terms": [
       "sole",
@@ -38957,7 +39462,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin solus; Italian isola",
+      "history": "Latin solus「一人だけの」に由来し、「唯一の」を表す。",
+      "roots": [
+        {
+          "form": "sol / isol",
+          "meaning": "一人・孤立"
+        }
+      ],
+      "related": [
+        "solo",
+        "isolate"
+      ]
+    }
   },
   {
     "id": "sw-07672",
@@ -39452,9 +39971,24 @@
     },
     "usage_note": "",
     "tags": [
-      "music-art"
+      "music-art",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin solus; Italian isola",
+      "history": "Latin solus「ただ一人の」に由来し、一人で行うことを表す。",
+      "roots": [
+        {
+          "form": "sol / isol",
+          "meaning": "一人・孤立"
+        }
+      ],
+      "related": [
+        "sole",
+        "isolate"
+      ]
+    }
   },
   {
     "id": "sw-09385",
@@ -39593,12 +40127,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "解決策",
-            "definition": "a thing, person, idea, or state related to 解決策",
+            "ja": "解決策；解答",
+            "definition": "a way of solving a problem",
             "examples": [
               {
-                "en": "This solution is important.",
-                "ja": "この「解決策」は重要です。"
+                "en": "There is no simple solution to the problem.",
+                "ja": "その問題に単純な解決策はありません。"
               }
             ]
           }
@@ -39612,8 +40146,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "solution"
     ],
@@ -39638,34 +40174,48 @@
         "meanings": [
           {
             "ja": "解決する",
-            "definition": "to perform or cause the action expressed by 解決する",
+            "definition": "to find an answer to a problem",
             "examples": [
               {
-                "en": "This is a common example of 'solve'.",
-                "ja": "これは「解決する」の一般的な例です。"
+                "en": "Technology alone cannot solve the problem.",
+                "ja": "技術だけではその問題を解決できません。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "solves",
+      "past": "solved",
+      "past_participle": "solved",
+      "ing": "solving"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "solve"
+      "solve",
+      "solves",
+      "solved",
+      "solving"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "solve a problem",
+      "solve an equation"
+    ]
   },
   {
     "id": "sw-06177",
@@ -42070,12 +42620,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "源；情報源",
-            "definition": "a thing, person, idea, or state related to 源",
+            "ja": "情報源；出所",
+            "definition": "a person, place, or thing from which information or something else comes",
             "examples": [
               {
-                "en": "This source is important.",
-                "ja": "この「源」は重要です。"
+                "en": "Always check the source of online information.",
+                "ja": "オンライン情報の出所を必ず確認してください。"
+              }
+            ]
+          },
+          {
+            "ja": "源",
+            "definition": "the place where something begins",
+            "examples": [
+              {
+                "en": "The river's source is in the mountains.",
+                "ja": "その川の源は山中にあります。"
               }
             ]
           }
@@ -42083,14 +42643,19 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "source of"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "source"
     ],
@@ -42553,12 +43118,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "空間；宇宙",
-            "definition": "a person, thing, state, or idea related to 空間",
+            "ja": "空間；場所；宇宙",
+            "definition": "an empty area available for use, or the universe beyond Earth",
             "examples": [
               {
-                "en": "This is a common example of 'space'.",
-                "ja": "これは「空間」の一般的な例です。"
+                "en": "There is not enough space for another desk.",
+                "ja": "もう一つ机を置く十分なスペースがありません。"
               }
             ]
           }
@@ -42572,8 +43137,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "space"
     ],
@@ -43744,11 +44311,11 @@
         "meanings": [
           {
             "ja": "特別な",
-            "definition": "having the quality expressed by 特別な",
+            "definition": "different from what is usual or intended for a particular purpose",
             "examples": [
               {
-                "en": "This is a common example of 'special'.",
-                "ja": "これは「特別な」の一般的な例です。"
+                "en": "The school arranged a special lesson for exchange students.",
+                "ja": "学校は交換留学生向けに特別授業を用意しました。"
               }
             ]
           }
@@ -43762,8 +44329,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "special"
     ],
@@ -43771,7 +44341,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin species / specificus",
+      "history": "specialis / species「種類・形」に由来し、特定の種類に属する→特別な、へ発展した。",
+      "roots": [
+        {
+          "form": "speci",
+          "meaning": "種類・形"
+        }
+      ],
+      "related": [
+        "specific",
+        "species",
+        "specification"
+      ]
+    }
   },
   {
     "id": "sw-10206",
@@ -44027,7 +44612,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "species"
@@ -44036,7 +44623,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin species / specificus",
+      "history": "species「外見・種類」に由来し、分類上の「種」を表すようになった。",
+      "roots": [
+        {
+          "form": "speci",
+          "meaning": "種類・形"
+        }
+      ],
+      "related": [
+        "specific",
+        "special",
+        "specification"
+      ]
+    }
   },
   {
     "id": "sw-00547",
@@ -44062,6 +44664,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "具体的な；特定の",
+            "definition": "clearly defined or relating to one particular thing",
+            "examples": [
+              {
+                "en": "Give a specific example to support your answer.",
+                "ja": "答えを裏付ける具体的な例を挙げてください。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -44071,8 +44688,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "specific"
     ],
@@ -44080,7 +44700,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin species / specificus",
+      "history": "specificus（species「種類」+ facere「作る」）に由来し、特定の種類に限られた意味を表す。",
+      "roots": [
+        {
+          "form": "speci",
+          "meaning": "種類・形"
+        }
+      ],
+      "related": [
+        "special",
+        "species",
+        "specification"
+      ]
+    }
   },
   {
     "id": "sw-12145",
@@ -44201,7 +44836,8 @@
     },
     "usage_note": "",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "etymology-v1"
     ],
     "status": "needs_enrichment",
     "search_terms": [
@@ -44211,7 +44847,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin species / specificus",
+      "history": "specify の名詞形で、内容を特定して明示することを表す。",
+      "roots": [
+        {
+          "form": "speci",
+          "meaning": "種類・形"
+        }
+      ],
+      "related": [
+        "specific",
+        "special",
+        "species"
+      ]
+    }
   },
   {
     "id": "sw-06766",
@@ -44345,9 +44996,26 @@
     },
     "usage_note": "",
     "tags": [
-      "sports-arts"
+      "sports-arts",
+      "etymology-v1"
     ],
-    "status": "basic"
+    "status": "basic",
+    "etymology": {
+      "origin": "Latin specere / spectare",
+      "history": "spectare「見る」に由来し、「見る人・観客」を表す。",
+      "roots": [
+        {
+          "form": "spect / spec",
+          "meaning": "見る"
+        }
+      ],
+      "related": [
+        "inspection",
+        "respect",
+        "prospect",
+        "perspective"
+      ]
+    }
   },
   {
     "id": "sw-11708",
@@ -45040,35 +45708,66 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "使う；過ごす",
-            "definition": "to perform or cause the action expressed by 使う",
+            "ja": "費やす；使う",
+            "definition": "to use time or money for a purpose",
             "examples": [
               {
-                "en": "This is a common example of 'spend'.",
-                "ja": "これは「使う」の一般的な例です。"
+                "en": "I spend about thirty minutes reading every morning.",
+                "ja": "私は毎朝約30分読書に使います。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "spends",
+      "past": "spent",
+      "past_participle": "spent",
+      "ing": "spending"
+    },
+    "phrases": [
+      "spend time doing",
+      "spend money on"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
-      "spend"
+      "spend",
+      "spends",
+      "spent",
+      "spending"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin pendere / pensus",
+      "history": "Latin expendere 系から Old French を経た語で、もとは重さを量る・支払うことに関係した。",
+      "roots": [
+        {
+          "form": "pend / pens",
+          "meaning": "ぶら下がる・量る"
+        }
+      ],
+      "related": [
+        "depend",
+        "dependent",
+        "independent",
+        "expense",
+        "expensive"
+      ]
+    }
   },
   {
     "id": "sw-12186",
@@ -46239,7 +46938,8 @@
     },
     "usage_note": "",
     "tags": [
-      "wordfreq-gap"
+      "wordfreq-gap",
+      "etymology-v1"
     ],
     "status": "basic",
     "search_terms": [
@@ -46249,7 +46949,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin spirare / spiritus",
+      "history": "spiritus / spirare「息をする」に由来し、息・生命力から精神の意味へ発展した。",
+      "roots": [
+        {
+          "form": "spir",
+          "meaning": "息をする"
+        }
+      ],
+      "related": [
+        "inspire"
+      ]
+    }
   },
   {
     "id": "sw-06081",
@@ -47611,12 +48324,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "スポーツ",
-            "definition": "a person, thing, idea, or concept connected with 'スポーツ'",
+            "ja": "スポーツ；運動競技",
+            "definition": "a physical activity with rules, often involving competition",
             "examples": [
               {
-                "en": "This sport is important.",
-                "ja": "この「スポーツ」は重要です。"
+                "en": "Running is a simple sport that requires little equipment.",
+                "ja": "ランニングはほとんど道具を必要としないシンプルなスポーツです。"
               }
             ]
           }
@@ -47630,8 +48343,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "sport"
     ],
@@ -49956,7 +50671,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "stable"
@@ -49965,7 +50682,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin stare / status",
+      "history": "Latin stabilis / stare に由来し、「しっかり立つ」ことから安定した、を表す.",
+      "roots": [
+        {
+          "form": "sta / stat",
+          "meaning": "立つ"
+        }
+      ],
+      "related": [
+        "state",
+        "status",
+        "station",
+        "establish",
+        "distance",
+        "instance"
+      ]
+    }
   },
   {
     "id": "sw-07019",
@@ -51286,7 +52021,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "stand"
@@ -51295,7 +52032,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Old English standan / related Germanic forms",
+      "history": "Old English standan に由来するゲルマン系の基本語で、「立つ」を表す。",
+      "roots": [
+        {
+          "form": "stand",
+          "meaning": "立つ"
+        }
+      ],
+      "related": [
+        "constant",
+        "circumstance",
+        "understand",
+        "standard"
+      ]
+    }
   },
   {
     "id": "sw-09988",
@@ -51734,12 +52487,27 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "基準；標準の",
-            "definition": "a person, thing, state, process, or idea connected with 基準",
+            "ja": "基準；標準",
+            "definition": "a level used to judge quality or performance",
             "examples": [
               {
-                "en": "The word 'standard' is commonly used in this context.",
-                "ja": "「standard」は「基準」に関する文脈で使われます。"
+                "en": "The product meets international safety standards.",
+                "ja": "その製品は国際安全基準を満たしています。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "標準的な",
+            "definition": "usual or generally accepted",
+            "examples": [
+              {
+                "en": "This is the standard procedure.",
+                "ja": "これは標準的な手順です。"
               }
             ]
           }
@@ -51753,8 +52521,12 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "standard"
     ],
@@ -51762,7 +52534,26 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "meet a standard",
+      "safety standard"
+    ],
+    "etymology": {
+      "origin": "Old English standan / related Germanic forms",
+      "history": "Old French estandard を経た語。歴史的には軍旗・目印から「基準」の意味へ発展した。",
+      "roots": [
+        {
+          "form": "stand",
+          "meaning": "立つ"
+        }
+      ],
+      "related": [
+        "constant",
+        "circumstance",
+        "understand",
+        "stand"
+      ]
+    }
   },
   {
     "id": "sw-03375",
@@ -52642,29 +53433,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "始める",
-            "definition": "to do or express the action '始める'",
+            "ja": "始める；始まる",
+            "definition": "to begin doing or happening",
             "examples": [
               {
-                "en": "We often start this in everyday life.",
-                "ja": "私たちは日常生活でよく「始める」します。"
+                "en": "The lesson starts at nine o'clock.",
+                "ja": "授業は9時に始まります。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "starts",
+      "past": "started",
+      "past_participle": "started",
+      "ing": "starting"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "start"
+      "start",
+      "starts",
+      "started",
+      "starting"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -52809,12 +53610,37 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "状態；州",
-            "definition": "a person, thing, idea, or concept connected with '状態；州'",
+            "ja": "状態",
+            "definition": "the condition that someone or something is in",
             "examples": [
               {
-                "en": "This state is important.",
-                "ja": "この「状態」は重要です。"
+                "en": "The building is in a poor state of repair.",
+                "ja": "その建物は修繕状態がよくありません。"
+              }
+            ]
+          },
+          {
+            "ja": "国家；州",
+            "definition": "a country or a political division of a country",
+            "examples": [
+              {
+                "en": "Each state has its own laws.",
+                "ja": "各州には独自の法律があります。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "述べる",
+            "definition": "to formally say or write something",
+            "examples": [
+              {
+                "en": "The report states that demand is increasing.",
+                "ja": "報告書には需要が増えていると述べられています。"
               }
             ]
           }
@@ -52828,8 +53654,12 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "state"
     ],
@@ -52837,7 +53667,28 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "state clearly",
+      "state that"
+    ],
+    "etymology": {
+      "origin": "Latin stare / status",
+      "history": "Latin status / stare「立つ」に由来し、立っている状態から「状態」や政治的な「国家」へ意味が広がった.",
+      "roots": [
+        {
+          "form": "sta / stat",
+          "meaning": "立つ"
+        }
+      ],
+      "related": [
+        "status",
+        "station",
+        "stable",
+        "establish",
+        "distance",
+        "instance"
+      ]
+    }
   },
   {
     "id": "sw-10182",
@@ -52954,7 +53805,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "station"
@@ -52963,7 +53816,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin stare / status",
+      "history": "Latin statio / stare に由来し、「立つ場所」から駅・配置場所などを表す.",
+      "roots": [
+        {
+          "form": "sta / stat",
+          "meaning": "立つ"
+        }
+      ],
+      "related": [
+        "state",
+        "status",
+        "stable",
+        "establish",
+        "distance",
+        "instance"
+      ]
+    }
   },
   {
     "id": "sw-13321",
@@ -53463,7 +54334,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "status"
@@ -53472,7 +54345,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin stare / status",
+      "history": "Latin status「立っている状態」に由来し、状態・地位を表す.",
+      "roots": [
+        {
+          "form": "sta / stat",
+          "meaning": "立つ"
+        }
+      ],
+      "related": [
+        "state",
+        "station",
+        "stable",
+        "establish",
+        "distance",
+        "instance"
+      ]
+    }
   },
   {
     "id": "sw-02977",
@@ -53575,29 +54466,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "滞在する",
-            "definition": "to do or express the action '滞在する'",
+            "ja": "滞在する；〜のままでいる",
+            "definition": "to remain in a place or condition",
             "examples": [
               {
-                "en": "We often stay this in everyday life.",
-                "ja": "私たちは日常生活でよく「滞在する」します。"
+                "en": "We stayed in a small hotel near the lake.",
+                "ja": "私たちは湖の近くの小さなホテルに泊まりました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "stays",
+      "past": "stayed",
+      "past_participle": "stayed",
+      "ing": "staying"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "stay"
+      "stay",
+      "stays",
+      "stayed",
+      "staying"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -57253,29 +58154,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "止める",
-            "definition": "to do or express the action '止める'",
+            "ja": "止める；止まる",
+            "definition": "to end an action or movement",
             "examples": [
               {
-                "en": "We often stop this in everyday life.",
-                "ja": "私たちは日常生活でよく「止める」します。"
+                "en": "Stop the program before changing the settings.",
+                "ja": "設定を変更する前にプログラムを停止してください。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "stops",
+      "past": "stoped",
+      "past_participle": "stoped",
+      "ing": "stoping"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "stop"
+      "stop",
+      "stops",
+      "stoped",
+      "stoping"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -57994,12 +58905,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "物語",
-            "definition": "a person, thing, idea, or concept connected with '物語'",
+            "ja": "物語；話",
+            "definition": "an account of events, real or imaginary",
             "examples": [
               {
-                "en": "This story is important.",
-                "ja": "この「物語」は重要です。"
+                "en": "The story is told from two different points of view.",
+                "ja": "その物語は二つの異なる視点から語られます。"
               }
             ]
           }
@@ -58013,8 +58924,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "story"
     ],
@@ -58710,6 +59623,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "戦略；方策",
+            "definition": "a plan designed to achieve a particular goal",
+            "examples": [
+              {
+                "en": "Changing pace is a useful strategy in a long race.",
+                "ja": "ペースを変えることは長距離レースで有効な戦略です。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -58719,8 +59647,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "strategy"
     ],
@@ -59085,12 +60015,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "通り",
-            "definition": "a person, thing, idea, or concept connected with '通り'",
+            "ja": "通り；街路",
+            "definition": "a public road in a town or city with buildings along it",
             "examples": [
               {
-                "en": "This street is important.",
-                "ja": "この「通り」は重要です。"
+                "en": "The restaurant is on a quiet street near the station.",
+                "ja": "そのレストランは駅近くの静かな通りにあります。"
               }
             ]
           }
@@ -59104,8 +60034,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "street"
     ],
@@ -60158,15 +61090,15 @@
     "frequency": 4,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
-            "ja": "強い",
-            "definition": "a person, thing, state, or idea related to 強い",
+            "ja": "強い；強力な",
+            "definition": "having great physical power, effect, or influence",
             "examples": [
               {
-                "en": "This is a common example of 'strong'.",
-                "ja": "これは「強い」の一般的な例です。"
+                "en": "There is strong evidence for the conclusion.",
+                "ja": "その結論には強い証拠があります。"
               }
             ]
           }
@@ -60180,8 +61112,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "strong"
     ],
@@ -60206,11 +61140,11 @@
         "meanings": [
           {
             "ja": "強く",
-            "definition": "in the manner or degree expressed by 強く",
+            "definition": "with great force, feeling, or certainty",
             "examples": [
               {
-                "en": "The word 'strongly' is commonly used in this kind of context.",
-                "ja": "「strongly」は「強く」に関する文脈でよく使われます。"
+                "en": "I strongly agree with the main argument.",
+                "ja": "私は主な主張に強く賛成します。"
               }
             ]
           }
@@ -60224,8 +61158,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "strongly"
     ],
@@ -60300,6 +61236,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "構造；構成",
+            "definition": "the way the parts of something are organized or connected",
+            "examples": [
+              {
+                "en": "A clear essay structure makes your argument easier to follow.",
+                "ja": "明確な作文構成は主張を理解しやすくします。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -60309,8 +61260,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "structure"
     ],
@@ -60318,7 +61272,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin structura / struere",
+      "history": "struere「積み上げる・組み立てる」に由来し、部分を組み合わせた「構造」を表す。",
+      "roots": [
+        {
+          "form": "struct",
+          "meaning": "組み立てる"
+        }
+      ],
+      "related": [
+        "construct",
+        "construction",
+        "infrastructure"
+      ]
+    }
   },
   {
     "id": "sw-11198",
@@ -60842,29 +61811,51 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "勉強する",
-            "definition": "to do or express the action '勉強する'",
+            "ja": "勉強する；学ぶ",
+            "definition": "to spend time learning about a subject",
             "examples": [
               {
-                "en": "We often study this in everyday life.",
-                "ja": "私たちは日常生活でよく「勉強する」します。"
+                "en": "She studies English for thirty minutes every morning.",
+                "ja": "彼女は毎朝30分英語を勉強します。"
+              }
+            ]
+          },
+          {
+            "ja": "調査する；詳しく調べる",
+            "definition": "to examine something carefully in order to understand it",
+            "examples": [
+              {
+                "en": "Researchers studied how sleep affects memory.",
+                "ja": "研究者たちは睡眠が記憶にどう影響するかを調べました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "studies",
+      "past": "studied",
+      "past_participle": "studied",
+      "ing": "studying"
+    },
+    "phrases": [
+      "study for a test"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.28-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "study"
+      "study",
+      "studies",
+      "studied",
+      "studying"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -62150,9 +63141,26 @@
     },
     "usage_note": "",
     "tags": [
-      "50k-frequency-gap"
+      "50k-frequency-gap",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin scribere / scriptus",
+      "history": "sub-「下に」と script「書く」に関係し、もとは文書の下に署名することを表した。",
+      "roots": [
+        {
+          "form": "scrib / script",
+          "meaning": "書く"
+        }
+      ],
+      "related": [
+        "describe",
+        "description",
+        "prescription",
+        "manuscript"
+      ]
+    }
   },
   {
     "id": "sw-02359",
@@ -62187,7 +63195,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "subsequent"
@@ -62196,7 +63206,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin subsequi",
+      "history": "sub-「後ろから」+ sequi「続く」に由来し、後に続くことを表す。",
+      "roots": [
+        {
+          "form": "sub-",
+          "meaning": "下に・後に"
+        },
+        {
+          "form": "sequ",
+          "meaning": "続く"
+        }
+      ],
+      "related": [
+        "substance"
+      ]
+    }
   },
   {
     "id": "sw-02753",
@@ -62444,7 +63471,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "substance"
@@ -62453,7 +63482,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin substantia / substare",
+      "history": "sub-「下に」+ stare「立つ」から、下で支えるもの→実体・物質、へ発展した。",
+      "roots": [
+        {
+          "form": "sub-",
+          "meaning": "下に"
+        },
+        {
+          "form": "sta / stat",
+          "meaning": "立つ"
+        }
+      ],
+      "related": [
+        "subsequent"
+      ]
+    }
   },
   {
     "id": "sw-13477",
@@ -62913,7 +63959,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "succeed"
@@ -62922,7 +63970,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin cedere / cessus",
+      "history": "sub- 系の要素 + cedere「進む」に由来し、後に続くことから「成功する」などへ意味が発展した.",
+      "roots": [
+        {
+          "form": "ced / ceed / cess",
+          "meaning": "進む・譲る"
+        }
+      ],
+      "related": [
+        "proceed",
+        "process",
+        "procedure",
+        "success",
+        "exceed"
+      ]
+    }
   },
   {
     "id": "sw-00953",
@@ -62939,11 +64004,11 @@
         "meanings": [
           {
             "ja": "成功",
-            "definition": "a thing, person, idea, or state related to 成功",
+            "definition": "the achievement of something you wanted or planned",
             "examples": [
               {
-                "en": "This success is important.",
-                "ja": "この「成功」は重要です。"
+                "en": "Consistent practice is a key to success.",
+                "ja": "継続的な練習は成功の鍵です。"
               }
             ]
           }
@@ -62957,8 +64022,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "success"
     ],
@@ -62966,7 +64034,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin cedere / cessus",
+      "history": "succeed と同じ ced/cess 系で、物事がうまく進んだ結果を表す.",
+      "roots": [
+        {
+          "form": "ced / ceed / cess",
+          "meaning": "進む・譲る"
+        }
+      ],
+      "related": [
+        "proceed",
+        "process",
+        "procedure",
+        "succeed",
+        "exceed"
+      ]
+    }
   },
   {
     "id": "sw-00954",
@@ -62983,11 +64068,11 @@
         "meanings": [
           {
             "ja": "成功した",
-            "definition": "having the quality or state expressed by 成功した",
+            "definition": "achieving the result that was wanted",
             "examples": [
               {
-                "en": "It is successful.",
-                "ja": "それは「成功した」です。"
+                "en": "The event was successful because many students participated.",
+                "ja": "多くの生徒が参加したためイベントは成功しました。"
               }
             ]
           }
@@ -63001,8 +64086,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "successful"
     ],
@@ -63373,6 +64460,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "十分な",
+            "definition": "enough for a particular purpose",
+            "examples": [
+              {
+                "en": "There is not sufficient evidence to support the claim.",
+                "ja": "その主張を支持する十分な証拠がありません。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -63382,8 +64484,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "sufficient"
     ],
@@ -63575,28 +64679,39 @@
         "meanings": [
           {
             "ja": "提案する",
-            "definition": "to perform or cause the action expressed by 提案する",
+            "definition": "to mention an idea or plan for someone to consider",
             "examples": [
               {
-                "en": "This is a common example of 'suggest'.",
-                "ja": "これは「提案する」の一般的な例です。"
+                "en": "She suggested taking an earlier train.",
+                "ja": "彼女はもっと早い電車に乗ることを提案しました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "suggests",
+      "past": "suggested",
+      "past_participle": "suggested",
+      "ing": "suggesting"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "v2.43-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "suggest"
+      "suggest",
+      "suggests",
+      "suggested",
+      "suggesting"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -65429,9 +66544,25 @@
     },
     "usage_note": "",
     "tags": [
-      "practical-quality"
+      "practical-quality",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin superior / super",
+      "history": "super「上に」に由来し、より上の・優れた、を表す。",
+      "roots": [
+        {
+          "form": "super-",
+          "meaning": "上に・越えて"
+        },
+        {
+          "form": "super",
+          "meaning": "上"
+        }
+      ],
+      "related": []
+    }
   },
   {
     "id": "sw-03174",
@@ -66001,35 +67132,86 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "支援する",
-            "definition": "to perform or cause the action expressed by 支援する",
+            "ja": "支援する；支持する",
+            "definition": "to help someone or show agreement with an idea",
             "examples": [
               {
-                "en": "People often support in this situation.",
-                "ja": "この状況では人々はしばしば「支援する」します。"
+                "en": "The evidence supports the main argument.",
+                "ja": "その証拠は主要な主張を裏付けています。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "支援；支持",
+            "definition": "help or approval given to someone or something",
+            "examples": [
+              {
+                "en": "The project received strong public support.",
+                "ja": "その計画は市民から強い支持を得ました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "supports",
+      "past": "supported",
+      "past_participle": "supported",
+      "ing": "supporting"
+    },
+    "phrases": [
+      "support an argument"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "support"
+      "support",
+      "supports",
+      "supported",
+      "supporting"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "provide support",
+      "support an argument"
+    ],
+    "etymology": {
+      "origin": "Latin supportare",
+      "history": "sub-「下から」と portare「運ぶ・支える」に由来し、下から支えるという発想を持つ。",
+      "roots": [
+        {
+          "form": "sub-",
+          "meaning": "下に"
+        },
+        {
+          "form": "port",
+          "meaning": "運ぶ・支える"
+        }
+      ],
+      "related": [
+        "supporter",
+        "portable",
+        "transport"
+      ]
+    }
   },
   {
     "id": "sw-06314",
@@ -66234,7 +67416,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "suppress"
@@ -66243,7 +67427,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin premere / pressus",
+      "history": "sub-「下に」+ premere「押す」に由来し、押さえ込むことを表す。",
+      "roots": [
+        {
+          "form": "sub-",
+          "meaning": "下に"
+        },
+        {
+          "form": "press",
+          "meaning": "押す"
+        }
+      ],
+      "related": [
+        "depression",
+        "compression"
+      ]
+    }
   },
   {
     "id": "sw-07752",
@@ -66979,6 +68181,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "調査；アンケート",
+            "definition": "a set of questions used to collect information from people",
+            "examples": [
+              {
+                "en": "We conducted a survey of students' study habits.",
+                "ja": "生徒の学習習慣についてアンケート調査を行いました。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -66988,8 +68205,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "survey"
     ],
@@ -67032,7 +68251,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "survival"
@@ -67041,7 +68262,26 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin vivere / vita / vivus",
+      "history": "survive の名詞形で、生き残ることを表す。",
+      "roots": [
+        {
+          "form": "sur-",
+          "meaning": "越えて"
+        },
+        {
+          "form": "viv / vit",
+          "meaning": "生きる・生命"
+        }
+      ],
+      "related": [
+        "vivid",
+        "survive",
+        "vital"
+      ]
+    }
   },
   {
     "id": "sw-02119",
@@ -67076,7 +68316,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "survive"
@@ -67085,7 +68327,26 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin vivere / vita / vivus",
+      "history": "super-「越えて」+ vivere「生きる」に由来し、出来事を越えて生き残る意味になった。",
+      "roots": [
+        {
+          "form": "sur-",
+          "meaning": "越えて"
+        },
+        {
+          "form": "viv / vit",
+          "meaning": "生きる・生命"
+        }
+      ],
+      "related": [
+        "vivid",
+        "survival",
+        "vital"
+      ]
+    }
   },
   {
     "id": "sw-06853",
@@ -69935,9 +71196,25 @@
     },
     "usage_note": "",
     "tags": [
-      "music-art"
+      "music-art",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Greek symphonia",
+      "history": "syn-「共に」と phōnē「音・声」から、「音が共に響くこと」を表した。",
+      "roots": [
+        {
+          "form": "phon",
+          "meaning": "声・音"
+        }
+      ],
+      "related": [
+        "phone",
+        "microphone",
+        "phonetic"
+      ]
+    }
   },
   {
     "id": "sw-02994",
@@ -70671,11 +71948,11 @@
         "meanings": [
           {
             "ja": "制度；システム",
-            "definition": "a thing, person, idea, or state related to 制度",
+            "definition": "a set of connected parts or rules that work together",
             "examples": [
               {
-                "en": "This system is important.",
-                "ja": "この「制度」は重要です。"
+                "en": "The school introduced a new online submission system.",
+                "ja": "学校は新しいオンライン提出システムを導入しました。"
               }
             ]
           }
@@ -70689,8 +71966,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.29-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "system"
     ],

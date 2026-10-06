@@ -105,19 +105,44 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "捨てる；断念する",
+            "definition": "to leave something behind or stop doing something before it is finished",
+            "examples": [
+              {
+                "en": "The team abandoned the plan after the cost became too high.",
+                "ja": "費用が高くなりすぎたためチームは計画を断念しました。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "abandons",
+      "past": "abandoned",
+      "past_participle": "abandoned",
+      "ing": "abandoning"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "abandon"
+      "abandon",
+      "abandons",
+      "abandoned",
+      "abandoning"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -362,12 +387,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "能力",
-            "definition": "a person, thing, state, process, or idea connected with 能力",
+            "ja": "能力；才能",
+            "definition": "the power or skill needed to do something",
             "examples": [
               {
-                "en": "The word 'ability' is commonly used in this kind of context.",
-                "ja": "「ability」は「能力」に関する文脈でよく使われます。"
+                "en": "Her ability to explain difficult ideas clearly makes her an excellent teacher.",
+                "ja": "難しい考えを分かりやすく説明する彼女の能力は、彼女を優れた教師にしています。"
               }
             ]
           }
@@ -381,8 +406,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "ability"
     ],
@@ -447,12 +474,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "できる",
-            "definition": "having the quality described as 'できる'",
+            "ja": "できる；能力がある",
+            "definition": "having the skill, opportunity, or power needed to do something",
             "examples": [
               {
-                "en": "This is able.",
-                "ja": "これは「できる」です。"
+                "en": "Will you be able to finish the report by Friday?",
+                "ja": "金曜日までに報告書を終えられますか。"
               }
             ]
           }
@@ -466,8 +493,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "able"
     ],
@@ -510,7 +539,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "abnormal"
@@ -519,7 +550,26 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin norma",
+      "history": "ab-「離れて」+ normal から、通常の基準から外れたことを表す。",
+      "roots": [
+        {
+          "form": "ab-",
+          "meaning": "離れて"
+        },
+        {
+          "form": "norm",
+          "meaning": "基準"
+        }
+      ],
+      "related": [
+        "norm",
+        "normal",
+        "normalize"
+      ]
+    }
   },
   {
     "id": "sw-02170",
@@ -799,12 +849,12 @@
         "pos": "preposition",
         "meanings": [
           {
-            "ja": "〜の上に",
-            "definition": "a word showing a relationship with the sense '〜の上に'",
+            "ja": "〜より上に；〜を超えて",
+            "definition": "in a higher position or greater than a particular level",
             "examples": [
               {
-                "en": "The word 'above' is common in English.",
-                "ja": "「above」は英語でよく使われる語です。"
+                "en": "Temperatures rose above thirty degrees.",
+                "ja": "気温は30度を超えました。"
               }
             ]
           }
@@ -818,8 +868,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "above"
     ],
@@ -1152,6 +1204,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "不在；欠席",
+            "definition": "the state of not being present where someone is expected to be",
+            "examples": [
+              {
+                "en": "Please explain the reason for your absence from class.",
+                "ja": "授業を欠席した理由を説明してください。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -1161,8 +1228,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "absence"
     ],
@@ -1409,6 +1478,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "完全な；絶対的な",
+            "definition": "complete and not limited or compared with anything else",
+            "examples": [
+              {
+                "en": "There is no absolute guarantee that the plan will succeed.",
+                "ja": "その計画が成功するという絶対的な保証はありません。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -1418,8 +1502,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "absolute"
     ],
@@ -1667,6 +1753,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "抽象的な",
+            "definition": "based on ideas rather than physical objects or specific examples",
+            "examples": [
+              {
+                "en": "The concept is too abstract for some younger students.",
+                "ja": "その概念は一部の年少の生徒には抽象的すぎます。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -1676,8 +1777,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "abstract"
     ],
@@ -1685,7 +1789,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin abstrahere",
+      "history": "abs-「離れて」+ trahere「引く」から、具体物から考えを引き離す→抽象的な、へ発展した。",
+      "roots": [
+        {
+          "form": "abs-",
+          "meaning": "離れて"
+        },
+        {
+          "form": "tract",
+          "meaning": "引く"
+        }
+      ],
+      "related": []
+    }
   },
   {
     "id": "sw-09099",
@@ -1956,12 +2075,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "乱用；虐待",
-            "definition": "a person, thing, state, or idea related to 乱用",
+            "ja": "虐待；乱用",
+            "definition": "cruel treatment or the harmful or improper use of something",
             "examples": [
               {
-                "en": "This is a common example of 'abuse'.",
-                "ja": "これは「乱用」の一般的な例です。"
+                "en": "The campaign aims to prevent child abuse.",
+                "ja": "その運動は児童虐待の防止を目指しています。"
               }
             ]
           }
@@ -1975,8 +2094,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "abuse"
     ],
@@ -2133,6 +2254,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "学問の；学業の",
+            "definition": "related to education, study, or scholarly work",
+            "examples": [
+              {
+                "en": "The university provides academic support for international students.",
+                "ja": "その大学は留学生に学業支援を提供しています。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -2142,8 +2278,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "academic"
     ],
@@ -2677,34 +2815,74 @@
         "meanings": [
           {
             "ja": "受け入れる",
-            "definition": "to do or express the action '受け入れる'",
+            "definition": "to agree to take or receive something",
             "examples": [
               {
-                "en": "We often accept this in everyday life.",
-                "ja": "私たちは日常生活でよく「受け入れる」します。"
+                "en": "She accepted the job offer.",
+                "ja": "彼女はその仕事の申し出を受け入れました。"
+              }
+            ]
+          },
+          {
+            "ja": "認める",
+            "definition": "to recognize that something is true or valid",
+            "examples": [
+              {
+                "en": "We must accept that mistakes happen.",
+                "ja": "間違いは起こるものだと認めなければなりません。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "accepts",
+      "past": "accepted",
+      "past_participle": "accepted",
+      "ing": "accepting"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "etymology-v1",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "accept"
+      "accept",
+      "accepts",
+      "accepted",
+      "accepting"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin capere / captus",
+      "history": "ad-「〜へ」+ capere「取る」に由来し、「受け取る」から「受け入れる」へ発展した。",
+      "roots": [
+        {
+          "form": "cap / cept",
+          "meaning": "取る・つかむ"
+        }
+      ],
+      "related": [
+        "acceptance",
+        "concept",
+        "exception",
+        "receive",
+        "reception",
+        "perception"
+      ]
+    }
   },
   {
     "id": "sw-01346",
@@ -2827,7 +3005,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "acceptance"
@@ -2836,7 +3016,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin capere / captus",
+      "history": "accept の名詞形で、「受け入れること」を表す。",
+      "roots": [
+        {
+          "form": "cap / cept",
+          "meaning": "取る・つかむ"
+        }
+      ],
+      "related": [
+        "accept",
+        "concept",
+        "exception",
+        "receive",
+        "reception",
+        "perception"
+      ]
+    }
   },
   {
     "id": "sw-00011",
@@ -2852,29 +3050,55 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "利用；接近",
-            "definition": "a person, thing, idea, or concept connected with '利用；接近'",
+            "ja": "利用する権利；接近手段",
+            "definition": "the opportunity or right to use, enter, or obtain something",
             "examples": [
               {
-                "en": "This access is important.",
-                "ja": "この「利用」は重要です。"
+                "en": "All students have access to the online library.",
+                "ja": "すべての生徒がオンライン図書館を利用できます。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "利用する；アクセスする",
+            "definition": "to obtain or use information, a service, or a system",
+            "examples": [
+              {
+                "en": "Students can access the materials from home.",
+                "ja": "生徒は自宅から教材にアクセスできます。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "accesses",
+      "past": "accessed",
+      "past_participle": "accessed",
+      "ing": "accessing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "access"
+      "access",
+      "accesses",
+      "accessed",
+      "accessing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -3069,12 +3293,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "事故",
-            "definition": "a person, thing, idea, or concept connected with '事故'",
+            "ja": "事故；偶然",
+            "definition": "an unexpected event that causes damage or injury",
             "examples": [
               {
-                "en": "This accident is important.",
-                "ja": "この「事故」は重要です。"
+                "en": "Nobody was seriously injured in the accident.",
+                "ja": "その事故で重傷を負った人はいませんでした。"
               }
             ]
           }
@@ -3088,8 +3312,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "accident"
     ],
@@ -3097,7 +3324,27 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin caedere / cadere (distinct roots)",
+      "history": "accidere「起こる」に由来し、ad- + cadere「落ちる」の語族。偶然起こる出来事を表す。",
+      "roots": [
+        {
+          "form": "ad-",
+          "meaning": "〜へ"
+        },
+        {
+          "form": "cid / cis; cad",
+          "meaning": "切る／落ちる"
+        }
+      ],
+      "related": [
+        "decide",
+        "decision",
+        "precision",
+        "incident"
+      ]
+    }
   },
   {
     "id": "sw-01443",
@@ -3220,7 +3467,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "acclaim"
@@ -3229,7 +3478,26 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin clamare",
+      "history": "ad-「〜へ」+ clamare「叫ぶ」に由来し、歓声を送る→称賛する、となった。",
+      "roots": [
+        {
+          "form": "ad-",
+          "meaning": "〜へ"
+        },
+        {
+          "form": "claim / clam",
+          "meaning": "叫ぶ・呼ぶ"
+        }
+      ],
+      "related": [
+        "claim",
+        "proclaim",
+        "exclaim"
+      ]
+    }
   },
   {
     "id": "sw-01444",
@@ -3340,6 +3608,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "宿泊施設；住居",
+            "definition": "a place where someone can live or stay temporarily",
+            "examples": [
+              {
+                "en": "The program fee includes accommodation and breakfast.",
+                "ja": "プログラム料金には宿泊と朝食が含まれています。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -3349,8 +3632,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "accommodation"
     ],
@@ -3466,19 +3751,44 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "同行する；伴う",
+            "definition": "to go somewhere with someone or happen together with something",
+            "examples": [
+              {
+                "en": "A teacher will accompany the students on the trip.",
+                "ja": "教員が旅行に生徒たちと同行します。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "accompanies",
+      "past": "accompanied",
+      "past_participle": "accompanied",
+      "ing": "accompanying"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "accompany"
+      "accompany",
+      "accompanies",
+      "accompanied",
+      "accompanying"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -3664,9 +3974,30 @@
     "usage_note": "",
     "tags": [
       "general-vocabulary",
-      "needs-example-enrichment"
+      "needs-example-enrichment",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin ad + cor / Old French acorder",
+      "history": "「心」を表す cor に関係し、心を合わせる→一致・合意の意味になった。",
+      "roots": [
+        {
+          "form": "ad-",
+          "meaning": "〜へ"
+        },
+        {
+          "form": "cord / cor",
+          "meaning": "心"
+        }
+      ],
+      "related": [
+        "according",
+        "record",
+        "core",
+        "courage"
+      ]
+    }
   },
   {
     "id": "sw-00659",
@@ -3701,7 +4032,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "according"
@@ -3710,7 +4043,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "accord + -ing",
+      "history": "accord「一致する」から、「〜に一致して・〜に従って」を表すようになった。",
+      "roots": [
+        {
+          "form": "cord / cor",
+          "meaning": "心・一致"
+        }
+      ],
+      "related": [
+        "accord",
+        "record",
+        "core",
+        "courage"
+      ]
+    }
   },
   {
     "id": "sw-01447",
@@ -3852,12 +4201,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "口座；説明",
-            "definition": "a person, thing, idea, or concept connected with '口座；説明'",
+            "ja": "口座；説明；アカウント",
+            "definition": "a record used for money or online services, or a description of an event",
             "examples": [
               {
-                "en": "This account is important.",
-                "ja": "この「口座」は重要です。"
+                "en": "You need an account to save your progress online.",
+                "ja": "オンラインで進捗を保存するにはアカウントが必要です。"
               }
             ]
           }
@@ -3871,8 +4220,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "account"
     ],
@@ -4014,6 +4365,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "責任を負うべき",
+            "definition": "responsible for decisions or actions and expected to explain them",
+            "examples": [
+              {
+                "en": "Public officials should be accountable for how money is spent.",
+                "ja": "公務員は資金の使い方について説明責任を負うべきです。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -4023,8 +4389,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "accountable"
     ],
@@ -4277,19 +4645,44 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "蓄積する；たまる",
+            "definition": "to gradually collect or increase over time",
+            "examples": [
+              {
+                "en": "Small amounts of fatigue can accumulate during a long training week.",
+                "ja": "長いトレーニング週では少しずつ疲労が蓄積することがあります。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "accumulates",
+      "past": "accumulated",
+      "past_participle": "accumulated",
+      "ing": "accumulating"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "accumulate"
+      "accumulate",
+      "accumulates",
+      "accumulated",
+      "accumulating"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -4452,6 +4845,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "正確な",
+            "definition": "correct and free from mistakes",
+            "examples": [
+              {
+                "en": "Make sure the figures in your report are accurate.",
+                "ja": "報告書の数値が正確か確認してください。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -4461,8 +4869,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "accurate"
     ],
@@ -4915,34 +5325,48 @@
         "meanings": [
           {
             "ja": "達成する",
-            "definition": "to do or express the action '達成する'",
+            "definition": "to succeed in reaching a goal",
             "examples": [
               {
-                "en": "We often achieve this in everyday life.",
-                "ja": "私たちは日常生活でよく「達成する」します。"
+                "en": "She achieved her goal of running a marathon.",
+                "ja": "彼女はマラソンを走るという目標を達成しました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "achieves",
+      "past": "achieved",
+      "past_participle": "achieved",
+      "ing": "achieving"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "achieve"
+      "achieve",
+      "achieves",
+      "achieved",
+      "achieving"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "achieve a goal",
+      "achieve success"
+    ]
   },
   {
     "id": "sw-00660",
@@ -5261,19 +5685,44 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "認める；知らせる",
+            "definition": "to accept that something is true or show that you have noticed something",
+            "examples": [
+              {
+                "en": "The report acknowledges several limitations of the study.",
+                "ja": "その報告書は研究のいくつかの限界を認めています。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "acknowledges",
+      "past": "acknowledged",
+      "past_participle": "acknowledged",
+      "ing": "acknowledging"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "acknowledge"
+      "acknowledge",
+      "acknowledges",
+      "acknowledged",
+      "acknowledging"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -5654,25 +6103,71 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "身につける；取得する",
+            "definition": "to gain knowledge, skill, or possession of something",
+            "examples": [
+              {
+                "en": "Children acquire language through repeated exposure and use.",
+                "ja": "子どもは繰り返し言語に触れ使うことで言語を身につけます。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "acquires",
+      "past": "acquired",
+      "past_participle": "acquired",
+      "ing": "acquiring"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
-      "acquire"
+      "acquire",
+      "acquires",
+      "acquired",
+      "acquiring"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin quaerere / quaesitus",
+      "history": "ad- + quaerere「求める」に由来し、求めて手に入れる意味になった。",
+      "roots": [
+        {
+          "form": "ad-",
+          "meaning": "〜へ"
+        },
+        {
+          "form": "quer / quir / quis",
+          "meaning": "尋ねる・求める"
+        }
+      ],
+      "related": [
+        "question",
+        "require",
+        "inquiry",
+        "acquisition"
+      ]
+    }
   },
   {
     "id": "sw-02703",
@@ -5707,7 +6202,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "acquisition"
@@ -5716,7 +6213,27 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin quaerere / quaesitus",
+      "history": "acquire の名詞形で、手に入れることを表す。",
+      "roots": [
+        {
+          "form": "ad-",
+          "meaning": "〜へ"
+        },
+        {
+          "form": "quer / quir / quis",
+          "meaning": "尋ねる・求める"
+        }
+      ],
+      "related": [
+        "question",
+        "require",
+        "inquiry",
+        "acquire"
+      ]
+    }
   },
   {
     "id": "sw-02371",
@@ -5940,12 +6457,12 @@
         "pos": "preposition",
         "meanings": [
           {
-            "ja": "〜を横切って；〜の向こう側に",
-            "definition": "used to express a relationship connected with 〜を横切って",
+            "ja": "〜を横切って；〜全体に",
+            "definition": "from one side to the other or throughout an area",
             "examples": [
               {
-                "en": "The word 'across' is commonly used in this context.",
-                "ja": "「across」は「〜を横切って」に関する文脈で使われます。"
+                "en": "The program is used in schools across the country.",
+                "ja": "そのプログラムは全国の学校で使われています。"
               }
             ]
           }
@@ -5959,8 +6476,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "across"
     ],
@@ -6085,7 +6604,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "act"
@@ -6094,7 +6615,27 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin agere / actus",
+      "history": "agere「行う・動かす」に由来し、「行為をする」が基本イメージ。",
+      "roots": [
+        {
+          "form": "act / ag",
+          "meaning": "行う・動かす"
+        }
+      ],
+      "related": [
+        "action",
+        "active",
+        "activity",
+        "actual",
+        "react",
+        "reaction",
+        "interact",
+        "interaction"
+      ]
+    }
   },
   {
     "id": "sw-09118",
@@ -6302,12 +6843,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "行動",
-            "definition": "a person, thing, idea, or concept connected with '行動'",
+            "ja": "行動；措置",
+            "definition": "something that a person or organization does, especially to achieve a result",
             "examples": [
               {
-                "en": "This action is important.",
-                "ja": "この「行動」は重要です。"
+                "en": "The school took immediate action to fix the safety problem.",
+                "ja": "学校は安全上の問題を解決するため直ちに対応しました。"
               }
             ]
           }
@@ -6321,8 +6862,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "action"
     ],
@@ -6330,7 +6874,27 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin agere / actus",
+      "history": "act の名詞形で、行うこと・行為を表す。",
+      "roots": [
+        {
+          "form": "act / ag",
+          "meaning": "行う・動かす"
+        }
+      ],
+      "related": [
+        "act",
+        "active",
+        "activity",
+        "actual",
+        "react",
+        "reaction",
+        "interact",
+        "interaction"
+      ]
+    }
   },
   {
     "id": "sw-01455",
@@ -6434,12 +6998,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "活動的な",
-            "definition": "having the quality described as '活動的な'",
+            "ja": "活動的な；活発な",
+            "definition": "busy and involved in physical or other activities",
             "examples": [
               {
-                "en": "This is active.",
-                "ja": "これは「活動的な」です。"
+                "en": "My grandfather is still very active in his seventies.",
+                "ja": "祖父は70代になってもとても活動的です。"
               }
             ]
           }
@@ -6453,8 +7017,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "active"
     ],
@@ -6462,7 +7029,27 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin agere / actus",
+      "history": "act と同じ語族で、「活動している」を表す。",
+      "roots": [
+        {
+          "form": "act / ag",
+          "meaning": "行う・動かす"
+        }
+      ],
+      "related": [
+        "act",
+        "action",
+        "activity",
+        "actual",
+        "react",
+        "reaction",
+        "interact",
+        "interaction"
+      ]
+    }
   },
   {
     "id": "sw-02215",
@@ -6566,12 +7153,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "活動",
-            "definition": "a person, thing, idea, or concept connected with '活動'",
+            "ja": "活動；行動",
+            "definition": "something that people do, especially for a particular purpose or for enjoyment",
             "examples": [
               {
-                "en": "This activity is important.",
-                "ja": "この「活動」は重要です。"
+                "en": "Outdoor activities are popular at the summer camp.",
+                "ja": "そのサマーキャンプでは野外活動が人気です。"
               }
             ]
           }
@@ -6585,8 +7172,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "activity"
     ],
@@ -6594,7 +7184,27 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin agere / actus",
+      "history": "active の名詞形で、活動・行動を表す。",
+      "roots": [
+        {
+          "form": "act / ag",
+          "meaning": "行う・動かす"
+        }
+      ],
+      "related": [
+        "act",
+        "action",
+        "active",
+        "actual",
+        "react",
+        "reaction",
+        "interact",
+        "interaction"
+      ]
+    }
   },
   {
     "id": "sw-01376",
@@ -6654,12 +7264,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "実際の",
-            "definition": "having the quality or characteristic expressed by 実際の",
+            "ja": "実際の；現実の",
+            "definition": "real rather than expected, imagined, or planned",
             "examples": [
               {
-                "en": "The word 'actual' is commonly used in this context.",
-                "ja": "「actual」は「実際の」に関する文脈で使われます。"
+                "en": "The actual cost was much lower than we expected.",
+                "ja": "実際の費用は予想よりずっと低かったです。"
               }
             ]
           }
@@ -6673,8 +7283,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "actual"
     ],
@@ -6682,7 +7295,27 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin agere / actus",
+      "history": "actus「行為・現実に行われたこと」に由来し、「実際の」を表すようになった。",
+      "roots": [
+        {
+          "form": "act / ag",
+          "meaning": "行う・動かす"
+        }
+      ],
+      "related": [
+        "act",
+        "action",
+        "active",
+        "activity",
+        "react",
+        "reaction",
+        "interact",
+        "interaction"
+      ]
+    }
   },
   {
     "id": "sw-00021",
@@ -6839,19 +7472,44 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "適応する；調整する",
+            "definition": "to change in order to fit a new situation or purpose",
+            "examples": [
+              {
+                "en": "Students quickly adapted to the new learning system.",
+                "ja": "生徒たちは新しい学習システムにすぐ適応しました。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "adapts",
+      "past": "adapted",
+      "past_participle": "adapted",
+      "ing": "adapting"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "adapt"
+      "adapt",
+      "adapts",
+      "adapted",
+      "adapting"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -7102,29 +7760,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "加える",
-            "definition": "to do or express the action '加える'",
+            "ja": "加える；足す",
+            "definition": "to put something together with something else or increase an amount",
             "examples": [
               {
-                "en": "We often add this in everyday life.",
-                "ja": "私たちは日常生活でよく「加える」します。"
+                "en": "Add a little salt after the water begins to boil.",
+                "ja": "お湯が沸騰してから塩を少し加えてください。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "adds",
+      "past": "added",
+      "past_participle": "added",
+      "ing": "adding"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "add"
+      "add",
+      "adds",
+      "added",
+      "adding"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -7413,6 +8081,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "追加の",
+            "definition": "more than what already exists or has been provided",
+            "examples": [
+              {
+                "en": "Additional information is available on the school website.",
+                "ja": "追加情報は学校のウェブサイトで確認できます。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -7422,8 +8105,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "additional"
     ],
@@ -7492,11 +8177,26 @@
         "meanings": [
           {
             "ja": "住所",
-            "definition": "a person, thing, idea, or concept connected with '住所'",
+            "definition": "the details of where someone lives or an organization is located",
             "examples": [
               {
-                "en": "This address is important.",
-                "ja": "この「住所」は重要です。"
+                "en": "Please write your address here.",
+                "ja": "ここに住所を書いてください。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "対処する",
+            "definition": "to deal with a problem or issue",
+            "examples": [
+              {
+                "en": "The policy aims to address income inequality.",
+                "ja": "その政策は所得格差への対処を目的としています。"
               }
             ]
           }
@@ -7510,8 +8210,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "address"
     ],
@@ -7519,7 +8222,10 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "address a problem",
+      "address an issue"
+    ]
   },
   {
     "id": "sw-07226",
@@ -7632,6 +8338,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "十分な；適切な",
+            "definition": "enough in amount or quality for a particular purpose",
+            "examples": [
+              {
+                "en": "The room has adequate space for thirty students.",
+                "ja": "その部屋には30人の生徒に十分な広さがあります。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -7641,8 +8362,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "adequate"
     ],
@@ -7650,7 +8374,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin aequus / aequare",
+      "history": "Latin adaequare「等しくする・釣り合わせる」に由来し、必要量に釣り合う→十分な、となった.",
+      "roots": [
+        {
+          "form": "equ",
+          "meaning": "等しい"
+        }
+      ],
+      "related": [
+        "equal",
+        "equality",
+        "equivalent",
+        "equation"
+      ]
+    }
   },
   {
     "id": "sw-01458",
@@ -8168,19 +8908,44 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "調整する；適応する",
+            "definition": "to change something slightly so that it works better or fits a situation",
+            "examples": [
+              {
+                "en": "You can adjust the text size in the settings.",
+                "ja": "設定で文字サイズを調整できます。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "adjusts",
+      "past": "adjusted",
+      "past_participle": "adjusted",
+      "ing": "adjusting"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "adjust"
+      "adjust",
+      "adjusts",
+      "adjusted",
+      "adjusting"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -8348,6 +9113,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "運営；行政",
+            "definition": "the activity of managing an organization or government",
+            "examples": [
+              {
+                "en": "The school administration approved the new program.",
+                "ja": "学校運営側は新しいプログラムを承認しました。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -8357,8 +9137,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "administration"
     ],
@@ -8750,7 +9532,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "admission"
@@ -8759,7 +9543,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin mittere / missus",
+      "history": "admit の名詞形で、「入れる・認める」の意味を持つ。",
+      "roots": [
+        {
+          "form": "mit / miss",
+          "meaning": "送る"
+        }
+      ],
+      "related": [
+        "admit",
+        "permit",
+        "permission",
+        "commit",
+        "committee",
+        "mission"
+      ]
+    }
   },
   {
     "id": "sw-00663",
@@ -8785,25 +9587,69 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "認める；入場を許す",
+            "definition": "to accept that something is true or allow someone to enter",
+            "examples": [
+              {
+                "en": "He admitted that he had made a mistake.",
+                "ja": "彼は自分が間違えたことを認めました。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "admits",
+      "past": "admited",
+      "past_participle": "admited",
+      "ing": "admiting"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
-      "admit"
+      "admit",
+      "admits",
+      "admited",
+      "admiting"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin mittere / missus",
+      "history": "ad-「〜へ」+ mittere「送る」に由来し、中へ入れることから「認める・入場を許す」へ発展した。",
+      "roots": [
+        {
+          "form": "mit / miss",
+          "meaning": "送る"
+        }
+      ],
+      "related": [
+        "admission",
+        "permit",
+        "permission",
+        "commit",
+        "committee",
+        "mission"
+      ]
+    }
   },
   {
     "id": "sw-03537",
@@ -9007,19 +9853,44 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "採用する；養子にする",
+            "definition": "to begin to use an idea or method, or legally take a child into a family",
+            "examples": [
+              {
+                "en": "The school adopted a new approach to language teaching.",
+                "ja": "学校は語学教育に新しい方法を採用しました。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "adopts",
+      "past": "adopted",
+      "past_participle": "adopted",
+      "ing": "adopting"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "adopt"
+      "adopt",
+      "adopts",
+      "adopted",
+      "adopting"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -9334,12 +10205,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "大人",
-            "definition": "a person, thing, idea, or concept connected with '大人'",
+            "ja": "成人；大人",
+            "definition": "a fully grown person",
             "examples": [
               {
-                "en": "This adult is important.",
-                "ja": "この「大人」は重要です。"
+                "en": "Adults can also benefit from learning a new language.",
+                "ja": "大人も新しい言語を学ぶことで恩恵を受けられます。"
               }
             ]
           }
@@ -9353,8 +10224,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "adult"
     ],
@@ -9388,6 +10261,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "進歩；前進",
+            "definition": "progress or movement toward a better or more developed state",
+            "examples": [
+              {
+                "en": "Recent advances in technology have changed translation tools.",
+                "ja": "近年の技術の進歩は翻訳ツールを変えました。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -9397,8 +10285,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "advance"
     ],
@@ -9422,12 +10312,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "高度な",
-            "definition": "having the quality or state expressed by 高度な",
+            "ja": "高度な；上級の",
+            "definition": "at a high level of development, skill, or difficulty",
             "examples": [
               {
-                "en": "It is advanced.",
-                "ja": "それは「高度な」です。"
+                "en": "The course is designed for advanced English learners.",
+                "ja": "その講座は上級英語学習者向けです。"
               }
             ]
           }
@@ -9441,8 +10331,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "advanced"
     ],
@@ -9510,12 +10402,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "利点",
-            "definition": "a person, thing, idea, or concept connected with '利点'",
+            "ja": "利点；有利な点",
+            "definition": "something that makes a situation better or gives someone a better chance of success",
             "examples": [
               {
-                "en": "This advantage is important.",
-                "ja": "この「利点」は重要です。"
+                "en": "One advantage of studying online is that you can learn at your own pace.",
+                "ja": "オンライン学習の利点の一つは自分のペースで学べることです。"
               }
             ]
           }
@@ -9529,8 +10421,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "advantage"
     ],
@@ -9661,7 +10555,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "adventure"
@@ -9670,7 +10566,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin venire / ventus",
+      "history": "Latin adventura 系で、ad-「〜へ」+ venire「来る」に関係し、「これから起こること」から冒険の意味へ発展した。",
+      "roots": [
+        {
+          "form": "ven / vent",
+          "meaning": "来る"
+        }
+      ],
+      "related": [
+        "event",
+        "prevent",
+        "prevention",
+        "invent",
+        "convention"
+      ]
+    }
   },
   {
     "id": "sw-10261",
@@ -9781,19 +10694,44 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "広告する；宣伝する",
+            "definition": "to tell the public about a product, service, or event in order to attract interest",
+            "examples": [
+              {
+                "en": "The company advertised the position on its website.",
+                "ja": "会社はウェブサイトでその求人を宣伝しました。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "advertises",
+      "past": "advertised",
+      "past_participle": "advertised",
+      "ing": "advertising"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "advertise"
+      "advertise",
+      "advertises",
+      "advertised",
+      "advertising"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -9903,12 +10841,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "助言",
-            "definition": "a person, thing, idea, or concept connected with '助言'",
+            "ja": "助言；アドバイス",
+            "definition": "an opinion or suggestion about what someone should do",
             "examples": [
               {
-                "en": "This advice is important.",
-                "ja": "この「助言」は重要です。"
+                "en": "My coach gave me useful advice about my running form.",
+                "ja": "コーチは私のランニングフォームについて役立つ助言をくれました。"
               }
             ]
           }
@@ -9916,14 +10854,20 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "give advice",
+      "ask for advice",
+      "a piece of advice"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "advice は不可算名詞。通常 an advice とはせず、a piece of advice などを使う。",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "advice"
     ],
@@ -10226,25 +11170,66 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "主張する；支持する",
+            "definition": "to publicly support an idea, policy, or action",
+            "examples": [
+              {
+                "en": "Some researchers advocate later school start times.",
+                "ja": "一部の研究者は学校の始業時間を遅くすることを支持しています。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "advocates",
+      "past": "advocated",
+      "past_participle": "advocated",
+      "ing": "advocating"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
-      "advocate"
+      "advocate",
+      "advocates",
+      "advocated",
+      "advocating"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin vox / vocare",
+      "history": "ad-「〜へ」+ vocare「呼ぶ」に由来し、助けるために呼ばれた人から「擁護する人・擁護する」へ発展した。",
+      "roots": [
+        {
+          "form": "voc",
+          "meaning": "声・呼ぶ"
+        }
+      ],
+      "related": [
+        "voice",
+        "vocal",
+        "vocabulary"
+      ]
+    }
   },
   {
     "id": "sw-06117",
@@ -10811,34 +11796,65 @@
         "meanings": [
           {
             "ja": "影響を与える",
-            "definition": "to do or express the action '影響を与える'",
+            "definition": "to cause a change in someone or something",
             "examples": [
               {
-                "en": "We often affect this in everyday life.",
-                "ja": "私たちは日常生活でよく「影響を与える」します。"
+                "en": "Lack of sleep can affect concentration.",
+                "ja": "睡眠不足は集中力に影響を与えることがあります。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "affects",
+      "past": "affected",
+      "past_participle": "affected",
+      "ing": "affecting"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "etymology-v1",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "affect"
+      "affect",
+      "affects",
+      "affected",
+      "affecting"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "seriously affect",
+      "directly affect"
+    ],
+    "etymology": {
+      "origin": "Latin facere / factus",
+      "history": "Latin afficere に由来し、ad-「〜へ」+ facere「する・作る」の語族。何かに作用する意味へ発展した。",
+      "roots": [
+        {
+          "form": "fac / fect",
+          "meaning": "する・作る"
+        }
+      ],
+      "related": [
+        "effect",
+        "effective",
+        "perfect",
+        "infection"
+      ]
+    }
   },
   {
     "id": "sw-10619",
@@ -11200,29 +12216,41 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "余裕がある",
-            "definition": "to do or express the action '余裕がある'",
+            "ja": "〜する余裕がある",
+            "definition": "to have enough money or time for something",
             "examples": [
               {
-                "en": "We often afford this in everyday life.",
-                "ja": "私たちは日常生活でよく「余裕がある」します。"
+                "en": "Many students cannot afford to study abroad for a full year.",
+                "ja": "多くの生徒には1年間留学する金銭的余裕がありません。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "affords",
+      "past": "afforded",
+      "past_participle": "afforded",
+      "ing": "affording"
+    },
+    "phrases": [
+      "can afford to do"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "afford"
+      "afford",
+      "affords",
+      "afforded",
+      "affording"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -11498,15 +12526,15 @@
     "frequency": 5,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "preposition",
         "meanings": [
           {
             "ja": "〜の後に",
-            "definition": "a person, thing, idea, or concept connected with '〜の後に'",
+            "definition": "later than an event or time",
             "examples": [
               {
-                "en": "This after is important.",
-                "ja": "この「〜の後に」は重要です。"
+                "en": "We went for dinner after the meeting.",
+                "ja": "会議の後に夕食へ行きました。"
               }
             ]
           }
@@ -11520,8 +12548,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "after"
     ],
@@ -11806,12 +12836,12 @@
         "pos": "preposition",
         "meanings": [
           {
-            "ja": "〜に反対して",
-            "definition": "a word showing a relationship with the sense '〜に反対して'",
+            "ja": "〜に反対して；〜に対して",
+            "definition": "in opposition to or touching something",
             "examples": [
               {
-                "en": "The word 'against' is common in English.",
-                "ja": "「against」は英語でよく使われる語です。"
+                "en": "Many residents voted against the proposal.",
+                "ja": "多くの住民がその提案に反対票を投じました。"
               }
             ]
           }
@@ -11825,8 +12855,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "against"
     ],
@@ -11973,12 +13005,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "年齢",
-            "definition": "a person, thing, idea, or concept connected with '年齢'",
+            "ja": "年齢；時代",
+            "definition": "the number of years someone has lived, or a particular period in history",
             "examples": [
               {
-                "en": "This age is important.",
-                "ja": "この「年齢」は重要です。"
+                "en": "Children under the age of twelve can enter for free.",
+                "ja": "12歳未満の子どもは無料で入場できます。"
               }
             ]
           }
@@ -11992,8 +13024,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "age"
     ],
@@ -12027,6 +13061,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "機関；代理店",
+            "definition": "an organization that provides a particular service or performs a public function",
+            "examples": [
+              {
+                "en": "The government agency published new safety guidelines.",
+                "ja": "政府機関は新しい安全指針を公表しました。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -12036,8 +13085,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "agency"
     ],
@@ -12250,7 +13301,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "aggregate"
@@ -12259,7 +13312,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin aggregare",
+      "history": "ad-「〜へ」+ grex「群れ」に由来し、群れへ集める→集計する、となった。",
+      "roots": [
+        {
+          "form": "ad-",
+          "meaning": "〜へ"
+        },
+        {
+          "form": "greg",
+          "meaning": "群れ・集める"
+        }
+      ],
+      "related": []
+    }
   },
   {
     "id": "sw-03322",
@@ -12576,38 +13644,43 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "同意する",
-            "definition": "to do or express the action '同意する'",
+            "ja": "同意する；意見が一致する",
+            "definition": "to have the same opinion or accept a suggestion",
             "examples": [
               {
-                "en": "We often agree this in everyday life.",
-                "ja": "私たちは日常生活でよく「同意する」します。"
+                "en": "I agree with you that the first plan is more realistic.",
+                "ja": "最初の案のほうが現実的だという点であなたに同意します。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "agrees",
+      "past": "agreed",
+      "past_participle": "agreed",
+      "ing": "agreeing"
+    },
     "phrases": [
-      {
-        "phrase": "agree with",
-        "ja": "人・意見に同意する"
-      },
-      {
-        "phrase": "agree on",
-        "ja": "事柄について合意する"
-      }
+      "agree with",
+      "agree on",
+      "agree to"
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "agree"
+      "agree",
+      "agrees",
+      "agreed",
+      "agreeing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -12737,12 +13810,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "合意",
-            "definition": "a person, thing, state, process, or idea connected with 合意",
+            "ja": "合意；協定",
+            "definition": "an arrangement or decision accepted by two or more sides",
             "examples": [
               {
-                "en": "The word 'agreement' is commonly used in this context.",
-                "ja": "「agreement」は「合意」に関する文脈で使われます。"
+                "en": "The two countries reached an agreement on trade.",
+                "ja": "両国は貿易について合意に達しました。"
               }
             ]
           }
@@ -12750,14 +13823,18 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "reach an agreement"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "agreement"
     ],
@@ -12782,11 +13859,11 @@
         "meanings": [
           {
             "ja": "農業の",
-            "definition": "having the quality expressed by 農業の",
+            "definition": "related to farming",
             "examples": [
               {
-                "en": "The word 'agricultural' is useful when discussing this topic.",
-                "ja": "この語は「農業の」に関する文脈で使われます。"
+                "en": "The region depends heavily on agricultural production.",
+                "ja": "その地域は農業生産に大きく依存しています。"
               }
             ]
           }
@@ -12800,8 +13877,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "agricultural"
     ],
@@ -12826,11 +13905,11 @@
         "meanings": [
           {
             "ja": "農業",
-            "definition": "a person, thing, state, or idea related to 農業",
+            "definition": "the activity of growing crops and raising animals for food",
             "examples": [
               {
-                "en": "This is a common example of 'agriculture'.",
-                "ja": "これは「農業」の一般的な例です。"
+                "en": "Agriculture uses a large amount of water in this region.",
+                "ja": "この地域では農業が大量の水を使用します。"
               }
             ]
           }
@@ -12844,8 +13923,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "agriculture"
     ],
@@ -12853,7 +13935,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin agricultura",
+      "history": "ager「畑・土地」と cultura「耕作・育成」に由来し、「土地を耕すこと」を表す。",
+      "roots": [
+        {
+          "form": "agri-",
+          "meaning": "畑・土地"
+        },
+        {
+          "form": "culture",
+          "meaning": "耕作・育成"
+        }
+      ],
+      "related": [
+        "agricultural",
+        "culture"
+      ]
+    }
   },
   {
     "id": "sw-10976",
@@ -12966,6 +14066,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "援助；助け",
+            "definition": "help or support given to a person, organization, or country",
+            "examples": [
+              {
+                "en": "Emergency aid arrived soon after the earthquake.",
+                "ja": "地震の直後に緊急援助が届きました。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -12975,8 +14090,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "aid"
     ],
@@ -13092,6 +14209,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "目的；目標",
+            "definition": "something that you hope to achieve",
+            "examples": [
+              {
+                "en": "The main aim of the lesson is to improve speaking confidence.",
+                "ja": "授業の主な目的は話す自信を高めることです。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -13101,8 +14233,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "aim"
     ],
@@ -13208,12 +14342,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "空気",
-            "definition": "a person, thing, idea, or concept connected with '空気'",
+            "ja": "空気；空中",
+            "definition": "the mixture of gases around the Earth that we breathe",
             "examples": [
               {
-                "en": "This air is important.",
-                "ja": "この「空気」は重要です。"
+                "en": "Clean air is essential for good health.",
+                "ja": "きれいな空気は健康に不可欠です。"
               }
             ]
           }
@@ -13227,8 +14361,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "air"
     ],
@@ -15836,25 +16972,66 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "割り当てる；配分する",
+            "definition": "to officially give time, money, or resources for a particular purpose",
+            "examples": [
+              {
+                "en": "The school allocated more money to library resources.",
+                "ja": "学校は図書館資料により多くの予算を配分しました。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "allocates",
+      "past": "allocated",
+      "past_participle": "allocated",
+      "ing": "allocating"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
-      "allocate"
+      "allocate",
+      "allocates",
+      "allocated",
+      "allocating"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin locus / locare",
+      "history": "ad-「〜へ」+ locare「置く」に由来し、資源などを特定の場所・目的へ割り当てる意味になった。",
+      "roots": [
+        {
+          "form": "loc",
+          "meaning": "場所・置く"
+        }
+      ],
+      "related": [
+        "local",
+        "location",
+        "allocation"
+      ]
+    }
   },
   {
     "id": "sw-02190",
@@ -15889,7 +17066,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "allocation"
@@ -15898,7 +17077,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin locus / locare",
+      "history": "allocate の名詞形で、何かを特定の場所・用途へ割り当てることを表す。",
+      "roots": [
+        {
+          "form": "loc",
+          "meaning": "場所・置く"
+        }
+      ],
+      "related": [
+        "local",
+        "location",
+        "allocate"
+      ]
+    }
   },
   {
     "id": "sw-10580",
@@ -16037,29 +17231,40 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "許す",
-            "definition": "to do or express the action '許す'",
+            "ja": "許可する；可能にする",
+            "definition": "to permit something or make it possible",
             "examples": [
               {
-                "en": "We often allow this in everyday life.",
-                "ja": "私たちは日常生活でよく「許す」します。"
+                "en": "The app allows users to study offline.",
+                "ja": "そのアプリではオフラインで学習できます。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "allows",
+      "past": "allowed",
+      "past_participle": "allowed",
+      "ing": "allowing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "v2.43-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "allow"
+      "allow",
+      "allows",
+      "allowed",
+      "allowing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -16559,12 +17764,12 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "ほとんど",
-            "definition": "in the way or time described as 'ほとんど'",
+            "ja": "ほとんど；もう少しで",
+            "definition": "very nearly but not completely",
             "examples": [
               {
-                "en": "The word 'almost' is common in English.",
-                "ja": "「almost」は英語でよく使われる語です。"
+                "en": "I had almost finished the book when the train arrived.",
+                "ja": "電車が着いたとき、その本をほとんど読み終えていました。"
               }
             ]
           }
@@ -16578,8 +17783,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "almost"
     ],
@@ -16600,15 +17807,15 @@
     "frequency": 5,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
-            "ja": "一人で",
-            "definition": "a person, thing, idea, or concept connected with '一人で'",
+            "ja": "一人で；単独の",
+            "definition": "without another person or other people",
             "examples": [
               {
-                "en": "This alone is important.",
-                "ja": "この「一人で」は重要です。"
+                "en": "He prefers to study alone when he needs to concentrate.",
+                "ja": "彼は集中したいとき一人で勉強するのを好みます。"
               }
             ]
           }
@@ -16622,8 +17829,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "alone"
     ],
@@ -16648,11 +17857,11 @@
         "meanings": [
           {
             "ja": "〜に沿って",
-            "definition": "a word showing a relationship with the sense '〜に沿って'",
+            "definition": "following the length of a road, river, or other line",
             "examples": [
               {
-                "en": "The word 'along' is common in English.",
-                "ja": "「along」は英語でよく使われる語です。"
+                "en": "We walked along the river for an hour.",
+                "ja": "私たちは1時間川沿いを歩きました。"
               }
             ]
           }
@@ -16666,8 +17875,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "along"
     ],
@@ -17077,12 +18288,12 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "すでに",
-            "definition": "in the way or time described as 'すでに'",
+            "ja": "すでに；もう",
+            "definition": "before now or earlier than expected",
             "examples": [
               {
-                "en": "The word 'already' is common in English.",
-                "ja": "「already」は英語でよく使われる語です。"
+                "en": "I've already sent the file to everyone in the group.",
+                "ja": "グループ全員にもうファイルを送りました。"
               }
             ]
           }
@@ -17096,8 +18307,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "already"
     ],
@@ -17175,19 +18388,44 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "変更する；変える",
+            "definition": "to change something, usually partly rather than completely",
+            "examples": [
+              {
+                "en": "The schedule was altered because of the storm.",
+                "ja": "嵐のため予定が変更されました。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "alters",
+      "past": "altered",
+      "past_participle": "altered",
+      "ing": "altering"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "alter"
+      "alter",
+      "alters",
+      "altered",
+      "altering"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -17263,6 +18501,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "代替案；選択肢",
+            "definition": "another choice or possibility",
+            "examples": [
+              {
+                "en": "If the train is delayed, the bus is a useful alternative.",
+                "ja": "電車が遅れた場合、バスが便利な代替手段です。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -17272,8 +18525,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "alternative"
     ],
@@ -18328,6 +19583,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "曖昧な",
+            "definition": "having more than one possible meaning and therefore unclear",
+            "examples": [
+              {
+                "en": "The question was ambiguous, so students interpreted it differently.",
+                "ja": "その質問は曖昧だったため生徒たちは異なる解釈をしました。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -18337,8 +19607,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "ambiguous"
     ],
@@ -18624,19 +19896,44 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "修正する；改正する",
+            "definition": "to make changes to a document, law, or proposal",
+            "examples": [
+              {
+                "en": "The committee amended the proposal before approving it.",
+                "ja": "委員会は承認前に提案を修正しました。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "amends",
+      "past": "amended",
+      "past_participle": "amended",
+      "ing": "amending"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "amend"
+      "amend",
+      "amends",
+      "amended",
+      "amending"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -18954,12 +20251,12 @@
         "pos": "preposition",
         "meanings": [
           {
-            "ja": "〜の間で",
-            "definition": "a word showing a relationship with the sense '〜の間で'",
+            "ja": "〜の間で；〜の中に",
+            "definition": "in the middle of or included in a group of three or more",
             "examples": [
               {
-                "en": "The word 'among' is common in English.",
-                "ja": "「among」は英語でよく使われる語です。"
+                "en": "The app is popular among high school students.",
+                "ja": "そのアプリは高校生の間で人気があります。"
               }
             ]
           }
@@ -18967,14 +20264,18 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "among other things"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "among"
     ],
@@ -19080,12 +20381,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "量",
-            "definition": "a person, thing, idea, or concept connected with '量'",
+            "ja": "量；金額",
+            "definition": "a quantity of something that cannot usually be counted individually",
             "examples": [
               {
-                "en": "This amount is important.",
-                "ja": "この「量」は重要です。"
+                "en": "Try to drink a sufficient amount of water during a long run.",
+                "ja": "長時間走るときは十分な量の水を飲むようにしてください。"
               }
             ]
           }
@@ -19099,8 +20400,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "amount"
     ],
@@ -19789,6 +21092,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "分析",
+            "definition": "a careful examination of something in order to understand it",
+            "examples": [
+              {
+                "en": "The report includes an analysis of the survey results.",
+                "ja": "その報告書には調査結果の分析が含まれています。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -19798,8 +21116,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "analysis"
     ],
@@ -19807,7 +21128,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Greek analysis",
+      "history": "ana- と lysis「ほどく・解く」に由来し、複雑なものを要素に「解きほぐして」調べるという発想を持つ。",
+      "roots": [
+        {
+          "form": "-lysis",
+          "meaning": "解く・分解する"
+        }
+      ],
+      "related": [
+        "analyze",
+        "paralysis"
+      ]
+    }
   },
   {
     "id": "sw-01482",
@@ -20006,19 +21341,44 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "分析する",
+            "definition": "to examine something carefully to understand its parts or causes",
+            "examples": [
+              {
+                "en": "Students analyzed the graph before writing their essays.",
+                "ja": "生徒たちは作文を書く前にグラフを分析しました。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "analyzes",
+      "past": "analyzed",
+      "past_participle": "analyzed",
+      "ing": "analyzing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "analyze"
+      "analyze",
+      "analyzes",
+      "analyzed",
+      "analyzing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -20423,12 +21783,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "古代の",
-            "definition": "having the quality or state expressed by 古代の",
+            "ja": "古代の；非常に古い",
+            "definition": "belonging to a time very long ago",
             "examples": [
               {
-                "en": "It is ancient.",
-                "ja": "それは「古代の」です。"
+                "en": "The museum displays objects from ancient Egypt.",
+                "ja": "その博物館は古代エジプトの品々を展示しています。"
               }
             ]
           }
@@ -20442,8 +21802,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "ancient"
     ],
@@ -21103,11 +22465,11 @@
         "meanings": [
           {
             "ja": "動物",
-            "definition": "a person, thing, idea, or concept connected with '動物'",
+            "definition": "a living creature that can move and is not a plant",
             "examples": [
               {
-                "en": "This animal is important.",
-                "ja": "この「動物」は重要です。"
+                "en": "The island is home to several rare animal species.",
+                "ja": "その島には数種の珍しい動物が生息しています。"
               }
             ]
           }
@@ -21121,8 +22483,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "animal"
     ],
@@ -21616,29 +22980,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "発表する",
-            "definition": "to perform or cause the action expressed by 発表する",
+            "ja": "発表する；知らせる",
+            "definition": "to make information known publicly or officially",
             "examples": [
               {
-                "en": "People often announce in this situation.",
-                "ja": "この状況では人々はしばしば「発表する」します。"
+                "en": "The school announced the results on Monday.",
+                "ja": "学校は月曜日に結果を発表しました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "announces",
+      "past": "announced",
+      "past_participle": "announced",
+      "ing": "announcing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "announce"
+      "announce",
+      "announces",
+      "announced",
+      "announcing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -21846,6 +23220,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "年1回の；年間の",
+            "definition": "happening once every year or relating to a whole year",
+            "examples": [
+              {
+                "en": "The school holds an annual international festival.",
+                "ja": "学校は毎年国際フェスティバルを開催します。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -21855,8 +23244,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "annual"
     ],
@@ -22222,29 +23613,52 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "答え",
-            "definition": "a person, thing, idea, or concept connected with '答え'",
+            "ja": "答え；回答",
+            "definition": "something said or written in response to a question",
             "examples": [
               {
-                "en": "This answer is important.",
-                "ja": "この「答え」は重要です。"
+                "en": "I still don't know the answer to the last question.",
+                "ja": "私はまだ最後の質問の答えが分かりません。"
+              }
+            ]
+          },
+          {
+            "ja": "解決策",
+            "definition": "a solution to a problem or difficulty",
+            "examples": [
+              {
+                "en": "There is no easy answer to this problem.",
+                "ja": "この問題に簡単な解決策はありません。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "answers",
+      "past": "answered",
+      "past_participle": "answered",
+      "ing": "answering"
+    },
+    "phrases": [
+      "answer a question",
+      "the answer to a question"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.28-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "answer"
+      "answer",
+      "answers",
+      "answered",
+      "answering"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -23181,19 +24595,44 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "予想する；見込む",
+            "definition": "to expect something to happen and prepare for it",
+            "examples": [
+              {
+                "en": "We anticipate a large number of visitors this weekend.",
+                "ja": "今週末は多くの来場者を見込んでいます。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "anticipates",
+      "past": "anticipated",
+      "past_participle": "anticipated",
+      "ing": "anticipating"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "anticipate"
+      "anticipate",
+      "anticipates",
+      "anticipated",
+      "anticipating"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -25010,6 +26449,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "明らかな；見かけ上の",
+            "definition": "easy to notice or seeming to be true",
+            "examples": [
+              {
+                "en": "There was no apparent reason for the sudden change.",
+                "ja": "突然の変化には明らかな理由がありませんでした。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -25019,8 +26473,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "apparent"
     ],
@@ -25098,6 +26554,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "魅力；訴え",
+            "definition": "the quality that makes something attractive, or a serious request for help",
+            "examples": [
+              {
+                "en": "The town's natural beauty is part of its appeal.",
+                "ja": "その町の自然の美しさは魅力の一部です。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -25107,8 +26578,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "appeal"
     ],
@@ -25116,7 +26590,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin appellare",
+      "history": "ad-「〜へ」+ pellere 系に関係する appellare「呼びかける」から、訴える・呼びかける意味になった。",
+      "roots": [
+        {
+          "form": "ad-",
+          "meaning": "〜へ"
+        },
+        {
+          "form": "pell / peal",
+          "meaning": "呼びかける"
+        }
+      ],
+      "related": [
+        "pulse",
+        "propel"
+      ]
+    }
   },
   {
     "id": "sw-09154",
@@ -25196,29 +26688,40 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "現れる",
-            "definition": "to do or express the action '現れる'",
+            "ja": "現れる；〜のように見える",
+            "definition": "to become visible or seem to be a particular way",
             "examples": [
               {
-                "en": "We often appear this in everyday life.",
-                "ja": "私たちは日常生活でよく「現れる」します。"
+                "en": "The results appear to support the theory.",
+                "ja": "結果はその理論を支持しているようです。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "appears",
+      "past": "appeared",
+      "past_participle": "appeared",
+      "ing": "appearing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "v2.43-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "appear"
+      "appear",
+      "appears",
+      "appeared",
+      "appearing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -25241,11 +26744,11 @@
         "meanings": [
           {
             "ja": "外見；出現",
-            "definition": "a thing, person, idea, or state related to 外見",
+            "definition": "the way someone or something looks",
             "examples": [
               {
-                "en": "This appearance is important.",
-                "ja": "この「外見」は重要です。"
+                "en": "The building's appearance changed after the renovation.",
+                "ja": "改修後、その建物の外観は変わりました。"
               }
             ]
           }
@@ -25259,8 +26762,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "appearance"
     ],
@@ -25829,6 +27334,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "申請；応用；アプリ",
+            "definition": "a formal request, a practical use, or a computer program",
+            "examples": [
+              {
+                "en": "The deadline for university applications is next Friday.",
+                "ja": "大学出願の締め切りは次の金曜日です。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -25838,8 +27358,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "application"
     ],
@@ -25904,29 +27426,59 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "申し込む",
-            "definition": "to do or express the action '申し込む'",
+            "ja": "申し込む；応募する",
+            "definition": "to formally ask for something such as a job or course",
             "examples": [
               {
-                "en": "We often apply this in everyday life.",
-                "ja": "私たちは日常生活でよく「申し込む」します。"
+                "en": "She applied for a scholarship.",
+                "ja": "彼女は奨学金に応募しました。"
+              }
+            ]
+          },
+          {
+            "ja": "当てはまる；適用する",
+            "definition": "to be relevant or to put a rule or method into use",
+            "examples": [
+              {
+                "en": "The same rule applies to everyone.",
+                "ja": "同じ規則が全員に当てはまります。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "applies",
+      "past": "applied",
+      "past_participle": "applied",
+      "ing": "applying"
+    },
+    "phrases": [
+      {
+        "phrase": "apply for",
+        "ja": "〜に応募する"
+      },
+      {
+        "phrase": "apply to",
+        "ja": "〜に当てはまる；〜に適用される"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "apply"
+      "apply",
+      "applies",
+      "applied",
+      "applying"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -26688,15 +28240,30 @@
     "frequency": 3,
     "parts_of_speech": [
       {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "近づく",
+            "definition": "to move nearer to someone or something",
+            "examples": [
+              {
+                "en": "A storm is approaching the coast.",
+                "ja": "嵐が海岸に近づいています。"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "pos": "noun",
         "meanings": [
           {
-            "ja": "方法；接近",
-            "definition": "a person, thing, idea, or concept connected with '方法；接近'",
+            "ja": "方法；取り組み方",
+            "definition": "a way of dealing with a problem or task",
             "examples": [
               {
-                "en": "This approach is important.",
-                "ja": "この「方法」は重要です。"
+                "en": "We need a different approach to teaching vocabulary.",
+                "ja": "語彙指導には別の方法が必要です。"
               }
             ]
           }
@@ -26710,8 +28277,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "approach"
     ],
@@ -26719,7 +28289,10 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "different approach",
+      "effective approach"
+    ]
   },
   {
     "id": "sw-06326",
@@ -26786,6 +28359,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "適切な",
+            "definition": "suitable for a particular situation or purpose",
+            "examples": [
+              {
+                "en": "Choose language that is appropriate for a formal email.",
+                "ja": "正式なメールに適切な言葉を選んでください。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -26795,8 +28383,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "appropriate"
     ],
@@ -26964,25 +28554,71 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "承認する；賛成する",
+            "definition": "to officially accept something or think it is good",
+            "examples": [
+              {
+                "en": "The committee approved the proposal without changes.",
+                "ja": "委員会は変更なしで提案を承認しました。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "approves",
+      "past": "approved",
+      "past_participle": "approved",
+      "ing": "approving"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
-      "approve"
+      "approve",
+      "approves",
+      "approved",
+      "approving"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin probare",
+      "history": "ad-「〜へ」+ probare「良いと認める」に由来し、認める・承認する意味になった。",
+      "roots": [
+        {
+          "form": "ad-",
+          "meaning": "〜へ"
+        },
+        {
+          "form": "prob / prov",
+          "meaning": "試す・証明する"
+        }
+      ],
+      "related": [
+        "probably",
+        "probability",
+        "prove",
+        "proof"
+      ]
+    }
   },
   {
     "id": "sw-10622",
@@ -27095,6 +28731,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "adverb",
+        "meanings": [
+          {
+            "ja": "およそ；約",
+            "definition": "close to a particular number or amount but not exact",
+            "examples": [
+              {
+                "en": "The journey takes approximately ninety minutes.",
+                "ja": "その移動には約90分かかります。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -27104,8 +28755,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "approximately"
     ],
@@ -28382,12 +30035,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "建築",
-            "definition": "a person, thing, state, or idea related to 建築",
+            "ja": "建築；建築様式",
+            "definition": "the art and design of buildings",
             "examples": [
               {
-                "en": "The word 'architecture' is often useful in formal or everyday English.",
-                "ja": "「architecture」は「建築」の意味で使われます。"
+                "en": "The city is known for its modern architecture.",
+                "ja": "その都市は現代建築で知られています。"
               }
             ]
           }
@@ -28401,8 +30054,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "architecture"
     ],
@@ -28593,12 +30248,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "地域",
-            "definition": "a person, thing, idea, or concept connected with '地域'",
+            "ja": "地域；面積；分野",
+            "definition": "a particular part of a place, subject, or activity",
             "examples": [
               {
-                "en": "This area is important.",
-                "ja": "この「地域」は重要です。"
+                "en": "This area is famous for its beautiful lakes and forests.",
+                "ja": "この地域は美しい湖と森で有名です。"
               }
             ]
           }
@@ -28612,8 +30267,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "area"
     ],
@@ -28764,28 +30421,49 @@
         "meanings": [
           {
             "ja": "主張する",
-            "definition": "to do or express the action '主張する'",
+            "definition": "to give reasons for an opinion",
             "examples": [
               {
-                "en": "We often argue this in everyday life.",
-                "ja": "私たちは日常生活でよく「主張する」します。"
+                "en": "The author argues that cities need more green space.",
+                "ja": "著者は都市にはもっと緑地が必要だと主張しています。"
+              }
+            ]
+          },
+          {
+            "ja": "口論する",
+            "definition": "to speak angrily because you disagree",
+            "examples": [
+              {
+                "en": "They argued about money.",
+                "ja": "彼らはお金のことで口論しました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "argues",
+      "past": "argued",
+      "past_participle": "argued",
+      "ing": "arguing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "argue"
+      "argue",
+      "argues",
+      "argued",
+      "arguing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -28817,17 +30495,37 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "主張；議論",
+            "definition": "a set of reasons supporting an idea, or a disagreement",
+            "examples": [
+              {
+                "en": "Support your argument with specific evidence.",
+                "ja": "具体的な証拠で自分の主張を支えてください。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "make an argument",
+      "support an argument"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "argument"
     ],
@@ -28992,19 +30690,45 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "生じる；起こる",
+            "definition": "to begin to exist or happen",
+            "examples": [
+              {
+                "en": "Problems can arise when instructions are unclear.",
+                "ja": "指示が不明確だと問題が生じることがあります。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "arises",
+      "past": "arose",
+      "past_participle": "arisen",
+      "ing": "arising"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "arise"
+      "arise",
+      "arises",
+      "arose",
+      "arisen",
+      "arising"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -29503,12 +31227,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "陸軍",
-            "definition": "a thing, person, idea, or state related to 陸軍",
+            "ja": "陸軍；軍隊",
+            "definition": "a large organized military force trained to fight on land",
             "examples": [
               {
-                "en": "This army is important.",
-                "ja": "この「陸軍」は重要です。"
+                "en": "The army helped deliver supplies after the disaster.",
+                "ja": "災害後、軍が物資輸送を支援しました。"
               }
             ]
           }
@@ -29522,8 +31246,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "army"
     ],
@@ -29634,12 +31360,12 @@
         "pos": "preposition",
         "meanings": [
           {
-            "ja": "〜の周りに",
-            "definition": "a word showing a relationship with the sense '〜の周りに'",
+            "ja": "〜の周りに；約",
+            "definition": "surrounding something or approximately",
             "examples": [
               {
-                "en": "The word 'around' is common in English.",
-                "ja": "「around」は英語でよく使われる語です。"
+                "en": "Around two hundred people attended the event.",
+                "ja": "約200人がイベントに参加しました。"
               }
             ]
           }
@@ -29653,8 +31379,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "around"
     ],
@@ -29719,29 +31447,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "手配する",
-            "definition": "to perform or cause the action expressed by 手配する",
+            "ja": "手配する；整理する",
+            "definition": "to plan or organize something in advance",
             "examples": [
               {
-                "en": "This is a common example of 'arrange'.",
-                "ja": "これは「手配する」の一般的な例です。"
+                "en": "We arranged a meeting for Friday afternoon.",
+                "ja": "金曜の午後に会議を設定しました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "arranges",
+      "past": "arranged",
+      "past_participle": "arranged",
+      "ing": "arranging"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "arrange"
+      "arrange",
+      "arranges",
+      "arranged",
+      "arranging"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -30066,28 +31804,38 @@
         "meanings": [
           {
             "ja": "到着する",
-            "definition": "to do or express the action '到着する'",
+            "definition": "to reach a place after traveling",
             "examples": [
               {
-                "en": "We often arrive this in everyday life.",
-                "ja": "私たちは日常生活でよく「到着する」します。"
+                "en": "We arrived at the airport two hours before our flight.",
+                "ja": "私たちは飛行機の2時間前に空港に到着しました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "arrives",
+      "past": "arrived",
+      "past_participle": "arrived",
+      "ing": "arriving"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "arrive"
+      "arrive",
+      "arrives",
+      "arrived",
+      "arriving"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -30363,12 +32111,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "芸術",
-            "definition": "a person, thing, idea, or concept connected with '芸術'",
+            "ja": "芸術；美術",
+            "definition": "creative work such as painting, drawing, music, or sculpture",
             "examples": [
               {
-                "en": "This art is important.",
-                "ja": "この「芸術」は重要です。"
+                "en": "The museum has a large collection of modern art.",
+                "ja": "その美術館には現代美術の大きなコレクションがあります。"
               }
             ]
           }
@@ -30382,8 +32130,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "art"
     ],
@@ -30538,12 +32288,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "記事",
-            "definition": "a thing, person, idea, or state related to 記事",
+            "ja": "記事；論文",
+            "definition": "a piece of writing about a particular subject",
             "examples": [
               {
-                "en": "This article is important.",
-                "ja": "この「記事」は重要です。"
+                "en": "I read an interesting article about language learning.",
+                "ja": "語学学習について興味深い記事を読みました。"
               }
             ]
           }
@@ -30557,8 +32307,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "article"
     ],
@@ -31874,6 +33626,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "側面；観点",
+            "definition": "one particular part or feature of a situation or subject",
+            "examples": [
+              {
+                "en": "The report examines the economic aspect of the problem.",
+                "ja": "その報告書は問題の経済的側面を検討しています。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -31883,8 +33650,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "aspect"
     ],
@@ -32518,19 +34287,44 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "評価する",
+            "definition": "to judge the quality, importance, or amount of something",
+            "examples": [
+              {
+                "en": "Teachers assess both the content and language of the essays.",
+                "ja": "教員は作文の内容と言語の両方を評価します。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "assesses",
+      "past": "assessed",
+      "past_participle": "assessed",
+      "ing": "assessing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "assess"
+      "assess",
+      "assesses",
+      "assessed",
+      "assessing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -32562,6 +34356,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "評価；査定",
+            "definition": "the process of judging quality, ability, or progress",
+            "examples": [
+              {
+                "en": "The course includes both written and oral assessment.",
+                "ja": "その講座には筆記と口頭の両方の評価があります。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -32571,8 +34380,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "assessment"
     ],
@@ -32732,25 +34543,71 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "割り当てる；課す",
+            "definition": "to give someone a particular task or responsibility",
+            "examples": [
+              {
+                "en": "Each group was assigned a different topic.",
+                "ja": "各グループに異なるテーマが割り当てられました。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "assigns",
+      "past": "assigned",
+      "past_participle": "assigned",
+      "ing": "assigning"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
-      "assign"
+      "assign",
+      "assigns",
+      "assigned",
+      "assigning"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin signum / signare",
+      "history": "ad-「〜へ」+ signare「印をつける」から、特定の人や用途へ割り当てる意味になった.",
+      "roots": [
+        {
+          "form": "ad-",
+          "meaning": "〜へ"
+        },
+        {
+          "form": "sign",
+          "meaning": "印・しるし"
+        }
+      ],
+      "related": [
+        "sign",
+        "signal",
+        "significant",
+        "design"
+      ]
+    }
   },
   {
     "id": "sw-08166",
@@ -33240,29 +35097,45 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "仮定する",
-            "definition": "to do or express the action '仮定する'",
+            "ja": "〜だと仮定する；思い込む",
+            "definition": "to accept something as true without proof",
             "examples": [
               {
-                "en": "We often assume this in everyday life.",
-                "ja": "私たちは日常生活でよく「仮定する」します。"
+                "en": "Do not assume that everyone agrees with you.",
+                "ja": "全員があなたに賛成していると思い込まないでください。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "assumes",
+      "past": "assumed",
+      "past_participle": "assumed",
+      "ing": "assuming"
+    },
+    "phrases": [
+      {
+        "phrase": "assume that ...",
+        "ja": "…だと仮定する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "assume"
+      "assume",
+      "assumes",
+      "assumed",
+      "assuming"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -33284,12 +35157,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "仮定",
-            "definition": "a person, thing, state, process, or idea connected with 仮定",
+            "ja": "仮定；思い込み",
+            "definition": "something accepted as true without definite proof",
             "examples": [
               {
-                "en": "The word 'assumption' is commonly used in this context.",
-                "ja": "「assumption」は「仮定」に関する文脈で使われます。"
+                "en": "The argument is based on an assumption that may be wrong.",
+                "ja": "その主張は誤っているかもしれない仮定に基づいています。"
               }
             ]
           }
@@ -33303,8 +35176,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "assumption"
     ],
@@ -34905,12 +36780,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "攻撃",
-            "definition": "a thing, person, idea, or state related to 攻撃",
+            "ja": "攻撃；発作",
+            "definition": "an act of trying to hurt someone or damage something",
             "examples": [
               {
-                "en": "This attack is important.",
-                "ja": "この「攻撃」は重要です。"
+                "en": "The system was temporarily closed after a cyber attack.",
+                "ja": "システムはサイバー攻撃後、一時的に停止されました。"
               }
             ]
           }
@@ -34924,8 +36799,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "attack"
     ],
@@ -35118,15 +36995,30 @@
     "frequency": 3,
     "parts_of_speech": [
       {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "試みる",
+            "definition": "to try to do something difficult",
+            "examples": [
+              {
+                "en": "They attempted to solve the problem.",
+                "ja": "彼らはその問題を解決しようとしました。"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "pos": "noun",
         "meanings": [
           {
             "ja": "試み",
-            "definition": "a thing, person, idea, or state related to 試み",
+            "definition": "an effort to do something",
             "examples": [
               {
-                "en": "This attempt is important.",
-                "ja": "この「試み」は重要です。"
+                "en": "His first attempt ended in failure.",
+                "ja": "彼の最初の試みは失敗に終わりました。"
               }
             ]
           }
@@ -35140,8 +37032,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "attempt"
     ],
@@ -35184,7 +37079,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "attend"
@@ -35193,7 +37090,26 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin tendere / tentus",
+      "history": "ad-「〜へ」+ tendere「向ける」に由来し、注意を向ける・その場へ行く意味へ発展した。",
+      "roots": [
+        {
+          "form": "tend / tens",
+          "meaning": "伸ばす・向ける"
+        }
+      ],
+      "related": [
+        "tend",
+        "tendency",
+        "extend",
+        "extension",
+        "intend",
+        "intention",
+        "attention"
+      ]
+    }
   },
   {
     "id": "sw-09170",
@@ -35358,12 +37274,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "注意",
-            "definition": "a person, thing, idea, or concept connected with '注意'",
+            "ja": "注意；注目",
+            "definition": "the act of carefully watching, listening to, or thinking about something",
             "examples": [
               {
-                "en": "This attention is important.",
-                "ja": "この「注意」は重要です。"
+                "en": "Please pay attention to the final instruction on the page.",
+                "ja": "ページの最後の指示に注意してください。"
               }
             ]
           }
@@ -35371,14 +37287,19 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "pay attention to"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "attention"
     ],
@@ -35386,7 +37307,26 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin tendere / tentus",
+      "history": "attend と同じ tend 系で、心を何かへ向けることを表す。",
+      "roots": [
+        {
+          "form": "tend / tens",
+          "meaning": "伸ばす・向ける"
+        }
+      ],
+      "related": [
+        "tend",
+        "tendency",
+        "extend",
+        "extension",
+        "intend",
+        "intention",
+        "attend"
+      ]
+    }
   },
   {
     "id": "sw-03562",
@@ -35588,6 +37528,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "態度；考え方",
+            "definition": "the way someone thinks or feels about something",
+            "examples": [
+              {
+                "en": "Living abroad changed his attitude toward cultural differences.",
+                "ja": "海外生活は文化の違いに対する彼の考え方を変えました。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -35597,8 +37552,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "attitude"
     ],
@@ -35687,7 +37644,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "attract"
@@ -35696,7 +37655,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin trahere / tractus",
+      "history": "ad-「〜へ」と trahere「引く」に由来し、「引き寄せる」が中心イメージ。",
+      "roots": [
+        {
+          "form": "tract",
+          "meaning": "引く"
+        }
+      ],
+      "related": [
+        "attraction",
+        "extract",
+        "contract",
+        "tractor"
+      ]
+    }
   },
   {
     "id": "sw-01385",
@@ -35731,7 +37706,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "attraction"
@@ -35740,7 +37717,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin trahere / tractus",
+      "history": "attract の名詞形で、「引く」を表す tract の語族。",
+      "roots": [
+        {
+          "form": "tract",
+          "meaning": "引く"
+        }
+      ],
+      "related": [
+        "attract",
+        "extract",
+        "contract",
+        "tractor"
+      ]
+    }
   },
   {
     "id": "sw-01386",
@@ -35810,19 +37803,44 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "〜のせいにする；〜に帰する",
+            "definition": "to regard something as being caused by a particular person or factor",
+            "examples": [
+              {
+                "en": "Researchers attributed the improvement to regular practice.",
+                "ja": "研究者たちは改善を定期的な練習のおかげだとしました。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "attributes",
+      "past": "attributed",
+      "past_participle": "attributed",
+      "ing": "attributing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "attribute"
+      "attribute",
+      "attributes",
+      "attributed",
+      "attributing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -36122,9 +38140,25 @@
     },
     "usage_note": "",
     "tags": [
-      "judgment-and-relations"
+      "judgment-and-relations",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin audire",
+      "history": "audire「聞く」から、「聞くことができる」を表す。",
+      "roots": [
+        {
+          "form": "aud",
+          "meaning": "聞く"
+        }
+      ],
+      "related": [
+        "audio",
+        "audience",
+        "auditorium"
+      ]
+    }
   },
   {
     "id": "sw-10051",
@@ -36200,7 +38234,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "audience"
@@ -36209,7 +38245,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin audientia / audire",
+      "history": "audire「聞く」に由来し、もとは「聞くこと」、そこから「聞く人々・観衆」を表すようになった。",
+      "roots": [
+        {
+          "form": "aud",
+          "meaning": "聞く"
+        }
+      ],
+      "related": [
+        "audio",
+        "audible",
+        "audition"
+      ]
+    }
   },
   {
     "id": "sw-01510",
@@ -36244,7 +38295,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "audio"
@@ -36253,7 +38306,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin audire",
+      "history": "audire「聞く」に由来する aud- の語族で、音声に関する語として使われる。",
+      "roots": [
+        {
+          "form": "aud",
+          "meaning": "聞く"
+        }
+      ],
+      "related": [
+        "audible",
+        "audience",
+        "auditorium"
+      ]
+    }
   },
   {
     "id": "sw-01511",
@@ -36383,9 +38451,25 @@
     "usage_note": "",
     "tags": [
       "general-vocabulary",
-      "needs-example-enrichment"
+      "needs-example-enrichment",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin audire",
+      "history": "audire「聞く」に関係し、もとは「聞く場所」という発想を持つ。",
+      "roots": [
+        {
+          "form": "aud",
+          "meaning": "聞く"
+        }
+      ],
+      "related": [
+        "audio",
+        "audible",
+        "audience"
+      ]
+    }
   },
   {
     "id": "sw-00083",
@@ -36870,12 +38954,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "著者",
-            "definition": "a thing, person, idea, or state related to 著者",
+            "ja": "著者；作家",
+            "definition": "a person who writes a book, article, or other text",
             "examples": [
               {
-                "en": "This author is important.",
-                "ja": "この「著者」は重要です。"
+                "en": "The author gives several examples to support her claim.",
+                "ja": "著者は主張を支えるため複数の例を挙げています。"
               }
             ]
           }
@@ -36889,8 +38973,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "author"
     ],
@@ -36924,6 +39010,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "権限；当局；権威",
+            "definition": "the power to make decisions, or a person or organization with official power",
+            "examples": [
+              {
+                "en": "Local authorities issued an evacuation warning.",
+                "ja": "地方当局は避難警報を出しました。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -36933,8 +39034,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "authority"
     ],
@@ -37077,9 +39180,25 @@
     "usage_note": "",
     "tags": [
       "general-vocabulary",
-      "needs-example-enrichment"
+      "needs-example-enrichment",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Greek auto- / automatos",
+      "history": "auto-「自分自身」+ bio-「人生」+ graph「書く」から、「自分自身の人生を書いたもの」を表す。",
+      "roots": [
+        {
+          "form": "auto-",
+          "meaning": "自分自身・自ら"
+        }
+      ],
+      "related": [
+        "automatic",
+        "automatically",
+        "automobile"
+      ]
+    }
   },
   {
     "id": "sw-12949",
@@ -37155,7 +39274,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "automatic"
@@ -37164,7 +39285,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Greek auto- / automatos",
+      "history": "Greek automatos「自ら動く」系の語に由来し、人の直接操作なしに動くことを表す。",
+      "roots": [
+        {
+          "form": "auto-",
+          "meaning": "自分自身・自ら"
+        }
+      ],
+      "related": [
+        "automatically",
+        "automobile",
+        "autobiography"
+      ]
+    }
   },
   {
     "id": "sw-01513",
@@ -37199,7 +39335,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "automatically"
@@ -37208,7 +39346,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Greek auto- / automatos",
+      "history": "automatic + -ally で、「自動的に」を表す。",
+      "roots": [
+        {
+          "form": "auto-",
+          "meaning": "自分自身・自ら"
+        }
+      ],
+      "related": [
+        "automatic",
+        "automobile",
+        "autobiography"
+      ]
+    }
   },
   {
     "id": "sw-02951",
@@ -37289,7 +39442,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "automobile"
@@ -37298,7 +39453,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Greek auto- / automatos",
+      "history": "auto-「自ら」と mobile「動く」に関係し、「自ら動く乗り物」として作られた語。",
+      "roots": [
+        {
+          "form": "auto-",
+          "meaning": "自分自身・自ら"
+        }
+      ],
+      "related": [
+        "automatic",
+        "automatically",
+        "autobiography"
+      ]
+    }
   },
   {
     "id": "sw-02868",
@@ -37705,12 +39875,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "利用できる",
-            "definition": "having the quality described as '利用できる'",
+            "ja": "利用できる；入手できる",
+            "definition": "ready to be used, obtained, or seen",
             "examples": [
               {
-                "en": "This is available.",
-                "ja": "これは「利用できる」です。"
+                "en": "The results will be available online tomorrow morning.",
+                "ja": "結果は明日の朝オンラインで確認できます。"
               }
             ]
           }
@@ -37724,8 +39894,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "available"
     ],
@@ -37893,6 +40065,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "平均；平均値",
+            "definition": "a number representing the typical value of a group of numbers",
+            "examples": [
+              {
+                "en": "The class average was seventy-eight points.",
+                "ja": "クラス平均は78点でした。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -37902,8 +40089,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "average"
     ],
@@ -38064,28 +40253,39 @@
         "meanings": [
           {
             "ja": "避ける",
-            "definition": "to do or express the action '避ける'",
+            "definition": "to stay away from something or prevent it from happening",
             "examples": [
               {
-                "en": "We often avoid this in everyday life.",
-                "ja": "私たちは日常生活でよく「避ける」します。"
+                "en": "Try to avoid using your phone before bed.",
+                "ja": "寝る前はスマホの使用を避けてみてください。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "avoids",
+      "past": "avoided",
+      "past_participle": "avoided",
+      "ing": "avoiding"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "avoid"
+      "avoid",
+      "avoids",
+      "avoided",
+      "avoiding"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -38289,17 +40489,36 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "気づいている；認識している",
+            "definition": "knowing that something exists or understanding a situation",
+            "examples": [
+              {
+                "en": "Students should be aware of the risks of sharing personal data.",
+                "ja": "生徒は個人データ共有の危険性を認識すべきです。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "be aware of"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "aware"
     ],

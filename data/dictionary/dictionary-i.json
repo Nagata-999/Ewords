@@ -642,12 +642,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "考え",
-            "definition": "a person, thing, idea, or concept connected with '考え'",
+            "ja": "考え；アイデア",
+            "definition": "a thought, suggestion, or plan in someone's mind",
             "examples": [
               {
-                "en": "This idea is important.",
-                "ja": "この「考え」は重要です。"
+                "en": "She had a good idea for making the lesson more interactive.",
+                "ja": "彼女は授業をより双方向的にするよいアイデアを思いつきました。"
               }
             ]
           }
@@ -661,8 +661,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "idea"
     ],
@@ -860,34 +862,48 @@
         "meanings": [
           {
             "ja": "特定する",
-            "definition": "to do or express the action '特定する'",
+            "definition": "to recognize or discover exactly what something is",
             "examples": [
               {
-                "en": "We often identify this in everyday life.",
-                "ja": "私たちは日常生活でよく「特定する」します。"
+                "en": "Researchers identified three main causes.",
+                "ja": "研究者たちは3つの主な原因を特定しました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "identifies",
+      "past": "identified",
+      "past_participle": "identified",
+      "ing": "identifying"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "identify"
+      "identify",
+      "identifies",
+      "identified",
+      "identifying"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "identify a problem",
+      "identify a cause"
+    ]
   },
   {
     "id": "sw-01848",
@@ -1221,7 +1237,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "illegal"
@@ -1230,7 +1248,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin lex / legis",
+      "history": "in-「〜でない」+ legal から、「法律に反する」を表す。",
+      "roots": [
+        {
+          "form": "leg / legis",
+          "meaning": "法律"
+        }
+      ],
+      "related": [
+        "legal",
+        "legislation",
+        "legislative",
+        "legitimate"
+      ]
+    }
   },
   {
     "id": "sw-07643",
@@ -1639,7 +1673,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "illustrate"
@@ -1648,7 +1684,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin lux / lumen / lucere",
+      "history": "in- + lustrare「明るくする」に関係し、説明によって内容を明らかにする意味へ発展した。",
+      "roots": [
+        {
+          "form": "luc / lumin",
+          "meaning": "光"
+        }
+      ],
+      "related": [
+        "light",
+        "illustration",
+        "luminous",
+        "translucent"
+      ]
+    }
   },
   {
     "id": "sw-01851",
@@ -1683,7 +1735,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "illustration"
@@ -1692,7 +1746,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin lux / lumen / lucere",
+      "history": "illustrate の名詞形で、説明や図によって明らかにすることを表す。",
+      "roots": [
+        {
+          "form": "luc / lumin",
+          "meaning": "光"
+        }
+      ],
+      "related": [
+        "light",
+        "illustrate",
+        "luminous",
+        "translucent"
+      ]
+    }
   },
   {
     "id": "sw-11918",
@@ -1750,11 +1820,11 @@
         "meanings": [
           {
             "ja": "画像；印象",
-            "definition": "a thing, person, idea, or state related to 画像",
+            "definition": "a picture or an idea people have about someone or something",
             "examples": [
               {
-                "en": "This image is important.",
-                "ja": "この「画像」は重要です。"
+                "en": "The image was too small to use in the presentation.",
+                "ja": "その画像はプレゼンで使うには小さすぎました。"
               }
             ]
           }
@@ -1768,8 +1838,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "image"
     ],
@@ -1879,28 +1951,38 @@
         "meanings": [
           {
             "ja": "想像する",
-            "definition": "to perform or cause the action expressed by 想像する",
+            "definition": "to form a picture or idea in your mind",
             "examples": [
               {
-                "en": "People often imagine in this situation.",
-                "ja": "この状況では人々はしばしば「想像する」します。"
+                "en": "Imagine how the city might look fifty years from now.",
+                "ja": "50年後の都市がどう見えるか想像してください。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "imagines",
+      "past": "imagined",
+      "past_participle": "imagined",
+      "ing": "imagining"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "imagine"
+      "imagine",
+      "imagines",
+      "imagined",
+      "imagining"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -2069,7 +2151,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "immediate"
@@ -2078,7 +2162,27 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin medius",
+      "history": "Latin immediatus に由来し、in-「〜でない」+ medius「中間」から、「間に何もない」→即時の、となった.",
+      "roots": [
+        {
+          "form": "in-",
+          "meaning": "〜でない"
+        },
+        {
+          "form": "medi",
+          "meaning": "中間"
+        }
+      ],
+      "related": [
+        "medium",
+        "media",
+        "mediate",
+        "intermediate"
+      ]
+    }
   },
   {
     "id": "sw-00889",
@@ -2094,12 +2198,12 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "直ちに",
-            "definition": "in a manner or degree expressed by 直ちに",
+            "ja": "直ちに；すぐに",
+            "definition": "without delay",
             "examples": [
               {
-                "en": "The word 'immediately' is useful.",
-                "ja": "「immediately」は役に立つ単語です。"
+                "en": "Stop using the device immediately if it becomes unusually hot.",
+                "ja": "端末が異常に熱くなったら直ちに使用をやめてください。"
               }
             ]
           }
@@ -2113,8 +2217,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "immediately"
     ],
@@ -2525,11 +2631,26 @@
         "meanings": [
           {
             "ja": "影響",
-            "definition": "a person, thing, idea, or concept connected with '影響'",
+            "definition": "a strong effect on something",
             "examples": [
               {
-                "en": "This impact is important.",
-                "ja": "この「影響」は重要です。"
+                "en": "Tourism has a major impact on the local economy.",
+                "ja": "観光は地域経済に大きな影響を与えます。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "影響を与える",
+            "definition": "to have a strong effect on something",
+            "examples": [
+              {
+                "en": "Rising prices are impacting small businesses.",
+                "ja": "物価上昇が小規模企業に影響を与えています。"
               }
             ]
           }
@@ -2537,14 +2658,19 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "have an impact on"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "impact"
     ],
@@ -3588,19 +3714,44 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "暗示する；ほのめかす",
+            "definition": "to suggest something without saying it directly",
+            "examples": [
+              {
+                "en": "The results do not imply that the method works for everyone.",
+                "ja": "その結果はその方法が全員に有効だということを意味しません。"
+              }
+            ]
+          }
+        ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "implies",
+      "past": "implied",
+      "past_participle": "implied",
+      "ing": "implying"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "imply"
+      "imply",
+      "implies",
+      "implied",
+      "implying"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -3754,11 +3905,11 @@
         "meanings": [
           {
             "ja": "重要な",
-            "definition": "having the quality described as '重要な'",
+            "definition": "having great value, influence, or effect",
             "examples": [
               {
-                "en": "This is important.",
-                "ja": "これは「重要な」です。"
+                "en": "It is important to check the source before sharing information online.",
+                "ja": "オンラインで情報を共有する前に情報源を確認することが重要です。"
               }
             ]
           }
@@ -3772,8 +3923,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "important"
     ],
@@ -3842,11 +3995,11 @@
         "meanings": [
           {
             "ja": "不可能な",
-            "definition": "having the quality or state expressed by 不可能な",
+            "definition": "not able to happen or be done",
             "examples": [
               {
-                "en": "It is impossible.",
-                "ja": "それは「不可能な」です。"
+                "en": "It is impossible to predict every possible outcome.",
+                "ja": "考えられるすべての結果を予測するのは不可能です。"
               }
             ]
           }
@@ -3860,8 +4013,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "impossible"
     ],
@@ -4027,7 +4182,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "impress"
@@ -4036,7 +4193,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin premere / pressus",
+      "history": "in-「中へ」と premere「押す」から、「押しつけて跡を残す」→「印象を与える」へ発展した。",
+      "roots": [
+        {
+          "form": "press",
+          "meaning": "押す"
+        }
+      ],
+      "related": [
+        "press",
+        "pressure",
+        "express",
+        "expression",
+        "impression"
+      ]
+    }
   },
   {
     "id": "sw-00892",
@@ -4071,7 +4245,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "impression"
@@ -4080,7 +4256,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin premere / pressus",
+      "history": "impress の名詞形で、心に残された「印」の発想を持つ。",
+      "roots": [
+        {
+          "form": "press",
+          "meaning": "押す"
+        }
+      ],
+      "related": [
+        "press",
+        "pressure",
+        "express",
+        "expression",
+        "impress"
+      ]
+    }
   },
   {
     "id": "sw-09421",
@@ -4263,29 +4456,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "改善する",
-            "definition": "to do or express the action '改善する'",
+            "ja": "改善する；上達する",
+            "definition": "to become better or make something better",
             "examples": [
               {
-                "en": "We often improve this in everyday life.",
-                "ja": "私たちは日常生活でよく「改善する」します。"
+                "en": "Reading every day can improve your vocabulary.",
+                "ja": "毎日読むことで語彙力を伸ばせます。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "improves",
+      "past": "improved",
+      "past_participle": "improved",
+      "ing": "improving"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "improve"
+      "improve",
+      "improves",
+      "improved",
+      "improving"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -4307,12 +4510,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "改善",
-            "definition": "a person, thing, state, process, or idea connected with 改善",
+            "ja": "改善；向上",
+            "definition": "a change that makes something better",
             "examples": [
               {
-                "en": "The word 'improvement' is commonly used in this kind of context.",
-                "ja": "「improvement」は「改善」に関する文脈でよく使われます。"
+                "en": "We saw a clear improvement in her writing.",
+                "ja": "彼女のライティングには明らかな向上が見られました。"
               }
             ]
           }
@@ -4326,8 +4529,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "improvement"
     ],
@@ -5409,7 +5614,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "incident"
@@ -5418,7 +5625,27 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin caedere / cadere (distinct roots)",
+      "history": "incidere「中へ落ちる・起こる」に由来する。incident の cid は「切る」の caedere ではなく cadere「落ちる」系なので区別する。",
+      "roots": [
+        {
+          "form": "in-",
+          "meaning": "中へ"
+        },
+        {
+          "form": "cid / cis; cad",
+          "meaning": "切る／落ちる"
+        }
+      ],
+      "related": [
+        "decide",
+        "decision",
+        "precision",
+        "accident"
+      ]
+    }
   },
   {
     "id": "sw-10653",
@@ -5558,34 +5785,64 @@
         "meanings": [
           {
             "ja": "含む",
-            "definition": "to do or express the action '含む'",
+            "definition": "to have someone or something as part of a group or whole",
             "examples": [
               {
-                "en": "We often include this in everyday life.",
-                "ja": "私たちは日常生活でよく「含む」します。"
+                "en": "The price includes breakfast.",
+                "ja": "料金には朝食が含まれています。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "includes",
+      "past": "included",
+      "past_participle": "included",
+      "ing": "including"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1",
+      "v2.43-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "include"
+      "include",
+      "includes",
+      "included",
+      "including"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin includere",
+      "history": "in-「中に」と claudere「閉じる」から、「中に閉じ込める・含める」という発想。",
+      "roots": [
+        {
+          "form": "in-",
+          "meaning": "中に"
+        },
+        {
+          "form": "clud",
+          "meaning": "閉じる"
+        }
+      ],
+      "related": [
+        "exclude",
+        "conclude"
+      ]
+    }
   },
   {
     "id": "sw-02723",
@@ -5769,11 +6026,11 @@
         "meanings": [
           {
             "ja": "収入",
-            "definition": "a person, thing, state, or idea related to 収入",
+            "definition": "money received regularly from work, business, or investment",
             "examples": [
               {
-                "en": "The word 'income' is often useful in formal or everyday English.",
-                "ja": "「income」は「収入」の意味で使われます。"
+                "en": "Housing costs take a large share of many families' income.",
+                "ja": "住宅費は多くの家庭の収入の大きな割合を占めます。"
               }
             ]
           }
@@ -5787,8 +6044,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "income"
     ],
@@ -6073,29 +6332,55 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "増加する",
-            "definition": "to do or express the action '増加する'",
+            "ja": "増える；増やす",
+            "definition": "to become or make something greater in amount",
             "examples": [
               {
-                "en": "We often increase this in everyday life.",
-                "ja": "私たちは日常生活でよく「増加する」します。"
+                "en": "Online sales increased by 20 percent.",
+                "ja": "オンライン販売は20％増加しました。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "増加",
+            "definition": "a rise in amount or number",
+            "examples": [
+              {
+                "en": "There was a sharp increase in prices.",
+                "ja": "価格が急激に上昇しました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "increases",
+      "past": "increased",
+      "past_participle": "increased",
+      "ing": "increasing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "v2.43-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "increase"
+      "increase",
+      "increases",
+      "increased",
+      "increasing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -6118,11 +6403,11 @@
         "meanings": [
           {
             "ja": "ますます",
-            "definition": "in the manner or degree expressed by ますます",
+            "definition": "more and more over time",
             "examples": [
               {
-                "en": "The word 'increasingly' is commonly used in this kind of context.",
-                "ja": "「increasingly」は「ますます」に関する文脈でよく使われます。"
+                "en": "Schools are increasingly using digital materials.",
+                "ja": "学校ではデジタル教材がますます使われています。"
               }
             ]
           }
@@ -6136,8 +6421,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "increasingly"
     ],
@@ -6181,7 +6468,8 @@
     },
     "usage_note": "",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "etymology-v1"
     ],
     "status": "needs_enrichment",
     "search_terms": [
@@ -6191,7 +6479,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin credere",
+      "history": "in-「〜でない」+ credible から、もとは「信じられない」を表す。",
+      "roots": [
+        {
+          "form": "cred",
+          "meaning": "信じる"
+        }
+      ],
+      "related": [
+        "credit",
+        "credible",
+        "credibility"
+      ]
+    }
   },
   {
     "id": "sw-06380",
@@ -6582,12 +6885,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "独立した",
-            "definition": "having the quality or state expressed by 独立した",
+            "ja": "独立した；自立した",
+            "definition": "not controlled by another person or organization",
             "examples": [
               {
-                "en": "It is independent.",
-                "ja": "それは「独立した」です。"
+                "en": "Students are encouraged to become independent learners.",
+                "ja": "生徒は自立した学習者になるよう促されています。"
               }
             ]
           }
@@ -6601,8 +6904,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "independent"
     ],
@@ -6610,7 +6916,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin pendere / pensus",
+      "history": "in-「〜でない」+ dependent から、「依存していない」を表す。",
+      "roots": [
+        {
+          "form": "pend / pens",
+          "meaning": "ぶら下がる・量る"
+        }
+      ],
+      "related": [
+        "depend",
+        "dependent",
+        "spend",
+        "expense",
+        "expensive"
+      ]
+    }
   },
   {
     "id": "sw-10194",
@@ -6794,34 +7117,48 @@
         "meanings": [
           {
             "ja": "示す",
-            "definition": "to perform or cause the action expressed by 示す",
+            "definition": "to show that something is true or likely",
             "examples": [
               {
-                "en": "The word 'indicate' is commonly used in this context.",
-                "ja": "「indicate」は「示す」に関する文脈で使われます。"
+                "en": "The results indicate that the program is effective.",
+                "ja": "結果はそのプログラムが効果的であることを示しています。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "indicates",
+      "past": "indicated",
+      "past_participle": "indicated",
+      "ing": "indicating"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "indicate"
+      "indicate",
+      "indicates",
+      "indicated",
+      "indicating"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "results indicate",
+      "evidence indicates"
+    ]
   },
   {
     "id": "sw-01864",
@@ -7229,6 +7566,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "個人；個体",
+            "definition": "one person considered separately from a group",
+            "examples": [
+              {
+                "en": "Each individual learns at a different pace.",
+                "ja": "一人ひとり異なるペースで学びます。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -7238,8 +7590,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "individual"
     ],
@@ -7432,12 +7786,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "産業の",
-            "definition": "having the quality expressed by 産業の",
+            "ja": "産業の；工業の",
+            "definition": "related to industry or manufacturing",
             "examples": [
               {
-                "en": "The word 'industrial' is useful when discussing this topic.",
-                "ja": "この語は「産業の」に関する文脈で使われます。"
+                "en": "The city developed as an industrial center.",
+                "ja": "その都市は工業の中心地として発展しました。"
               }
             ]
           }
@@ -7451,8 +7805,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "industrial"
     ],
@@ -7604,12 +7960,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "産業",
-            "definition": "a person, thing, idea, or concept connected with '産業'",
+            "ja": "産業；業界",
+            "definition": "business activity that produces goods or services",
             "examples": [
               {
-                "en": "This industry is important.",
-                "ja": "この「産業」は重要です。"
+                "en": "Tourism is an important industry in the region.",
+                "ja": "観光はその地域の重要な産業です。"
               }
             ]
           }
@@ -7623,8 +7979,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "industry"
     ],
@@ -8096,7 +8454,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "infection"
@@ -8105,7 +8465,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin facere / factus",
+      "history": "Latin inficere に由来し、in- + facere 系の語で、病原体などに侵されることを表す。",
+      "roots": [
+        {
+          "form": "fac / fect",
+          "meaning": "する・作る"
+        }
+      ],
+      "related": [
+        "affect",
+        "effect",
+        "effective",
+        "perfect"
+      ]
+    }
   },
   {
     "id": "sw-03245",
@@ -8547,11 +8923,26 @@
         "meanings": [
           {
             "ja": "影響",
-            "definition": "a thing, person, idea, or state related to 影響",
+            "definition": "the power to affect people or events",
             "examples": [
               {
-                "en": "This influence is important.",
-                "ja": "この「影響」は重要です。"
+                "en": "Parents have a strong influence on young children.",
+                "ja": "親は幼い子どもに強い影響を与えます。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "影響を与える",
+            "definition": "to affect the way someone thinks or behaves",
+            "examples": [
+              {
+                "en": "Social media can influence buying decisions.",
+                "ja": "SNSは購買判断に影響を与えることがあります。"
               }
             ]
           }
@@ -8559,14 +8950,20 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "have an influence on"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "etymology-v1",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "influence"
     ],
@@ -8574,7 +8971,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin fluere; Old English flowan",
+      "history": "Latin influere「流れ込む」に由来し、in- + fluere「流れる」から、作用が及ぶ意味へ発展した。",
+      "roots": [
+        {
+          "form": "in-",
+          "meaning": "中へ"
+        },
+        {
+          "form": "flu / flow",
+          "meaning": "流れる"
+        }
+      ],
+      "related": [
+        "fluent",
+        "flow"
+      ]
+    }
   },
   {
     "id": "sw-03247",
@@ -8655,7 +9070,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "inform"
@@ -8664,7 +9081,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin forma / formare",
+      "history": "in- と formare「形作る」に由来し、人の心に「形を与える」ことから「知らせる」の意味へ発展した。",
+      "roots": [
+        {
+          "form": "form",
+          "meaning": "形・形作る"
+        }
+      ],
+      "related": [
+        "form",
+        "formal",
+        "information",
+        "reform",
+        "transform",
+        "transformation"
+      ]
+    }
   },
   {
     "id": "sw-03356",
@@ -8727,11 +9162,11 @@
         "meanings": [
           {
             "ja": "情報",
-            "definition": "a person, thing, idea, or concept connected with '情報'",
+            "definition": "facts or details that tell you something about a person, event, subject, or situation",
             "examples": [
               {
-                "en": "This information is important.",
-                "ja": "この「情報」は重要です。"
+                "en": "The website provides useful information about the application process.",
+                "ja": "そのウェブサイトには出願手続きについて役立つ情報があります。"
               }
             ]
           }
@@ -8739,14 +9174,19 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "a piece of information"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "information は不可算名詞。通常 informations とはしない。",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "information"
     ],
@@ -8754,7 +9194,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin informatio / informare",
+      "history": "in- と forma「形」に関係し、もとは「形を与える・形作る」という発想を持った。",
+      "roots": [
+        {
+          "form": "form",
+          "meaning": "形"
+        }
+      ],
+      "related": [
+        "inform",
+        "form",
+        "formation"
+      ]
+    }
   },
   {
     "id": "sw-01412",
@@ -10085,7 +10540,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "innovation"
@@ -10094,7 +10551,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin novus / Old English niwe",
+      "history": "Latin innovare「新しくする」に由来し、in- + novus「新しい」から革新を表す.",
+      "roots": [
+        {
+          "form": "nov",
+          "meaning": "新しい"
+        }
+      ],
+      "related": [
+        "new",
+        "novel"
+      ]
+    }
   },
   {
     "id": "sw-08743",
@@ -10296,7 +10767,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "inquiry"
@@ -10305,7 +10778,27 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin quaerere / quaesitus",
+      "history": "inquirere（in- + quaerere）に由来し、調べ尋ねることを表す。",
+      "roots": [
+        {
+          "form": "in-",
+          "meaning": "中へ・詳しく"
+        },
+        {
+          "form": "quer / quir / quis",
+          "meaning": "尋ねる・求める"
+        }
+      ],
+      "related": [
+        "question",
+        "require",
+        "acquire",
+        "acquisition"
+      ]
+    }
   },
   {
     "id": "sw-10244",
@@ -10344,9 +10837,27 @@
     },
     "usage_note": "",
     "tags": [
-      "language-writing"
+      "language-writing",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin inscribere",
+      "history": "in-「上に・中に」+ scribere「書く」から、表面に書き込まれた文字を表す。",
+      "roots": [
+        {
+          "form": "in-",
+          "meaning": "上に・中に"
+        },
+        {
+          "form": "scrib / script",
+          "meaning": "書く"
+        }
+      ],
+      "related": [
+        "transcript"
+      ]
+    }
   },
   {
     "id": "sw-06875",
@@ -10489,11 +11000,11 @@
         "meanings": [
           {
             "ja": "〜の中に",
-            "definition": "a word showing a relationship with the sense '〜の中に'",
+            "definition": "within the inner part of something",
             "examples": [
               {
-                "en": "The word 'inside' is common in English.",
-                "ja": "「inside」は英語でよく使われる語です。"
+                "en": "Keep your phone inside your bag during the exam.",
+                "ja": "試験中はスマートフォンをかばんの中に入れておいてください。"
               }
             ]
           }
@@ -10507,8 +11018,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "inside"
     ],
@@ -11008,7 +11521,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "inspection"
@@ -11017,7 +11532,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin specere / spectare",
+      "history": "in-「中へ」と specere「見る」に由来する inspect の名詞形。",
+      "roots": [
+        {
+          "form": "spect / spec",
+          "meaning": "見る"
+        }
+      ],
+      "related": [
+        "respect",
+        "spectator",
+        "prospect",
+        "perspective"
+      ]
+    }
   },
   {
     "id": "sw-02561",
@@ -11052,7 +11583,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "inspire"
@@ -11061,7 +11594,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin spirare / spiritus",
+      "history": "in-「中へ」+ spirare「息をする」に由来し、息を吹き込む→鼓舞する、へ発展した。",
+      "roots": [
+        {
+          "form": "in-",
+          "meaning": "中へ"
+        },
+        {
+          "form": "spir",
+          "meaning": "息をする"
+        }
+      ],
+      "related": [
+        "spirit"
+      ]
+    }
   },
   {
     "id": "sw-03123",
@@ -11188,7 +11738,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "instance"
@@ -11197,7 +11749,29 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin stare / status",
+      "history": "Latin instantia / instare に由来し、in- + stare「立つ」に関係する.",
+      "roots": [
+        {
+          "form": "in-",
+          "meaning": "中に・上に"
+        },
+        {
+          "form": "sta / stat",
+          "meaning": "立つ"
+        }
+      ],
+      "related": [
+        "state",
+        "status",
+        "station",
+        "stable",
+        "establish",
+        "distance"
+      ]
+    }
   },
   {
     "id": "sw-08037",
@@ -11292,15 +11866,15 @@
     "frequency": 4,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adverb",
         "meanings": [
           {
             "ja": "代わりに",
-            "definition": "a person, thing, idea, or concept connected with '代わりに'",
+            "definition": "as an alternative to something else",
             "examples": [
               {
-                "en": "This instead is important.",
-                "ja": "この「代わりに」は重要です。"
+                "en": "We took the train instead of driving.",
+                "ja": "車ではなく電車を利用しました。"
               }
             ]
           }
@@ -11308,14 +11882,18 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "instead of"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "instead"
     ],
@@ -11533,7 +12111,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "instruction"
@@ -11542,7 +12122,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin struere / structus",
+      "history": "instruere「備える・組み立てる・教える」に由来し、教えや指示の意味へ発展した。",
+      "roots": [
+        {
+          "form": "struct",
+          "meaning": "組み立てる"
+        }
+      ],
+      "related": [
+        "construct",
+        "construction",
+        "structure",
+        "instructor",
+        "destroy",
+        "destruction"
+      ]
+    }
   },
   {
     "id": "sw-03283",
@@ -11586,9 +12184,28 @@
     },
     "usage_note": "",
     "tags": [
-      "50k-frequency-gap"
+      "50k-frequency-gap",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin struere / structus",
+      "history": "instruction と同じ struct 系の語族で、「教える人」を表す。",
+      "roots": [
+        {
+          "form": "struct",
+          "meaning": "組み立てる"
+        }
+      ],
+      "related": [
+        "construct",
+        "construction",
+        "structure",
+        "instruction",
+        "destroy",
+        "destruction"
+      ]
+    }
   },
   {
     "id": "sw-02458",
@@ -12560,7 +13177,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "intend"
@@ -12569,7 +13188,26 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin tendere / tentus",
+      "history": "in-「〜へ」+ tendere「伸ばす・向ける」に由来し、心をある目的へ向けることから「意図する」へ発展した。",
+      "roots": [
+        {
+          "form": "tend / tens",
+          "meaning": "伸ばす・向ける"
+        }
+      ],
+      "related": [
+        "tend",
+        "tendency",
+        "extend",
+        "extension",
+        "intention",
+        "attend",
+        "attention"
+      ]
+    }
   },
   {
     "id": "sw-01884",
@@ -12784,7 +13422,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "intention"
@@ -12793,7 +13433,26 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin tendere / tentus",
+      "history": "intend の名詞形で、心を向けた目的・意図を表す。",
+      "roots": [
+        {
+          "form": "tend / tens",
+          "meaning": "伸ばす・向ける"
+        }
+      ],
+      "related": [
+        "tend",
+        "tendency",
+        "extend",
+        "extension",
+        "intend",
+        "attend",
+        "attention"
+      ]
+    }
   },
   {
     "id": "sw-12955",
@@ -12915,7 +13574,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "interact"
@@ -12924,7 +13585,31 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin agere / actus",
+      "history": "inter-「相互に」+ act から、互いに作用することを表す。",
+      "roots": [
+        {
+          "form": "inter-",
+          "meaning": "間に・相互に"
+        },
+        {
+          "form": "act / ag",
+          "meaning": "行う・動かす"
+        }
+      ],
+      "related": [
+        "act",
+        "action",
+        "active",
+        "activity",
+        "actual",
+        "react",
+        "reaction",
+        "interaction"
+      ]
+    }
   },
   {
     "id": "sw-01887",
@@ -12959,7 +13644,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "interaction"
@@ -12968,7 +13655,31 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin agere / actus",
+      "history": "interact の名詞形で、相互作用を表す。",
+      "roots": [
+        {
+          "form": "inter-",
+          "meaning": "間に・相互に"
+        },
+        {
+          "form": "act / ag",
+          "meaning": "行う・動かす"
+        }
+      ],
+      "related": [
+        "act",
+        "action",
+        "active",
+        "activity",
+        "actual",
+        "react",
+        "reaction",
+        "interact"
+      ]
+    }
   },
   {
     "id": "sw-02883",
@@ -13294,12 +14005,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "興味",
-            "definition": "a person, thing, idea, or concept connected with '興味'",
+            "ja": "興味；関心",
+            "definition": "a feeling of wanting to know more about something",
             "examples": [
               {
-                "en": "This interest is important.",
-                "ja": "この「興味」は重要です。"
+                "en": "Her interest in other cultures began when she studied abroad.",
+                "ja": "彼女の異文化への関心は留学したときに始まりました。"
               }
             ]
           }
@@ -13307,14 +14018,19 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "have an interest in",
+      "show interest in"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "interest"
     ],
@@ -13901,7 +14617,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "intermediate"
@@ -13910,7 +14628,27 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin medius",
+      "history": "inter-「間に」+ medius「中間」から、二つのものの間にあることを表す.",
+      "roots": [
+        {
+          "form": "inter-",
+          "meaning": "間に"
+        },
+        {
+          "form": "medi",
+          "meaning": "中間"
+        }
+      ],
+      "related": [
+        "medium",
+        "media",
+        "mediate",
+        "immediate"
+      ]
+    }
   },
   {
     "id": "sw-09497",
@@ -14133,11 +14871,11 @@
         "meanings": [
           {
             "ja": "国際的な",
-            "definition": "having the quality described as '国際的な'",
+            "definition": "involving or connecting more than one country",
             "examples": [
               {
-                "en": "This is international.",
-                "ja": "これは「国際的な」です。"
+                "en": "The school has several international exchange programs.",
+                "ja": "その学校には複数の国際交流プログラムがあります。"
               }
             ]
           }
@@ -14151,8 +14889,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "international"
     ],
@@ -14160,7 +14901,29 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "inter- + nation + -al",
+      "history": "inter-「間に・相互に」と nation「国・民族」に形容詞語尾 -al が加わり、「国と国の間の」という意味になった。",
+      "roots": [
+        {
+          "form": "inter-",
+          "meaning": "間に・相互に"
+        },
+        {
+          "form": "nation",
+          "meaning": "国・民族"
+        },
+        {
+          "form": "-al",
+          "meaning": "〜に関する"
+        }
+      ],
+      "related": [
+        "nation",
+        "national"
+      ]
+    }
   },
   {
     "id": "sw-02257",
@@ -14239,7 +15002,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "internet"
@@ -14248,7 +15013,26 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "inter- + network",
+      "history": "inter-「間に・相互に」+ network から、ネットワーク同士を結ぶ仕組みを表す現代語。",
+      "roots": [
+        {
+          "form": "inter-",
+          "meaning": "間に・相互に"
+        },
+        {
+          "form": "inter",
+          "meaning": "間・相互"
+        }
+      ],
+      "related": [
+        "international",
+        "interview",
+        "intermediate"
+      ]
+    }
   },
   {
     "id": "sw-10525",
@@ -14578,7 +15362,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "interrupt"
@@ -14587,7 +15373,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin rumpere / ruptus",
+      "history": "inter-「間に」+ rumpere「破る」から、流れを途中で断ち切ることを表す。",
+      "roots": [
+        {
+          "form": "rupt",
+          "meaning": "破る・壊す"
+        }
+      ],
+      "related": [
+        "interruption",
+        "disruption"
+      ]
+    }
   },
   {
     "id": "sw-02700",
@@ -14622,7 +15422,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "interruption"
@@ -14631,7 +15433,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin rumpere / ruptus",
+      "history": "interrupt の名詞形で、流れが「断ち切られること」を表す。",
+      "roots": [
+        {
+          "form": "rupt",
+          "meaning": "破る・壊す"
+        }
+      ],
+      "related": [
+        "interrupt",
+        "disruption"
+      ]
+    }
   },
   {
     "id": "sw-04246",
@@ -14969,7 +15785,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "interview"
@@ -14978,7 +15796,26 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "French entrevue / entrevoir",
+      "history": "inter-「間に・互いに」+ view 系の要素に関係し、人と人が会って話す意味へ発展した。",
+      "roots": [
+        {
+          "form": "inter-",
+          "meaning": "間に・相互に"
+        },
+        {
+          "form": "inter",
+          "meaning": "間・相互"
+        }
+      ],
+      "related": [
+        "international",
+        "internet",
+        "intermediate"
+      ]
+    }
   },
   {
     "id": "sw-07744",
@@ -15552,34 +16389,65 @@
         "meanings": [
           {
             "ja": "紹介する；導入する",
-            "definition": "to perform or cause the action expressed by 紹介する",
+            "definition": "to present someone or something for the first time",
             "examples": [
               {
-                "en": "People often introduce in this situation.",
-                "ja": "この状況では人々はしばしば「紹介する」します。"
+                "en": "The school introduced a new online attendance system.",
+                "ja": "学校は新しいオンライン出欠システムを導入しました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "introduces",
+      "past": "introduced",
+      "past_participle": "introduced",
+      "ing": "introducing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
-      "introduce"
+      "introduce",
+      "introduces",
+      "introduced",
+      "introducing"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin ducere / ductus",
+      "history": "intro-「内へ」+ ducere「導く」から、「中へ導き入れる」が中心イメージ。",
+      "roots": [
+        {
+          "form": "duc / duct",
+          "meaning": "導く"
+        }
+      ],
+      "related": [
+        "produce",
+        "product",
+        "production",
+        "reduce",
+        "reduction",
+        "introduction",
+        "conduct",
+        "educate"
+      ]
+    }
   },
   {
     "id": "sw-01414",
@@ -15614,7 +16482,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "introduction"
@@ -15623,7 +16493,27 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin ducere / ductus",
+      "history": "introduce の名詞形で、人や話題を中へ「導き入れる」ことを表す。",
+      "roots": [
+        {
+          "form": "duc / duct",
+          "meaning": "導く"
+        }
+      ],
+      "related": [
+        "produce",
+        "product",
+        "production",
+        "reduce",
+        "reduction",
+        "introduce",
+        "conduct",
+        "educate"
+      ]
+    }
   },
   {
     "id": "sw-13499",
@@ -15868,7 +16758,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "invent"
@@ -15877,7 +16769,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin venire / ventus",
+      "history": "invenire「出会う・見つける」に由来し、in- + venire「来る」の語族。のちに「発明する」の意味へ発展した。",
+      "roots": [
+        {
+          "form": "ven / vent",
+          "meaning": "来る"
+        }
+      ],
+      "related": [
+        "event",
+        "prevent",
+        "prevention",
+        "convention",
+        "adventure"
+      ]
+    }
   },
   {
     "id": "sw-06344",
@@ -16261,9 +17170,28 @@
     },
     "usage_note": "",
     "tags": [
-      "judgment-and-relations"
+      "judgment-and-relations",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin videre / visus",
+      "history": "in-「〜でない」と visible の組み合わせで、「見えない」を表す。",
+      "roots": [
+        {
+          "form": "vid / vis",
+          "meaning": "見る"
+        }
+      ],
+      "related": [
+        "vision",
+        "visual",
+        "visible",
+        "evidence",
+        "provide",
+        "revise"
+      ]
+    }
   },
   {
     "id": "sw-09045",
@@ -16514,7 +17442,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "invoke"
@@ -16523,7 +17453,26 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin invocare",
+      "history": "in-「〜へ」+ vocare「呼ぶ」から、呼びかける・援用する意味へ発展した。",
+      "roots": [
+        {
+          "form": "in-",
+          "meaning": "〜へ"
+        },
+        {
+          "form": "voc",
+          "meaning": "呼ぶ・声"
+        }
+      ],
+      "related": [
+        "vocal",
+        "voice",
+        "vocabulary"
+      ]
+    }
   },
   {
     "id": "sw-01895",
@@ -16539,29 +17488,40 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "関与させる；含む",
-            "definition": "to perform or cause the action expressed by 関与させる",
+            "ja": "伴う；含む",
+            "definition": "to include something as a necessary part",
             "examples": [
               {
-                "en": "The word 'involve' is commonly used in this context.",
-                "ja": "「involve」は「関与させる」に関する文脈で使われます。"
+                "en": "The project involves working with local businesses.",
+                "ja": "そのプロジェクトには地元企業との協働が含まれます。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "involves",
+      "past": "involved",
+      "past_participle": "involved",
+      "ing": "involving"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "v2.43-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "involve"
+      "involve",
+      "involves",
+      "involved",
+      "involving"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -17790,7 +18750,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "isolate"
@@ -17799,7 +18761,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin solus; Italian isola",
+      "history": "Italian isolato / isola「島」に由来し、島のように切り離す意味から「孤立させる」となった。",
+      "roots": [
+        {
+          "form": "sol / isol",
+          "meaning": "一人・孤立"
+        }
+      ],
+      "related": [
+        "solo",
+        "sole"
+      ]
+    }
   },
   {
     "id": "sw-01896",
@@ -18024,11 +19000,36 @@
         "meanings": [
           {
             "ja": "問題；論点",
-            "definition": "a person, thing, idea, or concept connected with '問題；論点'",
+            "definition": "an important subject or problem that people discuss",
             "examples": [
               {
-                "en": "This issue is important.",
-                "ja": "この「問題」は重要です。"
+                "en": "Climate change is a major global issue.",
+                "ja": "気候変動は世界的な大問題です。"
+              }
+            ]
+          },
+          {
+            "ja": "号；発行物",
+            "definition": "one copy of a magazine, newspaper, or similar publication",
+            "examples": [
+              {
+                "en": "I bought the latest issue of the magazine.",
+                "ja": "その雑誌の最新号を買いました。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "発行する；公表する",
+            "definition": "to officially give or publish something",
+            "examples": [
+              {
+                "en": "The government issued a warning.",
+                "ja": "政府は警告を発しました。"
               }
             ]
           }
@@ -18036,14 +19037,26 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      {
+        "phrase": "deal with an issue",
+        "ja": "問題に対処する"
+      },
+      {
+        "phrase": "raise an issue",
+        "ja": "問題を提起する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated",
+      "v2.43-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "issue"
     ],
@@ -18051,7 +19064,11 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "major issue",
+      "social issue",
+      "issue a statement"
+    ]
   },
   {
     "id": "sw-10693",

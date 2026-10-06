@@ -2506,8 +2506,8 @@
             "definition": "a natural ability to do something well",
             "examples": [
               {
-                "en": "The word 'talent' is useful in this context.",
-                "ja": "この文脈では「才能」という意味で使われる。"
+                "en": "Talent helps, but consistent practice matters too.",
+                "ja": "才能も役立ちますが継続的な練習も重要です。"
               }
             ]
           }
@@ -2522,9 +2522,10 @@
     },
     "usage_note": "",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "v2.31-curated"
     ],
-    "status": "needs_enrichment",
+    "status": "basic",
     "search_terms": [
       "talent"
     ],
@@ -2548,29 +2549,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "話す",
-            "definition": "to do or express the action '話す'",
+            "ja": "話す；話し合う",
+            "definition": "to speak with someone or discuss something",
             "examples": [
               {
-                "en": "We often talk this in everyday life.",
-                "ja": "私たちは日常生活でよく「話す」します。"
+                "en": "We talked about the problem after class.",
+                "ja": "授業後にその問題について話し合いました。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "talks",
+      "past": "talked",
+      "past_participle": "talked",
+      "ing": "talking"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "talk"
+      "talk",
+      "talks",
+      "talked",
+      "talking"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -4743,12 +4754,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "目標",
-            "definition": "a person, thing, state, or idea related to 目標",
+            "ja": "目標；標的",
+            "definition": "a result or level that you try to achieve, or an object aimed at",
             "examples": [
               {
-                "en": "The word 'target' is useful in this context.",
-                "ja": "この文脈では「目標」という意味で使われます。"
+                "en": "Our target is to reduce energy use by twenty percent.",
+                "ja": "私たちの目標はエネルギー使用を20パーセント削減することです。"
               }
             ]
           }
@@ -4762,8 +4773,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "target"
     ],
@@ -5405,12 +5418,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "課題",
-            "definition": "a thing, person, idea, or state related to 課題",
+            "ja": "課題；仕事",
+            "definition": "a piece of work that must be done",
             "examples": [
               {
-                "en": "This task is important.",
-                "ja": "この「課題」は重要です。"
+                "en": "Break a large task into smaller steps.",
+                "ja": "大きな課題を小さな段階に分けましょう。"
               }
             ]
           }
@@ -5424,8 +5437,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "task"
     ],
@@ -6552,11 +6567,11 @@
         "meanings": [
           {
             "ja": "教える",
-            "definition": "to do or express the action '教える'",
+            "definition": "to help someone learn by giving instruction or experience",
             "examples": [
               {
-                "en": "We often teach this in everyday life.",
-                "ja": "私たちは日常生活でよく「教える」します。"
+                "en": "She teaches English at a high school in Tokyo.",
+                "ja": "彼女は東京の高校で英語を教えています。"
               }
             ]
           }
@@ -6564,23 +6579,27 @@
       }
     ],
     "forms": {
+      "third_person": "teaches",
       "past": "taught",
       "past_participle": "taught",
-      "third_person": "teaches",
       "ing": "teaching"
     },
-    "phrases": [],
+    "phrases": [
+      "teach someone to do"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "teach",
-      "taught",
       "teaches",
+      "taught",
       "teaching"
     ],
     "pronunciation": {
@@ -6814,12 +6833,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "チーム",
-            "definition": "a person, thing, idea, or concept connected with 'チーム'",
+            "ja": "チーム；組",
+            "definition": "a group of people who work or play together toward a shared goal",
             "examples": [
               {
-                "en": "This team is important.",
-                "ja": "この「チーム」は重要です。"
+                "en": "Our team meets every Monday to review progress.",
+                "ja": "私たちのチームは毎週月曜に進捗を確認します。"
               }
             ]
           }
@@ -6833,8 +6852,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.29-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "team"
     ],
@@ -7395,12 +7416,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "技術的な",
-            "definition": "having the quality or characteristic expressed by 技術的な",
+            "ja": "技術的な；専門的な",
+            "definition": "related to practical skills, technology, or specialized knowledge",
             "examples": [
               {
-                "en": "The word 'technical' is commonly used in this context.",
-                "ja": "「technical」は「技術的な」に関する文脈で使われます。"
+                "en": "We had a technical problem during the online meeting.",
+                "ja": "オンライン会議中に技術的な問題が起きました。"
               }
             ]
           }
@@ -7414,8 +7435,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "technical"
     ],
@@ -7524,12 +7547,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "技法",
-            "definition": "a person, thing, state, process, or idea connected with 技法",
+            "ja": "技法；方法",
+            "definition": "a particular skilled way of doing something",
             "examples": [
               {
-                "en": "The word 'technique' is commonly used in this context.",
-                "ja": "「technique」は「技法」に関する文脈で使われます。"
+                "en": "Good breathing technique can make running feel easier.",
+                "ja": "よい呼吸法はランニングを楽に感じさせます。"
               }
             ]
           }
@@ -7543,8 +7566,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "technique"
     ],
@@ -7609,12 +7634,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "技術の",
-            "definition": "having the quality expressed by 技術の",
+            "ja": "技術の；技術的な",
+            "definition": "related to technology",
             "examples": [
               {
-                "en": "The word 'technological' is often useful in formal or everyday English.",
-                "ja": "「technological」は「技術の」の意味で使われます。"
+                "en": "Rapid technological change is affecting many jobs.",
+                "ja": "急速な技術変化が多くの仕事に影響しています。"
               }
             ]
           }
@@ -7628,8 +7653,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "technological"
     ],
@@ -7653,12 +7680,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "技術",
-            "definition": "a person, thing, idea, or concept connected with '技術'",
+            "ja": "技術；テクノロジー",
+            "definition": "scientific knowledge and tools used to solve practical problems",
             "examples": [
               {
-                "en": "This technology is important.",
-                "ja": "この「技術」は重要です。"
+                "en": "Technology has changed how students access information.",
+                "ja": "技術は生徒が情報にアクセスする方法を変えました。"
               }
             ]
           }
@@ -7672,8 +7699,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "technology"
     ],
@@ -7681,7 +7711,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Greek tekhnologia",
+      "history": "tekhnē「技術・技能」と -logia「学問・論述」に由来する。",
+      "roots": [
+        {
+          "form": "techn",
+          "meaning": "技術・技能"
+        },
+        {
+          "form": "-logy",
+          "meaning": "学問・研究"
+        }
+      ],
+      "related": [
+        "technical",
+        "technological"
+      ]
+    }
   },
   {
     "id": "sw-11594",
@@ -8050,7 +8098,8 @@
     },
     "usage_note": "",
     "tags": [
-      "wordfreq-gap"
+      "wordfreq-gap",
+      "etymology-v1"
     ],
     "status": "basic",
     "search_terms": [
@@ -8060,7 +8109,18 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "tele- + vision",
+      "history": "tele-「遠く」と vision「見ること」を組み合わせ、遠方の映像を見る技術を表す。",
+      "roots": [
+        {
+          "form": "tele-",
+          "meaning": "遠く"
+        }
+      ],
+      "related": []
+    }
   },
   {
     "id": "sw-13148",
@@ -8199,29 +8259,52 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "伝える",
-            "definition": "to do or express the action '伝える'",
+            "ja": "伝える；教える",
+            "definition": "to give someone information by speaking or writing",
             "examples": [
               {
-                "en": "We often tell this in everyday life.",
-                "ja": "私たちは日常生活でよく「伝える」します。"
+                "en": "Please tell me what happened.",
+                "ja": "何が起きたのか教えてください。"
+              }
+            ]
+          },
+          {
+            "ja": "見分ける；判断する",
+            "definition": "to recognize or know something from available information",
+            "examples": [
+              {
+                "en": "It's hard to tell the difference between the two pictures.",
+                "ja": "その2枚の写真の違いを見分けるのは難しいです。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "tells",
+      "past": "told",
+      "past_participle": "told",
+      "ing": "telling"
+    },
+    "phrases": [
+      "tell someone about something",
+      "tell someone to do"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.28-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "tell"
+      "tell",
+      "tells",
+      "told",
+      "telling"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -8535,12 +8618,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "温度",
-            "definition": "a person, thing, state, or idea related to 温度",
+            "ja": "温度；体温",
+            "definition": "a measurement of how hot or cold something is",
             "examples": [
               {
-                "en": "This is a common example of 'temperature'.",
-                "ja": "これは「温度」の一般的な例です。"
+                "en": "The temperature dropped sharply after sunset.",
+                "ja": "日没後、気温が急激に下がりました。"
               }
             ]
           }
@@ -8554,8 +8637,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "temperature"
     ],
@@ -8563,7 +8649,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin temperatura / temperare",
+      "history": "temperare「調整する・適度にする」に由来し、のちに熱の程度を表すようになった。therm 語根とは別系統。",
+      "roots": [
+        {
+          "form": "temper",
+          "meaning": "調整する・適度にする"
+        }
+      ],
+      "related": [
+        "thermometer",
+        "thermostat"
+      ]
+    }
   },
   {
     "id": "sw-11665",
@@ -8684,9 +8784,24 @@
     },
     "usage_note": "",
     "tags": [
-      "music-art"
+      "music-art",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin tempus",
+      "history": "Italian tempo / Latin tempus「時間」に由来し、音楽の速さを表す。",
+      "roots": [
+        {
+          "form": "temp",
+          "meaning": "時間"
+        }
+      ],
+      "related": [
+        "temporary",
+        "contemporary"
+      ]
+    }
   },
   {
     "id": "sw-10317",
@@ -8825,12 +8940,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "一時的な",
-            "definition": "having the quality or characteristic expressed by 一時的な",
+            "ja": "一時的な；仮の",
+            "definition": "lasting for only a limited period of time",
             "examples": [
               {
-                "en": "The word 'temporary' is commonly used in this kind of context.",
-                "ja": "「temporary」は「一時的な」に関する文脈でよく使われます。"
+                "en": "The road closure is only temporary.",
+                "ja": "道路の通行止めは一時的なものです。"
               }
             ]
           }
@@ -8844,8 +8959,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "temporary"
     ],
@@ -8853,7 +8971,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin tempus",
+      "history": "Latin tempus「時間」に由来し、限られた時間だけ続くことを表す。",
+      "roots": [
+        {
+          "form": "temp",
+          "meaning": "時間"
+        }
+      ],
+      "related": [
+        "contemporary",
+        "tempo"
+      ]
+    }
   },
   {
     "id": "sw-00575",
@@ -9001,34 +9133,70 @@
         "meanings": [
           {
             "ja": "〜する傾向がある",
-            "definition": "to perform or cause the action expressed by 〜する傾向がある",
+            "definition": "to usually behave in a particular way or be likely to happen",
             "examples": [
               {
-                "en": "The word 'tend' is commonly used in this context.",
-                "ja": "「tend」は「〜する傾向がある」に関する文脈で使われます。"
+                "en": "People tend to sleep less when they are busy.",
+                "ja": "人は忙しいと睡眠時間が短くなる傾向があります。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "tends",
+      "past": "tended",
+      "past_participle": "tended",
+      "ing": "tending"
+    },
+    "phrases": [
+      {
+        "phrase": "tend to do",
+        "ja": "〜する傾向がある"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated",
+      "etymology-v1",
+      "v2.44-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "tend"
+      "tend",
+      "tends",
+      "tended",
+      "tending"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin tendere / tentus",
+      "history": "Latin tendere「伸ばす・向かう」に由来し、ある方向へ向かうことから「〜する傾向がある」へ発展した。",
+      "roots": [
+        {
+          "form": "tend / tens",
+          "meaning": "伸ばす・向ける"
+        }
+      ],
+      "related": [
+        "tendency",
+        "extend",
+        "extension",
+        "intend",
+        "intention",
+        "attend",
+        "attention"
+      ]
+    }
   },
   {
     "id": "sw-02126",
@@ -9045,11 +9213,11 @@
         "meanings": [
           {
             "ja": "傾向",
-            "definition": "a person, thing, state, or idea related to 傾向",
+            "definition": "a common way of behaving or a direction in which something often develops",
             "examples": [
               {
-                "en": "The word 'tendency' is often useful in formal or everyday English.",
-                "ja": "「tendency」は「傾向」の意味で使われます。"
+                "en": "There is a tendency to focus too much on test scores.",
+                "ja": "テストの点数を重視しすぎる傾向があります。"
               }
             ]
           }
@@ -9063,8 +9231,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "tendency"
     ],
@@ -9072,7 +9243,26 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin tendere / tentus",
+      "history": "tend からできた名詞で、ある方向へ向かう性質を表す。",
+      "roots": [
+        {
+          "form": "tend / tens",
+          "meaning": "伸ばす・向ける"
+        }
+      ],
+      "related": [
+        "tend",
+        "extend",
+        "extension",
+        "intend",
+        "intention",
+        "attend",
+        "attention"
+      ]
+    }
   },
   {
     "id": "sw-04870",
@@ -9934,9 +10124,14 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "学期；期間；用語",
-            "definition": "",
-            "examples": []
+            "ja": "用語；期間；学期",
+            "definition": "a word with a particular meaning, or a fixed period of time",
+            "examples": [
+              {
+                "en": "The term has a different meaning in economics.",
+                "ja": "その用語は経済学では異なる意味を持ちます。"
+              }
+            ]
           }
         ]
       }
@@ -9950,9 +10145,26 @@
     },
     "usage_note": "",
     "tags": [
-      "education-study"
+      "education-study",
+      "v2.31-curated",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "basic",
+    "etymology": {
+      "origin": "Latin terminus / terminare",
+      "history": "Latin terminus「境界・終点」に由来し、期間の終わりや限定された言葉などへ意味が広がった。",
+      "roots": [
+        {
+          "form": "termin",
+          "meaning": "終わり・境界"
+        }
+      ],
+      "related": [
+        "terminal",
+        "terminate",
+        "determine"
+      ]
+    }
   },
   {
     "id": "sw-03313",
@@ -9996,9 +10208,25 @@
     },
     "usage_note": "",
     "tags": [
-      "50k-frequency-gap"
+      "50k-frequency-gap",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin terminus / terminare",
+      "history": "terminus「境界・終点」に由来し、「終点の・末端の」を表す。",
+      "roots": [
+        {
+          "form": "termin",
+          "meaning": "終わり・境界"
+        }
+      ],
+      "related": [
+        "term",
+        "terminate",
+        "determine"
+      ]
+    }
   },
   {
     "id": "sw-02364",
@@ -10033,7 +10261,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "terminate"
@@ -10042,7 +10272,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin terminus / terminare",
+      "history": "terminus「終わり」に関係し、何かを終わらせることを表す。",
+      "roots": [
+        {
+          "form": "termin",
+          "meaning": "終わり・境界"
+        }
+      ],
+      "related": [
+        "term",
+        "terminal",
+        "determine"
+      ]
+    }
   },
   {
     "id": "sw-13113",
@@ -10432,15 +10677,15 @@
     "frequency": 2,
     "parts_of_speech": [
       {
-        "pos": "adjective",
+        "pos": "noun",
         "meanings": [
           {
-            "ja": "領域；領土",
-            "definition": "having the quality expressed by 領域",
+            "ja": "領土；地域",
+            "definition": "land controlled by a country or a particular area used by an animal or group",
             "examples": [
               {
-                "en": "The word 'territory' is often useful in formal or everyday English.",
-                "ja": "「territory」は「領域」の意味で使われます。"
+                "en": "The two countries disputed control of the territory.",
+                "ja": "両国はその領土の支配をめぐって争いました。"
               }
             ]
           }
@@ -10454,8 +10699,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "territory"
     ],
@@ -10463,7 +10711,18 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin territorium / terra",
+      "history": "terra「土地」に関係し、一定の土地・領域を表す。",
+      "roots": [
+        {
+          "form": "terr",
+          "meaning": "土地"
+        }
+      ],
+      "related": []
+    }
   },
   {
     "id": "sw-10573",
@@ -10561,12 +10820,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "試験",
-            "definition": "a person, thing, state, or idea related to 試験",
+            "ja": "試験；検査",
+            "definition": "a set of questions or procedures used to measure knowledge, ability, or condition",
             "examples": [
               {
-                "en": "This is a common example of 'test'.",
-                "ja": "これは「試験」の一般的な例です。"
+                "en": "We have a vocabulary test on Friday.",
+                "ja": "金曜日に語彙テストがあります。"
               }
             ]
           }
@@ -10580,8 +10839,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "test"
     ],
@@ -11424,12 +11685,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "テーマ",
-            "definition": "a person, thing, state, or idea related to テーマ",
+            "ja": "主題；テーマ",
+            "definition": "the main subject or idea in a work, discussion, or event",
             "examples": [
               {
-                "en": "The word 'theme' is often useful in formal or everyday English.",
-                "ja": "「theme」は「テーマ」の意味で使われます。"
+                "en": "One major theme of the novel is freedom.",
+                "ja": "その小説の主要なテーマの一つは自由です。"
               }
             ]
           }
@@ -11443,8 +11704,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "theme"
     ],
@@ -11641,12 +11904,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "理論",
-            "definition": "a person, thing, idea, or concept connected with '理論'",
+            "ja": "理論；説",
+            "definition": "a set of ideas intended to explain facts or events",
             "examples": [
               {
-                "en": "This theory is important.",
-                "ja": "この「理論」は重要です。"
+                "en": "The experiment produced evidence that supported the theory.",
+                "ja": "その実験は理論を支持する証拠を生み出しました。"
               }
             ]
           }
@@ -11660,8 +11923,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "theory"
     ],
@@ -11895,15 +12160,15 @@
     "frequency": 2,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adverb",
         "meanings": [
           {
             "ja": "したがって",
-            "definition": "a person, thing, state, process, or idea connected with したがって",
+            "definition": "for that reason",
             "examples": [
               {
-                "en": "The word 'therefore' is commonly used in this kind of context.",
-                "ja": "「therefore」は「したがって」に関する文脈でよく使われます。"
+                "en": "The data were incomplete; therefore, no firm conclusion was drawn.",
+                "ja": "データが不完全だったため、確かな結論は出されませんでした。"
               }
             ]
           }
@@ -11917,8 +12182,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "therefore"
     ],
@@ -12170,9 +12437,24 @@
     },
     "usage_note": "",
     "tags": [
-      "body-health"
+      "body-health",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Greek therme + metron",
+      "history": "thermo-「熱」+ meter「測るもの」から、温度を測る器具を表す。",
+      "roots": [
+        {
+          "form": "therm",
+          "meaning": "熱"
+        }
+      ],
+      "related": [
+        "temperature",
+        "thermostat"
+      ]
+    }
   },
   {
     "id": "sw-04287",
@@ -12219,9 +12501,24 @@
     },
     "usage_note": "",
     "tags": [
-      "home-tools"
+      "home-tools",
+      "etymology-v1"
     ],
-    "status": "basic"
+    "status": "basic",
+    "etymology": {
+      "origin": "Greek therme + statos",
+      "history": "thermo-「熱」+ statos「立っている・一定の」から、温度を一定に保つ装置を表す。",
+      "roots": [
+        {
+          "form": "therm",
+          "meaning": "熱"
+        }
+      ],
+      "related": [
+        "thermometer",
+        "temperature"
+      ]
+    }
   },
   {
     "id": "sw-10436",
@@ -12775,12 +13072,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "もの；こと",
-            "definition": "a person, thing, idea, or concept connected with 'もの；こと'",
+            "ja": "物；こと",
+            "definition": "an object, situation, action, or idea when it is not named more specifically",
             "examples": [
               {
-                "en": "This thing is important.",
-                "ja": "この「もの」は重要です。"
+                "en": "The first thing I do in the morning is make coffee.",
+                "ja": "朝一番にすることはコーヒーをいれることです。"
               }
             ]
           }
@@ -12794,8 +13091,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.29-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "thing"
     ],
@@ -12819,12 +13118,22 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "考える",
-            "definition": "to do or express the action '考える'",
+            "ja": "思う；考える",
+            "definition": "to have an opinion or idea about something",
             "examples": [
               {
-                "en": "We often think this in everyday life.",
-                "ja": "私たちは日常生活でよく「考える」します。"
+                "en": "I think this approach will work better.",
+                "ja": "この方法のほうがうまくいくと思います。"
+              }
+            ]
+          },
+          {
+            "ja": "よく考える",
+            "definition": "to use your mind to consider something carefully",
+            "examples": [
+              {
+                "en": "Think carefully before you answer.",
+                "ja": "答える前によく考えてください。"
               }
             ]
           }
@@ -12832,23 +13141,28 @@
       }
     ],
     "forms": {
+      "third_person": "thinks",
       "past": "thought",
       "past_participle": "thought",
-      "third_person": "thinks",
       "ing": "thinking"
     },
-    "phrases": [],
+    "phrases": [
+      "think about",
+      "think of"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.28-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "think",
-      "thought",
       "thinks",
+      "thought",
       "thinking"
     ],
     "pronunciation": {
@@ -14040,8 +14354,8 @@
             "definition": "something likely to cause harm or danger",
             "examples": [
               {
-                "en": "The word 'threat' is useful in this context.",
-                "ja": "この文脈では「脅威」という意味で使われる。"
+                "en": "Climate change is a serious threat to many coastal communities.",
+                "ja": "気候変動は多くの沿岸地域にとって深刻な脅威です。"
               }
             ]
           }
@@ -14056,9 +14370,10 @@
     },
     "usage_note": "",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "v2.31-curated"
     ],
-    "status": "needs_enrichment",
+    "status": "basic",
     "search_terms": [
       "threat"
     ],
@@ -14082,29 +14397,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "脅かす",
-            "definition": "to perform or cause the action expressed by 脅かす",
+            "ja": "脅かす；脅す",
+            "definition": "to create a risk of harm or say that you intend to harm someone",
             "examples": [
               {
-                "en": "The word 'threaten' is often useful in formal or everyday English.",
-                "ja": "「threaten」は「脅かす」の意味で使われます。"
+                "en": "Rising sea levels threaten low-lying islands.",
+                "ja": "海面上昇は低地の島々を脅かしています。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "threatens",
+      "past": "threatened",
+      "past_participle": "threatened",
+      "ing": "threatening"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "threaten"
+      "threaten",
+      "threatens",
+      "threatened",
+      "threatening"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -16817,12 +17142,32 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "時間；時",
-            "definition": "a person, thing, idea, or concept connected with '時間；時'",
+            "ja": "時間",
+            "definition": "what is measured in minutes, hours, days, and years",
             "examples": [
               {
-                "en": "This time is important.",
-                "ja": "この「時間」は重要です。"
+                "en": "We don't have enough time to finish the work today.",
+                "ja": "今日その仕事を終えるだけの時間がありません。"
+              }
+            ]
+          },
+          {
+            "ja": "時刻",
+            "definition": "a particular point shown by a clock",
+            "examples": [
+              {
+                "en": "What time does the train leave?",
+                "ja": "電車は何時に出発しますか。"
+              }
+            ]
+          },
+          {
+            "ja": "回；度",
+            "definition": "an occasion when something happens",
+            "examples": [
+              {
+                "en": "I've visited Kyoto three times.",
+                "ja": "私は京都を3回訪れたことがあります。"
               }
             ]
           }
@@ -16830,14 +17175,20 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "on time",
+      "in time",
+      "from time to time"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.28-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "time"
     ],
@@ -18455,12 +18806,12 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "今日",
-            "definition": "in the way or time described as '今日'",
+            "ja": "今日；現在では",
+            "definition": "on this day or at the present time",
             "examples": [
               {
-                "en": "The word 'today' is common in English.",
-                "ja": "「today」は英語でよく使われる語です。"
+                "en": "Many students today use digital dictionaries.",
+                "ja": "今日では多くの生徒がデジタル辞書を使います。"
               }
             ]
           }
@@ -18474,8 +18825,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "today"
     ],
@@ -18848,12 +19201,12 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "一緒に",
-            "definition": "in the way or time described as '一緒に'",
+            "ja": "一緒に；合わせて",
+            "definition": "with another person or thing, or as a group",
             "examples": [
               {
-                "en": "The word 'together' is common in English.",
-                "ja": "「together」は英語でよく使われる語です。"
+                "en": "The two classes worked together on the project.",
+                "ja": "二つのクラスは一緒にプロジェクトに取り組みました。"
               }
             ]
           }
@@ -18867,8 +19220,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "together"
     ],
@@ -22405,11 +22760,11 @@
         "meanings": [
           {
             "ja": "町",
-            "definition": "a person, thing, idea, or concept connected with '町'",
+            "definition": "a place where people live that is larger than a village and smaller than a city",
             "examples": [
               {
-                "en": "This town is important.",
-                "ja": "この「町」は重要です。"
+                "en": "The town attracts many visitors in spring.",
+                "ja": "その町は春に多くの観光客を集めます。"
               }
             ]
           }
@@ -22423,8 +22778,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "town"
     ],
@@ -22852,9 +23209,26 @@
     "usage_note": "",
     "tags": [
       "general-vocabulary",
-      "needs-example-enrichment"
+      "needs-example-enrichment",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin trahere / tractus",
+      "history": "trahere「引く」に由来し、物を引く機械を表す。",
+      "roots": [
+        {
+          "form": "tract",
+          "meaning": "引く"
+        }
+      ],
+      "related": [
+        "attract",
+        "attraction",
+        "extract",
+        "contract"
+      ]
+    }
   },
   {
     "id": "sw-13332",
@@ -23207,11 +23581,11 @@
         "meanings": [
           {
             "ja": "伝統的な",
-            "definition": "having the quality or state expressed by 伝統的な",
+            "definition": "following customs or methods that have existed for a long time",
             "examples": [
               {
-                "en": "It is traditional.",
-                "ja": "それは「伝統的な」です。"
+                "en": "The town is famous for its traditional festivals.",
+                "ja": "その町は伝統的な祭りで有名です。"
               }
             ]
           }
@@ -23225,8 +23599,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "traditional"
     ],
@@ -24110,7 +24486,8 @@
     },
     "usage_note": "",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "etymology-v1"
     ],
     "status": "needs_enrichment",
     "search_terms": [
@@ -24120,7 +24497,31 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin agere / actus",
+      "history": "trans-「越えて」+ agere「行う」に関係し、物事を遂行することから取引の意味へ発展した。",
+      "roots": [
+        {
+          "form": "trans-",
+          "meaning": "越えて"
+        },
+        {
+          "form": "act / ag",
+          "meaning": "行う・動かす"
+        }
+      ],
+      "related": [
+        "act",
+        "action",
+        "active",
+        "activity",
+        "actual",
+        "react",
+        "reaction",
+        "interact"
+      ]
+    }
   },
   {
     "id": "sw-07350",
@@ -24323,9 +24724,27 @@
     },
     "usage_note": "",
     "tags": [
-      "digital-office"
+      "digital-office",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin transcribere",
+      "history": "trans-「越えて」+ scribere「書く」から、別の場所へ書き写したものを表す。",
+      "roots": [
+        {
+          "form": "trans-",
+          "meaning": "越えて"
+        },
+        {
+          "form": "scrib / script",
+          "meaning": "書く"
+        }
+      ],
+      "related": [
+        "inscription"
+      ]
+    }
   },
   {
     "id": "sw-07244",
@@ -24401,7 +24820,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "transfer"
@@ -24410,7 +24831,29 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin ferre / latus",
+      "history": "trans-「越えて」+ ferre「運ぶ」から、別の場所へ移す意味になった.",
+      "roots": [
+        {
+          "form": "trans-",
+          "meaning": "越えて"
+        },
+        {
+          "form": "fer",
+          "meaning": "運ぶ・持つ"
+        }
+      ],
+      "related": [
+        "reference",
+        "prefer",
+        "preference",
+        "offer",
+        "differ",
+        "difference"
+      ]
+    }
   },
   {
     "id": "sw-07590",
@@ -24486,7 +24929,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "transform"
@@ -24495,7 +24940,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin forma / formare",
+      "history": "trans-「越えて・変えて」と formare「形作る」から、「形を変える」を表す。",
+      "roots": [
+        {
+          "form": "form",
+          "meaning": "形・形作る"
+        }
+      ],
+      "related": [
+        "form",
+        "formal",
+        "information",
+        "inform",
+        "reform",
+        "transformation"
+      ]
+    }
   },
   {
     "id": "sw-02736",
@@ -24530,7 +24993,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "transformation"
@@ -24539,7 +25004,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin forma / formare",
+      "history": "transform の名詞形で、form「形」を変えることを表す。",
+      "roots": [
+        {
+          "form": "form",
+          "meaning": "形・形作る"
+        }
+      ],
+      "related": [
+        "form",
+        "formal",
+        "information",
+        "inform",
+        "reform",
+        "transform"
+      ]
+    }
   },
   {
     "id": "sw-02917",
@@ -24902,9 +25385,30 @@
     },
     "usage_note": "",
     "tags": [
-      "description"
+      "description",
+      "etymology-v1"
     ],
-    "status": "basic"
+    "status": "basic",
+    "etymology": {
+      "origin": "Latin lux / lumen / lucere",
+      "history": "trans-「通して」+ lucere「光る」に由来し、光を通すことを表す。",
+      "roots": [
+        {
+          "form": "trans-",
+          "meaning": "通して"
+        },
+        {
+          "form": "luc / lumin",
+          "meaning": "光"
+        }
+      ],
+      "related": [
+        "light",
+        "illustrate",
+        "illustration",
+        "luminous"
+      ]
+    }
   },
   {
     "id": "sw-07348",
@@ -25258,15 +25762,15 @@
     "frequency": 3,
     "parts_of_speech": [
       {
-        "pos": "verb",
+        "pos": "noun",
         "meanings": [
           {
-            "ja": "輸送する；輸送",
-            "definition": "to perform or cause the action expressed by 輸送する",
+            "ja": "交通；輸送",
+            "definition": "the system or activity of moving people or goods from place to place",
             "examples": [
               {
-                "en": "The word 'transport' is commonly used in this context.",
-                "ja": "「transport」は「輸送する」に関する文脈で使われます。"
+                "en": "Public transport is limited in rural areas.",
+                "ja": "地方では公共交通が限られています。"
               }
             ]
           }
@@ -25280,8 +25784,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "transport"
     ],
@@ -25289,7 +25796,26 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin trans- + portare",
+      "history": "trans-「越えて」と portare「運ぶ」から、「向こう側へ運ぶ」が中心イメージ。",
+      "roots": [
+        {
+          "form": "trans-",
+          "meaning": "越えて"
+        },
+        {
+          "form": "port",
+          "meaning": "運ぶ"
+        }
+      ],
+      "related": [
+        "transportation",
+        "import",
+        "export"
+      ]
+    }
   },
   {
     "id": "sw-13403",
@@ -25692,29 +26218,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "旅行する",
-            "definition": "to do or express the action '旅行する'",
+            "ja": "旅行する；移動する",
+            "definition": "to go from one place to another, especially over a long distance",
             "examples": [
               {
-                "en": "We often travel this in everyday life.",
-                "ja": "私たちは日常生活でよく「旅行する」します。"
+                "en": "I hope to travel around New Zealand someday.",
+                "ja": "いつかニュージーランドを旅行したいです。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "travels",
+      "past": "traveled",
+      "past_participle": "traveled",
+      "ing": "traveling"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "travel"
+      "travel",
+      "travels",
+      "traveled",
+      "traveling"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -26956,17 +27492,37 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "傾向；動向",
+            "definition": "a general direction in which a situation is changing",
+            "examples": [
+              {
+                "en": "The graph shows an upward trend in online sales.",
+                "ja": "そのグラフはオンライン販売の上昇傾向を示しています。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "upward trend",
+      "downward trend"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "trend"
     ],
@@ -27180,9 +27736,25 @@
     },
     "usage_note": "",
     "tags": [
-      "music-art"
+      "music-art",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin triangulum",
+      "history": "tri-「三つ」+ angulus「角」から、三角形を表す。",
+      "roots": [
+        {
+          "form": "tri-",
+          "meaning": "三つ"
+        },
+        {
+          "form": "tri",
+          "meaning": "三"
+        }
+      ],
+      "related": []
+    }
   },
   {
     "id": "sw-05723",
@@ -29410,29 +29982,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "試す",
-            "definition": "to do or express the action '試す'",
+            "ja": "試す；努力する",
+            "definition": "to attempt to do something",
             "examples": [
               {
-                "en": "We often try this in everyday life.",
-                "ja": "私たちは日常生活でよく「試す」します。"
+                "en": "Try using a different example if the explanation is unclear.",
+                "ja": "説明が分かりにくければ別の例を使ってみてください。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "tries",
+      "past": "tried",
+      "past_participle": "tried",
+      "ing": "trying"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "try"
+      "try",
+      "tries",
+      "tried",
+      "trying"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -33222,11 +33804,11 @@
         "meanings": [
           {
             "ja": "典型的な",
-            "definition": "having the quality or characteristic expressed by 典型的な",
+            "definition": "having the usual features of a particular type",
             "examples": [
               {
-                "en": "The word 'typical' is commonly used in this context.",
-                "ja": "「typical」は「典型的な」に関する文脈で使われます。"
+                "en": "This is a typical example of the problem.",
+                "ja": "これはその問題の典型的な例です。"
               }
             ]
           }
@@ -33240,8 +33822,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "typical"
     ],
