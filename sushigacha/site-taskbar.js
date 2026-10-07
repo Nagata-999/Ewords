@@ -12,7 +12,16 @@
   function pick(date){let seed=hash('sushitan-daily-'+date),a=[...KEYS];for(let i=a.length-1;i>0;i--){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const j=seed%(i+1);[a[i],a[j]]=[a[j],a[i]]}return a.slice(0,COUNT)}
   function valid(a){return Array.isArray(a)&&a.length===COUNT&&new Set(a).size===COUNT&&a.every(k=>QUESTS[k])}
   function activeFor(date,existing){let s=null;try{s=JSON.parse(localStorage.getItem(ACTIVE_KEY)||'null')}catch{}if(s&&s.day===date&&valid(s.active))return [...s.active];const a=valid(existing)?[...existing]:pick(date);localStorage.setItem(ACTIVE_KEY,JSON.stringify({day:date,active:a}));return a}
-  function ensure(l){const t=day(),same=l.dailyQuests?.day===t,a=activeFor(t,same?l.dailyQuests.active:null);if(!same)l.dailyQuests={day:t,active:a,progress:{},claimed:{},chestClaimed:false,chestReward:0};const q=l.dailyQuests;q.active=a;q.progress=q.progress&&typeof q.progress==='object'?q.progress:{};q.claimed=q.claimed&&typeof q.claimed==='object'?q.claimed:{};KEYS.forEach(k=>{q.progress[k]=Math.max(0,Number(q.progress[k])||0);q.claimed[k]=!!q.claimed[k]});return q}
+  function ensure(l){const t=day(),same=l.dailyQuests?.day===t,a=activeFor(t,same?l.dailyQuests.active:null);if(!same)l.dailyQuests={day:t,active:a,progress:{},claimed:{},chestClaimed:false,chestReward:0};const q=l.dailyQuests;q.active=a;q.progress=q.progress&&typeof q.progress==='object'?q.progress:{};q.claimed=q.claimed&&typeof q.claimed==='object'?q.claimed:{};KEYS.forEach(k=>{q.progress[k]=Math.max(0,Number(q.progress[k])||0);q.claimed[k]=!!q.claimed[k]});
+    // One-time migration for the manual-claim rollout. Older trackers marked a
+    // completed quest as claimed immediately. Re-open those completed quests so
+    // today's UI becomes "受け取る" instead of staying stuck on "GET".
+    if(!q.manualClaimMigrationV1){
+      const ids=new Set((Array.isArray(l.gemEvents)?l.gemEvents:[]).map(e=>e&&e.id).filter(Boolean));
+      for(const k of q.active){if(q.claimed[k]&&q.progress[k]>=QUESTS[k].goal&&ids.has(`daily:${q.day}:${k}`))q.claimed[k]=false}
+      q.chestClaimed=false;q.chestReward=0;q.manualClaimMigrationV1=true;
+    }
+    return q}
   function toast(text){let t=document.getElementById('sushiTaskToast');if(!t){t=document.createElement('div');t.id='sushiTaskToast';document.body.append(t)}t.textContent=text;t.classList.remove('show');void t.offsetWidth;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2600)}
   function update(type,value,mode='add'){if(!QUESTS[type])return state();const l=read(),q=ensure(l),d=QUESTS[type];if(!q.active.includes(type)||q.claimed[type])return state();const before=q.progress[type];q.progress[type]=mode==='set'?Math.max(q.progress[type],Number(value)||0):q.progress[type]+Math.max(0,Number(value)||0);q.progress[type]=Math.min(q.progress[type],d.goal);write(l);if(before<d.goal&&q.progress[type]>=d.goal){toast(`✅ ${d.label} 達成！ デイリーから受け取ろう`);navigator.vibrate?.([18,28,35])}render();return state()}
   function claimQuest(type){if(!QUESTS[type])return;const l=read(),q=ensure(l),d=QUESTS[type];if(!q.active.includes(type)||q.claimed[type]||q.progress[type]<d.goal)return;q.claimed[type]=true;write(l);if(window.SushiGem?.awardGems)window.SushiGem.awardGems('daily-quest',d.reward,`daily:${q.day}:${type}`);else{const latest=read();latest.gems=(Number.isSafeInteger(latest.gems)?latest.gems:0)+d.reward;write(latest)}toast(`🎁 ${d.label} +${d.reward}💎 GET!`);render()}
