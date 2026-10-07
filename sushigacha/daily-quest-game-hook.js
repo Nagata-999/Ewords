@@ -23,12 +23,7 @@
     const l=read(),q=ensure(l);
     if(!q||!q.active.includes(type)||q.claimed[type])return false;
     q.progress[type]=Math.min(goal,Math.max(0,Number(q.progress[type])||0)+Math.max(0,Number(n)||0));
-    let justClaimed=false;
-    if(q.progress[type]>=goal&&!q.claimed[type]){
-      q.claimed[type]=true;justClaimed=true;
-    }
     localStorage.setItem(KEY,JSON.stringify(l));
-    if(justClaimed){const awardId=`daily:${q.day}:${type}`;if(window.SushiGem?.awardGems)window.SushiGem.awardGems('daily-quest',10,awardId);else{const latest=read();latest.gems=(Number.isSafeInteger(latest.gems)?latest.gems:0)+10;localStorage.setItem(KEY,JSON.stringify(latest));}}
     window.dispatchEvent(new CustomEvent('sushi-daily-quest-change'));
     return true;
   }
