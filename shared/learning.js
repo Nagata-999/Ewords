@@ -184,6 +184,9 @@
   importLegacy('sushian',hasV2?'sushian:v2:learningState':'sushian:v1:learningState',data=>data?.weakWords);
   global.SushiLearning=Object.freeze({version:VERSION,CONFIG,resolveWordId,recordAnswer,getWeakWords,getReviewWords,getWordProgress,getStats,registerDictionaryWord,reloadFromStorage,
     getWord:id=>clone(byId.get(resolveWordId(id))),getStorageStatus:()=>({ok:!storageError,message:storageError}),
-    exportData:()=>{refresh();return {version:VERSION,registry_version:global.SushiWordRegistry.version,events:clone([...events.values()]),words:clone([...progress.values()])};}});
+    exportData:()=>{refresh();return {version:VERSION,registry_version:global.SushiWordRegistry.version,
+      events:clone([...events.values()]),words:clone([...progress.values()]),
+      cards:clone([...byId.values()].filter(w=>String(w.word_id||'').startsWith('dictionary:')))};},
+    importCards:cards=>{if(!Array.isArray(cards))return 0;let n=0;for(const card of cards)if(registerDictionaryWord(card,true))n++;return n;}});
   global.addEventListener('storage',event=>{if(event.key?.startsWith(PREFIX)){scannedLength=-1;refresh();global.dispatchEvent(new CustomEvent('sushi-learning-change'));}});
 })(window);
