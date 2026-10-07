@@ -30,7 +30,7 @@
   }
   async function syncNow(){
     const c=creds(); if(!c.sushi_id||!c.pin)return {connected:false};
-    const data=await call('sync',c.sushi_id,c.pin); apply(data); return {connected:true,sushiId:c.sushi_id};
+    const sent=readLearning(); const data=await call('sync',c.sushi_id,c.pin); apply(data); const weak=window.SushiLearning?.getStats?.().weak ?? null; const diag={sentEvents:sent.events?.length||0,sentCards:sent.cards?.length||0,serverEvents:data.learning?.events?.length||0,serverCards:data.learning?.cards?.length||0,weak}; try{localStorage.setItem('sushitan_sync_diag_v1',JSON.stringify(diag))}catch{} window.dispatchEvent(new CustomEvent('sushi-sync-diagnostic',{detail:diag})); return {connected:true,sushiId:c.sushi_id,...diag};
   }
   async function connect(id,pin,create=false){
     id=String(id||'').normalize('NFKC').trim().toLowerCase();pin=String(pin||'').trim();
@@ -46,7 +46,7 @@
     const b=document.createElement('button');b.id='sushiSyncButton';b.textContent='☁ データ同期';
     const s=document.createElement('div');s.id='sushiSyncSheet';s.innerHTML=`<div class="ssp-card"><h2>☁ データ同期</h2><p>普段は登録なしで遊べます。一度つなぐと、この端末ではジェム・名前・取得アバターを自動同期します。共有端末では使い終わったら「この端末から切断」を押してください。</p><div class="ssp-status" id="sspStatus"></div><div class="ssp-input"><input id="sspId" autocomplete="username" maxlength="24" placeholder="すしID（例 sushi1234）"><input id="sspPin" inputmode="numeric" autocomplete="one-time-code" maxlength="4" placeholder="4桁PIN"></div><div class="ssp-actions"><button class="ssp-main" id="sspLoad">このIDで同期</button><button class="ssp-sub" id="sspCreate">新しく作る</button><button class="ssp-sub" id="sspClose">閉じる</button><button class="ssp-sub" id="sspOut">この端末から切断</button></div></div>`;document.body.append(b,s);
     const id=s.querySelector('#sspId'),pin=s.querySelector('#sspPin');id.value=localStorage.getItem(ID_KEY)||'';
-    const run=async create=>{try{setStatus(create?'作成しています…':'同期しています…');await connect(id.value,pin.value,create);pin.value='';setStatus('✓ 同期しました：'+localStorage.getItem(ID_KEY))}catch(e){setStatus(msg(e))}};
+    const run=async create=>{try{setStatus(create?'作成しています…':'同期しています…');await connect(id.value,pin.value,create);pin.value='';const d=JSON.parse(localStorage.getItem('sushitan_sync_diag_v1')||'{}');setStatus('✓ 同期 '+localStorage.getItem(ID_KEY)+'｜送信 '+(d.sentEvents??'?')+'件/'+(d.sentCards??'?')+'語｜サーバー '+(d.serverEvents??'?')+'件/'+(d.serverCards??'?')+'語｜苦手 '+(d.weak??'?')+'語')}catch(e){setStatus(msg(e))}};
     b.onclick=()=>{s.classList.add('open');render()};s.onclick=e=>{if(e.target===s)s.classList.remove('open')};s.querySelector('#sspClose').onclick=()=>s.classList.remove('open');s.querySelector('#sspLoad').onclick=()=>run(false);s.querySelector('#sspCreate').onclick=()=>run(true);s.querySelector('#sspOut').onclick=()=>{disconnect();pin.value='';setStatus('この端末の同期を切断しました')};
   }
   function setStatus(t){const e=document.getElementById('sspStatus');if(e)e.textContent=t}
