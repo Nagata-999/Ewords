@@ -1,4 +1,4 @@
-const CACHE_NAME = "sushitan-v8-learning-cards";
+const CACHE_NAME = "sushitan-v9-sync-diagnostic";
 const APP_SHELL = [
   "/",
   "/index.html",
