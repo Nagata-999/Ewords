@@ -18,7 +18,7 @@
     const data=await r.json().catch(()=>({error:'network'})); if(!r.ok)throw Object.assign(new Error(data.error||'sync_failed'),{code:data.error,status:r.status}); return data;
   }
   function apply(data){
-    if(data.ledger)localStorage.setItem(LEDGER_KEY,JSON.stringify(data.ledger));
+    if(data.ledger){localStorage.setItem(LEDGER_KEY,JSON.stringify(data.ledger));window.dispatchEvent(new CustomEvent('sushi-daily-quest-change'));window.dispatchEvent(new CustomEvent('sushi-gem-change'))}
     if(data.player_name){localStorage.setItem(NAME_KEY,data.player_name);window.SushiPlayer?.setName?.(data.player_name)}
     if(Array.isArray(data.learning?.cards) && window.SushiLearning?.importCards) window.SushiLearning.importCards(data.learning.cards);
     if(Array.isArray(data.learning?.events)){
