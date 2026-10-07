@@ -4116,13 +4116,15 @@ html, body {
       }
       clearAccuracy.textContent = `${accuracy}%`;
       clearMaxCombo.textContent = GAME.maxCombo;
+      let cumulativeScore = getStoredTotalScore();
       if (currentMode === MODE_SUSHI) {
         addGrowthScore(bonusScore);
-        renderGrowthCard("home", getStoredTotalScore());
+        cumulativeScore = getStoredTotalScore();
+        renderGrowthCard("home", cumulativeScore);
       }
       if (clearOverlay) clearOverlay.classList.remove('hidden');
       document.getElementById('clearAvatarReward').replaceChildren();
-      if(currentMode===MODE_SUSHI)window.SushiGameAvatarRewards?.showResult(document.getElementById('clearAvatarReward'),'sushitan',bonusScore);
+      if(currentMode===MODE_SUSHI)window.SushiGameAvatarRewards?.showResult(document.getElementById('clearAvatarReward'),'sushitan',cumulativeScore);
 
       await saveHighScore(bonusScore, accuracy);
     }
@@ -4174,7 +4176,7 @@ html, body {
       renderMistakeList();
       resultOverlay.classList.remove('hidden');
       document.getElementById('resultAvatarReward').replaceChildren();
-      if(currentMode===MODE_SUSHI)window.SushiGameAvatarRewards?.showResult(document.getElementById('resultAvatarReward'),'sushitan',bonusScore);
+      if(currentMode===MODE_SUSHI)window.SushiGameAvatarRewards?.showResult(document.getElementById('resultAvatarReward'),'sushitan',growth.after);
 
       await saveHighScore(bonusScore, accuracy);
       if (round === GAME.roundId) await loadRanking(currentMode, rankingList, currentSushiLevel);
