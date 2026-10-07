@@ -7,7 +7,7 @@ const ITEMS=[
   {id:'eyes-red',name:'赤い瞳',rarity:'R',slot:'eyeStyle',kind:'redEyes'},
   {id:'hair-spiky',name:'ツンツン髪',rarity:'R',slot:'hairStyle',kind:'spiky'},
   {id:'hair-princess',name:'お姫様巻き髪',rarity:'SR',slot:'hairStyle',kind:'princess'},
-  {id:'reward-sushitan-aura',name:'烈火のオーラ',rarity:'REWARD',slot:'auraEffect',kind:'blazing',reward:{game:'sushitan',minScore:1501,label:'すし単のどのレベルでも1,500点超',url:'../sushitan.html'}},
+  {id:'reward-sushitan-aura',name:'烈火のオーラ',rarity:'REWARD',slot:'auraEffect',kind:'blazing',reward:{game:'sushitan',minScore:15000,label:'すし単の累積15,000点',url:'../sushitan.html'}},
   {id:'reward-sushigiri',name:'すし斬り',rarity:'REWARD',slot:'hand',kind:'katana',reward:{game:'sushigiri',minScore:35000,label:'すし斬りで35,000点以上',url:'../sushigiri.html'}},
   {id:'apocalypse-jacket',name:'世紀末スパイクジャケット',rarity:'R',slot:'top',kind:'apocalypse',color:'#202226',accent:'#b8b3a8'},
   {id:'apocalypse-pants',name:'世紀末ダメージパンツ',rarity:'R',slot:'bottom',kind:'apocalypsePants',color:'#26282d',accent:'#9a6b4d'},
