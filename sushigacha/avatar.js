@@ -1,6 +1,12 @@
 'use strict';
 
 const ITEMS=[
+  {id:'eyes-anime',name:'アニメ風の大きな目',rarity:'R',slot:'eyeStyle',kind:'anime'},
+  {id:'eyes-sharp',name:'鋭い目',rarity:'R',slot:'eyeStyle',kind:'sharp'},
+  {id:'eyes-star',name:'星の瞳',rarity:'SR',slot:'eyeStyle',kind:'starEyes'},
+  {id:'eyes-red',name:'赤い瞳',rarity:'R',slot:'eyeStyle',kind:'redEyes'},
+  {id:'hair-spiky',name:'ツンツン髪',rarity:'R',slot:'hairStyle',kind:'spiky'},
+  {id:'hair-princess',name:'お姫様巻き髪',rarity:'SR',slot:'hairStyle',kind:'princess'},
   {id:'reward-sushitan-aura',name:'烈火のオーラ',rarity:'REWARD',slot:'auraEffect',kind:'blazing',reward:{game:'sushitan',minScore:1501,label:'すし単のどのレベルでも1,500点超',url:'../sushitan.html'}},
   {id:'reward-sushigiri',name:'すし斬り',rarity:'REWARD',slot:'hand',kind:'katana',reward:{game:'sushigiri',minScore:35000,label:'すし斬りで35,000点以上',url:'../sushigiri.html'}},
   {id:'apocalypse-jacket',name:'世紀末スパイクジャケット',rarity:'R',slot:'top',kind:'apocalypse',color:'#202226',accent:'#b8b3a8'},
@@ -133,5 +139,6 @@ function avatarSVG(value=DEFAULT_AVATAR,previewId){
   if(accessory==='star')accSvg='<path d="M120 162l5 10 11 2-8 8 2 11-10-5-10 5 2-11-8-8 11-2Z" fill="#e4bd55" stroke="#8b7233" stroke-width="2"/><path d="M120 131V162" stroke="#8b7233" stroke-width="2"/>';
   return `<svg viewBox="0 0 240 280" role="img" aria-label="アバター"><g>${wings}${backHair}${cape}${legs}${bottomSvg}${body}${detail}<ellipse cx="120" cy="90" rx="48" ry="47" fill="${skin}" stroke="#354b47" stroke-width="3"/>${eyes}${mouth}${frontHair}${hatSvg}${accSvg}</g></svg>`;
 }
+
 
 

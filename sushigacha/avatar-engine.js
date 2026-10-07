@@ -16,8 +16,8 @@
     {id:'studio-tea',name:'お茶の湯のみ',slot:'hand',kind:'tea'}
   ].map(x=>({...x,rarity:'PREVIEW'}));
   const catalog=[...(typeof ITEMS!=='undefined'?ITEMS:[]),...additions.filter(x=>!(typeof ITEMS!=='undefined'&&ITEMS.some(i=>i.id===x.id)))];
-  const slots={top:'トップス',bottom:'ボトムス',hat:'帽子',accessory:'アクセサリー',back:'背中',shoes:'靴',hand:'手持ち',auraEffect:'限定オーラ'};
-  const defaults={gender:'male',hair:0,eyes:0,mouth:0,skin:0,hairColor:0,faceShape:0,expression:0,top:'starter',bottom:'basic-bottom',hat:null,accessory:null,back:null,shoes:'studio-sneakers',hand:null,auraEffect:null};
+  const slots={top:'トップス',bottom:'ボトムス',hat:'帽子',accessory:'アクセサリー',back:'背中',shoes:'靴',hand:'手持ち',auraEffect:'限定オーラ',eyeStyle:'目',hairStyle:'髪型'};
+  const defaults={gender:'male',hair:0,eyes:0,mouth:0,skin:0,hairColor:0,faceShape:0,expression:0,top:'starter',bottom:'basic-bottom',hat:null,accessory:null,back:null,shoes:'studio-sneakers',hand:null,auraEffect:null,eyeStyle:null,hairStyle:null};
   const baseSet={top:'starter',bottom:'basic-bottom',hat:null,accessory:null,back:null,shoes:'studio-sneakers',hand:null,auraEffect:null};
   const sets={basic:{...baseSet},chef:{...baseSet,top:'studio-chef',hat:'studio-headband'},casual:{...baseSet,top:'studio-hoodie',back:'studio-backpack'},wizard:{...baseSet,top:'studio-wizard',hat:'studio-wizard-hat',back:'studio-cape',shoes:'studio-boots',hand:'studio-wand'}};
   const int=(v,n)=>Number.isInteger(v)&&v>=0&&v<n?v:0;
@@ -33,7 +33,25 @@
   const group=(s,t='',attr='')=>`<g${t?` transform="${t}"`:''} ${attr}>${s}</g>`;
   const star=(x,y,r=8,fill='#e8b557')=>{let d='';for(let i=0;i<10;i++){let t=(i*36-90)*Math.PI/180,rr=i%2?r*.46:r;d+=(i?'L':'M')+(x+Math.cos(t)*rr).toFixed(2)+' '+(y+Math.sin(t)*rr).toFixed(2);}return path(d+'Z',fill);};
   const circle=(x,y,r,fill,extra='')=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${fill}" ${extra}/>`;
+  function collectibleEye(a,x,sign,side,blink,happy){
+    const kind=item(a.eyeStyle)?.kind;
+    let art='';
+    if(blink)art=path('M-5 0H5','none','stroke-width="2"');
+    else if(happy||a.expression===1)art=path('M-5 1Q0 -7 5 1','none','stroke-width="2.2"');
+    else if(a.expression===4)art=path('M-5 -1Q0 4 5 -1','none','stroke-width="2"');
+    else if(kind==='sharp')art=path('M-7 -4L7 -1Q3 6 -4 3Z','#fff9ec','stroke-width="1.7"')+path('M-1 -2L3 -1L2 3H0Z','#538879','stroke="none"')+path('M-7 -4L7 -1','none','stroke-width="2.2"');
+    else{
+      const red=kind==='redEyes',starry=kind==='starEyes',ry=a.expression===3?8:kind==='anime'?7.5:6.5;
+      art=`<ellipse cx="0" cy="0" rx="6" ry="${ry}" fill="#fffdf5" stroke-width="1.3"/><ellipse cx="0" cy="1" rx="4.1" ry="${ry-1}" fill="${red?'#bb3b48':starry?'#655690':'#487d9e'}" stroke="none"/>`;
+      art+=starry?star(0,1,4.2,'#ffe294').replace('/>',' stroke="none"/>'):circle(0,1,2.1,red?'#522931':'#243e53','stroke="none"');
+      art+=circle(-1.8,-2.7,1.8,'#fffdf5','stroke="none"')+circle(2,3.8,.85,'#fffdf5','stroke="none"')+path(`M-6 -3Q-2 -${ry+2} 5 -4L7 -5`,'none','stroke-width="1.8"');
+    }
+    return group(art,`translate(${x} 70) scale(${side ? .82 : sign} 1)`,`data-eye-style="${a.eyeStyle}"`);
+  }
   function hairBack(a,h){
+    const style=item(a.hairStyle)?.kind;
+    if(style==='spiky')return '';
+    if(style==='princess')return group(path('M44 61Q35 19 80 23Q126 18 116 66L123 107Q130 120 111 126L101 114H59L48 126Q30 120 37 104Z',h)+path('M47 80Q33 89 46 98Q32 108 48 115M113 80Q128 89 114 98Q128 108 112 115','none','stroke-width="2"'),'','data-hair-back="hair-princess"');
     if(a.gender==='female'){
       const length=[104,132,123,148,104,104,127,104][a.hair];
       let s=path(`M48 66Q43 24 80 25Q118 25 112 67L119 ${length}Q106 ${length+10} 94 ${length-3}H65Q49 ${length+10} 41 ${length}Z`,h);
@@ -45,7 +63,7 @@
     return a.hair===6?path('M47 55H113L121 100L107 96L101 108L91 99H65L53 105L52 94L40 98Z',h):'';
   }
   function femaleTail(a,h,direction,time,reduced){
-    if(a.gender!=='female'||![4,5,6,7].includes(a.hair))return '';
+    if(a.hairStyle||a.gender!=='female'||![4,5,6,7].includes(a.hair))return '';
     const side=direction==='left'||direction==='right', back=direction==='back';
     const sway=reduced?0:Math.sin(time*5)*3;
     if(a.hair===4){
@@ -74,6 +92,13 @@
     return '';
   }
   function hairFront(a,h,back,side=false){
+    const style=item(a.hairStyle)?.kind;
+    if(style==='spiky')return group(path(back?'M43 77L33 58L44 55L32 38L53 40L46 20L68 28L79 7L89 27L109 16L106 37L127 35L116 52L128 59L114 80L101 86L83 81L62 87Z':'M43 71L33 57L44 51L32 38L53 40L46 20L68 28L79 7L89 27L109 16L106 37L127 35L116 52L124 61L112 74L104 52L96 62L87 44L77 60L68 49L58 65L54 54L48 78Z',h),'','data-hair-style="hair-spiky"');
+    if(style==='princess'){
+      const cap=path(back?'M45 75Q36 23 80 24Q122 22 116 76L107 94L94 87L81 97L65 88L52 96Z':'M45 68Q35 23 80 24Q123 23 116 69L106 72L104 49Q91 59 80 43Q68 59 55 49L53 75Z',h);
+      const curls=path('M46 62Q35 68 41 79Q29 88 41 97Q29 109 44 118Q55 120 54 109Q44 114 43 105Q58 102 51 91Q58 80 49 75ZM114 62Q125 68 119 79Q131 88 119 97Q131 109 116 118Q105 120 106 109Q116 114 117 105Q102 102 109 91Q102 80 111 75Z',h,'stroke-width="2"');
+      return group(cap+curls+path('M40 79Q48 85 51 80M41 97Q50 101 52 95M120 79Q112 85 109 80M119 97Q110 101 108 95','none','stroke-width="1.5"'),'','data-hair-style="hair-princess"');
+    }
     if(back){
       const backs=[
         'M45 62L41 48L48 43L45 34L60 35L68 23L80 28L89 20L103 32L112 29L114 43L120 50L113 62L108 78L97 87L82 84L65 88L50 79Z',
@@ -197,7 +222,8 @@
       let features='';
       for(const [index,x] of eyes.entries()){
         const sign=side?1:index===0?1:-1;
-        if(blink)features+=path(`M${x-3} 70H${x+3}`,'none','stroke-width="2.2"');
+        if(a.eyeStyle)features+=collectibleEye(a,x,sign,side,blink,happy);
+        else if(blink)features+=path(`M${x-3} 70H${x+3}`,'none','stroke-width="2.2"');
         else if(happy||a.expression===1)features+=path(`M${x-4} 71Q${x} 64 ${x+4} 71`,'none','stroke-width="2.3"');
         else if(sleepy)features+=path(`M${x-3} 69Q${x} 73 ${x+3} 69`,'none','stroke-width="2.3"');
         else if(a.expression===3)features+=`<ellipse cx="${x}" cy="70" rx="3" ry="4.4" fill="${INK}" stroke="none"/>`;
@@ -222,7 +248,7 @@
     if(accessory==='bag')extra+=path('M58 99L101 134','none','stroke="#916448" stroke-width="4"')+path('M93 124H113V144H92Z','#b18a61');
     if(bk==='cape'&&!back)extra+=path('M58 99L77 108L103 99','none','stroke="#e8b557" stroke-width="3"')+star(80,107,5);
     const far=side?arm(69,false):arm(54,false),near=arm(side?97:107,true);
-    const rearHair=(a.gender==='female'&&side)?'':hairBack(a,h);
+    const rearHair=(a.gender==='female'&&side&&!a.hairStyle)?'':hairBack(a,h);
     let upper=rear+rearHair+femaleTail(a,h,direction,time,reduced)+far+body+near+face+extra;
     let character=group(legs+group(upper,`translate(0 ${torsoY.toFixed(2)})`),`translate(0 ${sitting?0:bounce.toFixed(2)})`);
     if(direction==='left')character=group(character,'translate(160 0) scale(-1 1)');
@@ -261,5 +287,6 @@
   }
   window.SushiAvatarV2={catalog,slots,defaults,sets,normalize,render,mount,item};
 })();
+
 
 
