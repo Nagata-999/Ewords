@@ -18,7 +18,7 @@
     // today's UI becomes "受け取る" instead of staying stuck on "GET".
     if(!q.manualClaimMigrationV2){
       for(const k of q.active){if(q.claimed[k]&&q.progress[k]>=QUESTS[k].goal)q.claimed[k]=false}
-      q.chestClaimed=false;q.chestReward=0;q.manualClaimMigrationV1=true;
+      q.chestClaimed=false;q.chestReward=0;q.manualClaimMigrationV2=true;
     }
     return q}
   function toast(text){let t=document.getElementById('sushiTaskToast');if(!t){t=document.createElement('div');t.id='sushiTaskToast';document.body.append(t)}t.textContent=text;t.classList.remove('show');void t.offsetWidth;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2600)}
