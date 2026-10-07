@@ -134,6 +134,11 @@
     }).sort((a,b)=>b.priority-a.priority || (a.last_seen||'').localeCompare(b.last_seen||'') || a.word_id.localeCompare(b.word_id));
   }
   function getReviewWords(count=CONFIG.reviewBatch) { return getWeakWords().slice(0,Math.max(0,Math.floor(Number(count)||0))); }
+  function getDiagnostics() {
+    let stored=0,validCount=0,invalidCount=0;const unknown=new Set();
+    try{for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i);if(!key?.startsWith(EVENT))continue;stored++;try{const e=JSON.parse(localStorage.getItem(key));if(valid(e))validCount++;else{invalidCount++;if(e?.word_id&&!byId.has(e.word_id))unknown.add(e.word_id)}}catch{invalidCount++}}}catch{}
+    refresh();return {stored,valid:validCount,invalid:invalidCount,unknown_word_ids:unknown.size,ingested:events.size,progress:progress.size,weak:[...progress.values()].filter(p=>p.wrong_count>0&&p.status!=='mastered').length};
+  }
   function getStats() {
     refresh();const today=day(Date.now());const all=[...progress.values()];
     return {weak:all.filter(p=>p.wrong_count && p.status!=='mastered').length,
@@ -182,7 +187,7 @@
   // v2 supersedes v1: never import both versions of the same legacy state.
   let hasV2=false;try{hasV2=!!localStorage.getItem('sushian:v2:learningState');}catch{}
   importLegacy('sushian',hasV2?'sushian:v2:learningState':'sushian:v1:learningState',data=>data?.weakWords);
-  global.SushiLearning=Object.freeze({version:VERSION,CONFIG,resolveWordId,recordAnswer,getWeakWords,getReviewWords,getWordProgress,getStats,registerDictionaryWord,reloadFromStorage,
+  global.SushiLearning=Object.freeze({version:VERSION,CONFIG,resolveWordId,recordAnswer,getWeakWords,getReviewWords,getWordProgress,getStats,getDiagnostics,registerDictionaryWord,reloadFromStorage,
     getWord:id=>clone(byId.get(resolveWordId(id))),getStorageStatus:()=>({ok:!storageError,message:storageError}),
     exportData:()=>{refresh();return {version:VERSION,registry_version:global.SushiWordRegistry.version,
       events:clone([...events.values()]),words:clone([...progress.values()]),
