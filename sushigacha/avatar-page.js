@@ -21,7 +21,7 @@ function normalize(value){
 }
 function balance(l){return Number.isSafeInteger(l.gems)&&l.gems>=0?l.gems:0;}
 function state(){const l=readLedger();return {...normalize(l),gems:balance(l)};}
-async function transaction(change){const run=()=>{const ledger=readLedger(),g=normalize(ledger);const result=change(ledger,g);g.version=3;ledger.gacha=g;localStorage.setItem(LEDGER,JSON.stringify(ledger));return result;};return navigator.locks?navigator.locks.request('sushitan-ledger',run):run();}
+async function transaction(change){const run=()=>{const ledger=readLedger(),g=normalize(ledger);const result=change(ledger,g);g.version=3;ledger.gacha=g;ledger.gacha.avatarUpdatedAt=Date.now();localStorage.setItem(LEDGER,JSON.stringify(ledger));window.dispatchEvent(new Event('sushi-avatar-changed'));return result;};return navigator.locks?navigator.locks.request('sushitan-ledger',run):run();}
 function fail(e){if($('status'))$('status').textContent=e.message||'保存できませんでした。ブラウザの保存設定を確認してください。';}
 function namesFor(a){return {hair:HAIR_NAMES[a.gender],eyes:EYE_NAMES[a.gender],mouth:['ほほえみ','にっこり','おすまし'],skin:['ライト','ミディアム','ディープ'],hairColor:['ブラウン','キャラメル','ブルーブラック']};}
 function render(){try{const s=state();$('balance').textContent=s.gems.toLocaleString();if($('avatar')){$('avatar').innerHTML=avatarSVG(s.avatar);const top=ITEMS.find(x=>x.id===s.avatar.top),bottom=ITEMS.find(x=>x.id===s.avatar.bottom);$('outfitName').textContent=`${top?.name||''} × ${bottom?.name||''}`;$('ownedCount').textContent=(s.owned.filter(id=>!['starter','basic-bottom'].includes(id)).length)+' / 28 COLLECTED';renderEditor(s);renderAvatarControls(s);renderCloset(s);}}catch(e){fail(e);}}
