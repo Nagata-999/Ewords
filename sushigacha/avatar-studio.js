@@ -21,11 +21,11 @@
     $('itemGrid').replaceChildren();
     let items=A.catalog.filter(i=>i.slot===slot&&(state.owned||[]).includes(i.id));
     items.sort((a,b)=>Number((state.owned||[]).includes(b.id))-Number((state.owned||[]).includes(a.id)));
-    if(!['top','bottom'].includes(slot))items=[{id:null,name:'つけない',slot},...items];
+    if(!['top','bottom'].includes(slot))items=[{id:null,name:['eyeStyle','hairStyle'].includes(slot)?'基本パーツに戻す':'つけない',slot},...items];
     if(!items.length){const p=document.createElement('p');p.textContent='この種類のアイテムはまだ持っていません。ガチャなどで入手すると表示されます。';$('itemGrid').append(p);}
     for(const i of items){
       const b=document.createElement('button');b.className='item-card';b.dataset.item=i.id||'none';b.setAttribute('aria-pressed',String(state.avatar[slot]===i.id));b.setAttribute('aria-label',i.name);
-      const art=document.createElement('span');art.className='item-art';art.innerHTML=A.render({...state.avatar,[slot]:i.id});
+      const art=document.createElement('span');art.className='item-art';art.innerHTML=A.render({...state.avatar,[slot]:i.id,...(slot==='eyeStyle'?{expression:0}:{})});
       const name=document.createElement('strong');name.textContent=i.name;
       const hint=document.createElement('small');const owned=!i.id||(state.owned||[]).includes(i.id);b.classList.toggle('unowned',!owned);hint.textContent=!owned?'未所持・試着':state.avatar[slot]===i.id?'選択中':i.id?'所持':'取り外す';
       b.append(art,name,hint);b.addEventListener('click',()=>setAvatar({...state.avatar,[slot]:i.id}));$('itemGrid').append(b);
@@ -39,13 +39,15 @@
     $('genderControls').querySelectorAll('[data-gender]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.gender===state.avatar.gender))); $('hair').replaceChildren();
     HAIR_NAMES[state.avatar.gender].forEach((label,i)=>{const o=document.createElement('option');o.value=i;o.textContent=label;$('hair').append(o);});
     for(const k of ['hair','hairColor','skin','eyes','mouth','faceShape','expression','pet','aura'])$(k).value=state.avatar[k];
-    $('aura').querySelectorAll('[data-reward-aura]').forEach(o=>o.remove());
-    for(const item of A.catalog.filter(i=>i.slot==='auraEffect'&&((state.owned||[]).includes(i.id)||state.avatar.auraEffect===i.id))){const option=document.createElement('option');option.value=item.id;option.textContent=item.name;option.dataset.rewardAura='true';$('aura').append(option);}
-    $('aura').value=state.avatar.auraEffect||state.avatar.aura;
+    for(const [key,slot] of Object.entries({aura:'auraEffect',eyes:'eyeStyle',hair:'hairStyle'})){
+      $(key).querySelectorAll('[data-owned-part]').forEach(o=>o.remove());
+      for(const item of A.catalog.filter(i=>i.slot===slot&&((state.owned||[]).includes(i.id)||state.avatar[slot]===i.id))){const option=document.createElement('option');option.value=item.id;option.textContent=item.name;option.dataset.ownedPart='true';$(key).append(option);}
+      $(key).value=state.avatar[slot]||state.avatar[key];
+    }
     if($('eyes').selectedIndex<0){const o=document.createElement('option');o.value=state.avatar.eyes;o.textContent='引き継いだ目';$('eyes').append(o);$('eyes').value=state.avatar.eyes;}
   }
   $('appearanceToggle').onclick=()=>{const hidden=!$('appearancePanel').hidden;$('appearancePanel').hidden=hidden;$('appearanceToggle').setAttribute('aria-expanded',String(!hidden));$('appearanceToggle').querySelector('span').textContent=hidden?'＋':'−';};
-  for(const key of ['hair','hairColor','skin','eyes','mouth','faceShape','expression','pet','aura'])$(key).onchange=e=>{const reward=key==='aura'&&A.item(e.target.value,'auraEffect');setAvatar({...state.avatar,[key]:reward?0:Number(e.target.value),...(key==='aura'?{auraEffect:reward?reward.id:null}:{})});};
+  for(const key of ['hair','hairColor','skin','eyes','mouth','faceShape','expression','pet','aura'])$(key).onchange=e=>{const slot={aura:'auraEffect',eyes:'eyeStyle',hair:'hairStyle'}[key],part=slot&&A.item(e.target.value,slot);setAvatar({...state.avatar,[key]:part?state.avatar[key]:Number(e.target.value),...(slot?{[slot]:part?part.id:null}:{})});};
   function renderLooks(){
     $('savedLooks').replaceChildren();state.looks.forEach((look,i)=>{
       const cell=document.createElement('div');cell.className='saved-slot';
@@ -101,4 +103,5 @@
   renderWardrobe();renderLooks();syncSettings();
   window.SushiAvatarStudio={getState:()=>structuredClone(state),getMotion:()=>({hero:hero.getState(),walker:walker.getState(),x,mode}),destroy(){cancelAnimationFrame(raf);hero.destroy();walker.destroy();}};
 })();
+
 
