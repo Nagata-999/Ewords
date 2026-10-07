@@ -36,7 +36,7 @@
     id=String(id||'').normalize('NFKC').trim().toLowerCase();pin=String(pin||'').trim();
     if(!/^[a-z0-9_-]{4,24}$/.test(id))throw new Error('IDは4〜24文字の半角英数字・_・-で入力してください');
     if(!/^\d{4}$/.test(pin))throw new Error('PINは4桁の数字で入力してください');
-    const data=await call(create?'create':'sync',id,pin); localStorage.setItem(ID_KEY,id);localStorage.setItem(PIN_KEY,pin);apply(data);render();return data;
+    const sent=readLearning(); const data=await call(create?'create':'sync',id,pin); localStorage.setItem(ID_KEY,id);localStorage.setItem(PIN_KEY,pin);apply(data); const weak=window.SushiLearning?.getStats?.().weak ?? null; const diag={sentEvents:sent.events?.length||0,sentCards:sent.cards?.length||0,serverEvents:data.learning?.events?.length||0,serverCards:data.learning?.cards?.length||0,weak}; try{localStorage.setItem('sushitan_sync_diag_v1',JSON.stringify(diag))}catch{} render();return {...data,...diag};
   }
   function disconnect(){localStorage.removeItem(ID_KEY);localStorage.removeItem(PIN_KEY);render()}
   const msg=e=>({id_taken:'そのIDはすでに使われています',not_found:'そのIDは見つかりません',wrong_pin:'PINが違います',temporarily_locked:'失敗が続いたため10分間ロックされています'}[e?.code]||e?.message||'同期できませんでした');
