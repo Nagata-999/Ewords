@@ -14,11 +14,12 @@
   const readJSON=k=>{try{const v=JSON.parse(localStorage.getItem(k)||'{}');return v&&typeof v==='object'&&!Array.isArray(v)?v:{}}catch{return{}}};
   const creds=()=>({sushi_id:(localStorage.getItem(ID_KEY)||'').trim().toLowerCase(),pin:localStorage.getItem(PIN_KEY)||''});
   async function call(action,id,pin){
-    const r=await fetch(URL,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY},body:JSON.stringify({action,sushi_id:id,pin,player_name:window.SushiPlayer?.getName?.()||localStorage.getItem(NAME_KEY)||'',ledger:readJSON(LEDGER_KEY),learning:readLearning()})});
-    const data=await r.json().catch(()=>({error:'network'})); if(!r.ok)throw Object.assign(new Error(data.error||'sync_failed'),{code:data.error,status:r.status}); return data;
+    const sentLedger=readJSON(LEDGER_KEY),sentAvatarUpdatedAt=Number(sentLedger.gacha?.avatarUpdatedAt)||0;
+    const r=await fetch(URL,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY},body:JSON.stringify({action,sushi_id:id,pin,player_name:window.SushiPlayer?.getName?.()||localStorage.getItem(NAME_KEY)||'',ledger:sentLedger,learning:readLearning()})});
+    const data=await r.json().catch(()=>({error:'network'})); if(!r.ok)throw Object.assign(new Error(data.error||'sync_failed'),{code:data.error,status:r.status}); data.__sentAvatarUpdatedAt=sentAvatarUpdatedAt; return data;
   }
   function apply(data){
-    if(data.ledger){localStorage.setItem(LEDGER_KEY,JSON.stringify(data.ledger));window.dispatchEvent(new CustomEvent('sushi-daily-quest-change'));window.dispatchEvent(new CustomEvent('sushi-gem-change'))}
+    if(data.ledger){const current=readJSON(LEDGER_KEY),currentAvatarUpdatedAt=Number(current.gacha?.avatarUpdatedAt)||0,sentAvatarUpdatedAt=Number(data.__sentAvatarUpdatedAt)||0;if(currentAvatarUpdatedAt>sentAvatarUpdatedAt&&current.gacha?.avatar){data.ledger.gacha={...(data.ledger.gacha||{}),avatar:current.gacha.avatar,avatarUpdatedAt:currentAvatarUpdatedAt}}localStorage.setItem(LEDGER_KEY,JSON.stringify(data.ledger));window.dispatchEvent(new CustomEvent('sushi-daily-quest-change'));window.dispatchEvent(new CustomEvent('sushi-gem-change'))}
     if(data.player_name){localStorage.setItem(NAME_KEY,data.player_name);window.SushiPlayer?.setName?.(data.player_name)}
     if(Array.isArray(data.learning?.cards) && window.SushiLearning?.importCards) window.SushiLearning.importCards(data.learning.cards);
     if(Array.isArray(data.learning?.events)){
