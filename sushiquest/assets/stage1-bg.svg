@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+<defs>
+<linearGradient id="sky" x2="0" y2="1"><stop stop-color="#55bce9"/><stop offset=".62" stop-color="#dff6ff"/><stop offset="1" stop-color="#f9dca0"/></linearGradient>
+<linearGradient id="m1" x2="0" y2="1"><stop stop-color="#7699a4"/><stop offset="1" stop-color="#416e67"/></linearGradient>
+<linearGradient id="m2" x2="0" y2="1"><stop stop-color="#5d8d76"/><stop offset="1" stop-color="#315a45"/></linearGradient>
+<linearGradient id="road" x2="0" y2="1"><stop stop-color="#d5c39d"/><stop offset="1" stop-color="#88745d"/></linearGradient>
+<linearGradient id="grass" x2="0" y2="1"><stop stop-color="#6aa44d"/><stop offset="1" stop-color="#294f36"/></linearGradient>
+<filter id="soft"><feGaussianBlur stdDeviation="12"/></filter>
+</defs>
+<rect width="1600" height="900" fill="url(#sky)"/>
+<circle cx="1240" cy="155" r="86" fill="#fff7c5" opacity=".72"/><ellipse cx="1250" cy="175" rx="180" ry="70" fill="#fff" opacity=".22" filter="url(#soft)"/>
+<g fill="#fff" opacity=".72"><ellipse cx="250" cy="145" rx="130" ry="34"/><ellipse cx="355" cy="135" rx="95" ry="28"/><ellipse cx="1030" cy="115" rx="105" ry="30"/></g>
+<path d="M0 510L180 320 300 430 470 235 620 430 790 300 970 445 1160 250 1320 420 1470 300 1600 420V650H0Z" fill="url(#m1)" opacity=".72"/>
+<path d="M0 565L170 430 330 520 520 370 690 520 860 405 1010 530 1190 380 1370 505 1510 410 1600 480V690H0Z" fill="url(#m2)"/>
+<!-- distant castle -->
+<g transform="translate(1110 290)" fill="#e6d5b5" stroke="#765f50" stroke-width="7">
+<path d="M0 185V65h55V25h45v40h65V10h48v55h58v120Z"/><path d="M-28 185h330v30H-28Z"/>
+<path d="M70 185v-72h42v72M184 185v-90h40v90" fill="#806b61"/>
+</g>
+<!-- waterfall and river -->
+<path d="M1020 470c35 35 15 100 40 140 30 50 115 80 205 108" fill="none" stroke="#b9efff" stroke-width="52" opacity=".88"/>
+<path d="M1020 470c35 35 15 100 40 140 30 50 115 80 205 108" fill="none" stroke="#fff" stroke-width="12" opacity=".65"/>
+<!-- village -->
+<g stroke="#624c3d" stroke-width="6">
+<g transform="translate(145 475)"><rect width="160" height="125" rx="4" fill="#e8c98e"/><path d="M-20 20 80-60 180 20Z" fill="#a94e39"/><rect x="62" y="62" width="38" height="63" fill="#76503c"/></g>
+<g transform="translate(330 505)"><rect width="145" height="105" fill="#f0d59f"/><path d="M-15 18 72-48 160 18Z" fill="#8e4736"/><rect x="55" y="52" width="34" height="53" fill="#76503c"/></g>
+<g transform="translate(520 475)"><rect width="155" height="125" fill="#dcbf88"/><path d="M-15 18 77-58 170 18Z" fill="#a54e38"/><rect x="58" y="63" width="38" height="62" fill="#76503c"/></g>
+</g>
+<!-- windmill -->
+<g transform="translate(760 420)" stroke="#725744" stroke-width="10" stroke-linecap="round"><path d="M0 190 32 50h62l35 140" fill="#dfc28b"/><circle cx="64" cy="55" r="15" fill="#775744"/><path d="M64 55 64-70M64 55 180 10M64 55-45 105M64 55 20 170"/></g>
+<!-- meadow -->
+<path d="M0 610Q280 560 540 625T1080 610Q1350 555 1600 625V900H0Z" fill="url(#grass)"/>
+<!-- road -->
+<path d="M570 900C640 790 710 725 805 675C875 638 920 620 955 602C900 610 830 618 750 640C610 680 470 765 360 900Z" fill="url(#road)"/>
+<g opacity=".24" stroke="#4f4137" stroke-width="4"><path d="M430 850q120-30 260 0M500 780q100-25 220 0M585 715q85-18 170 0"/></g>
+<!-- foreground -->
+<path d="M0 790Q150 720 300 810T620 790V900H0ZM1040 820q170-120 330-10t230-15v105h-560Z" fill="#173e2d"/>
+<g fill="#f9e477"><circle cx="115" cy="785" r="12"/><circle cx="215" cy="825" r="9"/><circle cx="1390" cy="785" r="11"/></g>
+<g fill="#ef9fc0"><circle cx="165" cy="805" r="10"/><circle cx="1315" cy="820" r="13"/><circle cx="1490" cy="800" r="9"/></g>
+</svg>
