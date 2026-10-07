@@ -4,16 +4,26 @@
   const URL='https://rxyoyveykxdfrpomkltl.supabase.co/functions/v1/sushi-id-sync';
   const KEY='sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7';
   const LEDGER_KEY='sushitan_login_bonus_v1',NAME_KEY='sushitan_shared_player_name_v1';
-  const ID_KEY='sushitan_sync_id_v1',PIN_KEY='sushitan_sync_pin_v1';
+  const ID_KEY='sushitan_sync_id_v1',PIN_KEY='sushitan_sync_pin_v1',LEARNING_EVENT='sushitan_learning_v1:event:';
+  const readLearning=()=>{
+    if(window.SushiLearning?.exportData)return window.SushiLearning.exportData();
+    const events=[];
+    for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k?.startsWith(LEARNING_EVENT))try{events.push(JSON.parse(localStorage.getItem(k)))}catch{}}
+    return {version:1,registry_version:1,events};
+  };
   const readJSON=k=>{try{const v=JSON.parse(localStorage.getItem(k)||'{}');return v&&typeof v==='object'&&!Array.isArray(v)?v:{}}catch{return{}}};
   const creds=()=>({sushi_id:(localStorage.getItem(ID_KEY)||'').trim().toLowerCase(),pin:localStorage.getItem(PIN_KEY)||''});
   async function call(action,id,pin){
-    const r=await fetch(URL,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY},body:JSON.stringify({action,sushi_id:id,pin,player_name:window.SushiPlayer?.getName?.()||localStorage.getItem(NAME_KEY)||'',ledger:readJSON(LEDGER_KEY)})});
+    const r=await fetch(URL,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY},body:JSON.stringify({action,sushi_id:id,pin,player_name:window.SushiPlayer?.getName?.()||localStorage.getItem(NAME_KEY)||'',ledger:readJSON(LEDGER_KEY),learning:readLearning()})});
     const data=await r.json().catch(()=>({error:'network'})); if(!r.ok)throw Object.assign(new Error(data.error||'sync_failed'),{code:data.error,status:r.status}); return data;
   }
   function apply(data){
     if(data.ledger)localStorage.setItem(LEDGER_KEY,JSON.stringify(data.ledger));
     if(data.player_name){localStorage.setItem(NAME_KEY,data.player_name);window.SushiPlayer?.setName?.(data.player_name)}
+    if(Array.isArray(data.learning?.events)){
+      for(const e of data.learning.events){if(e&&typeof e.id==='string'&&/^[a-zA-Z0-9_-]{1,120}$/.test(e.id))localStorage.setItem(LEARNING_EVENT+e.id,JSON.stringify(e))}
+      window.dispatchEvent(new CustomEvent('sushi-learning-change'));
+    }
     const ev=new Event('sushi-avatar-changed');ev.__fromProfileSync=true;window.dispatchEvent(ev);
     window.dispatchEvent(new CustomEvent('sushi-profile-synced',{detail:{sushiId:data.sushi_id}}));
   }
@@ -41,5 +51,5 @@
   function setStatus(t){const e=document.getElementById('sspStatus');if(e)e.textContent=t}
   function render(){ensureUI();const c=creds();setStatus(c.sushi_id?(c.pin?'接続中：'+c.sushi_id:'ID保存済み：'+c.sushi_id+'（PINを入力すると同期）'):'未設定。この端末だけで遊んでいます。')}
   window.SushiProfileSync={syncNow,connect,disconnect};
-  let syncTimer=null;const queueSync=()=>{clearTimeout(syncTimer);syncTimer=setTimeout(()=>syncNow().catch(()=>{}),700)};const start=()=>{ensureUI();render();syncNow().catch(()=>{});window.addEventListener('sushi-gems-earned',queueSync);window.addEventListener('sushi-avatar-changed',e=>{if(!e.__fromProfileSync)queueSync()});window.addEventListener('sushi-player-change',queueSync);window.addEventListener('sushi-daily-quest-change',queueSync);window.addEventListener('pagehide',()=>{if(creds().pin)syncNow().catch(()=>{})})};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
+  let syncTimer=null;const queueSync=()=>{clearTimeout(syncTimer);syncTimer=setTimeout(()=>syncNow().catch(()=>{}),700)};const start=()=>{ensureUI();render();syncNow().catch(()=>{});window.addEventListener('sushi-gems-earned',queueSync);window.addEventListener('sushi-avatar-changed',e=>{if(!e.__fromProfileSync)queueSync()});window.addEventListener('sushi-player-change',queueSync);window.addEventListener('sushi-daily-quest-change',queueSync);window.addEventListener('sushi-learning-answer',queueSync);window.addEventListener('pagehide',()=>{if(creds().pin)syncNow().catch(()=>{})})};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 })();
