@@ -88,7 +88,7 @@
   // Full-screen/action-heavy games such as Sushi Dungeon must not receive the
   // shared bottom taskbar. Gem and quest integration remain available.
   const inSushiDungeon=/\/sushidungeon(?:\/|$)/i.test(location.pathname);
-  if(!inSushiDungeon)loadOnce('site-taskbar.js','/sushigacha/site-taskbar.js?v=20261008-1');
+  if(!inSushiDungeon)loadOnce('site-taskbar.js','/sushigacha/site-taskbar.js?v=20261008-2');
   loadOnce('daily-quest-click-bridge.js','/sushigacha/daily-quest-click-bridge.js?v=20261008-1');
   loadOnce('daily-quest-links.js','/sushigacha/daily-quest-links.js?v=20260914-1');
 })();
