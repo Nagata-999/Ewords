@@ -120,6 +120,11 @@
     if (detail.mastered) global.dispatchEvent(new CustomEvent('sushi-learning-mastered',{detail}));
     return after;
   }
+  function reloadFromStorage() {
+    events.clear();progress.clear();wordEvents.clear();dirtyWords.clear();
+    scannedLength=-1;latestAt=0;refresh();
+    global.dispatchEvent(new CustomEvent('sushi-learning-change'));
+  }
   function getWordProgress(id) { refresh();return clone(progress.get(resolveWordId(id))); }
   function getWeakWords() {
     refresh();const now=Date.now();
@@ -177,7 +182,7 @@
   // v2 supersedes v1: never import both versions of the same legacy state.
   let hasV2=false;try{hasV2=!!localStorage.getItem('sushian:v2:learningState');}catch{}
   importLegacy('sushian',hasV2?'sushian:v2:learningState':'sushian:v1:learningState',data=>data?.weakWords);
-  global.SushiLearning=Object.freeze({version:VERSION,CONFIG,resolveWordId,recordAnswer,getWeakWords,getReviewWords,getWordProgress,getStats,registerDictionaryWord,
+  global.SushiLearning=Object.freeze({version:VERSION,CONFIG,resolveWordId,recordAnswer,getWeakWords,getReviewWords,getWordProgress,getStats,registerDictionaryWord,reloadFromStorage,
     getWord:id=>clone(byId.get(resolveWordId(id))),getStorageStatus:()=>({ok:!storageError,message:storageError}),
     exportData:()=>{refresh();return {version:VERSION,registry_version:global.SushiWordRegistry.version,events:clone([...events.values()]),words:clone([...progress.values()])};}});
   global.addEventListener('storage',event=>{if(event.key?.startsWith(PREFIX)){scannedLength=-1;refresh();global.dispatchEvent(new CustomEvent('sushi-learning-change'));}});
