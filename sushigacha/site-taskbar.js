@@ -16,9 +16,8 @@
     // One-time migration for the manual-claim rollout. Older trackers marked a
     // completed quest as claimed immediately. Re-open those completed quests so
     // today's UI becomes "受け取る" instead of staying stuck on "GET".
-    if(!q.manualClaimMigrationV1){
-      const ids=new Set((Array.isArray(l.gemEvents)?l.gemEvents:[]).map(e=>e&&e.id).filter(Boolean));
-      for(const k of q.active){if(q.claimed[k]&&q.progress[k]>=QUESTS[k].goal&&ids.has(`daily:${q.day}:${k}`))q.claimed[k]=false}
+    if(!q.manualClaimMigrationV2){
+      for(const k of q.active){if(q.claimed[k]&&q.progress[k]>=QUESTS[k].goal)q.claimed[k]=false}
       q.chestClaimed=false;q.chestReward=0;q.manualClaimMigrationV1=true;
     }
     return q}
