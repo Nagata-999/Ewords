@@ -22,7 +22,7 @@
     if(data.player_name){localStorage.setItem(NAME_KEY,data.player_name);window.SushiPlayer?.setName?.(data.player_name)}
     if(Array.isArray(data.learning?.cards) && window.SushiLearning?.importCards) window.SushiLearning.importCards(data.learning.cards);
     if(Array.isArray(data.learning?.events)){
-      for(const e of data.learning.events){if(e&&typeof e.id==='string'&&/^[a-zA-Z0-9_-]{1,120}$/.test(e.id))localStorage.setItem(LEARNING_EVENT+e.id,JSON.stringify(e))}
+      for(const e of data.learning.events){if(e&&typeof e.id==='string'&&/^[a-zA-Z0-9_:-]{1,160}$/.test(e.id))localStorage.setItem(LEARNING_EVENT+e.id,JSON.stringify(e))}
       if(window.SushiLearning?.reloadFromStorage)window.SushiLearning.reloadFromStorage();else window.dispatchEvent(new CustomEvent('sushi-learning-change'));
     }
     const ev=new Event('sushi-avatar-changed');ev.__fromProfileSync=true;window.dispatchEvent(ev);
