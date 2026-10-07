@@ -29,9 +29,16 @@
     const ev=new Event('sushi-avatar-changed');ev.__fromProfileSync=true;window.dispatchEvent(ev);
     window.dispatchEvent(new CustomEvent('sushi-profile-synced',{detail:{sushiId:data.sushi_id}}));
   }
-  async function syncNow(){
+  let syncInFlight=null,syncAgain=false;
+  async function runSync(){
     const c=creds(); if(!c.sushi_id||!c.pin)return {connected:false};
-    const sent=readLearning(); const data=await call('sync',c.sushi_id,c.pin); apply(data); const weak=window.SushiLearning?.getStats?.().weak ?? null; const ld=window.SushiLearning?.getDiagnostics?.()||{}; const diag={sentEvents:sent.events?.length||0,sentCards:sent.cards?.length||0,serverEvents:data.learning?.events?.length||0,serverCards:data.learning?.cards?.length||0,weak,...ld}; try{localStorage.setItem('sushitan_sync_diag_v1',JSON.stringify(diag))}catch{} window.dispatchEvent(new CustomEvent('sushi-sync-diagnostic',{detail:diag})); return {connected:true,sushiId:c.sushi_id,...diag};
+    const sent=readLearning(); const data=await call('sync',c.sushi_id,c.pin); apply(data); const weak=window.SushiLearning?.getStats?.().weak ?? null; const ld=window.SushiLearning?.getDiagnostics?.()||{}; const diag={sentEvents:sent.events?.length||0,sentCards:sent.cards?.length||0,serverEvents:data.learning?.events?.length||0,serverCards:data.learning?.cards||0,weak,...ld}; try{localStorage.setItem('sushitan_sync_diag_v1',JSON.stringify(diag))}catch{} window.dispatchEvent(new CustomEvent('sushi-sync-diagnostic',{detail:diag})); return {connected:true,sushiId:c.sushi_id,...diag};
+  }
+  async function syncNow(){
+    if(syncInFlight){syncAgain=true;return syncInFlight}
+    syncInFlight=runSync();
+    try{return await syncInFlight}
+    finally{syncInFlight=null;if(syncAgain){syncAgain=false;queueMicrotask(()=>syncNow().catch(()=>{}))}}
   }
   async function connect(id,pin,create=false){
     id=String(id||'').normalize('NFKC').trim().toLowerCase();pin=String(pin||'').trim();
