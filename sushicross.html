@@ -49,7 +49,7 @@
 <link rel="canonical" href="https://sushitan.net/sushicross">
 
 <meta name="description" content="車や電車、川などの障害物に注意して進む、英単語とアクションを組み合わせたゲームです。移動は矢印キー・WASD・スワイプに対応し、語彙の問題では選択肢をタップして答えます。">
-</head>
+<script defer src="/sushigacha/site-taskbar.js?v=20261008-11"></script></head>
 <body>
 <canvas id="game" aria-label="すしクロスのゲーム画面"></canvas>
 <div id="hud">
@@ -161,7 +161,7 @@ updateBgmButton();
 const rand=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)],clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
 const theme=()=>THEMES[(stage-1)%THEMES.length],difficulty=()=>Math.min(stage-1,10);
 
-function resize(){dpr=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;canvas.width=W*dpr;canvas.height=H*dpr;canvas.style.width=W+"px";canvas.style.height=H+"px";ctx.setTransform(dpr,0,0,dpr,0,0);tileX=clamp(W/9.1,43,76);tileY=tileX*.61;centerX=W/2;baseY=H*.77}
+function resize(){dpr=Math.min(devicePixelRatio||1,2);W=innerWidth;H=canvas.getBoundingClientRect().height;canvas.width=W*dpr;canvas.height=H*dpr;canvas.style.width=W+"px";canvas.style.height=H+"px";ctx.setTransform(dpr,0,0,dpr,0,0);tileX=clamp(W/9.1,43,76);tileY=tileX*.61;centerX=W/2;baseY=H*.77}
 addEventListener("resize",resize);resize();ui.best.textContent="BEST "+best;
 
 function laneFor(row){return lanes.find(l=>l.row===row)}

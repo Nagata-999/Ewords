@@ -1,4 +1,4 @@
-const CACHE_NAME = "sushitan-v12-learning-diagnostic";
+const CACHE_NAME = "sushitan-v13-shared-navigation";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -45,4 +45,5 @@ self.addEventListener("fetch", event => {
       .catch(() => caches.match(event.request).then(cached => cached || caches.match("/index.html")))
   );
 });
+
 
