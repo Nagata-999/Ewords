@@ -181,6 +181,33 @@
     if(kind==='cheerBow')return path('M78 36Q56 17 47 29Q43 42 72 46L80 41Q88 46 116 37Q117 22 105 22Q91 24 82 35Z','#1767c7')+path('M53 29L72 42M106 27L87 40','none','stroke="#fff" stroke-width="4"')+circle(80,39,6,'#1767c7');
     return '';
   }
+  // Every tongue bends independently; all geometry stays behind the character.
+  // Use the shared clock so pause, hidden tabs and reduced-motion also stop the fire.
+  function blazingAura(time,reduced){
+    const t=reduced?0:time;
+    const f=n=>n.toFixed(2);
+    function tongue(x,width,height,phase,color,opacity){
+      const sway=Math.sin(t*4.5+phase)*5+Math.sin(t*7.2+phase)*2;
+      const tipY=Math.max(8,184-height+Math.sin(t*5.1+phase)*7);
+      const tipX=x+sway,shoulder=tipY+(184-tipY)*.42;
+      return `<path data-flame-tongue="true" d="M${f(x-width)} 184 C${f(x-width-7)} 157 ${f(x-width+sway)} ${f(shoulder+20)} ${f(tipX-3)} ${f(shoulder)} Q${f(tipX+8)} ${f(tipY+17)} ${f(tipX)} ${f(tipY)} C${f(tipX+width+8)} ${f(tipY+28)} ${f(x+width-sway)} ${f(shoulder+14)} ${f(x+width)} 158 Q${f(x+width+8)} 178 ${f(x+width)} 184Z" fill="${color}" opacity="${opacity}"/>`;
+    }
+    const tongues=[[32,10,68],[43,14,111],[59,17,140],[79,19,167],[97,16,144],[116,14,119],[129,10,77]];
+    let flame='<ellipse cx="80" cy="181" rx="60" ry="12" fill="#ff6a24" opacity=".22"/>';
+    for(let i=0;i<tongues.length;i++){const [x,w,h]=tongues[i];flame+=tongue(x,w,h,i*1.7,'#ed4225',.8);}
+    for(let i=0;i<tongues.length;i++){const [x,w,h]=tongues[i];flame+=tongue(x,w*.7,h*.79,i*1.7+.9,'#ffbd2e',.95);}
+    flame+='<path d="M47 183Q38 165 49 142L58 156Q54 131 68 111L79 132L89 97L99 135L109 123Q116 150 113 165L122 157Q127 179 113 184Z" fill="#fff2a4"/>';
+    for(let i=0;i<10;i++){
+      const progress=((t*(.32+(i%3)*.06)+i*.137)%1+1)%1;
+      const x=(i%2?135:24)+Math.sin(progress*5+i)*6;
+      const y=179-progress*(128+(i%3)*9);
+      const opacity=reduced?.6:Math.sin(progress*Math.PI)*.85;
+      flame+=`<path data-flame-spark="true" d="M0 -6Q4 -1 0 4Q-3 0 0 -6Z" transform="translate(${f(x)} ${f(y)}) rotate(${f(Math.sin(t*3+i)*18)}) scale(${f(.65+(i%3)*.17)})" fill="${i%3?'#ffce46':'#ff7540'}" opacity="${f(opacity)}"/>`;
+    }
+    flame+='<ellipse cx="80" cy="187" rx="52" ry="7" fill="#ffc53e" opacity=".3"/>';
+    return `<g data-item-art="reward-sushitan-aura" aria-label="烈火のオーラ">${flame}</g>`;
+  }
+
   function render(value={},options={}){
     const a=normalize(value), direction=['front','back','left','right'].includes(options.direction)?options.direction:'front';
     const action=['walk','idle','wave','sit','celebrate'].includes(options.action)?options.action:'idle';
@@ -287,14 +314,7 @@
     let extras='';
     if(a.pet){const pet=['','ねこ','すし','スライム','恐竜'][a.pet];extras=`<g aria-label="${pet}" transform="translate(123 157)">`+path('M0 14Q-2 1 10 1Q23 1 23 14V24H0Z',a.pet===2?'#fff9ec':a.pet===3?'#87ae91':a.pet===4?'#61917d':'#c19470')+(a.pet===1?path('M0 7L1 -3L9 2M14 2L23 -3L23 8','#c19470'):a.pet===2?path('M0 9Q-1 -3 12 0Q23 -3 24 9Z','#ed955e'):'')+circle(6,12,1.3,INK)+circle(17,12,1.3,INK)+'</g>';}
     if(a.aura&&!a.auraEffect)extras+=group(star(26,106,4,['','#e8b557','#e28a56','#e8b557','#d9a3ac'][a.aura])+star(132,115,4,['','#e8b557','#e28a56','#e8b557','#d9a3ac'][a.aura]),'','opacity=".75"');
-    const heat=reduced?0:Math.sin(time*2.4);
-    const aura=item(a.auraEffect)?.kind==='blazing'?`<g data-item-art="reward-sushitan-aura" aria-label="烈火のオーラ" transform="translate(80 188) scale(1 ${(1+heat*.015).toFixed(3)}) translate(-80 -188)">
-      <path d="M35 184Q9 155 20 124L13 107L32 121Q18 85 40 55L38 86Q49 62 55 28L67 47L80 8L93 49L107 29L106 69L126 48Q123 90 139 109L131 112L145 143Q143 172 125 184Z" fill="#e7512f" opacity=".76"/>
-      <path d="M40 183Q20 155 35 122L30 110L43 113Q37 89 52 64L53 90L70 54L79 28L91 69L100 57L109 98L122 81L119 123L132 137Q140 164 118 183Z" fill="#ffb82e" opacity=".9"/>
-      <path d="M49 184Q31 161 45 129L53 140L57 100L68 122L80 74L94 122L104 104L112 143L123 136Q127 167 112 184Z" fill="#fff1a1"/>
-      <ellipse cx="80" cy="187" rx="52" ry="7" fill="#ffc53e" opacity=".3"/>
-      <path d="M22 79L17 67L26 71M135 63L142 51L141 69M19 158L12 148M140 174L148 163" fill="none" stroke="#e99e22" stroke-width="3" stroke-linecap="round"/>
-    </g>`:'';
+    const aura=item(a.auraEffect)?.kind==='blazing'?blazingAura(time,reduced):'';
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 204" role="img" aria-label="すし単アバター" data-action="${action}" data-direction="${direction}">${aura}<ellipse cx="80" cy="190" rx="33" ry="5" fill="#ded8c9"/><g stroke="${INK}" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round">${character}${extras}</g></svg>`;
   }
   // Incremental DOM updates retain the SVG tree and avoid replacing it every frame.
@@ -319,6 +339,7 @@
   }
   window.SushiAvatarV2={catalog,slots,defaults,sets,normalize,render,mount,item};
 })();
+
 
 
 
