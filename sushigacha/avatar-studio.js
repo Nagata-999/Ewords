@@ -97,7 +97,7 @@
   $('hideWalker').onchange=e=>{state.settings.hidden=e.target.checked;syncSettings();persist();};
   window.addEventListener('resize',position);document.addEventListener('visibilitychange',syncSettings);media.addEventListener('change',syncSettings);
   window.addEventListener('storage',e=>{if(e.key!==Store.KEY)return;try{state=Store.load();equipped={...state.avatar};$('gemBalance').textContent=state.gems.toLocaleString();hero.setAvatar(state.avatar);walker.setAvatar(state.avatar);renderWardrobe();renderLooks();syncSettings();}catch(e){storageBlocked=true;status(e.message,true);}});
-  window.addEventListener('sushi-profile-synced',()=>{try{state=Store.load();equipped={...state.avatar};$('gemBalance').textContent=state.gems.toLocaleString();hero.setAvatar(state.avatar);walker.setAvatar(state.avatar);renderWardrobe();renderLooks();syncSettings();status('クラウドの所持品を同期しました。');}catch(e){storageBlocked=true;status(e.message,true);}});
+  window.addEventListener('sushi-profile-synced',()=>{try{const latest=Store.load();state.owned=latest.owned;state.gems=latest.gems;state.looks=latest.looks;state.settings=latest.settings;$('gemBalance').textContent=state.gems.toLocaleString();renderWardrobe();renderLooks();syncSettings();status('クラウドの所持品を同期しました。');}catch(e){storageBlocked=true;status(e.message,true);}});
   try{refreshBalance();}catch(e){status(e.message,true);}
   const requested=new URLSearchParams(location.search).get('item');if(requested&&A.item(requested)){const i=A.item(requested);state.avatar=A.normalize({...state.avatar,[i.slot]:i.id});hero.setAvatar(state.avatar);walker.setAvatar(state.avatar);}
   renderWardrobe();renderLooks();syncSettings();
