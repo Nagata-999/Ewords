@@ -10,3 +10,7 @@ async function search(navigate=false){const ticket=++sequence,q=normalize(input.
 if(input){input.form.addEventListener('submit',e=>{e.preventDefault();clearTimeout(timer);search(true);});input.addEventListener('input',()=>{++sequence;clearTimeout(timer);timer=setTimeout(()=>search(),180);});const query=new URLSearchParams(location.search).get('q');if(query){input.value=query;search();}else if(document.querySelector('meta[name="robots"]')&&location.pathname.startsWith('/dictionary/')){input.value=location.pathname.split('/')[2].replace(/~([a-f0-9]+)~/g,(_,n)=>String.fromCodePoint(parseInt(n,16)));search();}}
 const button=document.querySelector('#speak-word');if(button){button.addEventListener('click',()=>{const output=document.querySelector('#speech-status');if(!('speechSynthesis'in window)){output.textContent='この端末では読み上げを利用できません。';return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(document.querySelector('h1').textContent);u.lang='en-US';u.onerror=()=>output.textContent='音声を再生できませんでした。';speechSynthesis.speak(u);});}
 })();
+
+
+// Shared navigation for every generated dictionary entry.
+(()=>{if(window.__sushiSiteTaskbarLoaded)return;const s=document.createElement("script");s.src="/sushigacha/site-taskbar.js?v=20261008-11";document.head.append(s);})();

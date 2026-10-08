@@ -85,7 +85,7 @@ html,body{background:#fffaf2!important;}
 @media(max-width:800px){.tapHelp{bottom:48px;font-size:11px}}
 
 </style>
-</head>
+<script defer src="/sushigacha/site-taskbar.js?v=20261008-11"></script></head>
 <body>
 <div id="app">
 <div class="globalNav" id="globalNav" aria-label="quick navigation"><button class="titleHomeBtn" onclick="showTitle()" title="タイトルへ戻る">🏠</button><button onclick="showForge()" title="装備">⚔️</button><button onclick="showDex()" title="図鑑">📖</button></div>
@@ -239,7 +239,7 @@ function renderDex(){let names=Object.keys(WORDS);$('dexCount').textContent=save
 function renderStageSelect(){let max=Math.max(1,save.bestStage);let html='';for(let i=1;i<=Math.max(8,max+2);i++){let open=i<=max;let goal=stageGoal(i);html+=`<div class="choice stageBtn ${open?'':'locked'}" ${open?`onclick="selectStage(${i})"`:''}><div><div class="big">Stage ${i}</div><div class="muted">討伐 ${goal}匹 / 高速戦 ${enemyPreview(i)}</div></div><div>${open?'挑戦':'LOCK'}</div></div>`} $('stageList').innerHTML=html}
 function selectStage(n){if(n>save.bestStage)return;save.stage=n;persist();showForge();toast('Stage '+n+'を選択')}
 let cv=$('cv'),ctx=cv.getContext('2d'),W,H,player,enemies,bullets,enemyBullets,orbs,floatTexts,keys={},killGoal,ko,hp,last,targetX=0,targetY=0,tapPulse=0,touchMove=false,moveDX=0,moveDY=0,cool={},runStage=1,ended=false,spawnMeter=0,spawnedCount=0;
-function resize(){W=cv.width=innerWidth*devicePixelRatio;H=cv.height=innerHeight*devicePixelRatio;ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);W=innerWidth;H=innerHeight}
+function resize(){W=innerWidth;H=document.getElementById("app").clientHeight;cv.width=W*devicePixelRatio;cv.height=H*devicePixelRatio;ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0)}
 addEventListener('resize',resize);resize();addEventListener('keydown',e=>keys[e.key.toLowerCase()]=1);addEventListener('keyup',e=>keys[e.key.toLowerCase()]=0);
 function hasBarrier(){return save.equipped.some(w=>['orbit','aura','ghost'].includes(WORDS[w]?.type))}
 function startGame(){

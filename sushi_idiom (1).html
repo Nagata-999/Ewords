@@ -11,7 +11,7 @@
 <link rel="canonical" href="https://sushitan.net/sushi_idiom%20(1)">
 
 <meta name="description" content="英語→日本語・日本語→英語の4択で熟語を練習します。通常モードは60秒で、誤答すると残り時間が2秒減ります。連続正解でスコア倍率が上がります。">
-</head>
+<script defer src="/sushigacha/site-taskbar.js?v=20261008-11"></script></head>
 <body><div class="wrap"><div class="top"><div class="brand">🍣 すし<b>イディオム</b></div><button class="ghost" onclick="location.href='index.html'">トップへ</button></div>
 <section id="intro" class="panel intro"><div class="sushi">🍣</div><h1></h1><p>日本語→英語、英語→日本語の2方向で出題。<br>連続正解でスコア倍率アップ。10コンボから <b>SUSHI FEVER!</b></p><input id="playerName" data-sushi-name class="name" maxlength="20" placeholder="名前を入力" autocomplete="off"><div style="margin-top:16px"><button class="main" onclick="startGame()">ゲームスタート</button></div><p class="small">ベストスコア <b id="bestScore">0</b>　｜　覚えたイディオム <b id="mastered">0</b>　｜　復習リスト <b id="wrongCountTop">0</b></p><div class="reviewBox"><div class="reviewHead"><b>📝 間違えたイディオム</b><span class="reviewCount"><span id="wrongCount">0</span>個</span></div><div id="wrongList" class="reviewList"></div><div class="reviewActions"><button id="reviewBtn" class="main" onclick="startReview()">復習する</button><button class="ghost" onclick="showRanking()">ランキングを見る</button><button class="ghost" onclick="clearWrongList()">リストを消去</button></div><p class="small">間違えたイディオムはこのブラウザに保存されます。復習で同じイディオムに2回連続正解するとリストから外れます。</p></div></section>
 <section id="game" class="panel game"><div class="stats"><div class="stat"><b id="time">60.0</b><span>TIME</span></div><div class="stat"><b id="score">0</b><span>SCORE</span></div><div class="stat"><b id="combo">0</b><span>COMBO</span></div><div class="stat"><b id="mult">×1.0</b><span>MULTIPLIER</span></div></div><div class="bar"><i id="timebar"></i></div><div id="gamebox"><div class="question"><div class="qtype" id="qtype"></div><div id="reviewBadge" class="small hidden" style="margin-top:6px;color:var(--orange);font-weight:900">📝 復習モード　<button class="ghost" style="padding:5px 10px;margin-left:8px" onclick="finish()">終了</button></div><div class="prompt" id="prompt"></div><div class="hint" id="hint"></div></div><div id="choices" class="choices"></div><div id="feedback" class="feedback"></div></div></section>
@@ -77,6 +77,6 @@ async function loadRanking(mode='today'){
 }
 init();
 </script>
-<script src="sushigacha/site-taskbar.js?v=20260915-1"></script>
+
 <script src="sushigacha/daily-quest-click-bridge.js?v=20260922-3"></script>
 </body></html>
