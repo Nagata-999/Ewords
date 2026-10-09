@@ -15,6 +15,8 @@
    const sushi_id=(localStorage.getItem(ID)||'').trim().toLowerCase();
    const pin=localStorage.getItem(PIN)||'';
    if(!/^[a-z0-9_-]{4,24}$/.test(sushi_id)||!/^\d{4}$/.test(pin))throw new Error('achievement_pin_not_connected');
+   // A completed PIN profile sync triggers this, and the initial delayed
+   // run covers pages where profile sync happened before this module loaded.
    running=root.SushiAchievementTransport.synchronize(root.SushiAchievementLedger,async payload=>{
      const response=await fetch(URL,{method:'POST',headers:{'Content-Type':'application/json',apikey:KEY},body:JSON.stringify({...payload,sushi_id,pin})});
      const body=await response.json().catch(()=>({error:'invalid_json'}));
