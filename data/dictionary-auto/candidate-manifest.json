@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "base_production_version": "v3.57",
+  "reference_dictionary_version_checked": "v3.63",
+  "status": "staged_candidates_not_merged",
+  "source_of_truth": "manifest_shards_not_legacy_cumulative_snapshot",
+  "note": "The legacy new-entries.json is a historical 134-entry snapshot. Only its first 118 entries are loaded; subsequent 42 entries are loaded from separate batch shards. Do not append to the legacy snapshot.",
+  "total_candidates": 160,
+  "previous_candidates": 118,
+  "added_this_run": 42,
+  "expected_total_after_merge": 13660,
+  "temporary_ids_only": true,
+  "sources": [
+    {
+      "path": "data/dictionary-auto/new-entries.json",
+      "take_first": 118,
+      "count": 118
+    },
+    {
+      "path": "data/dictionary-auto/batches/new-entries-20261009-04.json",
+      "count": 16
+    },
+    {
+      "path": "data/dictionary-auto/batches/new-entries-20261009-04b.json",
+      "count": 4
+    },
+    {
+      "path": "data/dictionary-auto/batches/new-entries-20261009-04c.json",
+      "count": 5
+    },
+    {
+      "path": "data/dictionary-auto/batches/new-entries-20261009-04d.json",
+      "count": 3
+    },
+    {
+      "path": "data/dictionary-auto/batches/new-entries-20261009-04e.json",
+      "count": 5
+    },
+    {
+      "path": "data/dictionary-auto/batches/new-entries-20261009-04f.json",
+      "count": 5
+    },
+    {
+      "path": "data/dictionary-auto/batches/new-entries-20261009-04g.json",
+      "count": 4
+    }
+  ]
+}
