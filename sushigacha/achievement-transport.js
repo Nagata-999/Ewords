@@ -9,6 +9,7 @@
  async function synchronize(ledger,request,{pageSize=500,maxPages=10000}={}){
    if(!ledger||typeof ledger.exportAllPages!=='function'||typeof ledger.importEvents!=='function')throw new TypeError('invalid_ledger');
    if(typeof request!=='function')throw new TypeError('invalid_request');
+   if(!Number.isSafeInteger(pageSize)||pageSize<1||pageSize>500||!Number.isSafeInteger(maxPages)||maxPages<1||maxPages>10000)throw new RangeError('invalid_sync_limits');
    const pages=ledger.exportAllPages(pageSize);
    if(pages.length>maxPages)throw new Error('too_many_local_pages');
    let sent=0,received=0,conflicts=0,rejected=0,rounds=0;
