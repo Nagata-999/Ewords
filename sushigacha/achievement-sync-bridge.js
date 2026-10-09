@@ -7,7 +7,7 @@
  const URL='https://rxyoyveykxdfrpomkltl.supabase.co/functions/v1/sushi-id-sync';
  const KEY='sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7';
  const ID='sushitan_sync_id_v1',PIN='sushitan_sync_pin_v1';
- let running=null;
+ let running=null,syncTimer=null;
  function supported(){return !!(root.SushiAchievementTransport?.synchronize&&root.SushiAchievementLedger?.exportAllPages)}
  async function run(){
    if(running)return running;
@@ -36,7 +36,7 @@
  root.addEventListener('sushi-profile-synced',()=>{run().catch(error=>console.warn('Achievement sync deferred:',error.message))});
  root.addEventListener('sushi-achievement-change',()=>{
    if(!localStorage.getItem(PIN))return;
-   clearTimeout(root.__sushiAchievementSyncTimer);
-   root.__sushiAchievementSyncTimer=setTimeout(()=>run().catch(error=>console.warn('Achievement sync deferred:',error.message)),2500);
+   clearTimeout(syncTimer);
+   syncTimer=setTimeout(()=>run().catch(error=>console.warn('Achievement sync deferred:',error.message)),2500);
  });
 })(window);
