@@ -65,6 +65,11 @@
     const start=Math.max(0,Math.floor(Number(offset)||0));const size=Math.max(1,Math.min(500,Math.floor(Number(limit)||500)));
     return {version:2,events:events.slice(start,start+size),nextOffset:start+size<events.length?start+size:null,totalEvents:events.length};
   }
+  function exportAllPages(pageSize=500){
+    const pages=[];let offset=0;
+    do{const page=exportBatch(pageSize,offset);pages.push(page);if(page.nextOffset===null)break;offset=page.nextOffset}while(pages.length<1000);
+    return pages;
+  }
   function importEvents(input){
     if(!Array.isArray(input))return {added:0,conflicts:0,rejected:0};
     let added=0,conflicts=0,rejected=0;
@@ -86,5 +91,5 @@
     // Learning records may include the same post-migration answers; use as a floor, not an addition.
     return Math.max(historical+eventTotal,learningTotal(),legacyBaseline());
   }
-  global.SushiAchievementLedger=Object.freeze({record,summary,legacyBaseline,learningTotal,migrationBaseline,ensureMigrationBaseline,reconciledTotal,exportBatch,importEvents});
+  global.SushiAchievementLedger=Object.freeze({record,summary,legacyBaseline,learningTotal,migrationBaseline,ensureMigrationBaseline,reconciledTotal,exportBatch,exportAllPages,importEvents});
 })(window);
