@@ -1,45 +1,108 @@
 #!/usr/bin/env python3
-"""Validate staged dictionary additions; never modify production files."""
+"""Read-only validation of staged dictionary candidates against optional production JSON."""
+import argparse
 import json
-import pathlib
-import sys
 from collections import Counter
+from pathlib import Path
+
+def norm(s):
+    return " ".join(s.casefold().split()) if isinstance(s, str) else ""
+
+def load_entries(path):
+    data = json.loads(Path(path).read_text(encoding="utf-8"))
+    return data["entries"] if isinstance(data, dict) and "entries" in data else data
+
+def validate(payload, existing=()):
+    entries = payload.get("entries")
+    errors = []
+    if not isinstance(entries, list):
+        return ["entries must be a list"]
+    if payload.get("count") != len(entries):
+        errors.append("candidate count mismatch")
+    old_ids = {norm(e.get("id")) for e in existing if isinstance(e, dict)}
+    old_words = {norm(e.get("word")) for e in existing if isinstance(e, dict)}
+    ids, words = [], []
+    for i, e in enumerate(entries):
+        where = f"entry[{i}]"
+        if not isinstance(e, dict):
+            errors.append(f"{where}: not an object")
+            continue
+        ident, word = norm(e.get("id")), norm(e.get("word"))
+        if not ident or not word:
+            errors.append(f"{where}: missing id/word")
+        if ident in old_ids:
+            errors.append(f"{where}: ID collides with production: {ident}")
+        if word in old_words:
+            errors.append(f"{where}: headword already exists: {word}")
+        ids.append(ident)
+        words.append(word)
+        poses = e.get("parts_of_speech")
+        if not isinstance(poses, list) or not poses:
+            errors.append(f"{where}: missing parts_of_speech")
+            continue
+        senses = set()
+        for p in poses:
+            pos = norm(p.get("pos")) if isinstance(p, dict) else ""
+            meanings = p.get("meanings") if isinstance(p, dict) else None
+            if not pos or not isinstance(meanings, list) or not meanings:
+                errors.append(f"{where}: invalid pos/meanings")
+                continue
+            for m in meanings:
+                if not isinstance(m, dict):
+                    errors.append(f"{where}: invalid meaning")
+                    continue
+                ja = norm(m.get("ja"))
+                definition = norm(m.get("definition") or m.get("definition_en"))
+                if not ja or not definition:
+                    errors.append(f"{where}: empty Japanese meaning or English definition")
+                key = (pos, ja)
+                if key in senses:
+                    errors.append(f"{where}: duplicate same-POS meaning: {pos} / {ja}")
+                senses.add(key)
+                examples = m.get("examples")
+                if not isinstance(examples, list) or not examples or any(
+                    not isinstance(x, dict) or not norm(x.get("en")) or not norm(x.get("ja"))
+                    for x in examples
+                ):
+                    errors.append(f"{where}: missing bilingual example")
+        colls = e.get("collocations", [])
+        if not isinstance(colls, list):
+            errors.append(f"{where}: invalid collocations")
+        else:
+            for c in colls:
+                value = c if isinstance(c, str) else c.get("text") if isinstance(c, dict) else ""
+                if not norm(value):
+                    errors.append(f"{where}: blank collocation (would render ':')")
+    for label, values in (("ID", ids), ("headword", words)):
+        for value, count in Counter(values).items():
+            if value and count > 1:
+                errors.append(f"duplicate candidate {label}: {value}")
+    return errors
 
 def main():
-    path = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "data/dictionary-auto/new-entries.json")
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    entries = payload.get("entries")
-    if not isinstance(entries, list):
-        raise ValueError("entries must be an array")
-    problems = []
-    ids = []
-    words = []
-    for i, entry in enumerate(entries):
-        if not isinstance(entry, dict):
-            problems.append(f"entry {i}: not an object")
-            continue
-        word = entry.get("word", "")
-        ident = entry.get("id", "")
-        if not isinstance(word, str) or not word.strip():
-            problems.append(f"entry {i}: missing headword")
-        if not isinstance(ident, str) or not ident.strip():
-            problems.append(f"entry {i}: missing ID")
-        if isinstance(word, str):
-            words.append(word.strip().casefold())
-        if isinstance(ident, str):
-            ids.append(ident)
-    for field, values in (("headword", words), ("ID", ids)):
-        for value, n in Counter(values).items():
-            if value and n > 1:
-                problems.append(f"duplicate {field}: {value} ({n})")
-    if payload.get("count") != len(entries):
-        problems.append(f"declared count {payload.get('count')} != {len(entries)}")
-    print(f"Validated {len(entries)} staged candidates; {len(problems)} issue(s).")
-    for issue in problems:
-        print("ERROR:", issue)
-    if problems:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("candidates", nargs="?", default="data/dictionary-auto/new-entries.json")
+    parser.add_argument("--production-dir", help="directory of dictionary-*.json files; enables production overlap checks")
+    args = parser.parse_args()
+    payload = json.loads(Path(args.candidates).read_text(encoding="utf-8"))
+    production = []
+    if args.production_dir:
+        paths = sorted(Path(args.production_dir).rglob("dictionary-*.json"))
+        if not paths:
+            parser.error("no production dictionary JSON found")
+        for path in paths:
+            rows = load_entries(path)
+            if not isinstance(rows, list):
+                parser.error(f"{path}: expected list")
+            production.extend(rows)
+    errors = validate(payload, production)
+    print(f"Candidates: {len(payload.get('entries', []))}; production checked: {len(production)}; errors: {len(errors)}")
+    for err in errors:
+        print("ERROR:", err)
+    if not args.production_dir:
+        print("WARNING: production overlap NOT checked; do not auto-merge")
+    if errors:
         raise SystemExit(1)
-    print("NOTE: Candidate-only checks; production overlap, semantics and UI not yet verified.")
 
 if __name__ == "__main__":
     main()
