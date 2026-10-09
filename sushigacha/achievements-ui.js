@@ -18,8 +18,11 @@
   // Server receipts are supplied only after an authenticated response.
   // Never persist a locally guessed claim or award gems from this UI.
   let verifiedReceipts=null;
-  function setServerReceipts(response){
-    const parsed=window.SushiAchievementReceipts?.parse?.(response)||null;
+  let receiptsSushiId=null;
+  function setServerReceipts(response,sushiId){
+    const connected=(localStorage.getItem('sushitan_sync_id_v1')||'').trim().toLowerCase();
+    const parsed=connected&&sushiId===connected?window.SushiAchievementReceipts?.parse?.(response)||null:null;
+    receiptsSushiId=parsed?connected:null;
     verifiedReceipts=parsed;
     refresh();
     return !!parsed;
@@ -27,6 +30,7 @@
   function renderCatalog(){
     const box=document.getElementById('sushiAchievementList');
     if(!box||!window.SushiAchievementCatalog)return;
+    if(receiptsSushiId!==(localStorage.getItem('sushitan_sync_id_v1')||'').trim().toLowerCase())verifiedReceipts=null;
     box.replaceChildren();
     for(const a of window.SushiAchievementCatalog.evaluate(achievementMetrics())){
       const item=document.createElement('div');item.style.cssText='border:1px solid #e8e1d5;border-radius:12px;padding:10px;margin:8px 0';
