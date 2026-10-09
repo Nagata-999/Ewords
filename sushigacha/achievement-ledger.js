@@ -4,6 +4,8 @@
   const PREFIX='sushitan_achievement_v2:event:';
   const DEVICE='sushitan_achievement_v2:device';
   const KEY='sushitan_achievement_progress_v1';
+  const BASELINE='sushitan_achievement_v2:baseline';
+  const LEARNING='sushitan_learning_v1:event:';
   const VALID_GAME=/^[a-z0-9_-]{1,40}$/;
   function deviceId(){
     let id=localStorage.getItem(DEVICE);
@@ -11,8 +13,28 @@
     return id;
   }
   function valid(e){return e&&e.version===2&&typeof e.id==='string'&&/^[A-Za-z0-9:_-]{1,159}$/.test(e.id)&&VALID_GAME.test(e.game)&&Number.isSafeInteger(e.correct)&&e.correct>0&&e.correct<=1000&&Number.isFinite(e.at)&&e.at>=0}
+  function learningTotal(){
+    let total=0;
+    for(let i=0;i<localStorage.length;i++){
+      const key=localStorage.key(i);if(!key?.startsWith(LEARNING))continue;
+      try{const e=JSON.parse(localStorage.getItem(key));if(e?.version===1&&e.correct===true&&e.id===key.slice(LEARNING.length)&&Number.isSafeInteger(e.count)&&e.count>0)total+=e.count}catch{}
+    }
+    return total;
+  }
+  function migrationBaseline(){
+    try{const v=JSON.parse(localStorage.getItem(BASELINE)||'null');if(v?.version===1&&Number.isSafeInteger(v.total)&&v.total>=0)return v.total}catch{}
+    return null;
+  }
+  function ensureMigrationBaseline(){
+    const existing=migrationBaseline();if(existing!==null)return existing;
+    // Snapshot only once: future learning events can overlap the new achievement stream.
+    const baseline=Math.max(legacyBaseline(),learningTotal());
+    try{localStorage.setItem(BASELINE,JSON.stringify({version:1,total:baseline,at:Date.now()}))}catch{}
+    return baseline;
+  }
   function record(game,correct=1,eventId){
     if(!VALID_GAME.test(game)||!Number.isSafeInteger(correct)||correct<1||correct>1000)return null;
+    ensureMigrationBaseline();
     const id=eventId||deviceId()+':'+(global.crypto?.randomUUID?.()||Date.now()+'-'+Math.random().toString(36).slice(2));
     if(typeof id!=='string'||!/^[A-Za-z0-9:_-]{1,159}$/.test(id))return null;
     const key=PREFIX+id;
@@ -58,5 +80,5 @@
     if(added)global.dispatchEvent(new CustomEvent('sushi-achievement-change',{detail:{imported:added}}));
     return {added,conflicts,rejected};
   }
-  global.SushiAchievementLedger=Object.freeze({record,summary,legacyBaseline,exportBatch,importEvents});
+  global.SushiAchievementLedger=Object.freeze({record,summary,legacyBaseline,learningTotal,migrationBaseline,ensureMigrationBaseline,exportBatch,importEvents});
 })(window);
