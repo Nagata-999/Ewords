@@ -91,6 +91,7 @@ const server=http.createServer((req,res)=>{
         localStorage.setItem('sushitan_sync_id_v1','testuser');
         localStorage.setItem('sushitan_sync_pin_v1','1234');
         localStorage.setItem('sushitan_achievement_progress_v1',JSON.stringify({total:10}));
+        SushiAchievements.setServerReceipts({ok:true,receipts:{ids:[]}},'testuser');
         window.claimCalls=0;window.earned=[];
         addEventListener('sushi-gems-earned',e=>earned.push(e.detail));
         window.SushiAchievementSyncBridge={claim:()=>{claimCalls++;return new Promise(resolve=>{window.resolveClaim=()=>{const key='sushitan_login_bonus_v1',l=JSON.parse(localStorage.getItem(key)||'{}');l.gems=(l.gems||0)+10;localStorage.setItem(key,JSON.stringify(l));resolve({gems:10,already_claimed:false});};});}};
@@ -119,6 +120,10 @@ const server=http.createServer((req,res)=>{
       assert(await page.evaluate(()=>{const p=document.querySelector('#sushiAchievementPanel section').getBoundingClientRect(),bar=document.getElementById('sushiTaskbar').getBoundingClientRect();return p.left>=0&&p.right<=innerWidth&&p.top>=0&&p.bottom<=bar.top;}),'dialog fits above taskbar');
       await page.locator('#sushiAchievementClose').scrollIntoViewIfNeeded();await page.locator('#sushiAchievementClose').click();
       assert.equal(await page.locator('#sushiAchievementPanel').count(),0);assert.deepEqual(errors,[]);
+      await page.reload();await page.waitForFunction(()=>window.SushiAchievements);
+      await page.evaluate(()=>SushiAchievements.setServerReceipts({ok:true,receipts:{ids:['achievement:all_correct:10']}},'testuser'));
+      await page.locator('#sushiAchievementOpen').click();
+      assert.equal(await page.locator('#sushiAchievementList button').count(),0,'received reward must not reappear after reload');
       await context.close();console.log(`PASS: ${size.width}x${size.height} ${reducedMotion}: delayed achievement claim, visible flight destination, dialog bounds, cleanup`);
     }
   }finally{await browser.close();server.close();}

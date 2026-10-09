@@ -4,9 +4,9 @@ const fs=require('node:fs');
 const vm=require('node:vm');
 const path=require('node:path');
 const key='sushitan_login_bonus_v1';
-function setup(){
+function setup({rejectOnce=false}={}){
   const values=new Map([[key,JSON.stringify({gems:100,gemEvents:[]})],['sushitan_sync_id_v1','testuser'],['sushitan_sync_pin_v1','1234']]);
-  let balance=100,claimed=false,held=null;
+  let balance=100,claimed=false,held=null,outcomeHeld=null;
   const calls=[];
   const window={addEventListener(){},dispatchEvent(){},SushiAchievementLedger:{exportAllPages(){}},SushiAchievementTransport:{synchronize:async()=>({})}};
   const context=vm.createContext({window,console,Event:class {},CustomEvent:class {},localStorage:{getItem:k=>values.get(k)||null,setItem:(k,v)=>values.set(k,v),get length(){return values.size},key:i=>[...values.keys()][i]},sessionStorage:{getItem:()=>null,setItem(){}},document:{readyState:'loading',addEventListener(){}},setTimeout(){},clearTimeout(){},queueMicrotask,fetch:async(url,options)=>{
@@ -17,15 +17,35 @@ function setup(){
       return {ok:true,json:async()=>snapshot};
     }
     if(body.action==='achievement_claim'){
+      if(rejectOnce){rejectOnce=false;return {ok:false,json:async()=>({ok:false,error:'not_reached'})};}
       const already=claimed;claimed=true;if(!already)balance+=150;
       return {ok:true,json:async()=>({ok:true,already_claimed:already,claim_id:'avatar30',gems:150,wallet:{gems:balance,gemEvents:[{id:'avatar30',type:'earn',amount:150}]}})};
     }
+    if(body.action==='outcome_sync'&&outcomeHeld){const wait=outcomeHeld;outcomeHeld=null;await wait.promise;}
     return {ok:true,json:async()=>({ok:true,outcomes:{events:body.outcomes?.events||[],nextOffset:null}})};
   }});
   for(const file of ['shared/sushi-profile.js','sushigacha/achievement-sync-bridge.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'..',file),'utf8'),context);
-  return {window,calls,wallet:()=>JSON.parse(values.get(key)),store:values,hold(){let release;held={promise:new Promise(r=>release=r)};return release}};
+  return {window,calls,wallet:()=>JSON.parse(values.get(key)),store:values,holdOutcome(){let release;outcomeHeld={promise:new Promise(r=>release=r)};return release},hold(){let release;held={promise:new Promise(r=>release=r)};return release}};
 }
 const tick=()=>new Promise(r=>setImmediate(r));
+test('fresh progress is synchronized once only when the server reports not reached',async()=>{
+  const s=setup({rejectOnce:true});await s.window.SushiAchievementSyncBridge.claim(30,'avatar');
+  assert.equal(s.wallet().gems,250);assert.equal(s.calls.filter(action=>action==='achievement_claim').length,2);
+  assert.equal(s.calls.filter(action=>action==='sync').length,1);
+});
+test('slow outcome uploads do not hold the wallet queue or achievement claim',async()=>{
+  const s=setup();s.window.SushiAchievementLedger.exportOutcomes=()=>[{id:'answer:1'}];s.window.SushiAchievementLedger.importOutcomes=()=>{};
+  const release=s.holdOutcome(),sync=s.window.SushiProfileSync.syncNow();await tick();
+  assert.ok(s.calls.includes('outcome_sync'));
+  await s.window.SushiAchievementSyncBridge.claim(30,'avatar');assert.equal(s.wallet().gems,250);
+  release();await sync;assert.equal(s.wallet().gems,250);
+});
+test('claim applies wallet before background receipts and avoids full progress sync',async()=>{
+  const s=setup();const result=await s.window.SushiAchievementSyncBridge.claim(30,'avatar');
+  assert.equal(result.ok,true);assert.equal(s.wallet().gems,250);
+  assert.equal(s.calls.filter(action=>action==='achievement_claim').length,1);
+  assert.equal(s.calls.includes('sync'),false);assert.equal(s.calls.includes('outcome_sync'),false);
+});
 test('daily and login rewards survive a stale response with their claim flags',async()=>{
   const s=setup(),release=s.hold(),sync=s.window.SushiProfileSync.syncNow();await tick();
   const events=[{id:'daily:2026-10-10:sushitan',type:'earn',amount:10},{id:'login:2026-10-10',type:'earn',amount:10}];

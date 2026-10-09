@@ -110,7 +110,7 @@
   }
   async function syncNow(){
     if(syncInFlight){syncAgain=true;return syncInFlight}
-    syncInFlight=withWalletTransaction(async()=>{const result=await runSync();await syncOutcomes().catch(error=>console.warn('Achievement outcome sync:',error));return result});
+    syncInFlight=withWalletTransaction(runSync).then(async result=>{await syncOutcomes().catch(error=>console.warn('Achievement outcome sync:',error));return result});
     try{return await syncInFlight}
     finally{syncInFlight=null;if(syncAgain){syncAgain=false;queueMicrotask(()=>syncNow().catch(()=>{}))}}
   }
