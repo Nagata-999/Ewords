@@ -65,6 +65,10 @@
    }
    // Synchronize the receipt to the other devices using the existing merge.
    await root.SushiProfileSync?.syncNow?.().catch(error=>console.warn('Gem sync pending:',error.message));
+   // Server-credited rewards may already exist in the profile ledger. Refresh
+   // all wallet listeners after profile merge, not only after a local insert.
+   root.dispatchEvent(new CustomEvent('sushi-gem-change'));
+   root.dispatchEvent(new CustomEvent('sushi-gems-updated',{detail:{source:'achievement',claim_id:data.claim_id}}));
    await receipts().catch(()=>null);
    root.dispatchEvent(new CustomEvent('sushi-achievement-claimed',{detail:data}));
    return data;
