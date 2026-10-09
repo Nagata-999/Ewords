@@ -39,12 +39,34 @@
   let syncInFlight=null,syncAgain=false;
   async function runSync(){
     const c=creds(); if(!c.sushi_id||!c.pin)return {connected:false};
-    const sent=readLearning(); const data=await call('sync',c.sushi_id,c.pin); apply(data); const weak=window.SushiLearning?.getStats?.().weak ?? null; const ld=window.SushiLearning?.getDiagnostics?.()||{}; const diag={sentEvents:sent.events?.length||0,sentCards:sent.cards?.length||0,serverEvents:data.learning?.events?.length||0,serverCards:data.learning?.cards||0,weak,...ld}; try{localStorage.setItem('sushitan_sync_diag_v1',JSON.stringify(diag))}catch{} window.dispatchEvent(new CustomEvent('sushi-sync-diagnostic',{detail:diag})); return {connected:true,sushiId:c.sushi_id,...diag};
+    const sent=readLearning(); const data=await call('sync',c.sushi_id,c.pin); apply(data); await syncOutcomes().catch(()=>{}); const weak=window.SushiLearning?.getStats?.().weak ?? null; const ld=window.SushiLearning?.getDiagnostics?.()||{}; const diag={sentEvents:sent.events?.length||0,sentCards:sent.cards?.length||0,serverEvents:data.learning?.events?.length||0,serverCards:data.learning?.cards||0,weak,...ld}; try{localStorage.setItem('sushitan_sync_diag_v1',JSON.stringify(diag))}catch{} window.dispatchEvent(new CustomEvent('sushi-sync-diagnostic',{detail:diag})); return {connected:true,sushiId:c.sushi_id,...diag};
+  }
+  let outcomesSyncing=false;
+  async function syncOutcomes(){
+    const c=creds(),ledger=window.SushiAchievementLedger;
+    if(outcomesSyncing||!c.sushi_id||!/^\\d{4}$/.test(c.pin)||!ledger?.exportOutcomes||!ledger?.importOutcomes)return;
+    outcomesSyncing=true;
+    try{
+      const local=ledger.exportOutcomes();
+      // Keep requests bounded; each upload is idempotent on the server.
+      const send=async(events,offset)=>{
+        const response=await fetch(URL,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY},body:JSON.stringify({action:'outcome_sync',sushi_id:c.sushi_id,pin:c.pin,outcomes:{events,offset}})});
+        const data=await response.json();
+        if(!response.ok||!data.ok)throw new Error(data.error||'outcome_sync_failed');
+        ledger.importOutcomes(data.outcomes?.events||[]);
+        return data.outcomes?.nextOffset;
+      };
+      let offset=0,next=null;
+      for(let i=0;i<local.length;i+=200){next=await send(local.slice(i,i+200),0)}
+      if(!local.length)next=await send([],0);
+      // Fetch every server page, including after the first upload page.
+      if(next!==null){offset=next;for(let page=0;next!==null&&page<100;page++){next=await send([],offset);offset=next??offset}}
+    }finally{outcomesSyncing=false}
   }
   async function syncNow(){
     if(syncInFlight){syncAgain=true;return syncInFlight}
     syncInFlight=runSync();
-    try{return await syncInFlight}
+    try{const result=await syncInFlight;await syncOutcomes().catch(error=>console.warn('Achievement outcome sync:',error));return result}
     finally{syncInFlight=null;if(syncAgain){syncAgain=false;queueMicrotask(()=>syncNow().catch(()=>{}))}}
   }
   async function connect(id,pin,create=false){
