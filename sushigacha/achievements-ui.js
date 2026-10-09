@@ -86,7 +86,12 @@
         refresh();
       }
     };
+    select.style.cssText='display:block;width:100%;max-width:440px;margin-top:8px;padding:11px 12px;border:1px solid #d9cdbb;border-radius:12px;background:#fff;color:#263238;font:inherit';
     label.append(select);box.append(label);
+    const preview=document.createElement('p');preview.id='sushiAchievementTitlePreview';
+    preview.style.cssText='margin:10px 0 0;padding:10px 12px;border-radius:12px;background:#fff3d5;color:#593b17;font-weight:800';
+    preview.textContent=selected?'🏅 現在の称号：'+selected.title+'（'+selected.level+'）':'称号は未設定です。実績を解除すると選択できます。';
+    box.append(preview);
   }
   function show(){
     let panel=document.getElementById('sushiAchievementPanel');
@@ -96,6 +101,8 @@
       document.body.append(panel);
       const mute=panel.querySelector('#sushiAchievementMute');mute.checked=localStorage.getItem('sushitan_achievement_muted')==='1';window.SushiAchievementSound?.setMuted?.(mute.checked);mute.onchange=()=>{localStorage.setItem('sushitan_achievement_muted',mute.checked?'1':'0');window.SushiAchievementSound?.setMuted?.(mute.checked)};
       panel.querySelector('#sushiAchievementClose').onclick=()=>panel.remove();
+      panel.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();panel.remove();}});
+      panel.querySelector('#sushiAchievementClose').focus();
       panel.onclick=e=>{if(e.target===panel)panel.remove()};
       panel.querySelector('#sushiAchievementColors').onclick=e=>{const b=e.target.closest('button[data-rank]');if(!b||b.disabled)return;const s=state();save({...s,selected:b.dataset.rank})};
     }
