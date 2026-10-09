@@ -31,7 +31,7 @@ def main():
         ap.error("candidate validation failed: " + "; ".join(issues[:10]))
     with zipfile.ZipFile(source) as zin:
         names = zin.namelist()
-        dictionary_files = sorted(n for n in names if re.fullmatch(r"dictionary-[a-z]+\\.json", n))
+        dictionary_files = sorted(n for n in names if re.fullmatch(r"dictionary-[a-z]+\.json", n))
         if len(dictionary_files) != 27:
             ap.error(f"expected 27 dictionary files, got {len(dictionary_files)}")
         data = {n: zin.read(n) for n in names}
@@ -47,7 +47,7 @@ def main():
                 ap.error(f"base dictionary invalid or duplicate in {name}: {ident}/{word}")
             existing_ids.add(ident)
             existing_words.add(word)
-            match = re.fullmatch(r"sw-(\\d+)", ident)
+            match = re.fullmatch(r"sw-(\d+)", ident)
             if match:
                 max_number = max(max_number, int(match.group(1)))
     for e in additions:
@@ -70,11 +70,11 @@ def main():
         buckets[target].append(row)
         new_ids.append({"word": row["word"], "id": row["id"], "file": target})
     for name, rows in buckets.items():
-        data[name] = (json.dumps(rows, ensure_ascii=False, indent=2) + "\\n").encode("utf-8")
+        data[name] = (json.dumps(rows, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     data["dictionary-auto-merge-report.json"] = (json.dumps({
         "base_zip": source.name, "added": len(new_ids), "entries": new_ids,
         "note": "Staged offline build; requires full CI, semantic review and approval before production."
-    }, ensure_ascii=False, indent=2) + "\\n").encode("utf-8")
+    }, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     excluded = ("html", "sitemap", "search-index")
     with zipfile.ZipFile(dest, "w", compression=zipfile.ZIP_DEFLATED) as zout:
         for name in sorted(data):
