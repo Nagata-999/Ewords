@@ -5,7 +5,7 @@
   "status": "staged_candidates_not_merged",
   "id_policy": "Temporary candidate IDs; allocate permanent sw-xxxxx IDs after verifying the current production max ID at merge time.",
   "target": "50,000 headwords",
-  "count": 118,
+  "count": 119,
   "entries": [
     {
       "id": "candidate-20261009-001",
@@ -6258,6 +6258,59 @@
       "usage_note": "Contrast with deterministic.",
       "tags": [
         "candidate-auto-additions-20261009-batch03"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "candidate-20261009-119",
+      "word": "ambivalence",
+      "lemma": "ambivalence",
+      "search_terms": [
+        "ambivalence"
+      ],
+      "pronunciation": {
+        "ipa_us": null,
+        "ipa_uk": null
+      },
+      "level": {
+        "cefr": "C1",
+        "eiken": "1"
+      },
+      "frequency": 2,
+      "parts_of_speech": [
+        {
+          "pos": "noun",
+          "meanings": [
+            {
+              "ja": "相反する感情が入り混じった状態",
+              "definition": "the state of having conflicting feelings about something",
+              "examples": [
+                {
+                  "en": "She felt ambivalence about accepting the promotion.",
+                  "ja": "彼女は昇進を受け入れることに複雑な思いを抱いていた。"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "forms": {},
+      "phrases": [],
+      "collocations": [
+        {
+          "text": "feel ambivalence about"
+        },
+        {
+          "text": "express ambivalence toward"
+        }
+      ],
+      "related": {
+        "synonyms": [],
+        "antonyms": []
+      },
+      "usage_note": "Usually followed by about or toward.",
+      "tags": [
+        "candidate-auto-additions-20261009-batch04"
       ],
       "status": "candidate"
     }
