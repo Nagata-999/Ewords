@@ -17,6 +17,8 @@
       dailyClaims:new Set([...(Array.isArray(login.dailyGemClaims)?login.dailyGemClaims:[])]).size,
       gemsEarned:(Array.isArray(login.gemEvents)?login.gemEvents:[]).reduce((n,e)=>n+(e?.type==='earn'&&Number.isSafeInteger(e.amount)&&e.amount>0?e.amount:0),0),
       avatarItems:new Set(Array.isArray(login.gacha?.owned)?login.gacha.owned:[]).size,
+      gemPurchases:(Array.isArray(login.gemEvents)?login.gemEvents:[]).filter(e=>e?.type==='spend'&&Number(e.amount)>0).length,
+      outfitChanges:Number(login.gacha?.avatarRevision)>0?1:0,
       gameStats:gameplay
     })||{correct_total:Math.max(s.total,total),correct_vocabulary:0,login_streak:0};
   }
@@ -91,7 +93,7 @@
       if(!hidden&&(reward.length||claimed.length)){
         const badge=document.createElement('div');badge.style.cssText='font-size:12px;color:#8b5a1e;margin-top:5px';
         const pending=reward.filter(x=>!claimed.includes(x.id)&&!claimStatus(x.id));
-        const supported=['all_correct','streak','vocabulary','toeic','giri','blast','daily','gems','avatar'].includes(a.id);
+        const supported=['all_correct','streak','vocabulary','toeic','giri','blast','daily','gems','avatar','first_purchase','first_outfit'].includes(a.id);
         badge.textContent=(claimed.length?'✅ 受取済 '+claimed.length+'件　':'')+
           (pending.length?(supported?'🎁 未受取報酬 ':'🔧 報酬準備中 ')+pending.reduce((n,x)=>n+x.gems,0)+'ジェム':'');
         item.append(badge);
