@@ -28,6 +28,8 @@
      if(events.some(e=>!accepted.has(e.id)))throw new Error('achievement_batch_not_acknowledged');
      sent+=events.length;
      uploadIndex++;
+     // Reject malformed remote records before importing any of the page.
+     if(response.achievements.events.some(e=>!e||e.version!==2||typeof e.id!=='string'||!/^[A-Za-z0-9:_-]{1,159}$/.test(e.id)||typeof e.game!=='string'||!/^[a-z0-9_-]{1,40}$/.test(e.game)||!Number.isSafeInteger(e.correct)||e.correct<1||e.correct>1000||!Number.isFinite(e.at)||e.at<0||e.at>8640000000000000))throw new Error('invalid_server_events');
      const imported=ledger.importEvents(response.achievements.events);
      if(imported.conflicts||imported.rejected)throw new Error('invalid_server_events');
      received+=imported.added;conflicts+=imported.conflicts;rejected+=imported.rejected;
