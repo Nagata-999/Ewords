@@ -20,6 +20,7 @@
      const response=await request({action:'achievement_sync',achievements:{version:2,events,cursor,limit:Math.min(500,Math.max(1,pageSize))}});
      if(response?.achievements?.synced!==true||!Array.isArray(response.achievements.events)||!Array.isArray(response.achievements.accepted))
        throw new Error('achievement_server_not_ready');
+     if(response.achievements.events.length>500)throw new Error('oversized_server_page');
      const accepted=new Set(response.achievements.accepted);
      if(events.some(e=>!accepted.has(e.id)))throw new Error('achievement_batch_not_acknowledged');
      sent+=events.length;
@@ -28,7 +29,7 @@
      received+=imported.added;conflicts+=imported.conflicts;rejected+=imported.rejected;
      const next=response.achievements.nextCursor;
      if(next!==null&&next!==undefined){
-       if(typeof next!=='string'||!next||visited.has(next))throw new Error('invalid_server_cursor');
+       if(typeof next!=='string'||!/^[A-Za-z0-9:_-]{1,159}$/.test(next)||visited.has(next))throw new Error('invalid_server_cursor');
        visited.add(next);
      }
      cursor=next??null;
