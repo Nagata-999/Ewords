@@ -99,23 +99,24 @@
     const available=window.SushiAchievementTitles.unlocked(metrics,defs);
     const selected=window.SushiAchievementTitles.selection(localStorage,metrics,defs);
     box.replaceChildren();
-    const label=document.createElement('label');label.textContent='称号を選択 ';
-    const select=document.createElement('select');select.id='sushiAchievementTitleSelect';
-    const none=document.createElement('option');none.value='';none.textContent='称号なし';select.append(none);
-    for(const title of available){
-      const option=document.createElement('option');option.value=title.id;
-      option.textContent=title.title+'・'+title.level+'（'+title.threshold.toLocaleString()+'）';
-      select.append(option);
+    const heading=document.createElement('p');heading.textContent='称号を選択';heading.style.cssText='margin:8px 0;font-weight:800';box.append(heading);
+    const grid=document.createElement('div');grid.style.cssText='display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:9px';
+    const options=[{id:'',title:'称号なし',level:''},...available];
+    for(const title of options){
+      const button=document.createElement('button');button.type='button';
+      const active=(selected?.id||'')===title.id;
+      button.textContent=title.id?title.title+'\n'+title.level+'（'+title.threshold.toLocaleString()+'）':'称号なし';
+      button.setAttribute('aria-pressed',String(active));
+      button.style.cssText='white-space:pre-line;min-height:66px;padding:10px 8px;border-radius:12px;font:inherit;font-weight:800;cursor:pointer;border:'+(active?'3px solid #e8a12b':'1px solid #d9cdbb')+';background:'+(active?'#fff0b9':'#fff')+';color:#44311a';
+      button.onclick=()=>{
+        if(window.SushiAchievementTitles.set(localStorage,title.id,achievementMetrics(),defs)){
+          window.dispatchEvent(new CustomEvent('sushi-achievement-title-change',{detail:{id:title.id||null}}));
+          refresh();
+        }
+      };
+      grid.append(button);
     }
-    select.value=selected?.id||'';
-    select.onchange=()=>{
-      if(window.SushiAchievementTitles.set(localStorage,select.value,achievementMetrics(),defs)){
-        window.dispatchEvent(new CustomEvent('sushi-achievement-title-change',{detail:{id:select.value||null}}));
-        refresh();
-      }
-    };
-    select.style.cssText='display:block;width:100%;max-width:440px;margin-top:8px;padding:11px 12px;border:1px solid #d9cdbb;border-radius:12px;background:#fff;color:#263238;font:inherit';
-    label.append(select);box.append(label);
+    box.append(grid);
     const preview=document.createElement('p');preview.id='sushiAchievementTitlePreview';
     preview.style.cssText='margin:10px 0 0;padding:10px 12px;border-radius:12px;background:#fff3d5;color:#593b17;font-weight:800';
     preview.textContent=selected?'🏅 現在の称号：'+selected.title+'（'+selected.level+'）':'称号は未設定です。実績を解除すると選択できます。';
