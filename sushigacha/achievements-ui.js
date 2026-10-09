@@ -62,12 +62,37 @@
     const colors=document.getElementById('sushiAchievementColors');
     if(colors)colors.innerHTML=engine.RANKS.map(r=>{const enabled=total>=r.min;return `<button type="button" data-rank="${r.id}" ${enabled?'':'disabled'} aria-pressed="${rank.id===r.id}" style="background:${r.bg};color:${r.fg};border:${rank.id===r.id?'3px solid #e74b2a':'1px solid #bbb'};border-radius:12px;padding:12px 6px;font-weight:900;opacity:${enabled?1:.35}">${enabled?'':'🔒 '}${r.name}<br><small>${r.min.toLocaleString()}問</small></button>`}).join('');
     renderCatalog();
+    renderTitles();
+  }
+  function renderTitles(){
+    const box=document.getElementById('sushiAchievementTitles');
+    if(!box||!window.SushiAchievementTitles||!window.SushiAchievementCatalog)return;
+    const metrics=achievementMetrics(),defs=window.SushiAchievementCatalog.definitions;
+    const available=window.SushiAchievementTitles.unlocked(metrics,defs);
+    const selected=window.SushiAchievementTitles.selection(localStorage,metrics,defs);
+    box.replaceChildren();
+    const label=document.createElement('label');label.textContent='称号を選択 ';
+    const select=document.createElement('select');select.id='sushiAchievementTitleSelect';
+    const none=document.createElement('option');none.value='';none.textContent='称号なし';select.append(none);
+    for(const title of available){
+      const option=document.createElement('option');option.value=title.id;
+      option.textContent=title.title+'・'+title.level+'（'+title.threshold.toLocaleString()+'）';
+      select.append(option);
+    }
+    select.value=selected?.id||'';
+    select.onchange=()=>{
+      if(window.SushiAchievementTitles.set(localStorage,select.value,achievementMetrics(),defs)){
+        window.dispatchEvent(new CustomEvent('sushi-achievement-title-change',{detail:{id:select.value||null}}));
+        refresh();
+      }
+    };
+    label.append(select);box.append(label);
   }
   function show(){
     let panel=document.getElementById('sushiAchievementPanel');
     if(!panel){
       panel=document.createElement('div');panel.id='sushiAchievementPanel';panel.style.cssText='position:fixed;inset:0;z-index:100010;background:#0009;display:grid;place-items:center;padding:16px;font-family:system-ui';
-      panel.innerHTML='<section role="dialog" aria-modal="true" aria-label="学習ランク" style="background:#fffdf8;color:#263238;border-radius:20px;padding:24px;width:min(520px,100%);max-height:85vh;overflow:auto"><button id="sushiAchievementClose" style="float:right;font-size:22px" aria-label="閉じる">×</button><h2>🏆 学習ランク</h2><label style="font-size:12px"><input type="checkbox" id="sushiAchievementMute"> 解除音をミュート</label><p id="sushiAchievementInfo"></p><div id="sushiAchievementColors" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(95px,1fr));gap:9px"></div><p style="font-size:12px;color:#666">到達済みの色を選べます。未到達の色は選べません。</p><h3>実績一覧（プレビュー）</h3><div id="sushiAchievementList"></div></section>';
+      panel.innerHTML='<section role="dialog" aria-modal="true" aria-label="学習ランク" style="background:#fffdf8;color:#263238;border-radius:20px;padding:24px;width:min(520px,100%);max-height:85vh;overflow:auto"><button id="sushiAchievementClose" style="float:right;font-size:22px" aria-label="閉じる">×</button><h2>🏆 学習ランク</h2><label style="font-size:12px"><input type="checkbox" id="sushiAchievementMute"> 解除音をミュート</label><p id="sushiAchievementInfo"></p><div id="sushiAchievementColors" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(95px,1fr));gap:9px"></div><p style="font-size:12px;color:#666">到達済みの色を選べます。未到達の色は選べません。</p><h3>称号</h3><div id="sushiAchievementTitles"></div><h3>実績一覧（プレビュー）</h3><div id="sushiAchievementList"></div></section>';
       document.body.append(panel);
       const mute=panel.querySelector('#sushiAchievementMute');mute.checked=localStorage.getItem('sushitan_achievement_muted')==='1';window.SushiAchievementSound?.setMuted?.(mute.checked);mute.onchange=()=>{localStorage.setItem('sushitan_achievement_muted',mute.checked?'1':'0');window.SushiAchievementSound?.setMuted?.(mute.checked)};
       panel.querySelector('#sushiAchievementClose').onclick=()=>panel.remove();
