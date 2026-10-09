@@ -19,6 +19,8 @@
       const item=document.createElement('div');item.style.cssText='border:1px solid #e8e1d5;border-radius:12px;padding:10px;margin:8px 0';
       const name=a.secret&&!a.reached?'???':a.title;
       item.textContent=(a.reached?'🏅 ':'🔒 ')+name+'  '+a.reached+'/'+a.stageCount+(a.next?'  ('+Math.min(a.value,a.next.threshold)+' / '+a.next.threshold+')':'  COMPLETE');
+      const reward=window.SushiAchievementRewards?.available?.(achievementMetrics(),window.SushiAchievementCatalog.definitions,[])?.filter(x=>x.id.startsWith('achievement:'+a.id+':'))||[];
+      if(reward.length){const badge=document.createElement('div');badge.style.cssText='font-size:12px;color:#8b5a1e;margin-top:5px';badge.textContent='🎁 達成報酬 '+reward.reduce((n,x)=>n+x.gems,0)+'ジェム（受取機能は準備中）';item.append(badge)}
       box.append(item);
     }
   }
