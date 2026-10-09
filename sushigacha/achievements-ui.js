@@ -20,6 +20,7 @@
       gemPurchases:(Array.isArray(login.gemEvents)?login.gemEvents:[]).filter(e=>e?.type==='spend'&&Number(e.amount)>0).length,
       outfitChanges:Number(login.gacha?.avatarRevision)>0?1:0,
       distinctGamesInDay:window.SushiAchievementLedger?.distinctGamesInDay?.()||0,
+      outcomeStats:window.SushiAchievementLedger?.outcomeSummary?.()||{},
       gameStats:gameplay
     })||{correct_total:Math.max(s.total,total),correct_vocabulary:0,login_streak:0};
   }
