@@ -1,0 +1,25 @@
+name: Achievement ledger tests
+on:
+  push:
+    branches:
+      - feature/achievement-rank-colors
+    paths:
+      - 'sushigacha/achievement-merge.js'
+      - 'tests/achievement-merge.test.cjs'
+      - '.github/workflows/achievement-tests.yml'
+  pull_request:
+    paths:
+      - 'sushigacha/achievement-merge.js'
+      - 'tests/achievement-merge.test.cjs'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test tests/achievement-merge.test.cjs
