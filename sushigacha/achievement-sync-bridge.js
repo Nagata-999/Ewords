@@ -43,17 +43,15 @@
    const sushi_id=(localStorage.getItem(ID)||'').trim().toLowerCase(),pin=localStorage.getItem(PIN)||'';
    if(!/^[a-z0-9_-]{4,24}$/.test(sushi_id)||!/^[0-9]{4}$/.test(pin))throw new Error('achievement_pin_not_connected');
    if(!Number.isSafeInteger(threshold))throw new Error('invalid_threshold');
-   await run();
-   // Flush pending profile events before requesting the authoritative wallet.
-   await root.SushiProfileSync?.syncNow?.();
    const transaction=root.SushiProfileSync?.withWalletTransaction;
    if(!transaction)throw new Error('achievement_wallet_sync_missing');
-   const data=await transaction(async()=>{
+   const requestClaim=()=>transaction(async()=>{
    if(localStorage.getItem(ID)?.trim().toLowerCase()!==sushi_id||localStorage.getItem(PIN)!==pin)throw new Error('achievement_account_changed');
    const before=JSON.parse(localStorage.getItem('sushitan_login_bonus_v1')||'{}');
    const response=await fetch(URL,{method:'POST',headers:{'Content-Type':'application/json',apikey:KEY},body:JSON.stringify({action:'achievement_claim',sushi_id,pin,threshold,category,wallet_event_ids:(before.gemEvents||[]).map(e=>e?.id).filter(Boolean)})});
    const data=await response.json().catch(()=>({error:'invalid_json'}));
-   if(!response.ok||data.ok!==true)throw new Error(data.error||'achievement_claim_failed');
+   if(!response.ok||data.ok!==true)throw Object.assign(new Error(data.error||'achievement_claim_failed'),{code:data.error});
+   if(localStorage.getItem(ID)?.trim().toLowerCase()!==sushi_id||localStorage.getItem(PIN)!==pin)throw new Error('achievement_account_changed');
    // Use the server's authoritative wallet snapshot, including for a previously
    // claimed reward. Do not add gems a second time on the client.
    if(data.wallet&&Number.isSafeInteger(data.wallet.gems)&&Array.isArray(data.wallet.gemEvents)){
@@ -67,14 +65,17 @@
    }
    return data;
    });
-   // Synchronize the receipt to the other devices using the existing merge.
-   await root.SushiProfileSync?.syncNow?.().catch(error=>console.warn('Gem sync pending:',error.message));
-   // Server-credited rewards may already exist in the profile ledger. Refresh
-   // all wallet listeners after profile merge, not only after a local insert.
-   root.dispatchEvent(new CustomEvent('sushi-gem-change'));
+   let data;
+   try{data=await requestClaim()}catch(error){
+     if(error.code!=='not_reached')throw error;
+     // Only upload progress when the authoritative server needs fresh data.
+     if(['all_correct','vocabulary','toeic','all_games_day'].includes(category))await run();
+     await root.SushiProfileSync?.syncNow?.();
+     data=await requestClaim();
+   }
    root.dispatchEvent(new CustomEvent('sushi-gems-updated',{detail:{source:'achievement',claim_id:data.claim_id}}));
-   await receipts().catch(()=>null);
    root.dispatchEvent(new CustomEvent('sushi-achievement-claimed',{detail:data}));
+   receipts().catch(()=>null);
    return data;
  }
  root.SushiAchievementSyncBridge=Object.freeze({supported,run,claim,receipts});

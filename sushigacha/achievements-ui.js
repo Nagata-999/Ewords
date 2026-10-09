@@ -111,9 +111,10 @@
             const button=document.createElement('button');
             button.type='button';button.textContent='🎁 '+eligible.gems+'ジェムを受け取る';
             button.style.cssText='display:block;margin-top:8px;padding:9px 12px;border:0;border-radius:9px;background:#f6b52b;color:#402500;font-weight:800;cursor:pointer';
-            button.disabled=claimBusy.has(eligible.id)||!connected;
+            button.disabled=claimBusy.has(eligible.id)||!connected||!verifiedReceipts;
             if(claimBusy.has(eligible.id))button.textContent='受取中…';
             else if(!connected){button.textContent='同期設定後に受け取れます';button.style.opacity='.6';}
+            else if(!verifiedReceipts)button.textContent='受取状況を確認中…';
             button.onclick=()=>claimReward(eligible.id.split(':').at(-1)*1,eligible.id,button,a.id);
             item.append(button);
           }
@@ -177,6 +178,7 @@
   });
   window.addEventListener('sushi-achievement-baseline-sync',refresh);
   function show(){
+    window.SushiAchievementSyncBridge?.receipts?.().catch(()=>null);
     let panel=document.getElementById('sushiAchievementPanel');
     if(!panel){
       panel=document.createElement('div');panel.id='sushiAchievementPanel';panel.style.cssText='position:fixed;inset:0 0 var(--sushi-taskbar-space,84px);z-index:100010;box-sizing:border-box;min-height:0;background:#0009;display:grid;place-items:center;padding:16px;font-family:system-ui';

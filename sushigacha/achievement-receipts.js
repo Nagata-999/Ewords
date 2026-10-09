@@ -7,6 +7,11 @@
  if(root)root.SushiAchievementReceipts=api;
 })(typeof window==='undefined'?null:window,function(){
  function parse(response){
+   if(response?.ok===true&&Array.isArray(response.receipts?.ids)){
+     const ids=response.receipts.ids;
+     if(ids.length>1000||new Set(ids).size!==ids.length||ids.some(id=>typeof id!=='string'||!/^achievement:[a-z0-9_]+:[1-9][0-9]*$/.test(id)||id.length>120))return null;
+     return Object.freeze({ids:Object.freeze([...ids]),rows:Object.freeze(ids.map(id=>({id,gems:null})))});
+   }
    if(!response||response.version!==1||!Array.isArray(response.claims)||response.claims.length>1000)return null;
    const ids=new Set(),rows=[];
    for(const row of response.claims){
