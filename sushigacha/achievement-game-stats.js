@@ -1,26 +1,26 @@
 'use strict';
-/* Idempotent, device-local gameplay counters. No gems are awarded here.
- * A future PIN-sync backend must validate before permitting reward claims. */
+/* Only unlocked achievement IDs are stored, never play counts or scores. */
 (function(root){
- if(root.SushiAchievementGameStats)return;
- const KEY='sushitan_achievement_game_stats_v1';
- const read=()=>{try{const o=JSON.parse(localStorage.getItem(KEY)||'{}');return o&&typeof o==='object'?o:{}}catch{return{}}};
- function record(game,id,values={}){
-   if(!['giri','blast'].includes(game)||typeof id!=='string'||!/^[a-zA-Z0-9:_-]{1,150}$/.test(id))return false;
-   const data=read(),seen=data.seen&&typeof data.seen==='object'?data.seen:{};
-   if(seen[id])return false;
-   seen[id]=1;data.seen=seen;
-   const safe=n=>Number.isSafeInteger(n)&&n>=0?Math.min(n,100000000):0;
-   if(game==='giri'){
-     data.giri_plays=safe(data.giri_plays)+1;
-     data.giri_high_score=Math.max(safe(data.giri_high_score),safe(values.score));
-   }else{
-     data.blast_plays=safe(data.blast_plays)+1;
-     data.blast_perfect=safe(data.blast_perfect)+safe(values.perfect);
-   }
-   localStorage.setItem(KEY,JSON.stringify(data));
-   root.dispatchEvent(new CustomEvent('sushi-achievement-change',{detail:{game,stat:true}}));
+ const KEY='sushitan_achievement_unlocks_v1';
+ const RULES=Object.freeze({giri:[10000,30000,50000],blast:[1000,5000,10000,20000]});
+ function unlocked(){try{const a=JSON.parse(localStorage.getItem(KEY)||'[]');return Array.isArray(a)?a.filter(x=>typeof x==='string'&&/^achievement:(giri|blast):[0-9]+$/.test(x)):[]}catch{return[]}}
+ function merge(ids){
+   const before=unlocked(),all=new Set(before);
+   for(const id of Array.isArray(ids)?ids:[])if(typeof id==='string'&&/^achievement:(giri|blast):[0-9]+$/.test(id))all.add(id);
+   if(all.size===before.length)return false;
+   localStorage.setItem(KEY,JSON.stringify([...all].sort()));
+   root.dispatchEvent(new CustomEvent('sushi-achievement-change',{detail:{unlocks:true}}));
    return true;
  }
- root.SushiAchievementGameStats=Object.freeze({record,read});
+ function record(game,_id,values={}){
+   if(!Object.hasOwn(RULES,game))return false;
+   const score=Math.max(0,Math.floor(Number(values.score)||0));
+   return merge(RULES[game].filter(n=>score>=n).map(n=>'achievement:'+game+':'+n));
+ }
+ function read(){
+   const ids=new Set(unlocked());
+   const max=game=>Math.max(0,...RULES[game].filter(n=>ids.has('achievement:'+game+':'+n)));
+   return {giri_high_score:max('giri'),blast_high_score:max('blast')};
+ }
+ root.SushiAchievementGameStats=Object.freeze({record,read,unlocked,merge});
 })(window);
