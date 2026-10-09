@@ -3128,7 +3128,7 @@ html, body {
       const correct = button.dataset.type === 'correct';
       GAME.balloons.forEach(({el}) => { el.disabled = true; if (el.dataset.type === 'correct') el.classList.add('correct-flash'); });
       if (correct) {
-        GAME.correctCount++;
+        GAME.correctCount++; if(window.SushiAchievements?.addCorrect)window.SushiAchievements.addCorrect('sushitan',1);else (window.__sushiPendingAchievementCorrect||(window.__sushiPendingAchievementCorrect=[])).push('sushitan');
         const graduated = reviewCorrect(GAME.currentQuestion);
         setFeedback(graduated ? '復習完了！リストから外れました。' : '正解！共通の苦手度が下がりました。', 'good');
         soundCorrect();
@@ -3680,7 +3680,7 @@ html, body {
         GAME.questionLocked = true;
         GAME.attemptCount += 1;
         ensureAudio();
-        GAME.correctCount += 1;
+        GAME.correctCount += 1; if(window.SushiAchievements?.addCorrect)window.SushiAchievements.addCorrect('sushitan',1);else (window.__sushiPendingAchievementCorrect||(window.__sushiPendingAchievementCorrect=[])).push('sushitan');
         handleComboOnCorrect(now);
 
         const gained = 10 * getMultiplier(GAME.combo);
