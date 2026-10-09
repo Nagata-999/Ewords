@@ -43,13 +43,17 @@
   }
   async function claimReward(threshold,id,button,category){
     if(claimBusy.has(id))return;
+    // Keep the clicked position before refresh replaces the button and the
+    // authenticated request can take longer than the pointer history.
+    const rect=button.getBoundingClientRect();
+    const origin={x:rect.left+rect.width/2,y:rect.top+rect.height/2};
     claimBusy.add(id);button.disabled=true;button.textContent='受取中…';
     refresh();
     try{
       const result=await window.SushiAchievementSyncBridge.claim(threshold,category);
       const sushiId=(localStorage.getItem('sushitan_sync_id_v1')||'').trim().toLowerCase();
       claimedHere.add(sushiId+':'+id);
-      if(result.gems>0)window.dispatchEvent(new CustomEvent('sushi-gems-earned',{detail:{gems:result.gems,source:'achievement',id}}));
+      if(result.gems>0&&!result.already_claimed)window.dispatchEvent(new CustomEvent('sushi-gems-earned',{detail:{gems:result.gems,source:'achievement',id,origin}}));
       refresh();
     }catch(error){window.alert('受取に失敗しました：'+error.message);button.disabled=false;button.textContent='🎁 受け取る'}
     finally{claimBusy.delete(id);refresh()}
@@ -173,8 +177,8 @@
   function show(){
     let panel=document.getElementById('sushiAchievementPanel');
     if(!panel){
-      panel=document.createElement('div');panel.id='sushiAchievementPanel';panel.style.cssText='position:fixed;inset:0;z-index:100010;background:#0009;display:grid;place-items:center;padding:16px;font-family:system-ui';
-      panel.innerHTML='<section role="dialog" aria-modal="true" aria-label="学習ランク" style="background:#fffdf8;color:#263238;border-radius:20px;padding:24px;width:min(520px,100%);max-height:85vh;overflow:auto"><button id="sushiAchievementClose" style="float:right;font-size:22px" aria-label="閉じる">×</button><h2>🏆 学習ランク</h2><label style="font-size:12px"><input type="checkbox" id="sushiAchievementMute"> 解除音をミュート</label><p id="sushiAchievementInfo"></p><div id="sushiAchievementColors" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(95px,1fr));gap:9px"></div><p style="font-size:12px;color:#666">到達済みの色を選べます。未到達の色は選べません。</p><h3>称号</h3><div id="sushiAchievementTitles"></div><h3>実績一覧（プレビュー）</h3><div id="sushiAchievementList"></div></section>';
+      panel=document.createElement('div');panel.id='sushiAchievementPanel';panel.style.cssText='position:fixed;inset:0 0 var(--sushi-taskbar-space,84px);z-index:100010;box-sizing:border-box;min-height:0;background:#0009;display:grid;place-items:center;padding:16px;font-family:system-ui';
+      panel.innerHTML='<section role="dialog" aria-modal="true" aria-label="学習ランク" style="background:#fffdf8;color:#263238;border-radius:20px;padding:24px;width:min(520px,100%);box-sizing:border-box;min-height:0;max-height:100%;overflow:auto"><button id="sushiAchievementClose" style="float:right;font-size:22px" aria-label="閉じる">×</button><h2>🏆 学習ランク</h2><label style="font-size:12px"><input type="checkbox" id="sushiAchievementMute"> 解除音をミュート</label><p id="sushiAchievementInfo"></p><div id="sushiAchievementColors" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(95px,1fr));gap:9px"></div><p style="font-size:12px;color:#666">到達済みの色を選べます。未到達の色は選べません。</p><h3>称号</h3><div id="sushiAchievementTitles"></div><h3>実績一覧（プレビュー）</h3><div id="sushiAchievementList"></div></section>';
       document.body.append(panel);
       const mute=panel.querySelector('#sushiAchievementMute');mute.checked=localStorage.getItem('sushitan_achievement_muted')==='1';window.SushiAchievementSound?.setMuted?.(mute.checked);mute.onchange=()=>{localStorage.setItem('sushitan_achievement_muted',mute.checked?'1':'0');window.SushiAchievementSound?.setMuted?.(mute.checked)};
       panel.querySelector('#sushiAchievementClose').onclick=()=>panel.remove();

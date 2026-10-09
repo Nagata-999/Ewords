@@ -15,7 +15,7 @@
     body.sushi-taskbar-on #sushiGemToast{bottom:calc(var(--sushi-taskbar-space) + 8px)!important}
     body.sushi-taskbar-on #sushiSyncButton{bottom:calc(var(--sushi-taskbar-space) + 8px)!important}
     body.sushi-taskbar-on .ssp-card,body.sushi-taskbar-on .slb-card{max-height:calc(100dvh - 24px);overflow-y:auto;box-sizing:border-box}
-    #sushiDailySheet .sdq-card{max-height:calc(100dvh - 16px);box-sizing:border-box}
+    #sushiDailySheet .sdq-card{max-height:100%;box-sizing:border-box}
     #sushiTaskbar a:focus-visible,#sushiTaskbar button:focus-visible{outline:3px solid #ea580c;outline-offset:-4px;border-radius:12px}
     body.sushi-taskbar-on .side-menu{height:var(--sushi-page-height)!important;max-height:var(--sushi-page-height);overflow-y:auto;box-sizing:border-box}
     @media(max-width:600px){:root{--sushi-taskbar-space:calc(60px + env(safe-area-inset-bottom))}}
