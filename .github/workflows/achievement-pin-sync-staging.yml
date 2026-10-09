@@ -15,5 +15,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --check sushigacha/achievement-sync-bridge.js && node --check sushigacha/achievement-transport.js
+      - run: node --check sushigacha/achievement-sync-bridge.js && node --check sushigacha/achievement-transport.js && node --check sushigacha/site-taskbar.js
       - run: node --test tests/achievement-transport.test.cjs tests/achievement-sync-bridge.test.cjs
