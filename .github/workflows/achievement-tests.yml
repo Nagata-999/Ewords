@@ -5,11 +5,19 @@ on:
       - feature/achievement-rank-colors
     paths:
       - 'sushigacha/achievement-*.js'
+      - 'sushigacha/achievements-ui.js'
+      - 'sushigacha/site-taskbar.js'
+      - 'sushitan.html'
+      - 'supabase/achievement-*.ts'
       - 'tests/achievement-*.test.cjs'
       - '.github/workflows/achievement-tests.yml'
   pull_request:
     paths:
       - 'sushigacha/achievement-*.js'
+      - 'sushigacha/achievements-ui.js'
+      - 'sushigacha/site-taskbar.js'
+      - 'sushitan.html'
+      - 'supabase/achievement-*.ts'
       - 'tests/achievement-*.test.cjs'
       - '.github/workflows/achievement-tests.yml'
 jobs:
