@@ -93,6 +93,7 @@
     preview.textContent=selected?'🏅 現在の称号：'+selected.title+'（'+selected.level+'）':'称号は未設定です。実績を解除すると選択できます。';
     box.append(preview);
   }
+  window.addEventListener('sushi-achievement-baseline-sync',refresh);
   function show(){
     let panel=document.getElementById('sushiAchievementPanel');
     if(!panel){
