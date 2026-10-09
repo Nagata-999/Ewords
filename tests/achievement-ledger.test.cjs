@@ -34,7 +34,7 @@ test('exportAllPages contains all records once, including more than 500',()=>{
 test('import does not overwrite conflicting event',()=>{
  const {ledger}=setup();ledger.importEvents([event('d:1',1)]);
  const outcome=ledger.importEvents([event('d:1',5),event('d:2',3)]);
- assert.equal(outcome.conflicts,1);assert.equal(outcome.added,1);assert.equal(ledger.summary().total,4);
+ assert.equal(outcome.conflicts,1);assert.equal(outcome.added,0);assert.equal(ledger.summary().total,1);
 });
 test('invalid IDs cannot enter ledger',()=>{
  const {ledger}=setup();assert.equal(ledger.record('sushitan',1,'bad.id'),null);
@@ -63,4 +63,23 @@ test('legacy learning answers remain in the baseline while new answers count onc
  ledger.record('sushitan',1,'new:1');
  assert.equal(ledger.migrationBaseline(),17);
  assert.equal(ledger.reconciledTotal(),18);
+});
+
+test('import rejects malformed page without writing valid neighbors',()=>{
+ const {ledger}=setup();
+ const result=ledger.importEvents([event('valid:1'),event('invalid.id')]);
+ assert.equal(result.added,0);assert.equal(result.rejected,1);
+ assert.equal(ledger.summary().eventCount,0);
+});
+test('duplicate event IDs with different payloads are rejected as one page',()=>{
+ const {ledger}=setup();
+ const result=ledger.importEvents([event('dup:1',1),event('dup:1',2)]);
+ assert.equal(result.added,0);assert.equal(result.conflicts,1);
+ assert.equal(ledger.summary().total,0);
+});
+test('matching repeated imports are idempotent',()=>{
+ const {ledger}=setup();
+ assert.equal(ledger.importEvents([event('ok:1',2)]).added,1);
+ assert.equal(ledger.importEvents([event('ok:1',2)]).added,0);
+ assert.equal(ledger.summary().total,2);
 });
