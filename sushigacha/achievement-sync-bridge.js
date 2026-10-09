@@ -31,4 +31,12 @@
    }finally{running=null}
  }
  root.SushiAchievementSyncBridge=Object.freeze({supported,run});
+ // Sync only after the established profile PIN sync succeeds. A failed
+ // achievement sync never blocks the existing profile, gems, or avatar sync.
+ root.addEventListener('sushi-profile-synced',()=>{run().catch(error=>console.warn('Achievement sync deferred:',error.message))});
+ root.addEventListener('sushi-achievement-change',()=>{
+   if(!localStorage.getItem(PIN))return;
+   clearTimeout(root.__sushiAchievementSyncTimer);
+   root.__sushiAchievementSyncTimer=setTimeout(()=>run().catch(error=>console.warn('Achievement sync deferred:',error.message)),2500);
+ });
 })(window);
