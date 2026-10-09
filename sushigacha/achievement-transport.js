@@ -26,6 +26,7 @@
      sent+=events.length;
      uploadIndex++;
      const imported=ledger.importEvents(response.achievements.events);
+     if(imported.conflicts||imported.rejected)throw new Error('invalid_server_events');
      received+=imported.added;conflicts+=imported.conflicts;rejected+=imported.rejected;
      const next=response.achievements.nextCursor;
      if(next!==null&&next!==undefined){
