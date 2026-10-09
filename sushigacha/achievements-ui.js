@@ -59,6 +59,18 @@
       const item=document.createElement('div');item.style.cssText='border:1px solid #e8e1d5;border-radius:12px;padding:10px;margin:8px 0';
       const name=a.secret&&!a.reached?'???':a.title;
       item.textContent=(a.reached?'🏅 ':'🔒 ')+name+'  '+a.reached+'/'+a.stageCount+(a.next?'  ('+Math.min(a.value,a.next.threshold)+' / '+a.next.threshold+')':'  COMPLETE');
+      const hidden=a.secret&&!a.reached;
+      const definition=window.SushiAchievementCatalog.definitions.find(d=>d.id===a.id);
+      const stages=definition?.stages||[{threshold:definition?.threshold||1,gems:definition?.gems||0}];
+      const target=a.next||stages[stages.length-1];
+      const description=document.createElement('div');
+      description.style.cssText='font-size:13px;line-height:1.6;color:#645344;margin-top:5px';
+      description.textContent=hidden?'達成条件：？？？':'達成条件：'+window.SushiAchievementCatalog.describe(a.id,target.threshold);
+      item.append(description);
+      const hint=document.createElement('div');
+      hint.style.cssText='font-size:12px;color:#80694c;margin-top:3px';
+      hint.textContent=hidden?'報酬：？？？':(a.next?'次の報酬：'+target.gems+'ジェム':'全段階達成！');
+      item.append(hint);
       const reward=window.SushiAchievementRewards?.available?.(achievementMetrics(),window.SushiAchievementCatalog.definitions,[])?.filter(x=>x.id.startsWith('achievement:'+a.id+':'))||[];
       const claimed=verifiedReceipts?.ids.filter(id=>id.startsWith('achievement:'+a.id+':'))||[];
       if(reward.length||claimed.length){
