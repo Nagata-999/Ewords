@@ -52,6 +52,23 @@
     }
     return {total,games,eventCount:seen.size};
   }
+  // A game counts on a day only when a verified correct-answer event exists.
+  // Imported events are deduplicated by ID, so cross-device sync cannot inflate it.
+  function distinctGamesInDay(){
+    const days=new Map(),seen=new Set();
+    for(let i=0;i<localStorage.length;i++){
+      const key=localStorage.key(i);if(!key?.startsWith(PREFIX))continue;
+      try{
+        const e=JSON.parse(localStorage.getItem(key));
+        if(!valid(e)||key!==PREFIX+e.id||seen.has(e.id))continue;
+        seen.add(e.id);
+        const d=new Date(e.at),day=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+        if(!days.has(day))days.set(day,new Set());
+        days.get(day).add(e.game);
+      }catch{}
+    }
+    return Math.max(0,...[...days.values()].map(games=>games.size));
+  }
   function legacyBaseline(){
     try{const old=JSON.parse(localStorage.getItem(KEY)||'{}');return Number.isSafeInteger(old.total)&&old.total>=0?old.total:0}catch{return 0}
   }
@@ -138,5 +155,5 @@
     // Learning records may include the same post-migration answers; use as a floor, not an addition.
     return Math.max(historical+eventTotal,learningTotal(),legacyBaseline());
   }
-  global.SushiAchievementLedger=Object.freeze({record,summary,legacyBaseline,learningTotal,migrationBaseline,ensureMigrationBaseline,baselineForSync,mergeBaseline,reconciledTotal,exportBatch,exportAllPages,importEvents});
+  global.SushiAchievementLedger=Object.freeze({record,summary,distinctGamesInDay,legacyBaseline,learningTotal,migrationBaseline,ensureMigrationBaseline,baselineForSync,mergeBaseline,reconciledTotal,exportBatch,exportAllPages,importEvents});
 })(window);
