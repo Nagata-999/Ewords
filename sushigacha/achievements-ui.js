@@ -134,7 +134,7 @@
   window.SushiAchievements={state,addCorrect,show,refresh,setServerReceipts};
   // Drain correct answers recorded while the async achievement modules loaded.
   const pending=Array.isArray(window.__sushiPendingAchievementCorrect)?window.__sushiPendingAchievementCorrect.splice(0,1000):[];
-  for(const game of pending)if(['shinotan','antonitan'].includes(game))addCorrect(game,1);
+  for(const game of pending)if(['shinotan','antonitan','sushi_idiom'].includes(game))addCorrect(game,1);
   function init(){
     const bar=document.getElementById('sushiTaskbar');if(!bar)return;
     const trigger=document.createElement('button');trigger.type='button';trigger.id='sushiAchievementOpen';trigger.title='学習ランク';trigger.textContent='🏆';trigger.style.cssText='position:absolute;top:0;right:0;width:25px;height:25px;z-index:2;font-size:14px;border-radius:0 0 0 10px;background:#ffffff77!important';
