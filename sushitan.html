@@ -3122,10 +3122,19 @@ html, body {
       box.innerHTML = rows.length ? rows.map(w => `<div class="mistake-row"><div><b>${escapeHtml(w.en)}</b><br>${escapeHtml(w.jp)}</div><div>ミス ${w.misses}回<br>連続正解 ${w.streak}回</div></div>`).join('') : '<p class="small">復習する単語はありません。</p>';
       document.getElementById('reviewStorageStatus').textContent = reviewStorageFailed ? 'ブラウザに保存できません。この画面を閉じると復習記録が失われる場合があります。' : '';
     }
+    // Achievement-only telemetry; never modifies learning, score or gem balances.
+    function recordSushiOutcome(correct, review = false) {
+      const word = GAME.currentQuestion;
+      if (!word) return;
+      const id = window.SushiLearning?.resolveWordId?.(word) || String(word.id || word.en || '');
+      if (!id) return;
+      window.SushiAchievementLedger?.recordOutcome?.('sushitan', String(id), correct, {review});
+    }
     function handleReviewTap(button) {
       GAME.questionLocked = true;
       GAME.attemptCount++;
       const correct = button.dataset.type === 'correct';
+      recordSushiOutcome(correct, true);
       GAME.balloons.forEach(({el}) => { el.disabled = true; if (el.dataset.type === 'correct') el.classList.add('correct-flash'); });
       if (correct) {
         GAME.correctCount++; if(window.SushiAchievements?.addCorrect)window.SushiAchievements.addCorrect('sushitan',1);else (window.__sushiPendingAchievementCorrect||(window.__sushiPendingAchievementCorrect=[])).push('sushitan');
@@ -3676,6 +3685,7 @@ html, body {
       const type = button.dataset.type;
 
       if (type === 'correct') {
+        recordSushiOutcome(true, false);
         if (currentMode === MODE_SUSHI && !GAME.currentQuestion._learningMissed) window.SushiLearning?.recordAnswer(SushiLearning.resolveWordId(GAME.currentQuestion), true, 'sushitan');
         GAME.questionLocked = true;
         GAME.attemptCount += 1;
@@ -3701,6 +3711,7 @@ html, body {
         }, 420);
 
       } else {
+        recordSushiOutcome(false, false);
         GAME.attemptCount += 1;
         ensureAudio();
         recordMistake(button);
