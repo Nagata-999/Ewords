@@ -13,7 +13,7 @@
       if(e?.version===1&&e.correct===true&&e.id===key.slice(27)&&Number.isSafeInteger(e.count)&&e.count>0)correct+=e.count;
     }}catch{}
     let login={};try{login=JSON.parse(localStorage.getItem('sushitan_login_bonus_v1')||'{}')||{}}catch{}
-    return {correct_total:Math.max(s.total,correct),correct_vocabulary:Math.max(s.total,correct),login_streak:Number(login.loginBonusStreak)||0};
+    const ledger=window.SushiAchievementLedger?.summary();const newTotal=ledger?.total||0;const total=Math.max(s.total+newTotal,correct);return {correct_total:total,correct_vocabulary:total,login_streak:Number(login.loginBonusStreak)||0};
   }
   function renderCatalog(){
     const box=document.getElementById('sushiAchievementList');
@@ -56,7 +56,7 @@
   // Increment only for verified correct answers; caller must ensure one call per answer.
   function addCorrect(game,n=1){
     if(typeof game!=='string'||!game||!Number.isSafeInteger(n)||n<1||n>1000)return state();
-    const s=state();save({...s,total:s.total+n});return state();
+    if(window.SushiAchievementLedger){window.SushiAchievementLedger.record(game,n);refresh();return state()}const s=state();save({...s,total:s.total+n});return state();
   }
   window.SushiAchievements={state,addCorrect,show,refresh};
   function init(){
@@ -65,5 +65,5 @@
     trigger.onclick=show;bar.append(trigger);refresh();
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
-  window.addEventListener('storage',refresh);window.addEventListener('focus',refresh);
+  window.addEventListener('storage',refresh);window.addEventListener('focus',refresh);window.addEventListener('sushi-achievement-change',refresh);
 })();
