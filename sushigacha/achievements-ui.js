@@ -88,7 +88,7 @@
       }
       const reward=window.SushiAchievementRewards?.available?.(achievementMetrics(),window.SushiAchievementCatalog.definitions,[])?.filter(x=>x.id.startsWith('achievement:'+a.id+':'))||[];
       const claimed=verifiedReceipts?.ids.filter(id=>id.startsWith('achievement:'+a.id+':'))||[];
-      if(reward.length||claimed.length){
+      if(!hidden&&(reward.length||claimed.length)){
         const badge=document.createElement('div');badge.style.cssText='font-size:12px;color:#8b5a1e;margin-top:5px';
         const pending=reward.filter(x=>!claimed.includes(x.id)&&!claimStatus(x.id));
         const supported=['all_correct','streak','vocabulary','toeic','giri','blast'].includes(a.id);
