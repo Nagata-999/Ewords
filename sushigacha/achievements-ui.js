@@ -39,7 +39,7 @@
       const result=await window.SushiAchievementSyncBridge.claim(threshold);
       const sushiId=(localStorage.getItem('sushitan_sync_id_v1')||'').trim().toLowerCase();
       claimedHere.add(sushiId+':'+id);
-      if(result.gems>0)window.alert('🎁 '+result.gems+'ジェム GET!');
+      if(result.gems>0)window.dispatchEvent(new CustomEvent('sushi-gems-earned',{detail:{gems:result.gems,source:'achievement',id}}));
       refresh();
     }catch(error){window.alert('受取に失敗しました：'+error.message);button.disabled=false;button.textContent='🎁 受け取る'}
     finally{claimBusy.delete(id)}
