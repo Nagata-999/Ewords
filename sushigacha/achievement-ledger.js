@@ -118,9 +118,13 @@
   function mergeBaseline(remote){
     if(!Number.isSafeInteger(remote)||remote<0||remote>1000000000)return false;
     const current=ensureMigrationBaseline();
-    if(remote<=current)return false;
-    localStorage.setItem(BASELINE,JSON.stringify({version:1,total:remote,at:Date.now()}));
-    global.dispatchEvent(new CustomEvent('sushi-achievement-baseline-sync',{detail:{total:remote}}));
+    // Legacy totals can exceed the migration snapshot on another device.
+    // Subtract the event stream before comparing to avoid double counting.
+    const inferred=Math.max(0,legacyBaseline()-summary().total);
+    const target=Math.max(remote,current,inferred);
+    if(target<=current)return false;
+    localStorage.setItem(BASELINE,JSON.stringify({version:1,total:target,at:Date.now()}));
+    global.dispatchEvent(new CustomEvent('sushi-achievement-baseline-sync',{detail:{total:target}}));
     return true;
   }
   function reconciledTotal(){
