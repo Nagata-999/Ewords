@@ -20,6 +20,8 @@ jobs:
           python-version: '3.11'
       - name: Validate all staged candidates
         run: python scripts/validate_dictionary_candidates.py
+      - name: Run regression tests
+        run: python -m unittest discover -s tests -p 'test_dictionary_staging.py' -v
       - name: Check merger script syntax
         run: python -m py_compile scripts/stage_dictionary_merge.py
       - name: Production merge remains disabled
