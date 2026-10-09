@@ -1,0 +1,19 @@
+name: Achievement PIN sync staging checks
+on:
+  push:
+    branches: [feature/achievement-pin-sync-release]
+  pull_request:
+    paths:
+      - 'sushigacha/achievement-*'
+      - 'tests/achievement-*'
+      - 'supabase/staging/**'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check sushigacha/achievement-sync-bridge.js && node --check sushigacha/achievement-transport.js
+      - run: node --test tests/achievement-transport.test.cjs tests/achievement-sync-bridge.test.cjs
