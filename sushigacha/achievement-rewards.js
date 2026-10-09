@@ -22,6 +22,8 @@
    if(!Array.isArray(definitions)||!metrics||typeof metrics!=='object')return {eligible:false,reason:'invalid_input'};
    const match=stageFor(stageId,definitions);
    if(!match)return {eligible:false,reason:'unknown_stage'};
+   // Never trust inherited properties (e.g. prototype pollution) as metrics.
+   if(!Object.prototype.hasOwnProperty.call(metrics,match.definition.metric))return {eligible:false,reason:'not_reached'};
    const value=metrics[match.definition.metric];
    if(!Number.isSafeInteger(value)||value<match.stage.threshold)return {eligible:false,reason:'not_reached'};
    if(Array.isArray(claimed)&&claimed.includes(stageId))return {eligible:false,reason:'already_claimed'};
