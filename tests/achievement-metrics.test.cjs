@@ -18,3 +18,10 @@ test('invalid metrics cannot inflate ranks',()=>{
  const m=compute({historicalTotal:Infinity,ledgerTotal:-1,loginStreak:'365',byGame:{sushitan:-3,idiom:'999'}});
  assert.equal(m.correct_total,0);assert.equal(m.correct_vocabulary,0);assert.equal(m.login_streak,0);
 });
+
+test('TOEIC answers are tracked separately from vocabulary',()=>{
+ const metrics=compute({byGame:{toeic:12,sushitan:4},ledgerTotal:16});
+ assert.equal(metrics.toeic_correct,12);
+ assert.equal(metrics.correct_vocabulary,4);
+ assert.equal(metrics.correct_total,16);
+});
