@@ -1,12 +1,12 @@
 name: Dictionary staged data validation
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '17 2 * * *'
   push:
+    branches: [automation/dictionary-pipeline]
     paths:
       - 'data/dictionary-auto/**'
       - 'scripts/validate_dictionary_candidates.py'
+      - 'scripts/stage_dictionary_merge.py'
       - '.github/workflows/dictionary-staged-validation.yml'
 permissions:
   contents: read
@@ -18,10 +18,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Validate staged additions when present
-        run: |
-          if [ -f data/dictionary-auto/new-entries.json ]; then
-            python scripts/validate_dictionary_candidates.py
-          else
-            echo "No staged candidate file on this branch; nothing to validate."
-          fi
+      - name: Validate all staged candidates
+        run: python scripts/validate_dictionary_candidates.py
+      - name: Check merger script syntax
+        run: python -m py_compile scripts/stage_dictionary_merge.py
+      - name: Production merge remains disabled
+        run: echo "No base ZIP has been independently verified in CI; deployment is blocked."
