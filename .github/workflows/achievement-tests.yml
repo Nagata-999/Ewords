@@ -4,17 +4,14 @@ on:
     branches:
       - feature/achievement-rank-colors
     paths:
-      - 'sushigacha/achievement-merge.js'
-      - 'tests/achievement-merge.test.cjs'
-      - 'sushigacha/achievement-ledger.js'
-      - 'tests/achievement-ledger.test.cjs'
-      - 'sushigacha/achievement-ledger.js'
-      - 'tests/achievement-ledger.test.cjs'
+      - 'sushigacha/achievement-*.js'
+      - 'tests/achievement-*.test.cjs'
       - '.github/workflows/achievement-tests.yml'
   pull_request:
     paths:
-      - 'sushigacha/achievement-merge.js'
-      - 'tests/achievement-merge.test.cjs'
+      - 'sushigacha/achievement-*.js'
+      - 'tests/achievement-*.test.cjs'
+      - '.github/workflows/achievement-tests.yml'
 jobs:
   test:
     runs-on: ubuntu-latest
