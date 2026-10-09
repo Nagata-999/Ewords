@@ -27,6 +27,10 @@
      const accepted=new Set(ackIds);
      if(accepted.size!==ackIds.length)throw new Error('invalid_server_acknowledgment');
      if(events.some(e=>!accepted.has(e.id)))throw new Error('achievement_batch_not_acknowledged');
+     const next=response.achievements.nextCursor;
+     if(next!==null&&next!==undefined){
+       if(typeof next!=='string'||!/^[A-Za-z0-9:_-]{1,159}$/.test(next)||visited.has(next))throw new Error('invalid_server_cursor');
+     }
      sent+=events.length;
      uploadIndex++;
      // Reject malformed remote records before importing any of the page.
@@ -34,11 +38,7 @@
      const imported=ledger.importEvents(response.achievements.events);
      if(imported.conflicts||imported.rejected)throw new Error('invalid_server_events');
      received+=imported.added;conflicts+=imported.conflicts;rejected+=imported.rejected;
-     const next=response.achievements.nextCursor;
-     if(next!==null&&next!==undefined){
-       if(typeof next!=='string'||!/^[A-Za-z0-9:_-]{1,159}$/.test(next)||visited.has(next))throw new Error('invalid_server_cursor');
-       visited.add(next);
-     }
+     if(next!==null&&next!==undefined)visited.add(next);
      cursor=next??null;
    }while(uploadIndex<pages.length||cursor!==null);
    return {sent,received,conflicts,rejected,rounds};
