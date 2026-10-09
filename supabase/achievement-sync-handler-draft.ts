@@ -6,6 +6,11 @@ type SyncInput={events?:unknown;cursor?:string|null;limit?:number};
 const PAGE_SIZE=500;
 export async function syncAchievementPage(db:Client,sushiId:string,input:SyncInput){
   if(!sushiId||typeof sushiId!=="string")throw new Error("missing_verified_sushi_id");
+  if(input?.cursor!==undefined&&input.cursor!==null&&
+    (typeof input.cursor!=="string"||!/^[A-Za-z0-9:_-]{1,159}$/.test(input.cursor)))
+    throw new Error("invalid_page_cursor");
+  if(input?.limit!==undefined&&(!Number.isSafeInteger(input.limit)||input.limit<1||input.limit>PAGE_SIZE))
+    throw new Error("invalid_page_limit");
   const raw=input?.events??[];
   if(!Array.isArray(raw)||raw.length>PAGE_SIZE)throw new Error("invalid_event_batch_size");
   const normalized=normalizeAchievementEvents(raw,PAGE_SIZE);
@@ -33,16 +38,16 @@ export async function syncAchievementPage(db:Client,sushiId:string,input:SyncInp
   }
   // Keyset pagination avoids offset drift when another device adds new events.
   // Cursor is event_id, the stable primary-key component.
-  const cursor=typeof input.cursor==="string"&&/^[A-Za-z0-9:_-]{1,159}$/.test(input.cursor)?input.cursor:null;
-  const limit=Math.max(1,Math.min(PAGE_SIZE,Math.floor(Number(input.limit)||PAGE_SIZE)));
+  const cursor=input.cursor??null;
+  const limit=input.limit??PAGE_SIZE;
   let query=db.from("sushi_achievement_events")
     .select("event_id,game_id,correct_count,occurred_at")
     .eq("sushi_id",sushiId).order("event_id",{ascending:true}).limit(limit+1);
   if(cursor)query=query.gt("event_id",cursor);
   const {data:rows,error:pageError}=await query;
   if(pageError)throw pageError;
-  const hasMore=rows.length>limit;
-  const page=rows.slice(0,limit);
+  const hasMore=(rows||[]).length>limit;
+  const page=(rows||[]).slice(0,limit);
   return {
     version:2,synced:true,accepted:ids,
     events:page.map((r:any)=>({version:2,id:r.event_id,game:r.game_id,correct:r.correct_count,at:new Date(r.occurred_at).getTime()})),
