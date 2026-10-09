@@ -10,11 +10,11 @@
     if(!id){id=global.crypto?.randomUUID?.()||('device-'+Date.now()+'-'+Math.random().toString(36).slice(2));localStorage.setItem(DEVICE,id)}
     return id;
   }
-  function valid(e){return e&&e.version===2&&typeof e.id==='string'&&e.id.length<160&&VALID_GAME.test(e.game)&&Number.isSafeInteger(e.correct)&&e.correct>0&&e.correct<=1000&&Number.isFinite(e.at)}
+  function valid(e){return e&&e.version===2&&typeof e.id==='string'&&/^[A-Za-z0-9:_-]{1,159}$/.test(e.id)&&VALID_GAME.test(e.game)&&Number.isSafeInteger(e.correct)&&e.correct>0&&e.correct<=1000&&Number.isFinite(e.at)&&e.at>=0}
   function record(game,correct=1,eventId){
     if(!VALID_GAME.test(game)||!Number.isSafeInteger(correct)||correct<1||correct>1000)return null;
     const id=eventId||deviceId()+':'+(global.crypto?.randomUUID?.()||Date.now()+'-'+Math.random().toString(36).slice(2));
-    if(typeof id!=='string'||id.length>159)return null;
+    if(typeof id!=='string'||!/^[A-Za-z0-9:_-]{1,159}$/.test(id))return null;
     const key=PREFIX+id;
     if(localStorage.getItem(key))return id;
     const event={version:2,id,game,correct,at:Date.now()};
@@ -33,14 +33,15 @@
   function legacyBaseline(){
     try{const old=JSON.parse(localStorage.getItem(KEY)||'{}');return Number.isSafeInteger(old.total)&&old.total>=0?old.total:0}catch{return 0}
   }
-  function exportBatch(limit=500){
+  function exportBatch(limit=500,offset=0){
     const events=[];
     for(let i=0;i<localStorage.length;i++){
       const key=localStorage.key(i);if(!key?.startsWith(PREFIX))continue;
       try{const e=JSON.parse(localStorage.getItem(key));if(valid(e)&&key===PREFIX+e.id)events.push(e)}catch{}
     }
     events.sort((a,b)=>a.at-b.at||a.id.localeCompare(b.id));
-    return {version:2,events:events.slice(0,Math.max(1,Math.min(500,limit)))};
+    const start=Math.max(0,Math.floor(Number(offset)||0));const size=Math.max(1,Math.min(500,Math.floor(Number(limit)||500)));
+    return {version:2,events:events.slice(start,start+size),nextOffset:start+size<events.length?start+size:null,totalEvents:events.length};
   }
   function importEvents(input){
     if(!Array.isArray(input))return {added:0,conflicts:0,rejected:0};
