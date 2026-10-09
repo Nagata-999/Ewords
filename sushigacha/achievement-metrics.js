@@ -15,8 +15,7 @@
    return {correct_total:Math.max(safeCount(historicalTotal),safeCount(ledgerTotal)),
      correct_vocabulary:vocabulary,toeic_correct:safeCount(games.toeic),login_streak:safeCount(loginStreak),
      daily_claims:safeCount(dailyClaims),gems_earned:safeCount(gemsEarned),avatar_items:safeCount(avatarItems),
-     giri_plays:safeCount(gameStats.giri_plays),giri_high_score:safeCount(gameStats.giri_high_score),
-     blast_plays:safeCount(gameStats.blast_plays),blast_perfect:safeCount(gameStats.blast_perfect)};
+     giri_high_score:safeCount(gameStats.giri_high_score),blast_high_score:safeCount(gameStats.blast_high_score)};
  }
  return Object.freeze({compute});
 });
