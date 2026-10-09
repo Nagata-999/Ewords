@@ -64,7 +64,7 @@
       if(reward.length||claimed.length){
         const badge=document.createElement('div');badge.style.cssText='font-size:12px;color:#8b5a1e;margin-top:5px';
         const pending=reward.filter(x=>!claimed.includes(x.id)&&!claimStatus(x.id));
-        const supported=['all_correct','streak','vocabulary','toeic'].includes(a.id);
+        const supported=['all_correct','streak','vocabulary','toeic','giri','blast'].includes(a.id);
         badge.textContent=(claimed.length?'✅ 受取済 '+claimed.length+'件　':'')+
           (pending.length?(supported?'🎁 未受取報酬 ':'🔧 報酬準備中 ')+pending.reduce((n,x)=>n+x.gems,0)+'ジェム':'');
         item.append(badge);
