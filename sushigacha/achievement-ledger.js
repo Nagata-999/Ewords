@@ -80,5 +80,11 @@
     if(added)global.dispatchEvent(new CustomEvent('sushi-achievement-change',{detail:{imported:added}}));
     return {added,conflicts,rejected};
   }
-  global.SushiAchievementLedger=Object.freeze({record,summary,legacyBaseline,learningTotal,migrationBaseline,ensureMigrationBaseline,exportBatch,importEvents});
+  function reconciledTotal(){
+    const base=migrationBaseline();const historical=base===null?Math.max(legacyBaseline(),learningTotal()):base;
+    const eventTotal=summary().total;
+    // Learning records may include the same post-migration answers; use as a floor, not an addition.
+    return Math.max(historical+eventTotal,learningTotal(),legacyBaseline());
+  }
+  global.SushiAchievementLedger=Object.freeze({record,summary,legacyBaseline,learningTotal,migrationBaseline,ensureMigrationBaseline,reconciledTotal,exportBatch,importEvents});
 })(window);
