@@ -1,0 +1,22 @@
+{
+  "batch_id": "new-entries-20261009-04",
+  "base_production_version": "v3.57",
+  "reference_full_release": "v3.63",
+  "reference_total": 13500,
+  "reference_json_files": 27,
+  "added_candidates": 42,
+  "prior_candidates": 118,
+  "total_staged_candidates": 160,
+  "projected_total_if_merged": 13660,
+  "checks": {
+    "candidate_id_duplicates": 0,
+    "candidate_headword_duplicates": 0,
+    "reference_dictionary_headword_collisions": 0,
+    "duplicate_definitions_same_part_of_speech": 0,
+    "empty_definitions": 0,
+    "missing_bilingual_examples": 0,
+    "empty_collocations": 0
+  },
+  "publication_status": "staged_not_merged",
+  "note": "Checked against v3.63 Library ZIP and canonical manifest shards; other unpublished changes from separate workflows not independently verified. No production write."
+}
