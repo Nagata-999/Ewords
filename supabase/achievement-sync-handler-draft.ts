@@ -36,6 +36,21 @@ export async function syncAchievementPage(db:Client,sushiId:string,input:SyncInp
       if(insertError)throw insertError;
     }
   }
+  // Re-read after the insert: concurrent writers may have raced on the same ID.
+  // ignoreDuplicates prevents overwrite, but without this check the losing
+  // writer could otherwise receive a false acknowledgment.
+  if(ids.length){
+    const {data:canonical,error:verifyError}=await db.from("sushi_achievement_events")
+      .select("event_id,game_id,correct_count,occurred_at").eq("sushi_id",sushiId).in("event_id",ids);
+    if(verifyError)throw verifyError;
+    const verified=new Map((canonical||[]).map((e:any)=>[e.event_id,e]));
+    for(const event of normalized.events){
+      const row:any=verified.get(event.id);
+      if(!row||row.game_id!==event.game||row.correct_count!==event.correct||
+         new Date(row.occurred_at).getTime()!==event.at)
+        throw new Error("event_id_conflict_or_missing");
+    }
+  }
   // Keyset pagination avoids offset drift when another device adds new events.
   // Cursor is event_id, the stable primary-key component.
   const cursor=input.cursor??null;
