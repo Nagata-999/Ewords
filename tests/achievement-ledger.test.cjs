@@ -83,3 +83,18 @@ test('matching repeated imports are idempotent',()=>{
  assert.equal(ledger.importEvents([event('ok:1',2)]).added,0);
  assert.equal(ledger.summary().total,2);
 });
+
+test('timestamp beyond JavaScript Date range is rejected before import',()=>{
+ const {ledger}=setup();
+ const bad={...event('too-far'),at:8640000000000001};
+ const result=ledger.importEvents([bad,event('neighbor')]);
+ assert.equal(result.added,0);assert.equal(result.rejected,1);
+ assert.equal(ledger.summary().total,0);
+});
+test('conflicting timestamp for an existing ID is rejected',()=>{
+ const {ledger}=setup();
+ ledger.importEvents([event('same:1')]);
+ const result=ledger.importEvents([{...event('same:1'),at:456},event('new:2')]);
+ assert.equal(result.conflicts,1);assert.equal(result.added,0);
+ assert.equal(ledger.summary().total,1);
+});
