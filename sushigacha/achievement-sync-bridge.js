@@ -47,21 +47,21 @@
    const response=await fetch(URL,{method:'POST',headers:{'Content-Type':'application/json',apikey:KEY},body:JSON.stringify({action:'achievement_claim',sushi_id,pin,threshold,category})});
    const data=await response.json().catch(()=>({error:'invalid_json'}));
    if(!response.ok||data.ok!==true)throw new Error(data.error||'achievement_claim_failed');
-   // The server already committed this reward. Update the visible local ledger
-   // from the server receipt; NEVER invoke awardGems (which would pay again).
-   if(!data.already_claimed&&Number.isSafeInteger(data.gems)&&data.gems>0){
+   // Use the server's authoritative wallet snapshot, including for a previously
+   // claimed reward. Do not add gems a second time on the client.
+   if(data.wallet&&Number.isSafeInteger(data.wallet.gems)&&Array.isArray(data.wallet.gemEvents)){
      const key='sushitan_login_bonus_v1';
      const ledger=JSON.parse(localStorage.getItem(key)||'{}');
-     const events=Array.isArray(ledger.gemEvents)?ledger.gemEvents:[];
-     if(!events.some(e=>e?.id===data.claim_id)){
-       events.push({id:data.claim_id,type:'earn',amount:data.gems,source:'achievement',at:Date.now()});
-       ledger.gemEvents=events;
-       ledger.gems=Math.max(0,Number(ledger.gems)||0)+data.gems;
-       ledger.gemSyncBase=ledger.gems;
-       ledger.gemSyncBaseAt=Date.now();
-       localStorage.setItem(key,JSON.stringify(ledger));
-       root.dispatchEvent(new CustomEvent('sushi-gem-change'));
-     }
+     const remoteIds=new Set(data.wallet.gemEvents.map(e=>e?.id).filter(Boolean));
+     const pending=(Array.isArray(ledger.gemEvents)?ledger.gemEvents:[]).filter(e=>e?.id&&!remoteIds.has(e.id));
+     // Preserve local events awaiting sync, while using the credited server balance.
+     const delta=pending.reduce((sum,e)=>sum+(e.type==='earn'?1:e.type==='spend'?-1:0)*Math.max(0,Number(e.amount)||0),0);
+     ledger.gemEvents=[...data.wallet.gemEvents,...pending].slice(-1000);
+     ledger.gems=Math.max(0,data.wallet.gems+delta);
+     ledger.gemSyncBase=ledger.gems;
+     ledger.gemSyncBaseAt=Date.now();
+     localStorage.setItem(key,JSON.stringify(ledger));
+     root.dispatchEvent(new CustomEvent('sushi-gem-change'));
    }
    // Synchronize the receipt to the other devices using the existing merge.
    await root.SushiProfileSync?.syncNow?.().catch(error=>console.warn('Gem sync pending:',error.message));
