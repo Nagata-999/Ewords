@@ -62,3 +62,12 @@ test('rejects conflicting server records without reporting success',async()=>{
  local.importEvents=()=>({added:0,conflicts:1,rejected:0});
  await assert.rejects(synchronize(local,async()=>({achievements:{synced:true,accepted:['local:1'],events:[e('local:1')],nextCursor:null}})),/invalid_server_events/);
 });
+
+test('rejects malformed remote page before any import',async()=>{
+ const local=ledger([]);
+ await assert.rejects(synchronize(local,async()=>({achievements:{synced:true,accepted:[],events:[{version:2,id:'x',game:'sushitan',correct:-5,at:100}],nextCursor:null}})),/invalid_server_events/);
+ assert.equal(local.values().length,0);
+});
+test('rejects oversized client page configuration',async()=>{
+ await assert.rejects(synchronize(ledger([]),async()=>({}),{pageSize:501}),/invalid_sync_limits/);
+});
