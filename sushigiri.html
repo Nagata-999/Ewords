@@ -1383,6 +1383,7 @@ h1 span{color:#e44b2a !important;text-shadow:none !important}
     </div>
   </div>
 
+<script src="sushigacha/achievement-game-stats.js?v=20261009-1"></script>
 <script src="sushigacha/avatar.js?v=20261007-1"></script>
 <script src="sushigacha/avatar-engine.js?v=20261008-12"></script>
 <script src="sushigacha/avatar-state.js?v=20261007-1"></script>
@@ -1970,6 +1971,9 @@ window.addEventListener("load",loadTopMenuRanking);
 
 function end(){
  const completedRound=running;
+ if(completedRound){
+   window.SushiAchievementGameStats?.record('giri','giri:'+Date.now()+':'+Math.random().toString(36).slice(2),{score:Math.max(0,Math.floor(score))});
+ }
  learningRoundActive=false;
  running=false;
  stopSushiSlashBgm();
