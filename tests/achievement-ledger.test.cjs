@@ -46,3 +46,21 @@ test('migration baseline stays fixed after new events',()=>{
  assert.equal(ledger.migrationBaseline(),25);
  assert.equal(ledger.reconciledTotal(),27);
 });
+
+test('baseline snapshot before a learning event prevents first-answer double count',()=>{
+ const {ledger,store}=setup();
+ ledger.ensureMigrationBaseline();
+ store.set('sushitan_learning_v1:event:answer1',JSON.stringify({version:1,id:'answer1',correct:true,count:1}));
+ ledger.record('sushitan',1,'answer:1');
+ assert.equal(ledger.migrationBaseline(),0);
+ assert.equal(ledger.reconciledTotal(),1);
+});
+test('legacy learning answers remain in the baseline while new answers count once',()=>{
+ const previous={version:1,id:'old1',correct:true,count:17};
+ const {ledger,store}=setup({'sushitan_learning_v1:event:old1':JSON.stringify(previous)});
+ ledger.ensureMigrationBaseline();
+ store.set('sushitan_learning_v1:event:new1',JSON.stringify({version:1,id:'new1',correct:true,count:1}));
+ ledger.record('sushitan',1,'new:1');
+ assert.equal(ledger.migrationBaseline(),17);
+ assert.equal(ledger.reconciledTotal(),18);
+});
