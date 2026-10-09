@@ -5,7 +5,7 @@
   "status": "staged_candidates_not_merged",
   "id_policy": "Temporary candidate IDs; allocate permanent sw-xxxxx IDs after verifying the current production max ID at merge time.",
   "target": "50,000 headwords",
-  "count": 122,
+  "count": 123,
   "entries": [
     {
       "id": "candidate-20261009-001",
@@ -6461,6 +6461,59 @@
         },
         {
           "text": "infer causality"
+        }
+      ],
+      "related": {
+        "synonyms": [],
+        "antonyms": []
+      },
+      "usage_note": "",
+      "tags": [
+        "candidate-auto-additions-20261009-batch04"
+      ],
+      "status": "candidate"
+    },
+    {
+      "id": "candidate-20261009-123",
+      "word": "contingency",
+      "lemma": "contingency",
+      "search_terms": [
+        "contingency"
+      ],
+      "pronunciation": {
+        "ipa_us": null,
+        "ipa_uk": null
+      },
+      "level": {
+        "cefr": "C1",
+        "eiken": "1"
+      },
+      "frequency": 2,
+      "parts_of_speech": [
+        {
+          "pos": "noun",
+          "meanings": [
+            {
+              "ja": "不測の事態",
+              "definition": "a possible future event that requires preparation",
+              "examples": [
+                {
+                  "en": "The team prepared for unexpected contingencies.",
+                  "ja": "チームは不測の事態に備えた。"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "forms": {},
+      "phrases": [],
+      "collocations": [
+        {
+          "text": "contingency plan"
+        },
+        {
+          "text": "prepare for contingencies"
         }
       ],
       "related": {
