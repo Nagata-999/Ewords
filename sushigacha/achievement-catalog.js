@@ -23,6 +23,25 @@
     {id:'resilience',title:'不屈の精神',metric:'repeat_mistake_recovered',threshold:1,points:100,gems:100,secret:true},
     {id:'comeback',title:'奇跡の復活',metric:'comeback_streak',threshold:1,points:100,gems:100,secret:true}
   ];
+  const descriptions=Object.freeze({
+    vocabulary:n=>`すし単で英単語を累計${n.toLocaleString()}問正解する`,
+    all_correct:n=>`対象の英語学習ゲームで累計${n.toLocaleString()}問正解する`,
+    review:n=>`苦手単語の復習で累計${n.toLocaleString()}問正解する`,
+    streak:n=>`ログインボーナスを${n.toLocaleString()}日連続で達成する`,
+    daily:n=>`デイリークエストの報酬を累計${n.toLocaleString()}回受け取る`,
+    gems:n=>`ジェムを累計${n.toLocaleString()}個獲得する`,
+    avatar:n=>`アバターのアイテムを${n.toLocaleString()}種類集める`,
+    giri:n=>`すし斬りで1回のプレイ中に${n.toLocaleString()}点以上獲得する`,
+    blast:n=>`ブロックブラすしで1回のプレイ中に${n.toLocaleString()}点以上獲得する`,
+    toeic:n=>`すしTOEICで累計${n.toLocaleString()}問正解する`,
+    combo:n=>`英語の問題に${n.toLocaleString()}問連続で正解する`,
+    first_purchase:()=> 'ジェムを使って初めて買い物をする',
+    first_outfit:()=> 'アバターの衣装を初めて変更する',
+    all_games_day:()=> '同じ日に5種類のゲームで学習する',
+    resilience:()=> '繰り返し間違えた問題を正解する',
+    comeback:()=> '連続正解が途切れた後に再び連続正解する'
+  });
+  function describe(id,threshold){return descriptions[id]?.(threshold)||'実績条件を達成する'}
   const definitions=Object.freeze([...catalog,...oneTime]);
   function evaluate(metrics={}){
     return definitions.map(d=>{
@@ -34,5 +53,5 @@
         claimIds:reached.map(s=>`achievement:${d.id}:${s.threshold}`)};
     });
   }
-  global.SushiAchievementCatalog=Object.freeze({definitions,evaluate});
+  global.SushiAchievementCatalog=Object.freeze({definitions,evaluate,describe});
 })(window);
