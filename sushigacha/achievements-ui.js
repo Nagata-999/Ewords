@@ -13,7 +13,9 @@
       if(e?.version===1&&e.correct===true&&e.id===key.slice(27)&&Number.isSafeInteger(e.count)&&e.count>0)correct+=e.count;
     }}catch{}
     let login={};try{login=JSON.parse(localStorage.getItem('sushitan_login_bonus_v1')||'{}')||{}}catch{}
-    const ledger=window.SushiAchievementLedger?.summary();const newTotal=ledger?.total||0;const total=Math.max(s.total+newTotal,correct);return {correct_total:total,correct_vocabulary:total,login_streak:Number(login.loginBonusStreak)||0};
+    const ledger=window.SushiAchievementLedger?.summary();const newTotal=ledger?.total||0;// Learning events and achievement events can describe the same answer. Never add overlapping streams.
+    // Conservative until a canonical migration baseline and server reconciliation exist.
+    const total=Math.max(s.total,correct,newTotal);return {correct_total:total,correct_vocabulary:total,login_streak:Number(login.loginBonusStreak)||0};
   }
   function renderCatalog(){
     const box=document.getElementById('sushiAchievementList');
@@ -65,5 +67,6 @@
     trigger.onclick=show;bar.append(trigger);refresh();
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+  window.addEventListener('sushi-achievement-sync',refresh);window.addEventListener('sushi-learning-change',refresh);
   window.addEventListener('storage',refresh);window.addEventListener('focus',refresh);window.addEventListener('sushi-achievement-change',refresh);
 })();
