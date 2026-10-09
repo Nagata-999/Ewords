@@ -71,6 +71,21 @@
       hint.style.cssText='font-size:12px;color:#80694c;margin-top:3px';
       hint.textContent=hidden?'報酬：？？？':(a.next?'次の報酬：'+target.gems+'ジェム':'全段階達成！');
       item.append(hint);
+      if(!hidden){
+        const stagesBox=document.createElement('div');
+        stagesBox.style.cssText='display:flex;flex-wrap:wrap;gap:5px;margin-top:8px';
+        for(const stage of stages){
+          const id='achievement:'+a.id+':'+stage.threshold;
+          const achieved=a.value>=stage.threshold;
+          const received=claimStatus(id);
+          const chip=document.createElement('span');
+          chip.style.cssText='font-size:11px;border-radius:7px;padding:4px 7px;border:1px solid '+(received?'#9bc6a1':achieved?'#e9b74e':'#ddd4c7')+';background:'+(received?'#e7f6e9':achieved?'#fff1c9':'#f5f2ec')+';color:#554635';
+          chip.textContent=(received?'✅':achieved?'🎁':'🔒')+' '+stage.threshold.toLocaleString()+' / '+stage.gems+'💎';
+          chip.title=received?'受取済み':achieved?'達成済み・報酬を確認':'未達成';
+          stagesBox.append(chip);
+        }
+        item.append(stagesBox);
+      }
       const reward=window.SushiAchievementRewards?.available?.(achievementMetrics(),window.SushiAchievementCatalog.definitions,[])?.filter(x=>x.id.startsWith('achievement:'+a.id+':'))||[];
       const claimed=verifiedReceipts?.ids.filter(id=>id.startsWith('achievement:'+a.id+':'))||[];
       if(reward.length||claimed.length){
