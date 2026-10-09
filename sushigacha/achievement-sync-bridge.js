@@ -47,8 +47,24 @@
    const response=await fetch(URL,{method:'POST',headers:{'Content-Type':'application/json',apikey:KEY},body:JSON.stringify({action:'achievement_claim',sushi_id,pin,threshold,category})});
    const data=await response.json().catch(()=>({error:'invalid_json'}));
    if(!response.ok||data.ok!==true)throw new Error(data.error||'achievement_claim_failed');
-   // Refresh existing gem ledger through its established merge logic.
-   await root.SushiProfileSync?.syncNow?.();
+   // The server already committed this reward. Update the visible local ledger
+   // from the server receipt; NEVER invoke awardGems (which would pay again).
+   if(!data.already_claimed&&Number.isSafeInteger(data.gems)&&data.gems>0){
+     const key='sushitan_login_bonus_v1';
+     const ledger=JSON.parse(localStorage.getItem(key)||'{}');
+     const events=Array.isArray(ledger.gemEvents)?ledger.gemEvents:[];
+     if(!events.some(e=>e?.id===data.claim_id)){
+       events.push({id:data.claim_id,type:'earn',amount:data.gems,source:'achievement',at:Date.now()});
+       ledger.gemEvents=events;
+       ledger.gems=Math.max(0,Number(ledger.gems)||0)+data.gems;
+       ledger.gemSyncBase=ledger.gems;
+       ledger.gemSyncBaseAt=Date.now();
+       localStorage.setItem(key,JSON.stringify(ledger));
+       root.dispatchEvent(new CustomEvent('sushi-gem-change'));
+     }
+   }
+   // Synchronize the receipt to the other devices using the existing merge.
+   await root.SushiProfileSync?.syncNow?.().catch(error=>console.warn('Gem sync pending:',error.message));
    await receipts().catch(()=>null);
    root.dispatchEvent(new CustomEvent('sushi-achievement-claimed',{detail:data}));
    return data;
