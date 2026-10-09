@@ -66,9 +66,17 @@
     return {version:2,events:events.slice(start,start+size),nextOffset:start+size<events.length?start+size:null,totalEvents:events.length};
   }
   function exportAllPages(pageSize=500){
-    const pages=[];let offset=0;
-    do{const page=exportBatch(pageSize,offset);pages.push(page);if(page.nextOffset===null)break;offset=page.nextOffset}while(pages.length<1000);
-    return pages;
+    // Snapshot once: stable pagination even when new answers arrive during export.
+    const events=[];
+    for(let i=0;i<localStorage.length;i++){
+      const key=localStorage.key(i);if(!key?.startsWith(PREFIX))continue;
+      try{const e=JSON.parse(localStorage.getItem(key));if(valid(e)&&key===PREFIX+e.id)events.push(e)}catch{}
+    }
+    events.sort((a,b)=>a.at-b.at||a.id.localeCompare(b.id));
+    const size=Math.max(1,Math.min(500,Math.floor(Number(pageSize)||500)));
+    const pages=[];
+    for(let offset=0;offset<events.length;offset+=size)pages.push({version:2,events:events.slice(offset,offset+size),nextOffset:offset+size<events.length?offset+size:null,totalEvents:events.length});
+    return pages.length?pages:[{version:2,events:[],nextOffset:null,totalEvents:0}];
   }
   function importEvents(input){
     if(!Array.isArray(input))return {added:0,conflicts:0,rejected:0};
