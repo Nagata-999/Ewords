@@ -15,6 +15,15 @@
       loginStreak:Number(login.loginBonusStreak)||0
     })||{correct_total:Math.max(s.total,total),correct_vocabulary:0,login_streak:0};
   }
+  // Server receipts are supplied only after an authenticated response.
+  // Never persist a locally guessed claim or award gems from this UI.
+  let verifiedReceipts=null;
+  function setServerReceipts(response){
+    const parsed=window.SushiAchievementReceipts?.parse?.(response)||null;
+    verifiedReceipts=parsed;
+    refresh();
+    return !!parsed;
+  }
   function renderCatalog(){
     const box=document.getElementById('sushiAchievementList');
     if(!box||!window.SushiAchievementCatalog)return;
@@ -24,7 +33,14 @@
       const name=a.secret&&!a.reached?'???':a.title;
       item.textContent=(a.reached?'🏅 ':'🔒 ')+name+'  '+a.reached+'/'+a.stageCount+(a.next?'  ('+Math.min(a.value,a.next.threshold)+' / '+a.next.threshold+')':'  COMPLETE');
       const reward=window.SushiAchievementRewards?.available?.(achievementMetrics(),window.SushiAchievementCatalog.definitions,[])?.filter(x=>x.id.startsWith('achievement:'+a.id+':'))||[];
-      if(reward.length){const badge=document.createElement('div');badge.style.cssText='font-size:12px;color:#8b5a1e;margin-top:5px';badge.textContent='🎁 達成報酬 '+reward.reduce((n,x)=>n+x.gems,0)+'ジェム（受取機能は準備中）';item.append(badge)}
+      const claimed=verifiedReceipts?.ids.filter(id=>id.startsWith('achievement:'+a.id+':'))||[];
+      if(reward.length||claimed.length){
+        const badge=document.createElement('div');badge.style.cssText='font-size:12px;color:#8b5a1e;margin-top:5px';
+        const pending=reward.filter(x=>!claimed.includes(x.id));
+        badge.textContent=(claimed.length?'✅ 受取済 '+claimed.length+'件　':'')+
+          (pending.length?'🎁 未受取報酬 '+pending.reduce((n,x)=>n+x.gems,0)+'ジェム（受取機能は準備中）':'');
+        item.append(badge);
+      }
       box.append(item);
     }
   }
@@ -86,7 +102,7 @@
     const s=state();save({...s,total:s.total+n});return state();
   }
   window.SushiAchievementSound?.setMuted?.(localStorage.getItem('sushitan_achievement_muted')==='1');
-  window.SushiAchievements={state,addCorrect,show,refresh};
+  window.SushiAchievements={state,addCorrect,show,refresh,setServerReceipts};
   function init(){
     const bar=document.getElementById('sushiTaskbar');if(!bar)return;
     const trigger=document.createElement('button');trigger.type='button';trigger.id='sushiAchievementOpen';trigger.title='学習ランク';trigger.textContent='🏆';trigger.style.cssText='position:absolute;top:0;right:0;width:25px;height:25px;z-index:2;font-size:14px;border-radius:0 0 0 10px;background:#ffffff77!important';
