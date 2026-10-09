@@ -55,10 +55,33 @@
     }
     refresh();
   }
+  let celebrationTimer=null;
+  function celebrate(unlocks){
+    if(!unlocks.length)return;
+    let toast=document.getElementById('sushiAchievementToast');
+    if(!toast){
+      toast=document.createElement('div');toast.id='sushiAchievementToast';
+      toast.setAttribute('role','status');toast.setAttribute('aria-live','polite');
+      toast.style.cssText='position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:100011;background:linear-gradient(125deg,#fff4c4,#fff);color:#533000;padding:15px 22px;border:2px solid #e8ad32;border-radius:18px;box-shadow:0 8px 25px #0003;font:bold 16px system-ui;text-align:center;max-width:min(90vw,420px);pointer-events:none';
+      document.body.append(toast);
+    }
+    toast.textContent='🏆 実績解除！ '+unlocks.map(x=>x.title+' ('+x.threshold.toLocaleString()+')').join('・');
+    toast.animate?.([{opacity:0,transform:'translate(-50%,-15px) scale(.9)'},{opacity:1,transform:'translate(-50%,0) scale(1)'}],{duration:320,easing:'ease-out'});
+    clearTimeout(celebrationTimer);celebrationTimer=setTimeout(()=>toast.remove(),3500);
+  }
   // Increment only for verified correct answers; caller must ensure one call per answer.
   function addCorrect(game,n=1){
     if(typeof game!=='string'||!game||!Number.isSafeInteger(n)||n<1||n>1000)return state();
-    if(window.SushiAchievementLedger){window.SushiAchievementLedger.record(game,n);refresh();return state()}const s=state();save({...s,total:s.total+n});return state();
+    const before=achievementMetrics();
+    if(window.SushiAchievementLedger){
+      const recorded=window.SushiAchievementLedger.record(game,n);
+      if(recorded){
+        const unlocked=window.SushiAchievementMilestones?.reachedBetween?.(before,achievementMetrics(),window.SushiAchievementCatalog?.definitions)||[];
+        celebrate(unlocked);
+      }
+      refresh();return state();
+    }
+    const s=state();save({...s,total:s.total+n});return state();
   }
   window.SushiAchievements={state,addCorrect,show,refresh};
   function init(){
