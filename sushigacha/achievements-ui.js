@@ -15,7 +15,9 @@
     let login={};try{login=JSON.parse(localStorage.getItem('sushitan_login_bonus_v1')||'{}')||{}}catch{}
     const ledger=window.SushiAchievementLedger?.summary();const newTotal=ledger?.total||0;// Learning events and achievement events can describe the same answer. Never add overlapping streams.
     // Conservative until a canonical migration baseline and server reconciliation exist.
-    const total=Math.max(s.total,correct,newTotal);return {correct_total:total,correct_vocabulary:total,login_streak:Number(login.loginBonusStreak)||0};
+    const baseline=window.SushiAchievementLedger?.migrationBaseline?.();
+    // A frozen baseline is only a provisional historical floor, not an exact cross-device total.
+    const total=baseline===null||baseline===undefined?Math.max(s.total,correct,newTotal):Math.max(s.total,correct,baseline+newTotal);return {correct_total:total,correct_vocabulary:total,login_streak:Number(login.loginBonusStreak)||0};
   }
   function renderCatalog(){
     const box=document.getElementById('sushiAchievementList');
