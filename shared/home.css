@@ -1,0 +1,133 @@
+/* Home page: one palette, shared spacing, and clear learning priorities. */
+:root {
+  --bg: #f5f7f6;
+  --card: #fff;
+  --line: #dde5e1;
+  --text: #19352f;
+  --muted: #64776f;
+  --teal: #176b59;
+  --orange: #176b59;
+  --shadow: 0 6px 24px rgb(25 53 47 / 4%);
+}
+html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+body { background: var(--bg); color: var(--text); line-height: 1.6; }
+button, input { font: inherit; }
+a, button, summary { -webkit-tap-highlight-color: transparent; }
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible {
+  outline: 3px solid var(--teal); outline-offset: 4px;
+}
+.page { max-width: 1120px; padding: 28px 32px 48px; }
+.home-topbar { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; padding: 0 56px 24px 0; border-bottom: 1px solid var(--line); }
+.brand-mark { padding: 10px 0; background: none; border: 0; color: var(--teal); font-size: 11px; letter-spacing: .12em; white-space: nowrap; }
+.home-topbar [data-sushi-player] { width: 260px; max-width: 100%; }
+.home-topbar .sushi-player-profile { margin: 0; max-width: none; padding: 9px 14px; border-color: var(--line); border-radius: 12px; background: white; color: var(--muted); }
+.home-topbar .sushi-player-profile summary { min-height: 24px; }
+.home-intro { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; padding: 44px 0 40px; }
+.hero { max-width: none; padding: 0; }
+.title { gap: 16px; margin: 0 0 22px; }
+.title-icon { display: grid; place-items: center; flex: 0 0 72px; height: 84px; font-size: 44px; background: #e9f2ee; border-radius: 20px; }
+.title-main { font-size: clamp(48px, 5.5vw, 68px); line-height: 1.1; letter-spacing: -.06em; font-weight: 900; }
+.title-sub { margin-top: 12px; color: var(--text); font-size: 19px; font-weight: 700; letter-spacing: .02em; }
+.lead { font-size: 15px; line-height: 1.9; color: var(--muted); margin: 0 0 10px; }
+.hero-meta { font-size: 11px; color: var(--muted); margin: 0 0 24px; }
+.hero-cta { display: inline-flex; justify-content: space-between; gap: 36px; align-items: center; min-height: 48px; padding: 12px 20px; border-radius: 12px; color: #fff; background: var(--teal); font-size: 14px; font-weight: 750; text-decoration: none; transition: background .18s; }
+.hero-cta:hover { background: #105141; }
+.hero-cta span { font-size: 20px; }
+.eyebrow { display: block; font-size: 10px; font-weight: 800; letter-spacing: .16em; color: var(--teal); margin-bottom: 6px; }
+#sharedLearning { margin: 0; padding: 26px; border-radius: 20px; border: 1px solid var(--line); background: #fff; box-shadow: var(--shadow); }
+.review-heading h2 { margin: 0; font-size: 23px; letter-spacing: .02em; }
+.review-heading p { color: var(--muted); font-size: 12px; margin: 6px 0 20px; }
+#sharedLearning .learning-counts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin: 0 0 18px; }
+#sharedLearning .learning-counts > span { white-space: normal; font-size: 10px; color: var(--muted); padding: 0 10px; border-left: 1px solid var(--line); }
+#sharedLearning .learning-counts > span:first-child { padding-left: 0; border: 0; }
+#sharedLearning .learning-counts b { display: block; font-size: 30px; line-height: 1.35; color: var(--text); font-variant-numeric: tabular-nums; }
+#sharedLearning .learning-counts small { font-size: 10px; margin-left: 4px; color: var(--muted); font-weight: 500; }
+#sharedLearning .weak-review-start { margin: 0; min-height: 46px; background: #e9f2ee; color: var(--teal); border-radius: 10px; font-size: 13px; }
+#sharedLearning .weak-review-start:hover { background: #dcebe4; }
+#sharedLearning details { margin-top: 14px; font-size: 12px; color: var(--muted); }
+#sharedLearning summary { padding: 6px 0; font-weight: 500; }
+#sharedLearning details a { margin: 4px 4px 4px 0; text-decoration: none; border-color: var(--line); background: var(--bg); }
+.section { margin-top: 36px; padding: 0; background: none; border: 0; border-radius: 0; box-shadow: none; }
+.section h2 { font-size: 23px; line-height: 1.4; letter-spacing: .01em; margin: 0 0 12px; }
+.section > p { font-size: 14px; color: var(--muted); }
+.games-section { margin-top: 0; border-top: 1px solid var(--line); padding-top: 32px; }
+.section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+.section-heading h2 { margin: 0; }
+.section-note { color: var(--muted); font-size: 12px; }
+.grid { gap: 16px; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
+.card { min-height: 116px; padding: 24px; align-items: flex-start; text-align: left; border-radius: 16px; border-color: var(--line); background: white; box-shadow: none; font-size: 19px; font-weight: 800; }
+.card small { font-size: 12px; font-weight: 500; color: var(--muted); }
+.card:hover { border-color: #84b2a3; box-shadow: 0 8px 22px rgb(25 53 47 / 7%); transform: translateY(-2px); }
+.game-item { display: grid; gap: 0; border: 1px solid var(--line); background: #fff; border-radius: 16px; overflow: hidden; }
+.game-item .card { border: 0; border-radius: 0; min-height: 110px; }
+.game-item .card:hover { background: #f0f6f3; transform: none; box-shadow: none; }
+.game-item .game-info-toggle { width: 100%; min-height: 36px; height: auto; align-self: stretch; border: 0; border-top: 1px solid #edf1ee; border-radius: 0; box-shadow: none; font-size: 10px; color: var(--muted); background: #fff; }
+.game-info-toggle::before { content: '遊び方・学習内容 '; font-size: 11px; font-weight: 500; }
+.game-item .game-info-toggle:hover, .game-item.open .game-info-toggle { background: #edf5f1; color: var(--teal); transform: none; }
+.game-info { border: 0; border-radius: 0; box-shadow: none; background: #f9fbfa; }
+.game-info h4 { color: var(--teal); }
+.article-category { margin-top: 28px; }
+.article-category-head { align-items: baseline; flex-wrap: wrap; border-color: var(--line); }
+.article-category-head h3 { font-size: 17px; }
+.article-category-head span { font-weight: 500; }
+.article-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.article { background: #fff; border-color: var(--line); border-radius: 14px; padding: 20px; }
+.article strong { font-size: 14px; line-height: 1.6; }
+.article span { font-size: 12px; line-height: 1.7; }
+.about-link { background: #e9f2ee; border: 0; color: var(--teal); font-size: 13px; border-radius: 10px; }
+.dictionary-lab { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; margin-top: 36px; padding: 20px 0; border-top: 1px solid var(--line); color: var(--muted); }
+.dictionary-lab > div { display: flex; gap: 12px; align-items: center; }
+.lab-label { border: 1px solid var(--line); border-radius: 6px; padding: 2px 6px; font-size: 10px; }
+.dictionary-lab a { font-size: 13px; text-underline-offset: 4px; }
+.dictionary-lab p { font-size: 12px; margin: 0; }
+.footer { margin-top: 0; border-color: var(--line); line-height: 2.4; }
+.footer a { font-weight: 500; }
+.hamburger-btn { width: 44px; height: 44px; top: 26px; right: max(16px, calc((100vw - 1056px) / 2)); border-radius: 12px; box-shadow: none; }
+.hamburger-btn span { width: 19px; height: 2px; background: var(--teal); }
+.side-menu { background: var(--bg); }
+.menu-group-title { color: var(--teal); }
+.menu-link { border-color: var(--line); font-size: 14px; }
+.install-app, .login-bonus { background: #fff; border-color: var(--line); box-shadow: none; border-radius: 16px; }
+.install-app-btn { background: var(--teal); box-shadow: none; }
+.home-topbar .sushi-player-profile input { border-color: var(--line); }
+@media (max-width: 800px) {
+  .page { padding: 20px 24px 36px; }
+  .home-intro { gap: 24px; grid-template-columns: 1fr 1fr; padding: 32px 0; }
+  .title { gap: 10px; }
+  .title-icon { flex-basis: 48px; height: 64px; font-size: 30px; border-radius: 14px; }
+  .title-main { font-size: 52px; }
+  .title-sub { font-size: 15px; }
+  .hero-meta { line-height: 1.8; }
+  #sharedLearning { padding: 20px; }
+  .grid, .article-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hamburger-btn { top: 18px; right: 20px; }
+  .section-note { display: none; }
+}
+@media (max-width: 600px) {
+  .page { padding: 16px 18px 32px; }
+  .home-topbar { flex-wrap: wrap; padding: 0 0 16px; gap: 12px; }
+  .brand-mark { font-size: 10px; padding-right: 44px; }
+  .home-topbar [data-sushi-player] { width: 100%; }
+  .home-intro { grid-template-columns: 1fr; padding: 28px 0; gap: 28px; }
+  .title-main { font-size: 58px; }
+  .title-icon { flex-basis: 58px; height: 72px; font-size: 36px; }
+  .title-sub { font-size: 17px; }
+  .lead { font-size: 14px; }
+  .hero-meta { margin-bottom: 18px; }
+  .hero-cta { width: 100%; }
+  #sharedLearning { padding: 22px; }
+  #sharedLearning .learning-counts > span { font-size: 11px; }
+  .grid { gap: 10px; }
+  .card { padding: 16px; font-size: 16px; min-height: 110px; }
+  .card small { font-size: 11px; overflow-wrap: anywhere; }
+  .game-item .card { padding: 16px 12px; }
+  .game-item .game-info-toggle { min-height: 44px; }
+  .section h2 { font-size: 21px; }
+  .article-grid { grid-template-columns: 1fr; gap: 10px; }
+  .hamburger-btn { top: 14px; right: 18px; }
+  .dictionary-lab { gap: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
