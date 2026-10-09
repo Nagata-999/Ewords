@@ -145,7 +145,11 @@
   function init(){
     const bar=document.getElementById('sushiTaskbar');if(!bar)return;
     const trigger=document.getElementById('sushiAchievementOpen');
-    if(trigger)trigger.onclick=show;
+    if(trigger){
+      // Remove the obsolete floating icon if a cached script injected it.
+      for(const child of [...trigger.children])if(child.id==='sushiAchievementOpen')child.remove();
+      trigger.onclick=show;
+    }
     refresh();
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
