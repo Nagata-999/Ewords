@@ -9,7 +9,11 @@
     let login={};try{login=JSON.parse(localStorage.getItem('sushitan_login_bonus_v1')||'{}')||{}}catch{}
     const s=state();
     const total=window.SushiAchievementLedger?.reconciledTotal?.()??s.total;
-    const games=window.SushiAchievementLedger?.summary?.().games||{};const vocabulary=['sushitan','shinotan','antonitan','idiom','sushi_idiom'].reduce((n,k)=>n+(games[k]||0),0);return {correct_total:Math.max(s.total,total),correct_vocabulary:vocabulary,login_streak:Number(login.loginBonusStreak)||0};
+    const games=window.SushiAchievementLedger?.summary?.().games||{};
+    return window.SushiAchievementMetrics?.compute?.({
+      historicalTotal:s.total,ledgerTotal:total,byGame:games,
+      loginStreak:Number(login.loginBonusStreak)||0
+    })||{correct_total:Math.max(s.total,total),correct_vocabulary:0,login_streak:0};
   }
   function renderCatalog(){
     const box=document.getElementById('sushiAchievementList');
