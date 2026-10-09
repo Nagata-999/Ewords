@@ -15,7 +15,12 @@
    if(!AudioContext)return false;
    try{
      context=context||new AudioContext();
-     if(context.state!=='running')return false;
+     if(context.state!=='running'){
+       // Browser autoplay policies may suspend newly created contexts.
+       // Resume only from the caller's user gesture, never in background.
+       context.resume?.().catch(()=>{});
+       return false;
+     }
      const now=context.currentTime;
      const tones=[659.25,783.99,987.77];
      tones.forEach((frequency,i)=>{
