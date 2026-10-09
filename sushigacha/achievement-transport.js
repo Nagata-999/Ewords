@@ -18,10 +18,12 @@
    do{
      if(rounds++>=maxPages)throw new Error('too_many_server_pages');
      const events=uploadIndex<pages.length?pages[uploadIndex].events:[];
-     const response=await request({action:'achievement_sync',achievements:{version:2,events,cursor,limit:Math.min(500,Math.max(1,pageSize))}});
+     const response=await request({action:'achievement_sync',achievements:{version:2,events,cursor,limit:Math.min(500,Math.max(1,pageSize)),baseline:ledger.ensureMigrationBaseline()}});
      if(response?.achievements?.synced!==true||!Array.isArray(response.achievements.events)||!Array.isArray(response.achievements.accepted))
        throw new Error('achievement_server_not_ready');
      if(response.achievements.events.length>500)throw new Error('oversized_server_page');
+     if(!Number.isSafeInteger(response.achievements.baseline)||response.achievements.baseline<0||response.achievements.baseline>1000000000)throw new Error('invalid_server_baseline');
+     ledger.mergeBaseline(response.achievements.baseline);
      const ackIds=response.achievements.accepted;
      if(ackIds.some(id=>typeof id!=='string'||!/^[A-Za-z0-9:_-]{1,159}$/.test(id)))throw new Error('invalid_server_acknowledgment');
      const accepted=new Set(ackIds);
