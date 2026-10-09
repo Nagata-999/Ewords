@@ -89,7 +89,7 @@ function renderQ(){
 function toggleJP(){jp=!jp;$("questionJa").classList.toggle("hidden",!jp);$("jpToggle").textContent=jp?"日本語 ON":"日本語 OFF"}
 function answer(btn,ok,q){
  if(locked)return;locked=true;[...$("choices").children].forEach(b=>b.disabled=true);btn.classList.add(ok?"correct":"wrong");
- if(ok){score++;$("judge").textContent="✓ CORRECT"}else{$("judge").textContent="✕ NOT QUITE";let cor=q.choices[q.answer];[...$("choices").children].forEach(b=>{if(b.textContent===cor)b.classList.add("correct")})}
+ if(ok){score++;if(window.SushiAchievements?.addCorrect)window.SushiAchievements.addCorrect('sukaishi',1);else (window.__sushiPendingAchievementCorrect||(window.__sushiPendingAchievementCorrect=[])).push('sukaishi');$("judge").textContent="✓ CORRECT"}else{$("judge").textContent="✕ NOT QUITE";let cor=q.choices[q.answer];[...$("choices").children].forEach(b=>{if(b.textContent===cor)b.classList.add("correct")})}
  $("expEn").textContent=q.explanation_en;$("expJa").textContent="日本語： "+q.explanation_ja;$("feedback").classList.add("show");$("next").classList.remove("hidden")
 }
 function nextQ(){let s=DATA.sets[setIndex];qIndex++;qIndex>=s.questions.length?finish():renderQ()}
