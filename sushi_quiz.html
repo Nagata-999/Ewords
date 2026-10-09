@@ -953,6 +953,8 @@ function ansSolo(i,el){
   [...soloChoices.children].forEach(ch=>{if(ch.textContent.includes(c.choices[c.ans]))ch.classList.add("correct")});
   solo.count++;
   if(i===c.ans){
+    if(window.SushiAchievements?.addCorrect)window.SushiAchievements.addCorrect('sushi_quiz',1);
+    else (window.__sushiPendingAchievementCorrect||(window.__sushiPendingAchievementCorrect=[])).push('sushi_quiz');
     solo.streak++;
     if(solo.streak>solo.best){solo.best=solo.streak;localStorage.setItem("sqbest_"+solo.cat,solo.best)}
     soloRes.className="result show";
