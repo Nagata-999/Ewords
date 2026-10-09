@@ -178,6 +178,8 @@
   });
   window.addEventListener('sushi-achievement-baseline-sync',refresh);
   function show(){
+    const cached=window.SushiAchievementSyncBridge?.cachedReceipts?.();
+    if(cached)setServerReceipts(cached,cached.sushi_id);
     window.SushiAchievementSyncBridge?.receipts?.().catch(()=>null);
     let panel=document.getElementById('sushiAchievementPanel');
     if(!panel){
