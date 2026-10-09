@@ -15,21 +15,23 @@
    if(!AudioContext)return false;
    try{
      context=context||new AudioContext();
-     if(context.state!=='running'){
-       // Browser autoplay policies may suspend newly created contexts.
-       // Resume only from the caller's user gesture, never in background.
-       context.resume?.().catch(()=>{});
-       return false;
+     if(context.state==='running')return schedule(context);
+     if(context.state==='suspended'&&typeof context.resume==='function'){
+       context.resume().then(()=>{if(!muted&&context.state==='running')schedule(context)}).catch(()=>{});
      }
-     const now=context.currentTime;
-     const tones=[659.25,783.99,987.77];
-     tones.forEach((frequency,i)=>{
-       const oscillator=context.createOscillator(),gain=context.createGain();
+     return false;
+   }catch{return false}
+ }
+ function schedule(ctx){
+   try{
+     const now=ctx.currentTime;
+     [659.25,783.99,987.77].forEach((frequency,i)=>{
+       const oscillator=ctx.createOscillator(),gain=ctx.createGain();
        oscillator.type='sine';oscillator.frequency.value=frequency;
        gain.gain.setValueAtTime(0.0001,now+i*.11);
        gain.gain.exponentialRampToValueAtTime(.065,now+i*.11+.015);
        gain.gain.exponentialRampToValueAtTime(.0001,now+i*.11+.23);
-       oscillator.connect(gain);gain.connect(context.destination);
+       oscillator.connect(gain);gain.connect(ctx.destination);
        oscillator.start(now+i*.11);oscillator.stop(now+i*.11+.24);
      });
      return true;
