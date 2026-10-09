@@ -48,3 +48,17 @@ test('rejects malformed cursor',async()=>{
  const local=ledger([]);
  await assert.rejects(synchronize(local,async()=>({achievements:{synced:true,accepted:[],events:[],nextCursor:'../unsafe'}})),/invalid_server_cursor/);
 });
+
+test('rejects duplicate server acknowledgments',async()=>{
+ const local=ledger([e('local:1')]);
+ await assert.rejects(synchronize(local,async()=>({achievements:{synced:true,accepted:['local:1','local:1'],events:[],nextCursor:null}})),/invalid_server_acknowledgment/);
+});
+test('rejects malformed server acknowledgment IDs',async()=>{
+ const local=ledger([e('local:1')]);
+ await assert.rejects(synchronize(local,async()=>({achievements:{synced:true,accepted:['../bad'],events:[],nextCursor:null}})),/invalid_server_acknowledgment/);
+});
+test('rejects conflicting server records without reporting success',async()=>{
+ const local=ledger([e('local:1')]);
+ local.importEvents=()=>({added:0,conflicts:1,rejected:0});
+ await assert.rejects(synchronize(local,async()=>({achievements:{synced:true,accepted:['local:1'],events:[e('local:1')],nextCursor:null}})),/invalid_server_events/);
+});
