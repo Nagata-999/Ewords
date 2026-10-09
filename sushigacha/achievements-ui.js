@@ -32,11 +32,11 @@
     const sushiId=(localStorage.getItem('sushitan_sync_id_v1')||'').trim().toLowerCase();
     return claimedHere.has(sushiId+':'+id)||!!verifiedReceipts?.ids.includes(id);
   }
-  async function claimReward(threshold,id,button){
+  async function claimReward(threshold,id,button,category){
     if(claimBusy.has(id))return;
     claimBusy.add(id);button.disabled=true;button.textContent='受取中…';
     try{
-      const result=await window.SushiAchievementSyncBridge.claim(threshold);
+      const result=await window.SushiAchievementSyncBridge.claim(threshold,category);
       const sushiId=(localStorage.getItem('sushitan_sync_id_v1')||'').trim().toLowerCase();
       claimedHere.add(sushiId+':'+id);
       if(result.gems>0)window.dispatchEvent(new CustomEvent('sushi-gems-earned',{detail:{gems:result.gems,source:'achievement',id}}));
@@ -57,18 +57,19 @@
       const claimed=verifiedReceipts?.ids.filter(id=>id.startsWith('achievement:'+a.id+':'))||[];
       if(reward.length||claimed.length){
         const badge=document.createElement('div');badge.style.cssText='font-size:12px;color:#8b5a1e;margin-top:5px';
-        const pending=reward.filter(x=>!claimed.includes(x.id));
+        const pending=reward.filter(x=>!claimed.includes(x.id)&&!claimStatus(x.id));
+        const supported=['all_correct','streak'].includes(a.id);
         badge.textContent=(claimed.length?'✅ 受取済 '+claimed.length+'件　':'')+
           (pending.length?'🎁 未受取報酬 '+pending.reduce((n,x)=>n+x.gems,0)+'ジェム':'');
         item.append(badge);
-        if(a.id==='all_correct'&&window.SushiAchievementSyncBridge?.claim){
+        if(['all_correct','streak'].includes(a.id)&&window.SushiAchievementSyncBridge?.claim){
           for(const eligible of pending){
             if(claimStatus(eligible.id))continue;
             const button=document.createElement('button');
             button.type='button';button.textContent='🎁 '+eligible.gems+'ジェムを受け取る';
             button.style.cssText='display:block;margin-top:8px;padding:9px 12px;border:0;border-radius:9px;background:#f6b52b;color:#402500;font-weight:800;cursor:pointer';
             button.disabled=claimBusy.has(eligible.id);
-            button.onclick=()=>claimReward(eligible.id.split(':').at(-1)*1,eligible.id,button);
+            button.onclick=()=>claimReward(eligible.id.split(':').at(-1)*1,eligible.id,button,a.id);
             item.append(button);
           }
         }
