@@ -13,7 +13,7 @@
    let vocabulary=0;
    for(const [id,n] of Object.entries(games))if(VOCABULARY.has(id))vocabulary+=safeCount(n);
    return {correct_total:Math.max(safeCount(historicalTotal),safeCount(ledgerTotal)),
-     correct_vocabulary:vocabulary,login_streak:safeCount(loginStreak)};
+     correct_vocabulary:vocabulary,toeic_correct:safeCount(games.toeic),login_streak:safeCount(loginStreak)};
  }
  return Object.freeze({compute});
 });
