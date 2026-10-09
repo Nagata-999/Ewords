@@ -21,7 +21,10 @@
      if(response?.achievements?.synced!==true||!Array.isArray(response.achievements.events)||!Array.isArray(response.achievements.accepted))
        throw new Error('achievement_server_not_ready');
      if(response.achievements.events.length>500)throw new Error('oversized_server_page');
-     const accepted=new Set(response.achievements.accepted);
+     const ackIds=response.achievements.accepted;
+     if(ackIds.some(id=>typeof id!=='string'||!/^[A-Za-z0-9:_-]{1,159}$/.test(id)))throw new Error('invalid_server_acknowledgment');
+     const accepted=new Set(ackIds);
+     if(accepted.size!==ackIds.length)throw new Error('invalid_server_acknowledgment');
      if(events.some(e=>!accepted.has(e.id)))throw new Error('achievement_batch_not_acknowledged');
      sent+=events.length;
      uploadIndex++;
