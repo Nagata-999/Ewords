@@ -46,5 +46,5 @@ jobs:
         with:
           node-version: '22'
       - run: node --check sushigacha/achievements-ui.js && node --check sushigacha/site-taskbar.js && node --check sushigacha/achievement-titles.js
-      - run: node --test tests/achievement-merge.test.cjs tests/achievement-ledger.test.cjs tests/achievement-transport.test.cjs tests/achievement-sync-bridge.test.cjs tests/achievement-rewards.test.cjs tests/achievement-metrics.test.cjs tests/achievement-milestones.test.cjs tests/achievement-sound.test.cjs tests/achievement-receipts.test.cjs
+      - run: node --test tests/achievement-merge.test.cjs tests/achievement-ledger.test.cjs tests/achievement-transport.test.cjs tests/achievement-sync-bridge.test.cjs tests/achievement-rewards.test.cjs tests/achievement-metrics.test.cjs tests/achievement-milestones.test.cjs tests/achievement-sound.test.cjs tests/achievement-receipts.test.cjs tests/achievement-titles.test.cjs
 
