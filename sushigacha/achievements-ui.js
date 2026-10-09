@@ -7,6 +7,7 @@
   const state=()=>{const v=read();return {total:count(v.total),selected:typeof v.selected==='string'?v.selected:null}};
   function achievementMetrics(){
     let login={};try{login=JSON.parse(localStorage.getItem('sushitan_login_bonus_v1')||'{}')||{}}catch{}
+    const gameplay=window.SushiAchievementGameStats?.read?.()||{};
     const s=state();
     const total=window.SushiAchievementLedger?.reconciledTotal?.()??s.total;
     const games=window.SushiAchievementLedger?.summary?.().games||{};
@@ -15,7 +16,8 @@
       loginStreak:Number(login.loginBonusStreak)||0,
       dailyClaims:new Set([...(Array.isArray(login.dailyGemClaims)?login.dailyGemClaims:[])]).size,
       gemsEarned:(Array.isArray(login.gemEvents)?login.gemEvents:[]).reduce((n,e)=>n+(e?.type==='earn'&&Number.isSafeInteger(e.amount)&&e.amount>0?e.amount:0),0),
-      avatarItems:new Set(Array.isArray(login.gacha?.owned)?login.gacha.owned:[]).size
+      avatarItems:new Set(Array.isArray(login.gacha?.owned)?login.gacha.owned:[]).size,
+      gameStats:gameplay
     })||{correct_total:Math.max(s.total,total),correct_vocabulary:0,login_streak:0};
   }
   // Server receipts are supplied only after an authenticated response.
