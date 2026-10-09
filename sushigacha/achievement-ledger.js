@@ -12,7 +12,7 @@
     if(!id){id=global.crypto?.randomUUID?.()||('device-'+Date.now()+'-'+Math.random().toString(36).slice(2));localStorage.setItem(DEVICE,id)}
     return id;
   }
-  function valid(e){return e&&e.version===2&&typeof e.id==='string'&&/^[A-Za-z0-9:_-]{1,159}$/.test(e.id)&&VALID_GAME.test(e.game)&&Number.isSafeInteger(e.correct)&&e.correct>0&&e.correct<=1000&&Number.isFinite(e.at)&&e.at>=0}
+  function valid(e){return e&&e.version===2&&typeof e.id==='string'&&/^[A-Za-z0-9:_-]{1,159}$/.test(e.id)&&VALID_GAME.test(e.game)&&Number.isSafeInteger(e.correct)&&e.correct>0&&e.correct<=1000&&Number.isFinite(e.at)&&e.at>=0&&e.at<=8640000000000000}
   function learningTotal(){
     let total=0;
     for(let i=0;i<localStorage.length;i++){
