@@ -30,6 +30,15 @@
      throw error;
    }finally{running=null}
  }
+ async function receipts(){
+   const sushi_id=(localStorage.getItem(ID)||'').trim().toLowerCase(),pin=localStorage.getItem(PIN)||'';
+   if(!/^[a-z0-9_-]{4,24}$/.test(sushi_id)||!/^[0-9]{4}$/.test(pin))return null;
+   const response=await fetch(URL,{method:'POST',headers:{'Content-Type':'application/json',apikey:KEY},body:JSON.stringify({action:'achievement_claims',sushi_id,pin})});
+   if(!response.ok)throw new Error('achievement_receipts_failed');
+   const data=await response.json();
+   root.dispatchEvent(new CustomEvent('sushi-achievement-receipts',{detail:{...data,sushiId:sushi_id}}));
+   return data;
+ }
  async function claim(threshold){
    const sushi_id=(localStorage.getItem(ID)||'').trim().toLowerCase(),pin=localStorage.getItem(PIN)||'';
    if(!/^[a-z0-9_-]{4,24}$/.test(sushi_id)||!/^[0-9]{4}$/.test(pin))throw new Error('achievement_pin_not_connected');
@@ -40,10 +49,11 @@
    if(!response.ok||data.ok!==true)throw new Error(data.error||'achievement_claim_failed');
    // Refresh existing gem ledger through its established merge logic.
    await root.SushiProfileSync?.syncNow?.();
+   await receipts().catch(()=>null);
    root.dispatchEvent(new CustomEvent('sushi-achievement-claimed',{detail:data}));
    return data;
  }
- root.SushiAchievementSyncBridge=Object.freeze({supported,run,claim});
+ root.SushiAchievementSyncBridge=Object.freeze({supported,run,claim,receipts});
  // Initial sync on page load, then follow established profile sync.
  root.addEventListener('sushi-profile-synced',()=>{run().catch(error=>console.warn('Achievement sync deferred:',error.message))});
  root.addEventListener('sushi-achievement-change',()=>{
@@ -51,5 +61,5 @@
    clearTimeout(syncTimer);
    syncTimer=setTimeout(()=>run().catch(error=>console.warn('Achievement sync deferred:',error.message)),2500);
  });
- if(localStorage.getItem(ID)&&localStorage.getItem(PIN))setTimeout(()=>run().catch(error=>console.warn('Achievement sync deferred:',error.message)),1500);
+ if(localStorage.getItem(ID)&&localStorage.getItem(PIN))setTimeout(()=>{run().catch(error=>console.warn('Achievement sync deferred:',error.message));receipts().catch(()=>null)},1500);
 })(window);
