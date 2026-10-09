@@ -80,18 +80,40 @@
   }
   function importEvents(input){
     if(!Array.isArray(input))return {added:0,conflicts:0,rejected:0};
-    let added=0,conflicts=0,rejected=0;
-    for(const e of input.slice(0,1000)){
+    // Preflight the entire page before writing. A conflicting server page must
+    // not partially change local progress before the transport rejects it.
+    if(input.length>1000)return {added:0,conflicts:0,rejected:input.length};
+    const staged=new Map();let conflicts=0,rejected=0;
+    for(const e of input){
       if(!valid(e)){rejected++;continue}
       const key=PREFIX+e.id;
+      const duplicate=staged.get(key);
+      if(duplicate){
+        if(duplicate.game!==e.game||duplicate.correct!==e.correct||duplicate.at!==e.at)conflicts++;
+        continue;
+      }
       try{
         const old=localStorage.getItem(key);
-        if(old){const prev=JSON.parse(old);if(prev.game!==e.game||prev.correct!==e.correct)conflicts++;continue}
-        localStorage.setItem(key,JSON.stringify(e));added++;
+        if(old){
+          const prev=JSON.parse(old);
+          if(!valid(prev)||prev.id!==e.id||prev.game!==e.game||prev.correct!==e.correct||prev.at!==e.at)conflicts++;
+          continue;
+        }
+        staged.set(key,e);
       }catch{rejected++}
     }
+    if(conflicts||rejected)return {added:0,conflicts,rejected};
+    let added=0;
+    try{
+      for(const [key,e] of staged){localStorage.setItem(key,JSON.stringify(e));added++}
+    }catch{
+      // localStorage may reject writes (e.g. quota). Roll back only keys
+      // created by this import; never remove pre-existing records.
+      for(const key of [...staged.keys()].slice(0,added))try{localStorage.removeItem(key)}catch{}
+      return {added:0,conflicts:0,rejected:1};
+    }
     if(added)global.dispatchEvent(new CustomEvent('sushi-achievement-change',{detail:{imported:added}}));
-    return {added,conflicts,rejected};
+    return {added,conflicts:0,rejected:0};
   }
   function reconciledTotal(){
     const base=migrationBaseline();const historical=base===null?Math.max(legacyBaseline(),learningTotal()):base;
