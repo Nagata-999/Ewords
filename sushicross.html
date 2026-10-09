@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="ja">
 <head>
+<script src="/sushigacha/achievement-ledger.js?v=20261010-1"></script>
+<script src="/sushigacha/achievement-events.js?v=20261010-1"></script>
 <script src="shared/player.js?v=20260923-1"></script>
 <script src="shared/scores.js?v=20260923-1"></script>
 <script src="sushigacha/daily-quest-game-hook.js?v=20261001-1"></script>
@@ -49,7 +51,7 @@
 <link rel="canonical" href="https://sushitan.net/sushicross">
 
 <meta name="description" content="車や電車、川などの障害物に注意して進む、英単語とアクションを組み合わせたゲームです。移動は矢印キー・WASD・スワイプに対応し、語彙の問題では選択肢をタップして答えます。">
-<script defer src="/sushigacha/site-taskbar.js?v=20261008-11"></script></head>
+<script defer src="/sushigacha/site-taskbar.js?v=20261010-1"></script></head>
 <body>
 <canvas id="game" aria-label="すしクロスのゲーム画面"></canvas>
 <div id="hud">
@@ -265,7 +267,7 @@ function drawFX(){
  for(let p of particles){ctx.globalAlpha=clamp(p.life/.35,0,1);ctx.fillStyle=p.color;if(p.round){ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fill()}else{ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.life*7);ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size);ctx.restore()}}ctx.globalAlpha=1;if(screenFlash>0){ctx.fillStyle=`rgba(${flashColor},${screenFlash})`;ctx.fillRect(0,0,W,H)}
 }
 
-function answerCheck(){let l=laneFor(player.row);if(!l||l.type!==TYPES.QUIZ||!l.quiz||l.quiz.answered)return;let c=l.quiz.choices.find(c=>Math.abs(c.x-player.x)<.7);if(!c)return;l.quiz.answered=true;l.quiz.crushed=true;l.quiz.choices.forEach(q=>q.answered=true);answeredCount++;if(c.correct){correctCount++;window.SushiDailyGame?.add("cross",1);score+=5;showToast("GOOD! +5","#78ff9f")}else{hearts--;showToast("正解："+l.quiz.correct,"#ff9da2");shake=10;if(hearts<=0){updateHUD();end("英単語で3回ミス！");return}}updateHUD();primeQuizzes()}
+function answerCheck(){let l=laneFor(player.row);if(!l||l.type!==TYPES.QUIZ||!l.quiz||l.quiz.answered)return;let c=l.quiz.choices.find(c=>Math.abs(c.x-player.x)<.7);if(!c)return;l.quiz.answered=true;l.quiz.crushed=true;l.quiz.choices.forEach(q=>q.answered=true);answeredCount++;window.SushiAchievementEvents?.answer('sushicross',l.quiz.word,!!c.correct);if(c.correct){correctCount++;window.SushiDailyGame?.add("cross",1);score+=5;showToast("GOOD! +5","#78ff9f")}else{hearts--;showToast("正解："+l.quiz.correct,"#ff9da2");shake=10;if(hearts<=0){updateHUD();end("英単語で3回ミス！");return}}updateHUD();primeQuizzes()}
 function update(dt){
  updateFX(dt);if(state!=="playing")return;player.move=Math.min(1,player.move+dt*6.8);if(player.move>=.72){answerCheck();if(state!=="playing")return;let ahead=laneFor(player.row+1);if(ahead&&ahead.type===TYPES.QUIZ&&!ahead.quiz)startQuiz(ahead)}scrollAge+=dt;let follow=Math.max(0,player.row-3),scrollSpeed=.28+difficulty()*.025+Math.min(.12,Math.max(0,scrollAge-18)*.0025),forced=scrollAge>4?scrollSpeed*dt:0;camera=Math.max(camera+forced,camera+(follow-camera)*Math.min(1,dt*4));let pressure=camera-player.row;if(pressure>2.7&&!pressureWarned){pressureWarned=true;showToast("急いで！","#ff9b72")}else if(pressure<2.1)pressureWarned=false;if(pressure>4.4){player.hidden=true;shake=12;screenFlash=.35;flashColor="255,92,72";return end("画面外に押し出された！")}
  for(let l of lanes){l.phase+=dt;if(l.type===TYPES.ROAD){for(let o of l.objects){o.x+=l.dir*l.speed*dt;if(o.x>8)o.x=-8;if(o.x<-8)o.x=8}}

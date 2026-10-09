@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<script src="/sushigacha/achievement-ledger.js?v=20261010-1"></script>
+<script src="/sushigacha/achievement-events.js?v=20261010-1"></script>
 <script src="shared/player.js?v=20260923-1"></script>
 <script src="shared/scores.js?v=20260923-1"></script>
 
@@ -2322,7 +2324,7 @@ html, body {
 <script src="shared/review-ui.js"></script>
 
 <link rel="canonical" href="https://sushitan.net/sushitan">
-<script defer src="/sushigacha/site-taskbar.js?v=20261009-8"></script></head>
+<script defer src="/sushigacha/site-taskbar.js?v=20261010-1"></script></head>
 <body>
 
 <button class="hamburger-btn" id="hamburgerBtn" aria-label="サイトメニューを開く" aria-expanded="false">
@@ -3128,7 +3130,8 @@ html, body {
       if (!word) return;
       const id = window.SushiLearning?.resolveWordId?.(word) || String(word.id || word.en || '');
       if (!id) return;
-      window.SushiAchievementLedger?.recordOutcome?.('sushitan', String(id), correct, {review});
+      const game=currentMode===MODE_SHINO?'shinotan':currentMode===MODE_ANTONI?'antonitan':'sushitan';
+      window.SushiAchievementEvents?.answer(game,String(id),correct,{review});
     }
     function handleReviewTap(button) {
       GAME.questionLocked = true;
@@ -3137,7 +3140,7 @@ html, body {
       recordSushiOutcome(correct, true);
       GAME.balloons.forEach(({el}) => { el.disabled = true; if (el.dataset.type === 'correct') el.classList.add('correct-flash'); });
       if (correct) {
-        GAME.correctCount++; if(window.SushiAchievements?.addCorrect)window.SushiAchievements.addCorrect('sushitan',1);else (window.__sushiPendingAchievementCorrect||(window.__sushiPendingAchievementCorrect=[])).push('sushitan');
+        GAME.correctCount++;
         const graduated = reviewCorrect(GAME.currentQuestion);
         setFeedback(graduated ? '復習完了！リストから外れました。' : '正解！共通の苦手度が下がりました。', 'good');
         soundCorrect();
@@ -3690,7 +3693,7 @@ html, body {
         GAME.questionLocked = true;
         GAME.attemptCount += 1;
         ensureAudio();
-        GAME.correctCount += 1; if(window.SushiAchievements?.addCorrect)window.SushiAchievements.addCorrect('sushitan',1);else (window.__sushiPendingAchievementCorrect||(window.__sushiPendingAchievementCorrect=[])).push('sushitan');
+        GAME.correctCount += 1;
         handleComboOnCorrect(now);
 
         const gained = 10 * getMultiplier(GAME.combo);
@@ -4313,7 +4316,7 @@ html, body {
   });
 })();
 </script>
-<script src="sushigacha/gem-system.js?v=20260922-2"></script>
+<script src="sushigacha/gem-system.js?v=20261010-1"></script>
 <script src="sushigacha/sushitan-lucky-gems.js?v=20260913-2"></script>
 <script src="sushigacha/avatar-widget.js?v=20261008-12"></script>
 

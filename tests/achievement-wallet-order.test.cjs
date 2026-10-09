@@ -23,7 +23,7 @@ function setup(){
     return {ok:true,json:async()=>({ok:true,outcomes:{events:body.outcomes?.events||[],nextOffset:null}})};
   }});
   for(const file of ['shared/sushi-profile.js','sushigacha/achievement-sync-bridge.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'..',file),'utf8'),context);
-  return {window,calls,wallet:()=>JSON.parse(values.get(key)),hold(){let release;held={promise:new Promise(r=>release=r)};return release}};
+  return {window,calls,wallet:()=>JSON.parse(values.get(key)),store:values,hold(){let release;held={promise:new Promise(r=>release=r)};return release}};
 }
 const tick=()=>new Promise(r=>setImmediate(r));
 test('delayed pre-claim profile cannot overwrite the 150 gem reward',async()=>{
@@ -51,4 +51,22 @@ test('four-digit PIN uploads and imports achievement outcomes',async()=>{
   await s.window.SushiProfileSync.syncNow();
   assert.ok(s.calls.includes('outcome_sync'));
   assert.ok(imports>0);
+});
+test('local earn and spend during a slow profile request survive its response',async()=>{
+  const s=setup(),release=s.hold(),sync=s.window.SushiProfileSync.syncNow();await tick();
+  s.store.set(key,JSON.stringify({gems:115,gemEvents:[{id:'new-earn',type:'earn',amount:25},{id:'new-spend',type:'spend',amount:10}]}));
+  release();await sync;
+  assert.equal(s.wallet().gems,115);assert.equal(s.wallet().gemEvents.length,2);
+});
+test('acknowledged IDs missing from the display history do not count as pending',()=>{
+  const s=setup(),merge=s.window.SushiProfileSync.applyWalletSnapshot;
+  const wallet=merge({gemEvents:[{id:'old',type:'earn',amount:150},{id:'new',type:'earn',amount:5}]},{gems:250,gemEvents:[],gemAcknowledgedIds:['old']});
+  assert.equal(wallet.gems,255);assert.equal(wallet.gemEvents.length,1);
+});
+test('rank selections converge in either merge order and unlock floors never decrease',()=>{
+  const merge=setup().window.SushiProfileSync.mergeRankPreferences;
+  const a={selected:'yellow',selectionRevision:2,selectionDevice:'a',unlockedTotal:15000};
+  const b={selected:'white',selectionRevision:2,selectionDevice:'b',unlockedTotal:500};
+  assert.equal(JSON.stringify(merge(a,b)),JSON.stringify(merge(b,a)));
+  assert.equal(merge(a,b).selected,'white');assert.equal(merge(a,b).unlockedTotal,15000);
 });

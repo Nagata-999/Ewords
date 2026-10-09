@@ -3,7 +3,7 @@ const {chromium}=require(process.env.PLAYWRIGHT_MODULE||'playwright');
 const root=path.resolve(__dirname,'..');
 // The ready button pulses forever; click its real hit area without waiting for
 // the animation to become stable or bypassing hit testing with force:true.
-async function clickClaim(page){const button=page.locator('.sdq-claim').first();await button.evaluate(el=>el.scrollIntoView({block:'nearest'}));const r=await button.boundingBox();assert(r);await page.mouse.click(r.x+r.width/2,r.y+r.height/2);}
+async function clickClaim(page){const button=page.locator('.sdq-claim').first();let r;for(let attempt=0;attempt<5&&!r;attempt++){await button.waitFor({state:'visible'});await button.evaluate(el=>el.scrollIntoView({block:'nearest'}));r=await button.boundingBox();}assert(r);await page.mouse.click(r.x+r.width/2,r.y+r.height/2);}
 const server=http.createServer((req,res)=>{
   const url=new URL(req.url,'http://localhost');
   if(url.pathname==='/taskbar-only'||url.pathname==='/with-gem-api'){
@@ -67,6 +67,8 @@ const server=http.createServer((req,res)=>{
       await page.waitForFunction(()=>window.SushiAchievements&&window.SushiGemFx&&window.__sushiSiteLayoutLoaded);
       // Use the real UI and a delayed mock receipt; never contact a live account.
       await page.evaluate(()=>{
+        localStorage.setItem('sushitan_sync_id_v1','testuser');
+        localStorage.setItem('sushitan_sync_pin_v1','1234');
         localStorage.setItem('sushitan_achievement_progress_v1',JSON.stringify({total:10}));
         window.claimCalls=0;window.earned=[];
         addEventListener('sushi-gems-earned',e=>earned.push(e.detail));

@@ -50,7 +50,8 @@
    if(!transaction)throw new Error('achievement_wallet_sync_missing');
    const data=await transaction(async()=>{
    if(localStorage.getItem(ID)?.trim().toLowerCase()!==sushi_id||localStorage.getItem(PIN)!==pin)throw new Error('achievement_account_changed');
-   const response=await fetch(URL,{method:'POST',headers:{'Content-Type':'application/json',apikey:KEY},body:JSON.stringify({action:'achievement_claim',sushi_id,pin,threshold,category})});
+   const before=JSON.parse(localStorage.getItem('sushitan_login_bonus_v1')||'{}');
+   const response=await fetch(URL,{method:'POST',headers:{'Content-Type':'application/json',apikey:KEY},body:JSON.stringify({action:'achievement_claim',sushi_id,pin,threshold,category,wallet_event_ids:(before.gemEvents||[]).map(e=>e?.id).filter(Boolean)})});
    const data=await response.json().catch(()=>({error:'invalid_json'}));
    if(!response.ok||data.ok!==true)throw new Error(data.error||'achievement_claim_failed');
    // Use the server's authoritative wallet snapshot, including for a previously
@@ -58,15 +59,10 @@
    if(data.wallet&&Number.isSafeInteger(data.wallet.gems)&&Array.isArray(data.wallet.gemEvents)){
      const key='sushitan_login_bonus_v1';
      const ledger=JSON.parse(localStorage.getItem(key)||'{}');
-     const remoteIds=new Set(data.wallet.gemEvents.map(e=>e?.id).filter(Boolean));
-     const pending=(Array.isArray(ledger.gemEvents)?ledger.gemEvents:[]).filter(e=>e?.id&&!remoteIds.has(e.id));
-     // Preserve local events awaiting sync, while using the credited server balance.
-     const delta=pending.reduce((sum,e)=>sum+(e.type==='earn'?1:e.type==='spend'?-1:0)*Math.max(0,Number(e.amount)||0),0);
-     ledger.gemEvents=[...data.wallet.gemEvents,...pending].slice(-1000);
-     ledger.gems=Math.max(0,data.wallet.gems+delta);
-     ledger.gemSyncBase=ledger.gems;
-     ledger.gemSyncBaseAt=Date.now();
-     localStorage.setItem(key,JSON.stringify(ledger));
+     // Retained history is not an acknowledgment: older accepted IDs may have
+     // been pruned. Preserve only events that the server has not acknowledged.
+     const wallet=root.SushiProfileSync.applyWalletSnapshot(ledger,data.wallet,before.gemAcknowledgedIds||[]);
+     localStorage.setItem(key,JSON.stringify({...ledger,...wallet}));
      root.dispatchEvent(new CustomEvent('sushi-gem-change'));
    }
    return data;

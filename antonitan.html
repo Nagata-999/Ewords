@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<script src="/sushigacha/achievement-ledger.js?v=20261010-1"></script>
+<script src="/sushigacha/achievement-events.js?v=20261010-1"></script>
 <script src="shared/player.js?v=20260923-1"></script>
 <script src="shared/scores.js?v=20260923-1"></script>
 
@@ -2160,7 +2162,7 @@ html, body {
 </style>
 
 <link rel="canonical" href="https://sushitan.net/antonitan">
-<script defer src="/sushigacha/site-taskbar.js?v=20261008-11"></script></head>
+<script defer src="/sushigacha/site-taskbar.js?v=20261010-1"></script></head>
 <body>
 
 <button class="hamburger-btn" id="hamburgerBtn" aria-label="サイトメニューを開く" aria-expanded="false">
@@ -3309,6 +3311,7 @@ html, body {
 
       const now = performance.now();
       const type = button.dataset.type;
+      window.SushiAchievementEvents?.answer('antonitan',String(GAME.currentQuestion?.id||GAME.currentQuestion?.en||''),type==='correct');
 
       if (type === 'correct') {
         GAME.questionLocked = true;
@@ -3811,7 +3814,7 @@ html, body {
   });
 })();
 </script>
-<script src="sushigacha/gem-system.js?v=20260922-2"></script>
+<script src="sushigacha/gem-system.js?v=20261010-1"></script>
 <script src="sushigacha/multi-game-lucky-gems.js?v=20260913-2"></script>
 
 
