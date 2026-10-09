@@ -71,3 +71,23 @@ test('rejects malformed remote page before any import',async()=>{
 test('rejects oversized client page configuration',async()=>{
  await assert.rejects(synchronize(ledger([]),async()=>({}),{pageSize:501}),/invalid_sync_limits/);
 });
+
+test('invalid cursor does not import the page',async()=>{
+ const local=ledger([]);
+ await assert.rejects(synchronize(local,async()=>({achievements:{synced:true,accepted:[],events:[e('remote:1')],nextCursor:'../bad'}})),/invalid_server_cursor/);
+ assert.equal(local.values().length,0);
+});
+test('transport retries safely after interrupted request',async()=>{
+ const local=ledger([e('local:1')]);
+ let attempts=0;
+ const request=async req=>{
+   attempts++;
+   if(attempts===1)throw new Error('temporary_network_failure');
+   return {achievements:{synced:true,accepted:req.achievements.events.map(x=>x.id),events:[e('remote:1')],nextCursor:null}};
+ };
+ await assert.rejects(synchronize(local,request),/temporary_network_failure/);
+ assert.equal(local.values().length,1);
+ const result=await synchronize(local,request);
+ assert.equal(result.received,1);
+ assert.equal(local.values().length,2);
+});
