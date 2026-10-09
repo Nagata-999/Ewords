@@ -55,31 +55,115 @@
   function spendGems(source,amount,spendId){source=String(source||'spend');amount=Math.max(0,Math.floor(Number(amount)||0));const ledger=read(),current=Number.isSafeInteger(ledger.gems)&&ledger.gems>=0?ledger.gems:0;if(!amount||current<amount)return {spent:0,balance:current,ok:false};ledger.gems=current-amount;addGemEvent(ledger,'spend',amount,source,spendId);write(ledger);window.dispatchEvent(new CustomEvent('sushi-gems-spent',{detail:{source,gems:amount,balance:ledger.gems}}));return {spent:amount,balance:ledger.gems,ok:true};}
   window.SushiGem={awardScore,awardGems,spendGems,balance};
 
-  // Shared visual feedback for every gem reward (daily quests, login bonuses,
-  // lucky gems and game rewards). Kept here so all games get the same effect.
+  // Visuals never change the ledger: saving and balance updates stay immediate.
+  const motionQuery=window.matchMedia('(prefers-reduced-motion: reduce)');
+  const flights=new Set(), impacts=new Set();
+  const MAX_FLIGHTS=18;
+  let lastPointer=null, noticeTimer=0, noticeAmount=0;
+  window.addEventListener('pointerdown',e=>{
+    lastPointer={x:e.clientX,y:e.clientY,at:performance.now()};
+  },{capture:true,passive:true});
+  window.addEventListener('keydown',()=>{lastPointer=null;},{capture:true});
+
   function ensureGemFx(){
     if(document.getElementById('sushiGemFxStyle'))return;
     const st=document.createElement('style');st.id='sushiGemFxStyle';st.textContent=`
-#sushiGemFx{position:fixed;left:50%;top:24%;z-index:2147483000;pointer-events:none;transform:translate(-50%,-50%);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center}
-.sgf-pop{display:flex;align-items:center;gap:9px;padding:10px 18px;border-radius:999px;background:linear-gradient(135deg,#fffdf5ee,#fff5b9f2);border:2px solid #fff;box-shadow:0 8px 30px #4b2c0060,0 0 0 3px #f5c84255;color:#7a4b00;font-weight:1000;font-size:22px;white-space:nowrap;animation:sgfPop 1.45s cubic-bezier(.18,.9,.2,1) both;backdrop-filter:blur(5px)}
-.sgf-pop b{font-size:28px;color:#e58a00;text-shadow:0 2px 0 #fff}
-.sgf-gem{font-size:31px;filter:drop-shadow(0 3px 4px #3567a966);animation:sgfGem .55s ease-out both}
-.sgf-spark{position:fixed;z-index:2147482999;pointer-events:none;font-size:17px;animation:sgfSpark .9s ease-out both}
-@keyframes sgfPop{0%{opacity:0;transform:scale(.35) translateY(20px)}18%{opacity:1;transform:scale(1.13) translateY(0)}32%{transform:scale(1)}78%{opacity:1;transform:scale(1) translateY(0)}100%{opacity:0;transform:scale(.92) translateY(-25px)}}
-@keyframes sgfGem{0%{transform:rotate(-25deg) scale(.2)}55%{transform:rotate(12deg) scale(1.28)}100%{transform:rotate(0) scale(1)}}
-@keyframes sgfSpark{0%{opacity:1;transform:translate(0,0) scale(.4) rotate(0)}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.1) rotate(180deg)}}
-@media(prefers-reduced-motion:reduce){.sgf-pop,.sgf-gem,.sgf-spark{animation-duration:.01ms!important}}
+#sushiGemFx{position:fixed;left:50%;top:24%;z-index:2147483000;pointer-events:none;transform:translate(-50%,-50%);font:800 17px/1.4 system-ui,-apple-system,'Segoe UI',sans-serif;white-space:nowrap;color:#075985;background:#f0fbffff;border:1px solid #a5e2f5;border-radius:999px;padding:9px 16px;box-shadow:0 6px 24px #07598526}
+.sgf-flight{position:fixed;left:0;top:0;width:28px;height:28px;display:grid;place-items:center;z-index:2147482999;pointer-events:none;font-size:25px;line-height:1;filter:drop-shadow(0 0 5px #38bdf888);will-change:transform,opacity}
+.sgf-flight::after{content:'';position:absolute;inset:6px;border-radius:50%;background:#7dd3fc;filter:blur(7px);z-index:-1}
+.sgf-arrival{position:fixed;width:30px;height:30px;border:2px solid #38bdf8;border-radius:50%;z-index:2147482999;pointer-events:none;box-shadow:0 0 10px #7dd3fc99}
 `;document.head.appendChild(st);
   }
+  function gemTarget(){
+    const balance=document.getElementById('sushiBarGems');
+    const el=balance?.closest('.mini')||balance;
+    if(!el)return null;
+    const r=el.getBoundingClientRect();
+    if(!r.width||!r.height||r.bottom<0||r.top>innerHeight)return null;
+    return {el,x:r.left+r.width/2,y:r.top+r.height/2};
+  }
+  function originPoint(){
+    let x=innerWidth/2,y=innerHeight*.35;
+    if(lastPointer&&performance.now()-lastPointer.at<1200){({x,y}=lastPointer);}
+    else{
+      const active=document.activeElement;
+      if(active?.matches('button,a,input')){
+        const r=active.getBoundingClientRect();
+        if(r.width&&r.height&&r.top>=0&&r.bottom<=innerHeight){x=r.left+r.width/2;y=r.top+r.height/2;}
+      }
+    }
+    return {x:Math.max(24,Math.min(innerWidth-24,x)),y:Math.max(60,Math.min(innerHeight-100,y))};
+  }
+  function showGemNotice(amount,origin){
+    clearTimeout(noticeTimer);
+    let box=document.getElementById('sushiGemFx');
+    if(!box){
+      noticeAmount=0;box=document.createElement('div');box.id='sushiGemFx';
+      box.setAttribute('role','status');box.setAttribute('aria-live','polite');box.setAttribute('aria-atomic','true');
+      document.body.appendChild(box);
+    }
+    noticeAmount+=amount;
+    box.textContent=`💎 +${noticeAmount.toLocaleString()} ジェム`;
+    box.style.top=Math.max(40,origin.y-48)+'px';
+    const half=box.getBoundingClientRect().width/2+12;
+    box.style.left=Math.max(half,Math.min(innerWidth-half,origin.x))+'px';
+    noticeTimer=setTimeout(()=>{box.remove();noticeAmount=0;},1600);
+  }
+  function arrival(){
+    const target=gemTarget();if(!target||motionQuery.matches)return;
+    // Each incoming gem gives the destination a small "pop", without delaying
+    // the real balance or animating the navigation link's hit area.
+    target.el.getAnimations().filter(a=>a.id==='sushi-gem-arrival').forEach(a=>a.cancel());
+    target.el.animate([
+      {transform:'scale(1)',color:'#0284c7'},
+      {transform:'scale(1.35)',color:'#0284c7',offset:.35},
+      {transform:'scale(1)',color:'#0284c7'}
+    ],{id:'sushi-gem-arrival',duration:210,easing:'ease-out'});
+    const ring=document.createElement('span');ring.className='sgf-arrival';ring.setAttribute('aria-hidden','true');
+    ring.style.left=(target.x-15)+'px';ring.style.top=(target.y-15)+'px';document.body.appendChild(ring);
+    const animation=ring.animate([{transform:'scale(.4)',opacity:.9},{transform:'scale(1.7)',opacity:0}],{duration:280,easing:'ease-out'});
+    const item={el:ring,animation};impacts.add(item);
+    const clean=()=>{ring.remove();impacts.delete(item);};animation.finished.then(clean,clean);
+  }
+  function flyGem(origin,target,index){
+    const el=document.createElement('span');el.className='sgf-flight';el.textContent='💎';el.setAttribute('aria-hidden','true');
+    document.body.appendChild(el);
+    const spread=(index%2?1:-1)*(32+(index%4)*16);
+    const p1={x:Math.max(18,Math.min(innerWidth-18,origin.x+spread)),y:Math.max(20,origin.y-100-index%3*18)};
+    const p2={x:target.x+spread*.55,y:Math.max(20,target.y-110)};
+    const frames=Array.from({length:25},(_,i)=>{
+      const t=i/24,u=1-t;
+      const x=u*u*u*origin.x+3*u*u*t*p1.x+3*u*t*t*p2.x+t*t*t*target.x;
+      const y=u*u*u*origin.y+3*u*u*t*p1.y+3*u*t*t*p2.y+t*t*t*target.y;
+      const scale=t<.16?.45+t*3.5:1.01-(t-.16)*.82;
+      return {offset:t,transform:`translate(${x-14}px,${y-14}px) scale(${scale}) rotate(${spread*(1-t)}deg)`,opacity:t<.1?t*10:t>.9?(1-t)*10:1};
+    });
+    const animation=el.animate(frames,{duration:680+(index%3)*30,delay:100+index*65,easing:'cubic-bezier(.35,0,.65,1)',fill:'both'});
+    const item={el,animation};flights.add(item);
+    const clean=()=>{el.remove();flights.delete(item);};
+    animation.finished.then(()=>{clean();arrival();},clean);
+  }
+  function clearFlights(){
+    for(const item of [...flights,...impacts]){item.animation.cancel();item.el.remove();}
+    flights.clear();impacts.clear();
+    const target=gemTarget();target?.el.getAnimations().filter(a=>a.id==='sushi-gem-arrival').forEach(a=>a.cancel());
+  }
   function gemFx(amount){
-    amount=Math.max(0,Math.floor(Number(amount)||0));if(!amount)return;
-    ensureGemFx();document.getElementById('sushiGemFx')?.remove();
-    const box=document.createElement('div');box.id='sushiGemFx';box.innerHTML=`<div class="sgf-pop"><span class="sgf-gem">💎</span><span>GEM <b>+${amount}</b></span></div>`;document.body.appendChild(box);
-    const r=box.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
-    for(let i=0;i<10;i++){const s=document.createElement('span');s.className='sgf-spark';s.textContent=i%3?'✨':'💎';s.style.left=cx+'px';s.style.top=cy+'px';const a=(Math.PI*2*i/10)+(Math.random()*.35-.175),d=45+Math.random()*65;s.style.setProperty('--x',Math.cos(a)*d+'px');s.style.setProperty('--y',Math.sin(a)*d+'px');document.body.appendChild(s);setTimeout(()=>s.remove(),950)}
-    navigator.vibrate?.([18,28,35]);setTimeout(()=>box.remove(),1550);
+    amount=Math.max(0,Math.floor(Number(amount)||0));if(!amount||document.hidden)return;
+    ensureGemFx();const origin=originPoint();showGemNotice(amount,origin);
+    const target=gemTarget();
+    // Full-screen games without a taskbar and reduced-motion users keep a
+    // readable, static reward notice instead of a flight to an invented target.
+    if(!target||motionQuery.matches||!Element.prototype.animate)return;
+    const count=Math.min(amount,12,MAX_FLIGHTS-flights.size);
+    for(let i=0;i<count;i++)flyGem(origin,target,i);
   }
   window.addEventListener('sushi-gems-earned',e=>gemFx(e.detail?.gems));
+  window.addEventListener('resize',clearFlights,{passive:true});
+  window.addEventListener('pagehide',clearFlights);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden){clearFlights();clearTimeout(noticeTimer);document.getElementById('sushiGemFx')?.remove();noticeAmount=0;}});
+  motionQuery.addEventListener('change',()=>{if(motionQuery.matches)clearFlights();});
+
 
   function loadOnce(match,src){
     if(document.querySelector(`script[src*="${match}"]`))return;
