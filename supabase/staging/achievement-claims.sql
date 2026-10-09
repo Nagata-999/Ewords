@@ -36,6 +36,10 @@ begin
  get diagnostics v_inserted=row_count;
  if v_inserted=0 then return jsonb_build_object('ok',true,'already_claimed',true,'claim_id',v_id,'gems',0);end if;
  v_ledger:=coalesce(v_profile.ledger,'{}'::jsonb);
+ -- Never credit a claim whose deterministic event ID already exists in the legacy ledger.
+ if jsonb_path_exists(coalesce(v_ledger->'gemEvents','[]'::jsonb),'$[*] ? (@.id == $claim)',jsonb_build_object('claim',v_id)) then
+   return jsonb_build_object('ok',false,'error','legacy_claim_event_exists');
+ end if;
  v_events:=case when jsonb_typeof(v_ledger->'gemEvents')='array' then v_ledger->'gemEvents' else '[]'::jsonb end;
  -- A deterministic ID makes the existing profile sync merge idempotent.
  v_events:=v_events||jsonb_build_array(jsonb_build_object('id',v_id,'type','earn','amount',v_reward,'source','achievement','at',floor(extract(epoch from now())*1000)::bigint));
