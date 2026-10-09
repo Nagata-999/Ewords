@@ -3676,6 +3676,7 @@ html, body {
       const type = button.dataset.type;
 
       if (type === 'correct') {
+        window.SushiAchievementLedger?.ensureMigrationBaseline?.();
         if (currentMode === MODE_SUSHI && !GAME.currentQuestion._learningMissed) window.SushiLearning?.recordAnswer(SushiLearning.resolveWordId(GAME.currentQuestion), true, 'sushitan');
         GAME.questionLocked = true;
         GAME.attemptCount += 1;
