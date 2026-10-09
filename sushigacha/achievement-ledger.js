@@ -69,6 +69,45 @@
     }
     return Math.max(0,...[...days.values()].map(games=>games.size));
   }
+  // Explicit answer outcomes, separate from aggregate correct counts.
+  // A streak must never be inferred from correct-only events.
+  const OUTCOME_PREFIX='sushitan_achievement_outcome_v1:';
+  function recordOutcome(game,questionId,correct,{review=false}={}){
+    if(!VALID_GAME.test(game)||typeof questionId!=='string'||!questionId.trim()||questionId.length>160||typeof correct!=='boolean')return null;
+    const id=deviceId()+':'+(global.crypto?.randomUUID?.()||Date.now()+'-'+Math.random().toString(36).slice(2));
+    const event={version:1,id,game,questionId,correct,review:review===true,at:Date.now()};
+    try{localStorage.setItem(OUTCOME_PREFIX+id,JSON.stringify(event))}catch{return null}
+    global.dispatchEvent(new CustomEvent('sushi-achievement-change',{detail:{outcome:true,game}}));
+    return id;
+  }
+  function outcomeSummary(){
+    const events=[];
+    for(let i=0;i<localStorage.length;i++){
+      const key=localStorage.key(i);if(!key?.startsWith(OUTCOME_PREFIX))continue;
+      try{
+        const e=JSON.parse(localStorage.getItem(key));
+        if(e?.version!==1||key!==OUTCOME_PREFIX+e.id||!VALID_GAME.test(e.game)||typeof e.questionId!=='string'||!Number.isFinite(e.at)||typeof e.correct!=='boolean')continue;
+        events.push(e);
+      }catch{}
+    }
+    events.sort((a,b)=>a.at-b.at||a.id.localeCompare(b.id));
+    let streak=0,maxStreak=0,reviewCorrect=0,recovered=0,comeback=0;
+    const errors=new Map();let broken=false;
+    for(const e of events){
+      const key=e.game+':'+e.questionId;
+      if(e.correct){
+        streak++;maxStreak=Math.max(maxStreak,streak);
+        if(e.review)reviewCorrect++;
+        if((errors.get(key)||0)>=2){recovered++;errors.set(key,0)}
+        if(broken&&streak>=10){comeback=1;broken=false}
+      }else{
+        errors.set(key,(errors.get(key)||0)+1);
+        if(streak>=10)broken=true;
+        streak=0;
+      }
+    }
+    return {review_correct:reviewCorrect,correct_streak:maxStreak,repeat_mistake_recovered:recovered,comeback_streak:comeback,eventCount:events.length};
+  }
   function legacyBaseline(){
     try{const old=JSON.parse(localStorage.getItem(KEY)||'{}');return Number.isSafeInteger(old.total)&&old.total>=0?old.total:0}catch{return 0}
   }
@@ -155,5 +194,5 @@
     // Learning records may include the same post-migration answers; use as a floor, not an addition.
     return Math.max(historical+eventTotal,learningTotal(),legacyBaseline());
   }
-  global.SushiAchievementLedger=Object.freeze({record,summary,distinctGamesInDay,legacyBaseline,learningTotal,migrationBaseline,ensureMigrationBaseline,baselineForSync,mergeBaseline,reconciledTotal,exportBatch,exportAllPages,importEvents});
+  global.SushiAchievementLedger=Object.freeze({record,recordOutcome,outcomeSummary,summary,distinctGamesInDay,legacyBaseline,learningTotal,migrationBaseline,ensureMigrationBaseline,baselineForSync,mergeBaseline,reconciledTotal,exportBatch,exportAllPages,importEvents});
 })(window);
