@@ -33,3 +33,8 @@ test('reward values come from catalog, never request payload',()=>{
  const result=eligibility('achievement:vocabulary:10',{correct_vocabulary:10},definitions);
  assert.equal(result.gems,10);
 });
+
+test('inherited metrics cannot unlock rewards',()=>{
+ const forged=Object.create({correct_vocabulary:100000});
+ assert.equal(eligibility('achievement:vocabulary:10',forged,definitions).eligible,false);
+});
