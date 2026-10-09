@@ -1,6 +1,7 @@
 'use strict';
 /* Local-only event ledger. PIN sync requires server-side idempotent merge before launch. */
 (function(global){
+  if(global.SushiAchievementLedger)return;
   const PREFIX='sushitan_achievement_v2:event:';
   const DEVICE='sushitan_achievement_v2:device';
   const KEY='sushitan_achievement_progress_v1';
@@ -62,7 +63,7 @@
         const e=JSON.parse(localStorage.getItem(key));
         if(!valid(e)||key!==PREFIX+e.id||seen.has(e.id))continue;
         seen.add(e.id);
-        const d=new Date(e.at),day=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+        const day=new Date(e.at+9*3600000).toISOString().slice(0,10);
         if(!days.has(day))days.set(day,new Set());
         days.get(day).add(e.game);
       }catch{}
@@ -72,10 +73,17 @@
   // Explicit answer outcomes, separate from aggregate correct counts.
   // A streak must never be inferred from correct-only events.
   const OUTCOME_PREFIX='sushitan_achievement_outcome_v1:';
-  function recordOutcome(game,questionId,correct,{review=false}={}){
+  let outcomeClock=0,outcomeClockLoaded=false;
+  function validOutcome(e){return e?.version===1&&typeof e.id==='string'&&/^[A-Za-z0-9:_-]{1,159}$/.test(e.id)&&VALID_GAME.test(e.game)&&typeof e.questionId==='string'&&!!e.questionId.trim()&&e.questionId.length<=160&&typeof e.correct==='boolean'&&typeof e.review==='boolean'&&Number.isSafeInteger(e.at)&&e.at>=0&&e.at<=8640000000000000}
+  function recordOutcome(game,questionId,correct,{review=false,eventId}={}){
     if(!VALID_GAME.test(game)||typeof questionId!=='string'||!questionId.trim()||questionId.length>160||typeof correct!=='boolean')return null;
-    const id=deviceId()+':'+(global.crypto?.randomUUID?.()||Date.now()+'-'+Math.random().toString(36).slice(2));
-    const event={version:1,id,game,questionId,correct,review:review===true,at:Date.now()};
+    const id=eventId||deviceId()+':'+(global.crypto?.randomUUID?.()||Date.now()+'-'+Math.random().toString(36).slice(2));
+    if(typeof id!=='string'||!/^[A-Za-z0-9:_-]{1,159}$/.test(id))return null;
+    const existing=localStorage.getItem(OUTCOME_PREFIX+id);
+    if(existing){try{const old=JSON.parse(existing);return old.game===game&&old.questionId===questionId&&old.correct===correct&&old.review===(review===true)?id:null}catch{return null}}
+    if(!outcomeClockLoaded){for(const event of exportOutcomes())outcomeClock=Math.max(outcomeClock,event.at);outcomeClockLoaded=true;}
+    outcomeClock=Math.max(Date.now(),outcomeClock+1);
+    const event={version:1,id,game,questionId,correct,review:review===true,at:outcomeClock};
     try{localStorage.setItem(OUTCOME_PREFIX+id,JSON.stringify(event))}catch{return null}
     global.dispatchEvent(new CustomEvent('sushi-achievement-change',{detail:{outcome:true,game}}));
     return id;
@@ -86,19 +94,25 @@
       const key=localStorage.key(i);if(!key?.startsWith(OUTCOME_PREFIX))continue;
       try{
         const e=JSON.parse(localStorage.getItem(key));
-        if(e?.version===1&&key===OUTCOME_PREFIX+e.id&&/^[A-Za-z0-9:_-]{1,159}$/.test(e.id)&&VALID_GAME.test(e.game)&&typeof e.questionId==='string'&&e.questionId.length<=160&&typeof e.correct==='boolean'&&Number.isSafeInteger(e.at))out.push(e);
+        if(validOutcome(e)&&key===OUTCOME_PREFIX+e.id)out.push(e);
       }catch{}
     }
     return out.sort((a,b)=>a.at-b.at||a.id.localeCompare(b.id));
   }
   function importOutcomes(events){
     if(!Array.isArray(events)||events.length>10000)return 0;
-    let added=0;
+    const staged=new Map();
     for(const e of events){
-      if(e?.version!==1||typeof e.id!=='string'||!/^[A-Za-z0-9:_-]{1,159}$/.test(e.id)||!VALID_GAME.test(e.game)||typeof e.questionId!=='string'||e.questionId.length>160||typeof e.correct!=='boolean'||!Number.isSafeInteger(e.at))continue;
+      if(!validOutcome(e))throw new Error('invalid_outcome_event');
+      const previous=staged.get(e.id)||JSON.parse(localStorage.getItem(OUTCOME_PREFIX+e.id)||'null');
+      if(previous&&(previous.game!==e.game||previous.questionId!==e.questionId||previous.correct!==e.correct||previous.review!==e.review||previous.at!==e.at))throw new Error('outcome_id_conflict');
+      staged.set(e.id,e);
+    }
+    let added=0;
+    for(const e of staged.values()){
       const key=OUTCOME_PREFIX+e.id;
       if(localStorage.getItem(key))continue;
-      try{localStorage.setItem(key,JSON.stringify(e));added++}catch{break}
+      try{localStorage.setItem(key,JSON.stringify(e));outcomeClock=Math.max(outcomeClock,e.at);added++}catch{break}
     }
     if(added)global.dispatchEvent(new CustomEvent('sushi-achievement-change',{detail:{importedOutcomes:added}}));
     return added;
@@ -109,7 +123,7 @@
       const key=localStorage.key(i);if(!key?.startsWith(OUTCOME_PREFIX))continue;
       try{
         const e=JSON.parse(localStorage.getItem(key));
-        if(e?.version!==1||key!==OUTCOME_PREFIX+e.id||!VALID_GAME.test(e.game)||typeof e.questionId!=='string'||!Number.isFinite(e.at)||typeof e.correct!=='boolean')continue;
+        if(!validOutcome(e)||key!==OUTCOME_PREFIX+e.id)continue;
         events.push(e);
       }catch{}
     }

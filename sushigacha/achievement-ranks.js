@@ -13,7 +13,7 @@
   const validCount=n=>Number.isSafeInteger(n)&&n>=0?n:0;
   function rankFor(count){const n=validCount(count);return [...RANKS].reverse().find(r=>n>=r.min)}
   function unlocked(count){const n=validCount(count);return RANKS.filter(r=>n>=r.min)}
-  function select(count,preferred){return unlocked(count).find(r=>r.id===preferred)||rankFor(count)}
+  function select(count,preferred){return unlocked(count).find(r=>r.id===preferred)||RANKS[0]}
   function progress(count){const n=validCount(count),current=rankFor(n),i=RANKS.indexOf(current),next=RANKS[i+1]||null;return {current,next,remaining:next?next.min-n:0,ratio:next?Math.min(1,(n-current.min)/(next.min-current.min)):1}}
   function applyToTaskbar(count,preferred,element){
     const bar=element||global.document?.getElementById('sushiTaskbar');

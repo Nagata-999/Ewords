@@ -1,4 +1,4 @@
-const CACHE_NAME = "sushitan-v13-shared-navigation";
+const CACHE_NAME = "sushitan-v14-achievement-events";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -9,6 +9,8 @@ const APP_SHELL = [
   "/shared/learning.js",
   "/shared/review-ui.js",
   "/shared/learning-home.js",
+  "/sushigacha/achievement-ledger.js?v=20261010-1",
+  "/sushigacha/achievement-events.js?v=20261010-1",
   "/icon-192.png",
   "/icon-512.png"
 ];

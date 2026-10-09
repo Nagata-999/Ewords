@@ -4,7 +4,7 @@
   const read=()=>{try{const v=JSON.parse(localStorage.getItem(KEY)||'{}');return v&&typeof v==='object'?v:{}}catch{return {}}};
   const save=v=>{localStorage.setItem(KEY,JSON.stringify(v));refresh()};
   const count=v=>Number.isSafeInteger(v)&&v>=0?v:0;
-  const state=()=>{const v=read();return {total:count(v.total),selected:typeof v.selected==='string'?v.selected:null}};
+  const state=()=>{const v=read();return {...v,total:count(v.total),unlockedTotal:count(v.unlockedTotal),selected:typeof v.selected==='string'?v.selected:null}};
   function achievementMetrics(){
     let login={};try{login=JSON.parse(localStorage.getItem('sushitan_login_bonus_v1')||'{}')||{}}catch{}
     const gameplay=window.SushiAchievementGameStats?.read?.()||{};
@@ -13,9 +13,9 @@
     const games=window.SushiAchievementLedger?.summary?.().games||{};
     return window.SushiAchievementMetrics?.compute?.({
       historicalTotal:s.total,ledgerTotal:total,byGame:games,
-      loginStreak:Number(login.loginBonusStreak)||0,
+      loginStreak:Math.max(Number(login.loginBonusBestStreak)||0,Number(login.loginBonusStreak)||0),
       dailyClaims:new Set([...(Array.isArray(login.dailyGemClaims)?login.dailyGemClaims:[])]).size,
-      gemsEarned:(Array.isArray(login.gemEvents)?login.gemEvents:[]).reduce((n,e)=>n+(e?.type==='earn'&&Number.isSafeInteger(e.amount)&&e.amount>0?e.amount:0),0),
+      gemsEarned:Math.max(count(login.gemsEarnedTotal),(Array.isArray(login.gemEvents)?login.gemEvents:[]).reduce((n,e)=>n+(e?.type==='earn'&&Number.isSafeInteger(e.amount)&&e.amount>0?e.amount:0),0)),
       avatarItems:new Set(Array.isArray(login.gacha?.owned)?login.gacha.owned:[]).size,
       gemPurchases:(Array.isArray(login.gemEvents)?login.gemEvents:[]).filter(e=>e?.type==='spend'&&Number(e.amount)>0).length,
       outfitChanges:Number(login.gacha?.avatarRevision)>0?1:0,
@@ -63,6 +63,8 @@
     if(!box||!window.SushiAchievementCatalog)return;
     if(receiptsSushiId!==(localStorage.getItem('sushitan_sync_id_v1')||'').trim().toLowerCase())verifiedReceipts=null;
     box.replaceChildren();
+    const connected=/^[a-z0-9_-]{4,24}$/.test((localStorage.getItem('sushitan_sync_id_v1')||'').trim().toLowerCase())&&/^\d{4}$/.test(localStorage.getItem('sushitan_sync_pin_v1')||'');
+    if(!connected){const note=document.createElement('p');note.textContent='報酬を受け取るには「データ同期」でIDとPINを設定してください。';note.style.cssText='font-size:13px;line-height:1.6;color:#645344';box.append(note)}
     for(const a of window.SushiAchievementCatalog.evaluate(achievementMetrics())){
       const item=document.createElement('div');item.style.cssText='border:1px solid #e8e1d5;border-radius:12px;padding:10px;margin:8px 0';
       const name=a.secret&&!a.reached?'???':a.title;
@@ -109,8 +111,9 @@
             const button=document.createElement('button');
             button.type='button';button.textContent='🎁 '+eligible.gems+'ジェムを受け取る';
             button.style.cssText='display:block;margin-top:8px;padding:9px 12px;border:0;border-radius:9px;background:#f6b52b;color:#402500;font-weight:800;cursor:pointer';
-            button.disabled=claimBusy.has(eligible.id);
-            if(button.disabled)button.textContent='受取中…';
+            button.disabled=claimBusy.has(eligible.id)||!connected;
+            if(claimBusy.has(eligible.id))button.textContent='受取中…';
+            else if(!connected){button.textContent='同期設定後に受け取れます';button.style.opacity='.6';}
             button.onclick=()=>claimReward(eligible.id.split(':').at(-1)*1,eligible.id,button,a.id);
             item.append(button);
           }
@@ -121,7 +124,8 @@
   }
   function refresh(){
     const engine=window.SushiAchievementRanks;if(!engine)return;
-    const s=state(),total=achievementMetrics().correct_total,rank=engine.applyToTaskbar(total,s.selected);
+    const s=state(),total=Math.max(achievementMetrics().correct_total,s.unlockedTotal),rank=engine.applyToTaskbar(total,s.selected);
+    if(total>s.unlockedTotal)localStorage.setItem(KEY,JSON.stringify({...s,unlockedTotal:total}));
     const bar=document.getElementById('sushiTaskbar');
     if(bar){
       bar.querySelectorAll('a,button').forEach(el=>{el.style.setProperty('color',rank.fg,'important')});
@@ -169,9 +173,7 @@
     const data=event.detail;
     const sushiId=(localStorage.getItem('sushitan_sync_id_v1')||'').trim().toLowerCase();
     if(data?.sushiId!==sushiId||!Array.isArray(data.receipts?.ids))return;
-    verifiedReceipts={ids:data.receipts.ids};
-    receiptsSushiId=sushiId;
-    refresh();
+    setServerReceipts(data,sushiId);
   });
   window.addEventListener('sushi-achievement-baseline-sync',refresh);
   function show(){
@@ -185,7 +187,7 @@
       panel.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();panel.remove();}});
       panel.querySelector('#sushiAchievementClose').focus();
       panel.onclick=e=>{if(e.target===panel)panel.remove()};
-      panel.querySelector('#sushiAchievementColors').onclick=e=>{const b=e.target.closest('button[data-rank]');if(!b||b.disabled)return;const s=state();save({...s,selected:b.dataset.rank})};
+      panel.querySelector('#sushiAchievementColors').onclick=e=>{const b=e.target.closest('button[data-rank]');if(!b||b.disabled)return;const s=state();let device=localStorage.getItem('sushitan_achievement_v2:device');if(!device){device=window.crypto?.randomUUID?.()||Date.now()+'-'+Math.random().toString(36).slice(2);localStorage.setItem('sushitan_achievement_v2:device',device)}save({...s,selected:b.dataset.rank,selectionRevision:count(s.selectionRevision)+1,selectionDevice:device});window.dispatchEvent(new CustomEvent('sushi-achievement-preference-change'))};
     }
     refresh();
   }
@@ -220,9 +222,17 @@
   }
   window.SushiAchievementSound?.setMuted?.(localStorage.getItem('sushitan_achievement_muted')==='1');
   window.SushiAchievements={state,addCorrect,show,refresh,setServerReceipts};
+  let previousMetrics=achievementMetrics();
+  window.addEventListener('sushi-achievement-answer',()=>{
+    const next=achievementMetrics();
+    celebrate(window.SushiAchievementMilestones?.reachedBetween?.(previousMetrics,next,window.SushiAchievementCatalog?.definitions)||[]);
+    previousMetrics=next;refresh();
+  });
+  window.addEventListener('sushi-profile-synced',()=>{previousMetrics=achievementMetrics();refresh()});
+  window.addEventListener('sushi-gem-change',refresh);
   // Drain correct answers recorded while the async achievement modules loaded.
   const pending=Array.isArray(window.__sushiPendingAchievementCorrect)?window.__sushiPendingAchievementCorrect.splice(0,1000):[];
-  for(const game of pending)if(['shinotan','antonitan','sushi_idiom','toeic','sushi_quiz','sukaishi','sushitalk'].includes(game))addCorrect(game,1);
+  for(const game of pending)if(typeof game==='string'&&/^[a-z0-9_-]{1,40}$/.test(game))addCorrect(game,1);
   function init(){
     const bar=document.getElementById('sushiTaskbar');if(!bar)return;
     const trigger=document.getElementById('sushiAchievementOpen');
