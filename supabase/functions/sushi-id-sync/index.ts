@@ -374,4 +374,3 @@ async function derive(pin:string,salt:Uint8Array){
 }
 function b64(a:Uint8Array){return btoa(String.fromCharCode(...a))}
 function from64(s:string){return Uint8Array.from(atob(s),c=>c.charCodeAt(0))}
-
