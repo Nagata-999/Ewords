@@ -121,6 +121,14 @@
     preview.textContent=selected?'🏅 現在の称号：'+selected.title+'（'+selected.level+'）':'称号は未設定です。実績を解除すると選択できます。';
     box.append(preview);
   }
+  window.addEventListener('sushi-achievement-receipts',event=>{
+    const data=event.detail;
+    const sushiId=(localStorage.getItem('sushitan_sync_id_v1')||'').trim().toLowerCase();
+    if(data?.sushiId!==sushiId||!Array.isArray(data.receipts?.ids))return;
+    verifiedReceipts={ids:data.receipts.ids};
+    receiptsSushiId=sushiId;
+    refresh();
+  });
   window.addEventListener('sushi-achievement-baseline-sync',refresh);
   function show(){
     let panel=document.getElementById('sushiAchievementPanel');
