@@ -3315,6 +3315,8 @@ html, body {
         GAME.attemptCount += 1;
         ensureAudio();
         GAME.correctCount += 1;
+        // Achievement ledger records one event per verified correct tap.
+        window.SushiAchievements?.addCorrect?.('antonitan',1);
         handleComboOnCorrect(now);
 
         const gained = 10 * getMultiplier(GAME.combo);
