@@ -40,7 +40,7 @@
     if(gems>0)window.dispatchEvent(new CustomEvent('sushi-avatar-reaction',{detail:{kind:'combo',text:`+${gems} GEM${gems===1?'':'S'}!`}}));
     return {gems,remainder,balance:ledger.gems,duplicate:false};
   }
-  function awardGems(source,amount,awardId){
+  function awardGems(source,amount,awardId,{origin}={}){
     source=String(source||'reward');amount=Math.max(0,Math.floor(Number(amount)||0));
     const ledger=read(),r=rewards(ledger),id=awardId?String(awardId):'';
     if(id&&r.awardIds.includes(id))return {gems:0,balance:balance(),duplicate:true};
@@ -48,11 +48,11 @@
     ledger.gems=(Number.isSafeInteger(ledger.gems)&&ledger.gems>=0?ledger.gems:0)+amount;
     addGemEvent(ledger,'earn',amount,source,id||'award-'+source+'-'+Date.now());
     write(ledger);
-    window.dispatchEvent(new CustomEvent('sushi-gems-earned',{detail:{source,gems:amount,balance:ledger.gems}}));
+    window.dispatchEvent(new CustomEvent('sushi-gems-earned',{detail:{source,gems:amount,balance:ledger.gems,origin}}));
     if(amount>0)window.dispatchEvent(new CustomEvent('sushi-avatar-reaction',{detail:{kind:'combo',text:`+${amount} GEM${amount===1?'':'S'}!`}}));
     return {gems:amount,balance:ledger.gems,duplicate:false};
   }
-  function spendGems(source,amount,spendId){source=String(source||'spend');amount=Math.max(0,Math.floor(Number(amount)||0));const ledger=read(),current=Number.isSafeInteger(ledger.gems)&&ledger.gems>=0?ledger.gems:0;if(!amount||current<amount)return {spent:0,balance:current,ok:false};ledger.gems=current-amount;addGemEvent(ledger,'spend',amount,source,spendId);write(ledger);window.dispatchEvent(new CustomEvent('sushi-gems-spent',{detail:{source,gems:amount,balance:ledger.gems}}));return {spent:amount,balance:ledger.gems,ok:true};}
+  function spendGems(source,amount,spendId){source=String(source||'spend');amount=Math.max(0,Math.floor(Number(amount)||0));const ledger=read(),current=Number.isSafeInteger(ledger.gems)&&ledger.gems>=0?ledger.gems:0;if(!amount||current<amount)return {spent:0,balance:current,ok:false};ledger.gems=current-amount;addGemEvent(ledger,'spend',amount,source,spendId);write(ledger);window.dispatchEvent(new CustomEvent('sushi-gems-spent',{detail:{source,gems:amount,balance:ledger.gems,origin}}));return {spent:amount,balance:ledger.gems,ok:true};}
   window.SushiGem={awardScore,awardGems,spendGems,balance};
 
   // Taskbar-only pages also award gems. Load visuals independently of the
@@ -60,13 +60,13 @@
   function loadGemEffects(){
     if(window.SushiGemFx||window.__sushiGemFxLoading)return;
     window.__sushiGemFxLoading=true;
-    let pending=0;
-    const remember=e=>{pending+=Math.max(0,Math.floor(Number(e.detail?.gems)||0));};
+    let pending=0, pendingOrigin;
+    const remember=e=>{pending+=Math.max(0,Math.floor(Number(e.detail?.gems)||0));if(e.detail?.origin)pendingOrigin=e.detail.origin;};
     window.addEventListener('sushi-gems-earned',remember);
     const script=document.createElement('script');
-    script.src='/sushigacha/gem-effects.js?v=20261009-1';
+    script.src='/sushigacha/gem-effects.js?v=20261009-23';
     const finish=()=>{window.removeEventListener('sushi-gems-earned',remember);window.__sushiGemFxLoading=false;};
-    script.onload=()=>{finish();if(pending)window.SushiGemFx?.play(pending);};
+    script.onload=()=>{finish();if(pending)window.SushiGemFx?.play(pending,pendingOrigin);};
     script.onerror=()=>{finish();script.remove();};
     document.head.appendChild(script);
   }
@@ -79,7 +79,7 @@
   // Full-screen/action-heavy games such as Sushi Dungeon must not receive the
   // shared bottom taskbar. Gem and quest integration remain available.
   const inSushiDungeon=/\/sushidungeon(?:\/|$)/i.test(location.pathname);
-  if(!inSushiDungeon)loadOnce('site-taskbar.js','/sushigacha/site-taskbar.js?v=20261008-3');
+  if(!inSushiDungeon)loadOnce('site-taskbar.js','/sushigacha/site-taskbar.js?v=20261009-23');
   loadOnce('daily-quest-click-bridge.js','/sushigacha/daily-quest-click-bridge.js?v=20261008-1');
-  loadOnce('daily-quest-links.js','/sushigacha/daily-quest-links.js?v=20260914-1');
+  loadOnce('daily-quest-links.js','/sushigacha/daily-quest-links.js?v=20261009-23');
 })();

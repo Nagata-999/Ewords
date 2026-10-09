@@ -29,7 +29,10 @@
     if(!r.width||!r.height||r.bottom<0||r.top>innerHeight)return null;
     return {el,x:r.left+r.width/2,y:r.top+r.height/2};
   }
-  function originPoint(){
+  function originPoint(explicit){
+    if(Number.isFinite(explicit?.x)&&Number.isFinite(explicit?.y)){
+      return {x:Math.max(24,Math.min(innerWidth-24,explicit.x)),y:Math.max(60,Math.min(innerHeight-100,explicit.y))};
+    }
     let x=innerWidth/2,y=innerHeight*.35;
     if(lastPointer&&performance.now()-lastPointer.at<1200){({x,y}=lastPointer);}
     else{
@@ -96,9 +99,9 @@
     flights.clear();impacts.clear();
     const target=gemTarget();target?.el.getAnimations().filter(a=>a.id==='sushi-gem-arrival').forEach(a=>a.cancel());
   }
-  function gemFx(amount){
+  function gemFx(amount,explicitOrigin){
     amount=Math.max(0,Math.floor(Number(amount)||0));if(!amount||document.hidden)return;
-    ensureGemFx();const origin=originPoint();showGemNotice(amount,origin);
+    ensureGemFx();const origin=originPoint(explicitOrigin);showGemNotice(amount,origin);
     const target=gemTarget();
     // Full-screen games without a taskbar and reduced-motion users keep a
     // readable, static reward notice instead of a flight to an invented target.
@@ -110,7 +113,7 @@
     for(let i=0;i<count;i++)flyGem(origin,target,i);
   }
   window.SushiGemFx={play:gemFx};
-  window.addEventListener('sushi-gems-earned',e=>gemFx(e.detail?.gems));
+  window.addEventListener('sushi-gems-earned',e=>gemFx(e.detail?.gems,e.detail?.origin));
   window.addEventListener('resize',clearFlights,{passive:true});
   window.addEventListener('pagehide',clearFlights);
   document.addEventListener('visibilitychange',()=>{if(document.hidden){clearFlights();clearTimeout(noticeTimer);document.getElementById('sushiGemFx')?.remove();noticeAmount=0;}});

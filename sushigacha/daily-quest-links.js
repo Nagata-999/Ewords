@@ -33,8 +33,10 @@
         reward.appendChild(go);
       }
       const go=()=>{location.href=href};
-      row.addEventListener('click',go);
-      row.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}});
+      // A reward button lives inside the link row. Let the taskbar claim it;
+      // navigating here would unload the page before its gem flight is visible.
+      row.addEventListener('click',e=>{if(e.target.closest?.('.sdq-claim'))return;go()});
+      row.addEventListener('keydown',e=>{if(e.target.closest?.('.sdq-claim'))return;if(e.key==='Enter'||e.key===' '){e.preventDefault();go()}});
     });
   }
   const mo=new MutationObserver(wire);
