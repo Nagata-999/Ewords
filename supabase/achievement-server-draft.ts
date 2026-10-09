@@ -27,10 +27,11 @@ export function normalizeAchievementEvents(input:unknown,limit=500){
 }
 export function summarizeAchievementEvents(events:AchievementEvent[]):AchievementSummary{
   const games:Record<string,number>=Object.create(null);let total=0;
-  for(const e of normalizeAchievementEvents(events,Number.MAX_SAFE_INTEGER).events){
+  const unique=normalizeAchievementEvents(events,Number.MAX_SAFE_INTEGER).events;
+  for(const e of unique){
     total+=e.correct;games[e.game]=(games[e.game]||0)+e.correct;
   }
-  return {total,games,eventCount:events.length};
+  return {total,games,eventCount:unique.length};
 }
 // Intended server flow:
 // 1. Verify sushi_id/PIN with the existing rate-limited authorization path.
