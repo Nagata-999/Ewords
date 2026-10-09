@@ -8,6 +8,8 @@ on:
       - 'sushigacha/achievements-ui.js'
       - 'sushigacha/site-taskbar.js'
       - 'sushitan.html'
+      - 'shinotan.html'
+      - 'antonitan.html'
       - 'supabase/achievement-*.ts'
       - 'tests/achievement-*.test.cjs'
       - '.github/workflows/achievement-tests.yml'
@@ -17,6 +19,8 @@ on:
       - 'sushigacha/achievements-ui.js'
       - 'sushigacha/site-taskbar.js'
       - 'sushitan.html'
+      - 'shinotan.html'
+      - 'antonitan.html'
       - 'supabase/achievement-*.ts'
       - 'tests/achievement-*.test.cjs'
       - '.github/workflows/achievement-tests.yml'
@@ -31,4 +35,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - run: node --check sushigacha/achievements-ui.js && node --check sushigacha/site-taskbar.js && node --check sushigacha/achievement-titles.js
       - run: node --test tests/achievement-merge.test.cjs tests/achievement-ledger.test.cjs tests/achievement-transport.test.cjs tests/achievement-sync-bridge.test.cjs tests/achievement-rewards.test.cjs tests/achievement-metrics.test.cjs tests/achievement-milestones.test.cjs tests/achievement-sound.test.cjs tests/achievement-receipts.test.cjs
+
