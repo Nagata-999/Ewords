@@ -35,6 +35,7 @@
   async function claimReward(threshold,id,button,category){
     if(claimBusy.has(id))return;
     claimBusy.add(id);button.disabled=true;button.textContent='受取中…';
+    refresh();
     try{
       const result=await window.SushiAchievementSyncBridge.claim(threshold,category);
       const sushiId=(localStorage.getItem('sushitan_sync_id_v1')||'').trim().toLowerCase();
@@ -42,7 +43,7 @@
       if(result.gems>0)window.dispatchEvent(new CustomEvent('sushi-gems-earned',{detail:{gems:result.gems,source:'achievement',id}}));
       refresh();
     }catch(error){window.alert('受取に失敗しました：'+error.message);button.disabled=false;button.textContent='🎁 受け取る'}
-    finally{claimBusy.delete(id)}
+    finally{claimBusy.delete(id);refresh()}
   }
   function renderCatalog(){
     const box=document.getElementById('sushiAchievementList');
@@ -69,6 +70,7 @@
             button.type='button';button.textContent='🎁 '+eligible.gems+'ジェムを受け取る';
             button.style.cssText='display:block;margin-top:8px;padding:9px 12px;border:0;border-radius:9px;background:#f6b52b;color:#402500;font-weight:800;cursor:pointer';
             button.disabled=claimBusy.has(eligible.id);
+            if(button.disabled)button.textContent='受取中…';
             button.onclick=()=>claimReward(eligible.id.split(':').at(-1)*1,eligible.id,button,a.id);
             item.append(button);
           }
