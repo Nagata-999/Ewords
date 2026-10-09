@@ -3313,7 +3313,8 @@ html, body {
         ensureAudio();
         GAME.correctCount += 1;
         // Achievement ledger records one event per verified correct tap.
-        window.SushiAchievements?.addCorrect?.('shinotan',1);
+        if(window.SushiAchievements?.addCorrect)window.SushiAchievements.addCorrect('shinotan',1);
+        else (window.__sushiPendingAchievementCorrect||(window.__sushiPendingAchievementCorrect=[])).push('shinotan');
         handleComboOnCorrect(now);
 
         const gained = 10 * getMultiplier(GAME.combo);
