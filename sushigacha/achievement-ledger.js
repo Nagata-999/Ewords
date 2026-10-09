@@ -80,6 +80,29 @@
     global.dispatchEvent(new CustomEvent('sushi-achievement-change',{detail:{outcome:true,game}}));
     return id;
   }
+  function exportOutcomes(){
+    const out=[];
+    for(let i=0;i<localStorage.length;i++){
+      const key=localStorage.key(i);if(!key?.startsWith(OUTCOME_PREFIX))continue;
+      try{
+        const e=JSON.parse(localStorage.getItem(key));
+        if(e?.version===1&&key===OUTCOME_PREFIX+e.id&&/^[A-Za-z0-9:_-]{1,159}$/.test(e.id)&&VALID_GAME.test(e.game)&&typeof e.questionId==='string'&&e.questionId.length<=160&&typeof e.correct==='boolean'&&Number.isSafeInteger(e.at))out.push(e);
+      }catch{}
+    }
+    return out.sort((a,b)=>a.at-b.at||a.id.localeCompare(b.id));
+  }
+  function importOutcomes(events){
+    if(!Array.isArray(events)||events.length>10000)return 0;
+    let added=0;
+    for(const e of events){
+      if(e?.version!==1||typeof e.id!=='string'||!/^[A-Za-z0-9:_-]{1,159}$/.test(e.id)||!VALID_GAME.test(e.game)||typeof e.questionId!=='string'||e.questionId.length>160||typeof e.correct!=='boolean'||!Number.isSafeInteger(e.at))continue;
+      const key=OUTCOME_PREFIX+e.id;
+      if(localStorage.getItem(key))continue;
+      try{localStorage.setItem(key,JSON.stringify(e));added++}catch{break}
+    }
+    if(added)global.dispatchEvent(new CustomEvent('sushi-achievement-change',{detail:{importedOutcomes:added}}));
+    return added;
+  }
   function outcomeSummary(){
     const events=[];
     for(let i=0;i<localStorage.length;i++){
@@ -194,5 +217,5 @@
     // Learning records may include the same post-migration answers; use as a floor, not an addition.
     return Math.max(historical+eventTotal,learningTotal(),legacyBaseline());
   }
-  global.SushiAchievementLedger=Object.freeze({record,recordOutcome,outcomeSummary,summary,distinctGamesInDay,legacyBaseline,learningTotal,migrationBaseline,ensureMigrationBaseline,baselineForSync,mergeBaseline,reconciledTotal,exportBatch,exportAllPages,importEvents});
+  global.SushiAchievementLedger=Object.freeze({record,recordOutcome,exportOutcomes,importOutcomes,outcomeSummary,summary,distinctGamesInDay,legacyBaseline,learningTotal,migrationBaseline,ensureMigrationBaseline,baselineForSync,mergeBaseline,reconciledTotal,exportBatch,exportAllPages,importEvents});
 })(window);
