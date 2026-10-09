@@ -1,7 +1,5 @@
 'use strict';
-/* Explicit opt-in integration only. Never starts automatically.
- * Requires the existing PIN-authenticated sushi-id-sync Edge Function to implement
- * action=achievement_sync and return the acknowledged achievement page contract. */
+/* PIN-authenticated automatic achievement sync. */
 (function(root){
  if(root.SushiAchievementSyncBridge)return;
  const URL='https://rxyoyveykxdfrpomkltl.supabase.co/functions/v1/sushi-id-sync';
@@ -41,12 +39,4 @@
    syncTimer=setTimeout(()=>run().catch(error=>console.warn('Achievement sync deferred:',error.message)),2500);
  });
  if(localStorage.getItem(ID)&&localStorage.getItem(PIN))setTimeout(()=>run().catch(error=>console.warn('Achievement sync deferred:',error.message)),1500);
- // Sync only after the established profile PIN sync succeeds. A failed
- // achievement sync never blocks the existing profile, gems, or avatar sync.
- root.addEventListener('sushi-profile-synced',()=>{run().catch(error=>console.warn('Achievement sync deferred:',error.message))});
- root.addEventListener('sushi-achievement-change',()=>{
-   if(!localStorage.getItem(PIN))return;
-   clearTimeout(syncTimer);
-   syncTimer=setTimeout(()=>run().catch(error=>console.warn('Achievement sync deferred:',error.message)),2500);
- });
 })(window);
