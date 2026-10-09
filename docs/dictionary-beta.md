@@ -2,7 +2,7 @@
 
 ## 構成
 
-- 現在の辞書 v2.27.0、13,500語を `data/dictionary/` に保存。
+- 現在の辞書 v3.57、13,500語を `data/dictionary/` に保存。更新元と既存内容の保持・検証記録は `docs/dictionary-v3.57.md` を参照。
 - `python scripts/build-dictionary.py` で HTML・検索索引・sitemap を再生成する。外部ライブラリ、サーバー、データベースの追加は不要。
 - `/dictionary/abandon/` のように、各語に独立した静的HTMLを生成。末尾スラッシュなしのアクセスは静的ホストのディレクトリ転送を使う。
 - JavaScriptを無効にしても日本語の意味と内部リンクが読める。各HTMLに title / description / canonical / OG / DefinedTerm のJSON-LDを出力。
@@ -13,9 +13,9 @@
 
 ## データと表示
 
-元JSONは改変していない。日本語の語義、登録された語形、熟語、例文などをそのまま表示する。現在、類義語・反意語は全件未登録のため表示されない。IPAも登録がある場合に限って表示する。音声は端末の英語読み上げで、辞書収録の録音音声ではない。
+v3.57完全版JSONを反映し、現行リポジトリにだけ存在した良質な例文37組・語義22件を補完して保持した。補完履歴と更新元のハッシュは `data/dictionary/integration-v3.57.json` に記録。日本語の語義、登録された語形、熟語、例文などをそのまま表示する。IPAも登録がある場合に限って表示する。音声は端末の英語読み上げで、辞書収録の録音音声ではない。
 
-既知の未完成テンプレート（日本語を埋め込んだ英文定義3,333件・汎用例文3,600件）は公開画面から除外する。判定は `scripts/dictionary-quality.py`、集計は `data/dictionary-build-report.json`。代替説明や例文は生成しない。判定に合う有用な文を追加する場合はルールを見直す。辞書データ自体の語義監修を完了したことを意味しない。
+既知の未完成テンプレート（英文定義1,794件・汎用例文1,939件）は公開画面から除外する。判定は既存の `scripts/dictionary-quality.py`、集計は `data/dictionary-build-report.json`。代替説明や例文は生成しない。判定に合う有用な文を追加する場合はルールを見直す。辞書データ自体の語義監修を完了したことを意味しない。
 
 ## 学習連携
 
@@ -62,3 +62,4 @@ node tests/word-notes.cjs
 ```
 
 ブラウザ検証はPlaywrightが必要。必要なら `NODE_PATH` / `PLAYWRIGHT_MODULE` と `CHROME_PATH` を指定する。テストはローカルHTTPサーバーを起動し、外部通信を遮断する。
+

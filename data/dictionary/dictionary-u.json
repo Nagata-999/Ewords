@@ -92,15 +92,29 @@
     "frequency": 2,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
-            "ja": "最終的な",
-            "definition": "a person, thing, state, process, or idea connected with 最終的な",
+            "ja": "最終的な；究極の",
+            "definition": "final or most important in a series of events or goals",
             "examples": [
               {
-                "en": "The word 'ultimate' is commonly used in this kind of context.",
-                "ja": "「ultimate」は「最終的な」に関する文脈でよく使われます。"
+                "en": "The ultimate aim of the program is to improve literacy.",
+                "ja": "そのプログラムの最終目的は読み書き能力を向上させることだ。"
+              },
+              {
+                "en": "Our ultimate goal is to make the system easier for students to use.",
+                "ja": "最終目標はそのシステムを生徒がより使いやすくすることです。"
+              }
+            ]
+          },
+          {
+            "ja": "最大の；これ以上ない",
+            "definition": "the greatest or most extreme of its kind",
+            "examples": [
+              {
+                "en": "For many athletes, competing at the Olympics is the ultimate dream.",
+                "ja": "多くの選手にとってオリンピック出場は究極の夢だ。"
               }
             ]
           }
@@ -113,9 +127,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "ultimate は「最後の」だけでなく「最も重要・究極の」。ultimately は「最終的には」。",
+    "tags": [
+      "v2.31-curated",
+      "curated-v2.63",
+      "curated-v3.46"
+    ],
+    "status": "enriched",
     "search_terms": [
       "ultimate"
     ],
@@ -123,7 +141,34 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "ultimate goal"
+      },
+      {
+        "text": "ultimate cause"
+      },
+      {
+        "text": "ultimate responsibility",
+        "ja": "最終的な責任"
+      },
+      {
+        "text": "the ultimate test",
+        "ja": "究極の試練"
+      }
+    ],
+    "senses": [
+      {
+        "pos": "",
+        "definition_ja": "最終的な；究極の",
+        "examples": [
+          {
+            "en": "The ultimate goal is to create communities that remain livable as the climate changes.",
+            "ja": "最終目標は気候が変化しても住み続けられる地域社会をつくることである。"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "sw-02144",
@@ -140,13 +185,14 @@
         "meanings": [
           {
             "ja": "最終的に",
-            "definition": "in the manner or degree expressed by 最終的に",
+            "definition": "in the end, after all relevant factors or events have been considered",
             "examples": [
               {
-                "en": "The word 'ultimately' is commonly used in this kind of context.",
-                "ja": "「ultimately」は「最終的に」に関する文脈でよく使われます。"
+                "en": "Ultimately, the success of the policy will depend on public support.",
+                "ja": "最終的に、その政策の成功は国民の支持にかかっている。"
               }
-            ]
+            ],
+            "definition_en": "in the end, after all relevant factors or events have been considered"
           }
         ]
       }
@@ -157,9 +203,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "Often used to state the final result or most important conclusion.",
+    "tags": [
+      "curated-v3.26"
+    ],
+    "status": "enriched",
     "search_terms": [
       "ultimately"
     ],
@@ -167,7 +215,10 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "ultimately depend on",
+      "ultimately responsible"
+    ]
   },
   {
     "id": "sw-11434",
@@ -618,24 +669,34 @@
         "meanings": [
           {
             "ja": "曖昧さのない",
-            "definition": "",
-            "examples": []
+            "definition": "clear and having only one possible meaning or interpretation",
+            "examples": [
+              {
+                "en": "Survey questions should be simple and unambiguous.",
+                "ja": "調査の質問は単純で曖昧さのないものにすべきである。"
+              }
+            ],
+            "definition_en": "clear and having only one possible meaning or interpretation"
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "clear and unambiguous",
+      "unambiguous evidence"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Often used for language, instructions, evidence, or signals.",
     "tags": [
-      "judgment-and-relations"
+      "judgment-and-relations",
+      "curated-v3.26"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10119",
@@ -823,24 +884,33 @@
         "meanings": [
           {
             "ja": "控えめな；出しゃばらない",
-            "definition": "",
-            "examples": []
+            "definition": "not drawing attention to oneself and not claiming to be important",
+            "examples": [
+              {
+                "en": "Despite her international reputation, she remains remarkably unassuming.",
+                "ja": "国際的な名声にもかかわらず、彼女は驚くほど控えめなままだ。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "unassuming manner",
+      "quiet and unassuming"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
     "tags": [
-      "study-language"
+      "study-language",
+      "curated-v3.31"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-06533",
@@ -864,24 +934,34 @@
         "meanings": [
           {
             "ja": "達成できない",
-            "definition": "",
-            "examples": []
+            "definition": "impossible or extremely difficult to achieve",
+            "examples": [
+              {
+                "en": "Setting unattainable targets can reduce motivation.",
+                "ja": "達成不可能な目標を設定すると意欲が低下することがある。"
+              }
+            ],
+            "definition_en": "impossible or extremely difficult to achieve"
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "unattainable goal",
+      "seem unattainable"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Usually used of goals, standards, ideals, or targets.",
     "tags": [
-      "judgment-and-relations"
+      "judgment-and-relations",
+      "curated-v3.26"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-03520",
@@ -905,29 +985,34 @@
         "meanings": [
           {
             "ja": "気づいていない",
-            "definition": "having the quality or condition expressed by 気づいていない",
+            "definition": "not knowing about a fact, situation, or problem",
             "examples": [
               {
-                "en": "It was a unaware situation for everyone involved.",
-                "ja": "この例では「気づいていない」という意味で使われている。"
+                "en": "Many consumers are unaware of how much data the app collects.",
+                "ja": "多くの消費者は、そのアプリがどれほど多くのデータを収集しているか知らない。"
               }
-            ]
+            ],
+            "definition_en": "not knowing about a fact, situation, or problem"
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "unaware of",
+      "remain unaware"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Normally followed by of + noun or that + clause.",
     "tags": [
-      "general-vocabulary"
+      "general-vocabulary",
+      "curated-v3.26"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-06509",
@@ -1161,14 +1246,19 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "不確実性",
-            "definition": "a concept, state, person, thing, or process connected with 不確実性",
+            "ja": "不確実性；不安",
+            "definition": "a state in which something is not known or certain",
             "examples": [
               {
-                "en": "The report discusses uncertainty in detail.",
-                "ja": "その報告書は「不確実性」について詳しく論じている。"
+                "en": "Economic uncertainty made companies cautious about hiring.",
+                "ja": "経済の不確実性により企業は採用に慎重になりました。"
+              },
+              {
+                "en": "Policy uncertainty discouraged firms from making major investments.",
+                "ja": "政策の不確実性により企業は大規模投資を控えた。"
               }
-            ]
+            ],
+            "definition_en": "a state in which something is unknown, unclear, or difficult to predict"
           }
         ]
       }
@@ -1181,9 +1271,11 @@
     },
     "usage_note": "",
     "tags": [
-      "academic-expansion"
+      "academic-expansion",
+      "v2.31-curated",
+      "curated-v3.25"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "search_terms": [
       "uncertainty"
     ],
@@ -1191,7 +1283,10 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "economic uncertainty",
+      "reduce uncertainty"
+    ]
   },
   {
     "id": "sw-12807",
@@ -1382,24 +1477,33 @@
         "meanings": [
           {
             "ja": "粗野な；無作法な",
-            "definition": "",
-            "examples": []
+            "definition": "rude and lacking good manners or social refinement",
+            "examples": [
+              {
+                "en": "His uncouth remarks offended several guests.",
+                "ja": "彼の無作法な発言は数人の客を不快にさせた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "uncouth behavior",
+      "uncouth remark"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
     "tags": [
-      "personality-manner"
+      "personality-manner",
+      "curated-v3.31"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12869",
@@ -1423,24 +1527,33 @@
         "meanings": [
           {
             "ja": "うわべだけ丁重な；脂ぎった",
-            "definition": "",
-            "examples": []
+            "definition": "excessively flattering or polite in a way that seems insincere",
+            "examples": [
+              {
+                "en": "His unctuous praise made the audience suspicious of his motives.",
+                "ja": "彼のいやにへつらった称賛は、聴衆にその意図を疑わせた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "unctuous manner",
+      "unctuous tone"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
     "tags": [
-      "personality-manner"
+      "personality-manner",
+      "curated-v3.31"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13471",
@@ -1497,12 +1610,12 @@
         "pos": "preposition",
         "meanings": [
           {
-            "ja": "〜の下に",
-            "definition": "a word showing a relationship with the sense '〜の下に'",
+            "ja": "〜の下に；〜のもとで",
+            "definition": "below something or subject to a condition or authority",
             "examples": [
               {
-                "en": "The word 'under' is common in English.",
-                "ja": "「under」は英語でよく使われる語です。"
+                "en": "Children under twelve can enter for free.",
+                "ja": "12歳未満の子どもは無料で入場できます。"
               }
             ]
           }
@@ -1516,8 +1629,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "under"
     ],
@@ -1590,24 +1705,34 @@
         "meanings": [
           {
             "ja": "安すぎる料金を請求する",
-            "definition": "",
-            "examples": []
+            "definition": "to charge less money than the correct or usual amount",
+            "examples": [
+              {
+                "en": "The hotel accidentally undercharged us for the second night.",
+                "ja": "ホテルは誤って2泊目の料金を少なく請求した。"
+              }
+            ],
+            "definition_en": "to charge less money than the correct or usual amount"
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "undercharge a customer",
+      "undercharge for a service"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Opposite: overcharge.",
     "tags": [
-      "work-actions"
+      "work-actions",
+      "curated-v3.26"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-03261",
@@ -1631,29 +1756,34 @@
         "meanings": [
           {
             "ja": "過小評価する",
-            "definition": "to judge an amount, difficulty, or importance as lower than it is",
+            "definition": "to judge the size, difficulty, importance, or ability of something as less than it really is",
             "examples": [
               {
-                "en": "The team decided to underestimate the new approach.",
-                "ja": "チームは新しい方法について「過小評価する」ことにした。"
+                "en": "We should not underestimate the long-term effects of sleep deprivation.",
+                "ja": "睡眠不足の長期的な影響を過小評価すべきではない。"
               }
-            ]
+            ],
+            "definition_en": "to judge the size, difficulty, importance, or ability of something as less than it really is"
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "underestimate the importance of",
+      "seriously underestimate"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Often followed by the importance, cost, difficulty, risk, or impact of something.",
     "tags": [
-      "scale-50k"
+      "scale-50k",
+      "curated-v3.26"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12200",
@@ -1710,35 +1840,92 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "経験する；受ける",
-            "definition": "to perform or cause the action expressed by 経験する",
+            "ja": "（治療・検査などを）受ける",
+            "definition": "to experience a process or procedure, often one that is difficult",
             "examples": [
               {
-                "en": "The word 'undergo' is commonly used in this context.",
-                "ja": "「undergo」は「経験する」に関する文脈で使われます。"
+                "en": "The patient underwent surgery last month.",
+                "ja": "その患者は先月手術を受けた。"
+              }
+            ]
+          },
+          {
+            "ja": "（変化・変革などを）経験する",
+            "definition": "to go through a change or development",
+            "examples": [
+              {
+                "en": "The education system has undergone major reforms.",
+                "ja": "その教育制度は大規模な改革を経てきた。"
+              },
+              {
+                "en": "The region has undergone rapid economic change.",
+                "ja": "その地域は急速な経済変化を経験してきた。"
+              },
+              {
+                "en": "The system underwent major changes after the review.",
+                "ja": "その制度は見直し後に大きな変更を受けた。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "undergoes",
+      "past": "underwent",
+      "past_participle": "undergone",
+      "ing": "undergoing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "undergo surgery/treatment/changes のように、通常は処置・変化などの目的語を取る。",
+    "tags": [
+      "v2.31-curated",
+      "curated-v2.50",
+      "curated-v2.62",
+      "curated-v3.43"
+    ],
+    "status": "enriched",
     "search_terms": [
-      "undergo"
+      "undergo",
+      "undergoes",
+      "underwent",
+      "undergone",
+      "undergoing"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "undergo treatment"
+      },
+      {
+        "text": "undergo change"
+      },
+      {
+        "text": "undergo surgery"
+      },
+      {
+        "text": "undergo major changes"
+      }
+    ],
+    "senses": [
+      {
+        "pos": "",
+        "definition_ja": "経験する；受ける",
+        "examples": [
+          {
+            "en": "The system underwent major changes after the review.",
+            "ja": "その制度は見直し後に大きな変更を受けた。"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "sw-03040",
@@ -1772,11 +1959,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Useful in general, academic, news, or professional English.",
     "tags": [
-      "learner-core-gap"
+      "learner-core-gap",
+      "curated-v3.04"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "search_terms": [
       "undergraduate"
     ],
@@ -1784,7 +1972,10 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "undergraduate student",
+      "undergraduate degree"
+    ]
   },
   {
     "id": "sw-02804",
@@ -1923,15 +2114,38 @@
     "frequency": 2,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
-            "ja": "根底にある",
-            "definition": "a person, thing, state, process, or idea connected with 根底にある",
+            "ja": "根底にある；根本的な",
+            "definition": "being the basic cause or explanation of something, though not always obvious",
             "examples": [
               {
-                "en": "The word 'underlying' is commonly used in this kind of context.",
-                "ja": "「underlying」は「根底にある」に関する文脈でよく使われます。"
+                "en": "The study investigated the underlying causes of the decline.",
+                "ja": "その研究は減少の根本原因を調べた。"
+              },
+              {
+                "en": "The survey did not identify the underlying causes of the decline.",
+                "ja": "その調査では減少の根本原因を特定できなかった。"
+              },
+              {
+                "en": "The study examined the underlying causes of the decline.",
+                "ja": "その研究は減少の根本原因を調べた。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "表面下にある；潜在的な",
+            "definition": "existing beneath something else or not immediately visible",
+            "examples": [
+              {
+                "en": "The report revealed underlying tensions within the organization.",
+                "ja": "その報告書は組織内に潜む緊張関係を明らかにした。"
               }
             ]
           }
@@ -1944,9 +2158,14 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "Underlying commonly modifies causes, assumptions, mechanisms, problems, and trends; it is not normally used as a noun.",
+    "tags": [
+      "curated-v2.49",
+      "curated-v2.62",
+      "curated-v3.34",
+      "curated-v3.41"
+    ],
+    "status": "enriched",
     "search_terms": [
       "underlying"
     ],
@@ -1954,7 +2173,32 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "underlying cause"
+      },
+      {
+        "text": "underlying assumption"
+      },
+      {
+        "text": "underlying problem",
+        "ja": "潜在的な問題"
+      },
+      "underlying cause",
+      "underlying assumption"
+    ],
+    "senses": [
+      {
+        "pos": "",
+        "definition_ja": "根底にある；基礎となる",
+        "examples": [
+          {
+            "en": "The symptoms may have several different underlying causes.",
+            "ja": "その症状には複数の異なる根本原因があり得る。"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "sw-02367",
@@ -1970,12 +2214,20 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "弱める",
-            "definition": "to perform or cause the action expressed by 弱める",
+            "ja": "（信頼・権威・効果などを）弱める；損なう",
+            "definition": "to gradually weaken confidence, authority, or effectiveness",
             "examples": [
               {
-                "en": "The word 'undermine' is useful when discussing this topic.",
-                "ja": "この語は「弱める」に関する文脈で使われます。"
+                "en": "Unclear reporting can undermine confidence in scientific findings.",
+                "ja": "不明瞭な報告は科学的知見への信頼を損なうおそれがある。"
+              },
+              {
+                "en": "Repeated delays undermined the credibility of the project.",
+                "ja": "度重なる遅延はその計画の信頼性を損なった。"
+              },
+              {
+                "en": "Repeated misinformation can undermine public trust in institutions.",
+                "ja": "繰り返される誤情報は制度に対する国民の信頼を損なう可能性がある。"
               }
             ]
           }
@@ -1988,9 +2240,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "undermine は表面から直接壊すより、信頼・基盤・有効性を徐々に弱めるニュアンス。",
+    "tags": [
+      "curated-v3.26",
+      "curated-v3.56"
+    ],
+    "status": "enriched",
     "search_terms": [
       "undermine"
     ],
@@ -1998,7 +2253,18 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "undermine confidence",
+      "undermine public trust",
+      {
+        "text": "undermine an argument",
+        "ja": "議論の説得力を弱める"
+      },
+      {
+        "text": "seriously undermine",
+        "ja": "深刻に損なう"
+      }
+    ]
   },
   {
     "id": "sw-06817",
@@ -2104,24 +2370,34 @@
         "meanings": [
           {
             "ja": "十分な賃金を払わない",
-            "definition": "",
-            "examples": []
+            "definition": "to pay someone less than is fair, expected, or legally required",
+            "examples": [
+              {
+                "en": "The investigation found that several contractors had underpaid migrant workers.",
+                "ja": "調査の結果、複数の請負業者が移民労働者に不当に低い賃金しか支払っていなかったことが分かった。"
+              }
+            ],
+            "definition_en": "to pay someone less than is fair, expected, or legally required"
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "underpay workers",
+      "systematically underpay"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Usually takes a person or group as its object.",
     "tags": [
-      "work-actions"
+      "work-actions",
+      "curated-v3.26"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08069",
@@ -2145,24 +2421,34 @@
         "meanings": [
           {
             "ja": "基礎を補強する；裏付ける",
-            "definition": "",
-            "examples": []
+            "definition": "to support or form the basis of an argument, system, or idea",
+            "examples": [
+              {
+                "en": "Several decades of research underpin the new guidelines.",
+                "ja": "数十年にわたる研究が新しい指針の根拠となっている。"
+              }
+            ],
+            "definition_en": "to support or form the basis of an argument, system, or idea"
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "underpin an argument",
+      "underpin economic growth"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "In academic English, often means to provide the basic support or evidence for something.",
     "tags": [
-      "craft-actions"
+      "craft-actions",
+      "curated-v3.26"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08733",
@@ -2227,24 +2513,34 @@
         "meanings": [
           {
             "ja": "控えめに演じる；軽く扱う",
-            "definition": "",
-            "examples": []
+            "definition": "to make something seem less important or serious than it really is",
+            "examples": [
+              {
+                "en": "Officials were accused of underplaying the risks of the project.",
+                "ja": "当局はその事業のリスクを軽く見せたとして批判された。"
+              }
+            ],
+            "definition_en": "to make something seem less important or serious than it really is"
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "underplay the risk",
+      "underplay the importance of"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Often implies deliberate minimization.",
     "tags": [
-      "thinking-perception"
+      "thinking-perception",
+      "curated-v3.26"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13039",
@@ -2271,8 +2567,13 @@
         "meanings": [
           {
             "ja": "十分に反応しない；反応が弱すぎる",
-            "definition": "",
-            "examples": []
+            "definition": "to react less strongly than a situation requires",
+            "examples": [
+              {
+                "en": "Governments risk underreacting when early warning signs are dismissed.",
+                "ja": "初期の警告サインを軽視すると、政府は対応が不十分になる危険がある。"
+              }
+            ]
           }
         ]
       }
@@ -2284,16 +2585,20 @@
       "ing": "underreacting"
     },
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "underreact to a threat",
+      "tend to underreact"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
     "tags": [
-      "thinking-perception"
+      "thinking-perception",
+      "curated-v3.31"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-06541",
@@ -2317,24 +2622,34 @@
         "meanings": [
           {
             "ja": "強調する",
-            "definition": "",
-            "examples": []
+            "definition": "to emphasize the importance or seriousness of something",
+            "examples": [
+              {
+                "en": "The findings underscore the need for earlier intervention.",
+                "ja": "その調査結果は、より早期の介入の必要性を強調している。"
+              }
+            ],
+            "definition_en": "to emphasize the importance or seriousness of something"
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "underscore the importance of",
+      "underscore the need for"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Formal synonym of emphasize, especially common in reports and news.",
     "tags": [
-      "thinking-communication"
+      "thinking-communication",
+      "curated-v3.26"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07799",
@@ -2563,24 +2878,34 @@
         "meanings": [
           {
             "ja": "人手不足の",
-            "definition": "",
-            "examples": []
+            "definition": "having fewer workers than are needed to operate effectively",
+            "examples": [
+              {
+                "en": "Many rural hospitals are chronically understaffed.",
+                "ja": "多くの地方病院は慢性的な人手不足に陥っている。"
+              }
+            ],
+            "definition_en": "having fewer workers than are needed to operate effectively"
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "chronically understaffed",
+      "severely understaffed"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Often used of hospitals, schools, public services, and workplaces.",
     "tags": [
-      "work-description"
+      "work-description",
+      "curated-v3.26"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13156",
@@ -2604,24 +2929,33 @@
         "meanings": [
           {
             "ja": "人員不足",
-            "definition": "",
-            "examples": []
+            "definition": "a situation in which an organization has fewer workers than it needs",
+            "examples": [
+              {
+                "en": "Chronic understaffing has increased waiting times at the hospital.",
+                "ja": "慢性的な人員不足によって、その病院の待ち時間が長くなっている。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "chronic understaffing",
+      "severe understaffing"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
     "tags": [
-      "work-life"
+      "work-life",
+      "curated-v3.31"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-00609",
@@ -2638,34 +2972,63 @@
         "meanings": [
           {
             "ja": "理解する",
-            "definition": "to do or express the action '理解する'",
+            "definition": "to know the meaning, reason, or nature of something",
             "examples": [
               {
-                "en": "We often understand this in everyday life.",
-                "ja": "私たちは日常生活でよく「理解する」します。"
+                "en": "I understand the rule, but I still need practice using it.",
+                "ja": "規則は理解していますが使う練習がまだ必要です。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "understands",
+      "past": "understood",
+      "past_participle": "understood",
+      "ing": "understanding"
+    },
+    "phrases": [
+      "understand how/why"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
-      "understand"
+      "understand",
+      "understands",
+      "understood",
+      "understanding"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Old English standan / related Germanic forms",
+      "history": "Old English understandan に由来する。現代的に under + stand と単純分解して「下に立つ」と解釈するのは避ける。",
+      "roots": [
+        {
+          "form": "stand",
+          "meaning": "立つ"
+        }
+      ],
+      "related": [
+        "constant",
+        "circumstance",
+        "stand",
+        "standard"
+      ]
+    }
   },
   {
     "id": "sw-13487",
@@ -2689,24 +3052,34 @@
         "meanings": [
           {
             "ja": "控えめに表現された；派手すぎない",
-            "definition": "",
-            "examples": []
+            "definition": "presented or expressed in a restrained, subtle way rather than dramatically",
+            "examples": [
+              {
+                "en": "The report gives an understated account of the scale of the problem.",
+                "ja": "その報告書は問題の規模を控えめに描写している。"
+              }
+            ],
+            "definition_en": "presented or expressed in a restrained, subtle way rather than dramatically"
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "understated style",
+      "quietly understated"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Can be positive when describing elegant design or style.",
     "tags": [
-      "practical-quality"
+      "practical-quality",
+      "curated-v3.26"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07992",
@@ -2730,24 +3103,34 @@
         "meanings": [
           {
             "ja": "控えめな表現",
-            "definition": "",
-            "examples": []
+            "definition": "a statement that makes something seem less important, serious, or extreme than it really is",
+            "examples": [
+              {
+                "en": "Calling the storm inconvenient would be an understatement.",
+                "ja": "その嵐を「不便だった」と言うだけでは控えめすぎる表現だ。"
+              }
+            ],
+            "definition_en": "a statement that makes something seem less important, serious, or extreme than it really is"
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "a considerable understatement",
+      "something of an understatement"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "The pattern “X is an understatement” is common for deliberate emphasis.",
     "tags": [
-      "publishing"
+      "publishing",
+      "curated-v3.26"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-09419",
@@ -2771,24 +3154,33 @@
         "meanings": [
           {
             "ja": "代役俳優；代役",
-            "definition": "",
-            "examples": []
+            "definition": "a performer who learns another performer’s role and can replace them if necessary",
+            "examples": [
+              {
+                "en": "The understudy took over the leading role at short notice.",
+                "ja": "代役俳優が急きょ主役を務めた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "understudy for a role",
+      "serve as an understudy"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
     "tags": [
-      "music-performance"
+      "music-performance",
+      "curated-v3.31"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07815",
@@ -2842,30 +3234,57 @@
     "frequency": 2,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "verb",
         "meanings": [
           {
-            "ja": "引き受ける",
-            "definition": "a person, thing, state, process, or idea connected with 引き受ける",
+            "ja": "（仕事・調査などを）引き受ける；実施する",
+            "definition": "to agree to do and begin a task or responsibility",
             "examples": [
               {
-                "en": "The word 'undertake' is commonly used in this context.",
-                "ja": "「undertake」は「引き受ける」に関する文脈で使われます。"
+                "en": "The team undertook a detailed assessment of the risks.",
+                "ja": "チームはリスクの詳細な評価に着手した。"
+              },
+              {
+                "en": "The agency undertook a comprehensive review of the policy.",
+                "ja": "その機関は政策の包括的な見直しに着手した。"
+              },
+              {
+                "en": "The agency undertook a comprehensive review of the existing regulations.",
+                "ja": "その機関は既存の規制について包括的な見直しを実施した。"
+              }
+            ]
+          },
+          {
+            "ja": "～すると約束する（undertake to do）",
+            "definition": "to formally promise to do something",
+            "examples": [
+              {
+                "en": "The contractor undertook to complete the work by March.",
+                "ja": "請負業者は3月までに工事を完了すると約束した。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "undertakes",
+      "past": "undertook",
+      "past_participle": "undertaken",
+      "ing": "undertaking"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "undertake to do で「〜することを約束する」の意もある。 undertake research/a review（調査・見直しを行う）；undertake to do（～すると約束する）。",
+    "tags": [
+      "curated-v2.67",
+      "curated-v3.29",
+      "curated-v3.43"
+    ],
+    "status": "enriched",
     "search_terms": [
       "undertake"
     ],
@@ -2873,7 +3292,37 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "undertake research"
+      },
+      {
+        "text": "undertake a review"
+      },
+      {
+        "en": "undertake research",
+        "ja": ""
+      },
+      {
+        "en": "undertake a review",
+        "ja": ""
+      },
+      {
+        "text": "undertake to do"
+      }
+    ],
+    "senses": [
+      {
+        "pos": "",
+        "definition_ja": "引き受ける；着手する；実施する",
+        "examples": [
+          {
+            "en": "The agency undertook a comprehensive review of the existing regulations.",
+            "ja": "その機関は既存の規制について包括的な見直しを実施した。"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "sw-07010",
@@ -3006,7 +3455,11 @@
     "word": "underwrite",
     "lemma": "underwrite",
     "search_terms": [
-      "underwrite"
+      "underwrite",
+      "underwrites",
+      "underwrote",
+      "underwritten",
+      "underwriting"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -3022,25 +3475,56 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "引き受ける；資金を保証する",
-            "definition": "",
-            "examples": []
+            "ja": "（費用・事業に）資金を提供・保証する",
+            "definition": "to agree to finance or cover the costs of an activity",
+            "examples": [
+              {
+                "en": "A charitable foundation agreed to underwrite the research project.",
+                "ja": "慈善財団がその研究事業の費用を負担することに同意した。"
+              }
+            ]
+          },
+          {
+            "ja": "（保険を）引き受ける",
+            "definition": "to accept financial risk by providing insurance",
+            "examples": [
+              {
+                "en": "The insurer refused to underwrite the property at the proposed rate.",
+                "ja": "保険会社は提示された保険料率でその物件の保険を引き受けることを断った。"
+              }
+            ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "underwrites",
+      "past": "underwrote",
+      "past_participle": "underwritten",
+      "ing": "underwriting"
+    },
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "underwrite a project"
+      },
+      {
+        "text": "underwrite insurance"
+      },
+      {
+        "text": "underwriting risk"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "資金面の保証・費用負担と、保険の引受けの意味を区別する。",
     "tags": [
-      "work-actions"
+      "work-actions",
+      "curated-v3.51"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08412",
@@ -3590,12 +4074,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "失業",
-            "definition": "a person, thing, state, process, or idea connected with 失業",
+            "ja": "失業；働く意思があるのに仕事がない状態",
+            "definition": "the condition of being without a job while seeking work",
             "examples": [
               {
-                "en": "The word 'unemployment' is commonly used in this kind of context.",
-                "ja": "「unemployment」は「失業」に関する文脈でよく使われます。"
+                "en": "Long-term unemployment can affect mental health.",
+                "ja": "長期失業は心の健康に影響することがある。"
+              }
+            ]
+          },
+          {
+            "ja": "失業者数・失業率に関わる経済状況",
+            "definition": "the extent of joblessness within an economy",
+            "examples": [
+              {
+                "en": "Unemployment fell as the economy recovered.",
+                "ja": "景気が回復するにつれて失業率は低下した。"
               }
             ]
           }
@@ -3608,9 +4102,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "unemployment は通常不可算名詞。unemployed は形容詞で be unemployed、unemployment rate は失業率。",
+    "tags": [
+      "curated-v2.51",
+      "curated-v2.58",
+      "curated-v3.48"
+    ],
+    "status": "enriched",
     "search_terms": [
       "unemployment"
     ],
@@ -3618,7 +4116,32 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "unemployment rate",
+        "ja": "失業率"
+      },
+      {
+        "text": "long-term unemployment",
+        "ja": "長期失業"
+      },
+      {
+        "text": "reduce unemployment",
+        "ja": "失業を減らす"
+      }
+    ],
+    "senses": [
+      {
+        "pos": "",
+        "definition_ja": "失業；失業率",
+        "examples": [
+          {
+            "en": "Youth unemployment remains high in several regions.",
+            "ja": "いくつかの地域では若年失業率が依然として高い。"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "sw-08102",
@@ -3683,24 +4206,33 @@
         "meanings": [
           {
             "ja": "明確な",
-            "definition": "",
-            "examples": []
+            "definition": "clear and definite, with no possibility of misunderstanding",
+            "examples": [
+              {
+                "en": "The evidence provides unequivocal support for the conclusion.",
+                "ja": "その証拠は、その結論を明確に支持している。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "unequivocal evidence",
+      "unequivocal support"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
     "tags": [
-      "judgment-and-relations"
+      "judgment-and-relations",
+      "curated-v3.31"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10533",
@@ -4635,11 +5167,15 @@
         "meanings": [
           {
             "ja": "組合；連合",
-            "definition": "a person, thing, state, or idea related to 組合",
+            "definition": "an organization of workers, or the act or state of joining together",
             "examples": [
               {
                 "en": "The word 'union' is often useful in formal or everyday English.",
                 "ja": "「union」は「組合」の意味で使われます。"
+              },
+              {
+                "en": "The labor union called for safer working conditions.",
+                "ja": "労働組合はより安全な労働条件を求めた。"
               }
             ]
           }
@@ -4653,8 +5189,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "etymology-v1",
+      "v3.28-curated"
+    ],
+    "status": "enriched",
     "search_terms": [
       "union"
     ],
@@ -4662,7 +5201,31 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "labor union",
+      "trade union",
+      "union member"
+    ],
+    "etymology": {
+      "origin": "Latin unus / unicus",
+      "history": "Latin unio / unus「一つ」に由来し、一つに結びついた状態を表す。",
+      "roots": [
+        {
+          "form": "uni-",
+          "meaning": "一つ"
+        },
+        {
+          "form": "uni",
+          "meaning": "一つ"
+        }
+      ],
+      "related": [
+        "unique",
+        "universal",
+        "university",
+        "unite"
+      ]
+    }
   },
   {
     "id": "sw-13141",
@@ -4686,24 +5249,33 @@
         "meanings": [
           {
             "ja": "労働組合主義；統合を支持する立場",
-            "definition": "",
-            "examples": []
+            "definition": "the principles and activities associated with labor unions",
+            "examples": [
+              {
+                "en": "Industrial unionism expanded rapidly during the period.",
+                "ja": "その時期には産業別労働組合運動が急速に拡大した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "trade unionism",
+      "industrial unionism"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
     "tags": [
-      "work-life"
+      "work-life",
+      "curated-v3.31"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07893",
@@ -4768,24 +5340,33 @@
         "meanings": [
           {
             "ja": "労働組合の結成；組合化",
-            "definition": "",
-            "examples": []
+            "definition": "the process of organizing workers into a labor union",
+            "examples": [
+              {
+                "en": "The dispute renewed debate about unionization in the industry.",
+                "ja": "その争議によって、その業界の労働組合結成をめぐる議論が再燃した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "unionization drive",
+      "rate of unionization"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
     "tags": [
-      "work-life"
+      "work-life",
+      "curated-v3.31"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-01369",
@@ -4798,15 +5379,29 @@
     "frequency": 3,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
-            "ja": "独特の；唯一の",
-            "definition": "a person, thing, state, process, or idea connected with 独特の",
+            "ja": "唯一の；ほかにない",
+            "definition": "being the only one of its kind",
             "examples": [
               {
-                "en": "The word 'unique' is commonly used in this context.",
-                "ja": "「unique」は「独特の」に関する文脈で使われます。"
+                "en": "The manuscript is a unique record of life in the region.",
+                "ja": "その手稿はその地域の暮らしを伝える唯一無二の記録だ。"
+              },
+              {
+                "en": "Each student brings a unique perspective to the discussion.",
+                "ja": "各生徒は議論に独自の視点をもたらします。"
+              }
+            ]
+          },
+          {
+            "ja": "独特の；特有の",
+            "definition": "having qualities that make it different from others",
+            "examples": [
+              {
+                "en": "Each community faces a unique set of challenges.",
+                "ja": "それぞれの地域社会は独自の課題を抱えている。"
               }
             ]
           }
@@ -4819,9 +5414,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "unique to + 名詞「〜に特有の」。厳密な「唯一」の意味では比較級 more unique を避けるのが無難。",
+    "tags": [
+      "v2.31-curated",
+      "etymology-v1",
+      "curated-v3.46"
+    ],
+    "status": "enriched",
     "search_terms": [
       "unique"
     ],
@@ -4829,7 +5428,40 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "a unique opportunity",
+        "ja": "またとない機会"
+      },
+      {
+        "text": "unique characteristics",
+        "ja": "独自の特徴"
+      },
+      {
+        "text": "unique to a region",
+        "ja": "その地域に特有の"
+      }
+    ],
+    "etymology": {
+      "origin": "Latin unus / unicus",
+      "history": "Latin unicus / unus「一つ」に由来し、「唯一の」を表す。",
+      "roots": [
+        {
+          "form": "uni-",
+          "meaning": "一つ"
+        },
+        {
+          "form": "uni",
+          "meaning": "一つ"
+        }
+      ],
+      "related": [
+        "universal",
+        "university",
+        "unite",
+        "union"
+      ]
+    }
   },
   {
     "id": "sw-07040",
@@ -5033,7 +5665,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "unite"
@@ -5042,7 +5676,27 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin unus / unicus",
+      "history": "Latin unus「一つ」に由来し、一つにすることを表す。",
+      "roots": [
+        {
+          "form": "uni-",
+          "meaning": "一つ"
+        },
+        {
+          "form": "uni",
+          "meaning": "一つ"
+        }
+      ],
+      "related": [
+        "unique",
+        "universal",
+        "university",
+        "union"
+      ]
+    }
   },
   {
     "id": "sw-02149",
@@ -5055,15 +5709,19 @@
     "frequency": 2,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
             "ja": "普遍的な",
-            "definition": "a person, thing, state, process, or idea connected with 普遍的な",
+            "definition": "existing, applying, or true in all cases or for all people",
             "examples": [
               {
                 "en": "The word 'universal' is commonly used in this kind of context.",
                 "ja": "「universal」は「普遍的な」に関する文脈でよく使われます。"
+              },
+              {
+                "en": "Access to basic education should be a universal right.",
+                "ja": "基礎教育へのアクセスは普遍的な権利であるべきだ。"
               }
             ]
           }
@@ -5077,8 +5735,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "etymology-v1",
+      "v3.28-curated"
+    ],
+    "status": "enriched",
     "search_terms": [
       "universal"
     ],
@@ -5086,7 +5747,31 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "universal access",
+      "universal right",
+      "universal principle"
+    ],
+    "etymology": {
+      "origin": "Latin unus / unicus",
+      "history": "Latin universus（unus「一つ」+ versus「向けられた」）に由来し、全体を一つにまとめた→普遍的な、となった。",
+      "roots": [
+        {
+          "form": "uni-",
+          "meaning": "一つ"
+        },
+        {
+          "form": "uni",
+          "meaning": "一つ"
+        }
+      ],
+      "related": [
+        "unique",
+        "university",
+        "unite",
+        "union"
+      ]
+    }
   },
   {
     "id": "sw-02281",
@@ -5147,11 +5832,11 @@
         "meanings": [
           {
             "ja": "大学",
-            "definition": "a person, thing, idea, or concept connected with '大学'",
+            "definition": "an institution of higher education and research that awards degrees",
             "examples": [
               {
-                "en": "This university is important.",
-                "ja": "この「大学」は重要です。"
+                "en": "She hopes to study psychology at university.",
+                "ja": "彼女は大学で心理学を学びたいと思っています。"
               }
             ]
           }
@@ -5165,8 +5850,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "university"
     ],
@@ -5174,7 +5862,27 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin unus / unicus",
+      "history": "Latin universitas「全体・共同体」に由来し、教師と学生の共同体から大学を表すようになった。",
+      "roots": [
+        {
+          "form": "uni-",
+          "meaning": "一つ"
+        },
+        {
+          "form": "uni",
+          "meaning": "一つ"
+        }
+      ],
+      "related": [
+        "unique",
+        "universal",
+        "unite",
+        "union"
+      ]
+    }
   },
   {
     "id": "sw-08620",
@@ -5688,24 +6396,33 @@
         "meanings": [
           {
             "ja": "まずい；受け入れにくい",
-            "definition": "",
-            "examples": []
+            "definition": "unpleasant to taste or, figuratively, difficult to accept",
+            "examples": [
+              {
+                "en": "The committee had to confront the unpalatable fact that the policy had failed.",
+                "ja": "委員会は、その政策が失敗したという受け入れがたい事実に向き合わなければならなかった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "unpalatable truth",
+      "unpalatable fact"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
     "tags": [
-      "descriptive"
+      "descriptive",
+      "curated-v3.31"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08638",
@@ -5878,24 +6595,33 @@
         "meanings": [
           {
             "ja": "気取らない；飾らない",
-            "definition": "",
-            "examples": []
+            "definition": "simple and natural, without trying to appear more important or impressive than one is",
+            "examples": [
+              {
+                "en": "The restaurant is unpretentious but consistently excellent.",
+                "ja": "その店は気取らないが、いつも非常に質が高い。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "unpretentious style",
+      "unpretentious manner"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
     "tags": [
-      "study-language"
+      "study-language",
+      "curated-v3.31"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07618",
@@ -6375,24 +7101,33 @@
         "meanings": [
           {
             "ja": "落ち着いた",
-            "definition": "",
-            "examples": []
+            "definition": "calm and not disturbed or upset by a difficult situation",
+            "examples": [
+              {
+                "en": "She remained unruffled despite the hostile questions.",
+                "ja": "彼女は敵意のある質問を受けても冷静さを失わなかった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "remain unruffled",
+      "seem unruffled"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
     "tags": [
-      "descriptive"
+      "descriptive",
+      "curated-v3.31"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10746",
@@ -6565,24 +7300,33 @@
         "meanings": [
           {
             "ja": "手段を選ばずに",
-            "definition": "",
-            "examples": []
+            "definition": "in a way that ignores moral principles in order to gain an advantage",
+            "examples": [
+              {
+                "en": "Some firms unscrupulously exploit gaps in consumer protection laws.",
+                "ja": "一部の企業は消費者保護法の抜け穴を良心なく利用する。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "act unscrupulously",
+      "unscrupulously exploit"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
     "tags": [
-      "work-description"
+      "work-description",
+      "curated-v3.31"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10687",
@@ -6906,24 +7650,34 @@
         "meanings": [
           {
             "ja": "維持できない",
-            "definition": "",
-            "examples": []
+            "definition": "unable to continue at the same rate or in the same way over the long term",
+            "examples": [
+              {
+                "en": "The current level of water consumption is environmentally unsustainable.",
+                "ja": "現在の水消費量は環境面で持続不可能である。"
+              }
+            ],
+            "definition_en": "unable to continue at the same rate or in the same way over the long term"
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "environmentally unsustainable",
+      "unsustainable level of debt"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Common in environmental, economic, and policy contexts.",
     "tags": [
-      "materials-properties"
+      "materials-properties",
+      "curated-v3.26"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08626",
@@ -7034,12 +7788,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "珍しい",
-            "definition": "having the quality expressed by 珍しい",
+            "ja": "珍しい；普通でない",
+            "definition": "different from what normally happens or is expected",
             "examples": [
               {
-                "en": "This is a common example of 'unusual'.",
-                "ja": "これは「珍しい」の一般的な例です。"
+                "en": "It is unusual for this area to get so much snow.",
+                "ja": "この地域でこれほど雪が降るのは珍しいです。"
               }
             ]
           }
@@ -7053,8 +7807,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "unusual"
     ],
@@ -7518,28 +8274,38 @@
         "meanings": [
           {
             "ja": "更新する",
-            "definition": "to perform or cause the action expressed by 更新する",
+            "definition": "to make information or software more current",
             "examples": [
               {
-                "en": "The word 'update' appears in many kinds of English texts.",
-                "ja": "「update」はさまざまな英文で使われます。"
+                "en": "Please update the app before the next lesson.",
+                "ja": "次の授業までにアプリを更新してください。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "updates",
+      "past": "updated",
+      "past_participle": "updated",
+      "ing": "updating"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "update"
+      "update",
+      "updates",
+      "updated",
+      "updating"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -7784,24 +8550,33 @@
         "meanings": [
           {
             "ja": "隆起；高揚",
-            "definition": "",
-            "examples": []
+            "definition": "an improvement in mood, condition, value, or level; to raise or improve something",
+            "examples": [
+              {
+                "en": "The investment produced a measurable uplift in productivity.",
+                "ja": "その投資によって生産性が目に見えて向上した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "economic uplift",
+      "uplift in productivity"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
     "tags": [
-      "geology-minerals"
+      "geology-minerals",
+      "curated-v3.31"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-02834",
@@ -7818,28 +8593,38 @@
         "meanings": [
           {
             "ja": "アップロードする",
-            "definition": "a common English word connected with アップロードする",
+            "definition": "to send a file from a device to an online system",
             "examples": [
               {
-                "en": "The word 'upload' is commonly used in this context.",
-                "ja": "「upload」は「アップロードする」に関する文脈で使われます。"
+                "en": "Students must upload their presentations by Friday.",
+                "ja": "生徒は金曜日までにプレゼン資料をアップロードしなければなりません。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "uploads",
+      "past": "uploaded",
+      "past_participle": "uploaded",
+      "ing": "uploading"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "upload"
+      "upload",
+      "uploads",
+      "uploaded",
+      "uploading"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -7879,11 +8664,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Useful in formal, academic, news, or professional English; check the surrounding noun or verb for the intended sense.",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "curated-v3.05"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "search_terms": [
       "upper"
     ],
@@ -7891,7 +8677,10 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "highly upper",
+      "upper approach"
+    ]
   },
   {
     "id": "sw-06654",
@@ -7956,24 +8745,33 @@
         "meanings": [
           {
             "ja": "大文字；大文字表記",
-            "definition": "",
-            "examples": []
+            "definition": "written or printed as capital letters rather than small letters",
+            "examples": [
+              {
+                "en": "Passwords are case-sensitive, so check whether each letter is uppercase or lowercase.",
+                "ja": "パスワードは大文字と小文字を区別するので、各文字を確認してください。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "uppercase letter",
+      "uppercase and lowercase"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
     "tags": [
-      "language-writing"
+      "language-writing",
+      "curated-v3.31"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08437",
@@ -8286,15 +9084,15 @@
     "frequency": 3,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
             "ja": "都市の",
-            "definition": "a person, thing, state, or idea related to 都市の",
+            "definition": "related to towns and cities rather than the countryside",
             "examples": [
               {
-                "en": "The word 'urban' is often useful in formal or everyday English.",
-                "ja": "「urban」は「都市の」の意味で使われます。"
+                "en": "Urban areas usually have more public transportation options.",
+                "ja": "都市部には通常より多くの公共交通手段があります。"
               }
             ]
           }
@@ -8308,8 +9106,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated",
+      "curated-v2.51"
+    ],
+    "status": "basic",
     "search_terms": [
       "urban"
     ],
@@ -8317,7 +9118,26 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "urban areas"
+      },
+      {
+        "text": "urban development"
+      }
+    ],
+    "senses": [
+      {
+        "pos": "",
+        "definition_ja": "都市の；都会の",
+        "examples": [
+          {
+            "en": "Rapid urban growth can put pressure on public services.",
+            "ja": "急速な都市の成長は公共サービスを圧迫することがある。"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "sw-02823",
@@ -8334,11 +9154,15 @@
         "meanings": [
           {
             "ja": "都市化",
-            "definition": "a common English word connected with 都市化",
+            "definition": "the process by which cities grow and an increasing share of people live in urban areas",
             "examples": [
               {
-                "en": "The word 'urbanization' is commonly used in this context.",
-                "ja": "「urbanization」は「都市化」に関する文脈で使われます。"
+                "en": "Rapid urbanization has increased demand for housing.",
+                "ja": "急速な都市化で住宅需要が増えました。"
+              },
+              {
+                "en": "Rapid urbanization has increased demand for housing and transport.",
+                "ja": "急速な都市化により住宅と交通への需要が増加した。"
               }
             ]
           }
@@ -8352,8 +9176,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated",
+      "v3.28-curated"
+    ],
+    "status": "enriched",
     "search_terms": [
       "urbanization"
     ],
@@ -8361,14 +9188,21 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "rapid urbanization",
+      "urbanization process",
+      "pace of urbanization"
+    ]
   },
   {
     "id": "sw-03523",
     "word": "urge",
     "lemma": "urge",
     "search_terms": [
-      "urge"
+      "urge",
+      "urges",
+      "urged",
+      "urging"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -8384,19 +9218,24 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "強く促す；衝動",
-            "definition": "to perform or experience an action expressed by 強く促す",
+            "ja": "強く勧める；促す",
+            "definition": "to strongly advise or encourage someone to do something",
             "examples": [
               {
-                "en": "They decided to urge after discussing the situation.",
-                "ja": "この例では「強く促す」という意味で使われている。"
+                "en": "Doctors urge people to exercise regularly.",
+                "ja": "医師たちは人々に定期的な運動を強く勧めています。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "urges",
+      "past": "urged",
+      "past_participle": "urged",
+      "ing": "urging"
+    },
     "phrases": [],
     "collocations": [],
     "related": {
@@ -8405,9 +9244,10 @@
     },
     "usage_note": "",
     "tags": [
-      "general-vocabulary"
+      "general-vocabulary",
+      "v2.31-curated"
     ],
-    "status": "needs_enrichment"
+    "status": "basic"
   },
   {
     "id": "sw-00612",
@@ -8467,14 +9307,23 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "使用法；使用量",
-            "definition": "the way or amount in which something is used",
+            "ja": "使用法；使用状況",
+            "definition": "the way in which a word, expression, object, or resource is used",
             "examples": [
               {
-                "en": "The word 'usage' is useful in this context.",
-                "ja": "この文脈では「使用法」という意味で使われる。"
+                "en": "The dictionary explains differences in word usage.",
+                "ja": "その辞書は単語の使い方の違いを説明しています。"
+              },
+              {
+                "en": "English usage changes gradually as society changes.",
+                "ja": "英語の用法は社会の変化に伴って徐々に変わる。"
               }
             ]
+          },
+          {
+            "ja": "使用法；使用量",
+            "definition": "the way or amount in which something is used",
+            "examples": []
           }
         ]
       }
@@ -8487,9 +9336,11 @@
     },
     "usage_note": "",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "v2.31-curated",
+      "v3.28-curated"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "search_terms": [
       "usage"
     ],
@@ -8497,7 +9348,11 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "word usage",
+      "energy usage",
+      "common usage"
+    ]
   },
   {
     "id": "sw-00613",
@@ -8513,29 +9368,42 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "使う",
-            "definition": "to do or express the action '使う'",
+            "ja": "使う；利用する",
+            "definition": "to do something with a tool, method, or object for a particular purpose",
             "examples": [
               {
-                "en": "We often use this in everyday life.",
-                "ja": "私たちは日常生活でよく「使う」します。"
+                "en": "You can use this app to review words you missed.",
+                "ja": "このアプリを使って間違えた単語を復習できます。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "uses",
+      "past": "used",
+      "past_participle": "used",
+      "ing": "using"
+    },
+    "phrases": [
+      "make use of",
+      "used to"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.28-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "use"
+      "use",
+      "uses",
+      "used",
+      "using"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -8598,12 +9466,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "役立つ",
-            "definition": "having the quality or characteristic expressed by 役立つ",
+            "ja": "役に立つ；有用な",
+            "definition": "helping you do or achieve something",
             "examples": [
               {
-                "en": "The word 'useful' is commonly used in this context.",
-                "ja": "「useful」は「役立つ」に関する文脈で使われます。"
+                "en": "This chart is useful for comparing the two groups.",
+                "ja": "この図表は二つのグループを比較するのに役立ちます。"
               }
             ]
           }
@@ -8617,8 +9485,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "useful"
     ],
@@ -8642,12 +9512,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "利用者",
-            "definition": "a common English word connected with 利用者",
+            "ja": "利用者；ユーザー",
+            "definition": "a person who uses a product, service, or system",
             "examples": [
               {
-                "en": "The word 'user' is commonly used in this context.",
-                "ja": "「user」は「利用者」に関する文脈で使われます。"
+                "en": "Users can save their progress on this device.",
+                "ja": "利用者はこの端末に進捗を保存できます。"
               }
             ]
           }
@@ -8661,8 +9531,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "user"
     ],
@@ -8768,12 +9640,12 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "たいてい",
-            "definition": "in the way or time described as 'たいてい'",
+            "ja": "通常；たいてい",
+            "definition": "in most situations or on most occasions",
             "examples": [
               {
-                "en": "The word 'usually' is common in English.",
-                "ja": "「usually」は英語でよく使われる語です。"
+                "en": "I usually get up at six in the morning.",
+                "ja": "私は普段朝6時に起きます。"
               }
             ]
           }
@@ -8787,8 +9659,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "usually"
     ],
@@ -8894,12 +9768,32 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "公共サービス；有用性",
-            "definition": "a service such as electricity or water, or usefulness",
+            "ja": "有用性；役立つこと",
+            "definition": "the usefulness of something for a particular purpose",
             "examples": [
               {
-                "en": "The word 'utility' is useful in this context.",
-                "ja": "この文脈では「公共サービス」という意味で使われる。"
+                "en": "The study assessed the utility of online lessons for adult learners.",
+                "ja": "その研究は成人学習者にとってオンライン授業がどれほど有用か評価した。"
+              }
+            ]
+          },
+          {
+            "ja": "公共サービス；電気・水道などの事業者",
+            "definition": "a service or company that supplies electricity, water, or gas",
+            "examples": [
+              {
+                "en": "The storm damaged power lines, and the local utility began repairs.",
+                "ja": "嵐で送電線が損傷し、地元の電力会社が修理を始めた。"
+              }
+            ]
+          },
+          {
+            "ja": "（経済学の）効用",
+            "definition": "the satisfaction or benefit a consumer gets from a good or service",
+            "examples": [
+              {
+                "en": "Economists use utility to describe the satisfaction consumers gain from choices.",
+                "ja": "経済学者は選択から消費者が得る満足を「効用」で表す。"
               }
             ]
           }
@@ -8912,11 +9806,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "utility は「有用性」「公共サービス」「経済学の効用」。utilities は電気・ガス・水道などの料金や事業を指す。",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "curated-v3.05",
+      "curated-v3.55"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "search_terms": [
       "utility"
     ],
@@ -8924,7 +9820,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "public utility"
+      },
+      {
+        "text": "utility bill"
+      },
+      {
+        "text": "the utility of a method"
+      },
+      {
+        "text": "marginal utility"
+      }
+    ]
   },
   {
     "id": "sw-02738",
@@ -8985,13 +9894,14 @@
         "meanings": [
           {
             "ja": "利用する",
-            "definition": "to perform or cause the action expressed by 利用する",
+            "definition": "to make practical or effective use of something",
             "examples": [
               {
-                "en": "The word 'utilize' is useful when discussing this topic.",
-                "ja": "この語は「利用する」に関する文脈で使われます。"
+                "en": "The study utilized data collected from more than 2,000 households.",
+                "ja": "その研究では2,000世帯以上から収集したデータを利用した。"
               }
-            ]
+            ],
+            "definition_en": "to make practical or effective use of something"
           }
         ]
       }
@@ -9002,9 +9912,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "More formal than use; use is usually preferable in ordinary conversation.",
+    "tags": [
+      "curated-v3.26"
+    ],
+    "status": "enriched",
     "search_terms": [
       "utilize"
     ],
@@ -9012,7 +9924,10 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "utilize available resources",
+      "utilize data"
+    ]
   },
   {
     "id": "sw-05667",
