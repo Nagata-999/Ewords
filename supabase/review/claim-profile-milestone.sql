@@ -34,4 +34,4 @@ begin
  v_ledger:=jsonb_set(jsonb_set(jsonb_set(v_ledger,'{gemEvents}',v_events,true),'{gems}',to_jsonb(v_balance),true),'{gemSyncBase}',to_jsonb(v_balance),true);
  update public.sushi_id_profiles set ledger=v_ledger,updated_at=now() where sushi_id=p_sushi_id;
  return jsonb_build_object('ok',true,'already_claimed',false,'claim_id',v_id,'gems',v_reward,'balance',v_balance);
-end $function$
+end $function$;

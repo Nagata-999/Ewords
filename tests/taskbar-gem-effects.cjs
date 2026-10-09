@@ -21,7 +21,12 @@ const server=http.createServer((req,res)=>{
   try{
     for(const width of [1200,390])for(const mode of ['taskbar-only','with-gem-api','delayed-effects']){
       const context=await browser.newContext({viewport:{width,height:900},serviceWorkers:'block',reducedMotion:'no-preference'});
-      let heldRequest;await context.route('**/*',route=>{
+      let heldRequest,serverBalance=0;const serverEvents=new Map();await context.route('**/*',route=>{
+        if(route.request().url().includes('/functions/v1/sushi-id-sync')){
+          const body=route.request().postDataJSON();if(body.action!=='sync')return route.fulfill({json:{ok:true,outcomes:{events:[],nextOffset:null}}});
+          for(const e of body.ledger.gemEvents||[])if(!serverEvents.has(e.id)){serverEvents.set(e.id,e);serverBalance+=(e.type==='earn'?1:-1)*e.amount;}
+          return route.fulfill({json:{sushi_id:'testuser',ledger:{...body.ledger,gems:serverBalance,gemEvents:[...serverEvents.values()]}}});
+        }
         if(!route.request().url().startsWith(origin))return route.abort();
         if(mode==='delayed-effects'&&route.request().url().includes('/gem-effects.js')){heldRequest=route;return;}
         return route.continue();
@@ -55,6 +60,22 @@ const server=http.createServer((req,res)=>{
       assert.equal(await page.locator('.sdq-claim').count(),0);
       assert.equal(await page.evaluate(()=>rewardEvents.length),5);
       assert.equal(await page.evaluate(()=>rewardEvents.reduce((sum,e)=>sum+e.gems,0)),90);
+      await page.locator('.sdq-close').click();
+      await page.locator('#sushiLoginTab').click();
+      assert.equal(await page.locator('#sushiBarGems').textContent(),'100');
+      await page.locator('#sushiLoginTab').click();
+      assert.equal(await page.locator('#sushiBarGems').textContent(),'100');
+      const wallet=await page.evaluate(()=>JSON.parse(localStorage.getItem('sushitan_login_bonus_v1')));
+      assert.equal(wallet.gemEvents.filter(e=>e.type==='earn').reduce((n,e)=>n+e.amount,0),100);
+      assert.equal(wallet.gemPendingEvents.length,6);
+      assert.equal(wallet.gemEvents.filter(e=>e.source==='login-bonus').length,1);
+      assert.equal(wallet.gemEvents.filter(e=>e.source==='daily-complete').length,1);
+      await page.waitForFunction(()=>window.SushiProfileSync);
+      await page.evaluate(async()=>{localStorage.setItem('sushitan_sync_id_v1','testuser');localStorage.setItem('sushitan_sync_pin_v1','1234');await SushiProfileSync.syncNow();await SushiProfileSync.syncNow();});
+      assert.equal(serverBalance,100);assert.equal(serverEvents.size,6);
+      assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('sushitan_login_bonus_v1')).gemPendingEvents.length),0);
+      await page.reload({waitUntil:'domcontentloaded'});await page.waitForFunction(()=>document.querySelector('#sushiBarGems')?.textContent==='100');
+      await page.locator('#sushiLoginTab').click();assert.equal(await page.locator('#sushiBarGems').textContent(),'100');
       await page.waitForFunction(()=>!document.querySelector('.sgf-flight,.sgf-arrival')&&!document.querySelector('#sushiTaskbar.sgf-receiving'));
       assert.deepEqual(errors,[]);
       await context.close();console.log(`PASS: ${width}px ${mode}: claim buttons, 4 rewards + completion, visible destination, one effect loader, cleanup`);

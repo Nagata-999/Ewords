@@ -26,6 +26,15 @@ function setup(){
   return {window,calls,wallet:()=>JSON.parse(values.get(key)),store:values,hold(){let release;held={promise:new Promise(r=>release=r)};return release}};
 }
 const tick=()=>new Promise(r=>setImmediate(r));
+test('daily and login rewards survive a stale response with their claim flags',async()=>{
+  const s=setup(),release=s.hold(),sync=s.window.SushiProfileSync.syncNow();await tick();
+  const events=[{id:'daily:2026-10-10:sushitan',type:'earn',amount:10},{id:'login:2026-10-10',type:'earn',amount:10}];
+  s.store.set(key,JSON.stringify({gems:120,gemEvents:events,gemPendingEvents:events,dailyQuests:{day:'2026-10-10',active:['sushitan'],progress:{sushitan:30},claimed:{sushitan:true},chestClaimed:true,chestReward:50},loginManualClaims:['2026-10-10'],loginBonusTotal:1,loginBonusStreak:1,loginBonusBestStreak:10,loginBonusLastDay:'2026-10-10'}));
+  release();await sync;
+  assert.equal(s.wallet().gems,120);assert.equal(s.wallet().dailyQuests.claimed.sushitan,true);assert.equal(s.wallet().dailyQuests.chestClaimed,true);
+  assert.equal(s.wallet().loginManualClaims[0],'2026-10-10');assert.equal(s.wallet().loginBonusBestStreak,10);
+  assert.equal(s.wallet().gemPendingEvents.length,2);
+});
 test('delayed pre-claim profile cannot overwrite the 150 gem reward',async()=>{
   const s=setup(),release=s.hold();
   const sync=s.window.SushiProfileSync.syncNow();await tick();
