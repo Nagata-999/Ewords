@@ -6,18 +6,10 @@
   const count=v=>Number.isSafeInteger(v)&&v>=0?v:0;
   const state=()=>{const v=read();return {total:count(v.total),selected:typeof v.selected==='string'?v.selected:null}};
   function achievementMetrics(){
-    const s=state();let correct=0;
-    try{for(let i=0;i<localStorage.length;i++){
-      const key=localStorage.key(i);if(!key?.startsWith('sushitan_learning_v1:event:'))continue;
-      const e=JSON.parse(localStorage.getItem(key));
-      if(e?.version===1&&e.correct===true&&e.id===key.slice(27)&&Number.isSafeInteger(e.count)&&e.count>0)correct+=e.count;
-    }}catch{}
     let login={};try{login=JSON.parse(localStorage.getItem('sushitan_login_bonus_v1')||'{}')||{}}catch{}
-    const ledger=window.SushiAchievementLedger?.summary();const newTotal=ledger?.total||0;// Learning events and achievement events can describe the same answer. Never add overlapping streams.
-    // Conservative until a canonical migration baseline and server reconciliation exist.
-    const baseline=window.SushiAchievementLedger?.migrationBaseline?.();
-    // A frozen baseline is only a provisional historical floor, not an exact cross-device total.
-    const total=baseline===null||baseline===undefined?Math.max(s.total,correct,newTotal):Math.max(s.total,correct,baseline+newTotal);return {correct_total:total,correct_vocabulary:total,login_streak:Number(login.loginBonusStreak)||0};
+    const s=state();
+    const total=window.SushiAchievementLedger?.reconciledTotal?.()??s.total;
+    return {correct_total:Math.max(s.total,total),correct_vocabulary:Math.max(s.total,total),login_streak:Number(login.loginBonusStreak)||0};
   }
   function renderCatalog(){
     const box=document.getElementById('sushiAchievementList');
