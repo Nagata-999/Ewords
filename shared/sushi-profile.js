@@ -13,7 +13,7 @@
   };
   const readJSON=k=>{try{const v=JSON.parse(localStorage.getItem(k)||'{}');return v&&typeof v==='object'&&!Array.isArray(v)?v:{}}catch{return{}}};
   const creds=()=>({sushi_id:(localStorage.getItem(ID_KEY)||'').trim().toLowerCase(),pin:localStorage.getItem(PIN_KEY)||''});
-  const readAchievements=()=>window.SushiAchievementLedger?.exportBatch?.(500)||{version:2,events:[]};
+  const readAchievements=()=>window.SushiAchievementLedger?.exportBatch?.(500,0)||{version:2,events:[],nextOffset:null,totalEvents:0};
   async function call(action,id,pin){
     const sentLedger=readJSON(LEDGER_KEY);if(sentLedger.gacha)delete sentLedger.gacha.avatar;const sentAvatarUpdatedAt=Number(sentLedger.gacha?.avatarUpdatedAt)||0,sentAvatarRevision=Math.max(0,Number(sentLedger.gacha?.avatarRevision)||0),sentAvatar=sentLedger.gacha?.avatar?JSON.stringify(sentLedger.gacha.avatar):'';
     const r=await fetch(URL,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY},body:JSON.stringify({action,sushi_id:id,pin,player_name:window.SushiPlayer?.getName?.()||localStorage.getItem(NAME_KEY)||'',ledger:sentLedger,learning:readLearning(),achievements:readAchievements()})});
