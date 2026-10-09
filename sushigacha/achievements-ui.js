@@ -27,6 +27,23 @@
     refresh();
     return !!parsed;
   }
+  const claimBusy=new Set(),claimedHere=new Set();
+  function claimStatus(id){
+    const sushiId=(localStorage.getItem('sushitan_sync_id_v1')||'').trim().toLowerCase();
+    return claimedHere.has(sushiId+':'+id)||!!verifiedReceipts?.ids.includes(id);
+  }
+  async function claimReward(threshold,id,button){
+    if(claimBusy.has(id))return;
+    claimBusy.add(id);button.disabled=true;button.textContent='受取中…';
+    try{
+      const result=await window.SushiAchievementSyncBridge.claim(threshold);
+      const sushiId=(localStorage.getItem('sushitan_sync_id_v1')||'').trim().toLowerCase();
+      claimedHere.add(sushiId+':'+id);
+      if(result.gems>0)window.alert('🎁 '+result.gems+'ジェム GET!');
+      refresh();
+    }catch(error){window.alert('受取に失敗しました：'+error.message);button.disabled=false;button.textContent='🎁 受け取る'}
+    finally{claimBusy.delete(id)}
+  }
   function renderCatalog(){
     const box=document.getElementById('sushiAchievementList');
     if(!box||!window.SushiAchievementCatalog)return;
@@ -42,8 +59,19 @@
         const badge=document.createElement('div');badge.style.cssText='font-size:12px;color:#8b5a1e;margin-top:5px';
         const pending=reward.filter(x=>!claimed.includes(x.id));
         badge.textContent=(claimed.length?'✅ 受取済 '+claimed.length+'件　':'')+
-          (pending.length?'🎁 未受取報酬 '+pending.reduce((n,x)=>n+x.gems,0)+'ジェム（受取機能は準備中）':'');
+          (pending.length?'🎁 未受取報酬 '+pending.reduce((n,x)=>n+x.gems,0)+'ジェム':'');
         item.append(badge);
+        if(a.id==='all_correct'&&window.SushiAchievementSyncBridge?.claim){
+          for(const eligible of pending){
+            if(claimStatus(eligible.id))continue;
+            const button=document.createElement('button');
+            button.type='button';button.textContent='🎁 '+eligible.gems+'ジェムを受け取る';
+            button.style.cssText='display:block;margin-top:8px;padding:9px 12px;border:0;border-radius:9px;background:#f6b52b;color:#402500;font-weight:800;cursor:pointer';
+            button.disabled=claimBusy.has(eligible.id);
+            button.onclick=()=>claimReward(eligible.id.split(':').at(-1)*1,eligible.id,button);
+            item.append(button);
+          }
+        }
       }
       box.append(item);
     }
