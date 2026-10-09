@@ -6,6 +6,10 @@ on:
     paths:
       - 'sushigacha/achievement-merge.js'
       - 'tests/achievement-merge.test.cjs'
+      - 'sushigacha/achievement-ledger.js'
+      - 'tests/achievement-ledger.test.cjs'
+      - 'sushigacha/achievement-ledger.js'
+      - 'tests/achievement-ledger.test.cjs'
       - '.github/workflows/achievement-tests.yml'
   pull_request:
     paths:
@@ -22,4 +26,4 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: node --test tests/achievement-merge.test.cjs
+      - run: node --test tests/achievement-merge.test.cjs tests/achievement-ledger.test.cjs
