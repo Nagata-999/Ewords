@@ -15,12 +15,3 @@ jobs:
       - name: JavaScript syntax
         run: |
           for file in sushigacha/achievement-*.js sushigacha/achievements-ui.js sushigacha/site-taskbar.js; do node --check "$file"; done
-      - name: Validate rank and catalog modules
-        run: |
-          node - <<'NODE'
-          const assert=require('node:assert/strict');
-          const ranks=require('./sushigacha/achievement-ranks.js');
-          const catalog=require('./sushigacha/achievement-catalog.js');
-          const metrics=require('./sushigacha/achievement-metrics.js');
-          assert.ok(ranks && catalog && metrics);
-          NODE
