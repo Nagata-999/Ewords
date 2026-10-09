@@ -19,15 +19,28 @@ function setup({rejectOnce=false}={}){
     if(body.action==='achievement_claim'){
       if(rejectOnce){rejectOnce=false;return {ok:false,json:async()=>({ok:false,error:'not_reached'})};}
       const already=claimed;claimed=true;if(!already)balance+=150;
-      return {ok:true,json:async()=>({ok:true,already_claimed:already,claim_id:'avatar30',gems:150,wallet:{gems:balance,gemEvents:[{id:'avatar30',type:'earn',amount:150}]}})};
+      return {ok:true,json:async()=>({ok:true,already_claimed:already,claim_id:'achievement:avatar:30',gems:150,wallet:{gems:balance,gemEvents:[{id:'avatar30',type:'earn',amount:150}]}})};
     }
     if(body.action==='outcome_sync'&&outcomeHeld){const wait=outcomeHeld;outcomeHeld=null;await wait.promise;}
     return {ok:true,json:async()=>({ok:true,outcomes:{events:body.outcomes?.events||[],nextOffset:null}})};
   }});
-  for(const file of ['shared/sushi-profile.js','sushigacha/achievement-sync-bridge.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'..',file),'utf8'),context);
+  for(const file of ['sushigacha/achievement-receipts.js','shared/sushi-profile.js','sushigacha/achievement-sync-bridge.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'..',file),'utf8'),context);
   return {window,calls,wallet:()=>JSON.parse(values.get(key)),store:values,holdOutcome(){let release;outcomeHeld={promise:new Promise(r=>release=r)};return release},hold(){let release;held={promise:new Promise(r=>release=r)};return release}};
 }
 const tick=()=>new Promise(r=>setImmediate(r));
+test('server-confirmed receipt survives reopening and skips an already claimed request',async()=>{
+  const s=setup();await s.window.SushiAchievementSyncBridge.claim(30,'avatar');
+  const before=s.calls.length;
+  const data=await s.window.SushiAchievementSyncBridge.claim(30,'avatar');
+  assert.equal(data.already_claimed,true);assert.equal(data.gems,0);assert.equal(s.calls.length,before);
+  assert.equal(s.wallet().gems,250);
+  const receipt=s.window.SushiAchievementSyncBridge.cachedReceipts();
+  assert.deepEqual(Array.from(receipt.receipts.ids),['achievement:avatar:30']);
+  const reopened=setup();for(const [key,value] of s.store)reopened.store.set(key,value);
+  assert.equal((await reopened.window.SushiAchievementSyncBridge.claim(30,'avatar')).already_claimed,true);
+  assert.equal(reopened.calls.length,0);
+  s.store.set('sushitan_sync_id_v1','anotheruser');assert.equal(s.window.SushiAchievementSyncBridge.cachedReceipts(),null);
+});
 test('fresh progress is synchronized once only when the server reports not reached',async()=>{
   const s=setup({rejectOnce:true});await s.window.SushiAchievementSyncBridge.claim(30,'avatar');
   assert.equal(s.wallet().gems,250);assert.equal(s.calls.filter(action=>action==='achievement_claim').length,2);
