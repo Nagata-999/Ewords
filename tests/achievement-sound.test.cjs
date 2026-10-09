@@ -30,3 +30,17 @@ test('running audio schedules three short tones',()=>{
  });
  assert.equal(sound.play(),true);assert.equal(starts,3);
 });
+
+test('suspended audio plays after successful resume',async()=>{
+ let starts=0;
+ const gain={gain:{setValueAtTime(){},exponentialRampToValueAtTime(){}},connect(){}};
+ const sound=setup(class{
+   state='suspended';currentTime=10;destination={};
+   resume(){this.state='running';return Promise.resolve()}
+   createGain(){return gain}
+   createOscillator(){return {frequency:{value:0},connect(){},start(){starts++},stop(){}}}
+ });
+ assert.equal(sound.play(),false);
+ await new Promise(resolve=>setImmediate(resolve));
+ assert.equal(starts,3);
+});
