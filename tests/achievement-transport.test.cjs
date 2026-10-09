@@ -39,3 +39,12 @@ test('rejects looping server cursors',async()=>{
  const local=ledger([]);
  await assert.rejects(synchronize(local,async()=>({achievements:{synced:true,accepted:[],events:[],nextCursor:'repeat'}})),/invalid_server_cursor/);
 });
+
+test('rejects oversized server response',async()=>{
+ const local=ledger([]);
+ await assert.rejects(synchronize(local,async()=>({achievements:{synced:true,accepted:[],events:Array.from({length:501},(_,i)=>e('remote:'+i)),nextCursor:null}})),/oversized_server_page/);
+});
+test('rejects malformed cursor',async()=>{
+ const local=ledger([]);
+ await assert.rejects(synchronize(local,async()=>({achievements:{synced:true,accepted:[],events:[],nextCursor:'../unsafe'}})),/invalid_server_cursor/);
+});
