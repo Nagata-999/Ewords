@@ -39,12 +39,12 @@
    root.dispatchEvent(new CustomEvent('sushi-achievement-receipts',{detail:{...data,sushiId:sushi_id}}));
    return data;
  }
- async function claim(threshold){
+ async function claim(threshold,category='all_correct'){
    const sushi_id=(localStorage.getItem(ID)||'').trim().toLowerCase(),pin=localStorage.getItem(PIN)||'';
    if(!/^[a-z0-9_-]{4,24}$/.test(sushi_id)||!/^[0-9]{4}$/.test(pin))throw new Error('achievement_pin_not_connected');
    if(!Number.isSafeInteger(threshold))throw new Error('invalid_threshold');
    await run();
-   const response=await fetch(URL,{method:'POST',headers:{'Content-Type':'application/json',apikey:KEY},body:JSON.stringify({action:'achievement_claim',sushi_id,pin,threshold})});
+   const response=await fetch(URL,{method:'POST',headers:{'Content-Type':'application/json',apikey:KEY},body:JSON.stringify({action:'achievement_claim',sushi_id,pin,threshold,category})});
    const data=await response.json().catch(()=>({error:'invalid_json'}));
    if(!response.ok||data.ok!==true)throw new Error(data.error||'achievement_claim_failed');
    // Refresh existing gem ledger through its established merge logic.
