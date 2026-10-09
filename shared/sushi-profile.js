@@ -36,6 +36,14 @@
     const ev=new Event('sushi-avatar-changed');ev.__fromProfileSync=true;window.dispatchEvent(ev);
     window.dispatchEvent(new CustomEvent('sushi-profile-synced',{detail:{sushiId:data.sushi_id}}));
   }
+  // Serialize server wallet mutations together with their local application.
+  // An older profile response must finish before an achievement credits gems.
+  let walletQueue=Promise.resolve();
+  function withWalletTransaction(operation){
+    const result=walletQueue.then(operation);
+    walletQueue=result.catch(()=>{});
+    return result;
+  }
   let syncInFlight=null,syncAgain=false;
   async function runSync(){
     const c=creds(); if(!c.sushi_id||!c.pin)return {connected:false};
@@ -44,7 +52,7 @@
   let outcomesSyncing=false;
   async function syncOutcomes(){
     const c=creds(),ledger=window.SushiAchievementLedger;
-    if(outcomesSyncing||!c.sushi_id||!/^\\d{4}$/.test(c.pin)||!ledger?.exportOutcomes||!ledger?.importOutcomes)return;
+    if(outcomesSyncing||!c.sushi_id||!/^\d{4}$/.test(c.pin)||!ledger?.exportOutcomes||!ledger?.importOutcomes)return;
     outcomesSyncing=true;
     try{
       const local=ledger.exportOutcomes();
@@ -65,7 +73,7 @@
   }
   async function syncNow(){
     if(syncInFlight){syncAgain=true;return syncInFlight}
-    syncInFlight=runSync();
+    syncInFlight=withWalletTransaction(runSync);
     try{const result=await syncInFlight;await syncOutcomes().catch(error=>console.warn('Achievement outcome sync:',error));return result}
     finally{syncInFlight=null;if(syncAgain){syncAgain=false;queueMicrotask(()=>syncNow().catch(()=>{}))}}
   }
@@ -73,7 +81,7 @@
     id=String(id||'').normalize('NFKC').trim().toLowerCase();pin=String(pin||'').trim();
     if(!/^[a-z0-9_-]{4,24}$/.test(id))throw new Error('IDは4〜24文字の半角英数字・_・-で入力してください');
     if(!/^\d{4}$/.test(pin))throw new Error('PINは4桁の数字で入力してください');
-    const sent=readLearning(); const data=await call(create?'create':'sync',id,pin); localStorage.setItem(ID_KEY,id);localStorage.setItem(PIN_KEY,pin);apply(data); const weak=window.SushiLearning?.getStats?.().weak ?? null; const ld=window.SushiLearning?.getDiagnostics?.()||{}; const diag={sentEvents:sent.events?.length||0,sentCards:sent.cards?.length||0,serverEvents:data.learning?.events?.length||0,serverCards:data.learning?.cards?.length||0,weak,...ld}; try{localStorage.setItem('sushitan_sync_diag_v1',JSON.stringify(diag))}catch{} render();return {...data,...diag};
+    const sent=readLearning(); const data=await withWalletTransaction(async()=>{const data=await call(create?'create':'sync',id,pin);localStorage.setItem(ID_KEY,id);localStorage.setItem(PIN_KEY,pin);apply(data);return data}); const weak=window.SushiLearning?.getStats?.().weak ?? null; const ld=window.SushiLearning?.getDiagnostics?.()||{}; const diag={sentEvents:sent.events?.length||0,sentCards:sent.cards?.length||0,serverEvents:data.learning?.events?.length||0,serverCards:data.learning?.cards?.length||0,weak,...ld}; try{localStorage.setItem('sushitan_sync_diag_v1',JSON.stringify(diag))}catch{} render();return {...data,...diag};
   }
   function disconnect(){localStorage.removeItem(ID_KEY);localStorage.removeItem(PIN_KEY);render()}
   const msg=e=>({id_taken:'そのIDはすでに使われています',not_found:'そのIDは見つかりません',wrong_pin:'PINが違います',temporarily_locked:'失敗が続いたため10分間ロックされています'}[e?.code]||e?.message||'同期できませんでした');
@@ -88,6 +96,6 @@
   }
   function setStatus(t){const e=document.getElementById('sspStatus');if(e)e.textContent=t}
   function render(){ensureUI();const c=creds();setStatus(c.sushi_id?(c.pin?'接続中：'+c.sushi_id:'ID保存済み：'+c.sushi_id+'（PINを入力すると同期）'):'未設定。この端末だけで遊んでいます。')}
-  window.SushiProfileSync={syncNow,connect,disconnect};
+  window.SushiProfileSync={syncNow,connect,disconnect,withWalletTransaction};
   let syncTimer=null;const queueSync=()=>{clearTimeout(syncTimer);syncTimer=setTimeout(()=>syncNow().catch(()=>{}),700)};const start=()=>{ensureUI();render();const onAvatarPage=/\/sushigacha\/sushi-avatar\.html$/i.test(location.pathname);if(onAvatarPage)setTimeout(()=>syncNow().catch(()=>{}),2500);else syncNow().catch(()=>{});window.addEventListener('sushi-gems-earned',queueSync);window.addEventListener('sushi-gems-spent',queueSync);window.addEventListener('sushi-avatar-changed',e=>{if(!e.__fromProfileSync)queueSync()});window.addEventListener('sushi-player-change',queueSync);window.addEventListener('sushi-daily-quest-change',queueSync);window.addEventListener('sushi-learning-answer',queueSync);window.addEventListener('sushi-achievement-change',queueSync);window.addEventListener('pagehide',()=>{if(creds().pin)syncNow().catch(()=>{})})};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else start();
 })();

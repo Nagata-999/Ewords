@@ -44,6 +44,12 @@
    if(!/^[a-z0-9_-]{4,24}$/.test(sushi_id)||!/^[0-9]{4}$/.test(pin))throw new Error('achievement_pin_not_connected');
    if(!Number.isSafeInteger(threshold))throw new Error('invalid_threshold');
    await run();
+   // Flush pending profile events before requesting the authoritative wallet.
+   await root.SushiProfileSync?.syncNow?.();
+   const transaction=root.SushiProfileSync?.withWalletTransaction;
+   if(!transaction)throw new Error('achievement_wallet_sync_missing');
+   const data=await transaction(async()=>{
+   if(localStorage.getItem(ID)?.trim().toLowerCase()!==sushi_id||localStorage.getItem(PIN)!==pin)throw new Error('achievement_account_changed');
    const response=await fetch(URL,{method:'POST',headers:{'Content-Type':'application/json',apikey:KEY},body:JSON.stringify({action:'achievement_claim',sushi_id,pin,threshold,category})});
    const data=await response.json().catch(()=>({error:'invalid_json'}));
    if(!response.ok||data.ok!==true)throw new Error(data.error||'achievement_claim_failed');
@@ -63,6 +69,8 @@
      localStorage.setItem(key,JSON.stringify(ledger));
      root.dispatchEvent(new CustomEvent('sushi-gem-change'));
    }
+   return data;
+   });
    // Synchronize the receipt to the other devices using the existing merge.
    await root.SushiProfileSync?.syncNow?.().catch(error=>console.warn('Gem sync pending:',error.message));
    // Server-credited rewards may already exist in the profile ledger. Refresh

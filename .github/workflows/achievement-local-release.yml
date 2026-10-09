@@ -15,3 +15,6 @@ jobs:
       - name: JavaScript syntax
         run: |
           for file in sushigacha/achievement-*.js sushigacha/achievements-ui.js sushigacha/site-taskbar.js; do node --check "$file"; done
+          node --check shared/sushi-profile.js
+      - name: Achievement wallet and PIN sync regression tests
+        run: node --test tests/achievement-wallet-order.test.cjs
