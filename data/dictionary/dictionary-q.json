@@ -321,12 +321,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "資格",
-            "definition": "a person, thing, state, process, or idea connected with 資格",
+            "ja": "資格；必要な技能・条件",
+            "definition": "a skill, certificate, or experience that makes someone suitable for a job or activity",
             "examples": [
               {
-                "en": "The word 'qualification' is commonly used in this kind of context.",
-                "ja": "「qualification」は「資格」に関する文脈でよく使われます。"
+                "en": "Applicants must hold a recognized teaching qualification.",
+                "ja": "応募者は認定された教員資格を持っていなければならない。"
+              }
+            ]
+          },
+          {
+            "ja": "限定；留保",
+            "definition": "a condition or limitation added to a statement or claim",
+            "examples": [
+              {
+                "en": "The researcher accepted the conclusion with one important qualification.",
+                "ja": "その研究者は一つの重要な留保を付けて結論を受け入れた。"
               }
             ]
           }
@@ -339,9 +349,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "qualification for + 仕事・資格。学術文脈では「発言への留保・限定」の意味もある。",
+    "tags": [
+      "etymology-v1",
+      "curated-v2.54",
+      "curated-v3.40"
+    ],
+    "status": "enriched",
     "search_terms": [
       "qualification"
     ],
@@ -349,7 +363,50 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "professional qualification",
+        "ja": "専門資格"
+      },
+      {
+        "text": "gain a qualification"
+      },
+      {
+        "text": "meet the qualifications",
+        "ja": "必要な資格を満たす"
+      },
+      {
+        "text": "with some qualifications",
+        "ja": "いくつかの留保付きで"
+      }
+    ],
+    "etymology": {
+      "origin": "Latin qualis / qualitas",
+      "history": "qualify の名詞形で、必要な条件・資格を表す。",
+      "roots": [
+        {
+          "form": "qual",
+          "meaning": "どのような・性質"
+        }
+      ],
+      "related": [
+        "quality",
+        "qualify",
+        "equal"
+      ]
+    },
+    "senses": [
+      {
+        "pos": "",
+        "definition_ja": "資格；能力条件",
+        "examples": [
+          {
+            "en": "Applicants must have a recognized teaching qualification.",
+            "ja": "応募者は認定された教員資格を持っていなければならない。"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "sw-02573",
@@ -365,12 +422,40 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "資格を得る",
-            "definition": "to perform or cause the action expressed by 資格を得る",
+            "ja": "資格・条件を満たす",
+            "definition": "to meet the requirements for something",
             "examples": [
               {
-                "en": "The word 'qualify' appears in many kinds of English texts.",
-                "ja": "「qualify」はさまざまな英文で使われます。"
+                "en": "Only households below the income threshold qualify for the subsidy.",
+                "ja": "所得基準を下回る世帯だけがその補助金の対象となる。"
+              },
+              {
+                "en": "Applicants must qualify for financial aid before receiving the grant.",
+                "ja": "申請者は助成金を受ける前に学費援助の受給資格を満たさなければならない。"
+              },
+              {
+                "en": "Applicants must qualify for financial assistance under the new rules.",
+                "ja": "申請者は新しい規則の下で経済支援の資格を満たす必要がある。"
+              }
+            ]
+          },
+          {
+            "ja": "（発言を）限定する；条件を付ける",
+            "definition": "to limit the scope of a statement or add reservations to it",
+            "examples": [
+              {
+                "en": "The author qualified her conclusion by noting the small sample size.",
+                "ja": "著者は標本数が少ないことを指摘して結論に留保を付けた。"
+              }
+            ]
+          },
+          {
+            "ja": "（人を）有資格者にする",
+            "definition": "to provide someone with the skills or credentials needed for a role",
+            "examples": [
+              {
+                "en": "The training qualifies graduates to work as laboratory technicians.",
+                "ja": "その研修を修了すると検査技師として働く資格が得られる。"
               }
             ]
           }
@@ -383,9 +468,14 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "qualify for + 支援・競技、qualify as + 資格・役割。学術英語では qualify a claim（主張を限定する）も重要。",
+    "tags": [
+      "etymology-v1",
+      "curated-v3.26",
+      "curated-v3.41",
+      "curated-v3.56"
+    ],
+    "status": "enriched",
     "search_terms": [
       "qualify"
     ],
@@ -393,7 +483,38 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "qualify for",
+      "qualify as",
+      "qualify a claim",
+      {
+        "text": "qualify for a grant",
+        "ja": "助成金の対象となる"
+      },
+      {
+        "text": "qualify as a teacher",
+        "ja": "教員としての資格を満たす"
+      },
+      {
+        "text": "qualify a statement",
+        "ja": "発言に条件を付ける"
+      }
+    ],
+    "etymology": {
+      "origin": "Latin qualis / qualitas",
+      "history": "qualis「どのような」から、一定の性質・条件を満たす意味へ発展した。",
+      "roots": [
+        {
+          "form": "qual",
+          "meaning": "どのような・性質"
+        }
+      ],
+      "related": [
+        "quality",
+        "qualification",
+        "equal"
+      ]
+    }
   },
   {
     "id": "sw-03254",
@@ -416,12 +537,16 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "質的な",
-            "definition": "relating to qualities or characteristics rather than numerical amounts",
+            "ja": "質的な；性質に関する",
+            "definition": "relating to qualities, meanings, or characteristics rather than numerical amounts",
             "examples": [
               {
-                "en": "The report highlights a qualitative issue.",
-                "ja": "その報告書は「質的な」問題を取り上げている。"
+                "en": "The team used qualitative interviews to explore students’ experiences.",
+                "ja": "研究チームは生徒の経験を探るため質的インタビューを行った。"
+              },
+              {
+                "en": "The researchers used qualitative interviews to explore students’ experiences.",
+                "ja": "研究者たちは生徒の経験を詳しく調べるため質的インタビューを用いた。"
               }
             ]
           }
@@ -430,16 +555,49 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "qualitative research",
+        "ja": "質的研究"
+      },
+      {
+        "text": "qualitative data",
+        "ja": "質的データ"
+      },
+      {
+        "text": "qualitative analysis",
+        "ja": "質的分析"
+      },
+      {
+        "text": "qualitative interviews",
+        "ja": "質的インタビュー"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "qualitative は意味・経験・特徴を扱う研究などに使う。quantitative（量的な）と対比。",
     "tags": [
-      "scale-50k"
+      "scale-50k",
+      "curated-v2.52",
+      "curated-v2.61",
+      "curated-v3.33",
+      "curated-v3.37"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched",
+    "senses": [
+      {
+        "pos": "",
+        "definition_ja": "質的な；性質に関する",
+        "examples": [
+          {
+            "en": "Qualitative interviews can reveal experiences that fixed-response surveys may miss.",
+            "ja": "質的インタビューは選択式調査では捉えにくい経験を明らかにできる。"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "sw-00937",
@@ -455,12 +613,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "質",
-            "definition": "a thing, person, idea, or state related to 質",
+            "ja": "質；品質",
+            "definition": "how good or bad something is",
             "examples": [
               {
-                "en": "This quality is important.",
-                "ja": "この「質」は重要です。"
+                "en": "The company is trying to improve product quality.",
+                "ja": "その会社は製品の品質を改善しようとしています。"
+              }
+            ]
+          },
+          {
+            "ja": "特質；長所",
+            "definition": "a characteristic that someone or something has",
+            "examples": [
+              {
+                "en": "Patience is an important quality for teachers.",
+                "ja": "忍耐力は教師にとって重要な資質です。"
               }
             ]
           }
@@ -468,14 +636,20 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "quality of life"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated",
+      "etymology-v1",
+      "v2.45-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "quality"
     ],
@@ -483,7 +657,25 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "high quality",
+      "quality of life"
+    ],
+    "etymology": {
+      "origin": "Latin qualis / qualitas",
+      "history": "qualis「どのような」に由来し、物事がどのような性質かを表す。",
+      "roots": [
+        {
+          "form": "qual",
+          "meaning": "どのような・性質"
+        }
+      ],
+      "related": [
+        "qualify",
+        "qualification",
+        "equal"
+      ]
+    }
   },
   {
     "id": "sw-08055",
@@ -547,12 +739,16 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "量的な",
-            "definition": "relating to amounts or measurements expressed in numbers",
+            "ja": "量的な；数量に基づく",
+            "definition": "relating to amounts or information that can be measured numerically",
             "examples": [
               {
-                "en": "The report highlights a quantitative issue.",
-                "ja": "その報告書は「量的な」問題を取り上げている。"
+                "en": "The researchers conducted a quantitative analysis of the survey responses.",
+                "ja": "研究者たちはアンケート回答の量的分析を行った。"
+              },
+              {
+                "en": "Quantitative data showed a steady rise in household spending.",
+                "ja": "量的データは家計支出の着実な増加を示した。"
               }
             ]
           }
@@ -561,16 +757,63 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "quantitative research",
+        "ja": "量的研究"
+      },
+      {
+        "text": "quantitative data",
+        "ja": "量的データ"
+      },
+      {
+        "text": "quantitative analysis",
+        "ja": "量的分析"
+      },
+      {
+        "text": "quantitative survey",
+        "ja": "量的調査"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "quantitative は数値で測定・比較する研究などに使う。qualitative（質的な）と対比。",
     "tags": [
-      "scale-50k"
+      "scale-50k",
+      "etymology-v1",
+      "curated-v2.52",
+      "curated-v2.61",
+      "curated-v3.33",
+      "curated-v3.37"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched",
+    "etymology": {
+      "origin": "Latin quantus / quantitas",
+      "history": "quantity と同じ quant 語族で、量に関することを表す。",
+      "roots": [
+        {
+          "form": "quant",
+          "meaning": "どれほど・量"
+        }
+      ],
+      "related": [
+        "quantity"
+      ]
+    },
+    "senses": [
+      {
+        "pos": "",
+        "definition_ja": "量的な；数量に基づく",
+        "examples": [
+          {
+            "en": "Quantitative research often uses numerical data to test hypotheses.",
+            "ja": "量的研究では仮説検証に数値データを用いることが多い。"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "sw-02876",
@@ -587,11 +830,15 @@
         "meanings": [
           {
             "ja": "量；数量",
-            "definition": "an amount or number of something",
+            "definition": "an amount or number of something, especially one that can be measured",
             "examples": [
               {
-                "en": "The word 'quantity' is useful in this context.",
-                "ja": "この文脈では「量」という意味で使われる。"
+                "en": "The recipe uses only a small quantity of sugar.",
+                "ja": "そのレシピでは砂糖を少量しか使いません。"
+              },
+              {
+                "en": "The study focused on the quality rather than the quantity of sleep.",
+                "ja": "その研究は睡眠の量ではなく質に注目した。"
               }
             ]
           }
@@ -606,9 +853,12 @@
     },
     "usage_note": "",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "v2.31-curated",
+      "etymology-v1",
+      "v3.28-curated"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "search_terms": [
       "quantity"
     ],
@@ -616,7 +866,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "large quantity",
+      "quantity of",
+      "quality and quantity"
+    ],
+    "etymology": {
+      "origin": "Latin quantus / quantitas",
+      "history": "quantus「どれほど多い」に由来し、量を表す。",
+      "roots": [
+        {
+          "form": "quant",
+          "meaning": "どれほど・量"
+        }
+      ],
+      "related": [
+        "quantitative"
+      ]
+    }
   },
   {
     "id": "sw-08413",
@@ -714,12 +981,46 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "4分の1；四半期",
-            "definition": "one of four equal parts or a three-month period",
+            "ja": "4分の1",
+            "definition": "one of four equal parts of something",
             "examples": [
               {
-                "en": "The word 'quarter' is useful in this context.",
-                "ja": "この文脈では「4分の1」という意味で使われる。"
+                "en": "A quarter of respondents preferred the second option.",
+                "ja": "回答者の4分の1が2番目の選択肢を好んだ。"
+              },
+              {
+                "en": "About a quarter of the students walk to school.",
+                "ja": "生徒のおよそ4分の1が徒歩で通学しています。"
+              }
+            ]
+          },
+          {
+            "ja": "四半期；3か月間",
+            "definition": "one of four three-month periods in a year",
+            "examples": [
+              {
+                "en": "Sales rose by eight percent in the final quarter.",
+                "ja": "最終四半期の売上高は8％増加した。"
+              }
+            ]
+          },
+          {
+            "ja": "15分（時刻の表現で）",
+            "definition": "a period of fifteen minutes, especially when telling time",
+            "examples": [
+              {
+                "en": "The meeting starts at a quarter past nine.",
+                "ja": "会議は9時15分に始まる。"
+              }
+            ]
+          },
+          {
+            "ja": "地区；街の一角",
+            "definition": "a particular district of a town or city",
+            "examples": [
+              {
+                "en": "They stayed in the city’s historic quarter.",
+                "ja": "彼らはその都市の歴史地区に滞在した。"
               }
             ]
           }
@@ -732,11 +1033,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "a quarter of + 名詞。四半期は first/second/third/fourth quarter。a quarter to six は「6時15分」ではなく「5時45分」。",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "v2.31-curated",
+      "curated-v3.48"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "search_terms": [
       "quarter"
     ],
@@ -744,7 +1047,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "a quarter of ...",
+        "ja": "〜の4分の1"
+      },
+      {
+        "text": "the first quarter",
+        "ja": "第1四半期"
+      },
+      {
+        "text": "a quarter past six",
+        "ja": "6時15分"
+      },
+      {
+        "text": "a quarter to six",
+        "ja": "5時45分"
+      }
+    ]
   },
   {
     "id": "sw-10935",
@@ -850,24 +1170,34 @@
         "meanings": [
           {
             "ja": "四半期ごとに",
-            "definition": "",
-            "examples": []
+            "definition": "happening, produced, or paid four times a year",
+            "examples": [
+              {
+                "en": "The company publishes quarterly reports on its financial performance.",
+                "ja": "その会社は財務実績について四半期ごとの報告書を公表している。"
+              }
+            ],
+            "definition_en": "happening, produced, or paid four times a year"
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "quarterly report",
+      "quarterly earnings"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Can be an adjective, adverb, or noun.",
     "tags": [
-      "work-description"
+      "work-description",
+      "curated-v3.26"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07028",
@@ -1321,12 +1651,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "質問",
-            "definition": "a person, thing, idea, or concept connected with '質問'",
+            "ja": "質問；問い",
+            "definition": "a sentence or phrase used to ask for information",
             "examples": [
               {
-                "en": "This question is important.",
-                "ja": "この「質問」は重要です。"
+                "en": "If you have a question, raise your hand.",
+                "ja": "質問があれば手を挙げてください。"
+              }
+            ]
+          },
+          {
+            "ja": "問題；論点",
+            "definition": "a matter that needs to be considered or decided",
+            "examples": [
+              {
+                "en": "The question is whether the plan will actually work.",
+                "ja": "問題はその計画が本当に機能するかどうかです。"
               }
             ]
           }
@@ -1334,14 +1674,20 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "ask a question",
+      "answer a question"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.28-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "question"
     ],
@@ -1349,7 +1695,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin quaerere / quaesitus",
+      "history": "quaerere「尋ねる・探す」に由来し、尋ねる内容を表す。",
+      "roots": [
+        {
+          "form": "quer / quir / quis",
+          "meaning": "尋ねる・求める"
+        }
+      ],
+      "related": [
+        "require",
+        "inquiry",
+        "acquire",
+        "acquisition"
+      ]
+    }
   },
   {
     "id": "sw-10129",
@@ -1473,24 +1835,34 @@
         "meanings": [
           {
             "ja": "待ち行列；順番",
-            "definition": "",
-            "examples": []
+            "definition": "a line of people or things waiting for service or processing",
+            "examples": [
+              {
+                "en": "Passengers formed a long queue at the check-in counter.",
+                "ja": "乗客はチェックインカウンターに長い列を作った。"
+              }
+            ],
+            "definition_en": "a line of people or things waiting for service or processing"
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "join a queue",
+      "long queue"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Queue is common in British English; line is more common in American English for people waiting.",
     "tags": [
-      "computing"
+      "computing",
+      "curated-v3.26"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-09915",
@@ -1515,23 +1887,33 @@
           {
             "ja": "列に並ぶ",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "Hundreds of people queued up to enter the exhibition.",
+                "ja": "何百人もの人が展示会に入るため列を作った。"
+              }
+            ],
+            "definition_en": "to form or join a line while waiting"
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "queue up for tickets",
+      "queue up outside"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Learn this expression as a unit: queue up. The example and collocations show its common grammatical pattern and register.",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.14"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-06448",
@@ -1629,12 +2011,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "速い",
-            "definition": "having the quality described as '速い'",
+            "ja": "速い；素早い",
+            "definition": "done or happening in a short time",
             "examples": [
               {
-                "en": "This is quick.",
-                "ja": "これは「速い」です。"
+                "en": "Let's take a quick break before the next activity.",
+                "ja": "次の活動の前に短い休憩を取りましょう。"
               }
             ]
           }
@@ -1648,8 +2030,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "quick"
     ],
@@ -1714,12 +2098,12 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "素早く",
-            "definition": "in the manner or degree expressed by 素早く",
+            "ja": "素早く；すぐに",
+            "definition": "at a fast speed or after a short time",
             "examples": [
               {
-                "en": "The word 'quickly' is commonly used in this context.",
-                "ja": "「quickly」は「素早く」に関する文脈で使われます。"
+                "en": "The students quickly adapted to the new system.",
+                "ja": "生徒たちは新しいシステムにすぐ適応しました。"
               }
             ]
           }
@@ -1733,8 +2117,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "quickly"
     ],
@@ -1755,15 +2141,15 @@
     "frequency": 4,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
             "ja": "静かな",
-            "definition": "a person, thing, state, or idea related to 静かな",
+            "definition": "making little or no noise",
             "examples": [
               {
-                "en": "This is a common example of 'quiet'.",
-                "ja": "これは「静かな」の一般的な例です。"
+                "en": "The library is usually quiet in the morning.",
+                "ja": "図書館は朝はたいてい静かです。"
               }
             ]
           }
@@ -1777,8 +2163,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "quiet"
     ],
@@ -1811,23 +2199,33 @@
           {
             "ja": "静かになる；静める",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "The class quieted down when the presentation began.",
+                "ja": "発表が始まるとクラスは静かになった。"
+              }
+            ],
+            "definition_en": "to become or make someone less noisy or excited"
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "quiet down quickly",
+      "ask someone to quiet down"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Learn this expression as a unit: quiet down. The example and collocations show its common grammatical pattern and register.",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.14"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04101",
@@ -2287,24 +2685,34 @@
         "meanings": [
           {
             "ja": "定足数",
-            "definition": "",
-            "examples": []
+            "definition": "the minimum number of members who must be present for a meeting to make valid decisions",
+            "examples": [
+              {
+                "en": "The committee could not vote because it lacked a quorum.",
+                "ja": "委員会は定足数に達していなかったため採決できなかった。"
+              }
+            ],
+            "definition_en": "the minimum number of members who must be present for a meeting to make valid decisions"
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "reach a quorum",
+      "lack a quorum"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Used for formal meetings, committees, boards, and legislatures.",
     "tags": [
-      "work-business"
+      "work-business",
+      "curated-v3.26"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07918",
@@ -2328,24 +2736,34 @@
         "meanings": [
           {
             "ja": "見積もり；引用",
-            "definition": "",
-            "examples": []
+            "definition": "a group of words repeated from a text or speech; also, a stated price for work or goods",
+            "examples": [
+              {
+                "en": "The essay begins with a quotation from a nineteenth-century scientist.",
+                "ja": "その論文は19世紀の科学者の引用から始まる。"
+              }
+            ],
+            "definition_en": "a group of words repeated from a text or speech; also, a stated price for work or goods"
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "direct quotation",
+      "quotation marks"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "In business, quotation can also mean a quoted price.",
     "tags": [
-      "trade"
+      "trade",
+      "curated-v3.26"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10104",
@@ -2411,28 +2829,38 @@
         "meanings": [
           {
             "ja": "引用する",
-            "definition": "to perform or cause the action expressed by 引用する",
+            "definition": "to repeat the exact words that someone else has said or written",
             "examples": [
               {
-                "en": "The word 'quote' is often useful in formal or everyday English.",
-                "ja": "「quote」は「引用する」の意味で使われます。"
+                "en": "The essay quotes a line from the original article.",
+                "ja": "その作文は元の記事から一文を引用しています。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "quotes",
+      "past": "quoted",
+      "past_participle": "quoted",
+      "ing": "quoting"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.31-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "quote"
+      "quote",
+      "quotes",
+      "quoted",
+      "quoting"
     ],
     "pronunciation": {
       "ipa_us": null,

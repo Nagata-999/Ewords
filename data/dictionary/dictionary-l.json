@@ -13,12 +13,37 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "ラベル；分類名",
-            "definition": "a piece of information attached to identify or describe something",
+            "ja": "ラベル；表示",
+            "definition": "a piece of paper or other material giving information about an item",
             "examples": [
               {
-                "en": "The word 'label' is useful in this context.",
-                "ja": "この文脈では「ラベル」という意味で使われる。"
+                "en": "Check the label for instructions on storing the medicine.",
+                "ja": "薬の保管方法についてはラベルを確認しなさい。"
+              }
+            ]
+          },
+          {
+            "ja": "分類名；呼び名",
+            "definition": "a word or phrase used to describe or classify someone or something",
+            "examples": [
+              {
+                "en": "The label can obscure important differences within the group.",
+                "ja": "その分類名は集団内部の重要な違いを見えにくくすることがある。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "ラベルを付ける；分類する",
+            "definition": "to attach a label or describe someone or something as belonging to a group",
+            "examples": [
+              {
+                "en": "The samples were labeled with dates and locations.",
+                "ja": "試料には日付と採取場所が記された。"
               }
             ]
           }
@@ -31,11 +56,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "label A as B は「AをBと呼ぶ・分類する」。人に付ける label は否定的な固定観念につながることもある。",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "curated-v3.04",
+      "curated-v3.44"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "search_terms": [
       "label"
     ],
@@ -43,7 +70,16 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "warning label",
+      "product label",
+      {
+        "text": "label A as B"
+      },
+      {
+        "text": "clearly labeled"
+      }
+    ]
   },
   {
     "id": "sw-10175",
@@ -68,7 +104,12 @@
           {
             "ja": "唇の；唇で発する",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"labial\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「labial」が「唇の；唇で発する」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -82,7 +123,8 @@
     },
     "usage_note": "",
     "tags": [
-      "study-language"
+      "study-language",
+      "curated-v2.92"
     ],
     "status": "needs_enrichment"
   },
@@ -109,7 +151,12 @@
           {
             "ja": "唇と歯を用いる音の",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"labiodental\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「labiodental」が「唇と歯を用いる音の」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -123,7 +170,8 @@
     },
     "usage_note": "",
     "tags": [
-      "study-language"
+      "study-language",
+      "curated-v2.92"
     ],
     "status": "needs_enrichment"
   },
@@ -150,7 +198,12 @@
           {
             "ja": "下唇；昆虫の口器の一部",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"labium\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「labium」が「下唇；昆虫の口器の一部」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -164,7 +217,8 @@
     },
     "usage_note": "",
     "tags": [
-      "wildlife-invertebrates"
+      "wildlife-invertebrates",
+      "curated-v2.92"
     ],
     "status": "needs_enrichment"
   },
@@ -182,12 +236,37 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "労働",
-            "definition": "a person, thing, state, or idea related to 労働",
+            "ja": "労働；労働力",
+            "definition": "work, especially physical work, or the people available to work",
             "examples": [
               {
-                "en": "The word 'labor' is often useful in formal or everyday English.",
-                "ja": "「labor」は「労働」の意味で使われます。"
+                "en": "The region faces a shortage of skilled labor.",
+                "ja": "その地域は熟練労働力の不足に直面している。"
+              }
+            ]
+          },
+          {
+            "ja": "出産時の陣痛；分娩",
+            "definition": "the process of giving birth to a baby",
+            "examples": [
+              {
+                "en": "She went into labor early in the morning.",
+                "ja": "彼女は早朝に陣痛が始まった。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "苦労して取り組む",
+            "definition": "to work hard at a difficult task",
+            "examples": [
+              {
+                "en": "Researchers labored for years to collect the data.",
+                "ja": "研究者たちはそのデータを集めるために何年も苦労した。"
               }
             ]
           }
@@ -200,9 +279,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "labor は米国綴り、labour は英国綴り。labor market は「労働市場」。go into labor は「陣痛が始まる」。",
+    "tags": [
+      "etymology-v1",
+      "curated-v2.58",
+      "curated-v3.44"
+    ],
+    "status": "enriched",
     "search_terms": [
       "labor"
     ],
@@ -210,7 +293,47 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "labor market"
+      },
+      {
+        "text": "labor costs"
+      },
+      {
+        "text": "skilled labor"
+      },
+      {
+        "text": "go into labor"
+      }
+    ],
+    "etymology": {
+      "origin": "Latin labor / laborare",
+      "history": "Latin labor「労働・苦労」に由来する。",
+      "roots": [
+        {
+          "form": "labor",
+          "meaning": "働く・労働"
+        }
+      ],
+      "related": [
+        "laboratory",
+        "collaborate",
+        "collaboration"
+      ]
+    },
+    "senses": [
+      {
+        "pos": "",
+        "definition_ja": "労働；労働力",
+        "examples": [
+          {
+            "en": "Labor costs have risen as the workforce has aged.",
+            "ja": "労働力の高齢化に伴い人件費が上昇している。"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "sw-07901",
@@ -305,15 +428,16 @@
     "frequency": 3,
     "parts_of_speech": [
       {
-        "pos": "adjective",
+        "pos": "noun",
         "meanings": [
           {
-            "ja": "研究室",
-            "definition": "having the quality expressed by 研究室",
+            "ja": "研究室；実験室",
+            "definition": "a room or building equipped for scientific research and experiments",
+            "definition_en": "a room or building equipped for scientific research and experiments",
             "examples": [
               {
-                "en": "The word 'laboratory' is often useful in formal or everyday English.",
-                "ja": "「laboratory」は「研究室」の意味で使われます。"
+                "en": "The samples were analyzed in a university laboratory.",
+                "ja": "試料は大学の研究室で分析された。"
               }
             ]
           }
@@ -326,9 +450,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "laboratory は名詞。laboratory experiment（実験室での実験）のように名詞が別の名詞を修飾することもある。略語は lab。",
+    "tags": [
+      "etymology-v1",
+      "curated-v2.75",
+      "curated-v3.50"
+    ],
+    "status": "enriched",
     "search_terms": [
       "laboratory"
     ],
@@ -336,7 +464,35 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "research laboratory",
+        "ja": "研究所；研究室"
+      },
+      {
+        "text": "laboratory experiment",
+        "ja": "実験室での実験"
+      },
+      {
+        "text": "laboratory tests",
+        "ja": "臨床検査；実験室での検査"
+      }
+    ],
+    "etymology": {
+      "origin": "Latin labor / laborare",
+      "history": "Medieval Latin laboratorium に由来し、作業・実験を行う場所を表す。",
+      "roots": [
+        {
+          "form": "labor",
+          "meaning": "働く・労働"
+        }
+      ],
+      "related": [
+        "labor",
+        "collaborate",
+        "collaboration"
+      ]
+    }
   },
   {
     "id": "sw-12014",
@@ -361,7 +517,12 @@
           {
             "ja": "ラブラドライト；曹灰長石",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"labradorite\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「labradorite」が「ラブラドライト；曹灰長石」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -375,7 +536,8 @@
     },
     "usage_note": "",
     "tags": [
-      "geology-minerals"
+      "geology-minerals",
+      "curated-v2.92"
     ],
     "status": "needs_enrichment"
   },
@@ -402,7 +564,12 @@
           {
             "ja": "上唇；昆虫の口器の一部",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"labrum\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「labrum」が「上唇；昆虫の口器の一部」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -416,7 +583,8 @@
     },
     "usage_note": "",
     "tags": [
-      "wildlife-invertebrates"
+      "wildlife-invertebrates",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -566,7 +734,12 @@
           {
             "ja": "クサカゲロウ類；網目状の翅の昆虫",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lacewing\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lacewing」が「クサカゲロウ類；網目状の翅の昆虫」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -580,7 +753,8 @@
     },
     "usage_note": "",
     "tags": [
-      "wildlife-invertebrates"
+      "wildlife-invertebrates",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -636,15 +810,30 @@
     "frequency": 3,
     "parts_of_speech": [
       {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "不足；欠如",
+            "definition": "the absence or insufficiency of something needed",
+            "examples": [
+              {
+                "en": "A lack of reliable data limited the study.",
+                "ja": "信頼できるデータの不足がその研究を制約した。"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "pos": "verb",
         "meanings": [
           {
-            "ja": "不足；欠く",
-            "definition": "to perform or cause the action expressed by 不足",
+            "ja": "〜を欠いている；不足している",
+            "definition": "to not have enough of something",
             "examples": [
               {
-                "en": "The word 'lack' is commonly used in this context.",
-                "ja": "「lack」は「不足」に関する文脈で使われます。"
+                "en": "The proposal lacks clear evidence.",
+                "ja": "その提案には明確な根拠が欠けている。"
               }
             ]
           }
@@ -652,14 +841,21 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      {
+        "phrase": "for lack of",
+        "ja": "〜がないために"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "動詞 lack は他動詞なので lack evidence（× lack of evidence）。名詞は a lack of evidence。",
+    "tags": [
+      "curated-v3.47"
+    ],
+    "status": "enriched",
     "search_terms": [
       "lack"
     ],
@@ -667,7 +863,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "a lack of evidence",
+        "ja": "証拠の不足"
+      },
+      {
+        "text": "lack access to",
+        "ja": "〜を利用できない"
+      },
+      {
+        "text": "lack confidence",
+        "ja": "自信がない"
+      },
+      {
+        "text": "for lack of",
+        "ja": "〜がないために"
+      }
+    ]
   },
   {
     "id": "sw-13483",
@@ -692,7 +905,12 @@
           {
             "ja": "熱意のない；気のない",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lackadaisical\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lackadaisical」が「熱意のない；気のない」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -706,7 +924,8 @@
     },
     "usage_note": "",
     "tags": [
-      "practical-quality"
+      "practical-quality",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -774,7 +993,12 @@
           {
             "ja": "口数の少ない；簡潔な",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"laconic\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「laconic」が「口数の少ない；簡潔な」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -788,7 +1012,8 @@
     },
     "usage_note": "",
     "tags": [
-      "study-language"
+      "study-language",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -943,7 +1168,12 @@
           {
             "ja": "湖の；湖で形成された",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lacustrine\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lacustrine」が「湖の；湖で形成された」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -957,7 +1187,8 @@
     },
     "usage_note": "",
     "tags": [
-      "outdoor-conditions"
+      "outdoor-conditions",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -1128,7 +1359,12 @@
           {
             "ja": "ラガー；ビールの一種",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lager\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lager」が「ラガー；ビールの一種」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -1142,7 +1378,8 @@
     },
     "usage_note": "",
     "tags": [
-      "sweets-drinks"
+      "sweets-drinks",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -1169,7 +1406,12 @@
           {
             "ja": "ウサギ目の動物；ウサギ類",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lagomorph\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lagomorph」が「ウサギ目の動物；ウサギ類」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -1183,7 +1425,8 @@
     },
     "usage_note": "",
     "tags": [
-      "wildlife-mammals"
+      "wildlife-mammals",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -1472,7 +1715,12 @@
           {
             "ja": "嘆く",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lament\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lament」が「嘆く」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -1486,7 +1734,8 @@
     },
     "usage_note": "",
     "tags": [
-      "thinking-communication"
+      "thinking-communication",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -1513,7 +1762,12 @@
           {
             "ja": "舌端部で発する；薄板状の",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"laminal\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「laminal」が「舌端部で発する；薄板状の」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -1527,7 +1781,8 @@
     },
     "usage_note": "",
     "tags": [
-      "study-language"
+      "study-language",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -1814,7 +2069,12 @@
           {
             "ja": "ナメクジウオ；小型の海生動物",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lancelet\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lancelet」が「ナメクジウオ；小型の海生動物」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -1828,7 +2088,8 @@
     },
     "usage_note": "",
     "tags": [
-      "wildlife-invertebrates"
+      "wildlife-invertebrates",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -1865,7 +2126,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "curated-v2.63"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "land"
@@ -1874,7 +2137,26 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "agricultural land"
+      },
+      {
+        "text": "land use"
+      }
+    ],
+    "senses": [
+      {
+        "pos": "",
+        "definition_ja": "土地；陸地／着陸する",
+        "examples": [
+          {
+            "en": "Urban expansion can increase competition for agricultural land.",
+            "ja": "都市拡大は農地をめぐる競争を激化させることがある。"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "sw-11709",
@@ -2186,7 +2468,12 @@
           {
             "ja": "船や海に不慣れな人",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"landlubber\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「landlubber」が「船や海に不慣れな人」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -2200,7 +2487,8 @@
     },
     "usage_note": "",
     "tags": [
-      "boats-harbors"
+      "boats-harbors",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -2218,12 +2506,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "目印；名所",
-            "definition": "a common English word connected with 目印",
+            "ja": "目印となる建物・場所",
+            "definition": "a prominent feature that helps people identify a location",
             "examples": [
               {
-                "en": "The word 'landmark' is commonly used in this context.",
-                "ja": "「landmark」は「目印」に関する文脈で使われます。"
+                "en": "The old clock tower is a familiar landmark in the town.",
+                "ja": "古い時計台は町でおなじみの目印だ。"
+              }
+            ]
+          },
+          {
+            "ja": "画期的な出来事・重要な節目",
+            "definition": "an event or achievement marking an important change",
+            "examples": [
+              {
+                "en": "The ruling was a landmark in the history of environmental law.",
+                "ja": "その判決は環境法の歴史における画期的な出来事だった。"
               }
             ]
           }
@@ -2236,9 +2534,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "建造物などの「目印」と、歴史的な「画期的出来事」。landmark study は重要な先駆的研究。",
+    "tags": [
+      "curated-v3.51"
+    ],
+    "status": "enriched",
     "search_terms": [
       "landmark"
     ],
@@ -2246,7 +2546,17 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "a historic landmark"
+      },
+      {
+        "text": "a landmark decision"
+      },
+      {
+        "text": "a landmark study"
+      }
+    ]
   },
   {
     "id": "sw-01905",
@@ -2437,12 +2747,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "言語",
-            "definition": "a person, thing, idea, or concept connected with '言語'",
+            "ja": "言語；言葉",
+            "definition": "a system of words and grammar used by a particular group of people",
             "examples": [
               {
-                "en": "This language is important.",
-                "ja": "この「言語」は重要です。"
+                "en": "Learning a language takes more time than many people expect.",
+                "ja": "言語を学ぶことは多くの人が思う以上に時間がかかります。"
               }
             ]
           }
@@ -2450,14 +2760,19 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "foreign language",
+      "body language"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.28-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "language"
     ],
@@ -2818,7 +3133,12 @@
           {
             "ja": "宝石細工師；宝石研磨人",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lapidary\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lapidary」が「宝石細工師；宝石研磨人」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -2832,7 +3152,8 @@
     },
     "usage_note": "",
     "tags": [
-      "geology-minerals"
+      "geology-minerals",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -2985,7 +3306,12 @@
           {
             "ja": "タゲリ類；チドリ科の鳥",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lapwing\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lapwing」が「タゲリ類；チドリ科の鳥」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -2999,7 +3325,8 @@
     },
     "usage_note": "",
     "tags": [
-      "wildlife-birds"
+      "wildlife-birds",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -3067,7 +3394,12 @@
           {
             "ja": "ラード；豚脂",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lard\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lard」が「ラード；豚脂」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -3081,7 +3413,8 @@
     },
     "usage_note": "",
     "tags": [
-      "seasoning-baking"
+      "seasoning-baking",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -3099,12 +3432,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "大きい",
-            "definition": "having the quality described as '大きい'",
+            "ja": "大きい；大規模な",
+            "definition": "big in size, amount, or number",
             "examples": [
               {
-                "en": "This is large.",
-                "ja": "これは「大きい」です。"
+                "en": "A large crowd gathered in front of the station.",
+                "ja": "駅前に大勢の人が集まりました。"
               }
             ]
           }
@@ -3118,8 +3451,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "large"
     ],
@@ -3143,12 +3478,12 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "主として",
-            "definition": "in the manner or degree expressed by 主として",
+            "ja": "主に；大部分は",
+            "definition": "mostly or to a great extent",
             "examples": [
               {
-                "en": "The word 'largely' is commonly used in this kind of context.",
-                "ja": "「largely」は「主として」に関する文脈でよく使われます。"
+                "en": "The project's success was largely due to student participation.",
+                "ja": "プロジェクトの成功は主に生徒の参加によるものでした。"
               }
             ]
           }
@@ -3162,8 +3497,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "largely"
     ],
@@ -3196,7 +3533,12 @@
           {
             "ja": "ヒバリ類；愉快な遊び",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lark\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lark」が「ヒバリ類；愉快な遊び」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -3210,7 +3552,8 @@
     },
     "usage_note": "",
     "tags": [
-      "wildlife-birds"
+      "wildlife-birds",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -3278,7 +3621,12 @@
           {
             "ja": "喉頭の；喉頭に関する",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"laryngeal\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「laryngeal」が「喉頭の；喉頭に関する」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -3292,7 +3640,8 @@
     },
     "usage_note": "",
     "tags": [
-      "study-language"
+      "study-language",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -3360,7 +3709,12 @@
           {
             "ja": "ラザニア；平たいパスタ・その料理",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lasagne\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lasagne」が「ラザニア；平たいパスタ・その料理」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -3374,7 +3728,8 @@
     },
     "usage_note": "",
     "tags": [
-      "dishes-breads"
+      "dishes-breads",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -3410,11 +3765,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Useful in general, academic, news, or professional English.",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "curated-v3.04"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "search_terms": [
       "laser"
     ],
@@ -3422,7 +3778,10 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "laser technology",
+      "laser beam"
+    ]
   },
   {
     "id": "sw-13186",
@@ -3570,7 +3929,12 @@
           {
             "ja": "ラッシー；ヨーグルト飲料",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lassi\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lassi」が「ラッシー；ヨーグルト飲料」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -3584,7 +3948,8 @@
     },
     "usage_note": "",
     "tags": [
-      "sweets-drinks"
+      "sweets-drinks",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -3602,12 +3967,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "最後の；前の",
-            "definition": "having the quality described as '最後の；前の'",
+            "ja": "最後の；前回の",
+            "definition": "coming after all others or most recent before now",
             "examples": [
               {
-                "en": "This is last.",
-                "ja": "これは「最後の」です。"
+                "en": "I finished the last chapter yesterday.",
+                "ja": "昨日最後の章を読み終えました。"
               }
             ]
           }
@@ -3621,8 +3986,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "last"
     ],
@@ -3777,12 +4144,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "遅い",
-            "definition": "having the quality described as '遅い'",
+            "ja": "遅い；遅れた",
+            "definition": "happening after the expected or usual time",
             "examples": [
               {
-                "en": "This is late.",
-                "ja": "これは「遅い」です。"
+                "en": "The train was twenty minutes late because of heavy rain.",
+                "ja": "大雨のため電車は20分遅れました。"
               }
             ]
           }
@@ -3796,8 +4163,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "late"
     ],
@@ -3941,15 +4310,15 @@
     "frequency": 5,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adverb",
         "meanings": [
           {
-            "ja": "後で",
-            "definition": "a person, thing, idea, or concept connected with '後で'",
+            "ja": "後で；より遅く",
+            "definition": "at a time after the present or the time being discussed",
             "examples": [
               {
-                "en": "This later is important.",
-                "ja": "この「後で」は重要です。"
+                "en": "We can discuss the details later.",
+                "ja": "詳細は後で話し合えます。"
               }
             ]
           }
@@ -3963,8 +4332,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "later"
     ],
@@ -3997,7 +4368,12 @@
           {
             "ja": "側面音；側方のもの",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lateral\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lateral」が「側面音；側方のもの」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -4011,7 +4387,8 @@
     },
     "usage_note": "",
     "tags": [
-      "language-writing"
+      "language-writing",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -4108,15 +4485,40 @@
     "frequency": 2,
     "parts_of_speech": [
       {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "後半の；後者の",
+            "definition": "belonging to the second of two things mentioned",
+            "examples": [
+              {
+                "en": "The latter proposal would cost less.",
+                "ja": "後者の提案のほうが費用が少なくて済む。"
+              }
+            ]
+          },
+          {
+            "ja": "後期の",
+            "definition": "near the end of a period",
+            "examples": [
+              {
+                "en": "The policy changed in the latter half of the decade.",
+                "ja": "その政策はその10年間の後半に変更された。"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "pos": "noun",
         "meanings": [
           {
-            "ja": "後者",
-            "definition": "a person, thing, state, or idea related to 後者",
+            "ja": "後者（the latter）",
+            "definition": "the second of two people or things just mentioned",
             "examples": [
               {
-                "en": "The word 'latter' is often useful in formal or everyday English.",
-                "ja": "「latter」は「後者」の意味で使われます。"
+                "en": "We could travel by train or bus; I prefer the latter.",
+                "ja": "電車かバスで行けるが、私は後者がよい。"
               }
             ]
           }
@@ -4129,9 +4531,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "the former は「前者」、the latter は「後者」。通常は直前に挙げた二者を対比する。",
+    "tags": [
+      "curated-v3.54"
+    ],
+    "status": "enriched",
     "search_terms": [
       "latter"
     ],
@@ -4139,7 +4543,17 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "the latter"
+      },
+      {
+        "text": "the latter half"
+      },
+      {
+        "text": "the former and the latter"
+      }
+    ]
   },
   {
     "id": "sw-12895",
@@ -4164,7 +4578,12 @@
           {
             "ja": "最近は；後になって",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"latterly\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「latterly」が「最近は；後になって」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -4178,7 +4597,8 @@
     },
     "usage_note": "",
     "tags": [
-      "manner-time"
+      "manner-time",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -4205,7 +4625,12 @@
           {
             "ja": "称賛する",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"laud\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「laud」が「称賛する」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -4219,7 +4644,8 @@
     },
     "usage_note": "",
     "tags": [
-      "thinking-communication"
+      "thinking-communication",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -4331,7 +4757,12 @@
           {
             "ja": "ガビチョウ類；鳴き声の大きな鳥",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"laughingthrush\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「laughingthrush」が「ガビチョウ類；鳴き声の大きな鳥」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -4345,7 +4776,8 @@
     },
     "usage_note": "",
     "tags": [
-      "wildlife-birds"
+      "wildlife-birds",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -4363,12 +4795,37 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "開始する；打ち上げる",
-            "definition": "to perform or cause the action expressed by 開始する",
+            "ja": "（計画・事業・製品などを）開始する；発売する",
+            "definition": "to start an organized activity or make a product available",
             "examples": [
               {
-                "en": "The word 'launch' is often useful in formal or everyday English.",
-                "ja": "「launch」は「開始する」の意味で使われます。"
+                "en": "The company plans to launch a new service next spring.",
+                "ja": "その会社は来春、新サービスを開始する予定だ。"
+              }
+            ]
+          },
+          {
+            "ja": "（ロケットなどを）打ち上げる",
+            "definition": "to send a rocket, satellite, or similar object into the air or space",
+            "examples": [
+              {
+                "en": "The agency launched the satellite successfully.",
+                "ja": "その機関は衛星の打ち上げに成功した。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "開始；発売；打ち上げ",
+            "definition": "the act of starting or introducing something",
+            "examples": [
+              {
+                "en": "The product launch attracted widespread media attention.",
+                "ja": "その製品発表はメディアの大きな注目を集めた。"
               }
             ]
           }
@@ -4381,9 +4838,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "launch a campaign は「運動を始める」、launch a product は「製品を発売する」。名詞でも使う。",
+    "tags": [
+      "curated-v3.45"
+    ],
+    "status": "enriched",
     "search_terms": [
       "launch"
     ],
@@ -4391,7 +4850,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "launch a campaign"
+      },
+      {
+        "text": "launch a product"
+      },
+      {
+        "text": "launch a satellite"
+      },
+      {
+        "text": "product launch"
+      }
+    ]
   },
   {
     "id": "sw-03826",
@@ -4640,7 +5112,12 @@
           {
             "ja": "ラヴァシュ；薄い平パン",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lavash\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lavash」が「ラヴァシュ；薄い平パン」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -4654,7 +5131,8 @@
     },
     "usage_note": "",
     "tags": [
-      "dishes-breads"
+      "dishes-breads",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -4754,12 +5232,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "法律",
-            "definition": "a person, thing, idea, or concept connected with '法律'",
+            "ja": "法律；法",
+            "definition": "a rule officially made and enforced by a government",
             "examples": [
               {
-                "en": "This law is important.",
-                "ja": "この「法律」は重要です。"
+                "en": "The law requires drivers to stop at a red light.",
+                "ja": "法律は運転者に赤信号で停止することを求めています。"
               }
             ]
           }
@@ -4773,8 +5251,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.33-curated",
+      "curated-v2.57"
+    ],
+    "status": "basic",
     "search_terms": [
       "law"
     ],
@@ -4782,7 +5263,26 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "under the law"
+      },
+      {
+        "text": "pass a law"
+      }
+    ],
+    "senses": [
+      {
+        "pos": "",
+        "definition_ja": "法律；法；法則",
+        "examples": [
+          {
+            "en": "The new law requires greater transparency from public agencies.",
+            "ja": "新法は公的機関により高い透明性を求めている。"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "sw-06479",
@@ -4997,7 +5497,10 @@
     "word": "lay off",
     "lemma": "lay off",
     "search_terms": [
-      "lay off"
+      "lay off",
+      "lays off",
+      "laid off",
+      "laying off"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -5013,25 +5516,56 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "一時解雇する；やめる",
-            "definition": "",
-            "examples": []
+            "ja": "（従業員を）解雇する・一時解雇する",
+            "definition": "to stop employing someone, often because there is not enough work",
+            "examples": [
+              {
+                "en": "The factory laid off 200 workers after demand fell.",
+                "ja": "需要が落ち込んだため、その工場は従業員200人を解雇した。"
+              }
+            ]
+          },
+          {
+            "ja": "（人・物に）手を出すのをやめる",
+            "definition": "to stop bothering someone or stop using something",
+            "examples": [
+              {
+                "en": "The doctor advised him to lay off sugary drinks.",
+                "ja": "医師は彼に甘い飲み物を控えるよう勧めた。"
+              }
+            ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "lays off",
+      "past": "laid off",
+      "past_participle": "laid off",
+      "ing": "laying off"
+    },
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "lay off workers"
+      },
+      {
+        "text": "be laid off"
+      },
+      {
+        "text": "lay off alcohol"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "lay off + 従業員は「解雇する」。lay off + 飲食物などは口語で「控える」。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.51"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-09816",
@@ -5056,23 +5590,33 @@
           {
             "ja": "並べる；配置する；説明する",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "The report lays out three policy options.",
+                "ja": "報告書は三つの政策選択肢を明確に示している。"
+              }
+            ],
+            "definition_en": "to explain or present something clearly and systematically"
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "lay out a plan",
+      "lay out the evidence"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Multiword expression. Learn it as a unit: lay out. The example and collocations show its typical grammatical pattern.",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.13"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07422",
@@ -5274,7 +5818,12 @@
           {
             "ja": "青金石；ラピスラズリの主要な青色鉱物",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lazurite\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lazurite」が「青金石；ラピスラズリの主要な青色鉱物」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -5288,7 +5837,8 @@
     },
     "usage_note": "",
     "tags": [
-      "geology-minerals"
+      "geology-minerals",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -5969,7 +6519,12 @@
           {
             "ja": "コノハドリ類；緑色の鳥",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"leafbird\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「leafbird」が「コノハドリ類；緑色の鳥」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -5983,7 +6538,8 @@
     },
     "usage_note": "",
     "tags": [
-      "wildlife-birds"
+      "wildlife-birds",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -6010,7 +6566,12 @@
           {
             "ja": "ヨコバイ；植物の汁を吸う昆虫",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"leafhopper\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「leafhopper」が「ヨコバイ；植物の汁を吸う昆虫」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -6024,7 +6585,8 @@
     },
     "usage_note": "",
     "tags": [
-      "wildlife-invertebrates"
+      "wildlife-invertebrates",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -6097,7 +6659,12 @@
           {
             "ja": "昔の距離の単位；連盟",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"league\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「league」が「昔の距離の単位；連盟」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -6111,7 +6678,8 @@
     },
     "usage_note": "",
     "tags": [
-      "boats-harbors"
+      "boats-harbors",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -6231,12 +6799,45 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "寄りかかる；傾く",
-            "definition": "to perform or experience an action expressed by 寄りかかる",
+            "ja": "寄りかかる；身を傾ける",
+            "definition": "to bend or rest against something",
+            "definition_en": "to bend or rest against something",
             "examples": [
               {
-                "en": "They decided to lean after discussing the situation.",
-                "ja": "この例では「寄りかかる」という意味で使われている。"
+                "en": "She leaned against the wall while waiting for the train.",
+                "ja": "彼女は電車を待つ間、壁に寄りかかった。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "〜に傾く；〜を好む",
+            "definition": "to be inclined toward an opinion or choice",
+            "definition_en": "to be inclined toward an opinion or choice",
+            "examples": [
+              {
+                "en": "The committee is leaning toward a gradual reform.",
+                "ja": "委員会は段階的な改革に傾きつつある。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "脂肪の少ない；引き締まった",
+            "definition": "containing little fat",
+            "definition_en": "containing little fat",
+            "examples": [
+              {
+                "en": "Lean meat is often used in low-fat meals.",
+                "ja": "脂肪の少ない肉は低脂肪の食事によく使われる。"
               }
             ]
           }
@@ -6245,16 +6846,30 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "lean against a wall",
+        "ja": "壁に寄りかかる"
+      },
+      {
+        "text": "lean toward a proposal",
+        "ja": "提案に傾く"
+      },
+      {
+        "text": "lean meat",
+        "ja": "脂肪の少ない肉"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "lean against ...（〜に寄りかかる）、lean toward(s) ...（〜に傾く）。形容詞 lean は「脂肪の少ない」。",
     "tags": [
-      "general-vocabulary"
+      "general-vocabulary",
+      "curated-v3.50"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08889",
@@ -6357,9 +6972,13 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "学ぶ；習得する",
-            "definition": "to gain knowledge or a skill through study or experience",
+            "ja": "学ぶ；身につける",
+            "definition": "to gain knowledge or skill through study, practice, or experience",
             "examples": [
+              {
+                "en": "You learn a language faster when you use it regularly.",
+                "ja": "言語は定期的に使うとより速く身につきます。"
+              },
               {
                 "en": "We learn a new song every week.",
                 "ja": "私たちは毎週、新しい歌を習います。"
@@ -6370,9 +6989,9 @@
       }
     ],
     "forms": {
-      "past": "learned/learnt",
-      "past_participle": "learned/learnt",
       "third_person": "learns",
+      "past": "learned",
+      "past_participle": "learned",
       "ing": "learning"
     },
     "phrases": [],
@@ -6381,14 +7000,16 @@
       "antonyms": []
     },
     "usage_note": "過去形・過去分詞は learned と learnt。learnt は特に英式で使われる。",
-    "tags": [],
+    "tags": [
+      "v2.30-curated"
+    ],
     "status": "basic",
     "search_terms": [
       "learn",
-      "learned",
-      "learnt",
       "learns",
-      "learning"
+      "learned",
+      "learning",
+      "learnt"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -6410,12 +7031,30 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "学習",
-            "definition": "the process of gaining knowledge or skill",
+            "ja": "学習；知識・技能を身につける過程",
+            "definition": "the process of acquiring knowledge or skills through study or experience",
             "examples": [
               {
-                "en": "The discussion focused on learning.",
-                "ja": "議論では「学習」に焦点が当てられた。"
+                "en": "Learning a language requires regular practice.",
+                "ja": "言語の学習には継続的な練習が必要だ。"
+              },
+              {
+                "en": "The study compared online learning with classroom instruction.",
+                "ja": "その研究はオンライン学習と対面授業を比較した。"
+              },
+              {
+                "en": "Active learning often leads to better understanding.",
+                "ja": "能動的な学習はより深い理解につながることが多いです。"
+              }
+            ]
+          },
+          {
+            "ja": "学んだ知識；学識",
+            "definition": "knowledge acquired through study or experience",
+            "examples": [
+              {
+                "en": "She applied her learning to a real-world problem.",
+                "ja": "彼女は学んだ知識を現実の問題に応用した。"
               }
             ]
           }
@@ -6428,11 +7067,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "learning は通常不可算名詞。a learning を「学び一つ」の意味で使うビジネス用法もあるが、一般的には lesson learned が自然。",
     "tags": [
-      "learner-core-gap"
+      "learner-core-gap",
+      "v2.33-curated",
+      "curated-v3.48"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "search_terms": [
       "learning"
     ],
@@ -6440,7 +7081,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "lifelong learning",
+        "ja": "生涯学習"
+      },
+      {
+        "text": "machine learning",
+        "ja": "機械学習"
+      },
+      {
+        "text": "learning outcomes",
+        "ja": "学習成果"
+      }
+    ]
   },
   {
     "id": "sw-03467",
@@ -6588,15 +7242,33 @@
             "definition": "to go away from a place",
             "examples": [
               {
+                "en": "We left the station at six.",
+                "ja": "私たちは6時に駅を出ました。"
+              },
+              {
                 "en": "We leave at seven.",
                 "ja": "私たちは7時に出発します。"
               }
             ]
           },
           {
-            "ja": "残す",
-            "definition": "to cause something to remain",
+            "ja": "残す；置いていく",
+            "definition": "to let something remain in a place or condition",
             "examples": [
+              {
+                "en": "I left my umbrella on the train.",
+                "ja": "電車に傘を置き忘れました。"
+              }
+            ]
+          },
+          {
+            "ja": "〜のままにしておく",
+            "definition": "to cause someone or something to remain in a particular state",
+            "examples": [
+              {
+                "en": "Leave the window open for a while.",
+                "ja": "しばらく窓を開けたままにしてください。"
+              },
               {
                 "en": "Leave the door open.",
                 "ja": "ドアを開けたままにしてください。"
@@ -6606,23 +7278,50 @@
         ]
       }
     ],
-    "forms": {},
-    "phrases": [],
+    "forms": {
+      "third_person": "leaves",
+      "past": "left",
+      "past_participle": "left",
+      "ing": "leaving"
+    },
+    "phrases": [
+      {
+        "phrase": "leave for",
+        "ja": "〜へ向けて出発する"
+      },
+      {
+        "phrase": "leave behind",
+        "ja": "〜を置き去りにする；残す"
+      },
+      {
+        "phrase": "leave out",
+        "ja": "〜を除外する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "v2.43-curated"
+    ],
     "status": "basic",
     "search_terms": [
-      "leave"
+      "leave",
+      "leaves",
+      "left",
+      "leaving"
     ],
     "pronunciation": {
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "leave home",
+      "leave a message",
+      "leave someone alone"
+    ]
   },
   {
     "id": "sw-09821",
@@ -6852,7 +7551,12 @@
           {
             "ja": "レシチン；乳化に使う脂質",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lecithin\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lecithin」が「レシチン；乳化に使う脂質」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -6866,7 +7570,8 @@
     },
     "usage_note": "",
     "tags": [
-      "seasoning-baking"
+      "seasoning-baking",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -6884,12 +7589,45 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "講義",
-            "definition": "a person, thing, state, or idea connected with 講義",
+            "ja": "講義；講演",
+            "definition": "a formal talk intended to teach or explain a subject",
+            "definition_en": "a formal talk intended to teach or explain a subject",
             "examples": [
               {
-                "en": "The word 'lecture' appears in many kinds of English texts.",
-                "ja": "「lecture」はさまざまな英文で使われます。"
+                "en": "The professor gave a lecture on climate policy.",
+                "ja": "教授は気候政策について講義を行った。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "講義する",
+            "definition": "to give a formal educational talk",
+            "definition_en": "to give a formal educational talk",
+            "examples": [
+              {
+                "en": "She lectures on modern Japanese history.",
+                "ja": "彼女は日本近現代史を講義している。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "説教する；小言を言う",
+            "definition": "to criticize someone at length in a disapproving way",
+            "definition_en": "to criticize someone at length in a disapproving way",
+            "examples": [
+              {
+                "en": "His father lectured him about arriving home late.",
+                "ja": "父親は帰宅が遅いことについて彼に長々と説教した。"
               }
             ]
           }
@@ -6902,9 +7640,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "give/attend a lecture on ...。lecture someone about/on ... は「〜について説教する」。",
+    "tags": [
+      "etymology-v1",
+      "curated-v3.50"
+    ],
+    "status": "enriched",
     "search_terms": [
       "lecture"
     ],
@@ -6912,7 +7653,37 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "give a lecture on",
+        "ja": "〜について講義する"
+      },
+      {
+        "text": "attend a lecture",
+        "ja": "講義に出席する"
+      },
+      {
+        "text": "lecture someone about",
+        "ja": "人に〜について説教する"
+      }
+    ],
+    "etymology": {
+      "origin": "Latin legere / lectus",
+      "history": "lectura / legere「読む」に由来し、もとは文章を読み上げることを表した。",
+      "roots": [
+        {
+          "form": "leg / lect",
+          "meaning": "読む・選ぶ・集める"
+        }
+      ],
+      "related": [
+        "legible",
+        "collect",
+        "collection",
+        "elect",
+        "election"
+      ]
+    }
   },
   {
     "id": "sw-10373",
@@ -7071,7 +7842,12 @@
           {
             "ja": "いやらしく見る；にやにや眺める",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"leer\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「leer」が「いやらしく見る；にやにや眺める」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -7090,7 +7866,8 @@
     },
     "usage_note": "",
     "tags": [
-      "thinking-perception"
+      "thinking-perception",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -7345,11 +8122,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Common in formal, academic, professional, or news contexts.",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "curated-v3.03"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "search_terms": [
       "legacy"
     ],
@@ -7357,7 +8135,10 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "lasting legacy",
+      "leave a legacy"
+    ]
   },
   {
     "id": "sw-01300",
@@ -7373,12 +8154,26 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "法律上の；合法の",
-            "definition": "a common English word connected with 法律上の",
+            "ja": "法律上の；法的な",
+            "definition": "related to the law or legal system",
             "examples": [
               {
-                "en": "The word 'legal' is commonly used in this context.",
-                "ja": "「legal」は「法律上の」に関する文脈で使われます。"
+                "en": "The company sought legal advice before signing.",
+                "ja": "その会社は署名前に法的助言を求めた。"
+              },
+              {
+                "en": "The legal age of adulthood in Japan is eighteen.",
+                "ja": "日本の成人年齢は法律上18歳です。"
+              }
+            ]
+          },
+          {
+            "ja": "合法の；法律で認められた",
+            "definition": "permitted by law",
+            "examples": [
+              {
+                "en": "The practice is legal in some countries but not others.",
+                "ja": "その慣行は合法の国もあれば、そうでない国もある。"
               }
             ]
           }
@@ -7391,9 +8186,14 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "legal は「法律上の」と「合法の」。対義語 illegal は「違法な」、unlawful も「法律に反する」。",
+    "tags": [
+      "v2.33-curated",
+      "etymology-v1",
+      "curated-v2.57",
+      "curated-v3.47"
+    ],
+    "status": "enriched",
     "search_terms": [
       "legal"
     ],
@@ -7401,7 +8201,58 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "legal system"
+      },
+      {
+        "text": "legal action"
+      },
+      {
+        "text": "legal framework",
+        "ja": "法的枠組み"
+      },
+      {
+        "text": "legal advice",
+        "ja": "法律上の助言"
+      },
+      {
+        "text": "legal obligation",
+        "ja": "法的義務"
+      },
+      {
+        "text": "legal age",
+        "ja": "法定年齢"
+      }
+    ],
+    "etymology": {
+      "origin": "Latin lex / legis",
+      "history": "Latin lex / legalis「法律」に由来し、「法律に関する」を表す。",
+      "roots": [
+        {
+          "form": "leg / legis",
+          "meaning": "法律"
+        }
+      ],
+      "related": [
+        "illegal",
+        "legislation",
+        "legislative",
+        "legitimate"
+      ]
+    },
+    "senses": [
+      {
+        "pos": "",
+        "definition_ja": "法律の；合法の",
+        "examples": [
+          {
+            "en": "The company faces legal action over the incident.",
+            "ja": "その企業はその事件をめぐって法的措置に直面している。"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "sw-13176",
@@ -7607,9 +8458,27 @@
     },
     "usage_note": "",
     "tags": [
-      "judgment-and-relations"
+      "judgment-and-relations",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin legere / lectus",
+      "history": "legere「読む」に由来し、「読むことができる」を表す。",
+      "roots": [
+        {
+          "form": "leg / lect",
+          "meaning": "読む・選ぶ・集める"
+        }
+      ],
+      "related": [
+        "lecture",
+        "collect",
+        "collection",
+        "elect",
+        "election"
+      ]
+    }
   },
   {
     "id": "sw-01910",
@@ -7625,12 +8494,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "法律；立法",
-            "definition": "a person, thing, state, process, or idea connected with 法律",
+            "ja": "法律；法令",
+            "definition": "laws considered collectively or a particular body of law",
             "examples": [
               {
-                "en": "The word 'legislation' is commonly used in this kind of context.",
-                "ja": "「legislation」は「法律」に関する文脈でよく使われます。"
+                "en": "New legislation requires companies to protect customers’ personal data.",
+                "ja": "新しい法律は企業に顧客の個人情報の保護を義務づけている。"
+              }
+            ]
+          },
+          {
+            "ja": "立法；法律の制定",
+            "definition": "the process of making or passing laws",
+            "examples": [
+              {
+                "en": "The committee held public hearings before drafting the legislation.",
+                "ja": "委員会は法案を起草する前に公聴会を開いた。"
               }
             ]
           }
@@ -7643,9 +8522,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "legislation は通常不可算。個別の法律は a law / an act と表すことが多い。",
+    "tags": [
+      "etymology-v1",
+      "curated-v2.51",
+      "curated-v3.42"
+    ],
+    "status": "enriched",
     "search_terms": [
       "legislation"
     ],
@@ -7653,7 +8536,48 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "introduce legislation"
+      },
+      {
+        "text": "pass legislation"
+      },
+      {
+        "text": "proposed legislation"
+      },
+      {
+        "text": "environmental legislation"
+      }
+    ],
+    "etymology": {
+      "origin": "Latin lex / legis",
+      "history": "Latin lex「法律」と legislatio 系に由来し、法律を制定することを表す。",
+      "roots": [
+        {
+          "form": "leg / legis",
+          "meaning": "法律"
+        }
+      ],
+      "related": [
+        "legal",
+        "illegal",
+        "legislative",
+        "legitimate"
+      ]
+    },
+    "senses": [
+      {
+        "pos": "",
+        "definition_ja": "法律；立法",
+        "examples": [
+          {
+            "en": "The legislation aims to protect consumers from unfair practices.",
+            "ja": "その法律は不公正な慣行から消費者を守ることを目的としている。"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "sw-02940",
@@ -7670,13 +8594,14 @@
         "meanings": [
           {
             "ja": "立法の",
-            "definition": "relating to making laws",
+            "definition": "relating to making laws or to a body that makes laws",
             "examples": [
               {
-                "en": "The word 'legislative' is useful in this context.",
-                "ja": "この文脈では「立法の」という意味で使われる。"
+                "en": "The proposal requires legislative approval before it can take effect.",
+                "ja": "その提案が発効するには立法府の承認が必要である。"
               }
-            ]
+            ],
+            "definition_en": "relating to making laws or to a body that makes laws"
           }
         ]
       }
@@ -7687,11 +8612,14 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Common in politics and law; related noun: legislature.",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "etymology-v1",
+      "curated-v2.57",
+      "curated-v3.27"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "search_terms": [
       "legislative"
     ],
@@ -7699,7 +8627,39 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "legislative process",
+      "legislative reform",
+      "legislative authority"
+    ],
+    "etymology": {
+      "origin": "Latin lex / legis",
+      "history": "legislation と同じ lex/legis「法律」の語族で、立法に関することを表す。",
+      "roots": [
+        {
+          "form": "leg / legis",
+          "meaning": "法律"
+        }
+      ],
+      "related": [
+        "legal",
+        "illegal",
+        "legislation",
+        "legitimate"
+      ]
+    },
+    "senses": [
+      {
+        "pos": "",
+        "definition_ja": "立法の；議会の",
+        "examples": [
+          {
+            "en": "The proposal requires legislative approval.",
+            "ja": "その提案には議会の承認が必要である。"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "sw-02988",
@@ -7733,11 +8693,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Common in formal, academic, professional, or news contexts.",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "curated-v3.03"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "search_terms": [
       "legislature"
     ],
@@ -7745,7 +8706,10 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "state legislature",
+      "national legislature"
+    ]
   },
   {
     "id": "sw-03130",
@@ -7761,12 +8725,26 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "正当性",
-            "definition": "a concept, state, person, thing, or process connected with 正当性",
+            "ja": "正当性；合法性",
+            "definition": "the quality of being lawful or accepted as rightful",
             "examples": [
               {
-                "en": "The report discusses legitimacy in detail.",
-                "ja": "その報告書は「正当性」について詳しく論じている。"
+                "en": "Observers questioned the legitimacy of the election results.",
+                "ja": "監視団は選挙結果の正当性に疑問を呈した。"
+              },
+              {
+                "en": "Public participation can strengthen the legitimacy of political decisions.",
+                "ja": "市民参加は政治的決定の正当性を高めうる。"
+              }
+            ]
+          },
+          {
+            "ja": "社会的な承認；信任",
+            "definition": "public acceptance of an institution or authority as justified",
+            "examples": [
+              {
+                "en": "Public consultation can strengthen the legitimacy of a decision.",
+                "ja": "市民への意見聴取は決定の正当性に対する信頼を高め得る。"
               }
             ]
           }
@@ -7779,11 +8757,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "the legitimacy of + 政策・政府。legal（法律上の）と legitimate（正当と認められる）は同義とは限らない。",
     "tags": [
-      "academic-expansion"
+      "academic-expansion",
+      "curated-v3.25",
+      "curated-v3.55"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "search_terms": [
       "legitimacy"
     ],
@@ -7791,7 +8771,17 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "question the legitimacy of"
+      },
+      {
+        "text": "political legitimacy"
+      },
+      {
+        "text": "gain legitimacy"
+      }
+    ]
   },
   {
     "id": "sw-01911",
@@ -7804,15 +8794,34 @@
     "frequency": 2,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
-            "ja": "正当な",
-            "definition": "a person, thing, state, process, or idea connected with 正当な",
+            "ja": "正当な；もっともな",
+            "definition": "reasonable and acceptable in the circumstances",
             "examples": [
               {
-                "en": "The word 'legitimate' is commonly used in this kind of context.",
-                "ja": "「legitimate」は「正当な」に関する文脈でよく使われます。"
+                "en": "Residents raised legitimate concerns about the project’s environmental impact.",
+                "ja": "住民はその事業の環境への影響についてもっともな懸念を示した。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "合法的な；正統な",
+            "definition": "allowed by law or accepted as having proper authority",
+            "examples": [
+              {
+                "en": "The committee questioned whether the organization had legitimate authority to collect the data.",
+                "ja": "委員会はその組織にデータ収集の正当な権限があるのか疑問を呈した。"
+              },
+              {
+                "en": "Privacy is a legitimate concern when schools collect student data.",
+                "ja": "学校が生徒データを収集する際、プライバシーは正当な懸念である。"
               }
             ]
           }
@@ -7825,9 +8834,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "Legitimate may mean lawful, but it can also mean reasonable or justified even without a legal issue.",
+    "tags": [
+      "etymology-v1",
+      "curated-v2.49",
+      "curated-v3.34"
+    ],
+    "status": "enriched",
     "search_terms": [
       "legitimate"
     ],
@@ -7835,7 +8848,36 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "legitimate concern",
+        "ja": ""
+      },
+      {
+        "text": "legitimate authority",
+        "ja": ""
+      },
+      {
+        "text": "legitimate reason",
+        "ja": "正当な理由"
+      }
+    ],
+    "etymology": {
+      "origin": "Latin lex / legis",
+      "history": "Latin legitimus「法律にかなった」に由来し、正当な・合法的な意味へ広がった。",
+      "roots": [
+        {
+          "form": "leg / legis",
+          "meaning": "法律"
+        }
+      ],
+      "related": [
+        "legal",
+        "illegal",
+        "legislation",
+        "legislative"
+      ]
+    }
   },
   {
     "id": "sw-07647",
@@ -7945,7 +8987,12 @@
           {
             "ja": "繰り返し現れる主題・旋律",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"leitmotif\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「leitmotif」が「繰り返し現れる主題・旋律」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -7959,7 +9006,8 @@
     },
     "usage_note": "",
     "tags": [
-      "language-writing"
+      "language-writing",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -7986,7 +9034,12 @@
           {
             "ja": "見出し語の基本形；補題",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lemma\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lemma」が「見出し語の基本形；補題」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -8000,7 +9053,8 @@
     },
     "usage_note": "",
     "tags": [
-      "language-writing"
+      "language-writing",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -8536,7 +9590,12 @@
           {
             "ja": "リチア雲母；レピドライト",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lepidolite\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lepidolite」が「リチア雲母；レピドライト」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -8550,7 +9609,8 @@
     },
     "usage_note": "",
     "tags": [
-      "geology-minerals"
+      "geology-minerals",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -9156,12 +10216,65 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "水準；段階",
-            "definition": "a thing, person, idea, or state related to 水準",
+            "ja": "水準；段階；レベル",
+            "definition": "a particular degree or standard",
+            "definition_en": "a particular degree or standard",
             "examples": [
               {
-                "en": "This level is important.",
-                "ja": "この「水準」は重要です。"
+                "en": "This book is suitable for learners at an intermediate level.",
+                "ja": "この本は中級レベルの学習者に適している。"
+              },
+              {
+                "en": "Sea levels have risen in many parts of the world.",
+                "ja": "世界の多くの地域で海面水位が上昇している。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "階；層",
+            "definition": "a floor or position in a building or structure",
+            "definition_en": "a floor or position in a building or structure",
+            "examples": [
+              {
+                "en": "The library is on the second level of the building.",
+                "ja": "図書館は建物の2階にある。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "平らな；水平な",
+            "definition": "flat or at the same height",
+            "definition_en": "flat or at the same height",
+            "examples": [
+              {
+                "en": "Make sure the surface is level before installing the equipment.",
+                "ja": "機器を設置する前に表面が水平であることを確認してください。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "平らにする；均等にする",
+            "definition": "to make a surface flat or even",
+            "definition_en": "to make a surface flat or even",
+            "examples": [
+              {
+                "en": "Workers leveled the ground before building the path.",
+                "ja": "作業員たちは小道を造る前に地面を平らにした。"
               }
             ]
           }
@@ -9174,9 +10287,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "at a high level / sea level / level playing field（公平な競争条件）。形容詞・動詞にもなる。",
+    "tags": [
+      "v2.30-curated",
+      "curated-v3.50"
+    ],
+    "status": "enriched",
     "search_terms": [
       "level"
     ],
@@ -9184,7 +10300,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "sea level",
+        "ja": "海面水位"
+      },
+      {
+        "text": "at the national level",
+        "ja": "全国レベルで"
+      },
+      {
+        "text": "a level playing field",
+        "ja": "公平な競争条件"
+      }
+    ]
   },
   {
     "id": "sw-13278",
@@ -9232,7 +10361,10 @@
     "word": "level off",
     "lemma": "level off",
     "search_terms": [
-      "level off"
+      "level off",
+      "levels off",
+      "leveled off",
+      "leveling off"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -9248,25 +10380,56 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "横ばいになる；平らにする",
-            "definition": "",
-            "examples": []
+            "ja": "（数値・傾向が）横ばいになる",
+            "definition": "to stop rising or falling and remain relatively steady",
+            "examples": [
+              {
+                "en": "After years of growth, enrollment began to level off.",
+                "ja": "何年も増加した後、入学者数は横ばいになり始めた。"
+              }
+            ]
+          },
+          {
+            "ja": "（地面・表面を）平らにする",
+            "definition": "to make a surface flat or even",
+            "examples": [
+              {
+                "en": "Workers leveled off the ground before laying the foundation.",
+                "ja": "作業員は基礎を造る前に地面を平らにした。"
+              }
+            ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "levels off",
+      "past": "leveled off",
+      "past_participle": "leveled off",
+      "ing": "leveling off"
+    },
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "prices level off"
+      },
+      {
+        "text": "growth levels off"
+      },
+      {
+        "text": "level off at 5 percent"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "level off at + 数値（〜で横ばいになる）。グラフの変化を説明するときに頻出。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.51"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04959",
@@ -9502,7 +10665,12 @@
           {
             "ja": "語彙素；語形変化をまとめた語の単位",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lexeme\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lexeme」が「語彙素；語形変化をまとめた語の単位」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -9516,7 +10684,8 @@
     },
     "usage_note": "",
     "tags": [
-      "language-writing"
+      "language-writing",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -9584,7 +10753,12 @@
           {
             "ja": "語彙の；単語に関する",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lexical\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lexical」が「語彙の；単語に関する」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -9598,7 +10772,8 @@
     },
     "usage_note": "",
     "tags": [
-      "study-language"
+      "study-language",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -9625,7 +10800,12 @@
           {
             "ja": "辞書編集者；辞書学者",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lexicographer\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lexicographer」が「辞書編集者；辞書学者」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -9639,7 +10819,8 @@
     },
     "usage_note": "",
     "tags": [
-      "language-writing"
+      "language-writing",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -9666,7 +10847,12 @@
           {
             "ja": "辞書編纂の；辞書式配列の",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lexicographic\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lexicographic」が「辞書編纂の；辞書式配列の」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -9680,7 +10866,8 @@
     },
     "usage_note": "",
     "tags": [
-      "study-language"
+      "study-language",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -9707,7 +10894,12 @@
           {
             "ja": "辞書編纂；辞書学",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lexicography\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lexicography」が「辞書編纂；辞書学」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -9721,7 +10913,8 @@
     },
     "usage_note": "",
     "tags": [
-      "language-writing"
+      "language-writing",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -9748,7 +10941,12 @@
           {
             "ja": "語彙論；語彙学",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lexicology\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lexicology」が「語彙論；語彙学」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -9762,7 +10960,8 @@
     },
     "usage_note": "",
     "tags": [
-      "language-writing"
+      "language-writing",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -9789,7 +10988,12 @@
           {
             "ja": "語彙；語彙集",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lexicon\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lexicon」が「語彙；語彙集」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -9803,7 +11007,8 @@
     },
     "usage_note": "",
     "tags": [
-      "language-writing"
+      "language-writing",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -9830,7 +11035,12 @@
           {
             "ja": "語彙統計学",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lexicostatistics\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lexicostatistics」が「語彙統計学」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -9844,7 +11054,8 @@
     },
     "usage_note": "",
     "tags": [
-      "language-writing"
+      "language-writing",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -9871,7 +11082,12 @@
           {
             "ja": "ある言語などの語彙",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lexis\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lexis」が「ある言語などの語彙」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -9885,7 +11101,8 @@
     },
     "usage_note": "",
     "tags": [
-      "language-writing"
+      "language-writing",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -9903,12 +11120,32 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "責任；負債",
-            "definition": "legal responsibility or money that is owed",
+            "ja": "法的責任；賠償責任",
+            "definition": "legal responsibility for harm, loss, or a debt",
             "examples": [
               {
-                "en": "The word 'liability' is useful in this context.",
-                "ja": "この文脈では「責任」という意味で使われる。"
+                "en": "The contract limits the company’s liability for delays.",
+                "ja": "その契約は遅延に関する会社の責任を制限している。"
+              }
+            ]
+          },
+          {
+            "ja": "負債；債務",
+            "definition": "money that a person or organization owes",
+            "examples": [
+              {
+                "en": "The firm listed its assets and liabilities in the report.",
+                "ja": "その企業は報告書に資産と負債を記載した。"
+              }
+            ]
+          },
+          {
+            "ja": "足手まとい；不利になるもの",
+            "definition": "a person or thing that creates a disadvantage",
+            "examples": [
+              {
+                "en": "Poor communication became a liability during the negotiations.",
+                "ja": "意思疎通の悪さは交渉中に不利な要因となった。"
               }
             ]
           }
@@ -9916,16 +11153,23 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      {
+        "phrase": "accept liability for",
+        "ja": "～について責任を認める"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "liability for + 損害「～に対する責任」。会計では liabilities「負債」。a liability は「足手まとい」。",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "curated-v3.03",
+      "curated-v3.55"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "search_terms": [
       "liability"
     ],
@@ -9933,7 +11177,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "legal liability"
+      },
+      {
+        "text": "accept liability for"
+      },
+      {
+        "text": "assets and liabilities"
+      },
+      {
+        "text": "accept liability"
+      }
+    ]
   },
   {
     "id": "sw-06391",
@@ -9958,7 +11215,12 @@
           {
             "ja": "連絡を取り合う",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"liaise\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「liaise」が「連絡を取り合う」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -9972,7 +11234,8 @@
     },
     "usage_note": "",
     "tags": [
-      "thinking-communication"
+      "thinking-communication",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -9999,7 +11262,12 @@
           {
             "ja": "語をまたぐ音の連結；連絡関係",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"liaison\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「liaison」が「語をまたぐ音の連結；連絡関係」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -10013,7 +11281,8 @@
     },
     "usage_note": "",
     "tags": [
-      "language-writing"
+      "language-writing",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -10072,12 +11341,32 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "自由主義的な；寛大な",
-            "definition": "having the quality expressed by 自由主義的な",
+            "ja": "自由主義的な",
+            "definition": "favoring individual rights and freedoms; political meaning varies by country",
             "examples": [
               {
-                "en": "The word 'liberal' is often useful in formal or everyday English.",
-                "ja": "「liberal」は「自由主義的な」の意味で使われます。"
+                "en": "The article compares liberal and conservative views of the policy.",
+                "ja": "その記事は政策に対する自由主義的な見方と保守的な見方を比較している。"
+              }
+            ]
+          },
+          {
+            "ja": "寛大な；制限の少ない",
+            "definition": "willing to accept different views or allow freedom",
+            "examples": [
+              {
+                "en": "The university adopted a liberal policy on course selection.",
+                "ja": "大学は履修科目の選択について柔軟な方針を採用した。"
+              }
+            ]
+          },
+          {
+            "ja": "多めの；惜しみない",
+            "definition": "generous in amount",
+            "examples": [
+              {
+                "en": "Add a liberal amount of olive oil to the mixture.",
+                "ja": "その材料にオリーブ油をたっぷり加えなさい。"
               }
             ]
           }
@@ -10090,9 +11379,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "政治的な liberal の意味は国・時代によって異なる。liberal arts は「教養学問」。",
+    "tags": [
+      "etymology-v1",
+      "curated-v3.44"
+    ],
+    "status": "enriched",
     "search_terms": [
       "liberal"
     ],
@@ -10100,7 +11392,33 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "liberal democracy"
+      },
+      {
+        "text": "liberal arts"
+      },
+      {
+        "text": "liberal policy"
+      },
+      {
+        "text": "liberal amount"
+      }
+    ],
+    "etymology": {
+      "origin": "Latin liber",
+      "history": "liber「自由な」に由来し、自由人にふさわしい→自由主義的な、などへ意味が広がった。",
+      "roots": [
+        {
+          "form": "liber",
+          "meaning": "自由"
+        }
+      ],
+      "related": [
+        "deliver"
+      ]
+    }
   },
   {
     "id": "sw-03359",
@@ -10215,7 +11533,12 @@
           {
             "ja": "秤動；天体の見かけの揺れ",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"libration\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「libration」が「秤動；天体の見かけの揺れ」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -10229,7 +11552,8 @@
     },
     "usage_note": "",
     "tags": [
-      "astronomy-space"
+      "astronomy-space",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -10329,12 +11653,37 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "免許",
-            "definition": "a person, thing, state, or idea related to 免許",
+            "ja": "免許；許可証",
+            "definition": "an official document giving permission to do something",
             "examples": [
               {
-                "en": "The word 'license' is often useful in formal or everyday English.",
-                "ja": "「license」は「免許」の意味で使われます。"
+                "en": "You need a license to operate this equipment.",
+                "ja": "この機器を操作するには免許が必要だ。"
+              }
+            ]
+          },
+          {
+            "ja": "使用許諾；ライセンス",
+            "definition": "legal permission to use intellectual property or software",
+            "examples": [
+              {
+                "en": "The software is distributed under an open-source license.",
+                "ja": "そのソフトウェアはオープンソースのライセンスで配布されている。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "免許を与える；許可する",
+            "definition": "to give official permission to do something",
+            "examples": [
+              {
+                "en": "Only licensed professionals may perform the procedure.",
+                "ja": "その処置を行えるのは資格を持つ専門家だけだ。"
               }
             ]
           }
@@ -10347,9 +11696,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "米語では名詞・動詞とも license。英語では名詞 licence、動詞 license。",
+    "tags": [
+      "curated-v3.54"
+    ],
+    "status": "enriched",
     "search_terms": [
       "license"
     ],
@@ -10357,7 +11708,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "driver’s license"
+      },
+      {
+        "text": "software license"
+      },
+      {
+        "text": "license agreement"
+      },
+      {
+        "text": "licensed professional"
+      }
+    ]
   },
   {
     "id": "sw-08352",
@@ -10510,7 +11874,12 @@
           {
             "ja": "合法の",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"licit\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「licit」が「合法の」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -10524,7 +11893,8 @@
     },
     "usage_note": "",
     "tags": [
-      "judgment-and-relations"
+      "judgment-and-relations",
+      "curated-v2.93"
     ],
     "status": "needs_enrichment"
   },
@@ -10605,7 +11975,12 @@
           {
             "ja": "甘草；その風味の菓子",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"licorice\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「licorice」が「甘草；その風味の菓子」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -10619,7 +11994,8 @@
     },
     "usage_note": "",
     "tags": [
-      "seasoning-baking"
+      "seasoning-baking",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -10959,6 +12335,16 @@
         "pos": "noun",
         "meanings": [
           {
+            "ja": "人生；生命；生活",
+            "definition": "the period during which a person or living thing is alive, or the way someone lives",
+            "examples": [
+              {
+                "en": "Living abroad changed the way she looked at life.",
+                "ja": "海外生活は彼女の人生の見方を変えました。"
+              }
+            ]
+          },
+          {
             "ja": "人生；生涯",
             "definition": "the period during which someone is alive",
             "examples": [
@@ -10984,13 +12370,18 @@
     "forms": {
       "plural": "lives"
     },
-    "phrases": [],
+    "phrases": [
+      "daily life",
+      "quality of life"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "v2.30-curated"
+    ],
     "status": "basic",
     "search_terms": [
       "life",
@@ -11676,7 +13067,12 @@
           {
             "ja": "はしけ；荷物運搬用の小船",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lighter\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lighter」が「はしけ；荷物運搬用の小船」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -11690,7 +13086,8 @@
     },
     "usage_note": "",
     "tags": [
-      "boats-harbors"
+      "boats-harbors",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -11717,7 +13114,12 @@
           {
             "ja": "灯台",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lighthouse\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lighthouse」が「灯台」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -11731,7 +13133,8 @@
     },
     "usage_note": "",
     "tags": [
-      "boats-harbors"
+      "boats-harbors",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -11840,7 +13243,12 @@
           {
             "ja": "灯台船",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lightship\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lightship」が「灯台船」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -11854,7 +13262,8 @@
     },
     "usage_note": "",
     "tags": [
-      "boats-harbors"
+      "boats-harbors",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -11926,17 +13335,36 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "可能性が高い",
+            "definition": "expected or probable to happen or be true",
+            "examples": [
+              {
+                "en": "Rain is likely this afternoon.",
+                "ja": "今日の午後は雨が降る可能性が高いです。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      "be likely to do"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "likely"
     ],
@@ -11957,15 +13385,25 @@
     "frequency": 2,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adverb",
         "meanings": [
           {
-            "ja": "同様に",
-            "definition": "a person, thing, state, or idea related to 同様に",
+            "ja": "同様に；同じく",
+            "definition": "in the same way as something mentioned earlier",
             "examples": [
               {
-                "en": "The word 'likewise' is often useful in formal or everyday English.",
-                "ja": "「likewise」は「同様に」の意味で使われます。"
+                "en": "Rural areas need reliable infrastructure; likewise, cities require continued investment.",
+                "ja": "農村部には信頼できるインフラが必要であり、同様に都市にも継続的な投資が必要である。"
+              }
+            ]
+          },
+          {
+            "ja": "こちらこそ；同じく（応答）",
+            "definition": "used to return a greeting or wish",
+            "examples": [
+              {
+                "en": "“It was a pleasure meeting you.” “Likewise.”",
+                "ja": "「お会いできてうれしかったです」「こちらこそ」。"
               }
             ]
           }
@@ -11978,9 +13416,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "likewise は文をつなぐ接続副詞で「同様に」。返答として単独の Likewise. は「こちらこそ」。",
+    "tags": [
+      "curated-v2.63",
+      "curated-v3.54"
+    ],
+    "status": "enriched",
     "search_terms": [
       "likewise"
     ],
@@ -11988,7 +13429,32 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "and likewise"
+      },
+      {
+        "text": "likewise important"
+      },
+      {
+        "text": "likewise,"
+      },
+      {
+        "text": "respond likewise"
+      }
+    ],
+    "senses": [
+      {
+        "pos": "",
+        "definition_ja": "同様に",
+        "examples": [
+          {
+            "en": "Rural areas need reliable infrastructure; likewise, cities require continued investment.",
+            "ja": "農村部には信頼できるインフラが必要であり、同様に都市にも継続的な投資が必要である。"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "sw-05494",
@@ -12267,7 +13733,12 @@
           {
             "ja": "脚光；注目",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"limelight\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「limelight」が「脚光；注目」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -12281,7 +13752,8 @@
     },
     "usage_note": "",
     "tags": [
-      "music-performance"
+      "music-performance",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -12396,6 +13868,21 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "限界；制限",
+            "definition": "the greatest amount allowed or possible",
+            "examples": [
+              {
+                "en": "There is a time limit of thirty minutes.",
+                "ja": "制限時間は30分です。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {},
@@ -12405,8 +13892,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.32-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "limit"
     ],
@@ -12483,7 +13972,12 @@
           {
             "ja": "褐鉄鉱；リモナイト",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"limonite\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「limonite」が「褐鉄鉱；リモナイト」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -12497,7 +13991,8 @@
     },
     "usage_note": "",
     "tags": [
-      "geology-minerals"
+      "geology-minerals",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -12873,7 +14368,12 @@
           {
             "ja": "コケモモ；リンゴンベリー",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lingonberry\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lingonberry」が「コケモモ；リンゴンベリー」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -12887,7 +14387,8 @@
     },
     "usage_note": "",
     "tags": [
-      "food-ingredients"
+      "food-ingredients",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -12914,7 +14415,12 @@
           {
             "ja": "リングイネ；細く平たいパスタ",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"linguine\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「linguine」が「リングイネ；細く平たいパスタ」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -12928,7 +14434,8 @@
     },
     "usage_note": "",
     "tags": [
-      "dishes-breads"
+      "dishes-breads",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -12952,8 +14459,13 @@
               {
                 "en": "This is an important example of a linguistic issue.",
                 "ja": "これは「言語の」問題の重要な例である。"
+              },
+              {
+                "en": "Linguistic diversity can be an important cultural resource.",
+                "ja": "言語的多様性は重要な文化資源となりうる。"
               }
-            ]
+            ],
+            "definition_en": "relating to language or the scientific study of language"
           }
         ]
       }
@@ -12966,9 +14478,10 @@
     },
     "usage_note": "",
     "tags": [
-      "academic-expansion"
+      "academic-expansion",
+      "curated-v3.25"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "search_terms": [
       "linguistic"
     ],
@@ -12976,7 +14489,10 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "linguistic diversity",
+      "linguistic evidence"
+    ]
   },
   {
     "id": "sw-06876",
@@ -13033,12 +14549,37 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "つながり",
-            "definition": "a person, thing, state, or idea related to つながり",
+            "ja": "関連；つながり",
+            "definition": "a connection between two people, things, or events",
             "examples": [
               {
-                "en": "This is a common example of 'link'.",
-                "ja": "これは「つながり」の一般的な例です。"
+                "en": "The study found a link between sleep and memory.",
+                "ja": "その研究は睡眠と記憶の関連を見いだした。"
+              }
+            ]
+          },
+          {
+            "ja": "リンク；接続部分",
+            "definition": "a connection that allows movement or access from one place or item to another",
+            "examples": [
+              {
+                "en": "The article includes a link to the original dataset.",
+                "ja": "その記事には元のデータセットへのリンクがある。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "結びつける；関連づける",
+            "definition": "to connect one thing with another",
+            "examples": [
+              {
+                "en": "Researchers linked air pollution to increased health risks.",
+                "ja": "研究者たちは大気汚染を健康リスクの増加と関連づけた。"
               }
             ]
           }
@@ -13046,14 +14587,22 @@
       }
     ],
     "forms": {},
-    "phrases": [],
+    "phrases": [
+      {
+        "phrase": "link up with",
+        "ja": "～と連携する・つながる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "a link between A and B、link A to/with B。link up with は「～と連携する」。",
+    "tags": [
+      "curated-v2.71",
+      "curated-v3.44"
+    ],
+    "status": "enriched",
     "search_terms": [
       "link"
     ],
@@ -13061,7 +14610,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "link between A and B"
+      },
+      {
+        "text": "link A to B"
+      },
+      {
+        "text": "direct link"
+      },
+      {
+        "text": "link up with"
+      }
+    ]
   },
   {
     "id": "sw-08933",
@@ -13168,7 +14730,12 @@
           {
             "ja": "ムネアカヒワ；ヒワ類",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"linnet\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「linnet」が「ムネアカヒワ；ヒワ類」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -13182,7 +14749,8 @@
     },
     "usage_note": "",
     "tags": [
-      "wildlife-birds"
+      "wildlife-birds",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -13548,7 +15116,12 @@
           {
             "ja": "有名人としてもてはやす",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lionize\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lionize」が「有名人としてもてはやす」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -13562,7 +15135,8 @@
     },
     "usage_note": "",
     "tags": [
-      "actions-interaction"
+      "actions-interaction",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -13674,7 +15248,12 @@
           {
             "ja": "特定の文字を使わずに書く文章",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lipogram\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lipogram」が「特定の文字を使わずに書く文章」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -13688,7 +15267,8 @@
     },
     "usage_note": "",
     "tags": [
-      "language-writing"
+      "language-writing",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -13715,7 +15295,12 @@
           {
             "ja": "リキュール；甘い香味酒",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"liqueur\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「liqueur」が「リキュール；甘い香味酒」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -13729,7 +15314,8 @@
     },
     "usage_note": "",
     "tags": [
-      "sweets-drinks"
+      "sweets-drinks",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -13767,9 +15353,10 @@
     },
     "usage_note": "",
     "tags": [
-      "frequency-gap"
+      "frequency-gap",
+      "curated-v3.03"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "search_terms": [
       "liquid"
     ],
@@ -13777,7 +15364,10 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "liquid form",
+      "liquid fuel"
+    ]
   },
   {
     "id": "sw-07771",
@@ -14114,11 +15704,21 @@
         "meanings": [
           {
             "ja": "読み書き能力",
-            "definition": "a common English word connected with 読み書き能力",
+            "definition": "the ability to read and write",
             "examples": [
               {
-                "en": "The word 'literacy' is commonly used in this context.",
-                "ja": "「literacy」は「読み書き能力」に関する文脈で使われます。"
+                "en": "Adult literacy programs can improve access to employment.",
+                "ja": "成人向けの識字教育は就職の機会を広げることがある。"
+              }
+            ]
+          },
+          {
+            "ja": "（特定分野の）基礎知識と活用能力",
+            "definition": "the ability to understand and use information in a particular field",
+            "examples": [
+              {
+                "en": "Media literacy helps people evaluate information they encounter online.",
+                "ja": "メディアリテラシーはネット上で接する情報を評価する助けになる。"
               }
             ]
           }
@@ -14131,9 +15731,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "literacy は通常不可算。illiteracy = 読み書きができないこと。",
+    "tags": [
+      "etymology-v1",
+      "curated-v2.54",
+      "curated-v3.37"
+    ],
+    "status": "enriched",
     "search_terms": [
       "literacy"
     ],
@@ -14141,7 +15745,49 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "digital literacy",
+        "ja": "デジタル情報活用能力"
+      },
+      {
+        "text": "media literacy"
+      },
+      {
+        "text": "adult literacy",
+        "ja": "成人の識字能力"
+      },
+      {
+        "text": "financial literacy",
+        "ja": "金融リテラシー"
+      }
+    ],
+    "etymology": {
+      "origin": "Latin littera",
+      "history": "littera「文字」に関係し、文字を読み書きできる能力を表す。",
+      "roots": [
+        {
+          "form": "liter",
+          "meaning": "文字"
+        }
+      ],
+      "related": [
+        "literature",
+        "literary"
+      ]
+    },
+    "senses": [
+      {
+        "pos": "",
+        "definition_ja": "読み書き能力；特定分野の基礎的活用能力",
+        "examples": [
+          {
+            "en": "Digital literacy includes the ability to evaluate information critically.",
+            "ja": "デジタルリテラシーには情報を批判的に評価する能力も含まれる。"
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "sw-09212",
@@ -14198,12 +15844,22 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "文学の",
-            "definition": "having the quality expressed by 文学の",
+            "ja": "文学の；文学に関する",
+            "definition": "connected with literature or the study of written works",
             "examples": [
               {
-                "en": "The word 'literary' is often useful in formal or everyday English.",
-                "ja": "「literary」は「文学の」の意味で使われます。"
+                "en": "The course introduces several literary genres.",
+                "ja": "その授業では複数の文学ジャンルを紹介する。"
+              }
+            ]
+          },
+          {
+            "ja": "文語的な；文学的な",
+            "definition": "having a style associated with imaginative or formal writing",
+            "examples": [
+              {
+                "en": "The translation preserves the novel’s literary style.",
+                "ja": "その翻訳は小説の文学的な文体を保っている。"
               }
             ]
           }
@@ -14216,9 +15872,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "literary は「文学の」。literal は「文字どおりの」で意味が異なる。",
+    "tags": [
+      "etymology-v1",
+      "curated-v3.54"
+    ],
+    "status": "enriched",
     "search_terms": [
       "literary"
     ],
@@ -14226,7 +15885,34 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "literary criticism"
+      },
+      {
+        "text": "literary works"
+      },
+      {
+        "text": "literary tradition"
+      },
+      {
+        "text": "literary style"
+      }
+    ],
+    "etymology": {
+      "origin": "Latin littera",
+      "history": "literature と同じ littera「文字」の語族で、文学に関することを表す。",
+      "roots": [
+        {
+          "form": "liter",
+          "meaning": "文字"
+        }
+      ],
+      "related": [
+        "literature",
+        "literacy"
+      ]
+    }
   },
   {
     "id": "sw-01919",
@@ -14242,12 +15928,32 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "文学",
-            "definition": "a person, thing, state, or idea related to 文学",
+            "ja": "文学；文学作品",
+            "definition": "written artistic works such as novels, plays, and poems",
             "examples": [
               {
-                "en": "The word 'literature' is often useful in formal or everyday English.",
-                "ja": "「literature」は「文学」の意味で使われます。"
+                "en": "The course introduces students to modern Japanese literature.",
+                "ja": "その授業は生徒に現代日本文学を紹介する。"
+              }
+            ]
+          },
+          {
+            "ja": "（ある分野の）研究文献",
+            "definition": "published academic writing about a subject",
+            "examples": [
+              {
+                "en": "The literature suggests that sleep affects memory.",
+                "ja": "研究文献によれば、睡眠は記憶に影響することが示唆されている。"
+              }
+            ]
+          },
+          {
+            "ja": "（製品などの）資料；パンフレット類",
+            "definition": "printed information about a product or organization",
+            "examples": [
+              {
+                "en": "The company provided technical literature for the new device.",
+                "ja": "会社は新しい装置の技術資料を提供した。"
               }
             ]
           }
@@ -14260,9 +15966,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "学術論文の literature review は「先行研究レビュー」。literature は通常不可算。",
+    "tags": [
+      "etymology-v1",
+      "curated-v3.46"
+    ],
+    "status": "enriched",
     "search_terms": [
       "literature"
     ],
@@ -14270,7 +15979,34 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "review the literature",
+        "ja": "先行研究を検討する"
+      },
+      {
+        "text": "scientific literature",
+        "ja": "科学文献"
+      },
+      {
+        "text": "a work of literature",
+        "ja": "文学作品"
+      }
+    ],
+    "etymology": {
+      "origin": "Latin littera",
+      "history": "litteratura / littera「文字」に由来し、文字で書かれたもの・文学を表す。",
+      "roots": [
+        {
+          "form": "liter",
+          "meaning": "文字"
+        }
+      ],
+      "related": [
+        "literary",
+        "literacy"
+      ]
+    }
   },
   {
     "id": "sw-10519",
@@ -14377,7 +16113,12 @@
           {
             "ja": "岩相；岩石の性質",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lithology\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lithology」が「岩相；岩石の性質」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -14391,7 +16132,8 @@
     },
     "usage_note": "",
     "tags": [
-      "geology-minerals"
+      "geology-minerals",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -14418,7 +16160,12 @@
           {
             "ja": "反対の否定による控えめな肯定；緩叙法",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"litotes\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「litotes」が「反対の否定による控えめな肯定；緩叙法」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -14432,7 +16179,8 @@
     },
     "usage_note": "",
     "tags": [
-      "language-writing"
+      "language-writing",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -14492,11 +16240,11 @@
         "meanings": [
           {
             "ja": "小さい；少しの",
-            "definition": "having the quality described as '小さい；少しの'",
+            "definition": "small in size or amount",
             "examples": [
               {
-                "en": "This is little.",
-                "ja": "これは「小さい」です。"
+                "en": "We have very little time left, so let's start now.",
+                "ja": "残り時間がほとんどないので今始めましょう。"
               }
             ]
           }
@@ -14510,8 +16258,10 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated"
+    ],
+    "status": "basic",
     "search_terms": [
       "little"
     ],
@@ -14544,7 +16294,12 @@
           {
             "ja": "沿岸の；湖岸の",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"littoral\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「littoral」が「沿岸の；湖岸の」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -14558,7 +16313,8 @@
     },
     "usage_note": "",
     "tags": [
-      "outdoor-conditions"
+      "outdoor-conditions",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -14577,28 +16333,38 @@
         "meanings": [
           {
             "ja": "住む；生きる",
-            "definition": "to do or express the action '住む；生きる'",
+            "definition": "to have your home somewhere or remain alive",
             "examples": [
               {
-                "en": "We often live this in everyday life.",
-                "ja": "私たちは日常生活でよく「住む」します。"
+                "en": "More than a million people live in the city.",
+                "ja": "その都市には100万人以上が住んでいます。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "lives",
+      "past": "lived",
+      "past_participle": "lived",
+      "ing": "living"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "live"
+      "live",
+      "lives",
+      "lived",
+      "living"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -14750,25 +16516,50 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "期待などに応える",
-            "definition": "",
-            "examples": []
+            "ja": "（期待・基準に）応える",
+            "definition": "to meet expectations or reach a required standard",
+            "examples": [
+              {
+                "en": "The new policy has not lived up to expectations.",
+                "ja": "新しい政策は期待に応えていない。"
+              },
+              {
+                "en": "The product must live up to strict safety standards.",
+                "ja": "その製品は厳しい安全基準を満たさなければならない。"
+              }
+            ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "lives up to",
+      "past": "lived up to",
+      "past_participle": "lived up to",
+      "ing": "living up to"
+    },
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "live up to expectations"
+      },
+      {
+        "text": "live up to a promise"
+      },
+      {
+        "text": "live up to standards"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "live up to + 名詞（期待・評判・約束・基準）。to は前置詞なので後ろは名詞句。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.52"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08771",
@@ -15424,7 +17215,12 @@
           {
             "ja": "借用語；外来語",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"loanword\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「loanword」が「借用語；外来語」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -15438,7 +17234,8 @@
     },
     "usage_note": "",
     "tags": [
-      "language-writing"
+      "language-writing",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -15544,12 +17341,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "地元の",
-            "definition": "having the quality described as '地元の'",
+            "ja": "地元の；地域の",
+            "definition": "relating to a particular nearby area",
             "examples": [
               {
-                "en": "This is local.",
-                "ja": "これは「地元の」です。"
+                "en": "We bought fresh vegetables at the local market.",
+                "ja": "私たちは地元の市場で新鮮な野菜を買いました。"
               }
             ]
           }
@@ -15563,8 +17360,11 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.30-curated",
+      "etymology-v1"
+    ],
+    "status": "basic",
     "search_terms": [
       "local"
     ],
@@ -15572,7 +17372,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin locus / locare",
+      "history": "Latin locus「場所」に由来し、「ある場所の」を表す。",
+      "roots": [
+        {
+          "form": "loc",
+          "meaning": "場所・置く"
+        }
+      ],
+      "related": [
+        "location",
+        "allocate",
+        "allocation"
+      ]
+    }
   },
   {
     "id": "sw-13255",
@@ -15735,7 +17550,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "etymology-v1"
+    ],
     "status": "needs_enrichment",
     "search_terms": [
       "location"
@@ -15744,7 +17561,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [],
+    "etymology": {
+      "origin": "Latin locus / locare",
+      "history": "Latin locare「置く」/ locus「場所」に由来し、場所・位置を表す。",
+      "roots": [
+        {
+          "form": "loc",
+          "meaning": "場所・置く"
+        }
+      ],
+      "related": [
+        "local",
+        "allocate",
+        "allocation"
+      ]
+    }
   },
   {
     "id": "sw-10359",
@@ -15769,7 +17601,12 @@
           {
             "ja": "処格の；場所を表す",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"locative\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「locative」が「処格の；場所を表す」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -15783,7 +17620,8 @@
     },
     "usage_note": "",
     "tags": [
-      "study-language"
+      "study-language",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -16229,7 +18067,12 @@
           {
             "ja": "トノサマバッタ類；群生するバッタ",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"locust\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「locust」が「トノサマバッタ類；群生するバッタ」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -16243,7 +18086,8 @@
     },
     "usage_note": "",
     "tags": [
-      "wildlife-invertebrates"
+      "wildlife-invertebrates",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -16270,7 +18114,12 @@
           {
             "ja": "発話そのものに関する；発語の",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"locutionary\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「locutionary」が「発話そのものに関する；発語の」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -16284,7 +18133,8 @@
     },
     "usage_note": "",
     "tags": [
-      "study-language"
+      "study-language",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -16311,7 +18161,12 @@
           {
             "ja": "鉱脈；鉱床",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lode\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lode」が「鉱脈；鉱床」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -16325,7 +18180,8 @@
     },
     "usage_note": "",
     "tags": [
-      "geology-minerals"
+      "geology-minerals",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -16393,7 +18249,12 @@
           {
             "ja": "黄土；風で運ばれた細かな堆積物",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"loess\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「loess」が「黄土；風で運ばれた細かな堆積物」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -16407,7 +18268,8 @@
     },
     "usage_note": "",
     "tags": [
-      "geology-minerals"
+      "geology-minerals",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -16673,7 +18535,12 @@
           {
             "ja": "ローガンベリー",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"loganberry\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「loganberry」が「ローガンベリー」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -16687,7 +18554,8 @@
     },
     "usage_note": "",
     "tags": [
-      "food-ingredients"
+      "food-ingredients",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -16755,7 +18623,12 @@
           {
             "ja": "航海日誌；作業などの記録簿",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"logbook\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「logbook」が「航海日誌；作業などの記録簿」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -16769,7 +18642,8 @@
     },
     "usage_note": "",
     "tags": [
-      "boats-harbors"
+      "boats-harbors",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -16825,15 +18699,25 @@
     "frequency": 2,
     "parts_of_speech": [
       {
-        "pos": "adjective",
+        "pos": "noun",
         "meanings": [
           {
-            "ja": "論理",
-            "definition": "having the quality expressed by 論理",
+            "ja": "論理；推論の筋道",
+            "definition": "a system or method of reasoning",
             "examples": [
               {
-                "en": "The word 'logic' is often useful in formal or everyday English.",
-                "ja": "「logic」は「論理」の意味で使われます。"
+                "en": "The conclusion does not follow the logic of the argument.",
+                "ja": "その結論は議論の論理からは導かれない。"
+              }
+            ]
+          },
+          {
+            "ja": "道理；考え方の筋道",
+            "definition": "the reasoning behind a decision or action",
+            "examples": [
+              {
+                "en": "I understand the logic behind the policy, but I disagree with it.",
+                "ja": "その政策の考え方は理解できるが、私は賛成しない。"
               }
             ]
           }
@@ -16846,9 +18730,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "logic は名詞。「論理的な」は logical。the logic behind + 名詞 は「〜の背後にある理屈」。",
+    "tags": [
+      "curated-v3.47"
+    ],
+    "status": "enriched",
     "search_terms": [
       "logic"
     ],
@@ -16856,7 +18742,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "logical reasoning",
+        "ja": "論理的推論"
+      },
+      {
+        "text": "the logic behind",
+        "ja": "〜の背後にある論理"
+      },
+      {
+        "text": "follow the logic",
+        "ja": "論理の筋道を追う"
+      },
+      {
+        "text": "formal logic",
+        "ja": "形式論理学"
+      }
+    ]
   },
   {
     "id": "sw-02259",
@@ -16872,12 +18775,22 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "論理の",
-            "definition": "having the quality expressed by 論理の",
+            "ja": "論理的な；筋道の通った",
+            "definition": "using clear reasoning or following a sensible order",
             "examples": [
               {
-                "en": "The word 'logical' is useful when discussing this topic.",
-                "ja": "この語は「論理の」に関する文脈で使われます。"
+                "en": "The essay presents a logical sequence of arguments.",
+                "ja": "その小論文は筋道の通った論証の順序を示している。"
+              }
+            ]
+          },
+          {
+            "ja": "当然の；理にかなった",
+            "definition": "reasonable as a result of known facts",
+            "examples": [
+              {
+                "en": "Reducing waste is a logical next step for the company.",
+                "ja": "廃棄物の削減はその会社にとって理にかなった次の一歩だ。"
               }
             ]
           }
@@ -16890,9 +18803,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "logical は「論理にかなう」。logical と「感情がない」は同義ではない。副詞 logically。",
+    "tags": [
+      "curated-v3.46"
+    ],
+    "status": "enriched",
     "search_terms": [
       "logical"
     ],
@@ -16900,7 +18815,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "logical reasoning",
+        "ja": "論理的推論"
+      },
+      {
+        "text": "a logical conclusion",
+        "ja": "論理的な結論"
+      },
+      {
+        "text": "logical sequence",
+        "ja": "筋道の通った順序"
+      }
+    ]
   },
   {
     "id": "sw-02260",
@@ -16916,12 +18844,22 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "論理に",
-            "definition": "in the manner or degree expressed by 論理に",
+            "ja": "論理的に；筋道を立てて",
+            "definition": "in a way that follows clear reasoning",
             "examples": [
               {
-                "en": "The word 'logically' is useful when discussing this topic.",
-                "ja": "この語は「論理に」に関する文脈で使われます。"
+                "en": "The essay is logically organized and easy to follow.",
+                "ja": "その小論文は論理的に構成されていて理解しやすい。"
+              }
+            ]
+          },
+          {
+            "ja": "論理上は；理屈から言えば",
+            "definition": "as a consequence of reasoning",
+            "examples": [
+              {
+                "en": "Logically, one result cannot establish a causal relationship.",
+                "ja": "論理的に考えれば、一つの結果だけでは因果関係を立証できない。"
               }
             ]
           }
@@ -16934,9 +18872,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "logically consistent（論理的に矛盾がない）。logical（論理的な）の副詞形。",
+    "tags": [
+      "curated-v3.53"
+    ],
+    "status": "enriched",
     "search_terms": [
       "logically"
     ],
@@ -16944,7 +18884,17 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "logically consistent"
+      },
+      {
+        "text": "logically organized"
+      },
+      {
+        "text": "logically follow from"
+      }
+    ]
   },
   {
     "id": "sw-07279",
@@ -17210,8 +19160,12 @@
         "meanings": [
           {
             "ja": "長い",
-            "definition": "having a large length or lasting a large amount of time",
+            "definition": "measuring a great distance or continuing for a large amount of time",
             "examples": [
+              {
+                "en": "It was a long journey, but the scenery was beautiful.",
+                "ja": "長い旅でしたが景色は美しかったです。"
+              },
               {
                 "en": "It was a long journey, but we enjoyed it.",
                 "ja": "長い旅でしたが、私たちは楽しみました。"
@@ -17231,7 +19185,9 @@
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
+    "tags": [
+      "v2.30-curated"
+    ],
     "status": "basic",
     "search_terms": [
       "long",
@@ -17349,7 +19305,12 @@
           {
             "ja": "リュウガン；ロンガン",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"longan\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「longan」が「リュウガン；ロンガン」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -17363,7 +19324,8 @@
     },
     "usage_note": "",
     "tags": [
-      "food-ingredients"
+      "food-ingredients",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -17390,7 +19352,12 @@
           {
             "ja": "大型の手こぎボート",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"longboat\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「longboat」が「大型の手こぎボート」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -17404,7 +19371,8 @@
     },
     "usage_note": "",
     "tags": [
-      "boats-harbors"
+      "boats-harbors",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -17428,8 +19396,13 @@
               {
                 "en": "The report discusses longevity in detail.",
                 "ja": "その報告書は「長寿」について詳しく論じている。"
+              },
+              {
+                "en": "Researchers are examining how diet and exercise affect human longevity.",
+                "ja": "研究者たちは食事と運動が人間の寿命にどう影響するか調べている。"
               }
-            ]
+            ],
+            "definition_en": "long life or the length of time that something continues to exist or function"
           }
         ]
       }
@@ -17442,9 +19415,10 @@
     },
     "usage_note": "",
     "tags": [
-      "academic-expansion"
+      "academic-expansion",
+      "curated-v3.25"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "search_terms": [
       "longevity"
     ],
@@ -17452,7 +19426,10 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      "human longevity",
+      "increase longevity"
+    ]
   },
   {
     "id": "sw-12404",
@@ -17600,7 +19577,12 @@
           {
             "ja": "港湾労働者",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"longshoreman\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「longshoreman」が「港湾労働者」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -17614,7 +19596,8 @@
     },
     "usage_note": "",
     "tags": [
-      "boats-harbors"
+      "boats-harbors",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -17641,7 +19624,12 @@
           {
             "ja": "ツメナガホオジロ類；後ろ爪の長い鳥",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"longspur\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「longspur」が「ツメナガホオジロ類；後ろ爪の長い鳥」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -17655,7 +19643,8 @@
     },
     "usage_note": "",
     "tags": [
-      "wildlife-birds"
+      "wildlife-birds",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -18268,8 +20257,13 @@
               {
                 "en": "The manager will look into the complaint.",
                 "ja": "担当者がその苦情を調査する。"
+              },
+              {
+                "en": "The committee promised to look into the allegations.",
+                "ja": "委員会はその疑惑を調査すると約束した。"
               }
-            ]
+            ],
+            "definition_en": "to investigate or examine something"
           }
         ]
       }
@@ -18281,16 +20275,20 @@
       "ing": "looking into"
     },
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "look into a complaint",
+      "look into the cause"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Multiword expression. Learn it as a unit: look into. The example and collocations show its typical grammatical pattern.",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.13"
     ],
-    "status": "basic"
+    "status": "enriched"
   },
   {
     "id": "sw-04867",
@@ -18762,7 +20760,12 @@
           {
             "ja": "アビ；水鳥；変わり者",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"loon\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「loon」が「アビ；水鳥；変わり者」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -18776,7 +20779,8 @@
     },
     "usage_note": "",
     "tags": [
-      "wildlife-birds"
+      "wildlife-birds",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -19018,7 +21022,12 @@
           {
             "ja": "大きなゆったりした歩幅で走る",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lope\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lope」が「大きなゆったりした歩幅で走る」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -19032,7 +21041,8 @@
     },
     "usage_note": "",
     "tags": [
-      "actions-expression"
+      "actions-expression",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -19146,7 +21156,12 @@
           {
             "ja": "おしゃべりな；多弁な",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"loquacious\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「loquacious」が「おしゃべりな；多弁な」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -19160,7 +21175,8 @@
     },
     "usage_note": "",
     "tags": [
-      "study-language"
+      "study-language",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -19228,7 +21244,12 @@
           {
             "ja": "小型のヒインコ類；花蜜などを食べる鳥",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lorikeet\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lorikeet」が「小型のヒインコ類；花蜜などを食べる鳥」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -19242,7 +21263,8 @@
     },
     "usage_note": "",
     "tags": [
-      "wildlife-birds"
+      "wildlife-birds",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -19342,29 +21364,39 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "失う",
-            "definition": "to do or express the action '失う'",
+            "ja": "失う；負ける",
+            "definition": "to no longer have something or fail to win",
             "examples": [
               {
-                "en": "We often lose this in everyday life.",
-                "ja": "私たちは日常生活でよく「失う」します。"
+                "en": "Back up your files so that you do not lose your work.",
+                "ja": "作業内容を失わないようファイルをバックアップしてください。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "loses",
+      "past": "lost",
+      "past_participle": "lost",
+      "ing": "losing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "lose"
+      "lose",
+      "loses",
+      "lost",
+      "losing"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -19852,7 +21884,12 @@
           {
             "ja": "シラミ；寄生性の昆虫",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"louse\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「louse」が「シラミ；寄生性の昆虫」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -19866,7 +21903,8 @@
     },
     "usage_note": "",
     "tags": [
-      "wildlife-invertebrates"
+      "wildlife-invertebrates",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -19926,28 +21964,38 @@
         "meanings": [
           {
             "ja": "愛する；大好きである",
-            "definition": "to do or express the action '愛する；大好きである'",
+            "definition": "to care deeply about someone or like something very much",
             "examples": [
               {
-                "en": "We often love this in everyday life.",
-                "ja": "私たちは日常生活でよく「愛する」します。"
+                "en": "She loves reading historical novels.",
+                "ja": "彼女は歴史小説を読むのが大好きです。"
               }
             ]
           }
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "loves",
+      "past": "loved",
+      "past_participle": "loved",
+      "ing": "loving"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
     "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "tags": [
+      "v2.34-curated"
+    ],
+    "status": "basic",
     "search_terms": [
-      "love"
+      "love",
+      "loves",
+      "loved",
+      "loving"
     ],
     "pronunciation": {
       "ipa_us": null,
@@ -19978,7 +22026,12 @@
           {
             "ja": "ボタンインコ類；仲のよい恋人",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lovebird\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lovebird」が「ボタンインコ類；仲のよい恋人」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -19992,7 +22045,8 @@
     },
     "usage_note": "",
     "tags": [
-      "wildlife-birds"
+      "wildlife-birds",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -20265,7 +22319,12 @@
           {
             "ja": "小文字；小文字表記",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lowercase\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lowercase」が「小文字；小文字表記」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -20279,7 +22338,8 @@
     },
     "usage_note": "",
     "tags": [
-      "language-writing"
+      "language-writing",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -20347,7 +22407,12 @@
           {
             "ja": "ロックス；塩漬けサーモン",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lox\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lox」が「ロックス；塩漬けサーモン」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -20361,7 +22426,8 @@
     },
     "usage_note": "",
     "tags": [
-      "dishes-breads"
+      "dishes-breads",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -20822,7 +22888,12 @@
           {
             "ja": "大げさに悲しげな；陰気な",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lugubrious\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lugubrious」が「大げさに悲しげな；陰気な」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -20836,7 +22907,8 @@
     },
     "usage_note": "",
     "tags": [
-      "personality-manner"
+      "personality-manner",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -21032,7 +23104,12 @@
           {
             "ja": "光度；光を放つ強さ",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"luminosity\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「luminosity」が「光度；光を放つ強さ」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -21046,7 +23123,8 @@
     },
     "usage_note": "",
     "tags": [
-      "astronomy-space"
+      "astronomy-space",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -21087,9 +23165,26 @@
     },
     "usage_note": "",
     "tags": [
-      "descriptive"
+      "descriptive",
+      "etymology-v1"
     ],
-    "status": "needs_enrichment"
+    "status": "needs_enrichment",
+    "etymology": {
+      "origin": "Latin lux / lumen / lucere",
+      "history": "lumen「光」に由来し、「光を発する・明るい」を表す。",
+      "roots": [
+        {
+          "form": "luc / lumin",
+          "meaning": "光"
+        }
+      ],
+      "related": [
+        "light",
+        "illustrate",
+        "illustration",
+        "translucent"
+      ]
+    }
   },
   {
     "id": "sw-09067",
@@ -21248,7 +23343,12 @@
           {
             "ja": "昼食会；正式な昼食",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"luncheon\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「luncheon」が「昼食会；正式な昼食」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -21262,7 +23362,8 @@
     },
     "usage_note": "",
     "tags": [
-      "kitchen-service"
+      "kitchen-service",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -21379,7 +23480,12 @@
           {
             "ja": "ルンゴ；多めに抽出したエスプレッソ",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lungo\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lungo」が「ルンゴ；多めに抽出したエスプレッソ」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -21393,7 +23499,8 @@
     },
     "usage_note": "",
     "tags": [
-      "sweets-drinks"
+      "sweets-drinks",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -21420,7 +23527,12 @@
           {
             "ja": "ルピナス；食用になる種子",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lupin\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lupin」が「ルピナス；食用になる種子」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -21434,7 +23546,8 @@
     },
     "usage_note": "",
     "tags": [
-      "food-ingredients"
+      "food-ingredients",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -21684,7 +23797,12 @@
           {
             "ja": "光沢；輝き",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"luster\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「luster」が「光沢；輝き」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -21698,7 +23816,8 @@
     },
     "usage_note": "",
     "tags": [
-      "geology-minerals"
+      "geology-minerals",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
@@ -22020,7 +24139,12 @@
           {
             "ja": "コトドリ；尾の形が特徴的な鳥",
             "definition": "",
-            "examples": []
+            "examples": [
+              {
+                "en": "In advanced texts, \"lyrebird\" may be used to mean \"\".",
+                "ja": "上級レベルの文章では「lyrebird」が「コトドリ；尾の形が特徴的な鳥」という意味で用いられることがある。"
+              }
+            ]
           }
         ]
       }
@@ -22034,7 +24158,8 @@
     },
     "usage_note": "",
     "tags": [
-      "wildlife-birds"
+      "wildlife-birds",
+      "curated-v2.94"
     ],
     "status": "needs_enrichment"
   },
