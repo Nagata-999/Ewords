@@ -51,7 +51,7 @@
   async function init(){
     installCss();
     try{
-      if(typeof window.avatarSVG!=='function') await loadScript('sushigacha/avatar.js?v=20260913-run2');
+      if(typeof window.avatarSVG!=='function') await loadScript('sushigacha/avatar.js?v=20261010-avatars1');
       await loadScript('sushigacha/avatar-polish.js?v=20260913-4');
       await loadScript('sushigacha/avatar-modern.js?v=20260922-1');
     }catch(_e){}
