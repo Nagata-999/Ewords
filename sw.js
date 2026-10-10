@@ -1,4 +1,4 @@
-const CACHE_NAME = "sushitan-v14-achievement-events";
+const CACHE_NAME = "sushitan-v15-achievement-claims";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -37,8 +37,10 @@ self.addEventListener("fetch", event => {
       (requestUrl.origin === self.location.origin && /\/writing(?:\/|$)/.test(requestUrl.pathname))) return;
   // Keep dictionary 404 responses intact and avoid caching thousands of word pages.
   if (new URL(event.request.url).pathname.startsWith('/dictionary/')) return;
+  const criticalSyncAsset = requestUrl.origin === self.location.origin &&
+    /\/(?:shared\/sushi-profile|sushigacha\/(?:site-taskbar|achievement-[a-z-]+|achievements-ui))\.js$/.test(requestUrl.pathname);
   event.respondWith(
-    fetch(event.request)
+    fetch(event.request, criticalSyncAsset ? {cache:'no-cache'} : {})
       .then(response => {
         const copy = response.clone();
         caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
