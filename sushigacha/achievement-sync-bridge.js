@@ -84,7 +84,8 @@
      if(error.code!=='not_reached')throw error;
      // Only upload progress when the authoritative server needs fresh data.
      if(['all_correct','vocabulary','toeic','all_games_day'].includes(category))await run();
-     await root.SushiProfileSync?.syncNow?.();
+     if(['practice','login_03','login_05','login_23'].includes(category))await root.SushiLoginAchievements?.record?.(true);
+     else await root.SushiProfileSync?.syncNow?.();
      data=await requestClaim();
    }
    root.dispatchEvent(new CustomEvent('sushi-gems-updated',{detail:{source:'achievement',claim_id:data.claim_id}}));

@@ -64,7 +64,8 @@
   const media=matchMedia('(prefers-reduced-motion: reduce)');
   const reduce=()=>state.settings.reduced||media.matches;
   function maxX(){return Math.max(0,$('walkArea').clientWidth-$('walker').offsetWidth-8);}
-  function position(){x=Math.max(8,Math.min(maxX(),x));$('walker').style.transform=`translateX(${x.toFixed(1)}px)`;$('greeting').style.left=Math.max(4,Math.min($('walkArea').clientWidth-112,x-12))+'px';}
+  let speech=null;
+  function position(){speech?.position();x=Math.max(8,Math.min(maxX(),x));$('walker').style.transform=`translateX(${x.toFixed(1)}px)`;speech?.position();}
   function walkerMode(next){mode=next;walker.setOptions({action:next==='turn'?'idle':next,direction:next==='walk'?dir:'front',reduced:reduce(),paused:state.settings.hidden});}
   function tick(t){
     raf=0;if(document.hidden||reduce()||state.settings.hidden)return;
@@ -88,20 +89,24 @@
     const s=state.settings;$('walkerSize').value=s.size;$('reduceMotion').checked=s.reduced;$('hideWalker').checked=s.hidden;
     $('walker').hidden=s.hidden;$('walker').style.height=s.size+'px';$('walker').style.width=Math.round(s.size*160/204)+'px';$('greeting').style.bottom=s.size+'px';
     hero.setOptions({reduced:reduce()});walker.setOptions({action:reduce()?'idle':mode==='turn'?'idle':mode,direction:reduce()?'front':mode==='walk'?dir:'front',reduced:reduce(),paused:s.hidden});
-    if(s.hidden||reduce())$('greeting').hidden=true;
+    if(s.hidden)speech?.hide();
     position();if(!document.hidden&&!reduce()&&!s.hidden)raf=requestAnimationFrame(tick);
   }
-  $('walker').onclick=()=>{walkerMode('wave');deadline=clock+1.8;greetingUntil=clock+1.8;$('greeting').hidden=false;if(reduce()){walker.setOptions({action:'wave',direction:'front',reduced:true});}};
+  speech=window.SushiAvatarPersonality?.mount($('walkArea'),{anchor:$('walker'),bubble:$('greeting'),getPersonality:()=>state.personality,isHidden:()=>state.settings.hidden,auto:true,contain:true});
+  $('personality').value=state.personality||'serious';
+  $('personality').onchange=async e=>{const kind=e.target.value;try{await Store.savePersonality(kind);state.personality=kind;speech?.say();status('性格を保存しました。');window.SushiProfileSync?.syncNow?.().catch(()=>null);}catch(error){$('personality').value=state.personality||'serious';status(error.message,true);}};
+  $('personalityGreeting').onclick=()=>speech?.say();
+  $('walker').onclick=()=>{walkerMode('wave');deadline=clock+1.8;greetingUntil=0;speech?.say();if(reduce()){walker.setOptions({action:'wave',direction:'front',reduced:true});}};
   $('walkerSize').onchange=e=>{state.settings.size=Number(e.target.value);syncSettings();persist();};
   $('reduceMotion').onchange=e=>{state.settings.reduced=e.target.checked;syncSettings();persist();};
   $('hideWalker').onchange=e=>{state.settings.hidden=e.target.checked;syncSettings();persist();};
   window.addEventListener('resize',position);document.addEventListener('visibilitychange',syncSettings);media.addEventListener('change',syncSettings);
-  window.addEventListener('storage',e=>{if(e.key!==Store.KEY)return;try{state=Store.load();equipped={...state.avatar};$('gemBalance').textContent=state.gems.toLocaleString();hero.setAvatar(state.avatar);walker.setAvatar(state.avatar);renderWardrobe();renderLooks();syncSettings();}catch(e){storageBlocked=true;status(e.message,true);}});
-  window.addEventListener('sushi-profile-synced',()=>{try{const latest=Store.load();state.owned=latest.owned;state.gems=latest.gems;state.looks=latest.looks;state.settings=latest.settings;$('gemBalance').textContent=state.gems.toLocaleString();renderWardrobe();renderLooks();syncSettings();status('クラウドの所持品を同期しました。');}catch(e){storageBlocked=true;status(e.message,true);}});
+  window.addEventListener('storage',e=>{if(e.key!==Store.KEY)return;try{state=Store.load();$('personality').value=state.personality||'serious';equipped={...state.avatar};$('gemBalance').textContent=state.gems.toLocaleString();hero.setAvatar(state.avatar);walker.setAvatar(state.avatar);renderWardrobe();renderLooks();syncSettings();}catch(e){storageBlocked=true;status(e.message,true);}});
+  window.addEventListener('sushi-profile-synced',()=>{try{const latest=Store.load();state.owned=latest.owned;state.gems=latest.gems;state.looks=latest.looks;state.settings=latest.settings;state.personality=latest.personality;$('personality').value=state.personality;$('gemBalance').textContent=state.gems.toLocaleString();renderWardrobe();renderLooks();syncSettings();status('クラウドの所持品を同期しました。');}catch(e){storageBlocked=true;status(e.message,true);}});
   try{refreshBalance();}catch(e){status(e.message,true);}
   const requested=new URLSearchParams(location.search).get('item');if(requested&&A.item(requested)){const i=A.item(requested);state.avatar=A.normalize({...state.avatar,[i.slot]:i.id});hero.setAvatar(state.avatar);walker.setAvatar(state.avatar);}
   renderWardrobe();renderLooks();syncSettings();
-  window.SushiAvatarStudio={getState:()=>structuredClone(state),getMotion:()=>({hero:hero.getState(),walker:walker.getState(),x,mode}),destroy(){cancelAnimationFrame(raf);hero.destroy();walker.destroy();}};
+  window.SushiAvatarStudio={getState:()=>structuredClone(state),getMotion:()=>({hero:hero.getState(),walker:walker.getState(),x,mode}),destroy(){speech?.destroy();cancelAnimationFrame(raf);hero.destroy();walker.destroy();}};
 })();
 
 
