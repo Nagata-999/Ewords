@@ -189,7 +189,7 @@
   async function init(){
     installCss();
     try{
-      if(!window.ITEMS||!window.DEFAULT_AVATAR)await loadScript('sushigacha/avatar.js?v=20260913-three2');
+      if(!window.ITEMS||!window.DEFAULT_AVATAR)await loadScript('sushigacha/avatar.js?v=20261010-avatars1');
       window.THREE = await import('https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js');
       setup3d();animate(performance.now());
     }catch(err){console.warn('Three.js runner unavailable; keeping fallback runner.',err);}

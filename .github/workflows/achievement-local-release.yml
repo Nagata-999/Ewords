@@ -16,6 +16,8 @@ jobs:
         run: |
           for file in sushigacha/achievement-*.js sushigacha/achievements-ui.js sushigacha/site-taskbar.js; do node --check "$file"; done
           node --check shared/sushi-profile.js
+      - name: Avatar catalog and shoe regression tests
+        run: node --test tests/avatar-items.test.cjs
       - name: Achievement wallet and PIN sync regression tests
         run: node --test tests/achievement-*.test.cjs
       - name: Reward RPC checks in disposable Postgres

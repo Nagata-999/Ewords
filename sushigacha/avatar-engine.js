@@ -170,6 +170,10 @@
   }
 
   function hat(kind,back){
+    if(kind==='bunnyEars')return path('M48 43Q30 -1 48 3Q61 6 64 39M95 39Q100 -2 116 9Q124 26 110 48','#fff2f6')+path('M47 12Q43 26 55 39M111 16Q114 28 105 39','none','stroke="#efa5c2" stroke-width="7"')+path('M45 44Q80 32 114 45','none','stroke="#f4bace" stroke-width="8"');
+    if(kind==='catEars')return path('M44 47L43 10L69 34M93 34L118 10L116 48','#c7b6ed')+path('M49 34L49 21L60 33M101 33L112 21L111 36','#efacd0');
+    if(kind==='pandaEars')return circle(49,29,15,'#404653')+circle(111,29,15,'#404653')+circle(49,29,7,'#7c8391')+circle(111,29,7,'#7c8391')+path('M45 44Q80 31 115 44','none','stroke="#fff9ec" stroke-width="9"');
+    if(kind==='visor')return path('M44 40Q80 29 114 41V51Q80 40 45 51Z','#fff9ec')+path(back?'M45 47H114':'M90 46Q127 41 135 52L95 59Z',back?'none':'#e6a1bb');
     if(kind==='headband')return path('M45 42Q80 31 114 44L112 55Q79 44 46 54Z','#ee9857')+path('M111 47L132 49L125 57L135 67L124 70L109 54Z','#ee9857');
     if(kind==='wizard')return path('M43 44L70 5L109 15L111 36L101 27L96 42Z','#425875')+path('M42 35L103 33L110 45L40 48Z','#e8b557')+path('M24 50Q45 32 101 41Q127 43 136 53Q113 64 90 54Q53 49 24 50Z','#425875')+star(110,32,7);
     if(kind==='chef')return path('M46 44Q30 28 48 23Q50 7 67 17Q78 0 91 17Q112 7 116 24Q131 36 113 45L111 56H48Z','#fff9ec')+path('M48 43H112V56H48Z','#fff9ec');
@@ -208,6 +212,29 @@
     return `<g data-item-art="reward-sushitan-aura" aria-label="烈火のオーラ">${flame}</g>`;
   }
 
+  // The same shoe artwork follows the feet in standing, walking and seated poses.
+  function shoeArt(shoe){
+    const kind=shoe?.kind||'sneakers',c=shoe?.color||'#fff9ec',ac=shoe?.accent||'#fff9ec';
+    let art='';
+    if(kind==='boots'||kind==='apocalypseBoots'){
+      const dark=kind==='apocalypseBoots';
+      art=path('M-8 19H9V29Q20 28 20 38H-10Z',dark?'#26282d':'#916448')+path('M-10 37H20','none','stroke="#403a37" stroke-width="4"')+path('M-6 24H6M-5 29H7','none',`stroke="${dark?'#b8b3a8':'#d9b58a'}" stroke-width="2"`);
+      if(dark)art+=path('M-8 20H10V24H-8Z','#6d7078')+circle(10,23,2,'#ddd8c8');
+    }else if(kind==='bunnySlippers'||kind==='pawSlippers'){
+      art=path('M-10 28Q4 23 15 30Q25 32 21 40Q6 46 -12 40Z',c);
+      if(kind==='bunnySlippers')art+=path('M8 31Q3 17 8 17Q13 17 13 29M15 31Q13 18 18 19Q23 21 20 32',ac)+circle(9,35,1.3,INK)+circle(17,35,1.3,INK)+circle(13,38,1.4,'#e287a9');
+      else art+=circle(10,36,3.7,ac)+circle(4,32,1.8,ac)+circle(10,30,1.8,ac)+circle(16,32,1.8,ac);
+    }else{
+      art=path(kind==='highTops'?'M-9 20H9V29L18 33Q22 40 13 41H-11Z':'M-9 28H9L18 33Q22 40 13 41H-11Z',kind==='cheerShoes'?'#fff':c)+path('M-10 38H19','none',`stroke="${kind==='cleats'?'#a9df75':'#dfded7'}" stroke-width="3"`);
+      if(kind==='cheerShoes')art+=path('M-7 31L2 34L9 30','none','stroke="#1767c7" stroke-width="3"');
+      if(kind==='highTops')art+=path('M-6 23H6M-4 27H7M-2 31H9','none',`stroke="${ac}" stroke-width="2"`)+circle(-5,33,3,ac);
+      if(kind==='cleats')art+=path('M-7 41V44M1 41V44M11 41V44','none','stroke="#303d53" stroke-width="3"')+path('M-4 30L0 35M2 30L6 35','none',`stroke="${ac}" stroke-width="2"`);
+      if(kind==='running')art+=path('M-7 32L1 35L10 30','none',`stroke="${ac}" stroke-width="3"`)+path('M-8 39H18','none','stroke="#409a83" stroke-width="2"');
+      if(kind==='sneakers')art+=path('M-6 31H7','none','stroke="#a9b7bb" stroke-width="2"');
+    }
+    return group(art,'',`data-part="shoe" data-shoe-kind="${kind}"`);
+  }
+
   function render(value={},options={}){
     const a=normalize(value), direction=['front','back','left','right'].includes(options.direction)?options.direction:'front';
     const action=['walk','idle','wave','sit','celebrate'].includes(options.action)?options.action:'idle';
@@ -219,8 +246,12 @@
     const bounce=reduced?0:walking?-Math.abs(Math.sin(phase))*2:happy?-Math.max(0,Math.sin(time*5))*13:Math.sin(time*2)*.65;
     let torsoY=sitting?29:0;
     const legAngle=walking?motionWave*23:0;
-    const leg=(x,angle)=>group(path('M-8 0H9L8 29H-8Z',bottom.color||'#334155')+path(sh==='boots'?'M-8 19H9V29Q20 28 20 38H-10Z':'M-9 28H9L18 33Q22 40 13 41H-11Z',sh==='boots'?'#916448':'#fff9ec')+(sh==='boots'?path('M-8 24H9','none'):path('M-10 36H19','none')),`translate(${x} 144) rotate(${angle})`);
-    let legs=sitting?path('M62 151Q39 153 44 176Q49 187 78 177L93 164L100 150Z',bottom.color||'#334155')+path('M91 151Q118 149 119 171Q115 190 79 181L61 169Z',bottom.color||'#334155')+path('M54 174Q44 173 44 182Q48 190 65 183L69 176Z',sh==='boots'?'#916448':'#fff9ec')+path('M104 177Q120 174 118 184Q109 191 96 185L94 179Z',sh==='boots'?'#916448':'#fff9ec'):leg(side?77:66,legAngle)+leg(side?85:95,-legAngle);
+    const shoes=item(a.shoes,'shoes');
+    const sportBottom=bottom.kind==='sportShorts'||bottom.kind==='tennisSkirt';
+    const leg=(x,angle)=>group(path('M-8 0H9L8 29H-8Z',sportBottom?skin:bottom.color||'#334155')+(sportBottom?path('M-8 0H9V12H-8Z',bottom.color)+path('M-8 21H9V28H-8Z','#fff9ec'):'')+shoeArt(shoes),`translate(${x} 144) rotate(${angle})`);
+    let legs=sitting?path('M62 151Q39 153 44 176Q49 187 78 177L93 164L100 150Z',sportBottom?skin:bottom.color||'#334155')+path('M91 151Q118 149 119 171Q115 190 79 181L61 169Z',sportBottom?skin:bottom.color||'#334155')+group(shoeArt(shoes),'translate(53 155) rotate(18) scale(.72)')+group(shoeArt(shoes),'translate(107 157) rotate(-18) scale(.72)'):leg(side?77:66,legAngle)+leg(side?85:95,-legAngle);
+    if(bottom.kind==='sportShorts')legs+=path(sitting?'M55 151H105L109 165H87L81 157L73 165H51Z':'M54 140H107L109 158H87L81 148L74 158H52Z',bottom.color)+path(sitting?'M53 164H73M88 164H108':'M53 156H73M88 156H108','none',`stroke="${bottom.accent}" stroke-width="3"`);
+    if(bottom.kind==='tennisSkirt')legs+=path(sitting?'M53 153H108L119 171Q82 182 43 170Z':'M54 140H107L114 163Q81 174 46 163Z',bottom.color)+path(sitting?'M67 155L62 173M82 155V177M98 155L104 173':'M62 143L57 164M79 142V169M98 143L105 164','none',`stroke="${bottom.accent}" stroke-width="2"`);
     if(bottom.kind==='cheerSkirt')legs+=path(sitting?'M53 153H108L119 171Q82 182 43 170Z':'M54 140H107L114 163Q81 174 46 163Z',bottom.color)+path(sitting?'M55 158H114M67 155L62 173M82 155V177M98 155L104 173':'M55 146H110M62 143L57 164M79 142V169M98 143L105 164','none','stroke="#fff" stroke-width="3"');
     if(bottom.kind==='apocalypsePants')legs+=path(sitting?'M52 161L69 158M91 160L108 166':'M60 151L72 148M91 149L104 154','none','stroke="#9a6b4d" stroke-width="2.5"');
     if(bottom.kind==='schoolSkirt')legs+=path(sitting?'M53 153H108L120 172Q82 181 42 169Z':'M55 140H106L113 164Q82 172 47 164Z',bottom.color)+path(sitting?'M57 155L52 170M74 156L72 175M92 155L98 174M51 161H112M48 168H116':'M62 146L57 165M78 145V168M96 146L104 165M54 151H109M51 159H111','none','stroke="#77848b" stroke-width="1.5"');
@@ -231,6 +262,18 @@
     if(bk==='backpack')rear+=side?path('M51 102Q37 97 36 116V140Q37 150 56 147L60 113Z','#39877e'):path('M50 104Q47 93 57 92H103Q114 93 113 108V145H49Z','#39877e');
     const torso=side?'M68 99Q86 94 101 104L104 145Q87 151 61 144L62 113Z':'M58 99Q79 92 103 99L108 146Q82 152 53 146Z';
     let body=path(torso,c);
+    if(['bunny','cat','panda'].includes(k)){
+      body+=path(side?'M66 98Q70 86 94 96L103 106L90 111Z':'M58 99Q59 87 80 92Q100 86 104 99L91 110L80 101L68 110Z',c)+path('M55 141H107','none',`stroke="${accent}" stroke-width="4"`);
+      if(!back&&!side){
+        body+=`<ellipse cx="81" cy="124" rx="14" ry="12" fill="${k==='panda'?'#fff':accent}" stroke-width="1.5"/>`;
+        if(k==='bunny')body+=path('M72 116Q68 101 73 103L77 114M85 114Q88 101 92 104L91 117',accent);
+        if(k==='cat')body+=path('M68 119L68 110L77 114M85 114L94 110L94 119',accent)+path('M65 124H72M90 124H97M65 129L72 127M90 127L97 129','none','stroke-width="1"');
+        if(k==='panda')body+=circle(69,115,4,accent)+circle(93,115,4,accent)+circle(75,123,4,accent)+circle(87,123,4,accent);
+        body+=circle(75,123,1.5,INK)+circle(87,123,1.5,INK)+path('M78 128Q81 133 84 128','none','stroke-width="1.5"');
+      }
+    }
+    if(k==='basketball'||k==='soccer')body+=path('M66 98Q81 109 96 98M55 141H107','none',`stroke="${accent}" stroke-width="4"`)+(k==='soccer'?path('M65 107V139M97 107V139','none',`stroke="${accent}" stroke-width="5"`):'')+(!side?`<text x="81" y="132" text-anchor="middle" font-family="sans-serif" font-size="25" font-weight="900" fill="${accent}" stroke="none">${k==='basketball'?'7':'10'}</text>`:'');
+    if(k==='tennis')body+=path('M66 97L77 108L81 99L86 108L96 97','none',`stroke="${accent}" stroke-width="3"`)+path('M55 138H107','none',`stroke="${accent}" stroke-width="4"`)+(!back?circle(95,116,3,accent):'');
     if(k==='hoodie')body+=path(side?'M66 98Q70 86 94 96L103 106L90 111Z':'M58 99Q59 87 80 92Q100 86 104 99L91 110L80 101L68 110Z',c)+(!back?path(side?'M82 126H98V138H81Z':'M67 125H94L98 140H63Z',c)+path(side?'M90 109V118':'M74 108V118M87 108V118','none',`stroke="${accent}" stroke-width="2"`):'');
     if(k==='sweater')body+=path('M66 98Q80 109 96 98M55 140Q80 146 107 140','none',`stroke="${accent}" stroke-width="3"`)+path('M60 142V147M67 144V148M74 145V149M81 145V149M88 145V149M95 144V148M102 142V147','none',`stroke="${accent}" stroke-width="1.2"`);
     if(k==='chef')body+=back?path('M55 125H106','none',`stroke="${accent}"`):path('M67 98L88 119L99 101M80 112L64 128','none')+path(side?'M76 124H104V149H73Z':'M58 123H103L106 151H54Z',accent)+path('M57 126H105','none')+path('M80 125L72 132L82 130L89 136L90 128Z',accent);
@@ -257,6 +300,9 @@
       if(right&&hand==='wand')s+=path('M8 8L12 66','none','stroke="#916448" stroke-width="5"')+circle(7,1,12,'#916448')+star(7,1,9);
       if(right&&hand==='katana')s+=`<g data-item-art="reward-sushigiri" transform="translate(5 28) rotate(22)"><path d="M-3 -17L-2 -72Q0 -83 5 -91L7 -23L4 -17Z" fill="#d6f4ff" stroke="#31526c" stroke-width="1.5"/><path d="M1 -22L2 -72L5 -86" fill="none" stroke="#fff" stroke-width="2"/><path d="M-9 -18Q1 -23 11 -18L10 -13H-8Z" fill="#d7ae54" stroke="#5a4229" stroke-width="1.5"/><rect x="-3" y="-13" width="8" height="25" rx="2" fill="#202c3d" stroke="#151e2c" stroke-width="1.5"/><path d="M-2 -9L4 -5L-2 -1L4 3L-2 7" fill="none" stroke="#c7a65b" stroke-width="2"/><path d="M-3 12H5" stroke="#e1bd65" stroke-width="3"/><path d="M1 14Q14 20 10 29M2 14Q-5 21 0 27" fill="none" stroke="#b84840" stroke-width="3"/></g>`;
       if(hand==='cheerPompoms')s+='<g transform="translate(0 31)" stroke="none"><circle cx="0" cy="0" r="12" fill="#1767c7"/><path d="M-12 -7L10 8M-10 9L11 -8M-2 -13L3 13M-13 1L13 -2" stroke="#fff" stroke-width="3"/></g>';
+      if(right&&hand==='basketballBall')s+=circle(10,31,13,'#e8914c')+path('M-3 31H23M10 18V44M0 22Q16 31 0 40M20 22Q4 31 20 40','none','stroke-width="1.5"');
+      if(right&&hand==='soccerBall')s+=circle(10,31,13,'#fff9ec')+path('M10 25L16 29L14 36H6L4 29Z','#303d53')+path('M10 18V25M23 27L16 29M18 42L14 36M2 42L6 36M-3 27L4 29','none','stroke-width="1.5"');
+      if(right&&hand==='tennisRacket')s+=`<g transform="translate(9 10) rotate(18)"><ellipse cx="0" cy="0" rx="12" ry="17" fill="#e5f6ef" stroke="#dd8eaa" stroke-width="4"/><path d="M-9 -10H9M-11 -4H11M-11 3H11M-9 10H9M-5 -15V15M1 -15V15M6 -13V13" stroke="#94b7ab" stroke-width="1" fill="none"/><path d="M-4 17L-2 25H2L4 17" fill="none"/><path d="M0 25V39" stroke="#dd8eaa" stroke-width="5"/></g>`+circle(22,37,5,'#d9ed87');
       if(right&&hand==='tea')s+=path('M0 22H18L16 39H2Z','#39877e')+`<ellipse cx="9" cy="22" rx="9" ry="3" fill="#f3d5b1"/>`;
       return group(s,`translate(${x} 104) rotate(${angle})`);
     };
