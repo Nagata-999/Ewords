@@ -1,4 +1,4 @@
-const CACHE_NAME = "sushitan-v17-login-personality";
+const CACHE_NAME = "sushitan-v18-talk-two-exchanges";
 const APP_SHELL = [
   "/",
   "/index.html",

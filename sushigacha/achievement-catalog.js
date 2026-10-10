@@ -18,9 +18,9 @@
     tier('combo','完璧主義者','correct_streak',[[10,'white',10,10],[50,'orange',50,50],[100,'purple',200,200]])
   ];
   const oneTime=[
-    {id:'login_03',title:'こんな時間に勉強？',metric:'login_03',threshold:1,points:10,gems:10},
-    {id:'login_05',title:'一日の初めに勉強',metric:'login_05',threshold:1,points:10,gems:10},
-    {id:'login_23',title:'まだ勉強するの？',metric:'login_23',threshold:1,points:10,gems:10},
+    {id:'login_03',secret:true,title:'こんな時間に勉強？',metric:'login_03',threshold:1,points:10,gems:10},
+    {id:'login_05',secret:true,title:'一日の初めに勉強',metric:'login_05',threshold:1,points:10,gems:10},
+    {id:'login_23',secret:true,title:'まだ勉強するの？',metric:'login_23',threshold:1,points:10,gems:10},
     {id:'first_purchase',title:'はじめてのお買い物',metric:'gem_purchases',threshold:1,points:10,gems:10},
     {id:'first_outfit',title:'おしゃれ初心者',metric:'outfit_changes',threshold:1,points:10,gems:10},
     {id:'all_games_day',title:'全部盛り',metric:'distinct_games_in_day',threshold:5,points:100,gems:100,secret:true},
