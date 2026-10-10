@@ -21,6 +21,7 @@
       outfitChanges:Number(login.gacha?.avatarRevision)>0?1:0,
       distinctGamesInDay:window.SushiAchievementLedger?.distinctGamesInDay?.()||0,
       outcomeStats:window.SushiAchievementLedger?.outcomeSummary?.()||{},
+      loginActivity:window.SushiLoginAchievements?.read?.()||{},
       gameStats:gameplay
     })||{correct_total:Math.max(s.total,total),correct_vocabulary:0,login_streak:0};
   }
@@ -101,7 +102,7 @@
       if(!hidden&&(reward.length||claimed.length)){
         const badge=document.createElement('div');badge.style.cssText='font-size:12px;color:#8b5a1e;margin-top:5px';
         const pending=reward.filter(x=>!claimed.includes(x.id)&&!claimStatus(x.id));
-        const supported=['all_correct','streak','vocabulary','toeic','giri','blast','daily','gems','avatar','first_purchase','first_outfit','all_games_day','review','combo','resilience','comeback'].includes(a.id);
+        const supported=['practice','login_03','login_05','login_23','all_correct','streak','vocabulary','toeic','giri','blast','daily','gems','avatar','first_purchase','first_outfit','all_games_day','review','combo','resilience','comeback'].includes(a.id);
         badge.textContent=(claimed.length?'✅ 受取済 '+claimed.length+'件　':'')+
           (pending.length?(supported?'🎁 未受取報酬 ':'🔧 報酬準備中 ')+pending.reduce((n,x)=>n+x.gems,0)+'ジェム':'');
         item.append(badge);
@@ -233,6 +234,11 @@
     previousMetrics=next;refresh();
   });
   window.addEventListener('sushi-profile-synced',()=>{previousMetrics=achievementMetrics();refresh()});
+  window.addEventListener('sushi-login-achievement-change',()=>{
+    const next=achievementMetrics();
+    celebrate(window.SushiAchievementMilestones?.reachedBetween?.(previousMetrics,next,window.SushiAchievementCatalog?.definitions)||[]);
+    previousMetrics=next;refresh();
+  });
   window.addEventListener('sushi-gem-change',refresh);
   // Drain correct answers recorded while the async achievement modules loaded.
   const pending=Array.isArray(window.__sushiPendingAchievementCorrect)?window.__sushiPendingAchievementCorrect.splice(0,1000):[];

@@ -88,6 +88,9 @@ function mergeLedger(a0:unknown,b0:unknown,claimIds:string[]=[]){
   const clientWins=clientRev>serverRev||(clientRev===serverRev&&clientRev>0&&clientAt>serverAt);
   const avatarSource=clientWins?bg:ag;
   out.gacha={...ag,...bg,avatar:avatarSource.avatar,avatarRevision:Math.max(serverRev,clientRev),avatarUpdatedAt:clientWins?clientAt:serverAt,owned:uniq([...(Array.isArray(ag.owned)?ag.owned:[]),...(Array.isArray(bg.owned)?bg.owned:[])])};
+  const personalityValid=(v:any)=>["serious","casual"].includes(v?.kind)&&Number.isSafeInteger(v.updatedAt)&&v.updatedAt>=0;
+  const pa=obj(a.avatarPersonality),pb=obj(b.avatarPersonality);
+  out.avatarPersonality=personalityValid(pb)&&(!personalityValid(pa)||(pb.updatedAt>pa.updatedAt||(pb.updatedAt===pa.updatedAt&&pb.kind>pa.kind)))?pb:personalityValid(pa)?pa:{kind:"serious",updatedAt:0};
   const ad=obj(a.dailyQuests),bd=obj(b.dailyQuests);
   const aday=String(ad.day||""),bday=String(bd.day||"");
   if(aday&&bday&&aday===bday){
@@ -265,6 +268,11 @@ Deno.serve(async(req)=>{
       await db.from("sushi_id_profiles").update({failed_attempts:failures>=5?0:failures,locked_until:lock}).eq("sushi_id",sushiId);
       return reply({error:lock?"temporarily_locked":"wrong_pin"},lock?429:401);
     }
+    if(action==="login_visit"){
+      const {data:visit,error:visitError}=await db.rpc("sushi_record_login_visit",{p_sushi_id:sushiId});
+      if(visitError)throw visitError;
+      return reply(visit,visit?.ok?200:409);
+    }
     if(action==="outcome_sync"){
       const incoming=body.outcomes?.events;
       const offset=Number(body.outcomes?.offset??0);
@@ -297,9 +305,9 @@ Deno.serve(async(req)=>{
       const threshold=Number(body.threshold);
       if(!Number.isSafeInteger(threshold))return reply({error:"invalid_threshold"},400);
       const category=String(body.category||"all_correct");
-      if(!["all_correct","streak","vocabulary","toeic","giri","blast","daily","gems","avatar","first_purchase","first_outfit","all_games_day","review","combo","resilience","comeback"].includes(category))return reply({error:"unsupported_category"},400);
-      const procedure=["review","combo","resilience","comeback"].includes(category)?"sushi_claim_outcome_milestone":category==="all_games_day"?"sushi_claim_five_games_day":category==="streak"?"sushi_claim_login_streak":category==="all_correct"?"sushi_claim_all_correct":category==="giri"||category==="blast"?"sushi_claim_score_unlock":["daily","gems","avatar"].includes(category)?"sushi_claim_profile_milestone":["first_purchase","first_outfit"].includes(category)?"sushi_claim_first_action":"sushi_claim_game_correct";
-      const args=["vocabulary","toeic","giri","blast","daily","gems","avatar","first_purchase","first_outfit","review","combo","resilience","comeback"].includes(category)?{p_sushi_id:sushiId,p_category:category,p_threshold:threshold}:{p_sushi_id:sushiId,p_threshold:threshold};
+      if(!["practice","login_03","login_05","login_23","all_correct","streak","vocabulary","toeic","giri","blast","daily","gems","avatar","first_purchase","first_outfit","all_games_day","review","combo","resilience","comeback"].includes(category))return reply({error:"unsupported_category"},400);
+      const procedure=["practice","login_03","login_05","login_23"].includes(category)?"sushi_claim_login_achievement":["review","combo","resilience","comeback"].includes(category)?"sushi_claim_outcome_milestone":category==="all_games_day"?"sushi_claim_five_games_day":category==="streak"?"sushi_claim_login_streak":category==="all_correct"?"sushi_claim_all_correct":category==="giri"||category==="blast"?"sushi_claim_score_unlock":["daily","gems","avatar"].includes(category)?"sushi_claim_profile_milestone":["first_purchase","first_outfit"].includes(category)?"sushi_claim_first_action":"sushi_claim_game_correct";
+      const args=["practice","login_03","login_05","login_23","vocabulary","toeic","giri","blast","daily","gems","avatar","first_purchase","first_outfit","review","combo","resilience","comeback"].includes(category)?{p_sushi_id:sushiId,p_category:category,p_threshold:threshold}:{p_sushi_id:sushiId,p_threshold:threshold};
       const {data:claim,error:claimError}=await db.rpc(procedure,args);
       if(claimError)throw claimError;
       if(claim?.ok){

@@ -3,3 +3,8 @@
 .save-row{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}.save-row button{font-size:12px}.save-row #equipLook{background:#367c71;color:white;border:0}.save-row #equipLook:disabled{background:#ded9cf;color:#7c7569;cursor:default}.item-card.unowned small{color:#996841}.collection-info{font-size:11px;color:#7c7569;margin:12px 0}.page-links{display:flex;gap:18px;margin-bottom:20px;font-size:12px}.page-links a{color:#367c71}.set-grid button small{font-size:10px;color:#817a70;display:block;margin-top:5px}.save-row [disabled]{opacity:.65}
 
 .gender-controls{display:flex;justify-content:center;gap:8px;margin:18px 0 0}.gender-controls button{min-width:100px}
+
+#greeting.avatar-speech{padding:10px 13px;border-radius:15px;font-size:13px;max-width:min(260px,calc(100vw - 56px));}
+#personality{display:block;width:100%;margin:8px 0;}
+
+.walk-area{height:260px;}#greeting.avatar-speech{max-width:min(260px,100%);}

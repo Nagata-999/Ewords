@@ -1,12 +1,13 @@
 const {test}=require('node:test'),assert=require('node:assert/strict');
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
 const {stripTypeScriptTypes}=require('node:module');
-const source=stripTypeScriptTypes(fs.readFileSync(path.join(__dirname,'../supabase/functions/sushi-id-sync/index.ts'),'utf8').replace(/^import .*\n/m,''));
+const source=stripTypeScriptTypes(fs.readFileSync(path.join(__dirname,'../supabase/functions/sushi-id-sync/index.ts'),'utf8').replace(/^import [^\r\n]*\r?\n/m,''));
 const plain=value=>JSON.parse(JSON.stringify(value));
 function boot(){
   let handler,row={sushi_id:'testuser',ledger:{gems:100,gemEvents:[]},learning:{events:[]},pin_hash:'testhash',updated_at:'2026-10-09T00:00:00.000Z'},beforeUpdate;
-  let updates=0;
+  let updates=0;const loginCalls=[];
   const db={async rpc(name,args){
+    if(name==='sushi_record_login_visit'||name==='sushi_claim_login_achievement'){loginCalls.push({name,args:plain(args)});return {data:name==='sushi_record_login_visit'?{ok:true,login:{lastDay:'2026-10-10',streak:7,bestStreak:7,hour03:true}}:{ok:true,claim_id:'achievement:'+args.p_category+':'+args.p_threshold,gems:10},error:null};}
     assert.equal(name,'sushi_save_profile_if_current');updates++;beforeUpdate?.();
     if(args.p_expected_updated_at!==row.updated_at||JSON.stringify(args.p_expected_ledger)!==JSON.stringify(row.ledger)||JSON.stringify(args.p_expected_learning)!==JSON.stringify(row.learning))return {data:false,error:null};
     row={...row,ledger:plain(args.p_ledger),learning:plain(args.p_learning),player_name:args.p_player_name,updated_at:args.p_updated_at};return {data:true,error:null};
@@ -23,7 +24,7 @@ function boot(){
   vm.runInContext(source,context);
   // PIN hashing is unchanged; keep these tests focused on the authenticated path.
   vm.runInContext("verifyPin=async(pin,hash)=>pin==='1234'&&hash==='testhash'",context);
-  return {context,get row(){return row},set row(value){row=value},get updates(){return updates},onUpdate(fn){beforeUpdate=fn},async request(body){const response=await handler(new Request('https://example.test',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'sync',sushi_id:'testuser',pin:'1234',ledger:{gemEvents:[]},...body})}));return {status:response.status,data:await response.json()}}};
+  return {context,loginCalls,get row(){return row},set row(value){row=value},get updates(){return updates},onUpdate(fn){beforeUpdate=fn},async request(body){const response=await handler(new Request('https://example.test',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'sync',sushi_id:'testuser',pin:'1234',ledger:{gemEvents:[]},...body})}));return {status:response.status,data:await response.json()}}};
 }
 test('pruned event IDs cannot be paid twice and earned total stays cumulative',()=>{
   const {context:c}=boot();
@@ -78,3 +79,10 @@ test('newer login day resets the current streak while preserving its best achiev
   const result=c.mergeLedger({gems:100,gemEvents:[],loginBonusLastDay:'2026-10-01',loginBonusStreak:30},{loginBonusLastDay:'2026-10-09',loginBonusStreak:1,streak:30});
   assert.equal(result.loginBonusStreak,1);assert.equal(result.streak,1);assert.equal(result.loginBonusBestStreak,30);
 });
+
+test('new login actions authenticate PIN and route only fixed server RPC arguments',async()=>{
+ const s=boot();const visit=await s.request({action:'login_visit',at:'2050-01-01',streak:49});assert.equal(visit.status,200);assert.equal(visit.data.login.bestStreak,7);assert.deepEqual(s.loginCalls[0],{name:'sushi_record_login_visit',args:{p_sushi_id:'testuser'}});
+ for(const category of ['practice','login_03','login_05','login_23']){const result=await s.request({action:'achievement_claim',category,threshold:category==='practice'?7:1});assert.equal(result.status,200);assert.equal(s.loginCalls.at(-1).name,'sushi_claim_login_achievement');assert.equal(s.loginCalls.at(-1).args.p_category,category);}
+ const before=s.loginCalls.length;assert.equal((await s.request({action:'login_visit',pin:'0000'})).status,401);assert.equal(s.loginCalls.length,before);
+});
+test('server personality merge retains a newer preference from either device',()=>{const c=boot().context,a={kind:'serious',updatedAt:10},b={kind:'casual',updatedAt:20};assert.deepEqual(plain(c.mergeLedger({avatarPersonality:a},{avatarPersonality:b}).avatarPersonality),b);assert.deepEqual(plain(c.mergeLedger({avatarPersonality:b},{avatarPersonality:a}).avatarPersonality),b);});

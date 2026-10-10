@@ -4,7 +4,7 @@ const fs=require('node:fs');
 const vm=require('node:vm');
 const path=require('node:path');
 const key='sushitan_login_bonus_v1';
-function setup({rejectOnce=false}={}){
+function setup({rejectOnce=false,remotePersonality=null}={}){
   const values=new Map([[key,JSON.stringify({gems:100,gemEvents:[]})],['sushitan_sync_id_v1','testuser'],['sushitan_sync_pin_v1','1234']]);
   let balance=100,claimed=false,held=null,outcomeHeld=null;
   const calls=[];
@@ -12,7 +12,7 @@ function setup({rejectOnce=false}={}){
   const context=vm.createContext({window,console,Event:class {},CustomEvent:class {},localStorage:{getItem:k=>values.get(k)||null,setItem:(k,v)=>values.set(k,v),get length(){return values.size},key:i=>[...values.keys()][i]},sessionStorage:{getItem:()=>null,setItem(){}},document:{readyState:'loading',addEventListener(){}},setTimeout(){},clearTimeout(){},queueMicrotask,fetch:async(url,options)=>{
     const body=JSON.parse(options.body);calls.push(body.action);
     if(body.action==='sync'){
-      const snapshot={sushi_id:'testuser',ledger:{gems:balance,gemEvents:claimed?[{id:'avatar30',type:'earn',amount:150}]:[]}};
+      const snapshot={sushi_id:'testuser',ledger:{avatarPersonality:remotePersonality,gems:balance,gemEvents:claimed?[{id:'avatar30',type:'earn',amount:150}]:[]}};
       if(held){const wait=held;held=null;await wait.promise;}
       return {ok:true,json:async()=>snapshot};
     }
@@ -111,4 +111,9 @@ test('rank selections converge in either merge order and unlock floors never dec
   const b={selected:'white',selectionRevision:2,selectionDevice:'b',unlockedTotal:500};
   assert.equal(JSON.stringify(merge(a,b)),JSON.stringify(merge(b,a)));
   assert.equal(merge(a,b).selected,'white');assert.equal(merge(a,b).unlockedTotal,15000);
+});
+
+test('profile applies the newer personality and preserves a change made during sync',async()=>{
+ const s=setup({remotePersonality:{kind:'casual',updatedAt:20}});s.store.set(key,JSON.stringify({...s.wallet(),avatarPersonality:{kind:'serious',updatedAt:10}}));await s.window.SushiProfileSync.syncNow();assert.equal(s.wallet().avatarPersonality.kind,'casual');
+ const release=s.hold(),pending=s.window.SushiProfileSync.syncNow();await tick();s.store.set(key,JSON.stringify({...s.wallet(),avatarPersonality:{kind:'serious',updatedAt:30}}));release();await pending;assert.equal(s.wallet().avatarPersonality.updatedAt,30);assert.equal(s.wallet().avatarPersonality.kind,'serious');
 });

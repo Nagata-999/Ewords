@@ -7,6 +7,7 @@
     tier('vocabulary','語彙の達人','correct_vocabulary',seven),
     tier('all_correct','学習の達人','correct_total',[[10,'white',10,10],[500,'yellow',25,25],[2000,'orange',50,50],[5000,'green',75,75],[15000,'blue',100,100],[50000,'purple',200,200],[150000,'black',300,300]]),
     tier('review','七転び八起き','review_correct',[[10,'white',10,10],[100,'yellow',25,25],[1000,'orange',50,50],[5000,'green',100,100]]),
+    tier('practice','Practice makes perfect!','login_visit_streak',[[7,'white',10,10],[14,'yellow',25,25],[21,'orange',50,50],[28,'green',75,75],[35,'blue',100,100],[42,'purple',200,200],[49,'black',300,300]]),
     tier('streak','習慣の力','login_streak',[[3,'white',10,10],[7,'yellow',25,25],[30,'orange',50,50],[100,'blue',100,100],[365,'purple',250,300]]),
     tier('daily','毎日の積み重ね','daily_claims',[[1,'white',10,10],[10,'yellow',25,25],[100,'blue',100,100]]),
     tier('gems','ジェム収集家','gems_earned',[[100,'white',10,10],[1000,'yellow',25,25],[10000,'blue',100,100]]),
@@ -17,6 +18,9 @@
     tier('combo','完璧主義者','correct_streak',[[10,'white',10,10],[50,'orange',50,50],[100,'purple',200,200]])
   ];
   const oneTime=[
+    {id:'login_03',title:'こんな時間に勉強？',metric:'login_03',threshold:1,points:10,gems:10},
+    {id:'login_05',title:'一日の初めに勉強',metric:'login_05',threshold:1,points:10,gems:10},
+    {id:'login_23',title:'まだ勉強するの？',metric:'login_23',threshold:1,points:10,gems:10},
     {id:'first_purchase',title:'はじめてのお買い物',metric:'gem_purchases',threshold:1,points:10,gems:10},
     {id:'first_outfit',title:'おしゃれ初心者',metric:'outfit_changes',threshold:1,points:10,gems:10},
     {id:'all_games_day',title:'全部盛り',metric:'distinct_games_in_day',threshold:5,points:100,gems:100,secret:true},
@@ -27,6 +31,10 @@
     vocabulary:n=>`すし単で英単語を累計${n.toLocaleString()}問正解する`,
     all_correct:n=>`対象の英語学習ゲームで累計${n.toLocaleString()}問正解する`,
     review:n=>`苦手単語の復習で累計${n.toLocaleString()}問正解する`,
+    practice:n=>`サイトに${n}日連続でログインする（日本時間・日付は0時に切り替え）`,
+    login_03:()=> '日本時間の午前3時台（3:00〜3:59）にログインする',
+    login_05:()=> '日本時間の午前5時台（5:00〜5:59）にログインする',
+    login_23:()=> '日本時間の午後11時台（23:00〜23:59）にログインする',
     streak:n=>`ログインボーナスを${n.toLocaleString()}日連続で達成する`,
     daily:n=>`デイリークエストの報酬を累計${n.toLocaleString()}回受け取る`,
     gems:n=>`ジェムを累計${n.toLocaleString()}個獲得する`,

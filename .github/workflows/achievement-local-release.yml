@@ -17,10 +17,11 @@ jobs:
           for file in sushigacha/achievement-*.js sushigacha/achievements-ui.js sushigacha/site-taskbar.js; do node --check "$file"; done
           node --check shared/sushi-profile.js
       - name: Avatar catalog and shoe regression tests
-        run: node --test tests/avatar-items.test.cjs
+        run: node --test tests/avatar-*.test.cjs
       - name: Achievement wallet and PIN sync regression tests
         run: node --test tests/achievement-*.test.cjs
       - name: Reward RPC checks in disposable Postgres
         run: |
           npm install --prefix "$RUNNER_TEMP/achievement-postgres" --ignore-scripts --no-audit --no-fund @electric-sql/pglite@0.3.14
           PGLITE_MODULE="$RUNNER_TEMP/achievement-postgres/node_modules/@electric-sql/pglite" node tests/achievement-rpc.cjs
+          PGLITE_MODULE="$RUNNER_TEMP/achievement-postgres/node_modules/@electric-sql/pglite" node tests/achievement-login-rpc.cjs
