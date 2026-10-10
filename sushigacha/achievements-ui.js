@@ -68,8 +68,8 @@
     if(!connected){const note=document.createElement('p');note.textContent='報酬を受け取るには「データ同期」でIDとPINを設定してください。';note.style.cssText='font-size:13px;line-height:1.6;color:#645344';box.append(note)}
     for(const a of window.SushiAchievementCatalog.evaluate(achievementMetrics())){
       const item=document.createElement('div');item.style.cssText='border:1px solid #e8e1d5;border-radius:12px;padding:10px;margin:8px 0';
-      const name=a.secret&&!a.reached?'???':a.title;
-      item.textContent=a.secret&&!a.reached?'🔒 ???':(a.reached?'🏅 ':'🔒 ')+name+'  '+a.reached+'/'+a.stageCount+(a.next?'  ('+Math.min(a.value,a.next.threshold)+' / '+a.next.threshold+')':'  COMPLETE');
+      const name=a.secret&&!a.reached?'？？？？':a.title;
+      item.textContent=a.secret&&!a.reached?'🔒 ？？？？':(a.reached?'🏅 ':'🔒 ')+name+'  '+a.reached+'/'+a.stageCount+(a.next?'  ('+Math.min(a.value,a.next.threshold)+' / '+a.next.threshold+')':'  COMPLETE');
       const hidden=a.secret&&!a.reached;
       const definition=window.SushiAchievementCatalog.definitions.find(d=>d.id===a.id);
       const stages=definition?.stages||[{threshold:definition?.threshold||1,gems:definition?.gems||0}];
