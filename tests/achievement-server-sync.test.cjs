@@ -7,6 +7,7 @@ function boot(){
   let handler,row={sushi_id:'testuser',ledger:{gems:100,gemEvents:[]},learning:{events:[]},pin_hash:'testhash',updated_at:'2026-10-09T00:00:00.000Z'},beforeUpdate;
   let updates=0;const loginCalls=[];
   const db={async rpc(name,args){
+    if(name==='sushi_record_usage'){loginCalls.push({name,args:plain(args)});return {data:{ok:true},error:null};}
     if(name==='sushi_record_login_visit'||name==='sushi_claim_login_achievement'){loginCalls.push({name,args:plain(args)});return {data:name==='sushi_record_login_visit'?{ok:true,login:{lastDay:'2026-10-10',streak:7,bestStreak:7,hour03:true}}:{ok:true,claim_id:'achievement:'+args.p_category+':'+args.p_threshold,gems:10},error:null};}
     assert.equal(name,'sushi_save_profile_if_current');updates++;beforeUpdate?.();
     if(args.p_expected_updated_at!==row.updated_at||JSON.stringify(args.p_expected_ledger)!==JSON.stringify(row.ledger)||JSON.stringify(args.p_expected_learning)!==JSON.stringify(row.learning))return {data:false,error:null};
@@ -86,3 +87,5 @@ test('new login actions authenticate PIN and route only fixed server RPC argumen
  const before=s.loginCalls.length;assert.equal((await s.request({action:'login_visit',pin:'0000'})).status,401);assert.equal(s.loginCalls.length,before);
 });
 test('server personality merge retains a newer preference from either device',()=>{const c=boot().context,a={kind:'serious',updatedAt:10},b={kind:'casual',updatedAt:20};assert.deepEqual(plain(c.mergeLedger({avatarPersonality:a},{avatarPersonality:b}).avatarPersonality),b);assert.deepEqual(plain(c.mergeLedger({avatarPersonality:b},{avatarPersonality:a}).avatarPersonality),b);});
+
+test('usage identity is bound to the verified PIN account and cannot be client-selected',async()=>{const s=boot();const usage={session:'11111111-1111-4111-8111-111111111111',visitor:'22222222-2222-4222-8222-222222222222',game:'sushitalk',started:'2026-10-11T00:00:00Z',seconds:60,answers:10,correct:8,p_sushi_id:'otheruser'};assert.equal((await s.request({action:'usage_record',usage})).status,200);assert.equal(s.loginCalls.at(-1).args.p_sushi_id,'testuser');const before=s.loginCalls.length;assert.equal((await s.request({action:'usage_record',usage,pin:'0000'})).status,401);assert.equal(s.loginCalls.length,before)});

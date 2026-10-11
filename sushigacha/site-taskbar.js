@@ -18,6 +18,8 @@
     document.head.appendChild(script);
   }
   loadGemEffects();
+  if(!document.querySelector('script[src*="usage-analytics.js"]')){const usage=document.createElement('script');usage.src='/shared/usage-analytics.js?v=20261011-1';document.head.append(usage)}
+
 
   const KEY='sushitan_login_bonus_v1',ACTIVE_KEY='sushitan_daily_active_v1';
   const QUESTS={sushitan:{label:'すし単',icon:'🍣',goal:30,reward:10,unit:'問',href:'/sushitan.html'},shino:{label:'しの単',icon:'🟣',goal:20,reward:10,unit:'問',href:'/shinotan.html'},antoni:{label:'あんとに単',icon:'🔴',goal:20,reward:10,unit:'問',href:'/antonitan.html'},idiom:{label:'すしイディオム',icon:'🍱',goal:10,reward:10,unit:'問',href:'/sushi_idiom%20(1).html'},quiz:{label:'すしクイズ',icon:'❓',goal:10,reward:10,unit:'問',href:'/sushi_quiz.html'},talk:{label:'すしTalk',icon:'💬',goal:10,reward:10,unit:'問',href:'/sushitalk.html'},world:{label:'す界し',icon:'🌍',goal:5,reward:10,unit:'問',href:'/sukaishi_world_study_v03.html'},run:{label:'すしRUN',icon:'🏃',goal:1500,reward:10,unit:'m',href:'/sushi_run.html'},cross:{label:'すしクロス',icon:'🛣️',goal:20,reward:10,unit:'問',href:'/sushicross.html'},blast:{label:'ブロックブラすし',icon:'🧱',goal:5,reward:10,unit:'LINE',href:'/sushi_blast.html'},toeic:{label:'すしTOEIC',icon:'📘',goal:10,reward:10,unit:'問',href:'/toeic/'}};
