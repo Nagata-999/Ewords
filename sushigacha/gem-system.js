@@ -73,6 +73,8 @@
     document.head.appendChild(script);
   }
   loadGemEffects();
+  if(!document.querySelector('script[src*="usage-analytics.js"]')){const usage=document.createElement('script');usage.src='/shared/usage-analytics.js?v=20261011-1';document.head.append(usage)}
+
 
   function loadOnce(match,src){
     if(document.querySelector(`script[src*="${match}"]`))return;

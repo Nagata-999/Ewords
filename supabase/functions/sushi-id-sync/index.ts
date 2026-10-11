@@ -268,6 +268,12 @@ Deno.serve(async(req)=>{
       await db.from("sushi_id_profiles").update({failed_attempts:failures>=5?0:failures,locked_until:lock}).eq("sushi_id",sushiId);
       return reply({error:lock?"temporarily_locked":"wrong_pin"},lock?429:401);
     }
+    if(action==="usage_record"){
+      const u=obj(body.usage);
+      const {data:usage,error:usageError}=await db.rpc("sushi_record_usage",{p_session:u.session,p_visitor:u.visitor,p_game:u.game,p_started:u.started,p_seconds:u.seconds,p_answers:u.answers,p_correct:u.correct,p_sushi_id:sushiId});
+      if(usageError)return reply({error:"invalid_usage"},400);
+      return reply(usage,usage?.ok?200:usage?.error==="usage_rate_limit"?429:409);
+    }
     if(action==="login_visit"){
       const {data:visit,error:visitError}=await db.rpc("sushi_record_login_visit",{p_sushi_id:sushiId});
       if(visitError)throw visitError;
