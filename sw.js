@@ -1,4 +1,4 @@
-const CACHE_NAME = "sushitan-v21-game-bottom-controls";
+const CACHE_NAME = "sushitan-v22-run-directions";
 const APP_SHELL = [
   "/",
   "/index.html",

@@ -203,6 +203,10 @@ overflow:hidden;
 .screenFlash{animation:screenFlash .22s ease}@keyframes screenFlash{0%{filter:brightness(1)}50%{filter:brightness(1.9)}100%{filter:brightness(1)}}
 .shake{animation:shake .18s ease}@keyframes shake{0%{transform:translateX(-50%) scale(1)}25%{transform:translateX(calc(-50% - 10px)) scale(1.02)}50%{transform:translateX(calc(-50% + 10px)) scale(1.02)}100%{transform:translateX(-50%) scale(1)}}
 @media(max-width:700px){#hud{width:min(94vw,420px)}.box{padding:7px}.value{font-size:19px}.choice{font-size:clamp(13px,3.6vw,21px);min-height:76px;padding:5px}.choice.long{font-size:clamp(10px,2.6vw,15px)}#player{height:72px;bottom:76px}#trail{bottom:84px;height:54px}#questionBox{position:absolute;top:58px;left:50%;transform:translateX(-50%);width:min(92vw,620px);z-index:55;text-align:center;pointer-events:none}.modeBtn{font-size:11px;padding:8px 2px}}
+html.sushi-run-playing{--sushi-taskbar-space:0px!important}
+body.sushi-run-playing{padding-bottom:0!important}
+body.sushi-run-playing #sushiTaskbar,body.sushi-run-playing #sushiUtilityDock,body.sushi-run-playing #sushiSyncButton,body.sushi-run-playing #sushiAvatarWidget{display:none!important}
+#pauseRun{position:absolute;right:8px;bottom:100px;z-index:60;font-size:13px;padding:8px;border-radius:10px}
 </style>
 <script src="shared/word-registry.js"></script>
 <script src="shared/learning.js"></script>
@@ -213,7 +217,7 @@ overflow:hidden;
 <meta name="description" content="表示された日本語に合う英単語のレーンを、3つの候補から選んで進みます。左右のキーや画面の移動ボタンでレーンを変えます。走行中はライフやコンボを確認しながら解答します。">
 <script defer src="/sushigacha/site-taskbar.js?v=20261010-personality1"></script></head>
 <body>
-<div id="game">
+<div id="game"><button id="pauseRun" onclick="pauseRun()" hidden>一時停止</button>
   <div id="road"><div class="lane"></div><div class="lane"></div><div class="lane"></div><div class="lane"></div><div id="trail"></div><div id="player"></div></div>
   <div id="hud"><div class="box"><div class="label">DISTANCE</div><div class="value" id="distance">0m</div></div><div class="box"><div class="label">LIFE</div><div class="value" id="life">❤❤❤</div></div><div class="box"><div class="label">COMBO</div><div class="value" id="combo">0</div></div></div>
   <div id="questionBox"><div class="nowLabel">NOW</div><div id="question"></div><div id="nextBox">NEXT: <span id="nextQuestion"></span></div></div>
@@ -263,7 +267,11 @@ function setPlayerMiss(){playerState='miss';setPlayerBg('assets/player_miss.png'
 let learningQuestion=null;
 function pool(){return window.SushiReview?.active ? SushiReview.words() : WORDS}
 function updateHUD(){document.getElementById('distance').textContent=Math.floor(distance)+'m';document.getElementById('combo').textContent=combo;document.getElementById('life').textContent='❤'.repeat(Math.max(0,life));boostFill.style.width=Math.max(0,Math.min(100,boostCharge))+'%';boostBtn.classList.toggle('ready',boostCharge>=100)}
-function startGame(){if(window.SushiReview?.begin()===false)return;initAudio();startBgm();if(animationFrame)cancelAnimationFrame(animationFrame);document.getElementById('overlay').style.display='none';distance=0;combo=0;speed=1;life=3;lane=1;lineOffset=0;hitLocked=false;currentWord=null;nextWord=null;gameRunning=true;fever=0;boostHeld=false;boostCharge=0;superReady=false;lastSaved=false;game.className='';road.className='';player.style.left=lanePositions[lane]+'%';trail.style.left=lanePositions[lane]+'%';playerState='walk';clearChoices();updateHUD();spawnQuestion();animate()}
+let pendingRunQuestion=false;
+function setRunPlaying(active){document.documentElement.classList.toggle('sushi-run-playing',active);document.body.classList.toggle('sushi-run-playing',active);document.getElementById('pauseRun').hidden=!active;window.dispatchEvent(new CustomEvent('sushi-run-state',{detail:{active}}));}
+function pauseRun(){if(!gameRunning)return;gameRunning=false;boostHeld=false;cancelAnimationFrame(animationFrame);bgm.pause();setRunPlaying(false);document.getElementById('overlay').style.display='flex';document.getElementById('menu').innerHTML='<div id=title>一時停止</div><button onclick=resumeRun()>続ける</button><button onclick=showTopMenu()>トップへ戻る</button>';}
+function resumeRun(){setRunPlaying(true);gameRunning=true;document.getElementById('overlay').style.display='none';bgm.play().catch(()=>{});if(pendingRunQuestion){pendingRunQuestion=false;spawnQuestion();}animate();}
+function startGame(){if(window.SushiReview?.begin()===false)return;initAudio();startBgm();if(animationFrame)cancelAnimationFrame(animationFrame);document.getElementById('overlay').style.display='none';distance=0;combo=0;speed=1;life=3;lane=1;lineOffset=0;hitLocked=false;currentWord=null;nextWord=null;gameRunning=true;fever=0;boostHeld=false;boostCharge=0;superReady=false;lastSaved=false;setRunPlaying(true);game.classList.remove('fever','superboost');road.className='';window.dispatchEvent(new CustomEvent('sushi-run-direction',{detail:{direction:'back'}}));player.style.left=lanePositions[lane]+'%';trail.style.left=lanePositions[lane]+'%';playerState='walk';clearChoices();updateHUD();spawnQuestion();animate()}
 function clearChoices(){activeChoices.forEach(o=>o.el.remove());activeChoices=[];hitLocked=false}
 function pickWord(){
   const p=pool();
@@ -277,7 +285,8 @@ function setQuestionText(){
   questionEl.classList.add('questionSwap');
 }
 function spawnQuestion(){
-  if(!gameRunning)return;
+  if(!gameRunning){pendingRunQuestion=true;return;}
+  pendingRunQuestion=false;
   if(window.SushiReview?.active && !SushiReview.words().length){gameOver();return;}
   clearChoices();
   if(!currentWord) currentWord=pickWord();
@@ -391,7 +400,7 @@ async function showTopRanking(){
   await loadRanking();
 }
 
-function showTopMenu(){
+function showTopMenu(){setRunPlaying(false);
   stopBgm();
   gameRunning=false;
   if(animationFrame)cancelAnimationFrame(animationFrame);
@@ -405,7 +414,7 @@ function showTopMenu(){
   `;
 }
 
-function gameOver(){
+function gameOver(){setRunPlaying(false);
   stopBgm();gameRunning=false;
   if(animationFrame)cancelAnimationFrame(animationFrame);
   clearChoices();
@@ -427,7 +436,7 @@ function gameOver(){
   loadRanking();
 }
 function shuffle(arr){return[...arr].sort(()=>Math.random()-.5)}
-function move(dir){if(!gameRunning)return;const before=lane;lane=Math.max(0,Math.min(2,lane+dir));if(lane!==before)playMoveSound();player.style.left=lanePositions[lane]+'%';trail.style.left=lanePositions[lane]+'%'}
+function move(dir){if(!gameRunning)return;const before=lane;lane=Math.max(0,Math.min(2,lane+dir));if(lane!==before){playMoveSound();window.dispatchEvent(new CustomEvent('sushi-run-direction',{detail:{direction:dir<0?'left':'right'}}));}player.style.left=lanePositions[lane]+'%';trail.style.left=lanePositions[lane]+'%'}
 window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft'||e.key==='a')move(-1);if(e.key==='ArrowRight'||e.key==='d')move(1);if(e.key==='ArrowUp'||e.key==='w'){if(boostCharge>=100){activateSuperBoost();boostHeld=false}else boostHeld=true}});
 window.addEventListener('keyup',e=>{if(e.key==='ArrowUp'||e.key==='w')boostHeld=false});
 boostBtn.addEventListener('pointerdown',e=>{e.stopPropagation();if(boostCharge>=100){activateSuperBoost();boostHeld=false}else{boostHeld=true}});
@@ -444,7 +453,7 @@ rightBtn2.addEventListener('pointerdown',e=>{e.stopPropagation();move(1)});
 </script>
 <script src="sushigacha/gem-system.js?v=20260922-2"></script>
 <script src="sushigacha/game-gem-bridge.js?v=20260913-2"></script>
-<script src="sushigacha/run-avatar.js?v=20261010-avatars1"></script>
+<script src="sushigacha/run-avatar.js?v=20261011-directions1"></script>
 <script src="sushigacha/run-gem-pickups.js?v=20260913-2"></script>
 
 
