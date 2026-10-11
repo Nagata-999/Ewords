@@ -4,7 +4,7 @@
   window.__sushiSiteLayoutLoaded=true;
   const css=document.createElement('style');
   css.textContent=`
-    :root{--sushi-taskbar-space:calc(76px + max(8px,env(safe-area-inset-bottom)));--sushi-page-height:calc(100dvh - var(--sushi-taskbar-space))}
+    :root{--sushi-navigation-space:calc(76px + max(8px,env(safe-area-inset-bottom)));--sushi-taskbar-space:var(--sushi-navigation-space);--sushi-page-height:calc(100dvh - var(--sushi-taskbar-space))}
     html{scroll-padding-bottom:calc(var(--sushi-taskbar-space) + 16px)}
     body.sushi-taskbar-on{padding-bottom:var(--sushi-taskbar-space)}
     .sushi-viewport-root{height:var(--sushi-page-height)!important;min-height:0!important;box-sizing:border-box}
@@ -18,15 +18,27 @@
     #sushiDailySheet .sdq-card{max-height:100%;box-sizing:border-box}
     #sushiTaskbar a:focus-visible,#sushiTaskbar button:focus-visible{outline:3px solid #ea580c;outline-offset:-4px;border-radius:12px}
     body.sushi-taskbar-on .side-menu{height:var(--sushi-page-height)!important;max-height:var(--sushi-page-height);overflow-y:auto;box-sizing:border-box}
-    @media(max-width:600px){:root{--sushi-taskbar-space:calc(60px + env(safe-area-inset-bottom))}}
+    :root.sushi-utility-dock{--sushi-taskbar-space:calc(var(--sushi-navigation-space) + 52px)}
+    #sushiUtilityDock{position:fixed;left:50%;transform:translateX(-50%);bottom:var(--sushi-navigation-space);width:min(620px,calc(100% - 20px));height:48px;z-index:8999;border-radius:14px;background:rgba(255,253,248,.96);border:1px solid #eadfce;box-sizing:border-box;pointer-events:none}
+    body.sushi-utility-dock #sushiSyncButton{left:max(14px,calc((100vw - 620px)/2 + 10px));right:auto;bottom:calc(var(--sushi-navigation-space) + 2px)!important;height:44px;width:auto;margin:0;box-sizing:border-box;padding:6px 12px;box-shadow:none;font-size:11px}
+    body.sushi-utility-dock #sushiAvatarWidget{right:max(14px,calc((100vw - 620px)/2 + 10px));bottom:calc(var(--sushi-navigation-space) + 2px)!important;width:44px;height:44px;filter:none;transform:none}
+    body.sushi-utility-dock #sushiAvatarWidget svg{width:45px;left:0;bottom:-4px}
+    body.sushi-utility-dock #sushiAvatarWidget .saw-stage{border-radius:10px;animation:none}
+    body.sushi-utility-dock #sushiAvatarWidget .saw-badge{width:17px;height:17px;font-size:9px;right:0;bottom:0}
+    body.sushi-utility-dock #sushiAvatarWidget .saw-bubble{right:50px;bottom:1px;max-width:min(300px,calc(100vw - 206px));max-height:42px;box-sizing:border-box;overflow:hidden;font-size:10px;padding:3px 5px;box-shadow:none;border-radius:8px}
+    @media(max-width:600px){:root{--sushi-navigation-space:calc(60px + env(safe-area-inset-bottom))}#sushiUtilityDock{width:calc(100% - 12px)}}
     @media print{#sushiTaskbar,#sushiDailySheet,#sushiTaskToast{display:none!important}:root{--sushi-taskbar-space:0px}body.sushi-taskbar-on{padding-bottom:0!important}}
   `;
   document.head.append(css);
   const route=decodeURIComponent(location.pathname).replace(/\.html$/,'').toLowerCase();
   const roots={sushitan:'.app',shinotan:'.app',antonitan:'.app',sharitan:'.app',sushi_blast:'.app',sushigiri:'#game',sushi_run:'#game',sushi_survivor:'#app',sushicross:'#game, #hud','sushi-run3d':'#world'};
   const name=route.split('/').filter(Boolean).pop()||'index';
+  if(route!=='/index'&&route!=='/'&&!route.startsWith('/admin')){
+    document.body.classList.add('sushi-utility-dock');document.documentElement.classList.add('sushi-utility-dock');
+    const dock=document.createElement('div');dock.id='sushiUtilityDock';dock.setAttribute('aria-hidden','true');document.body.append(dock);
+  }
   for(const el of document.querySelectorAll(roots[name]||':not(*)'))el.classList.add('sushi-viewport-root');
-  if(name==='sushi_blast')document.querySelector('.app')?.classList.add('sushi-scroll-game');
+  if(['sushitan','shinotan','antonitan','sharitan','sushi_blast'].includes(name))document.querySelector('.app')?.classList.add('sushi-scroll-game');
   if(/^\/sushiquest(?:\/|$)/.test(route))document.querySelector('.game')?.classList.add('sushi-viewport-root');
   // Only fixed viewport overlays are moved. Absolute overlays already follow their game root.
   const overlaySelector='.overlay,#overlay,.modal,.startOverlay,.screen,.titleScreen,.student-board,.display,.side-menu,.install-modal,.chest-modal,.weak-review-modal,.result-overlay,.review-overlay,.countdown-overlay,.shuffle-overlay,.discovery';

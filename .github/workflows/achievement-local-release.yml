@@ -18,6 +18,7 @@ jobs:
           node --check admin/admin.js
           node --check admin/test-lab-frame.js
           node --check shared/usage-analytics.js
+          node --check sushigacha/site-layout.js
           node --check shared/sushi-profile.js
           node --check sushigacha/login-bonus-model.js
           node --check sushigacha/site-taskbar-login-modal.js
