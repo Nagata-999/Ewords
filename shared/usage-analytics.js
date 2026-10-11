@@ -22,6 +22,6 @@
  root.addEventListener('sushi-achievement-answer',e=>{tick();const a=e.detail;if(!a?.id||seen.has(a.id))return;seen.add(a.id);session.answers=Math.min(50000,session.answers+1);if(a.correct)session.correct=Math.min(session.answers,session.correct+1);lastAction=performance.now();persist()});
  ['pointerdown','keydown'].forEach(name=>root.addEventListener(name,()=>lastAction=performance.now(),{passive:true}));
  document.addEventListener('visibilitychange',()=>{tick();lastTick=performance.now();if(document.hidden)flush();else lastAction=lastTick});
- root.addEventListener('pagehide',flush);setInterval(()=>{tick();if(performance.now()-lastSend>=120000)flush()},10000);flush();
+ root.addEventListener('pagehide',flush);setInterval(()=>{tick();if(performance.now()-lastSend>=300000)flush()},10000);flush();
  }catch{}
 })(typeof window!=='undefined'?window:globalThis);

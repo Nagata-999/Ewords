@@ -1,4 +1,4 @@
-const CACHE_NAME = "sushitan-v20-admin-usage";
+const CACHE_NAME = "sushitan-v21-game-bottom-controls";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -40,7 +40,7 @@ self.addEventListener("fetch", event => {
   // Keep dictionary 404 responses intact and avoid caching thousands of word pages.
   if (new URL(event.request.url).pathname.startsWith('/dictionary/')) return;
   const criticalSyncAsset = requestUrl.origin === self.location.origin &&
-    /\/(?:shared\/sushi-profile|sushigacha\/(?:avatar|avatar-engine|avatar-personality|avatar-state|avatar-studio|avatar-widget|home-avatar-walker|site-taskbar|site-taskbar-login-modal|login-bonus-model|achievement-[a-z-]+|achievements-ui))\.js$/.test(requestUrl.pathname);
+    /\/(?:shared\/(?:sushi-profile|usage-analytics)|sushigacha\/(?:avatar|avatar-engine|avatar-personality|avatar-state|avatar-studio|avatar-widget|home-avatar-walker|site-layout|site-taskbar|site-taskbar-login-modal|login-bonus-model|achievement-[a-z-]+|achievements-ui))\.js$/.test(requestUrl.pathname);
   event.respondWith(
     fetch(event.request, criticalSyncAsset ? {cache:'no-cache'} : {})
       .then(response => {
