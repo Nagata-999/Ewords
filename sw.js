@@ -1,4 +1,4 @@
-const CACHE_NAME = "sushitan-v22-run-directions";
+const CACHE_NAME = "sushitan-v23-run-pause";
 const APP_SHELL = [
   "/",
   "/index.html",
