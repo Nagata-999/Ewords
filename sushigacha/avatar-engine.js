@@ -29,10 +29,37 @@
     for(const [k,n] of Object.entries({hair:8,eyes:7,mouth:3,skin:3,hairColor:3,faceShape:4,expression:6,pet:5,aura:5}))a[k]=int(a[k],n);
     a.gender=a.gender==='female'?'female':'male';return a;
   }
-  const path=(d,fill,extra='')=>`<path d="${d}" fill="${fill}" ${extra}/>`;
+  // Keep the original silhouettes and item IDs; illustration is a material layer.
+  // This context exists only during the synchronous render, never in saved avatars.
+  let paint=null;
+  const fingerprint=text=>{let h=2166136261;for(const ch of text)h=Math.imul(h^ch.charCodeAt(0),16777619);return (h>>>0).toString(36);};
+  const tint=(hex,target,amount)=>'#'+[0,2,4].map(i=>Math.round(parseInt(hex.slice(i+1,i+3),16)*(1-amount)+target*amount).toString(16).padStart(2,'0')).join('');
+  function material(fill){
+    if(!paint||!/^#[\da-f]{6}$/i.test(fill)||['#3e332e','#fffdf5','#ffffff'].includes(fill.toLowerCase()))return null;
+    const type=SKINS.includes(fill)?'skin':HAIRS.includes(fill)?'hair':/^#(e8b557|f[ef][dbe][\da-f]{3}|[bcd][\da-f][bcd][\da-f][bcd][\da-f])$/i.test(fill)?'metal':/^#(735|8[\da-f]|9[\da-f]|a[\da-f]|b47)/i.test(fill)?'leather':'cloth';
+    const key=type+fill,existing=paint.materials.get(key);if(existing)return existing;
+    const id=paint.prefix+type+fill.slice(1);
+    const hi=tint(fill,255,type==='metal'?.62:type==='skin'?.23:.34),shade=tint(fill,0,type==='hair'?.42:type==='skin'?.19:.32);
+    paint.defs.push(type==='skin'?`<radialGradient id="${id}" cx=".32" cy=".3" r=".85"><stop stop-color="${hi}"/><stop offset=".58" stop-color="${fill}"/><stop offset="1" stop-color="${shade}"/></radialGradient>`:`<linearGradient id="${id}" x1="0" y1="0" x2=".85" y2="1"><stop stop-color="${hi}"/><stop offset=".38" stop-color="${fill}"/><stop offset=".8" stop-color="${shade}"/><stop offset="1" stop-color="${tint(fill,0,.4)}"/></linearGradient>`);
+    const m={id,type};paint.materials.set(key,m);return m;
+  }
+  const path=(d,fill,extra='')=>{
+    const m=material(fill),base=`<path d="${d}" fill="${m?`url(#${m.id})`:fill}" ${m?`data-avatar-base="true" data-material="${m.type}"`:''} ${extra}/>`;
+    if(!m||m.type==='skin'||extra.includes('stroke="none"'))return base;
+    let clip=paint.clips.get(d);if(!clip){clip=paint.prefix+'c'+fingerprint(d);paint.clips.set(d,clip);paint.defs.push(`<clipPath id="${clip}"><path d="${d}"/></clipPath>`);}
+    let detail='';
+    if(m.type==='hair'){
+      for(let x=38;x<130;x+=19)detail+=`<path d="M${x} 25Q${x-18} 48 ${x-8} 76Q${x-8} 49 ${x+9} 36Z" fill="#e6ad72" fill-opacity=".19"/><path d="M${x} 31Q${x-10} 59 ${x+1} 99T${x+5} 147" fill="none" stroke="#fff4d7" stroke-opacity=".12" stroke-width=".8"/><path d="M${x+5} 39Q${x-2} 79 ${x+8} 137" fill="none" stroke="#251a1c" stroke-opacity=".16" stroke-width="1"/>`;
+      detail+=`<path d="M38 42Q67 18 108 35" fill="none" stroke="#f2c493" stroke-opacity=".2" stroke-width="4"/>`;
+    }
+    else if(m.type==='cloth')detail=`<path d="M52 105Q57 119 51 133L60 122Z M102 111L107 146L101 156L99 134Z M60 150Q81 157 103 150L98 154Q79 159 58 154Z" fill="#fff9e9" fill-opacity=".22"/><path d="M35 113Q80 103 125 113M39 137Q80 145 124 137M44 161Q80 169 119 161" fill="none" stroke="#fff9e9" stroke-width="1.1" stroke-opacity=".32"/><path d="M35 116Q80 106 125 116M44 165Q80 171 119 165" fill="none" stroke="#342c35" stroke-width=".65" stroke-opacity=".18" stroke-dasharray="1 2"/>`;
+    else if(m.type==='leather')detail=`<path d="M-20 7Q0 3 24 7M-15 15Q0 12 24 15M35 115Q80 104 125 115" fill="none" stroke="#fff1c8" stroke-width=".9" stroke-opacity=".38" stroke-dasharray="1 2"/>`;
+    else detail=`<path d="M-20 3L30 16M25 75L130 145M37 77L139 143" fill="none" stroke="#fffdf2" stroke-width="2" stroke-opacity=".28"/>`;
+    return base+`<g clip-path="url(#${clip})" stroke="none" pointer-events="none" data-material-detail="${m.type}">${detail}</g>`;
+  };
   const group=(s,t='',attr='')=>`<g${t?` transform="${t}"`:''} ${attr}>${s}</g>`;
   const star=(x,y,r=8,fill='#e8b557')=>{let d='';for(let i=0;i<10;i++){let t=(i*36-90)*Math.PI/180,rr=i%2?r*.46:r;d+=(i?'L':'M')+(x+Math.cos(t)*rr).toFixed(2)+' '+(y+Math.sin(t)*rr).toFixed(2);}return path(d+'Z',fill);};
-  const circle=(x,y,r,fill,extra='')=>`<circle cx="${x}" cy="${y}" r="${r}" fill="${fill}" ${extra}/>`;
+  const circle=(x,y,r,fill,extra='')=>{const m=material(fill);return `<circle cx="${x}" cy="${y}" r="${r}" fill="${m?`url(#${m.id})`:fill}" ${extra}/>`;};
   function collectibleEye(a,x,sign,side,blink,happy){
     const kind=item(a.eyeStyle)?.kind;
     let art='';
@@ -237,6 +264,7 @@
 
   function render(value={},options={}){
     const a=normalize(value), direction=['front','back','left','right'].includes(options.direction)?options.direction:'front';
+    paint=options.style==='classic'?null:{prefix:'avb'+fingerprint(JSON.stringify(a)+direction)+'-',defs:[],materials:new Map(),clips:new Map()};
     const action=['walk','idle','wave','sit','celebrate'].includes(options.action)?options.action:'idle';
     const time=Number.isFinite(options.time)?options.time:0, reduced=!!options.reduced;
     const phase=reduced?0:time*7.8, motionWave=Math.sin(phase), side=direction==='left'||direction==='right', back=direction==='back';
@@ -361,7 +389,8 @@
     if(a.pet){const pet=['','ねこ','すし','スライム','恐竜'][a.pet];extras=`<g aria-label="${pet}" transform="translate(123 157)">`+path('M0 14Q-2 1 10 1Q23 1 23 14V24H0Z',a.pet===2?'#fff9ec':a.pet===3?'#87ae91':a.pet===4?'#61917d':'#c19470')+(a.pet===1?path('M0 7L1 -3L9 2M14 2L23 -3L23 8','#c19470'):a.pet===2?path('M0 9Q-1 -3 12 0Q23 -3 24 9Z','#ed955e'):'')+circle(6,12,1.3,INK)+circle(17,12,1.3,INK)+'</g>';}
     if(a.aura&&!a.auraEffect)extras+=group(star(26,106,4,['','#e8b557','#e28a56','#e8b557','#d9a3ac'][a.aura])+star(132,115,4,['','#e8b557','#e28a56','#e8b557','#d9a3ac'][a.aura]),'','opacity=".75"');
     const aura=item(a.auraEffect)?.kind==='blazing'?blazingAura(time,reduced):'';
-    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 204" role="img" aria-label="すし単アバター" data-action="${action}" data-direction="${direction}">${aura}<ellipse cx="80" cy="190" rx="33" ry="5" fill="#ded8c9"/><g stroke="${INK}" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round">${character}${extras}</g></svg>`;
+    const painted=paint,defs=painted?`<defs>${painted.defs.join('')}</defs>`:'';paint=null;
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 204" role="img" aria-label="すし単アバター" data-art-style="${painted?'painted-b':'classic'}" data-action="${action}" data-direction="${direction}">${defs}${aura}<ellipse cx="80" cy="190" rx="33" ry="5" fill="#ded8c9"/><g stroke="${INK}" stroke-width="${painted?'1.65':'2.7'}" stroke-linecap="round" stroke-linejoin="round">${character}${extras}</g></svg>`;
   }
   // Incremental DOM updates retain the SVG tree and avoid replacing it every frame.
   function patchNode(target,source){
