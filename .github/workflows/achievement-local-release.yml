@@ -19,6 +19,7 @@ jobs:
           node --check admin/rpg-lab.js
           node --check idle-rpg/model.js
           node --check idle-rpg/game.js
+          node --check idle-rpg/art.js
           node --check admin/test-lab-frame.js
           node --check shared/usage-analytics.js
           node --check sushigacha/site-layout.js
