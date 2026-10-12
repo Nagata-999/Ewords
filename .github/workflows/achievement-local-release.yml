@@ -17,6 +17,9 @@ jobs:
           for file in sushigacha/achievement-*.js sushigacha/achievements-ui.js sushigacha/site-taskbar.js; do node --check "$file"; done
           node --check admin/admin.js
           node --check admin/rpg-lab.js
+          node --check admin/avatar-lab.js
+          node --check admin/avatar-preview.js
+          node --check sushigacha/avatar-engine.js
           node --check idle-rpg/model.js
           node --check idle-rpg/game.js
           node --check idle-rpg/art.js
