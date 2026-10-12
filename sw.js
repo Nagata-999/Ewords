@@ -1,4 +1,4 @@
-const CACHE_NAME = "sushitan-v27-avatar-painted";
+const CACHE_NAME = "sushitan-v28-rpg-compact";
 const APP_SHELL = [
   "/",
   "/index.html",
