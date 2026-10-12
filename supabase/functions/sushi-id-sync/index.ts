@@ -270,7 +270,7 @@ Deno.serve(async(req)=>{
     }
     if(action==="usage_record"){
       const u=obj(body.usage);
-      const {data:usage,error:usageError}=await db.rpc("sushi_record_usage",{p_session:u.session,p_visitor:u.visitor,p_game:u.game,p_started:u.started,p_seconds:u.seconds,p_answers:u.answers,p_correct:u.correct,p_sushi_id:sushiId});
+      const {data:usage,error:usageError}=await db.rpc("sushi_record_usage",{p_session:u.session,p_visitor:u.visitor,p_game:u.game,p_started:u.started,p_seconds:u.seconds,p_answers:u.answers,p_correct:u.correct,p_sushi_id:sushiId,p_player_name:typeof u.player_name==='string'?u.player_name.replace(/[\x00-\x1f\x7f]/g,'').trim().slice(0,20):''});
       if(usageError)return reply({error:"invalid_usage"},400);
       return reply(usage,usage?.ok?200:usage?.error==="usage_rate_limit"?429:409);
     }

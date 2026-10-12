@@ -7,12 +7,13 @@
  const base='https://rxyoyveykxdfrpomkltl.supabase.co/functions/v1/',apikey='sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7',key='sushitan_usage_queue_v1',visitorKey='sushitan_usage_visitor_v1';
  try{
  let visitor=localStorage.getItem(visitorKey);if(!/^[0-9a-f-]{36}$/.test(visitor||'')){visitor=crypto.randomUUID();localStorage.setItem(visitorKey,visitor)}
+ const playerName=()=>String(localStorage.getItem('sushitan_shared_player_name_v1')||'').replace(/[\x00-\x1f\x7f]/g,'').trim().slice(0,20);
  const account=()=>localStorage.getItem('sushitan_sync_id_v1')||'';
  const read=()=>{try{const records=JSON.parse(localStorage.getItem(key)||'[]');return Array.isArray(records)?records.filter(r=>r?.session&&Date.parse(r.started)>Date.now()-7*86400000).slice(-20):[]}catch{return []}};
- let identity=account(),session={session:crypto.randomUUID(),visitor,game,started:new Date().toISOString(),seconds:0,answers:0,correct:0,account:identity},elapsed=0,lastTick=performance.now(),lastAction=lastTick,lastSend=0,sending=false;
+ let identity=account(),session={session:crypto.randomUUID(),visitor,game,started:new Date().toISOString(),seconds:0,answers:0,correct:0,account:identity,player_name:playerName()},elapsed=0,lastTick=performance.now(),lastAction=lastTick,lastSend=0,sending=false;
  const seen=new Set(),acknowledged=new Map(),signature=r=>[r.seconds,r.answers,r.correct].join(':');
  function persist(){try{if(acknowledged.get(session.session)===signature(session))return;const q=read().filter(r=>r.session!==session.session);q.push({...session});localStorage.setItem(key,JSON.stringify(q.slice(-20)))}catch{}}
- function tick(){const now=performance.now();if(!document.hidden&&now-lastAction<60000)elapsed+=Math.max(0,Math.min(10000,now-lastTick));lastTick=now;session.seconds=Math.min(14400,Math.floor(elapsed/1000));if(account()!==identity){persist();identity=account();session={session:crypto.randomUUID(),visitor,game,started:new Date().toISOString(),seconds:0,answers:0,correct:0,account:identity};elapsed=0;lastAction=now;seen.clear()}}
+ function tick(){session.player_name=playerName();const now=performance.now();if(!document.hidden&&now-lastAction<60000)elapsed+=Math.max(0,Math.min(10000,now-lastTick));lastTick=now;session.seconds=Math.min(14400,Math.floor(elapsed/1000));if(account()!==identity){persist();identity=account();session={session:crypto.randomUUID(),visitor,game,started:new Date().toISOString(),seconds:0,answers:0,correct:0,account:identity,player_name:playerName()};elapsed=0;lastAction=now;seen.clear()}}
  async function flush(){if(sending)return;sending=true;try{tick();persist();for(const record of read()){
  const id=account(),pin=localStorage.getItem('sushitan_sync_pin_v1');if(record.account&&(record.account!==id||!/^\d{4}$/.test(pin||'')))continue;
  const {account:_account,...usage}=record;const endpoint=record.account?'sushi-id-sync':'usage-record',body=record.account?{action:'usage_record',sushi_id:id,pin,usage}:usage;
