@@ -16,6 +16,9 @@ jobs:
         run: |
           for file in sushigacha/achievement-*.js sushigacha/achievements-ui.js sushigacha/site-taskbar.js; do node --check "$file"; done
           node --check admin/admin.js
+          node --check admin/rpg-lab.js
+          node --check idle-rpg/model.js
+          node --check idle-rpg/game.js
           node --check admin/test-lab-frame.js
           node --check shared/usage-analytics.js
           node --check sushigacha/site-layout.js
@@ -30,6 +33,8 @@ jobs:
         run: node --test tests/sushitalk-*.test.cjs
       - name: Admin authorization and telemetry regression tests
         run: node --test tests/admin-usage.test.cjs
+      - name: Idle RPG progression and loot regression tests
+        run: node --test tests/idle-rpg.test.cjs
       - name: Reward RPC checks in disposable Postgres
         run: |
           npm install --prefix "$RUNNER_TEMP/achievement-postgres" --ignore-scripts --no-audit --no-fund @electric-sql/pglite@0.3.14
