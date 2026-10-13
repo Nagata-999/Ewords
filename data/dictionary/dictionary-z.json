@@ -398,25 +398,42 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "的を絞る；照準を合わせる",
-            "definition": "",
-            "examples": []
+            "ja": "（問題・対象に）狙いを定める；焦点を絞る",
+            "definition": "to direct attention or effort toward one particular target or issue",
+            "examples": [
+              {
+                "en": "The investigators zeroed in on a flaw in the payment system.",
+                "ja": "調査担当者たちは決済システムの欠陥に焦点を絞った。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "zero in on a problem",
+        "en": "zero in on a problem",
+        "ja": "問題に焦点を絞る"
+      },
+      {
+        "text": "zero in on the cause",
+        "en": "zero in on the cause",
+        "ja": "原因を突き止めることに集中する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "zero in on + 名詞。句動詞。過去形は zeroed in on。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.90"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-05296",
@@ -1028,11 +1045,15 @@
         "meanings": [
           {
             "ja": "区域；地帯",
-            "definition": "an area with a particular purpose or feature",
+            "definition": "an area marked or recognized for a particular use, condition, or feature",
             "examples": [
               {
-                "en": "The word 'zone' is useful in this context.",
-                "ja": "この文脈では「区域」という意味で使われる。"
+                "en": "Parking is prohibited in the loading zone.",
+                "ja": "荷物の積み下ろし区域では駐車が禁止されている。"
+              },
+              {
+                "en": "The city designated the riverbank as a flood-risk zone.",
+                "ja": "市は川岸を洪水危険区域に指定した。"
               }
             ]
           }
@@ -1045,10 +1066,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Useful in formal, academic, news, or professional English; check the surrounding noun or verb for the intended sense.",
+    "usage_note": "zone は可算名詞。time zone は「時間帯」、danger zone は「危険区域」。",
     "tags": [
       "frequency-gap",
-      "curated-v3.05"
+      "curated-v3.05",
+      "curated-v3.108"
     ],
     "status": "enriched",
     "search_terms": [
@@ -1059,8 +1081,21 @@
       "ipa_uk": null
     },
     "collocations": [
-      "zone policy",
-      "zone issue"
+      {
+        "en": "time zone",
+        "text": "time zone",
+        "ja": "時間帯；タイムゾーン"
+      },
+      {
+        "en": "flood-risk zone",
+        "text": "flood-risk zone",
+        "ja": "洪水危険区域"
+      },
+      {
+        "en": "pedestrian zone",
+        "text": "pedestrian zone",
+        "ja": "歩行者専用区域"
+      }
     ]
   },
   {

@@ -473,25 +473,42 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "名札板；表札",
-            "definition": "",
-            "examples": []
+            "ja": "名札板；表札；機器の銘板",
+            "definition": "a small plate displaying a person’s name or information identifying an object",
+            "examples": [
+              {
+                "en": "The new researcher placed a nameplate on her office door.",
+                "ja": "新任の研究員は研究室のドアに名前入りのプレートを取り付けた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a desk nameplate",
+        "en": "a desk nameplate",
+        "ja": "机上のネームプレート"
+      },
+      {
+        "text": "manufacturer’s nameplate",
+        "en": "manufacturer’s nameplate",
+        "ja": "製造者名が記された銘板"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "人名表示だけでなく、機器の型番や製造者を示す金属板にも用いる。",
     "tags": [
-      "office-business"
+      "office-business",
+      "curated-v3.118"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08909",
@@ -733,25 +750,42 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "自己愛の強い；自己陶酔的な",
-            "definition": "",
-            "examples": []
+            "ja": "自己愛が強い；自分に過度に関心を向ける",
+            "definition": "showing excessive interest in or admiration for oneself",
+            "examples": [
+              {
+                "en": "His narcissistic behavior made it difficult for him to accept criticism.",
+                "ja": "彼は自己愛の強い振る舞いのため、批判を受け入れるのが難しかった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "narcissistic behavior",
+        "en": "narcissistic behavior",
+        "ja": "自己愛的な振る舞い"
+      },
+      {
+        "text": "narcissistic tendencies",
+        "en": "narcissistic tendencies",
+        "ja": "自己愛的な傾向"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "人の性格や行動を批判的に表す形容詞。日常語としての使用と医学的診断は区別する。",
     "tags": [
-      "personality-manner"
+      "personality-manner",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07660",
@@ -1037,15 +1071,18 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "候補などを絞る",
-            "definition": "",
+            "ja": "（候補・範囲などを）絞り込む",
+            "definition": "to reduce a list or range of possibilities to a smaller number",
             "examples": [
+              {
+                "en": "After reviewing the evidence, the researchers narrowed down the possible explanations to two.",
+                "ja": "証拠を検討した後、研究者たちは考えられる説明を二つに絞った。"
+              },
               {
                 "en": "Researchers narrowed down the possible causes to three factors.",
                 "ja": "研究者たちは考えられる原因を三つの要因に絞り込んだ。"
               }
-            ],
-            "definition_en": "to reduce the number of possibilities or choices"
+            ]
           }
         ]
       }
@@ -1053,17 +1090,26 @@
     "forms": {},
     "phrases": [],
     "collocations": [
-      "narrow down the options",
-      "narrow something down to"
+      {
+        "text": "narrow down the options",
+        "en": "narrow down the options",
+        "ja": "選択肢を絞る"
+      },
+      {
+        "text": "narrow something down to three",
+        "en": "narrow something down to three",
+        "ja": "何かを三つに絞る"
+      }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Learn this expression as a unit. Note its typical grammatical pattern and register.",
+    "usage_note": "narrow A down to B「AをBに絞る」。",
     "tags": [
       "phrasal-verbs",
-      "curated-v3.22"
+      "curated-v3.22",
+      "curated-v3.91"
     ],
     "status": "enriched"
   },
@@ -1135,25 +1181,57 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "かろうじて；狭く",
-            "definition": "",
-            "examples": []
+            "ja": "かろうじて；危うく",
+            "definition": "by only a small margin, especially when avoiding failure or danger",
+            "examples": [
+              {
+                "en": "The proposal was narrowly approved by the committee.",
+                "ja": "その提案は委員会で僅差で承認された。"
+              }
+            ]
+          },
+          {
+            "ja": "狭い範囲で；限定的に",
+            "definition": "in a limited or restricted way",
+            "examples": [
+              {
+                "en": "The study defines success too narrowly.",
+                "ja": "その研究は成功をあまりに狭く定義している。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "narrowly avoid a disaster",
+        "en": "narrowly avoid a disaster",
+        "ja": "辛うじて災難を免れる"
+      },
+      {
+        "text": "narrowly defeat an opponent",
+        "en": "narrowly defeat an opponent",
+        "ja": "相手に僅差で勝つ"
+      },
+      {
+        "text": "narrowly defined",
+        "en": "narrowly defined",
+        "ja": "狭く定義された"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "narrowly escape / narrowly miss は「危うく免れる」。narrowly define は「狭く定義する」。",
     "tags": [
-      "manner-and-time"
+      "manner-and-time",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12183",
@@ -1251,9 +1329,23 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "国家；国民",
-            "definition": "a country and its people considered as a political or social group",
+            "ja": "国家；国",
+            "definition": "a country considered as a political community",
             "examples": [
+              {
+                "en": "The nation invested in public transport to reduce emissions.",
+                "ja": "その国は排出量を減らすため公共交通に投資した。"
+              }
+            ]
+          },
+          {
+            "ja": "国民全体",
+            "definition": "all the people of a particular country",
+            "examples": [
+              {
+                "en": "The victory brought the nation together for a brief moment.",
+                "ja": "その勝利は一時的に国民を一つにした。"
+              },
               {
                 "en": "The entire nation watched the final match.",
                 "ja": "国中が決勝戦を見守りました。"
@@ -1269,11 +1361,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "nation は国民共同体としての「国」。state は政治的な統治機構、country は地理的な国を指すことが多い。",
     "tags": [
-      "v2.31-curated"
+      "v2.31-curated",
+      "curated-v3.159"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "nation"
     ],
@@ -1281,7 +1374,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "developing nation",
+        "en": "developing nation",
+        "ja": "開発途上国"
+      },
+      {
+        "text": "nation-state",
+        "en": "nation-state",
+        "ja": "国民国家"
+      },
+      {
+        "text": "across the nation",
+        "en": "across the nation",
+        "ja": "全国で"
+      }
+    ]
   },
   {
     "id": "sw-00418",
@@ -1297,9 +1406,23 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "国の；全国的な",
-            "definition": "relating to a whole country rather than one local area",
+            "ja": "国の；国家的な",
+            "definition": "relating to an entire country or its government",
             "examples": [
+              {
+                "en": "The government introduced a national strategy for disaster preparedness.",
+                "ja": "政府は防災の国家戦略を導入した。"
+              }
+            ]
+          },
+          {
+            "ja": "全国的な",
+            "definition": "affecting or involving people across a whole country",
+            "examples": [
+              {
+                "en": "The debate attracted national attention after the report was published.",
+                "ja": "その報告書が公表された後、議論は全国的な注目を集めた。"
+              },
               {
                 "en": "The issue received national attention.",
                 "ja": "その問題は全国的な注目を集めました。"
@@ -1315,11 +1438,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "national は「国全体の」。international は「国際的な」、local は「地域の」。",
     "tags": [
-      "v2.31-curated"
+      "v2.31-curated",
+      "curated-v3.159"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "national"
     ],
@@ -1327,7 +1451,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "national government",
+        "en": "national government",
+        "ja": "中央政府"
+      },
+      {
+        "text": "national security",
+        "en": "national security",
+        "ja": "国家安全保障"
+      },
+      {
+        "text": "national survey",
+        "en": "national survey",
+        "ja": "全国調査"
+      }
+    ]
   },
   {
     "id": "sw-02818",
@@ -1343,19 +1483,18 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "国家主義；民族主義",
-            "definition": "a common English word connected with 国家主義",
+            "ja": "国家主義；民族主義；ナショナリズム",
+            "definition": "strong identification with a nation and support for its interests or political self-determination",
             "examples": [
               {
-                "en": "The word 'nationalism' is commonly used in this context.",
-                "ja": "「nationalism」は「国家主義」に関する文脈で使われます。"
+                "en": "The historian examined the growth of nationalism in the nineteenth century.",
+                "ja": "歴史家は19世紀におけるナショナリズムの拡大を検討した。"
               },
               {
                 "en": "Economic insecurity can contribute to the rise of nationalism.",
                 "ja": "経済的不安はナショナリズムの高まりにつながることがある。"
               }
-            ],
-            "definition_en": "strong identification with and support for one nation, sometimes above other interests"
+            ]
           }
         ]
       }
@@ -1366,9 +1505,10 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Useful in advanced general, academic, news, or professional English. Note its common collocations and context-dependent senses.",
+    "usage_note": "nationalismは文脈により民族自決の運動も排他的な国家主義も指す。patriotism（愛国心）と同一ではない。",
     "tags": [
-      "curated-v3.22"
+      "curated-v3.22",
+      "curated-v3.94"
     ],
     "status": "enriched",
     "search_terms": [
@@ -1379,8 +1519,21 @@
       "ipa_uk": null
     },
     "collocations": [
-      "rise of nationalism",
-      "economic nationalism"
+      {
+        "text": "the rise of nationalism",
+        "en": "the rise of nationalism",
+        "ja": "ナショナリズムの高まり"
+      },
+      {
+        "text": "economic nationalism",
+        "en": "economic nationalism",
+        "ja": "経済ナショナリズム"
+      },
+      {
+        "text": "nationalist movements",
+        "en": "nationalist movements",
+        "ja": "民族主義運動"
+      }
     ]
   },
   {
@@ -1404,25 +1557,42 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "全国的に",
-            "definition": "",
-            "examples": []
+            "ja": "全国的に；全国規模で",
+            "definition": "throughout an entire country or at the national level",
+            "examples": [
+              {
+                "en": "The program will be introduced nationally next year.",
+                "ja": "その制度は来年、全国で導入される。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "nationally representative sample",
+        "en": "nationally representative sample",
+        "ja": "全国を代表する標本"
+      },
+      {
+        "text": "nationally recognized",
+        "en": "nationally recognized",
+        "ja": "全国的に認知された"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "nationally representative は調査・統計で重要な表現。",
     "tags": [
-      "manner-and-time"
+      "manner-and-time",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-02887",
@@ -1448,6 +1618,10 @@
               {
                 "en": "The project aims to restore native plant species.",
                 "ja": "その計画は在来植物種の回復を目指している。"
+              },
+              {
+                "en": "The restoration project focuses on plants native to the coastal region.",
+                "ja": "その復元計画は沿岸地域に自生する植物を重点的に扱っている。"
               }
             ]
           },
@@ -1469,7 +1643,8 @@
     "tags": [
       "frequency-gap",
       "v2.31-curated",
-      "v3.28-curated"
+      "v3.28-curated",
+      "curated-v3.173"
     ],
     "status": "enriched",
     "search_terms": [
@@ -1480,9 +1655,21 @@
       "ipa_uk": null
     },
     "collocations": [
-      "native language",
-      "native species",
-      "native speaker"
+      {
+        "en": "native language",
+        "text": "native language",
+        "ja": "母語"
+      },
+      {
+        "en": "native species",
+        "text": "native species",
+        "ja": "在来種"
+      },
+      {
+        "en": "native speaker",
+        "text": "native speaker",
+        "ja": "母語話者"
+      }
     ]
   },
   {
@@ -1595,6 +1782,36 @@
                 "ja": "その地域は自然の美しさで有名です。"
               }
             ]
+          },
+          {
+            "ja": "人工的でない；天然の",
+            "definition": "existing or produced without artificial processes",
+            "examples": [
+              {
+                "en": "The fabric is made from natural fibers.",
+                "ja": "その布地は天然繊維で作られている。"
+              }
+            ]
+          },
+          {
+            "ja": "生まれつきの；天性の",
+            "definition": "possessing a skill or quality without much instruction",
+            "examples": [
+              {
+                "en": "She has a natural talent for explaining complex ideas.",
+                "ja": "彼女には複雑な考えを説明する天性の才能がある。"
+              }
+            ]
+          },
+          {
+            "ja": "無理のない；自然に見える",
+            "definition": "appearing normal or unforced in behavior or speech",
+            "examples": [
+              {
+                "en": "The dialogue sounds natural rather than memorized.",
+                "ja": "その対話は暗記したものではなく自然に聞こえる。"
+              }
+            ]
           }
         ]
       }
@@ -1605,11 +1822,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "natural は「自然界の」「天然の」「天性の」「不自然でない」を表す。natural resources は「天然資源」。",
     "tags": [
-      "v2.29-curated"
+      "v2.29-curated",
+      "curated-v3.121"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "natural"
     ],
@@ -1617,7 +1835,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "natural resources",
+        "ja": "天然資源"
+      },
+      {
+        "text": "natural selection",
+        "ja": "自然選択"
+      },
+      {
+        "text": "a natural ability",
+        "ja": "天性の能力"
+      }
+    ]
   },
   {
     "id": "sw-08441",
@@ -1640,25 +1871,52 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "自然を忠実に表す；自然主義の",
-            "definition": "",
-            "examples": []
+            "ja": "自然を忠実に描いた；写実的な",
+            "definition": "representing people or things as they appear in real life",
+            "examples": [
+              {
+                "en": "The film uses naturalistic dialogue rather than dramatic speeches.",
+                "ja": "その映画は大げさな演説ではなく自然で写実的な会話を用いている。"
+              }
+            ]
+          },
+          {
+            "ja": "自然主義的な；自然環境での",
+            "definition": "based on observing behavior in natural settings rather than artificial conditions",
+            "examples": [
+              {
+                "en": "Researchers conducted naturalistic observations in classrooms.",
+                "ja": "研究者たちは教室で自然な状況下の観察を行った。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "naturalistic dialogue",
+        "en": "naturalistic dialogue",
+        "ja": "自然な会話"
+      },
+      {
+        "text": "naturalistic observation",
+        "en": "naturalistic observation",
+        "ja": "自然場面での観察"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "文学・演劇では「写実的な」、研究方法では「自然な環境での」という意味。",
     "tags": [
-      "materials-properties"
+      "materials-properties",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-02263",
@@ -1720,12 +1978,26 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "自然；性質",
-            "definition": "the physical world and living things, or the basic character of something",
+            "ja": "自然；自然界",
+            "definition": "the physical world, including plants, animals, and landscapes",
             "examples": [
+              {
+                "en": "Spending time in nature can help people recover from stress.",
+                "ja": "自然の中で過ごすことはストレスからの回復に役立つ場合がある。"
+              },
               {
                 "en": "Camping gives us a chance to spend more time in nature.",
                 "ja": "キャンプをすると自然の中でより多くの時間を過ごせます。"
+              }
+            ]
+          },
+          {
+            "ja": "本質；性質",
+            "definition": "the basic character or essential qualities of something",
+            "examples": [
+              {
+                "en": "The nature of the problem changed as new evidence emerged.",
+                "ja": "新たな証拠が現れるにつれて問題の性質が変わった。"
               }
             ]
           }
@@ -1738,11 +2010,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "nature は自然界の意味では通常不可算。the nature of ... は「～の性質・本質」。",
     "tags": [
-      "v2.29-curated"
+      "v2.29-curated",
+      "curated-v3.159"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "nature"
     ],
@@ -1750,7 +2023,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "protect nature",
+        "en": "protect nature",
+        "ja": "自然を守る"
+      },
+      {
+        "text": "human nature",
+        "en": "human nature",
+        "ja": "人間の本性"
+      },
+      {
+        "text": "the nature of the problem",
+        "en": "the nature of the problem",
+        "ja": "問題の本質"
+      }
+    ]
   },
   {
     "id": "sw-10994",
@@ -2044,25 +2333,52 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "船で通れる；移動可能な",
-            "definition": "",
-            "examples": []
+            "ja": "（川・水路が）船で通航できる",
+            "definition": "deep or wide enough for boats or ships to travel on",
+            "examples": [
+              {
+                "en": "The river is navigable for most of the year.",
+                "ja": "その川は一年の大半を通して船で通航できる。"
+              }
+            ]
+          },
+          {
+            "ja": "（ウェブサイトなどが）使いやすく移動しやすい",
+            "definition": "easy to move through or find your way around",
+            "examples": [
+              {
+                "en": "The redesigned website is more navigable on a phone.",
+                "ja": "改修後のウェブサイトはスマートフォンでも操作しやすい。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "navigable river",
+        "en": "navigable river",
+        "ja": "船が通れる川"
+      },
+      {
+        "text": "easily navigable website",
+        "en": "easily navigable website",
+        "ja": "操作しやすいウェブサイト"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "船舶の通航可能性に加え、デジタル画面の操作性にも使う。",
     "tags": [
-      "outdoor-conditions"
+      "outdoor-conditions",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-03289",
@@ -2085,19 +2401,28 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "航行；ナビゲーション",
-            "definition": "a person, thing, activity, or concept connected with 航行",
+            "ja": "航行；航法",
+            "definition": "the process of planning and controlling the route of a ship, aircraft, or vehicle",
             "examples": [
               {
-                "en": "The report includes information about navigation.",
-                "ja": "その報告書には「航行」についての情報が含まれている。"
+                "en": "Satellite navigation helps ships avoid dangerous routes.",
+                "ja": "衛星航法は船舶が危険な航路を避けるのに役立つ。"
               },
               {
                 "en": "Satellite navigation has transformed travel in unfamiliar areas.",
                 "ja": "衛星ナビゲーションは不慣れな地域での移動を大きく変えた。"
               }
-            ],
-            "definition_en": "the process of finding and following a route; movement through a website or system"
+            ]
+          },
+          {
+            "ja": "（ウェブサイトなどの）画面・情報の移動操作",
+            "definition": "the process of finding and moving between sections of a website or application",
+            "examples": [
+              {
+                "en": "Clear navigation makes the learning app easier to use.",
+                "ja": "分かりやすい画面移動の仕組みは学習アプリを使いやすくする。"
+              }
+            ]
           }
         ]
       }
@@ -2105,17 +2430,31 @@
     "forms": {},
     "phrases": [],
     "collocations": [
-      "satellite navigation",
-      "navigation system"
+      {
+        "text": "satellite navigation",
+        "en": "satellite navigation",
+        "ja": "衛星航法"
+      },
+      {
+        "text": "navigation system",
+        "en": "navigation system",
+        "ja": "ナビゲーションシステム"
+      },
+      {
+        "text": "website navigation",
+        "en": "website navigation",
+        "ja": "ウェブサイト内の移動操作"
+      }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Useful in advanced general, academic, news, or professional English. Note its common collocations and context-dependent senses.",
+    "usage_note": "Uncountable in general use; navigation describes route-finding and movement through digital interfaces.",
     "tags": [
       "50k-frequency-gap",
-      "curated-v3.22"
+      "curated-v3.22",
+      "curated-v3.105"
     ],
     "status": "enriched"
   },
@@ -2140,25 +2479,52 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "航法担当者；案内装置",
-            "definition": "",
-            "examples": []
+            "ja": "航法士；進路を案内する人",
+            "definition": "a person who plans or directs the route of a ship, aircraft, or vehicle",
+            "examples": [
+              {
+                "en": "The navigator checked the charts before the vessel left port.",
+                "ja": "航法士は船が出港する前に海図を確認した。"
+              }
+            ]
+          },
+          {
+            "ja": "ナビゲーション装置；道案内をするシステム",
+            "definition": "a device or system that helps someone find a route",
+            "examples": [
+              {
+                "en": "The car navigator suggested a shorter route.",
+                "ja": "車載ナビはもっと短い経路を提案した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "ship navigator",
+        "en": "ship navigator",
+        "ja": "船の航法士"
+      },
+      {
+        "text": "satellite navigator",
+        "en": "satellite navigator",
+        "ja": "衛星航法装置"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "人を指す場合と装置・ソフトウェアを指す場合がある。",
     "tags": [
-      "community-travel"
+      "community-travel",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-05514",
@@ -2178,28 +2544,65 @@
     "frequency": 3,
     "parts_of_speech": [
       {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "海軍",
+            "definition": "the branch of a country’s armed forces that operates at sea",
+            "examples": [
+              {
+                "en": "She served in the navy for six years.",
+                "ja": "彼女は六年間、海軍に勤務した。"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "濃紺の",
-            "definition": "",
-            "examples": []
+            "ja": "濃紺の；ネイビーブルーの",
+            "definition": "having a very dark shade of blue",
+            "examples": [
+              {
+                "en": "He wore a navy jacket to the interview.",
+                "ja": "彼は面接に濃紺のジャケットを着て行った。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "join the navy",
+        "en": "join the navy",
+        "ja": "海軍に入隊する"
+      },
+      {
+        "text": "navy blue",
+        "en": "navy blue",
+        "ja": "濃紺"
+      },
+      {
+        "text": "navy jacket",
+        "en": "navy jacket",
+        "ja": "濃紺のジャケット"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "the navy は「海軍」、navy blue / navy jacket は色を表す。",
     "tags": [
-      "descriptive"
+      "descriptive",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10070",
@@ -2442,12 +2845,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "近隣国への業務移転",
-            "definition": "",
+            "ja": "近隣国への業務・生産拠点の移転",
+            "definition": "the practice of moving business operations to a nearby country, often to reduce costs or supply-chain risks",
             "examples": [
               {
-                "en": "In advanced academic English, \"nearshoring\" can be used with the meaning \"\".",
-                "ja": "上級の学術英語では「nearshoring」が「近隣国への業務移転」という意味で用いられることがある。"
+                "en": "The manufacturer chose nearshoring to shorten delivery times.",
+                "ja": "そのメーカーは納期を短縮するために近隣国への生産移転を選んだ。"
               }
             ]
           }
@@ -2456,17 +2859,29 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "nearshoring strategy",
+        "en": "nearshoring strategy",
+        "ja": "近隣国への移転戦略"
+      },
+      {
+        "text": "nearshoring production",
+        "en": "nearshoring production",
+        "ja": "生産拠点を近隣国へ移すこと"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "offshoring（海外移転）のうち、比較的近い国に移すことを指す。",
     "tags": [
       "work-life",
-      "curated-v2.97"
+      "curated-v2.97",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04057",
@@ -2662,19 +3077,24 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "必ずしも",
-            "definition": "in the manner or degree expressed by 必ずしも",
+            "ja": "必然的に；必ず",
+            "definition": "as an unavoidable result or by the nature of the situation",
             "examples": [
               {
-                "en": "The word 'necessarily' is commonly used in this kind of context.",
-                "ja": "「necessarily」は「必ずしも」に関する文脈でよく使われます。"
-              },
+                "en": "The conclusion necessarily follows from the two premises.",
+                "ja": "その結論は二つの前提から必然的に導かれる。"
+              }
+            ]
+          },
+          {
+            "ja": "（not とともに）必ずしも～ではない",
+            "definition": "used with a negative to show that something is not always true",
+            "examples": [
               {
                 "en": "Higher spending does not necessarily lead to better outcomes.",
                 "ja": "支出を増やしても必ずしもより良い結果につながるわけではない。"
               }
-            ],
-            "definition_en": "in a way that must be true or happen; inevitably"
+            ]
           }
         ]
       }
@@ -2685,9 +3105,10 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Useful in advanced general, academic, news, or professional English. Note its common collocations and context-dependent senses.",
+    "usage_note": "not necessarily は「必ずしも～ではない」。necessarily 自体は「必然的に」の意味で、否定語ではない。",
     "tags": [
-      "curated-v3.22"
+      "curated-v3.22",
+      "curated-v3.112"
     ],
     "status": "enriched",
     "search_terms": [
@@ -2698,8 +3119,21 @@
       "ipa_uk": null
     },
     "collocations": [
-      "not necessarily",
-      "necessarily imply"
+      {
+        "text": "not necessarily",
+        "en": "not necessarily",
+        "ja": "必ずしもそうとは限らない"
+      },
+      {
+        "text": "necessarily imply",
+        "en": "necessarily imply",
+        "ja": "必然的に意味する"
+      },
+      {
+        "text": "necessarily follow",
+        "en": "necessarily follow",
+        "ja": "必然的に導かれる"
+      }
     ]
   },
   {
@@ -2722,6 +3156,10 @@
               {
                 "en": "No special equipment is necessary for this exercise.",
                 "ja": "この運動には特別な器具は必要ありません。"
+              },
+              {
+                "en": "Further evidence is necessary before we can draw a firm conclusion.",
+                "ja": "確かな結論を出すには、さらに証拠が必要だ。"
               }
             ]
           }
@@ -2734,11 +3172,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "It is necessary to + 動詞原形、necessary for + 名詞、necessary to + 人の使い分けに注意。",
     "tags": [
-      "v2.29-curated"
+      "v2.29-curated",
+      "curated-v3.137"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "necessary"
     ],
@@ -2746,7 +3185,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "if necessary",
+        "en": "if necessary",
+        "ja": "必要であれば"
+      },
+      {
+        "text": "necessary for survival",
+        "en": "necessary for survival",
+        "ja": "生存に必要な"
+      },
+      {
+        "text": "it is necessary to do something",
+        "en": "it is necessary to do something",
+        "ja": "～する必要がある"
+      }
+    ]
   },
   {
     "id": "sw-01079",
@@ -3222,6 +3677,16 @@
                 "ja": "新しい規則はオンラインで主に否定的な反応を受けました。"
               }
             ]
+          },
+          {
+            "ja": "（数値・検査結果などが）負の；陰性の",
+            "definition": "below zero or indicating that a particular substance or condition was not detected",
+            "examples": [
+              {
+                "en": "The test result was negative for the virus.",
+                "ja": "検査結果はそのウイルスについて陰性だった。"
+              }
+            ]
           }
         ]
       }
@@ -3232,12 +3697,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "negative は「否定的な」「悪影響のある」のほか、数学・統計では「負の」。negative test result は検査の「陰性」。",
     "tags": [
       "v2.31-curated",
-      "curated-v2.67"
+      "curated-v2.67",
+      "curated-v3.81"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "negative"
     ],
@@ -3246,6 +3712,14 @@
       "ipa_uk": null
     },
     "collocations": [
+      {
+        "text": "a negative correlation",
+        "ja": "負の相関"
+      },
+      {
+        "text": "a negative impact on",
+        "ja": "〜への悪影響"
+      },
       {
         "text": "negative effect"
       },
@@ -3280,12 +3754,22 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "否定に",
-            "definition": "in the manner or degree expressed by 否定に",
+            "ja": "悪い影響を与える形で",
+            "definition": "in a way that causes harm or an unfavorable effect",
             "examples": [
               {
-                "en": "The word 'negatively' is useful when discussing this topic.",
-                "ja": "この語は「否定に」に関する文脈で使われます。"
+                "en": "Air pollution can negatively affect children’s health.",
+                "ja": "大気汚染は子どもの健康に悪影響を及ぼす可能性がある。"
+              }
+            ]
+          },
+          {
+            "ja": "否定的に",
+            "definition": "in a way that expresses criticism, rejection, or disapproval",
+            "examples": [
+              {
+                "en": "Several reviewers responded negatively to the proposal.",
+                "ja": "複数の査読者がその提案に否定的な反応を示した。"
               }
             ]
           }
@@ -3298,9 +3782,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "negatively affect は IELTS の因果関係の記述で便利。negative correlation は「負の相関」。",
+    "tags": [
+      "curated-v3.112"
+    ],
+    "status": "enriched",
     "search_terms": [
       "negatively"
     ],
@@ -3308,7 +3794,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "negatively affect",
+        "en": "negatively affect",
+        "ja": "～に悪影響を与える"
+      },
+      {
+        "text": "respond negatively",
+        "en": "respond negatively",
+        "ja": "否定的に反応する"
+      },
+      {
+        "text": "negatively correlated",
+        "en": "negatively correlated",
+        "ja": "負の相関がある"
+      }
+    ]
   },
   {
     "id": "sw-03142",
@@ -3324,19 +3826,18 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "怠慢；過失",
-            "definition": "a concept, state, person, thing, or process connected with 怠慢",
+            "ja": "過失；必要な注意を怠ること",
+            "definition": "failure to take the level of care that a reasonable person should take in a situation",
             "examples": [
               {
-                "en": "The report discusses negligence in detail.",
-                "ja": "その報告書は「怠慢」について詳しく論じている。"
+                "en": "The investigation found evidence of negligence in maintaining the bridge.",
+                "ja": "調査で橋の保守管理に過失があった証拠が見つかった。"
               },
               {
                 "en": "The court found the company liable for negligence.",
                 "ja": "裁判所はその会社に過失責任があると認定した。"
               }
-            ],
-            "definition_en": "failure to take the care that a reasonable person should take"
+            ]
           }
         ]
       }
@@ -3347,10 +3848,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Useful in advanced general, academic, news, or professional English. Note its common collocations and context-dependent senses.",
+    "usage_note": "In law, negligence can involve a breach of a duty of care; it is not always intentional.",
     "tags": [
       "academic-expansion",
-      "curated-v3.22"
+      "curated-v3.22",
+      "curated-v3.64"
     ],
     "status": "enriched",
     "search_terms": [
@@ -3361,8 +3863,12 @@
       "ipa_uk": null
     },
     "collocations": [
-      "gross negligence",
-      "medical negligence"
+      {
+        "text": "gross negligence"
+      },
+      {
+        "text": "medical negligence"
+      }
     ]
   },
   {
@@ -3386,15 +3892,18 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "無視できるほどに",
-            "definition": "",
+            "ja": "無視できるほどわずかに",
+            "definition": "to such a small extent that the difference is not important",
             "examples": [
+              {
+                "en": "The two methods differed only negligibly in accuracy.",
+                "ja": "二つの方法の精度の差は無視できるほど小さかった。"
+              },
               {
                 "en": "The two methods differed only negligibly in accuracy.",
                 "ja": "二つの方法の精度差は無視できるほど小さかった。"
               }
-            ],
-            "definition_en": "to such a small degree that it is not worth considering"
+            ]
           }
         ]
       }
@@ -3402,17 +3911,26 @@
     "forms": {},
     "phrases": [],
     "collocations": [
-      "negligibly small",
-      "differ negligibly"
+      {
+        "text": "negligibly small",
+        "en": "negligibly small",
+        "ja": "無視できるほど小さい"
+      },
+      {
+        "text": "differ negligibly",
+        "en": "differ negligibly",
+        "ja": "ほとんど差がない"
+      }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Useful in advanced general, academic, news, or professional English. Note its common collocations and context-dependent senses.",
+    "usage_note": "学術論文では negligibly small / differ negligibly などの形で差の小ささを示す。",
     "tags": [
       "work-description",
-      "curated-v3.22"
+      "curated-v3.22",
+      "curated-v3.75"
     ],
     "status": "enriched"
   },
@@ -3437,15 +3955,28 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "交渉可能な；譲渡可能な",
-            "definition": "",
+            "ja": "交渉可能な；協議して変更できる",
+            "definition": "open to discussion or change by agreement",
             "examples": [
+              {
+                "en": "The starting salary is negotiable depending on experience.",
+                "ja": "初任給は経験に応じて交渉できる。"
+              },
               {
                 "en": "The starting salary is negotiable depending on experience.",
                 "ja": "初任給は経験に応じて交渉可能である。"
               }
-            ],
-            "definition_en": "open to discussion or change by agreement"
+            ]
+          },
+          {
+            "ja": "（手形などが）譲渡可能な",
+            "definition": "able to be legally transferred to another person, especially in finance",
+            "examples": [
+              {
+                "en": "A negotiable instrument can be transferred to another holder.",
+                "ja": "流通証券は別の保有者に譲渡できる。"
+              }
+            ]
           }
         ]
       }
@@ -3453,17 +3984,31 @@
     "forms": {},
     "phrases": [],
     "collocations": [
-      "negotiable salary",
-      "terms are negotiable"
+      {
+        "text": "negotiable salary",
+        "en": "negotiable salary",
+        "ja": "交渉可能な給与"
+      },
+      {
+        "text": "negotiable terms",
+        "en": "negotiable terms",
+        "ja": "交渉可能な条件"
+      },
+      {
+        "text": "negotiable instrument",
+        "en": "negotiable instrument",
+        "ja": "流通証券"
+      }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Useful in advanced general, academic, news, or professional English. Note its common collocations and context-dependent senses.",
+    "usage_note": "salary / terms are negotiable は条件交渉の可否。negotiable instrument は金融・法律用語。",
     "tags": [
       "work-description",
-      "curated-v3.22"
+      "curated-v3.22",
+      "curated-v3.75"
     ],
     "status": "enriched"
   },
@@ -3686,11 +4231,25 @@
         "meanings": [
           {
             "ja": "近所の人；隣人",
-            "definition": "a person who lives near you",
+            "definition": "a person who lives near another person",
             "examples": [
+              {
+                "en": "Our neighbors helped us move the heavy furniture.",
+                "ja": "近所の人たちが重い家具を運ぶのを手伝ってくれた。"
+              },
               {
                 "en": "Our neighbor looked after the cat while we were away.",
                 "ja": "留守の間、近所の人が猫の世話をしてくれました。"
+              }
+            ]
+          },
+          {
+            "ja": "隣接する国・地域",
+            "definition": "a country or place situated next to another",
+            "examples": [
+              {
+                "en": "France is a neighbor of Germany.",
+                "ja": "フランスはドイツの隣国である。"
               }
             ]
           }
@@ -3703,11 +4262,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "neighbor は米式綴り。英式は neighbour。国や地域の隣接関係にも使う。",
     "tags": [
-      "v2.31-curated"
+      "v2.31-curated",
+      "curated-v3.159"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "neighbor"
     ],
@@ -3715,7 +4275,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "next-door neighbor",
+        "en": "next-door neighbor",
+        "ja": "隣家の人"
+      },
+      {
+        "text": "neighboring country",
+        "en": "neighboring country",
+        "ja": "隣国"
+      },
+      {
+        "text": "help a neighbor",
+        "en": "help a neighbor",
+        "ja": "近所の人を助ける"
+      }
+    ]
   },
   {
     "id": "sw-12246",
@@ -3826,12 +4402,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "新語；新しい用法",
-            "definition": "",
+            "ja": "新語；新しく作られた表現",
+            "definition": "a newly coined word or expression, or a new use of an existing word",
             "examples": [
               {
-                "en": "In advanced academic English, \"neologism\" can be used with the meaning \"\".",
-                "ja": "上級の学術英語では「neologism」が「新語；新しい用法」という意味で用いられることがある。"
+                "en": "The spread of social media has introduced many neologisms into everyday speech.",
+                "ja": "ソーシャルメディアの普及によって、多くの新語が日常会話に入り込んだ。"
               }
             ]
           }
@@ -3840,17 +4416,29 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "coin a neologism",
+        "en": "coin a neologism",
+        "ja": "新語を作る"
+      },
+      {
+        "text": "a linguistic neologism",
+        "en": "a linguistic neologism",
+        "ja": "言語上の新語"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "既存語の新しい意味にも使う。造語 coinage と重なるが、言語学では用法の定着も論じる。",
     "tags": [
       "language-writing",
-      "curated-v2.97"
+      "curated-v2.97",
+      "curated-v3.90"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11958",
@@ -3920,15 +4508,14 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "親族びいき",
-            "definition": "",
+            "ja": "縁故採用；親族びいき",
+            "definition": "unfairly giving jobs or advantages to relatives, especially by someone in authority",
             "examples": [
               {
                 "en": "The reforms were intended to reduce corruption and nepotism.",
                 "ja": "その改革は汚職と縁故主義を減らすことを目的としていた。"
               }
-            ],
-            "definition_en": "favoritism toward relatives, especially in jobs or positions of power"
+            ]
           }
         ]
       }
@@ -3936,17 +4523,26 @@
     "forms": {},
     "phrases": [],
     "collocations": [
-      "accusations of nepotism",
-      "combat nepotism"
+      {
+        "text": "accusations of nepotism",
+        "en": "accusations of nepotism",
+        "ja": "縁故採用の疑惑"
+      },
+      {
+        "text": "combat nepotism",
+        "en": "combat nepotism",
+        "ja": "縁故主義を是正する"
+      }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Useful in advanced general, academic, news, or professional English. Note its common collocations and context-dependent senses.",
+    "usage_note": "特に採用・昇進などで親族を優遇すること。単なる親族との協力とは異なる。",
     "tags": [
       "work-business",
-      "curated-v3.22"
+      "curated-v3.22",
+      "curated-v3.75"
     ],
     "status": "enriched"
   },
@@ -4012,11 +4608,25 @@
         "meanings": [
           {
             "ja": "緊張した；不安な",
-            "definition": "worried or slightly afraid about what may happen",
+            "definition": "worried or tense about something that may happen",
             "examples": [
+              {
+                "en": "I felt nervous before presenting my research to the class.",
+                "ja": "授業で研究成果を発表する前は緊張した。"
+              },
               {
                 "en": "I always feel nervous before speaking in front of a large audience.",
                 "ja": "大勢の前で話す前はいつも緊張します。"
+              }
+            ]
+          },
+          {
+            "ja": "神経の；神経系の",
+            "definition": "relating to the nerves or the nervous system",
+            "examples": [
+              {
+                "en": "The disease affects the central nervous system.",
+                "ja": "その病気は中枢神経系に影響を及ぼす。"
               }
             ]
           }
@@ -4029,11 +4639,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "be nervous about ... は「～を不安に思う」。nervous system は医学用語で「神経系」。",
     "tags": [
-      "v2.31-curated"
+      "v2.31-curated",
+      "curated-v3.159"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "nervous"
     ],
@@ -4041,7 +4652,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "feel nervous about",
+        "en": "feel nervous about",
+        "ja": "～について緊張する"
+      },
+      {
+        "text": "nervous system",
+        "en": "nervous system",
+        "ja": "神経系"
+      },
+      {
+        "text": "nervous smile",
+        "en": "nervous smile",
+        "ja": "緊張した笑み"
+      }
+    ]
   },
   {
     "id": "sw-05055",
@@ -4105,25 +4732,52 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "心地よく寄り添う",
-            "definition": "",
-            "examples": []
+            "ja": "体を寄せて心地よく落ち着く",
+            "definition": "to move close to someone or something in a comfortable, protected position",
+            "examples": [
+              {
+                "en": "The child nestled against her father on the sofa.",
+                "ja": "子どもはソファで父親に寄り添った。"
+              }
+            ]
+          },
+          {
+            "ja": "（建物・町などが）囲まれるように位置する",
+            "definition": "to be situated in a sheltered or attractive place",
+            "examples": [
+              {
+                "en": "A small village nestles among the hills.",
+                "ja": "小さな村が丘陵に抱かれるようにたたずんでいる。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "nestle against someone",
+        "en": "nestle against someone",
+        "ja": "人に身を寄せる"
+      },
+      {
+        "text": "nestle among the hills",
+        "en": "nestle among the hills",
+        "ja": "丘の間に位置する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "nestle against / into は人や物に寄り添う。場所を主語にした比喩的用法もある。",
     "tags": [
-      "actions"
+      "actions",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13241",
@@ -4146,15 +4800,18 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "純利益",
-            "definition": "",
+            "ja": "純利益；最終利益",
+            "definition": "the money a business retains after deducting all costs, expenses, and taxes from its revenue",
             "examples": [
+              {
+                "en": "Net profit rose despite a decline in total sales.",
+                "ja": "総売上高が減ったにもかかわらず純利益は増加した。"
+              },
               {
                 "en": "Net profit rose despite a decline in total sales.",
                 "ja": "総売上が減少したにもかかわらず純利益は増加した。"
               }
-            ],
-            "definition_en": "the money a business keeps after all costs, taxes, and expenses are deducted"
+            ]
           }
         ]
       }
@@ -4162,17 +4819,26 @@
     "forms": {},
     "phrases": [],
     "collocations": [
-      "net profit margin",
-      "report a net profit"
+      {
+        "text": "net profit margin",
+        "en": "net profit margin",
+        "ja": "純利益率"
+      },
+      {
+        "text": "report a net profit",
+        "en": "report a net profit",
+        "ja": "純利益を計上する"
+      }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Learn this expression as a unit. Note its typical grammatical pattern and register.",
+    "usage_note": "gross profit（売上総利益）とは異なり、経費や税金などを差し引いた後の利益。",
     "tags": [
       "office-business",
-      "curated-v3.22"
+      "curated-v3.22",
+      "curated-v3.75"
     ],
     "status": "enriched"
   },
@@ -4313,12 +4979,51 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "ネットワーク；網",
-            "definition": "a connected system of people, computers, roads, or other things",
+            "ja": "ネットワーク；通信網",
+            "definition": "a connected system of computers or other devices",
             "examples": [
+              {
+                "en": "The network was temporarily unavailable after the outage.",
+                "ja": "障害の後、ネットワークは一時的に利用できなくなった。"
+              },
               {
                 "en": "The school upgraded its wireless network during the summer.",
                 "ja": "学校は夏休みに無線ネットワークを更新しました。"
+              }
+            ]
+          },
+          {
+            "ja": "人脈；連携組織",
+            "definition": "a group of people or organizations connected through shared interests or work",
+            "examples": [
+              {
+                "en": "Researchers built an international network of collaborators.",
+                "ja": "研究者たちは国際的な共同研究者のネットワークを築いた。"
+              }
+            ]
+          },
+          {
+            "ja": "交通・流通などの網",
+            "definition": "an interconnected system of routes or services",
+            "examples": [
+              {
+                "en": "The rail network links rural towns to the capital.",
+                "ja": "鉄道網は地方の町々と首都を結んでいる。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "人脈を築く；交流する",
+            "definition": "to make professional or social connections with other people",
+            "examples": [
+              {
+                "en": "Students networked with local entrepreneurs after the event.",
+                "ja": "生徒たちは催しの後、地元の起業家たちと交流した。"
               }
             ]
           }
@@ -4331,12 +5036,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "network は名詞だけでなく「人脈を築く」という動詞にもなる。network with people の形。",
     "tags": [
       "v2.29-curated",
-      "curated-v2.59"
+      "curated-v2.59",
+      "curated-v3.105"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "network"
     ],
@@ -4346,10 +5052,24 @@
     },
     "collocations": [
       {
-        "text": "computer network"
+        "text": "computer network",
+        "en": "computer network",
+        "ja": "コンピューターネットワーク"
       },
       {
-        "text": "social network"
+        "text": "social network",
+        "en": "social network",
+        "ja": "人的・社会的ネットワーク"
+      },
+      {
+        "text": "transport network",
+        "en": "transport network",
+        "ja": "交通網"
+      },
+      {
+        "text": "network with",
+        "en": "network with",
+        "ja": "～と人脈を築く"
       }
     ],
     "senses": [
@@ -4563,8 +5283,12 @@
         "meanings": [
           {
             "ja": "それにもかかわらず",
-            "definition": "despite what has just been mentioned",
+            "definition": "despite what has just been said or established",
             "examples": [
+              {
+                "en": "The sample was small; nevertheless, the findings were useful.",
+                "ja": "標本数は少なかったが、それでも調査結果は有用だった。"
+              },
               {
                 "en": "The task was difficult; nevertheless, everyone completed it.",
                 "ja": "課題は難しかったですが、それでも全員が完成させました。"
@@ -4580,12 +5304,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "接続副詞。文頭では Nevertheless, ... とコンマを置く。二つの独立節をつなぐ際はセミコロンなどが必要。",
     "tags": [
       "v2.34-curated",
-      "curated-v2.62"
+      "curated-v2.62",
+      "curated-v3.108"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "nevertheless"
     ],
@@ -4599,6 +5324,11 @@
       },
       {
         "text": "nevertheless important"
+      },
+      {
+        "text": "nevertheless, the results suggest ...",
+        "en": "nevertheless, the results suggest ...",
+        "ja": "それでも結果は～を示唆する"
       }
     ],
     "senses": [
@@ -4701,24 +5431,41 @@
         "meanings": [
           {
             "ja": "新しく来た人；新参者",
-            "definition": "",
-            "examples": []
+            "definition": "someone who has recently arrived in a place or joined a group or activity",
+            "examples": [
+              {
+                "en": "The club welcomes newcomers regardless of experience.",
+                "ja": "そのクラブは経験を問わず新しく入る人を歓迎している。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "welcome newcomers",
+        "en": "welcome newcomers",
+        "ja": "新しく来た人を歓迎する"
+      },
+      {
+        "text": "a newcomer to the industry",
+        "en": "a newcomer to the industry",
+        "ja": "業界の新規参入者"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "a newcomer to + 場所・分野・活動。必ずしも初心者とは限らない。",
     "tags": [
-      "work-life"
+      "work-life",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08859",
@@ -4876,12 +5623,26 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "新聞",
-            "definition": "a regularly published collection of news and articles, traditionally printed on large sheets",
+            "ja": "新聞；新聞社が発行する定期刊行物",
+            "definition": "a publication containing news and commentary, traditionally printed on paper",
             "examples": [
+              {
+                "en": "The local newspaper reported on the school’s volunteer project.",
+                "ja": "地元紙は学校のボランティア活動を報じた。"
+              },
               {
                 "en": "The story appeared on the front page of the local newspaper.",
                 "ja": "その記事は地元紙の一面に掲載されました。"
+              }
+            ]
+          },
+          {
+            "ja": "新聞紙",
+            "definition": "the paper used to print a newspaper",
+            "examples": [
+              {
+                "en": "We wrapped the fragile cups in old newspaper.",
+                "ja": "壊れやすいカップを古新聞で包んだ。"
               }
             ]
           }
@@ -4894,11 +5655,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "newspaper は「新聞（媒体）」にも「新聞紙（素材）」にも使う。news は不可算名詞。",
     "tags": [
-      "v2.31-curated"
+      "v2.31-curated",
+      "curated-v3.159"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "newspaper"
     ],
@@ -4906,7 +5668,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "local newspaper",
+        "en": "local newspaper",
+        "ja": "地方紙"
+      },
+      {
+        "text": "newspaper article",
+        "en": "newspaper article",
+        "ja": "新聞記事"
+      },
+      {
+        "text": "read the newspaper",
+        "en": "read the newspaper",
+        "ja": "新聞を読む"
+      }
+    ]
   },
   {
     "id": "sw-00425",
@@ -5251,25 +6029,42 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "夜勤；夜間勤務の班",
-            "definition": "",
-            "examples": []
+            "ja": "夜勤；夜間勤務",
+            "definition": "a period of work that takes place during the night",
+            "examples": [
+              {
+                "en": "She works the night shift at the hospital.",
+                "ja": "彼女は病院で夜勤をしている。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "work the night shift",
+        "en": "work the night shift",
+        "ja": "夜勤で働く"
+      },
+      {
+        "text": "night-shift workers",
+        "en": "night-shift workers",
+        "ja": "夜勤労働者"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "work the night shift と on the night shift が一般的。",
     "tags": [
-      "work-life"
+      "work-life",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-06812",
@@ -5724,12 +6519,27 @@
         "pos": "determiner",
         "meanings": [
           {
-            "ja": "一つも〜ない",
-            "definition": "a word used before a noun with the sense '一つも〜ない'",
+            "ja": "一つも〜ない；少しも〜ない",
+            "definition": "used before a noun to mean not any",
             "examples": [
               {
-                "en": "The word 'no' is common in English.",
-                "ja": "「no」は英語でよく使われる語です。"
+                "en": "There is no evidence to support the claim.",
+                "ja": "その主張を裏付ける証拠はない。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "interjection",
+        "meanings": [
+          {
+            "ja": "いいえ；違います",
+            "definition": "used to give a negative answer or refuse something",
+            "examples": [
+              {
+                "en": "No, I have not finished the assignment yet.",
+                "ja": "いいえ、まだ課題を終えていません。"
               }
             ]
           }
@@ -5742,9 +6552,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "no + 名詞は「〜がない」。not any + 名詞と意味が近い。",
+    "tags": [
+      "curated-v3.155"
+    ],
+    "status": "enriched",
     "search_terms": [
       "no"
     ],
@@ -5752,7 +6564,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "no evidence",
+        "en": "no evidence",
+        "ja": "証拠がないこと"
+      },
+      {
+        "text": "no longer",
+        "en": "no longer",
+        "ja": "もはや〜ない"
+      },
+      {
+        "text": "no problem",
+        "en": "no problem",
+        "ja": "問題ありません"
+      }
+    ]
   },
   {
     "id": "sw-03479",
@@ -6004,25 +6832,42 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "居眠りする",
-            "definition": "",
-            "examples": []
+            "ja": "うとうとする；居眠りする",
+            "definition": "to fall asleep briefly or unintentionally, especially while sitting",
+            "examples": [
+              {
+                "en": "He nodded off during the long train journey.",
+                "ja": "彼は長い電車の移動中にうとうと眠ってしまった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "nod off during a lecture",
+        "en": "nod off during a lecture",
+        "ja": "講義中に居眠りする"
+      },
+      {
+        "text": "nod off in front of the TV",
+        "en": "nod off in front of the TV",
+        "ja": "テレビの前でうとうとする"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "nod off は意図せず眠りに落ちること。fall asleep より口語的。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12125",
@@ -6307,25 +7152,51 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "遊牧民；定住しない人",
-            "definition": "",
-            "examples": []
+            "ja": "遊牧民；定住せず移動して暮らす人",
+            "definition": "a person who moves from place to place rather than living permanently in one location",
+            "examples": [
+              {
+                "en": "Many nomads move their herds with the seasons.",
+                "ja": "多くの遊牧民は季節に合わせて家畜の群れを移動させる。"
+              },
+              {
+                "en": "The documentary explores the lives of nomads in the desert.",
+                "ja": "そのドキュメンタリーは砂漠で暮らす遊牧民の生活を描いている。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "nomadic people",
+        "en": "nomadic people",
+        "ja": "遊牧民"
+      },
+      {
+        "text": "modern nomad",
+        "en": "modern nomad",
+        "ja": "現代の移動生活者"
+      },
+      {
+        "text": "digital nomad",
+        "en": "digital nomad",
+        "ja": "場所に縛られず働く人"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "伝統的な遊牧民に加え、digital nomad はネットを使って移動しながら働く人を指す。",
     "tags": [
-      "community-travel"
+      "community-travel",
+      "curated-v3.142"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10402",
@@ -6348,12 +7219,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "命名法；名称体系",
-            "definition": "",
+            "ja": "命名法；名称の体系",
+            "definition": "a system of names used in a particular field of study or activity",
             "examples": [
               {
-                "en": "In advanced academic English, \"nomenclature\" can be used with the meaning \"\".",
-                "ja": "上級の学術英語では「nomenclature」が「命名法；名称体系」という意味で用いられることがある。"
+                "en": "Biologists use standardized nomenclature to identify species.",
+                "ja": "生物学者は種を特定するために標準化された命名法を用いる。"
               }
             ]
           }
@@ -6362,17 +7233,29 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "scientific nomenclature",
+        "en": "scientific nomenclature",
+        "ja": "科学的な命名法"
+      },
+      {
+        "text": "standardized nomenclature",
+        "en": "standardized nomenclature",
+        "ja": "標準化された名称体系"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "科学・医学・分類学などで使う形式的な語。単なる name とは異なり体系を指す。",
     "tags": [
       "language-writing",
-      "curated-v2.97"
+      "curated-v2.97",
+      "curated-v3.90"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10255",
@@ -6395,12 +7278,32 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "名詞の；名目上の",
-            "definition": "",
+            "ja": "名目上の；形式だけの",
+            "definition": "existing in name but not necessarily in reality",
             "examples": [
               {
-                "en": "In advanced academic English, \"nominal\" can be used with the meaning \"\".",
-                "ja": "上級の学術英語では「nominal」が「名詞の；名目上の」という意味で用いられることがある。"
+                "en": "The organization has nominal independence but relies on government funding.",
+                "ja": "その組織は名目上は独立しているが、政府の資金に依存している。"
+              }
+            ]
+          },
+          {
+            "ja": "ごくわずかな；名ばかりの金額の",
+            "definition": "very small in comparison with what might be expected",
+            "examples": [
+              {
+                "en": "Visitors pay only a nominal fee to enter the museum.",
+                "ja": "来館者は入館に際してごく少額の料金しか払わない。"
+              }
+            ]
+          },
+          {
+            "ja": "名詞の；名詞に関する",
+            "definition": "relating to nouns or noun phrases in grammar",
+            "examples": [
+              {
+                "en": "The teacher explained the structure of a nominal phrase.",
+                "ja": "教師は名詞句の構造を説明した。"
               }
             ]
           }
@@ -6409,17 +7312,34 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "a nominal fee",
+        "text": "a nominal fee",
+        "ja": "名目程度の料金"
+      },
+      {
+        "en": "nominal independence",
+        "text": "nominal independence",
+        "ja": "名目上の独立"
+      },
+      {
+        "en": "nominal value",
+        "text": "nominal value",
+        "ja": "額面価格"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "経済では nominal wages（名目賃金）と real wages（実質賃金）を区別する。",
     "tags": [
       "study-language",
-      "curated-v2.97"
+      "curated-v2.97",
+      "curated-v3.59"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07703",
@@ -6442,15 +7362,28 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "名目上；わずかに",
-            "definition": "",
+            "ja": "名目上は；形式上は",
+            "definition": "officially or in name, though not necessarily in reality",
             "examples": [
+              {
+                "en": "The organization is nominally independent, but its budget comes from the government.",
+                "ja": "その組織は名目上独立しているが、予算は政府から出ている。"
+              },
               {
                 "en": "The service is nominally free, but users still pay several fees.",
                 "ja": "そのサービスは名目上無料だが、利用者はいくつかの料金を支払う。"
               }
-            ],
-            "definition_en": "in name or officially, though not necessarily in reality"
+            ]
+          },
+          {
+            "ja": "ほんのわずかに",
+            "definition": "by a very small amount",
+            "examples": [
+              {
+                "en": "The revised estimate was nominally higher than the original.",
+                "ja": "修正後の推計値は当初のものよりわずかに高かった。"
+              }
+            ]
           }
         ]
       }
@@ -6458,17 +7391,31 @@
     "forms": {},
     "phrases": [],
     "collocations": [
-      "nominally independent",
-      "nominally free"
+      {
+        "text": "nominally independent",
+        "en": "nominally independent",
+        "ja": "名目上独立した"
+      },
+      {
+        "text": "nominally free",
+        "en": "nominally free",
+        "ja": "名目上無料の"
+      },
+      {
+        "text": "nominally higher",
+        "en": "nominally higher",
+        "ja": "わずかに高い"
+      }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Useful in advanced general, academic, news, or professional English. Note its common collocations and context-dependent senses.",
+    "usage_note": "nominally independent は実態との違いを含意する。nominally higher は数値差の小ささ。",
     "tags": [
       "work-description",
-      "curated-v3.22"
+      "curated-v3.22",
+      "curated-v3.75"
     ],
     "status": "enriched"
   },
@@ -6581,15 +7528,18 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "生分解しない",
-            "definition": "",
+            "ja": "生分解されない；微生物で分解されにくい",
+            "definition": "unable to be broken down naturally by living organisms such as bacteria",
             "examples": [
+              {
+                "en": "Nonbiodegradable waste can remain in the environment for decades.",
+                "ja": "生分解されないごみは環境中に何十年も残ることがある。"
+              },
               {
                 "en": "Nonbiodegradable waste can remain in the environment for decades.",
                 "ja": "非生分解性の廃棄物は何十年も環境中に残ることがある。"
               }
-            ],
-            "definition_en": "unable to break down naturally through biological processes"
+            ]
           }
         ]
       }
@@ -6597,17 +7547,26 @@
     "forms": {},
     "phrases": [],
     "collocations": [
-      "nonbiodegradable waste",
-      "nonbiodegradable plastic"
+      {
+        "text": "nonbiodegradable waste",
+        "en": "nonbiodegradable waste",
+        "ja": "生分解されない廃棄物"
+      },
+      {
+        "text": "nonbiodegradable plastic",
+        "en": "nonbiodegradable plastic",
+        "ja": "生分解されないプラスチック"
+      }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Useful in advanced general, academic, news, or professional English. Note its common collocations and context-dependent senses.",
+    "usage_note": "biodegradable（生分解性の）の反対。recyclable（再資源化可能）とは別の性質。",
     "tags": [
       "materials-properties",
-      "curated-v3.22"
+      "curated-v3.22",
+      "curated-v3.75"
     ],
     "status": "enriched"
   },
@@ -6761,15 +7720,18 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "秘密保持契約",
-            "definition": "",
+            "ja": "秘密保持契約；守秘義務契約",
+            "definition": "a legal agreement requiring specified information to be kept confidential",
             "examples": [
+              {
+                "en": "Employees signed a nondisclosure agreement before joining the project.",
+                "ja": "従業員はプロジェクトに参加する前に秘密保持契約に署名した。"
+              },
               {
                 "en": "Employees signed a nondisclosure agreement before joining the project.",
                 "ja": "従業員はプロジェクト参加前に秘密保持契約へ署名した。"
               }
-            ],
-            "definition_en": "a legal agreement requiring specified information to be kept confidential"
+            ]
           }
         ]
       }
@@ -6777,17 +7739,26 @@
     "forms": {},
     "phrases": [],
     "collocations": [
-      "sign a nondisclosure agreement",
-      "breach a nondisclosure agreement"
+      {
+        "text": "sign a nondisclosure agreement",
+        "en": "sign a nondisclosure agreement",
+        "ja": "秘密保持契約に署名する"
+      },
+      {
+        "text": "breach a nondisclosure agreement",
+        "en": "breach a nondisclosure agreement",
+        "ja": "秘密保持契約に違反する"
+      }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Learn this expression as a unit. Note its typical grammatical pattern and register.",
+    "usage_note": "NDA と略す。何を秘密にするか、誰が義務を負うかは契約条項による。",
     "tags": [
       "work-life",
-      "curated-v3.22"
+      "curated-v3.22",
+      "curated-v3.75"
     ],
     "status": "enriched"
   },
@@ -6982,15 +7953,18 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "非政府の",
-            "definition": "",
+            "ja": "政府に属さない；非政府の",
+            "definition": "not established, run, or controlled by a government",
             "examples": [
+              {
+                "en": "Nongovernmental organizations provided emergency aid after the disaster.",
+                "ja": "災害後、非政府組織が緊急支援を提供した。"
+              },
               {
                 "en": "Nongovernmental organizations provided emergency aid after the disaster.",
                 "ja": "災害後、非政府組織が緊急援助を提供した。"
               }
-            ],
-            "definition_en": "not controlled or operated by a government"
+            ]
           }
         ]
       }
@@ -6998,17 +7972,26 @@
     "forms": {},
     "phrases": [],
     "collocations": [
-      "nongovernmental organization",
-      "nongovernmental sector"
+      {
+        "text": "nongovernmental organization",
+        "en": "nongovernmental organization",
+        "ja": "非政府組織"
+      },
+      {
+        "text": "nongovernmental sector",
+        "en": "nongovernmental sector",
+        "ja": "非政府部門"
+      }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Useful in advanced general, academic, news, or professional English. Note its common collocations and context-dependent senses.",
+    "usage_note": "nongovernmental organization は NGO と略す。nonprofit（非営利）と同義ではない。",
     "tags": [
       "work-description",
-      "curated-v3.22"
+      "curated-v3.22",
+      "curated-v3.75"
     ],
     "status": "enriched"
   },
@@ -7156,15 +8139,14 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "交渉の余地がない",
-            "definition": "",
+            "ja": "交渉・変更の余地がない；譲れない",
+            "definition": "not open to discussion or change",
             "examples": [
               {
                 "en": "Safety standards are nonnegotiable.",
                 "ja": "安全基準については妥協の余地がない。"
               }
-            ],
-            "definition_en": "not open to discussion or change"
+            ]
           }
         ]
       }
@@ -7172,17 +8154,26 @@
     "forms": {},
     "phrases": [],
     "collocations": [
-      "nonnegotiable requirement",
-      "absolutely nonnegotiable"
+      {
+        "text": "nonnegotiable requirement",
+        "en": "nonnegotiable requirement",
+        "ja": "譲れない要件"
+      },
+      {
+        "text": "absolutely nonnegotiable",
+        "en": "absolutely nonnegotiable",
+        "ja": "絶対に譲れない"
+      }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Useful in advanced general, academic, news, or professional English. Note its common collocations and context-dependent senses.",
+    "usage_note": "条件・原則が「交渉対象ではない」ことを示す。negotiable の反対。",
     "tags": [
       "work-description",
-      "curated-v3.22"
+      "curated-v3.22",
+      "curated-v3.75"
     ],
     "status": "enriched"
   },
@@ -7207,25 +8198,42 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "日持ちする",
-            "definition": "",
-            "examples": []
+            "ja": "腐敗しにくい；長期保存できる",
+            "definition": "able to be stored for a long time without spoiling",
+            "examples": [
+              {
+                "en": "The food bank requested nonperishable items such as canned beans.",
+                "ja": "フードバンクは豆の缶詰など長期保存できる食品を求めた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "nonperishable food",
+        "en": "nonperishable food",
+        "ja": "保存の利く食品"
+      },
+      {
+        "text": "nonperishable supplies",
+        "en": "nonperishable supplies",
+        "ja": "長期保存できる備蓄品"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "保存期間が長いという意味であり、永久に品質が保たれるという意味ではない。",
     "tags": [
-      "descriptive"
+      "descriptive",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08042",
@@ -7290,11 +8298,38 @@
         "meanings": [
           {
             "ja": "非営利の",
-            "definition": "organized to serve a social purpose rather than make profit for owners",
+            "definition": "operating for a public or social purpose rather than to distribute profits to owners",
             "examples": [
+              {
+                "en": "A nonprofit organization provides free legal advice.",
+                "ja": "非営利団体が無料の法律相談を提供している。"
+              },
+              {
+                "en": "The hospital is run by a nonprofit foundation.",
+                "ja": "その病院は非営利財団によって運営されている。"
+              },
               {
                 "en": "She works for a nonprofit organization that supports children.",
                 "ja": "彼女は子どもを支援する非営利団体で働いています。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "非営利団体",
+            "definition": "an organization that operates for a public or social purpose rather than owners’ profit",
+            "examples": [
+              {
+                "en": "She founded a nonprofit to support rural libraries.",
+                "ja": "彼女は地方の図書館を支援する非営利団体を設立した。"
+              },
+              {
+                "en": "The nonprofit relies on donations and volunteers.",
+                "ja": "その非営利団体は寄付とボランティアに支えられている。"
               }
             ]
           }
@@ -7303,17 +8338,29 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "a nonprofit organization",
+        "text": "a nonprofit organization",
+        "ja": "非営利団体"
+      },
+      {
+        "en": "run a nonprofit",
+        "text": "run a nonprofit",
+        "ja": "非営利団体を運営する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "nonprofitは利益を一切生まないという意味ではなく、利益を所有者へ分配することを目的としない。",
     "tags": [
       "trade",
-      "v2.31-curated"
+      "v2.31-curated",
+      "curated-v3.113"
     ],
-    "status": "basic"
+    "status": "enriched"
   },
   {
     "id": "sw-08420",
@@ -7336,25 +8383,42 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "再資源化できない",
-            "definition": "",
-            "examples": []
+            "ja": "リサイクルできない；再資源化できない",
+            "definition": "not suitable for processing into usable materials again",
+            "examples": [
+              {
+                "en": "The packaging contains both recyclable and nonrecyclable components.",
+                "ja": "その包装には再資源化できる部品とできない部品が含まれる。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "nonrecyclable materials",
+        "en": "nonrecyclable materials",
+        "ja": "リサイクルできない素材"
+      },
+      {
+        "text": "nonrecyclable packaging",
+        "en": "nonrecyclable packaging",
+        "ja": "再資源化できない包装"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "recyclable と対になる。回収制度や地域の設備によって扱いが変わる場合がある。",
     "tags": [
-      "materials-properties"
+      "materials-properties",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08222",
@@ -7418,15 +8482,18 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "払い戻しできない",
-            "definition": "",
+            "ja": "返金不可の；払い戻しできない",
+            "definition": "not eligible for a refund after payment",
             "examples": [
+              {
+                "en": "The booking fee is nonrefundable once payment is confirmed.",
+                "ja": "支払いが確定すると予約手数料は返金されない。"
+              },
               {
                 "en": "The booking fee is nonrefundable once payment is confirmed.",
                 "ja": "予約手数料は支払い確定後は返金されない。"
               }
-            ],
-            "definition_en": "not eligible to be returned for a refund"
+            ]
           }
         ]
       }
@@ -7434,17 +8501,26 @@
     "forms": {},
     "phrases": [],
     "collocations": [
-      "nonrefundable deposit",
-      "nonrefundable ticket"
+      {
+        "text": "nonrefundable deposit",
+        "en": "nonrefundable deposit",
+        "ja": "返金不可の保証金"
+      },
+      {
+        "text": "nonrefundable ticket",
+        "en": "nonrefundable ticket",
+        "ja": "払い戻し不可のチケット"
+      }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Useful in advanced general, academic, news, or professional English. Note its common collocations and context-dependent senses.",
+    "usage_note": "予約・航空券・手数料の条件で使う。nonrefundable は譲渡不可（nontransferable）とは異なる。",
     "tags": [
       "work-description",
-      "curated-v3.22"
+      "curated-v3.22",
+      "curated-v3.75"
     ],
     "status": "enriched"
   },
@@ -7469,15 +8545,18 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "再生不可能な",
-            "definition": "",
+            "ja": "再生可能でない；使うと短期間には補充されない",
+            "definition": "not able to be replenished by natural processes on a human timescale",
             "examples": [
+              {
+                "en": "The economy remains heavily dependent on nonrenewable energy sources.",
+                "ja": "その経済は依然として非再生可能なエネルギー源に大きく依存している。"
+              },
               {
                 "en": "The economy remains heavily dependent on nonrenewable energy sources.",
                 "ja": "その経済は依然として非再生可能エネルギー源に大きく依存している。"
               }
-            ],
-            "definition_en": "unable to be replaced naturally at a rate fast enough for continued use"
+            ]
           }
         ]
       }
@@ -7485,17 +8564,26 @@
     "forms": {},
     "phrases": [],
     "collocations": [
-      "nonrenewable resource",
-      "nonrenewable energy"
+      {
+        "text": "nonrenewable resource",
+        "en": "nonrenewable resource",
+        "ja": "非再生可能資源"
+      },
+      {
+        "text": "nonrenewable energy",
+        "en": "nonrenewable energy",
+        "ja": "非再生可能エネルギー"
+      }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Useful in advanced general, academic, news, or professional English. Note its common collocations and context-dependent senses.",
+    "usage_note": "化石燃料などに使う。renewable（再生可能な）の反対。",
     "tags": [
       "materials-properties",
-      "curated-v3.22"
+      "curated-v3.22",
+      "curated-v3.75"
     ],
     "status": "enriched"
   },
@@ -7819,25 +8907,42 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "譲渡できない",
-            "definition": "",
-            "examples": []
+            "ja": "譲渡できない；他人に移せない",
+            "definition": "not allowed to be passed or assigned to another person",
+            "examples": [
+              {
+                "en": "The ticket is nontransferable and can be used only by the named passenger.",
+                "ja": "そのチケットは譲渡不可で、記名された乗客だけが利用できる。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "nontransferable ticket",
+        "en": "nontransferable ticket",
+        "ja": "譲渡不可のチケット"
+      },
+      {
+        "text": "nontransferable rights",
+        "en": "nontransferable rights",
+        "ja": "譲渡できない権利"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "nonrefundable（返金不可）とは別の制限。",
     "tags": [
-      "work-description"
+      "work-description",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08315",
@@ -7901,25 +9006,42 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "言葉を使わずに",
-            "definition": "",
-            "examples": []
+            "ja": "言葉を使わずに；非言語的に",
+            "definition": "without using spoken or written words",
+            "examples": [
+              {
+                "en": "The teacher encouraged students to communicate nonverbally through gestures.",
+                "ja": "教師は生徒に身振りを使って言葉なしで伝えるよう促した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "communicate nonverbally",
+        "en": "communicate nonverbally",
+        "ja": "言葉を使わずに意思疎通する"
+      },
+      {
+        "text": "respond nonverbally",
+        "en": "respond nonverbally",
+        "ja": "言葉を使わずに反応する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "ジェスチャー・表情・視線などを通じたコミュニケーションに用いる。",
     "tags": [
-      "expression-manner"
+      "expression-manner",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08366",
@@ -7942,25 +9064,57 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "揮発しない；不揮発性の",
-            "definition": "",
-            "examples": []
+            "ja": "（物質が）揮発しにくい；不揮発性の",
+            "definition": "not readily changing into a gas at ordinary temperatures",
+            "examples": [
+              {
+                "en": "The coating contains nonvolatile components that remain after drying.",
+                "ja": "その塗料には乾燥後も残る不揮発性の成分が含まれている。"
+              }
+            ]
+          },
+          {
+            "ja": "（記憶装置が）電源を切っても情報を保持する",
+            "definition": "able to retain stored data when the power is turned off",
+            "examples": [
+              {
+                "en": "The device stores its settings in nonvolatile memory.",
+                "ja": "その装置は電源を切っても消えないメモリーに設定を保存する。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "nonvolatile memory",
+        "text": "nonvolatile memory",
+        "ja": "不揮発性メモリー"
+      },
+      {
+        "en": "nonvolatile compounds",
+        "text": "nonvolatile compounds",
+        "ja": "不揮発性化合物"
+      },
+      {
+        "en": "nonvolatile storage",
+        "text": "nonvolatile storage",
+        "ja": "不揮発性ストレージ"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "化学では「蒸発しにくい」、情報技術では「電源を切ってもデータが消えない」。文脈で区別する。",
     "tags": [
-      "materials-properties"
+      "materials-properties",
+      "curated-v3.140"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-03886",
@@ -8031,6 +9185,22 @@
               {
                 "en": "Social norms influence how people behave even when no formal rule exists.",
                 "ja": "社会規範は正式な規則がなくても人々の行動に影響を与える。"
+              },
+              {
+                "en": "What counts as polite behavior depends partly on cultural norms.",
+                "ja": "何が礼儀正しい行動とみなされるかは文化的規範にも左右される。"
+              },
+              {
+                "en": "Working from home became the norm for many employees during the emergency.",
+                "ja": "緊急事態の間、多くの従業員にとって在宅勤務が普通になった。"
+              },
+              {
+                "en": "Social norms influence what people consider acceptable behavior.",
+                "ja": "社会規範は人々がどのような行動を許容できると考えるかに影響する。"
+              },
+              {
+                "en": "Working from home became the norm for many employees during the pandemic.",
+                "ja": "パンデミックの間、多くの従業員にとって在宅勤務が普通になった。"
               }
             ],
             "definition_en": "an accepted standard of behavior or a usual pattern within a group or society"
@@ -8044,13 +9214,15 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Common in sociology and academic discussion; often plural norms.",
+    "usage_note": "norm は集団で共有される規範のほか、「通常の状態」を表す。the norm は「普通のこと」。",
     "tags": [
       "learner-core-gap",
       "v2.31-curated",
       "etymology-v1",
       "curated-v2.60",
-      "curated-v3.27"
+      "curated-v3.27",
+      "curated-v3.115",
+      "curated-v3.174"
     ],
     "status": "enriched",
     "search_terms": [
@@ -8061,9 +9233,46 @@
       "ipa_uk": null
     },
     "collocations": [
-      "social norm",
-      "cultural norm",
-      "accepted norm"
+      {
+        "en": "social norms",
+        "text": "social norms",
+        "ja": "社会規範"
+      },
+      {
+        "en": "cultural norms",
+        "text": "cultural norms",
+        "ja": "文化的規範"
+      },
+      {
+        "en": "become the norm",
+        "text": "become the norm",
+        "ja": "普通になる"
+      },
+      {
+        "en": "depart from the norm",
+        "text": "depart from the norm",
+        "ja": "標準から外れる"
+      },
+      {
+        "en": "social norm",
+        "text": "social norm",
+        "ja": "社会規範"
+      },
+      {
+        "en": "cultural norm",
+        "text": "cultural norm",
+        "ja": "文化的規範"
+      },
+      {
+        "en": "accepted norm",
+        "text": "accepted norm",
+        "ja": "広く受け入れられた規範"
+      },
+      {
+        "en": "challenge the norm",
+        "text": "challenge the norm",
+        "ja": "従来の常識に異議を唱える"
+      }
     ],
     "etymology": {
       "origin": "Latin norma",
@@ -8079,19 +9288,7 @@
         "abnormal",
         "normalize"
       ]
-    },
-    "senses": [
-      {
-        "pos": "",
-        "definition_ja": "規範；標準",
-        "examples": [
-          {
-            "en": "Social norms influence what people consider acceptable behavior.",
-            "ja": "社会規範は人々がどのような行動を許容できると考えるかに影響する。"
-          }
-        ]
-      }
-    ]
+    }
   },
   {
     "id": "sw-01083",
@@ -8107,12 +9304,26 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "普通の；正常な",
-            "definition": "usual, expected, or healthy",
+            "ja": "普通の；通常の",
+            "definition": "usual or expected in a particular situation",
             "examples": [
+              {
+                "en": "It is normal to make mistakes when learning a new language.",
+                "ja": "新しい言語を学ぶときに間違えるのは普通のことだ。"
+              },
               {
                 "en": "It is normal to feel nervous before an important interview.",
                 "ja": "重要な面接の前に緊張するのは普通です。"
+              }
+            ]
+          },
+          {
+            "ja": "正常な",
+            "definition": "within the usual or healthy range",
+            "examples": [
+              {
+                "en": "The doctor said the test results were normal.",
+                "ja": "医師は検査結果が正常だと述べた。"
               }
             ]
           }
@@ -8125,12 +9336,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "normal は「通常の」「正常な」。return to normal は「平常に戻る」。人に対して normal を使う際は価値判断に聞こえることがある。",
     "tags": [
       "v2.29-curated",
-      "etymology-v1"
+      "etymology-v1",
+      "curated-v3.159"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "normal"
     ],
@@ -8138,7 +9350,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "return to normal",
+        "en": "return to normal",
+        "ja": "通常の状態に戻る"
+      },
+      {
+        "text": "normal range",
+        "en": "normal range",
+        "ja": "正常範囲"
+      },
+      {
+        "text": "normal working hours",
+        "en": "normal working hours",
+        "ja": "通常の勤務時間"
+      }
+    ],
     "etymology": {
       "origin": "Latin norma",
       "history": "norma「基準」に由来し、基準に合う→通常の、を表す。",
@@ -8176,12 +9404,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "正常化；標準化",
-            "definition": "a state, process, idea, person, or thing associated with 正常化",
+            "ja": "正常化；通常の状態に戻すこと",
+            "definition": "the process of returning something to a normal or stable condition",
             "examples": [
               {
-                "en": "The study discusses normalization in this context.",
-                "ja": "その研究はこの文脈における「正常化」を論じている。"
+                "en": "The two countries announced the normalization of diplomatic relations.",
+                "ja": "両国は外交関係の正常化を発表した。"
+              }
+            ]
+          },
+          {
+            "ja": "（データ・手続きの）標準化；正規化",
+            "definition": "the process of making data or procedures consistent with a standard",
+            "examples": [
+              {
+                "en": "Normalization made the scores comparable across schools.",
+                "ja": "正規化によって学校間で得点を比較できるようになった。"
               }
             ]
           }
@@ -8190,16 +9428,28 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "normalization of relations",
+        "text": "normalization of relations",
+        "ja": "関係の正常化"
+      },
+      {
+        "en": "data normalization",
+        "text": "data normalization",
+        "ja": "データの正規化"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "外交の「正常化」とデータ処理の「正規化」を区別する。",
     "tags": [
-      "50k-curated-band"
+      "50k-curated-band",
+      "curated-v3.59"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08349",
@@ -8222,15 +9472,28 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "標準化する；正規化する",
-            "definition": "",
+            "ja": "標準化する；（データを）正規化する",
+            "definition": "to adjust information or measurements to a common standard or scale",
             "examples": [
+              {
+                "en": "The researchers normalized the data before comparing the two groups.",
+                "ja": "研究者たちは二つの群を比較する前にデータを正規化した。"
+              },
               {
                 "en": "The researchers normalized the data before comparing the two groups.",
                 "ja": "研究者たちは二群を比較する前にデータを正規化した。"
               }
-            ],
-            "definition_en": "to make something normal or standard; to adjust data to a common scale"
+            ]
+          },
+          {
+            "ja": "普通のこととして受け入れられるようにする",
+            "definition": "to make something seem normal or socially acceptable",
+            "examples": [
+              {
+                "en": "The campaign aims to normalize conversations about mental health.",
+                "ja": "その活動は心の健康について話すことを当たり前にすることを目指している。"
+              }
+            ]
           }
         ]
       }
@@ -8238,18 +9501,32 @@
     "forms": {},
     "phrases": [],
     "collocations": [
-      "normalize data",
-      "normalize relations"
+      {
+        "text": "normalize data",
+        "en": "normalize data",
+        "ja": "データを正規化する"
+      },
+      {
+        "text": "normalize relations",
+        "en": "normalize relations",
+        "ja": "関係を正常化する"
+      },
+      {
+        "text": "normalize discussion of a topic",
+        "en": "normalize discussion of a topic",
+        "ja": "ある話題についての議論を一般的にする"
+      }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Useful in advanced general, academic, news, or professional English. Note its common collocations and context-dependent senses.",
+    "usage_note": "データ処理では「正規化」、外交では「正常化」、社会的態度では「普通のことにする」。",
     "tags": [
       "computing-actions",
       "etymology-v1",
-      "curated-v3.22"
+      "curated-v3.22",
+      "curated-v3.75"
     ],
     "status": "enriched",
     "etymology": {
@@ -8378,28 +9655,65 @@
     "frequency": 4,
     "parts_of_speech": [
       {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "鼻",
+            "definition": "the part of the face used for smelling and breathing",
+            "examples": [
+              {
+                "en": "She covered her nose because of the strong smell.",
+                "ja": "彼女は強いにおいのため鼻を覆った。"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "pos": "verb",
         "meanings": [
           {
-            "ja": "鼻を近づける；探る",
-            "definition": "",
-            "examples": []
+            "ja": "（車などが）ゆっくり進む",
+            "definition": "to move slowly and carefully in a particular direction",
+            "examples": [
+              {
+                "en": "The bus nosed through the narrow street.",
+                "ja": "バスは狭い通りを慎重にゆっくり進んだ。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "a runny nose",
+        "text": "a runny nose",
+        "ja": "鼻水が出る鼻"
+      },
+      {
+        "en": "nose into a space",
+        "text": "nose into a space",
+        "ja": "狭い場所へゆっくり進み入る"
+      },
+      {
+        "en": "follow one’s nose",
+        "text": "follow one’s nose",
+        "ja": "直感に従う；鼻の向くまま進む"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "名詞「鼻」が基本。動詞 nose はゆっくり進む用法があり、nose around は「詮索する」。",
     "tags": [
-      "actions"
+      "actions",
+      "curated-v3.116"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-09863",
@@ -8510,25 +9824,42 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "懐かしむ",
-            "definition": "",
-            "examples": []
+            "ja": "懐かしさを感じる；郷愁を誘う",
+            "definition": "feeling affection or sadness when remembering the past",
+            "examples": [
+              {
+                "en": "The old photographs made her nostalgic for her childhood.",
+                "ja": "古い写真を見て、彼女は子ども時代を懐かしく思った。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "feel nostalgic for childhood",
+        "en": "feel nostalgic for childhood",
+        "ja": "子ども時代を懐かしむ"
+      },
+      {
+        "text": "nostalgic memories",
+        "en": "nostalgic memories",
+        "ja": "懐かしい思い出"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "nostalgic for + 過去の時期・場所・物。nostalgic about も使う。",
     "tags": [
-      "descriptive"
+      "descriptive",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-05231",
@@ -8677,15 +10008,15 @@
     "frequency": 5,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adverb",
         "meanings": [
           {
-            "ja": "〜でない",
-            "definition": "a person, thing, idea, or concept connected with '〜でない'",
+            "ja": "〜ではない；〜しない",
+            "definition": "used to make a statement or part of a statement negative",
             "examples": [
               {
-                "en": "This not is important.",
-                "ja": "この「〜でない」は重要です。"
+                "en": "She does not agree with the proposal.",
+                "ja": "彼女はその提案に賛成していない。"
               }
             ]
           }
@@ -8698,9 +10029,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "not は否定の副詞。一般動詞の否定には通常 do / does / did + not を使う。",
+    "tags": [
+      "curated-v3.155"
+    ],
+    "status": "enriched",
     "search_terms": [
       "not"
     ],
@@ -8708,7 +10041,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "not at all",
+        "en": "not at all",
+        "ja": "全く〜ない"
+      },
+      {
+        "text": "not necessarily",
+        "en": "not necessarily",
+        "ja": "必ずしも〜ない"
+      },
+      {
+        "text": "not yet",
+        "en": "not yet",
+        "ja": "まだ〜ない"
+      }
+    ]
   },
   {
     "id": "sw-07764",
@@ -8775,19 +10124,24 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "特に",
-            "definition": "in the manner or degree expressed by 特に",
+            "ja": "特に；とりわけ",
+            "definition": "used to single out a particularly important example",
             "examples": [
-              {
-                "en": "The word 'notably' is commonly used in this kind of context.",
-                "ja": "「notably」は「特に」に関する文脈でよく使われます。"
-              },
               {
                 "en": "Several countries, notably Japan, have rapidly aging populations.",
                 "ja": "いくつかの国、とりわけ日本では人口高齢化が急速に進んでいる。"
               }
-            ],
-            "definition_en": "especially or in a way that deserves attention"
+            ]
+          },
+          {
+            "ja": "著しく；目立って",
+            "definition": "to a degree that is clearly noticeable",
+            "examples": [
+              {
+                "en": "Attendance was notably higher after the schedule changed.",
+                "ja": "日程変更後、出席率は目に見えて高くなった。"
+              }
+            ]
           }
         ]
       }
@@ -8798,9 +10152,10 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Useful in advanced general, academic, news, or professional English. Note its common collocations and context-dependent senses.",
+    "usage_note": "notably は例示の「とりわけ」と程度の「著しく」の両方がある。",
     "tags": [
-      "curated-v3.22"
+      "curated-v3.22",
+      "curated-v3.112"
     ],
     "status": "enriched",
     "search_terms": [
@@ -8811,8 +10166,21 @@
       "ipa_uk": null
     },
     "collocations": [
-      "most notably",
-      "notably different"
+      {
+        "text": "most notably",
+        "en": "most notably",
+        "ja": "とりわけ"
+      },
+      {
+        "text": "notably absent",
+        "en": "notably absent",
+        "ja": "目立って欠けている"
+      },
+      {
+        "text": "notably higher",
+        "en": "notably higher",
+        "ja": "著しく高い"
+      }
     ]
   },
   {
@@ -8836,25 +10204,42 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "公証する",
-            "definition": "",
-            "examples": []
+            "ja": "（書類・署名を）公証する；公証人の認証を受ける",
+            "definition": "to have a document or signature officially certified by a notary",
+            "examples": [
+              {
+                "en": "You may need to have the consent form notarized before submitting it.",
+                "ja": "同意書を提出する前に公証人の認証を受ける必要があるかもしれない。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "have a document notarized",
+        "en": "have a document notarized",
+        "ja": "書類を公証してもらう"
+      },
+      {
+        "text": "notarized signature",
+        "en": "notarized signature",
+        "ja": "公証された署名"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "have + 書類 + notarized の形が一般的。公証の具体的な法的効力は国・制度による。",
     "tags": [
-      "work-actions"
+      "work-actions",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-09181",
@@ -8877,12 +10262,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "記譜法；表記",
-            "definition": "",
+            "ja": "記号法；表記法",
+            "definition": "a system of signs or symbols used to represent information",
             "examples": [
               {
-                "en": "In advanced academic English, \"notation\" can be used with the meaning \"\".",
-                "ja": "上級の学術英語では「notation」が「記譜法；表記」という意味で用いられることがある。"
+                "en": "The textbook introduces a simpler notation for the formula.",
+                "ja": "その教科書はその式のために、より簡単な表記法を導入している。"
+              }
+            ]
+          },
+          {
+            "ja": "楽譜の記譜法",
+            "definition": "a system of written symbols used to represent musical sounds",
+            "examples": [
+              {
+                "en": "Students learn basic musical notation before reading full scores.",
+                "ja": "生徒たちは総譜を読む前に基本的な記譜法を学ぶ。"
               }
             ]
           }
@@ -8891,17 +10286,29 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "mathematical notation",
+        "en": "mathematical notation",
+        "ja": "数学的表記法"
+      },
+      {
+        "text": "musical notation",
+        "en": "musical notation",
+        "ja": "楽譜の記譜法"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "数学・科学では記号体系、音楽では音符や休符などの表記体系を指す。",
     "tags": [
       "music-performance",
-      "curated-v2.98"
+      "curated-v2.98",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-01084",
@@ -8917,12 +10324,61 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "メモ；注記",
-            "definition": "a short written record or piece of additional information",
+            "ja": "メモ；覚え書き",
+            "definition": "a short written record of information",
             "examples": [
+              {
+                "en": "I took notes during the lecture.",
+                "ja": "私は講義中にメモを取った。"
+              },
               {
                 "en": "I made a note of the teacher's advice.",
                 "ja": "先生の助言をメモしました。"
+              }
+            ]
+          },
+          {
+            "ja": "注記；脚注",
+            "definition": "a brief explanation added to a text",
+            "examples": [
+              {
+                "en": "See the note below the table for details.",
+                "ja": "詳細は表の下の注記を参照してください。"
+              }
+            ]
+          },
+          {
+            "ja": "音符；音",
+            "definition": "a single musical sound or its written symbol",
+            "examples": [
+              {
+                "en": "The melody ends on a high note.",
+                "ja": "その旋律は高い音で終わる。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "注目する；留意する",
+            "definition": "to notice or pay particular attention to something",
+            "examples": [
+              {
+                "en": "The authors note that the sample size was small.",
+                "ja": "著者らは標本数が少なかったと指摘している。"
+              }
+            ]
+          },
+          {
+            "ja": "書き留める；記録する",
+            "definition": "to write down information for later use",
+            "examples": [
+              {
+                "en": "Please note the date of the next meeting.",
+                "ja": "次の会議の日付を控えてください。"
               }
             ]
           }
@@ -8935,11 +10391,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "note that ... は論文で「…と指摘する」。take notes は通常複数形。",
     "tags": [
-      "v2.31-curated"
+      "v2.31-curated",
+      "curated-v3.105"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "note"
     ],
@@ -8947,7 +10404,28 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "take notes",
+        "en": "take notes",
+        "ja": "メモを取る"
+      },
+      {
+        "text": "note that",
+        "en": "note that",
+        "ja": "～と指摘する；留意する"
+      },
+      {
+        "text": "footnote",
+        "en": "footnote",
+        "ja": "脚注"
+      },
+      {
+        "text": "on a positive note",
+        "en": "on a positive note",
+        "ja": "前向きな話題で"
+      }
+    ]
   },
   {
     "id": "sw-02789",
@@ -9015,24 +10493,41 @@
         "meanings": [
           {
             "ja": "メモ帳",
-            "definition": "",
-            "examples": []
+            "definition": "a pad of paper used for writing short notes",
+            "examples": [
+              {
+                "en": "Bring a notepad so you can record questions during the interview.",
+                "ja": "面接中に質問を書き留められるようメモ帳を持ってきてください。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "write in a notepad",
+        "en": "write in a notepad",
+        "ja": "メモ帳に書く"
+      },
+      {
+        "text": "a pocket notepad",
+        "en": "a pocket notepad",
+        "ja": "ポケットサイズのメモ帳"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "紙のメモ帳を指すことが多いが、デジタルのメモ用アプリ名としても使われる。",
     "tags": [
-      "digital-office"
+      "digital-office",
+      "curated-v3.118"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-00432",
@@ -9048,12 +10543,22 @@
         "pos": "pronoun",
         "meanings": [
           {
-            "ja": "何も〜ない",
-            "definition": "a word used in place of a noun with the sense '何も〜ない'",
+            "ja": "何も〜ない；何もない",
+            "definition": "not a single thing",
             "examples": [
               {
-                "en": "The word 'nothing' is common in English.",
-                "ja": "「nothing」は英語でよく使われる語です。"
+                "en": "Nothing was damaged during the storm.",
+                "ja": "嵐の間、何も損傷しなかった。"
+              }
+            ]
+          },
+          {
+            "ja": "重要でないもの；取るに足りないこと",
+            "definition": "something with no importance or value in a particular context",
+            "examples": [
+              {
+                "en": "The mistake was nothing to worry about.",
+                "ja": "その間違いは心配するほどのことではなかった。"
               }
             ]
           }
@@ -9066,9 +10571,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "nothing 自体に否定の意味があるので、通常は二重否定にしない。nothing important のように形容詞を後置する。",
+    "tags": [
+      "curated-v3.170"
+    ],
+    "status": "enriched",
     "search_terms": [
       "nothing"
     ],
@@ -9076,7 +10583,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "nothing else",
+        "en": "nothing else",
+        "ja": "ほかには何もない"
+      },
+      {
+        "text": "nothing to worry about",
+        "en": "nothing to worry about",
+        "ja": "心配することは何もない"
+      },
+      {
+        "text": "nothing but",
+        "en": "nothing but",
+        "ja": "〜以外は何もない"
+      }
+    ]
   },
   {
     "id": "sw-00916",
@@ -9102,6 +10625,31 @@
             ]
           }
         ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "告知；掲示",
+            "definition": "a written or printed announcement giving information",
+            "examples": [
+              {
+                "en": "A notice on the door said the library would close early.",
+                "ja": "扉の掲示には図書館が早く閉まると書かれていた。"
+              }
+            ]
+          },
+          {
+            "ja": "（退職・契約解除などの）事前通知",
+            "definition": "an advance warning required before ending an arrangement",
+            "examples": [
+              {
+                "en": "Employees must give one month’s notice before leaving.",
+                "ja": "従業員は退職する1か月前に通知しなければならない。"
+              }
+            ]
+          }
+        ]
       }
     ],
     "forms": {
@@ -9115,11 +10663,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "notice は動詞「気づく」と名詞「通知」。notice + 人 + doing は「人が〜しているのに気づく」。give notice は「事前に通知する」。",
     "tags": [
-      "v2.29-curated"
+      "v2.29-curated",
+      "curated-v3.121"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "notice",
       "notices",
@@ -9130,7 +10679,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "notice a change",
+        "ja": "変化に気づく"
+      },
+      {
+        "text": "give notice",
+        "ja": "事前に通知する"
+      },
+      {
+        "text": "at short notice",
+        "ja": "急な知らせで"
+      }
+    ]
   },
   {
     "id": "sw-09057",
@@ -9208,25 +10770,42 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "掲示板",
-            "definition": "",
-            "examples": []
+            "ja": "掲示板；告知板",
+            "definition": "a board on which public notices and announcements are displayed",
+            "examples": [
+              {
+                "en": "The timetable is posted on the noticeboard outside the office.",
+                "ja": "時間割は事務室の外の掲示板に貼られている。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "post a notice on the noticeboard",
+        "en": "post a notice on the noticeboard",
+        "ja": "掲示板にお知らせを貼る"
+      },
+      {
+        "text": "school noticeboard",
+        "en": "school noticeboard",
+        "ja": "学校の掲示板"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "英国英語でよく使う。米国英語では bulletin board も一般的。",
     "tags": [
-      "office-business"
+      "office-business",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-03291",
@@ -9255,6 +10834,10 @@
               {
                 "en": "Turn off unnecessary notifications while you study.",
                 "ja": "勉強中は不要な通知を切ってください。"
+              },
+              {
+                "en": "Applicants will receive a notification once their documents have been reviewed.",
+                "ja": "応募者には書類審査が終わり次第、通知が届く。"
               }
             ]
           }
@@ -9263,17 +10846,34 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "receive a notification",
+        "en": "receive a notification",
+        "ja": "通知を受け取る"
+      },
+      {
+        "text": "push notification",
+        "en": "push notification",
+        "ja": "プッシュ通知"
+      },
+      {
+        "text": "notification of a change",
+        "en": "notification of a change",
+        "ja": "変更の通知"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "notify A of B は「AにBを通知する」。notification はその名詞形。",
     "tags": [
       "50k-frequency-gap",
-      "v2.31-curated"
+      "v2.31-curated",
+      "curated-v3.137"
     ],
-    "status": "basic"
+    "status": "enriched"
   },
   {
     "id": "sw-01949",
@@ -9299,6 +10899,18 @@
               {
                 "en": "The book challenges the notion that intelligence never changes.",
                 "ja": "その本は知能は変化しないという考えに異議を唱えています。"
+              },
+              {
+                "en": "The findings challenge the notion that economic growth automatically improves wellbeing.",
+                "ja": "その研究結果は経済成長が自動的に幸福を改善するという考えに疑問を投げかける。"
+              },
+              {
+                "en": "The findings undermine the notion that older adults cannot learn new skills.",
+                "ja": "その研究結果は、高齢者は新しい技能を習得できないという考えを揺るがす。"
+              },
+              {
+                "en": "Her notion of success includes well-being, not just income.",
+                "ja": "彼女の成功観には収入だけでなく幸福も含まれている。"
               }
             ]
           }
@@ -9311,11 +10923,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "“The notion that + clause” is common in academic argument. A notion is often less formally defined than a concept.",
+    "usage_note": "“The notion that + clause” is common in academic argument. A notion is often less formally defined than a concept.\nthe notion that + 節／the notion of + 名詞。idea より抽象的な「考え・観念」を指すことが多い。",
     "tags": [
       "v2.31-curated",
       "curated-v2.67",
-      "curated-v3.34"
+      "curated-v3.34",
+      "curated-v3.132"
     ],
     "status": "enriched",
     "search_terms": [
@@ -9327,34 +10940,39 @@
     },
     "collocations": [
       {
-        "text": "notion that"
+        "text": "notion that",
+        "en": "notion that",
+        "ja": "～という考え"
       },
       {
-        "text": "conventional notion"
+        "text": "conventional notion",
+        "en": "conventional notion",
+        "ja": "従来の通念"
       },
       {
         "text": "the notion that",
+        "en": "the notion that",
         "ja": "～という考え"
       },
       {
         "text": "challenge the notion",
+        "en": "challenge the notion",
         "ja": "通念に異議を唱える"
       },
       {
         "text": "widely held notion",
+        "en": "widely held notion",
         "ja": "広く受け入れられた考え"
-      }
-    ],
-    "senses": [
+      },
       {
-        "pos": "",
-        "definition_ja": "考え；概念",
-        "examples": [
-          {
-            "en": "The findings challenge the notion that economic growth automatically improves wellbeing.",
-            "ja": "その研究結果は経済成長が自動的に幸福を改善するという考えに疑問を投げかける。"
-          }
-        ]
+        "text": "reject the notion that ...",
+        "en": "reject the notion that ...",
+        "ja": "…という考えを退ける"
+      },
+      {
+        "text": "a narrow notion of success",
+        "en": "a narrow notion of success",
+        "ja": "狭い成功観"
       }
     ]
   },
@@ -9467,25 +11085,52 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "滋養になる",
-            "definition": "",
-            "examples": []
+            "ja": "栄養を与える；滋養のある",
+            "definition": "providing the nutrients needed for health and growth",
+            "examples": [
+              {
+                "en": "The soup is simple but nourishing.",
+                "ja": "そのスープは素朴だが栄養がある。"
+              }
+            ]
+          },
+          {
+            "ja": "心を豊かにする；気持ちを満たす",
+            "definition": "helping someone feel emotionally supported or fulfilled",
+            "examples": [
+              {
+                "en": "She found the conversation deeply nourishing.",
+                "ja": "彼女はその会話に心が満たされる思いをした。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "nourishing meal",
+        "en": "nourishing meal",
+        "ja": "栄養のある食事"
+      },
+      {
+        "text": "emotionally nourishing",
+        "en": "emotionally nourishing",
+        "ja": "心の支えになる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "食事には「滋養のある」、人間関係や活動には比喩的に「心を満たす」。",
     "tags": [
-      "descriptive"
+      "descriptive",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11956",
@@ -9684,12 +11329,22 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "今",
-            "definition": "in the way or time described as '今'",
+            "ja": "今；現在",
+            "definition": "at the present time",
             "examples": [
               {
-                "en": "The word 'now' is common in English.",
-                "ja": "「now」は英語でよく使われる語です。"
+                "en": "We now have enough data to compare the results.",
+                "ja": "私たちには今、結果を比較するのに十分なデータがある。"
+              }
+            ]
+          },
+          {
+            "ja": "たった今；すぐに",
+            "definition": "at this moment or without further delay",
+            "examples": [
+              {
+                "en": "Please submit your answer now.",
+                "ja": "今すぐ解答を提出してください。"
               }
             ]
           }
@@ -9702,9 +11357,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "now は現在を示す。by now は「今ごろまでには」、from now on は「これからずっと」。",
+    "tags": [
+      "curated-v3.170"
+    ],
+    "status": "enriched",
     "search_terms": [
       "now"
     ],
@@ -9712,7 +11369,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "right now",
+        "en": "right now",
+        "ja": "今すぐ"
+      },
+      {
+        "text": "from now on",
+        "en": "from now on",
+        "ja": "今後は"
+      },
+      {
+        "text": "by now",
+        "en": "by now",
+        "ja": "今ごろはもう"
+      }
+    ]
   },
   {
     "id": "sw-04092",
@@ -9827,25 +11500,42 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "ノズル",
-            "definition": "",
-            "examples": []
+            "ja": "ノズル；液体・気体の噴出口",
+            "definition": "a shaped opening at the end of a pipe or hose that controls the flow of liquid or gas",
+            "examples": [
+              {
+                "en": "Adjust the nozzle to produce a finer spray.",
+                "ja": "より細かな霧が出るようにノズルを調整してください。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "spray nozzle",
+        "en": "spray nozzle",
+        "ja": "噴霧ノズル"
+      },
+      {
+        "text": "hose nozzle",
+        "en": "hose nozzle",
+        "ja": "ホースの噴出口"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "水・空気・燃料などの流れや噴射形状を調整する部品。",
     "tags": [
-      "home-workshop"
+      "home-workshop",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-01950",
@@ -10052,15 +11742,28 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "無効にする",
-            "definition": "",
+            "ja": "（契約・決定などを）法的に無効にする",
+            "definition": "to make a legal agreement, decision, or rule invalid",
             "examples": [
+              {
+                "en": "The court ruling could nullify the earlier agreement.",
+                "ja": "その裁判所の判断によって以前の合意が無効になる可能性がある。"
+              },
               {
                 "en": "The court ruling could nullify the earlier agreement.",
                 "ja": "その裁判所の判断は以前の合意を無効にする可能性がある。"
               }
-            ],
-            "definition_en": "to make something legally invalid or ineffective"
+            ]
+          },
+          {
+            "ja": "（効果・利点などを）打ち消す",
+            "definition": "to cancel out the effect or value of something",
+            "examples": [
+              {
+                "en": "A single serious error could nullify the benefits of the reform.",
+                "ja": "たった一つの重大な誤りが改革の利点を帳消しにしかねない。"
+              }
+            ]
           }
         ]
       }
@@ -10068,17 +11771,26 @@
     "forms": {},
     "phrases": [],
     "collocations": [
-      "nullify an agreement",
-      "nullify the effect"
+      {
+        "text": "nullify an agreement",
+        "en": "nullify an agreement",
+        "ja": "合意を無効にする"
+      },
+      {
+        "text": "nullify the effect",
+        "en": "nullify the effect",
+        "ja": "効果を打ち消す"
+      }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Useful in advanced general, academic, news, or professional English. Note its common collocations and context-dependent senses.",
+    "usage_note": "法律文書での「無効にする」と一般的な「効果を打ち消す」の両方に使う。",
     "tags": [
       "work-actions",
-      "curated-v3.22"
+      "curated-v3.22",
+      "curated-v3.75"
     ],
     "status": "enriched"
   },
@@ -10143,12 +11855,41 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "数；番号",
-            "definition": "a word or symbol representing an amount, or a set of digits used to identify something",
+            "ja": "番号；識別用の数字",
+            "definition": "a figure or series of figures used to identify something",
             "examples": [
+              {
+                "en": "Please write your student number on the answer sheet.",
+                "ja": "解答用紙に学籍番号を書いてください。"
+              },
               {
                 "en": "Write your student number at the top of the page.",
                 "ja": "ページ上部に学籍番号を書いてください。"
+              }
+            ]
+          },
+          {
+            "ja": "数；数量",
+            "definition": "an amount expressed as a count",
+            "examples": [
+              {
+                "en": "The number of applicants increased this year.",
+                "ja": "今年は志願者の数が増えた。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "番号を付ける",
+            "definition": "to assign numbers to items in a sequence",
+            "examples": [
+              {
+                "en": "Number the pages before you submit the report.",
+                "ja": "報告書を提出する前にページ番号を付けてください。"
               }
             ]
           }
@@ -10161,12 +11902,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "a number of + 複数名詞は複数扱い、the number of + 複数名詞は単数扱いが基本。",
     "tags": [
       "v2.29-curated",
-      "etymology-v1"
+      "etymology-v1",
+      "curated-v3.159"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "number"
     ],
@@ -10174,7 +11916,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a large number of",
+        "en": "a large number of",
+        "ja": "多数の"
+      },
+      {
+        "text": "the number of students",
+        "en": "the number of students",
+        "ja": "生徒の人数"
+      },
+      {
+        "text": "number the pages",
+        "en": "number the pages",
+        "ja": "ページに番号を付ける"
+      }
+    ],
     "etymology": {
       "origin": "Latin numerus",
       "history": "Latin numerus「数」に由来し、Old French を経て英語に入った。",
@@ -10211,25 +11969,52 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "しびれ；感覚の欠如",
-            "definition": "",
-            "examples": []
+            "ja": "しびれ；感覚が鈍くなること",
+            "definition": "a loss or reduction of physical feeling in part of the body",
+            "examples": [
+              {
+                "en": "She felt numbness in her fingers after being outside in the cold.",
+                "ja": "彼女は寒い屋外にいた後、指にしびれを感じた。"
+              }
+            ]
+          },
+          {
+            "ja": "感情の麻痺；何も感じられない状態",
+            "definition": "an inability to feel or respond emotionally",
+            "examples": [
+              {
+                "en": "After the shocking news, he described a sense of numbness.",
+                "ja": "衝撃的な知らせの後、彼は感情が麻痺したような感覚を語った。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "numbness in the fingers",
+        "en": "numbness in the fingers",
+        "ja": "指のしびれ"
+      },
+      {
+        "text": "emotional numbness",
+        "en": "emotional numbness",
+        "ja": "感情の麻痺"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "身体のしびれと感情の麻痺の両方を表す。",
     "tags": [
-      "body-health"
+      "body-health",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10481",
@@ -10252,15 +12037,18 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "数を理解し扱う能力；計算能力",
-            "definition": "",
+            "ja": "数的リテラシー；数を理解して使う能力",
+            "definition": "the ability to understand and work with numbers in everyday situations",
             "examples": [
+              {
+                "en": "Schools are placing greater emphasis on literacy and numeracy.",
+                "ja": "学校は読み書き能力と数的能力をより重視するようになっている。"
+              },
               {
                 "en": "Schools are placing greater emphasis on literacy and numeracy.",
                 "ja": "学校は読み書き能力と数的能力をより重視している。"
               }
-            ],
-            "definition_en": "the ability to understand and work with numbers"
+            ]
           }
         ]
       }
@@ -10268,17 +12056,26 @@
     "forms": {},
     "phrases": [],
     "collocations": [
-      "basic numeracy",
-      "numeracy skills"
+      {
+        "text": "basic numeracy",
+        "en": "basic numeracy",
+        "ja": "基本的な数的能力"
+      },
+      {
+        "text": "numeracy skills",
+        "en": "numeracy skills",
+        "ja": "数を扱う技能"
+      }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Useful in advanced general, academic, news, or professional English. Note its common collocations and context-dependent senses.",
+    "usage_note": "literacy（読み書き能力）と対で用いられることが多い。単なる暗算力だけではない。",
     "tags": [
       "education-study",
-      "curated-v3.22"
+      "curated-v3.22",
+      "curated-v3.75"
     ],
     "status": "enriched"
   },
@@ -10303,15 +12100,18 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "数の上で；数値的に",
-            "definition": "",
+            "ja": "数値の上で；数を用いて",
+            "definition": "in terms of numbers or by means of numerical calculation",
             "examples": [
+              {
+                "en": "The groups were numerically similar but differed greatly in age.",
+                "ja": "二つの集団は人数がほぼ同じだったが、年齢には大きな差があった。"
+              },
               {
                 "en": "The groups were numerically similar but differed greatly in age.",
                 "ja": "二つの集団は人数ではほぼ同じだったが、年齢は大きく異なった。"
               }
-            ],
-            "definition_en": "in terms of numbers or by using numbers"
+            ]
           }
         ]
       }
@@ -10319,17 +12119,26 @@
     "forms": {},
     "phrases": [],
     "collocations": [
-      "numerically equal",
-      "numerically small"
+      {
+        "text": "numerically equal",
+        "en": "numerically equal",
+        "ja": "数値的に等しい"
+      },
+      {
+        "text": "numerically small",
+        "en": "numerically small",
+        "ja": "数の上では小さい"
+      }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Useful in advanced general, academic, news, or professional English. Note its common collocations and context-dependent senses.",
+    "usage_note": "numerically similar は「数値上は似ている」。質的な類似性とは区別する。",
     "tags": [
       "description",
-      "curated-v3.22"
+      "curated-v3.22",
+      "curated-v3.75"
     ],
     "status": "enriched"
   },
@@ -10357,6 +12166,10 @@
               {
                 "en": "Numerous studies have linked regular exercise to better mental health.",
                 "ja": "数多くの研究が定期的な運動とより良い精神的健康を関連づけている。"
+              },
+              {
+                "en": "Numerous studies have linked regular exercise to better sleep quality.",
+                "ja": "多くの研究が定期的な運動と睡眠の質の向上との関連を示している。"
               }
             ]
           }
@@ -10369,12 +12182,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Numerous is formal and normally modifies a plural countable noun, not an uncountable noun.",
     "tags": [
       "frequency-gap",
       "v2.31-curated",
       "etymology-v1",
-      "v3.28-curated"
+      "v3.28-curated",
+      "curated-v3.173"
     ],
     "status": "enriched",
     "search_terms": [
@@ -10385,9 +12199,21 @@
       "ipa_uk": null
     },
     "collocations": [
-      "numerous studies",
-      "numerous examples",
-      "numerous factors"
+      {
+        "en": "numerous studies",
+        "text": "numerous studies",
+        "ja": "多数の研究"
+      },
+      {
+        "en": "numerous examples",
+        "text": "numerous examples",
+        "ja": "数多くの例"
+      },
+      {
+        "en": "numerous factors",
+        "text": "numerous factors",
+        "ja": "多数の要因"
+      }
     ],
     "etymology": {
       "origin": "Latin numerus",
@@ -10778,6 +12604,14 @@
               {
                 "en": "Good nutrition is important for recovery after exercise.",
                 "ja": "運動後の回復には適切な栄養が重要です。"
+              },
+              {
+                "en": "Schools can improve children’s nutrition by offering balanced meals.",
+                "ja": "学校は栄養バランスの取れた食事を提供することで子どもの栄養状態を改善できる。"
+              },
+              {
+                "en": "Good nutrition is essential for healthy development.",
+                "ja": "適切な栄養は健全な発達に不可欠である。"
               }
             ]
           },
@@ -10800,12 +12634,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "nutrition は通常不可算名詞。nutrient は「栄養素」、nutritious は「栄養価の高い」。",
+    "usage_note": "nutrition は通常不可算で「栄養・栄養学」。nutrient は「栄養素」、nutritious は「栄養価の高い」。",
     "tags": [
       "frequency-gap",
       "v2.31-curated",
       "curated-v2.55",
-      "curated-v3.48"
+      "curated-v3.48",
+      "curated-v3.131"
     ],
     "status": "enriched",
     "search_terms": [
@@ -10817,31 +12652,29 @@
     },
     "collocations": [
       {
+        "en": "adequate nutrition",
         "text": "adequate nutrition",
         "ja": "十分な栄養"
       },
       {
+        "en": "poor nutrition",
         "text": "poor nutrition",
-        "ja": "栄養状態の悪さ"
+        "ja": "不十分な栄養状態"
       },
       {
+        "en": "nutrition education",
         "text": "nutrition education",
         "ja": "栄養教育"
       },
       {
-        "text": "proper nutrition"
-      }
-    ],
-    "senses": [
+        "en": "proper nutrition",
+        "text": "proper nutrition",
+        "ja": "適切な栄養"
+      },
       {
-        "pos": "",
-        "definition_ja": "栄養；栄養摂取",
-        "examples": [
-          {
-            "en": "Good nutrition is essential for healthy development.",
-            "ja": "適切な栄養は健全な発達に不可欠である。"
-          }
-        ]
+        "en": "nutrition research",
+        "text": "nutrition research",
+        "ja": "栄養学研究"
       }
     ]
   },
@@ -10866,25 +12699,42 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "栄養のある",
-            "definition": "",
-            "examples": []
+            "ja": "栄養価の高い；栄養に富んだ",
+            "definition": "containing nutrients that help the body stay healthy and grow",
+            "examples": [
+              {
+                "en": "Beans are an affordable source of nutritious food.",
+                "ja": "豆類は手頃な価格で手に入る栄養価の高い食品だ。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "nutritious meal",
+        "en": "nutritious meal",
+        "ja": "栄養価の高い食事"
+      },
+      {
+        "text": "nutritious food",
+        "en": "nutritious food",
+        "ja": "栄養に富んだ食品"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "nutritious は栄養成分を含むこと。nourishing は心身を養うという広いニュアンスでも使う。",
     "tags": [
-      "descriptive"
+      "descriptive",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-05960",
@@ -10948,25 +12798,42 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "鼻や顔をすり寄せる",
-            "definition": "",
-            "examples": []
+            "ja": "鼻や顔を優しくすり寄せる",
+            "definition": "to rub or press your nose or face gently against someone or something",
+            "examples": [
+              {
+                "en": "The dog nuzzled her hand, asking to be petted.",
+                "ja": "犬はなでてほしそうに彼女の手に鼻先をすり寄せた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "nuzzle against someone",
+        "en": "nuzzle against someone",
+        "ja": "人に顔をすり寄せる"
+      },
+      {
+        "text": "nuzzle someone’s hand",
+        "en": "nuzzle someone’s hand",
+        "ja": "人の手に鼻先をすり寄せる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "動物や親しい人が愛情を示して顔や鼻を寄せる動作。",
     "tags": [
-      "actions"
+      "actions",
+      "curated-v3.75"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11983",

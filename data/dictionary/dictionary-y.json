@@ -574,25 +574,42 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "切望する",
-            "definition": "",
-            "examples": []
+            "ja": "切望する；強く恋い慕う",
+            "definition": "to want something very much, especially something difficult to obtain or far away",
+            "examples": [
+              {
+                "en": "After years abroad, she yearned to see her hometown again.",
+                "ja": "何年も海外で暮らした後、彼女は故郷をもう一度見たいと切望した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "yearn for home",
+        "en": "yearn for home",
+        "ja": "故郷を恋しく思う"
+      },
+      {
+        "text": "yearn to return",
+        "en": "yearn to return",
+        "ja": "戻りたいと切望する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "yearn for + 名詞、yearn to + 動詞の原形。長く続く強い願望に使う。",
     "tags": [
-      "thinking-communication"
+      "thinking-communication",
+      "curated-v3.90"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-03939",
@@ -908,15 +925,15 @@
     "frequency": 5,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "interjection",
         "meanings": [
           {
-            "ja": "はい",
-            "definition": "a person, thing, idea, or concept connected with 'はい'",
+            "ja": "はい；ええ",
+            "definition": "used to agree, answer positively, or confirm something",
             "examples": [
               {
-                "en": "This yes is important.",
-                "ja": "この「はい」は重要です。"
+                "en": "Yes, I have already sent the email.",
+                "ja": "はい、メールはもう送りました。"
               }
             ]
           }
@@ -929,9 +946,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "yes は肯定の返事を表す。否定疑問文への返答では英語の肯定・否定を基準にする。",
+    "tags": [
+      "curated-v3.155"
+    ],
+    "status": "enriched",
     "search_terms": [
       "yes"
     ],
@@ -939,7 +958,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "say yes",
+        "en": "say yes",
+        "ja": "承諾する"
+      },
+      {
+        "text": "yes, please",
+        "en": "yes, please",
+        "ja": "はい、お願いします"
+      },
+      {
+        "text": "yes or no",
+        "en": "yes or no",
+        "ja": "はいかいいえか"
+      }
+    ]
   },
   {
     "id": "sw-00654",
@@ -955,12 +990,27 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "昨日",
-            "definition": "in the way or time described as '昨日'",
+            "ja": "昨日；昨日は",
+            "definition": "on the day before today",
             "examples": [
               {
-                "en": "The word 'yesterday' is common in English.",
-                "ja": "「yesterday」は英語でよく使われる語です。"
+                "en": "We submitted the application yesterday.",
+                "ja": "私たちは昨日申請書を提出した。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "昨日という日",
+            "definition": "the day immediately before today",
+            "examples": [
+              {
+                "en": "Yesterday was the deadline for registration.",
+                "ja": "昨日が登録の締め切りだった。"
               }
             ]
           }
@@ -973,9 +1023,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "yesterday は副詞としては前置詞なしで使う（× on yesterday）。名詞として主語にもなる。",
+    "tags": [
+      "curated-v3.179"
+    ],
+    "status": "enriched",
     "search_terms": [
       "yesterday"
     ],
@@ -983,7 +1035,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "yesterday morning",
+        "en": "yesterday morning",
+        "ja": "昨日の朝"
+      },
+      {
+        "text": "as of yesterday",
+        "en": "as of yesterday",
+        "ja": "昨日の時点で"
+      },
+      {
+        "text": "the day before yesterday",
+        "en": "the day before yesterday",
+        "ja": "一昨日"
+      }
+    ]
   },
   {
     "id": "sw-07911",
@@ -1225,12 +1293,22 @@
         "pos": "pronoun",
         "meanings": [
           {
-            "ja": "あなた",
-            "definition": "a word used in place of a noun with the sense 'あなた'",
+            "ja": "あなたは；あなたを",
+            "definition": "used to address one or more people directly as subject or object",
             "examples": [
               {
-                "en": "The word 'you' is common in English.",
-                "ja": "「you」は英語でよく使われる語です。"
+                "en": "You can submit your answer online.",
+                "ja": "回答はオンラインで提出できます。"
+              }
+            ]
+          },
+          {
+            "ja": "人は；誰でも（一般論）",
+            "definition": "used to refer to people in general rather than a particular listener",
+            "examples": [
+              {
+                "en": "You never know what you might learn from a mistake.",
+                "ja": "失敗から何を学べるかはわからないものだ。"
               }
             ]
           }
@@ -1243,9 +1321,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "you は単数・複数とも同形で、主格と目的格も同じ。一般論を述べる you は「人は」の意味。",
+    "tags": [
+      "curated-v3.179"
+    ],
+    "status": "enriched",
     "search_terms": [
       "you"
     ],
@@ -1253,7 +1333,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "thank you for ...",
+        "en": "thank you for ...",
+        "ja": "〜をありがとう"
+      },
+      {
+        "text": "you need to ...",
+        "en": "you need to ...",
+        "ja": "〜する必要があります"
+      },
+      {
+        "text": "if you have any questions",
+        "en": "if you have any questions",
+        "ja": "質問があれば"
+      }
+    ]
   },
   {
     "id": "sw-00656",

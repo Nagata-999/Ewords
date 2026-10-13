@@ -11,7 +11,52 @@ def url(w): return '/dictionary/' + slug(w) + '/'
 def dump(v): return json.dumps(v, ensure_ascii=False, separators=(',', ':')).replace('<', '\\u003c')
 def write(p, s):
     p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_bytes(s.encode('utf-8'))
+    content = s.encode('utf-8')
+    if not p.exists() or p.read_bytes() != content:
+        p.write_bytes(content)
+
+def expression_rows(values):
+    """Accept the existing string, phrase/en/text object schemas without blank rows."""
+    rows = []
+    for value in values or []:
+        if isinstance(value, str):
+            en, ja = value.strip(), ''
+        elif isinstance(value, dict):
+            en = next((value[k].strip() for k in ('phrase', 'en', 'text')
+                       if isinstance(value.get(k), str) and value[k].strip()), '')
+            ja = value.get('ja', '')
+            ja = ja.strip() if isinstance(ja, str) else ''
+        else:
+            continue
+        if not en or re.fullmatch(r'[\s・:：\-–—]*', en):
+            continue
+        if (en, ja) not in rows:
+            rows.append((en, ja))
+    return rows
+
+def display_parts(entry, excluded):
+    """Group exact same-POS/gloss duplicates for display, retaining distinct content."""
+    parts = {}
+    for part in entry['parts_of_speech']:
+        senses = parts.setdefault(part['pos'], {})
+        for meaning in part['meanings']:
+            gloss = meaning['ja'].strip()
+            key = re.sub(r'\s+', ' ', gloss)
+            target = senses.setdefault(key, {'ja': gloss, 'definitions': [], 'examples': []})
+            definition = meaning.get('definition') or meaning.get('definition_en') or ''
+            if definition:
+                if QUALITY['template_definition'](definition): excluded['definitions'] += 1
+                elif definition not in target['definitions']: target['definitions'].append(definition)
+            for example in meaning.get('examples', []):
+                if QUALITY['template_example'](entry['word'], example['en']): excluded['examples'] += 1
+                else:
+                    existing = next((x for x in target['examples'] if x['en'] == example['en']), None)
+                    if existing is None:
+                        target['examples'].append(dict(example))
+                    elif example['ja'] != existing['ja']:
+                        translations = existing.setdefault('additional_translations', [])
+                        if example['ja'] not in translations: translations.append(example['ja'])
+    return [{'pos': pos, 'meanings': list(senses.values())} for pos, senses in parts.items()]
 SEARCH = '<form action="/dictionary/" role="search"><label for="dictionary-query">英単語を検索</label><div class="search-row"><input id="dictionary-query" name="q" type="search" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="例：abandon" maxlength="100"><button>検索</button></div><p id="search-status" role="status"></p><ul id="search-results"></ul></form>'
 def page(title, desc, body, canonical=None, card=None, schema=None, noindex=False):
     return '<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' + f'<title>{esc(title)}</title><meta name="description" content="{esc(desc)}">' + (f'<link rel="canonical" href="{BASE}{canonical}"><meta property="og:url" content="{BASE}{canonical}">' if canonical else '') + f'<meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(desc)}"><meta property="og:type" content="website"><meta property="og:site_name" content="すし単"><meta property="og:image" content="{BASE}/icon-512.png">' + ('<meta name="robots" content="noindex,follow">' if noindex else '') + '<link rel="stylesheet" href="/shared/dictionary.css"><script defer src="/shared/dictionary.js"></script>' + (f'<script type="application/ld+json">{dump(schema)}</script>' if schema else '') + '</head><body><header><a href="/">🍣 すし単</a><a href="/dictionary/">すし辞書 <small>β</small></a><a href="/sushian.html">すし暗</a></header><main>' + body + '<footer><p>すし辞書 β — 収録内容は順次充実させています。</p><a href="/">すし単で英単語をゲーム感覚で覚える</a><p><a href="/contact.html">誤りを知らせる</a> · <a href="/privacy.html">プライバシーポリシー</a></p></footer></main>' + (f'<script id="dictionary-card" type="application/json">{dump(card)}</script>' if card else '') + '</body></html>\n'
@@ -32,22 +77,22 @@ def build(source):
     pos_names = {'noun':'名詞','verb':'動詞','adjective':'形容詞','adverb':'副詞','preposition':'前置詞','conjunction':'接続詞','pronoun':'代名詞','interjection':'間投詞','determiner':'限定詞','phrase':'句','auxiliary':'助動詞'}
     def link(word): return f'<a href="{url(word)}">{esc(word)}</a>' if word.lower() in lookup else esc(word)
     for e in entries:
-        word=e['word']; meanings=[m['ja'] for p in e['parts_of_speech'] for m in p['meanings']]
+        word=e['word']; parts=display_parts(e, excluded)
+        meanings=[m['ja'] for p in parts for m in p['meanings']]
         body='<nav aria-label="パンくず"><a href="/dictionary/">すし辞書</a> / '+esc(word)+'</nav><article><h1 lang="en">'+esc(word)+'</h1>'
         ipa=e.get('pronunciation') or {}
         body+=''.join(f'<p class="ipa">{label} <span lang="en">{esc(ipa[key])}</span></p>' for key,label in [('ipa_us','米'),('ipa_uk','英')] if ipa.get(key))
         body+='<button type="button" id="speak-word">▶ 音声を聞く</button><span id="speech-status" role="status"></span><p class="muted">音声は端末の読み上げ機能を使用します。</p>'
-        for part in e['parts_of_speech']:
+        for part in parts:
             body+='<section><h2>'+esc(pos_names.get(part['pos'],part['pos']))+'</h2><ol class="meanings">'
             for m in part['meanings']:
                 body+='<li><p class="meaning">'+esc(m['ja'])+'</p>'
-                definition=m.get('definition','')
-                if definition:
-                    if QUALITY['template_definition'](definition): excluded['definitions']+=1
-                    else: body+='<p lang="en">'+esc(definition)+'</p>'
+                for definition in m['definitions']:
+                    body+='<p lang="en">'+esc(definition)+'</p>'
                 for x in m.get('examples',[]):
-                    if QUALITY['template_example'](word,x['en']): excluded['examples']+=1
-                    else: body+='<blockquote><p lang="en">'+esc(x['en'])+'</p><p>'+esc(x['ja'])+'</p></blockquote>'
+                    body+='<blockquote><p lang="en">'+esc(x['en'])+'</p><p>'+esc(x['ja'])+'</p>'
+                    body+=''.join('<p>'+esc(translation)+'</p>' for translation in x.get('additional_translations', []))
+                    body+='</blockquote>'
                 body+='</li>'
             body+='</ol></section>'
         for key,label in [('forms','語形変化'),('related','関連する単語')]:
@@ -58,8 +103,8 @@ def build(source):
                 if values: rows.append('<dt>'+esc(labels.get(k,k))+'</dt><dd>'+' · '.join(link(w) for w in values if isinstance(w,str))+'</dd>')
             if rows: body+='<section><h2>'+label+'</h2><dl>'+''.join(rows)+'</dl></section>'
         for key,label in [('phrases','熟語・表現'),('collocations','よく使う組み合わせ')]:
-            vals=e.get(key,[])
-            if vals: body+='<section><h2>'+label+'</h2><ul>'+''.join('<li>'+ (link(v) if isinstance(v,str) else link(v.get('phrase',v.get('en',''))) + '：'+esc(v.get('ja','')))+'</li>' for v in vals)+'</ul></section>'
+            vals=expression_rows(e.get(key,[]))
+            if vals: body+='<section><h2>'+label+'</h2><ul>'+''.join('<li>'+link(en)+('：'+esc(ja) if ja else '')+'</li>' for en,ja in vals)+'</ul></section>'
         if e.get('usage_note'): body+='<p>'+esc(e['usage_note'])+'</p>'
         body+=f'<a class="learn" href="/sushian.html?dictionary={quote(slug(word))}">この単語を覚える</a><p class="muted">すし暗で意味を選んで練習。間違えた語は、このブラウザの苦手復習に残ります。</p></article>'+SEARCH
         card={'word_id':'dictionary:'+e['id'],'en':word,'jp':'；'.join(meanings),'source_number':None}

@@ -44,6 +44,10 @@
               {
                 "en": "The samples were labeled with dates and locations.",
                 "ja": "試料には日付と採取場所が記された。"
+              },
+              {
+                "en": "The researchers warned against labeling every unusual result as an error.",
+                "ja": "研究者たちは、通常と異なる結果をすべて誤りと決めつけないよう警告した。"
               }
             ]
           }
@@ -60,7 +64,8 @@
     "tags": [
       "frequency-gap",
       "curated-v3.04",
-      "curated-v3.44"
+      "curated-v3.44",
+      "curated-v3.173"
     ],
     "status": "enriched",
     "search_terms": [
@@ -71,13 +76,25 @@
       "ipa_uk": null
     },
     "collocations": [
-      "warning label",
-      "product label",
       {
-        "text": "label A as B"
+        "en": "warning label",
+        "text": "warning label",
+        "ja": "警告表示"
       },
       {
-        "text": "clearly labeled"
+        "en": "product label",
+        "text": "product label",
+        "ja": "商品ラベル"
+      },
+      {
+        "en": "label A as B",
+        "text": "label A as B",
+        "ja": "AをBと呼ぶ・分類する"
+      },
+      {
+        "en": "clearly labeled",
+        "text": "clearly labeled",
+        "ja": "明確に表示された"
       }
     ]
   },
@@ -357,24 +374,34 @@
         "meanings": [
           {
             "ja": "労働組合",
-            "definition": "",
-            "examples": []
+            "definition": "an organization that represents workers and negotiates with employers over pay and conditions",
+            "examples": [
+              {
+                "en": "The labor union negotiated for safer working conditions.",
+                "ja": "労働組合はより安全な労働条件を求めて交渉した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "join a labor union",
+      "labor union representative",
+      "collective bargaining by a labor union"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "米語 labor union、英語圏では trade union も一般的。collective bargaining は団体交渉。",
     "tags": [
-      "work-business"
+      "work-business",
+      "curated-v3.73"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07710",
@@ -397,25 +424,66 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "多くの労働力を要する",
-            "definition": "",
-            "examples": []
+            "ja": "多くの人手や作業時間を要する",
+            "definition": "requiring a large amount of human work relative to other resources",
+            "examples": [
+              {
+                "en": "Restoring the damaged paintings is a labor-intensive process.",
+                "ja": "損傷した絵画の修復には多くの手作業が必要だ。"
+              },
+              {
+                "en": "Manual data entry is labor-intensive and prone to error.",
+                "ja": "データの手入力には多くの労力がかかり、誤りも生じやすい。"
+              },
+              {
+                "en": "The company automated several labor-intensive tasks.",
+                "ja": "その会社は人手のかかる作業をいくつか自動化した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "labor-intensive industry",
+        "en": "labor-intensive industry",
+        "ja": "労働集約型産業"
+      },
+      {
+        "text": "labor-intensive production",
+        "en": "labor-intensive production",
+        "ja": "労働集約的な生産"
+      },
+      {
+        "text": "a labor-intensive process",
+        "en": "a labor-intensive process",
+        "ja": "人手のかかる工程"
+      },
+      {
+        "text": "labor-intensive tasks",
+        "en": "labor-intensive tasks",
+        "ja": "人手のかかる作業"
+      },
+      {
+        "text": "labor-intensive methods",
+        "en": "labor-intensive methods",
+        "ja": "労働集約的な方法"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "labor-intensive は米語表記。英語では labour-intensive。capital-intensive（資本集約的な）と対比される。",
     "tags": [
-      "work-description"
+      "work-description",
+      "curated-v3.73",
+      "curated-v3.138"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-01904",
@@ -903,12 +971,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "熱意のない；気のない",
-            "definition": "",
+            "ja": "やる気のない；いいかげんな",
+            "definition": "showing little enthusiasm, care, or effort",
             "examples": [
               {
-                "en": "In advanced texts, \"lackadaisical\" may be used to mean \"\".",
-                "ja": "上級レベルの文章では「lackadaisical」が「熱意のない；気のない」という意味で用いられることがある。"
+                "en": "The manager criticized the team’s lackadaisical approach to safety checks.",
+                "ja": "管理者は安全点検に対するチームのいいかげんな姿勢を批判した。"
               }
             ]
           }
@@ -917,17 +985,22 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "a lackadaisical attitude",
+      "a lackadaisical approach",
+      "lackadaisical effort"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "人の態度や取り組みを否定的に評する語。lack（不足）とは語源的に直接対応しない。",
     "tags": [
       "practical-quality",
-      "curated-v2.93"
+      "curated-v2.93",
+      "curated-v3.73"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13482",
@@ -950,25 +1023,45 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "精彩を欠く；つやのない",
-            "definition": "",
-            "examples": []
+            "ja": "精彩を欠く；ぱっとしない",
+            "definition": "lacking energy, excitement, or impressive qualities",
+            "examples": [
+              {
+                "en": "The candidate gave a lackluster performance in the debate.",
+                "ja": "その候補者は討論会で精彩を欠いた。"
+              }
+            ]
+          },
+          {
+            "ja": "光沢のない；つやのない",
+            "definition": "lacking brightness or shine",
+            "examples": [
+              {
+                "en": "The old silverware had a lackluster surface.",
+                "ja": "古い銀食器の表面はつやを失っていた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "lackluster performance",
+      "lackluster sales",
+      "a lackluster response"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "比喩的な「精彩を欠く」が頻出。英国式綴りは lacklustre。",
     "tags": [
-      "practical-quality"
+      "practical-quality",
+      "curated-v3.73"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10571",
@@ -991,12 +1084,12 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "口数の少ない；簡潔な",
-            "definition": "",
+            "ja": "言葉数の少ない；簡潔な",
+            "definition": "using very few words, often in a way that seems abrupt",
             "examples": [
               {
-                "en": "In advanced texts, \"laconic\" may be used to mean \"\".",
-                "ja": "上級レベルの文章では「laconic」が「口数の少ない；簡潔な」という意味で用いられることがある。"
+                "en": "His laconic reply consisted of just two words.",
+                "ja": "彼のそっけない返事はたった二語だった。"
               }
             ]
           }
@@ -1005,17 +1098,22 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "a laconic reply",
+      "laconic style",
+      "laconic humor"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "簡潔さを示すが、文脈によって「そっけない」印象を伴う。",
     "tags": [
       "study-language",
-      "curated-v2.93"
+      "curated-v2.93",
+      "curated-v3.73"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-06171",
@@ -1038,25 +1136,51 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "ラッカー",
-            "definition": "",
-            "examples": []
+            "ja": "ラッカー；つやのある塗料・塗膜",
+            "definition": "a hard, often shiny coating applied to wood, metal, or other surfaces",
+            "examples": [
+              {
+                "en": "The wooden box has a smooth lacquer finish.",
+                "ja": "その木箱には滑らかなラッカー仕上げが施されている。"
+              },
+              {
+                "en": "Several layers of lacquer protect the surface.",
+                "ja": "何層ものラッカーが表面を保護している。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "lacquer finish",
+        "en": "lacquer finish",
+        "ja": "ラッカー仕上げ"
+      },
+      {
+        "text": "apply lacquer",
+        "en": "apply lacquer",
+        "ja": "ラッカーを塗る"
+      },
+      {
+        "text": "clear lacquer",
+        "en": "clear lacquer",
+        "ja": "透明ラッカー"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "日本の漆を説明するときも lacquer を使うが、伝統的な漆塗りは urushi lacquer と区別することがある。",
     "tags": [
-      "home-workshop"
+      "home-workshop",
+      "curated-v3.142"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04518",
@@ -1546,25 +1670,45 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "ねぐら；隠れ家",
-            "definition": "",
-            "examples": []
+            "ja": "（野生動物の）ねぐら",
+            "definition": "a place where a wild animal lives or rests",
+            "examples": [
+              {
+                "en": "The fox returned to its lair before sunrise.",
+                "ja": "キツネは日の出前にねぐらへ戻った。"
+              }
+            ]
+          },
+          {
+            "ja": "（人の）隠れ家",
+            "definition": "a secret or private place where someone stays, especially in stories",
+            "examples": [
+              {
+                "en": "The detective discovered the thief’s lair beneath the old building.",
+                "ja": "探偵は古い建物の地下にある泥棒の隠れ家を発見した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "a fox’s lair",
+      "a hidden lair",
+      "return to its lair"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "物語では悪役の隠れ家を指すことがある。通常 den より文語・物語的。",
     "tags": [
-      "wildlife-mammals"
+      "wildlife-mammals",
+      "curated-v3.73"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-01053",
@@ -1713,12 +1857,27 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "嘆く",
-            "definition": "",
+            "ja": "〜を嘆く；悲しむ",
+            "definition": "to express sorrow or regret about something",
             "examples": [
               {
-                "en": "In advanced texts, \"lament\" may be used to mean \"\".",
-                "ja": "上級レベルの文章では「lament」が「嘆く」という意味で用いられることがある。"
+                "en": "Residents lamented the loss of the historic library.",
+                "ja": "住民たちは歴史ある図書館が失われたことを嘆いた。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "嘆き；悲嘆の表現",
+            "definition": "an expression of grief or regret",
+            "examples": [
+              {
+                "en": "The poem is a lament for a disappearing way of life.",
+                "ja": "その詩は失われつつある暮らしへの哀歌である。"
               }
             ]
           }
@@ -1727,17 +1886,22 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "lament the loss of something",
+      "lament a decision",
+      "a lament for the past"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "lament + 名詞、lament that + 節。名詞としても使われる。",
     "tags": [
       "thinking-communication",
-      "curated-v2.93"
+      "curated-v2.93",
+      "curated-v3.73"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10189",
@@ -1807,25 +1971,45 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "薄膜で覆う；積層する",
-            "definition": "",
-            "examples": []
+            "ja": "〜を薄い保護膜で覆う",
+            "definition": "to cover paper or another material with a thin protective layer",
+            "examples": [
+              {
+                "en": "Please laminate the cards so they can be reused in class.",
+                "ja": "授業で繰り返し使えるようにカードをラミネートしてください。"
+              }
+            ]
+          },
+          {
+            "ja": "〜を何層にも重ねて接着する",
+            "definition": "to make a material by joining several thin layers together",
+            "examples": [
+              {
+                "en": "The manufacturer laminates thin sheets of wood to make strong panels.",
+                "ja": "そのメーカーは薄い木材を重ねて接着し、丈夫な板を作る。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "laminate a document",
+      "laminated paper",
+      "laminate layers of wood"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "印刷物の保護と、材料を積層する技術の両方に使う。",
     "tags": [
-      "work-actions"
+      "work-actions",
+      "curated-v3.73"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07211",
@@ -1977,25 +2161,50 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "痛烈に風刺する",
-            "definition": "",
-            "examples": []
+            "ja": "〜を痛烈に風刺する",
+            "definition": "to publicly criticize or mock someone or something through satire",
+            "examples": [
+              {
+                "en": "The cartoon lampooned the government’s contradictory policies.",
+                "ja": "その漫画は政府の矛盾した政策を痛烈に風刺した。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "風刺文；風刺作品",
+            "definition": "a piece of writing or performance that ridicules a person or institution",
+            "examples": [
+              {
+                "en": "The play is a lampoon of political corruption.",
+                "ja": "その劇は政治腐敗を風刺した作品である。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "lampoon a politician",
+      "a satirical lampoon",
+      "lampoon government policy"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "単なる批判ではなく、笑いや誇張を用いた風刺を表す。",
     "tags": [
-      "work-actions"
+      "work-actions",
+      "curated-v3.73"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-03813",
@@ -2104,15 +2313,54 @@
     "frequency": 4,
     "parts_of_speech": [
       {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "陸地；土地",
+            "definition": "the solid surface of the earth, as opposed to the sea",
+            "examples": [
+              {
+                "en": "The rescue team reached land before nightfall.",
+                "ja": "救助隊は日暮れ前に陸地に到着した。"
+              }
+            ]
+          },
+          {
+            "ja": "所有地；農地",
+            "definition": "an area of ground that someone owns or uses",
+            "examples": [
+              {
+                "en": "The family has farmed this land for generations.",
+                "ja": "その家族は何世代にもわたりこの土地を耕してきた。"
+              },
+              {
+                "en": "Urban expansion can increase competition for agricultural land.",
+                "ja": "都市拡大は農地をめぐる競争を激化させることがある。"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "pos": "verb",
         "meanings": [
           {
-            "ja": "土地；着陸する",
-            "definition": "to perform or cause the action expressed by 土地",
+            "ja": "着陸する；着地する",
+            "definition": "to come down onto the ground or another surface after moving through the air",
             "examples": [
               {
-                "en": "This is a common example of 'land'.",
-                "ja": "これは「土地」の一般的な例です。"
+                "en": "The plane landed safely despite the strong winds.",
+                "ja": "飛行機は強風にもかかわらず無事に着陸した。"
+              }
+            ]
+          },
+          {
+            "ja": "（仕事・契約などを）獲得する",
+            "definition": "to succeed in obtaining a job, contract, or opportunity",
+            "examples": [
+              {
+                "en": "She landed a research position after graduation.",
+                "ja": "彼女は卒業後、研究職を獲得した。"
               }
             ]
           }
@@ -2125,11 +2373,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "land は名詞「土地・陸地」と動詞「着陸する・獲得する」を区別する。land a job は口語的な「就職先を得る」。",
     "tags": [
-      "curated-v2.63"
+      "curated-v2.63",
+      "curated-v3.184"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "search_terms": [
       "land"
     ],
@@ -2139,22 +2388,24 @@
     },
     "collocations": [
       {
-        "text": "agricultural land"
+        "text": "agricultural land",
+        "en": "agricultural land",
+        "ja": "農地"
       },
       {
-        "text": "land use"
-      }
-    ],
-    "senses": [
+        "text": "land use",
+        "en": "land use",
+        "ja": "土地利用"
+      },
       {
-        "pos": "",
-        "definition_ja": "土地；陸地／着陸する",
-        "examples": [
-          {
-            "en": "Urban expansion can increase competition for agricultural land.",
-            "ja": "都市拡大は農地をめぐる競争を激化させることがある。"
-          }
-        ]
+        "text": "land safely",
+        "en": "land safely",
+        "ja": "無事に着陸する"
+      },
+      {
+        "text": "land a job",
+        "en": "land a job",
+        "ja": "仕事を獲得する"
       }
     ]
   },
@@ -2180,24 +2431,34 @@
         "meanings": [
           {
             "ja": "陸風；陸から海へ吹く風",
-            "definition": "",
-            "examples": []
+            "definition": "a wind that blows from land toward the sea, often at night as the land cools",
+            "examples": [
+              {
+                "en": "A gentle land breeze carried cooler air toward the fishing boats.",
+                "ja": "穏やかな陸風が漁船の方へ冷たい空気を運んだ。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "a nighttime land breeze",
+      "land breeze circulation",
+      "land breeze and sea breeze"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "陸が海より早く冷える夜間に起こりやすい。sea breeze（海風）は一般に日中、海から陸へ吹く。",
     "tags": [
-      "weather-atmosphere"
+      "weather-atmosphere",
+      "curated-v3.73"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08847",
@@ -2302,25 +2563,35 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "訪問者が最初に開くページ",
-            "definition": "",
-            "examples": []
+            "ja": "（広告や検索結果からの）リンク先ページ",
+            "definition": "a web page that a visitor reaches after clicking a link, advertisement, or search result",
+            "examples": [
+              {
+                "en": "The team redesigned the landing page to make registration easier.",
+                "ja": "チームは登録しやすいようにリンク先ページを作り直した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "landing page design",
+      "landing page conversion rate",
+      "visit a landing page"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "マーケティングでは登録・購入など特定の行動につなげる目的で設計されることが多い。",
     "tags": [
-      "digital-office"
+      "digital-office",
+      "curated-v3.73"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07524",
@@ -2384,25 +2655,35 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "海に面していない；内陸の",
-            "definition": "",
-            "examples": []
+            "ja": "内陸の；海に面していない",
+            "definition": "surrounded by land and having no coastline",
+            "examples": [
+              {
+                "en": "Mongolia is a landlocked country between Russia and China.",
+                "ja": "モンゴルはロシアと中国の間にある内陸国だ。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "a landlocked country",
+      "landlocked region",
+      "landlocked developing countries"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "地理・国際開発分野で使う。海への直接のアクセスがないことを指す。",
     "tags": [
-      "outdoor-conditions"
+      "outdoor-conditions",
+      "curated-v3.73"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07523",
@@ -2426,24 +2707,34 @@
         "meanings": [
           {
             "ja": "家主；賃貸人",
-            "definition": "",
-            "examples": []
+            "definition": "a person who owns a property and rents it to someone else",
+            "examples": [
+              {
+                "en": "The landlord agreed to repair the leaking roof.",
+                "ja": "家主は雨漏りする屋根を修理することに同意した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "landlord and tenant",
+      "contact the landlord",
+      "a landlord’s responsibilities"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "借り手は tenant。landlady は女性の家主を指すが、landlord は性別を問わず用いられることがある。",
     "tags": [
-      "community-travel"
+      "community-travel",
+      "curated-v3.73"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10983",
@@ -2512,6 +2803,10 @@
               {
                 "en": "The old clock tower is a familiar landmark in the town.",
                 "ja": "古い時計台は町でおなじみの目印だ。"
+              },
+              {
+                "en": "The lighthouse serves as a landmark for ships entering the harbor.",
+                "ja": "灯台は港に入る船の目印となっている。"
               }
             ]
           },
@@ -2522,6 +2817,10 @@
               {
                 "en": "The ruling was a landmark in the history of environmental law.",
                 "ja": "その判決は環境法の歴史における画期的な出来事だった。"
+              },
+              {
+                "en": "The court’s ruling marked a landmark in disability rights.",
+                "ja": "その裁判所の判決は障害者の権利における画期的な節目となった。"
               }
             ]
           }
@@ -2536,7 +2835,8 @@
     },
     "usage_note": "建造物などの「目印」と、歴史的な「画期的出来事」。landmark study は重要な先駆的研究。",
     "tags": [
-      "curated-v3.51"
+      "curated-v3.51",
+      "curated-v3.138"
     ],
     "status": "enriched",
     "search_terms": [
@@ -2548,13 +2848,29 @@
     },
     "collocations": [
       {
-        "text": "a historic landmark"
+        "text": "a historic landmark",
+        "ja": "歴史的な目印となる建造物",
+        "en": "a historic landmark"
       },
       {
-        "text": "a landmark decision"
+        "text": "a landmark decision",
+        "ja": "画期的な決定",
+        "en": "a landmark decision"
       },
       {
-        "text": "a landmark study"
+        "text": "a landmark study",
+        "ja": "画期的な研究",
+        "en": "a landmark study"
+      },
+      {
+        "text": "landmark ruling",
+        "en": "landmark ruling",
+        "ja": "画期的な判決"
+      },
+      {
+        "text": "landmark achievement",
+        "en": "landmark achievement",
+        "ja": "画期的な成果"
       }
     ]
   },
@@ -2572,12 +2888,30 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "風景",
-            "definition": "a person, thing, state, or idea related to 風景",
+            "ja": "風景；景観",
+            "definition": "the visible features of an area of land, especially as seen from one place",
             "examples": [
               {
-                "en": "The word 'landscape' is often useful in formal or everyday English.",
-                "ja": "「landscape」は「風景」の意味で使われます。"
+                "en": "The mountain landscape changes dramatically with the seasons.",
+                "ja": "山岳地帯の景観は季節によって大きく変わる。"
+              },
+              {
+                "en": "The project will alter the landscape along the river.",
+                "ja": "その事業は川沿いの景観を変えることになる。"
+              }
+            ]
+          },
+          {
+            "ja": "状況；全体像",
+            "definition": "the overall situation in a particular field or area of activity",
+            "examples": [
+              {
+                "en": "Digital technology has transformed the media landscape.",
+                "ja": "デジタル技術はメディアを取り巻く状況を一変させた。"
+              },
+              {
+                "en": "The employment landscape has shifted with the spread of remote work.",
+                "ja": "在宅勤務の普及に伴い雇用環境は変化した。"
               }
             ]
           }
@@ -2590,9 +2924,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "landscape は可算名詞で「風景」のほか、the political landscape のように社会や業界の「状況」を比喩的に表す。",
+    "tags": [
+      "curated-v3.106",
+      "curated-v3.138"
+    ],
+    "status": "enriched",
     "search_terms": [
       "landscape"
     ],
@@ -2600,7 +2937,33 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "rural landscape",
+        "en": "rural landscape",
+        "ja": "田園風景"
+      },
+      {
+        "text": "political landscape",
+        "en": "political landscape",
+        "ja": "政治情勢"
+      },
+      {
+        "text": "changing landscape",
+        "en": "changing landscape",
+        "ja": "変化する状況"
+      },
+      {
+        "text": "the employment landscape",
+        "en": "the employment landscape",
+        "ja": "雇用を取り巻く状況"
+      },
+      {
+        "text": "urban landscape",
+        "en": "urban landscape",
+        "ja": "都市景観"
+      }
+    ]
   },
   {
     "id": "sw-07696",
@@ -2665,12 +3028,34 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "地滑り",
-            "definition": "a mass of earth or rock moving down a slope",
+            "ja": "地滑り；土砂崩れ",
+            "definition": "a sudden movement of soil, rock, or debris down a slope",
             "examples": [
+              {
+                "en": "Heavy rainfall triggered a landslide that blocked the mountain road.",
+                "ja": "大雨によって土砂崩れが起き、山道がふさがれた。"
+              },
+              {
+                "en": "Engineers checked the hillside for signs of another landslide.",
+                "ja": "技術者たちは斜面に再度の地滑りの兆候がないか調べた。"
+              },
               {
                 "en": "The landslide buried part of the road.",
                 "ja": "地滑りで道路の一部が埋まった。"
+              }
+            ]
+          },
+          {
+            "ja": "（選挙などでの）圧勝",
+            "definition": "an overwhelming victory, especially in an election",
+            "examples": [
+              {
+                "en": "The party won the election by a landslide.",
+                "ja": "その政党は選挙で圧勝した。"
+              },
+              {
+                "en": "The candidate secured a landslide victory in the final vote.",
+                "ja": "その候補者は最終投票で圧勝した。"
               }
             ]
           }
@@ -2681,16 +3066,33 @@
       "plural": "landslides"
     },
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "trigger a landslide",
+        "text": "trigger a landslide",
+        "ja": "地滑りを引き起こす"
+      },
+      {
+        "en": "landslide risk",
+        "text": "landslide risk",
+        "ja": "地滑りの危険性"
+      },
+      {
+        "en": "a deadly landslide",
+        "text": "a deadly landslide",
+        "ja": "死者を伴う土砂崩れ"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "landslide は比喩的に「圧勝」にも用いる。例：win by a landslide（圧勝する）。",
     "tags": [
-      "nature-animals"
+      "nature-animals",
+      "curated-v3.182"
     ],
-    "status": "basic"
+    "status": "enriched"
   },
   {
     "id": "sw-07400",
@@ -2747,12 +3149,26 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "言語；言葉",
-            "definition": "a system of words and grammar used by a particular group of people",
+            "ja": "言語",
+            "definition": "a system of words and grammar used by a community to communicate",
             "examples": [
+              {
+                "en": "Children can learn more than one language at home.",
+                "ja": "子どもは家庭で複数の言語を学ぶことができる。"
+              },
               {
                 "en": "Learning a language takes more time than many people expect.",
                 "ja": "言語を学ぶことは多くの人が思う以上に時間がかかります。"
+              }
+            ]
+          },
+          {
+            "ja": "言葉遣い；表現",
+            "definition": "the words and style used when speaking or writing",
+            "examples": [
+              {
+                "en": "The report uses clear language to explain a complex issue.",
+                "ja": "その報告書は複雑な問題を説明するために明快な表現を用いている。"
               }
             ]
           }
@@ -2768,11 +3184,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "language は可算名詞なら「一つの言語」、不可算名詞なら「言語一般・言葉遣い」を表す。",
     "tags": [
-      "v2.28-curated"
+      "v2.28-curated",
+      "curated-v3.159"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "language"
     ],
@@ -2780,7 +3197,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "foreign language",
+        "en": "foreign language",
+        "ja": "外国語"
+      },
+      {
+        "text": "body language",
+        "en": "body language",
+        "ja": "身ぶりによる意思表示"
+      },
+      {
+        "text": "plain language",
+        "en": "plain language",
+        "ja": "平易な言葉"
+      }
+    ]
   },
   {
     "id": "sw-12967",
@@ -2804,24 +3237,34 @@
         "meanings": [
           {
             "ja": "だるそうに；ゆったりと",
-            "definition": "",
-            "examples": []
+            "definition": "in a slow, relaxed, or weak way",
+            "examples": [
+              {
+                "en": "The cat stretched languidly in the afternoon sun.",
+                "ja": "猫は午後の日差しの中で気だるそうに体を伸ばした。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "stretch languidly",
+      "move languidly",
+      "languidly turn toward someone"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "形容詞 languid（けだるい・ゆったりした）の副詞形。",
     "tags": [
-      "manner-time"
+      "manner-time",
+      "curated-v3.73"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12968",
@@ -3049,25 +3492,45 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "喜んで受け入れる；ぺろぺろ飲む",
-            "definition": "",
-            "examples": []
+            "ja": "（賞賛・情報などを）喜んで受け入れる",
+            "definition": "to accept or enjoy something eagerly",
+            "examples": [
+              {
+                "en": "The audience lapped up every story the speaker told.",
+                "ja": "聴衆は話し手の語る話をどれも夢中で聞いた。"
+              }
+            ]
+          },
+          {
+            "ja": "（動物が液体を）舌でなめて飲む",
+            "definition": "to drink a liquid by repeatedly moving the tongue into it",
+            "examples": [
+              {
+                "en": "The puppy lapped up the water from its bowl.",
+                "ja": "子犬は器の水をぺろぺろとなめて飲んだ。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "lap up praise",
+      "lap up attention",
+      "lap up water"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "比喩的には称賛・注目・話などを「大喜びで受け取る」。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.73"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-06871",
@@ -3219,25 +3682,35 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "気温減率；高度による気温変化率",
-            "definition": "",
-            "examples": []
+            "ja": "（高度による）気温減率",
+            "definition": "the rate at which atmospheric temperature changes, usually decreases, with increasing altitude",
+            "examples": [
+              {
+                "en": "The measured lapse rate was lower than the typical environmental value that day.",
+                "ja": "その日の観測された気温減率は、一般的な環境気温減率より小さかった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "environmental lapse rate",
+      "dry adiabatic lapse rate",
+      "temperature lapse rate"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "気象学の用語。environmental lapse rate（実際の大気の気温減率）と adiabatic lapse rate（断熱変化の気温減率）は区別する。",
     "tags": [
-      "weather-atmosphere"
+      "weather-atmosphere",
+      "curated-v3.73"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-02463",
@@ -3479,11 +3952,25 @@
         "meanings": [
           {
             "ja": "主に；大部分は",
-            "definition": "mostly or to a great extent",
+            "definition": "mostly or mainly, rather than entirely",
             "examples": [
+              {
+                "en": "The difference is largely explained by access to education.",
+                "ja": "その違いは主として教育を受ける機会によって説明される。"
+              },
               {
                 "en": "The project's success was largely due to student participation.",
                 "ja": "プロジェクトの成功は主に生徒の参加によるものでした。"
+              }
+            ]
+          },
+          {
+            "ja": "おおむね；ほぼ",
+            "definition": "to a great extent, though not completely",
+            "examples": [
+              {
+                "en": "The findings were largely consistent with earlier research.",
+                "ja": "その結果は先行研究とおおむね一致していた。"
               }
             ]
           }
@@ -3496,11 +3983,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "largely は「主に」「おおむね」。completely（完全に）とは異なり、例外の余地を残す。",
     "tags": [
-      "v2.34-curated"
+      "v2.34-curated",
+      "curated-v3.109"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "largely"
     ],
@@ -3508,7 +3996,24 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "largely due to",
+        "ja": "主として～による"
+      },
+      {
+        "text": "largely responsible for",
+        "ja": "主として～に責任がある"
+      },
+      {
+        "text": "largely consistent with",
+        "ja": "～とおおむね一致する"
+      },
+      {
+        "text": "largely unchanged",
+        "ja": "ほぼ変わらない"
+      }
+    ]
   },
   {
     "id": "sw-12509",
@@ -3886,25 +4391,57 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "怒って攻撃する；大金を使う",
-            "definition": "",
-            "examples": []
+            "ja": "怒って激しく非難する；攻撃する",
+            "definition": "to suddenly attack or criticize someone in anger",
+            "examples": [
+              {
+                "en": "The minister lashed out at reporters who questioned the policy.",
+                "ja": "大臣はその政策に疑問を呈した記者たちを激しく非難した。"
+              }
+            ]
+          },
+          {
+            "ja": "（大金を）思い切って使う",
+            "definition": "to spend a large amount of money on something, especially as a treat",
+            "examples": [
+              {
+                "en": "They lashed out on a seaside hotel for their anniversary.",
+                "ja": "二人は記念日に海辺のホテルに奮発した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "lash out at critics",
+        "en": "lash out at critics",
+        "ja": "批判者に激しく反発する"
+      },
+      {
+        "text": "lash out in anger",
+        "en": "lash out in anger",
+        "ja": "怒って攻撃する"
+      },
+      {
+        "text": "lash out on a holiday",
+        "en": "lash out on a holiday",
+        "ja": "休暇に大金を使う"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "lash out at + 人 は怒りの攻撃。lash out on + 物 は「奮発する」のイギリス英語。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.164"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11263",
@@ -4197,25 +4734,47 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "最近",
-            "definition": "",
-            "examples": []
+            "ja": "最近；このところ",
+            "definition": "during the period of time just before now",
+            "examples": [
+              {
+                "en": "I have been reading more research articles lately.",
+                "ja": "最近は研究論文を以前より多く読んでいる。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "have been busy lately",
+        "en": "have been busy lately",
+        "ja": "最近忙しくしている"
+      },
+      {
+        "text": "not lately",
+        "en": "not lately",
+        "ja": "最近はそうではない"
+      },
+      {
+        "text": "more frequently lately",
+        "en": "more frequently lately",
+        "ja": "このところより頻繁に"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "現在完了形とよく共起する。lately は「最近」であり、late（遅く）とは区別する。",
     "tags": [
-      "manner-and-time"
+      "manner-and-time",
+      "curated-v3.143"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07353",
@@ -4238,25 +4797,76 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "遅延；潜在期間",
-            "definition": "",
-            "examples": []
+            "ja": "（通信・処理の）遅延時間",
+            "definition": "the time between an action or signal and the response to it",
+            "examples": [
+              {
+                "en": "High network latency made the video call difficult.",
+                "ja": "ネットワークの遅延が大きく、ビデオ通話が難しかった。"
+              },
+              {
+                "en": "Reducing latency is essential for real-time online collaboration.",
+                "ja": "リアルタイムのオンライン共同作業には遅延時間の短縮が不可欠だ。"
+              }
+            ]
+          },
+          {
+            "ja": "潜伏状態；潜伏期間",
+            "definition": "a period during which something is present but not yet active or apparent",
+            "examples": [
+              {
+                "en": "The virus can remain in latency before becoming active again.",
+                "ja": "そのウイルスは再び活性化するまで潜伏状態にとどまることがある。"
+              },
+              {
+                "en": "The infection may enter a period of latency before symptoms return.",
+                "ja": "その感染症は症状が再び現れる前に潜伏状態に入ることがある。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "network latency",
+        "en": "network latency",
+        "ja": "ネットワーク遅延"
+      },
+      {
+        "text": "low-latency connection",
+        "en": "low-latency connection",
+        "ja": "低遅延の接続"
+      },
+      {
+        "text": "viral latency",
+        "en": "viral latency",
+        "ja": "ウイルスの潜伏状態"
+      },
+      {
+        "text": "reduce latency",
+        "en": "reduce latency",
+        "ja": "遅延時間を短縮する"
+      },
+      {
+        "text": "a period of latency",
+        "en": "a period of latency",
+        "ja": "潜伏期間"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "ITの latency は「処理・通信の応答遅延」。感染症などでは「潜伏・潜在状態」を表す。",
     "tags": [
-      "digital-office"
+      "digital-office",
+      "curated-v3.73",
+      "curated-v3.138"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13103",
@@ -4413,25 +5023,45 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "横方向に",
-            "definition": "",
-            "examples": []
+            "ja": "横方向に；側方へ",
+            "definition": "toward or from the side rather than forward or backward",
+            "examples": [
+              {
+                "en": "The roots spread laterally through the shallow soil.",
+                "ja": "根は浅い土の中を横方向に広がった。"
+              }
+            ]
+          },
+          {
+            "ja": "（組織内で）同じ階層の別の役割へ",
+            "definition": "to a different position at roughly the same organizational level",
+            "examples": [
+              {
+                "en": "She moved laterally into a research role without changing her grade.",
+                "ja": "彼女は等級を変えずに研究職へ横の異動をした。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "move laterally",
+      "spread laterally",
+      "transfer laterally within a company"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "lateral（側面の・横方向の）の副詞。職務上の lateral move は昇進を伴わない異動。",
     "tags": [
-      "description"
+      "description",
+      "curated-v3.73"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-06408",
@@ -4623,12 +5253,12 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "称賛する",
-            "definition": "",
+            "ja": "〜を称賛する；高く評価する",
+            "definition": "to praise someone or something highly, often publicly",
             "examples": [
               {
-                "en": "In advanced texts, \"laud\" may be used to mean \"\".",
-                "ja": "上級レベルの文章では「laud」が「称賛する」という意味で用いられることがある。"
+                "en": "The researchers were lauded for making their data openly available.",
+                "ja": "研究者たちはデータを公開したことで高く評価された。"
               }
             ]
           }
@@ -4637,17 +5267,22 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "laud someone for an achievement",
+      "widely lauded",
+      "laud the efforts of volunteers"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "やや格式のある語。laud A for B で「BのことでAを称賛する」。",
     "tags": [
       "thinking-communication",
-      "curated-v2.93"
+      "curated-v2.93",
+      "curated-v3.73"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-01055",
@@ -5240,6 +5875,26 @@
                 "ja": "法律は運転者に赤信号で停止することを求めています。"
               }
             ]
+          },
+          {
+            "ja": "（科学の）法則",
+            "definition": "a principle describing a regular pattern in nature",
+            "examples": [
+              {
+                "en": "Newton’s laws of motion describe how forces affect movement.",
+                "ja": "ニュートンの運動法則は力が運動にどう影響するかを説明する。"
+              }
+            ]
+          },
+          {
+            "ja": "法律という制度・学問",
+            "definition": "the legal system or the study of legal rules",
+            "examples": [
+              {
+                "en": "She plans to study law after graduation.",
+                "ja": "彼女は卒業後に法学を学ぶ予定だ。"
+              }
+            ]
           }
         ]
       }
@@ -5250,12 +5905,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "a law は個別の「法律」、law（無冠詞）は「法・法学」という抽象的意味で使われる。scientific law は「科学法則」。",
     "tags": [
       "v2.33-curated",
-      "curated-v2.57"
+      "curated-v2.57",
+      "curated-v3.121"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "law"
     ],
@@ -5269,6 +5925,14 @@
       },
       {
         "text": "pass a law"
+      },
+      {
+        "text": "enforce the law",
+        "ja": "法を執行する"
+      },
+      {
+        "text": "the rule of law",
+        "ja": "法の支配"
       }
     ],
     "senses": [
@@ -5305,25 +5969,36 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "合法の",
-            "definition": "",
-            "examples": []
+            "ja": "合法の；法律で認められた",
+            "definition": "permitted by law or carried out according to the law",
+            "examples": [
+              {
+                "en": "The court ruled that the search had a lawful basis.",
+                "ja": "裁判所はその捜索には法的根拠があったと判断した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      "lawful authority",
+      "lawful conduct",
+      "a lawful basis",
+      "lawful owner"
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "unlawful は「違法の」。legal と意味が重なるが、lawful は法に従っていることを強調しやすい。",
     "tags": [
-      "judgment-and-relations"
+      "judgment-and-relations",
+      "curated-v3.73"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07635",
@@ -5421,12 +6096,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "弁護士",
-            "definition": "a person, thing, state, or idea connected with 弁護士",
+            "ja": "弁護士；法律家",
+            "definition": "a person qualified to give legal advice and represent clients",
             "examples": [
               {
-                "en": "The word 'lawyer' appears in many kinds of English texts.",
-                "ja": "「lawyer」はさまざまな英文で使われます。"
+                "en": "The family consulted a lawyer before signing the contract.",
+                "ja": "家族は契約書に署名する前に弁護士に相談した。"
               }
             ]
           }
@@ -5439,9 +6114,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "lawyer は法律の専門家の一般的な呼称。attorney は特に米国で使われる。",
+    "tags": [
+      "curated-v3.178"
+    ],
+    "status": "enriched",
     "search_terms": [
       "lawyer"
     ],
@@ -5449,7 +6126,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "en": "consult a lawyer",
+        "text": "consult a lawyer",
+        "ja": "弁護士に相談する"
+      },
+      {
+        "en": "defense lawyer",
+        "text": "defense lawyer",
+        "ja": "弁護人"
+      },
+      {
+        "en": "human rights lawyer",
+        "text": "human rights lawyer",
+        "ja": "人権問題を扱う弁護士"
+      }
+    ]
   },
   {
     "id": "sw-09814",
@@ -5588,15 +6281,28 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "並べる；配置する；説明する",
-            "definition": "",
+            "ja": "（計画・理由などを）明確に説明する",
+            "definition": "to present information or a plan in an organized and detailed way",
             "examples": [
+              {
+                "en": "The report lays out the evidence supporting the policy change.",
+                "ja": "その報告書は政策変更を裏付ける証拠を整理して示している。"
+              },
               {
                 "en": "The report lays out three policy options.",
                 "ja": "報告書は三つの政策選択肢を明確に示している。"
               }
-            ],
-            "definition_en": "to explain or present something clearly and systematically"
+            ]
+          },
+          {
+            "ja": "（物を）並べる；配置する",
+            "definition": "to arrange things in a particular order or pattern",
+            "examples": [
+              {
+                "en": "She laid out the documents on the table before the meeting.",
+                "ja": "彼女は会議前に書類を机の上に並べた。"
+              }
+            ]
           }
         ]
       }
@@ -5604,17 +6310,26 @@
     "forms": {},
     "phrases": [],
     "collocations": [
-      "lay out a plan",
-      "lay out the evidence"
+      {
+        "text": "lay out a plan",
+        "en": "lay out a plan",
+        "ja": "計画を詳しく示す"
+      },
+      {
+        "text": "lay out the documents",
+        "en": "lay out the documents",
+        "ja": "書類を並べる"
+      }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Multiword expression. Learn it as a unit: lay out. The example and collocations show its typical grammatical pattern.",
+    "usage_note": "過去形・過去分詞は laid out。lie down「横になる」と区別。",
     "tags": [
       "phrasal-verbs",
-      "curated-v3.13"
+      "curated-v3.13",
+      "curated-v3.91"
     ],
     "status": "enriched"
   },
@@ -5680,12 +6395,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "配置；レイアウト",
-            "definition": "a person, thing, activity, or concept connected with 配置",
+            "ja": "（物や設備の）配置；間取り",
+            "definition": "the way the parts of a space or system are arranged",
             "examples": [
               {
-                "en": "The report includes information about layout.",
-                "ja": "その報告書には「配置」についての情報が含まれている。"
+                "en": "The new classroom layout makes group discussion easier.",
+                "ja": "新しい教室の配置はグループ討論をしやすくしている。"
+              }
+            ]
+          },
+          {
+            "ja": "（印刷物・画面の）レイアウト；紙面構成",
+            "definition": "the arrangement of text, images, and other elements on a page or screen",
+            "examples": [
+              {
+                "en": "The editor changed the page layout to improve readability.",
+                "ja": "編集者は読みやすさを高めるため紙面のレイアウトを変更した。"
               }
             ]
           }
@@ -5694,16 +6419,38 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "page layout",
+        "en": "page layout",
+        "ja": "紙面レイアウト"
+      },
+      {
+        "text": "classroom layout",
+        "en": "classroom layout",
+        "ja": "教室の配置"
+      },
+      {
+        "text": "screen layout",
+        "en": "screen layout",
+        "ja": "画面構成"
+      },
+      {
+        "text": "change the layout",
+        "en": "change the layout",
+        "ja": "配置を変更する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "物理的な配置と、ページ・画面の視覚的な構成の両方に使う。layout（名詞）と lay out（動詞）を区別する。",
     "tags": [
-      "50k-frequency-gap"
+      "50k-frequency-gap",
+      "curated-v3.111"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04241",
@@ -5909,25 +6656,57 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "しみ出させる；溶出する",
-            "definition": "",
-            "examples": []
+            "ja": "（物質が液体に）溶け出す；浸出する",
+            "definition": "to dissolve out of a material and be carried away by liquid",
+            "examples": [
+              {
+                "en": "Heavy metals may leach into groundwater from contaminated soil.",
+                "ja": "重金属が汚染された土壌から地下水へ溶け出すことがある。"
+              }
+            ]
+          },
+          {
+            "ja": "（液体が物質を）溶出させる",
+            "definition": "to remove a soluble substance from a material by passing liquid through it",
+            "examples": [
+              {
+                "en": "Rainwater can leach nutrients from sandy soils.",
+                "ja": "雨水は砂質土壌から養分を溶出させることがある。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "leach into groundwater",
+        "en": "leach into groundwater",
+        "ja": "地下水に溶け出す"
+      },
+      {
+        "text": "leach nutrients from soil",
+        "en": "leach nutrients from soil",
+        "ja": "土壌から養分を溶出させる"
+      },
+      {
+        "text": "chemical leaching",
+        "en": "chemical leaching",
+        "ja": "化学物質の溶出"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "leach into + 流入先／leach A from B（BからAを溶出させる）。leech（ヒル）とは別語。",
     "tags": [
-      "craft-actions"
+      "craft-actions",
+      "curated-v3.119"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13077",
@@ -6060,25 +6839,42 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "見込み客を見つけて獲得する活動",
-            "definition": "",
-            "examples": []
+            "ja": "見込み客の獲得活動",
+            "definition": "the process of identifying and attracting potential customers for a product or service",
+            "examples": [
+              {
+                "en": "The company used free webinars for lead generation.",
+                "ja": "その企業は見込み客を獲得するために無料ウェビナーを利用した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "lead generation strategy",
+        "en": "lead generation strategy",
+        "ja": "見込み客獲得戦略"
+      },
+      {
+        "text": "lead generation campaign",
+        "en": "lead generation campaign",
+        "ja": "見込み客獲得キャンペーン"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "In marketing, a lead is a potential customer, not a person in charge.",
     "tags": [
-      "office-business"
+      "office-business",
+      "curated-v3.96"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-09817",
@@ -6183,25 +6979,42 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "発注などから完了までの所要時間",
-            "definition": "",
-            "examples": []
+            "ja": "発注・準備から納品・完成までの所要時間",
+            "definition": "the period between starting or ordering something and its completion or delivery",
+            "examples": [
+              {
+                "en": "The supplier needs a lead time of six weeks for custom parts.",
+                "ja": "その供給業者は特注部品の納品までに6週間を要する。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "production lead time",
+        "en": "production lead time",
+        "ja": "生産リードタイム"
+      },
+      {
+        "text": "reduce lead time",
+        "en": "reduce lead time",
+        "ja": "所要期間を短縮する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "物流・製造・プロジェクト管理で頻出。通常は lead time for + 名詞。",
     "tags": [
-      "trade"
+      "trade",
+      "curated-v3.90"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-09819",
@@ -6224,25 +7037,57 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "前段階となる；話をつなげる",
-            "definition": "",
-            "examples": []
+            "ja": "（出来事の）前段階となる",
+            "definition": "to happen before an event and help bring it about",
+            "examples": [
+              {
+                "en": "A series of protests led up to the government’s resignation.",
+                "ja": "一連の抗議活動が政府の辞任に先立って起こった。"
+              }
+            ]
+          },
+          {
+            "ja": "（話や説明を）徐々に本題へつなげる",
+            "definition": "to introduce a topic gradually before reaching the main point",
+            "examples": [
+              {
+                "en": "The lecturer used a short story to lead up to the main argument.",
+                "ja": "講師は短い話を使って中心的な主張へと話をつなげた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "events leading up to the election",
+        "en": "events leading up to the election",
+        "ja": "選挙に至るまでの出来事"
+      },
+      {
+        "text": "the weeks leading up to the exam",
+        "en": "the weeks leading up to the exam",
+        "ja": "試験直前の数週間"
+      },
+      {
+        "text": "lead up to the main point",
+        "en": "lead up to the main point",
+        "ja": "本題へ話をつなげる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "lead up to + 出来事／話題。leading up to ... は「〜までの間に」として頻出。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.164"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-09610",
@@ -6299,12 +7144,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "指導者",
-            "definition": "a thing, person, idea, or state related to 指導者",
+            "ja": "指導者；リーダー",
+            "definition": "a person who directs or guides a group, organization, or country",
             "examples": [
               {
-                "en": "This leader is important.",
-                "ja": "この「指導者」は重要です。"
+                "en": "A good leader makes room for different opinions.",
+                "ja": "優れたリーダーはさまざまな意見を受け入れる余地を作る。"
+              }
+            ]
+          },
+          {
+            "ja": "先頭に立つ人・組織",
+            "definition": "a person or organization that is ahead of others in a field or competition",
+            "examples": [
+              {
+                "en": "The company is a leader in battery recycling technology.",
+                "ja": "その企業は電池のリサイクル技術で先進的な存在だ。"
               }
             ]
           }
@@ -6317,9 +7172,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "leader in a field は「その分野の先駆者・第一人者」。leader of a group は「集団の指導者」。",
+    "tags": [
+      "curated-v3.159"
+    ],
+    "status": "enriched",
     "search_terms": [
       "leader"
     ],
@@ -6327,7 +7184,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "team leader",
+        "en": "team leader",
+        "ja": "チームリーダー"
+      },
+      {
+        "text": "political leader",
+        "en": "political leader",
+        "ja": "政治指導者"
+      },
+      {
+        "text": "industry leader",
+        "en": "industry leader",
+        "ja": "業界をリードする企業"
+      }
+    ]
   },
   {
     "id": "sw-01909",
@@ -6343,12 +7216,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "指導力",
-            "definition": "a person, thing, state, or idea related to 指導力",
+            "ja": "指導力；統率力",
+            "definition": "the ability to guide, motivate, and organize people",
             "examples": [
               {
-                "en": "The word 'leadership' is often useful in formal or everyday English.",
-                "ja": "「leadership」は「指導力」の意味で使われます。"
+                "en": "Effective leadership helped the team respond to the crisis.",
+                "ja": "効果的なリーダーシップがチームの危機対応を支えた。"
+              }
+            ]
+          },
+          {
+            "ja": "指導部；幹部",
+            "definition": "the group of people who lead an organization or institution",
+            "examples": [
+              {
+                "en": "The university leadership announced a new admissions policy.",
+                "ja": "大学の執行部は新たな入学者選抜方針を発表した。"
               }
             ]
           }
@@ -6361,9 +7244,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "能力としての leadership は通常不可算。the leadership は組織の指導層を指すことがある。",
+    "tags": [
+      "curated-v3.93"
+    ],
+    "status": "enriched",
     "search_terms": [
       "leadership"
     ],
@@ -6371,7 +7256,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "leadership skills",
+        "en": "leadership skills",
+        "ja": "指導力"
+      },
+      {
+        "text": "under new leadership",
+        "en": "under new leadership",
+        "ja": "新たな指導体制の下で"
+      },
+      {
+        "text": "political leadership",
+        "en": "political leadership",
+        "ja": "政治的指導力・指導部"
+      }
+    ]
   },
   {
     "id": "sw-08764",
@@ -6808,12 +7709,7 @@
                 "ja": "彼女は電車を待つ間、壁に寄りかかった。"
               }
             ]
-          }
-        ]
-      },
-      {
-        "pos": "verb",
-        "meanings": [
+          },
           {
             "ja": "〜に傾く；〜を好む",
             "definition": "to be inclined toward an opinion or choice",
@@ -6822,6 +7718,10 @@
               {
                 "en": "The committee is leaning toward a gradual reform.",
                 "ja": "委員会は段階的な改革に傾きつつある。"
+              },
+              {
+                "en": "The committee is leaning toward a proposal that would reduce costs without cutting services.",
+                "ja": "委員会はサービスを削減せずに費用を抑える案に傾いている。"
               }
             ]
           }
@@ -6848,16 +7748,24 @@
     "phrases": [],
     "collocations": [
       {
+        "en": "lean against a wall",
         "text": "lean against a wall",
         "ja": "壁に寄りかかる"
       },
       {
+        "en": "lean toward a proposal",
         "text": "lean toward a proposal",
         "ja": "提案に傾く"
       },
       {
+        "en": "lean meat",
         "text": "lean meat",
         "ja": "脂肪の少ない肉"
+      },
+      {
+        "en": "lean toward an option",
+        "text": "lean toward an option",
+        "ja": "ある選択肢に傾く"
       }
     ],
     "related": {
@@ -6867,7 +7775,8 @@
     "usage_note": "lean against ...（〜に寄りかかる）、lean toward(s) ...（〜に傾く）。形容詞 lean は「脂肪の少ない」。",
     "tags": [
       "general-vocabulary",
-      "curated-v3.50"
+      "curated-v3.50",
+      "curated-v3.172"
     ],
     "status": "enriched"
   },
@@ -6973,8 +7882,12 @@
         "meanings": [
           {
             "ja": "学ぶ；身につける",
-            "definition": "to gain knowledge or skill through study, practice, or experience",
+            "definition": "to gain knowledge or a skill through study, instruction, or experience",
             "examples": [
+              {
+                "en": "Students learn new vocabulary more effectively when they review it regularly.",
+                "ja": "生徒は定期的に復習すると新しい語彙をより効果的に身につける。"
+              },
               {
                 "en": "You learn a language faster when you use it regularly.",
                 "ja": "言語は定期的に使うとより速く身につきます。"
@@ -6982,6 +7895,16 @@
               {
                 "en": "We learn a new song every week.",
                 "ja": "私たちは毎週、新しい歌を習います。"
+              }
+            ]
+          },
+          {
+            "ja": "知る；聞いて分かる",
+            "definition": "to discover information or become aware of a fact",
+            "examples": [
+              {
+                "en": "We learned that the museum would close for repairs.",
+                "ja": "私たちはその博物館が修繕のため休館すると知った。"
               }
             ]
           }
@@ -6999,11 +7922,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "過去形・過去分詞は learned と learnt。learnt は特に英式で使われる。",
+    "usage_note": "learn to do は「～できるようになる」。learn that ... は「…だと知る」。過去形・過去分詞は learned または learnt。",
     "tags": [
-      "v2.30-curated"
+      "v2.30-curated",
+      "curated-v3.159"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "learn",
       "learns",
@@ -7015,7 +7939,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "learn from mistakes",
+        "en": "learn from mistakes",
+        "ja": "失敗から学ぶ"
+      },
+      {
+        "text": "learn to swim",
+        "en": "learn to swim",
+        "ja": "泳げるようになる"
+      },
+      {
+        "text": "learn about history",
+        "en": "learn about history",
+        "ja": "歴史について学ぶ"
+      }
+    ]
   },
   {
     "id": "sw-03039",
@@ -7426,25 +8366,69 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "省く；仲間外れにする",
-            "definition": "",
-            "examples": []
+            "ja": "（情報・項目を）省く",
+            "definition": "to fail to include something in a list, account, or explanation",
+            "definition_en": "to fail to include something in a list, account, or explanation",
+            "examples": [
+              {
+                "en": "The summary leaves out several important details.",
+                "ja": "その要約では重要な詳細がいくつか省かれている。"
+              },
+              {
+                "en": "The summary leaves out important details about how the participants were selected.",
+                "ja": "その要約では参加者の選び方に関する重要な詳細が省かれている。"
+              }
+            ]
+          },
+          {
+            "ja": "（人を）仲間に入れない",
+            "definition": "to exclude someone from an activity or group",
+            "definition_en": "to exclude someone from an activity or group",
+            "examples": [
+              {
+                "en": "She felt left out when everyone else received an invitation.",
+                "ja": "ほかの全員が招待されたため、彼女は仲間外れにされたと感じた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "leave out details",
+        "text": "leave out details",
+        "ja": "詳細を省く"
+      },
+      {
+        "en": "leave someone out",
+        "text": "leave someone out",
+        "ja": "人を仲間に入れない"
+      },
+      {
+        "en": "feel left out",
+        "text": "feel left out",
+        "ja": "仲間外れにされたと感じる"
+      },
+      {
+        "en": "leave out key information",
+        "text": "leave out key information",
+        "ja": "重要な情報を省く"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "leave A out / leave out A。feel left out は「仲間外れにされたと感じる」。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.58",
+      "curated-v3.172"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-06597",
@@ -7612,14 +8596,13 @@
               {
                 "en": "She lectures on modern Japanese history.",
                 "ja": "彼女は日本近現代史を講義している。"
+              },
+              {
+                "en": "The professor lectured on how migration changes the economies of both sending and receiving countries.",
+                "ja": "教授は移住が送り出し国と受け入れ国の双方の経済をどう変えるかについて講義した。"
               }
             ]
-          }
-        ]
-      },
-      {
-        "pos": "verb",
-        "meanings": [
+          },
           {
             "ja": "説教する；小言を言う",
             "definition": "to criticize someone at length in a disapproving way",
@@ -7643,7 +8626,8 @@
     "usage_note": "give/attend a lecture on ...。lecture someone about/on ... は「〜について説教する」。",
     "tags": [
       "etymology-v1",
-      "curated-v3.50"
+      "curated-v3.50",
+      "curated-v3.172"
     ],
     "status": "enriched",
     "search_terms": [
@@ -7655,16 +8639,24 @@
     },
     "collocations": [
       {
+        "en": "give a lecture on",
         "text": "give a lecture on",
         "ja": "〜について講義する"
       },
       {
+        "en": "attend a lecture",
         "text": "attend a lecture",
         "ja": "講義に出席する"
       },
       {
+        "en": "lecture someone about",
         "text": "lecture someone about",
         "ja": "人に〜について説教する"
+      },
+      {
+        "en": "lecture on migration",
+        "text": "lecture on migration",
+        "ja": "移住について講義する"
       }
     ],
     "etymology": {
@@ -7706,25 +8698,51 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "講師；講演者",
-            "definition": "",
-            "examples": []
+            "ja": "講師；講義を行う人",
+            "definition": "a person who teaches or gives lectures, particularly at a university",
+            "examples": [
+              {
+                "en": "The lecturer explained the experiment before showing the results.",
+                "ja": "講師は結果を示す前に実験について説明した。"
+              },
+              {
+                "en": "A guest lecturer spoke about renewable energy policy.",
+                "ja": "外部講師が再生可能エネルギー政策について講演した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "university lecturer",
+        "en": "university lecturer",
+        "ja": "大学講師"
+      },
+      {
+        "text": "guest lecturer",
+        "en": "guest lecturer",
+        "ja": "客員講師；外部講師"
+      },
+      {
+        "text": "senior lecturer",
+        "en": "senior lecturer",
+        "ja": "上級講師"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "大学の lecturer の職位・雇用形態は国によって異なる。講義そのものは lecture、講義をする人は lecturer。",
     "tags": [
-      "education-study"
+      "education-study",
+      "curated-v3.144"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07906",
@@ -7747,25 +8765,57 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "元帳；台帳",
-            "definition": "",
-            "examples": []
+            "ja": "（会計の）元帳；取引記録簿",
+            "definition": "a book or electronic record in which financial transactions are recorded",
+            "examples": [
+              {
+                "en": "The accountant entered the payment in the general ledger.",
+                "ja": "会計担当者はその支払いを総勘定元帳に記入した。"
+              }
+            ]
+          },
+          {
+            "ja": "（デジタル取引の）台帳",
+            "definition": "a record of transactions maintained in a computer system",
+            "examples": [
+              {
+                "en": "The system uses a shared ledger to track transfers.",
+                "ja": "そのシステムは送金を追跡するために共有台帳を使っている。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "general ledger",
+        "text": "general ledger",
+        "ja": "総勘定元帳"
+      },
+      {
+        "en": "record a transaction in a ledger",
+        "text": "record a transaction in a ledger",
+        "ja": "取引を元帳に記録する"
+      },
+      {
+        "en": "distributed ledger",
+        "text": "distributed ledger",
+        "ja": "分散型台帳"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "会計では general ledger が「総勘定元帳」。distributed ledger は複数の参加者で記録を共有する技術上の用語。",
     "tags": [
-      "trade"
+      "trade",
+      "curated-v3.104"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-03905",
@@ -7923,15 +8973,45 @@
     "frequency": 5,
     "parts_of_speech": [
       {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "左側の",
+            "definition": "on the side opposite the right",
+            "examples": [
+              {
+                "en": "The left door leads to the library.",
+                "ja": "左側の扉は図書館につながっている。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adverb",
+        "meanings": [
+          {
+            "ja": "左へ；左側に",
+            "definition": "toward the side opposite the right",
+            "examples": [
+              {
+                "en": "Turn left at the traffic lights.",
+                "ja": "信号で左に曲がってください。"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "pos": "noun",
         "meanings": [
           {
-            "ja": "左の",
-            "definition": "a person, thing, idea, or concept connected with '左の'",
+            "ja": "左；左側",
+            "definition": "the direction or side opposite the right",
             "examples": [
               {
-                "en": "This left is important.",
-                "ja": "この「左の」は重要です。"
+                "en": "The station is on your left.",
+                "ja": "駅は左手にあります。"
               }
             ]
           }
@@ -7944,9 +9024,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "left は leave の過去形・過去分詞でもある。方向の left と区別する。",
+    "tags": [
+      "curated-v3.155"
+    ],
+    "status": "enriched",
     "search_terms": [
       "left"
     ],
@@ -7954,7 +9036,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "turn left",
+        "en": "turn left",
+        "ja": "左に曲がる"
+      },
+      {
+        "text": "on the left",
+        "en": "on the left",
+        "ja": "左側に"
+      },
+      {
+        "text": "the left side",
+        "en": "the left side",
+        "ja": "左側"
+      }
+    ]
   },
   {
     "id": "sw-07449",
@@ -8104,12 +9202,30 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "遺産；受け継がれたもの",
-            "definition": "something passed on from the past",
+            "ja": "後世に残る遺産；影響",
+            "definition": "something lasting that a person, event, or period leaves behind",
             "examples": [
               {
-                "en": "The word 'legacy' is useful in this context.",
-                "ja": "この文脈では「遺産」という意味で使われる。"
+                "en": "Her greatest legacy was a network of public libraries.",
+                "ja": "彼女が残した最大の遺産は公共図書館のネットワークだった。"
+              },
+              {
+                "en": "The scholarship fund is part of the scientist’s lasting legacy.",
+                "ja": "その奨学金基金は科学者が残した永続的な功績の一部だ。"
+              }
+            ]
+          },
+          {
+            "ja": "（過去から引き継いだ）問題・仕組み",
+            "definition": "a system, practice, or problem inherited from an earlier period",
+            "examples": [
+              {
+                "en": "The company still relies on legacy software.",
+                "ja": "その会社はいまだに旧式のソフトウェアに依存している。"
+              },
+              {
+                "en": "Maintaining legacy databases consumes much of the department’s budget.",
+                "ja": "旧式のデータベースの保守が部門予算の大きな部分を占めている。"
               }
             ]
           }
@@ -8122,10 +9238,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Common in formal, academic, professional, or news contexts.",
+    "usage_note": "legacy は良い功績にも負の遺産にも使える。ITの legacy system は旧来のシステム。",
     "tags": [
       "frequency-gap",
-      "curated-v3.03"
+      "curated-v3.03",
+      "curated-v3.92",
+      "curated-v3.138"
     ],
     "status": "enriched",
     "search_terms": [
@@ -8136,8 +9254,31 @@
       "ipa_uk": null
     },
     "collocations": [
-      "lasting legacy",
-      "leave a legacy"
+      {
+        "en": "lasting legacy",
+        "text": "lasting legacy",
+        "ja": "長く残る功績"
+      },
+      {
+        "en": "leave a legacy",
+        "text": "leave a legacy",
+        "ja": "後世に遺産を残す"
+      },
+      {
+        "en": "legacy system",
+        "text": "legacy system",
+        "ja": "旧来のシステム"
+      },
+      {
+        "text": "legacy database",
+        "en": "legacy database",
+        "ja": "旧来のデータベース"
+      },
+      {
+        "text": "a legacy of inequality",
+        "en": "a legacy of inequality",
+        "ja": "過去から残る不平等の問題"
+      }
     ]
   },
   {
@@ -8309,12 +9450,22 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "法律に",
-            "definition": "in the manner or degree expressed by 法律に",
+            "ja": "法律上；法的に",
+            "definition": "according to what the law permits or requires",
             "examples": [
               {
-                "en": "The word 'legally' is useful when discussing this topic.",
-                "ja": "この語は「法律に」に関する文脈で使われます。"
+                "en": "Employers are legally required to provide a safe workplace.",
+                "ja": "雇用主は法律上、安全な職場を提供する義務がある。"
+              }
+            ]
+          },
+          {
+            "ja": "合法的に",
+            "definition": "in a way that does not break the law",
+            "examples": [
+              {
+                "en": "The materials were legally obtained and properly credited.",
+                "ja": "その資料は合法的に入手され、出典も適切に示されていた。"
               }
             ]
           }
@@ -8327,9 +9478,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "legally binding は契約や合意について頻出。legal は形容詞、legality は名詞。",
+    "tags": [
+      "curated-v3.112"
+    ],
+    "status": "enriched",
     "search_terms": [
       "legally"
     ],
@@ -8337,7 +9490,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "legally binding",
+        "en": "legally binding",
+        "ja": "法的拘束力のある"
+      },
+      {
+        "text": "legally required",
+        "en": "legally required",
+        "ja": "法律上義務づけられた"
+      },
+      {
+        "text": "legally permitted",
+        "en": "legally permitted",
+        "ja": "法的に認められた"
+      }
+    ]
   },
   {
     "id": "sw-07020",
@@ -8442,26 +9611,52 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "読みやすい",
-            "definition": "",
-            "examples": []
+            "ja": "（文字が）はっきり読める",
+            "definition": "clear enough to be read without difficulty",
+            "examples": [
+              {
+                "en": "Please write your name in legible handwriting.",
+                "ja": "名前は読みやすい字で書いてください。"
+              },
+              {
+                "en": "The faded label was barely legible.",
+                "ja": "色あせたラベルはかろうじて読める程度だった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "legible handwriting",
+        "en": "legible handwriting",
+        "ja": "読みやすい筆跡"
+      },
+      {
+        "text": "clearly legible",
+        "en": "clearly legible",
+        "ja": "はっきり判読できる"
+      },
+      {
+        "text": "barely legible",
+        "en": "barely legible",
+        "ja": "かろうじて読める"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "legible は字や印刷が「判読できる」。readable は文章内容の読みやすさにも使う。",
     "tags": [
       "judgment-and-relations",
-      "etymology-v1"
+      "etymology-v1",
+      "curated-v3.152"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "etymology": {
       "origin": "Latin legere / lectus",
       "history": "legere「読む」に由来し、「読むことができる」を表す。",
@@ -8500,6 +9695,14 @@
               {
                 "en": "New legislation requires companies to protect customers’ personal data.",
                 "ja": "新しい法律は企業に顧客の個人情報の保護を義務づけている。"
+              },
+              {
+                "en": "Lawmakers introduced legislation to improve safety standards in factories.",
+                "ja": "議員たちは工場の安全基準を改善するための法案を提出した。"
+              },
+              {
+                "en": "The legislation aims to protect consumers from unfair practices.",
+                "ja": "その法律は不公正な慣行から消費者を守ることを目的としている。"
               }
             ]
           },
@@ -8526,7 +9729,8 @@
     "tags": [
       "etymology-v1",
       "curated-v2.51",
-      "curated-v3.42"
+      "curated-v3.42",
+      "curated-v3.161"
     ],
     "status": "enriched",
     "search_terms": [
@@ -8538,16 +9742,24 @@
     },
     "collocations": [
       {
-        "text": "introduce legislation"
+        "text": "introduce legislation",
+        "en": "introduce legislation",
+        "ja": "法案を提出する"
       },
       {
-        "text": "pass legislation"
+        "text": "pass legislation",
+        "en": "pass legislation",
+        "ja": "法案を可決して法律を成立させる"
       },
       {
-        "text": "proposed legislation"
+        "text": "proposed legislation",
+        "en": "proposed legislation",
+        "ja": "提出・検討中の法案"
       },
       {
-        "text": "environmental legislation"
+        "text": "environmental legislation",
+        "en": "environmental legislation",
+        "ja": "環境関連法規"
       }
     ],
     "etymology": {
@@ -8565,19 +9777,7 @@
         "legislative",
         "legitimate"
       ]
-    },
-    "senses": [
-      {
-        "pos": "",
-        "definition_ja": "法律；立法",
-        "examples": [
-          {
-            "en": "The legislation aims to protect consumers from unfair practices.",
-            "ja": "その法律は不公正な慣行から消費者を守ることを目的としている。"
-          }
-        ]
-      }
-    ]
+    }
   },
   {
     "id": "sw-02940",
@@ -8599,6 +9799,22 @@
               {
                 "en": "The proposal requires legislative approval before it can take effect.",
                 "ja": "その提案が発効するには立法府の承認が必要である。"
+              },
+              {
+                "en": "The committee is considering legislative changes to consumer protection.",
+                "ja": "委員会は消費者保護に関する法改正を検討している。"
+              },
+              {
+                "en": "Legislative power is divided between two chambers in some countries.",
+                "ja": "国によっては立法権が二つの議院に分かれている。"
+              },
+              {
+                "en": "The proposal requires legislative approval.",
+                "ja": "その提案には議会の承認が必要である。"
+              },
+              {
+                "en": "The bill must pass through several stages of the legislative process.",
+                "ja": "その法案は立法過程のいくつかの段階を経なければならない。"
               }
             ],
             "definition_en": "relating to making laws or to a body that makes laws"
@@ -8612,12 +9828,14 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Common in politics and law; related noun: legislature.",
+    "usage_note": "legislative は「法律を制定することに関する」。legislature は「立法府・議会」。",
     "tags": [
       "frequency-gap",
       "etymology-v1",
       "curated-v2.57",
-      "curated-v3.27"
+      "curated-v3.27",
+      "curated-v3.115",
+      "curated-v3.174"
     ],
     "status": "enriched",
     "search_terms": [
@@ -8628,9 +9846,31 @@
       "ipa_uk": null
     },
     "collocations": [
-      "legislative process",
-      "legislative reform",
-      "legislative authority"
+      {
+        "en": "legislative process",
+        "text": "legislative process",
+        "ja": "立法過程"
+      },
+      {
+        "en": "legislative reform",
+        "text": "legislative reform",
+        "ja": "法制度改革"
+      },
+      {
+        "en": "legislative authority",
+        "text": "legislative authority",
+        "ja": "立法権限"
+      },
+      {
+        "en": "legislative approval",
+        "text": "legislative approval",
+        "ja": "立法府の承認"
+      },
+      {
+        "en": "legislative branch",
+        "text": "legislative branch",
+        "ja": "立法府"
+      }
     ],
     "etymology": {
       "origin": "Latin lex / legis",
@@ -8647,19 +9887,7 @@
         "legislation",
         "legitimate"
       ]
-    },
-    "senses": [
-      {
-        "pos": "",
-        "definition_ja": "立法の；議会の",
-        "examples": [
-          {
-            "en": "The proposal requires legislative approval.",
-            "ja": "その提案には議会の承認が必要である。"
-          }
-        ]
-      }
-    ]
+    }
   },
   {
     "id": "sw-02988",
@@ -8675,12 +9903,24 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "立法府",
-            "definition": "a body of people with the power to make laws",
+            "ja": "立法府；議会",
+            "definition": "the branch or body of government responsible for making laws",
             "examples": [
               {
-                "en": "The word 'legislature' is useful in this context.",
-                "ja": "この文脈では「立法府」という意味で使われる。"
+                "en": "The legislature passed a bill to improve access to public transport.",
+                "ja": "議会は公共交通へのアクセスを改善する法案を可決した。"
+              },
+              {
+                "en": "The proposal will be debated in the state legislature.",
+                "ja": "その提案は州議会で審議される。"
+              },
+              {
+                "en": "The legislature is expected to vote on the education bill next month.",
+                "ja": "議会は来月、教育法案について採決する見込みだ。"
+              },
+              {
+                "en": "The executive proposed the measure, but only the legislature could enact it.",
+                "ja": "行政府がその措置を提案したが、法律として制定できるのは立法府だけだった。"
               }
             ]
           }
@@ -8693,10 +9933,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Common in formal, academic, professional, or news contexts.",
+    "usage_note": "legislature は法律を制定する機関。legislation（法律・立法）と区別する。",
     "tags": [
       "frequency-gap",
-      "curated-v3.03"
+      "curated-v3.03",
+      "curated-v3.92",
+      "curated-v3.138"
     ],
     "status": "enriched",
     "search_terms": [
@@ -8707,8 +9949,31 @@
       "ipa_uk": null
     },
     "collocations": [
-      "state legislature",
-      "national legislature"
+      {
+        "en": "state legislature",
+        "text": "state legislature",
+        "ja": "州議会"
+      },
+      {
+        "en": "national legislature",
+        "text": "national legislature",
+        "ja": "国の立法府"
+      },
+      {
+        "en": "pass a bill in the legislature",
+        "text": "pass a bill in the legislature",
+        "ja": "議会で法案を可決する"
+      },
+      {
+        "text": "elected legislature",
+        "en": "elected legislature",
+        "ja": "選挙で選ばれた議会"
+      },
+      {
+        "text": "legislature debates a bill",
+        "en": "legislature debates a bill",
+        "ja": "議会が法案を審議する"
+      }
     ]
   },
   {
@@ -8735,6 +10000,10 @@
               {
                 "en": "Public participation can strengthen the legitimacy of political decisions.",
                 "ja": "市民参加は政治的決定の正当性を高めうる。"
+              },
+              {
+                "en": "The court questioned the legitimacy of the agreement.",
+                "ja": "裁判所はその合意の正当性に疑問を呈した。"
               }
             ]
           },
@@ -8745,6 +10014,10 @@
               {
                 "en": "Public consultation can strengthen the legitimacy of a decision.",
                 "ja": "市民への意見聴取は決定の正当性に対する信頼を高め得る。"
+              },
+              {
+                "en": "Public trust is essential to the legitimacy of democratic institutions.",
+                "ja": "民主的な制度が正当なものとして認められるには国民の信頼が不可欠だ。"
               }
             ]
           }
@@ -8761,7 +10034,8 @@
     "tags": [
       "academic-expansion",
       "curated-v3.25",
-      "curated-v3.55"
+      "curated-v3.55",
+      "curated-v3.125"
     ],
     "status": "enriched",
     "search_terms": [
@@ -8773,13 +10047,20 @@
     },
     "collocations": [
       {
-        "text": "question the legitimacy of"
+        "text": "question the legitimacy of",
+        "ja": "～の正当性を疑問視する"
       },
       {
-        "text": "political legitimacy"
+        "text": "political legitimacy",
+        "ja": "政治的正当性"
       },
       {
-        "text": "gain legitimacy"
+        "text": "gain legitimacy",
+        "ja": "正当性を獲得する"
+      },
+      {
+        "text": "the legitimacy of a decision",
+        "ja": "決定の正当性"
       }
     ]
   },
@@ -8803,14 +10084,17 @@
               {
                 "en": "Residents raised legitimate concerns about the project’s environmental impact.",
                 "ja": "住民はその事業の環境への影響についてもっともな懸念を示した。"
+              },
+              {
+                "en": "Students have a legitimate interest in knowing how their work is assessed.",
+                "ja": "生徒には自分の成果物がどのように評価されるか知る正当な関心がある。"
+              },
+              {
+                "en": "Parents have a legitimate reason to ask how their children’s data are stored.",
+                "ja": "保護者には、子どものデータがどのように保存されるかを尋ねるもっともな理由がある。"
               }
             ]
-          }
-        ]
-      },
-      {
-        "pos": "adjective",
-        "meanings": [
+          },
           {
             "ja": "合法的な；正統な",
             "definition": "allowed by law or accepted as having proper authority",
@@ -8822,6 +10106,10 @@
               {
                 "en": "Privacy is a legitimate concern when schools collect student data.",
                 "ja": "学校が生徒データを収集する際、プライバシーは正当な懸念である。"
+              },
+              {
+                "en": "The court ruled that the organization had a legitimate claim to the property.",
+                "ja": "裁判所はその団体に財産に対する正当な請求権があると判断した。"
               }
             ]
           }
@@ -8834,11 +10122,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Legitimate may mean lawful, but it can also mean reasonable or justified even without a legal issue.",
+    "usage_note": "Legitimate may mean lawful, but it can also mean reasonable or justified even without a legal issue.\nlegitimate concern は「もっともな懸念」で、必ずしも法律上の問題ではない。",
     "tags": [
       "etymology-v1",
       "curated-v2.49",
-      "curated-v3.34"
+      "curated-v3.34",
+      "curated-v3.132",
+      "curated-v3.162"
     ],
     "status": "enriched",
     "search_terms": [
@@ -8851,15 +10141,38 @@
     "collocations": [
       {
         "text": "legitimate concern",
-        "ja": ""
+        "en": "legitimate concern",
+        "ja": "もっともな懸念"
       },
       {
         "text": "legitimate authority",
-        "ja": ""
+        "en": "legitimate authority",
+        "ja": "正当な権限"
       },
       {
         "text": "legitimate reason",
+        "en": "legitimate reason",
         "ja": "正当な理由"
+      },
+      {
+        "text": "a legitimate objection",
+        "en": "a legitimate objection",
+        "ja": "もっともな異議"
+      },
+      {
+        "text": "legitimate business activities",
+        "en": "legitimate business activities",
+        "ja": "合法的な事業活動"
+      },
+      {
+        "text": "a legitimate request",
+        "en": "a legitimate request",
+        "ja": "正当な要求"
+      },
+      {
+        "text": "legitimate public interest",
+        "en": "legitimate public interest",
+        "ja": "正当な公共の利益"
       }
     ],
     "etymology": {
@@ -8900,25 +10213,60 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "正当に；合法的に",
-            "definition": "",
-            "examples": []
+            "ja": "合法的に；正当な権限に基づいて",
+            "definition": "in a lawful or properly authorized way",
+            "examples": [
+              {
+                "en": "The data was legitimately obtained with consent.",
+                "ja": "そのデータは同意を得て合法的に取得された。"
+              },
+              {
+                "en": "Only authorized staff may legitimately access the records.",
+                "ja": "正式に権限を与えられた職員だけが記録に正当にアクセスできる。"
+              }
+            ]
+          },
+          {
+            "ja": "もっともな理由で；正当に",
+            "definition": "for a good or reasonable reason",
+            "examples": [
+              {
+                "en": "Residents may legitimately question the safety of the project.",
+                "ja": "住民がその事業の安全性に疑問を持つのはもっともだ。"
+              },
+              {
+                "en": "The proposal can legitimately be criticized for its cost.",
+                "ja": "その提案は費用の面で正当に批判されうる。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "legitimately obtained",
+        "text": "legitimately obtained",
+        "ja": "正当に取得された"
+      },
+      {
+        "en": "legitimately question",
+        "text": "legitimately question",
+        "ja": "もっともな理由で疑問を呈する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "legitimatelyは「法的に適法」と「道理にかなう」の両義。",
     "tags": [
-      "work-description"
+      "work-description",
+      "curated-v3.113"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-01912",
@@ -8934,12 +10282,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "余暇",
-            "definition": "a person, thing, state, or idea related to 余暇",
+            "ja": "余暇；自由時間",
+            "definition": "time when a person is free from work or other duties",
             "examples": [
               {
-                "en": "The word 'leisure' is often useful in formal or everyday English.",
-                "ja": "「leisure」は「余暇」の意味で使われます。"
+                "en": "Many students have little leisure time during the examination period.",
+                "ja": "試験期間中は自由時間がほとんどない生徒が多い。"
               }
             ]
           }
@@ -8952,9 +10300,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "leisure は通常不可算名詞。leisure activities のように名詞を修飾する用法も多い。",
+    "tags": [
+      "curated-v3.106"
+    ],
+    "status": "enriched",
     "search_terms": [
       "leisure"
     ],
@@ -8962,7 +10312,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "leisure activities",
+        "en": "leisure activities",
+        "ja": "余暇活動"
+      },
+      {
+        "text": "leisure time",
+        "en": "leisure time",
+        "ja": "余暇"
+      },
+      {
+        "text": "at leisure",
+        "en": "at leisure",
+        "ja": "暇なときに；ゆっくりと"
+      }
+    ]
   },
   {
     "id": "sw-10534",
@@ -9334,25 +10700,42 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "寛大な",
-            "definition": "",
-            "examples": []
+            "ja": "（規則・処罰などに）寛大な；厳しくない",
+            "definition": "not as strict or severe as might be expected",
+            "examples": [
+              {
+                "en": "The judge gave the first-time offender a lenient sentence.",
+                "ja": "裁判官は初犯者に比較的軽い刑を言い渡した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "a lenient sentence",
+        "text": "a lenient sentence",
+        "ja": "軽い判決"
+      },
+      {
+        "en": "be lenient with students",
+        "text": "be lenient with students",
+        "ja": "生徒に寛大である"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "be lenient with + 人／lenient toward + 人。",
     "tags": [
-      "personality"
+      "personality",
+      "curated-v3.60"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-06632",
@@ -9628,12 +11011,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "授業",
-            "definition": "a person, thing, idea, or concept connected with '授業'",
+            "ja": "授業；レッスン",
+            "definition": "a period of time when someone is taught a subject or skill",
             "examples": [
               {
-                "en": "This lesson is important.",
-                "ja": "この「授業」は重要です。"
+                "en": "The science lesson began with a simple experiment.",
+                "ja": "理科の授業は簡単な実験から始まった。"
+              }
+            ]
+          },
+          {
+            "ja": "教訓",
+            "definition": "something useful learned from an experience, especially a mistake",
+            "examples": [
+              {
+                "en": "The project taught us a valuable lesson about planning ahead.",
+                "ja": "そのプロジェクトから、前もって計画することの大切さを学んだ。"
               }
             ]
           }
@@ -9646,9 +11039,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "lesson は一回の授業にも経験から得る教訓にも使う。learn a lesson from ... で「～から教訓を得る」。",
+    "tags": [
+      "curated-v3.159"
+    ],
+    "status": "enriched",
     "search_terms": [
       "lesson"
     ],
@@ -9656,7 +11051,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "take a lesson",
+        "en": "take a lesson",
+        "ja": "レッスンを受ける"
+      },
+      {
+        "text": "learn a lesson",
+        "en": "learn a lesson",
+        "ja": "教訓を得る"
+      },
+      {
+        "text": "lesson plan",
+        "en": "lesson plan",
+        "ja": "授業計画"
+      }
+    ]
   },
   {
     "id": "sw-10403",
@@ -9679,25 +11090,51 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "授業計画案",
-            "definition": "",
-            "examples": []
+            "ja": "授業計画案；指導案",
+            "definition": "a written outline of what a teacher intends students to learn and how a lesson will be taught",
+            "examples": [
+              {
+                "en": "The teacher revised her lesson plan after the first class ran out of time.",
+                "ja": "最初の授業で時間が足りなくなったため、先生は指導案を修正した。"
+              },
+              {
+                "en": "Each lesson plan includes objectives, activities, and an assessment.",
+                "ja": "各指導案には目標、活動、評価方法が含まれている。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "prepare a lesson plan",
+        "en": "prepare a lesson plan",
+        "ja": "授業計画案を作成する"
+      },
+      {
+        "text": "detailed lesson plan",
+        "en": "detailed lesson plan",
+        "ja": "詳細な指導案"
+      },
+      {
+        "text": "lesson plan template",
+        "en": "lesson plan template",
+        "ja": "指導案のひな型"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "授業単位の計画。より長期的な course syllabus（授業概要）や curriculum（教育課程）と区別する。",
     "tags": [
-      "education-study"
+      "education-study",
+      "curated-v3.144"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-00368",
@@ -9764,25 +11201,57 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "裾を伸ばす；失望させる",
-            "definition": "",
-            "examples": []
+            "ja": "（人を）失望させる",
+            "definition": "to disappoint someone by failing to do what was expected",
+            "examples": [
+              {
+                "en": "I promised to help, and I do not want to let the team down.",
+                "ja": "手伝うと約束したので、チームをがっかりさせたくない。"
+              }
+            ]
+          },
+          {
+            "ja": "（衣服の裾などを）下ろす；長くする",
+            "definition": "to make a piece of clothing longer by lowering its hem",
+            "examples": [
+              {
+                "en": "The tailor let down the hem of the skirt by two centimeters.",
+                "ja": "仕立屋はスカートの裾を2センチ下ろした。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "let someone down",
+        "en": "let someone down",
+        "ja": "人を失望させる"
+      },
+      {
+        "text": "feel let down",
+        "en": "feel let down",
+        "ja": "期待を裏切られたと感じる"
+      },
+      {
+        "text": "let down the hem",
+        "en": "let down the hem",
+        "ja": "裾を下ろす"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "let + 人 + down は「期待を裏切る」。let は原形・過去形・過去分詞が同形。",
     "tags": [
-      "craft-actions"
+      "craft-actions",
+      "curated-v3.164"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-09824",
@@ -10044,12 +11513,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "手紙；文字",
-            "definition": "a person, thing, idea, or concept connected with '手紙；文字'",
+            "ja": "手紙",
+            "definition": "a written message sent to a person or organization",
             "examples": [
               {
-                "en": "This letter is important.",
-                "ja": "この「手紙」は重要です。"
+                "en": "She wrote a letter to thank the volunteers.",
+                "ja": "彼女はボランティアに感謝する手紙を書いた。"
+              }
+            ]
+          },
+          {
+            "ja": "文字；アルファベットの一字",
+            "definition": "a symbol used in writing a language",
+            "examples": [
+              {
+                "en": "The word begins with the letter S.",
+                "ja": "その単語はSという文字で始まる。"
               }
             ]
           }
@@ -10062,9 +11541,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "letter to 人 は「人宛ての手紙」。文字の意味では a capital letter（大文字）や a lowercase letter（小文字）が頻出。",
+    "tags": [
+      "curated-v3.159"
+    ],
+    "status": "enriched",
     "search_terms": [
       "letter"
     ],
@@ -10072,7 +11553,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "write a letter",
+        "en": "write a letter",
+        "ja": "手紙を書く"
+      },
+      {
+        "text": "capital letter",
+        "en": "capital letter",
+        "ja": "大文字"
+      },
+      {
+        "text": "letter of recommendation",
+        "en": "letter of recommendation",
+        "ja": "推薦状"
+      }
+    ]
   },
   {
     "id": "sw-07232",
@@ -10227,14 +11724,13 @@
               {
                 "en": "Sea levels have risen in many parts of the world.",
                 "ja": "世界の多くの地域で海面水位が上昇している。"
+              },
+              {
+                "en": "The noise level rose sharply during the experiment.",
+                "ja": "実験中に騒音レベルが急激に上がった。"
               }
             ]
-          }
-        ]
-      },
-      {
-        "pos": "noun",
-        "meanings": [
+          },
           {
             "ja": "階；層",
             "definition": "a floor or position in a building or structure",
@@ -10290,7 +11786,8 @@
     "usage_note": "at a high level / sea level / level playing field（公平な競争条件）。形容詞・動詞にもなる。",
     "tags": [
       "v2.30-curated",
-      "curated-v3.50"
+      "curated-v3.50",
+      "curated-v3.172"
     ],
     "status": "enriched",
     "search_terms": [
@@ -10302,16 +11799,24 @@
     },
     "collocations": [
       {
+        "en": "sea level",
         "text": "sea level",
         "ja": "海面水位"
       },
       {
+        "en": "at the national level",
         "text": "at the national level",
         "ja": "全国レベルで"
       },
       {
+        "en": "a level playing field",
         "text": "a level playing field",
         "ja": "公平な競争条件"
+      },
+      {
+        "en": "noise level",
+        "text": "noise level",
+        "ja": "騒音レベル"
       }
     ]
   },
@@ -10500,24 +12005,60 @@
         "meanings": [
           {
             "ja": "てこ；レバー",
-            "definition": "",
-            "examples": []
+            "definition": "a bar or handle that pivots to move, lift, or operate something",
+            "examples": [
+              {
+                "en": "Pull the lever to release the safety lock.",
+                "ja": "レバーを引いて安全ロックを解除してください。"
+              },
+              {
+                "en": "A long lever makes it easier to lift the heavy lid.",
+                "ja": "長いてこを使うと重いふたを持ち上げやすくなる。"
+              }
+            ]
+          },
+          {
+            "ja": "（変化を起こす）手段；影響力",
+            "definition": "a means of exerting influence or bringing about change",
+            "examples": [
+              {
+                "en": "Tax policy is one lever governments can use to shape demand.",
+                "ja": "税制は政府が需要を調整するために使える手段の一つである。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "pull a lever",
+        "en": "pull a lever",
+        "ja": "レバーを引く"
+      },
+      {
+        "text": "a lever for change",
+        "en": "a lever for change",
+        "ja": "変革のための手段"
+      },
+      {
+        "text": "use a lever to lift",
+        "en": "use a lever to lift",
+        "ja": "てこを使って持ち上げる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "物理的な「てこ」と、政策・交渉などの「影響を及ぼす手段」の両方に使う。動詞 lever は別用法。",
     "tags": [
-      "home-workshop"
+      "home-workshop",
+      "curated-v3.142"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13183",
@@ -10752,11 +12293,11 @@
         "meanings": [
           {
             "ja": "語彙の；単語に関する",
-            "definition": "",
+            "definition": "relating to words or the vocabulary of a language",
             "examples": [
               {
-                "en": "In advanced texts, \"lexical\" may be used to mean \"\".",
-                "ja": "上級レベルの文章では「lexical」が「語彙の；単語に関する」という意味で用いられることがある。"
+                "en": "The two texts differ in lexical complexity.",
+                "ja": "その二つの文章は語彙の複雑さが異なる。"
               }
             ]
           }
@@ -10765,17 +12306,25 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "lexical choice"
+      },
+      {
+        "text": "lexical diversity"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Lexical relates to words; grammatical relates to structure.",
     "tags": [
       "study-language",
-      "curated-v2.93"
+      "curated-v2.93",
+      "curated-v3.62"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10412",
@@ -10893,11 +12442,15 @@
         "meanings": [
           {
             "ja": "辞書編纂；辞書学",
-            "definition": "",
+            "definition": "the practice and study of compiling, editing, and evaluating dictionaries",
             "examples": [
               {
                 "en": "In advanced texts, \"lexicography\" may be used to mean \"\".",
                 "ja": "上級レベルの文章では「lexicography」が「辞書編纂；辞書学」という意味で用いられることがある。"
+              },
+              {
+                "en": "Digital corpora have transformed modern lexicography.",
+                "ja": "デジタルコーパスは現代の辞書編纂を大きく変えた。"
               }
             ]
           }
@@ -10906,17 +12459,34 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "modern lexicography",
+        "en": "modern lexicography",
+        "ja": "現代の辞書編纂"
+      },
+      {
+        "text": "bilingual lexicography",
+        "en": "bilingual lexicography",
+        "ja": "二言語辞書の編纂"
+      },
+      {
+        "text": "a study of lexicography",
+        "en": "a study of lexicography",
+        "ja": "辞書学の研究"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "lexicography は辞書を編纂する実務とその研究。lexicographer は辞書編纂者。",
     "tags": [
       "language-writing",
-      "curated-v2.93"
+      "curated-v2.93",
+      "curated-v3.145"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10414",
@@ -10986,12 +12556,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "語彙；語彙集",
-            "definition": "",
+            "ja": "語彙；特定分野で使う言葉の集合",
+            "definition": "the vocabulary used in a language, field, or community",
             "examples": [
               {
-                "en": "In advanced texts, \"lexicon\" may be used to mean \"\".",
-                "ja": "上級レベルの文章では「lexicon」が「語彙；語彙集」という意味で用いられることがある。"
+                "en": "The term has become part of the public health lexicon.",
+                "ja": "その用語は公衆衛生分野の語彙の一部になった。"
+              }
+            ]
+          },
+          {
+            "ja": "辞書；語彙集",
+            "definition": "a dictionary or organized collection of words",
+            "examples": [
+              {
+                "en": "The researchers compiled a lexicon of regional expressions.",
+                "ja": "研究者たちは地域特有の表現を集めた語彙集を編纂した。"
               }
             ]
           }
@@ -11000,17 +12580,29 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "the scientific lexicon",
+        "text": "the scientific lexicon",
+        "ja": "科学分野の語彙"
+      },
+      {
+        "en": "enter the lexicon",
+        "text": "enter the lexicon",
+        "ja": "一般的な語彙として定着する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "the lexicon of ... は「…の分野で使われる語彙」の意味。",
     "tags": [
       "language-writing",
-      "curated-v2.93"
+      "curated-v2.93",
+      "curated-v3.84"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10440",
@@ -11126,6 +12718,10 @@
               {
                 "en": "The contract limits the company’s liability for delays.",
                 "ja": "その契約は遅延に関する会社の責任を制限している。"
+              },
+              {
+                "en": "The insurer denied liability for the damage caused by the storm.",
+                "ja": "保険会社は嵐による損害について責任を認めなかった。"
               }
             ]
           },
@@ -11167,7 +12763,8 @@
     "tags": [
       "frequency-gap",
       "curated-v3.03",
-      "curated-v3.55"
+      "curated-v3.55",
+      "curated-v3.161"
     ],
     "status": "enriched",
     "search_terms": [
@@ -11179,16 +12776,24 @@
     },
     "collocations": [
       {
-        "text": "legal liability"
+        "text": "legal liability",
+        "en": "legal liability",
+        "ja": "法的責任"
       },
       {
-        "text": "accept liability for"
+        "text": "accept liability for damage",
+        "en": "accept liability for damage",
+        "ja": "損害に対する責任を認める"
       },
       {
-        "text": "assets and liabilities"
+        "text": "assets and liabilities",
+        "en": "assets and liabilities",
+        "ja": "資産と負債"
       },
       {
-        "text": "accept liability"
+        "text": "a potential liability",
+        "en": "a potential liability",
+        "ja": "潜在的な負担・不利な要因"
       }
     ]
   },
@@ -11213,12 +12818,12 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "連絡を取り合う",
-            "definition": "",
+            "ja": "連絡・調整を取り合う",
+            "definition": "to communicate and cooperate with someone to coordinate work",
             "examples": [
               {
-                "en": "In advanced texts, \"liaise\" may be used to mean \"\".",
-                "ja": "上級レベルの文章では「liaise」が「連絡を取り合う」という意味で用いられることがある。"
+                "en": "The school will liaise with local officials before the event.",
+                "ja": "学校は行事の前に地元の担当者と連絡・調整を行う。"
               }
             ]
           }
@@ -11227,17 +12832,29 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "liaise with stakeholders",
+        "text": "liaise with stakeholders",
+        "ja": "関係者と連携する"
+      },
+      {
+        "en": "liaise closely with",
+        "text": "liaise closely with",
+        "ja": "…と緊密に連絡を取る"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "liaise with + 人・組織。英国英語やビジネス文書でよく見られる。",
     "tags": [
       "thinking-communication",
-      "curated-v2.93"
+      "curated-v2.93",
+      "curated-v3.84"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10612",
@@ -11260,12 +12877,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "語をまたぐ音の連結；連絡関係",
-            "definition": "",
+            "ja": "連絡・調整；橋渡し",
+            "definition": "communication and cooperation between groups or people",
             "examples": [
               {
-                "en": "In advanced texts, \"liaison\" may be used to mean \"\".",
-                "ja": "上級レベルの文章では「liaison」が「語をまたぐ音の連結；連絡関係」という意味で用いられることがある。"
+                "en": "Close liaison between teachers and parents improved attendance.",
+                "ja": "教師と保護者の緊密な連携によって出席状況が改善した。"
+              }
+            ]
+          },
+          {
+            "ja": "連絡担当者",
+            "definition": "a person who helps two groups communicate",
+            "examples": [
+              {
+                "en": "She serves as the liaison between the hospital and the university.",
+                "ja": "彼女は病院と大学の間の連絡担当者を務めている。"
               }
             ]
           }
@@ -11274,17 +12901,29 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "act as a liaison",
+        "text": "act as a liaison",
+        "ja": "連絡役を務める"
+      },
+      {
+        "en": "liaison between departments",
+        "text": "liaison between departments",
+        "ja": "部署間の連携"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "liaison between A and B は組織間の連絡関係。人を指す場合は liaison officer も使う。",
     "tags": [
       "language-writing",
-      "curated-v2.93"
+      "curated-v2.93",
+      "curated-v3.84"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12753",
@@ -11441,12 +13080,16 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "自由化",
-            "definition": "a state, process, idea, person, or thing associated with 自由化",
+            "ja": "（市場・貿易などの）自由化；規制緩和",
+            "definition": "the process of removing restrictions, especially in trade or economic activity",
             "examples": [
               {
-                "en": "The study discusses liberalization in this context.",
-                "ja": "その研究はこの文脈における「自由化」を論じている。"
+                "en": "Trade liberalization reduced some barriers to international commerce.",
+                "ja": "貿易の自由化によって国際商取引の一部の障壁が減った。"
+              },
+              {
+                "en": "The report examines the effects of market liberalization.",
+                "ja": "報告書は市場自由化の影響を検討している。"
               }
             ]
           }
@@ -11455,16 +13098,28 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "trade liberalization",
+        "text": "trade liberalization",
+        "ja": "貿易自由化"
+      },
+      {
+        "en": "market liberalization",
+        "text": "market liberalization",
+        "ja": "市場自由化"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "liberalization of + 市場・制度。米国式 -ization、英国式 -isation。",
     "tags": [
-      "50k-curated-band"
+      "50k-curated-band",
+      "curated-v3.59"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-00370",
@@ -11481,11 +13136,21 @@
         "meanings": [
           {
             "ja": "図書館",
-            "definition": "a person, thing, idea, or concept connected with '図書館'",
+            "definition": "a place where people can read or borrow books and use information resources",
             "examples": [
               {
-                "en": "This library is important.",
-                "ja": "この「図書館」は重要です。"
+                "en": "The public library offers free study space after school.",
+                "ja": "公共図書館は放課後に無料の学習スペースを提供している。"
+              }
+            ]
+          },
+          {
+            "ja": "蔵書；資料のコレクション",
+            "definition": "a collection of books, recordings, or digital resources",
+            "examples": [
+              {
+                "en": "The university has built a large digital library of research papers.",
+                "ja": "その大学は研究論文の大規模な電子コレクションを構築した。"
               }
             ]
           }
@@ -11498,9 +13163,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "library は建物だけでなく、資料の集合にも使う。borrow a book from a library と表現する。",
+    "tags": [
+      "curated-v3.159"
+    ],
+    "status": "enriched",
     "search_terms": [
       "library"
     ],
@@ -11508,7 +13175,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "public library",
+        "en": "public library",
+        "ja": "公共図書館"
+      },
+      {
+        "text": "borrow a book from the library",
+        "en": "borrow a book from the library",
+        "ja": "図書館で本を借りる"
+      },
+      {
+        "text": "digital library",
+        "en": "digital library",
+        "ja": "電子図書館"
+      }
+    ]
   },
   {
     "id": "sw-11648",
@@ -11785,12 +13468,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "許認可；ライセンス供与",
-            "definition": "a person, thing, activity, or concept connected with 許認可",
+            "ja": "免許・許可の付与；許認可制度",
+            "definition": "the official process of granting permission to carry out an activity",
             "examples": [
               {
-                "en": "The report includes information about licensing.",
-                "ja": "その報告書には「許認可」についての情報が含まれている。"
+                "en": "The city introduced stricter licensing rules for food vendors.",
+                "ja": "市は食品販売業者に対してより厳しい営業許可規則を導入した。"
+              }
+            ]
+          },
+          {
+            "ja": "知的財産などの使用権の許諾",
+            "definition": "the granting of permission to use intellectual property in return for agreed terms or payment",
+            "examples": [
+              {
+                "en": "The university earns revenue through technology licensing.",
+                "ja": "その大学は技術ライセンスの供与によって収入を得ている。"
               }
             ]
           }
@@ -11799,16 +13492,33 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "licensing agreement",
+        "text": "licensing agreement",
+        "ja": "ライセンス契約"
+      },
+      {
+        "en": "licensing requirements",
+        "text": "licensing requirements",
+        "ja": "許認可要件"
+      },
+      {
+        "en": "licensing fees",
+        "text": "licensing fees",
+        "ja": "ライセンス料"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "licensing は「行政上の許可」と「特許・著作権などの利用許諾」の両方を指す。license は名詞・動詞。",
     "tags": [
-      "50k-frequency-gap"
+      "50k-frequency-gap",
+      "curated-v3.104"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08376",
@@ -11872,12 +13582,16 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "合法の",
-            "definition": "",
+            "ja": "法律で認められた；合法の",
+            "definition": "permitted by law, especially in contrast with illicit activity",
             "examples": [
               {
-                "en": "In advanced texts, \"licit\" may be used to mean \"\".",
-                "ja": "上級レベルの文章では「licit」が「合法の」という意味で用いられることがある。"
+                "en": "The study compared licit and illicit trade in the region.",
+                "ja": "その研究は地域内の合法取引と違法取引を比較した。"
+              },
+              {
+                "en": "The substance has both licit medical uses and illicit markets.",
+                "ja": "その物質には合法的な医療用途と違法な市場の両方がある。"
               }
             ]
           }
@@ -11886,17 +13600,34 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "licit trade",
+        "en": "licit trade",
+        "ja": "合法的な取引"
+      },
+      {
+        "text": "licit use",
+        "en": "licit use",
+        "ja": "合法的な使用"
+      },
+      {
+        "text": "licit market",
+        "en": "licit market",
+        "ja": "合法市場"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "illicit（違法な）の対語。legal より使用頻度が低く、licit / illicit の対比で現れることが多い。",
     "tags": [
       "judgment-and-relations",
-      "curated-v2.93"
+      "curated-v2.93",
+      "curated-v3.175"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04661",
@@ -12341,23 +14072,11 @@
               {
                 "en": "Living abroad changed the way she looked at life.",
                 "ja": "海外生活は彼女の人生の見方を変えました。"
-              }
-            ]
-          },
-          {
-            "ja": "人生；生涯",
-            "definition": "the period during which someone is alive",
-            "examples": [
+              },
               {
                 "en": "He spent most of his life near the sea.",
                 "ja": "彼は人生の大半を海の近くで過ごしました。"
-              }
-            ]
-          },
-          {
-            "ja": "生命",
-            "definition": "the state of being alive",
-            "examples": [
+              },
               {
                 "en": "Scientists look for signs of life on other planets.",
                 "ja": "科学者たちは他の惑星に生命の痕跡を探しています。"
@@ -12546,12 +14265,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "生活様式",
-            "definition": "a person, thing, state, or idea related to 生活様式",
+            "ja": "生活様式；ライフスタイル",
+            "definition": "the way a person or group lives, including habits and daily activities",
             "examples": [
               {
-                "en": "The word 'lifestyle' is often useful in formal or everyday English.",
-                "ja": "「lifestyle」は「生活様式」の意味で使われます。"
+                "en": "Regular exercise is part of her healthy lifestyle.",
+                "ja": "定期的な運動は彼女の健康的な生活習慣の一部だ。"
               }
             ]
           }
@@ -12564,9 +14283,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "lifestyle は生活習慣・価値観を含む。way of life より個人の習慣を強調しやすい。",
+    "tags": [
+      "curated-v3.109"
+    ],
+    "status": "enriched",
     "search_terms": [
       "lifestyle"
     ],
@@ -12574,7 +14295,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "a healthy lifestyle",
+        "en": "a healthy lifestyle",
+        "ja": "健康的な生活習慣"
+      },
+      {
+        "text": "a sedentary lifestyle",
+        "en": "a sedentary lifestyle",
+        "ja": "座りがちな生活様式"
+      },
+      {
+        "text": "lifestyle changes",
+        "en": "lifestyle changes",
+        "ja": "生活習慣の変化"
+      }
+    ]
   },
   {
     "id": "sw-01916",
@@ -13325,24 +15062,21 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "ありそうな",
-            "definition": "having the quality or state expressed by ありそうな",
+            "ja": "可能性が高い；起こりそうな",
+            "definition": "expected to happen or be true; probable",
             "examples": [
               {
-                "en": "It is likely.",
-                "ja": "それは「ありそうな」です。"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "pos": "adjective",
-        "meanings": [
-          {
-            "ja": "可能性が高い",
-            "definition": "expected or probable to happen or be true",
-            "examples": [
+                "en": "Rain is likely this afternoon.",
+                "ja": "今日の午後は雨が降る可能性が高い。"
+              },
+              {
+                "en": "The policy is likely to reduce household energy use.",
+                "ja": "その政策は家庭のエネルギー使用量を減らす可能性が高い。"
+              },
+              {
+                "en": "It is likely that demand for clean energy will continue to grow.",
+                "ja": "クリーンエネルギーの需要は今後も増え続ける可能性が高い。"
+              },
               {
                 "en": "Rain is likely this afternoon.",
                 "ja": "今日の午後は雨が降る可能性が高いです。"
@@ -13360,11 +15094,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "be likely to + 動詞原形、It is likely that + 節。likely は形容詞として使うのが基本。",
     "tags": [
-      "v2.32-curated"
+      "v2.32-curated",
+      "curated-v3.137"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "likely"
     ],
@@ -13372,7 +15107,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "be likely to do something",
+        "en": "be likely to do something",
+        "ja": "～する可能性が高い"
+      },
+      {
+        "text": "it is likely that ...",
+        "en": "it is likely that ...",
+        "ja": "…である可能性が高い"
+      },
+      {
+        "text": "a likely explanation",
+        "en": "a likely explanation",
+        "ja": "ありそうな説明"
+      }
+    ]
   },
   {
     "id": "sw-01917",
@@ -13858,27 +15609,41 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "限界",
-            "definition": "a thing, person, idea, or state related to 限界",
+            "ja": "限度；上限",
+            "definition": "the greatest amount or level that is allowed or possible",
             "examples": [
               {
-                "en": "This limit is important.",
-                "ja": "この「限界」は重要です。"
+                "en": "The city introduced a limit on daily water use.",
+                "ja": "市は一日の水使用量に上限を設けた。"
+              },
+              {
+                "en": "There is a time limit of thirty minutes.",
+                "ja": "制限時間は30分です。"
+              }
+            ]
+          },
+          {
+            "ja": "限界；能力の範囲",
+            "definition": "a point beyond which something cannot continue or improve",
+            "examples": [
+              {
+                "en": "The experiment tested the limits of the material’s strength.",
+                "ja": "その実験では材料の強度の限界を試した。"
               }
             ]
           }
         ]
       },
       {
-        "pos": "noun",
+        "pos": "verb",
         "meanings": [
           {
-            "ja": "限界；制限",
-            "definition": "the greatest amount allowed or possible",
+            "ja": "～を制限する",
+            "definition": "to prevent something from becoming greater or more widespread",
             "examples": [
               {
-                "en": "There is a time limit of thirty minutes.",
-                "ja": "制限時間は30分です。"
+                "en": "The policy aims to limit traffic in the city center.",
+                "ja": "その政策は都心部の交通量を抑えることを目指している。"
               }
             ]
           }
@@ -13891,11 +15656,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "limit A to B は「AをBに制限する」。",
     "tags": [
-      "v2.32-curated"
+      "v2.32-curated",
+      "curated-v3.100"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "limit"
     ],
@@ -13903,7 +15669,18 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "en": "set a limit",
+        "text": "set a limit",
+        "ja": "上限を設ける"
+      },
+      {
+        "en": "limit access to information",
+        "text": "limit access to information",
+        "ja": "情報へのアクセスを制限する"
+      }
+    ]
   },
   {
     "id": "sw-02725",
@@ -13919,12 +15696,30 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "制限",
-            "definition": "a person, thing, state, process, or idea connected with 制限",
+            "ja": "制約；限界",
+            "definition": "a factor that restricts what someone or something can do",
             "examples": [
               {
-                "en": "The word 'limitation' is commonly used in this kind of context.",
-                "ja": "「limitation」は「制限」に関する文脈でよく使われます。"
+                "en": "A major limitation of the study is its small sample size.",
+                "ja": "この研究の大きな限界は標本数が少ないことだ。"
+              },
+              {
+                "en": "One limitation of online surveys is that some groups are underrepresented.",
+                "ja": "オンライン調査の限界の一つは一部の集団が十分に代表されないことだ。"
+              }
+            ]
+          },
+          {
+            "ja": "制限；規制",
+            "definition": "a rule or condition that sets a maximum or boundary",
+            "examples": [
+              {
+                "en": "The contract places limitations on the use of personal data.",
+                "ja": "その契約は個人データの利用に制限を設けている。"
+              },
+              {
+                "en": "There are strict limitations on how the data may be shared.",
+                "ja": "そのデータの共有方法には厳しい制限がある。"
               }
             ]
           }
@@ -13937,9 +15732,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "limitation は可算名詞。学術論文では limitations of the study（研究の限界）が頻出。",
+    "tags": [
+      "curated-v3.93",
+      "curated-v3.138"
+    ],
+    "status": "enriched",
     "search_terms": [
       "limitation"
     ],
@@ -13947,7 +15745,33 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "study limitations",
+        "en": "study limitations",
+        "ja": "研究上の限界"
+      },
+      {
+        "text": "limitations of a method",
+        "en": "limitations of a method",
+        "ja": "方法の限界"
+      },
+      {
+        "text": "place limitations on",
+        "en": "place limitations on",
+        "ja": "〜に制限を設ける"
+      },
+      {
+        "text": "a significant limitation",
+        "en": "a significant limitation",
+        "ja": "重大な限界"
+      },
+      {
+        "text": "limitations on data use",
+        "en": "limitations on data use",
+        "ja": "データ利用の制限"
+      }
+    ]
   },
   {
     "id": "sw-11878",
@@ -14238,25 +16062,51 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "直線的に；線形に",
-            "definition": "",
-            "examples": []
+            "ja": "線形に；一定の割合で",
+            "definition": "in a way that follows a straight-line relationship between variables",
+            "examples": [
+              {
+                "en": "In this model, cost increases linearly with distance.",
+                "ja": "このモデルでは費用は距離に比例して直線的に増える。"
+              },
+              {
+                "en": "The two measurements are not linearly related.",
+                "ja": "その二つの測定値は線形の関係にはない。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "increase linearly with",
+        "en": "increase linearly with",
+        "ja": "〜に対して線形に増加する"
+      },
+      {
+        "text": "vary linearly",
+        "en": "vary linearly",
+        "ja": "線形に変化する"
+      },
+      {
+        "text": "linearly related",
+        "en": "linearly related",
+        "ja": "線形の関係にある"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "数学・統計では linearly related / increase linearly with がよく使われる。日常語の steadily と区別する。",
     "tags": [
-      "description"
+      "description",
+      "curated-v3.152"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04318",
@@ -14325,25 +16175,52 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "長くとどまる",
-            "definition": "",
-            "examples": []
+            "ja": "（人が）立ち去らずにいる；長居する",
+            "definition": "to stay somewhere longer than necessary or expected",
+            "examples": [
+              {
+                "en": "Several visitors lingered after the exhibition closed.",
+                "ja": "展示会が閉まった後も数人の来場者が残っていた。"
+              }
+            ]
+          },
+          {
+            "ja": "（匂い・感情などが）残り続ける",
+            "definition": "to remain noticeable or present for some time",
+            "examples": [
+              {
+                "en": "The smell of smoke lingered in the room.",
+                "ja": "部屋には煙のにおいが残っていた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "linger in the air",
+        "text": "linger in the air",
+        "ja": "空気中に漂い続ける"
+      },
+      {
+        "en": "linger over a meal",
+        "text": "linger over a meal",
+        "ja": "食事をゆっくり楽しむ"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "linger on は「長く続く・残る」。",
     "tags": [
-      "actions"
+      "actions",
+      "curated-v3.60"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11165",
@@ -14453,16 +16330,20 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "言語の；言語学的な",
-            "definition": "having or relating to the quality expressed by 言語の",
+            "ja": "言語の；言語学に関する",
+            "definition": "relating to language or the scientific study of language",
             "examples": [
-              {
-                "en": "This is an important example of a linguistic issue.",
-                "ja": "これは「言語の」問題の重要な例である。"
-              },
               {
                 "en": "Linguistic diversity can be an important cultural resource.",
                 "ja": "言語的多様性は重要な文化資源となりうる。"
+              },
+              {
+                "en": "The study compares linguistic patterns across several age groups.",
+                "ja": "その研究は複数の年齢層にわたる言語的特徴を比較している。"
+              },
+              {
+                "en": "Teachers should be aware of linguistic differences among learners.",
+                "ja": "教師は学習者間の言語上の違いを意識すべきだ。"
               }
             ],
             "definition_en": "relating to language or the scientific study of language"
@@ -14476,10 +16357,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "linguistic diversity（言語の多様性）、linguistic evidence（言語学的証拠）。linguistics は「言語学」。",
     "tags": [
       "academic-expansion",
-      "curated-v3.25"
+      "curated-v3.25",
+      "curated-v3.138"
     ],
     "status": "enriched",
     "search_terms": [
@@ -14490,8 +16372,26 @@
       "ipa_uk": null
     },
     "collocations": [
-      "linguistic diversity",
-      "linguistic evidence"
+      {
+        "text": "linguistic diversity",
+        "en": "linguistic diversity",
+        "ja": "言語の多様性"
+      },
+      {
+        "text": "linguistic evidence",
+        "en": "linguistic evidence",
+        "ja": "言語学的証拠"
+      },
+      {
+        "text": "linguistic variation",
+        "en": "linguistic variation",
+        "ja": "言語的変異"
+      },
+      {
+        "text": "linguistic patterns",
+        "en": "linguistic patterns",
+        "ja": "言語的なパターン"
+      }
     ]
   },
   {
@@ -15333,12 +17233,37 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "液体；液体の",
-            "definition": "a substance that flows and takes the shape of its container",
+            "ja": "液体",
+            "definition": "a substance that flows and has no fixed shape",
             "examples": [
               {
-                "en": "The word 'liquid' is useful in this context.",
-                "ja": "この文脈では「液体」という意味で使われる。"
+                "en": "Water is a liquid at ordinary room temperature.",
+                "ja": "水は通常の室温では液体だ。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "液体の；流動性の",
+            "definition": "in a form that flows rather than keeping a fixed shape",
+            "examples": [
+              {
+                "en": "The sample must be kept in liquid form.",
+                "ja": "その試料は液体の状態で保たなければならない。"
+              }
+            ]
+          },
+          {
+            "ja": "換金しやすい；流動性の高い",
+            "definition": "able to be converted quickly into cash without a large loss",
+            "examples": [
+              {
+                "en": "The firm kept enough liquid assets to cover its expenses.",
+                "ja": "その企業は経費を賄えるだけの流動性資産を保有していた。"
               }
             ]
           }
@@ -15351,10 +17276,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "名詞は「液体」。金融の liquid assets は「換金しやすい資産」を意味する。",
     "tags": [
       "frequency-gap",
-      "curated-v3.03"
+      "curated-v3.03",
+      "curated-v3.101"
     ],
     "status": "enriched",
     "search_terms": [
@@ -15365,8 +17291,21 @@
       "ipa_uk": null
     },
     "collocations": [
-      "liquid form",
-      "liquid fuel"
+      {
+        "en": "liquid fuel",
+        "text": "liquid fuel",
+        "ja": "液体燃料"
+      },
+      {
+        "en": "liquid form",
+        "text": "liquid form",
+        "ja": "液体の状態"
+      },
+      {
+        "en": "liquid assets",
+        "text": "liquid assets",
+        "ja": "流動性資産"
+      }
     ]
   },
   {
@@ -15390,25 +17329,57 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "清算する；換金する",
-            "definition": "",
-            "examples": []
+            "ja": "（会社を）清算する",
+            "definition": "to close a business by selling its assets and settling its obligations",
+            "examples": [
+              {
+                "en": "The owners decided to liquidate the company after years of losses.",
+                "ja": "所有者たちは長年の赤字を受けて会社を清算することにした。"
+              }
+            ]
+          },
+          {
+            "ja": "（資産を）売却して現金化する",
+            "definition": "to sell assets in order to turn them into cash",
+            "examples": [
+              {
+                "en": "The fund had to liquidate some investments to meet withdrawal requests.",
+                "ja": "そのファンドは解約請求に応じるため一部の投資資産を現金化しなければならなかった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "liquidate a company",
+        "text": "liquidate a company",
+        "ja": "会社を清算する"
+      },
+      {
+        "en": "liquidate assets",
+        "text": "liquidate assets",
+        "ja": "資産を現金化する"
+      },
+      {
+        "en": "liquidate a position",
+        "text": "liquidate a position",
+        "ja": "保有ポジションを解消する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "liquidate は会社の「清算」と資産の「換金」を区別。liquidation は名詞。金融文脈では投資持分の売却を指す。",
     "tags": [
-      "work-actions"
+      "work-actions",
+      "curated-v3.103"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08010",
@@ -15509,12 +17480,26 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "耳を傾ける；聞く",
-            "definition": "to pay attention to sounds",
+            "ja": "耳を傾ける；注意して聞く",
+            "definition": "to pay attention to a sound or to what someone is saying",
             "examples": [
+              {
+                "en": "The teacher asked everyone to listen carefully to the instructions.",
+                "ja": "教師は全員に指示を注意深く聞くよう求めた。"
+              },
               {
                 "en": "We listened to the birds in the garden.",
                 "ja": "私たちは庭で鳥の声に耳を傾けました。"
+              }
+            ]
+          },
+          {
+            "ja": "忠告を聞き入れる",
+            "definition": "to take someone’s advice or views seriously",
+            "examples": [
+              {
+                "en": "If we listen to residents, we can design a more useful service.",
+                "ja": "住民の意見に耳を傾ければ、より役立つサービスを設計できる。"
               }
             ]
           }
@@ -15532,9 +17517,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "意識して耳を傾けること。聞く対象は listen to music のように to の後ろに置く。hear は音が聞こえること。",
-    "tags": [],
-    "status": "basic",
+    "usage_note": "listen は意識的に耳を傾けること。目的語の前には通常 to が必要。hear は音が自然に耳に入ること。",
+    "tags": [
+      "curated-v3.159"
+    ],
+    "status": "enriched",
     "search_terms": [
       "listen",
       "listened",
@@ -15545,7 +17532,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "listen to music",
+        "en": "listen to music",
+        "ja": "音楽を聴く"
+      },
+      {
+        "text": "listen carefully",
+        "en": "listen carefully",
+        "ja": "注意深く聞く"
+      },
+      {
+        "text": "listen to advice",
+        "en": "listen to advice",
+        "ja": "助言を聞き入れる"
+      }
+    ]
   },
   {
     "id": "sw-04764",
@@ -15709,6 +17712,10 @@
               {
                 "en": "Adult literacy programs can improve access to employment.",
                 "ja": "成人向けの識字教育は就職の機会を広げることがある。"
+              },
+              {
+                "en": "The program aims to raise adult literacy rates.",
+                "ja": "そのプログラムは成人の識字率を高めることを目指している。"
               }
             ]
           },
@@ -15719,6 +17726,10 @@
               {
                 "en": "Media literacy helps people evaluate information they encounter online.",
                 "ja": "メディアリテラシーはネット上で接する情報を評価する助けになる。"
+              },
+              {
+                "en": "Media literacy helps students assess the credibility of online claims.",
+                "ja": "メディアリテラシーは生徒がオンライン上の主張の信頼性を評価する助けとなる。"
               }
             ]
           }
@@ -15735,7 +17746,8 @@
     "tags": [
       "etymology-v1",
       "curated-v2.54",
-      "curated-v3.37"
+      "curated-v3.37",
+      "curated-v3.125"
     ],
     "status": "enriched",
     "search_terms": [
@@ -15751,7 +17763,8 @@
         "ja": "デジタル情報活用能力"
       },
       {
-        "text": "media literacy"
+        "text": "media literacy",
+        "ja": "メディアリテラシー"
       },
       {
         "text": "adult literacy",
@@ -15760,6 +17773,10 @@
       {
         "text": "financial literacy",
         "ja": "金融リテラシー"
+      },
+      {
+        "text": "improve literacy rates",
+        "ja": "識字率を向上させる"
       }
     ],
     "etymology": {
@@ -15810,25 +17827,61 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "文字どおりに；まさに",
-            "definition": "",
-            "examples": []
+            "ja": "文字どおりに；比喩でなく",
+            "definition": "in the exact and nonfigurative sense of the words used",
+            "examples": [
+              {
+                "en": "The sign literally means “Do not enter.”",
+                "ja": "その標識は文字どおり「立入禁止」を意味する。"
+              },
+              {
+                "en": "The room was literally below sea level.",
+                "ja": "その部屋は文字どおり海面より低い位置にあった。"
+              }
+            ]
+          },
+          {
+            "ja": "本当に；まさに（強調）",
+            "definition": "used informally to emphasize a statement, even when it is not strictly literal",
+            "examples": [
+              {
+                "en": "I was literally speechless when I heard the news.",
+                "ja": "その知らせを聞いて、私は本当に言葉が出なかった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "literally mean",
+        "en": "literally mean",
+        "ja": "文字どおり〜を意味する"
+      },
+      {
+        "text": "literally translate as",
+        "en": "literally translate as",
+        "ja": "直訳すると〜になる"
+      },
+      {
+        "text": "literally impossible",
+        "en": "literally impossible",
+        "ja": "文字どおり不可能な"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "強調の literally は口語で比喩にも用いられるが、学術的な文章では文字どおりの意味との混同を避ける。",
     "tags": [
-      "expression-manner"
+      "expression-manner",
+      "curated-v3.152"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-01918",
@@ -16029,25 +18082,42 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "先行研究の検討・概観",
-            "definition": "",
-            "examples": []
+            "ja": "先行研究の調査・整理；文献レビュー",
+            "definition": "a critical overview of published research relevant to a particular question",
+            "examples": [
+              {
+                "en": "The literature review identified a gap in studies of rural education.",
+                "ja": "先行研究のレビューによって、地方の教育に関する研究の不足が明らかになった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "conduct a literature review",
+        "en": "conduct a literature review",
+        "ja": "先行研究をレビューする"
+      },
+      {
+        "text": "systematic literature review",
+        "en": "systematic literature review",
+        "ja": "体系的な文献レビュー"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "A literature review synthesizes research; it is more than a list of summaries.",
     "tags": [
-      "education-study"
+      "education-study",
+      "curated-v3.96"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07140",
@@ -16475,25 +18545,47 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "困難を経験して生き抜く",
-            "definition": "",
-            "examples": []
+            "ja": "（戦争・災害など）を経験して生き抜く",
+            "definition": "to experience a difficult or dangerous period and survive it",
+            "examples": [
+              {
+                "en": "Her grandparents lived through the war and later rebuilt their home.",
+                "ja": "彼女の祖父母は戦争を生き抜き、その後家を再建した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "live through a war",
+        "en": "live through a war",
+        "ja": "戦争を生き抜く"
+      },
+      {
+        "text": "live through a crisis",
+        "en": "live through a crisis",
+        "ja": "危機を乗り越えて生きる"
+      },
+      {
+        "text": "live through difficult times",
+        "en": "live through difficult times",
+        "ja": "困難な時代を生き抜く"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "live through + 困難な時期・出来事。単に live in（〜に住む）とは異なる。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.164"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-09837",
@@ -16623,25 +18715,51 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "活気のある",
-            "definition": "",
-            "examples": []
+            "ja": "活気のある；生き生きした",
+            "definition": "full of energy, activity, or enthusiasm",
+            "examples": [
+              {
+                "en": "The students had a lively discussion about the proposal.",
+                "ja": "生徒たちはその提案について活発に議論した。"
+              },
+              {
+                "en": "The market is especially lively on weekends.",
+                "ja": "その市場は週末に特ににぎわう。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "lively discussion",
+        "en": "lively discussion",
+        "ja": "活発な議論"
+      },
+      {
+        "text": "lively atmosphere",
+        "en": "lively atmosphere",
+        "ja": "活気のある雰囲気"
+      },
+      {
+        "text": "lively debate",
+        "en": "lively debate",
+        "ja": "活発な討論"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "人・議論・場所などに使う。lively は -ly で終わるが通常は形容詞で、副詞は in a lively way など。",
     "tags": [
-      "description"
+      "description",
+      "curated-v3.142"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-06687",
@@ -16746,25 +18864,52 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "激怒した；鉛色の",
-            "definition": "",
-            "examples": []
+            "ja": "激怒した",
+            "definition": "extremely angry",
+            "examples": [
+              {
+                "en": "She was livid when she discovered the mistake.",
+                "ja": "彼女はその間違いに気づいて激怒した。"
+              }
+            ]
+          },
+          {
+            "ja": "（皮膚などが）青黒い；土気色の",
+            "definition": "dark bluish or grayish in color, especially from bruising",
+            "examples": [
+              {
+                "en": "A livid bruise appeared on his arm.",
+                "ja": "彼の腕に青黒いあざが現れた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "absolutely livid",
+        "text": "absolutely livid",
+        "ja": "激怒している"
+      },
+      {
+        "en": "a livid bruise",
+        "text": "a livid bruise",
+        "ja": "青黒いあざ"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "感情を表す場合は very angry より強い。皮膚の色を表す用法もある。",
     "tags": [
-      "descriptive"
+      "descriptive",
+      "curated-v3.60"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04469",
@@ -17131,25 +19276,51 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "ローム土",
-            "definition": "",
-            "examples": []
+            "ja": "壌土；砂・シルト・粘土が混ざった土",
+            "definition": "soil made up of a relatively balanced mixture of sand, silt, and clay",
+            "examples": [
+              {
+                "en": "Vegetables grow well in moist, well-drained loam.",
+                "ja": "野菜は湿り気があり水はけのよい壌土でよく育つ。"
+              },
+              {
+                "en": "The researchers compared loam with sandy soil.",
+                "ja": "研究者たちは壌土と砂質土を比較した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "sandy loam",
+        "en": "sandy loam",
+        "ja": "砂壌土"
+      },
+      {
+        "text": "fertile loam",
+        "en": "fertile loam",
+        "ja": "肥沃な壌土"
+      },
+      {
+        "text": "well-drained loam",
+        "en": "well-drained loam",
+        "ja": "水はけのよい壌土"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "地質・農業分野の用語。loam は一般に土の粒径組成を表し、必ずしも有機物が豊富とは限らない。",
     "tags": [
-      "nature-animals"
+      "nature-animals",
+      "curated-v3.142"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08495",
@@ -17260,12 +19431,37 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "ロビー；働きかけ",
-            "definition": "a person, object, place, state, or idea associated with ロビー",
+            "ja": "ロビー；玄関ホール",
+            "definition": "a large entrance area inside a hotel or public building",
             "examples": [
               {
-                "en": "They talked about lobby during the lesson.",
-                "ja": "授業中に「ロビー」について話した。"
+                "en": "Visitors must sign in at the main lobby.",
+                "ja": "訪問者は正面ロビーで受付をしなければならない。"
+              }
+            ]
+          },
+          {
+            "ja": "圧力団体；ロビー団体",
+            "definition": "an organized group that seeks to influence public policy",
+            "examples": [
+              {
+                "en": "An environmental lobby called for stricter emissions standards.",
+                "ja": "環境保護団体はより厳しい排出基準を求めた。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "（政策変更などを求めて）働きかける",
+            "definition": "to try to persuade officials or lawmakers to support a particular decision",
+            "examples": [
+              {
+                "en": "Local businesses lobbied the council to improve public transport.",
+                "ja": "地元企業は公共交通の改善を求めて市議会に働きかけた。"
               }
             ]
           }
@@ -17274,17 +19470,28 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "hotel lobby",
+        "text": "hotel lobby",
+        "ja": "ホテルのロビー"
+      },
+      {
+        "en": "lobby for reform",
+        "text": "lobby for reform",
+        "ja": "改革を求めて働きかける"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "lobby for ... は政策などへの働きかけ。建物のロビーとは別義。",
     "tags": [
       "general-vocabulary",
-      "needs-example-enrichment"
+      "curated-v3.100"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-05176",
@@ -17349,6 +19556,31 @@
                 "ja": "私たちは地元の市場で新鮮な野菜を買いました。"
               }
             ]
+          },
+          {
+            "ja": "（国全体でなく）地域限定の",
+            "definition": "affecting or operating in one particular area",
+            "examples": [
+              {
+                "en": "Local authorities are responsible for waste collection.",
+                "ja": "地方自治体はごみ収集を担当している。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "地元住民",
+            "definition": "a person who lives in a particular area",
+            "examples": [
+              {
+                "en": "A local showed us a quieter route to the station.",
+                "ja": "地元の人が駅までの静かな道を教えてくれた。"
+              }
+            ]
           }
         ]
       }
@@ -17359,12 +19591,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "local は形容詞「地域の」、名詞 a local は「地元の人」。local government は「地方自治体・地方行政」。",
     "tags": [
       "v2.30-curated",
-      "etymology-v1"
+      "etymology-v1",
+      "curated-v3.121"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "local"
     ],
@@ -17372,7 +19605,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "local residents",
+        "ja": "地域住民"
+      },
+      {
+        "text": "local authorities",
+        "ja": "地方自治体"
+      },
+      {
+        "text": "the local economy",
+        "ja": "地域経済"
+      }
+    ],
     "etymology": {
       "origin": "Latin locus / locare",
       "history": "Latin locus「場所」に由来し、「ある場所の」を表す。",
@@ -17451,12 +19697,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "地域化；ローカライズ",
-            "definition": "a state, process, idea, person, or thing associated with 地域化",
+            "ja": "（製品・サービスの）現地化；ローカライズ",
+            "definition": "the adaptation of a product or service to the language and culture of a particular market",
             "examples": [
               {
-                "en": "The study discusses localization in this context.",
-                "ja": "その研究はこの文脈における「地域化」を論じている。"
+                "en": "Effective localization requires more than translating the interface.",
+                "ja": "効果的な現地化には画面表示の翻訳以上のことが必要だ。"
+              }
+            ]
+          },
+          {
+            "ja": "（活動・供給などの）地域への移行",
+            "definition": "the process of organizing activities or production closer to the local area where they are needed",
+            "examples": [
+              {
+                "en": "The company pursued localization of its supply chain.",
+                "ja": "その企業は供給網の現地化を進めた。"
               }
             ]
           }
@@ -17465,16 +19721,33 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "software localization",
+        "en": "software localization",
+        "ja": "ソフトウェアの現地化"
+      },
+      {
+        "text": "localization strategy",
+        "en": "localization strategy",
+        "ja": "現地化戦略"
+      },
+      {
+        "text": "localization of production",
+        "en": "localization of production",
+        "ja": "生産の現地化"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "In technology, localization includes language, formats, and cultural expectations, not translation alone.",
     "tags": [
-      "50k-curated-band"
+      "50k-curated-band",
+      "curated-v3.105"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-05619",
@@ -17497,25 +19770,61 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "地元で；局所的に",
-            "definition": "",
-            "examples": []
+            "ja": "地元で；その地域内で",
+            "definition": "within a particular town, area, or community",
+            "examples": [
+              {
+                "en": "The school purchases vegetables grown locally.",
+                "ja": "その学校は地元で栽培された野菜を購入している。"
+              },
+              {
+                "en": "Residents were encouraged to shop locally after the flood.",
+                "ja": "洪水の後、住民は地元の店で買い物をするよう促された。"
+              }
+            ]
+          },
+          {
+            "ja": "局所的に；特定の部分で",
+            "definition": "in one limited part of a larger system or area",
+            "examples": [
+              {
+                "en": "The treatment was applied locally rather than to the whole body.",
+                "ja": "その治療は全身ではなく局所に施された。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "locally produced food",
+        "en": "locally produced food",
+        "ja": "地元産の食品"
+      },
+      {
+        "text": "shop locally",
+        "en": "shop locally",
+        "ja": "地元で買い物をする"
+      },
+      {
+        "text": "apply a treatment locally",
+        "en": "apply a treatment locally",
+        "ja": "治療を局所的に施す"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "locally は地域経済では「地元で」、医学・科学では「局所的に」を意味する。",
     "tags": [
-      "manner-and-time"
+      "manner-and-time",
+      "curated-v3.114"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-01301",
@@ -17531,12 +19840,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "場所",
-            "definition": "a person, thing, state, process, or idea connected with 場所",
+            "ja": "場所；所在地",
+            "definition": "the particular place where someone or something is",
             "examples": [
               {
-                "en": "The word 'location' is commonly used in this context.",
-                "ja": "「location」は「場所」に関する文脈で使われます。"
+                "en": "The app shows the location of the nearest emergency shelter.",
+                "ja": "そのアプリは最寄りの避難所の場所を示す。"
+              }
+            ]
+          },
+          {
+            "ja": "撮影地；現場",
+            "definition": "a place outside a studio where a film or television program is made",
+            "examples": [
+              {
+                "en": "The documentary was filmed on location in Hokkaido.",
+                "ja": "そのドキュメンタリーは北海道で現地撮影された。"
               }
             ]
           }
@@ -17549,11 +19868,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "location は「位置・所在地」を表す。on location は特に映画や番組の現地撮影を指す。",
     "tags": [
-      "etymology-v1"
+      "etymology-v1",
+      "curated-v3.159"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "search_terms": [
       "location"
     ],
@@ -17561,7 +19881,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "exact location",
+        "en": "exact location",
+        "ja": "正確な位置"
+      },
+      {
+        "text": "location data",
+        "en": "location data",
+        "ja": "位置情報"
+      },
+      {
+        "text": "on location",
+        "en": "on location",
+        "ja": "現地で（撮影して）"
+      }
+    ],
     "etymology": {
       "origin": "Latin locus / locare",
       "history": "Latin locare「置く」/ locus「場所」に由来し、場所・位置を表す。",
@@ -18958,25 +21294,51 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "物流・段取りの面で",
-            "definition": "",
-            "examples": []
+            "ja": "運営・輸送などの段取りの面で",
+            "definition": "with regard to practical arrangements, transport, or organization",
+            "examples": [
+              {
+                "en": "The field trip is logistically difficult because buses are limited.",
+                "ja": "バスの台数が限られているため、その校外学習は運営面で難しい。"
+              },
+              {
+                "en": "Logistically, holding the event online would be simpler.",
+                "ja": "運営面では、その行事をオンラインで開く方が簡単だ。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "logistically challenging",
+        "en": "logistically challenging",
+        "ja": "段取りの面で難しい"
+      },
+      {
+        "text": "logistically feasible",
+        "en": "logistically feasible",
+        "ja": "運営上実行可能な"
+      },
+      {
+        "text": "logistically complicated",
+        "en": "logistically complicated",
+        "ja": "運営・輸送面で複雑な"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "logistically は物流だけでなく、人員・場所・時間など実務上の手配全般を表す。",
     "tags": [
-      "work-description"
+      "work-description",
+      "curated-v3.152"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07280",
@@ -19071,15 +21433,25 @@
     "frequency": 4,
     "parts_of_speech": [
       {
-        "pos": "adverb",
+        "pos": "adjective",
         "meanings": [
           {
-            "ja": "孤独な",
-            "definition": "in the manner expressed by 孤独な",
+            "ja": "孤独な；寂しい",
+            "definition": "unhappy because you have too little company or friendship",
             "examples": [
               {
-                "en": "This is a common example of 'lonely'.",
-                "ja": "これは「孤独な」の一般的な例です。"
+                "en": "I felt lonely when I first moved to the city.",
+                "ja": "初めてその街に引っ越したとき、私は寂しかった。"
+              }
+            ]
+          },
+          {
+            "ja": "人けのない；寂れた",
+            "definition": "isolated or far from other people and places",
+            "examples": [
+              {
+                "en": "A lonely farmhouse stood at the edge of the valley.",
+                "ja": "谷の端に人里離れた農家が一軒建っていた。"
               }
             ]
           }
@@ -19092,9 +21464,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "lonely は形容詞で、副詞ではない。alone は単に「一人で」の状態、lonely は寂しさを含む。",
+    "tags": [
+      "curated-v3.186"
+    ],
+    "status": "enriched",
     "search_terms": [
       "lonely"
     ],
@@ -19102,7 +21476,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "feel lonely",
+        "en": "feel lonely",
+        "ja": "寂しく感じる"
+      },
+      {
+        "text": "a lonely place",
+        "en": "a lonely place",
+        "ja": "人けのない場所"
+      },
+      {
+        "text": "a lonely childhood",
+        "en": "a lonely childhood",
+        "ja": "孤独な子ども時代"
+      }
+    ]
   },
   {
     "id": "sw-06206",
@@ -19262,25 +21652,42 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "話が長く退屈な；冗長な",
-            "definition": "",
-            "examples": []
+            "ja": "話が長く要点を得ない；冗長な",
+            "definition": "using too many words and taking too long to reach the point",
+            "examples": [
+              {
+                "en": "The speaker gave a long-winded explanation of a simple rule.",
+                "ja": "話し手は簡単な規則を長々と説明した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "a long-winded explanation",
+        "text": "a long-winded explanation",
+        "ja": "冗長な説明"
+      },
+      {
+        "en": "a long-winded speech",
+        "text": "a long-winded speech",
+        "ja": "長たらしい演説"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "long-winded は文章や説明が不必要に長いという否定的評価。",
     "tags": [
-      "study-language"
+      "study-language",
+      "curated-v3.84"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11110",
@@ -19390,19 +21797,28 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "長寿；寿命",
-            "definition": "a concept, state, person, thing, or process connected with 長寿",
+            "ja": "長寿；寿命の長さ",
+            "definition": "the length of time a person or animal lives, especially a long life",
             "examples": [
               {
-                "en": "The report discusses longevity in detail.",
-                "ja": "その報告書は「長寿」について詳しく論じている。"
+                "en": "Scientists are studying the relationship between diet and longevity.",
+                "ja": "科学者たちは食生活と長寿の関係を研究している。"
               },
               {
                 "en": "Researchers are examining how diet and exercise affect human longevity.",
                 "ja": "研究者たちは食事と運動が人間の寿命にどう影響するか調べている。"
               }
-            ],
-            "definition_en": "long life or the length of time that something continues to exist or function"
+            ]
+          },
+          {
+            "ja": "長続きすること；耐用年数の長さ",
+            "definition": "the length of time something continues to exist or function",
+            "examples": [
+              {
+                "en": "Regular maintenance can improve the longevity of the equipment.",
+                "ja": "定期的な保守によって設備の寿命を延ばすことができる。"
+              }
+            ]
           }
         ]
       }
@@ -19413,10 +21829,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "longevity of + 人・製品・制度。人以外の長期存続にも用いる。",
     "tags": [
       "academic-expansion",
-      "curated-v3.25"
+      "curated-v3.25",
+      "curated-v3.94"
     ],
     "status": "enriched",
     "search_terms": [
@@ -19427,8 +21844,21 @@
       "ipa_uk": null
     },
     "collocations": [
-      "human longevity",
-      "increase longevity"
+      {
+        "text": "human longevity",
+        "en": "human longevity",
+        "ja": "人間の長寿"
+      },
+      {
+        "text": "increase longevity",
+        "en": "increase longevity",
+        "ja": "寿命を延ばす"
+      },
+      {
+        "text": "the longevity of a product",
+        "en": "the longevity of a product",
+        "ja": "製品の耐用年数"
+      }
     ]
   },
   {
@@ -19493,25 +21923,71 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "長さ方向の；長期追跡の",
-            "definition": "",
-            "examples": []
+            "ja": "長期追跡の；同じ対象を継続的に調べる",
+            "definition": "following the same people or subjects over an extended period",
+            "examples": [
+              {
+                "en": "A longitudinal study followed the students for ten years.",
+                "ja": "ある長期追跡研究では、その生徒たちを10年間追跡した。"
+              },
+              {
+                "en": "Longitudinal research can reveal changes that one-time surveys miss.",
+                "ja": "縦断研究では一度きりの調査では見逃す変化を明らかにできる。"
+              }
+            ]
+          },
+          {
+            "ja": "長さ方向の；縦方向の",
+            "definition": "running along the length of something",
+            "examples": [
+              {
+                "en": "The engineers measured longitudinal cracks in the bridge.",
+                "ja": "技術者たちは橋の縦方向の亀裂を測定した。"
+              },
+              {
+                "en": "The team examined the longitudinal alignment of the railway tracks.",
+                "ja": "チームは鉄道線路の長手方向の位置合わせを調べた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "a longitudinal study",
+        "text": "a longitudinal study",
+        "ja": "長期追跡研究"
+      },
+      {
+        "en": "longitudinal data",
+        "text": "longitudinal data",
+        "ja": "縦断データ"
+      },
+      {
+        "text": "longitudinal research",
+        "en": "longitudinal research",
+        "ja": "縦断研究"
+      },
+      {
+        "text": "longitudinal analysis",
+        "en": "longitudinal analysis",
+        "ja": "縦断分析"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "研究の longitudinal study（縦断研究）は cross-sectional study（横断研究）と対比する。",
     "tags": [
-      "materials-properties"
+      "materials-properties",
+      "curated-v3.59",
+      "curated-v3.138"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08067",
@@ -20197,9 +22673,13 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "楽しみに待つ",
-            "definition": "to feel pleased about something expected in the future",
+            "ja": "〜を楽しみに待つ",
+            "definition": "to feel happy about something that is going to happen",
             "examples": [
+              {
+                "en": "The students are looking forward to meeting their exchange partners.",
+                "ja": "生徒たちは交流相手に会うのを楽しみにしている。"
+              },
               {
                 "en": "We look forward to seeing you.",
                 "ja": "お会いするのを楽しみにしています。"
@@ -20216,16 +22696,33 @@
       "ing": "looking forward to"
     },
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "look forward to seeing you",
+        "text": "look forward to seeing you",
+        "ja": "お会いするのを楽しみにする"
+      },
+      {
+        "en": "look forward to the event",
+        "text": "look forward to the event",
+        "ja": "行事を楽しみに待つ"
+      },
+      {
+        "en": "look forward to hearing from you",
+        "text": "look forward to hearing from you",
+        "ja": "お返事を楽しみにお待ちする"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "to は前置詞。後ろは名詞や動名詞にする。例：look forward to seeing you。",
+    "usage_note": "to は前置詞なので後ろは名詞・動名詞（× look forward to see）。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.82"
     ],
-    "status": "basic"
+    "status": "enriched"
   },
   {
     "id": "sw-04859",
@@ -20571,12 +23068,36 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "調べる；見上げる",
-            "definition": "to search for information or raise one's eyes",
+            "ja": "〜を調べる",
+            "definition": "to search for information in a reference source",
             "examples": [
+              {
+                "en": "If you are unsure of the meaning, look it up in a dictionary.",
+                "ja": "意味がわからなければ辞書で調べなさい。"
+              },
               {
                 "en": "Look up the word in a dictionary.",
                 "ja": "辞書でその語を調べてください。"
+              }
+            ]
+          },
+          {
+            "ja": "見上げる",
+            "definition": "to raise your eyes or head",
+            "examples": [
+              {
+                "en": "She looked up from her notes when the speaker entered.",
+                "ja": "話し手が入ってきたとき、彼女はノートから顔を上げた。"
+              }
+            ]
+          },
+          {
+            "ja": "（状況が）好転する",
+            "definition": "to become better, especially after difficulty",
+            "examples": [
+              {
+                "en": "Business is finally looking up after a difficult year.",
+                "ja": "厳しい一年を経て、ようやく景気が上向いてきた。"
               }
             ]
           }
@@ -20590,16 +23111,33 @@
       "ing": "looking up"
     },
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "look up a word",
+        "text": "look up a word",
+        "ja": "単語を調べる"
+      },
+      {
+        "en": "look up from a book",
+        "text": "look up from a book",
+        "ja": "本から顔を上げる"
+      },
+      {
+        "en": "things are looking up",
+        "text": "things are looking up",
+        "ja": "状況が好転している"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": " 他動詞として使う場合、目的語を間に置ける。代名詞は通常間に置く。例：look it up。",
+    "usage_note": "「調べる」は分離可能（look it up）。「好転する」は自動詞用法。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.82"
     ],
-    "status": "basic"
+    "status": "enriched"
   },
   {
     "id": "sw-04865",
@@ -20625,9 +23163,13 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "尊敬する",
-            "definition": "to respect and admire someone",
+            "ja": "〜を尊敬する；手本とする",
+            "definition": "to admire and respect someone",
             "examples": [
+              {
+                "en": "Many young athletes look up to her for her determination.",
+                "ja": "多くの若い選手が彼女の強い意志を尊敬している。"
+              },
               {
                 "en": "The younger players look up to their coach.",
                 "ja": "若い選手たちはコーチを尊敬している。"
@@ -20644,16 +23186,28 @@
       "ing": "looking up to"
     },
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "look up to a teacher",
+        "text": "look up to a teacher",
+        "ja": "教師を尊敬する"
+      },
+      {
+        "en": "look up to someone as a role model",
+        "text": "look up to someone as a role model",
+        "ja": "人を手本として尊敬する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "目的語は to の後ろに置く。look up to someone。",
+    "usage_note": "look up to + 人。to は前置詞で、目的語を後ろに置く。look down on（見下す）と対比。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.82"
     ],
-    "status": "basic"
+    "status": "enriched"
   },
   {
     "id": "sw-10986",
@@ -20717,25 +23271,52 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "ぼんやり大きく現れる；迫る",
-            "definition": "",
-            "examples": []
+            "ja": "（大きなものが）ぼんやり姿を現す",
+            "definition": "to appear as a large, often unclear shape",
+            "examples": [
+              {
+                "en": "A mountain loomed through the fog.",
+                "ja": "霧の中から山が大きく浮かび上がった。"
+              }
+            ]
+          },
+          {
+            "ja": "（危機・期限などが）迫る",
+            "definition": "to seem likely to happen soon, often in a threatening way",
+            "examples": [
+              {
+                "en": "A funding deadline looms for the research team.",
+                "ja": "研究チームには資金申請の期限が迫っている。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "a deadline looms",
+        "text": "a deadline looms",
+        "ja": "期限が迫る"
+      },
+      {
+        "en": "loom large",
+        "text": "loom large",
+        "ja": "大きな存在感を持つ"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "loom は危機や期限が迫る比喩によく使う。名詞 loom は「織機」。",
     "tags": [
-      "actions"
+      "actions",
+      "curated-v3.60"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12269",
@@ -21155,11 +23736,11 @@
         "meanings": [
           {
             "ja": "おしゃべりな；多弁な",
-            "definition": "",
+            "definition": "talking a great deal, often more than necessary",
             "examples": [
               {
-                "en": "In advanced texts, \"loquacious\" may be used to mean \"\".",
-                "ja": "上級レベルの文章では「loquacious」が「おしゃべりな；多弁な」という意味で用いられることがある。"
+                "en": "The usually quiet student became loquacious when discussing astronomy.",
+                "ja": "普段は無口な生徒が、天文学の話になると多弁になった。"
               }
             ]
           }
@@ -21168,17 +23749,29 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "a loquacious speaker",
+        "text": "a loquacious speaker",
+        "ja": "話の長い話し手"
+      },
+      {
+        "en": "become loquacious",
+        "text": "become loquacious",
+        "ja": "おしゃべりになる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "talkative より硬く、話が多すぎるという軽い批判を含むことがある。",
     "tags": [
       "study-language",
-      "curated-v2.94"
+      "curated-v2.94",
+      "curated-v3.84"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08027",
@@ -21425,25 +24018,57 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "不利益を被る；負ける",
-            "definition": "",
-            "examples": []
+            "ja": "（競争や選考で）不利になる；負ける",
+            "definition": "to fail to get an opportunity or advantage that someone else gets",
+            "examples": [
+              {
+                "en": "Smaller firms may lose out when contracts go only to large suppliers.",
+                "ja": "契約が大手の供給業者だけに渡ると、中小企業は不利になる可能性がある。"
+              }
+            ]
+          },
+          {
+            "ja": "（利益や機会を）逃す",
+            "definition": "to miss a benefit or opportunity",
+            "examples": [
+              {
+                "en": "Apply before Friday or you could lose out on the discount.",
+                "ja": "金曜日までに申し込まないと割引を受け損なうかもしれない。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "lose out to a competitor",
+        "en": "lose out to a competitor",
+        "ja": "競争相手に負ける"
+      },
+      {
+        "text": "lose out on an opportunity",
+        "en": "lose out on an opportunity",
+        "ja": "機会を逃す"
+      },
+      {
+        "text": "risk losing out",
+        "en": "risk losing out",
+        "ja": "不利益を被る危険がある"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "lose out to + 相手／lose out on + 利益・機会。lose は不規則動詞 lost。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.164"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07626",
@@ -21705,15 +24330,30 @@
     "frequency": 4,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
-            "ja": "大きな音の",
-            "definition": "a person, thing, state, or idea related to 大きな音の",
+            "ja": "（音・声が）大きい",
+            "definition": "producing or having a high volume of sound",
             "examples": [
               {
-                "en": "This is a common example of 'loud'.",
-                "ja": "これは「大きな音の」の一般的な例です。"
+                "en": "The music was too loud for us to talk.",
+                "ja": "音楽が大きすぎて会話できなかった。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adverb",
+        "meanings": [
+          {
+            "ja": "大きな声で；大きな音で",
+            "definition": "with a high volume of sound",
+            "examples": [
+              {
+                "en": "Could you speak a little louder?",
+                "ja": "もう少し大きな声で話してもらえますか。"
               }
             ]
           }
@@ -21726,9 +24366,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "loud は形容詞のほか副詞としても使える。loudly も一般的な副詞。",
+    "tags": [
+      "curated-v3.155"
+    ],
+    "status": "enriched",
     "search_terms": [
       "loud"
     ],
@@ -21736,7 +24378,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "a loud noise",
+        "en": "a loud noise",
+        "ja": "大きな物音"
+      },
+      {
+        "text": "speak loud and clear",
+        "en": "speak loud and clear",
+        "ja": "大きくはっきり話す"
+      },
+      {
+        "text": "turn the music up too loud",
+        "en": "turn the music up too loud",
+        "ja": "音楽の音量を上げすぎる"
+      }
+    ]
   },
   {
     "id": "sw-05039",
@@ -22361,28 +25019,65 @@
     "frequency": 2,
     "parts_of_speech": [
       {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "低地",
+            "definition": "land that is lower than the surrounding area or close to sea level",
+            "examples": [
+              {
+                "en": "The lowlands were flooded after days of heavy rain.",
+                "ja": "何日も大雨が続き、低地は浸水した。"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "低地の；低地にすむ",
-            "definition": "",
-            "examples": []
+            "ja": "低地の；低地に生息する",
+            "definition": "situated in or characteristic of low-lying land",
+            "examples": [
+              {
+                "en": "Lowland farms rely on drainage channels.",
+                "ja": "低地の農場は排水路に頼っている。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "coastal lowlands",
+        "en": "coastal lowlands",
+        "ja": "沿岸の低地"
+      },
+      {
+        "text": "lowland farming",
+        "en": "lowland farming",
+        "ja": "低地農業"
+      },
+      {
+        "text": "flood-prone lowlands",
+        "en": "flood-prone lowlands",
+        "ja": "洪水が起こりやすい低地"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "lowland は名詞・形容詞の両方で使える。反対語は highland / upland。",
     "tags": [
-      "outdoor-conditions"
+      "outdoor-conditions",
+      "curated-v3.184"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11157",
@@ -22581,24 +25276,50 @@
         "meanings": [
           {
             "ja": "明快に；分かりやすく",
-            "definition": "",
-            "examples": []
+            "definition": "in a clear and easy-to-understand manner",
+            "examples": [
+              {
+                "en": "The lecturer lucidly explained the difference between correlation and causation.",
+                "ja": "講師は相関と因果関係の違いを明快に説明した。"
+              },
+              {
+                "en": "The article lucidly summarizes a complex debate.",
+                "ja": "その記事は複雑な論争を分かりやすく要約している。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "explain lucidly",
+        "en": "explain lucidly",
+        "ja": "明快に説明する"
+      },
+      {
+        "text": "write lucidly",
+        "en": "write lucidly",
+        "ja": "明晰に書く"
+      },
+      {
+        "text": "lucidly presented",
+        "en": "lucidly presented",
+        "ja": "明快に提示された"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "lucidly は特に複雑な内容の説明・文章の明晰さを評価する語。lucid の副詞形。",
     "tags": [
-      "expression-manner"
+      "expression-manner",
+      "curated-v3.152"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-01064",
@@ -22611,15 +25332,15 @@
     "frequency": 4,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
-            "ja": "幸運な",
-            "definition": "a person, thing, state, or idea related to 幸運な",
+            "ja": "運が良い；幸運な",
+            "definition": "having good things happen by chance",
             "examples": [
               {
-                "en": "This is a common example of 'lucky'.",
-                "ja": "これは「幸運な」の一般的な例です。"
+                "en": "We were lucky to catch the last train.",
+                "ja": "私たちは運よく終電に間に合った。"
               }
             ]
           }
@@ -22632,9 +25353,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "be lucky to do / be lucky that ... の形がよく使われる。",
+    "tags": [
+      "curated-v3.155"
+    ],
+    "status": "enriched",
     "search_terms": [
       "lucky"
     ],
@@ -22642,7 +25365,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "be lucky enough to do",
+        "en": "be lucky enough to do",
+        "ja": "運よく〜できる"
+      },
+      {
+        "text": "a lucky break",
+        "en": "a lucky break",
+        "ja": "思いがけない幸運"
+      },
+      {
+        "text": "lucky to be alive",
+        "en": "lucky to be alive",
+        "ja": "生きていて幸運な"
+      }
+    ]
   },
   {
     "id": "sw-07622",
@@ -22665,25 +25404,51 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "もうかる",
-            "definition": "",
-            "examples": []
+            "ja": "利益の大きい；もうかる",
+            "definition": "producing a large amount of money or profit",
+            "examples": [
+              {
+                "en": "She left a lucrative consulting job to become a teacher.",
+                "ja": "彼女は収入のよいコンサルタントの仕事を辞めて教員になった。"
+              },
+              {
+                "en": "The company secured a lucrative contract to maintain the network.",
+                "ja": "その会社はネットワーク保守の収益性の高い契約を獲得した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "lucrative business",
+        "en": "lucrative business",
+        "ja": "もうかる事業"
+      },
+      {
+        "text": "lucrative contract",
+        "en": "lucrative contract",
+        "ja": "収益性の高い契約"
+      },
+      {
+        "text": "lucrative career",
+        "en": "lucrative career",
+        "ja": "高収入を得られる職業"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "lucrative は単に利益が出る profitable より「かなりの収入・利益」を強調する。",
     "tags": [
-      "work-description"
+      "work-description",
+      "curated-v3.152"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-09240",
@@ -22794,12 +25559,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "荷物",
-            "definition": "a person, thing, state, or idea connected with 荷物",
+            "ja": "旅行かばん；手荷物",
+            "definition": "bags and suitcases taken on a journey",
             "examples": [
               {
-                "en": "The word 'luggage' appears in many kinds of English texts.",
-                "ja": "「luggage」はさまざまな英文で使われます。"
+                "en": "Passengers must keep their luggage out of the aisle.",
+                "ja": "乗客は通路に荷物を置かないようにしなければならない。"
               }
             ]
           }
@@ -22812,9 +25577,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "luggage は不可算名詞。通常 a luggage / luggages とは言わず、a piece of luggage を使う。",
+    "tags": [
+      "curated-v3.178"
+    ],
+    "status": "enriched",
     "search_terms": [
       "luggage"
     ],
@@ -22822,7 +25589,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "en": "carry-on luggage",
+        "text": "carry-on luggage",
+        "ja": "機内持ち込み手荷物"
+      },
+      {
+        "en": "lost luggage",
+        "text": "lost luggage",
+        "ja": "紛失した手荷物"
+      },
+      {
+        "en": "luggage allowance",
+        "text": "luggage allowance",
+        "ja": "手荷物許容量"
+      }
+    ]
   },
   {
     "id": "sw-07452",
@@ -22846,24 +25629,50 @@
         "meanings": [
           {
             "ja": "荷物棚",
-            "definition": "",
-            "examples": []
+            "definition": "a shelf or frame for storing luggage on a train, bus, or other vehicle",
+            "examples": [
+              {
+                "en": "Please place small bags on the luggage rack above your seat.",
+                "ja": "小さなかばんは座席上の荷物棚に置いてください。"
+              },
+              {
+                "en": "The suitcase was too large to fit on the luggage rack.",
+                "ja": "そのスーツケースは荷物棚に収まらないほど大きかった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "overhead luggage rack",
+        "en": "overhead luggage rack",
+        "ja": "頭上の荷物棚"
+      },
+      {
+        "text": "put a bag on the luggage rack",
+        "en": "put a bag on the luggage rack",
+        "ja": "かばんを荷物棚に置く"
+      },
+      {
+        "text": "luggage rack above the seat",
+        "en": "luggage rack above the seat",
+        "ja": "座席上の荷物棚"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "luggage は通常不可算名詞。複数のかばんを指す場合は pieces of luggage などを使う。",
     "tags": [
-      "community-travel"
+      "community-travel",
+      "curated-v3.183"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12803",
@@ -23149,26 +25958,43 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "光を放つ；明るい",
-            "definition": "",
-            "examples": []
+            "ja": "光を放つ；明るく輝く",
+            "definition": "producing or reflecting a soft, steady light",
+            "examples": [
+              {
+                "en": "The luminous hands of the clock were visible in the dark.",
+                "ja": "時計の夜光塗料の針は暗闇でも見えた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "luminous paint",
+        "text": "luminous paint",
+        "ja": "夜光塗料"
+      },
+      {
+        "en": "luminous display",
+        "text": "luminous display",
+        "ja": "発光表示"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "luminous は自ら光る場合だけでなく、光を受けて明るく見える場合もある。",
     "tags": [
       "descriptive",
-      "etymology-v1"
+      "etymology-v1",
+      "curated-v3.60"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "etymology": {
       "origin": "Latin lux / lumen / lucere",
       "history": "lumen「光」に由来し、「光を発する・明るい」を表す。",
@@ -23708,25 +26534,42 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "潜む",
-            "definition": "",
-            "examples": []
+            "ja": "（人・危険などが）潜む；隠れて待つ",
+            "definition": "to remain hidden, often while waiting or posing a threat",
+            "examples": [
+              {
+                "en": "Hidden risks may lurk in the proposed agreement.",
+                "ja": "その合意案には隠れた危険が潜んでいるかもしれない。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "lurk in the shadows",
+        "text": "lurk in the shadows",
+        "ja": "物陰に潜む"
+      },
+      {
+        "en": "danger lurks",
+        "text": "danger lurks",
+        "ja": "危険が潜む"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "lurk in/behind + 名詞。人以外に danger, risk なども主語になる。",
     "tags": [
-      "actions"
+      "actions",
+      "curated-v3.60"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04913",

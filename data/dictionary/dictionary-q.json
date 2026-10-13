@@ -74,25 +74,50 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "四角い中庭；四辺形",
-            "definition": "",
-            "examples": []
+            "ja": "四辺形",
+            "definition": "a flat shape with four sides and four angles",
+            "examples": [
+              {
+                "en": "The architect drew a quadrangle to show the shape of the courtyard.",
+                "ja": "建築家は中庭の形を示すために四辺形を描いた。"
+              }
+            ]
+          },
+          {
+            "ja": "四角形の中庭",
+            "definition": "an open courtyard surrounded by buildings, especially at a university",
+            "examples": [
+              {
+                "en": "Students gathered in the quadrangle after the lecture.",
+                "ja": "講義の後、学生たちは大学の中庭に集まった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a college quadrangle",
+        "ja": "大学の中庭"
+      },
+      {
+        "text": "a four-sided quadrangle",
+        "ja": "四辺形"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "幾何学では「四辺形」、大学などの建築では「四角い中庭」を指す。",
     "tags": [
-      "building"
+      "building",
+      "curated-v3.78"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11596",
@@ -197,25 +222,40 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "豪快に飲む",
-            "definition": "",
-            "examples": []
+            "ja": "（飲み物を）ぐいぐい飲む",
+            "definition": "to drink something, especially alcohol, in large amounts or with obvious enjoyment",
+            "examples": [
+              {
+                "en": "After the long hike, they quaffed cold lemonade on the porch.",
+                "ja": "長いハイキングの後、彼らはポーチで冷たいレモネードを豪快に飲んだ。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "quaff a drink",
+        "ja": "飲み物をぐいっと飲む"
+      },
+      {
+        "text": "quaff a pint of beer",
+        "ja": "ビールを1パイント豪快に飲む"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "文学的・ユーモラスな語感があり、通常は飲み物を目的語に取る。",
     "tags": [
-      "actions-household"
+      "actions-household",
+      "curated-v3.78"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04495",
@@ -288,24 +328,39 @@
         "meanings": [
           {
             "ja": "古風で趣のある",
-            "definition": "",
-            "examples": []
+            "definition": "attractively unusual or old-fashioned",
+            "examples": [
+              {
+                "en": "We stayed in a quaint village with narrow stone streets.",
+                "ja": "私たちは狭い石畳の道がある、古風で趣のある村に滞在した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a quaint village",
+        "ja": "趣のある村"
+      },
+      {
+        "text": "quaint old houses",
+        "ja": "趣のある古い家々"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "魅力的な古風さを表すが、文脈によっては「時代遅れで奇妙」という皮肉にもなる。",
     "tags": [
-      "description"
+      "description",
+      "curated-v3.78"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-02026",
@@ -547,6 +602,14 @@
               {
                 "en": "The researchers used qualitative interviews to explore students’ experiences.",
                 "ja": "研究者たちは生徒の経験を詳しく調べるため質的インタビューを用いた。"
+              },
+              {
+                "en": "Qualitative analysis helped explain why the participants changed their views.",
+                "ja": "質的分析によって参加者が考えを変えた理由が明らかになった。"
+              },
+              {
+                "en": "Qualitative interviews can reveal experiences that fixed-response surveys may miss.",
+                "ja": "質的インタビューは選択式調査では捉えにくい経験を明らかにできる。"
               }
             ]
           }
@@ -558,18 +621,22 @@
     "collocations": [
       {
         "text": "qualitative research",
+        "en": "qualitative research",
         "ja": "質的研究"
       },
       {
         "text": "qualitative data",
+        "en": "qualitative data",
         "ja": "質的データ"
       },
       {
         "text": "qualitative analysis",
+        "en": "qualitative analysis",
         "ja": "質的分析"
       },
       {
         "text": "qualitative interviews",
+        "en": "qualitative interviews",
         "ja": "質的インタビュー"
       }
     ],
@@ -577,27 +644,16 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "qualitative は意味・経験・特徴を扱う研究などに使う。quantitative（量的な）と対比。",
+    "usage_note": "qualitative は経験・意味・過程などを言葉で分析する質的研究に使う。",
     "tags": [
       "scale-50k",
       "curated-v2.52",
       "curated-v2.61",
       "curated-v3.33",
-      "curated-v3.37"
+      "curated-v3.37",
+      "curated-v3.123"
     ],
-    "status": "enriched",
-    "senses": [
-      {
-        "pos": "",
-        "definition_ja": "質的な；性質に関する",
-        "examples": [
-          {
-            "en": "Qualitative interviews can reveal experiences that fixed-response surveys may miss.",
-            "ja": "質的インタビューは選択式調査では捉えにくい経験を明らかにできる。"
-          }
-        ]
-      }
-    ]
+    "status": "enriched"
   },
   {
     "id": "sw-00937",
@@ -614,8 +670,12 @@
         "meanings": [
           {
             "ja": "質；品質",
-            "definition": "how good or bad something is",
+            "definition": "the standard of how good or bad something is",
             "examples": [
+              {
+                "en": "The survey examined the quality of public transport services.",
+                "ja": "その調査は公共交通サービスの質を検証した。"
+              },
               {
                 "en": "The company is trying to improve product quality.",
                 "ja": "その会社は製品の品質を改善しようとしています。"
@@ -623,12 +683,31 @@
             ]
           },
           {
-            "ja": "特質；長所",
-            "definition": "a characteristic that someone or something has",
+            "ja": "特質；資質",
+            "definition": "a characteristic or trait that someone or something has",
             "examples": [
+              {
+                "en": "Curiosity is an important quality in a researcher.",
+                "ja": "好奇心は研究者にとって重要な資質だ。"
+              },
               {
                 "en": "Patience is an important quality for teachers.",
                 "ja": "忍耐力は教師にとって重要な資質です。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "高品質の；上質な",
+            "definition": "of a high standard, especially in commercial descriptions",
+            "examples": [
+              {
+                "en": "The company is known for quality products at reasonable prices.",
+                "ja": "その会社は手頃な価格の高品質な製品で知られている。"
               }
             ]
           }
@@ -643,13 +722,14 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "quality of + 名詞。high-quality は名詞の前でハイフンを使うことが多い。",
     "tags": [
       "v2.31-curated",
       "etymology-v1",
-      "v2.45-curated"
+      "v2.45-curated",
+      "curated-v3.82"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "quality"
     ],
@@ -658,8 +738,26 @@
       "ipa_uk": null
     },
     "collocations": [
-      "high quality",
-      "quality of life"
+      {
+        "en": "improve quality",
+        "text": "improve quality",
+        "ja": "品質を改善する"
+      },
+      {
+        "en": "quality of life",
+        "text": "quality of life",
+        "ja": "生活の質"
+      },
+      {
+        "en": "leadership qualities",
+        "text": "leadership qualities",
+        "ja": "指導者としての資質"
+      },
+      {
+        "en": "quality control",
+        "text": "quality control",
+        "ja": "品質管理"
+      }
     ],
     "etymology": {
       "origin": "Latin qualis / qualitas",
@@ -698,25 +796,40 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "数量で示せる形で",
-            "definition": "",
-            "examples": []
+            "ja": "数量的に示せる形で",
+            "definition": "in a way that can be measured or expressed as a number",
+            "examples": [
+              {
+                "en": "The new process is quantifiably more efficient than the old one.",
+                "ja": "新しい工程は従来のものより、数値で示せるほど効率が高い。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "quantifiably better",
+        "ja": "数値で示せるほど優れている"
+      },
+      {
+        "text": "quantifiably more effective",
+        "ja": "測定可能なほど効果的である"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "quantifiably は比較級を修飾することが多い。quantitatively（数量的に）との違いに注意。",
     "tags": [
-      "work-description"
+      "work-description",
+      "curated-v3.78"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-03253",
@@ -749,6 +862,14 @@
               {
                 "en": "Quantitative data showed a steady rise in household spending.",
                 "ja": "量的データは家計支出の着実な増加を示した。"
+              },
+              {
+                "en": "The team combined quantitative survey data with interviews.",
+                "ja": "チームは量的なアンケートデータとインタビューを組み合わせた。"
+              },
+              {
+                "en": "Quantitative research often uses numerical data to test hypotheses.",
+                "ja": "量的研究では仮説検証に数値データを用いることが多い。"
               }
             ]
           }
@@ -760,18 +881,22 @@
     "collocations": [
       {
         "text": "quantitative research",
+        "en": "quantitative research",
         "ja": "量的研究"
       },
       {
         "text": "quantitative data",
+        "en": "quantitative data",
         "ja": "量的データ"
       },
       {
         "text": "quantitative analysis",
+        "en": "quantitative analysis",
         "ja": "量的分析"
       },
       {
         "text": "quantitative survey",
+        "en": "quantitative survey",
         "ja": "量的調査"
       }
     ],
@@ -779,14 +904,15 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "quantitative は数値で測定・比較する研究などに使う。qualitative（質的な）と対比。",
+    "usage_note": "quantitative は数値・測定値を用いる「量的な」。qualitative（質的な）と対比。",
     "tags": [
       "scale-50k",
       "etymology-v1",
       "curated-v2.52",
       "curated-v2.61",
       "curated-v3.33",
-      "curated-v3.37"
+      "curated-v3.37",
+      "curated-v3.123"
     ],
     "status": "enriched",
     "etymology": {
@@ -801,19 +927,7 @@
       "related": [
         "quantity"
       ]
-    },
-    "senses": [
-      {
-        "pos": "",
-        "definition_ja": "量的な；数量に基づく",
-        "examples": [
-          {
-            "en": "Quantitative research often uses numerical data to test hypotheses.",
-            "ja": "量的研究では仮説検証に数値データを用いることが多い。"
-          }
-        ]
-      }
-    ]
+    }
   },
   {
     "id": "sw-02876",
@@ -839,6 +953,10 @@
               {
                 "en": "The study focused on the quality rather than the quantity of sleep.",
                 "ja": "その研究は睡眠の量ではなく質に注目した。"
+              },
+              {
+                "en": "The laboratory recorded the quantity of water used in each trial.",
+                "ja": "実験室では各試行で使用した水の量を記録した。"
               }
             ]
           }
@@ -851,12 +969,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Quantity concerns how much or how many; quality concerns how good something is.",
     "tags": [
       "frequency-gap",
       "v2.31-curated",
       "etymology-v1",
-      "v3.28-curated"
+      "v3.28-curated",
+      "curated-v3.173"
     ],
     "status": "enriched",
     "search_terms": [
@@ -867,9 +986,21 @@
       "ipa_uk": null
     },
     "collocations": [
-      "large quantity",
-      "quantity of",
-      "quality and quantity"
+      {
+        "en": "large quantity",
+        "text": "large quantity",
+        "ja": "大量"
+      },
+      {
+        "en": "quantity of",
+        "text": "quantity of",
+        "ja": "～の量"
+      },
+      {
+        "en": "quality and quantity",
+        "text": "quality and quantity",
+        "ja": "質と量"
+      }
     ],
     "etymology": {
       "origin": "Latin quantus / quantitas",
@@ -906,25 +1037,40 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "量子化する；離散的な値にする",
-            "definition": "",
-            "examples": []
+            "ja": "（連続量を）離散的な値に変換する",
+            "definition": "to convert a continuous range of values into a limited set of discrete values",
+            "examples": [
+              {
+                "en": "The audio software quantizes the signal before storing it digitally.",
+                "ja": "その音声ソフトは信号をデジタル保存する前に量子化する。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "quantize a signal",
+        "ja": "信号を量子化する"
+      },
+      {
+        "text": "quantize audio data",
+        "ja": "音声データを量子化する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "情報処理では連続値を離散値に丸めること。物理学の「量子化」と関連するが文脈で意味が異なる。",
     "tags": [
-      "computing-actions"
+      "computing-actions",
+      "curated-v3.78"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10641",
@@ -947,25 +1093,40 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "けんか好きな；争いがちな",
-            "definition": "",
-            "examples": []
+            "ja": "けんか好きな；口論しがちな",
+            "definition": "frequently inclined to argue or fight with others",
+            "examples": [
+              {
+                "en": "The quarrelsome neighbors argued about the fence again.",
+                "ja": "けんか好きな隣人たちはまた塀のことで口論した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a quarrelsome person",
+        "ja": "けんか好きな人"
+      },
+      {
+        "text": "a quarrelsome attitude",
+        "ja": "口論を招きやすい態度"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "性格や態度に使う形容詞。quarrel（口論する）から派生。",
     "tags": [
-      "study-language"
+      "study-language",
+      "curated-v3.78"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-02884",
@@ -1129,24 +1290,39 @@
         "meanings": [
           {
             "ja": "準々決勝",
-            "definition": "",
-            "examples": []
+            "definition": "a match or round in a competition that determines who advances to the semifinals",
+            "examples": [
+              {
+                "en": "Our team reached the quarterfinal but lost in a close match.",
+                "ja": "私たちのチームは準々決勝に進んだが、接戦で敗れた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "reach the quarterfinals",
+        "ja": "準々決勝に進む"
+      },
+      {
+        "text": "a quarterfinal match",
+        "ja": "準々決勝の試合"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "大会全体の段階は quarterfinals と複数形で表すことが多い。",
     "tags": [
-      "sports-arts"
+      "sports-arts",
+      "curated-v3.78"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07595",
@@ -1220,25 +1396,40 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "四重奏；四人組",
-            "definition": "",
-            "examples": []
+            "ja": "四重奏団；四人組",
+            "definition": "a group of four musicians who perform together, or a musical composition for four performers",
+            "examples": [
+              {
+                "en": "A string quartet performed in the school hall.",
+                "ja": "弦楽四重奏団が学校のホールで演奏した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a string quartet",
+        "ja": "弦楽四重奏団"
+      },
+      {
+        "text": "a jazz quartet",
+        "ja": "ジャズの四人編成"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "音楽以外でも四人組を指す。quintet は五人組。",
     "tags": [
-      "music-art"
+      "music-art",
+      "curated-v3.78"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-05512",
@@ -1262,24 +1453,39 @@
         "meanings": [
           {
             "ja": "石英",
-            "definition": "",
-            "examples": []
+            "definition": "a common hard mineral made of silicon dioxide and found in many rocks",
+            "examples": [
+              {
+                "en": "The sample contained clear crystals of quartz.",
+                "ja": "その標本には透明な石英の結晶が含まれていた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "quartz crystal",
+        "ja": "水晶（石英の結晶）"
+      },
+      {
+        "text": "quartz sand",
+        "ja": "石英砂"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "鉱物名として通常不可算。水晶は透明な石英の一種。",
     "tags": [
-      "nature-animals"
+      "nature-animals",
+      "curated-v3.78"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11758",
@@ -1343,25 +1549,40 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "クエーサー；非常に明るい活動銀河核",
-            "definition": "",
-            "examples": []
+            "ja": "クエーサー",
+            "definition": "an extremely luminous active galactic nucleus powered by matter falling toward a supermassive black hole",
+            "examples": [
+              {
+                "en": "Astronomers detected a quasar billions of light-years away.",
+                "ja": "天文学者たちは数十億光年離れたクエーサーを検出した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a distant quasar",
+        "ja": "遠方のクエーサー"
+      },
+      {
+        "text": "quasar emission",
+        "ja": "クエーサーからの放射"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "クエーサーは銀河の中心核に由来する非常に明るい天体現象で、恒星そのものではない。",
     "tags": [
-      "astronomy-space"
+      "astronomy-space",
+      "curated-v3.78"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08016",
@@ -1385,24 +1606,39 @@
         "meanings": [
           {
             "ja": "四行詩；四行連",
-            "definition": "",
-            "examples": []
+            "definition": "a stanza or complete poem consisting of four lines",
+            "examples": [
+              {
+                "en": "The poet ended the sonnet with a final quatrain.",
+                "ja": "詩人はそのソネットを最後の四行連で締めくくった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a rhyming quatrain",
+        "ja": "押韻する四行詩"
+      },
+      {
+        "text": "a four-line quatrain",
+        "ja": "四行からなる詩節"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "詩の一節を指す場合と四行だけの詩全体を指す場合がある。",
     "tags": [
-      "publishing"
+      "publishing",
+      "curated-v3.78"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08970",
@@ -1426,24 +1662,39 @@
         "meanings": [
           {
             "ja": "岸壁；埠頭",
-            "definition": "",
-            "examples": []
+            "definition": "a solid platform beside water where ships can load or unload passengers or goods",
+            "examples": [
+              {
+                "en": "The fishing boats were tied up along the quay.",
+                "ja": "漁船は埠頭に沿って係留されていた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "along the quay",
+        "ja": "岸壁に沿って"
+      },
+      {
+        "text": "a busy quay",
+        "ja": "にぎわう埠頭"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "発音は通常 /kiː/ で key と同音。",
     "tags": [
-      "building"
+      "building",
+      "curated-v3.78"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-02843",
@@ -1535,25 +1786,50 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "急冷する；渇きを癒やす",
-            "definition": "",
-            "examples": []
+            "ja": "（渇きを）癒やす",
+            "definition": "to satisfy a feeling of thirst by drinking",
+            "examples": [
+              {
+                "en": "Cold water helped quench our thirst after the run.",
+                "ja": "ランニングの後、冷たい水が私たちの渇きを癒やした。"
+              }
+            ]
+          },
+          {
+            "ja": "（火・熱などを）消す；急冷する",
+            "definition": "to put out a fire or rapidly cool a hot material",
+            "examples": [
+              {
+                "en": "The blacksmith quenched the heated steel in water.",
+                "ja": "鍛冶職人は熱した鋼を水に入れて急冷した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "quench your thirst",
+        "ja": "喉の渇きを癒やす"
+      },
+      {
+        "text": "quench heated steel",
+        "ja": "熱した鋼を急冷する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "quench one’s thirst は定型表現。金属加工では「急冷する」の意味。",
     "tags": [
-      "craft-actions"
+      "craft-actions",
+      "curated-v3.78"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12856",
@@ -1576,25 +1852,40 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "不平がましい",
-            "definition": "",
-            "examples": []
+            "ja": "不平がましい；ぐちっぽい",
+            "definition": "complaining repeatedly in an irritated or whining manner",
+            "examples": [
+              {
+                "en": "His querulous tone made a simple request sound like a complaint.",
+                "ja": "彼の不平がましい口調のせいで、簡単な依頼が苦情のように聞こえた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a querulous voice",
+        "ja": "不平がましい声"
+      },
+      {
+        "text": "a querulous complaint",
+        "ja": "ぐちっぽい不満"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "人の声・口調・態度などを修飾する硬い表現。",
     "tags": [
-      "personality-manner"
+      "personality-manner",
+      "curated-v3.78"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-06609",
@@ -1652,8 +1943,12 @@
         "meanings": [
           {
             "ja": "質問；問い",
-            "definition": "a sentence or phrase used to ask for information",
+            "definition": "a sentence or statement used to ask for information",
             "examples": [
+              {
+                "en": "The interviewer asked a follow-up question.",
+                "ja": "面接官は追加の質問をした。"
+              },
               {
                 "en": "If you have a question, raise your hand.",
                 "ja": "質問があれば手を挙げてください。"
@@ -1662,11 +1957,40 @@
           },
           {
             "ja": "問題；論点",
-            "definition": "a matter that needs to be considered or decided",
+            "definition": "a matter that needs to be considered, discussed, or decided",
             "examples": [
+              {
+                "en": "The central question is whether the evidence is reliable.",
+                "ja": "中心となる論点は、その証拠が信頼できるかどうかである。"
+              },
               {
                 "en": "The question is whether the plan will actually work.",
                 "ja": "問題はその計画が本当に機能するかどうかです。"
+              }
+            ]
+          },
+          {
+            "ja": "疑い；不確かさ",
+            "definition": "doubt about whether something is true or acceptable",
+            "examples": [
+              {
+                "en": "There is no question about the need for reform.",
+                "ja": "改革の必要性には疑いの余地がない。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "疑問を呈する；問いただす",
+            "definition": "to express doubts about something or ask someone about it critically",
+            "examples": [
+              {
+                "en": "Scientists questioned the accuracy of the measurements.",
+                "ja": "科学者たちは測定値の正確性に疑問を呈した。"
               }
             ]
           }
@@ -1682,12 +2006,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "question は「質問」以外に「論点」「疑い」、動詞「疑問視する」。out of the question は「不可能」。",
     "tags": [
       "v2.28-curated",
-      "etymology-v1"
+      "etymology-v1",
+      "curated-v3.105"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "question"
     ],
@@ -1695,7 +2020,28 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "raise a question",
+        "en": "raise a question",
+        "ja": "疑問を提起する"
+      },
+      {
+        "text": "call into question",
+        "en": "call into question",
+        "ja": "～を疑問視する"
+      },
+      {
+        "text": "question the evidence",
+        "en": "question the evidence",
+        "ja": "証拠を疑問視する"
+      },
+      {
+        "text": "out of the question",
+        "en": "out of the question",
+        "ja": "問題外で；不可能で"
+      }
+    ],
     "etymology": {
       "origin": "Latin quaerere / quaesitus",
       "history": "quaerere「尋ねる・探す」に由来し、尋ねる内容を表す。",
@@ -1936,25 +2282,55 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "些細なことで議論する",
-            "definition": "",
-            "examples": []
+            "ja": "ささいな点に難癖をつける",
+            "definition": "to argue about a small detail that is not very important",
+            "examples": [
+              {
+                "en": "Instead of quibbling over the wording, we should discuss the main proposal.",
+                "ja": "言い回しの細部に難癖をつけるより、提案の本題を議論すべきだ。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "ささいな異議；細かな難癖",
+            "definition": "a minor objection or argument about an unimportant detail",
+            "examples": [
+              {
+                "en": "I have one small quibble with the report’s conclusion.",
+                "ja": "その報告書の結論について、ささいな異議が一つある。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "quibble over details",
+        "ja": "細部に難癖をつける"
+      },
+      {
+        "text": "a minor quibble",
+        "ja": "ささいな異議"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "動詞は quibble over/about + 名詞。名詞としても使う。",
     "tags": [
-      "thinking-communication"
+      "thinking-communication",
+      "curated-v3.78"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-05400",
@@ -2065,24 +2441,39 @@
         "meanings": [
           {
             "ja": "速乾性の",
-            "definition": "",
-            "examples": []
+            "definition": "designed to dry quickly after becoming wet",
+            "examples": [
+              {
+                "en": "She packed a quick-drying shirt for the hiking trip.",
+                "ja": "彼女はハイキング旅行に速乾性のシャツを詰めた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "quick-drying fabric",
+        "ja": "速乾性の生地"
+      },
+      {
+        "text": "quick-drying clothes",
+        "ja": "速乾性の衣類"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "名詞の前で複合形容詞として使うときはハイフンを入れる。",
     "tags": [
-      "practical-quality"
+      "practical-quality",
+      "curated-v3.78"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-02654",
@@ -2294,25 +2685,50 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "羽根ペン；鳥の硬い羽軸",
-            "definition": "",
-            "examples": []
+            "ja": "羽根ペン",
+            "definition": "a pen made from a large feather with a sharpened hollow shaft",
+            "examples": [
+              {
+                "en": "The historian displayed a letter written with a quill.",
+                "ja": "歴史家は羽根ペンで書かれた手紙を展示した。"
+              }
+            ]
+          },
+          {
+            "ja": "鳥の羽の軸",
+            "definition": "the hollow central shaft of a large feather",
+            "examples": [
+              {
+                "en": "The damaged feather had a split quill.",
+                "ja": "傷んだ羽は羽軸が割れていた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a quill pen",
+        "ja": "羽根ペン"
+      },
+      {
+        "text": "write with a quill",
+        "ja": "羽根ペンで書く"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "羽根ペンのほか、羽の硬い軸そのものも指す。",
     "tags": [
-      "language-writing"
+      "language-writing",
+      "curated-v3.78"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04314",
@@ -2384,25 +2800,40 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "キルティング；刺し縫い",
-            "definition": "",
-            "examples": []
+            "ja": "キルティング；布を重ねて縫う技法",
+            "definition": "the activity or technique of stitching together layers of fabric, often to make a quilt",
+            "examples": [
+              {
+                "en": "She learned quilting from her grandmother.",
+                "ja": "彼女は祖母からキルティングを習った。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "quilting patterns",
+        "ja": "キルティングの模様"
+      },
+      {
+        "text": "quilting techniques",
+        "ja": "キルティングの技法"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "quilt は完成した掛け布団など、quilting は縫製の技法・作業を指す。",
     "tags": [
-      "sewing-clothing"
+      "sewing-clothing",
+      "curated-v3.78"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04396",
@@ -2520,25 +2951,40 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "五重奏；五人組",
-            "definition": "",
-            "examples": []
+            "ja": "五重奏団；五人組",
+            "definition": "a group of five musicians who perform together, or a composition for five performers",
+            "examples": [
+              {
+                "en": "The brass quintet played at the opening ceremony.",
+                "ja": "金管五重奏団が開会式で演奏した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a brass quintet",
+        "ja": "金管五重奏団"
+      },
+      {
+        "text": "a jazz quintet",
+        "ja": "ジャズの五人編成"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "quartet（四重奏）と区別する。",
     "tags": [
-      "music-art"
+      "music-art",
+      "curated-v3.78"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-06451",
@@ -2561,25 +3007,55 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "気の利いたことを言う",
-            "definition": "",
-            "examples": []
+            "ja": "気の利いた冗談を言う",
+            "definition": "to make a short, clever, often humorous remark",
+            "examples": [
+              {
+                "en": "“At least the rain is free,” she quipped as we ran for shelter.",
+                "ja": "雨宿りに走りながら、彼女は「少なくとも雨は無料ね」と冗談を言った。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "機知に富んだ短い言葉",
+            "definition": "a short, clever, or amusing remark",
+            "examples": [
+              {
+                "en": "His quick quip made the audience laugh.",
+                "ja": "彼の機知に富んだ一言に観客は笑った。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "quip about something",
+        "ja": "何かについて軽口をたたく"
+      },
+      {
+        "text": "a witty quip",
+        "ja": "機知に富んだ一言"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "発言の引用に続けて she quipped のように用いる。",
     "tags": [
-      "thinking-communication"
+      "thinking-communication",
+      "curated-v3.78"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11543",

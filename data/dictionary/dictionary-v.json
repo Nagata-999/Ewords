@@ -281,12 +281,32 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "真空；掃除機",
-            "definition": "a person, object, place, state, or idea associated with 真空",
+            "ja": "真空；物質がほとんど存在しない空間",
+            "definition": "a space containing little or no matter, especially little or no air",
             "examples": [
               {
-                "en": "They talked about vacuum during the lesson.",
-                "ja": "授業中に「真空」について話した。"
+                "en": "Sound cannot travel through a perfect vacuum.",
+                "ja": "音は完全な真空中を伝わることができない。"
+              }
+            ]
+          },
+          {
+            "ja": "空白；欠落した状態",
+            "definition": "a situation in which something important is absent",
+            "examples": [
+              {
+                "en": "The sudden resignation created a leadership vacuum.",
+                "ja": "突然の辞任によって指導者不在の状態が生まれた。"
+              }
+            ]
+          },
+          {
+            "ja": "掃除機",
+            "definition": "a machine that removes dust and dirt by suction",
+            "examples": [
+              {
+                "en": "The vacuum is in the storage closet.",
+                "ja": "掃除機は収納庫にある。"
               }
             ]
           }
@@ -295,18 +315,32 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "in a vacuum",
+        "ja": "孤立した状況で／真空中で"
+      },
+      {
+        "text": "a power vacuum",
+        "ja": "権力の空白"
+      },
+      {
+        "text": "vacuum cleaner",
+        "ja": "掃除機"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "in a vacuum は「他の事情と切り離して」。動詞 vacuum は「掃除機をかける」。既存の語源情報を保持。",
     "tags": [
       "general-vocabulary",
       "needs-example-enrichment",
-      "etymology-v1"
+      "etymology-v1",
+      "curated-v3.80"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "etymology": {
       "origin": "Latin vacare / vacuus",
       "history": "vacuum「空の空間」に由来し、物質のない空間を表す。",
@@ -479,25 +513,51 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "卒業生代表演説をする最優秀生など",
-            "definition": "",
-            "examples": []
+            "ja": "（主に北米の）卒業式で代表挨拶をする成績優秀な卒業生",
+            "definition": "a graduating student, often one with the highest academic standing, chosen to give the farewell speech at a graduation ceremony",
+            "examples": [
+              {
+                "en": "The valedictorian thanked the teachers in her graduation speech.",
+                "ja": "卒業生代表は卒業式のスピーチで先生たちに感謝を述べた。"
+              },
+              {
+                "en": "He was named valedictorian of his high school class.",
+                "ja": "彼は高校の卒業学年の総代に選ばれた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "class valedictorian",
+        "en": "class valedictorian",
+        "ja": "卒業学年の総代"
+      },
+      {
+        "text": "valedictorian speech",
+        "en": "valedictorian speech",
+        "ja": "卒業生総代のスピーチ"
+      },
+      {
+        "text": "be named valedictorian",
+        "en": "be named valedictorian",
+        "ja": "卒業生総代に選ばれる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "主に米国・カナダの学校文化に由来する。必ずしも単純な成績順位だけで決まるとは限らない。卒業式の次席代表は salutatorian。",
     "tags": [
-      "education-study"
+      "education-study",
+      "curated-v3.144"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-06257",
@@ -564,15 +624,11 @@
         "meanings": [
           {
             "ja": "妥当な；有効な",
-            "definition": "reasonable and well supported, or officially acceptable",
+            "definition": "based on sound reasoning or evidence and therefore acceptable or convincing",
             "examples": [
               {
                 "en": "That is a valid criticism of the study.",
                 "ja": "それはその研究に対する妥当な批判です。"
-              },
-              {
-                "en": "The passport must be valid for at least six months after arrival.",
-                "ja": "パスポートは到着後少なくとも6か月間有効でなければならない。"
               }
             ]
           },
@@ -583,6 +639,10 @@
               {
                 "en": "The passport must be valid for at least six months after arrival.",
                 "ja": "パスポートは到着後少なくとも6か月間有効でなければならない。"
+              },
+              {
+                "en": "The ticket is valid for twenty-four hours after its first use.",
+                "ja": "そのチケットは最初に使用してから24時間有効だ。"
               }
             ]
           }
@@ -602,7 +662,8 @@
       "etymology-v1",
       "curated-v2.52",
       "curated-v2.61",
-      "curated-v3.33"
+      "curated-v3.33",
+      "curated-v3.168"
     ],
     "status": "enriched",
     "search_terms": [
@@ -614,18 +675,29 @@
     },
     "collocations": [
       {
-        "text": "valid conclusion"
+        "text": "valid conclusion",
+        "en": "valid conclusion",
+        "ja": "妥当な結論"
       },
       {
-        "text": "valid measure"
+        "text": "valid measure",
+        "en": "valid measure",
+        "ja": "妥当な測定方法"
       },
       {
         "text": "valid argument",
+        "en": "valid argument",
         "ja": "妥当な議論"
       },
       {
-        "text": "valid until",
-        "ja": "～まで有効な"
+        "text": "valid until ...",
+        "en": "valid until ...",
+        "ja": "…まで有効な"
+      },
+      {
+        "text": "valid for twenty-four hours",
+        "en": "valid for twenty-four hours",
+        "ja": "24時間有効な"
       }
     ],
     "etymology": {
@@ -696,6 +768,10 @@
               {
                 "en": "A second experiment was conducted to validate the findings.",
                 "ja": "その知見を検証するために2回目の実験が行われた。"
+              },
+              {
+                "en": "Independent reviewers were asked to validate the survey results.",
+                "ja": "独立した査読者たちが調査結果の妥当性を検証するよう求められた。"
               }
             ]
           },
@@ -720,10 +796,23 @@
     },
     "phrases": [],
     "collocations": [
-      "validate findings",
-      "validate a model",
-      "validate results",
       {
+        "en": "validate findings",
+        "text": "validate findings",
+        "ja": "研究結果の妥当性を確認する"
+      },
+      {
+        "en": "validate a model",
+        "text": "validate a model",
+        "ja": "モデルの妥当性を検証する"
+      },
+      {
+        "en": "validate results",
+        "text": "validate results",
+        "ja": "結果の妥当性を検証する"
+      },
+      {
+        "en": "validate a ticket",
         "text": "validate a ticket",
         "ja": "切符を有効化する"
       }
@@ -732,12 +821,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "validate は「妥当性を確かめる／有効と認める」。verify は事実の正確さの確認に重点を置く。",
+    "usage_note": "validate は方法・結果の妥当性を確認する、または正式に有効化すること。verify は事実・情報の正確さの確認に重点を置く。",
     "tags": [
       "scale-50k",
       "v2.31-curated",
       "v3.28-curated",
-      "curated-v3.56"
+      "curated-v3.56",
+      "curated-v3.131"
     ],
     "status": "enriched"
   },
@@ -761,6 +851,14 @@
               {
                 "en": "The researchers questioned the validity of the survey method.",
                 "ja": "研究者たちはその調査方法の妥当性に疑問を呈した。"
+              },
+              {
+                "en": "Poor sampling can threaten the validity of a study's conclusions.",
+                "ja": "不適切な標本抽出は研究結論の妥当性を損なうことがある。"
+              },
+              {
+                "en": "A questionnaire may be consistent without having sufficient validity for its intended purpose.",
+                "ja": "質問票の結果が一貫していても、意図した目的に対する妥当性が十分とは限らない。"
               }
             ]
           },
@@ -771,6 +869,10 @@
               {
                 "en": "The court examined the validity of the contract.",
                 "ja": "裁判所はその契約の法的有効性を検討した。"
+              },
+              {
+                "en": "The validity of the permit depends on whether the required inspection was completed.",
+                "ja": "その許可証が有効かどうかは、必要な検査が完了したかによる。"
               }
             ]
           }
@@ -783,14 +885,16 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "validity of + 方法・主張・契約。valid（形容詞）。",
+    "usage_note": "研究の validity は測定・推論の妥当性。reliability（一貫性）とは別の概念。legal validity は法的効力を指す。",
     "tags": [
       "learner-core-gap",
       "v2.31-curated",
       "etymology-v1",
       "curated-v2.52",
       "curated-v2.61",
-      "curated-v3.37"
+      "curated-v3.37",
+      "curated-v3.127",
+      "curated-v3.176"
     ],
     "status": "enriched",
     "search_terms": [
@@ -803,18 +907,33 @@
     "collocations": [
       {
         "text": "internal validity",
+        "en": "internal validity",
         "ja": "内的妥当性"
       },
       {
-        "text": "validity of"
+        "text": "validity of",
+        "en": "validity of",
+        "ja": "～の妥当性・有効性"
       },
       {
         "text": "validity of a study",
+        "en": "validity of a study",
         "ja": "研究の妥当性"
       },
       {
         "text": "legal validity",
+        "en": "legal validity",
         "ja": "法的有効性"
+      },
+      {
+        "text": "construct validity",
+        "en": "construct validity",
+        "ja": "構成概念妥当性"
+      },
+      {
+        "text": "question the validity of",
+        "en": "question the validity of",
+        "ja": "～の妥当性を疑う"
       }
     ],
     "etymology": {
@@ -833,19 +952,7 @@
         "evaluate",
         "equivalent"
       ]
-    },
-    "senses": [
-      {
-        "pos": "",
-        "definition_ja": "妥当性；有効性",
-        "examples": [
-          {
-            "en": "Poor sampling can threaten the validity of a study's conclusions.",
-            "ja": "不適切な標本抽出は研究結論の妥当性を損なうことがある。"
-          }
-        ]
-      }
-    ]
+    }
   },
   {
     "id": "sw-02517",
@@ -1021,12 +1128,36 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "価値",
+            "ja": "価値；重要性",
             "definition": "the importance or usefulness of something",
             "examples": [
               {
+                "en": "The findings highlight the value of early intervention.",
+                "ja": "その結果は早期介入の重要性を浮き彫りにしている。"
+              }
+            ]
+          },
+          {
+            "ja": "金銭的価値；価格に見合う価値",
+            "definition": "the amount something is worth in money or in relation to its cost",
+            "examples": [
+              {
+                "en": "The house has increased in value over the past five years.",
+                "ja": "その住宅は過去5年間で資産価値が上がった。"
+              },
+              {
                 "en": "The course offers good value for money.",
                 "ja": "その講座は価格に見合う価値があります。"
+              }
+            ]
+          },
+          {
+            "ja": "価値観",
+            "definition": "a belief about what is important or right, especially in the plural",
+            "examples": [
+              {
+                "en": "The organization promotes the values of fairness and transparency.",
+                "ja": "その組織は公平性と透明性という価値観を推進している。"
               }
             ]
           }
@@ -1036,9 +1167,13 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "大切にする；評価する",
-            "definition": "to consider someone or something important",
+            "ja": "〜を重視する；大切にする",
+            "definition": "to regard something or someone as important",
             "examples": [
+              {
+                "en": "Many employees value the flexibility to work from home.",
+                "ja": "多くの従業員は在宅勤務できる柔軟性を重視している。"
+              },
               {
                 "en": "Employees value flexible working hours.",
                 "ja": "従業員は柔軟な勤務時間を重視しています。"
@@ -1048,19 +1183,25 @@
         ]
       }
     ],
-    "forms": {},
+    "forms": {
+      "third_person": "values",
+      "past": "valued",
+      "past_participle": "valued",
+      "ing": "valuing"
+    },
     "phrases": [],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "value は名詞・動詞。values（複数形）は「価値観」を表すことが多い。",
     "tags": [
       "v2.29-curated",
       "etymology-v1",
-      "v2.44-curated"
+      "v2.44-curated",
+      "curated-v3.82"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "value"
     ],
@@ -1069,8 +1210,26 @@
       "ipa_uk": null
     },
     "collocations": [
-      "great value",
-      "value highly"
+      {
+        "en": "the value of education",
+        "text": "the value of education",
+        "ja": "教育の価値"
+      },
+      {
+        "en": "market value",
+        "text": "market value",
+        "ja": "市場価値"
+      },
+      {
+        "en": "shared values",
+        "text": "shared values",
+        "ja": "共通の価値観"
+      },
+      {
+        "en": "value diversity",
+        "text": "value diversity",
+        "ja": "多様性を尊重する"
+      }
     ],
     "etymology": {
       "origin": "Latin valere / validus",
@@ -1251,6 +1410,14 @@
               {
                 "en": "Income was treated as an independent variable in the analysis.",
                 "ja": "その分析では所得を独立変数として扱った。"
+              },
+              {
+                "en": "The researchers controlled for age and income as additional variables.",
+                "ja": "研究者たちは追加の変数として年齢と所得を統制した。"
+              },
+              {
+                "en": "The experiment kept the temperature constant while changing one variable at a time.",
+                "ja": "その実験では温度を一定に保ち、一度に一つの変数だけを変えた。"
               }
             ]
           }
@@ -1266,6 +1433,10 @@
               {
                 "en": "The region has highly variable rainfall from year to year.",
                 "ja": "その地域の降水量は年によって大きく変動する。"
+              },
+              {
+                "en": "Operating costs are variable because electricity prices change each month.",
+                "ja": "電気料金が毎月変わるため、運営費は変動する。"
               }
             ]
           }
@@ -1278,13 +1449,15 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "名詞 variable = 変数、形容詞 variable = 変わりやすい・一定でない。",
+    "usage_note": "研究では independent variable（独立変数）、dependent variable（従属変数）、control variable（統制変数）を区別する。形容詞は variable costs（変動費）のように使う。",
     "tags": [
       "v2.29-curated",
       "v2.32-curated",
       "curated-v2.52",
       "curated-v2.61",
-      "curated-v3.33"
+      "curated-v3.33",
+      "curated-v3.127",
+      "curated-v3.176"
     ],
     "status": "enriched",
     "search_terms": [
@@ -1296,30 +1469,34 @@
     },
     "collocations": [
       {
-        "text": "independent variable"
+        "text": "independent variable",
+        "en": "independent variable",
+        "ja": "独立変数"
       },
       {
-        "text": "control variable"
+        "text": "control variable",
+        "en": "control variable",
+        "ja": "統制変数"
       },
       {
         "text": "dependent variable",
+        "en": "dependent variable",
         "ja": "従属変数"
       },
       {
         "text": "variable costs",
+        "en": "variable costs",
         "ja": "変動費"
-      }
-    ],
-    "senses": [
+      },
       {
-        "pos": "",
-        "definition_ja": "変数；変動要因／変わりやすい",
-        "examples": [
-          {
-            "en": "The researchers controlled for age and income as additional variables.",
-            "ja": "研究者たちは追加の変数として年齢と所得を統制した。"
-          }
-        ]
+        "text": "a confounding variable",
+        "en": "a confounding variable",
+        "ja": "交絡変数"
+      },
+      {
+        "text": "variable operating costs",
+        "en": "variable operating costs",
+        "ja": "変動する運営費"
       }
     ]
   },
@@ -1476,6 +1653,26 @@
                 "ja": "その市場では多種多様な新鮮な野菜を売っています。"
               }
             ]
+          },
+          {
+            "ja": "（ある物の）品種；種類",
+            "definition": "one particular type within a larger category",
+            "examples": [
+              {
+                "en": "This variety of rice grows well in cooler climates.",
+                "ja": "この品種の米は比較的涼しい気候でもよく育つ。"
+              }
+            ]
+          },
+          {
+            "ja": "多様さ；変化に富むこと",
+            "definition": "the quality of including many different types or experiences",
+            "examples": [
+              {
+                "en": "A variety of viewpoints can improve the discussion.",
+                "ja": "多様な視点は議論を深めることができる。"
+              }
+            ]
           }
         ]
       }
@@ -1486,11 +1683,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "a variety of + 複数名詞 は「さまざまな〜」。a variety of rice は「米の一品種」。主語と動詞の数の一致は文脈で判断する。",
     "tags": [
-      "v2.29-curated"
+      "v2.29-curated",
+      "curated-v3.121"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "variety"
     ],
@@ -1498,7 +1696,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "a wide variety of ...",
+        "ja": "多種多様な〜"
+      },
+      {
+        "text": "a variety of viewpoints",
+        "ja": "多様な視点"
+      },
+      {
+        "text": "a new variety of rice",
+        "ja": "新しい品種の米"
+      }
+    ]
   },
   {
     "id": "sw-01431",
@@ -1520,6 +1731,10 @@
               {
                 "en": "Students used various methods to solve the problem.",
                 "ja": "生徒たちは問題を解くためにさまざまな方法を使いました。"
+              },
+              {
+                "en": "The survey included respondents from various age groups.",
+                "ja": "その調査にはさまざまな年齢層の回答者が含まれていた。"
               }
             ]
           }
@@ -1532,11 +1747,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Various normally modifies a plural noun and emphasizes different kinds: various methods, not various method.",
     "tags": [
-      "v2.29-curated"
+      "v2.29-curated",
+      "curated-v3.139"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "various"
     ],
@@ -1544,7 +1760,28 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "en": "various factors",
+        "text": "various factors",
+        "ja": "さまざまな要因"
+      },
+      {
+        "en": "various approaches",
+        "text": "various approaches",
+        "ja": "さまざまな手法"
+      },
+      {
+        "en": "for various reasons",
+        "text": "for various reasons",
+        "ja": "さまざまな理由で"
+      },
+      {
+        "en": "various age groups",
+        "text": "various age groups",
+        "ja": "さまざまな年齢層"
+      }
+    ]
   },
   {
     "id": "sw-06168",
@@ -1752,6 +1989,10 @@
               {
                 "en": "Vast amounts of data are generated every day.",
                 "ja": "膨大な量のデータが毎日生成されている。"
+              },
+              {
+                "en": "The survey covered a vast area that included several remote islands.",
+                "ja": "その調査は複数の離島を含む広大な地域を対象とした。"
               }
             ]
           }
@@ -1764,11 +2005,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Vast is used for exceptionally large areas, amounts, or ranges; the vast majority means nearly all.",
     "tags": [
       "frequency-gap",
       "v2.29-curated",
-      "v3.28-curated"
+      "v3.28-curated",
+      "curated-v3.173"
     ],
     "status": "enriched",
     "search_terms": [
@@ -1779,9 +2021,21 @@
       "ipa_uk": null
     },
     "collocations": [
-      "vast majority",
-      "vast amount",
-      "vast range"
+      {
+        "en": "vast majority",
+        "text": "vast majority",
+        "ja": "圧倒的多数"
+      },
+      {
+        "en": "vast amount",
+        "text": "vast amount",
+        "ja": "膨大な量"
+      },
+      {
+        "en": "vast range",
+        "text": "vast range",
+        "ja": "非常に広い範囲"
+      }
     ]
   },
   {
@@ -1887,25 +2141,64 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "方向と大きさを持つ量；ベクター画像",
-            "definition": "",
-            "examples": []
+            "ja": "ベクトル；大きさと方向を持つ量",
+            "definition": "a quantity that has both magnitude and direction",
+            "examples": [
+              {
+                "en": "Velocity is a vector because it specifies both speed and direction.",
+                "ja": "速度は速さと方向の両方を示すためベクトル量である。"
+              }
+            ]
+          },
+          {
+            "ja": "病原体の媒介生物",
+            "definition": "an organism that carries and transmits a disease-causing agent",
+            "examples": [
+              {
+                "en": "Mosquitoes can act as vectors for several infectious diseases.",
+                "ja": "蚊は複数の感染症の媒介生物になり得る。"
+              }
+            ]
+          },
+          {
+            "ja": "ベクター画像の図形情報",
+            "definition": "a graphic element represented by mathematical paths rather than pixels",
+            "examples": [
+              {
+                "en": "The logo was saved as a vector so it could be enlarged without losing sharpness.",
+                "ja": "そのロゴは拡大しても鮮明さを失わないよう、ベクター形式で保存された。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "disease vector",
+        "ja": "病気の媒介生物"
+      },
+      {
+        "text": "vector quantity",
+        "ja": "ベクトル量"
+      },
+      {
+        "text": "vector graphics",
+        "ja": "ベクター画像"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "数学・疫学・画像処理で意味が異なる。単なる「方向」だけでは数学の vector の説明として不十分。",
     "tags": [
-      "digital-office"
+      "digital-office",
+      "curated-v3.80"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08108",
@@ -2010,25 +2303,50 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "進路がそれる",
-            "definition": "",
-            "examples": []
+            "ja": "進路や方向を急に変える；それる",
+            "definition": "to change direction suddenly or unexpectedly",
+            "examples": [
+              {
+                "en": "The driver veered to the left to avoid a fallen branch.",
+                "ja": "運転手は落ちた枝を避けるため急に左へ進路を変えた。"
+              }
+            ]
+          },
+          {
+            "ja": "話題や方針がそれる",
+            "definition": "to change from one subject, opinion, or course of action to another",
+            "examples": [
+              {
+                "en": "The discussion veered away from the original question.",
+                "ja": "議論は当初の問いからそれていった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "veer off course",
+        "ja": "進路をそれる"
+      },
+      {
+        "text": "veer away from",
+        "ja": "〜からそれる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "veer は意図的な方向転換にも、予期しない逸脱にも使う。",
     "tags": [
-      "hands-and-movement"
+      "hands-and-movement",
+      "curated-v3.80"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-01216",
@@ -2184,25 +2502,64 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "静脈；葉脈",
-            "definition": "",
-            "examples": []
+            "ja": "静脈",
+            "definition": "a blood vessel that carries blood toward the heart",
+            "examples": [
+              {
+                "en": "The nurse drew a blood sample from a vein in his arm.",
+                "ja": "看護師は彼の腕の静脈から採血した。"
+              }
+            ]
+          },
+          {
+            "ja": "葉脈",
+            "definition": "a narrow tube in a leaf that carries water and nutrients",
+            "examples": [
+              {
+                "en": "The veins of the leaf were clearly visible against the light.",
+                "ja": "光に透かすと葉脈がはっきり見えた。"
+              }
+            ]
+          },
+          {
+            "ja": "鉱脈",
+            "definition": "a narrow deposit of a mineral within rock",
+            "examples": [
+              {
+                "en": "Miners discovered a vein of copper beneath the hillside.",
+                "ja": "鉱夫たちは丘の地下で銅の鉱脈を発見した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a vein of ore",
+        "ja": "鉱脈"
+      },
+      {
+        "text": "leaf veins",
+        "ja": "葉脈"
+      },
+      {
+        "text": "in a similar vein",
+        "ja": "同じような趣旨で"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "in the same vein は「同様の調子・趣旨で」。artery（動脈）との区別にも注意。",
     "tags": [
-      "body-health"
+      "body-health",
+      "curated-v3.80"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10167",
@@ -2226,24 +2583,50 @@
         "meanings": [
           {
             "ja": "軟口蓋の；軟口蓋で発する",
-            "definition": "",
-            "examples": []
+            "definition": "relating to the soft palate or to speech sounds made with the back of the tongue near it",
+            "examples": [
+              {
+                "en": "The sounds /k/ and /g/ are velar consonants.",
+                "ja": "/k/と/g/は軟口蓋子音である。"
+              },
+              {
+                "en": "The velar nasal /ŋ/ occurs at the end of sing.",
+                "ja": "軟口蓋鼻音/ŋ/はsingの語末に現れる。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "velar consonant",
+        "en": "velar consonant",
+        "ja": "軟口蓋子音"
+      },
+      {
+        "text": "velar nasal",
+        "en": "velar nasal",
+        "ja": "軟口蓋鼻音"
+      },
+      {
+        "text": "velar stop",
+        "en": "velar stop",
+        "ja": "軟口蓋破裂音"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "velum（軟口蓋）を使う調音を指す。/k/・/g/・/ŋ/ は代表的な軟口蓋音。",
     "tags": [
-      "study-language"
+      "study-language",
+      "curated-v3.181"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10260",
@@ -2740,25 +3123,50 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "換気する；意見などを公にする",
-            "definition": "",
-            "examples": []
+            "ja": "換気する；空気を循環させる",
+            "definition": "to allow fresh air to enter and circulate through an enclosed space",
+            "examples": [
+              {
+                "en": "Open the windows regularly to ventilate the classroom.",
+                "ja": "教室を換気するために定期的に窓を開けなさい。"
+              }
+            ]
+          },
+          {
+            "ja": "意見や問題を公に述べる",
+            "definition": "to discuss an opinion, complaint, or issue openly",
+            "examples": [
+              {
+                "en": "The meeting gave residents a chance to ventilate their concerns.",
+                "ja": "その会合は住民が懸念を率直に述べる機会となった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "well-ventilated room",
+        "ja": "換気のよい部屋"
+      },
+      {
+        "text": "ventilate a building",
+        "ja": "建物を換気する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "「意見を表明する」はやや改まった用法。換気の形容詞は ventilated。",
     "tags": [
-      "craft-actions"
+      "craft-actions",
+      "curated-v3.80"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-06672",
@@ -2866,6 +3274,10 @@
               {
                 "en": "The company invested heavily in a new overseas venture.",
                 "ja": "その会社は新たな海外事業に多額の投資をした。"
+              },
+              {
+                "en": "The research venture brought together universities and local businesses.",
+                "ja": "その研究事業には大学と地元企業が参加した。"
               }
             ]
           }
@@ -2878,10 +3290,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "venture はリスクを伴う新規事業。動詞 venture into ～ は「未知の分野に思い切って踏み出す」。",
     "tags": [
       "v2.29-curated",
-      "v3.28-curated"
+      "v3.28-curated",
+      "curated-v3.123"
     ],
     "status": "enriched",
     "search_terms": [
@@ -2892,9 +3305,31 @@
       "ipa_uk": null
     },
     "collocations": [
-      "business venture",
-      "joint venture",
-      "new venture"
+      {
+        "text": "business venture",
+        "en": "business venture",
+        "ja": "新規事業"
+      },
+      {
+        "text": "joint venture",
+        "en": "joint venture",
+        "ja": "合弁事業"
+      },
+      {
+        "text": "overseas venture",
+        "en": "overseas venture",
+        "ja": "海外での新規事業"
+      },
+      {
+        "text": "venture into a new field",
+        "en": "venture into a new field",
+        "ja": "新分野に踏み出す"
+      },
+      {
+        "text": "new venture",
+        "en": "new venture",
+        "ja": "新規事業"
+      }
     ]
   },
   {
@@ -3014,25 +3449,50 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "言葉で；口頭で",
-            "definition": "",
-            "examples": []
+            "ja": "口頭で；言葉を使って",
+            "definition": "using spoken words rather than writing or gestures",
+            "examples": [
+              {
+                "en": "The instructions were explained verbally before the test.",
+                "ja": "試験前に指示が口頭で説明された。"
+              }
+            ]
+          },
+          {
+            "ja": "言葉によって；発言で",
+            "definition": "through words, especially in a way that affects another person",
+            "examples": [
+              {
+                "en": "The customer verbally abused a member of staff.",
+                "ja": "その客は職員の一人に暴言を浴びせた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "verbally confirm",
+        "ja": "口頭で確認する"
+      },
+      {
+        "text": "verbally abuse",
+        "ja": "暴言を浴びせる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "verbal は「言葉の」という広い意味を持つが、verbally は特に口頭での伝達を指すことが多い。",
     "tags": [
-      "expression-manner"
+      "expression-manner",
+      "curated-v3.80"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10579",
@@ -3114,12 +3574,7 @@
                 "ja": "道路脇の草地には野の花が咲いていた。"
               }
             ]
-          }
-        ]
-      },
-      {
-        "pos": "noun",
-        "meanings": [
+          },
           {
             "ja": "瀬戸際；寸前（on the verge of）",
             "definition": "a point immediately before a major event or change",
@@ -3128,6 +3583,10 @@
               {
                 "en": "The species is on the verge of extinction.",
                 "ja": "その種は絶滅の瀬戸際にある。"
+              },
+              {
+                "en": "The species was on the verge of disappearing from the island when conservation efforts began.",
+                "ja": "保護活動が始まったとき、その種は島から姿を消す寸前だった。"
               }
             ]
           }
@@ -3138,16 +3597,24 @@
     "phrases": [],
     "collocations": [
       {
+        "en": "on the verge of collapse",
         "text": "on the verge of collapse",
         "ja": "崩壊寸前で"
       },
       {
+        "en": "on the verge of extinction",
         "text": "on the verge of extinction",
         "ja": "絶滅の瀬戸際で"
       },
       {
+        "en": "road verge",
         "text": "road verge",
         "ja": "道路脇の草地"
+      },
+      {
+        "en": "on the verge of a breakthrough",
+        "text": "on the verge of a breakthrough",
+        "ja": "大きな進展の直前に"
       }
     ],
     "related": {
@@ -3157,7 +3624,8 @@
     "usage_note": "on the verge of + 名詞・動名詞（〜の寸前で）。road verge は主に英語圏で道路脇の草地を指す。",
     "tags": [
       "travel-transport",
-      "curated-v3.50"
+      "curated-v3.50",
+      "curated-v3.172"
     ],
     "status": "enriched"
   },
@@ -3182,25 +3650,40 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "検証可能な形で",
-            "definition": "",
-            "examples": []
+            "ja": "検証可能な形で；確かめられるように",
+            "definition": "in a way that can be checked and shown to be true",
+            "examples": [
+              {
+                "en": "The results must be verifiably accurate before publication.",
+                "ja": "公表前に、その結果が検証可能な形で正確だと確認できなければならない。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "verifiably accurate",
+        "ja": "検証可能な形で正確な"
+      },
+      {
+        "text": "verifiably independent",
+        "ja": "独立性を検証できる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "verify（検証する）から。客観的な証拠で確認できることを強調する。",
     "tags": [
-      "work-description"
+      "work-description",
+      "curated-v3.80"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11312",
@@ -3679,25 +4162,40 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "版管理；変更履歴の管理",
-            "definition": "",
-            "examples": []
+            "ja": "バージョン管理；変更履歴の管理",
+            "definition": "a system for tracking and managing changes to files over time",
+            "examples": [
+              {
+                "en": "Version control lets the team restore an earlier version of the code.",
+                "ja": "バージョン管理を使えば、チームはコードを以前の版に戻せる。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "version control system",
+        "ja": "バージョン管理システム"
+      },
+      {
+        "text": "use version control",
+        "ja": "バージョン管理を利用する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "ソフトウェア開発だけでなく共同編集の履歴管理にも用いる。不可算的に扱うことが多い。",
     "tags": [
-      "computing"
+      "computing",
+      "curated-v3.80"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-06647",
@@ -4076,6 +4574,10 @@
               {
                 "en": "The study assessed the economic viability of the proposed rail line.",
                 "ja": "その研究は提案された鉄道路線の経済的実現可能性を評価した。"
+              },
+              {
+                "en": "Without stable funding, the long-term viability of the clinic is uncertain.",
+                "ja": "安定した資金がなければ、その診療所が長期的に存続できるかは不透明だ。"
               }
             ],
             "definition_en": "the ability of something to work successfully or continue to exist"
@@ -4089,11 +4591,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "viability は計画や事業が現実に成り立ち、継続できるかを指す。feasibility（実行可能性）より長期の存続・採算性に焦点を当てることがある。",
     "tags": [
       "academic-expansion",
       "v2.31-curated",
-      "curated-v3.25"
+      "curated-v3.25",
+      "curated-v3.161"
     ],
     "status": "enriched",
     "search_terms": [
@@ -4104,8 +4607,26 @@
       "ipa_uk": null
     },
     "collocations": [
-      "economic viability",
-      "long-term viability"
+      {
+        "text": "economic viability",
+        "en": "economic viability",
+        "ja": "経済的な採算性"
+      },
+      {
+        "text": "long-term viability",
+        "en": "long-term viability",
+        "ja": "長期的な存続可能性"
+      },
+      {
+        "text": "assess the viability of a project",
+        "en": "assess the viability of a project",
+        "ja": "事業の実現・存続可能性を評価する"
+      },
+      {
+        "text": "commercial viability",
+        "en": "commercial viability",
+        "ja": "商業的な採算性"
+      }
     ]
   },
   {
@@ -4122,13 +4643,9 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "実行可能な；存続できる",
-            "definition": "capable of working successfully or continuing to exist",
+            "ja": "（計画・事業などが）実行可能な；採算が取れる",
+            "definition": "capable of working successfully in practice",
             "examples": [
-              {
-                "en": "We need a viable solution that the school can afford.",
-                "ja": "学校が負担できる実行可能な解決策が必要です。"
-              },
               {
                 "en": "The proposal is not financially viable without additional funding.",
                 "ja": "その提案は追加の資金がなければ財政的に実行可能ではない。"
@@ -4136,6 +4653,24 @@
               {
                 "en": "Solar power is now a viable option for many households.",
                 "ja": "太陽光発電は今や多くの家庭にとって実行可能な選択肢だ。"
+              },
+              {
+                "en": "The proposal is technically possible but may not be economically viable.",
+                "ja": "その提案は技術的には可能だが経済的に実行可能とは限らない。"
+              },
+              {
+                "en": "We need a viable solution that the school can afford.",
+                "ja": "学校が負担できる実行可能な解決策が必要です。"
+              }
+            ]
+          },
+          {
+            "ja": "（生物・細胞などが）生存可能な",
+            "definition": "capable of living, growing, or developing",
+            "examples": [
+              {
+                "en": "The researchers checked whether the cells remained viable after freezing.",
+                "ja": "研究者たちは凍結後も細胞が生存可能かどうかを調べた。"
               }
             ]
           }
@@ -4148,12 +4683,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "viable は実際に実行・維持できること。possible（可能な）より持続可能性・実現性を含む。",
+    "usage_note": "viable は可能性だけでなく、実際の実行・継続可能性を含む。生物学では「生存可能な」。",
     "tags": [
       "v2.31-curated",
       "curated-v2.67",
       "curated-v3.33",
-      "curated-v3.41"
+      "curated-v3.41",
+      "curated-v3.123"
     ],
     "status": "enriched",
     "search_terms": [
@@ -4165,32 +4701,29 @@
     },
     "collocations": [
       {
-        "text": "viable option"
+        "text": "viable option",
+        "en": "viable option",
+        "ja": "実行可能な選択肢"
       },
       {
-        "text": "economically viable"
+        "text": "economically viable",
+        "en": "economically viable",
+        "ja": "経済的に成立する"
       },
       {
         "text": "commercially viable",
-        "ja": "商業的に成立する"
+        "en": "commercially viable",
+        "ja": "商業的に採算が取れる"
+      },
+      {
+        "text": "viable cells",
+        "en": "viable cells",
+        "ja": "生存可能な細胞"
       },
       {
         "text": "viable alternative",
+        "en": "viable alternative",
         "ja": "実行可能な代替案"
-      },
-      "economically viable",
-      "viable alternative"
-    ],
-    "senses": [
-      {
-        "pos": "",
-        "definition_ja": "実行可能な；存続可能な",
-        "examples": [
-          {
-            "en": "The proposal is technically possible but may not be economically viable.",
-            "ja": "その提案は技術的には可能だが経済的に実行可能とは限らない。"
-          }
-        ]
       }
     ]
   },
@@ -4468,24 +5001,50 @@
         "meanings": [
           {
             "ja": "副校長；教頭",
-            "definition": "",
-            "examples": []
+            "definition": "a school administrator who assists the principal and may take charge when the principal is absent",
+            "examples": [
+              {
+                "en": "The vice principal met the parents to discuss the school’s attendance policy.",
+                "ja": "副校長は学校の出席方針について話し合うため保護者と面会した。"
+              },
+              {
+                "en": "The vice principal supervised the evacuation drill.",
+                "ja": "副校長は避難訓練を監督した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "assistant or vice principal",
+        "en": "assistant or vice principal",
+        "ja": "副校長または教頭に当たる職"
+      },
+      {
+        "text": "school vice principal",
+        "en": "school vice principal",
+        "ja": "学校の副校長"
+      },
+      {
+        "text": "vice principal’s office",
+        "en": "vice principal’s office",
+        "ja": "副校長室"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "主に米国・カナダなどの学校職。英国では deputy headteacher / deputy head などが一般的。日本の「教頭」と職務が完全に一致するとは限らない。",
     "tags": [
-      "education-study"
+      "education-study",
+      "curated-v3.144"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11212",
@@ -4548,6 +5107,14 @@
               {
                 "en": "The charity provides support for victims of the earthquake.",
                 "ja": "その慈善団体は地震の被災者を支援しています。"
+              },
+              {
+                "en": "The organization offers legal advice to victims of fraud.",
+                "ja": "その団体は詐欺の被害者に法律上の助言を提供している。"
+              },
+              {
+                "en": "Several villages fell victim to severe flooding.",
+                "ja": "いくつかの村が深刻な洪水の被害を受けた。"
               }
             ]
           }
@@ -4560,11 +5127,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Victim of + event identifies the cause of harm. Fall victim to can describe people, communities, or organizations.",
     "tags": [
-      "v2.29-curated"
+      "v2.29-curated",
+      "curated-v3.139"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "victim"
     ],
@@ -4572,7 +5140,28 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "en": "victims of crime",
+        "text": "victims of crime",
+        "ja": "犯罪被害者"
+      },
+      {
+        "en": "earthquake victims",
+        "text": "earthquake victims",
+        "ja": "地震の被災者"
+      },
+      {
+        "en": "fall victim to fraud",
+        "text": "fall victim to fraud",
+        "ja": "詐欺の被害に遭う"
+      },
+      {
+        "en": "support victims",
+        "text": "support victims",
+        "ja": "被害者を支援する"
+      }
+    ]
   },
   {
     "id": "sw-11339",
@@ -4677,25 +5266,51 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "映像を使った遠隔会議",
-            "definition": "",
-            "examples": []
+            "ja": "ビデオ会議；映像を用いた遠隔会議",
+            "definition": "a meeting in which people in different places see and hear one another over a network",
+            "examples": [
+              {
+                "en": "The parents attended the meeting by video conference.",
+                "ja": "保護者たちはビデオ会議でその会合に参加した。"
+              },
+              {
+                "en": "The team held a video conference with its overseas partners.",
+                "ja": "チームは海外の協力先とビデオ会議を開いた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "hold a video conference",
+        "en": "hold a video conference",
+        "ja": "ビデオ会議を開催する"
+      },
+      {
+        "text": "join a video conference",
+        "en": "join a video conference",
+        "ja": "ビデオ会議に参加する"
+      },
+      {
+        "text": "video conference platform",
+        "en": "video conference platform",
+        "ja": "ビデオ会議用プラットフォーム"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "video conference は名詞。動詞としては have / hold a video conference、または meet by video を用いる。",
     "tags": [
-      "office-business"
+      "office-business",
+      "curated-v3.151"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-00961",
@@ -4711,9 +5326,13 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "見解；考え",
-            "definition": "an opinion about something",
+            "ja": "見解；意見",
+            "definition": "an opinion or way of thinking about something",
             "examples": [
+              {
+                "en": "The researchers expressed different views on the results.",
+                "ja": "研究者たちは結果について異なる見解を示した。"
+              },
               {
                 "en": "Experts have different views on the issue.",
                 "ja": "専門家はその問題について異なる見解を持っています。"
@@ -4721,12 +5340,51 @@
             ]
           },
           {
-            "ja": "眺め",
+            "ja": "眺め；景色",
             "definition": "what can be seen from a particular place",
             "examples": [
               {
+                "en": "The room offers a clear view of the mountains.",
+                "ja": "その部屋からは山々がよく見える。"
+              },
+              {
                 "en": "The room has a view of the ocean.",
                 "ja": "その部屋から海が見えます。"
+              }
+            ]
+          },
+          {
+            "ja": "見方；視点",
+            "definition": "a particular way of understanding or considering something",
+            "examples": [
+              {
+                "en": "From an economic point of view, the plan is risky.",
+                "ja": "経済的な観点から見ると、その計画は危険だ。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "～とみなす；考える",
+            "definition": "to regard someone or something in a particular way",
+            "examples": [
+              {
+                "en": "Many experts view the change as a positive step.",
+                "ja": "多くの専門家はその変化を前向きな一歩とみなしている。"
+              }
+            ]
+          },
+          {
+            "ja": "閲覧する；見る",
+            "definition": "to look at something, especially on a screen or in a display",
+            "examples": [
+              {
+                "en": "Students can view their results online.",
+                "ja": "生徒はオンラインで結果を閲覧できる。"
               }
             ]
           }
@@ -4744,12 +5402,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "view A as B は「AをBとみなす」。in view of ... は「…を考慮すると」。",
     "tags": [
       "v2.29-curated",
-      "v2.45-curated"
+      "v2.45-curated",
+      "curated-v3.105"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "view"
     ],
@@ -4757,7 +5416,28 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "point of view",
+        "en": "point of view",
+        "ja": "観点；見解"
+      },
+      {
+        "text": "view A as B",
+        "en": "view A as B",
+        "ja": "AをBとみなす"
+      },
+      {
+        "text": "in view of",
+        "en": "in view of",
+        "ja": "～を考慮して"
+      },
+      {
+        "text": "view the results",
+        "en": "view the results",
+        "ja": "結果を閲覧する"
+      }
+    ]
   },
   {
     "id": "sw-06395",
@@ -5159,6 +5839,10 @@
               {
                 "en": "The campaign aims to reduce violence in schools.",
                 "ja": "その運動は学校での暴力を減らすことを目指しています。"
+              },
+              {
+                "en": "The program teaches students how to resolve conflicts without violence.",
+                "ja": "そのプログラムでは、生徒に暴力を使わず対立を解決する方法を教えている。"
               }
             ]
           }
@@ -5171,11 +5855,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Violence is usually uncountable; an act of violence refers to one incident. Violent is the related adjective.",
     "tags": [
-      "v2.29-curated"
+      "v2.29-curated",
+      "curated-v3.139"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "violence"
     ],
@@ -5183,7 +5868,28 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "en": "domestic violence",
+        "text": "domestic violence",
+        "ja": "家庭内暴力"
+      },
+      {
+        "en": "prevent violence",
+        "text": "prevent violence",
+        "ja": "暴力を防ぐ"
+      },
+      {
+        "en": "acts of violence",
+        "text": "acts of violence",
+        "ja": "暴力行為"
+      },
+      {
+        "en": "violence against children",
+        "text": "violence against children",
+        "ja": "子どもに対する暴力"
+      }
+    ]
   },
   {
     "id": "sw-05490",
@@ -5547,25 +6253,40 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "仮想マシン；仮想の実行環境",
-            "definition": "",
-            "examples": []
+            "ja": "仮想マシン",
+            "definition": "a software-based computer environment that behaves like a physical computer",
+            "examples": [
+              {
+                "en": "The developer tested the application inside a virtual machine.",
+                "ja": "開発者は仮想マシン内でアプリをテストした。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "run a virtual machine",
+        "ja": "仮想マシンを実行する"
+      },
+      {
+        "text": "virtual machine image",
+        "ja": "仮想マシンのイメージファイル"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "仮想マシンは通常、独立したOS環境を実行できる。コンテナと同一ではない。",
     "tags": [
-      "computing"
+      "computing",
+      "curated-v3.80"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08527",
@@ -5728,7 +6449,7 @@
         "meanings": [
           {
             "ja": "ウイルス",
-            "definition": "a microscopic infectious agent that reproduces inside living cells; also malicious computer code",
+            "definition": "a microscopic infectious agent that can reproduce only inside living cells",
             "examples": [
               {
                 "en": "The virus spreads mainly through close contact.",
@@ -5737,6 +6458,20 @@
               {
                 "en": "The virus can spread before infected people develop symptoms.",
                 "ja": "そのウイルスは、感染者に症状が出る前に広がる可能性がある。"
+              },
+              {
+                "en": "The new test can detect the virus before symptoms appear.",
+                "ja": "その新しい検査では症状が現れる前にウイルスを検出できる。"
+              }
+            ]
+          },
+          {
+            "ja": "コンピューターウイルス",
+            "definition": "malicious computer code that spreads by copying itself to other files or systems",
+            "examples": [
+              {
+                "en": "A computer virus disrupted the hospital’s appointment system.",
+                "ja": "コンピューターウイルスが病院の予約システムを混乱させた。"
               }
             ]
           }
@@ -5749,11 +6484,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Virus refers to an infectious agent in biology or malicious self-replicating code in computing.",
     "tags": [
       "frequency-gap",
       "v2.29-curated",
-      "v3.28-curated"
+      "v3.28-curated",
+      "curated-v3.173"
     ],
     "status": "enriched",
     "search_terms": [
@@ -5764,9 +6500,21 @@
       "ipa_uk": null
     },
     "collocations": [
-      "spread a virus",
-      "computer virus",
-      "viral infection"
+      {
+        "en": "spread a virus",
+        "text": "spread a virus",
+        "ja": "ウイルスを広める"
+      },
+      {
+        "en": "computer virus",
+        "text": "computer virus",
+        "ja": "コンピューターウイルス"
+      },
+      {
+        "en": "viral infection",
+        "text": "viral infection",
+        "ja": "ウイルス感染"
+      }
     ]
   },
   {
@@ -5956,12 +6704,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "見えやすさ；可視性",
-            "definition": "a person, thing, state, process, or idea connected with 見えやすさ",
+            "ja": "視界；見通せる距離",
+            "definition": "the distance or degree to which objects can be seen clearly",
             "examples": [
               {
-                "en": "The word 'visibility' is commonly used in this kind of context.",
-                "ja": "「visibility」は「見えやすさ」に関する文脈でよく使われます。"
+                "en": "Heavy fog reduced visibility on the highway.",
+                "ja": "濃霧によって高速道路の視界が悪くなった。"
+              }
+            ]
+          },
+          {
+            "ja": "可視性；人目に触れる度合い",
+            "definition": "the degree to which something is noticeable or publicly known",
+            "examples": [
+              {
+                "en": "The campaign increased the visibility of local environmental issues.",
+                "ja": "そのキャンペーンは地域の環境問題への注目を高めた。"
               }
             ]
           }
@@ -5974,9 +6732,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "物理的な視界と社会的な認知度を区別。ITでは状況の把握しやすさにも使う。",
+    "tags": [
+      "curated-v3.80"
+    ],
+    "status": "enriched",
     "search_terms": [
       "visibility"
     ],
@@ -5984,7 +6744,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "poor visibility",
+        "ja": "視界不良"
+      },
+      {
+        "text": "increase visibility",
+        "ja": "認知度を高める"
+      },
+      {
+        "text": "visibility into",
+        "ja": "〜の状況を把握できること"
+      }
+    ]
   },
   {
     "id": "sw-02158",
@@ -6117,8 +6890,8 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "視力；構想；将来像",
-            "definition": "the ability to see, or a clear idea of what the future should be like",
+            "ja": "構想；将来像",
+            "definition": "a clear idea of what a future situation should be like",
             "examples": [
               {
                 "en": "The mayor presented a long-term vision for the city.",
@@ -6127,6 +6900,20 @@
               {
                 "en": "The mayor presented a long-term vision for a greener city.",
                 "ja": "市長は、より環境に優しい都市の長期構想を示した。"
+              },
+              {
+                "en": "The council outlined a vision for a city with cleaner transport and more green space.",
+                "ja": "市議会は交通をより環境に優しくし緑地を増やす都市の将来像を示した。"
+              }
+            ]
+          },
+          {
+            "ja": "視力；視覚",
+            "definition": "the ability to see",
+            "examples": [
+              {
+                "en": "The eye examination showed that her vision had improved.",
+                "ja": "眼科検査の結果、彼女の視力が改善していることが分かった。"
               }
             ]
           }
@@ -6139,12 +6926,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Vision can mean eyesight or a plan for the future; identify the sense from context.",
     "tags": [
       "frequency-gap",
       "v2.29-curated",
       "etymology-v1",
-      "v3.28-curated"
+      "v3.28-curated",
+      "curated-v3.173"
     ],
     "status": "enriched",
     "search_terms": [
@@ -6155,9 +6943,21 @@
       "ipa_uk": null
     },
     "collocations": [
-      "long-term vision",
-      "clear vision",
-      "vision for the future"
+      {
+        "en": "long-term vision",
+        "text": "long-term vision",
+        "ja": "長期的な構想"
+      },
+      {
+        "en": "clear vision",
+        "text": "clear vision",
+        "ja": "明確な展望・鮮明な視界"
+      },
+      {
+        "en": "vision for the future",
+        "text": "vision for the future",
+        "ja": "将来への構想"
+      }
     ],
     "etymology": {
       "origin": "Latin videre / visus",
@@ -6341,6 +7141,10 @@
               {
                 "en": "Visual evidence can make a complex argument easier to understand.",
                 "ja": "視覚的な証拠は、複雑な議論を理解しやすくすることがある。"
+              },
+              {
+                "en": "Visual evidence from satellite images confirmed the extent of the flooding.",
+                "ja": "衛星画像から得られた視覚的証拠によって洪水の範囲が確認された。"
               }
             ]
           }
@@ -6353,12 +7157,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Visual relates to seeing; a visual aid is an image or diagram that helps explain information.",
     "tags": [
       "frequency-gap",
       "v2.31-curated",
       "etymology-v1",
-      "v3.28-curated"
+      "v3.28-curated",
+      "curated-v3.173"
     ],
     "status": "enriched",
     "search_terms": [
@@ -6369,9 +7174,21 @@
       "ipa_uk": null
     },
     "collocations": [
-      "visual information",
-      "visual evidence",
-      "visual impact"
+      {
+        "en": "visual information",
+        "text": "visual information",
+        "ja": "視覚情報"
+      },
+      {
+        "en": "visual evidence",
+        "text": "visual evidence",
+        "ja": "視覚的証拠"
+      },
+      {
+        "en": "visual impact",
+        "text": "visual impact",
+        "ja": "視覚的な影響"
+      }
     ],
     "etymology": {
       "origin": "Latin videre / visus",
@@ -6460,6 +7277,10 @@
               {
                 "en": "Access to reliable information is vital for sound decision-making.",
                 "ja": "信頼できる情報へのアクセスは、適切な意思決定に不可欠である。"
+              },
+              {
+                "en": "Reliable electricity is vital to the operation of rural hospitals.",
+                "ja": "安定した電力供給は地方の病院の運営に不可欠である。"
               }
             ]
           }
@@ -6472,12 +7293,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Vital to/for means essential; vital signs refers to basic bodily measurements such as pulse and breathing.",
     "tags": [
       "frequency-gap",
       "v2.29-curated",
       "etymology-v1",
-      "v3.28-curated"
+      "v3.28-curated",
+      "curated-v3.173"
     ],
     "status": "enriched",
     "search_terms": [
@@ -6488,9 +7310,21 @@
       "ipa_uk": null
     },
     "collocations": [
-      "vital role",
-      "vital importance",
-      "vital information"
+      {
+        "en": "vital role",
+        "text": "vital role",
+        "ja": "極めて重要な役割"
+      },
+      {
+        "en": "vital importance",
+        "text": "vital importance",
+        "ja": "極めて重要であること"
+      },
+      {
+        "en": "vital information",
+        "text": "vital information",
+        "ja": "不可欠な情報"
+      }
     ],
     "etymology": {
       "origin": "Latin vivere / vita / vivus",
@@ -7053,9 +7887,18 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "職業の；職業訓練の",
-            "definition": "",
-            "examples": []
+            "ja": "職業に関する；職業技能を身につけるための",
+            "definition": "relating to preparation for a particular occupation or trade",
+            "examples": [
+              {
+                "en": "The college offers vocational training in electrical engineering.",
+                "ja": "その専門学校は電気工学の職業訓練を提供している。"
+              },
+              {
+                "en": "Vocational education can provide a route into skilled employment.",
+                "ja": "職業教育は専門技能を要する就職への道を開くことがある。"
+              }
+            ]
           }
         ]
       }
@@ -7064,22 +7907,32 @@
     "phrases": [],
     "collocations": [
       {
-        "text": "vocational education"
+        "en": "vocational training",
+        "text": "vocational training",
+        "ja": "職業訓練"
       },
       {
-        "text": "vocational training"
+        "en": "vocational education",
+        "text": "vocational education",
+        "ja": "職業教育"
+      },
+      {
+        "en": "vocational qualification",
+        "text": "vocational qualification",
+        "ja": "職業資格"
       }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "vocational は実務技能や特定の職業への準備に関する形容詞。academic（学問中心の）と対比されることがある。",
     "tags": [
       "work-description",
-      "curated-v2.54"
+      "curated-v2.54",
+      "curated-v3.104"
     ],
-    "status": "basic",
+    "status": "enriched",
     "senses": [
       {
         "pos": "",
@@ -7114,25 +7967,40 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "職業学校；専門技術を学ぶ学校",
-            "definition": "",
-            "examples": []
+            "ja": "職業訓練校；専門的な技能を学ぶ学校",
+            "definition": "a school that teaches practical skills for particular jobs or trades",
+            "examples": [
+              {
+                "en": "She enrolled in a vocational school to train as an automotive technician.",
+                "ja": "彼女は自動車整備士になるため職業訓練校に入学した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "attend a vocational school",
+        "ja": "職業訓練校に通う"
+      },
+      {
+        "text": "vocational training",
+        "ja": "職業訓練"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "vocational は職業に直結する技能や教育を指す。国ごとに学校制度や名称は異なる。",
     "tags": [
-      "education-study"
+      "education-study",
+      "curated-v3.80"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10357",
@@ -7341,24 +8209,45 @@
         "meanings": [
           {
             "ja": "声帯振動を伴う；有声の",
-            "definition": "",
-            "examples": []
+            "definition": "pronounced with vibration of the vocal folds",
+            "examples": [
+              {
+                "en": "The consonant /z/ is voiced, whereas /s/ is voiceless.",
+                "ja": "子音 /z/ は有声音だが、/s/ は無声音である。"
+              },
+              {
+                "en": "Place a hand on your throat to feel the vibration in a voiced sound.",
+                "ja": "有声音の振動を感じるには、喉に手を当ててみよう。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "voiced consonant",
+        "en": "voiced consonant",
+        "ja": "有声子音"
+      },
+      {
+        "text": "voiced sound",
+        "en": "voiced sound",
+        "ja": "有声音"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "音声学では voiced は声帯振動を伴うこと。voiceless（無声の）と対比する。",
     "tags": [
-      "study-language"
+      "study-language",
+      "curated-v3.177"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10199",
@@ -7382,24 +8271,45 @@
         "meanings": [
           {
             "ja": "声帯振動を伴わない；声を持たない",
-            "definition": "",
-            "examples": []
+            "definition": "pronounced without vibration of the vocal folds",
+            "examples": [
+              {
+                "en": "English /p/ is voiceless, while /b/ is voiced.",
+                "ja": "英語の /p/ は無声音だが、/b/ は有声音である。"
+              },
+              {
+                "en": "The final sound in “cats” is a voiceless consonant.",
+                "ja": "「cats」の語末の音は無声子音である。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "voiceless consonant",
+        "en": "voiceless consonant",
+        "ja": "無声子音"
+      },
+      {
+        "text": "voiceless sound",
+        "en": "voiceless sound",
+        "ja": "無声音"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "音声学の voiceless は声帯が振動しないこと。比喩的には「発言力のない」という意味もある。",
     "tags": [
-      "study-language"
+      "study-language",
+      "curated-v3.177"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07310",
@@ -7639,19 +8549,18 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "変動性；不安定さ",
-            "definition": "a concept, state, person, thing, or process connected with 変動性",
+            "ja": "変動性；価格などの変動の激しさ",
+            "definition": "the degree to which prices, conditions, or values change sharply or unpredictably",
             "examples": [
               {
-                "en": "The report discusses volatility in detail.",
-                "ja": "その報告書は「変動性」について詳しく論じている。"
+                "en": "Exchange-rate volatility increased costs for importers.",
+                "ja": "為替相場の激しい変動により輸入業者の費用が増えた。"
               },
               {
                 "en": "Energy-price volatility makes long-term planning more difficult for manufacturers.",
                 "ja": "エネルギー価格の変動性は製造業者の長期計画をより難しくする。"
               }
-            ],
-            "definition_en": "the tendency to change quickly and unpredictably, especially in prices or conditions"
+            ]
           }
         ]
       }
@@ -7662,10 +8571,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "In finance, volatility measures variation in returns; it does not necessarily mean a downward trend.",
     "tags": [
       "academic-expansion",
-      "curated-v3.25"
+      "curated-v3.25",
+      "curated-v3.64"
     ],
     "status": "enriched",
     "search_terms": [
@@ -7676,8 +8586,12 @@
       "ipa_uk": null
     },
     "collocations": [
-      "market volatility",
-      "price volatility"
+      {
+        "text": "market volatility"
+      },
+      {
+        "text": "price volatility"
+      }
     ]
   },
   {
@@ -7702,24 +8616,37 @@
         "meanings": [
           {
             "ja": "火山の；火山活動による",
-            "definition": "",
-            "examples": []
+            "definition": "relating to volcanoes or material produced by volcanic activity",
+            "examples": [
+              {
+                "en": "Volcanic ash disrupted flights across the region.",
+                "ja": "火山灰の影響で地域一帯の航空便に支障が出た。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "volcanic ash"
+      },
+      {
+        "text": "volcanic eruption"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Volcanic is an adjective; volcano is the related noun.",
     "tags": [
-      "outdoor-conditions"
+      "outdoor-conditions",
+      "curated-v3.63"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11550",
@@ -7957,12 +8884,46 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "音量；量；巻",
-            "definition": "the amount of sound, space, or material, or one book in a series",
+            "ja": "音量",
+            "definition": "the loudness of a sound",
             "examples": [
+              {
+                "en": "Please turn down the volume during the announcement.",
+                "ja": "アナウンス中は音量を下げてください。"
+              },
               {
                 "en": "Could you turn the volume down a little?",
                 "ja": "音量を少し下げてもらえますか。"
+              }
+            ]
+          },
+          {
+            "ja": "量；取引量",
+            "definition": "the amount of something produced, sold, or processed",
+            "examples": [
+              {
+                "en": "The volume of online sales increased last year.",
+                "ja": "昨年はオンライン売上の取引量が増加した。"
+              }
+            ]
+          },
+          {
+            "ja": "体積；容積",
+            "definition": "the amount of three-dimensional space occupied by something",
+            "examples": [
+              {
+                "en": "The experiment measured the volume of gas released.",
+                "ja": "実験では放出された気体の体積を測定した。"
+              }
+            ]
+          },
+          {
+            "ja": "巻；一冊",
+            "definition": "one book in a series or a bound collection of writings",
+            "examples": [
+              {
+                "en": "The second volume contains the final chapters.",
+                "ja": "第2巻には最後の章が収められている。"
               }
             ]
           }
@@ -7975,12 +8936,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "volume は音量・数量・体積・書籍の巻などを表す。体積と面積（area）を混同しない。",
     "tags": [
       "v2.29-curated",
-      "curated-v2.67"
+      "curated-v2.67",
+      "curated-v3.105"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "volume"
     ],
@@ -7990,10 +8952,29 @@
     },
     "collocations": [
       {
-        "text": "large volume of"
+        "text": "sales volume",
+        "en": "sales volume",
+        "ja": "販売量"
       },
       {
-        "text": "sales volume"
+        "text": "turn down the volume",
+        "en": "turn down the volume",
+        "ja": "音量を下げる"
+      },
+      {
+        "text": "volume of data",
+        "en": "volume of data",
+        "ja": "データ量"
+      },
+      {
+        "text": "volume of a cylinder",
+        "en": "volume of a cylinder",
+        "ja": "円柱の体積"
+      },
+      {
+        "text": "large volume of",
+        "en": "large volume of",
+        "ja": "大量の～"
       }
     ],
     "senses": [
@@ -8064,12 +9045,12 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "自発に",
-            "definition": "in the manner or degree expressed by 自発に",
+            "ja": "自発的に；自分の意思で",
+            "definition": "by choice rather than because of force or a legal requirement",
             "examples": [
               {
-                "en": "The word 'voluntarily' is useful when discussing this topic.",
-                "ja": "この語は「自発に」に関する文脈で使われます。"
+                "en": "Several employees voluntarily joined the community cleanup.",
+                "ja": "数人の従業員が自発的に地域の清掃活動に参加した。"
               }
             ]
           }
@@ -8082,9 +9063,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "voluntarily は「無償で」とは限らない。volunteer と voluntary の関係に注意。",
+    "tags": [
+      "curated-v3.80"
+    ],
+    "status": "enriched",
     "search_terms": [
       "voluntarily"
     ],
@@ -8092,7 +9075,16 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "voluntarily resign",
+        "ja": "自発的に辞職する"
+      },
+      {
+        "text": "voluntarily disclose",
+        "ja": "自主的に開示する"
+      }
+    ]
   },
   {
     "id": "sw-02160",
@@ -8211,6 +9203,25 @@
               {
                 "en": "Hundreds of volunteers helped clean the beach.",
                 "ja": "何百人ものボランティアが海岸清掃を手伝いました。"
+              },
+              {
+                "en": "Volunteers distributed drinking water after the storm.",
+                "ja": "嵐の後、ボランティアが飲料水を配った。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "自発的に申し出る；志願する",
+            "definition": "to offer to do something willingly without being required",
+            "examples": [
+              {
+                "en": "Several students volunteered to translate the notices.",
+                "ja": "数人の生徒が進んでお知らせの翻訳を申し出た。"
               }
             ]
           }
@@ -8219,17 +9230,39 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "volunteer work",
+        "text": "volunteer work",
+        "ja": "ボランティア活動"
+      },
+      {
+        "en": "volunteer organization",
+        "text": "volunteer organization",
+        "ja": "ボランティア団体"
+      },
+      {
+        "en": "volunteer for a project",
+        "text": "volunteer for a project",
+        "ja": "プロジェクトに志願する"
+      },
+      {
+        "en": "volunteer to help",
+        "text": "volunteer to help",
+        "ja": "自ら進んで手伝う"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Volunteer is both a noun and a verb. Volunteer to do something means offer willingly; volunteer for a task means offer to take part.",
     "tags": [
       "50k-frequency-gap",
-      "v2.29-curated"
+      "v2.29-curated",
+      "curated-v3.139"
     ],
-    "status": "basic"
+    "status": "enriched"
   },
   {
     "id": "sw-02161",
@@ -8251,6 +9284,25 @@
               {
                 "en": "Citizens aged eighteen and over can vote in national elections.",
                 "ja": "18歳以上の国民は国政選挙で投票できます。"
+              },
+              {
+                "en": "The committee voted to postpone the decision until next month.",
+                "ja": "委員会は決定を来月まで延期することを投票で決めた。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "投票；票",
+            "definition": "a formal choice made in an election or decision-making process",
+            "examples": [
+              {
+                "en": "The proposal passed by a narrow vote.",
+                "ja": "その提案は僅差の投票で可決された。"
               }
             ]
           }
@@ -8268,11 +9320,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Vote for supports a candidate or proposal; vote against opposes it. Cast a vote is a formal expression.",
     "tags": [
-      "v2.29-curated"
+      "v2.29-curated",
+      "curated-v3.139"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "vote",
       "votes",
@@ -8283,7 +9336,28 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "en": "vote in an election",
+        "text": "vote in an election",
+        "ja": "選挙で投票する"
+      },
+      {
+        "en": "vote for a candidate",
+        "text": "vote for a candidate",
+        "ja": "候補者に投票する"
+      },
+      {
+        "en": "vote against a proposal",
+        "text": "vote against a proposal",
+        "ja": "提案に反対票を投じる"
+      },
+      {
+        "en": "cast a vote",
+        "text": "cast a vote",
+        "ja": "一票を投じる"
+      }
+    ]
   },
   {
     "id": "sw-07545",
@@ -8356,25 +9430,54 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "引換券；証憑書類",
-            "definition": "",
-            "examples": []
+            "ja": "引換券；割引券",
+            "definition": "a document or code that can be exchanged for goods, services, or a discount",
+            "examples": [
+              {
+                "en": "Guests received a voucher for a free breakfast.",
+                "ja": "宿泊客には無料の朝食引換券が配られた。"
+              }
+            ]
+          },
+          {
+            "ja": "支払いなどの証憑書類",
+            "definition": "a document that records or supports a financial transaction",
+            "examples": [
+              {
+                "en": "Keep the payment voucher for the annual audit.",
+                "ja": "年次監査のために支払い証憑を保管してください。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "gift voucher",
+        "ja": "商品券"
+      },
+      {
+        "text": "meal voucher",
+        "ja": "食事券"
+      },
+      {
+        "text": "payment voucher",
+        "ja": "支払い証憑"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "voucher は用途によって「引換券」「クーポン」「会計証憑」と訳し分ける。",
     "tags": [
-      "office-business"
+      "office-business",
+      "curated-v3.80"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10596",
@@ -8566,6 +9669,10 @@
               {
                 "en": "The study examines the vulnerability of coastal communities to flooding.",
                 "ja": "その研究は沿岸地域の洪水に対する脆弱性を検証している。"
+              },
+              {
+                "en": "Poverty can increase vulnerability to natural disasters.",
+                "ja": "貧困は自然災害に対する脆弱性を高めることがある。"
               }
             ]
           },
@@ -8580,6 +9687,10 @@
               {
                 "en": "The update fixed a serious security vulnerability.",
                 "ja": "その更新で重大なセキュリティ上の脆弱性が修正されました。"
+              },
+              {
+                "en": "The audit revealed a software vulnerability that allowed unauthorized access to records.",
+                "ja": "監査によって、記録への不正アクセスを可能にするソフトウェアの脆弱性が判明した。"
               }
             ]
           }
@@ -8597,7 +9708,8 @@
       "learner-core-gap",
       "v2.31-curated",
       "curated-v2.63",
-      "curated-v3.39"
+      "curated-v3.39",
+      "curated-v3.174"
     ],
     "status": "enriched",
     "search_terms": [
@@ -8609,31 +9721,29 @@
     },
     "collocations": [
       {
-        "text": "vulnerability to"
+        "en": "vulnerability to",
+        "text": "vulnerability to",
+        "ja": "～に対する脆弱性"
       },
       {
+        "en": "reduce vulnerability",
         "text": "reduce vulnerability",
         "ja": "脆弱性を低減する"
       },
       {
+        "en": "vulnerability to flooding",
         "text": "vulnerability to flooding",
         "ja": "洪水に対する脆弱性"
       },
       {
+        "en": "security vulnerability",
         "text": "security vulnerability",
         "ja": "セキュリティ上の脆弱性"
-      }
-    ],
-    "senses": [
+      },
       {
-        "pos": "",
-        "definition_ja": "脆弱性；傷つきやすさ",
-        "examples": [
-          {
-            "en": "Poverty can increase vulnerability to natural disasters.",
-            "ja": "貧困は自然災害に対する脆弱性を高めることがある。"
-          }
-        ]
+        "en": "expose a vulnerability",
+        "text": "expose a vulnerability",
+        "ja": "脆弱性を明らかにする"
       }
     ]
   },
