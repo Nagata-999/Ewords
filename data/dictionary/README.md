@@ -1,5 +1,7 @@
 # すし辞書 v3.186
 
+このブランチには独立した試験追加 `new-entry-pilot-20261013` の30語を含み、合計は13,530語です。既存v3.186の13,500語は全フィールド不変です。以下は基礎リリースの記録で、追加分のID対応・検証は `new-entry-manifest.json`、`../../docs/dictionary-new-entries-phase2.md`（リポジトリルートからは `docs/dictionary-new-entries-phase2.md`）を参照してください。
+
 全27辞書JSON、13,500語。更新元は `sushitan_dictionary_v3.186_full.zip`（完全版）です。
 
 - ZIP SHA-256: `88dac458af365ae1b64f6a507d9d540f75b5d56d2d76d5a44925be8af082648a`

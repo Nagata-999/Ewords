@@ -1,9 +1,9 @@
 name: Check dictionary beta
 on:
   push:
-    paths: ['data/dictionary/**', 'scripts/*dictionary*', 'shared/dictionary*', 'shared/learning.js', 'dictionary/**', 'sushian.html', 'tests/dictionary*']
+    paths: ['data/dictionary/**', 'data/dictionary-candidates/**', 'scripts/*dictionary*', 'shared/dictionary*', 'shared/learning.js', 'dictionary/**', 'sushian.html', 'tests/dictionary*']
   pull_request:
-    paths: ['data/dictionary/**', 'scripts/*dictionary*', 'shared/dictionary*', 'shared/learning.js', 'dictionary/**', 'sushian.html', 'tests/dictionary*']
+    paths: ['data/dictionary/**', 'data/dictionary-candidates/**', 'scripts/*dictionary*', 'shared/dictionary*', 'shared/learning.js', 'dictionary/**', 'sushian.html', 'tests/dictionary*']
   workflow_dispatch:
 jobs:
   validate:
@@ -19,6 +19,11 @@ jobs:
       - run: python scripts/build-dictionary.py
       - run: git diff --exit-code -- dictionary data/dictionary-generated.json data/dictionary-build-report.json 404.html
       - run: python scripts/check-dictionary.py
+      - run: python data/dictionary/validate_dictionary.py
+      - if: startsWith(github.head_ref, 'codex/dictionary-new-entries-') || startsWith(github.ref_name, 'codex/dictionary-new-entries-')
+        run: python scripts/check-dictionary-additions.py
+      - if: startsWith(github.head_ref, 'codex/dictionary-new-entries-') || startsWith(github.ref_name, 'codex/dictionary-new-entries-')
+        run: python tests/dictionary-additions.py
       - run: python tests/dictionary-rendering.py
       - run: node tests/dictionary.cjs
       - run: node tests/shared-learning.cjs
