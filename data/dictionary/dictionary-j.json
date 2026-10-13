@@ -324,12 +324,24 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "上着",
-            "definition": "a person, thing, state, or idea related to 上着",
+            "ja": "上着；ジャケット",
+            "definition": "a short outer garment worn on the upper body",
+            "definition_en": "a short outer garment worn on the upper body",
             "examples": [
               {
-                "en": "This is a common example of 'jacket'.",
-                "ja": "これは「上着」の一般的な例です。"
+                "en": "She put on a waterproof jacket before leaving.",
+                "ja": "彼女は出かける前に防水ジャケットを着た。"
+              }
+            ]
+          },
+          {
+            "ja": "本などのカバー",
+            "definition": "a removable protective or decorative cover for a book",
+            "definition_en": "a removable protective or decorative cover for a book",
+            "examples": [
+              {
+                "en": "The book jacket includes a short biography of the author.",
+                "ja": "その本のカバーには著者の略歴が載っている。"
               }
             ]
           }
@@ -342,9 +354,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "wear/put on/take off a jacket。「book jacket」は本の外側のカバー。",
+    "tags": [
+      "curated-v3.72"
+    ],
+    "status": "enriched",
     "search_terms": [
       "jacket"
     ],
@@ -352,7 +366,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "a waterproof jacket",
+        "ja": "防水ジャケット"
+      },
+      {
+        "text": "a leather jacket",
+        "ja": "革のジャケット"
+      },
+      {
+        "text": "a book jacket",
+        "ja": "本のカバー"
+      }
+    ]
   },
   {
     "id": "sw-08003",
@@ -849,12 +876,29 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "刑務所",
-            "definition": "a person, thing, state, or idea connected with 刑務所",
+            "ja": "拘置所；刑務所",
+            "definition": "a place where people are kept as punishment or while awaiting trial",
+            "definition_en": "a place where people are kept as punishment or while awaiting trial",
             "examples": [
               {
-                "en": "The story mentions jail as an important detail.",
-                "ja": "この例では「刑務所」という意味で使われている。"
+                "en": "He spent two nights in jail before the hearing.",
+                "ja": "彼は審理前に拘置所で二晩過ごした。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "投獄する",
+            "definition": "to put someone in jail",
+            "definition_en": "to put someone in jail",
+            "examples": [
+              {
+                "en": "The journalist was jailed for reporting on the protest.",
+                "ja": "その記者は抗議活動を報じたため投獄された。"
               }
             ]
           }
@@ -863,16 +907,30 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "go to jail",
+        "ja": "投獄される"
+      },
+      {
+        "text": "be released from jail",
+        "ja": "拘置所・刑務所から釈放される"
+      },
+      {
+        "text": "jail a suspect",
+        "ja": "容疑者を拘禁する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "be in jail は通常冠詞なし。jail と prison は制度・地域により区別が異なる。",
     "tags": [
-      "general-vocabulary"
+      "general-vocabulary",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11086",
@@ -1076,25 +1134,41 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "建物の清掃管理人",
-            "definition": "",
-            "examples": []
+            "ja": "清掃員；建物の管理員",
+            "definition": "a person employed to clean and maintain a building",
+            "definition_en": "a person employed to clean and maintain a building",
+            "examples": [
+              {
+                "en": "The school janitor repaired the broken door handle.",
+                "ja": "学校の管理員が壊れたドアノブを修理した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a school janitor",
+        "ja": "学校の管理員"
+      },
+      {
+        "text": "building janitor",
+        "ja": "建物の清掃管理員"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "米国英語で学校・ビルなどの清掃・管理担当者。英語圏では caretaker なども使う。",
     "tags": [
-      "community-travel"
+      "community-travel",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-00346",
@@ -1250,25 +1324,41 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "顎",
-            "definition": "",
-            "examples": []
+            "ja": "顎；顎の骨",
+            "definition": "either of the two bony structures in the mouth that hold the teeth",
+            "definition_en": "either of the two bony structures in the mouth that hold the teeth",
+            "examples": [
+              {
+                "en": "The dentist asked him to relax his jaw.",
+                "ja": "歯科医は彼に顎の力を抜くよう求めた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "lower jaw",
+        "ja": "下顎"
+      },
+      {
+        "text": "clench your jaw",
+        "ja": "顎を食いしばる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "upper/lower jaw（上顎／下顎）。jawline は顎の輪郭。",
     "tags": [
-      "body-health"
+      "body-health",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-06616",
@@ -1370,15 +1460,27 @@
     "frequency": 3,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
-            "ja": "嫉妬した",
-            "definition": "a person, thing, state, or idea connected with 嫉妬した",
+            "ja": "嫉妬した；うらやましく思う",
+            "definition": "feeling unhappy because someone has something you want",
+            "definition_en": "feeling unhappy because someone has something you want",
             "examples": [
               {
-                "en": "The story mentions jealous as an important detail.",
-                "ja": "この例では「嫉妬した」という意味で使われている。"
+                "en": "She was jealous of her colleague’s promotion.",
+                "ja": "彼女は同僚の昇進をうらやましく思った。"
+              }
+            ]
+          },
+          {
+            "ja": "独占欲が強い；嫉妬深い",
+            "definition": "upset because you fear losing someone’s affection to another person",
+            "definition_en": "upset because you fear losing someone’s affection to another person",
+            "examples": [
+              {
+                "en": "He became jealous whenever his partner met an old friend.",
+                "ja": "パートナーが昔の友人に会うたびに彼は嫉妬した。"
               }
             ]
           }
@@ -1387,16 +1489,30 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "be jealous of someone",
+        "ja": "人をうらやむ・嫉妬する"
+      },
+      {
+        "text": "a jealous partner",
+        "ja": "嫉妬深い恋人"
+      },
+      {
+        "text": "feel jealous",
+        "ja": "嫉妬を感じる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "be jealous of + 人・物。envious と意味が重なるが、jealous は恋愛関係の嫉妬にもよく使う。",
     "tags": [
-      "general-vocabulary"
+      "general-vocabulary",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-05291",
@@ -1419,25 +1535,52 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "嫉妬して；大切に守って",
-            "definition": "",
-            "examples": []
+            "ja": "嫉妬して",
+            "definition": "in a way that shows envy or fear of losing someone’s affection",
+            "definition_en": "in a way that shows envy or fear of losing someone’s affection",
+            "examples": [
+              {
+                "en": "He watched jealously as his rival received the award.",
+                "ja": "ライバルが賞を受け取るのを彼は嫉妬しながら見ていた。"
+              }
+            ]
+          },
+          {
+            "ja": "大切に守って；厳重に",
+            "definition": "with great care to prevent others from taking or sharing something",
+            "definition_en": "with great care to prevent others from taking or sharing something",
+            "examples": [
+              {
+                "en": "The company jealously guards its manufacturing methods.",
+                "ja": "その会社は製造方法を厳重に守っている。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "jealously guard a secret",
+        "ja": "秘密を厳重に守る"
+      },
+      {
+        "text": "watch jealously",
+        "ja": "嫉妬しながら見守る"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "jealously guard は「（秘密・権利などを）厳重に守る」という定型的な組み合わせ。",
     "tags": [
-      "manner-and-time"
+      "manner-and-time",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12694",
@@ -1460,25 +1603,57 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "あざける；やじる",
-            "definition": "",
-            "examples": []
+            "ja": "やじる；あざける",
+            "definition": "to shout rude or mocking remarks at someone",
+            "definition_en": "to shout rude or mocking remarks at someone",
+            "examples": [
+              {
+                "en": "Some spectators jeered at the referee’s decision.",
+                "ja": "一部の観客は審判の判定にやじを飛ばした。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "やじ；嘲笑の声",
+            "definition": "a rude shout intended to mock someone",
+            "definition_en": "a rude shout intended to mock someone",
+            "examples": [
+              {
+                "en": "The speaker continued despite the jeers from the crowd.",
+                "ja": "演説者は群衆のやじにもかかわらず話し続けた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "jeer at a speaker",
+        "ja": "演説者をやじる"
+      },
+      {
+        "text": "a chorus of jeers",
+        "ja": "一斉のやじ"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "jeer at + 人・行為。cheer（声援を送る）と対比される。",
     "tags": [
-      "actions-interaction"
+      "actions-interaction",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11108",
@@ -1763,28 +1938,60 @@
     "frequency": 2,
     "parts_of_speech": [
       {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "冗談；戯れ",
+            "definition": "something said or done to make people laugh",
+            "definition_en": "something said or done to make people laugh",
+            "examples": [
+              {
+                "en": "His remark was intended as a jest, but it upset his colleague.",
+                "ja": "彼の発言は冗談のつもりだったが、同僚を怒らせた。"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "pos": "verb",
         "meanings": [
           {
             "ja": "冗談を言う",
-            "definition": "",
-            "examples": []
+            "definition": "to speak in a playful or joking way",
+            "definition_en": "to speak in a playful or joking way",
+            "examples": [
+              {
+                "en": "She was only jesting when she said she would quit tomorrow.",
+                "ja": "明日辞めると言ったのは彼女の冗談にすぎなかった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "say something in jest",
+        "ja": "冗談で何かを言う"
+      },
+      {
+        "text": "only jesting",
+        "ja": "ただ冗談を言っているだけ"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "in jest は「冗談で」。joke よりやや文語的・古風な響きがある。",
     "tags": [
-      "thinking-communication"
+      "thinking-communication",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13341",
@@ -1849,24 +2056,44 @@
         "meanings": [
           {
             "ja": "時差ぼけ",
-            "definition": "",
-            "examples": []
+            "definition": "tiredness and sleep disruption caused by traveling quickly across time zones",
+            "definition_en": "tiredness and sleep disruption caused by traveling quickly across time zones",
+            "examples": [
+              {
+                "en": "It took me three days to recover from jet lag after the flight.",
+                "ja": "飛行機で移動した後、時差ぼけから回復するのに3日かかった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "suffer from jet lag",
+        "ja": "時差ぼけに悩む"
+      },
+      {
+        "text": "recover from jet lag",
+        "ja": "時差ぼけから回復する"
+      },
+      {
+        "text": "severe jet lag",
+        "ja": "ひどい時差ぼけ"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "通常不可算。jet-lagged は「時差ぼけの」。単なる飛行疲れとは区別する。",
     "tags": [
-      "travel-transport"
+      "travel-transport",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11693",
@@ -2052,12 +2279,13 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "宝飾品",
-            "definition": "a person, thing, state, or idea connected with 宝飾品",
+            "ja": "宝飾品；アクセサリー類",
+            "definition": "decorative objects such as rings and necklaces that people wear",
+            "definition_en": "decorative objects such as rings and necklaces that people wear",
             "examples": [
               {
-                "en": "The word 'jewelry' appears in many kinds of English texts.",
-                "ja": "「jewelry」はさまざまな英文で使われます。"
+                "en": "The museum displayed jewelry made from gold and glass.",
+                "ja": "博物館には金とガラスで作られた装身具が展示されていた。"
               }
             ]
           }
@@ -2070,9 +2298,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "通常不可算名詞。米 jewelry、英 jewellery。個々の品は a piece of jewelry。",
+    "tags": [
+      "curated-v3.72"
+    ],
+    "status": "enriched",
     "search_terms": [
       "jewelry"
     ],
@@ -2080,7 +2310,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "a piece of jewelry",
+        "ja": "宝飾品1点"
+      },
+      {
+        "text": "handmade jewelry",
+        "ja": "手作りのアクセサリー"
+      },
+      {
+        "text": "fine jewelry",
+        "ja": "高級宝飾品"
+      }
+    ]
   },
   {
     "id": "sw-09587",
@@ -2191,25 +2434,57 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "ちりんちりん鳴る",
-            "definition": "",
-            "examples": []
+            "ja": "ちりんちりんと鳴る；鳴らす",
+            "definition": "to make or cause a series of light ringing sounds",
+            "definition_en": "to make or cause a series of light ringing sounds",
+            "examples": [
+              {
+                "en": "The keys jingled in his pocket as he walked.",
+                "ja": "歩くたびにポケットの中で鍵がちりんちりんと鳴った。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "短い広告用の歌；ジングル",
+            "definition": "a short, memorable tune used in advertising or broadcasting",
+            "definition_en": "a short, memorable tune used in advertising or broadcasting",
+            "examples": [
+              {
+                "en": "The radio station played its familiar jingle before the news.",
+                "ja": "ラジオ局はニュースの前におなじみのジングルを流した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "keys jingle",
+        "ja": "鍵がちりんちりん鳴る"
+      },
+      {
+        "text": "a catchy jingle",
+        "ja": "耳に残る短い広告曲"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "keys/coins jingle（鍵・硬貨が鳴る）。広告・放送の短い音楽にも使う。",
     "tags": [
-      "actions"
+      "actions",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08885",
@@ -2328,25 +2603,41 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "神経質に震える",
-            "definition": "",
-            "examples": []
+            "ja": "そわそわした；落ち着かない",
+            "definition": "nervous and unable to relax",
+            "definition_en": "nervous and unable to relax",
+            "examples": [
+              {
+                "en": "I felt jittery before giving my first public speech.",
+                "ja": "初めて人前で話す前、私は落ち着かなかった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "feel jittery",
+        "ja": "そわそわする"
+      },
+      {
+        "text": "get jittery",
+        "ja": "落ち着かなくなる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "jittery は nervous に近い口語。カフェイン摂取後の落ち着かなさにも使う。",
     "tags": [
-      "descriptive"
+      "descriptive",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12980",
@@ -2456,25 +2747,45 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "職務内容の説明；職務記述書",
-            "definition": "",
-            "examples": []
+            "ja": "職務記述書；担当業務の説明",
+            "definition": "a written account of the duties and responsibilities of a particular job",
+            "definition_en": "a written account of the duties and responsibilities of a particular job",
+            "examples": [
+              {
+                "en": "The job description specifies that the role involves frequent travel.",
+                "ja": "職務記述書には、その職には頻繁な出張が伴うと明記されている。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "read a job description",
+        "ja": "職務記述書を読む"
+      },
+      {
+        "text": "a detailed job description",
+        "ja": "詳細な職務記述書"
+      },
+      {
+        "text": "update the job description",
+        "ja": "職務内容の説明を更新する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "job title（役職名）とは異なり、job description は仕事の内容・責任範囲を説明する。",
     "tags": [
-      "work-life"
+      "work-life",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13150",
@@ -2497,25 +2808,41 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "職務を順次変えること；配置転換制度",
-            "definition": "",
-            "examples": []
+            "ja": "ジョブローテーション；計画的な職務交代",
+            "definition": "a system in which employees move between different tasks or roles to gain experience",
+            "definition_en": "a system in which employees move between different tasks or roles to gain experience",
+            "examples": [
+              {
+                "en": "Job rotation helped new employees understand how the departments work together.",
+                "ja": "計画的な職務交代によって、新入社員は部署間の連携を理解できた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "introduce job rotation",
+        "ja": "ジョブローテーションを導入する"
+      },
+      {
+        "text": "a job rotation program",
+        "ja": "職務交代制度"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "職務経験を広げるための制度。単なる転職（changing jobs）とは異なる。",
     "tags": [
-      "work-life"
+      "work-life",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13151",
@@ -2589,25 +2916,41 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "一つの職務を複数人で分担する勤務形態",
-            "definition": "",
-            "examples": []
+            "ja": "ワークシェアリングの一形態；一つの職務の分担",
+            "definition": "an arrangement in which two or more people divide the hours and responsibilities of one full-time job",
+            "definition_en": "an arrangement in which two or more people divide the hours and responsibilities of one full-time job",
+            "examples": [
+              {
+                "en": "Job sharing allowed the two employees to work part-time in the same role.",
+                "ja": "ジョブシェアリングにより、二人の従業員は同じ職務を非常勤で分担できた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a job-sharing arrangement",
+        "ja": "職務分担の勤務形態"
+      },
+      {
+        "text": "offer job sharing",
+        "ja": "ジョブシェアリングを認める"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "job sharing は一つの職を分担すること。work sharing は労働時間の分配など、より広い意味でも使う。",
     "tags": [
-      "work-life"
+      "work-life",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13117",
@@ -2630,25 +2973,41 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "職名；役職名",
-            "definition": "",
-            "examples": []
+            "ja": "役職名；職名",
+            "definition": "the name used to describe a person’s position in an organization",
+            "definition_en": "the name used to describe a person’s position in an organization",
+            "examples": [
+              {
+                "en": "Her job title changed to senior research analyst.",
+                "ja": "彼女の役職名は上級調査アナリストに変わった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "an official job title",
+        "ja": "正式な役職名"
+      },
+      {
+        "text": "change a job title",
+        "ja": "役職名を変更する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "job title は肩書き。job description は具体的な仕事内容。",
     "tags": [
-      "work-life"
+      "work-life",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13091",
@@ -2671,25 +3030,41 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "職に就いている人",
-            "definition": "",
-            "examples": []
+            "ja": "就業者；職に就いている人",
+            "definition": "a person who has a paid job",
+            "definition_en": "a person who has a paid job",
+            "examples": [
+              {
+                "en": "The survey compared jobholders with people seeking work.",
+                "ja": "その調査は就業者と求職者を比較した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "full-time jobholders",
+        "ja": "フルタイム就業者"
+      },
+      {
+        "text": "a jobholder’s responsibilities",
+        "ja": "就業者の職務上の責任"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "jobholder は労働市場などの文脈で用いる。job holder と2語で書くこともある。",
     "tags": [
-      "work-life"
+      "work-life",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13090",
@@ -2713,24 +3088,40 @@
         "meanings": [
           {
             "ja": "求職者",
-            "definition": "",
-            "examples": []
+            "definition": "a person who is looking for paid employment",
+            "definition_en": "a person who is looking for paid employment",
+            "examples": [
+              {
+                "en": "The career center offers free workshops for jobseekers.",
+                "ja": "その就職支援センターは求職者向けに無料の講習会を開いている。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "support jobseekers",
+        "ja": "求職者を支援する"
+      },
+      {
+        "text": "young jobseekers",
+        "ja": "若年求職者"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "job seeker と2語で書くこともある。jobseeker は特に英国英語でよく見られる。",
     "tags": [
-      "work-life"
+      "work-life",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12219",
@@ -2902,25 +3293,46 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "参加する；加わる",
-            "definition": "",
-            "examples": []
+            "ja": "（活動・会話などに）加わる；参加する",
+            "definition": "to take part in an activity that other people are already doing",
+            "definition_en": "to take part in an activity that other people are already doing",
+            "examples": [
+              {
+                "en": "When the discussion began, several students joined in.",
+                "ja": "話し合いが始まると、数人の生徒が加わった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
-    "phrases": [],
-    "collocations": [],
+    "phrases": [
+      {
+        "phrase": "join in the conversation",
+        "ja": "会話に加わる"
+      }
+    ],
+    "collocations": [
+      {
+        "text": "join in the discussion",
+        "ja": "議論に加わる"
+      },
+      {
+        "text": "join in the fun",
+        "ja": "楽しい活動に加わる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "join in + 活動、または目的語なしで使う。join + 団体・人 との違いに注意。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07194",
@@ -2981,28 +3393,75 @@
     "frequency": 2,
     "parts_of_speech": [
       {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "共同の；共有の",
+            "definition": "involving two or more people or organizations acting together",
+            "definition_en": "involving two or more people or organizations acting together",
+            "examples": [
+              {
+                "en": "The two universities launched a joint research project.",
+                "ja": "二つの大学は共同研究プロジェクトを開始した。"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "pos": "noun",
         "meanings": [
           {
-            "ja": "関節；接合部",
-            "definition": "",
-            "examples": []
+            "ja": "関節",
+            "definition": "a place where two bones meet and allow movement",
+            "definition_en": "a place where two bones meet and allow movement",
+            "examples": [
+              {
+                "en": "Regular exercise can help keep your joints flexible.",
+                "ja": "定期的な運動は関節の柔軟性を保つ助けになる。"
+              }
+            ]
+          },
+          {
+            "ja": "接合部；継ぎ目",
+            "definition": "a place where two parts of a structure are connected",
+            "definition_en": "a place where two parts of a structure are connected",
+            "examples": [
+              {
+                "en": "Water was leaking through a joint in the pipe.",
+                "ja": "配管の継ぎ目から水が漏れていた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a joint statement",
+        "ja": "共同声明"
+      },
+      {
+        "text": "joint responsibility",
+        "ja": "共同責任"
+      },
+      {
+        "text": "knee joint",
+        "ja": "膝関節"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "joint は形容詞で joint decision/project、名詞で関節・接合部を表す。",
     "tags": [
-      "body-health"
+      "body-health",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07759",
@@ -3076,25 +3535,45 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "共同で",
-            "definition": "",
-            "examples": []
+            "ja": "共同で；連名で",
+            "definition": "together with another person or organization",
+            "definition_en": "together with another person or organization",
+            "examples": [
+              {
+                "en": "The report was jointly written by researchers from three countries.",
+                "ja": "その報告書は3か国の研究者が共同執筆した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "jointly funded",
+        "ja": "共同出資された"
+      },
+      {
+        "text": "jointly responsible",
+        "ja": "共同で責任を負う"
+      },
+      {
+        "text": "jointly developed",
+        "ja": "共同開発された"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "jointly + 動詞／過去分詞。jointly and severally は法律で「連帯して」の意味。",
     "tags": [
-      "manner-and-time"
+      "manner-and-time",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-06222",
@@ -3199,25 +3678,61 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "がくんと揺れる",
-            "definition": "",
-            "examples": []
+            "ja": "がくんと揺らす；急に揺れる",
+            "definition": "to move or make something move suddenly and roughly",
+            "definition_en": "to move or make something move suddenly and roughly",
+            "examples": [
+              {
+                "en": "The bus jolted as it crossed the uneven road.",
+                "ja": "バスはでこぼこ道を通るときにがくんと揺れた。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "衝撃；突然のショック",
+            "definition": "a sudden physical movement or emotional shock",
+            "definition_en": "a sudden physical movement or emotional shock",
+            "examples": [
+              {
+                "en": "The unexpected announcement gave investors a jolt.",
+                "ja": "予想外の発表は投資家に衝撃を与えた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a sudden jolt",
+        "ja": "突然の揺れ・衝撃"
+      },
+      {
+        "text": "jolt someone awake",
+        "ja": "衝撃で人を目覚めさせる"
+      },
+      {
+        "text": "jolt the economy",
+        "ja": "経済に衝撃を与える"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "jolt someone into action は「人を刺激して行動させる」。",
     "tags": [
-      "actions"
+      "actions",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-05815",
@@ -3240,25 +3755,52 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "押し合う",
-            "definition": "",
-            "examples": []
+            "ja": "押し合う；人混みで押す",
+            "definition": "to push against other people while moving through a crowd",
+            "definition_en": "to push against other people while moving through a crowd",
+            "examples": [
+              {
+                "en": "Passengers jostled for space on the crowded train.",
+                "ja": "乗客たちは混雑した電車の中で場所を求めて押し合った。"
+              }
+            ]
+          },
+          {
+            "ja": "（地位・優位などを）競い合う",
+            "definition": "to compete actively with others for a position or advantage",
+            "definition_en": "to compete actively with others for a position or advantage",
+            "examples": [
+              {
+                "en": "Several firms are jostling for a share of the growing market.",
+                "ja": "複数の企業が成長市場でのシェアを競い合っている。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "jostle for position",
+        "ja": "有利な位置を競う"
+      },
+      {
+        "text": "jostle through a crowd",
+        "ja": "人混みを押し分けて進む"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "jostle for + 場所・地位・優位。物理的な押し合いと比喩的な競争の両方で使う。",
     "tags": [
-      "actions"
+      "actions",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-09797",
@@ -3423,25 +3965,52 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "仕訳；日誌の記録",
-            "definition": "",
-            "examples": []
+            "ja": "日誌の一項目；日記の記述",
+            "definition": "a dated piece of writing in a personal journal",
+            "definition_en": "a dated piece of writing in a personal journal",
+            "examples": [
+              {
+                "en": "In her journal entry, she described the first day of the expedition.",
+                "ja": "彼女は日記のその日の記述で、探検初日の様子を書いた。"
+              }
+            ]
+          },
+          {
+            "ja": "仕訳記入",
+            "definition": "a record of a financial transaction in an accounting journal",
+            "definition_en": "a record of a financial transaction in an accounting journal",
+            "examples": [
+              {
+                "en": "The accountant checked each journal entry against the receipts.",
+                "ja": "会計担当者は各仕訳記入を領収書と照合した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "write a journal entry",
+        "ja": "日記の一項目を書く"
+      },
+      {
+        "text": "record a journal entry",
+        "ja": "仕訳を記入する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "文脈により日記の一記述か、会計の仕訳記入かが決まる。",
     "tags": [
-      "trade"
+      "trade",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-02701",
@@ -3507,12 +4076,13 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "記者",
-            "definition": "a person, thing, state, or idea related to 記者",
+            "ja": "ジャーナリスト；報道記者",
+            "definition": "a person whose work is to gather, investigate, and report news",
+            "definition_en": "a person whose work is to gather, investigate, and report news",
             "examples": [
               {
-                "en": "The word 'journalist' is often useful in formal or everyday English.",
-                "ja": "「journalist」は「記者」の意味で使われます。"
+                "en": "The journalist interviewed residents affected by the flood.",
+                "ja": "その記者は洪水の被害を受けた住民に取材した。"
               }
             ]
           }
@@ -3525,9 +4095,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "journalist は新聞・テレビ・ネットなどの報道に従事する人。reporter は取材・報告する人を特に指す。",
+    "tags": [
+      "curated-v3.72"
+    ],
+    "status": "enriched",
     "search_terms": [
       "journalist"
     ],
@@ -3535,7 +4107,16 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "an investigative journalist",
+        "ja": "調査報道記者"
+      },
+      {
+        "text": "a freelance journalist",
+        "ja": "フリーの記者"
+      }
+    ]
   },
   {
     "id": "sw-01047",
@@ -3551,12 +4132,24 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "旅",
-            "definition": "a person, thing, state, or idea related to 旅",
+            "ja": "旅；移動の道のり",
+            "definition": "the act of traveling from one place to another, especially over a considerable distance",
+            "definition_en": "the act of traveling from one place to another, especially over a considerable distance",
             "examples": [
               {
-                "en": "This is a common example of 'journey'.",
-                "ja": "これは「旅」の一般的な例です。"
+                "en": "The train journey through the mountains took six hours.",
+                "ja": "山間部を通る列車の旅には6時間かかった。"
+              }
+            ]
+          },
+          {
+            "ja": "（成長・変化の）道のり；過程",
+            "definition": "a long process of personal development or change",
+            "definition_en": "a long process of personal development or change",
+            "examples": [
+              {
+                "en": "Learning to speak confidently was a gradual journey for her.",
+                "ja": "自信を持って話せるようになるまで、彼女には時間のかかる過程があった。"
               }
             ]
           }
@@ -3569,9 +4162,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "journey は移動の過程・道のりを強調する。trip は外出・旅行全体を指すことが多い。",
+    "tags": [
+      "curated-v3.72"
+    ],
+    "status": "enriched",
     "search_terms": [
       "journey"
     ],
@@ -3579,7 +4174,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "a long journey",
+        "ja": "長い旅"
+      },
+      {
+        "text": "a journey of discovery",
+        "ja": "発見の旅"
+      },
+      {
+        "text": "begin a journey",
+        "ja": "旅・過程を始める"
+      }
+    ]
   },
   {
     "id": "sw-07175",
@@ -3689,25 +4297,41 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "大喜びの",
-            "definition": "",
-            "examples": []
+            "ja": "歓喜に満ちた；大喜びの",
+            "definition": "extremely happy, especially because of a success",
+            "definition_en": "extremely happy, especially because of a success",
+            "examples": [
+              {
+                "en": "The jubilant crowd celebrated the team’s first championship.",
+                "ja": "歓喜に沸く群衆はチームの初優勝を祝った。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "jubilant supporters",
+        "ja": "歓喜する支持者"
+      },
+      {
+        "text": "a jubilant mood",
+        "ja": "歓喜に満ちた雰囲気"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "jubilant は単なる happy より強く、成功や勝利の喜びを表す。",
     "tags": [
-      "descriptive"
+      "descriptive",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-01899",
@@ -3723,12 +4347,40 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "判断する；裁判官",
-            "definition": "to perform or cause the action expressed by 判断する",
+            "ja": "判断する；評価する",
+            "definition": "to form an opinion about someone or something after considering evidence",
+            "definition_en": "to form an opinion about someone or something after considering evidence",
             "examples": [
               {
-                "en": "The word 'judge' is often useful in formal or everyday English.",
-                "ja": "「judge」は「判断する」の意味で使われます。"
+                "en": "It is difficult to judge the impact of the policy so soon.",
+                "ja": "政策の影響をこれほど早い段階で判断するのは難しい。"
+              }
+            ]
+          },
+          {
+            "ja": "（競技などを）審査する",
+            "definition": "to decide how well people have performed in a competition",
+            "definition_en": "to decide how well people have performed in a competition",
+            "examples": [
+              {
+                "en": "Three experts will judge the final presentations.",
+                "ja": "3人の専門家が最終発表を審査する。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "裁判官；審判員",
+            "definition": "a person who makes decisions in a court or a competition",
+            "definition_en": "a person who makes decisions in a court or a competition",
+            "examples": [
+              {
+                "en": "The judge asked the witness to clarify her statement.",
+                "ja": "裁判官は証人に証言を明確にするよう求めた。"
               }
             ]
           }
@@ -3741,11 +4393,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "judge A by B は「Bを基準にAを判断する」。judge whether ... の形もよく使う。",
     "tags": [
-      "etymology-v1"
+      "etymology-v1",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment",
+    "status": "enriched",
     "search_terms": [
       "judge"
     ],
@@ -3753,7 +4406,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "judge by appearances",
+        "ja": "外見で判断する"
+      },
+      {
+        "text": "judge the quality of",
+        "ja": "～の質を評価する"
+      },
+      {
+        "text": "a federal judge",
+        "ja": "連邦裁判官"
+      }
+    ],
     "etymology": {
       "origin": "Latin jus / juris; judex",
       "history": "judex（jus「法」+ dicere「言う」）から、判断を下す人を表す。",
@@ -3790,6 +4456,14 @@
               {
                 "en": "Teachers must use professional judgment when unusual cases arise.",
                 "ja": "例外的な事例が生じたとき、教師は専門的な判断を用いなければならない。"
+              },
+              {
+                "en": "Good judgment requires weighing evidence rather than relying on first impressions.",
+                "ja": "適切な判断には第一印象ではなく証拠を比較検討することが必要だ。"
+              },
+              {
+                "en": "The committee reserved judgment until more information became available.",
+                "ja": "委員会は追加情報が得られるまで判断を保留した。"
               }
             ],
             "definition_en": "the ability to make sensible decisions, or an opinion or decision formed after consideration"
@@ -3803,9 +4477,10 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Also spelled judgement, especially in British English; judgment is standard in American English.",
+    "usage_note": "judgment（米）/ judgement（英）。exercise judgment「判断力を働かせる」、reserve judgment「判断を保留する」。裁判では「判決」の意味もある。",
     "tags": [
-      "curated-v3.26"
+      "curated-v3.26",
+      "curated-v3.138"
     ],
     "status": "enriched",
     "search_terms": [
@@ -3816,8 +4491,26 @@
       "ipa_uk": null
     },
     "collocations": [
-      "exercise judgment",
-      "sound judgment"
+      {
+        "text": "exercise judgment",
+        "en": "exercise judgment",
+        "ja": "判断力を働かせる"
+      },
+      {
+        "text": "sound judgment",
+        "en": "sound judgment",
+        "ja": "適切な判断"
+      },
+      {
+        "text": "reserve judgment",
+        "en": "reserve judgment",
+        "ja": "判断を保留する"
+      },
+      {
+        "text": "make a judgment",
+        "en": "make a judgment",
+        "ja": "判断を下す"
+      }
     ]
   },
   {
@@ -3840,6 +4533,18 @@
               {
                 "en": "The decision is subject to judicial review.",
                 "ja": "その決定は司法審査の対象となる。"
+              },
+              {
+                "en": "Judicial independence is essential to the rule of law.",
+                "ja": "司法の独立は法の支配に不可欠である。"
+              },
+              {
+                "en": "The court ordered a judicial inquiry into the allegations.",
+                "ja": "裁判所はその申し立てに対する司法調査を命じた。"
+              },
+              {
+                "en": "Judicial oversight helps ensure that government agencies act within the law.",
+                "ja": "司法による監督は行政機関が法律の範囲内で行動することを確保する助けとなる。"
               }
             ],
             "definition_en": "relating to courts, judges, or the administration of justice"
@@ -3853,12 +4558,14 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Do not confuse judicial (courts) with legislative (law-making) or executive (administration).",
+    "usage_note": "judicial は裁判所・裁判官・司法に関する形容詞。legislative（立法の）とは役割が異なる。",
     "tags": [
       "frequency-gap",
       "etymology-v1",
       "curated-v2.57",
-      "curated-v3.27"
+      "curated-v3.27",
+      "curated-v3.115",
+      "curated-v3.174"
     ],
     "status": "enriched",
     "search_terms": [
@@ -3869,9 +4576,31 @@
       "ipa_uk": null
     },
     "collocations": [
-      "judicial system",
-      "judicial review",
-      "judicial independence"
+      {
+        "en": "judicial review",
+        "text": "judicial review",
+        "ja": "司法審査"
+      },
+      {
+        "en": "judicial independence",
+        "text": "judicial independence",
+        "ja": "司法の独立"
+      },
+      {
+        "en": "judicial system",
+        "text": "judicial system",
+        "ja": "司法制度"
+      },
+      {
+        "en": "judicial decision",
+        "text": "judicial decision",
+        "ja": "司法判断"
+      },
+      {
+        "en": "judicial oversight",
+        "text": "judicial oversight",
+        "ja": "司法による監督"
+      }
     ],
     "etymology": {
       "origin": "Latin jus / juris; judex",
@@ -3887,19 +4616,7 @@
         "justice",
         "judge"
       ]
-    },
-    "senses": [
-      {
-        "pos": "",
-        "definition_ja": "司法の；裁判の",
-        "examples": [
-          {
-            "en": "Judicial independence is essential to the rule of law.",
-            "ja": "司法の独立は法の支配に不可欠である。"
-          }
-        ]
-      }
-    ]
+    }
   },
   {
     "id": "sw-12826",
@@ -3973,25 +4690,41 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "賢明に；適切な判断で",
-            "definition": "",
-            "examples": []
+            "ja": "思慮深く；適切に判断して",
+            "definition": "in a careful and sensible way that shows good judgment",
+            "definition_en": "in a careful and sensible way that shows good judgment",
+            "examples": [
+              {
+                "en": "The researchers used the limited budget judiciously.",
+                "ja": "研究者たちは限られた予算を慎重かつ適切に使った。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "use resources judiciously",
+        "ja": "資源を賢明に使う"
+      },
+      {
+        "text": "choose judiciously",
+        "ja": "慎重に選ぶ"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "judiciously は carefully より「判断の賢明さ」を強調する。judicially（司法上）と混同しない。",
     "tags": [
-      "manner-time"
+      "manner-time",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-03860",
@@ -4415,25 +5148,41 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "喜んで飛び付く",
-            "definition": "",
-            "examples": []
+            "ja": "（機会・申し出などに）喜んで飛びつく",
+            "definition": "to accept an opportunity or offer very eagerly",
+            "definition_en": "to accept an opportunity or offer very eagerly",
+            "examples": [
+              {
+                "en": "She jumped at the chance to study abroad.",
+                "ja": "彼女は留学する機会に喜んで飛びついた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "jump at the chance",
+        "ja": "機会に飛びつく"
+      },
+      {
+        "text": "jump at an offer",
+        "ja": "申し出に飛びつく"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "jump at the chance/opportunity/offer が典型。jump at someone は「人に飛びかかる」の意味にもなる。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-09799",
@@ -4456,25 +5205,52 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "飛び込む；話に割り込む",
-            "definition": "",
-            "examples": []
+            "ja": "（会話・活動に）急に加わる；口を挟む",
+            "definition": "to become involved in a conversation or activity without delay",
+            "definition_en": "to become involved in a conversation or activity without delay",
+            "examples": [
+              {
+                "en": "Feel free to jump in if you have a question.",
+                "ja": "質問があれば遠慮なく話に加わってください。"
+              }
+            ]
+          },
+          {
+            "ja": "飛び込む",
+            "definition": "to leap into water or another place",
+            "definition_en": "to leap into water or another place",
+            "examples": [
+              {
+                "en": "The children jumped in as soon as the pool opened.",
+                "ja": "プールが開くと子どもたちはすぐに飛び込んだ。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "jump in with a question",
+        "ja": "質問で会話に加わる"
+      },
+      {
+        "text": "jump in the water",
+        "ja": "水に飛び込む"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "会話での jump in はくだけた表現。物理的な「飛び込む」と文脈で区別する。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12300",
@@ -4579,25 +5355,41 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "びくびくした",
-            "definition": "",
-            "examples": []
+            "ja": "びくびくした；神経過敏な",
+            "definition": "nervous and easily startled by sudden sounds or movements",
+            "definition_en": "nervous and easily startled by sudden sounds or movements",
+            "examples": [
+              {
+                "en": "After the earthquake, the children were jumpy whenever the ground shook.",
+                "ja": "地震の後、子どもたちは地面が揺れるたびにびくびくしていた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "feel jumpy",
+        "ja": "びくびくする"
+      },
+      {
+        "text": "a little jumpy",
+        "ja": "少し神経過敏な"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "informal。jumpy は緊張して刺激に過敏な状態を指す。",
     "tags": [
-      "descriptive"
+      "descriptive",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07411",
@@ -4620,25 +5412,56 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "接合点；交差点",
-            "definition": "",
-            "examples": []
+            "ja": "交差点；分岐点",
+            "definition": "a place where roads or railway lines meet or separate",
+            "definition_en": "a place where roads or railway lines meet or separate",
+            "examples": [
+              {
+                "en": "Turn left at the junction with the main road.",
+                "ja": "幹線道路との交差点を左に曲がってください。"
+              }
+            ]
+          },
+          {
+            "ja": "接合部",
+            "definition": "a place where two things are joined",
+            "definition_en": "a place where two things are joined",
+            "examples": [
+              {
+                "en": "The sensor was installed at the junction of the two pipes.",
+                "ja": "センサーは二つの配管の接合部に設置された。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a road junction",
+        "ja": "道路の交差点"
+      },
+      {
+        "text": "a railway junction",
+        "ja": "鉄道の分岐点"
+      },
+      {
+        "text": "at the junction of",
+        "ja": "～の接合部・交差点で"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "at the junction of A and B。road junction は主に英国英語で一般的。",
     "tags": [
-      "community-travel"
+      "community-travel",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-00350",
@@ -4750,28 +5573,75 @@
     "frequency": 2,
     "parts_of_speech": [
       {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "年少の；下位の",
+            "definition": "younger or lower in rank than another person",
+            "definition_en": "younger or lower in rank than another person",
+            "examples": [
+              {
+                "en": "Junior staff receive additional training during their first year.",
+                "ja": "若手職員は最初の1年間に追加研修を受ける。"
+              }
+            ]
+          }
+        ]
+      },
+      {
         "pos": "noun",
         "meanings": [
           {
-            "ja": "三年生など；年少者",
-            "definition": "",
-            "examples": []
+            "ja": "年少者；後輩",
+            "definition": "a person who is younger or lower in rank",
+            "definition_en": "a person who is younger or lower in rank",
+            "examples": [
+              {
+                "en": "The program pairs each junior with an experienced mentor.",
+                "ja": "その制度では各後輩に経験豊富な指導役をつける。"
+              }
+            ]
+          },
+          {
+            "ja": "（米国の学校で）3年生",
+            "definition": "a student in the third year of a four-year high school or college course in the United States",
+            "definition_en": "a student in the third year of a four-year high school or college course in the United States",
+            "examples": [
+              {
+                "en": "My cousin is a junior at a university in California.",
+                "ja": "いとこはカリフォルニアの大学の3年生だ。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "junior staff",
+        "ja": "若手職員"
+      },
+      {
+        "text": "a junior colleague",
+        "ja": "後輩の同僚"
+      },
+      {
+        "text": "be junior to",
+        "ja": "～より下位である"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "junior to + 人「～より年少・下位」。米国の学年用法と一般的な「若手」を区別する。",
     "tags": [
-      "education-study"
+      "education-study",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10226",
@@ -4795,24 +5665,40 @@
         "meanings": [
           {
             "ja": "短期大学；ジュニアカレッジ",
-            "definition": "",
-            "examples": []
+            "definition": "a college, especially in the United States, that usually offers two-year programs",
+            "definition_en": "a college, especially in the United States, that usually offers two-year programs",
+            "examples": [
+              {
+                "en": "She completed a two-year nursing program at a junior college.",
+                "ja": "彼女はジュニアカレッジで2年間の看護課程を修了した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "attend a junior college",
+        "ja": "短期大学に通う"
+      },
+      {
+        "text": "a two-year junior college",
+        "ja": "2年制の短期大学"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "米国では2年制の教育機関を指すことが多い。日本の「短期大学」と制度が完全に同じとは限らない。",
     "tags": [
-      "education-study"
+      "education-study",
+      "curated-v3.72"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10162",
@@ -4916,6 +5802,10 @@
               {
                 "en": "The court ruled that it lacked jurisdiction over the dispute.",
                 "ja": "裁判所はその紛争について管轄権がないと判断した。"
+              },
+              {
+                "en": "The local court has no jurisdiction over cases filed in another country.",
+                "ja": "その地方裁判所には他国で提起された訴訟を扱う管轄権がない。"
               }
             ]
           },
@@ -4948,7 +5838,8 @@
       "frequency-gap",
       "etymology-v1",
       "curated-v3.03",
-      "curated-v3.55"
+      "curated-v3.55",
+      "curated-v3.160"
     ],
     "status": "enriched",
     "search_terms": [
@@ -4960,19 +5851,29 @@
     },
     "collocations": [
       {
-        "text": "have jurisdiction over"
+        "en": "have jurisdiction over",
+        "text": "have jurisdiction over",
+        "ja": "～に対する管轄権を持つ"
       },
       {
-        "text": "outside the jurisdiction of"
+        "en": "outside the jurisdiction of",
+        "text": "outside the jurisdiction of",
+        "ja": "～の管轄外で"
       },
       {
-        "text": "local jurisdiction"
+        "en": "local jurisdiction",
+        "text": "local jurisdiction",
+        "ja": "地方の管轄区域"
       },
       {
-        "text": "under the jurisdiction of"
+        "en": "under the jurisdiction of",
+        "text": "under the jurisdiction of",
+        "ja": "～の管轄下で"
       },
       {
-        "text": "legal jurisdiction"
+        "en": "legal jurisdiction",
+        "text": "legal jurisdiction",
+        "ja": "法的管轄権"
       }
     ],
     "etymology": {
@@ -5049,15 +5950,54 @@
     "frequency": 5,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adverb",
         "meanings": [
           {
-            "ja": "ちょうど；ただ",
-            "definition": "a person, thing, idea, or concept connected with 'ちょうど；ただ'",
+            "ja": "ちょうど；まさに",
+            "definition": "exactly or precisely",
+            "definition_en": "exactly or precisely",
             "examples": [
               {
-                "en": "This just is important.",
-                "ja": "この「ちょうど」は重要です。"
+                "en": "This is just the evidence we needed.",
+                "ja": "これはまさに私たちが必要としていた証拠だ。"
+              }
+            ]
+          },
+          {
+            "ja": "ほんの；ただ",
+            "definition": "only or merely",
+            "definition_en": "only or merely",
+            "examples": [
+              {
+                "en": "The repair took just ten minutes.",
+                "ja": "修理にはほんの10分しかかからなかった。"
+              }
+            ]
+          },
+          {
+            "ja": "たった今",
+            "definition": "a very short time ago",
+            "definition_en": "a very short time ago",
+            "examples": [
+              {
+                "en": "The train has just left the station.",
+                "ja": "電車はたった今駅を出たところだ。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "公正な；正当な",
+            "definition": "fair and morally right",
+            "definition_en": "fair and morally right",
+            "examples": [
+              {
+                "en": "The committee called for a just distribution of resources.",
+                "ja": "委員会は資源の公正な配分を求めた。"
               }
             ]
           }
@@ -5070,9 +6010,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "just は副詞で「ちょうど・単に・たった今」、形容詞で「公正な」。have just + 過去分詞が頻出。",
+    "tags": [
+      "curated-v3.72"
+    ],
+    "status": "enriched",
     "search_terms": [
       "just"
     ],
@@ -5080,7 +6022,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "just in time",
+        "ja": "ぎりぎり間に合って"
+      },
+      {
+        "text": "just a moment",
+        "ja": "ほんの少しの間"
+      },
+      {
+        "text": "a just society",
+        "ja": "公正な社会"
+      }
+    ]
   },
   {
     "id": "sw-01901",
@@ -5096,19 +6051,36 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "正義；司法",
-            "definition": "a person, thing, state, or idea related to 正義",
+            "ja": "正義；公正",
+            "definition": "fair treatment of people and respect for their rights",
             "examples": [
               {
-                "en": "The word 'justice' is often useful in formal or everyday English.",
-                "ja": "「justice」は「正義」の意味で使われます。"
+                "en": "The campaign calls for justice for victims of discrimination.",
+                "ja": "その運動は差別の被害者に対する公正な扱いを求めている。"
+              },
+              {
+                "en": "The reform aims to ensure equal access to justice for all citizens.",
+                "ja": "その改革はすべての市民に司法への平等なアクセスを保障することを目指す。"
+              }
+            ]
+          },
+          {
+            "ja": "司法；裁判制度",
+            "definition": "the system by which laws are applied and disputes or crimes are judged",
+            "examples": [
+              {
+                "en": "Access to justice should not depend on a person’s income.",
+                "ja": "司法へのアクセスは個人の所得に左右されるべきではない。"
+              },
+              {
+                "en": "The ministry is reviewing how the criminal justice system handles young offenders.",
+                "ja": "同省は刑事司法制度が若年の犯罪者にどう対応するかを見直している。"
               },
               {
                 "en": "Access to justice should not depend on a person's income.",
                 "ja": "司法へのアクセスは個人の所得に左右されるべきではない。"
               }
-            ],
-            "definition_en": "fair treatment according to law or moral principles"
+            ]
           }
         ]
       }
@@ -5119,11 +6091,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "justice is usually uncountable in this sense",
+    "usage_note": "justice は通常不可算名詞。「裁判官」を指す a justice という可算用法もある。",
     "tags": [
       "etymology-v1",
       "curated-v2.57",
-      "curated-v3.32"
+      "curated-v3.32",
+      "curated-v3.112",
+      "curated-v3.138"
     ],
     "status": "enriched",
     "search_terms": [
@@ -5135,14 +6109,30 @@
     },
     "collocations": [
       {
-        "text": "social justice"
+        "text": "social justice",
+        "en": "social justice",
+        "ja": "社会正義"
       },
       {
-        "text": "criminal justice"
+        "text": "criminal justice system",
+        "en": "criminal justice system",
+        "ja": "刑事司法制度"
       },
-      "social justice",
-      "criminal justice",
-      "access to justice"
+      {
+        "text": "access to justice",
+        "en": "access to justice",
+        "ja": "司法へのアクセス"
+      },
+      {
+        "text": "environmental justice",
+        "en": "environmental justice",
+        "ja": "環境正義"
+      },
+      {
+        "text": "the administration of justice",
+        "en": "the administration of justice",
+        "ja": "司法の運営"
+      }
     ],
     "etymology": {
       "origin": "Latin jus / juris; judex",
@@ -5158,19 +6148,7 @@
         "judicial",
         "judge"
       ]
-    },
-    "senses": [
-      {
-        "pos": "",
-        "definition_ja": "正義；公正；司法",
-        "examples": [
-          {
-            "en": "Equal access to justice is a basic principle of the legal system.",
-            "ja": "司法への平等なアクセスは法制度の基本原則である。"
-          }
-        ]
-      }
-    ]
+    }
   },
   {
     "id": "sw-02724",
@@ -5200,6 +6178,14 @@
               {
                 "en": "There is little justification for collecting data that will never be used.",
                 "ja": "決して使われないデータを収集する正当な理由はほとんどない。"
+              },
+              {
+                "en": "There is little justification for excluding those participants.",
+                "ja": "その参加者を除外する根拠はほとんどない。"
+              },
+              {
+                "en": "The committee requested a clear justification for the additional expense.",
+                "ja": "委員会は追加費用について明確な根拠を求めた。"
               }
             ]
           }
@@ -5216,7 +6202,8 @@
     "tags": [
       "curated-v2.53",
       "curated-v3.32",
-      "curated-v3.56"
+      "curated-v3.56",
+      "curated-v3.160"
     ],
     "status": "enriched",
     "search_terms": [
@@ -5228,33 +6215,29 @@
     },
     "collocations": [
       {
-        "text": "provide justification"
+        "en": "provide justification",
+        "text": "provide justification",
+        "ja": "正当化する根拠を示す"
       },
       {
-        "text": "justification for"
+        "en": "justification for",
+        "text": "justification for",
+        "ja": "～の正当な理由"
       },
-      "provide justification",
-      "adequate justification",
-      "justification for",
       {
+        "en": "adequate justification",
+        "text": "adequate justification",
+        "ja": "十分な正当化の根拠"
+      },
+      {
+        "en": "justification for doing something",
         "text": "justification for doing something",
-        "ja": "…することの正当な理由"
+        "ja": "何かをする正当な理由"
       },
       {
+        "en": "provide a justification",
         "text": "provide a justification",
         "ja": "正当化の理由を示す"
-      }
-    ],
-    "senses": [
-      {
-        "pos": "",
-        "definition_ja": "正当化；根拠",
-        "examples": [
-          {
-            "en": "There is little justification for excluding those participants.",
-            "ja": "その参加者を除外する根拠はほとんどない。"
-          }
-        ]
       }
     ]
   },
@@ -5282,6 +6265,18 @@
               {
                 "en": "The potential benefits do not justify the additional risk.",
                 "ja": "潜在的な利益は追加のリスクを正当化するほどではない。"
+              },
+              {
+                "en": "The benefits must be substantial enough to justify the additional cost.",
+                "ja": "追加費用を正当化するには、利益が十分に大きくなければならない。"
+              },
+              {
+                "en": "The potential benefits do not justify the high cost.",
+                "ja": "潜在的な利益だけではその高い費用を正当化できない。"
+              },
+              {
+                "en": "The author must justify the conclusion with evidence rather than personal opinion.",
+                "ja": "筆者は個人的な意見ではなく証拠によって結論を正当化しなければならない。"
               }
             ],
             "definition_en": "to give a good reason for something; to show that something is reasonable"
@@ -5300,13 +6295,15 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "justify doing something",
+    "usage_note": "justify doing something justify + 名詞／動名詞。justify to do は通常用いない。",
     "tags": [
       "v2.32-curated",
       "curated-v2.50",
       "curated-v2.53",
       "curated-v2.66",
-      "curated-v3.32"
+      "curated-v3.32",
+      "curated-v3.126",
+      "curated-v3.162"
     ],
     "status": "enriched",
     "search_terms": [
@@ -5321,25 +6318,39 @@
     },
     "collocations": [
       {
-        "text": "justify a decision"
+        "text": "justify a decision",
+        "en": "justify a decision",
+        "ja": "決定の妥当性を説明する"
       },
       {
-        "text": "justify doing"
+        "text": "justify doing",
+        "en": "justify doing",
+        "ja": "～することを正当化する"
       },
-      "justify a decision",
-      "justify the cost",
-      "difficult to justify"
-    ],
-    "senses": [
       {
-        "pos": "",
-        "definition_ja": "正当化する；根拠を示す",
-        "examples": [
-          {
-            "en": "The potential benefits do not justify the high cost.",
-            "ja": "潜在的な利益だけではその高い費用を正当化できない。"
-          }
-        ]
+        "text": "justify the cost",
+        "en": "justify the cost",
+        "ja": "費用に見合う理由を示す"
+      },
+      {
+        "text": "difficult to justify",
+        "en": "difficult to justify",
+        "ja": "正当化するのが難しい"
+      },
+      {
+        "text": "justify a claim with evidence",
+        "en": "justify a claim with evidence",
+        "ja": "主張を証拠で裏付ける"
+      },
+      {
+        "text": "justify a conclusion",
+        "en": "justify a conclusion",
+        "ja": "結論の根拠を示す"
+      },
+      {
+        "text": "justify the expense",
+        "en": "justify the expense",
+        "ja": "支出の正当性を説明する"
       }
     ]
   },

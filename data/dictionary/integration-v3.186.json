@@ -1,0 +1,1512 @@
+{
+  "version": "v3.186",
+  "base_commit": "56f7e0e7cc9b99b724cf68ad61f35442c7ecf47c",
+  "base_version": "v3.57",
+  "zip_sha256": "88dac458af365ae1b64f6a507d9d540f75b5d56d2d76d5a44925be8af082648a",
+  "preserved_examples": [
+    {
+      "id": "sw-01237",
+      "word": "abandon",
+      "target_ja": "（計画・試みなどを）断念する；中止する",
+      "en": "The team abandoned the plan after the cost became too high.",
+      "ja": "費用が高くなりすぎたためチームは計画を断念しました。"
+    },
+    {
+      "id": "sw-01243",
+      "word": "accompany",
+      "target_ja": "同行する；付き添う",
+      "en": "A teacher will accompany the students on the trip.",
+      "ja": "教員が旅行に生徒たちと同行します。"
+    },
+    {
+      "id": "sw-00663",
+      "word": "admit",
+      "target_ja": "（事実・過失などを）認める",
+      "en": "He admitted that he had made a mistake.",
+      "ja": "彼は自分が間違えたことを認めました。"
+    },
+    {
+      "id": "sw-00029",
+      "word": "afford",
+      "target_ja": "〜を買う・行う金銭的余裕がある",
+      "en": "Many students cannot afford to study abroad for a full year.",
+      "ja": "多くの生徒には1年間留学する金銭的余裕がありません。"
+    },
+    {
+      "id": "sw-02291",
+      "word": "ambiguous",
+      "target_ja": "曖昧な；複数の解釈が可能な",
+      "en": "The survey question was ambiguous, so respondents interpreted it differently.",
+      "ja": "その調査の質問は曖昧だったため、回答者によって解釈が異なった。"
+    },
+    {
+      "id": "sw-02291",
+      "word": "ambiguous",
+      "target_ja": "曖昧な；複数の解釈が可能な",
+      "en": "The wording of the question was ambiguous, so students interpreted it differently.",
+      "ja": "設問の表現が曖昧だったため、生徒によって解釈が異なった。"
+    },
+    {
+      "id": "sw-02291",
+      "word": "ambiguous",
+      "target_ja": "曖昧な；複数の解釈が可能な",
+      "en": "The question was ambiguous, so students interpreted it differently.",
+      "ja": "その質問は曖昧だったため生徒たちは異なる解釈をしました。"
+    },
+    {
+      "id": "sw-00677",
+      "word": "ancient",
+      "target_ja": "古代の",
+      "en": "The museum displays objects from ancient Egypt.",
+      "ja": "その博物館は古代エジプトの品々を展示しています。"
+    },
+    {
+      "id": "sw-01255",
+      "word": "arise",
+      "target_ja": "（問題・状況などが）生じる",
+      "en": "Problems can arise when instructions are unclear.",
+      "ja": "指示が不明確だと問題が生じることがあります。"
+    },
+    {
+      "id": "sw-00074",
+      "word": "arrive",
+      "target_ja": "到着する",
+      "en": "We arrived at the airport two hours before our flight.",
+      "ja": "私たちは飛行機の2時間前に空港に到着しました。"
+    },
+    {
+      "id": "sw-00697",
+      "word": "attempt",
+      "target_ja": "〜を試みる；挑戦する",
+      "en": "They attempted to solve the problem.",
+      "ja": "彼らはその問題を解決しようとしました。"
+    },
+    {
+      "id": "sw-00697",
+      "word": "attempt",
+      "target_ja": "試み；挑戦",
+      "en": "His first attempt ended in failure.",
+      "ja": "彼の最初の試みは失敗に終わりました。"
+    },
+    {
+      "id": "sw-00701",
+      "word": "author",
+      "target_ja": "著者；作家",
+      "en": "The author gives several examples to support her claim.",
+      "ja": "著者は主張を支えるため複数の例を挙げています。"
+    },
+    {
+      "id": "sw-04446",
+      "word": "avalanche",
+      "target_ja": "雪崩",
+      "en": "The avalanche blocked the mountain road.",
+      "ja": "雪崩で山道がふさがれた。"
+    },
+    {
+      "id": "sw-00091",
+      "word": "bad",
+      "target_ja": "悪い；質の低い",
+      "en": "Bad weather delayed our flight.",
+      "ja": "悪天候で私たちの便が遅れました。"
+    },
+    {
+      "id": "sw-02742",
+      "word": "barely",
+      "target_ja": "ほとんど～ない",
+      "en": "The difference was barely noticeable.",
+      "ja": "その違いはほとんど気づかないほどだった。"
+    },
+    {
+      "id": "sw-04675",
+      "word": "bark",
+      "target_ja": "（犬などが）ほえる",
+      "en": "The dog began to bark at the gate.",
+      "ja": "犬が門に向かってほえ始めた。"
+    },
+    {
+      "id": "sw-00096",
+      "word": "basic",
+      "target_ja": "基本的な；基礎の",
+      "en": "Students should learn the basic rules before practicing.",
+      "ja": "生徒は練習前に基本的な規則を学ぶべきです。"
+    },
+    {
+      "id": "sw-02629",
+      "word": "basically",
+      "target_ja": "ほぼ；実質的に",
+      "en": "The two proposals are basically the same, although the details differ.",
+      "ja": "細部は異なるが、二つの提案は基本的に同じである。"
+    },
+    {
+      "id": "sw-00100",
+      "word": "beautiful",
+      "target_ja": "美しい",
+      "en": "The garden is beautiful in spring.",
+      "ja": "その庭は春になると美しいです。"
+    },
+    {
+      "id": "sw-00121",
+      "word": "book",
+      "target_ja": "本；書籍",
+      "en": "I borrowed a book about birds.",
+      "ja": "私は鳥についての本を借りました。"
+    },
+    {
+      "id": "sw-07921",
+      "word": "boycott",
+      "target_ja": "不買運動；参加拒否",
+      "en": "Consumers organized a boycott of the company's products.",
+      "ja": "消費者はその会社の製品の不買運動を組織した。"
+    },
+    {
+      "id": "sw-01535",
+      "word": "breed",
+      "target_ja": "（問題・感情などを）生み出す",
+      "en": "Persistent inequality can breed resentment and distrust.",
+      "ja": "根強い格差は憤りや不信を生むことがある。"
+    },
+    {
+      "id": "sw-00137",
+      "word": "buy",
+      "target_ja": "買う",
+      "en": "I bought some flowers for my mother.",
+      "ja": "母のために花を買いました。"
+    },
+    {
+      "id": "sw-00139",
+      "word": "call",
+      "target_ja": "呼ぶ；電話する",
+      "en": "We call this game SushiTan.",
+      "ja": "私たちはこのゲームをすし単と呼びます。"
+    },
+    {
+      "id": "sw-00139",
+      "word": "call",
+      "target_ja": "呼ぶ；電話する",
+      "en": "I'll call you tonight.",
+      "ja": "今夜電話します。"
+    },
+    {
+      "id": "sw-00139",
+      "word": "call",
+      "target_ja": "大声で呼びかける",
+      "en": "She called my name from the other side of the street.",
+      "ja": "彼女は通りの反対側から私の名前を呼びました。"
+    },
+    {
+      "id": "sw-00139",
+      "word": "call",
+      "target_ja": "呼び寄せる；招集する",
+      "en": "They called a technician to repair the heater.",
+      "ja": "彼らは暖房器具を直すために技術者を呼びました。"
+    },
+    {
+      "id": "sw-00139",
+      "word": "call",
+      "target_ja": "電話；通話",
+      "en": "I missed your call while I was on the train.",
+      "ja": "電車に乗っている間に、あなたからの電話に出られませんでした。"
+    },
+    {
+      "id": "sw-00139",
+      "word": "call",
+      "target_ja": "判断；決定",
+      "en": "Whether to cancel the trip is your call.",
+      "ja": "旅行を中止するかどうかは、あなたの判断に任せます。"
+    },
+    {
+      "id": "sw-09447",
+      "word": "call off",
+      "target_ja": "（予定・行事などを）中止する",
+      "en": "Officials called off the event because of the storm.",
+      "ja": "当局は嵐のため行事を中止した。"
+    },
+    {
+      "id": "sw-00743",
+      "word": "career",
+      "target_ja": "職業人生；経歴",
+      "en": "She hopes to pursue a career in journalism.",
+      "ja": "彼女はジャーナリズムの仕事に進みたいと考えています。"
+    },
+    {
+      "id": "sw-03269",
+      "word": "carrier",
+      "target_ja": "運送会社；航空会社",
+      "en": "Low-cost carriers have transformed regional air travel.",
+      "ja": "格安航空会社は地域の航空旅行を大きく変えた。"
+    },
+    {
+      "id": "sw-02207",
+      "word": "casual",
+      "target_ja": "臨時の；非正規の",
+      "en": "The company relies heavily on casual workers during peak periods.",
+      "ja": "その会社は繁忙期に臨時労働者へ大きく依存している。"
+    },
+    {
+      "id": "sw-00986",
+      "word": "central",
+      "target_ja": "主要な；極めて重要な",
+      "en": "Trust is central to a good working relationship.",
+      "ja": "信頼はよい仕事上の関係にとって中心的です。"
+    },
+    {
+      "id": "sw-00750",
+      "word": "century",
+      "target_ja": "世紀；100年間",
+      "en": "The city grew rapidly during the twentieth century.",
+      "ja": "その都市は20世紀に急速に発展しました。"
+    },
+    {
+      "id": "sw-07767",
+      "word": "charitable",
+      "target_ja": "慈善の；慈善活動に関する",
+      "en": "The organization relies heavily on charitable donations.",
+      "ja": "その団体は慈善寄付に大きく依存している。"
+    },
+    {
+      "id": "sw-01555",
+      "word": "chemistry",
+      "target_ja": "化学",
+      "en": "Understanding basic chemistry is essential for studying many environmental processes.",
+      "ja": "多くの環境過程を学ぶには基礎化学の理解が不可欠である。"
+    },
+    {
+      "id": "sw-00156",
+      "word": "child",
+      "target_ja": "子ども",
+      "en": "Each child chose a book to take home.",
+      "ja": "子どもたちはそれぞれ、家に持ち帰る本を選びました。"
+    },
+    {
+      "id": "sw-01562",
+      "word": "civilization",
+      "target_ja": "文明；文明社会",
+      "en": "Writing transformed the way early civilizations preserved knowledge.",
+      "ja": "文字は初期文明が知識を保存する方法を変えた。"
+    },
+    {
+      "id": "sw-00160",
+      "word": "class",
+      "target_ja": "授業",
+      "en": "Our English class begins at nine.",
+      "ja": "英語の授業は九時に始まります。"
+    },
+    {
+      "id": "sw-00160",
+      "word": "class",
+      "target_ja": "クラス；学級",
+      "en": "There are twenty students in my class.",
+      "ja": "私のクラスには二十人の生徒がいます。"
+    },
+    {
+      "id": "sw-10035",
+      "word": "cogently",
+      "target_ja": "論理的かつ説得力をもって",
+      "en": "She argued cogently that the evidence did not support the conclusion.",
+      "ja": "彼女は証拠がその結論を支持しないと明快かつ説得的に論じた。"
+    },
+    {
+      "id": "sw-10031",
+      "word": "coherently",
+      "target_ja": "筋道立てて；一貫性をもって",
+      "en": "Candidates must be able to express their ideas coherently.",
+      "ja": "受験者は自分の考えを筋道立てて表現できなければならない。"
+    },
+    {
+      "id": "sw-07563",
+      "word": "collaboratively",
+      "target_ja": "共同で；協働して",
+      "en": "The two teams worked collaboratively to analyze the data.",
+      "ja": "二つのチームは協力してデータを分析した。"
+    },
+    {
+      "id": "sw-01578",
+      "word": "combination",
+      "target_ja": "組み合わせ；結合",
+      "en": "The result reflects a combination of economic and social factors.",
+      "ja": "その結果は経済的要因と社会的要因の組み合わせを反映している。"
+    },
+    {
+      "id": "sw-01270",
+      "word": "combine",
+      "target_ja": "〜を組み合わせる；統合する",
+      "en": "The course combines reading practice with vocabulary study.",
+      "ja": "その講座は読解練習と語彙学習を組み合わせています。"
+    },
+    {
+      "id": "sw-06235",
+      "word": "commend",
+      "target_ja": "称賛する；高く評価する",
+      "en": "The panel commended the researchers for making their data public.",
+      "ja": "委員会はデータを公開した研究者たちを称賛した。"
+    },
+    {
+      "id": "sw-01586",
+      "word": "committee",
+      "target_ja": "委員会",
+      "en": "The committee recommended further research before implementation.",
+      "ja": "委員会は実施前にさらなる研究を推奨した。"
+    },
+    {
+      "id": "sw-02992",
+      "word": "comparative",
+      "target_ja": "比較の；比較的な",
+      "en": "The study takes a comparative approach to education policy in three countries.",
+      "ja": "その研究は3か国の教育政策に比較的アプローチを取っている。"
+    },
+    {
+      "id": "sw-03075",
+      "word": "compatibility",
+      "target_ja": "互換性；適合性",
+      "en": "The update caused compatibility problems with older software.",
+      "ja": "その更新により古いソフトウェアとの互換性問題が生じた。"
+    },
+    {
+      "id": "sw-01589",
+      "word": "compensation",
+      "target_ja": "（労働への）報酬；給与",
+      "en": "Workers demanded fair compensation for the additional hours.",
+      "ja": "労働者は追加労働時間に対する公正な補償を求めた。"
+    },
+    {
+      "id": "sw-01593",
+      "word": "complaint",
+      "target_ja": "苦情；不満の申し立て",
+      "en": "The agency received hundreds of complaints about the new system.",
+      "ja": "その機関は新制度について数百件の苦情を受けた。"
+    },
+    {
+      "id": "sw-12865",
+      "word": "compliant",
+      "target_ja": "規則・基準に適合した",
+      "en": "All products must be compliant with the new safety standard.",
+      "ja": "すべての製品は新しい安全基準に適合していなければならない。"
+    },
+    {
+      "id": "sw-01598",
+      "word": "compose",
+      "target_ja": "構成する",
+      "en": "Women compose more than half of the research team.",
+      "ja": "女性は研究チームの半数以上を構成している。"
+    },
+    {
+      "id": "sw-01599",
+      "word": "composition",
+      "target_ja": "構成；組成",
+      "en": "The chemical composition of the samples varied considerably.",
+      "ja": "試料の化学組成はかなり異なっていた。"
+    },
+    {
+      "id": "sw-06544",
+      "word": "comprehensible",
+      "target_ja": "理解できる；分かりやすい",
+      "en": "The report should be comprehensible to non-specialist readers.",
+      "ja": "報告書は専門家でない読者にも理解できるものであるべきだ。"
+    },
+    {
+      "id": "sw-02689",
+      "word": "computation",
+      "target_ja": "計算；計算処理",
+      "en": "Modern climate models require enormous amounts of computation.",
+      "ja": "現代の気候モデルには膨大な計算処理が必要である。"
+    },
+    {
+      "id": "sw-01604",
+      "word": "conceal",
+      "target_ja": "隠す；秘密にする",
+      "en": "The company was accused of concealing important safety information.",
+      "ja": "その会社は重要な安全情報を隠したとして非難された。"
+    },
+    {
+      "id": "sw-03076",
+      "word": "conception",
+      "target_ja": "概念；考え方；理解",
+      "en": "The study challenges the traditional conception of intelligence.",
+      "ja": "その研究は知能についての従来の考え方に異議を唱えている。"
+    },
+    {
+      "id": "sw-01608",
+      "word": "conceptual",
+      "target_ja": "概念上の；概念的な",
+      "en": "The paper provides a useful conceptual framework for the analysis.",
+      "ja": "その論文は分析に有用な概念的枠組みを提供する。"
+    },
+    {
+      "id": "sw-01609",
+      "word": "concerning",
+      "target_ja": "～に関して；～について",
+      "en": "New evidence concerning the incident emerged last week.",
+      "ja": "その事件に関する新たな証拠が先週明らかになった。"
+    },
+    {
+      "id": "sw-10575",
+      "word": "concise",
+      "target_ja": "簡潔で要点を押さえた",
+      "en": "A good abstract should be concise and informative.",
+      "ja": "良い要旨は簡潔で情報量があるべきだ。"
+    },
+    {
+      "id": "sw-00778",
+      "word": "confidence",
+      "target_ja": "自信；自分の能力への信頼",
+      "en": "Regular speaking practice helped build her confidence.",
+      "ja": "定期的なスピーキング練習が彼女の自信を高めました。"
+    },
+    {
+      "id": "sw-00779",
+      "word": "confirm",
+      "target_ja": "（予約・予定などを）確定する",
+      "en": "Please confirm your reservation by Friday.",
+      "ja": "金曜日までに予約を確認してください。"
+    },
+    {
+      "id": "sw-02743",
+      "word": "consequently",
+      "target_ja": "その結果；したがって",
+      "en": "Demand fell sharply and, consequently, several factories closed.",
+      "ja": "需要が急減し、その結果いくつかの工場が閉鎖された。"
+    },
+    {
+      "id": "sw-03080",
+      "word": "consolidate",
+      "target_ja": "（組織・業務などを）統合する",
+      "en": "The reform consolidated several agencies into one organization.",
+      "ja": "改革によって複数の機関が一つの組織に統合された。"
+    },
+    {
+      "id": "sw-03081",
+      "word": "constituent",
+      "target_ja": "（選挙区の）有権者；住民",
+      "en": "Lawmakers received thousands of messages from constituents.",
+      "ja": "議員たちは有権者から何千件ものメッセージを受け取った。"
+    },
+    {
+      "id": "sw-01627",
+      "word": "construction",
+      "target_ja": "建設；建築",
+      "en": "Construction of the new rail line will begin next year.",
+      "ja": "新しい鉄道路線の建設は来年始まる。"
+    },
+    {
+      "id": "sw-01628",
+      "word": "consultant",
+      "target_ja": "専門コンサルタント；助言を行う専門家",
+      "en": "The hospital hired a consultant to improve its data systems.",
+      "ja": "病院はデータシステム改善のためコンサルタントを雇った。"
+    },
+    {
+      "id": "sw-00783",
+      "word": "contain",
+      "target_ja": "〜を含む；中に持つ",
+      "en": "This drink contains no added sugar.",
+      "ja": "この飲み物には砂糖が添加されていません。"
+    },
+    {
+      "id": "sw-00783",
+      "word": "contain",
+      "target_ja": "（感染・被害・感情などを）抑える",
+      "en": "Firefighters worked to contain the fire.",
+      "ja": "消防士たちは火災の拡大を食い止めようとしました。"
+    },
+    {
+      "id": "sw-02692",
+      "word": "contamination",
+      "target_ja": "汚染；混入",
+      "en": "Tests revealed contamination of the groundwater.",
+      "ja": "検査により地下水の汚染が判明した。"
+    },
+    {
+      "id": "sw-01634",
+      "word": "contempt",
+      "target_ja": "軽蔑；侮蔑",
+      "en": "The ruling was criticized as showing contempt for basic rights.",
+      "ja": "その判決は基本的権利を軽視していると批判された。"
+    },
+    {
+      "id": "sw-01636",
+      "word": "continual",
+      "target_ja": "繰り返し起こる；絶え間ない",
+      "en": "Continual changes to the rules created confusion.",
+      "ja": "規則の度重なる変更が混乱を生んだ。"
+    },
+    {
+      "id": "sw-08046",
+      "word": "contractual",
+      "target_ja": "契約上の；契約に基づく",
+      "en": "The company failed to meet its contractual obligations.",
+      "ja": "その会社は契約上の義務を果たさなかった。"
+    },
+    {
+      "id": "sw-01641",
+      "word": "controversial",
+      "target_ja": "議論を呼ぶ；論争の的となる",
+      "en": "The proposal remains controversial because its long-term effects are uncertain.",
+      "ja": "長期的影響が不確かなため、その提案は依然として議論を呼んでいる。"
+    },
+    {
+      "id": "sw-01643",
+      "word": "convention",
+      "target_ja": "条約；協定",
+      "en": "The treaty established an important international convention on human rights.",
+      "ja": "その条約は人権に関する重要な国際協定を確立した。"
+    },
+    {
+      "id": "sw-01645",
+      "word": "conversion",
+      "target_ja": "転換；変換",
+      "en": "The conversion of offices into housing has accelerated.",
+      "ja": "オフィスを住宅へ転用する動きが加速している。"
+    },
+    {
+      "id": "sw-01647",
+      "word": "conviction",
+      "target_ja": "強い確信；信念",
+      "en": "She argued with conviction that the reform was necessary.",
+      "ja": "彼女は改革が必要だと確信をもって主張した。"
+    },
+    {
+      "id": "sw-02534",
+      "word": "convince",
+      "target_ja": "（人を）納得させる；確信させる",
+      "en": "The evidence convinced policymakers that further action was necessary.",
+      "ja": "その証拠は政策立案者にさらなる行動が必要だと納得させた。"
+    },
+    {
+      "id": "sw-01651",
+      "word": "coordination",
+      "target_ja": "調整；連携",
+      "en": "Better coordination between agencies could reduce delays.",
+      "ja": "機関間の連携改善により遅延を減らせる可能性がある。"
+    },
+    {
+      "id": "sw-01662",
+      "word": "coverage",
+      "target_ja": "報道；取材",
+      "en": "Media coverage of the issue increased after the report was released.",
+      "ja": "報告書の公表後、その問題に関する報道が増えた。"
+    },
+    {
+      "id": "sw-01670",
+      "word": "crisis",
+      "target_ja": "危機；重大な局面",
+      "en": "The housing crisis has pushed rents to record levels.",
+      "ja": "住宅危機によって家賃は過去最高水準に押し上げられた。"
+    },
+    {
+      "id": "sw-02825",
+      "word": "cybersecurity",
+      "target_ja": "サイバーセキュリティ；情報システムの安全対策",
+      "en": "Hospitals are investing heavily in cybersecurity after recent attacks.",
+      "ja": "病院は最近の攻撃を受け、サイバーセキュリティに多額の投資をしている。"
+    },
+    {
+      "id": "sw-00192",
+      "word": "day",
+      "target_ja": "日；一日",
+      "en": "The journey takes two days.",
+      "ja": "その旅には二日かかります。"
+    },
+    {
+      "id": "sw-00192",
+      "word": "day",
+      "target_ja": "昼；日中",
+      "en": "Owls often sleep during the day.",
+      "ja": "フクロウは昼間に眠ることがよくあります。"
+    },
+    {
+      "id": "sw-02536",
+      "word": "declare",
+      "target_ja": "（非常事態・独立などを）正式に宣言する",
+      "en": "The government declared a state of emergency after the earthquake.",
+      "ja": "政府は地震後に非常事態を宣言した."
+    },
+    {
+      "id": "sw-02711",
+      "word": "dedication",
+      "target_ja": "献身；熱心な取り組み",
+      "en": "Her dedication to the project kept the team focused during setbacks.",
+      "ja": "彼女のプロジェクトへの献身が、困難な時期にもチームの集中を保った."
+    },
+    {
+      "id": "sw-00807",
+      "word": "degree",
+      "target_ja": "程度；度合い",
+      "en": "The policy was successful to some degree.",
+      "ja": "その政策はある程度成功しました。"
+    },
+    {
+      "id": "sw-03086",
+      "word": "deliberation",
+      "target_ja": "熟考；慎重な検討",
+      "en": "After lengthy deliberation, the committee approved the proposal.",
+      "ja": "長時間の審議の末、委員会は提案を承認した."
+    },
+    {
+      "id": "sw-01699",
+      "word": "demonstration",
+      "target_ja": "実演；説明のための実証",
+      "en": "The experiment provides a clear demonstration of the effect.",
+      "ja": "その実験はその効果を明確に実証している."
+    },
+    {
+      "id": "sw-00197",
+      "word": "describe",
+      "target_ja": "〜を描写する；説明する",
+      "en": "Describe the main trend shown in the graph.",
+      "ja": "グラフに示された主な傾向を説明してください。"
+    },
+    {
+      "id": "sw-03222",
+      "word": "designate",
+      "target_ja": "（場所・物を）正式に指定する",
+      "en": "The area was designated as a protected habitat.",
+      "ja": "その地域は保護生息地に指定された."
+    },
+    {
+      "id": "sw-01710",
+      "word": "destruction",
+      "target_ja": "破壊；壊滅",
+      "en": "Deforestation leads to the destruction of important habitats.",
+      "ja": "森林伐採は重要な生息地の破壊につながる."
+    },
+    {
+      "id": "sw-01712",
+      "word": "detection",
+      "target_ja": "発見；検出",
+      "en": "Early detection greatly improves the chances of successful treatment.",
+      "ja": "早期発見は治療成功の可能性を大きく高める."
+    },
+    {
+      "id": "sw-01714",
+      "word": "devote",
+      "target_ja": "（時間・労力・資源を）ささげる；充てる",
+      "en": "The course devotes considerable attention to academic writing.",
+      "ja": "その講座はアカデミック・ライティングにかなりの時間を割いている."
+    },
+    {
+      "id": "sw-01716",
+      "word": "differ",
+      "target_ja": "異なる；違いがある",
+      "en": "The two studies differ significantly in their methodology.",
+      "ja": "二つの研究は方法論が大きく異なる."
+    },
+    {
+      "id": "sw-00205",
+      "word": "difficult",
+      "target_ja": "難しい；困難な",
+      "en": "It was difficult to find the entrance.",
+      "ja": "入り口を見つけるのは難しかったです。"
+    },
+    {
+      "id": "sw-02827",
+      "word": "digitalization",
+      "target_ja": "デジタル化；デジタル技術による業務変革",
+      "en": "Digitalization has changed how public services are delivered.",
+      "ja": "デジタル化は公共サービスの提供方法を変えた."
+    },
+    {
+      "id": "sw-01721",
+      "word": "disability",
+      "target_ja": "障害；心身の機能上の制約",
+      "en": "The law requires employers to provide reasonable support for workers with disabilities.",
+      "ja": "法律は雇用主に障害のある労働者への合理的な支援を求めている."
+    },
+    {
+      "id": "sw-01724",
+      "word": "discipline",
+      "target_ja": "学問分野；専門領域",
+      "en": "The issue is studied across several academic disciplines.",
+      "ja": "その問題はいくつかの学問分野にまたがって研究されている。"
+    },
+    {
+      "id": "sw-02694",
+      "word": "disclosure",
+      "target_ja": "（情報の）開示；公表",
+      "en": "The rules require full disclosure of potential conflicts of interest.",
+      "ja": "規則は潜在的な利益相反の完全な開示を求めている."
+    },
+    {
+      "id": "sw-01728",
+      "word": "dismiss",
+      "target_ja": "（意見・懸念を）退ける；軽視する",
+      "en": "It would be a mistake to dismiss the findings as irrelevant.",
+      "ja": "その研究結果を無関係だとして退けるのは誤りだろう."
+    },
+    {
+      "id": "sw-01733",
+      "word": "distinction",
+      "target_ja": "区別；違い",
+      "en": "The study draws an important distinction between correlation and causation.",
+      "ja": "その研究は相関関係と因果関係を重要な点で区別している."
+    },
+    {
+      "id": "sw-00222",
+      "word": "economic",
+      "target_ja": "経済の；経済に関する",
+      "en": "The report discusses the economic effects of tourism.",
+      "ja": "その報告書は観光の経済的影響を論じています。"
+    },
+    {
+      "id": "sw-01762",
+      "word": "empirical",
+      "target_ja": "実証的な；観察・実験に基づく",
+      "en": "The claim needs empirical evidence before it can be accepted.",
+      "ja": "その主張を受け入れるには実証的な証拠が必要である。"
+    },
+    {
+      "id": "sw-01762",
+      "word": "empirical",
+      "target_ja": "実証的な；観察・実験に基づく",
+      "en": "The theory is supported by empirical evidence from several countries.",
+      "ja": "その理論は複数の国から得られた実証的証拠に支えられている。"
+    },
+    {
+      "id": "sw-02318",
+      "word": "encompass",
+      "target_ja": "（広い範囲の物事を）含む；網羅する",
+      "en": "The concept encompasses economic, social, and environmental factors.",
+      "ja": "その概念は経済・社会・環境の要因を包含する。"
+    },
+    {
+      "id": "sw-01290",
+      "word": "examine",
+      "target_ja": "〜を詳しく調べる；検討する",
+      "en": "The study examines how children use social media.",
+      "ja": "その研究は子どもたちのSNS利用を詳しく調べています。"
+    },
+    {
+      "id": "sw-02718",
+      "word": "facilitation",
+      "target_ja": "（議論・会議の）進行支援",
+      "en": "Skilled facilitation helped the two groups reach an agreement.",
+      "ja": "熟練した進行支援により、二つのグループは合意に達した。"
+    },
+    {
+      "id": "sw-02671",
+      "word": "familiarity",
+      "target_ja": "熟知；よく知っていること",
+      "en": "Familiarity with the software is essential for this role.",
+      "ja": "この職務にはそのソフトウェアへの習熟が不可欠である。"
+    },
+    {
+      "id": "sw-00246",
+      "word": "family",
+      "target_ja": "家族",
+      "en": "Our family gets together every winter.",
+      "ja": "私たちの家族は毎年冬に集まります。"
+    },
+    {
+      "id": "sw-13475",
+      "word": "flawless",
+      "target_ja": "欠点のない；申し分のない",
+      "en": "The system performed almost flawlessly during the trial.",
+      "ja": "そのシステムは試験中ほぼ完璧に作動した。"
+    },
+    {
+      "id": "sw-00275",
+      "word": "friend",
+      "target_ja": "友人；友達",
+      "en": "My friend helped me carry the boxes.",
+      "ja": "友人が箱を運ぶのを手伝ってくれました。"
+    },
+    {
+      "id": "sw-00288",
+      "word": "good",
+      "target_ja": "よい；優れた",
+      "en": "This is a good place for a picnic.",
+      "ja": "ここはピクニックに良い場所です。"
+    },
+    {
+      "id": "sw-00313",
+      "word": "home",
+      "target_ja": "家；家庭",
+      "en": "They invited us into their home.",
+      "ja": "彼らは私たちを自宅に招いてくれました。"
+    },
+    {
+      "id": "sw-00313",
+      "word": "home",
+      "target_ja": "家へ；家で",
+      "en": "I usually walk home from school.",
+      "ja": "私は普段、学校から歩いて帰ります。"
+    },
+    {
+      "id": "sw-00888",
+      "word": "imagine",
+      "target_ja": "〜を想像する；心に思い描く",
+      "en": "Imagine how the city might look fifty years from now.",
+      "ja": "50年後の都市がどう見えるか想像してください。"
+    },
+    {
+      "id": "sw-04066",
+      "word": "impatient",
+      "target_ja": "（待たされて）いらいらした",
+      "en": "The passengers grew impatient as the delay continued.",
+      "ja": "遅れが続くにつれて乗客はいらいらしてきた。"
+    },
+    {
+      "id": "sw-00340",
+      "word": "interest",
+      "target_ja": "興味；関心",
+      "en": "Her interest in other cultures began when she studied abroad.",
+      "ja": "彼女の異文化への関心は留学したときに始まりました。"
+    },
+    {
+      "id": "sw-01901",
+      "word": "justice",
+      "target_ja": "司法；裁判制度",
+      "en": "Access to justice should not depend on a person's income.",
+      "ja": "司法へのアクセスは個人の所得に左右されるべきではない。"
+    },
+    {
+      "id": "sw-00363",
+      "word": "learn",
+      "target_ja": "学ぶ；身につける",
+      "en": "We learn a new song every week.",
+      "ja": "私たちは毎週、新しい歌を習います。"
+    },
+    {
+      "id": "sw-00364",
+      "word": "leave",
+      "target_ja": "去る；出発する",
+      "en": "We leave at seven.",
+      "ja": "私たちは7時に出発します。"
+    },
+    {
+      "id": "sw-00364",
+      "word": "leave",
+      "target_ja": "〜のままにしておく",
+      "en": "Leave the door open.",
+      "ja": "ドアを開けたままにしてください。"
+    },
+    {
+      "id": "sw-00371",
+      "word": "life",
+      "target_ja": "人生；生命；生活",
+      "en": "He spent most of his life near the sea.",
+      "ja": "彼は人生の大半を海の近くで過ごしました。"
+    },
+    {
+      "id": "sw-00371",
+      "word": "life",
+      "target_ja": "人生；生命；生活",
+      "en": "Scientists look for signs of life on other planets.",
+      "ja": "科学者たちは他の惑星に生命の痕跡を探しています。"
+    },
+    {
+      "id": "sw-00902",
+      "word": "likely",
+      "target_ja": "可能性が高い；起こりそうな",
+      "en": "Rain is likely this afternoon.",
+      "ja": "今日の午後は雨が降る可能性が高いです。"
+    },
+    {
+      "id": "sw-00380",
+      "word": "long",
+      "target_ja": "長い",
+      "en": "It was a long journey, but we enjoyed it.",
+      "ja": "長い旅でしたが、私たちは楽しみました。"
+    },
+    {
+      "id": "sw-02879",
+      "word": "magic",
+      "target_ja": "魔法；魔力",
+      "en": "The children watched in amazement as the magician performed his magic.",
+      "ja": "子どもたちは手品師の魔法を驚いて見ていました。"
+    },
+    {
+      "id": "sw-03133",
+      "word": "magnitude",
+      "target_ja": "規模；大きさ",
+      "en": "Officials underestimated the magnitude of the economic impact.",
+      "ja": "当局は経済的影響の大きさを過小評価していた。"
+    },
+    {
+      "id": "sw-03134",
+      "word": "malnutrition",
+      "target_ja": "栄養不良；栄養失調",
+      "en": "The program provides meals to children at risk of malnutrition.",
+      "ja": "その事業は栄養不良の恐れがある子どもたちに食事を提供します。"
+    },
+    {
+      "id": "sw-00905",
+      "word": "manage",
+      "target_ja": "管理する；運営する",
+      "en": "She manages a team of twelve people.",
+      "ja": "彼女は12人のチームを管理しています。"
+    },
+    {
+      "id": "sw-02839",
+      "word": "mass",
+      "target_ja": "大量；塊；質量",
+      "en": "A large mass of people gathered outside.",
+      "ja": "大勢の人々が外に集まった。"
+    },
+    {
+      "id": "sw-00396",
+      "word": "mean",
+      "target_ja": "〜するつもりである",
+      "en": "I didn't mean to hurt you.",
+      "ja": "あなたを傷つけるつもりではありませんでした。"
+    },
+    {
+      "id": "sw-06706",
+      "word": "microbe",
+      "target_ja": "微生物（特に細菌など）",
+      "en": "Some microbes are useful in producing food.",
+      "ja": "食品の生産に役立つ微生物もあります。"
+    },
+    {
+      "id": "sw-02871",
+      "word": "motor",
+      "target_ja": "モーター；原動機",
+      "en": "A small electric motor powers the fan.",
+      "ja": "小型の電動モーターがその扇風機を動かしています。"
+    },
+    {
+      "id": "sw-03289",
+      "word": "navigation",
+      "target_ja": "航行；航法",
+      "en": "Satellite navigation has transformed travel in unfamiliar areas.",
+      "ja": "衛星ナビゲーションは不慣れな地域での移動を大きく変えた。"
+    },
+    {
+      "id": "sw-08039",
+      "word": "negligibly",
+      "target_ja": "無視できるほどわずかに",
+      "en": "The two methods differed only negligibly in accuracy.",
+      "ja": "二つの方法の精度差は無視できるほど小さかった。"
+    },
+    {
+      "id": "sw-07594",
+      "word": "negotiable",
+      "target_ja": "交渉可能な；協議して変更できる",
+      "en": "The starting salary is negotiable depending on experience.",
+      "ja": "初任給は経験に応じて交渉可能である。"
+    },
+    {
+      "id": "sw-13241",
+      "word": "net profit",
+      "target_ja": "純利益；最終利益",
+      "en": "Net profit rose despite a decline in total sales.",
+      "ja": "総売上が減少したにもかかわらず純利益は増加した。"
+    },
+    {
+      "id": "sw-08411",
+      "word": "nonbiodegradable",
+      "target_ja": "生分解されない；微生物で分解されにくい",
+      "en": "Nonbiodegradable waste can remain in the environment for decades.",
+      "ja": "非生分解性の廃棄物は何十年も環境中に残ることがある。"
+    },
+    {
+      "id": "sw-13138",
+      "word": "nondisclosure agreement",
+      "target_ja": "秘密保持契約；守秘義務契約",
+      "en": "Employees signed a nondisclosure agreement before joining the project.",
+      "ja": "従業員はプロジェクト参加前に秘密保持契約へ署名した。"
+    },
+    {
+      "id": "sw-07761",
+      "word": "nongovernmental",
+      "target_ja": "政府に属さない；非政府の",
+      "en": "Nongovernmental organizations provided emergency aid after the disaster.",
+      "ja": "災害後、非政府組織が緊急援助を提供した。"
+    },
+    {
+      "id": "sw-07654",
+      "word": "nonrefundable",
+      "target_ja": "返金不可の；払い戻しできない",
+      "en": "The booking fee is nonrefundable once payment is confirmed.",
+      "ja": "予約手数料は支払い確定後は返金されない。"
+    },
+    {
+      "id": "sw-08426",
+      "word": "nonrenewable",
+      "target_ja": "再生可能でない；使うと短期間には補充されない",
+      "en": "The economy remains heavily dependent on nonrenewable energy sources.",
+      "ja": "その経済は依然として非再生可能エネルギー源に大きく依存している。"
+    },
+    {
+      "id": "sw-08349",
+      "word": "normalize",
+      "target_ja": "標準化する；（データを）正規化する",
+      "en": "The researchers normalized the data before comparing the two groups.",
+      "ja": "研究者たちは二群を比較する前にデータを正規化した。"
+    },
+    {
+      "id": "sw-08065",
+      "word": "nullify",
+      "target_ja": "（契約・決定などを）法的に無効にする",
+      "en": "The court ruling could nullify the earlier agreement.",
+      "ja": "その裁判所の判断は以前の合意を無効にする可能性がある。"
+    },
+    {
+      "id": "sw-10481",
+      "word": "numeracy",
+      "target_ja": "数的リテラシー；数を理解して使う能力",
+      "en": "Schools are placing greater emphasis on literacy and numeracy.",
+      "ja": "学校は読み書き能力と数的能力をより重視している。"
+    },
+    {
+      "id": "sw-08203",
+      "word": "numerically",
+      "target_ja": "数値の上で；数を用いて",
+      "en": "The groups were numerically similar but differed greatly in age.",
+      "ja": "二つの集団は人数ではほぼ同じだったが、年齢は大きく異なった。"
+    },
+    {
+      "id": "sw-03996",
+      "word": "pace",
+      "target_ja": "（不安などで）行ったり来たり歩く",
+      "en": "He paced the hallway while waiting for the news.",
+      "ja": "知らせを待つ間、彼は廊下を行ったり来たりした。"
+    },
+    {
+      "id": "sw-02482",
+      "word": "package",
+      "target_ja": "小包；包装された荷物",
+      "en": "A package arrived for you this morning.",
+      "ja": "今朝あなた宛ての荷物が届きました。"
+    },
+    {
+      "id": "sw-00457",
+      "word": "page",
+      "target_ja": "（本・資料の）ページ",
+      "en": "Turn to page twenty and read the first paragraph.",
+      "ja": "20ページを開いて最初の段落を読んでください。"
+    },
+    {
+      "id": "sw-01092",
+      "word": "paint",
+      "target_ja": "（壁などに）ペンキを塗る",
+      "en": "They painted the classroom walls during the summer.",
+      "ja": "彼らは夏休みに教室の壁を塗りました。"
+    },
+    {
+      "id": "sw-02483",
+      "word": "painting",
+      "target_ja": "絵画；絵の具で描いた作品",
+      "en": "The museum displayed a famous painting from the nineteenth century.",
+      "ja": "その美術館は19世紀の有名な絵画を展示しました。"
+    },
+    {
+      "id": "sw-01093",
+      "word": "pair",
+      "target_ja": "一対；一組（二つで使うもの）",
+      "en": "I bought a new pair of running shoes.",
+      "ja": "新しいランニングシューズを一足買いました。"
+    },
+    {
+      "id": "sw-00458",
+      "word": "paper",
+      "target_ja": "紙",
+      "en": "Write your name on a piece of paper.",
+      "ja": "紙に名前を書いてください。"
+    },
+    {
+      "id": "sw-00458",
+      "word": "paper",
+      "target_ja": "学術論文",
+      "en": "She published a paper on language learning.",
+      "ja": "彼女は言語学習についての論文を発表しました。"
+    },
+    {
+      "id": "sw-00459",
+      "word": "parent",
+      "target_ja": "親；父親または母親",
+      "en": "Parents were invited to attend the school meeting.",
+      "ja": "保護者は学校説明会への参加を招待されました。"
+    },
+    {
+      "id": "sw-00459",
+      "word": "parent",
+      "target_ja": "親；父親または母親",
+      "en": "A parent must sign this form.",
+      "ja": "保護者の署名がこの用紙に必要です。"
+    },
+    {
+      "id": "sw-00461",
+      "word": "part",
+      "target_ja": "全体の一部分",
+      "en": "Listening is an important part of language learning.",
+      "ja": "リスニングは語学学習の重要な部分です。"
+    },
+    {
+      "id": "sw-01094",
+      "word": "partner",
+      "target_ja": "共同作業の相手；パートナー",
+      "en": "Discuss your answer with a partner before sharing it with the class.",
+      "ja": "クラスで発表する前にペアの相手と答えを話し合ってください。"
+    },
+    {
+      "id": "sw-00463",
+      "word": "party",
+      "target_ja": "パーティー；集まり",
+      "en": "We had a small party to celebrate her birthday.",
+      "ja": "彼女の誕生日を祝って小さなパーティーを開きました。"
+    },
+    {
+      "id": "sw-01095",
+      "word": "pass",
+      "target_ja": "（場所・人を）通り過ぎる",
+      "en": "We passed the station.",
+      "ja": "私たちは駅を通り過ぎました。"
+    },
+    {
+      "id": "sw-01095",
+      "word": "pass",
+      "target_ja": "（試験などに）合格する",
+      "en": "She passed the exam.",
+      "ja": "彼女は試験に合格しました。"
+    },
+    {
+      "id": "sw-01096",
+      "word": "passenger",
+      "target_ja": "乗客；旅客",
+      "en": "All passengers must wear a seat belt.",
+      "ja": "すべての乗客はシートベルトを着用しなければなりません。"
+    },
+    {
+      "id": "sw-01097",
+      "word": "past",
+      "target_ja": "過去；以前の時代",
+      "en": "We can learn a great deal from the past.",
+      "ja": "私たちは過去から多くを学べます。"
+    },
+    {
+      "id": "sw-01098",
+      "word": "path",
+      "target_ja": "小道；歩道",
+      "en": "The path through the forest was covered with leaves.",
+      "ja": "森の中の小道は落ち葉で覆われていました。"
+    },
+    {
+      "id": "sw-00464",
+      "word": "pay",
+      "target_ja": "代金・費用を支払う",
+      "en": "Can I pay by card?",
+      "ja": "カードで支払えますか。"
+    },
+    {
+      "id": "sw-01100",
+      "word": "peace",
+      "target_ja": "平和；戦争のない状態",
+      "en": "The agreement brought several years of peace to the region.",
+      "ja": "その合意は地域に数年間の平和をもたらしました。"
+    },
+    {
+      "id": "sw-00465",
+      "word": "pen",
+      "target_ja": "ペン；筆記具",
+      "en": "Could I borrow your pen for a moment?",
+      "ja": "少しペンを借りてもいいですか。"
+    },
+    {
+      "id": "sw-00466",
+      "word": "people",
+      "target_ja": "人々；複数の人",
+      "en": "Several people were waiting outside.",
+      "ja": "数人が外で待っていました。"
+    },
+    {
+      "id": "sw-01101",
+      "word": "perfect",
+      "target_ja": "（目的に）ぴったりの；理想的な",
+      "en": "The weather was perfect for a long run.",
+      "ja": "天気は長距離ランに最適でした。"
+    },
+    {
+      "id": "sw-00467",
+      "word": "person",
+      "target_ja": "一人の人；人物",
+      "en": "Only one person in the group knew the answer.",
+      "ja": "グループの中で答えを知っていたのは一人だけでした。"
+    },
+    {
+      "id": "sw-00467",
+      "word": "person",
+      "target_ja": "一人の人；人物",
+      "en": "Only one person can enter at a time.",
+      "ja": "一度に入れるのは一人だけです。"
+    },
+    {
+      "id": "sw-01308",
+      "word": "personal",
+      "target_ja": "個人の；本人に関する",
+      "en": "Do not share personal information with strangers online.",
+      "ja": "オンラインで知らない人に個人情報を共有しないでください。"
+    },
+    {
+      "id": "sw-00470",
+      "word": "place",
+      "target_ja": "場所；地点",
+      "en": "This park is a good place to go running.",
+      "ja": "この公園はランニングをするのによい場所です。"
+    },
+    {
+      "id": "sw-00929",
+      "word": "prevent",
+      "target_ja": "〜を防ぐ；起こらないようにする",
+      "en": "Regular exercise can help prevent disease.",
+      "ja": "定期的な運動は病気の予防に役立ちます。"
+    },
+    {
+      "id": "sw-00481",
+      "word": "problem",
+      "target_ja": "問題；解決すべき困難",
+      "en": "We need to find the cause of the problem before changing the system.",
+      "ja": "システムを変更する前に問題の原因を見つける必要があります。"
+    },
+    {
+      "id": "sw-02575",
+      "word": "recognize",
+      "target_ja": "（見覚えなどから）見分ける；気づく",
+      "en": "I recognized her voice immediately.",
+      "ja": "私はすぐに彼女の声だと分かりました。"
+    },
+    {
+      "id": "sw-02575",
+      "word": "recognize",
+      "target_ja": "（事実・重要性を）認める",
+      "en": "We must recognize the importance of sleep.",
+      "ja": "睡眠の重要性を認識しなければなりません。"
+    },
+    {
+      "id": "sw-02042",
+      "word": "regulate",
+      "target_ja": "（温度・速度などを）調節する",
+      "en": "The body regulates its temperature through several mechanisms.",
+      "ja": "体は複数の仕組みによって体温を調節する。"
+    },
+    {
+      "id": "sw-03166",
+      "word": "scarcity",
+      "target_ja": "不足；希少性",
+      "en": "Water scarcity is becoming a serious constraint on agriculture in some regions.",
+      "ja": "一部の地域では水不足が農業への深刻な制約となりつつある。"
+    },
+    {
+      "id": "sw-03166",
+      "word": "scarcity",
+      "target_ja": "不足；希少性",
+      "en": "Water scarcity is becoming a serious concern in dry regions.",
+      "ja": "乾燥地域では水不足が深刻な懸念になりつつある。"
+    },
+    {
+      "id": "sw-00509",
+      "word": "school",
+      "target_ja": "学校",
+      "en": "The school is opposite the station.",
+      "ja": "その学校は駅の向かいにあります。"
+    },
+    {
+      "id": "sw-03170",
+      "word": "skeptical",
+      "target_ja": "懐疑的な；疑い深い",
+      "en": "Scientists remain skeptical of claims lacking independent evidence.",
+      "ja": "科学者たちは独立した証拠のない主張に懐疑的であり続けている。"
+    },
+    {
+      "id": "sw-02097",
+      "word": "sophisticated",
+      "target_ja": "高度な；精巧な",
+      "en": "Modern satellites use sophisticated sensors to monitor the climate.",
+      "ja": "現代の人工衛星は気候を監視するため高度なセンサーを使う。"
+    },
+    {
+      "id": "sw-02113",
+      "word": "sufficient",
+      "target_ja": "十分な；必要量を満たす",
+      "en": "There is not sufficient evidence to support the claim.",
+      "ja": "その主張を裏付ける十分な証拠はありません。"
+    },
+    {
+      "id": "sw-02113",
+      "word": "sufficient",
+      "target_ja": "十分な；必要量を満たす",
+      "en": "There is not sufficient evidence to support the conclusion.",
+      "ja": "その結論を裏づける十分な証拠はない。"
+    },
+    {
+      "id": "sw-02362",
+      "word": "suppress",
+      "target_ja": "（情報・意見・感情などを）抑え込む",
+      "en": "The government attempted to suppress reports of the incident.",
+      "ja": "政府はその事件に関する報道を抑えようとした。"
+    },
+    {
+      "id": "sw-03176",
+      "word": "tariff",
+      "target_ja": "（輸入品などに課す）関税",
+      "en": "Higher tariffs can protect domestic producers but also raise consumer prices.",
+      "ja": "関税引き上げは国内生産者を保護しうるが、消費者価格も押し上げる。"
+    },
+    {
+      "id": "sw-02133",
+      "word": "thus",
+      "target_ja": "したがって；その結果",
+      "en": "The sample was too small and thus the results should be interpreted cautiously.",
+      "ja": "標本が小さすぎたため、結果は慎重に解釈すべきである。"
+    },
+    {
+      "id": "sw-02823",
+      "word": "urbanization",
+      "target_ja": "都市化",
+      "en": "Rapid urbanization has increased demand for housing.",
+      "ja": "急速な都市化で住宅需要が増えました。"
+    },
+    {
+      "id": "sw-00646",
+      "word": "word",
+      "target_ja": "単語；語",
+      "en": "Look up the word if you cannot guess its meaning from context.",
+      "ja": "文脈から意味を推測できなければその単語を調べてください。"
+    },
+    {
+      "id": "sw-00647",
+      "word": "work",
+      "target_ja": "働く；仕事をする",
+      "en": "She works at a school.",
+      "ja": "彼女は学校で働いています。"
+    },
+    {
+      "id": "sw-00647",
+      "word": "work",
+      "target_ja": "（方法・機械などが）機能する；効果がある",
+      "en": "This method really works.",
+      "ja": "この方法は本当にうまくいきます。"
+    },
+    {
+      "id": "sw-00651",
+      "word": "year",
+      "target_ja": "年；1年間",
+      "en": "She moved here three years ago.",
+      "ja": "彼女は三年前にここに引っ越してきました。"
+    }
+  ],
+  "preserved_senses": [
+    {
+      "id": "sw-00139",
+      "word": "call",
+      "pos": "verb",
+      "ja": "大声で呼びかける"
+    },
+    {
+      "id": "sw-00139",
+      "word": "call",
+      "pos": "verb",
+      "ja": "呼び寄せる；招集する"
+    },
+    {
+      "id": "sw-00139",
+      "word": "call",
+      "pos": "noun",
+      "ja": "電話；通話"
+    },
+    {
+      "id": "sw-00139",
+      "word": "call",
+      "pos": "noun",
+      "ja": "判断；決定"
+    },
+    {
+      "id": "sw-00160",
+      "word": "class",
+      "pos": "noun",
+      "ja": "クラス；学級"
+    },
+    {
+      "id": "sw-00192",
+      "word": "day",
+      "pos": "noun",
+      "ja": "昼；日中"
+    },
+    {
+      "id": "sw-00313",
+      "word": "home",
+      "pos": "adverb",
+      "ja": "家へ；家で"
+    },
+    {
+      "id": "sw-03002",
+      "word": "citation",
+      "pos": "noun",
+      "ja": "引用；表彰"
+    },
+    {
+      "id": "sw-02979",
+      "word": "indicator",
+      "pos": "noun",
+      "ja": "指標；表示器"
+    },
+    {
+      "id": "sw-02887",
+      "word": "native",
+      "pos": "adjective",
+      "ja": "生まれつきの；母語の；原産の"
+    },
+    {
+      "id": "sw-03235",
+      "word": "enact",
+      "pos": "verb",
+      "ja": "制定する；実施する"
+    },
+    {
+      "id": "sw-07980",
+      "word": "onomatopoeia",
+      "pos": "noun",
+      "ja": "擬音語；擬音法"
+    }
+  ],
+  "preserved_search_terms": [],
+  "unchanged_dictionary_files": [
+    "dictionary-other.json",
+    "dictionary-x.json"
+  ],
+  "updated_dictionary_files": [
+    "dictionary-a.json",
+    "dictionary-b.json",
+    "dictionary-c.json",
+    "dictionary-d.json",
+    "dictionary-e.json",
+    "dictionary-f.json",
+    "dictionary-g.json",
+    "dictionary-h.json",
+    "dictionary-i.json",
+    "dictionary-j.json",
+    "dictionary-k.json",
+    "dictionary-l.json",
+    "dictionary-m.json",
+    "dictionary-n.json",
+    "dictionary-o.json",
+    "dictionary-p.json",
+    "dictionary-q.json",
+    "dictionary-r.json",
+    "dictionary-s.json",
+    "dictionary-t.json",
+    "dictionary-u.json",
+    "dictionary-v.json",
+    "dictionary-w.json",
+    "dictionary-y.json",
+    "dictionary-z.json"
+  ],
+  "metadata_note": "ZIP README says v3.138 and generic validation.json says v3.184. meta/progress/release-manifest/versioned validation agree on v3.186. Repository README corrected and generic validation regenerated after integration.",
+  "updated_word_count": 4516,
+  "entry_count": 13500,
+  "checks": {
+    "dictionary_files": 27,
+    "entries": 13500,
+    "unique_ids": 13500,
+    "duplicate_ids": 0,
+    "empty_headwords": 0,
+    "empty_sense_entries": 0,
+    "incomplete_bilingual_examples": 0,
+    "source_data_retained": true,
+    "existing_ids_and_headwords_unchanged": true,
+    "etymology_entries_unchanged": 505,
+    "etymology_reference_files_unchanged": true,
+    "preserved_examples_verified": 197,
+    "restored_missing_sense_entry": "onomatopoeia",
+    "deleted_files": []
+  }
+}

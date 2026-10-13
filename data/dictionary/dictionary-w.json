@@ -61,25 +61,48 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "水の中を歩く",
-            "definition": "",
-            "examples": []
+            "ja": "（水・雪・泥などの中を）歩いて進む",
+            "definition": "to walk with difficulty through water or another substance that slows movement",
+            "examples": [
+              {
+                "en": "We had to wade across the shallow river.",
+                "ja": "私たちは浅い川を歩いて渡らなければならなかった。"
+              },
+              {
+                "en": "Rescue workers waded through knee-deep floodwater.",
+                "ja": "救助隊員たちは膝まである洪水の水の中を歩いて進んだ。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "wade through water",
+        "ja": "水の中を歩いて進む"
+      },
+      {
+        "text": "wade across a stream",
+        "ja": "小川を歩いて渡る"
+      },
+      {
+        "text": "wade through mud",
+        "ja": "泥の中を歩いて進む"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "wade through a report には「長い報告書を苦労して読み進める」という比喩的な意味もある。",
     "tags": [
-      "actions"
+      "actions",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11017",
@@ -192,25 +215,48 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "ふわりと漂う",
-            "definition": "",
-            "examples": []
+            "ja": "（におい・煙・音などが）ふわりと漂う",
+            "definition": "to move gently through the air, especially as a smell, sound, or light substance",
+            "examples": [
+              {
+                "en": "The smell of fresh bread wafted from the bakery.",
+                "ja": "焼きたてのパンの香りがパン屋から漂ってきた。"
+              },
+              {
+                "en": "Music wafted through the open window.",
+                "ja": "開いた窓から音楽がかすかに流れてきた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a smell wafts from ...",
+        "ja": "〜からにおいが漂う"
+      },
+      {
+        "text": "waft through the air",
+        "ja": "空気中をふわりと漂う"
+      },
+      {
+        "text": "a gentle breeze wafts ...",
+        "ja": "そよ風が〜を運ぶ"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "主語には smell, scent, smoke, music などがよく来る。waft from/through/across の形が自然。",
     "tags": [
-      "actions"
+      "actions",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04020",
@@ -280,12 +326,27 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "賃金",
-            "definition": "a person, thing, state, or idea related to 賃金",
+            "ja": "賃金；給与（特に時間・日・週単位）",
+            "definition": "money paid to a worker for work done, often calculated by the hour or week",
             "examples": [
               {
-                "en": "The word 'wage' is often useful in formal or everyday English.",
-                "ja": "「wage」は「賃金」の意味で使われます。"
+                "en": "Many workers are calling for a higher minimum wage.",
+                "ja": "多くの労働者が最低賃金の引き上げを求めている。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "（戦争・運動などを）遂行する",
+            "definition": "to carry on a sustained conflict, campaign, or struggle",
+            "examples": [
+              {
+                "en": "The organization waged a campaign against workplace discrimination.",
+                "ja": "その団体は職場での差別に反対する運動を展開した。"
               }
             ]
           }
@@ -298,11 +359,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "wage は名詞「賃金」と動詞「（戦争・運動を）行う」。salary は通常、月給・年俸を指す。",
     "tags": [
-      "curated-v2.58"
+      "curated-v2.58",
+      "curated-v3.112"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "wage"
     ],
@@ -312,22 +374,19 @@
     },
     "collocations": [
       {
-        "text": "minimum wage"
+        "text": "minimum wage",
+        "en": "minimum wage",
+        "ja": "最低賃金"
       },
       {
-        "text": "wage growth"
-      }
-    ],
-    "senses": [
+        "text": "wage growth",
+        "en": "wage growth",
+        "ja": "賃金の伸び"
+      },
       {
-        "pos": "",
-        "definition_ja": "賃金",
-        "examples": [
-          {
-            "en": "Real wages may fall when prices rise faster than pay.",
-            "ja": "物価が給与より速く上昇すると実質賃金が下がることがある。"
-          }
-        ]
+        "text": "wage a campaign",
+        "en": "wage a campaign",
+        "ja": "運動を展開する"
       }
     ]
   },
@@ -352,25 +411,48 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "賃金労働者；家計の稼ぎ手",
-            "definition": "",
-            "examples": []
+            "ja": "賃金を得て働く人；家計を支える稼ぎ手",
+            "definition": "a person who earns money from paid employment, especially wages",
+            "examples": [
+              {
+                "en": "The survey compared the expenses of wage earners and retirees.",
+                "ja": "その調査は賃金労働者と退職者の支出を比較した。"
+              },
+              {
+                "en": "She became the main wage earner in her family.",
+                "ja": "彼女は家族の主な稼ぎ手になった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "the main wage earner",
+        "ja": "主な稼ぎ手"
+      },
+      {
+        "text": "low-income wage earners",
+        "ja": "低所得の賃金労働者"
+      },
+      {
+        "text": "a household with two wage earners",
+        "ja": "稼ぎ手が二人いる世帯"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "wage earner は主に雇用による収入を得る人を指す。breadwinner は「家計を支える人」の意味がより強い。",
     "tags": [
-      "work-life"
+      "work-life",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12515",
@@ -984,25 +1066,48 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "待合室",
-            "definition": "",
-            "examples": []
+            "ja": "（病院・駅などの）待合室",
+            "definition": "a room where people wait before an appointment, journey, or service",
+            "examples": [
+              {
+                "en": "Please take a seat in the waiting room until your name is called.",
+                "ja": "名前を呼ばれるまで待合室でお掛けください。"
+              },
+              {
+                "en": "The station waiting room was crowded after the train delay.",
+                "ja": "列車の遅延後、駅の待合室は混雑していた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "sit in the waiting room",
+        "ja": "待合室で座って待つ"
+      },
+      {
+        "text": "a hospital waiting room",
+        "ja": "病院の待合室"
+      },
+      {
+        "text": "a crowded waiting room",
+        "ja": "混雑した待合室"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "wait room とはせず waiting room。in the waiting room と表現する。",
     "tags": [
-      "community-travel"
+      "community-travel",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-01218",
@@ -1394,25 +1499,48 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "歩行者用通路",
-            "definition": "",
-            "examples": []
+            "ja": "歩行者用の通路；歩道",
+            "definition": "a path or passage designed for people to walk along",
+            "examples": [
+              {
+                "en": "A covered walkway connects the two school buildings.",
+                "ja": "屋根付きの通路が二つの校舎をつないでいる。"
+              },
+              {
+                "en": "Keep bicycles off the narrow walkway.",
+                "ja": "狭い歩行者通路に自転車を乗り入れないでください。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a covered walkway",
+        "ja": "屋根付きの通路"
+      },
+      {
+        "text": "a pedestrian walkway",
+        "ja": "歩行者専用通路"
+      },
+      {
+        "text": "a walkway connecting two buildings",
+        "ja": "二つの建物をつなぐ通路"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "walkway は建物内・敷地内の歩行用通路にも使う。sidewalk は主に米語で道路沿いの歩道。",
     "tags": [
-      "community-travel"
+      "community-travel",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-01219",
@@ -2215,25 +2343,42 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "防ぐ；寄せ付けない",
-            "definition": "",
-            "examples": []
+            "ja": "（病気・危険・攻撃などを）防ぐ；寄せ付けない",
+            "definition": "to prevent something harmful or unpleasant from affecting someone",
+            "examples": [
+              {
+                "en": "Vaccination can help ward off serious illness.",
+                "ja": "予防接種は重い病気を防ぐ助けになる。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "ward off infection",
+        "en": "ward off infection",
+        "ja": "感染を防ぐ"
+      },
+      {
+        "text": "ward off a threat",
+        "en": "ward off a threat",
+        "ja": "脅威を退ける"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "ward off illness / danger など、悪いことを未然に防ぐ意味で使う。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.91"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10350",
@@ -2346,12 +2491,27 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "倉庫",
-            "definition": "a person, thing, activity, or concept connected with 倉庫",
+            "ja": "商品・資材などを保管する倉庫",
+            "definition": "a large building used for storing goods before they are sold or distributed",
             "examples": [
               {
-                "en": "The report includes information about warehouse.",
-                "ja": "その報告書には「倉庫」についての情報が含まれている。"
+                "en": "The goods are stored in a warehouse near the port.",
+                "ja": "商品は港の近くの倉庫に保管されている。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "（商品を）倉庫に保管する",
+            "definition": "to store goods in a warehouse",
+            "examples": [
+              {
+                "en": "The distributor warehouses spare parts at several locations.",
+                "ja": "その販売業者は複数の場所で交換部品を倉庫保管している。"
               }
             ]
           }
@@ -2360,16 +2520,33 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "distribution warehouse",
+        "text": "distribution warehouse",
+        "ja": "配送用倉庫"
+      },
+      {
+        "en": "warehouse inventory",
+        "text": "warehouse inventory",
+        "ja": "倉庫在庫"
+      },
+      {
+        "en": "store goods in a warehouse",
+        "text": "store goods in a warehouse",
+        "ja": "商品を倉庫に保管する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "warehouse は名詞・動詞。data warehouse は分析用にデータを集約する仕組みで、物理的な倉庫ではない。",
     "tags": [
-      "50k-frequency-gap"
+      "50k-frequency-gap",
+      "curated-v3.104"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07970",
@@ -2433,25 +2610,48 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "用心して",
-            "definition": "",
-            "examples": []
+            "ja": "用心深く；警戒して",
+            "definition": "in a careful and cautious way because of possible danger or trouble",
+            "examples": [
+              {
+                "en": "The hikers approached the unstable bridge warily.",
+                "ja": "ハイカーたちは不安定な橋に用心深く近づいた。"
+              },
+              {
+                "en": "She looked warily at the unfamiliar email attachment.",
+                "ja": "彼女は見覚えのないメールの添付ファイルを警戒して見た。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "approach warily",
+        "ja": "用心深く近づく"
+      },
+      {
+        "text": "look warily at ...",
+        "ja": "〜を警戒して見る"
+      },
+      {
+        "text": "respond warily",
+        "ja": "慎重に応じる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "wary（用心深い）の副詞。wearily（疲れた様子で）とは綴りと意味が異なる。",
     "tags": [
-      "manner-and-time"
+      "manner-and-time",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-00622",
@@ -2665,25 +2865,58 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "温かく",
-            "definition": "",
-            "examples": []
+            "ja": "温かく；親しみを込めて",
+            "definition": "in a friendly, kind, or enthusiastic manner",
+            "examples": [
+              {
+                "en": "The host warmly welcomed the exchange students.",
+                "ja": "主催者は交換留学生たちを温かく迎えた。"
+              },
+              {
+                "en": "Her proposal was warmly received by the committee.",
+                "ja": "彼女の提案は委員会に好意的に受け入れられた。"
+              }
+            ]
+          },
+          {
+            "ja": "暖かく（保温して）",
+            "definition": "in a way that keeps someone comfortably warm",
+            "examples": [
+              {
+                "en": "Dress warmly if you are going hiking in the mountains.",
+                "ja": "山へハイキングに行くなら暖かい服装をしてください。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "warmly welcome guests",
+        "ja": "客を温かく迎える"
+      },
+      {
+        "text": "be warmly received",
+        "ja": "好意的に受け入れられる"
+      },
+      {
+        "text": "dress warmly",
+        "ja": "暖かい服装をする"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "warmly は人への態度と体を暖かく保つ意味の両方で使う。warmly received は肯定的評価を表す。",
     "tags": [
-      "manner"
+      "manner",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-02598",
@@ -2794,12 +3027,16 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "保証",
-            "definition": "a written promise to repair or replace a product if necessary",
+            "ja": "製品保証；保証書に定められた約束",
+            "definition": "a written promise by a seller or maker to repair or replace a product under stated conditions",
             "examples": [
               {
-                "en": "The word 'warranty' is useful in this context.",
-                "ja": "この文脈では「保証」という意味で使われる。"
+                "en": "The laptop comes with a one-year warranty.",
+                "ja": "そのノートパソコンには1年間の保証が付いている。"
+              },
+              {
+                "en": "Accidental damage is not covered by this warranty.",
+                "ja": "偶発的な破損はこの保証の対象外だ。"
               }
             ]
           }
@@ -2812,10 +3049,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Useful in formal, academic, news, or professional English; check the surrounding noun or verb for the intended sense.",
+    "usage_note": "warranty は製品の保証条件を指すことが多い。under warranty は「保証期間内で」。",
     "tags": [
       "frequency-gap",
-      "curated-v3.05"
+      "curated-v3.05",
+      "curated-v3.101"
     ],
     "status": "enriched",
     "search_terms": [
@@ -2826,8 +3064,21 @@
       "ipa_uk": null
     },
     "collocations": [
-      "warranty policy",
-      "warranty issue"
+      {
+        "en": "under warranty",
+        "text": "under warranty",
+        "ja": "保証期間内で"
+      },
+      {
+        "en": "a one-year warranty",
+        "text": "a one-year warranty",
+        "ja": "1年間の保証"
+      },
+      {
+        "en": "warranty coverage",
+        "text": "warranty coverage",
+        "ja": "保証の対象範囲"
+      }
     ]
   },
   {
@@ -2933,25 +3184,40 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "警戒した",
-            "definition": "",
-            "examples": []
+            "ja": "警戒している；慎重な",
+            "definition": "careful because you suspect that something may be dangerous or unreliable",
+            "examples": [
+              {
+                "en": "Consumers are increasingly wary of misleading environmental claims.",
+                "ja": "消費者は誤解を招く環境配慮の宣伝にますます警戒している。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "be wary of",
+        "ja": "〜を警戒する"
+      },
+      {
+        "text": "remain wary",
+        "ja": "警戒を続ける"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "be wary of + 名詞／動名詞。「疲れた」の weary と混同しない。",
     "tags": [
-      "judgment-and-relations"
+      "judgment-and-relations",
+      "curated-v3.80"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11410",
@@ -3544,25 +3810,57 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "荒れ地；不毛の地",
-            "definition": "",
-            "examples": []
+            "ja": "荒れ地；利用されていない土地",
+            "definition": "land that is barren, damaged, or not being used productively",
+            "examples": [
+              {
+                "en": "The abandoned factory stood in an industrial wasteland.",
+                "ja": "廃工場は荒れ果てた工業地帯に建っていた。"
+              }
+            ]
+          },
+          {
+            "ja": "（比喩）文化的・精神的に不毛な場所",
+            "definition": "a place or situation seen as lacking cultural or intellectual life",
+            "examples": [
+              {
+                "en": "The critic described the town as a cultural wasteland.",
+                "ja": "批評家はその町を文化的に不毛な場所だと評した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "industrial wasteland",
+        "text": "industrial wasteland",
+        "ja": "荒廃した工業地帯"
+      },
+      {
+        "en": "barren wasteland",
+        "text": "barren wasteland",
+        "ja": "不毛の荒れ地"
+      },
+      {
+        "en": "cultural wasteland",
+        "text": "cultural wasteland",
+        "ja": "文化的に不毛な場所"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "文字どおりの「荒れ地」と比喩的な「不毛な場所」。後者は批判的で強い表現なので注意。",
     "tags": [
-      "terrain-water"
+      "terrain-water",
+      "curated-v3.103"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-00624",
@@ -3639,25 +3937,48 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "注意して待つ",
-            "definition": "",
-            "examples": []
+            "ja": "（人・物・兆候などを）注意して待つ；見逃さないよう気をつける",
+            "definition": "to look carefully for someone or something expected or for a sign of change",
+            "examples": [
+              {
+                "en": "Watch for signs of dehydration during the race.",
+                "ja": "レース中は脱水症状の兆候に注意してください。"
+              },
+              {
+                "en": "We watched for the bus at the corner.",
+                "ja": "私たちは角でバスが来るのを注意して待った。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "watch for signs of ...",
+        "ja": "〜の兆候に注意する"
+      },
+      {
+        "text": "watch for changes",
+        "ja": "変化を見逃さないようにする"
+      },
+      {
+        "text": "watch for approaching traffic",
+        "ja": "近づいてくる車に注意する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "watch for は「現れるかどうか注意する」。watch out for は「危険に気をつける」という警告に特によく使う。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04868",
@@ -3734,25 +4055,48 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "見守る",
-            "definition": "",
-            "examples": []
+            "ja": "（人・物を）見守る；保護する",
+            "definition": "to take care of or protect someone or something by keeping watch",
+            "examples": [
+              {
+                "en": "Volunteers watched over the children during the event.",
+                "ja": "ボランティアたちは行事の間、子どもたちを見守った。"
+              },
+              {
+                "en": "The staff watched over the equipment overnight.",
+                "ja": "職員たちは夜通し機材を見守った。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "watch over children",
+        "ja": "子どもたちを見守る"
+      },
+      {
+        "text": "watch over a patient",
+        "ja": "患者を見守る"
+      },
+      {
+        "text": "watch over the property",
+        "ja": "財産を見張る"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "watch over は「見守って保護する」。watch for（現れるものを注意して待つ）と区別する。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08882",
@@ -4168,25 +4512,42 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "耐水性の",
-            "definition": "",
-            "examples": []
+            "ja": "耐水性の；水にある程度耐える",
+            "definition": "able to resist damage from water to some extent without necessarily being completely waterproof",
+            "examples": [
+              {
+                "en": "The jacket is water-resistant but not suitable for heavy rain.",
+                "ja": "その上着には耐水性があるが、大雨には向いていない。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "water-resistant coating",
+        "en": "water-resistant coating",
+        "ja": "耐水性コーティング"
+      },
+      {
+        "text": "water-resistant material",
+        "en": "water-resistant material",
+        "ja": "耐水性素材"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Water-resistant does not mean fully waterproof; the level of protection depends on the product and conditions.",
     "tags": [
-      "practical-quality"
+      "practical-quality",
+      "curated-v3.97"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11991",
@@ -4291,25 +4652,51 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "河川；水路",
-            "definition": "",
-            "examples": []
+            "ja": "河川；自然または人工の水路",
+            "definition": "a channel through which water flows, such as a stream, river, or ditch",
+            "examples": [
+              {
+                "en": "The new road crosses a small watercourse.",
+                "ja": "新しい道路は小さな水路を横切る。"
+              },
+              {
+                "en": "Fertilizer runoff polluted the nearby watercourse.",
+                "ja": "肥料の流出が近くの水路を汚染した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "natural watercourse",
+        "en": "natural watercourse",
+        "ja": "自然の水路"
+      },
+      {
+        "text": "protect a watercourse",
+        "en": "protect a watercourse",
+        "ja": "水路を保護する"
+      },
+      {
+        "text": "watercourse management",
+        "en": "watercourse management",
+        "ja": "河川・水路の管理"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "watercourse は水が流れる「水路・河川」。waterway は特に船が通る航路にも用いる。",
     "tags": [
-      "terrain-water"
+      "terrain-water",
+      "curated-v3.184"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04350",
@@ -4379,24 +4766,41 @@
         "meanings": [
           {
             "ja": "滝",
-            "definition": "",
-            "examples": []
+            "definition": "a place where a river or stream flows over a steep drop",
+            "examples": [
+              {
+                "en": "The walking trail leads to a waterfall surrounded by old-growth forest.",
+                "ja": "その遊歩道は原生林に囲まれた滝へと続いている。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a spectacular waterfall",
+        "en": "a spectacular waterfall",
+        "ja": "壮観な滝"
+      },
+      {
+        "text": "waterfall viewing platform",
+        "en": "waterfall viewing platform",
+        "ja": "滝の展望台"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "waterfall は可算名詞。比喩的には waterfall of data のように大量のものが流れる様子にも使う。",
     "tags": [
-      "nature-animals"
+      "nature-animals",
+      "curated-v3.118"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10753",
@@ -4419,25 +4823,42 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "水辺；臨海地区",
-            "definition": "",
-            "examples": []
+            "ja": "水辺の地区；海岸や川沿いの一帯",
+            "definition": "land or an area of a town along the edge of a sea, lake, or river",
+            "examples": [
+              {
+                "en": "The city has turned its old waterfront into a public park.",
+                "ja": "その市は古い臨水地区を公共公園に整備した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "waterfront redevelopment",
+        "en": "waterfront redevelopment",
+        "ja": "臨水地区の再開発"
+      },
+      {
+        "text": "waterfront property",
+        "en": "waterfront property",
+        "ja": "水辺の不動産"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Waterfront can refer to a shoreline area or the buildings and land beside it; it is not limited to the sea.",
     "tags": [
-      "terrain-water"
+      "terrain-water",
+      "curated-v3.97"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-03841",
@@ -4550,25 +4971,51 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "水浸しの",
-            "definition": "",
-            "examples": []
+            "ja": "水浸しの；水を含みすぎた",
+            "definition": "so full of water that normal use or growth is difficult",
+            "examples": [
+              {
+                "en": "Heavy rain left the fields waterlogged for several days.",
+                "ja": "大雨で畑は数日間水浸しになった。"
+              },
+              {
+                "en": "Roots may rot if the soil remains waterlogged.",
+                "ja": "土壌が水を含みすぎた状態のままだと、根が腐ることがある。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "waterlogged soil",
+        "en": "waterlogged soil",
+        "ja": "水を含みすぎた土壌"
+      },
+      {
+        "text": "waterlogged fields",
+        "en": "waterlogged fields",
+        "ja": "水浸しの畑"
+      },
+      {
+        "text": "become waterlogged",
+        "en": "become waterlogged",
+        "ja": "水浸しになる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "waterlogged は地面・木材などが過剰に水を含んだ状態。flooded は水があふれた状態にも使う。",
     "tags": [
-      "descriptive"
+      "descriptive",
+      "curated-v3.114"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-03925",
@@ -4693,14 +5140,13 @@
               {
                 "en": "Forests in the watershed help protect the river’s water quality.",
                 "ja": "流域の森林は川の水質を守るのに役立つ。"
+              },
+              {
+                "en": "Protecting wetlands upstream can reduce flooding across the watershed.",
+                "ja": "上流の湿地を保護することで、流域全体の洪水被害を軽減できる。"
               }
             ]
-          }
-        ]
-      },
-      {
-        "pos": "noun",
-        "meanings": [
+          },
           {
             "ja": "重大な転機；分岐点",
             "definition": "an event that marks an important change",
@@ -4719,16 +5165,24 @@
     "phrases": [],
     "collocations": [
       {
+        "en": "watershed management",
         "text": "watershed management",
         "ja": "流域管理"
       },
       {
+        "en": "a watershed moment",
         "text": "a watershed moment",
         "ja": "重大な転機"
       },
       {
+        "en": "watershed protection",
         "text": "watershed protection",
         "ja": "流域の保全"
+      },
+      {
+        "en": "watershed conservation",
+        "text": "watershed conservation",
+        "ja": "流域保全"
       }
     ],
     "related": {
@@ -4738,7 +5192,8 @@
     "usage_note": "地理用語の watershed は地域により「分水界」または「流域」を指す。比喩的な a watershed moment は「歴史的な転機」。",
     "tags": [
       "nature-animals",
-      "curated-v3.50"
+      "curated-v3.50",
+      "curated-v3.172"
     ],
     "status": "enriched"
   },
@@ -4850,25 +5305,51 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "水路；航路",
-            "definition": "",
-            "examples": []
+            "ja": "水路；航行可能な河川・運河",
+            "definition": "a river, canal, or other route of water used or suitable for travel and transport",
+            "examples": [
+              {
+                "en": "The canal is an important waterway for transporting grain.",
+                "ja": "その運河は穀物輸送の重要な水路である。"
+              },
+              {
+                "en": "Volunteers removed plastic waste from the urban waterway.",
+                "ja": "ボランティアは都市の水路からプラスチックごみを取り除いた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "inland waterway",
+        "en": "inland waterway",
+        "ja": "内陸水路"
+      },
+      {
+        "text": "navigable waterway",
+        "en": "navigable waterway",
+        "ja": "航行可能な水路"
+      },
+      {
+        "text": "waterway transport",
+        "en": "waterway transport",
+        "ja": "水運"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "waterway は交通・航行の文脈でよく使う。watercourse は水の流れそのものを強調する。",
     "tags": [
-      "terrain-water"
+      "terrain-water",
+      "curated-v3.184"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-05828",
@@ -4891,25 +5372,58 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "水っぽい",
-            "definition": "",
-            "examples": []
+            "ja": "水っぽい；薄い",
+            "definition": "containing too much water or having a weak, diluted consistency",
+            "examples": [
+              {
+                "en": "The soup tasted watery, so she let it simmer longer.",
+                "ja": "スープは水っぽい味だったので、彼女はさらに煮込んだ。"
+              },
+              {
+                "en": "The sauce became watery after the frozen vegetables thawed.",
+                "ja": "冷凍野菜が解凍されるとソースは水っぽくなった。"
+              }
+            ]
+          },
+          {
+            "ja": "（目が）涙ぐんだ",
+            "definition": "filled with tears or appearing as though tears may come",
+            "examples": [
+              {
+                "en": "His eyes grew watery in the cold wind.",
+                "ja": "冷たい風で彼の目は涙ぐんだ。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "watery soup",
+        "ja": "水っぽいスープ"
+      },
+      {
+        "text": "watery eyes",
+        "ja": "涙ぐんだ目"
+      },
+      {
+        "text": "a watery solution",
+        "ja": "薄い水溶液"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "watery eyes は「涙ぐんだ目」。watered-down は意図的に薄めた内容・飲み物にも使う。",
     "tags": [
-      "descriptive"
+      "descriptive",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-05158",
@@ -4932,25 +5446,48 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "波状の",
-            "definition": "",
-            "examples": []
+            "ja": "波打った；うねった",
+            "definition": "having a series of gentle curves rather than being straight",
+            "examples": [
+              {
+                "en": "She has naturally wavy hair.",
+                "ja": "彼女の髪は生まれつき緩く波打っている。"
+              },
+              {
+                "en": "The designer used wavy lines to suggest flowing water.",
+                "ja": "デザイナーは流れる水を表すために波状の線を使った。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "wavy hair",
+        "ja": "ウェーブのかかった髪"
+      },
+      {
+        "text": "wavy lines",
+        "ja": "波状の線"
+      },
+      {
+        "text": "a wavy pattern",
+        "ja": "波模様"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "wavy hair は curly hair（巻き毛）より緩い波状の髪を表すことが多い。",
     "tags": [
-      "description"
+      "description",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12570",
@@ -5442,25 +5979,57 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "言うことを聞かない；気まぐれな",
-            "definition": "",
-            "examples": []
+            "ja": "（人・行動が）言うことを聞かない；気まぐれな",
+            "definition": "difficult to control because of unpredictable or independent behavior",
+            "examples": [
+              {
+                "en": "The coach struggled to guide the wayward young player.",
+                "ja": "コーチは気まぐれな若い選手を指導するのに苦労した。"
+              }
+            ]
+          },
+          {
+            "ja": "（物の動きが）予想外の方向にそれた",
+            "definition": "moving or going in an unintended or unpredictable direction",
+            "examples": [
+              {
+                "en": "A wayward pass gave the opposing team a chance to score.",
+                "ja": "方向のそれたパスが相手チームに得点の機会を与えた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "wayward child",
+        "text": "wayward child",
+        "ja": "言うことを聞かない子ども"
+      },
+      {
+        "en": "wayward behavior",
+        "text": "wayward behavior",
+        "ja": "気まぐれな行動"
+      },
+      {
+        "en": "wayward pass",
+        "text": "wayward pass",
+        "ja": "狙いからそれたパス"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "人の「手に負えない」と、動きが「意図した方向から外れた」の両義。wayward pass はスポーツで頻出。",
     "tags": [
-      "personality-manner"
+      "personality-manner",
+      "curated-v3.103"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-00627",
@@ -5476,12 +6045,22 @@
         "pos": "pronoun",
         "meanings": [
           {
-            "ja": "私たち",
-            "definition": "a word used in place of a noun with the sense '私たち'",
+            "ja": "私たちは",
+            "definition": "used as the subject for a group that includes the speaker",
             "examples": [
               {
-                "en": "The word 'we' is common in English.",
-                "ja": "「we」は英語でよく使われる語です。"
+                "en": "We compared the results of both experiments.",
+                "ja": "私たちは二つの実験の結果を比較した。"
+              }
+            ]
+          },
+          {
+            "ja": "私たち人間は；一般に人は",
+            "definition": "used to include people in general in a statement or observation",
+            "examples": [
+              {
+                "en": "We often underestimate the value of sleep.",
+                "ja": "私たちは睡眠の価値を過小評価しがちだ。"
               }
             ]
           }
@@ -5494,9 +6073,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "we は話し手を含む複数主語。目的格は us、所有限定詞は our。学術論文の we は著者を指すこともある。",
+    "tags": [
+      "curated-v3.179"
+    ],
+    "status": "enriched",
     "search_terms": [
       "we"
     ],
@@ -5504,7 +6085,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "we need to ...",
+        "en": "we need to ...",
+        "ja": "私たちは〜する必要がある"
+      },
+      {
+        "text": "we found that ...",
+        "en": "we found that ...",
+        "ja": "私たちは〜ということを発見した"
+      },
+      {
+        "text": "we should consider ...",
+        "en": "we should consider ...",
+        "ja": "私たちは〜を検討すべきだ"
+      }
+    ]
   },
   {
     "id": "sw-01221",
@@ -5572,6 +6169,20 @@
               {
                 "en": "The review identified a weakness in the security system.",
                 "ja": "その調査でセキュリティシステムの弱点が見つかりました。"
+              },
+              {
+                "en": "A major weakness of the study is its small sample size.",
+                "ja": "その研究の大きな弱点は標本数が少ないことである。"
+              }
+            ]
+          },
+          {
+            "ja": "身体的な弱さ；衰弱",
+            "definition": "a lack of physical strength",
+            "examples": [
+              {
+                "en": "Temporary muscle weakness may follow a long period of inactivity.",
+                "ja": "長期間活動しないと一時的に筋力が低下することがある。"
               }
             ]
           }
@@ -5584,11 +6195,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Weakness can mean a flaw in an argument or system, or lack of physical strength.",
     "tags": [
-      "v2.31-curated"
+      "v2.31-curated",
+      "curated-v3.139"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "weakness"
     ],
@@ -5596,7 +6208,28 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "en": "a major weakness",
+        "text": "a major weakness",
+        "ja": "重大な弱点"
+      },
+      {
+        "en": "identify a weakness",
+        "text": "identify a weakness",
+        "ja": "弱点を特定する"
+      },
+      {
+        "en": "physical weakness",
+        "text": "physical weakness",
+        "ja": "身体的な衰弱"
+      },
+      {
+        "en": "strengths and weaknesses",
+        "text": "strengths and weaknesses",
+        "ja": "長所と短所"
+      }
+    ]
   },
   {
     "id": "sw-02687",
@@ -5618,6 +6251,24 @@
               {
                 "en": "The country has great natural wealth.",
                 "ja": "その国には豊かな天然資源があります。"
+              },
+              {
+                "en": "The study examines how wealth is distributed across generations.",
+                "ja": "その研究は富が世代間でどのように分配されるかを調べている。"
+              },
+              {
+                "en": "Wealth is distributed unevenly across the population.",
+                "ja": "富は人口全体に不均等に分布している。"
+              }
+            ]
+          },
+          {
+            "ja": "豊富な量；大量",
+            "definition": "a large quantity or supply of something useful",
+            "examples": [
+              {
+                "en": "The archive contains a wealth of historical documents.",
+                "ja": "その資料館には豊富な歴史資料が所蔵されている。"
               }
             ]
           }
@@ -5630,12 +6281,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Wealth can mean material riches or a large supply of something: a wealth of evidence/information.",
     "tags": [
       "v2.31-curated",
-      "curated-v2.58"
+      "curated-v2.58",
+      "curated-v3.139"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "wealth"
     ],
@@ -5645,22 +6297,24 @@
     },
     "collocations": [
       {
-        "text": "wealth inequality"
+        "en": "wealth inequality",
+        "text": "wealth inequality",
+        "ja": "富の格差"
       },
       {
-        "text": "accumulate wealth"
-      }
-    ],
-    "senses": [
+        "en": "accumulate wealth",
+        "text": "accumulate wealth",
+        "ja": "富を蓄積する"
+      },
       {
-        "pos": "",
-        "definition_ja": "富；財産；豊富さ",
-        "examples": [
-          {
-            "en": "Wealth is distributed unevenly across the population.",
-            "ja": "富は人口全体に不均等に分布している。"
-          }
-        ]
+        "en": "distribution of wealth",
+        "text": "distribution of wealth",
+        "ja": "富の分配"
+      },
+      {
+        "en": "a wealth of information",
+        "text": "a wealth of information",
+        "ja": "豊富な情報"
       }
     ]
   },
@@ -5878,25 +6532,42 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "効き目などがなくなる",
-            "definition": "",
-            "examples": []
+            "ja": "（薬の効果・感情などが）徐々に薄れる；消える",
+            "definition": "to gradually become weaker until an effect or feeling disappears",
+            "examples": [
+              {
+                "en": "The pain returned after the medicine wore off.",
+                "ja": "薬の効き目が切れると痛みが戻ってきた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "the effect wears off",
+        "en": "the effect wears off",
+        "ja": "効果が薄れる"
+      },
+      {
+        "text": "wear off gradually",
+        "en": "wear off gradually",
+        "ja": "徐々に消える"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "効果・興奮・痛みなどが徐々に薄れる。自動詞用法。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.87"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-05349",
@@ -5919,25 +6590,58 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "擦り切れる；疲れ果てさせる",
-            "definition": "",
-            "examples": []
+            "ja": "（物を）使い古してすり減らす；すり減る",
+            "definition": "to damage something gradually through repeated use until it can no longer be used well",
+            "examples": [
+              {
+                "en": "Years of running wore out the soles of his shoes.",
+                "ja": "長年のランニングで彼の靴底はすり減った。"
+              },
+              {
+                "en": "These cheap batteries wear out quickly.",
+                "ja": "この安い電池はすぐに使えなくなる。"
+              }
+            ]
+          },
+          {
+            "ja": "（人を）疲れ果てさせる",
+            "definition": "to make someone extremely tired",
+            "examples": [
+              {
+                "en": "The long journey wore the children out.",
+                "ja": "長旅で子どもたちは疲れ果てた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "wear out a pair of shoes",
+        "ja": "靴を一足履きつぶす"
+      },
+      {
+        "text": "wear out quickly",
+        "ja": "すぐにすり減る"
+      },
+      {
+        "text": "be worn out",
+        "ja": "くたくたに疲れている；使い古されている"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "他動詞は wear something out / wear someone out。代名詞は wear it out と動詞と out の間に置く。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08708",
@@ -6001,25 +6705,48 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "疲れた様子で",
-            "definition": "",
-            "examples": []
+            "ja": "疲れた様子で；うんざりして",
+            "definition": "in a way that shows physical or mental tiredness",
+            "examples": [
+              {
+                "en": "After the exam, the students walked wearily to the station.",
+                "ja": "試験の後、生徒たちは疲れた足取りで駅へ歩いた。"
+              },
+              {
+                "en": "She sighed wearily and returned to the unfinished report.",
+                "ja": "彼女は疲れたようにため息をつき、未完成の報告書に戻った。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "sigh wearily",
+        "ja": "疲れたようにため息をつく"
+      },
+      {
+        "text": "walk wearily",
+        "ja": "疲れた足取りで歩く"
+      },
+      {
+        "text": "shake one’s head wearily",
+        "ja": "うんざりした様子で首を振る"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "weary（疲れた）の副詞。warily（用心深く）との混同に注意。",
     "tags": [
-      "manner"
+      "manner",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-05748",
@@ -6077,11 +6804,23 @@
         "meanings": [
           {
             "ja": "天気；気象",
-            "definition": "the condition of the air outside at a particular place and time",
+            "definition": "the state of the atmosphere at a particular place and time, including temperature, wind, and precipitation",
             "examples": [
+              {
+                "en": "Unpredictable weather disrupted the outdoor event.",
+                "ja": "予測しにくい天候で屋外行事に支障が出た。"
+              },
+              {
+                "en": "The researchers compared daily weather records from five stations.",
+                "ja": "研究者たちは五つの観測所の日々の気象記録を比較した。"
+              },
               {
                 "en": "Cool weather makes long runs much easier for me.",
                 "ja": "涼しい天気だと長距離ランがずっと楽です。"
+              },
+              {
+                "en": "Extreme weather can disrupt transport and food production.",
+                "ja": "異常気象は交通や食料生産を混乱させることがある。"
               }
             ]
           }
@@ -6094,12 +6833,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "weather は短期的な天候、climate は長期間の気候の傾向。名詞の weather は通常不可算。",
     "tags": [
       "v2.31-curated",
-      "curated-v2.56"
+      "curated-v2.56",
+      "curated-v3.182"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "weather"
     ],
@@ -6109,22 +6849,19 @@
     },
     "collocations": [
       {
-        "text": "extreme weather"
+        "en": "extreme weather",
+        "text": "extreme weather",
+        "ja": "異常気象"
       },
       {
-        "text": "weather conditions"
-      }
-    ],
-    "senses": [
+        "en": "weather conditions",
+        "text": "weather conditions",
+        "ja": "気象条件"
+      },
       {
-        "pos": "",
-        "definition_ja": "天気；気象",
-        "examples": [
-          {
-            "en": "Extreme weather can disrupt transport and food production.",
-            "ja": "異常気象は交通や食料生産を混乱させることがある。"
-          }
-        ]
+        "en": "weather forecast",
+        "text": "weather forecast",
+        "ja": "天気予報"
       }
     ]
   },
@@ -6150,24 +6887,45 @@
         "meanings": [
           {
             "ja": "前線；気団の境界",
-            "definition": "",
-            "examples": []
+            "definition": "the boundary between two air masses with different temperatures or other atmospheric properties",
+            "examples": [
+              {
+                "en": "A weather front moved across the region, bringing heavy rain.",
+                "ja": "前線がその地域を通過し、大雨をもたらした。"
+              },
+              {
+                "en": "The weather map showed a cold front approaching the coast.",
+                "ja": "天気図には寒冷前線が海岸に近づく様子が示されていた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "cold front",
+        "en": "cold front",
+        "ja": "寒冷前線"
+      },
+      {
+        "text": "passing weather front",
+        "en": "passing weather front",
+        "ja": "通過する前線"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "気象の front（前線）は異なる気団の境界。cold front（寒冷前線）と warm front（温暖前線）が代表的。",
     "tags": [
-      "weather-atmosphere"
+      "weather-atmosphere",
+      "curated-v3.177"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13460",
@@ -6827,25 +7585,54 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "くさび形の一切れ",
-            "definition": "",
-            "examples": []
+            "ja": "くさび；物を固定・分割するためのくさび形の道具",
+            "definition": "a piece of material with one thick end and one thin edge, used to hold or split things",
+            "examples": [
+              {
+                "en": "He pushed a wooden wedge under the door to keep it open.",
+                "ja": "彼はドアを開けておくために木のくさびを差し込んだ。"
+              }
+            ]
+          },
+          {
+            "ja": "くさび形に切った一切れ",
+            "definition": "a piece of food or another material cut into a triangular shape",
+            "examples": [
+              {
+                "en": "Serve the fish with a wedge of lemon.",
+                "ja": "魚にくし形に切ったレモンを添えてください。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a wedge of lemon",
+        "ja": "くし形に切ったレモン一切れ"
+      },
+      {
+        "text": "a wooden wedge",
+        "ja": "木製のくさび"
+      },
+      {
+        "text": "drive a wedge between ...",
+        "ja": "〜の間に亀裂を生じさせる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "a wedge of lemon / cheese のように切り分けた形を表す。drive a wedge between A and B は比喩的に「AとBを仲たがいさせる」。",
     "tags": [
-      "kitchen-dining"
+      "kitchen-dining",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-00628",
@@ -6913,25 +7700,63 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "雑草",
-            "definition": "",
-            "examples": []
+            "ja": "雑草；望まれない場所に生える植物",
+            "definition": "a wild plant growing where it is not wanted, especially among cultivated plants",
+            "examples": [
+              {
+                "en": "The community group removed weeds from the school garden.",
+                "ja": "地域のグループは学校の花壇から雑草を取り除いた。"
+              },
+              {
+                "en": "Some weeds can compete with crops for water.",
+                "ja": "雑草の中には作物と水を奪い合うものもある。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "（庭などの）雑草を抜く",
+            "definition": "to remove unwanted plants from an area",
+            "examples": [
+              {
+                "en": "We weeded the vegetable beds before planting seeds.",
+                "ja": "種をまく前に私たちは野菜の畝の草取りをした。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "pull up weeds",
+        "ja": "雑草を引き抜く"
+      },
+      {
+        "text": "weed the garden",
+        "ja": "庭の草取りをする"
+      },
+      {
+        "text": "control weeds",
+        "ja": "雑草を防除する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "weed は可算名詞で a weed / weeds。動詞 weed は「草取りをする」。weed out は「不要なものを取り除く」。",
     "tags": [
-      "home-tools"
+      "home-tools",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-00629",
@@ -7183,25 +8008,57 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "重荷を負わせる；気を重くさせる",
-            "definition": "",
-            "examples": []
+            "ja": "（重さで物を）押し下げる",
+            "definition": "to make something bend or hang lower because of its weight",
+            "examples": [
+              {
+                "en": "Heavy snow weighed down the branches.",
+                "ja": "重い雪のせいで枝が垂れ下がった。"
+              }
+            ]
+          },
+          {
+            "ja": "（責任・不安などで人の）気を重くする",
+            "definition": "to make someone feel worried, tired, or burdened",
+            "examples": [
+              {
+                "en": "She felt weighed down by the pressure to succeed.",
+                "ja": "彼女は成功しなければならないという重圧に押しつぶされそうだった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "be weighed down by debt",
+        "en": "be weighed down by debt",
+        "ja": "借金に苦しめられる"
+      },
+      {
+        "text": "weigh down the branches",
+        "en": "weigh down the branches",
+        "ja": "枝を重みで垂れ下がらせる"
+      },
+      {
+        "text": "feel weighed down by responsibility",
+        "en": "feel weighed down by responsibility",
+        "ja": "責任の重圧を感じる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "weigh + 目的語 + down。比喩的には受動態 be weighed down by ... が多い。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.164"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10124",
@@ -7423,25 +8280,48 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "温かく迎える",
-            "definition": "",
-            "examples": []
+            "ja": "人を温かく迎える；親しみやすい",
+            "definition": "making visitors or newcomers feel accepted and comfortable",
+            "examples": [
+              {
+                "en": "The library has a welcoming atmosphere for first-time visitors.",
+                "ja": "その図書館には初めての来館者もくつろげる雰囲気がある。"
+              },
+              {
+                "en": "The staff were welcoming to students from overseas.",
+                "ja": "職員たちは海外からの生徒を温かく迎えた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a welcoming atmosphere",
+        "ja": "温かく迎えてくれる雰囲気"
+      },
+      {
+        "text": "a welcoming environment",
+        "ja": "居心地のよい環境"
+      },
+      {
+        "text": "be welcoming to newcomers",
+        "ja": "新しく来た人を温かく迎える"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "welcoming は形容詞として人・場所・雰囲気に使う。welcome（歓迎する／歓迎される）との使い分けに注意。",
     "tags": [
-      "description"
+      "description",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04650",
@@ -8118,25 +8998,38 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "湿地",
-            "definition": "",
-            "examples": []
+            "ja": "湿地；水で満たされるか水分を多く含む土地",
+            "definition": "an area of land where water covers or saturates the soil permanently or seasonally",
+            "examples": [
+              {
+                "en": "The wetland provides habitat for migratory birds.",
+                "ja": "その湿地は渡り鳥の生息地となっている。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "coastal wetland"
+      },
+      {
+        "text": "wetland conservation"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Wetlands include marshes, swamps, and bogs.",
     "tags": [
-      "terrain-water"
+      "terrain-water",
+      "curated-v3.63"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04532",
@@ -8866,6 +9759,18 @@
               {
                 "en": "The first group improved, whereas the second showed little change.",
                 "ja": "第1グループは改善した一方、第2グループにはほとんど変化がありませんでした。"
+              },
+              {
+                "en": "Urban populations increased, whereas some rural areas lost residents.",
+                "ja": "都市人口は増えた一方、一部の農村地域では人口が減った。"
+              },
+              {
+                "en": "The rural population declined, whereas the urban population continued to grow.",
+                "ja": "農村部の人口は減少した一方、都市部の人口は増え続けた。"
+              },
+              {
+                "en": "The first survey measured attitudes, whereas the second focused on behavior.",
+                "ja": "最初の調査は意識を測定した一方、二回目は行動に焦点を当てた。"
               }
             ]
           }
@@ -8878,11 +9783,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "whereas は対照を示す接続詞で後ろに節を置く。whereas と however を同じ位置で重ねない。",
+    "usage_note": "whereas は対照を示す接続詞で後ろに節を置く。whereas と however を同じ位置で重ねない。\nwhereas は二つの節を対比する接続詞。単独の文頭副詞 however とは文法的に異なる。",
     "tags": [
       "v2.34-curated",
       "curated-v2.62",
-      "curated-v3.40"
+      "curated-v3.40",
+      "curated-v3.132"
     ],
     "status": "enriched",
     "search_terms": [
@@ -8894,31 +9800,24 @@
     },
     "collocations": [
       {
-        "text": "A whereas B"
+        "text": "A whereas B",
+        "en": "A whereas B",
+        "ja": "Aである一方、Bである"
       },
       {
         "text": "A, whereas B",
+        "en": "A, whereas B",
         "ja": "Aである一方、Bである"
       },
       {
         "text": "whereas the former ...",
+        "en": "whereas the former ...",
         "ja": "前者は…である一方"
       },
       {
         "text": "whereas in rural areas ...",
+        "en": "whereas in rural areas ...",
         "ja": "一方、農村部では…"
-      }
-    ],
-    "senses": [
-      {
-        "pos": "",
-        "definition_ja": "一方で；〜であるのに対して",
-        "examples": [
-          {
-            "en": "Urban populations increased, whereas some rural areas lost residents.",
-            "ja": "都市人口は増えた一方、一部の農村地域では人口が減った。"
-          }
-        ]
       }
     ]
   },
@@ -9224,12 +10123,41 @@
         "pos": "conjunction",
         "meanings": [
           {
-            "ja": "〜する間；一方で",
-            "definition": "during the time that something happens, or used to contrast two facts",
+            "ja": "～する間に；～している間",
+            "definition": "during the time that another action takes place",
             "examples": [
+              {
+                "en": "She took notes while the speaker explained the results.",
+                "ja": "講演者が結果を説明している間、彼女はメモを取った。"
+              },
               {
                 "en": "I listened to a podcast while I was running.",
                 "ja": "ランニング中にポッドキャストを聞きました。"
+              }
+            ]
+          },
+          {
+            "ja": "一方で；～なのに対して",
+            "definition": "introducing a contrast between two facts",
+            "examples": [
+              {
+                "en": "The first method is inexpensive, while the second is more accurate.",
+                "ja": "最初の方法は安価だが、二つ目の方法はより正確だ。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "しばらくの間",
+            "definition": "a period of time, usually not specified",
+            "examples": [
+              {
+                "en": "It took a while to verify the figures.",
+                "ja": "数値を確認するのにしばらく時間がかかった。"
               }
             ]
           }
@@ -9242,11 +10170,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "while + 節。対比の while は whereas に近い。a while（名詞句）と awhile（副詞）を区別する。",
     "tags": [
-      "v2.31-curated"
+      "v2.31-curated",
+      "curated-v3.128"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "while"
     ],
@@ -9254,7 +10183,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "while doing",
+        "en": "while doing",
+        "ja": "～している間に"
+      },
+      {
+        "text": "for a while",
+        "en": "for a while",
+        "ja": "しばらくの間"
+      },
+      {
+        "text": "a little while later",
+        "en": "a little while later",
+        "ja": "少し後に"
+      }
+    ]
   },
   {
     "id": "sw-12303",
@@ -9553,25 +10498,64 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "むち打つ；素早く動かす",
-            "definition": "",
-            "examples": []
+            "ja": "（むちなどで）打つ",
+            "definition": "to strike a person or animal with a whip or similar object",
+            "examples": [
+              {
+                "en": "The historical account describes prisoners being whipped.",
+                "ja": "その歴史記録には囚人がむちで打たれたことが記されている。"
+              }
+            ]
+          },
+          {
+            "ja": "（クリーム・卵などを）泡立てる",
+            "definition": "to beat cream, eggs, or another ingredient rapidly to add air",
+            "examples": [
+              {
+                "en": "Whip the cream until soft peaks form.",
+                "ja": "クリームを柔らかい角が立つまで泡立ててください。"
+              }
+            ]
+          },
+          {
+            "ja": "（物を）素早く動かす",
+            "definition": "to move or pull something suddenly and quickly",
+            "examples": [
+              {
+                "en": "A strong gust whipped the flag against the pole.",
+                "ja": "強い突風で旗がポールに激しく打ちつけられた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "whip cream",
+        "ja": "クリームを泡立てる"
+      },
+      {
+        "text": "whip up enthusiasm",
+        "ja": "熱意をかき立てる"
+      },
+      {
+        "text": "whip something out",
+        "ja": "何かをさっと取り出す"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "whip up は「（料理を）手早く作る」「感情をかき立てる」。whipped cream は「ホイップクリーム」。",
     "tags": [
-      "actions"
+      "actions",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12286",
@@ -9771,25 +10755,51 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "渦巻き",
-            "definition": "",
-            "examples": []
+            "ja": "渦巻き；水の渦",
+            "definition": "a circular current of water that draws nearby water or objects toward its center",
+            "examples": [
+              {
+                "en": "The kayak was pulled toward a whirlpool near the rocks.",
+                "ja": "カヤックは岩の近くの渦に引き寄せられた。"
+              },
+              {
+                "en": "Strong currents formed a whirlpool beneath the bridge.",
+                "ja": "強い流れが橋の下に渦を作った。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "a powerful whirlpool",
+        "text": "a powerful whirlpool",
+        "ja": "強い渦"
+      },
+      {
+        "en": "a swirling whirlpool",
+        "text": "a swirling whirlpool",
+        "ja": "渦巻く水流"
+      },
+      {
+        "en": "be caught in a whirlpool",
+        "text": "be caught in a whirlpool",
+        "ja": "渦に巻き込まれる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "whirlwind は空気の渦、whirlpool は水の渦を表す。",
     "tags": [
-      "nature-animals"
+      "nature-animals",
+      "curated-v3.182"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-05588",
@@ -9812,25 +10822,51 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "つむじ風",
-            "definition": "",
-            "examples": []
+            "ja": "つむじ風；旋風",
+            "definition": "a small, rapidly rotating column of air that can lift dust or loose objects",
+            "examples": [
+              {
+                "en": "A whirlwind lifted dry leaves from the playground.",
+                "ja": "つむじ風が校庭の枯れ葉を巻き上げた。"
+              },
+              {
+                "en": "The children watched a small whirlwind cross the field.",
+                "ja": "子どもたちは小さなつむじ風が野原を横切るのを見た。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "a sudden whirlwind",
+        "text": "a sudden whirlwind",
+        "ja": "突然のつむじ風"
+      },
+      {
+        "en": "a whirlwind of dust",
+        "text": "a whirlwind of dust",
+        "ja": "土ぼこりの渦"
+      },
+      {
+        "en": "a whirlwind of activity",
+        "text": "a whirlwind of activity",
+        "ja": "目まぐるしい活動"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "比喩の a whirlwind of ～ は「目まぐるしい～」。a whirlwind tour は「駆け足の旅行」。",
     "tags": [
-      "nature-animals"
+      "nature-animals",
+      "curated-v3.182"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-03850",
@@ -10183,24 +11219,45 @@
         "meanings": [
           {
             "ja": "白色矮星",
-            "definition": "",
-            "examples": []
+            "definition": "a small, very dense stellar remnant left when a low- or medium-mass star has shed its outer layers",
+            "examples": [
+              {
+                "en": "A white dwarf can pack roughly the mass of the Sun into a volume comparable to Earth’s.",
+                "ja": "白色矮星は太陽に近い質量を地球ほどの体積に詰め込むことがある。"
+              },
+              {
+                "en": "Astronomers detected a planet orbiting a white dwarf.",
+                "ja": "天文学者たちは白色矮星の周りを回る惑星を検出した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "white dwarf star",
+        "en": "white dwarf star",
+        "ja": "白色矮星"
+      },
+      {
+        "text": "cooling white dwarf",
+        "en": "cooling white dwarf",
+        "ja": "冷えつつある白色矮星"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "恒星進化の語。white dwarf は主に電子の縮退圧で支えられる。neutron star とは異なる。",
     "tags": [
-      "astronomy-space"
+      "astronomy-space",
+      "curated-v3.177"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12588",
@@ -10305,25 +11362,48 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "ホワイトボード；消して書ける白い板",
-            "definition": "",
-            "examples": []
+            "ja": "ホワイトボード；消せる筆記用の白い板",
+            "definition": "a smooth white surface on which people write with special markers and erase the writing",
+            "examples": [
+              {
+                "en": "The teacher drew a timeline on the whiteboard.",
+                "ja": "先生はホワイトボードに年表を描いた。"
+              },
+              {
+                "en": "Please erase the whiteboard after the meeting.",
+                "ja": "会議の後でホワイトボードを消してください。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "write on the whiteboard",
+        "ja": "ホワイトボードに書く"
+      },
+      {
+        "text": "erase the whiteboard",
+        "ja": "ホワイトボードを消す"
+      },
+      {
+        "text": "an interactive whiteboard",
+        "ja": "電子黒板"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "write on a whiteboard。interactive whiteboard は電子的な表示・操作ができるボードを指す。",
     "tags": [
-      "office-business"
+      "office-business",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11006",
@@ -10772,12 +11852,42 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "卸売；卸売の",
-            "definition": "the selling of goods in large quantities to retailers",
+            "ja": "卸売；卸売取引",
+            "definition": "the sale of goods in large quantities, usually to retailers rather than consumers",
             "examples": [
               {
-                "en": "The discussion focused on wholesale.",
-                "ja": "議論では「卸売」に焦点が当てられた。"
+                "en": "The company expanded from retail into wholesale.",
+                "ja": "その会社は小売から卸売へと事業を拡大した。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "卸売の",
+            "definition": "relating to goods sold in large quantities to businesses",
+            "examples": [
+              {
+                "en": "Wholesale prices rose after transport costs increased.",
+                "ja": "輸送費の上昇を受けて卸売価格が上がった。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adverb",
+        "meanings": [
+          {
+            "ja": "卸売で",
+            "definition": "in large quantities to businesses rather than individual consumers",
+            "examples": [
+              {
+                "en": "The farm sells most of its produce wholesale.",
+                "ja": "その農場は農産物の大半を卸売で販売している。"
               }
             ]
           }
@@ -10790,10 +11900,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Useful in formal, academic, news, or professional English; check the surrounding noun or verb for the intended sense.",
+    "usage_note": "wholesale は名詞・形容詞・副詞。retail（小売）との対比で覚える。",
     "tags": [
       "learner-core-gap",
-      "curated-v3.05"
+      "curated-v3.05",
+      "curated-v3.101"
     ],
     "status": "enriched",
     "search_terms": [
@@ -10804,8 +11915,21 @@
       "ipa_uk": null
     },
     "collocations": [
-      "wholesale policy",
-      "wholesale issue"
+      {
+        "en": "wholesale price",
+        "text": "wholesale price",
+        "ja": "卸売価格"
+      },
+      {
+        "en": "wholesale market",
+        "text": "wholesale market",
+        "ja": "卸売市場"
+      },
+      {
+        "en": "buy wholesale",
+        "text": "buy wholesale",
+        "ja": "卸売価格でまとめ買いする"
+      }
     ]
   },
   {
@@ -10871,24 +11995,49 @@
         "meanings": [
           {
             "ja": "健康によい；健全な",
-            "definition": "",
-            "examples": []
+            "definition": "good for physical health or general well-being",
+            "examples": [
+              {
+                "en": "The school offers wholesome meals made with fresh vegetables.",
+                "ja": "その学校は新鮮な野菜を使った健康的な食事を提供している。"
+              }
+            ]
+          },
+          {
+            "ja": "健全で好ましい",
+            "definition": "having a positive moral or emotional influence",
+            "examples": [
+              {
+                "en": "The film tells a wholesome story about friendship and trust.",
+                "ja": "その映画は友情と信頼を描いた心温まる物語である。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "wholesome food",
+        "ja": "健康によい食べ物"
+      },
+      {
+        "text": "wholesome entertainment",
+        "ja": "健全な娯楽"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "健康面だけでなく、道徳的・情緒的に健全という評価にも使う。",
     "tags": [
-      "descriptive"
+      "descriptive",
+      "curated-v3.80"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-05659",
@@ -10911,25 +12060,40 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "完全に",
-            "definition": "",
-            "examples": []
+            "ja": "完全に；まったく",
+            "definition": "completely or entirely",
+            "examples": [
+              {
+                "en": "The findings were not wholly consistent with the original hypothesis.",
+                "ja": "その結果は当初の仮説と完全には一致しなかった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "wholly owned subsidiary",
+        "ja": "完全子会社"
+      },
+      {
+        "text": "not wholly convinced",
+        "ja": "完全には納得していない"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "not wholly は部分否定「完全に〜というわけではない」。",
     "tags": [
-      "manner-and-time"
+      "manner-and-time",
+      "curated-v3.80"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13062",
@@ -11167,6 +12331,18 @@
               {
                 "en": "The report found widespread concern about data privacy.",
                 "ja": "報告書はデータのプライバシーに対する広範な懸念を明らかにした。"
+              },
+              {
+                "en": "The drought caused widespread damage to crops.",
+                "ja": "干ばつは作物に広範な被害をもたらした。"
+              },
+              {
+                "en": "The flood caused widespread damage to roads and farmland.",
+                "ja": "洪水は道路や農地に広範な被害をもたらした。"
+              },
+              {
+                "en": "There is widespread agreement that early intervention is important.",
+                "ja": "早期介入が重要だという点では広く意見が一致している。"
               }
             ]
           }
@@ -11179,12 +12355,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "widespread は場所・人々の間に広く見られること。very widespread のような強調も可能。",
+    "usage_note": "widespread は場所・人々の間に広く見られること。very widespread のような強調も可能。\nwidespread は地域・集団に「広く及ぶ」。widespread among + 集団 もよく使う。",
     "tags": [
       "v2.31-curated",
       "curated-v2.63",
       "curated-v3.33",
-      "curated-v3.41"
+      "curated-v3.41",
+      "curated-v3.132"
     ],
     "status": "enriched",
     "search_terms": [
@@ -11196,32 +12373,29 @@
     },
     "collocations": [
       {
-        "text": "widespread concern"
+        "text": "widespread concern",
+        "en": "widespread concern",
+        "ja": "広範な懸念"
       },
       {
-        "text": "widespread damage"
+        "text": "widespread damage",
+        "en": "widespread damage",
+        "ja": "広範囲の被害"
       },
       {
         "text": "widespread adoption",
+        "en": "widespread adoption",
         "ja": "広範な普及"
       },
       {
         "text": "widespread belief",
+        "en": "widespread belief",
         "ja": "広く共有された考え"
       },
-      "widespread concern",
-      "widespread adoption"
-    ],
-    "senses": [
       {
-        "pos": "",
-        "definition_ja": "広範囲に及ぶ；広く普及した",
-        "examples": [
-          {
-            "en": "The drought caused widespread damage to crops.",
-            "ja": "干ばつは作物に広範な被害をもたらした。"
-          }
-        ]
+        "text": "widespread agreement",
+        "en": "widespread agreement",
+        "ja": "広く共有された合意"
       }
     ]
   },
@@ -11334,25 +12508,48 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "小さくくねくね動かす",
-            "definition": "",
-            "examples": []
+            "ja": "（体の一部などを）小刻みにくねくね動かす",
+            "definition": "to move or make something move from side to side with small quick movements",
+            "examples": [
+              {
+                "en": "The child wiggled her toes in the sand.",
+                "ja": "子どもは砂の中で足の指をくねくね動かした。"
+              },
+              {
+                "en": "The loose table leg wiggled when he touched it.",
+                "ja": "緩んだテーブルの脚は触れるとぐらついた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "wiggle your fingers",
+        "ja": "指をくねくね動かす"
+      },
+      {
+        "text": "wiggle your toes",
+        "ja": "足の指をくねくね動かす"
+      },
+      {
+        "text": "wiggle from side to side",
+        "ja": "左右に小刻みに揺れる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "wiggle は小さく素早い動き。wobble は不安定にぐらぐら揺れることを強調する。",
     "tags": [
-      "hands-and-movement"
+      "hands-and-movement",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-01228",
@@ -11365,15 +12562,25 @@
     "frequency": 4,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
             "ja": "野生の",
-            "definition": "a person, thing, state, or idea related to 野生の",
+            "definition": "living or growing in nature rather than being kept or cultivated by people",
             "examples": [
               {
-                "en": "This is a common example of 'wild'.",
-                "ja": "これは「野生の」の一般的な例です。"
+                "en": "Wild animals should not be fed by visitors.",
+                "ja": "来訪者は野生動物に餌を与えるべきではない。"
+              }
+            ]
+          },
+          {
+            "ja": "激しい；制御されていない",
+            "definition": "uncontrolled, extreme, or full of excitement",
+            "examples": [
+              {
+                "en": "The crowd gave a wild cheer when the team scored.",
+                "ja": "チームが得点すると観衆は熱狂的な歓声を上げた。"
               }
             ]
           }
@@ -11386,9 +12593,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "wild は「野生の」以外に「激しい・無謀な」も表す。",
+    "tags": [
+      "curated-v3.155"
+    ],
+    "status": "enriched",
     "search_terms": [
       "wild"
     ],
@@ -11396,7 +12605,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "wild animals",
+        "en": "wild animals",
+        "ja": "野生動物"
+      },
+      {
+        "text": "in the wild",
+        "en": "in the wild",
+        "ja": "野生で"
+      },
+      {
+        "text": "a wild guess",
+        "en": "a wild guess",
+        "ja": "根拠の薄い推測"
+      }
+    ]
   },
   {
     "id": "sw-08984",
@@ -11494,12 +12719,16 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "野生生物",
-            "definition": "animals and plants living naturally in an area",
+            "ja": "野生動物；野生生物",
+            "definition": "animals living in natural conditions rather than being kept or domesticated",
             "examples": [
               {
                 "en": "The wetland provides an important habitat for wildlife.",
                 "ja": "その湿地は野生生物に重要な生息地を提供しています。"
+              },
+              {
+                "en": "Road construction can fragment habitats and threaten wildlife.",
+                "ja": "道路建設は生息地を分断し、野生生物を脅かすことがある。"
               }
             ]
           }
@@ -11512,11 +12741,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Wildlife primarily means wild animals collectively; it is generally an uncountable noun.",
     "tags": [
-      "v2.31-curated"
+      "v2.31-curated",
+      "curated-v3.139"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "wildlife"
     ],
@@ -11524,7 +12754,28 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "en": "wildlife conservation",
+        "text": "wildlife conservation",
+        "ja": "野生生物の保護"
+      },
+      {
+        "en": "wildlife habitat",
+        "text": "wildlife habitat",
+        "ja": "野生動物の生息地"
+      },
+      {
+        "en": "protect wildlife",
+        "text": "protect wildlife",
+        "ja": "野生生物を保護する"
+      },
+      {
+        "en": "wildlife population",
+        "text": "wildlife population",
+        "ja": "野生動物の個体群"
+      }
+    ]
   },
   {
     "id": "sw-00641",
@@ -11537,15 +12788,50 @@
     "frequency": 5,
     "parts_of_speech": [
       {
-        "pos": "modal",
+        "pos": "auxiliary",
         "meanings": [
           {
-            "ja": "〜だろう；〜するつもり",
-            "definition": "a helping verb expressing the sense '〜だろう；〜するつもり'",
+            "ja": "〜だろう；〜する予定だ",
+            "definition": "a modal auxiliary used to express future events, predictions, or plans",
             "examples": [
               {
-                "en": "The word 'will' is common in English.",
-                "ja": "「will」は英語でよく使われる語です。"
+                "en": "The committee will announce its decision tomorrow.",
+                "ja": "委員会は明日決定を発表する。"
+              }
+            ]
+          },
+          {
+            "ja": "〜するつもりだ；〜してくれる",
+            "definition": "a modal auxiliary used to express willingness, intention, or a request",
+            "examples": [
+              {
+                "en": "Will you help me carry these boxes?",
+                "ja": "これらの箱を運ぶのを手伝ってくれますか。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "意志；意欲",
+            "definition": "the mental determination to do something despite difficulty",
+            "examples": [
+              {
+                "en": "She had the will to keep trying.",
+                "ja": "彼女には挑戦し続ける意志があった。"
+              }
+            ]
+          },
+          {
+            "ja": "遺言書",
+            "definition": "a legal document stating how a person’s property should be distributed after death",
+            "examples": [
+              {
+                "en": "He left his house to his daughter in his will.",
+                "ja": "彼は遺言書で家を娘に遺した。"
               }
             ]
           }
@@ -11558,9 +12844,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "助動詞 will の後は動詞の原形。未来だけでなく意志・依頼にも使う。名詞 will には「意志」と「遺言書」の意味がある。",
+    "tags": [
+      "curated-v3.179"
+    ],
+    "status": "enriched",
     "search_terms": [
       "will"
     ],
@@ -11568,7 +12856,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "will be able to ...",
+        "en": "will be able to ...",
+        "ja": "〜できるようになるだろう"
+      },
+      {
+        "text": "will probably ...",
+        "en": "will probably ...",
+        "ja": "おそらく〜するだろう"
+      },
+      {
+        "text": "a strong will",
+        "en": "a strong will",
+        "ja": "強い意志"
+      }
+    ]
   },
   {
     "id": "sw-04991",
@@ -11726,25 +13030,48 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "進んで",
-            "definition": "",
-            "examples": []
+            "ja": "進んで；快く",
+            "definition": "without being forced and with a readiness to do something",
+            "examples": [
+              {
+                "en": "Several parents willingly volunteered to help with the event.",
+                "ja": "数人の保護者が進んで行事の手伝いに志願した。"
+              },
+              {
+                "en": "She willingly shared her notes with classmates.",
+                "ja": "彼女は快くノートをクラスメートと共有した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "willingly accept an offer",
+        "ja": "申し出を快く受け入れる"
+      },
+      {
+        "text": "willingly participate",
+        "ja": "進んで参加する"
+      },
+      {
+        "text": "willingly share information",
+        "ja": "進んで情報を共有する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "willingly は本人の意思で行うことを表す。be willing to do（〜する意思がある）も頻出。",
     "tags": [
-      "manner"
+      "manner",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04192",
@@ -11982,8 +13309,16 @@
         "meanings": [
           {
             "ja": "風",
-            "definition": "air moving naturally across the earth",
+            "definition": "air moving naturally across the Earth, especially along its surface",
             "examples": [
+              {
+                "en": "Strong winds forced the ferry to remain in port.",
+                "ja": "強風のためフェリーは港にとどまらざるを得なかった。"
+              },
+              {
+                "en": "The turbines generate electricity when the wind blows.",
+                "ja": "風が吹くとタービンが発電する。"
+              },
               {
                 "en": "A strong wind blew my hat off.",
                 "ja": "強い風で私の帽子が飛ばされました。"
@@ -12001,9 +13336,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "ここでは「風」を表す名詞。「巻く」という動詞 wind は発音と語義が異なり、未補完。",
-    "tags": [],
-    "status": "basic",
+    "usage_note": "wind（風）は /wɪnd/ と発音。動詞 wind（巻く）は /waɪnd/ と発音する。",
+    "tags": [
+      "curated-v3.182"
+    ],
+    "status": "enriched",
     "search_terms": [
       "wind",
       "winds"
@@ -12012,7 +13349,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "en": "strong winds",
+        "text": "strong winds",
+        "ja": "強風"
+      },
+      {
+        "en": "wind speed",
+        "text": "wind speed",
+        "ja": "風速"
+      },
+      {
+        "en": "wind direction",
+        "text": "wind direction",
+        "ja": "風向き"
+      }
+    ]
   },
   {
     "id": "sw-10127",
@@ -12035,25 +13388,50 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "徐々に活動を弱める；くつろぐ",
-            "definition": "",
-            "examples": []
+            "ja": "徐々に活動を縮小する；終える",
+            "definition": "to gradually reduce activity or bring something to an end",
+            "examples": [
+              {
+                "en": "The company will wind down the pilot project by December.",
+                "ja": "その会社は12月までに試験事業を段階的に終了する予定だ。"
+              }
+            ]
+          },
+          {
+            "ja": "くつろぐ；緊張を解く",
+            "definition": "to relax after being busy or stressed",
+            "examples": [
+              {
+                "en": "She listens to music to wind down after work.",
+                "ja": "彼女は仕事の後、気持ちを落ち着けるために音楽を聴く。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "wind down operations",
+        "ja": "事業を段階的に縮小する"
+      },
+      {
+        "text": "wind down after work",
+        "ja": "仕事後にくつろぐ"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "wind はこの句動詞では /waɪnd/ と発音する。縮小とリラックスの二義に注意。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.80"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11689",
@@ -12077,24 +13455,45 @@
         "meanings": [
           {
             "ja": "ウインドシア；風向・風速の急変",
-            "definition": "",
-            "examples": []
+            "definition": "a rapid change in wind speed or direction over a short distance",
+            "examples": [
+              {
+                "en": "The pilot delayed landing because of severe wind shear near the runway.",
+                "ja": "滑走路付近で強いウインドシアが発生したため、操縦士は着陸を遅らせた。"
+              },
+              {
+                "en": "Meteorologists issued an alert for low-level wind shear.",
+                "ja": "気象予報士たちは低高度のウインドシアに警報を出した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "low-level wind shear",
+        "en": "low-level wind shear",
+        "ja": "低高度ウインドシア"
+      },
+      {
+        "text": "wind shear warning",
+        "en": "wind shear warning",
+        "ja": "ウインドシア警報"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "航空・気象の語。単なる strong wind（強風）ではなく、距離に対する風速・風向の変化を指す。",
     "tags": [
-      "weather-atmosphere"
+      "weather-atmosphere",
+      "curated-v3.177"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10130",
@@ -12117,25 +13516,64 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "終える；結局〜になる；ねじを巻く",
-            "definition": "",
-            "examples": []
+            "ja": "結局〜になる；〜する羽目になる",
+            "definition": "to eventually find yourself in a particular situation, often unexpectedly",
+            "examples": [
+              {
+                "en": "If we ignore the warnings, we may wind up paying much more.",
+                "ja": "警告を無視すると、結局はるかに多く払う羽目になるかもしれない。"
+              }
+            ]
+          },
+          {
+            "ja": "会議などを終える；締めくくる",
+            "definition": "to bring an activity or meeting to an end",
+            "examples": [
+              {
+                "en": "The chair wound up the meeting with a brief summary.",
+                "ja": "議長は短い要約で会議を締めくくった。"
+              }
+            ]
+          },
+          {
+            "ja": "ねじを巻く",
+            "definition": "to turn a mechanism so that it stores energy and can operate",
+            "examples": [
+              {
+                "en": "He wound up the old clock before going to bed.",
+                "ja": "彼は寝る前に古い時計のねじを巻いた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "wind up doing",
+        "ja": "結局〜することになる"
+      },
+      {
+        "text": "wind up a meeting",
+        "ja": "会議を終える"
+      },
+      {
+        "text": "wind up a clock",
+        "ja": "時計のねじを巻く"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "wind up doing と end up doing は近い。過去形は wound up。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.80"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10912",
@@ -12199,25 +13637,51 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "風よけ；防風林",
-            "definition": "",
-            "examples": []
+            "ja": "防風林；風よけ",
+            "definition": "a row of trees, fence, or other barrier that reduces the force of the wind",
+            "examples": [
+              {
+                "en": "Farmers planted trees as a windbreak around the fields.",
+                "ja": "農家は畑の周囲に防風林として木を植えた。"
+              },
+              {
+                "en": "The fence provides a windbreak for the young plants.",
+                "ja": "その柵は若い植物の風よけになっている。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "plant a windbreak",
+        "en": "plant a windbreak",
+        "ja": "防風林を植える"
+      },
+      {
+        "text": "shelterbelt windbreak",
+        "en": "shelterbelt windbreak",
+        "ja": "防風用の樹木帯"
+      },
+      {
+        "text": "natural windbreak",
+        "en": "natural windbreak",
+        "ja": "自然の風よけ"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "windbreak は風を弱める障壁。windbreaker は防風用の上着を指す別語。",
     "tags": [
-      "outdoors-navigation"
+      "outdoors-navigation",
+      "curated-v3.184"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-06788",
@@ -12281,25 +13745,51 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "風による体感温度の低下",
-            "definition": "",
-            "examples": []
+            "ja": "風による体感温度の低下；風冷え",
+            "definition": "the cooling effect of wind on exposed skin, often expressed as an apparent temperature",
+            "examples": [
+              {
+                "en": "The windchill made the morning feel much colder.",
+                "ja": "風冷えのため朝は実際の気温よりずっと寒く感じられた。"
+              },
+              {
+                "en": "The forecast warned of dangerous windchill overnight.",
+                "ja": "予報は夜間の危険な風冷えを警告した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "windchill factor",
+        "en": "windchill factor",
+        "ja": "風冷え指数"
+      },
+      {
+        "text": "windchill temperature",
+        "en": "windchill temperature",
+        "ja": "風冷えによる体感温度"
+      },
+      {
+        "text": "dangerous windchill",
+        "en": "dangerous windchill",
+        "ja": "危険なほどの風冷え"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "windchill は wind chill と2語で書くことも多い。実際の気温ではなく、風の影響を加味した寒さの指標。",
     "tags": [
-      "outdoors-navigation"
+      "outdoors-navigation",
+      "curated-v3.184"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10903",
@@ -12410,25 +13900,48 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "窓側の座席",
-            "definition": "",
-            "examples": []
+            "ja": "（乗り物の）窓側の座席",
+            "definition": "a seat next to a window, especially on a plane, train, or bus",
+            "examples": [
+              {
+                "en": "I requested a window seat so I could see the coastline.",
+                "ja": "海岸線が見えるように窓側の席を希望した。"
+              },
+              {
+                "en": "The airline assigned him a window seat.",
+                "ja": "航空会社は彼に窓側の席を割り当てた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "request a window seat",
+        "ja": "窓側の席を希望する"
+      },
+      {
+        "text": "an aisle seat or a window seat",
+        "ja": "通路側の席か窓側の席"
+      },
+      {
+        "text": "sit in a window seat",
+        "ja": "窓側の席に座る"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "window seat の反対は aisle seat（通路側の席）。seat by the window とも言える。",
     "tags": [
-      "community-travel"
+      "community-travel",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08805",
@@ -12713,25 +14226,51 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "暴風；風の嵐",
-            "definition": "",
-            "examples": []
+            "ja": "暴風；強風を伴う嵐",
+            "definition": "a storm characterized by unusually strong winds",
+            "examples": [
+              {
+                "en": "The windstorm knocked down trees and power lines.",
+                "ja": "暴風で木や送電線が倒れた。"
+              },
+              {
+                "en": "The roof was damaged during last night’s windstorm.",
+                "ja": "昨夜の暴風で屋根が損傷した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "severe windstorm",
+        "en": "severe windstorm",
+        "ja": "激しい暴風"
+      },
+      {
+        "text": "windstorm damage",
+        "en": "windstorm damage",
+        "ja": "暴風被害"
+      },
+      {
+        "text": "windstorm warning",
+        "en": "windstorm warning",
+        "ja": "暴風警報"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "windstorm は強い風を中心とする嵐。thunderstorm は雷雨を伴う嵐。",
     "tags": [
-      "weather-atmosphere"
+      "weather-atmosphere",
+      "curated-v3.184"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10908",
@@ -12796,24 +14335,61 @@
         "meanings": [
           {
             "ja": "風上の",
-            "definition": "",
-            "examples": []
+            "definition": "facing the direction from which the wind is blowing",
+            "examples": [
+              {
+                "en": "The windward side of the island receives more rainfall.",
+                "ja": "島の風上側は降水量が多い。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adverb",
+        "meanings": [
+          {
+            "ja": "風上へ；風上に",
+            "definition": "toward the direction from which the wind blows",
+            "examples": [
+              {
+                "en": "The boat turned windward to avoid the rocks.",
+                "ja": "船は岩を避けるため風上へ向きを変えた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "windward side",
+        "en": "windward side",
+        "ja": "風上側"
+      },
+      {
+        "text": "windward slope",
+        "en": "windward slope",
+        "ja": "風上斜面"
+      },
+      {
+        "text": "windward coast",
+        "en": "windward coast",
+        "ja": "風上側の海岸"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "windward は「風上の」。反対は leeward（風下の）。風下方向への移動は downwind ともいう。",
     "tags": [
-      "outdoor-conditions"
+      "outdoor-conditions",
+      "curated-v3.184"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04045",
@@ -13259,25 +14835,50 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "全滅させる；消し去る",
-            "definition": "",
-            "examples": []
+            "ja": "全滅させる；壊滅させる",
+            "definition": "to destroy or eliminate something completely",
+            "examples": [
+              {
+                "en": "The flood wiped out several small farms along the river.",
+                "ja": "洪水によって川沿いの小規模農場がいくつも壊滅した。"
+              }
+            ]
+          },
+          {
+            "ja": "記録や情報を完全に消去する",
+            "definition": "to remove information or traces of something completely",
+            "examples": [
+              {
+                "en": "The faulty update wiped out the device’s saved settings.",
+                "ja": "不具合のある更新によって端末に保存されていた設定がすべて消えた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "wipe out a population",
+        "ja": "集団を絶滅させる"
+      },
+      {
+        "text": "wipe out savings",
+        "ja": "貯蓄を失わせる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "wipe out は物理的な壊滅だけでなく、損失・記録の消去にも使う。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.80"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04942",
@@ -13488,25 +15089,48 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "賢明に",
-            "definition": "",
-            "examples": []
+            "ja": "賢明に；分別をもって",
+            "definition": "in a way that shows good judgment and careful thought",
+            "examples": [
+              {
+                "en": "The committee wisely postponed the outdoor event because of the storm warning.",
+                "ja": "委員会は暴風警報を受けて屋外行事を賢明にも延期した。"
+              },
+              {
+                "en": "Students should use online sources wisely.",
+                "ja": "生徒はオンラインの情報源を賢く利用すべきだ。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "choose wisely",
+        "ja": "賢明に選ぶ"
+      },
+      {
+        "text": "use resources wisely",
+        "ja": "資源を賢く使う"
+      },
+      {
+        "text": "invest time wisely",
+        "ja": "時間を賢明に使う"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "wisely は判断の適切さを表す。wise（賢明な）に -ly を付けた副詞。",
     "tags": [
-      "manner"
+      "manner",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12163",
@@ -13668,25 +15292,48 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "物思いに沈んだ；切なそうな",
-            "definition": "",
-            "examples": []
+            "ja": "懐かしさやかなわぬ思いを帯びた；物悲しげな",
+            "definition": "feeling or showing a gentle sadness about something desired or remembered",
+            "examples": [
+              {
+                "en": "He gave a wistful smile as he looked at his childhood photographs.",
+                "ja": "彼は子どもの頃の写真を見ながら、どこか物悲しげにほほえんだ。"
+              },
+              {
+                "en": "Her voice sounded wistful when she spoke of her hometown.",
+                "ja": "故郷のことを話す彼女の声は懐かしさと寂しさを帯びていた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a wistful smile",
+        "ja": "物悲しげなほほえみ"
+      },
+      {
+        "text": "a wistful look",
+        "ja": "名残惜しそうな表情"
+      },
+      {
+        "text": "feel wistful about the past",
+        "ja": "過去を思って切ない気持ちになる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "wistful は nostalgia（懐かしさ）や満たされない願いを含む静かな寂しさを表す。",
     "tags": [
-      "descriptive"
+      "descriptive",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-05227",
@@ -13744,11 +15391,31 @@
         "meanings": [
           {
             "ja": "〜と一緒に",
-            "definition": "a word showing a relationship with the sense '〜と一緒に'",
+            "definition": "in the company of a person or thing",
             "examples": [
               {
-                "en": "The word 'with' is common in English.",
-                "ja": "「with」は英語でよく使われる語です。"
+                "en": "I worked with colleagues from three countries.",
+                "ja": "私は3か国の同僚と一緒に働いた。"
+              }
+            ]
+          },
+          {
+            "ja": "〜を使って",
+            "definition": "using a particular tool, material, or method",
+            "examples": [
+              {
+                "en": "She measured the temperature with a digital sensor.",
+                "ja": "彼女はデジタルセンサーで温度を測定した。"
+              }
+            ]
+          },
+          {
+            "ja": "〜を持つ；〜のある",
+            "definition": "having a particular feature, quality, or characteristic",
+            "examples": [
+              {
+                "en": "We need a solution with fewer risks.",
+                "ja": "私たちにはリスクの少ない解決策が必要だ。"
               }
             ]
           }
@@ -13761,9 +15428,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "with は同行・手段・特徴などを表す。道具を示す with と行為者を示す by を混同しない。",
+    "tags": [
+      "curated-v3.179"
+    ],
+    "status": "enriched",
     "search_terms": [
       "with"
     ],
@@ -13771,7 +15440,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "deal with ...",
+        "en": "deal with ...",
+        "ja": "〜に対処する"
+      },
+      {
+        "text": "with regard to ...",
+        "en": "with regard to ...",
+        "ja": "〜に関して"
+      },
+      {
+        "text": "with the help of ...",
+        "en": "with the help of ...",
+        "ja": "〜の助けを借りて"
+      }
+    ]
   },
   {
     "id": "sw-02164",
@@ -13855,14 +15540,13 @@
               {
                 "en": "The child became withdrawn after moving to a new school.",
                 "ja": "その子は転校後、内向的になり人づきあいを避けるようになった。"
+              },
+              {
+                "en": "After repeated criticism, he became withdrawn and stopped attending club meetings.",
+                "ja": "繰り返し批判を受けた後、彼は人づきあいを避けるようになり、部活動の集まりにも出なくなった。"
               }
             ]
-          }
-        ]
-      },
-      {
-        "pos": "adjective",
-        "meanings": [
+          },
           {
             "ja": "取り下げられた；撤回された",
             "definition": "removed or canceled after having been offered or stated",
@@ -13881,16 +15565,24 @@
     "phrases": [],
     "collocations": [
       {
+        "en": "become withdrawn",
         "text": "become withdrawn",
         "ja": "人づきあいを避けるようになる"
       },
       {
+        "en": "socially withdrawn",
         "text": "socially withdrawn",
         "ja": "社会的に引きこもった"
       },
       {
+        "en": "withdrawn proposal",
         "text": "withdrawn proposal",
         "ja": "撤回された提案"
+      },
+      {
+        "en": "withdrawn behavior",
+        "text": "withdrawn behavior",
+        "ja": "人づきあいを避ける行動"
       }
     ],
     "related": {
@@ -13900,7 +15592,8 @@
     "usage_note": "withdrawn は withdraw の過去分詞から来た形容詞。性格を表す場合は「人づきあいを避ける」。withdrawn application は「取り下げられた申請」。",
     "tags": [
       "descriptive",
-      "curated-v3.50"
+      "curated-v3.50",
+      "curated-v3.172"
     ],
     "status": "enriched"
   },
@@ -14107,25 +15800,48 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "機知に富んだ",
-            "definition": "",
-            "examples": []
+            "ja": "機知に富んだ；気の利いた",
+            "definition": "using words or ideas in a clever and amusing way",
+            "examples": [
+              {
+                "en": "Her witty reply made the audience laugh.",
+                "ja": "彼女の機知に富んだ返答に観客は笑った。"
+              },
+              {
+                "en": "The essay is both thoughtful and witty.",
+                "ja": "そのエッセーは思慮深く、しかも機知に富んでいる。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a witty remark",
+        "ja": "気の利いた発言"
+      },
+      {
+        "text": "a witty response",
+        "ja": "機知に富んだ返答"
+      },
+      {
+        "text": "witty dialogue",
+        "ja": "軽妙な会話"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "witty は単に funny（面白い）ではなく、言葉や発想の巧みさを含む。wit は「機知」。",
     "tags": [
-      "personality"
+      "personality",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-05049",
@@ -14148,25 +15864,48 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "ぐらぐらする",
-            "definition": "",
-            "examples": []
+            "ja": "不安定にぐらぐら揺れる；ふらつく",
+            "definition": "to move unsteadily from side to side as if about to fall",
+            "examples": [
+              {
+                "en": "The chair wobbles because one leg is shorter than the others.",
+                "ja": "その椅子は脚が一本短いためぐらつく。"
+              },
+              {
+                "en": "The cyclist wobbled before regaining balance.",
+                "ja": "自転車の乗り手はふらついたが、再びバランスを取り戻した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "wobble from side to side",
+        "ja": "左右にぐらぐら揺れる"
+      },
+      {
+        "text": "a wobbling chair",
+        "ja": "ぐらつく椅子"
+      },
+      {
+        "text": "wobble on one’s feet",
+        "ja": "足元がふらつく"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "wobble は不安定さを強調する。wiggle は小刻みな左右の動き。",
     "tags": [
-      "hands-and-movement"
+      "hands-and-movement",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04928",
@@ -15061,25 +16800,42 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "羊毛",
-            "definition": "",
-            "examples": []
+            "ja": "羊毛；ウール",
+            "definition": "the soft hair of sheep or similar animals used to make fabric and clothing",
+            "examples": [
+              {
+                "en": "The cooperative sells blankets made from locally produced wool.",
+                "ja": "その協同組合は地元産の羊毛で作った毛布を販売している。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "pure wool",
+        "en": "pure wool",
+        "ja": "純毛"
+      },
+      {
+        "text": "wool sweater",
+        "en": "wool sweater",
+        "ja": "ウールのセーター"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "素材を指す wool は通常不可算。woolen（米）/ woollen（英）は「毛織物の」。",
     "tags": [
-      "clothes-textiles"
+      "clothes-textiles",
+      "curated-v3.118"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13517",
@@ -15136,12 +16892,41 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "単語；言葉",
-            "definition": "a single unit of language with meaning",
+            "ja": "単語；語",
+            "definition": "a single unit of language that has meaning and can be spoken or written",
             "examples": [
+              {
+                "en": "Please look up any unfamiliar words before class.",
+                "ja": "授業の前に知らない単語を調べてください。"
+              },
               {
                 "en": "Look up the word if you cannot guess its meaning from context.",
                 "ja": "文脈から意味を推測できなければその単語を調べてください。"
+              }
+            ]
+          },
+          {
+            "ja": "発言；言葉",
+            "definition": "something that someone says or writes",
+            "examples": [
+              {
+                "en": "Her words gave me the courage to try again.",
+                "ja": "彼女の言葉のおかげで、もう一度挑戦する勇気が出た。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "言葉で表現する",
+            "definition": "to express something using particular words",
+            "examples": [
+              {
+                "en": "We need to word the question more clearly.",
+                "ja": "その質問はもっと明確な言葉で表現する必要がある。"
               }
             ]
           }
@@ -15154,11 +16939,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "word は可算名詞。in other words は「言い換えれば」、keep one’s word は「約束を守る」。動詞 word は「言葉を選んで表現する」。",
     "tags": [
-      "v2.34-curated"
+      "v2.34-curated",
+      "curated-v3.186"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "word"
     ],
@@ -15166,7 +16952,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "in other words",
+        "en": "in other words",
+        "ja": "言い換えれば"
+      },
+      {
+        "text": "keep your word",
+        "en": "keep your word",
+        "ja": "約束を守る"
+      },
+      {
+        "text": "word a question carefully",
+        "en": "word a question carefully",
+        "ja": "質問の言葉遣いに気を配る"
+      }
+    ]
   },
   {
     "id": "sw-10424",
@@ -15356,11 +17158,25 @@
         "meanings": [
           {
             "ja": "仕事；作業",
-            "definition": "an activity that requires effort, especially as part of a job or task",
+            "definition": "tasks or activities involving effort",
             "examples": [
+              {
+                "en": "The team completed the work ahead of schedule.",
+                "ja": "チームは予定より早く作業を終えた。"
+              },
               {
                 "en": "I have some work to finish before I go home.",
                 "ja": "帰宅する前に終わらせる仕事があります。"
+              }
+            ]
+          },
+          {
+            "ja": "（研究・芸術などの）作品；成果",
+            "definition": "a piece of writing, art, or research produced by someone",
+            "examples": [
+              {
+                "en": "Her latest work examines language and social identity.",
+                "ja": "彼女の最新の著作は言語と社会的アイデンティティを検討している。"
               }
             ]
           }
@@ -15370,12 +17186,26 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "働く",
-            "definition": "to do a job",
+            "ja": "働く；仕事をする",
+            "definition": "to perform tasks as a job or activity",
             "examples": [
+              {
+                "en": "Many graduates work in the public sector.",
+                "ja": "多くの卒業生は公共部門で働いている。"
+              },
               {
                 "en": "She works at a school.",
                 "ja": "彼女は学校で働いています。"
+              }
+            ]
+          },
+          {
+            "ja": "（方法・機械などが）機能する；効果がある",
+            "definition": "to function properly or produce the intended result",
+            "examples": [
+              {
+                "en": "The strategy works best when students receive feedback.",
+                "ja": "その方法は生徒がフィードバックを受けるときに最も効果を発揮する。"
               },
               {
                 "en": "This method really works.",
@@ -15401,11 +17231,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "work は名詞「仕事」（通常不可算）・「作品」（可算）、動詞「働く・機能する」。",
     "tags": [
-      "v2.29-curated"
+      "v2.29-curated",
+      "curated-v3.124"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "work"
     ],
@@ -15413,7 +17244,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "work on a project",
+        "en": "work on a project",
+        "ja": "事業に取り組む"
+      },
+      {
+        "text": "work effectively",
+        "en": "work effectively",
+        "ja": "効果的に機能する"
+      },
+      {
+        "text": "a work of literature",
+        "en": "a work of literature",
+        "ja": "文学作品"
+      }
+    ]
   },
   {
     "id": "sw-10136",
@@ -15518,25 +17365,50 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "取り組む；働きかける",
-            "definition": "",
-            "examples": []
+            "ja": "〜に取り組む；作業を進める",
+            "definition": "to spend time and effort improving or completing something",
+            "examples": [
+              {
+                "en": "The team is working on a more accessible version of the website.",
+                "ja": "チームはウェブサイトのより利用しやすい版の開発に取り組んでいる。"
+              }
+            ]
+          },
+          {
+            "ja": "人に働きかける；説得しようとする",
+            "definition": "to try to influence or persuade someone",
+            "examples": [
+              {
+                "en": "We are working on the committee to reconsider its decision.",
+                "ja": "私たちは委員会に決定を再考するよう働きかけている。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "work on a project",
+        "ja": "プロジェクトに取り組む"
+      },
+      {
+        "text": "work on improving",
+        "ja": "改善に取り組む"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "work on + 名詞／動名詞。work for（〜のために働く）と区別。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.80"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04771",
@@ -15704,25 +17576,48 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "仕事中毒の人；働きすぎる人",
-            "definition": "",
-            "examples": []
+            "ja": "仕事に過度にのめり込む人；仕事中毒の人",
+            "definition": "a person who works excessively and finds it difficult to stop working",
+            "examples": [
+              {
+                "en": "He described himself as a workaholic after years of working every weekend.",
+                "ja": "彼は何年も週末まで働いた末、自分を仕事中毒だと表現した。"
+              },
+              {
+                "en": "Being a workaholic can leave little time for rest and relationships.",
+                "ja": "仕事にのめり込みすぎると休息や人間関係に使う時間がほとんどなくなることがある。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "a self-confessed workaholic",
+        "ja": "自他ともに認める仕事中毒の人"
+      },
+      {
+        "text": "a recovering workaholic",
+        "ja": "働きすぎの習慣を改めつつある人"
+      },
+      {
+        "text": "workaholic tendencies",
+        "ja": "仕事にのめり込みすぎる傾向"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "workaholic は work と alcoholic を組み合わせた語。勤勉な人を褒める語とは限らず、働きすぎの問題を含意する。",
     "tags": [
-      "work-life"
+      "work-life",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-06036",
@@ -15964,25 +17859,40 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "作業の流れ",
-            "definition": "",
-            "examples": []
+            "ja": "作業の流れ；業務手順",
+            "definition": "the sequence of tasks and decisions used to complete a piece of work",
+            "examples": [
+              {
+                "en": "The new software simplified the approval workflow.",
+                "ja": "新しいソフトウェアによって承認業務の流れが簡素化された。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "streamline a workflow",
+        "ja": "業務の流れを効率化する"
+      },
+      {
+        "text": "approval workflow",
+        "ja": "承認手順"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "workflow は単なる「仕事量」ではなく、作業の順序や担当者間の受け渡しを指す。",
     "tags": [
-      "work-business"
+      "work-business",
+      "curated-v3.80"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-03185",
@@ -15998,19 +17908,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "労働力；従業員",
-            "definition": "a concept, state, person, thing, or process connected with 労働力",
+            "ja": "労働力；企業・業界などで働く人々の総体",
+            "definition": "all the people employed by an organization or working in a particular sector or country",
             "examples": [
               {
-                "en": "The report discusses workforce in detail.",
-                "ja": "その報告書は「労働力」について詳しく論じている。"
+                "en": "An aging workforce is creating recruitment challenges in some industries.",
+                "ja": "一部の産業では労働力の高齢化が人材採用上の課題を生んでいる。"
               },
               {
                 "en": "An aging workforce may intensify labor shortages in many sectors.",
                 "ja": "労働力の高齢化は多くの分野で人手不足を深刻化させる可能性がある。"
+              },
+              {
+                "en": "Automation is changing the skills required in the workforce.",
+                "ja": "自動化によって労働力に求められる技能が変化している。"
               }
-            ],
-            "definition_en": "the people who are employed by a company, industry, or country"
+            ]
           }
         ]
       }
@@ -16021,11 +17934,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Workforce is usually collective and singular; labor force may include unemployed people actively seeking work.",
     "tags": [
       "academic-expansion",
       "curated-v2.58",
-      "curated-v3.25"
+      "curated-v3.25",
+      "curated-v3.64"
     ],
     "status": "enriched",
     "search_terms": [
@@ -16041,20 +17955,6 @@
       },
       {
         "text": "enter the workforce"
-      },
-      "skilled workforce",
-      "workforce shortage"
-    ],
-    "senses": [
-      {
-        "pos": "",
-        "definition_ja": "労働力；全従業員",
-        "examples": [
-          {
-            "en": "Automation is changing the skills required in the workforce.",
-            "ja": "自動化によって労働力に求められる技能が変化している。"
-          }
-        ]
       }
     ]
   },
@@ -16180,25 +18080,40 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "仕事量",
-            "definition": "",
-            "examples": []
+            "ja": "仕事量；課される作業の量",
+            "definition": "the amount of work that a person or organization has to do",
+            "examples": [
+              {
+                "en": "Teachers reported a heavier workload during the examination period.",
+                "ja": "教員たちは試験期間中に仕事量が増えたと報告した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "heavy workload",
+        "ja": "多い仕事量"
+      },
+      {
+        "text": "manage a workload",
+        "ja": "仕事量を管理する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "workload は可算・不可算両方で用いられる。workforce（労働力）と混同しない。",
     "tags": [
-      "work-business"
+      "work-business",
+      "curated-v3.80"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07865",
@@ -16255,12 +18170,12 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "職場",
-            "definition": "a common English word connected with 職場",
+            "ja": "職場；仕事場",
+            "definition": "a place where people perform their jobs",
             "examples": [
               {
-                "en": "The word 'workplace' is commonly used in this context.",
-                "ja": "「workplace」は「職場」に関する文脈で使われます。"
+                "en": "The company introduced measures to prevent harassment in the workplace.",
+                "ja": "その会社は職場でのハラスメントを防ぐ対策を導入した。"
               }
             ]
           }
@@ -16273,9 +18188,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "workplace は職場という場所や環境。at work は「仕事中・職場で」。",
+    "tags": [
+      "curated-v3.109"
+    ],
+    "status": "enriched",
     "search_terms": [
       "workplace"
     ],
@@ -16283,7 +18200,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "workplace safety",
+        "en": "workplace safety",
+        "ja": "職場の安全"
+      },
+      {
+        "text": "workplace culture",
+        "en": "workplace culture",
+        "ja": "職場文化"
+      },
+      {
+        "text": "workplace discrimination",
+        "en": "workplace discrimination",
+        "ja": "職場での差別"
+      }
+    ]
   },
   {
     "id": "sw-13083",
@@ -16381,12 +18314,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "研修会；作業場",
-            "definition": "a person, thing, state, or idea connected with 研修会",
+            "ja": "実習形式の研修会；ワークショップ",
+            "definition": "a meeting where people learn a skill through practical activities",
             "examples": [
               {
-                "en": "The word 'workshop' appears in many kinds of English texts.",
-                "ja": "「workshop」はさまざまな英文で使われます。"
+                "en": "Teachers attended a workshop on designing digital lessons.",
+                "ja": "教師たちはデジタル授業の設計に関する実践研修に参加した。"
+              }
+            ]
+          },
+          {
+            "ja": "作業場；工房",
+            "definition": "a room or building where things are made or repaired",
+            "examples": [
+              {
+                "en": "The carpenter built the shelves in his workshop.",
+                "ja": "大工は自分の作業場で棚を作った。"
               }
             ]
           }
@@ -16399,9 +18342,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "workshop は実習を伴う研修・討論会のほか、物を作ったり修理したりする作業場を指す。",
+    "tags": [
+      "curated-v3.178"
+    ],
+    "status": "enriched",
     "search_terms": [
       "workshop"
     ],
@@ -16409,7 +18354,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "en": "hands-on workshop",
+        "text": "hands-on workshop",
+        "ja": "実践型の研修会"
+      },
+      {
+        "en": "attend a workshop",
+        "text": "attend a workshop",
+        "ja": "研修会に参加する"
+      },
+      {
+        "en": "repair workshop",
+        "text": "repair workshop",
+        "ja": "修理工房"
+      }
+    ]
   },
   {
     "id": "sw-13084",
@@ -16432,25 +18393,48 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "作業現場",
-            "definition": "",
-            "examples": []
+            "ja": "作業現場；工事現場",
+            "definition": "a place where construction or other practical work is being carried out",
+            "examples": [
+              {
+                "en": "All visitors to the worksite must wear a safety helmet.",
+                "ja": "作業現場への訪問者は全員安全ヘルメットを着用しなければならない。"
+              },
+              {
+                "en": "The inspector checked safety procedures at the worksite.",
+                "ja": "検査官は作業現場で安全手順を確認した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "worksite safety",
+        "ja": "作業現場の安全"
+      },
+      {
+        "text": "a construction worksite",
+        "ja": "建設作業現場"
+      },
+      {
+        "text": "inspect a worksite",
+        "ja": "作業現場を点検する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "worksite は特定の作業が行われる場所。workplace は職場一般を指す。",
     "tags": [
-      "work-life"
+      "work-life",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13081",
@@ -16691,25 +18675,54 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "世慣れた；世俗的な",
-            "definition": "",
-            "examples": []
+            "ja": "世慣れた；世間の事情に通じた",
+            "definition": "having practical experience of life and understanding how people behave",
+            "examples": [
+              {
+                "en": "Her worldly advice helped him negotiate the contract.",
+                "ja": "彼女の世慣れた助言は彼が契約交渉をする助けになった。"
+              }
+            ]
+          },
+          {
+            "ja": "世俗的な；物質的な",
+            "definition": "concerned with ordinary life or material things rather than spiritual matters",
+            "examples": [
+              {
+                "en": "The novel contrasts spiritual ideals with worldly ambition.",
+                "ja": "その小説は精神的な理想と世俗的な野心を対比させている。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "worldly experience",
+        "ja": "世間での経験"
+      },
+      {
+        "text": "worldly wisdom",
+        "ja": "世知にたけた知恵"
+      },
+      {
+        "text": "worldly possessions",
+        "ja": "現世で所有する財産"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "worldly は「世慣れた」と「世俗的な」の二義に注意。worldwide（世界的な）とは異なる。",
     "tags": [
-      "personality-manner"
+      "personality-manner",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12835",
@@ -16763,15 +18776,30 @@
     "frequency": 2,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
-            "ja": "世界中の",
-            "definition": "a common English word connected with 世界中の",
+            "ja": "世界中の；世界規模の",
+            "definition": "extending to or involving the whole world",
             "examples": [
               {
-                "en": "The word 'worldwide' is commonly used in this context.",
-                "ja": "「worldwide」は「世界中の」に関する文脈で使われます。"
+                "en": "The organization launched a worldwide campaign against food waste.",
+                "ja": "その団体は食品廃棄を減らす世界規模の運動を始めた。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adverb",
+        "meanings": [
+          {
+            "ja": "世界中で；世界的に",
+            "definition": "throughout the world or in many countries",
+            "examples": [
+              {
+                "en": "The documentary was broadcast worldwide.",
+                "ja": "そのドキュメンタリーは世界中で放送された。"
               }
             ]
           }
@@ -16784,9 +18812,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "worldwide は形容詞・副詞の両方で使う。形容詞は名詞の前にも置ける。",
+    "tags": [
+      "curated-v3.109"
+    ],
+    "status": "enriched",
     "search_terms": [
       "worldwide"
     ],
@@ -16794,7 +18824,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "worldwide attention",
+        "en": "worldwide attention",
+        "ja": "世界的な注目"
+      },
+      {
+        "text": "worldwide demand",
+        "en": "worldwide demand",
+        "ja": "世界的な需要"
+      },
+      {
+        "text": "worldwide distribution",
+        "en": "worldwide distribution",
+        "ja": "世界規模の流通"
+      }
+    ]
   },
   {
     "id": "sw-08776",
@@ -16859,24 +18905,45 @@
         "meanings": [
           {
             "ja": "ワームホール；時空をつなぐ仮説上の通路",
-            "definition": "",
-            "examples": []
+            "definition": "a hypothetical passage through spacetime that could connect distant regions of the universe",
+            "examples": [
+              {
+                "en": "The novel imagines a spacecraft traveling through a wormhole.",
+                "ja": "その小説は宇宙船がワームホールを通って移動する場面を描いている。"
+              },
+              {
+                "en": "Physicists have not found observational evidence that traversable wormholes exist.",
+                "ja": "物理学者たちは通り抜け可能なワームホールが存在するという観測的証拠を見つけていない。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "traversable wormhole",
+        "en": "traversable wormhole",
+        "ja": "通過可能なワームホール"
+      },
+      {
+        "text": "hypothetical wormhole",
+        "en": "hypothetical wormhole",
+        "ja": "仮説上のワームホール"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "一般相対性理論に関連する仮説的概念。実在や通過可能性が確認されたわけではない。",
     "tags": [
-      "astronomy-space"
+      "astronomy-space",
+      "curated-v3.177"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13456",
@@ -17166,25 +19233,64 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "包む；締めくくる",
-            "definition": "",
-            "examples": []
+            "ja": "締めくくる；終わらせる",
+            "definition": "to finish an activity, discussion, or project",
+            "examples": [
+              {
+                "en": "Let’s wrap up the discussion and agree on the next steps.",
+                "ja": "議論を締めくくり、次の手順について合意しましょう。"
+              }
+            ]
+          },
+          {
+            "ja": "包む；くるむ",
+            "definition": "to cover something by folding paper or fabric around it",
+            "examples": [
+              {
+                "en": "She wrapped up the fragile glass in a towel.",
+                "ja": "彼女は壊れやすいグラスをタオルで包んだ。"
+              }
+            ]
+          },
+          {
+            "ja": "暖かく着込む",
+            "definition": "to put on warm clothing to protect yourself from the cold",
+            "examples": [
+              {
+                "en": "Wrap up well before you go outside in the snow.",
+                "ja": "雪の中へ出る前に暖かい服装をしなさい。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "wrap up a meeting",
+        "ja": "会議を締めくくる"
+      },
+      {
+        "text": "wrap up a gift",
+        "ja": "贈り物を包む"
+      },
+      {
+        "text": "wrap up warm",
+        "ja": "暖かく着込む"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "wrap up は「包む」と「終える」を区別。英国英語では wrap up warm が自然。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.80"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12541",
@@ -17248,25 +19354,63 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "レンチ",
-            "definition": "",
-            "examples": []
+            "ja": "レンチ；ナットなどを回す工具",
+            "definition": "a tool used to grip and turn nuts, bolts, or pipes",
+            "examples": [
+              {
+                "en": "Use a wrench to tighten the loose bolt.",
+                "ja": "緩んだボルトを締めるにはレンチを使ってください。"
+              },
+              {
+                "en": "The mechanic selected an adjustable wrench.",
+                "ja": "整備士はモンキーレンチを選んだ。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "verb",
+        "meanings": [
+          {
+            "ja": "（力を込めて）ねじる；無理に引き離す",
+            "definition": "to twist or pull something suddenly and forcefully",
+            "examples": [
+              {
+                "en": "She wrenched the door open when the handle jammed.",
+                "ja": "取っ手が引っかかったので彼女はドアを力ずくで開けた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "an adjustable wrench",
+        "ja": "モンキーレンチ"
+      },
+      {
+        "text": "tighten a bolt with a wrench",
+        "ja": "レンチでボルトを締める"
+      },
+      {
+        "text": "wrench something open",
+        "ja": "何かを力ずくでこじ開ける"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "名詞 wrench は米語で一般的。英語圏によっては spanner ともいう。動詞は wrench open / wrench away など。",
     "tags": [
-      "home-workshop"
+      "home-workshop",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-05129",
@@ -18097,25 +20241,58 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "誤って",
-            "definition": "",
-            "examples": []
+            "ja": "誤って；間違って",
+            "definition": "in a way that is incorrect or based on a mistaken belief",
+            "examples": [
+              {
+                "en": "The article wrongly identified the scientist as the project leader.",
+                "ja": "その記事は誤ってその科学者をプロジェクト責任者と記した。"
+              },
+              {
+                "en": "I wrongly assumed the meeting would be online.",
+                "ja": "私は会議がオンラインで開かれると誤解していた。"
+              }
+            ]
+          },
+          {
+            "ja": "不当に；不正に",
+            "definition": "in a way that is unfair or morally wrong",
+            "examples": [
+              {
+                "en": "The court ruled that the employee had been wrongly dismissed.",
+                "ja": "裁判所はその従業員が不当に解雇されたと判断した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "wrongly assume that ...",
+        "ja": "〜だと誤って思い込む"
+      },
+      {
+        "text": "be wrongly accused",
+        "ja": "不当に告発される"
+      },
+      {
+        "text": "be wrongly dismissed",
+        "ja": "不当に解雇される"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "wrongly は事実の誤りと不当な扱いの両方に使う。wrongly accused / wrongly convicted は司法関連で頻出。",
     "tags": [
-      "manner"
+      "manner",
+      "curated-v3.150"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12459",

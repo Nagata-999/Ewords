@@ -1,612 +1,237 @@
 {
-  "base_version": "v3.56",
-  "target_version": "v3.57",
+  "base_version": "v3.185",
+  "target_version": "v3.186",
   "package_type": "full",
   "dictionary_entry_count": 13500,
-  "changed_word_count": 40,
-  "cumulative_enriched_words": 4787,
-  "full_zip": "sushitan_dictionary_v3.57_full.zip",
+  "dictionary_file_count": 27,
+  "changed_word_count": 30,
+  "cumulative_enriched_words": 9621,
+  "full_zip": "sushitan_dictionary_v3.186_full.zip",
   "changed_words": [
     {
-      "file": "dictionary-a.json",
-      "word": "accessibility",
-      "id": "sw-02174",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 2,
-      "parts_of_speech": [
-        "noun"
-      ],
-      "new_examples_written": 2,
-      "existing_examples_preserved": 0,
-      "legacy_senses_preserved": true
-    },
-    {
-      "file": "dictionary-a.json",
-      "word": "accessible",
-      "id": "sw-01442",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 3,
-      "parts_of_speech": [
-        "adjective"
-      ],
-      "new_examples_written": 3,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
-    },
-    {
-      "file": "dictionary-a.json",
-      "word": "achieve",
-      "id": "sw-00015",
-      "previous_status": "basic",
-      "previous_senses": 1,
-      "new_senses": 1,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 2,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
-    },
-    {
-      "file": "dictionary-a.json",
-      "word": "achievement",
-      "id": "sw-00660",
-      "previous_status": "basic",
-      "previous_senses": 1,
-      "new_senses": 2,
-      "parts_of_speech": [
-        "noun"
-      ],
-      "new_examples_written": 3,
-      "existing_examples_preserved": 0,
-      "legacy_senses_preserved": true
-    },
-    {
-      "file": "dictionary-a.json",
-      "word": "adjustment",
-      "id": "sw-02181",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 2,
-      "parts_of_speech": [
-        "noun"
-      ],
-      "new_examples_written": 3,
-      "existing_examples_preserved": 0,
-      "legacy_senses_preserved": true
-    },
-    {
-      "file": "dictionary-a.json",
-      "word": "administer",
-      "id": "sw-03188",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 3,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 3,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
-    },
-    {
-      "file": "dictionary-a.json",
-      "word": "allocation",
-      "id": "sw-02190",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 2,
-      "parts_of_speech": [
-        "noun"
-      ],
-      "new_examples_written": 3,
-      "existing_examples_preserved": 0,
-      "legacy_senses_preserved": true
-    },
-    {
-      "file": "dictionary-a.json",
-      "word": "anticipation",
-      "id": "sw-02194",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 2,
-      "parts_of_speech": [
-        "noun"
-      ],
-      "new_examples_written": 2,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
-    },
-    {
-      "file": "dictionary-a.json",
-      "word": "attain",
-      "id": "sw-01507",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 2,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 2,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
-    },
-    {
+      "word": "bend",
+      "id": "sw-00977",
       "file": "dictionary-b.json",
-      "word": "bring up",
-      "id": "sw-04835",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 2,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 2,
-      "existing_examples_preserved": 2,
-      "legacy_senses_preserved": true
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
+      "word": "brush",
+      "id": "sw-00982",
+      "file": "dictionary-b.json",
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
+    },
+    {
+      "word": "circle",
+      "id": "sw-00987",
       "file": "dictionary-c.json",
-      "word": "carry over",
-      "id": "sw-04840",
-      "previous_status": "basic",
-      "previous_senses": 1,
-      "new_senses": 2,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 2,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
+      "word": "cross",
+      "id": "sw-00995",
       "file": "dictionary-c.json",
-      "word": "come across",
-      "id": "sw-05421",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 2,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 2,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
-      "file": "dictionary-c.json",
-      "word": "compromise",
-      "id": "sw-01602",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 3,
-      "parts_of_speech": [
-        "noun",
-        "verb"
-      ],
-      "new_examples_written": 4,
-      "existing_examples_preserved": 0,
-      "legacy_senses_preserved": true
-    },
-    {
-      "file": "dictionary-c.json",
-      "word": "conceive",
-      "id": "sw-01606",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 3,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 3,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
-    },
-    {
-      "file": "dictionary-c.json",
-      "word": "consequence",
-      "id": "sw-00180",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 1,
-      "parts_of_speech": [
-        "noun"
-      ],
-      "new_examples_written": 2,
-      "existing_examples_preserved": 2,
-      "legacy_senses_preserved": true
-    },
-    {
-      "file": "dictionary-c.json",
-      "word": "convert",
-      "id": "sw-01646",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 2,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 3,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
-    },
-    {
+      "word": "dance",
+      "id": "sw-00997",
       "file": "dictionary-d.json",
-      "word": "deteriorate",
-      "id": "sw-01713",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 1,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 2,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
+      "word": "diet",
+      "id": "sw-01005",
       "file": "dictionary-d.json",
-      "word": "diversify",
-      "id": "sw-03345",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 2,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 3,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
+      "word": "dress",
+      "id": "sw-01009",
       "file": "dictionary-d.json",
-      "word": "domestic",
-      "id": "sw-01741",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 3,
-      "parts_of_speech": [
-        "adjective"
-      ],
-      "new_examples_written": 3,
-      "existing_examples_preserved": 2,
-      "legacy_senses_preserved": true
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
+      "word": "drop",
+      "id": "sw-01010",
       "file": "dictionary-d.json",
-      "word": "dominate",
-      "id": "sw-01742",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 2,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 3,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
-      "file": "dictionary-d.json",
-      "word": "draw on",
-      "id": "sw-09650",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 2,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 3,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
-    },
-    {
+      "word": "empty",
+      "id": "sw-01013",
       "file": "dictionary-e.json",
-      "word": "eligible",
-      "id": "sw-03101",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 1,
-      "parts_of_speech": [
-        "adjective"
-      ],
-      "new_examples_written": 2,
-      "existing_examples_preserved": 0,
-      "legacy_senses_preserved": true
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
+      "word": "excited",
+      "id": "sw-01015",
       "file": "dictionary-e.json",
-      "word": "enable",
-      "id": "sw-01763",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 2,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 2,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
+      "word": "exciting",
+      "id": "sw-01016",
       "file": "dictionary-e.json",
-      "word": "encounter",
-      "id": "sw-01764",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 3,
-      "parts_of_speech": [
-        "verb",
-        "noun"
-      ],
-      "new_examples_written": 3,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
+      "word": "exercise",
+      "id": "sw-01017",
       "file": "dictionary-e.json",
-      "word": "enforce",
-      "id": "sw-02320",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 2,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 2,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
+      "word": "fat",
+      "id": "sw-01021",
       "file": "dictionary-f.json",
-      "word": "forecast",
-      "id": "sw-02908",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 2,
-      "parts_of_speech": [
-        "noun",
-        "verb"
-      ],
-      "new_examples_written": 3,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
+      "word": "favorite",
+      "id": "sw-01022",
       "file": "dictionary-f.json",
-      "word": "foster",
-      "id": "sw-02325",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 2,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 3,
-      "existing_examples_preserved": 0,
-      "legacy_senses_preserved": true
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
-      "file": "dictionary-i.json",
-      "word": "impose",
-      "id": "sw-01856",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 2,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 3,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
+      "word": "fly",
+      "id": "sw-01026",
+      "file": "dictionary-f.json",
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
-      "file": "dictionary-i.json",
-      "word": "insight",
-      "id": "sw-01873",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 1,
-      "parts_of_speech": [
-        "noun"
-      ],
-      "new_examples_written": 2,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
+      "word": "funny",
+      "id": "sw-01029",
+      "file": "dictionary-f.json",
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
-      "file": "dictionary-m.json",
-      "word": "make out",
-      "id": "sw-04826",
-      "previous_status": "basic",
-      "previous_senses": 1,
-      "new_senses": 3,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 3,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
+      "word": "guide",
+      "id": "sw-01037",
+      "file": "dictionary-g.json",
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
+      "word": "lonely",
+      "id": "sw-01062",
+      "file": "dictionary-l.json",
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
+    },
+    {
+      "word": "perhaps",
+      "id": "sw-01102",
       "file": "dictionary-p.json",
-      "word": "point out",
-      "id": "sw-09885",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 1,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 2,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
+      "word": "plant",
+      "id": "sw-01109",
       "file": "dictionary-p.json",
-      "word": "prioritize",
-      "id": "sw-02347",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 1,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 2,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
+      "word": "poor",
+      "id": "sw-01114",
       "file": "dictionary-p.json",
-      "word": "put forward",
-      "id": "sw-09908",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 2,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 3,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
+      "word": "post",
+      "id": "sw-01116",
       "file": "dictionary-p.json",
-      "word": "put off",
-      "id": "sw-04811",
-      "previous_status": "basic",
-      "previous_senses": 1,
-      "new_senses": 2,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 2,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
+      "word": "pretty",
+      "id": "sw-01118",
+      "file": "dictionary-p.json",
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
+    },
+    {
+      "word": "proud",
+      "id": "sw-01122",
+      "file": "dictionary-p.json",
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
+    },
+    {
+      "word": "rent",
+      "id": "sw-01133",
       "file": "dictionary-r.json",
-      "word": "reject",
-      "id": "sw-02044",
-      "previous_status": "basic",
-      "previous_senses": 1,
-      "new_senses": 3,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 3,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
+      "word": "reply",
+      "id": "sw-01136",
       "file": "dictionary-r.json",
-      "word": "remedy",
-      "id": "sw-03164",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 3,
-      "parts_of_speech": [
-        "noun",
-        "verb"
-      ],
-      "new_examples_written": 3,
-      "existing_examples_preserved": 0,
-      "legacy_senses_preserved": true
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
+      "word": "ring",
+      "id": "sw-01141",
       "file": "dictionary-r.json",
-      "word": "representative",
-      "id": "sw-02058",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 3,
-      "parts_of_speech": [
-        "noun",
-        "adjective"
-      ],
-      "new_examples_written": 3,
-      "existing_examples_preserved": 0,
-      "legacy_senses_preserved": true
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
+      "word": "rock",
+      "id": "sw-01143",
       "file": "dictionary-r.json",
-      "word": "rule out",
-      "id": "sw-09930",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 2,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 2,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
+      "word": "steal",
+      "id": "sw-01179",
       "file": "dictionary-s.json",
-      "word": "set out",
-      "id": "sw-05221",
-      "previous_status": "enriched",
-      "previous_senses": 1,
-      "new_senses": 3,
-      "parts_of_speech": [
-        "verb"
-      ],
-      "new_examples_written": 3,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     },
     {
-      "file": "dictionary-t.json",
-      "word": "target",
-      "id": "sw-01367",
-      "previous_status": "basic",
-      "previous_senses": 1,
-      "new_senses": 3,
-      "parts_of_speech": [
-        "noun",
-        "verb"
-      ],
-      "new_examples_written": 3,
-      "existing_examples_preserved": 1,
-      "legacy_senses_preserved": true
+      "word": "word",
+      "id": "sw-00646",
+      "file": "dictionary-w.json",
+      "source": "Original editorial rewrite: accurate POS and distinct English definitions, contextual bilingual examples, translated collocations, usage notes; original ID and etymology preserved."
     }
   ],
-  "new_bilingual_examples": 104,
-  "existing_examples_preserved": 34,
-  "generic_placeholder_examples_removed": 9,
   "deleted_files": [],
   "deleted_word_ids": [],
-  "dictionary_files": [
-    "dictionary-a.json",
-    "dictionary-b.json",
-    "dictionary-c.json",
-    "dictionary-d.json",
-    "dictionary-e.json",
-    "dictionary-f.json",
-    "dictionary-g.json",
-    "dictionary-h.json",
-    "dictionary-i.json",
-    "dictionary-j.json",
-    "dictionary-k.json",
-    "dictionary-l.json",
-    "dictionary-m.json",
-    "dictionary-n.json",
-    "dictionary-o.json",
-    "dictionary-other.json",
-    "dictionary-p.json",
-    "dictionary-q.json",
-    "dictionary-r.json",
-    "dictionary-s.json",
-    "dictionary-t.json",
-    "dictionary-u.json",
-    "dictionary-v.json",
-    "dictionary-w.json",
-    "dictionary-x.json",
-    "dictionary-y.json",
-    "dictionary-z.json"
-  ],
-  "generated_at": "2026-10-09T08:00:14+09:00"
+  "deletion_reasons": [],
+  "deletions": [],
+  "deletion_log": [],
+  "etymology_preserved": true,
+  "public_artifacts_included": false,
+  "display_generation_code_modified": false,
+  "generated_at": "2026-10-13T10:26:20+09:00",
+  "audit_unresolved_issue_total": 21723,
+  "audit_issues_resolved_this_run": 87,
+  "supplemental_duplicate_issue_total": 0,
+  "collocations_reviewed": 90,
+  "dictionary_sha256": {
+    "dictionary-a.json": "c7d8151ca21612616dc56a5ad1d2e78eb2bfffe00e6ee4f20b03f50ebcd9bfaf",
+    "dictionary-b.json": "9f2f71a4057a2452536024437aa76e0e6911eb804a1a1667ff7348b3b4c6eda8",
+    "dictionary-c.json": "7b8b1d14d7c710321dec448667d9a5436b7102ea1ea4440a4699403120031da0",
+    "dictionary-d.json": "bbf1c43a1146e504e272898398f659e24a66c04026d619fb2413528e647835c0",
+    "dictionary-e.json": "9b9781ccd6bc243c2c92f4db70e38f69ababe4c582e0c36c4f19a934fcea333b",
+    "dictionary-f.json": "60a66a1832c6ef98e34b34063988c046335f4387147ffd9e0d19ced90345b7b3",
+    "dictionary-g.json": "c5de09ac9be14565c865286bd8393d08682f31c299c20d33432e0497398c07d1",
+    "dictionary-h.json": "287903b6ec3856164228efeb85fc10bc52a2fd600877200dbc0d458bbaaadaf5",
+    "dictionary-i.json": "c0861b99f933239c112516f0334a46aee348af9d0a40859a7ca0d982d5f80532",
+    "dictionary-j.json": "38c2ef3b213188ed9b66b13bd58b3f452135a39d5d7710ee7c4e605d222d35d2",
+    "dictionary-k.json": "6228fa3ce81fc689de85f6fb206dc7e24643ca93e441c548442a1d1a3b3854f9",
+    "dictionary-l.json": "a5c33f1f686fd173f86e7ee67a8b926eda2e6bc67b85a8bdb3bae9dee3ed8b83",
+    "dictionary-m.json": "3d17ea70b8470a85b3fb690a0de3cf42d985915a0b88e5d4e8044b4a36bf5f88",
+    "dictionary-n.json": "39f7026d6eeeb6e560ff75f0de8a9e3481a1e2948a8d28c9c8e6c37136b234d6",
+    "dictionary-o.json": "cdeba2ab256931169bc3bd5c79a1a4b7c2c456433a3413bcf98b1f4a7f6ae4c8",
+    "dictionary-p.json": "27780defe110beee6d160c10d8cea4dbf9a8d40a13fb872f9e56a02d24da0c13",
+    "dictionary-q.json": "ff9323fc9e723a6284731e281faba99482d2e926caa5b07df8b9360ffbf70545",
+    "dictionary-r.json": "224a213e4d8e4e00725b245c18bef9bce6ca5324d048f0e884722956fae721fc",
+    "dictionary-s.json": "973c0aca671839817af46045e9f13acc68e7c3cec48d69f9938696a57bf698da",
+    "dictionary-t.json": "a94c272ce749e35dab7c85f7ad00f94b0a00ef70a807212db7fd40eb0a59bec5",
+    "dictionary-u.json": "8cea4578534c0cda8184e4f1e14c513e36713ab3ade69ea493a2a9a34956fe3d",
+    "dictionary-v.json": "b6d5c4aef58b357b79e65c84f2b1e3135ead1955e0afd1eb7322138630fee720",
+    "dictionary-w.json": "a0eeb2958b4a274080fb24fd5d02de7ace84eee912b594925a7d68680fd1df0f",
+    "dictionary-x.json": "0e8b0b0d1f186e32326ead0e4bbd9ca0a2da3e0c5f31896e2919c02f03118b9b",
+    "dictionary-y.json": "2b1f0b9e7d757083bc8c6e401a74f841d18ac91ddb6f845ce8ccccdc102b662b",
+    "dictionary-z.json": "0500e6433bb9372fbb9dcd18abb5fde774fe2b5fa4572888b9f4d5d15d6c50ba",
+    "dictionary-other.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "dictionary_sha256_method": "SHA-256 of UTF-8 dictionary JSON files",
+  "change_summary": "30 high-frequency entries: 79 original English–Japanese examples, 90 translated collocations, corrected part-of-speech assignments and authentic usage notes. No IDs or headwords deleted.",
+  "removed_legacy_content": "Replaced boilerplate definitions and artificial examples in the 30 edited entries; retained all headwords, IDs, etymology and unrelated data."
 }

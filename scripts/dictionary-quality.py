@@ -20,6 +20,7 @@ GENERIC = [
  r'The phrase uses .+ to show the relationship between the two things\.'
 ]
 def template_example(word,text):
-    return text.replace(word,'X') in {'This X is important.','This is X.','It is X.'} or any(re.match(p,text) for p in GENERIC)
+    empty_gloss = re.match(r'^(?:The term|In (?:academic writing|formal discussion|academic contexts|advanced academic English|scientific or technical writing)).*(?:in the sense of|the idea of|with the meaning)\s*["“]\s*["”]', text)
+    return bool(empty_gloss) or text.replace(word,'X') in {'This X is important.','This is X.','It is X.'} or any(re.match(p,text) for p in GENERIC)
 def template_definition(text):
     return bool(re.search(r'[\u3040-\u30ff\u4e00-\u9fff]',text) or re.search(r'^(?:a person, (?:thing|object)|to perform or cause|in a way related to|relating to the quality)',text))
