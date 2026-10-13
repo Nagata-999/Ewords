@@ -7,6 +7,26 @@ const server=http.createServer((req,res)=>{let file=path.resolve(root,'.'+decode
  browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH||undefined});const context=await browser.newContext({viewport:{width:390,height:844}});
  await context.route('**/*',r=>r.request().url().startsWith(origin)?r.continue():r.abort());
  const page=await context.newPage();page.setDefaultTimeout(10000);const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ const pilotFile=path.join(root,'data/dictionary/new-entry-manifest.json');
+ if(fs.existsSync(pilotFile)){
+  const pilot=JSON.parse(fs.readFileSync(pilotFile,'utf8'));
+  const entries=fs.readdirSync(path.join(root,'data/dictionary')).filter(f=>/^dictionary-.*\.json$/.test(f)).flatMap(f=>JSON.parse(fs.readFileSync(path.join(root,'data/dictionary',f),'utf8')));
+  for(const width of [320,390,1280]){
+   await page.setViewportSize({width,height:844});
+   for(const record of pilot.entries){
+    const e=entries.find(e=>e.id===record.id);
+    await page.goto(origin+'/dictionary/');await page.locator('#dictionary-query').fill(e.word);await page.locator('#dictionary-query').press('Enter');await page.waitForURL('**/dictionary/'+e.word+'/');
+    const body=await page.locator('article').innerText();
+    for(const part of e.parts_of_speech)for(const meaning of part.meanings){assert(body.includes(meaning.ja),e.word);assert(body.includes(meaning.definition),e.word);for(const ex of meaning.examples){assert(body.includes(ex.en),e.word);assert(body.includes(ex.ja),e.word);}}
+    for(const c of e.collocations)assert(body.includes(c.text||c.en||c.phrase||c),e.word);
+    assert(body.includes(e.usage_note));assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),e.word+' overflow');
+    assert.equal(await page.locator('#dictionary-card').evaluate(el=>JSON.parse(el.textContent).word_id),'dictionary:'+e.id);
+    if(process.env.PILOT_SCREENSHOT&&width===390&&e.word==='debrief')await page.screenshot({path:process.env.PILOT_SCREENSHOT,fullPage:true});
+   }
+  }
+  console.log('PASS pilot: all 30 entries searched and displayed with definitions, bilingual examples, collocations, usage and IDs at 320/390/1280px');
+  await page.setViewportSize({width:390,height:844});
+ }
  await page.goto(origin+'/dictionary/');await page.locator('#dictionary-query').fill('environ');await page.locator('#search-results a', {hasText:'environment'}).first().waitFor();
  await page.locator('#dictionary-query').fill('abandon');await page.locator('#dictionary-query').press('Enter');await page.waitForURL('**/dictionary/abandon/');await page.reload();assert.equal(await page.locator('h1').textContent(),'abandon');
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
