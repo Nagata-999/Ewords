@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "status": "staged_candidates_not_merged",
+  "base_production_version": "v3.57",
+  "reference_dictionary_version_checked": "v3.185",
+  "github_manifest_blob_sha": "de4e31512041db5a29167fc231679ecf779d6ee8",
+  "production_entries_reference": 13500,
+  "total_staged_candidates": 3760,
+  "raw_entry_count_if_all_staged_appended": 17260,
+  "new_candidates": 40,
+  "github_pinned_count": 160,
+  "library_cumulative_count": 3600,
+  "expected_unique_normalized_headwords": 17260,
+  "expected_unique_loose_headwords": 17223,
+  "strict_duplicate_groups_all": 0,
+  "loose_duplicate_groups_all": 37,
+  "published_full_dictionary": false,
+  "merge_instruction": "Staged candidates only. Do not overwrite production or enrichment data. Allocate permanent IDs and reconcile preexisting duplicate headwords before merging into a single cumulative package based on v3.57.",
+  "generated_at": "2026-10-13T10:03:36+09:00",
+  "previous_library_cumulative_sha256": "38d272519d288d45d156510233ee5f67edcc480eefcd725974702f786c96a06b",
+  "reference_dictionary_zip_sha256": "2e20523237855fbd2511ce674e8c17faf396ef390bbb54d354efce8852efbc02",
+  "sources": [
+    {
+      "location": "github",
+      "repository": "Nagata-999/Ewords",
+      "branch": "automation/dictionary-new-entries",
+      "manifest": "data/dictionary-auto/candidate-manifest.json",
+      "count": 160
+    }
+  ],
+  "batch_file": "sushitan_new_candidates_20261013_09.json",
+  "cumulative_file": "sushitan_new_candidates_library_cumulative_20261013_09.json",
+  "validation_file": "sushitan_new_candidates_20261013_09_validation.json",
+  "github_pinned_shard_blob_shas": {
+    "data/dictionary-auto/new-entries.json": "95944d636d560decfef5ace67ba97480eaa38dde",
+    "data/dictionary-auto/batches/new-entries-20261009-04.json": "6e110e10f018ed0d66e980bf68f9c294f7111600",
+    "data/dictionary-auto/batches/new-entries-20261009-04b.json": "3025aa29061b4319307deaac2482387f3dd15c64",
+    "data/dictionary-auto/batches/new-entries-20261009-04c.json": "459e2a61f6c8886b9e53f82a93da64d3e7536a6f",
+    "data/dictionary-auto/batches/new-entries-20261009-04d.json": "564f453959941c8532dcb9e786cf94b55d77cac9",
+    "data/dictionary-auto/batches/new-entries-20261009-04e.json": "53b2886e78e1f210432fd0e830dbfcd2a72f1b04",
+    "data/dictionary-auto/batches/new-entries-20261009-04f.json": "e9139b565bfd7ebc49979ba4ed53fe2dedd510db",
+    "data/dictionary-auto/batches/new-entries-20261009-04g.json": "b4f344c3006f8f3789b27ad6ee12281794acbbce"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "batch_id": "new-entries-20261013-09",
+  "validated_at": "2026-10-13T10:03:36+09:00",
+  "result": "passed_against_v3.185_previous_library_3560_and_unchanged_github_160",
+  "new_candidates": 40,
+  "previous_staged_candidates": 3720,
+  "total_staged_candidates": 3760,
+  "production_entries_reference": 13500,
+  "raw_entry_count_if_all_staged_appended": 17260,
+  "unique_normalized_headwords_if_merged_provisional": 17260,
+  "unique_loose_headwords_if_merged_provisional": 17223,
+  "reference_dictionary_version": "v3.185",
+  "reference_dictionary_zip_sha256": "2e20523237855fbd2511ce674e8c17faf396ef390bbb54d354efce8852efbc02",
+  "checks": {
+    "production_entries": 13500,
+    "previous_library_entries": 3560,
+    "github_pinned_entries": 160,
+    "new_entries": 40,
+    "new_headword_collisions_production_library": 0,
+    "new_loose_normalization_collisions_production_library": 0,
+    "new_id_collisions_production_library": 0,
+    "new_duplicate_meanings_within_entry": 0,
+    "new_required_fields_and_examples": true,
+    "new_collocations_and_usage_notes": true,
+    "new_japanese_script_present": true,
+    "combined_normalized_headword_count_provisional": 17260,
+    "combined_loose_headword_count_provisional": 17223,
+    "new_headword_collisions_production_library_github": 0,
+    "new_loose_normalization_collisions_production_library_github": 0,
+    "new_id_collisions_production_library_github": 0,
+    "combined_normalized_headword_count_verified": 17260,
+    "combined_loose_headword_count_verified": 17223
+  },
+  "source_integrity": {
+    "github_manifest_blob_sha": "de4e31512041db5a29167fc231679ecf779d6ee8",
+    "previous_library_sha256": "38d272519d288d45d156510233ee5f67edcc480eefcd725974702f786c96a06b",
+    "dictionary_sha256": "2e20523237855fbd2511ce674e8c17faf396ef390bbb54d354efce8852efbc02",
+    "github_pinned_shard_count": 8,
+    "github_pinned_words_count": 160,
+    "github_pinned_shard_blob_shas": {
+      "data/dictionary-auto/new-entries.json": "95944d636d560decfef5ace67ba97480eaa38dde",
+      "data/dictionary-auto/batches/new-entries-20261009-04.json": "6e110e10f018ed0d66e980bf68f9c294f7111600",
+      "data/dictionary-auto/batches/new-entries-20261009-04b.json": "3025aa29061b4319307deaac2482387f3dd15c64",
+      "data/dictionary-auto/batches/new-entries-20261009-04c.json": "459e2a61f6c8886b9e53f82a93da64d3e7536a6f",
+      "data/dictionary-auto/batches/new-entries-20261009-04d.json": "564f453959941c8532dcb9e786cf94b55d77cac9",
+      "data/dictionary-auto/batches/new-entries-20261009-04e.json": "53b2886e78e1f210432fd0e830dbfcd2a72f1b04",
+      "data/dictionary-auto/batches/new-entries-20261009-04f.json": "e9139b565bfd7ebc49979ba4ed53fe2dedd510db",
+      "data/dictionary-auto/batches/new-entries-20261009-04g.json": "b4f344c3006f8f3789b27ad6ee12281794acbbce"
+    },
+    "github_pinned_shards_unchanged_from_previous_run": true
+  },
+  "editorial_review": {
+    "english_japanese_examples": "authored and structurally checked; no independent linguistic review",
+    "corpus_frequency_check": "not performed",
+    "independent_expert_review": "not performed",
+    "level_and_frequency_labels": "provisional estimates"
+  },
+  "merge_status": "not_merged_or_published",
+  "file_sha256": {
+    "sushitan_new_candidates_20261013_09.json": "b0c3b53266d81de3fad0486f46a8a6aaece775130c68876932b24ec31cae186f",
+    "sushitan_new_candidates_library_cumulative_20261013_09.json": "8e7f4c2708676a851ba0af8d5bb4afd8c9a5f8ef7a97fd21463764a52b2509bd",
+    "sushitan_new_candidates_cumulative_manifest_20261013_09.json": "6bca551c7b4f4de210966b9a2afcc483bf0f5b9cda468dd5c96aa3b83d413e85"
+  }
+}
