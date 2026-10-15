@@ -25,7 +25,8 @@
 <script src="shared/review-ui.js"></script>
 
 <link rel="canonical" href="https://sushitan.net/sushian">
-<script defer src="/sushigacha/site-taskbar.js?v=20261008-11"></script></head>
+<script defer src="/sushigacha/site-taskbar.js?v=20261008-11"></script><link rel="stylesheet" href="shared/learning-paths.css">
+</head>
 <body>
   <div class="page">
     <div class="topbar"><a class="home" href="index.html">← すし単トップ</a><div class="top-stats"><span class="mastered-pill">覚えた単語 <span id="masteredCountTop">0</span> / 2026</span><button class="weak-pill" id="openWeakTop" type="button">苦手単語 <span id="weakCountTop">0</span></button></div></div>
@@ -33,13 +34,14 @@
 
     <main>
       <section class="panel" id="setupPanel" aria-labelledby="setupTitle">
-        <h2 id="setupTitle">学習範囲を決める</h2><p class="sub">単語番号1〜2026から自由に指定できます。最初は100語程度の範囲がおすすめです。</p>
+        <section class="learning-preview" aria-label="出題例と学習の流れ"><h2>まずは20語、意味を確認しよう</h2><p>英単語を見て意味を思い出す練習です。出題例：<strong lang="en">follow</strong> →「～の後に続く」。<span lang="en">Follow me to the station.</span> は「駅まで私についてきてください」。follow の後に、ついていく相手を直接置きます。</p><p>番号1〜20・20問から始め、答え合わせで例文を読み、最後に苦手単語を復習しましょう。</p><a href="learning-guides/first-20-words.html">20語の練習手順と確認問題を見る</a></section>
+<h2 id="setupTitle">学習範囲を決める</h2><p class="sub">単語番号1〜2026から自由に指定できます。初めての方は1〜20番の20語から始めましょう。</p>
         <div class="range-grid">
           <div class="field"><label for="rangeStart">開始番号</label><input id="rangeStart" type="number" min="1" max="2026" value="1" inputmode="numeric"></div>
-          <div class="field"><label for="rangeEnd">終了番号</label><input id="rangeEnd" type="number" min="1" max="2026" value="100" inputmode="numeric"></div>
+          <div class="field"><label for="rangeEnd">終了番号</label><input id="rangeEnd" type="number" min="1" max="2026" value="20" inputmode="numeric"></div>
           <div class="field"><label for="questionCount">出題数</label><select id="questionCount"><option value="10">10問</option><option value="20" selected>20問</option><option value="50">50問</option><option value="all">範囲内すべて</option></select></div>
         </div>
-        <p class="range-help" id="rangeInfo">1〜100：100語から出題</p>
+        <p class="range-help" id="rangeInfo">1〜20：20語から出題</p>
         <div class="actions"><button class="primary" id="startQuiz" type="button">この範囲を学習する</button><button class="secondary" id="openWeak" type="button">苦手単語を確認する</button></div>
         <div class="message" id="setupMessage" role="alert"></div>
       </section>
@@ -55,7 +57,7 @@
       </section>
 
       <section class="panel hidden" id="resultPanel">
-        <h2>今回の結果</h2><p class="sub" id="resultLead"></p>
+        <h2>今回の結果</h2><p><a href="learning-guides/first-20-words.html#after">結果を次の復習につなげる方法</a></p><p class="sub" id="resultLead"></p>
         <div class="score-grid"><div class="score-card"><b id="correctScore">0</b><span>正解</span></div><div class="score-card"><b id="wrongScore">0</b><span>不正解</span></div><div class="score-card"><b id="unknownScore">0</b><span>わからない</span></div></div>
         <div class="actions"><button class="primary" id="retryBtn" type="button">同じ範囲でもう一度</button><button class="secondary" id="resultWeakBtn" type="button">苦手単語を復習</button><button class="secondary" id="backSetupBtn" type="button">範囲を変更</button></div>
       </section>
@@ -71,7 +73,7 @@
       <h2>範囲を区切って英単語を覚える方法</h2>
       <p>2,000語を一度に覚えようとすると、学習した単語と未学習の単語が混ざり、復習すべき範囲が分かりにくくなります。すし暗では「1〜100」「601〜700」のように番号で範囲を区切り、その中から4択で意味を確認できます。</p>
       <div class="guide-grid">
-        <section class="guide-card"><h3>最初は100語ずつ</h3><p>新しく覚えるときは100語程度に区切り、10〜20問ずつ繰り返します。正答率が上がってから次の範囲へ進むと、未定着の単語を残しにくくなります。</p></section>
+        <section class="guide-card"><h3>最初は20語ずつ</h3><p>新しく覚えるときは20語程度に区切り、10〜20問ずつ繰り返します。正答率が上がってから次の範囲へ進むと、未定着の単語を残しにくくなります。</p></section>
         <section class="guide-card"><h3>「わからない」を使う</h3><p>4択では偶然正解することがあります。意味が頭に浮かばなかったときは、選択肢を推測せず「わからない」を押してください。その単語が苦手リストに残ります。</p></section>
         <section class="guide-card"><h3>間違いは正解を見てから保存</h3><p>誤答時には正しい意味を表示してから、苦手単語として保存します。答えを確認した直後に次へ進むことで、間違った選択肢の印象を残しにくくします。</p></section>
         <section class="guide-card"><h3>苦手だけを繰り返す</h3><p>苦手リストはこの端末に残り、いつでも復習できます。復習で繰り返し正解した単語は自動でリストから外れます。一度の偶然の正解では解除されません。</p></section>
@@ -91,7 +93,7 @@
   const GUIDE_SEEN_KEY='sushian:guideSeen';
   const $=id=>document.getElementById(id);
   const panels=['setupPanel','quizPanel','resultPanel','weakPanel'];
-  let session={mode:'range',items:[],index:0,answered:false,stats:{correct:0,wrong:0,unknown:0},range:{start:1,end:100,count:'20'}};
+  let session={mode:'range',items:[],index:0,answered:false,stats:{correct:0,wrong:0,unknown:0},range:{start:1,end:20,count:'20'}};
 
   function blankState(){return {schemaVersion:2,weakWords:{},masteredWords:{},updatedAt:null};}
   function normaliseState(state){state.masteredWords ||= {};if(state.wordProgress){Object.entries(state.wordProgress).forEach(([id,progress])=>{if(progress?.mastered)state.masteredWords[id]=true;});delete state.wordProgress;}return state;}
@@ -138,5 +140,6 @@
   </script>
 </body>
 </html>
+
 
 
