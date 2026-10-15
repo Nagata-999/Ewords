@@ -6,8 +6,7 @@
 <script src="shared/player.js?v=20260923-1"></script>
 <script src="shared/scores.js?v=20260923-1"></script>
 
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4726251793577317"
-     crossorigin="anonymous"></script>
+
   <meta name="google-adsense-account" content="ca-pub-4726251793577317">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -22,7 +21,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sushitan.net/sushitan" />
   <meta name="twitter:card" content="summary_large_image" />
-  
+
   <style>
     :root {
       --bg1: #0f172a;
@@ -1094,7 +1093,7 @@
         font-size: 13px;
       }
     }
-  
+
 
     /* Learning navigation */
     .site-navigator {
@@ -1285,7 +1284,7 @@
       .utility-row { grid-template-columns: repeat(2, 1fr); }
     }
 
-  
+
     /* Mobile fit fixes */
     @media (max-width: 420px) {
       html, body { overflow: hidden; }
@@ -1322,13 +1321,13 @@
       .balloon { padding: 12px 14px; font-size: 16px; min-width: 106px; }
     }
 
-  
+
     @media (max-width: 420px) {
       .navigator-grid { grid-template-columns: 1fr; }
       .site-navigator { padding: 10px; }
     }
 
-  
+
 /* hamburger navigation */
 .hamburger-btn{
   position:fixed;
@@ -2324,8 +2323,9 @@ html, body {
 <script src="shared/review-ui.js"></script>
 
 <link rel="canonical" href="https://sushitan.net/sushitan">
-<script defer src="/sushigacha/site-taskbar.js?v=20261010-personality1"></script></head>
-<body>
+<script defer src="/sushigacha/site-taskbar.js?v=20261010-personality1"></script><link rel="stylesheet" href="shared/learning-paths.css">
+</head>
+<body class="learning-game">
 
 <button class="hamburger-btn" id="hamburgerBtn" aria-label="サイトメニューを開く" aria-expanded="false">
   <span></span>
@@ -2426,9 +2426,9 @@ html, body {
     </a>
 
 
-    <a class="menu-link" href="IELTSRdemo.html">
-      IELTS Reading PC Demo
-      <small>Computer Based Practice</small>
+    <a class="menu-link" href="reading/ielts/">
+      IELTS Reading
+      <small>Passage別・解説付き練習</small>
     </a>
     <a class="menu-link" href="slang.html">
       英語スラング・日常会話表現
@@ -2523,7 +2523,8 @@ html, body {
             <p class="brand-sub">日本語に合う英単語をタップ。30秒でハイスコアを目指そう。</p>
           </div>
 
-          <details class="learning-accordion">
+          <section class="learning-preview" aria-label="出題例と学習の流れ"><h2>日本語から英単語を思い出す</h2><p>英単語を見れば意味は分かる人向けの30秒練習です。出題例：「～を考慮する」→ <strong lang="en">consider</strong>。<span lang="en">consider moving</span> は「引っ越すことを検討する」。動詞を続けるなら -ing 形にします。</p><p>選ぶ前に英語を思い出し、終了後に誤答の例文を確認。メニューの「復習する」では苦手語を時間制限なしで練習できます。</p><a href="learning-guides/recall-and-use.html">選べる単語を、使える単語にする練習</a></section>
+<details class="learning-accordion">
             <summary aria-label="ゲーム説明を開く"></summary>
             <div class="learning-body"><h4>遊び方・練習内容</h4><p>日本語の意味を見て、対応する英単語の風船を選ぶゲームです。通常モードは30秒で、ALLまたはLv.1〜Lv.4の出題範囲を選べます。英単語を見て訳す練習とは逆に、日本語から英語を思い出します。</p><h4>学習の進め方</h4><p>迷う単語が多いときは範囲を絞り、まず正確に選ぶことを優先してください。終了後は苦手単語を確認し、選択肢を見る前に英語を言えるか試します。似た意味の単語も区別したい場合は、しの単で言い換えを練習できます。</p><h4>関連する教材</h4><ul><li><a href="sushian.html">すし暗で範囲を指定して復習</a></li><li><a href="shinotan.html">しの単で類義語を確認</a></li></ul></div>
           </details>
@@ -4324,6 +4325,7 @@ html, body {
 <script>window.addEventListener('sushi-learning-change',()=>renderReviewList());if(new URLSearchParams(location.search).get('review')==='weak') WORD_DATA_READY.then(()=>document.getElementById('startReviewBtn')?.click());</script>
 </body>
 </html>
+
 
 
 

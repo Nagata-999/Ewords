@@ -96,7 +96,8 @@ button,.login-claim,.chest,.chest-start,.chest-modal{touch-action:manipulation!i
 .weak-review-choice:disabled{cursor:default;opacity:.8}.weak-review-start{width:100%;margin:10px 0 4px;padding:12px 14px;border:0;border-radius:14px;background:#0f766e;color:#fff;font-weight:1000;font-size:15px;cursor:pointer}.weak-review-actions{display:flex;gap:10px;margin-top:12px}.weak-review-actions button{flex:1;margin-top:0}.weak-review-result{min-height:24px;margin:15px 0 0;text-align:center;font-weight:1000}.weak-review-close{width:100%;margin-top:12px;padding:12px;border:0;border-radius:14px;background:#172033;color:#fff;font-weight:900;cursor:pointer}
 </style>
 <link rel="stylesheet" href="shared/home.css?v=20261009-1">
-<script defer src="/sushigacha/site-taskbar.js?v=20261010-personality1"></script></head>
+<script defer src="/sushigacha/site-taskbar.js?v=20261010-personality1"></script><link rel="stylesheet" href="shared/learning-paths.css">
+</head>
 <body>
 <div class="weak-review-modal" id="weakReviewModal" hidden role="dialog" aria-modal="true" aria-labelledby="weakReviewTitle">
 <div class="weak-review-card">
@@ -141,7 +142,7 @@ button,.login-claim,.chest,.chest-start,.chest-modal{touch-action:manipulation!i
 <a class="menu-link" href="/toeic/">🍣 すしTOEIC<small>Part 5・文法・苦手復習</small></a>
 <div class="menu-group-title">Classroom｜授業サポート</div><a class="menu-link" href="sushikome.html">🍚 すし米<small>授業リアルタイムコメント</small></a><a class="menu-link" href="writing/index.html">📝 作文添削<small>提出・フィードバック・先生管理</small></a><div class="menu-group-title">Reading Practice｜長文練習</div>
 <a class="menu-link" href="reading/"><strong>長文練習トップ</strong><small>IELTS・共通テスト</small></a>
-<a class="menu-link" href="reading/ielts/">IELTS Reading<small>Computer Based Practice</small></a>
+<a class="menu-link" href="reading/ielts/">IELTS Reading<small>Passage別・解説付き練習</small></a>
 <a class="menu-link" href="reading/common/">共通 Reading<small>大学入学共通テスト形式</small></a>
 <div class="menu-group-title">Articles｜学習記事</div>
 <a class="menu-link" href="words/index.html">単語一覧<small>word list</small></a>
@@ -206,6 +207,7 @@ button,.login-claim,.chest,.chest-start,.chest-modal{touch-action:manipulation!i
 <button class="install-modal-close" id="installModalClose" type="button">閉じる</button>
 </div>
 </div>
+<section class="section" aria-labelledby="learning-path-title"><span class="eyebrow">START HERE</span><h2 id="learning-path-title">今日、どんな練習をする？</h2><p>初めての方は「基本単語を覚えたい」から。答えを選んだ後に例文を読み、もう一度思い出すところまで取り組みましょう。</p><div class="learning-paths"><article><h3>基本単語を覚えたい</h3><p>すし暗で1〜20番を練習。意味が分からない語は「わからない」で記録し、例文を読んで復習します。</p><a href="sushian.html">すし暗を始める →</a><br><a href="learning-guides/first-20-words.html">20語の学習ガイド</a></article><article><h3>日本語から思い出したい</h3><p>すし単で日本語に合う英語を選びます。30秒の後は、間違えた単語を時間制限なしで確認できます。</p><a href="sushitan.html">すし単を始める →</a><br><a href="learning-guides/recall-and-use.html">英文で使う練習ガイド</a></article><article><h3>言い換えを学びたい</h3><p>しの単で意味の近い英語を選びます。誤答の組を復習し、例文で文型や意味の違いを確かめます。</p><a href="shinotan.html">しの単を始める →</a><br><a href="learning-guides/synonyms.html">類義語の使い分けガイド</a></article></div></section>
 <section class="section games-section" id="games">
 <div class="section-heading"><div><span class="eyebrow">PLAY & LEARN</span><h2>無料英語ゲーム一覧</h2></div><span class="section-note">気になるゲームから、はじめよう。</span></div>
 <p>初めての方は、<a href="sushian.html">すし暗</a>で範囲を1〜20に設定して挑戦。答え合わせで<a href="word-notes.html">例文・使い方</a>を確認し、苦手復習でもう一度思い出してみましょう。</p>
@@ -313,7 +315,7 @@ button,.login-claim,.chest,.chest-start,.chest-modal{touch-action:manipulation!i
 <p>英単語、言い換え、語源、タイピング、英作文、IELTSなど、短い時間でも繰り返し取り組めるゲームや教材を少しずつ作っています。</p>
 <a class="about-link" href="about.html">すし単について詳しく見る →</a>
 </section>
-<aside class="dictionary-lab" aria-label="開発中のツール"><div><span class="lab-label">開発中</span><a href="/dictionary/">すし辞書 <span aria-hidden="true">↗</span></a></div><p>英単語の意味・発音・例文を調べる（β版）</p></aside>
+
 <footer class="footer">© すし単 <a href="index.html">トップページ</a> <a href="about.html">運営者情報</a> <a href="privacy.html">プライバシーポリシー</a> <a href="contact.html">お問い合わせ</a></footer>
 </main>
 <script>
@@ -447,3 +449,4 @@ if ("serviceWorker" in navigator) {
 <footer style="text-align:center;margin:40px 0 100px;font-size:11px;color:#8c8c83"><a href="/admin/" style="display:inline-block;margin-top:12px;color:#8c8c83;text-decoration:none">管理者用</a></footer>
 </body>
 </html>
+

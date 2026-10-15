@@ -6,8 +6,7 @@
 <script src="shared/player.js?v=20260923-1"></script>
 <script src="shared/scores.js?v=20260923-1"></script>
 
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4726251793577317"
-     crossorigin="anonymous"></script>
+
   <meta name="google-adsense-account" content="ca-pub-4726251793577317">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -22,7 +21,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://sushitan.net/shinotan" />
   <meta name="twitter:card" content="summary_large_image" />
-  
+
   <style>
     :root {
       --bg1: #0f172a;
@@ -1094,7 +1093,7 @@
         font-size: 13px;
       }
     }
-  
+
 
     /* Learning navigation */
     .site-navigator {
@@ -1285,7 +1284,7 @@
       .utility-row { grid-template-columns: repeat(2, 1fr); }
     }
 
-  
+
     /* Mobile fit fixes */
     @media (max-width: 420px) {
       html, body { overflow: hidden; }
@@ -1322,13 +1321,13 @@
       .balloon { padding: 12px 14px; font-size: 16px; min-width: 106px; }
     }
 
-  
+
     @media (max-width: 420px) {
       .navigator-grid { grid-template-columns: 1fr; }
       .site-navigator { padding: 10px; }
     }
 
-  
+
 /* hamburger navigation */
 .hamburger-btn{
   position:fixed;
@@ -2154,8 +2153,10 @@ html, body {
 </style>
 
 <link rel="canonical" href="https://sushitan.net/shinotan">
-<script defer src="/sushigacha/site-taskbar.js?v=20261010-1"></script></head>
-<body><script>(()=>{const KEY='sushitan_login_bonus_v1',ACTIVE_KEY='sushitan_daily_active_v1',ALL=['sushitan','shino','antoni','idiom','quiz','talk','world','run'];const day=()=>{const d=new Date();d.setHours(d.getHours()-6);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}function pick(date){let seed=hash('sushitan-daily-'+date),a=[...ALL];for(let i=a.length-1;i>0;i--){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const j=seed%(i+1);[a[i],a[j]]=[a[j],a[i]]}return a.slice(0,4)}function activeFor(today){try{const s=JSON.parse(localStorage.getItem(ACTIVE_KEY)||'null');if(s&&s.day===today&&Array.isArray(s.active)&&s.active.length===4)return s.active}catch(e){}const a=pick(today);localStorage.setItem(ACTIVE_KEY,JSON.stringify({day:today,active:a}));return a}function flash(n){let x=document.getElementById('shinoDailyToast');if(!x){x=document.createElement('div');x.id='shinoDailyToast';x.style.cssText='position:fixed;left:50%;bottom:80px;transform:translateX(-50%);z-index:999999;background:#173f37;color:#fff;padding:9px 14px;border-radius:999px;font:900 12px system-ui;box-shadow:0 6px 18px #0003;pointer-events:none';document.body.appendChild(x)}x.textContent='デイリー しの単 '+n+'/20';clearTimeout(x._t);x._t=setTimeout(()=>x.remove(),1200)}function add(){const today=day(),active=activeFor(today);if(!active.includes('shino'))return;let l={};try{l=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){};let q=l.dailyQuests;if(!q||q.day!==today){q=l.dailyQuests={day:today,active:[...active],progress:{},claimed:{},chestClaimed:false,chestReward:0}}else{q.active=[...active]}q.progress=q.progress&&typeof q.progress==='object'?q.progress:{};q.claimed=q.claimed&&typeof q.claimed==='object'?q.claimed:{};if(q.claimed.shino)return;q.progress.shino=Math.min(20,(Number(q.progress.shino)||0)+1);if(q.progress.shino>=20){q.claimed.shino=true;l.gems=(Number.isSafeInteger(l.gems)?l.gems:0)+10}localStorage.setItem(KEY,JSON.stringify(l));window.dispatchEvent(new CustomEvent('sushi-daily-quest-change'));flash(q.progress.shino)}function hit(e){const b=e.target.closest?.('.balloon[data-type="correct"]');if(!b||b.dataset.shinoDailyCounted==='1')return;b.dataset.shinoDailyCounted='1';add()}document.addEventListener('pointerdown',hit,true);document.addEventListener('click',hit,true)})();</script>
+<script defer src="/sushigacha/site-taskbar.js?v=20261010-1"></script><link rel="stylesheet" href="shared/learning-paths.css">
+<script src="shared/word-notes.js"></script><link rel="stylesheet" href="shared/word-notes.css"><script defer src="shared/shino-review.js"></script>
+</head>
+<body class="learning-game"><script>(()=>{const KEY='sushitan_login_bonus_v1',ACTIVE_KEY='sushitan_daily_active_v1',ALL=['sushitan','shino','antoni','idiom','quiz','talk','world','run'];const day=()=>{const d=new Date();d.setHours(d.getHours()-6);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}function pick(date){let seed=hash('sushitan-daily-'+date),a=[...ALL];for(let i=a.length-1;i>0;i--){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const j=seed%(i+1);[a[i],a[j]]=[a[j],a[i]]}return a.slice(0,4)}function activeFor(today){try{const s=JSON.parse(localStorage.getItem(ACTIVE_KEY)||'null');if(s&&s.day===today&&Array.isArray(s.active)&&s.active.length===4)return s.active}catch(e){}const a=pick(today);localStorage.setItem(ACTIVE_KEY,JSON.stringify({day:today,active:a}));return a}function flash(n){let x=document.getElementById('shinoDailyToast');if(!x){x=document.createElement('div');x.id='shinoDailyToast';x.style.cssText='position:fixed;left:50%;bottom:80px;transform:translateX(-50%);z-index:999999;background:#173f37;color:#fff;padding:9px 14px;border-radius:999px;font:900 12px system-ui;box-shadow:0 6px 18px #0003;pointer-events:none';document.body.appendChild(x)}x.textContent='デイリー しの単 '+n+'/20';clearTimeout(x._t);x._t=setTimeout(()=>x.remove(),1200)}function add(){const today=day(),active=activeFor(today);if(!active.includes('shino'))return;let l={};try{l=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){};let q=l.dailyQuests;if(!q||q.day!==today){q=l.dailyQuests={day:today,active:[...active],progress:{},claimed:{},chestClaimed:false,chestReward:0}}else{q.active=[...active]}q.progress=q.progress&&typeof q.progress==='object'?q.progress:{};q.claimed=q.claimed&&typeof q.claimed==='object'?q.claimed:{};if(q.claimed.shino)return;q.progress.shino=Math.min(20,(Number(q.progress.shino)||0)+1);if(q.progress.shino>=20){q.claimed.shino=true;l.gems=(Number.isSafeInteger(l.gems)?l.gems:0)+10}localStorage.setItem(KEY,JSON.stringify(l));window.dispatchEvent(new CustomEvent('sushi-daily-quest-change'));flash(q.progress.shino)}function hit(e){const b=e.target.closest?.('.balloon[data-type="correct"]');if(!b||b.dataset.shinoDailyCounted==='1')return;b.dataset.shinoDailyCounted='1';add()}document.addEventListener('pointerdown',hit,true);document.addEventListener('click',hit,true)})();</script>
 
 <button class="hamburger-btn" id="hamburgerBtn" aria-label="サイトメニューを開く" aria-expanded="false">
   <span></span>
@@ -2256,9 +2257,9 @@ html, body {
     </a>
 
 
-    <a class="menu-link" href="IELTSRdemo.html">
-      IELTS Reading PC Demo
-      <small>Computer Based Practice</small>
+    <a class="menu-link" href="reading/ielts/">
+      IELTS Reading
+      <small>Passage別・解説付き練習</small>
     </a>
     <a class="menu-link" href="slang.html">
       英語スラング・日常会話表現
@@ -2353,7 +2354,8 @@ html, body {
             <p class="brand-sub">英単語と意味が近い語をタップする無料シノニムゲームです。英検・IELTS・高校英語の言い換え力を鍛えます。</p>
           </div>
 
-          <details class="learning-accordion">
+          <section class="learning-preview" aria-label="出題例と学習の流れ"><h2>意味の近い英語を、英語で考える</h2><p>基本単語の意味が分かる人向けの30秒練習です。出題例：<strong lang="en">consider → think about</strong>。「考慮する・よく考える」という意味で近い組です。</p><p><span lang="en">consider moving / think about moving</span> のように文で確認しましょう。類義語でも、すべての文で交換できるとは限りません。終了後は間違えた組の例文を読み、時間制限なしで復習できます。</p><a href="learning-guides/synonyms.html">実際の3組で、意味と文型の違いを学ぶ</a><p><button class="btn secondary" type="button" data-shino-review disabled>間違えた組を復習（0組）</button></p></section>
+<details class="learning-accordion">
             <summary aria-label="このゲームについて"></summary>
             <div class="learning-body"><h4>遊び方・練習内容</h4><p>表示された英単語と意味が近い英単語を選びます。通常モードは30秒です。日本語訳を手がかりにせず、英語同士の言い換えを確認したいときに使えます。</p><h4>学習の進め方</h4><p>学習例として、attempt と try には「試みる」という共通する意味があります。ただし、類義語でも文法や使える場面が常に同じとは限りません。間違えた組をメモし、それぞれの例文で目的語や前置詞も確認してから、もう一度取り組んでください。</p><h4>関連する教材</h4><ul><li><a href="antonitan.html">あんとに単で反対語を確認</a></li><li><a href="reading/ielts/">長文の中で言い換えを読む</a></li></ul></div>
           </details>
@@ -2493,7 +2495,8 @@ html, body {
           <div class="ranking-empty">まだスコアがありません</div>
         </div>
 
-        <div id="mistakeList" class="mistake-list hidden">
+        <p><button class="btn secondary" type="button" data-shino-review disabled>間違えた組を復習（0組）</button></p>
+<div id="mistakeList" class="mistake-list hidden">
           <div class="mistake-list-title">Review: 間違えた単語</div>
           <div id="mistakeListBody"></div>
         </div>
@@ -3092,6 +3095,7 @@ html, body {
       if (!GAME.currentQuestion) return;
       const correct = getAnswerValue(GAME.currentQuestion);
       const picked = button ? button.dataset.value : "";
+      window.SushiShinoReview?.remember(getQuestionPrompt(GAME.currentQuestion), correct);
       GAME.mistakes.push({
         prompt: getQuestionPrompt(GAME.currentQuestion),
         correct,
@@ -3114,7 +3118,7 @@ html, body {
             <strong>${escapeHtml(m.prompt)}</strong><br>
             <span class="small">your answer: ${escapeHtml(m.picked || "-")}</span>
           </div>
-          <div class="mistake-answer">${escapeHtml(m.correct)}</div>
+          <div class="mistake-answer">${escapeHtml(m.correct)}${window.SushiShinoReview?.notes(m.prompt,m.correct)||""}</div>
         </div>
       `).join("");
 
@@ -3815,4 +3819,5 @@ html, body {
 <script src="sushigacha/multi-game-lucky-gems.js?v=20260913-2"></script>
 </body>
 </html>
+
 
