@@ -26,7 +26,7 @@ global.SushiShinoThinkingCore=Object.freeze({validate,session,shuffled});
 function init(){
  const opener=document.getElementById('shinoThinkingStart');if(!opener)return;
  const dialog=document.createElement('dialog');dialog.className='shino-thinking';dialog.setAttribute('aria-labelledby','thinkingTitle');
- dialog.innerHTML='<header><p class="thinking-kicker">しのたん · 言葉の違いを学ぶ</p><h2 id="thinkingTitle">言葉を通して、見方を増やす</h2><button type="button" data-close>学習を閉じる</button></header><div data-content tabindex="-1"></div>';
+ dialog.innerHTML='<header><p class="thinking-kicker">しの単のサブコーナー</p><h2 id="thinkingTitle">シノニムの微妙な違い</h2><button type="button" data-close>学習を閉じる</button></header><div data-content tabindex="-1"></div>';
  document.body.append(dialog);
  const content=dialog.querySelector('[data-content]');let bank=null,round=null,loading=false,run=0,serial=0;
  const sessionId=global.crypto?.randomUUID?.()||Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);
@@ -81,7 +81,7 @@ function init(){
  }
  function finish(){
   const wrong=round.wrong;
-  content.innerHTML='<h3>今回の学習を振り返りましょう</h3><p>'+round.questions.length+'問中 '+round.score+'問正解しました。</p><p>点数だけでなく、言葉を選ぶ理由を説明できるか確かめてみましょう。</p><ul>'+round.questions.map(q=>'<li><span lang="en">'+esc(q.choices.join(' / '))+'</span></li>').join('')+'</ul><p class="thinking-reflection">今日の言葉で、見方が少し変わった出来事はありましたか。</p><div class="thinking-actions">'+(wrong.length?'<button type="button" data-review>間違えた'+wrong.length+'組を復習する</button>':'')+'<button type="button" data-menu>別の組を学ぶ</button></div><p><a href="/english-thinking">記事を読み、考えを深める</a></p><p>時間制限のない学習結果は30秒ランキングには加算しません。復習はデイリーへ重複加算しません。</p>';
+  content.innerHTML='<h3>今回の学習を振り返りましょう</h3><p>'+round.questions.length+'問中 '+round.score+'問正解しました。</p><p>点数だけでなく、言葉を選ぶ理由を説明できるか確かめてみましょう。</p><ul>'+round.questions.map(q=>'<li><span lang="en">'+esc(q.choices.join(' / '))+'</span></li>').join('')+'</ul><p class="thinking-reflection">今日の言葉で、見方が少し変わった出来事はありましたか。</p><div class="thinking-actions">'+(wrong.length?'<button type="button" data-review>間違えた'+wrong.length+'組を復習する</button>':'')+'<button type="button" data-menu>別の組を学ぶ</button></div><p><a href="/english-thinking">記事を読み、考えを深める</a></p><p>時間制限のない学習結果はしの単のランキングには加算しません。復習はデイリーへ重複加算しません。</p>';
   if(wrong.length)content.querySelector('[data-review]').onclick=()=>launch(wrong,true);
   content.querySelector('[data-menu]').onclick=menu;focusTop();
  }
