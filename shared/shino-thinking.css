@@ -1,0 +1,12 @@
+.shino-thinking{box-sizing:border-box;width:min(820px,calc(100% - 24px));max-height:calc(100dvh - 108px - env(safe-area-inset-bottom));margin:12px auto auto;padding:24px;border:1px solid #efcfad;border-radius:20px;background:#fffaf5;color:#172033;overflow:auto;overscroll-behavior:contain;font:16px/1.8 system-ui,sans-serif;text-align:left}
+.shino-thinking::backdrop{background:#182031b3}.shino-thinking *{box-sizing:border-box}
+.shino-thinking h2{font-size:1.45rem;line-height:1.5;margin:8px 0}.shino-thinking h3{font-size:1.15rem;line-height:1.7;margin:22px 0 10px}.shino-thinking p{color:#344256;line-height:1.85;overflow-wrap:anywhere}
+.shino-thinking button{min-height:48px;padding:12px 18px;border:1px solid #c28046;border-radius:12px;background:white;color:#713300;font:700 1rem/1.5 system-ui;cursor:pointer;white-space:normal;overflow-wrap:anywhere}
+.shino-thinking button:focus-visible,.shino-thinking a:focus-visible{outline:3px solid #1d66b0;outline-offset:3px}
+.shino-thinking button:disabled{cursor:default;opacity:.75}.shino-thinking button.thinking-selected{border:3px solid #9b480c;opacity:1}
+.shino-thinking a{color:#8d4008;text-decoration:underline}.thinking-kicker,.thinking-progress{font-size:.9rem}
+.thinking-choices,.thinking-actions{display:flex;gap:12px;flex-wrap:wrap}.thinking-choices button{flex:1;min-width:140px}
+.thinking-comparison{display:grid;grid-template-columns:1fr 1fr;gap:12px}.thinking-comparison section,.thinking-example{padding:16px;border:1px solid #ead4bd;border-radius:12px;background:white;margin:12px 0}.thinking-comparison h4{font-size:1.25rem;margin:0;overflow-wrap:anywhere}
+.thinking-reflection{padding:18px;background:#fff0d9;border-left:5px solid #b75c12;border-radius:10px;margin:24px 0}.thinking-reflection h3{margin-top:0}.thinking-hint{font-size:.9rem}
+.shino-thinking .thinking-result{font-weight:800;color:#713300;padding-top:18px}.shino-thinking .thinking-next{background:#98420a;color:white;width:100%}
+@media(max-width:540px){.shino-thinking{padding:16px}.thinking-comparison{grid-template-columns:1fr}.thinking-choices{flex-direction:column}.thinking-actions button{width:100%}}
