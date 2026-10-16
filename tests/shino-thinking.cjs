@@ -2,6 +2,7 @@ const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/st
 const read=p=>fs.readFileSync(path.join(__dirname,'..',p),'utf8');
 const context={window:{},document:{readyState:'loading',addEventListener(){}}};vm.runInNewContext(read('shared/shino-thinking.js'),context);
 const core=context.window.SushiShinoThinkingCore,raw=JSON.parse(read('data/shino-thinking.json')),bank=core.validate(raw);
+assert(bank.length>=20,'At least twenty distinct pairs must ship');
 assert.equal(new Set(bank.map(q=>q.id)).size,bank.length);
 const round=core.session(bank.slice(0,3));assert.equal(round.next(),false);assert.equal(round.answer('invalid'),null);
 assert.equal(round.answer(bank[0].answer).correct,true);assert.equal(round.answer(bank[0].answer),null);assert.equal(round.next(),true);
@@ -10,7 +11,7 @@ assert.equal(core.session(round.wrong,true).answer(round.wrong[0].answer).review
 for(const field of ['question','explanation','reflection','category']){const bad=structuredClone(raw);delete bad.questions[0][field];assert.throws(()=>core.validate(bad));}
 const bad=structuredClone(raw);bad.questions[0].answer='other';assert.throws(()=>core.validate(bad));
 const duplicate=structuredClone(raw);duplicate.questions.push(duplicate.questions[0]);assert.throws(()=>core.validate(duplicate));
-for(const p of ['english-thinking.html','shared/shino-thinking.js','shared/shino-thinking.css','data/shino-thinking.json'])assert(!read(p).includes('－－'),p);
+for(const p of ['english-thinking.html','shared/shino-thinking.js','shared/shino-thinking.css','data/shino-thinking.json'])assert(!read(p).includes('\uFF0D\uFF0D'),p);
 assert(read('index.html').includes('href="english-thinking.html"'));assert(read('english-thinking.html').includes('/shinotan?practice=article'));assert(read('shinotan.html').includes('/english-thinking'));
 // Execute the existing daily tracker with the added answer hook, checking one award and review exclusion.
 const html=read('shinotan.html'),tracker=html.match(/<body[^>]*><script>([\s\S]*?)<\/script>/)[1];
