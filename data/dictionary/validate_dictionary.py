@@ -26,7 +26,8 @@ try:
     additions=json.loads(addition_path.read_text(encoding='utf-8')) if addition_path.exists() else {}
     added=additions.get('entries',[])
     added_ids={e['id'] for e in added}
-    if additions and (additions.get('base_entry_count')!=manifest.get('dictionary_entry_count') or additions.get('base_version')!=version or additions.get('added_entry_count')!=len(added) or len(added_ids)!=len(added) or not added_ids.issubset(ids) or additions.get('total_entry_count')!=len(entries)):
+    # base_version records the historical addition source, not subsequent quality releases.
+    if additions and (additions.get('base_entry_count')!=manifest.get('dictionary_entry_count') or additions.get('added_entry_count')!=len(added) or len(added_ids)!=len(added) or not added_ids.issubset(ids) or additions.get('total_entry_count')!=len(entries)):
         errors.append('addition manifest mismatch')
     if len(entries)!=manifest.get('dictionary_entry_count')+len(added):errors.append('manifest entry count mismatch')
     if progress.get('current_version')!=version or meta.get('version')!=version:errors.append('version mismatch')

@@ -382,6 +382,14 @@
               {
                 "en": "Applicants must hold a recognized teaching qualification.",
                 "ja": "応募者は認定された教員資格を持っていなければならない。"
+              },
+              {
+                "en": "Applicants must have a recognized teaching qualification.",
+                "ja": "応募者は認定された教員資格を持っていなければならない。"
+              },
+              {
+                "en": "The position requires a professional qualification in accounting.",
+                "ja": "その職には会計分野の専門資格が必要である。"
               }
             ]
           },
@@ -404,11 +412,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "qualification for + 仕事・資格。学術文脈では「発言への留保・限定」の意味もある。",
+    "usage_note": "qualification for + 仕事・資格。学術文脈では「発言への留保・限定」の意味もある。 Qualification can mean a credential or a limitation added to a statement; distinguish from quality.",
     "tags": [
       "etymology-v1",
       "curated-v2.54",
-      "curated-v3.40"
+      "curated-v3.40",
+      "curated-v3.318"
     ],
     "status": "enriched",
     "search_terms": [
@@ -421,17 +430,22 @@
     "collocations": [
       {
         "text": "professional qualification",
+        "en": "professional qualification",
         "ja": "専門資格"
       },
       {
-        "text": "gain a qualification"
+        "text": "gain a qualification",
+        "en": "gain a qualification",
+        "ja": "資格を取得する"
       },
       {
         "text": "meet the qualifications",
-        "ja": "必要な資格を満たす"
+        "en": "meet the qualifications",
+        "ja": "必要な資格要件を満たす"
       },
       {
         "text": "with some qualifications",
+        "en": "with some qualifications",
         "ja": "いくつかの留保付きで"
       }
     ],
@@ -449,19 +463,7 @@
         "qualify",
         "equal"
       ]
-    },
-    "senses": [
-      {
-        "pos": "",
-        "definition_ja": "資格；能力条件",
-        "examples": [
-          {
-            "en": "Applicants must have a recognized teaching qualification.",
-            "ja": "応募者は認定された教員資格を持っていなければならない。"
-          }
-        ]
-      }
-    ]
+    }
   },
   {
     "id": "sw-02573",
@@ -501,6 +503,10 @@
               {
                 "en": "The author qualified her conclusion by noting the small sample size.",
                 "ja": "著者は標本数が少ないことを指摘して結論に留保を付けた。"
+              },
+              {
+                "en": "The researchers qualified their conclusion because the sample was small.",
+                "ja": "研究者たちは標本数が少なかったため、結論に留保を付けた。"
               }
             ]
           },
@@ -528,7 +534,8 @@
       "etymology-v1",
       "curated-v3.26",
       "curated-v3.41",
-      "curated-v3.56"
+      "curated-v3.56",
+      "curated-v3.264"
     ],
     "status": "enriched",
     "search_terms": [
@@ -539,20 +546,40 @@
       "ipa_uk": null
     },
     "collocations": [
-      "qualify for",
-      "qualify as",
-      "qualify a claim",
+      {
+        "text": "qualify for a scholarship",
+        "en": "qualify for a scholarship",
+        "ja": "奨学金の受給資格を得る"
+      },
+      {
+        "text": "qualify as a specialist",
+        "en": "qualify as a specialist",
+        "ja": "専門家としての資格を得る"
+      },
+      {
+        "text": "qualify a claim",
+        "en": "qualify a claim",
+        "ja": "主張に留保を付ける"
+      },
       {
         "text": "qualify for a grant",
+        "en": "qualify for a grant",
         "ja": "助成金の対象となる"
       },
       {
         "text": "qualify as a teacher",
+        "en": "qualify as a teacher",
         "ja": "教員としての資格を満たす"
       },
       {
         "text": "qualify a statement",
+        "en": "qualify a statement",
         "ja": "発言に条件を付ける"
+      },
+      {
+        "text": "qualify a conclusion",
+        "en": "qualify a conclusion",
+        "ja": "結論に留保を付ける"
       }
     ],
     "etymology": {
@@ -1716,6 +1743,10 @@
               {
                 "en": "The queen attended the ceremony.",
                 "ja": "女王は式典に出席した。"
+              },
+              {
+                "en": "The queen addressed the nation during the crisis.",
+                "ja": "女王は危機のさなかに国民に向けて演説した。"
               }
             ]
           },
@@ -1750,11 +1781,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "女王・社会性昆虫の繁殖個体・チェスの駒の意味を区別する。",
+    "usage_note": "queen は女性の君主、王妃、社会性昆虫の女王、チェスの駒などを指す。queen regnant は女性君主。",
     "tags": [
-      "wordfreq-gap"
+      "wordfreq-gap",
+      "curated-v3.277"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "queen",
       "queens"
@@ -1763,7 +1795,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "queen consort",
+        "ja": "王妃"
+      },
+      {
+        "text": "queen bee",
+        "ja": "女王バチ"
+      },
+      {
+        "text": "chess queen",
+        "ja": "チェスのクイーン"
+      }
+    ]
   },
   {
     "id": "sw-08440",
@@ -2232,14 +2277,17 @@
         "meanings": [
           {
             "ja": "列に並ぶ",
-            "definition": "",
+            "definition": "to join or form a line while waiting for something",
             "examples": [
               {
                 "en": "Hundreds of people queued up to enter the exhibition.",
                 "ja": "何百人もの人が展示会に入るため列を作った。"
+              },
+              {
+                "en": "Passengers queued up at the ticket counter before dawn.",
+                "ja": "乗客たちは夜明け前から切符売り場に列を作った。"
               }
-            ],
-            "definition_en": "to form or join a line while waiting"
+            ]
           }
         ]
       }
@@ -2247,17 +2295,31 @@
     "forms": {},
     "phrases": [],
     "collocations": [
-      "queue up for tickets",
-      "queue up outside"
+      {
+        "en": "queue up for tickets",
+        "text": "queue up for tickets",
+        "ja": "チケットを求めて列に並ぶ"
+      },
+      {
+        "en": "queue up outside a shop",
+        "text": "queue up outside a shop",
+        "ja": "店の外で列に並ぶ"
+      },
+      {
+        "en": "queue up to enter",
+        "text": "queue up to enter",
+        "ja": "入場するために列に並ぶ"
+      }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Learn this expression as a unit: queue up. The example and collocations show its common grammatical pattern and register.",
+    "usage_note": "queue は英国英語で一般的。米国英語では line up や wait in line がよく使われる。",
     "tags": [
       "phrasal-verbs",
-      "curated-v3.14"
+      "curated-v3.14",
+      "curated-v3.300"
     ],
     "status": "enriched"
   },
@@ -2387,12 +2449,26 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "速い；素早い",
-            "definition": "done or happening in a short time",
+            "ja": "短時間の；手早い",
+            "definition": "taking or requiring only a short time",
             "examples": [
               {
                 "en": "Let's take a quick break before the next activity.",
                 "ja": "次の活動の前に短い休憩を取りましょう。"
+              },
+              {
+                "en": "A quick review of the data revealed a missing value.",
+                "ja": "データをざっと確認すると、欠損値が一つ見つかった。"
+              }
+            ]
+          },
+          {
+            "ja": "反応が速い；素早い",
+            "definition": "able to act or respond without delay",
+            "examples": [
+              {
+                "en": "The lifeguard was quick to notice the swimmer in trouble.",
+                "ja": "監視員は泳いでいる人の異変にすぐ気づいた。"
               }
             ]
           }
@@ -2405,11 +2481,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "quick は形容詞で quick response のように名詞を修飾する。動詞を修飾するときは通常 quickly を使う。be quick to do は「すぐに～する」。",
     "tags": [
-      "v2.31-curated"
+      "v2.31-curated",
+      "curated-v3.252"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "quick"
     ],
@@ -2417,7 +2494,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "a quick decision",
+        "en": "a quick decision",
+        "ja": "素早い決断"
+      },
+      {
+        "text": "a quick look",
+        "en": "a quick look",
+        "ja": "ざっと見ること"
+      },
+      {
+        "text": "be quick to respond",
+        "en": "be quick to respond",
+        "ja": "すぐに対応する"
+      }
+    ]
   },
   {
     "id": "sw-13414",
@@ -2489,9 +2582,17 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "素早く；すぐに",
-            "definition": "at a fast speed or after a short time",
+            "ja": "素早く；急いで",
+            "definition": "at a fast speed or with little delay",
             "examples": [
+              {
+                "en": "The firefighters quickly moved everyone to safety.",
+                "ja": "消防隊員はすぐに全員を安全な場所へ移動させた。"
+              },
+              {
+                "en": "She quickly realized that the figures did not match.",
+                "ja": "彼女は数字が一致しないことにすぐ気づいた。"
+              },
               {
                 "en": "The students quickly adapted to the new system.",
                 "ja": "生徒たちは新しいシステムにすぐ適応しました。"
@@ -2507,11 +2608,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "quickly は動作の速さと、判断などにかかる時間の短さの両方を表す。soon は「間もなく」で、速さそのものは示さない。",
     "tags": [
-      "v2.34-curated"
+      "v2.34-curated",
+      "curated-v3.280"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "quickly"
     ],
@@ -2519,7 +2621,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "en": "respond quickly",
+        "text": "respond quickly",
+        "ja": "素早く対応する"
+      },
+      {
+        "en": "quickly realize",
+        "text": "quickly realize",
+        "ja": "すぐに気づく"
+      },
+      {
+        "en": "recover quickly",
+        "text": "recover quickly",
+        "ja": "早く回復する"
+      }
+    ]
   },
   {
     "id": "sw-01125",
@@ -2535,12 +2653,26 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "静かな",
+            "ja": "静かな；騒音の少ない",
             "definition": "making little or no noise",
             "examples": [
               {
                 "en": "The library is usually quiet in the morning.",
+                "ja": "図書館は朝はたいてい静かだ。"
+              },
+              {
+                "en": "The library is usually quiet in the morning.",
                 "ja": "図書館は朝はたいてい静かです。"
+              }
+            ]
+          },
+          {
+            "ja": "落ち着いた；目立たない",
+            "definition": "not attracting attention or involving much activity",
+            "examples": [
+              {
+                "en": "She made a quiet but important contribution to the project.",
+                "ja": "彼女は目立たないながらもプロジェクトに重要な貢献をした。"
               }
             ]
           }
@@ -2553,11 +2685,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "quiet は「音が静か」のほか「控えめで目立たない」ことにも使う。quite（かなり）と綴り・発音を混同しない。",
     "tags": [
-      "v2.31-curated"
+      "v2.31-curated",
+      "curated-v3.279"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "quiet"
     ],
@@ -2565,7 +2698,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "a quiet place",
+        "en": "a quiet place",
+        "ja": "静かな場所"
+      },
+      {
+        "text": "keep quiet",
+        "en": "keep quiet",
+        "ja": "静かにしている"
+      },
+      {
+        "text": "a quiet confidence",
+        "en": "a quiet confidence",
+        "ja": "静かな自信"
+      }
+    ]
   },
   {
     "id": "sw-09914",
@@ -2588,15 +2737,32 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "静かになる；静める",
-            "definition": "",
+            "ja": "静かになる；騒ぎが収まる",
+            "definition": "to become less noisy, excited, or active",
             "examples": [
               {
                 "en": "The class quieted down when the presentation began.",
                 "ja": "発表が始まるとクラスは静かになった。"
+              },
+              {
+                "en": "The streets quieted down after midnight.",
+                "ja": "真夜中を過ぎると通りは静かになった。"
               }
-            ],
-            "definition_en": "to become or make someone less noisy or excited"
+            ]
+          },
+          {
+            "ja": "人を静かにさせる",
+            "definition": "to make someone or a group less noisy or excited",
+            "examples": [
+              {
+                "en": "The teacher raised her hand to quiet down the room.",
+                "ja": "教師は教室を静かにさせるため手を上げた。"
+              },
+              {
+                "en": "A familiar song helped quiet down the children.",
+                "ja": "なじみのある歌が子どもたちを落ち着かせるのに役立った。"
+              }
+            ]
           }
         ]
       }
@@ -2604,17 +2770,31 @@
     "forms": {},
     "phrases": [],
     "collocations": [
-      "quiet down quickly",
-      "ask someone to quiet down"
+      {
+        "en": "quiet down after midnight",
+        "text": "quiet down after midnight",
+        "ja": "真夜中を過ぎて静かになる"
+      },
+      {
+        "en": "quiet down the class",
+        "text": "quiet down the class",
+        "ja": "クラスを静かにさせる"
+      },
+      {
+        "en": "help someone quiet down",
+        "text": "help someone quiet down",
+        "ja": "人が落ち着くのを助ける"
+      }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Learn this expression as a unit: quiet down. The example and collocations show its common grammatical pattern and register.",
+    "usage_note": "自動詞にも他動詞にもなる。quiet down the room のように目的語を取れる。",
     "tags": [
       "phrasal-verbs",
-      "curated-v3.14"
+      "curated-v3.14",
+      "curated-v3.300"
     ],
     "status": "enriched"
   },
@@ -3304,12 +3484,51 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "引用する",
-            "definition": "to repeat the exact words that someone else has said or written",
+            "ja": "（発言・文章を）引用する",
+            "definition": "to repeat someone’s exact words",
             "examples": [
+              {
+                "en": "The article quotes a statement from the minister.",
+                "ja": "その記事は大臣の発言を引用している。"
+              },
               {
                 "en": "The essay quotes a line from the original article.",
                 "ja": "その作文は元の記事から一文を引用しています。"
+              }
+            ]
+          },
+          {
+            "ja": "（価格などを）提示する",
+            "definition": "to state a price or estimate for goods or services",
+            "examples": [
+              {
+                "en": "The contractor quoted a price of 200,000 yen.",
+                "ja": "請負業者は20万円の見積額を提示した。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "引用文；引用句",
+            "definition": "words repeated from a speech or text",
+            "examples": [
+              {
+                "en": "The essay begins with a quote from a novel.",
+                "ja": "その小論文は小説からの引用文で始まる。"
+              }
+            ]
+          },
+          {
+            "ja": "見積額",
+            "definition": "a stated price for a service or product",
+            "examples": [
+              {
+                "en": "We received three quotes for the repairs.",
+                "ja": "修理について三つの見積もりを受け取った。"
               }
             ]
           }
@@ -3327,11 +3546,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "quote A from B は「BからAを引用する」。名詞の quote は引用文と見積額の両義を持つ。",
     "tags": [
-      "v2.31-curated"
+      "v2.31-curated",
+      "curated-v3.230"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "quote",
       "quotes",
@@ -3342,6 +3562,22 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "quote a source",
+        "en": "quote a source",
+        "ja": "出典を引用する"
+      },
+      {
+        "text": "direct quote",
+        "en": "direct quote",
+        "ja": "直接引用"
+      },
+      {
+        "text": "get a quote",
+        "en": "get a quote",
+        "ja": "見積もりを取る"
+      }
+    ]
   }
 ]
