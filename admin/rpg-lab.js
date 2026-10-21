@@ -1,4 +1,6 @@
-(()=>{'use strict';const $=id=>document.getElementById(id),KEY='sushitan_rpg_lab_v2';let nonce='',timer,studyTimer;
+(()=>{
+ if (!(globalThis.SushiAdminFeatures?.enabled === true)) return;
+'use strict';const $=id=>document.getElementById(id),KEY='sushitan_rpg_lab_v2';let nonce='',timer,studyTimer;
 function studyTotal(){let total=0;for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i);if(!key?.startsWith('sushitan_achievement_v2:event:'))continue;try{const e=JSON.parse(localStorage.getItem(key));if(e?.version===2&&e.game==='sushitan'&&e.id===key.slice('sushitan_achievement_v2:event:'.length)&&Number.isSafeInteger(e.correct)&&e.correct>0&&e.correct<=1000)total+=e.correct;}catch{}}return total;}
 function avatar(){try{const l=JSON.parse(localStorage.getItem('sushitan_login_bonus_v1')||'{}'),a=JSON.parse(localStorage.getItem('sushitan_avatar_local_v1')||'null');return a||l.gacha?.avatar||{};}catch{return {};}}
 function state(){try{return JSON.parse(localStorage.getItem(KEY)||'null');}catch{return null;}}
@@ -15,3 +17,4 @@ window.addEventListener('focus',refresh);window.addEventListener('storage',refre
 document.addEventListener('visibilitychange',()=>{send('sushi-rpg-visible',{visible:active()&&!document.hidden});if(!document.hidden)refresh();});new MutationObserver(()=>{if($('console').hidden){clearTimeout(timer);$('rpgFrame').removeAttribute('src');$('rpgPanel').hidden=true;$('rpgTab').classList.remove('selected');nonce='';}}).observe($('console'),{attributes:true,attributeFilter:['hidden']});
 $('rpgExit').onclick=()=>{$('rpgDebug').open=false;$('usageTab').click();};new MutationObserver(()=>{const open=active();document.body.classList.toggle('rpg-open',open);for(const node of document.querySelectorAll('main>header,#console>.heading,#console>.tabs,#status'))node.inert=open;}).observe($('rpgPanel'),{attributes:true,attributeFilter:['hidden']});for(const id of ['rpgPractice','rpgSpeed','rpgJump'])$(id).addEventListener('click',()=>{$('rpgDebug').open=false;});
 })();
+

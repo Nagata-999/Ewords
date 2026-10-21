@@ -1,5 +1,7 @@
 'use strict';
 (()=>{
+ if (!(globalThis.SushiAdminFeatures?.enabled === true)) return;
+
  const nonce=new URL(location.href).searchParams.get('nonce')||'',key='sushitan_login_bonus_v1';
  const values=new Map(),storage={getItem:k=>values.get(String(k))??null,setItem:(k,v)=>values.set(String(k),String(v)),removeItem:k=>values.delete(String(k)),clear:()=>values.clear(),get length(){return values.size},key:i=>[...values.keys()][i]??null};
  // Replace storage BEFORE site scripts run. The iframe has an opaque origin and
@@ -13,5 +15,6 @@
  function publish(){const l=JSON.parse(storage.getItem(key)||'{}'),state={'操作':lastAction,'テスト日付（日本時間）':new TestDate().toLocaleString('ja-JP',{timeZone:'Asia/Tokyo'}),'端末：連続日数':l.loginBonusStreak,'端末：ジェム':l.gems,'模擬サーバー：連続日数':server.loginBonusStreak,'模擬サーバー：ジェム':server.gems,'受取日':l.loginManualClaims,'獲得イベント':(l.gemEvents||[]).filter(e=>e.source==='login-bonus').map(e=>({id:e.id,gems:e.amount})),'未同期の件数':l.gemPendingEvents?.length||0,'模擬API呼出回数':calls};parent.postMessage({type:'sushi-test-state',nonce,state},'*');const el=document.getElementById('snapshot');if(el)el.textContent=`${l.loginBonusStreak}日連続 / ${l.gems}ジェム / サーバー ${server.gems}ジェム`}
  ['sushi-daily-quest-change','sushi-gems-earned','sushi-gem-change'].forEach(e=>window.addEventListener(e,()=>{lastAction='受取・表示更新';publish()}));
  window.addEventListener('message',async e=>{if(e.source!==parent||e.data?.type!=='sushi-test-command'||e.data.nonce!==nonce)return;lastAction=e.data.cmd;try{if(e.data.cmd==='next_day'){clock+=86400000;window.dispatchEvent(new Event('pageshow'));document.getElementById('sushiLoginTab')?.click()}else if(e.data.cmd==='sync'){await window.SushiProfileSync?.syncWallet()}else if(e.data.cmd==='other_device'){storage.setItem(key,JSON.stringify({gems:0,gemEvents:[],loginButtonModeV1:true,loginBonusStreak:1,loginBonusTotal:1,loginBonusLastDay:'2026-10-09'}));await window.SushiProfileSync?.syncWallet();document.getElementById('sushiLoginTab')?.click()}publish()}catch{lastAction='テストコードの読み込みを待って、もう一度操作してください';publish()}});
- document.addEventListener('DOMContentLoaded',publish);
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',publish);else publish();
 })();
+

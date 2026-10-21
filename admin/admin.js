@@ -1,5 +1,7 @@
 'use strict';
 (()=>{
+ if (!(globalThis.SushiAdminFeatures?.enabled === true)) return;
+
  const base='https://rxyoyveykxdfrpomkltl.supabase.co',apikey='sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7',$=id=>document.getElementById(id);
  const labels={sushitanjunior:'すし単ジュニア',sushi_run3d:'すしRUN 3D',sushiflow:'すしFLOW',sushian:'すしあん',sushitype:'すしTYPE',sushishun:'すしSHUN',sushikome:'すしコメ',sushikobun:'すし古文',sharitan:'しゃり単',spetan:'スペ単',sushi_clock:'すしCLOCK',sushi_hayaoshi:'すし早押し',sushi_parts_learning:'すしPARTS学習',sushi_parts:'すしPARTS',sushi_ondoku:'すし音読',home:'ホーム',sushitan:'すし単',shinotan:'しの単',antonitan:'あんとに単',sushi_idiom:'すしイディオム',sushi_quiz:'すしクイズ',sushitalk:'すしTALK',sukaishi:'す界し',sushi_run:'すしRUN',sushicross:'すしクロス',sushi_blast:'ブロックブラすし',toeic:'すしTOEIC',sushigiri:'すし斬り',sushidungeon:'すしダンジョン'};
  const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -27,3 +29,4 @@
  window.addEventListener('message',e=>{if(e.source!==$('testFrame').contentWindow||e.data?.type!=='sushi-test-state'||e.data.nonce!==nonce)return;$('testState').textContent=JSON.stringify(e.data.state,null,2)});
  $('diagnosticForm').onsubmit=async e=>{e.preventDefault();$('diagnostic').textContent='確認しています…';const requestToken=token;try{const d=(await api({action:'login_diagnostic',sushi_id:$('diagnosticId').value.trim().toLowerCase()})).diagnostic;if(!token||token!==requestToken)return;$('diagnostic').innerHTML=`<p><b>${num(d.streak)}日連続</b> · 累計${num(d.total)}日 · 最終受取 ${esc(d.lastDay)}</p><div class="tableWrap"><table><thead><tr><th>受取日</th><th>獲得イベント</th></tr></thead><tbody>${d.claims.map(c=>`<tr><td>${esc(c.day)}</td><td class="${c.eventRecorded?'ok':'bad'}">${c.eventRecorded?'記録あり':'記録なし'}</td></tr>`).join('')}</tbody></table></div><p class="muted">「記録なし」は受取済みフラグと獲得イベントが一致していない状態です。過去の旧形式の受取は未記録の場合があります。この画面から補填はしません。</p>`}catch(err){$('diagnostic').textContent=err.message}};
 })();
+
