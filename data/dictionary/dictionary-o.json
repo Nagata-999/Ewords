@@ -125,6 +125,20 @@
               {
                 "en": "The travelers rested at an oasis.",
                 "ja": "旅人たちはオアシスで休んだ。"
+              },
+              {
+                "en": "The quiet courtyard was an oasis of calm in the busy city.",
+                "ja": "静かな中庭はにぎやかな街の中の安らぎの場所だった。"
+              }
+            ]
+          },
+          {
+            "ja": "安らぎの場所；憩いの場",
+            "definition": "a peaceful or pleasant place amid difficult or busy surroundings",
+            "examples": [
+              {
+                "en": "The library became an oasis for students who needed quiet.",
+                "ja": "その図書館は静けさを求める生徒たちの憩いの場となった。"
               }
             ]
           }
@@ -135,16 +149,33 @@
       "plural": "oases"
     },
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "desert oasis",
+        "en": "desert oasis",
+        "ja": "砂漠のオアシス"
+      },
+      {
+        "text": "an oasis of calm",
+        "en": "an oasis of calm",
+        "ja": "安らぎの場所"
+      },
+      {
+        "text": "a green oasis",
+        "en": "a green oasis",
+        "ja": "緑豊かな憩いの場所"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Oasis can be a real source of water in a desert or a figurative refuge from stress.",
     "tags": [
-      "nature-animals"
+      "nature-animals",
+      "curated-v3.319"
     ],
-    "status": "basic"
+    "status": "enriched"
   },
   {
     "id": "sw-04400",
@@ -403,6 +434,14 @@
               {
                 "en": "The report examines links between obesity and lifestyle.",
                 "ja": "その報告書は肥満と生活習慣の関係を調べています。"
+              },
+              {
+                "en": "Obesity is associated with an increased risk of several diseases.",
+                "ja": "肥満はいくつかの疾患リスクの上昇と関連している。"
+              },
+              {
+                "en": "The campaign addressed childhood obesity without blaming families.",
+                "ja": "その啓発活動は家族を責めることなく小児肥満の問題に取り組んだ。"
               }
             ]
           }
@@ -415,12 +454,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "obesity は通常不可算名詞。overweight（過体重）と obesity（肥満）は医学的な分類上、同義ではない。",
+    "usage_note": "obesity は通常不可算名詞。overweight（過体重）と obesity（肥満）は医学的な分類上、同義ではない。 In public health writing, distinguish obesity rates from the number of people affected.",
     "tags": [
       "academic-expansion",
       "v2.31-curated",
       "curated-v2.55",
-      "curated-v3.48"
+      "curated-v3.48",
+      "curated-v3.318"
     ],
     "status": "enriched",
     "search_terms": [
@@ -433,30 +473,23 @@
     "collocations": [
       {
         "text": "childhood obesity",
+        "en": "childhood obesity",
         "ja": "小児肥満"
       },
       {
         "text": "obesity prevalence",
+        "en": "obesity prevalence",
         "ja": "肥満の有病割合"
       },
       {
         "text": "obesity-related disease",
+        "en": "obesity-related disease",
         "ja": "肥満に関連する疾患"
       },
       {
-        "text": "obesity rate"
-      }
-    ],
-    "senses": [
-      {
-        "pos": "",
-        "definition_ja": "肥満",
-        "examples": [
-          {
-            "en": "Obesity is associated with an increased risk of several diseases.",
-            "ja": "肥満はいくつかの疾患リスクの上昇と関連している。"
-          }
-        ]
+        "text": "obesity rate",
+        "en": "obesity rate",
+        "ja": "肥満率"
       }
     ]
   },
@@ -490,6 +523,10 @@
               {
                 "en": "Drivers must obey the speed limit.",
                 "ja": "運転者は制限速度を守らなければなりません。"
+              },
+              {
+                "en": "All participants must obey the safety instructions.",
+                "ja": "参加者は全員、安全上の指示に従わなければならない。"
               }
             ]
           }
@@ -503,17 +540,31 @@
       "ing": "obeying"
     },
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "obey the law",
+        "ja": "法律を守る"
+      },
+      {
+        "text": "obey an order",
+        "ja": "命令に従う"
+      },
+      {
+        "text": "obey traffic rules",
+        "ja": "交通規則を守る"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "obey は他動詞なので obey the law とし、obey to the law とはしない。follow はより広い「従う」。",
     "tags": [
       "general-vocabulary",
-      "v2.31-curated"
+      "v2.31-curated",
+      "curated-v3.277"
     ],
-    "status": "basic"
+    "status": "enriched"
   },
   {
     "id": "sw-08285",
@@ -888,6 +939,10 @@
               {
                 "en": "Employees have an obligation to protect confidential information.",
                 "ja": "従業員には機密情報を守る義務がある。"
+              },
+              {
+                "en": "Employers have a legal obligation to provide a safe working environment.",
+                "ja": "雇用主には安全な職場環境を提供する法的義務がある。"
               }
             ],
             "definition_en": "a legal or moral duty to do something"
@@ -901,10 +956,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "obligation to do / obligation under a contract",
+    "usage_note": "have an obligation to do（～する義務がある）。obligation は法律上の義務だけでなく、約束や道徳上の責任も表す。",
     "tags": [
       "v2.31-curated",
-      "curated-v3.32"
+      "curated-v3.32",
+      "curated-v3.188"
     ],
     "status": "enriched",
     "search_terms": [
@@ -915,9 +971,26 @@
       "ipa_uk": null
     },
     "collocations": [
-      "legal obligation",
-      "meet an obligation",
-      "moral obligation"
+      {
+        "text": "legal obligation",
+        "en": "legal obligation",
+        "ja": "法的義務"
+      },
+      {
+        "text": "meet an obligation",
+        "en": "meet an obligation",
+        "ja": "義務を果たす"
+      },
+      {
+        "text": "moral obligation",
+        "en": "moral obligation",
+        "ja": "道徳的義務"
+      },
+      {
+        "text": "an obligation to disclose information",
+        "en": "an obligation to disclose information",
+        "ja": "情報を開示する義務"
+      }
     ]
   },
   {
@@ -1184,25 +1257,65 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "斜めに；遠回しに",
-            "definition": "",
-            "examples": []
+            "ja": "斜めに；斜め方向から",
+            "definition": "at an angle rather than directly or straight on",
+            "examples": [
+              {
+                "en": "The afternoon sunlight fell obliquely across the floor.",
+                "ja": "午後の日差しが床に斜めに差し込んだ。"
+              },
+              {
+                "en": "The road crosses the railway line obliquely.",
+                "ja": "その道路は鉄道線路を斜めに横切る。"
+              }
+            ]
+          },
+          {
+            "ja": "遠回しに；間接的に",
+            "definition": "in an indirect way, without saying something openly",
+            "examples": [
+              {
+                "en": "The minister referred obliquely to the budget cuts.",
+                "ja": "大臣は予算削減について遠回しに触れた。"
+              },
+              {
+                "en": "She criticized the policy obliquely rather than naming its supporters.",
+                "ja": "彼女は支持者を名指しせず、政策を間接的に批判した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "refer obliquely to",
+        "text": "refer obliquely to",
+        "ja": "～に遠回しに言及する"
+      },
+      {
+        "en": "fall obliquely across",
+        "text": "fall obliquely across",
+        "ja": "～に斜めに差し込む"
+      },
+      {
+        "en": "obliquely criticize",
+        "text": "obliquely criticize",
+        "ja": "遠回しに批判する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "物理的な角度と発言の間接性の両方に使う。",
     "tags": [
-      "description"
+      "description",
+      "curated-v3.265"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11636",
@@ -2032,6 +2145,10 @@
               {
                 "en": "Many older devices became obsolete after the software update.",
                 "ja": "ソフトウェアの更新後、多くの古い機器が使い物にならなくなった。"
+              },
+              {
+                "en": "The new safety standard made the old equipment obsolete.",
+                "ja": "新しい安全基準によって古い設備は使えなくなった。"
               }
             ]
           },
@@ -2042,6 +2159,10 @@
               {
                 "en": "The term is now considered obsolete in academic writing.",
                 "ja": "その用語は現在、学術文書では使われなくなっている。"
+              },
+              {
+                "en": "Some words in the nineteenth-century novel are now obsolete.",
+                "ja": "その19世紀の小説に出てくる語の一部は今では廃れている。"
               }
             ]
           }
@@ -2052,13 +2173,19 @@
     "phrases": [],
     "collocations": [
       {
-        "text": "become obsolete"
+        "text": "become obsolete",
+        "en": "become obsolete",
+        "ja": "時代遅れになる・使われなくなる"
       },
       {
-        "text": "obsolete technology"
+        "text": "obsolete technology",
+        "en": "obsolete technology",
+        "ja": "旧式の技術"
       },
       {
-        "text": "an obsolete term"
+        "text": "an obsolete term",
+        "en": "an obsolete term",
+        "ja": "廃れた用語"
       }
     ],
     "related": {
@@ -2068,7 +2195,8 @@
     "usage_note": "obsolete は「もはや使われない」。old（古い）だけでなく、用途・使用実態が失われたことを示す。",
     "tags": [
       "study-language",
-      "curated-v3.51"
+      "curated-v3.51",
+      "curated-v3.314"
     ],
     "status": "enriched"
   },
@@ -2150,11 +2278,11 @@
         "meanings": [
           {
             "ja": "騒がしく手に負えない",
-            "definition": "",
+            "definition": "noisy, difficult to control, and unwilling to behave as expected",
             "examples": [
               {
-                "en": "In advanced academic English, \"obstreperous\" can be used with the meaning \"\".",
-                "ja": "上級の学術英語では「obstreperous」が「騒がしく手に負えない」という意味で用いられることがある。"
+                "en": "The chair struggled to restore order during the obstreperous debate.",
+                "ja": "議長は騒然とした討論の秩序を取り戻すのに苦労した。"
               }
             ]
           }
@@ -2163,17 +2291,29 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "obstreperous crowd",
+        "en": "obstreperous crowd",
+        "ja": "騒々しく手に負えない群衆"
+      },
+      {
+        "text": "obstreperous behavior",
+        "en": "obstreperous behavior",
+        "ja": "騒がしく反抗的な振る舞い"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "unruly に近いが、特に騒々しさと扱いにくさを強調する。",
     "tags": [
       "personality-manner",
-      "curated-v2.98"
+      "curated-v2.98",
+      "curated-v3.330"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-01955",
@@ -2534,24 +2674,51 @@
         "meanings": [
           {
             "ja": "閉塞前線",
-            "definition": "",
-            "examples": []
+            "definition": "a weather front formed when a cold front overtakes a warm front",
+            "definition_en": "a weather front formed when a cold front overtakes a warm front",
+            "examples": [
+              {
+                "en": "The forecast showed an occluded front crossing the coast.",
+                "ja": "天気予報では閉塞前線が沿岸部を横切ると示されていた。"
+              },
+              {
+                "en": "Clouds thickened as the occluded front approached.",
+                "ja": "閉塞前線が近づくにつれて雲が厚くなった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "an approaching occluded front",
+        "text": "an approaching occluded front",
+        "ja": "接近する閉塞前線"
+      },
+      {
+        "en": "an occluded front forms",
+        "text": "an occluded front forms",
+        "ja": "閉塞前線が形成される"
+      },
+      {
+        "en": "rain near an occluded front",
+        "text": "rain near an occluded front",
+        "ja": "閉塞前線付近の雨"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "occlude は「ふさぐ」。寒冷前線が温暖前線に追いつく過程で生じる。",
     "tags": [
-      "weather-atmosphere"
+      "weather-atmosphere",
+      "curated-v3.290"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11584",
@@ -2687,6 +2854,10 @@
               {
                 "en": "The report identified several occupational health risks.",
                 "ja": "その報告書はいくつかの職業上の健康リスクを特定した。"
+              },
+              {
+                "en": "The report identified occupational hazards faced by construction workers.",
+                "ja": "報告書は建設作業員が直面する職業上の危険を明らかにした。"
               }
             ]
           }
@@ -2697,23 +2868,30 @@
     "phrases": [],
     "collocations": [
       {
-        "text": "occupational health"
+        "text": "occupational health",
+        "en": "occupational health",
+        "ja": "労働衛生"
       },
       {
-        "text": "occupational hazards"
+        "text": "occupational hazards",
+        "en": "occupational hazards",
+        "ja": "職業上の危険"
       },
       {
-        "text": "occupational training"
+        "text": "occupational training",
+        "en": "occupational training",
+        "ja": "職業訓練"
       }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "occupational health（労働衛生）、occupational hazard（職業上の危険）は頻出。occupation は「職業」。",
+    "usage_note": "occupational は「職業に関する」。occupational health and safety は「労働安全衛生」。",
     "tags": [
       "work-description",
-      "curated-v3.52"
+      "curated-v3.52",
+      "curated-v3.317"
     ],
     "status": "enriched"
   },
@@ -2805,9 +2983,23 @@
               {
                 "en": "Most errors occur when the system is under heavy load.",
                 "ja": "ほとんどのエラーはシステムに大きな負荷がかかったときに起こる。"
+              },
+              {
+                "en": "These changes occur gradually rather than all at once.",
+                "ja": "こうした変化は一度にではなく徐々に起こる。"
               }
             ],
             "definition_en": "to happen; or to come into someone's mind"
+          },
+          {
+            "ja": "（考えが人に）ふと思い浮かぶ",
+            "definition": "to come into someone’s mind as a thought or idea",
+            "examples": [
+              {
+                "en": "It occurred to me that the data might have been recorded incorrectly.",
+                "ja": "データが誤って記録されたのかもしれないと、ふと思った。"
+              }
+            ]
           }
         ]
       }
@@ -2829,7 +3021,8 @@
       "v2.32-curated",
       "etymology-v1",
       "v2.44-curated",
-      "curated-v3.32"
+      "curated-v3.32",
+      "curated-v3.275"
     ],
     "status": "enriched",
     "search_terms": [
@@ -2845,9 +3038,31 @@
       "ipa_uk": null
     },
     "collocations": [
-      "occur naturally",
-      "occur frequently",
-      "occur to someone"
+      {
+        "text": "occur naturally",
+        "en": "occur naturally",
+        "ja": "自然に生じる"
+      },
+      {
+        "text": "occur frequently",
+        "en": "occur frequently",
+        "ja": "頻繁に起こる"
+      },
+      {
+        "text": "occur to someone",
+        "en": "occur to someone",
+        "ja": "（考えが）人の頭に浮かぶ"
+      },
+      {
+        "text": "occur in nature",
+        "en": "occur in nature",
+        "ja": "自然界に存在する"
+      },
+      {
+        "text": "occur at regular intervals",
+        "en": "occur at regular intervals",
+        "ja": "一定の間隔で起こる"
+      }
     ],
     "etymology": {
       "origin": "Latin currere / cursus",
@@ -3277,24 +3492,50 @@
         "meanings": [
           {
             "ja": "オクターブ",
-            "definition": "",
-            "examples": []
+            "definition": "the interval between two musical notes when the higher note has twice the frequency of the lower one",
+            "examples": [
+              {
+                "en": "The singer moved up an octave for the final chorus.",
+                "ja": "歌手は最後のサビで1オクターブ高く歌った。"
+              },
+              {
+                "en": "The melody spans nearly two octaves.",
+                "ja": "その旋律はほぼ2オクターブの音域にわたる。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "an octave higher",
+        "en": "an octave higher",
+        "ja": "1オクターブ高く"
+      },
+      {
+        "text": "span two octaves",
+        "en": "span two octaves",
+        "ja": "2オクターブの音域にわたる"
+      },
+      {
+        "text": "move up an octave",
+        "en": "move up an octave",
+        "ja": "1オクターブ上げる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "an octave higher/lower は「1オクターブ高く／低く」。音域は vocal range ともいう。",
     "tags": [
-      "music-art"
+      "music-art",
+      "curated-v3.327"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-00437",
@@ -3622,15 +3863,55 @@
     "frequency": 5,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adverb",
         "meanings": [
           {
-            "ja": "離れて；切れて",
-            "definition": "a person, thing, idea, or concept connected with '離れて；切れて'",
+            "ja": "離れて；外れて",
+            "definition": "away from a place, surface, or position",
             "examples": [
               {
-                "en": "This off is important.",
-                "ja": "この「離れて」は重要です。"
+                "en": "The label came off when the bottle got wet.",
+                "ja": "瓶がぬれるとラベルがはがれた。"
+              }
+            ]
+          },
+          {
+            "ja": "停止して；消えて",
+            "definition": "not operating, connected, or switched on",
+            "examples": [
+              {
+                "en": "Please turn off the lights when you leave.",
+                "ja": "退出するときは電気を消してください。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "preposition",
+        "meanings": [
+          {
+            "ja": "～から離れて；～の沖に",
+            "definition": "away from or at a distance from something",
+            "examples": [
+              {
+                "en": "A small island lies off the coast.",
+                "ja": "海岸の沖に小さな島がある。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "休みの；営業していない",
+            "definition": "not working or not available for normal use",
+            "examples": [
+              {
+                "en": "I have Friday off this week.",
+                "ja": "今週の金曜日は休みだ。"
               }
             ]
           }
@@ -3643,9 +3924,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "offは副詞・前置詞・形容詞として働く。動詞と結びつく句動詞では意味が変わることがある。",
+    "tags": [
+      "curated-v3.209"
+    ],
+    "status": "enriched",
     "search_terms": [
       "off"
     ],
@@ -3653,7 +3936,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "turn off",
+        "en": "turn off",
+        "ja": "電源などを切る"
+      },
+      {
+        "text": "take off",
+        "en": "take off",
+        "ja": "脱ぐ；離陸する"
+      },
+      {
+        "text": "a day off",
+        "en": "a day off",
+        "ja": "休日"
+      }
+    ]
   },
   {
     "id": "sw-13444",
@@ -3815,11 +4114,26 @@
         "meanings": [
           {
             "ja": "主要な拍から外れた拍",
-            "definition": "",
+            "definition": "a beat between the main accented beats of a musical rhythm",
             "examples": [
               {
-                "en": "In advanced academic English, \"offbeat\" can be used with the meaning \"\".",
-                "ja": "上級の学術英語では「offbeat」が「主要な拍から外れた拍」という意味で用いられることがある。"
+                "en": "The guitarist emphasized the offbeat to give the song a lively rhythm.",
+                "ja": "ギタリストは裏拍を強調して曲に躍動感のあるリズムを与えた。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "型破りな；風変わりな",
+            "definition": "unusual or unconventional in a way that is often appealing or amusing",
+            "examples": [
+              {
+                "en": "The film combines an offbeat sense of humor with a serious theme.",
+                "ja": "その映画は風変わりなユーモアと深刻なテーマを組み合わせている。"
               }
             ]
           }
@@ -3828,17 +4142,29 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "accent the offbeat",
+        "en": "accent the offbeat",
+        "ja": "裏拍にアクセントを置く"
+      },
+      {
+        "text": "play on the offbeat",
+        "en": "play on the offbeat",
+        "ja": "裏拍で演奏する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "音楽では裏拍。形容詞 offbeat は「型破りな」という意味でも頻出。",
     "tags": [
       "music-performance",
-      "curated-v2.98"
+      "curated-v2.98",
+      "curated-v3.330"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13122",
@@ -3862,11 +4188,11 @@
         "meanings": [
           {
             "ja": "退職・契約終了時の手続き",
-            "definition": "",
+            "definition": "the administrative and practical process of ending an employee’s or contractor’s relationship with an organization",
             "examples": [
               {
-                "en": "In advanced academic English, \"offboarding\" can be used with the meaning \"\".",
-                "ja": "上級の学術英語では「offboarding」が「退職・契約終了時の手続き」という意味で用いられることがある。"
+                "en": "The company’s offboarding process includes returning devices and revoking system access.",
+                "ja": "その会社の退職手続きには、端末の返却とシステムへのアクセス権の取り消しが含まれる。"
               }
             ]
           }
@@ -3875,17 +4201,29 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "employee offboarding",
+        "en": "employee offboarding",
+        "ja": "従業員の退職手続き"
+      },
+      {
+        "text": "offboarding checklist",
+        "en": "offboarding checklist",
+        "ja": "退職時の手続き確認表"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "onboarding（入社・受入れ手続き）の反対語。",
     "tags": [
       "work-life",
-      "curated-v2.98"
+      "curated-v2.98",
+      "curated-v3.330"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-02566",
@@ -4185,6 +4523,24 @@
               {
                 "en": "I'll be in the office until six today.",
                 "ja": "今日は6時までオフィスにいます。"
+              },
+              {
+                "en": "The company opened a new office in Osaka.",
+                "ja": "その会社は大阪に新しい事務所を開設した。"
+              }
+            ]
+          },
+          {
+            "ja": "公職；役職",
+            "definition": "an official position of authority, especially in government",
+            "examples": [
+              {
+                "en": "She took office as mayor in April.",
+                "ja": "彼女は4月に市長に就任した。"
+              },
+              {
+                "en": "The president remained in office for two terms.",
+                "ja": "大統領は2期にわたって在職した。"
               }
             ]
           }
@@ -4197,11 +4553,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "office は「事務所」のほか「公職」。take office は「就任する」。",
     "tags": [
-      "v2.29-curated"
+      "v2.29-curated",
+      "curated-v3.282"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "office"
     ],
@@ -4209,7 +4566,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "head office",
+        "en": "head office",
+        "ja": "本社"
+      },
+      {
+        "text": "take office",
+        "en": "take office",
+        "ja": "就任する"
+      },
+      {
+        "text": "office hours",
+        "en": "office hours",
+        "ja": "営業時間；面談受付時間"
+      }
+    ]
   },
   {
     "id": "sw-02481",
@@ -4730,12 +5103,26 @@
         "pos": "adverb",
         "meanings": [
           {
-            "ja": "しばしば；よく",
-            "definition": "many times or regularly",
+            "ja": "よく；しばしば",
+            "definition": "on many occasions or at frequent intervals",
             "examples": [
+              {
+                "en": "Researchers often repeat an experiment to check the results.",
+                "ja": "研究者は結果を確かめるために実験を繰り返すことが多い。"
+              },
               {
                 "en": "I often listen to podcasts while running.",
                 "ja": "私はランニング中によくポッドキャストを聴きます。"
+              }
+            ]
+          },
+          {
+            "ja": "（頻度を尋ねて）どのくらい",
+            "definition": "used with how to ask about the frequency of an event",
+            "examples": [
+              {
+                "en": "How often do you review the vocabulary you have learned?",
+                "ja": "覚えた語彙をどのくらいの頻度で復習しますか。"
               }
             ]
           }
@@ -4748,11 +5135,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "oftenは通常、一般動詞の前、be動詞の後ろに置く。how oftenは頻度を尋ねる表現で、how long（期間）と区別する。",
     "tags": [
-      "v2.31-curated"
+      "v2.31-curated",
+      "curated-v3.237"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "often"
     ],
@@ -4760,7 +5148,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "en": "more often than not",
+        "text": "more often than not",
+        "ja": "たいていの場合"
+      },
+      {
+        "en": "as often as possible",
+        "text": "as often as possible",
+        "ja": "できるだけ頻繁に"
+      },
+      {
+        "en": "how often",
+        "text": "how often",
+        "ja": "どのくらいの頻度で"
+      }
+    ]
   },
   {
     "id": "sw-12899",
@@ -4887,12 +5291,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "油",
-            "definition": "a person, thing, state, or idea related to 油",
+            "ja": "石油；原油",
+            "definition": "a naturally occurring liquid fossil fuel used to make energy and other products",
             "examples": [
               {
-                "en": "This is a common example of 'oil'.",
-                "ja": "これは「油」の一般的な例です。"
+                "en": "Rising oil prices increased transport costs for small businesses.",
+                "ja": "石油価格の上昇で中小企業の輸送費が増加した。"
+              }
+            ]
+          },
+          {
+            "ja": "食用油；油脂",
+            "definition": "a liquid fat used in cooking or food preparation",
+            "examples": [
+              {
+                "en": "The recipe calls for a small amount of olive oil.",
+                "ja": "そのレシピでは少量のオリーブ油を使う。"
               }
             ]
           }
@@ -4905,9 +5319,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "crude oil は「原油」、cooking oil は「食用油」。oil prices は経済記事で頻出。",
+    "tags": [
+      "curated-v3.246"
+    ],
+    "status": "enriched",
     "search_terms": [
       "oil"
     ],
@@ -4915,7 +5331,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "crude oil",
+        "en": "crude oil",
+        "ja": "原油"
+      },
+      {
+        "text": "oil prices",
+        "en": "oil prices",
+        "ja": "石油価格"
+      },
+      {
+        "text": "cooking oil",
+        "en": "cooking oil",
+        "ja": "食用油"
+      }
+    ]
   },
   {
     "id": "sw-12441",
@@ -5206,22 +5638,30 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "古い",
+            "ja": "古い・以前からある",
             "definition": "having existed or been used for a long time",
             "examples": [
               {
+                "en": "The museum has preserved several old maps of the city.",
+                "ja": "博物館はその都市の古い地図を何枚か保存している。"
+              },
+              {
                 "en": "They repaired the old wooden bridge.",
                 "ja": "彼らは古い木の橋を修理しました。"
+              },
+              {
+                "en": "The old dog walked slowly beside her.",
+                "ja": "年を取った犬は彼女の横をゆっくり歩きました。"
               }
             ]
           },
           {
-            "ja": "年を取った",
+            "ja": "年齢が高い・年を取った",
             "definition": "having lived for many years",
             "examples": [
               {
-                "en": "The old dog walked slowly beside her.",
-                "ja": "年を取った犬は彼女の横をゆっくり歩きました。"
+                "en": "Older adults may face barriers to using online services.",
+                "ja": "高齢者はオンラインサービスの利用に障壁を感じる場合がある。"
               }
             ]
           }
@@ -5237,9 +5677,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "basic",
+    "usage_note": "an old friendは「年老いた友人」だけでなく「長年の友人」。older adultsは高齢者を指す中立的な表現。",
+    "tags": [
+      "curated-v3.236"
+    ],
+    "status": "enriched",
     "search_terms": [
       "old",
       "older",
@@ -5249,7 +5691,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "en": "an old building",
+        "text": "an old building",
+        "ja": "古い建物"
+      },
+      {
+        "en": "older adults",
+        "text": "older adults",
+        "ja": "高齢者"
+      },
+      {
+        "en": "an old friend",
+        "text": "an old friend",
+        "ja": "長年の友人"
+      }
+    ]
   },
   {
     "id": "sw-11823",
@@ -5778,15 +6236,40 @@
     "frequency": 5,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adverb",
         "meanings": [
           {
-            "ja": "一度",
-            "definition": "a person, thing, idea, or concept connected with '一度'",
+            "ja": "一度；一回",
+            "definition": "on one occasion only",
             "examples": [
               {
-                "en": "This once is important.",
-                "ja": "この「一度」は重要です。"
+                "en": "The researcher repeated the measurement once.",
+                "ja": "研究者は測定を一度繰り返した。"
+              }
+            ]
+          },
+          {
+            "ja": "かつて；以前は",
+            "definition": "at some time in the past but not necessarily now",
+            "examples": [
+              {
+                "en": "This building was once a public library.",
+                "ja": "この建物はかつて公共図書館だった。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "conjunction",
+        "meanings": [
+          {
+            "ja": "いったん～すると；～したら",
+            "definition": "as soon as or after something happens",
+            "examples": [
+              {
+                "en": "Once the data are available, we can test the hypothesis.",
+                "ja": "データが利用可能になれば、仮説を検証できる。"
               }
             ]
           }
@@ -5799,9 +6282,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "onceは頻度・過去・接続詞の三用法が重要。once節で未来を表すときは通常現在形を用いる。",
+    "tags": [
+      "curated-v3.209"
+    ],
+    "status": "enriched",
     "search_terms": [
       "once"
     ],
@@ -5809,7 +6294,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "once a week",
+        "en": "once a week",
+        "ja": "週に一度"
+      },
+      {
+        "text": "once upon a time",
+        "en": "once upon a time",
+        "ja": "昔々"
+      },
+      {
+        "text": "once you ...",
+        "en": "once you ...",
+        "ja": "いったん～すれば"
+      }
+    ]
   },
   {
     "id": "sw-00445",
@@ -5981,11 +6482,15 @@
         "meanings": [
           {
             "ja": "タマネギ",
-            "definition": "a person, object, place, state, or idea associated with タマネギ",
+            "definition": "a round vegetable with layers and a strong flavor, often used in cooking",
             "examples": [
               {
-                "en": "They talked about onion during the lesson.",
-                "ja": "授業中に「タマネギ」について話した。"
+                "en": "Chop the onion finely before adding it to the soup.",
+                "ja": "スープに加える前にタマネギを細かく刻んでください。"
+              },
+              {
+                "en": "The onions became soft after ten minutes in the pan.",
+                "ja": "タマネギはフライパンで10分加熱すると柔らかくなった。"
               }
             ]
           }
@@ -5994,17 +6499,34 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "chopped onion",
+        "en": "chopped onion",
+        "ja": "刻んだタマネギ"
+      },
+      {
+        "text": "slice an onion",
+        "en": "slice an onion",
+        "ja": "タマネギを薄切りにする"
+      },
+      {
+        "text": "spring onion",
+        "en": "spring onion",
+        "ja": "青ネギ（主に英国英語）"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "onion は可算名詞。spring onion（英）と green onion（米）は青ネギを指すことが多い。",
     "tags": [
       "general-vocabulary",
-      "needs-example-enrichment"
+      "needs-example-enrichment",
+      "curated-v3.310"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-01087",
@@ -6026,6 +6548,25 @@
               {
                 "en": "The application process is entirely online.",
                 "ja": "出願手続きはすべてオンラインです。"
+              },
+              {
+                "en": "Online learning can expand access to education.",
+                "ja": "オンライン学習は教育へのアクセスを広げることができる。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adverb",
+        "meanings": [
+          {
+            "ja": "インターネット上で；オンラインで",
+            "definition": "using or through the internet",
+            "examples": [
+              {
+                "en": "The university moved several courses online to reach students in remote areas.",
+                "ja": "大学は遠隔地の学生にも授業を届けるため、いくつかの科目をオンラインに移した。"
               }
             ]
           }
@@ -6038,12 +6579,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "online は形容詞（online lessons）にも副詞（study online）にもなる。on the internet と言い換えられる。",
     "tags": [
       "v2.31-curated",
-      "curated-v2.59"
+      "curated-v2.59",
+      "curated-v3.225"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "online"
     ],
@@ -6053,22 +6595,14 @@
     },
     "collocations": [
       {
-        "text": "online service"
+        "text": "online service",
+        "ja": "オンラインサービス",
+        "en": "online service"
       },
       {
-        "text": "online learning"
-      }
-    ],
-    "senses": [
-      {
-        "pos": "",
-        "definition_ja": "オンラインの；インターネット上で",
-        "examples": [
-          {
-            "en": "Online learning can expand access to education.",
-            "ja": "オンライン学習は教育へのアクセスを広げることができる。"
-          }
-        ]
+        "text": "online learning",
+        "ja": "オンライン学習",
+        "en": "online learning"
       }
     ]
   },
@@ -6083,15 +6617,40 @@
     "frequency": 5,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adverb",
         "meanings": [
           {
-            "ja": "ただ〜だけ",
-            "definition": "a person, thing, idea, or concept connected with 'ただ〜だけ'",
+            "ja": "ただ～だけ；～しか",
+            "definition": "and no one or nothing more than the stated person, thing, or amount",
             "examples": [
               {
-                "en": "This only is important.",
-                "ja": "この「ただ〜だけ」は重要です。"
+                "en": "Only three participants completed the survey.",
+                "ja": "調査を完了した参加者はわずか三人だった。"
+              }
+            ]
+          },
+          {
+            "ja": "ようやく；初めて（ある時点になって）",
+            "definition": "not until a particular time or situation",
+            "examples": [
+              {
+                "en": "Only after reviewing the evidence did they change their conclusion.",
+                "ja": "証拠を再検討して初めて、彼らは結論を変えた。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "唯一の；ただ一つの",
+            "definition": "being the sole person or thing of a particular kind",
+            "examples": [
+              {
+                "en": "This is the only copy of the original document.",
+                "ja": "これは原本の唯一の写しだ。"
               }
             ]
           }
@@ -6104,9 +6663,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "onlyの位置によって限定する対象が変わる。Only after ...などを文頭に置くと主節が倒置することがある。",
+    "tags": [
+      "curated-v3.209"
+    ],
+    "status": "enriched",
     "search_terms": [
       "only"
     ],
@@ -6114,7 +6675,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "not only A but also B",
+        "en": "not only A but also B",
+        "ja": "AだけでなくBも"
+      },
+      {
+        "text": "only if",
+        "en": "only if",
+        "ja": "～の場合に限り"
+      },
+      {
+        "text": "the only way",
+        "en": "the only way",
+        "ja": "唯一の方法"
+      }
+    ]
   },
   {
     "id": "sw-07980",
@@ -6137,9 +6714,18 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "擬音語；擬音法",
-            "definition": "",
-            "examples": []
+            "ja": "擬音語；音をまねた表現",
+            "definition": "a word that imitates or suggests a sound",
+            "examples": [
+              {
+                "en": "“Buzz” and “hiss” are examples of onomatopoeia.",
+                "ja": "「buzz」と「hiss」は擬音語の例である。"
+              },
+              {
+                "en": "The poet uses onomatopoeia to make the storm seem closer.",
+                "ja": "詩人は嵐を身近に感じさせるために擬音語を使っている。"
+              }
+            ]
           }
         ]
       }
@@ -6149,21 +6735,29 @@
     "collocations": [
       {
         "text": "use onomatopoeia",
+        "en": "use onomatopoeia",
         "ja": "擬音語を使う"
       },
       {
         "text": "an example of onomatopoeia",
-        "ja": "擬音語の例"
+        "en": "an example of onomatopoeia",
+        "ja": "擬音語の一例"
+      },
+      {
+        "text": "onomatopoeia in poetry",
+        "en": "onomatopoeia in poetry",
+        "ja": "詩における擬音語"
       }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "英語の onomatopoeia は主に音を模した語を指し、日本語の「擬態語」と範囲が完全には一致しない。",
+    "usage_note": "日本語の擬態語まで常に含むわけではない。英語では音を模倣する語が中心。",
     "tags": [
       "publishing",
-      "curated-v3.76"
+      "curated-v3.76",
+      "curated-v3.194"
     ],
     "status": "enriched"
   },
@@ -6643,11 +7237,40 @@
         "meanings": [
           {
             "ja": "開ける；開く",
-            "definition": "to move something so that it is no longer closed, or make something available",
+            "definition": "to make something no longer closed",
             "examples": [
+              {
+                "en": "Open the window to let in some fresh air.",
+                "ja": "新鮮な空気を入れるために窓を開けてください。"
+              },
               {
                 "en": "Open the file and check the first page.",
                 "ja": "ファイルを開いて最初のページを確認してください。"
+              }
+            ]
+          },
+          {
+            "ja": "開設する；開始する",
+            "definition": "to start a business, event, or service",
+            "examples": [
+              {
+                "en": "The city opened a new public library in June.",
+                "ja": "市は6月に新しい公共図書館を開設した。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "開いている；営業中の",
+            "definition": "not closed or available for use",
+            "examples": [
+              {
+                "en": "The museum is open to the public on Sundays.",
+                "ja": "その博物館は日曜日に一般公開されている。"
               }
             ]
           }
@@ -6665,11 +7288,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "open は動詞・形容詞の両方で使う。The shop is open は状態、The shop opens は開店の動作。",
     "tags": [
-      "v2.31-curated"
+      "v2.31-curated",
+      "curated-v3.234"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "open",
       "opens",
@@ -6680,7 +7304,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "en": "open a file",
+        "text": "open a file",
+        "ja": "ファイルを開く"
+      },
+      {
+        "en": "open to the public",
+        "text": "open to the public",
+        "ja": "一般公開されている"
+      },
+      {
+        "en": "open an account",
+        "text": "open an account",
+        "ja": "口座を開設する"
+      }
+    ]
   },
   {
     "id": "sw-12084",
@@ -7757,12 +8397,26 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "意見；考え",
-            "definition": "a belief or judgment about something that may not be based on proven facts",
+            "ja": "意見；見解",
+            "definition": "a belief or judgment about a subject",
             "examples": [
+              {
+                "en": "Students expressed different opinions about the new rule.",
+                "ja": "生徒たちは新しい規則について異なる意見を述べた。"
+              },
               {
                 "en": "In my opinion, the second plan is more practical.",
                 "ja": "私の意見では、2つ目の案のほうが現実的です。"
+              }
+            ]
+          },
+          {
+            "ja": "専門的な判断；所見",
+            "definition": "a judgment given by someone with specialist knowledge",
+            "examples": [
+              {
+                "en": "We sought a second medical opinion before deciding.",
+                "ja": "決断する前に別の医師の意見を求めた。"
               }
             ]
           }
@@ -7775,11 +8429,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "opinion は可算名詞。in my opinion は「私の意見では」。事実を表す fact と区別する。",
     "tags": [
-      "v2.29-curated"
+      "v2.29-curated",
+      "curated-v3.234"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "opinion"
     ],
@@ -7787,7 +8442,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "en": "in my opinion",
+        "text": "in my opinion",
+        "ja": "私の考えでは"
+      },
+      {
+        "en": "express an opinion",
+        "text": "express an opinion",
+        "ja": "意見を述べる"
+      },
+      {
+        "en": "a difference of opinion",
+        "text": "a difference of opinion",
+        "ja": "意見の相違"
+      }
+    ]
   },
   {
     "id": "sw-05820",
@@ -8081,6 +8752,10 @@
               {
                 "en": "The novel portrays a society shaped by political oppression and fear.",
                 "ja": "その小説は政治的抑圧と恐怖に形作られた社会を描いている。"
+              },
+              {
+                "en": "The novel portrays the daily lives of people living under political oppression.",
+                "ja": "その小説は政治的抑圧の下で暮らす人々の日常を描いている。"
               }
             ]
           }
@@ -8093,11 +8768,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Often refers to systematic mistreatment by authorities or powerful groups.",
+    "usage_note": "oppression は権力や社会制度による継続的で不当な抑圧を指す。単なる pressure（圧力）より強い。",
     "tags": [
       "academic-expansion",
       "curated-v3.25",
-      "curated-v3.64"
+      "curated-v3.64",
+      "curated-v3.188"
     ],
     "status": "enriched",
     "search_terms": [
@@ -8109,10 +8785,19 @@
     },
     "collocations": [
       {
-        "text": "political oppression"
+        "text": "political oppression",
+        "en": "political oppression",
+        "ja": "政治的抑圧"
       },
       {
-        "text": "resist oppression"
+        "text": "resist oppression",
+        "en": "resist oppression",
+        "ja": "抑圧に抵抗する"
+      },
+      {
+        "text": "systemic oppression",
+        "en": "systemic oppression",
+        "ja": "制度的な抑圧"
       }
     ]
   },
@@ -8231,6 +8916,10 @@
               {
                 "en": "Parents may opt out of the optional survey.",
                 "ja": "保護者は任意の調査への参加を辞退できる。"
+              },
+              {
+                "en": "Participants can opt out of the study at any time without giving a reason.",
+                "ja": "参加者は理由を述べずにいつでも研究への参加を取りやめることができる。"
               }
             ]
           },
@@ -8256,13 +8945,19 @@
     "phrases": [],
     "collocations": [
       {
-        "text": "opt out of a survey"
+        "text": "opt out of a survey",
+        "ja": "調査への参加を辞退する",
+        "en": "opt out of a survey"
       },
       {
-        "text": "opt out of a program"
+        "text": "opt out of a program",
+        "ja": "プログラムへの参加を辞退する",
+        "en": "opt out of a program"
       },
       {
-        "text": "opt out of tracking"
+        "text": "opt out of tracking",
+        "ja": "追跡の対象から外れることを選ぶ",
+        "en": "opt out of tracking"
       }
     ],
     "related": {
@@ -8272,7 +8967,8 @@
     "usage_note": "opt out of + 名詞。opt in（自ら参加を選ぶ）との対比が重要。",
     "tags": [
       "phrasal-verbs",
-      "curated-v3.51"
+      "curated-v3.51",
+      "curated-v3.320"
     ],
     "status": "enriched"
   },
@@ -8298,11 +8994,11 @@
         "meanings": [
           {
             "ja": "願望を表す；願望法の",
-            "definition": "",
+            "definition": "expressing a wish or desire, especially through a particular grammatical mood",
             "examples": [
               {
-                "en": "In advanced academic English, \"optative\" can be used with the meaning \"\".",
-                "ja": "上級の学術英語では「optative」が「願望を表す；願望法の」という意味で用いられることがある。"
+                "en": "The optative mood in ancient Greek can express a wish or a possibility.",
+                "ja": "古代ギリシャ語の願望法は、願いや可能性を表すことがある。"
               }
             ]
           }
@@ -8311,17 +9007,29 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "optative mood",
+        "en": "optative mood",
+        "ja": "願望法"
+      },
+      {
+        "text": "optative construction",
+        "en": "optative construction",
+        "ja": "願望を表す構文"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "文法用語。imperative（命令法）とは異なる。",
     "tags": [
       "study-language",
-      "curated-v2.98"
+      "curated-v2.98",
+      "curated-v3.330"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-06635",
@@ -8345,24 +9053,50 @@
         "meanings": [
           {
             "ja": "視神経",
-            "definition": "",
-            "examples": []
+            "definition": "the nerve that carries visual information from the retina to the brain",
+            "examples": [
+              {
+                "en": "The optic nerve transmits signals from the eye to the brain.",
+                "ja": "視神経は目から脳へ信号を伝える。"
+              },
+              {
+                "en": "The scan was used to examine the optic nerve.",
+                "ja": "その画像検査は視神経を調べるために行われた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "optic nerve damage",
+        "text": "optic nerve damage",
+        "ja": "視神経の損傷"
+      },
+      {
+        "en": "optic nerve function",
+        "text": "optic nerve function",
+        "ja": "視神経の機能"
+      },
+      {
+        "en": "optic nerve fibers",
+        "text": "optic nerve fibers",
+        "ja": "視神経線維"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "optic は「視覚の・目の」。optical は光学的な意味でも広く使う。",
     "tags": [
-      "body-health"
+      "body-health",
+      "curated-v3.295"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07337",
@@ -8829,12 +9563,49 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "オレンジ；だいだい色",
+            "ja": "オレンジ（果物）",
             "definition": "a round citrus fruit with orange-colored skin",
             "examples": [
               {
                 "en": "She cut an orange into four pieces.",
                 "ja": "彼女はオレンジを4つに切りました。"
+              },
+              {
+                "en": "I peeled an orange for my daughter.",
+                "ja": "娘のためにオレンジの皮をむいた。"
+              }
+            ]
+          },
+          {
+            "ja": "オレンジ色；だいだい色",
+            "definition": "a color between red and yellow",
+            "examples": [
+              {
+                "en": "The sunset turned the sky a deep orange.",
+                "ja": "夕焼けで空が濃いオレンジ色になった。"
+              },
+              {
+                "en": "Orange is used to highlight the warnings on the chart.",
+                "ja": "図表では注意事項を目立たせるためにオレンジ色が使われている。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "オレンジ色の",
+            "definition": "having a color between red and yellow",
+            "examples": [
+              {
+                "en": "She wore an orange jacket on the hike.",
+                "ja": "彼女はハイキングでオレンジ色の上着を着た。"
+              },
+              {
+                "en": "The leaves turn orange in autumn.",
+                "ja": "秋には葉がオレンジ色になる。"
               }
             ]
           }
@@ -8847,11 +9618,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "orange は果物、色の名詞、色を表す形容詞として使う。",
     "tags": [
-      "v2.31-curated"
+      "v2.31-curated",
+      "curated-v3.282"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "orange"
     ],
@@ -8859,7 +9631,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "orange juice",
+        "en": "orange juice",
+        "ja": "オレンジジュース"
+      },
+      {
+        "text": "orange peel",
+        "en": "orange peel",
+        "ja": "オレンジの皮"
+      },
+      {
+        "text": "bright orange",
+        "en": "bright orange",
+        "ja": "鮮やかなオレンジ色"
+      }
+    ]
   },
   {
     "id": "sw-05790",
@@ -9432,6 +10220,10 @@
               {
                 "en": "It looked like an ordinary day until the storm arrived.",
                 "ja": "嵐が来るまでは普通の日に見えました。"
+              },
+              {
+                "en": "An ordinary conversation gave her the idea for the research project.",
+                "ja": "何気ない会話が彼女に研究課題の着想を与えた。"
               }
             ]
           }
@@ -9444,12 +10236,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "ordinary は「特別ではない」という意味で、必ずしも否定的ではない。out of the ordinary は「普通と違う」。",
     "tags": [
       "v2.29-curated",
-      "etymology-v1"
+      "etymology-v1",
+      "curated-v3.269"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "ordinary"
     ],
@@ -9457,7 +10250,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "ordinary people",
+        "en": "ordinary people",
+        "ja": "一般の人々"
+      },
+      {
+        "text": "an ordinary day",
+        "en": "an ordinary day",
+        "ja": "いつもと変わらない日"
+      },
+      {
+        "text": "out of the ordinary",
+        "en": "out of the ordinary",
+        "ja": "普通とは違って；珍しく"
+      }
+    ],
     "etymology": {
       "origin": "Latin ordo / ordinare",
       "history": "ordo「順序」に由来し、通常の順序に属する→普通の、となった。",
@@ -9495,11 +10304,11 @@
         "meanings": [
           {
             "ja": "鉱石",
-            "definition": "",
+            "definition": "naturally occurring rock or mineral from which a valuable substance, especially a metal, can be extracted economically",
             "examples": [
               {
-                "en": "In advanced academic English, \"ore\" can be used with the meaning \"\".",
-                "ja": "上級の学術英語では「ore」が「鉱石」という意味で用いられることがある。"
+                "en": "The mine processes copper ore before sending the concentrate to a smelter.",
+                "ja": "その鉱山では銅鉱石を処理してから精鉱を製錬所に送る。"
               }
             ]
           }
@@ -9508,17 +10317,29 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "iron ore",
+        "en": "iron ore",
+        "ja": "鉄鉱石"
+      },
+      {
+        "text": "ore deposits",
+        "en": "ore deposits",
+        "ja": "鉱床"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "単なる mineral（鉱物）とは異なり、採掘・回収の経済的価値を含意する。",
     "tags": [
       "geology-minerals",
-      "curated-v2.98"
+      "curated-v2.98",
+      "curated-v3.330"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04359",
@@ -9789,6 +10610,20 @@
               {
                 "en": "She works for an international aid organization.",
                 "ja": "彼女は国際援助団体で働いています。"
+              },
+              {
+                "en": "The organization provides free legal advice to migrants.",
+                "ja": "その団体は移住者に無料の法律相談を提供している。"
+              }
+            ]
+          },
+          {
+            "ja": "整理；組織化",
+            "definition": "the process of arranging people or things into an effective structure",
+            "examples": [
+              {
+                "en": "Good organization of the evidence made the argument easier to follow.",
+                "ja": "証拠をうまく整理したことで、議論が追いやすくなった。"
               }
             ]
           }
@@ -9801,11 +10636,12 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "organization は「団体」と「組織化・整理」の両方。米語 organization、英語綴り organisation。",
     "tags": [
-      "v2.29-curated"
+      "v2.29-curated",
+      "curated-v3.277"
     ],
-    "status": "basic",
+    "status": "enriched",
     "search_terms": [
       "organization"
     ],
@@ -9813,7 +10649,20 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "nonprofit organization",
+        "ja": "非営利団体"
+      },
+      {
+        "text": "international organization",
+        "ja": "国際機関"
+      },
+      {
+        "text": "organizational structure",
+        "ja": "組織構造"
+      }
+    ]
   },
   {
     "id": "sw-02265",
@@ -9839,6 +10688,10 @@
               {
                 "en": "The company invested in organizational development.",
                 "ja": "その会社は組織開発に投資した。"
+              },
+              {
+                "en": "The charity introduced organizational changes to make its spending more transparent.",
+                "ja": "その慈善団体は支出の透明性を高めるため組織改革を導入した。"
               }
             ]
           }
@@ -9853,7 +10706,8 @@
     },
     "usage_note": "organization（組織）から派生。organizational culture は「組織文化」。",
     "tags": [
-      "curated-v3.52"
+      "curated-v3.52",
+      "curated-v3.268"
     ],
     "status": "enriched",
     "search_terms": [
@@ -9865,13 +10719,19 @@
     },
     "collocations": [
       {
-        "text": "organizational culture"
+        "text": "organizational culture",
+        "en": "organizational culture",
+        "ja": "組織文化"
       },
       {
-        "text": "organizational structure"
+        "text": "organizational structure",
+        "en": "organizational structure",
+        "ja": "組織構造"
       },
       {
-        "text": "organizational change"
+        "text": "organizational change",
+        "en": "organizational change",
+        "ja": "組織改革"
       }
     ]
   },
@@ -10375,6 +11235,10 @@
               {
                 "en": "The program was originally intended for younger students.",
                 "ja": "そのプログラムは当初、もっと年少の生徒向けに考案された。"
+              },
+              {
+                "en": "The manuscript was originally written for a much younger audience.",
+                "ja": "その原稿はもともと、もっと若い読者層に向けて書かれた。"
               }
             ]
           }
@@ -10387,9 +11251,10 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "originally は通常「もともと・当初は」。original（独創的な）由来の「独創的に」はまれで、通常 creatively などが自然。",
+    "usage_note": "originally は「もともとは」「当初は」。独創的に、なら creatively などを使う。",
     "tags": [
-      "curated-v3.53"
+      "curated-v3.53",
+      "curated-v3.317"
     ],
     "status": "enriched",
     "search_terms": [
@@ -10401,13 +11266,19 @@
     },
     "collocations": [
       {
-        "text": "originally intended"
+        "text": "originally intended",
+        "en": "originally intended",
+        "ja": "当初意図されていた"
       },
       {
-        "text": "originally designed"
+        "text": "originally designed",
+        "en": "originally designed",
+        "ja": "もともと設計された"
       },
       {
-        "text": "originally from"
+        "text": "originally from",
+        "en": "originally from",
+        "ja": "もともと～の出身で"
       }
     ]
   },
@@ -10480,24 +11351,41 @@
         "meanings": [
           {
             "ja": "装飾用の；装飾的な",
-            "definition": "",
-            "examples": []
+            "definition": "grown, made, or used mainly for decoration rather than practical purposes",
+            "examples": [
+              {
+                "en": "The garden contains ornamental trees that produce vivid flowers in spring.",
+                "ja": "その庭には春に鮮やかな花を咲かせる観賞用の木がある。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "ornamental plants",
+        "en": "ornamental plants",
+        "ja": "観賞用植物"
+      },
+      {
+        "text": "ornamental design",
+        "en": "ornamental design",
+        "ja": "装飾的な意匠"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "ornamental plants は食用・実用より鑑賞目的の植物。",
     "tags": [
-      "sound-art"
+      "sound-art",
+      "curated-v3.331"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-09221",
@@ -10521,11 +11409,15 @@
         "meanings": [
           {
             "ja": "装飾；音楽上の装飾",
-            "definition": "",
+            "definition": "decorative detail added to music, architecture, or another work to enhance its effect",
             "examples": [
               {
-                "en": "In advanced academic English, \"ornamentation\" can be used with the meaning \"\".",
-                "ja": "上級の学術英語では「ornamentation」が「装飾；音楽上の装飾」という意味で用いられることがある。"
+                "en": "The pianist used restrained ornamentation rather than adding elaborate trills.",
+                "ja": "ピアニストは凝ったトリルを加える代わりに、控えめな装飾を用いた。"
+              },
+              {
+                "en": "The temple’s stone ornamentation reflects the craftsmanship of its builders.",
+                "ja": "その寺院の石の装飾には建設に携わった職人たちの技術が表れている。"
               }
             ]
           }
@@ -10534,17 +11426,29 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "musical ornamentation",
+        "en": "musical ornamentation",
+        "ja": "音楽的な装飾"
+      },
+      {
+        "text": "architectural ornamentation",
+        "en": "architectural ornamentation",
+        "ja": "建築の装飾"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "音楽では装飾音、建築・美術では装飾的な細部を指す。",
     "tags": [
       "music-performance",
-      "curated-v2.98"
+      "curated-v2.98",
+      "curated-v3.330"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-09490",
@@ -10568,24 +11472,50 @@
         "meanings": [
           {
             "ja": "装飾の多い；華麗な",
-            "definition": "",
-            "examples": []
+            "definition": "covered with many elaborate details or decorations",
+            "examples": [
+              {
+                "en": "The building has an ornate entrance carved from stone.",
+                "ja": "その建物には石を彫って作られた華麗な入口がある。"
+              },
+              {
+                "en": "The manuscript is known for its ornate illustrations.",
+                "ja": "その写本は精巧で華麗な挿絵で知られている。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "ornate architecture",
+        "en": "ornate architecture",
+        "ja": "華麗な建築"
+      },
+      {
+        "text": "ornate design",
+        "en": "ornate design",
+        "ja": "凝った装飾のデザイン"
+      },
+      {
+        "text": "highly ornate",
+        "en": "highly ornate",
+        "ja": "非常に装飾的な"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "ornate は装飾が凝っていることを表し、文脈によっては「過度に飾り立てた」という含みもある。",
     "tags": [
-      "sound-art"
+      "sound-art",
+      "curated-v3.187"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11590",
@@ -10609,11 +11539,11 @@
         "meanings": [
           {
             "ja": "造山運動",
-            "definition": "",
+            "definition": "the geological process of mountain building through movements and deformation of Earth’s crust",
             "examples": [
               {
-                "en": "In advanced academic English, \"orogeny\" can be used with the meaning \"\".",
-                "ja": "上級の学術英語では「orogeny」が「造山運動」という意味で用いられることがある。"
+                "en": "The mountain range was shaped by an orogeny that lasted millions of years.",
+                "ja": "その山脈は数百万年続いた造山運動によって形成された。"
               }
             ]
           }
@@ -10622,17 +11552,29 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "Alpine orogeny",
+        "en": "Alpine orogeny",
+        "ja": "アルプス造山運動"
+      },
+      {
+        "text": "continental orogeny",
+        "en": "continental orogeny",
+        "ja": "大陸の造山運動"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "プレート運動による山脈形成を説明する地質学用語。",
     "tags": [
       "geology-minerals",
-      "curated-v2.98"
+      "curated-v2.98",
+      "curated-v3.330"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11684",
@@ -10776,6 +11718,10 @@
               {
                 "en": "English orthography does not always reflect pronunciation.",
                 "ja": "英語の正書法は必ずしも発音をそのまま表さない。"
+              },
+              {
+                "en": "English orthography preserves spellings that do not always match modern pronunciation.",
+                "ja": "英語の正書法には、現代の発音と必ずしも一致しないつづりが残っている。"
               }
             ]
           }
@@ -10786,21 +11732,26 @@
     "phrases": [],
     "collocations": [
       {
-        "text": "English orthography"
+        "text": "English orthography",
+        "en": "English orthography",
+        "ja": "英語の正書法"
       },
       {
-        "text": "orthographic conventions"
+        "text": "orthographic conventions",
+        "en": "orthographic conventions",
+        "ja": "正書法上の慣習"
       }
     ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "Different from calligraphy, which concerns handwriting style.",
+    "usage_note": "Different from calligraphy, which concerns handwriting style. Orthography is the spelling system; calligraphy is the art of decorative handwriting.",
     "tags": [
       "language-writing",
       "curated-v2.98",
-      "curated-v3.62"
+      "curated-v3.62",
+      "curated-v3.318"
     ],
     "status": "enriched"
   },
@@ -11290,15 +12241,40 @@
     "frequency": 5,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adjective",
         "meanings": [
           {
-            "ja": "ほかの",
-            "definition": "a person, thing, idea, or concept connected with 'ほかの'",
+            "ja": "ほかの；別の",
+            "definition": "different from the person or thing already mentioned",
             "examples": [
               {
-                "en": "This other is important.",
-                "ja": "この「ほかの」は重要です。"
+                "en": "Other researchers have reached similar conclusions.",
+                "ja": "ほかの研究者たちも同様の結論に達している。"
+              }
+            ]
+          },
+          {
+            "ja": "もう一方の；残りの",
+            "definition": "the remaining one or ones of a set",
+            "examples": [
+              {
+                "en": "The other group received no additional training.",
+                "ja": "もう一方の集団には追加の訓練を行わなかった。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "pronoun",
+        "meanings": [
+          {
+            "ja": "ほかの人・物",
+            "definition": "a different person or thing, or the remaining ones",
+            "examples": [
+              {
+                "en": "Some students preferred the first topic; others chose the second.",
+                "ja": "最初の話題を好む生徒もいれば、二番目を選ぶ生徒もいた。"
               }
             ]
           }
@@ -11311,9 +12287,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "other＋複数名詞、another＋単数名詞を区別する。the otherは二つのうちの残り一つを指すことが多い。",
+    "tags": [
+      "curated-v3.209"
+    ],
+    "status": "enriched",
     "search_terms": [
       "other"
     ],
@@ -11321,7 +12299,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "each other",
+        "en": "each other",
+        "ja": "お互いに"
+      },
+      {
+        "text": "on the other hand",
+        "en": "on the other hand",
+        "ja": "一方で"
+      },
+      {
+        "text": "in other words",
+        "en": "in other words",
+        "ja": "言い換えれば"
+      }
+    ]
   },
   {
     "id": "sw-04121",
@@ -11478,15 +12472,15 @@
     "frequency": 5,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "determiner",
         "meanings": [
           {
-            "ja": "私たちの",
-            "definition": "a person, thing, idea, or concept connected with '私たちの'",
+            "ja": "私たちの；私たちに属する",
+            "definition": "belonging to or connected with the speaker and at least one other person",
             "examples": [
               {
-                "en": "This our is important.",
-                "ja": "この「私たちの」は重要です。"
+                "en": "Our class conducted a survey on public transport.",
+                "ja": "私たちのクラスは公共交通機関について調査した。"
               }
             ]
           }
@@ -11499,9 +12493,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "our は名詞の前に置く所有限定詞。単独で「私たちのもの」と言うときは ours を使う。",
+    "tags": [
+      "curated-v3.279"
+    ],
+    "status": "enriched",
     "search_terms": [
       "our"
     ],
@@ -11509,7 +12505,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "our school",
+        "en": "our school",
+        "ja": "私たちの学校"
+      },
+      {
+        "text": "our responsibility",
+        "en": "our responsibility",
+        "ja": "私たちの責任"
+      },
+      {
+        "text": "our own decisions",
+        "en": "our own decisions",
+        "ja": "私たち自身の決定"
+      }
+    ]
   },
   {
     "id": "sw-00453",
@@ -11522,15 +12534,50 @@
     "frequency": 5,
     "parts_of_speech": [
       {
-        "pos": "noun",
+        "pos": "adverb",
         "meanings": [
           {
-            "ja": "外へ",
-            "definition": "a person, thing, idea, or concept connected with '外へ'",
+            "ja": "外へ；外に",
+            "definition": "to or in a place outside an enclosed area",
             "examples": [
               {
-                "en": "This out is important.",
-                "ja": "この「外へ」は重要です。"
+                "en": "The students went out after the lecture.",
+                "ja": "生徒たちは講義の後に外へ出た。"
+              }
+            ]
+          },
+          {
+            "ja": "なくなって；尽きて",
+            "definition": "no longer available or in supply",
+            "examples": [
+              {
+                "en": "The printer has run out of paper.",
+                "ja": "プリンターの用紙がなくなった。"
+              }
+            ]
+          },
+          {
+            "ja": "明らかになって；公になって",
+            "definition": "into public knowledge or open view",
+            "examples": [
+              {
+                "en": "The truth finally came out during the investigation.",
+                "ja": "調査中に真相がついに明らかになった。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "外出している；不在の",
+            "definition": "not at home or not in the usual place",
+            "examples": [
+              {
+                "en": "The manager is out until noon.",
+                "ja": "責任者は正午まで不在です。"
               }
             ]
           }
@@ -11543,9 +12590,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "outは多くの句動詞に現れる。out ofは「～の外へ」「～を欠いて」など文脈で意味が異なる。",
+    "tags": [
+      "curated-v3.209"
+    ],
+    "status": "enriched",
     "search_terms": [
       "out"
     ],
@@ -11553,7 +12602,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "find out",
+        "en": "find out",
+        "ja": "調べて知る"
+      },
+      {
+        "text": "run out of",
+        "en": "run out of",
+        "ja": "～を使い果たす"
+      },
+      {
+        "text": "carry out",
+        "en": "carry out",
+        "ja": "～を実施する"
+      }
+    ]
   },
   {
     "id": "sw-07221",
@@ -11617,25 +12682,51 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "より高い値を付ける",
-            "definition": "",
-            "examples": []
+            "ja": "競争相手より高い価格を提示する",
+            "definition": "to offer more money than another bidder in order to buy something",
+            "examples": [
+              {
+                "en": "The museum was outbid at the auction for the rare manuscript.",
+                "ja": "博物館は希少な写本の競売でほかの入札者に競り負けた。"
+              },
+              {
+                "en": "A rival company outbid us for the contract.",
+                "ja": "競合企業がその契約で私たちより高い金額を提示した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "outbid a competitor",
+        "text": "outbid a competitor",
+        "ja": "競争相手より高値を付ける"
+      },
+      {
+        "en": "outbid someone at auction",
+        "text": "outbid someone at auction",
+        "ja": "競売で人より高値を付ける"
+      },
+      {
+        "en": "be outbid for a contract",
+        "text": "be outbid for a contract",
+        "ja": "契約の入札で競り負ける"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "outbid の過去形・過去分詞も outbid。be outbid は「競り負ける」。",
     "tags": [
-      "work-actions"
+      "work-actions",
+      "curated-v3.300"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07223",
@@ -11747,6 +12838,24 @@
               {
                 "en": "The study measured learning outcomes after six months.",
                 "ja": "その研究は6か月後の学習成果を測定した。"
+              },
+              {
+                "en": "The long-term outcomes of the policy will not be clear for several years.",
+                "ja": "その政策の長期的な成果は今後数年間は明らかにならないだろう。"
+              }
+            ]
+          },
+          {
+            "ja": "（治療の）転帰；（臨床研究の）評価項目",
+            "definition": "a patient’s condition after treatment or a result measured in a clinical study",
+            "examples": [
+              {
+                "en": "The trial’s primary outcome was recovery within thirty days.",
+                "ja": "その試験の主要評価項目は三十日以内の回復だった。"
+              },
+              {
+                "en": "The primary outcome was measured six months after treatment.",
+                "ja": "主要評価項目は治療6か月後に測定された。"
               }
             ]
           }
@@ -11759,12 +12868,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "An outcome is the result; an output is something produced, such as a report or a product.",
+    "usage_note": "An outcome is the result; an output is something produced, such as a report or a product. 臨床試験の primary outcome は主要評価項目。output（産出物）と outcome（結果・効果）は異なる。",
     "tags": [
       "v2.31-curated",
       "curated-v2.61",
       "curated-v3.34",
-      "curated-v3.125"
+      "curated-v3.125",
+      "curated-v3.323"
     ],
     "status": "enriched",
     "search_terms": [
@@ -11777,39 +12887,38 @@
     "collocations": [
       {
         "text": "treatment outcome",
-        "ja": "治療の結果"
+        "ja": "治療の結果",
+        "en": "treatment outcome"
       },
       {
         "text": "likely outcome",
-        "ja": "起こりそうな結果"
+        "ja": "起こりそうな結果",
+        "en": "likely outcome"
       },
       {
         "text": "learning outcomes",
-        "ja": "学習成果"
+        "ja": "学習成果",
+        "en": "learning outcomes"
       },
       {
         "text": "positive outcome",
-        "ja": "好ましい結果"
+        "ja": "好ましい結果",
+        "en": "positive outcome"
       },
       {
         "text": "outcome of the study",
-        "ja": "研究の結果"
+        "ja": "研究の結果",
+        "en": "outcome of the study"
       },
       {
         "text": "long-term outcomes",
-        "ja": "長期的な成果"
-      }
-    ],
-    "senses": [
+        "ja": "長期的な成果",
+        "en": "long-term outcomes"
+      },
       {
-        "pos": "",
-        "definition_ja": "結果；成果；転帰",
-        "examples": [
-          {
-            "en": "The primary outcome was measured six months after treatment.",
-            "ja": "主要評価項目は治療6か月後に測定された。"
-          }
-        ]
+        "text": "measurable outcomes",
+        "en": "measurable outcomes",
+        "ja": "測定可能な成果"
       }
     ]
   },
@@ -11834,25 +12943,52 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "露頭；地表に出た岩盤",
-            "definition": "",
-            "examples": []
+            "ja": "露頭",
+            "definition": "an area of rock exposed at the Earth’s surface",
+            "definition_en": "an area of rock exposed at the Earth’s surface",
+            "examples": [
+              {
+                "en": "Students examined an outcrop beside the road.",
+                "ja": "生徒たちは道路脇の露頭を調べた。"
+              },
+              {
+                "en": "The outcrop reveals layers of ancient sedimentary rock.",
+                "ja": "その露頭には古い堆積岩の層が現れている。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "a rock outcrop",
+        "text": "a rock outcrop",
+        "ja": "岩石の露頭"
+      },
+      {
+        "en": "an exposed outcrop",
+        "text": "an exposed outcrop",
+        "ja": "露出した露頭"
+      },
+      {
+        "en": "a limestone outcrop",
+        "text": "a limestone outcrop",
+        "ja": "石灰岩の露頭"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "地質学では地表に露出している岩盤を指す。outcrop は動詞としても使われる。",
     "tags": [
-      "terrain-water"
+      "terrain-water",
+      "curated-v3.290"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10811",
@@ -11975,12 +13111,16 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "知恵で出し抜く",
-            "definition": "",
+            "ja": "機転や知恵で出し抜く",
+            "definition": "to defeat or escape from someone by being cleverer than they are",
             "examples": [
               {
-                "en": "In advanced academic English, \"outfox\" can be used with the meaning \"\".",
-                "ja": "上級の学術英語では「outfox」が「知恵で出し抜く」という意味で用いられることがある。"
+                "en": "The detective outfoxed the suspect with an unexpected question.",
+                "ja": "刑事は意外な質問で容疑者の裏をかいた。"
+              },
+              {
+                "en": "The small team outfoxed a much stronger opponent.",
+                "ja": "その小さなチームははるかに強い相手を知恵で出し抜いた。"
               }
             ]
           }
@@ -11989,17 +13129,34 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "outfox an opponent",
+        "text": "outfox an opponent",
+        "ja": "相手を知恵で出し抜く"
+      },
+      {
+        "en": "outfox a rival",
+        "text": "outfox a rival",
+        "ja": "競争相手の裏をかく"
+      },
+      {
+        "en": "outfox the authorities",
+        "text": "outfox the authorities",
+        "ja": "当局の裏をかく"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "fox（キツネ）のずる賢いイメージに由来する口語的な動詞。",
     "tags": [
       "actions-interaction",
-      "curated-v2.98"
+      "curated-v2.98",
+      "curated-v3.285"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04074",
@@ -12028,6 +13185,20 @@
               {
                 "en": "Her outgoing nature helped her make friends at her new school.",
                 "ja": "社交的な性格のおかげで彼女は新しい学校で友達を作れた。"
+              },
+              {
+                "en": "The outgoing students welcomed the new exchange students.",
+                "ja": "社交的な生徒たちは新しい交換留学生を温かく迎えた。"
+              }
+            ]
+          },
+          {
+            "ja": "出発する；退任する",
+            "definition": "leaving a place or position rather than arriving or taking it up",
+            "examples": [
+              {
+                "en": "Passengers for the outgoing flight should proceed to Gate 4.",
+                "ja": "出発便の乗客は4番ゲートへお進みください。"
               }
             ]
           }
@@ -12036,16 +13207,33 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "outgoing personality",
+        "en": "outgoing personality",
+        "ja": "社交的な性格"
+      },
+      {
+        "text": "outgoing flight",
+        "en": "outgoing flight",
+        "ja": "出発便"
+      },
+      {
+        "text": "outgoing president",
+        "en": "outgoing president",
+        "ja": "退任する会長・大統領"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Outgoing describes a sociable person, but an outgoing flight departs and an outgoing official is leaving office.",
     "tags": [
-      "character"
+      "character",
+      "curated-v3.319"
     ],
-    "status": "basic"
+    "status": "enriched"
   },
   {
     "id": "sw-08886",
@@ -12182,6 +13370,10 @@
               {
                 "en": "The brand plans to open three new retail outlets.",
                 "ja": "そのブランドは新たに3店舗の小売店を開く予定だ。"
+              },
+              {
+                "en": "The company sells its products through online and physical outlets.",
+                "ja": "その会社はオンライン店舗と実店舗の両方で製品を販売している。"
               }
             ]
           },
@@ -12192,6 +13384,10 @@
               {
                 "en": "Painting became an outlet for her frustration.",
                 "ja": "絵を描くことが彼女の不満のはけ口になった。"
+              },
+              {
+                "en": "Music provided a creative outlet during a stressful period.",
+                "ja": "音楽はストレスの多い時期に創造的なはけ口となった。"
               }
             ]
           },
@@ -12212,6 +13408,10 @@
               {
                 "en": "There is an electrical outlet beside the desk.",
                 "ja": "机の横にコンセントがある。"
+              },
+              {
+                "en": "Make sure the outlet is not overloaded with adapters.",
+                "ja": "コンセントにアダプターをつなぎすぎていないか確認してください。"
               }
             ]
           }
@@ -12222,16 +13422,24 @@
     "phrases": [],
     "collocations": [
       {
-        "text": "retail outlet"
+        "text": "retail outlet",
+        "en": "retail outlet",
+        "ja": "小売店舗"
       },
       {
-        "text": "an outlet for stress"
+        "text": "an outlet for stress",
+        "en": "an outlet for stress",
+        "ja": "ストレスのはけ口"
       },
       {
-        "text": "electrical outlet"
+        "text": "electrical outlet",
+        "en": "electrical outlet",
+        "ja": "コンセント"
       },
       {
-        "text": "water outlet"
+        "text": "water outlet",
+        "en": "water outlet",
+        "ja": "排水口"
       }
     ],
     "related": {
@@ -12241,7 +13449,8 @@
     "usage_note": "outlet は「出口」から派生して販売店・感情のはけ口・コンセントも表す。米語 electrical outlet は英語では socket とも言う。",
     "tags": [
       "50k-frequency-gap",
-      "curated-v3.54"
+      "curated-v3.54",
+      "curated-v3.313"
     ],
     "status": "enriched"
   },
@@ -12345,12 +13554,16 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "巧みな行動で出し抜く",
-            "definition": "",
+            "ja": "巧みな戦略や行動で出し抜く",
+            "definition": "to gain an advantage over an opponent by acting more cleverly or strategically",
             "examples": [
               {
-                "en": "In advanced academic English, \"outmaneuver\" can be used with the meaning \"\".",
-                "ja": "上級の学術英語では「outmaneuver」が「巧みな行動で出し抜く」という意味で用いられることがある。"
+                "en": "The smaller firm outmaneuvered its rivals by serving an overlooked market.",
+                "ja": "その小規模企業は見過ごされていた市場を狙い、競合他社を出し抜いた。"
+              },
+              {
+                "en": "The defender outmaneuvered the attacker without committing a foul.",
+                "ja": "その守備選手は反則をせずに攻撃選手を巧みにかわした。"
               }
             ]
           }
@@ -12359,17 +13572,34 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "outmaneuver a rival",
+        "text": "outmaneuver a rival",
+        "ja": "競争相手を出し抜く"
+      },
+      {
+        "en": "outmaneuver an opponent",
+        "text": "outmaneuver an opponent",
+        "ja": "対戦相手を出し抜く"
+      },
+      {
+        "en": "outmaneuver the competition",
+        "text": "outmaneuver the competition",
+        "ja": "競合勢力を戦略で上回る"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "outmaneuver は単に速く動くのではなく、戦略や判断で相手より有利に立つことを表す。",
     "tags": [
       "actions-interaction",
-      "curated-v2.99"
+      "curated-v2.99",
+      "curated-v3.285"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10801",
@@ -12401,6 +13631,10 @@
               {
                 "en": "Demand for the service has outpaced our ability to expand it.",
                 "ja": "そのサービスへの需要は、私たちが拡充できる速さを上回っています。"
+              },
+              {
+                "en": "In many cities, housing costs have outpaced wage growth.",
+                "ja": "多くの都市で住宅費の上昇が賃金の伸びを上回っている。"
               }
             ]
           }
@@ -12414,16 +13648,33 @@
       "ing": "outpacing"
     },
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "outpace inflation",
+        "text": "outpace inflation",
+        "ja": "インフレ率を上回る"
+      },
+      {
+        "en": "outpace wage growth",
+        "text": "outpace wage growth",
+        "ja": "賃金の伸びを上回る"
+      },
+      {
+        "en": "outpace competitors",
+        "text": "outpace competitors",
+        "ja": "競争相手を上回る"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "outpace + 対象で「伸び・速度で上回る」。経済指標の比較で頻出。",
     "tags": [
-      "movement-outdoors"
+      "movement-outdoors",
+      "curated-v3.239"
     ],
-    "status": "basic"
+    "status": "enriched"
   },
   {
     "id": "sw-06158",
@@ -12862,6 +14113,10 @@
               {
                 "en": "The company decided to outsource customer support.",
                 "ja": "その会社は顧客対応を外部委託することにした。"
+              },
+              {
+                "en": "The university outsourced maintenance of its computer network.",
+                "ja": "大学はコンピューターネットワークの保守を外部委託した。"
               }
             ]
           },
@@ -12872,6 +14127,10 @@
               {
                 "en": "Some manufacturers outsource production to reduce costs.",
                 "ja": "一部の製造業者は費用を抑えるため生産を外部委託している。"
+              },
+              {
+                "en": "The manufacturer outsourced assembly to a specialist supplier.",
+                "ja": "その製造会社は組み立て作業を専門業者に外部委託した。"
               }
             ]
           }
@@ -12887,13 +14146,19 @@
     "phrases": [],
     "collocations": [
       {
-        "text": "outsource production"
+        "text": "outsource production",
+        "en": "outsource production",
+        "ja": "生産を外部委託する"
       },
       {
-        "text": "outsource IT services"
+        "text": "outsource IT services",
+        "en": "outsource IT services",
+        "ja": "IT業務を外部委託する"
       },
       {
-        "text": "outsource work to a contractor"
+        "text": "outsource work to a contractor",
+        "en": "outsource work to a contractor",
+        "ja": "業務を請負業者に委託する"
       }
     ],
     "related": {
@@ -12903,7 +14168,8 @@
     "usage_note": "outsource A to B（AをBに外部委託する）。海外委託に限定されない。",
     "tags": [
       "work-actions",
-      "curated-v3.51"
+      "curated-v3.51",
+      "curated-v3.314"
     ],
     "status": "enriched"
   },
@@ -13162,12 +14428,16 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "予定や歓迎される期間を超えて居続ける",
-            "definition": "",
+            "ja": "（歓迎・予定された期間を超えて）居続ける",
+            "definition": "to remain somewhere longer than is appropriate, expected, or welcome",
             "examples": [
               {
-                "en": "In advanced academic English, \"outstay\" can be used with the meaning \"\".",
-                "ja": "上級の学術英語では「outstay」が「予定や歓迎される期間を超えて居続ける」という意味で用いられることがある。"
+                "en": "The guests had outstayed their welcome by midnight.",
+                "ja": "真夜中には客たちは長居しすぎて歓迎されなくなっていた。"
+              },
+              {
+                "en": "Visitors should avoid outstaying the time allowed by their visas.",
+                "ja": "訪問者は査証で認められた滞在期間を超えないようにすべきだ。"
               }
             ]
           }
@@ -13181,17 +14451,34 @@
       "ing": "outstaying"
     },
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "outstay one’s welcome",
+        "text": "outstay one’s welcome",
+        "ja": "長居して歓迎されなくなる"
+      },
+      {
+        "en": "outstay a visa",
+        "text": "outstay a visa",
+        "ja": "査証の滞在期限を超える"
+      },
+      {
+        "en": "outstay the permitted period",
+        "text": "outstay the permitted period",
+        "ja": "許可された期間を超えて滞在する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "outstay one’s welcome は定型表現。overstay は査証などの期限超過に特によく使う。",
     "tags": [
       "thinking-perception",
-      "curated-v2.99"
+      "curated-v2.99",
+      "curated-v3.285"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-10806",
@@ -13398,24 +14685,51 @@
         "meanings": [
           {
             "ja": "卵巣",
-            "definition": "",
-            "examples": []
+            "definition": "in a female animal, an organ that produces eggs and reproductive hormones",
+            "examples": [
+              {
+                "en": "The ultrasound scan showed a cyst on one ovary.",
+                "ja": "超音波検査で片方の卵巣に嚢胞が見つかった。"
+              }
+            ]
+          },
+          {
+            "ja": "（花の）子房",
+            "definition": "the part of a flower that contains the ovules and may develop into a fruit after fertilization",
+            "examples": [
+              {
+                "en": "After fertilization, the flower’s ovary develops into a fruit.",
+                "ja": "受精後、花の子房は果実へと発達する。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "ovarian function",
+        "en": "ovarian function",
+        "ja": "卵巣の機能"
+      },
+      {
+        "text": "flower ovary",
+        "en": "flower ovary",
+        "ja": "花の子房"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "動物の「卵巣」と植物の「子房」を区別する。植物の ovule は「胚珠」。",
     "tags": [
-      "body-health"
+      "body-health",
+      "curated-v3.331"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-09491",
@@ -13439,11 +14753,11 @@
         "meanings": [
           {
             "ja": "大喝采",
-            "definition": "",
+            "definition": "enthusiastic applause from an audience, often showing strong approval or admiration",
             "examples": [
               {
-                "en": "In advanced academic English, \"ovation\" can be used with the meaning \"\".",
-                "ja": "上級の学術英語では「ovation」が「大喝采」という意味で用いられることがある。"
+                "en": "The orchestra received a standing ovation after the final movement.",
+                "ja": "管弦楽団は最終楽章の後、観客からスタンディングオベーションを受けた。"
               }
             ]
           }
@@ -13452,17 +14766,29 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "standing ovation",
+        "en": "standing ovation",
+        "ja": "総立ちの拍手喝采"
+      },
+      {
+        "text": "receive an ovation",
+        "en": "receive an ovation",
+        "ja": "喝采を受ける"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "standing ovation が特に頻出。単なる applause より強い賞賛を表す。",
     "tags": [
       "music-performance",
-      "curated-v2.99"
+      "curated-v2.99",
+      "curated-v3.330"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-03752",
@@ -13486,11 +14812,15 @@
         "meanings": [
           {
             "ja": "オーブン",
-            "definition": "a person, object, place, state, or idea associated with オーブン",
+            "definition": "an enclosed heated appliance used to bake, roast, or cook food",
             "examples": [
               {
-                "en": "They talked about oven during the lesson.",
-                "ja": "授業中に「オーブン」について話した。"
+                "en": "Preheat the oven to 180 degrees Celsius.",
+                "ja": "オーブンを摂氏180度に予熱してください。"
+              },
+              {
+                "en": "The bread is still baking in the oven.",
+                "ja": "パンはまだオーブンで焼いているところだ。"
               }
             ]
           }
@@ -13499,17 +14829,34 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "preheat the oven",
+        "en": "preheat the oven",
+        "ja": "オーブンを予熱する"
+      },
+      {
+        "text": "oven temperature",
+        "en": "oven temperature",
+        "ja": "オーブンの温度"
+      },
+      {
+        "text": "bake in the oven",
+        "en": "bake in the oven",
+        "ja": "オーブンで焼く"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "preheat the oven to ... で「オーブンを…度に予熱する」。電子レンジは microwave oven。",
     "tags": [
       "general-vocabulary",
-      "needs-example-enrichment"
+      "needs-example-enrichment",
+      "curated-v3.310"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-05060",
@@ -13533,24 +14880,50 @@
         "meanings": [
           {
             "ja": "鍋つかみ",
-            "definition": "",
-            "examples": []
+            "definition": "a thick protective glove used to handle hot dishes or trays from an oven",
+            "examples": [
+              {
+                "en": "Use an oven mitt when you take the dish out of the oven.",
+                "ja": "オーブンから皿を取り出すときはオーブン用ミトンを使ってください。"
+              },
+              {
+                "en": "The oven mitt was hanging from a hook beside the stove.",
+                "ja": "オーブン用ミトンはコンロの横のフックに掛かっていた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "wear an oven mitt",
+        "text": "wear an oven mitt",
+        "ja": "オーブン用ミトンを着ける"
+      },
+      {
+        "en": "a heat-resistant oven mitt",
+        "text": "a heat-resistant oven mitt",
+        "ja": "耐熱性のオーブン用ミトン"
+      },
+      {
+        "en": "a pair of oven mitts",
+        "text": "a pair of oven mitts",
+        "ja": "オーブン用ミトン1組"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "oven mittは特に米語。イギリス英語ではoven gloveともいう。",
     "tags": [
-      "home-tools"
+      "home-tools",
+      "curated-v3.291"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12612",
@@ -13771,6 +15144,10 @@
               {
                 "en": "The overall impact was positive despite some short-term costs.",
                 "ja": "短期的な費用は生じたものの、全体としての影響は好ましかった。"
+              },
+              {
+                "en": "The committee issued an overall assessment after reviewing every proposal.",
+                "ja": "委員会はすべての提案を検討した後、総合評価を示した。"
               }
             ],
             "definition_en": "considering everything; total or general"
@@ -13787,6 +15164,10 @@
               {
                 "en": "Overall, the evidence supports a cautious interpretation.",
                 "ja": "全体として、証拠は慎重な解釈を支持している。"
+              },
+              {
+                "en": "Overall performance improved despite variation between groups.",
+                "ja": "集団間にばらつきはあったが、全体として成績は向上した。"
               }
             ]
           }
@@ -13799,12 +15180,13 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "sentence adverb Overall, ... is common in reports Overall, ... は文頭で「全体としては」。形容詞 overall + 名詞 と区別。",
+    "usage_note": "sentence adverb Overall, ... is common in reports Overall, ... は文頭で「全体としては」。形容詞 overall + 名詞 と区別。 overall は形容詞では名詞の前に置く。文頭の Overall, は「全体として」の副詞。",
     "tags": [
       "v2.31-curated",
       "curated-v2.62",
       "curated-v3.32",
-      "curated-v3.126"
+      "curated-v3.126",
+      "curated-v3.324"
     ],
     "status": "enriched",
     "search_terms": [
@@ -13834,18 +15216,11 @@
         "text": "overall impact",
         "en": "overall impact",
         "ja": "総合的な影響"
-      }
-    ],
-    "senses": [
+      },
       {
-        "pos": "",
-        "definition_ja": "全体的な；総合的な／全体として",
-        "examples": [
-          {
-            "en": "Overall performance improved despite variation between groups.",
-            "ja": "集団間にばらつきはあったが、全体として成績は向上した。"
-          }
-        ]
+        "text": "overall assessment",
+        "en": "overall assessment",
+        "ja": "総合評価"
       }
     ]
   },
@@ -13911,25 +15286,48 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "威圧的な；横柄な",
-            "definition": "",
-            "examples": []
+            "ja": "威圧的な；支配的な",
+            "definition": "trying to control others in an unpleasant or forceful way",
+            "examples": [
+              {
+                "en": "An overbearing manager discouraged staff from offering suggestions.",
+                "ja": "威圧的な上司のため、職員は提案しにくくなっていた。"
+              },
+              {
+                "en": "She resented her uncle’s overbearing attitude toward her career choices.",
+                "ja": "彼女は進路選択に口を出す叔父の高圧的な態度に反発した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "an overbearing boss",
+        "ja": "高圧的な上司"
+      },
+      {
+        "text": "overbearing behavior",
+        "ja": "威圧的な振る舞い"
+      },
+      {
+        "text": "an overbearing attitude",
+        "ja": "支配的な態度"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "overbearing は単に自信があるのではなく、他人の意思を押しのけて支配しようとする否定的な語。",
     "tags": [
-      "personality-manner"
+      "personality-manner",
+      "curated-v3.273"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-11650",
@@ -13952,12 +15350,16 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "上載層；鉱床を覆う土石",
-            "definition": "",
+            "ja": "（鉱床などの上を覆う）土砂・岩石の層",
+            "definition": "soil and rock that lie above a mineral deposit or another geological layer",
             "examples": [
               {
-                "en": "In advanced academic English, \"overburden\" can be used with the meaning \"\".",
-                "ja": "上級の学術英語では「overburden」が「上載層；鉱床を覆う土石」という意味で用いられることがある。"
+                "en": "The mining company removed the overburden before extracting the coal.",
+                "ja": "採掘会社は石炭を採掘する前に上を覆う土砂や岩石を取り除いた。"
+              },
+              {
+                "en": "Thick overburden made the excavation more expensive.",
+                "ja": "厚い上載層のために掘削費用が増えた。"
               }
             ]
           }
@@ -13966,17 +15368,34 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "remove the overburden",
+        "text": "remove the overburden",
+        "ja": "上載層を除去する"
+      },
+      {
+        "en": "thick overburden",
+        "text": "thick overburden",
+        "ja": "厚い上載層"
+      },
+      {
+        "en": "overburden removal",
+        "text": "overburden removal",
+        "ja": "上載層の除去"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "地質・採掘分野の名詞。一般的な「負担をかけすぎる」は動詞 overburden として使われる。",
     "tags": [
       "geology-minerals",
-      "curated-v2.99"
+      "curated-v2.99",
+      "curated-v3.285"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04901",
@@ -14045,25 +15464,51 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "過大な料金を請求する",
-            "definition": "",
-            "examples": []
+            "ja": "（客に）料金を取りすぎる；過大請求する",
+            "definition": "to ask someone to pay more than the correct or reasonable price",
+            "examples": [
+              {
+                "en": "The hotel accidentally overcharged us for breakfast.",
+                "ja": "ホテルは朝食代を誤って私たちに多く請求した。"
+              },
+              {
+                "en": "Customers can request a refund if the company overcharges them.",
+                "ja": "会社から過大請求された場合、客は返金を求めることができる。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "overcharge a customer",
+        "text": "overcharge a customer",
+        "ja": "客に過大請求する"
+      },
+      {
+        "en": "overcharge for a service",
+        "text": "overcharge for a service",
+        "ja": "サービスの料金を取りすぎる"
+      },
+      {
+        "en": "be overcharged by mistake",
+        "text": "be overcharged by mistake",
+        "ja": "誤って過大請求される"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "overcharge someone for something の形が基本。過去形・過去分詞は overcharged。",
     "tags": [
-      "work-actions"
+      "work-actions",
+      "curated-v3.296"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-04130",
@@ -14246,25 +15691,57 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "期限を過ぎた",
-            "definition": "",
-            "examples": []
+            "ja": "（支払い・提出などが）期限を過ぎた",
+            "definition": "not completed or paid by the required date",
+            "examples": [
+              {
+                "en": "Several library books were overdue by more than a month.",
+                "ja": "図書館の本が数冊、一か月以上返却期限を過ぎていた。"
+              }
+            ]
+          },
+          {
+            "ja": "もっと早く実現すべきだった；待望の",
+            "definition": "expected or needed for a long time and happening later than it should",
+            "examples": [
+              {
+                "en": "The school finally introduced a long-overdue safety policy.",
+                "ja": "学校は長らく必要とされていた安全方針をようやく導入した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "an overdue payment",
+        "en": "an overdue payment",
+        "ja": "期限を過ぎた支払い"
+      },
+      {
+        "text": "overdue books",
+        "en": "overdue books",
+        "ja": "返却期限を過ぎた本"
+      },
+      {
+        "text": "long-overdue reform",
+        "en": "long-overdue reform",
+        "ja": "長年必要とされていた改革"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "overdue は期限超過のほか、long-overdue reform のように「以前から必要とされていた」という意味でも使う。",
     "tags": [
-      "work-description"
+      "work-description",
+      "curated-v3.244"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-08671",
@@ -14404,25 +15881,51 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "張り出し部分",
-            "definition": "",
-            "examples": []
+            "ja": "張り出した部分；ひさし",
+            "definition": "a part of a structure or natural feature that projects beyond what supports it",
+            "examples": [
+              {
+                "en": "The roof has a wide overhang that keeps rain off the windows.",
+                "ja": "その屋根には窓に雨が当たるのを防ぐ広いひさしがある。"
+              },
+              {
+                "en": "We stood beneath a rocky overhang to escape the sun.",
+                "ja": "私たちは日差しを避けて張り出した岩の下に立った。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "roof overhang",
+        "text": "roof overhang",
+        "ja": "屋根のひさし"
+      },
+      {
+        "en": "rocky overhang",
+        "text": "rocky overhang",
+        "ja": "張り出した岩"
+      },
+      {
+        "en": "wide overhang",
+        "text": "wide overhang",
+        "ja": "幅の広い張り出し"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "名詞 overhang は張り出し部分。動詞 overhang は「上に張り出す」。",
     "tags": [
-      "building"
+      "building",
+      "curated-v3.300"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07854",
@@ -14445,25 +15948,62 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "経常経費",
-            "definition": "",
-            "examples": []
+            "ja": "（事業運営の）間接経費；諸経費",
+            "definition": "ongoing business expenses that cannot be linked directly to a particular product or service",
+            "examples": [
+              {
+                "en": "Sharing office space helped the startup reduce its overhead.",
+                "ja": "オフィスを共有することで、その新興企業は間接経費を削減できた。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adverb",
+        "meanings": [
+          {
+            "ja": "頭上に；上空で",
+            "definition": "above someone's head or in the sky",
+            "examples": [
+              {
+                "en": "A helicopter circled overhead during the rescue operation.",
+                "ja": "救助活動中、ヘリコプターが上空を旋回していた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "reduce overhead",
+        "en": "reduce overhead",
+        "ja": "間接経費を削減する"
+      },
+      {
+        "text": "overhead costs",
+        "en": "overhead costs",
+        "ja": "間接経費"
+      },
+      {
+        "text": "fly overhead",
+        "en": "fly overhead",
+        "ja": "頭上を飛ぶ"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "経費の意味では通常 overhead（不可算）または overhead costs。頭上の意味では副詞。",
     "tags": [
-      "trade"
+      "trade",
+      "curated-v3.245"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07454",
@@ -14487,24 +16027,50 @@
         "meanings": [
           {
             "ja": "頭上の荷物入れ",
-            "definition": "",
-            "examples": []
+            "definition": "a storage compartment above passenger seats on an aircraft",
+            "examples": [
+              {
+                "en": "Place your small suitcase in the overhead bin.",
+                "ja": "小型のスーツケースは頭上の荷物入れに入れてください。"
+              },
+              {
+                "en": "The overhead bins must be closed before takeoff.",
+                "ja": "離陸前に頭上の荷物入れを閉めなければなりません。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "close the overhead bin",
+        "text": "close the overhead bin",
+        "ja": "頭上の荷物入れを閉める"
+      },
+      {
+        "en": "overhead bin space",
+        "text": "overhead bin space",
+        "ja": "頭上収納スペース"
+      },
+      {
+        "en": "stow luggage in the overhead bin",
+        "text": "stow luggage in the overhead bin",
+        "ja": "荷物を頭上の荷物入れに収納する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "主に米国英語。英国英語では overhead locker ともいう。",
     "tags": [
-      "community-travel"
+      "community-travel",
+      "curated-v3.294"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07453",
@@ -14528,24 +16094,50 @@
         "meanings": [
           {
             "ja": "頭上の荷物入れ",
-            "definition": "",
-            "examples": []
+            "definition": "a compartment above seats where passengers store hand luggage",
+            "examples": [
+              {
+                "en": "The crew asked us to close the overhead lockers.",
+                "ja": "乗務員は頭上の荷物入れを閉めるよう私たちに求めた。"
+              },
+              {
+                "en": "Her bag would not fit in the overhead locker.",
+                "ja": "彼女のかばんは頭上の荷物入れに収まらなかった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "overhead locker space",
+        "text": "overhead locker space",
+        "ja": "頭上の収納スペース"
+      },
+      {
+        "en": "open the overhead locker",
+        "text": "open the overhead locker",
+        "ja": "頭上の荷物入れを開ける"
+      },
+      {
+        "en": "store a bag in the overhead locker",
+        "text": "store a bag in the overhead locker",
+        "ja": "頭上の荷物入れにかばんを収納する"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "英国英語で一般的。米国英語では overhead bin がよく使われる。",
     "tags": [
-      "community-travel"
+      "community-travel",
+      "curated-v3.294"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13273",
@@ -14656,6 +16248,25 @@
               {
                 "en": "We stayed overnight at a small hotel.",
                 "ja": "私たちは小さなホテルに一泊した。"
+              },
+              {
+                "en": "The temperature dropped sharply overnight.",
+                "ja": "気温は夜の間に急激に下がった。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "adjective",
+        "meanings": [
+          {
+            "ja": "一晩の；夜通しの",
+            "definition": "happening during the night or lasting for one night",
+            "examples": [
+              {
+                "en": "The hotel offers overnight parking for guests.",
+                "ja": "そのホテルは宿泊客向けに夜間駐車場を提供している。"
               }
             ]
           }
@@ -14664,16 +16275,33 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "stay overnight",
+        "en": "stay overnight",
+        "ja": "一泊する"
+      },
+      {
+        "text": "overnight train",
+        "en": "overnight train",
+        "ja": "夜行列車"
+      },
+      {
+        "text": "overnight success",
+        "en": "overnight success",
+        "ja": "一夜にして成功した人・事例"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "Overnight can mean during the night or suddenly; it is also an adjective in overnight delivery.",
     "tags": [
-      "daily-description"
+      "daily-description",
+      "curated-v3.319"
     ],
-    "status": "basic"
+    "status": "enriched"
   },
   {
     "id": "sw-07407",
@@ -14763,25 +16391,51 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "払いすぎる",
-            "definition": "",
-            "examples": []
+            "ja": "払いすぎる；過大に支払う",
+            "definition": "to pay more than the amount due or more than something is worth",
+            "examples": [
+              {
+                "en": "We overpaid for the tickets because we booked at the last minute.",
+                "ja": "直前に予約したため、私たちはチケットに高い金額を払いすぎた。"
+              },
+              {
+                "en": "The agency discovered that it had overpaid several contractors.",
+                "ja": "その機関は複数の請負業者に過大な支払いをしていたことを発見した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "overpay for a service",
+        "text": "overpay for a service",
+        "ja": "サービスに払いすぎる"
+      },
+      {
+        "en": "overpay a contractor",
+        "text": "overpay a contractor",
+        "ja": "請負業者に過大に支払う"
+      },
+      {
+        "en": "avoid overpaying",
+        "text": "avoid overpaying",
+        "ja": "払いすぎを避ける"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "overpay for ～ は購入価格が高すぎる場合に使う。過去形・過去分詞は overpaid。",
     "tags": [
-      "work-actions"
+      "work-actions",
+      "curated-v3.296"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13010",
@@ -14804,25 +16458,65 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "大げさに扱う；誇張する",
-            "definition": "",
-            "examples": []
+            "ja": "重要性や効果を大げさに言う",
+            "definition": "to exaggerate the importance, strength, or effect of something",
+            "examples": [
+              {
+                "en": "The report warns against overplaying the benefits of the new policy.",
+                "ja": "その報告書は新政策の利点を誇張しないよう警告している。"
+              },
+              {
+                "en": "Some commentators overplayed the significance of a single poll.",
+                "ja": "一部の論評者は一つの世論調査の重要性を大げさに扱った。"
+              }
+            ]
+          },
+          {
+            "ja": "演技や反応を大げさにする",
+            "definition": "to perform a role or react with excessive emphasis",
+            "examples": [
+              {
+                "en": "The actor overplayed the final scene and lost its subtlety.",
+                "ja": "その俳優は最後の場面を大げさに演じ、繊細さを損なった。"
+              },
+              {
+                "en": "Try not to overplay your surprise during the performance.",
+                "ja": "上演中は驚きを大げさに表現しすぎないように。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "overplay the benefits",
+        "text": "overplay the benefits",
+        "ja": "利点を誇張する"
+      },
+      {
+        "en": "overplay the significance",
+        "text": "overplay the significance",
+        "ja": "重要性を大げさに扱う"
+      },
+      {
+        "en": "overplay a role",
+        "text": "overplay a role",
+        "ja": "役を大げさに演じる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "overplay は「過大評価して強調する」。反対方向は underplay（控えめに扱う）。",
     "tags": [
-      "thinking-perception"
+      "thinking-perception",
+      "curated-v3.300"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13005",
@@ -15106,25 +16800,57 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "行き過ぎる；目標を超える",
-            "definition": "",
-            "examples": []
+            "ja": "（目標値・予算などを）超過する",
+            "definition": "to go beyond a target, limit, or planned amount",
+            "examples": [
+              {
+                "en": "The construction costs overshot the original budget.",
+                "ja": "建設費は当初の予算を超過した。"
+              }
+            ]
+          },
+          {
+            "ja": "（目的地・停止位置などを）通り過ぎる",
+            "definition": "to travel farther than the intended destination or stopping point",
+            "examples": [
+              {
+                "en": "The train overshot the platform before coming to a stop.",
+                "ja": "列車は停止する前にホームの所定の位置を通り過ぎた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "overshoot the target",
+        "en": "overshoot the target",
+        "ja": "目標を超過する"
+      },
+      {
+        "text": "overshoot the budget",
+        "en": "overshoot the budget",
+        "ja": "予算を超過する"
+      },
+      {
+        "text": "overshoot the platform",
+        "en": "overshoot the platform",
+        "ja": "ホームの停止位置を通り過ぎる"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "overshoot は数値が目標を超えることと、目的地を通り過ぎること。過去形・過去分詞は overshot。",
     "tags": [
-      "thinking-perception"
+      "thinking-perception",
+      "curated-v3.244"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07809",
@@ -15147,25 +16873,51 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "使いすぎる",
-            "definition": "",
-            "examples": []
+            "ja": "予算や収入を超えて使う；浪費する",
+            "definition": "to spend more money than is available, planned, or sensible",
+            "examples": [
+              {
+                "en": "The council overspent its annual budget by ten percent.",
+                "ja": "市議会は年間予算を10％超過して支出した。"
+              },
+              {
+                "en": "It is easy to overspend when shopping online.",
+                "ja": "オンラインで買い物をすると、ついお金を使いすぎやすい。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "overspend a budget",
+        "text": "overspend a budget",
+        "ja": "予算を超過して使う"
+      },
+      {
+        "en": "overspend on equipment",
+        "text": "overspend on equipment",
+        "ja": "機材にお金を使いすぎる"
+      },
+      {
+        "en": "avoid overspending",
+        "text": "avoid overspending",
+        "ja": "使いすぎを避ける"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "overspend on ～ は「～に使いすぎる」。過去形・過去分詞は overspent。",
     "tags": [
-      "work-actions"
+      "work-actions",
+      "curated-v3.296"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07578",
@@ -15188,25 +16940,51 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "人員過剰の",
-            "definition": "",
-            "examples": []
+            "ja": "必要以上に人員を抱えた",
+            "definition": "having more workers than are needed for the amount of work",
+            "examples": [
+              {
+                "en": "The branch was overstaffed on weekdays but short-staffed on weekends.",
+                "ja": "その支店は平日は人員過剰だが、週末は人手不足だった。"
+              },
+              {
+                "en": "Management reviewed the schedule before deciding whether the office was overstaffed.",
+                "ja": "経営陣は事務所の人員が過剰かどうか判断する前に勤務表を見直した。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "an overstaffed department",
+        "text": "an overstaffed department",
+        "ja": "人員過剰の部署"
+      },
+      {
+        "en": "be overstaffed",
+        "text": "be overstaffed",
+        "ja": "人員が過剰である"
+      },
+      {
+        "en": "an overstaffed office",
+        "text": "an overstaffed office",
+        "ja": "人員を抱えすぎた事務所"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "short-staffed（人手不足の）の反対。人員数の評価であり、個人の能力を表さない。",
     "tags": [
-      "work-description"
+      "work-description",
+      "curated-v3.296"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13157",
@@ -15229,12 +17007,16 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "人員過剰",
-            "definition": "",
+            "ja": "人員過剰；必要以上に人を配置すること",
+            "definition": "the situation of employing more workers than are needed for the work available",
             "examples": [
               {
-                "en": "In advanced academic English, \"overstaffing\" can be used with the meaning \"\".",
-                "ja": "上級の学術英語では「overstaffing」が「人員過剰」という意味で用いられることがある。"
+                "en": "The review found overstaffing in some departments and shortages in others.",
+                "ja": "調査では一部の部署で人員過剰が、別の部署では人手不足が見つかった。"
+              },
+              {
+                "en": "Overstaffing can increase costs without improving service quality.",
+                "ja": "人員を必要以上に配置すると、サービスの質を高めずに費用だけが増えることがある。"
               }
             ]
           }
@@ -15243,17 +17025,34 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "reduce overstaffing",
+        "text": "reduce overstaffing",
+        "ja": "人員過剰を減らす"
+      },
+      {
+        "en": "chronic overstaffing",
+        "text": "chronic overstaffing",
+        "ja": "慢性的な人員過剰"
+      },
+      {
+        "en": "overstaffing in a department",
+        "text": "overstaffing in a department",
+        "ja": "部署での人員過剰"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "understaffing（人員不足）と対比される。従業員の能力ではなく配置人数の問題を指す。",
     "tags": [
       "work-life",
-      "curated-v2.99"
+      "curated-v2.99",
+      "curated-v3.285"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-13009",
@@ -15464,24 +17263,41 @@
         "meanings": [
           {
             "ja": "募集額・定員を超えて申し込む",
-            "definition": "",
-            "examples": []
+            "definition": "to apply for or subscribe to something in numbers exceeding the available places or shares",
+            "examples": [
+              {
+                "en": "The university’s summer program was oversubscribed within a week.",
+                "ja": "その大学の夏季プログラムは1週間で定員を超える応募が集まった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "an oversubscribed course",
+        "en": "an oversubscribed course",
+        "ja": "定員を超える応募があった講座"
+      },
+      {
+        "text": "oversubscribed share offering",
+        "en": "oversubscribed share offering",
+        "ja": "募集株数を上回る申し込みがあった株式売り出し"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "主に受け身で be oversubscribed と用いる。講座・募集・株式など。",
     "tags": [
-      "work-actions"
+      "work-actions",
+      "curated-v3.331"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07813",
@@ -15504,25 +17320,62 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "供給しすぎる",
-            "definition": "",
-            "examples": []
+            "ja": "（市場などに）過剰に供給する",
+            "definition": "to provide more of something than is needed or demanded",
+            "examples": [
+              {
+                "en": "Several producers oversupplied the market, pushing prices down.",
+                "ja": "複数の生産者が市場に過剰供給し、価格を押し下げた。"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "pos": "noun",
+        "meanings": [
+          {
+            "ja": "供給過剰",
+            "definition": "a situation in which more goods or services are available than people want to buy",
+            "examples": [
+              {
+                "en": "An oversupply of apartments led to lower rents.",
+                "ja": "住宅の供給過剰によって家賃が下がった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "oversupply the market",
+        "en": "oversupply the market",
+        "ja": "市場に過剰供給する"
+      },
+      {
+        "text": "an oversupply of housing",
+        "en": "an oversupply of housing",
+        "ja": "住宅の供給過剰"
+      },
+      {
+        "text": "persistent oversupply",
+        "en": "persistent oversupply",
+        "ja": "慢性的な供給過剰"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "oversupply は動詞「過剰供給する」、名詞「供給過剰」。an oversupply of + 名詞。",
     "tags": [
-      "work-actions"
+      "work-actions",
+      "curated-v3.244"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-06434",
@@ -15761,25 +17614,57 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "倍音；含み",
-            "definition": "",
-            "examples": []
+            "ja": "倍音",
+            "definition": "a higher-frequency component of a musical sound heard together with its fundamental tone",
+            "examples": [
+              {
+                "en": "The instrument produces rich overtones that give it a distinctive sound.",
+                "ja": "その楽器は豊かな倍音を生み、独特の音色を作り出す。"
+              }
+            ]
+          },
+          {
+            "ja": "含み；暗示的な調子",
+            "definition": "a subtle feeling or suggestion conveyed by words, actions, or an atmosphere",
+            "examples": [
+              {
+                "en": "The speech had political overtones despite its focus on education.",
+                "ja": "その演説は教育が中心だったが、政治的な含みもあった。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "rich overtones",
+        "en": "rich overtones",
+        "ja": "豊かな倍音"
+      },
+      {
+        "text": "political overtones",
+        "en": "political overtones",
+        "ja": "政治的な含み"
+      },
+      {
+        "text": "racial overtones",
+        "en": "racial overtones",
+        "ja": "人種に関わる含み"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "音響では overtone は基音より高い成分。比喩的には political overtones のように、表面上の内容の背後にある含みを表す。",
     "tags": [
-      "music-art"
+      "music-art",
+      "curated-v3.327"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-07060",
@@ -15802,25 +17687,57 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "序曲；申し入れ",
-            "definition": "",
-            "examples": []
+            "ja": "序曲",
+            "definition": "an instrumental piece performed at the beginning of an opera, ballet, or other extended work",
+            "examples": [
+              {
+                "en": "The overture introduces melodies that return later in the opera.",
+                "ja": "その序曲では、オペラの後半で再び現れる旋律が提示される。"
+              }
+            ]
+          },
+          {
+            "ja": "働きかけ；申し入れ",
+            "definition": "an approach or proposal made to begin discussions or improve relations",
+            "examples": [
+              {
+                "en": "The government made diplomatic overtures to its neighboring country.",
+                "ja": "政府は隣国に外交的な働きかけを行った。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "an opera overture",
+        "en": "an opera overture",
+        "ja": "オペラの序曲"
+      },
+      {
+        "text": "diplomatic overtures",
+        "en": "diplomatic overtures",
+        "ja": "外交的な働きかけ"
+      },
+      {
+        "text": "make overtures to ...",
+        "en": "make overtures to ...",
+        "ja": "…に働きかける"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "音楽では「序曲」。外交・交渉では make overtures to ... の形で「…に働きかける」。通常、外交的な意味では複数形 overtures が多い。",
     "tags": [
-      "music-art"
+      "music-art",
+      "curated-v3.327"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-03294",
@@ -15900,25 +17817,51 @@
         "pos": "adjective",
         "meanings": [
           {
-            "ja": "働きすぎの",
-            "definition": "",
-            "examples": []
+            "ja": "働きすぎで疲れている；過重労働の",
+            "definition": "made tired or stressed by having too much work to do",
+            "examples": [
+              {
+                "en": "Overworked nurses reported difficulty taking regular breaks.",
+                "ja": "過重労働の看護師たちは定期的に休憩を取るのが難しいと報告した。"
+              },
+              {
+                "en": "The manager hired another assistant to help the overworked staff.",
+                "ja": "管理職は働きすぎの職員を助けるため、補助職員をもう一人雇った。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "overworked employees",
+        "text": "overworked employees",
+        "ja": "働きすぎの従業員"
+      },
+      {
+        "en": "an overworked teacher",
+        "text": "an overworked teacher",
+        "ja": "過重労働の教師"
+      },
+      {
+        "en": "overworked staff",
+        "text": "overworked staff",
+        "ja": "過重労働の職員"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "overwork（働かせすぎる）の過去分詞形からできた形容詞。単なる busy より負担の大きさを示す。",
     "tags": [
-      "work-description"
+      "work-description",
+      "curated-v3.296"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12657",
@@ -16030,11 +17973,11 @@
         "meanings": [
           {
             "ja": "胚珠",
-            "definition": "",
+            "definition": "the structure inside the ovary of a seed plant that develops into a seed after fertilization",
             "examples": [
               {
-                "en": "In advanced academic English, \"ovule\" can be used with the meaning \"\".",
-                "ja": "上級の学術英語では「ovule」が「胚珠」という意味で用いられることがある。"
+                "en": "After fertilization, the ovule develops into a seed.",
+                "ja": "受精後、胚珠は種子へと発達する。"
               }
             ]
           }
@@ -16043,17 +17986,29 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "fertilized ovule",
+        "en": "fertilized ovule",
+        "ja": "受精した胚珠"
+      },
+      {
+        "text": "ovule development",
+        "en": "ovule development",
+        "ja": "胚珠の発達"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "植物学の語。ovary（子房）と ovule（胚珠）を区別する。",
     "tags": [
       "nature-garden",
-      "curated-v2.99"
+      "curated-v2.99",
+      "curated-v3.330"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-03481",
@@ -16076,12 +18031,22 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "借りがある；〜のおかげである",
-            "definition": "to perform or experience an action expressed by 借りがある",
+            "ja": "（金銭などを）借りている；支払う義務がある",
+            "definition": "to be required to pay money or give something back to someone",
             "examples": [
               {
-                "en": "They decided to owe after discussing the situation.",
-                "ja": "この例では「借りがある」という意味で使われている。"
+                "en": "I still owe the library a small overdue fee.",
+                "ja": "私はまだ図書館に少額の延滞料金を支払わなければならない。"
+              }
+            ]
+          },
+          {
+            "ja": "〜のおかげである；恩義がある",
+            "definition": "to have something because of another person’s help or influence",
+            "examples": [
+              {
+                "en": "She owes much of her success to her first teacher.",
+                "ja": "彼女の成功の多くは最初の先生のおかげである。"
               }
             ]
           }
@@ -16090,16 +18055,33 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "owe someone money",
+        "en": "owe someone money",
+        "ja": "人にお金を借りている"
+      },
+      {
+        "text": "owe an apology",
+        "en": "owe an apology",
+        "ja": "謝罪する義務がある"
+      },
+      {
+        "text": "owe something to someone",
+        "en": "owe something to someone",
+        "ja": "何かを人のおかげで得ている"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "owe A B は「AにBを借りている」。owe A to B は「AはBのおかげだ」。",
     "tags": [
-      "general-vocabulary"
+      "general-vocabulary",
+      "curated-v3.214"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-03753",
@@ -16123,11 +18105,15 @@
         "meanings": [
           {
             "ja": "フクロウ",
-            "definition": "a person, object, place, state, or idea associated with フクロウ",
+            "definition": "a bird with a broad face and large eyes that is usually active at night",
             "examples": [
               {
-                "en": "They talked about owl during the lesson.",
-                "ja": "授業中に「フクロウ」について話した。"
+                "en": "An owl called from the trees after sunset.",
+                "ja": "日没後、木々の間からフクロウの鳴き声が聞こえた。"
+              },
+              {
+                "en": "Owls can turn their heads much farther than humans can.",
+                "ja": "フクロウは人間よりはるかに大きく首を回すことができる。"
               }
             ]
           }
@@ -16136,17 +18122,33 @@
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "text": "barn owl",
+        "en": "barn owl",
+        "ja": "メンフクロウ"
+      },
+      {
+        "text": "night owl",
+        "en": "night owl",
+        "ja": "夜型の人"
+      },
+      {
+        "text": "owl habitat",
+        "en": "owl habitat",
+        "ja": "フクロウの生息地"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "night owl は比喩的に「夜更かしする人・夜型の人」。",
     "tags": [
       "general-vocabulary",
-      "needs-example-enrichment"
+      "curated-v3.281"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12425",
@@ -16262,25 +18264,47 @@
         "pos": "verb",
         "meanings": [
           {
-            "ja": "白状する；非を認める",
-            "definition": "",
-            "examples": []
+            "ja": "自分の誤り・責任を認める",
+            "definition": "to admit that one has done something wrong or is responsible for it",
+            "examples": [
+              {
+                "en": "The student owned up to copying part of the assignment.",
+                "ja": "その生徒は課題の一部を写したことを認めた。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "own up to a mistake",
+        "text": "own up to a mistake",
+        "ja": "間違いを認める"
+      },
+      {
+        "en": "own up to what happened",
+        "text": "own up to what happened",
+        "ja": "何が起きたか正直に話す"
+      },
+      {
+        "en": "finally own up",
+        "text": "finally own up",
+        "ja": "ついに非を認める"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "own up to + 名詞・動名詞。「責任を認める」の意味で、単なる admit より口語的。",
     "tags": [
-      "phrasal-verbs"
+      "phrasal-verbs",
+      "curated-v3.235"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-01090",
@@ -16296,12 +18320,22 @@
         "pos": "noun",
         "meanings": [
           {
-            "ja": "所有者",
-            "definition": "a person, thing, state, or idea related to 所有者",
+            "ja": "所有者；持ち主",
+            "definition": "a person or organization that legally possesses something",
             "examples": [
               {
-                "en": "This is a common example of 'owner'.",
-                "ja": "これは「所有者」の一般的な例です。"
+                "en": "The owner agreed to preserve the historic building.",
+                "ja": "所有者はその歴史的建造物を保存することに同意した。"
+              }
+            ]
+          },
+          {
+            "ja": "事業主；経営者",
+            "definition": "a person who owns a business",
+            "examples": [
+              {
+                "en": "The café owner raised wages to retain experienced staff.",
+                "ja": "カフェの経営者は熟練した従業員を引き留めるために賃金を上げた。"
               }
             ]
           }
@@ -16314,9 +18348,11 @@
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
-    "tags": [],
-    "status": "needs_enrichment",
+    "usage_note": "owner は所有者。business owner は事業主、property owner は不動産所有者。",
+    "tags": [
+      "curated-v3.246"
+    ],
+    "status": "enriched",
     "search_terms": [
       "owner"
     ],
@@ -16324,7 +18360,23 @@
       "ipa_us": null,
       "ipa_uk": null
     },
-    "collocations": []
+    "collocations": [
+      {
+        "text": "property owner",
+        "en": "property owner",
+        "ja": "不動産所有者"
+      },
+      {
+        "text": "business owner",
+        "en": "business owner",
+        "ja": "事業主"
+      },
+      {
+        "text": "rightful owner",
+        "en": "rightful owner",
+        "ja": "正当な所有者"
+      }
+    ]
   },
   {
     "id": "sw-02939",
@@ -16510,24 +18562,51 @@
         "meanings": [
           {
             "ja": "三日月湖",
-            "definition": "",
-            "examples": []
+            "definition": "a curved lake formed when a river bend is cut off from the main channel",
+            "definition_en": "a curved lake formed when a river bend is cut off from the main channel",
+            "examples": [
+              {
+                "en": "An oxbow lake remained after the river changed course.",
+                "ja": "川の流路が変わった後、三日月湖が残った。"
+              },
+              {
+                "en": "The oxbow lake supports fish and wetland birds.",
+                "ja": "その三日月湖には魚や湿地の鳥が生息している。"
+              }
+            ]
           }
         ]
       }
     ],
     "forms": {},
     "phrases": [],
-    "collocations": [],
+    "collocations": [
+      {
+        "en": "a crescent-shaped oxbow lake",
+        "text": "a crescent-shaped oxbow lake",
+        "ja": "三日月形の三日月湖"
+      },
+      {
+        "en": "oxbow lake formation",
+        "text": "oxbow lake formation",
+        "ja": "三日月湖の形成"
+      },
+      {
+        "en": "an abandoned oxbow lake",
+        "text": "an abandoned oxbow lake",
+        "ja": "本流から切り離された三日月湖"
+      }
+    ],
     "related": {
       "synonyms": [],
       "antonyms": []
     },
-    "usage_note": "",
+    "usage_note": "蛇行した川の一部が本流から切り離されて形成される湖。",
     "tags": [
-      "terrain-water"
+      "terrain-water",
+      "curated-v3.290"
     ],
-    "status": "needs_enrichment"
+    "status": "enriched"
   },
   {
     "id": "sw-12574",
@@ -16603,6 +18682,10 @@
               {
                 "en": "Deafening silence is a familiar oxymoron.",
                 "ja": "deafening silence（耳をつんざく静けさ）はよく知られた撞着語法だ。"
+              },
+              {
+                "en": "The phrase “bittersweet memory” works as an oxymoron because its two parts pull in opposite directions.",
+                "ja": "「bittersweet memory」という表現は、二つの要素が相反するため撞着語法として機能する。"
               }
             ]
           }
@@ -16613,10 +18696,14 @@
     "phrases": [],
     "collocations": [
       {
-        "text": "a deliberate oxymoron"
+        "text": "a deliberate oxymoron",
+        "en": "a deliberate oxymoron",
+        "ja": "意図的に使われた撞着語法"
       },
       {
-        "text": "an example of oxymoron"
+        "text": "an example of an oxymoron",
+        "en": "an example of an oxymoron",
+        "ja": "撞着語法の一例"
       }
     ],
     "related": {
@@ -16627,7 +18714,8 @@
     "tags": [
       "language-writing",
       "curated-v2.99",
-      "curated-v3.62"
+      "curated-v3.62",
+      "curated-v3.329"
     ],
     "status": "enriched"
   },

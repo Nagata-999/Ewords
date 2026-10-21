@@ -16,23 +16,7 @@ def write(p, s):
         p.write_bytes(content)
 
 def expression_rows(values):
-    """Accept the existing string, phrase/en/text object schemas without blank rows."""
-    rows = []
-    for value in values or []:
-        if isinstance(value, str):
-            en, ja = value.strip(), ''
-        elif isinstance(value, dict):
-            en = next((value[k].strip() for k in ('phrase', 'en', 'text')
-                       if isinstance(value.get(k), str) and value[k].strip()), '')
-            ja = value.get('ja', '')
-            ja = ja.strip() if isinstance(ja, str) else ''
-        else:
-            continue
-        if not en or re.fullmatch(r'[\s・:：\-–—]*', en):
-            continue
-        if (en, ja) not in rows:
-            rows.append((en, ja))
-    return rows
+    return QUALITY['expression_data'](values)[0]
 
 def display_parts(entry, excluded):
     """Group exact same-POS/gloss duplicates for display, retaining distinct content."""
@@ -72,6 +56,7 @@ def build(source):
     previous = json.loads(manifest.read_text()) if manifest.exists() else []
     generated = []
     excluded = {'definitions':0,'examples':0}
+    expression_issues = []
     def emit(rel, text):
         write(ROOT / rel, text); generated.append(rel)
     pos_names = {'noun':'名詞','verb':'動詞','adjective':'形容詞','adverb':'副詞','preposition':'前置詞','conjunction':'接続詞','pronoun':'代名詞','interjection':'間投詞','determiner':'限定詞','phrase':'句','auxiliary':'助動詞'}
@@ -103,9 +88,18 @@ def build(source):
                 if values: rows.append('<dt>'+esc(labels.get(k,k))+'</dt><dd>'+' · '.join(link(w) for w in values if isinstance(w,str))+'</dd>')
             if rows: body+='<section><h2>'+label+'</h2><dl>'+''.join(rows)+'</dl></section>'
         for key,label in [('phrases','熟語・表現'),('collocations','よく使う組み合わせ')]:
-            vals=expression_rows(e.get(key,[]))
+            vals, issues=QUALITY['expression_data'](e.get(key,[]))
+            expression_issues.extend(dict(issue, id=e['id'], word=word, field=key) for issue in issues)
             if vals: body+='<section><h2>'+label+'</h2><ul>'+''.join('<li>'+link(en)+('：'+esc(ja) if ja else '')+'</li>' for en,ja in vals)+'</ul></section>'
         if e.get('usage_note'): body+='<p>'+esc(e['usage_note'])+'</p>'
+        etym=e.get('etymology')
+        if isinstance(etym,dict) and etym:
+            content=''.join('<p>'+esc(etym[k])+'</p>' for k in ('origin','history') if isinstance(etym.get(k),str) and etym[k].strip())
+            roots=[x for x in etym.get('roots',[]) if isinstance(x,dict) and isinstance(x.get('form'),str) and x['form'].strip()]
+            if roots: content+='<ul>'+''.join('<li>'+esc(x['form'])+('：'+esc(x['meaning']) if isinstance(x.get('meaning'),str) and x['meaning'].strip() else '')+'</li>' for x in roots)+'</ul>'
+            related=[x for x in etym.get('related',[]) if isinstance(x,str) and x.strip()]
+            if related: content+='<p>関連語：'+' · '.join(link(x) for x in related)+'</p>'
+            if content: body+='<section><h2>語源</h2>'+content+'</section>'
         body+=f'<a class="learn" href="/sushian.html?dictionary={quote(slug(word))}">この単語を覚える</a><p class="muted">すし暗で意味を選んで練習。間違えた語は、このブラウザの苦手復習に残ります。</p></article>'+SEARCH
         card={'word_id':'dictionary:'+e['id'],'en':word,'jp':'；'.join(meanings),'source_number':None}
         schema={'@context':'https://schema.org','@type':'DefinedTerm','name':word,'description':'；'.join(meanings),'url':BASE+url(word),'inDefinedTermSet':{'@type':'DefinedTermSet','name':'すし辞書','url':BASE+'/dictionary/'}}
@@ -130,7 +124,7 @@ def build(source):
         p=(ROOT/rel).resolve()
         if p.is_relative_to(out.resolve()) and p.is_file(): p.unlink()
     write(manifest,dump(generated))
-    write(ROOT/'data/dictionary-build-report.json',dump({'entries':len(entries),'excluded_unfinished_templates':excluded,'sitemaps':len(maps)}))
+    write(ROOT/'data/dictionary-build-report.json',dump({'entries':len(entries),'excluded_unfinished_templates':excluded,'expression_issues':expression_issues,'sitemaps':len(maps)}))
     print(f'Built {len(entries)} dictionary entries, {len(maps)} sitemaps')
 if __name__=='__main__':
     parser=argparse.ArgumentParser(); parser.add_argument('--source',type=pathlib.Path,default=ROOT/'data/dictionary'); args=parser.parse_args(); build(args.source)

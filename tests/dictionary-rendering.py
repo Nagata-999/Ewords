@@ -9,6 +9,32 @@ BUILD = runpy.run_path(str(pathlib.Path(__file__).resolve().parents[1] / 'script
 
 
 class DictionaryRendering(unittest.TestCase):
+    def test_invalid_expression_containers_are_audited(self):
+        parse = BUILD['QUALITY']['expression_data']
+        for value in ('not an array', {'text': 'not an array'}, None, 1):
+            rows, issues = parse(value)
+            self.assertEqual(rows, [])
+            self.assertEqual(issues[0]['code'], 'invalid_expression_container')
+        rows, issues = parse([{'text': 1}, {'en': 'valid', 'ja': 2}, '・ :', None])
+        self.assertEqual(rows, [('valid', '')])
+        self.assertIn('invalid_expression_translation', [x['code'] for x in issues])
+        self.assertIn('blank_expression', [x['code'] for x in issues])
+
+    def test_etymology_is_rendered(self):
+        import json
+        root = pathlib.Path(__file__).resolve().parents[1]
+        count = 0
+        for source in (root/'data/dictionary').glob('dictionary-*.json'):
+            for entry in json.loads(source.read_text(encoding='utf-8')):
+                etym = entry.get('etymology')
+                if not etym: continue
+                page = (root/'dictionary'/BUILD['slug'](entry['word'])/'index.html').read_text(encoding='utf-8')
+                self.assertIn('<h2>語源</h2>', page)
+                for key in ('origin', 'history'):
+                    if etym.get(key): self.assertIn(BUILD['esc'](etym[key]), page)
+                count += 1
+        self.assertGreater(count, 0)
+
     def test_expression_schemas(self):
         values = [' plain ', {'phrase': 'old', 'ja': '旧'}, {'en': 'new', 'ja': '新'},
                   {'text': 'text only'}, {'text': 'translated', 'ja': '訳'},
