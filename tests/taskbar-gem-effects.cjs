@@ -25,7 +25,7 @@ const server=http.createServer((req,res)=>{
         if(route.request().url().includes('/functions/v1/sushi-id-sync')){
           const body=route.request().postDataJSON();if(body.action!=='sync')return route.fulfill({json:{ok:true,outcomes:{events:[],nextOffset:null}}});
           for(const e of body.ledger.gemEvents||[])if(!serverEvents.has(e.id)){serverEvents.set(e.id,e);serverBalance+=(e.type==='earn'?1:-1)*e.amount;}
-          return route.fulfill({json:{sushi_id:'testuser',ledger:{...body.ledger,gems:serverBalance,gemEvents:[...serverEvents.values()]}}});
+          return route.fulfill({json:{ok:true,sushi_id:'testuser',learning:body.learning,ledger:{...body.ledger,gems:serverBalance,gemEvents:[...serverEvents.values()]}}});
         }
         if(!route.request().url().startsWith(origin))return route.abort();
         if(mode==='delayed-effects'&&route.request().url().includes('/gem-effects.js')){heldRequest=route;return;}

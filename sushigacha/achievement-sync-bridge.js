@@ -2,10 +2,10 @@
 /* PIN-authenticated automatic achievement sync. */
 (function(root){
  if(root.SushiAchievementSyncBridge)return;
- const URL='https://rxyoyveykxdfrpomkltl.supabase.co/functions/v1/sushi-id-sync';
- const KEY='sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7';
+ const request=payload=>{if(!root.SushiProfileSync?.requestJSON)throw new Error('profile_transport_missing');return root.SushiProfileSync.requestJSON(payload)};
+ function assertAccount(id,pin){if((localStorage.getItem(ID)||'').trim().toLowerCase()!==id||localStorage.getItem(PIN)!==pin)throw new Error('achievement_account_changed')}
  const ID='sushitan_sync_id_v1',PIN='sushitan_sync_pin_v1';
- let running=null,syncTimer=null;
+ let running=null,syncTimer=null,receiptsRunning=null,paused=false;const claims=new Map();
  const RECEIPTS='sushitan_verified_achievement_receipts_v1:';
  function cachedReceipts(){
    const sushi_id=(localStorage.getItem(ID)||'').trim().toLowerCase();
@@ -15,7 +15,7 @@
    if((localStorage.getItem(ID)||'').trim().toLowerCase()!==sushi_id||!Array.isArray(data.receipts?.ids)||!root.SushiAchievementReceipts?.parse(data))return;
    const previous=cachedReceipts();
    const result={ok:true,sushi_id,receipts:{ids:[...new Set([...(previous?.receipts.ids||[]),...data.receipts.ids])]}};
-   try{localStorage.setItem(RECEIPTS+sushi_id,JSON.stringify(result))}catch{}
+   localStorage.setItem(RECEIPTS+sushi_id,JSON.stringify(result));
    root.dispatchEvent(new CustomEvent('sushi-achievement-receipts',{detail:{...result,sushiId:sushi_id}}));
  }
  function supported(){return !!(root.SushiAchievementTransport?.synchronize&&root.SushiAchievementLedger?.exportAllPages)}
@@ -28,30 +28,36 @@
    // A completed PIN profile sync triggers this, and the initial delayed
    // run covers pages where profile sync happened before this module loaded.
    running=root.SushiAchievementTransport.synchronize(root.SushiAchievementLedger,async payload=>{
-     const response=await fetch(URL,{method:'POST',headers:{'Content-Type':'application/json',apikey:KEY},body:JSON.stringify({...payload,sushi_id,pin})});
-     const body=await response.json().catch(()=>({error:'invalid_json'}));
-     if(!response.ok)throw new Error(body.error||'achievement_sync_failed');
+     assertAccount(sushi_id,pin);
+     const body=await request({...payload,sushi_id,pin});
+     assertAccount(sushi_id,pin);
      return body;
    });
    try{
-     const result=await running;
+     const result=await running;paused=false;
      root.dispatchEvent(new CustomEvent('sushi-achievement-sync',{detail:{supported:true,...result}}));
      return result;
    }catch(error){
-     root.dispatchEvent(new CustomEvent('sushi-achievement-sync',{detail:{supported:false,error:error.message}}));
+     paused=true;root.dispatchEvent(new CustomEvent('sushi-achievement-sync',{detail:{supported:false,error:error.message}}));
      throw error;
    }finally{running=null}
  }
- async function receipts(){
+ async function fetchReceipts(){
    const sushi_id=(localStorage.getItem(ID)||'').trim().toLowerCase(),pin=localStorage.getItem(PIN)||'';
    if(!/^[a-z0-9_-]{4,24}$/.test(sushi_id)||!/^[0-9]{4}$/.test(pin))return null;
-   const response=await fetch(URL,{method:'POST',headers:{'Content-Type':'application/json',apikey:KEY},body:JSON.stringify({action:'achievement_claims',sushi_id,pin})});
-   if(!response.ok)throw new Error('achievement_receipts_failed');
-   const data=await response.json();
+   const data=await request({action:'achievement_claims',sushi_id,pin});
+   assertAccount(sushi_id,pin);
+   if(!root.SushiAchievementReceipts?.parse(data))throw new Error('invalid_achievement_receipts');
    rememberReceipts(data,sushi_id);
    return data;
  }
- async function claim(threshold,category='all_correct'){
+ function receipts(){if(receiptsRunning)return receiptsRunning;receiptsRunning=fetchReceipts().finally(()=>{receiptsRunning=null});return receiptsRunning}
+ function claim(threshold,category='all_correct'){
+   const key=[localStorage.getItem(ID),category,threshold].join(':');
+   if(claims.has(key))return claims.get(key);
+   const promise=claimOnce(threshold,category).finally(()=>claims.delete(key));claims.set(key,promise);return promise;
+ }
+ async function claimOnce(threshold,category='all_correct'){
    const sushi_id=(localStorage.getItem(ID)||'').trim().toLowerCase(),pin=localStorage.getItem(PIN)||'';
    if(!/^[a-z0-9_-]{4,24}$/.test(sushi_id)||!/^[0-9]{4}$/.test(pin))throw new Error('achievement_pin_not_connected');
    if(!Number.isSafeInteger(threshold))throw new Error('invalid_threshold');
@@ -62,9 +68,8 @@
    const requestClaim=()=>transaction(async()=>{
    if(localStorage.getItem(ID)?.trim().toLowerCase()!==sushi_id||localStorage.getItem(PIN)!==pin)throw new Error('achievement_account_changed');
    const before=JSON.parse(localStorage.getItem('sushitan_login_bonus_v1')||'{}');
-   const response=await fetch(URL,{method:'POST',headers:{'Content-Type':'application/json',apikey:KEY},body:JSON.stringify({action:'achievement_claim',sushi_id,pin,threshold,category,wallet_event_ids:(before.gemEvents||[]).map(e=>e?.id).filter(Boolean)})});
-   const data=await response.json().catch(()=>({error:'invalid_json'}));
-   if(!response.ok||data.ok!==true)throw Object.assign(new Error(data.error||'achievement_claim_failed'),{code:data.error});
+   const data=await request({action:'achievement_claim',sushi_id,pin,threshold,category,wallet_event_ids:(before.gemEvents||[]).map(e=>e?.id).filter(Boolean)});
+   if(!data.wallet||!Number.isSafeInteger(data.wallet.gems)||data.wallet.gems<0||!Array.isArray(data.wallet.gemEvents)||data.claim_id!==stageId)throw new Error('invalid_claim_wallet');
    if(localStorage.getItem(ID)?.trim().toLowerCase()!==sushi_id||localStorage.getItem(PIN)!==pin)throw new Error('achievement_account_changed');
    // Use the server's authoritative wallet snapshot, including for a previously
    // claimed reward. Do not add gems a second time on the client.
@@ -96,11 +101,14 @@
  }
  root.SushiAchievementSyncBridge=Object.freeze({supported,run,claim,receipts,cachedReceipts});
  // Initial sync on page load, then follow established profile sync.
- root.addEventListener('sushi-profile-synced',()=>{run().catch(error=>console.warn('Achievement sync deferred:',error.message))});
- root.addEventListener('sushi-achievement-change',()=>{
+ // Full profile synchronization explicitly awaits run(), including all pages.
+ root.addEventListener('sushi-achievement-change',event=>{
+   if(event?.detail?.imported||event?.detail?.importedOutcomes)return;
    if(!localStorage.getItem(PIN))return;
+   if(paused)return;
    clearTimeout(syncTimer);
    syncTimer=setTimeout(()=>run().catch(error=>console.warn('Achievement sync deferred:',error.message)),2500);
  });
+ root.addEventListener('online',()=>{paused=false});
  if(localStorage.getItem(ID)&&localStorage.getItem(PIN))setTimeout(()=>{run().catch(error=>console.warn('Achievement sync deferred:',error.message));receipts().catch(()=>null)},1500);
 })(window);

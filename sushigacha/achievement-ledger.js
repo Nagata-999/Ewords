@@ -112,7 +112,9 @@
     for(const e of staged.values()){
       const key=OUTCOME_PREFIX+e.id;
       if(localStorage.getItem(key))continue;
-      try{localStorage.setItem(key,JSON.stringify(e));outcomeClock=Math.max(outcomeClock,e.at);added++}catch{break}
+      // Keep any imported prefix and all local records, but never report a
+      // partially persisted page as successful. Replaying the page is idempotent.
+      localStorage.setItem(key,JSON.stringify(e));outcomeClock=Math.max(outcomeClock,e.at);added++;
     }
     if(added)global.dispatchEvent(new CustomEvent('sushi-achievement-change',{detail:{importedOutcomes:added}}));
     return added;

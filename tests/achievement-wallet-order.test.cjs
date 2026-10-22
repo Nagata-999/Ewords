@@ -9,10 +9,10 @@ function setup({rejectOnce=false,remotePersonality=null}={}){
   let balance=100,claimed=false,held=null,outcomeHeld=null;
   const calls=[];
   const window={addEventListener(){},dispatchEvent(){},SushiAchievementLedger:{exportAllPages(){}},SushiAchievementTransport:{synchronize:async()=>({})}};
-  const context=vm.createContext({window,console,Event:class {},CustomEvent:class {},localStorage:{getItem:k=>values.get(k)||null,setItem:(k,v)=>values.set(k,v),get length(){return values.size},key:i=>[...values.keys()][i]},sessionStorage:{getItem:()=>null,setItem(){}},document:{readyState:'loading',addEventListener(){}},setTimeout(){},clearTimeout(){},queueMicrotask,fetch:async(url,options)=>{
+  const context=vm.createContext({window,console,AbortController,Event:class {},CustomEvent:class {},localStorage:{getItem:k=>values.get(k)||null,setItem:(k,v)=>values.set(k,v),removeItem:k=>values.delete(k),get length(){return values.size},key:i=>[...values.keys()][i]},sessionStorage:{getItem:()=>null,setItem(){}},document:{readyState:'loading',addEventListener(){}},setTimeout(){},clearTimeout(){},queueMicrotask,fetch:async(url,options)=>{
     const body=JSON.parse(options.body);calls.push(body.action);
     if(body.action==='sync'){
-      const snapshot={sushi_id:'testuser',ledger:{avatarPersonality:remotePersonality,gems:balance,gemEvents:claimed?[{id:'avatar30',type:'earn',amount:150}]:[]}};
+      const snapshot={ok:true,sushi_id:'testuser',learning:{events:[],cards:[]},ledger:{avatarPersonality:remotePersonality,gems:balance,gemEvents:claimed?[{id:'avatar30',type:'earn',amount:150}]:[]}};
       if(held){const wait=held;held=null;await wait.promise;}
       return {ok:true,json:async()=>snapshot};
     }
