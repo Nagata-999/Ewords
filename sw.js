@@ -1,4 +1,4 @@
-const CACHE_NAME = "sushitan-v29-admin-sealed";
+const CACHE_NAME = "sushitan-v30-pin-safe";
 const APP_SHELL = [
   "/",
   "/index.html",

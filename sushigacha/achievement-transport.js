@@ -23,7 +23,6 @@
        throw new Error('achievement_server_not_ready');
      if(response.achievements.events.length>500)throw new Error('oversized_server_page');
      if(!Number.isSafeInteger(response.achievements.baseline)||response.achievements.baseline<0||response.achievements.baseline>1000000000)throw new Error('invalid_server_baseline');
-     ledger.mergeBaseline(response.achievements.baseline);
      const ackIds=response.achievements.accepted;
      if(ackIds.some(id=>typeof id!=='string'||!/^[A-Za-z0-9:_-]{1,159}$/.test(id)))throw new Error('invalid_server_acknowledgment');
      const accepted=new Set(ackIds);
@@ -39,6 +38,7 @@
      if(response.achievements.events.some(e=>!e||e.version!==2||typeof e.id!=='string'||!/^[A-Za-z0-9:_-]{1,159}$/.test(e.id)||typeof e.game!=='string'||!/^[a-z0-9_-]{1,40}$/.test(e.game)||!Number.isSafeInteger(e.correct)||e.correct<1||e.correct>1000||!Number.isFinite(e.at)||e.at<0||e.at>8640000000000000))throw new Error('invalid_server_events');
      const imported=ledger.importEvents(response.achievements.events);
      if(imported.conflicts||imported.rejected)throw new Error('invalid_server_events');
+     ledger.mergeBaseline(response.achievements.baseline);
      received+=imported.added;conflicts+=imported.conflicts;rejected+=imported.rejected;
      if(next!==null&&next!==undefined)visited.add(next);
      cursor=next??null;

@@ -34,7 +34,7 @@ jobs:
       - name: Avatar catalog and shoe regression tests
         run: node --test tests/avatar-*.test.cjs
       - name: Achievement wallet and PIN sync regression tests
-        run: node --test tests/achievement-*.test.cjs
+        run: node --test tests/achievement-*.test.cjs tests/pin-sync-resilience.test.cjs
       - name: Sushi Talk two-exchange regression tests
         run: node --test tests/sushitalk-*.test.cjs
       - name: Admin authorization and telemetry regression tests
