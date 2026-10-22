@@ -1,0 +1,51 @@
+(function(){
+'use strict';
+// Enable only after final import + verification. No Supabase fallback once enabled.
+const ENABLED=true;
+if(!ENABLED||window.__rankingD1)return;window.__rankingD1=true;
+const nativeFetch=window.fetch.bind(window),PREFIX='sushitan_d1_rank_pending_v1:',active=new Map(),collectionKeys=new Map();
+const hosts={'rxyoyveykxdfrpomkltl.supabase.co':'main','ykrjocftuflnkubaxrza.supabase.co':'typing'};
+function id(){return crypto.randomUUID()}
+function classify(u,method){
+ const source=hosts[u.hostname];if(!source)return null;
+ if(u.pathname==='/functions/v1/sushi-blast-rank-v3')return {path:'/api/rankings/blast',blast:true};
+ const m=u.pathname.match(/^\/rest\/v1\/(rpc\/)?([a-z_]+)$/);if(!m)return null;
+ if(m[1]&&!['save_high_score','save_score_with_daily','get_daily_high_scores','save_typing_tower_score'].includes(m[2]))return null;
+ if(!m[1]&&!['scores','sushi_parts_runs','sushi_parts_collection'].includes(m[2]))return null;
+ const collection=m[2]==='sushi_parts_collection';
+ // The personal dictionary remains on its existing backend. Only its ranking
+ // projection is read from D1; new discoveries are independently mirrored.
+ if(collection&&method==='GET'&&u.searchParams.has('player_id'))return {personal:true};
+ if(collection&&!['GET','POST','PATCH'].includes(method))return null;
+ return {path:'/api/rankings/'+source+u.pathname,collection,mirror:collection&&['POST','PATCH'].includes(method)};
+}
+async function send(job,signal){
+ if(active.has(job.id))return active.get(job.id);
+ const p=(async()=>{try{const r=await nativeFetch(job.url,{method:job.method,headers:job.headers,body:job.body,signal});if(r.ok){localStorage.removeItem(PREFIX+job.id)}return r}finally{active.delete(job.id)}})();active.set(job.id,p);return p;
+}
+async function queued(url,request,body){
+ const method=request.method,headers={'Content-Type':'application/json'};for(const k of ['accept','prefer','range'])if(request.headers.has(k))headers[k]=request.headers.get(k);
+ const b=body===undefined?undefined:JSON.stringify(body),writes=method!=='GET'&&!/get_daily_high_scores/.test(url)&&(!url.endsWith('/blast')||body?.action==='submit');
+ const job={id:id(),url,method,headers,body:b};
+ if(writes)localStorage.setItem(PREFIX+job.id,JSON.stringify(job));
+ return writes?send(job,request.signal):nativeFetch(url,{method,headers,body:b,signal:request.signal});
+}
+window.fetch=async(input,init)=>{
+ const request=new Request(input,init),u=new URL(request.url),route=classify(u,request.method);if(!route)return nativeFetch(input,init);
+ if(route.personal){const response=await nativeFetch(input,init);if(response.ok&&u.searchParams.get('word')?.startsWith('eq.')){try{const data=await response.clone().json();for(const row of Array.isArray(data)?data:[data])if(row?.id)collectionKeys.set(row.id,{player_id:u.searchParams.get('player_id').slice(3),word:u.searchParams.get('word').slice(3)})}catch{}}return response}
+ const destination=new URL(route.path+u.search,location.origin).href;
+ let body=request.method==='GET'?undefined:await request.clone().json();
+ if(request.method==='POST'&&/sushi_parts_(runs|collection)$/.test(u.pathname)&&body){
+  const rows=Array.isArray(body)?body:[body];body=rows.map(row=>({...row,id:row.id||id()}));if(!Array.isArray(await request.clone().json()))body=body[0];
+ }
+ if(route.collection&&request.method==='PATCH')body={...body,...collectionKeys.get(u.searchParams.get('id')?.slice(3))};
+ if(route.mirror){queued(destination,request,body).catch(()=>{});return nativeFetch(input,init)}
+ return queued(destination,request,body);
+};
+async function flush(){
+ const keys=[];for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i);if(key?.startsWith(PREFIX))keys.push(key)}
+ for(const key of keys.slice(0,30)){try{const job=JSON.parse(localStorage.getItem(key));if(new URL(job.url).origin!==location.origin||!new URL(job.url).pathname.startsWith('/api/rankings/'))continue;const r=await send(job);if(!r.ok)break}catch{break}}
+}
+window.addEventListener('online',flush);if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',flush);else flush();
+})();
+

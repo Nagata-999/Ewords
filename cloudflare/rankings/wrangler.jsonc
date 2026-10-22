@@ -1,0 +1,199 @@
+{
+  "name": "ewords",
+  "account_id": "100ebca3da19b2822758fb5728b05b5b",
+  "main": "integrated.mjs",
+  "compatibility_date": "2026-05-14",
+  "workers_dev": true,
+  "keep_vars": true,
+  "vars": {
+    "PUBLIC_ORIGIN": "https://sushitan.net",
+    "RANKINGS_READY": "true"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "sushitan",
+      "database_id": "72087aea-0b5a-4e1f-9cb9-437e88b8677d"
+    }
+  ],
+  "ratelimits": [
+    {
+      "name": "READ_LIMIT",
+      "namespace_id": "1001",
+      "simple": {
+        "limit": 120,
+        "period": 60
+      }
+    },
+    {
+      "name": "WRITE_LIMIT",
+      "namespace_id": "1002",
+      "simple": {
+        "limit": 30,
+        "period": 60
+      }
+    }
+  ],
+  "routes": [
+    {
+      "pattern": "sushitan.net/api/rankings/*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/shared/ranking-d1.js*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/index.html*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/antonitan.html*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/shinotan.html*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushi-run3D.html*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushicross.html*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushigiri.html*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushikobun.html*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushitan.html*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushitype.html*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushi_blast.html*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushi_clock.html*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushi_hayaoshi.html*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushi_idiom%20(1).html*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushi_parts.html*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushi_quiz.html*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushi_quiz_core.html*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushi_run.html*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushidungeon/*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushidungeon/index.html*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/index*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/antonitan*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/shinotan*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushi-run3D*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushicross*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushigiri*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushikobun*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushitan*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushitype*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushi_blast*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushi_clock*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushi_hayaoshi*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushi_idiom%20(1)*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushi_parts*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushi_quiz*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushi_quiz_core*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushi_run*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushidungeon/index*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    }
+  ]
+}
