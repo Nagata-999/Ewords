@@ -17,4 +17,3 @@
  window.addEventListener('message',async e=>{if(e.source!==parent||e.data?.type!=='sushi-test-command'||e.data.nonce!==nonce)return;lastAction=e.data.cmd;try{if(e.data.cmd==='next_day'){clock+=86400000;window.dispatchEvent(new Event('pageshow'));document.getElementById('sushiLoginTab')?.click()}else if(e.data.cmd==='sync'){await window.SushiProfileSync?.syncWallet()}else if(e.data.cmd==='other_device'){storage.setItem(key,JSON.stringify({gems:0,gemEvents:[],loginButtonModeV1:true,loginBonusStreak:1,loginBonusTotal:1,loginBonusLastDay:'2026-10-09'}));await window.SushiProfileSync?.syncWallet();document.getElementById('sushiLoginTab')?.click()}publish()}catch{lastAction='テストコードの読み込みを待って、もう一度操作してください';publish()}});
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',publish);else publish();
 })();
-

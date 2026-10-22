@@ -23,4 +23,3 @@ Deno.serve(async req=>{
  const {data,error}=await db.rpc('sushi_usage_report',{p_from:b.from,p_to:b.to,p_game:b.game,p_search:b.search,p_offset:b.offset});if(error)return reply({error:'report_failed'},400);return reply({ok:true,...data});
  }catch{return reply({error:'server_error'},500)}
 });
-

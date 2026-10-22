@@ -1,6 +1,6 @@
 'use strict';
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),http=require('node:http');
-const {chromium}=require('playwright');
+const {chromium}=require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const root=path.join(__dirname,'..');
 (async()=>{
  const server=http.createServer((req,res)=>{
@@ -12,7 +12,7 @@ const root=path.join(__dirname,'..');
  const origin='http://127.0.0.1:'+server.address().port;
  let browser;
  try{
-  browser=await chromium.launch({headless:true,channel:'msedge'});
+  browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH});
   for(const route of ['/admin/','/admin/index.html?enabled=true','/admin/set-password.html#token_hash=test','/admin/avatar-preview.html','/admin/test-lab-frame.html']){
    const page=await browser.newPage(),external=[],errors=[];
    page.on('request',r=>{if(!r.url().startsWith(origin))external.push(r.url());});page.on('pageerror',e=>errors.push(e.message));

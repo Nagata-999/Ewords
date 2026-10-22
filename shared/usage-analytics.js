@@ -29,4 +29,3 @@
  root.addEventListener('pagehide',flush);setInterval(()=>{tick();if(performance.now()-lastSend>=300000)flush()},10000);flush();
  }catch{}
 })(typeof window!=='undefined'?window:globalThis);
-

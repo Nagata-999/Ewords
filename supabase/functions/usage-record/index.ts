@@ -14,4 +14,3 @@ Deno.serve(async req=>{
  if(error)return reply({error:'invalid_usage'},400);return reply(data,data?.ok?200:data?.error==='usage_rate_limit'?429:409);
  }catch{return reply({error:'invalid_request'},400)}
 });
-
