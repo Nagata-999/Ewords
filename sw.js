@@ -1,4 +1,4 @@
-const CACHE_NAME = "sushitan-v28-rpg-compact";
+const CACHE_NAME = "sushitan-v29-admin-sealed";
 const APP_SHELL = [
   "/",
   "/index.html",
@@ -37,6 +37,15 @@ self.addEventListener("fetch", event => {
       (requestUrl.origin === self.location.origin && /\/writing(?:\/|$)/.test(requestUrl.pathname))) return;
   // Admin shell is online-only; never retain authenticated diagnostic pages.
   if (requestUrl.origin === self.location.origin && requestUrl.pathname.startsWith('/admin/')) return;
+  // Never resurrect a pre-seal collector from an offline cache (including old query versions).
+  if (requestUrl.origin === self.location.origin && requestUrl.pathname === '/shared/usage-analytics.js') {
+    event.respondWith(fetch(event.request, {cache:'no-store'}).catch(() =>
+      new Response('/* Usage collection unavailable: fail closed. */', {
+        headers:{'Content-Type':'application/javascript','Cache-Control':'no-store'}
+      })
+    ));
+    return;
+  }
   // Keep dictionary 404 responses intact and avoid caching thousands of word pages.
   if (new URL(event.request.url).pathname.startsWith('/dictionary/')) return;
   const criticalSyncAsset = requestUrl.origin === self.location.origin &&

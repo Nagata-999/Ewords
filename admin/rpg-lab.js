@@ -1,4 +1,6 @@
-(()=>{'use strict';const $=id=>document.getElementById(id),KEY='sushitan_rpg_lab_v2';let nonce='',timer,studyTimer;
+(()=>{'use strict';
+ if (!(globalThis.SushiAdminFeatures?.enabled === true)) return;
+const $=id=>document.getElementById(id),KEY='sushitan_rpg_lab_v2';let nonce='',timer,studyTimer;
 function studyTotal(){let total=0;for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i);if(!key?.startsWith('sushitan_achievement_v2:event:'))continue;try{const e=JSON.parse(localStorage.getItem(key));if(e?.version===2&&e.game==='sushitan'&&e.id===key.slice('sushitan_achievement_v2:event:'.length)&&Number.isSafeInteger(e.correct)&&e.correct>0&&e.correct<=1000)total+=e.correct;}catch{}}return total;}
 function avatar(){try{const l=JSON.parse(localStorage.getItem('sushitan_login_bonus_v1')||'{}'),a=JSON.parse(localStorage.getItem('sushitan_avatar_local_v1')||'null');return a||l.gacha?.avatar||{};}catch{return {};}}
 function state(){try{return JSON.parse(localStorage.getItem(KEY)||'null');}catch{return null;}}

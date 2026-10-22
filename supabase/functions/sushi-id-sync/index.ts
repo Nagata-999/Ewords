@@ -1,3 +1,4 @@
+import { ADMIN_USAGE_ENABLED } from "../_shared/admin-feature.ts";
 // Reviewed candidate. Deploy separately after the wallet concurrency tests pass.
 import { createClient } from "npm:@supabase/supabase-js@2";
 
@@ -245,6 +246,7 @@ Deno.serve(async(req)=>{
   try{
     const body=await req.json();
     const action=String(body.action||"");
+    if(action==="usage_record" && !ADMIN_USAGE_ENABLED) return reply({ok:false,error:"admin_usage_disabled"},503);
     const sushiId=String(body.sushi_id||"").normalize("NFKC").trim().toLowerCase();
     const pin=String(body.pin||"").trim();
     if(!validId(sushiId)||!validPin(pin)) return reply({error:"invalid_credentials"},400);

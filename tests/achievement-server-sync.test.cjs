@@ -1,9 +1,9 @@
 const {test}=require('node:test'),assert=require('node:assert/strict');
 const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
 const {stripTypeScriptTypes}=require('node:module');
-const source=stripTypeScriptTypes(fs.readFileSync(path.join(__dirname,'../supabase/functions/sushi-id-sync/index.ts'),'utf8').replace(/^import [^\r\n]*\r?\n/m,''));
+const source=stripTypeScriptTypes(fs.readFileSync(path.join(__dirname,'../supabase/functions/sushi-id-sync/index.ts'),'utf8').replace(/^import [^\r\n]*\r?\n/gm,''));
 const plain=value=>JSON.parse(JSON.stringify(value));
-function boot(){
+function boot(adminUsageEnabled=false){
   let handler,row={sushi_id:'testuser',ledger:{gems:100,gemEvents:[]},learning:{events:[]},pin_hash:'testhash',updated_at:'2026-10-09T00:00:00.000Z'},beforeUpdate;
   let updates=0;const loginCalls=[];
   const db={async rpc(name,args){
@@ -21,7 +21,7 @@ function boot(){
     },then(resolve,reject){return query.maybeSingle().then(resolve,reject)}};
     return query;
   }};
-  const context=vm.createContext({console,Response,Request,TextEncoder,Uint8Array,crypto:require('node:crypto').webcrypto,btoa,atob,createClient:()=>db,Deno:{env:{get:()=>''},serve:fn=>handler=fn}});
+  const context=vm.createContext({ADMIN_USAGE_ENABLED:adminUsageEnabled,console,Response,Request,TextEncoder,Uint8Array,crypto:require('node:crypto').webcrypto,btoa,atob,createClient:()=>db,Deno:{env:{get:()=>''},serve:fn=>handler=fn}});
   vm.runInContext(source,context);
   // PIN hashing is unchanged; keep these tests focused on the authenticated path.
   vm.runInContext("verifyPin=async(pin,hash)=>pin==='1234'&&hash==='testhash'",context);
@@ -88,4 +88,4 @@ test('new login actions authenticate PIN and route only fixed server RPC argumen
 });
 test('server personality merge retains a newer preference from either device',()=>{const c=boot().context,a={kind:'serious',updatedAt:10},b={kind:'casual',updatedAt:20};assert.deepEqual(plain(c.mergeLedger({avatarPersonality:a},{avatarPersonality:b}).avatarPersonality),b);assert.deepEqual(plain(c.mergeLedger({avatarPersonality:b},{avatarPersonality:a}).avatarPersonality),b);});
 
-test('usage identity is bound to the verified PIN account and cannot be client-selected',async()=>{const s=boot();const usage={session:'11111111-1111-4111-8111-111111111111',visitor:'22222222-2222-4222-8222-222222222222',game:'sushitalk',started:'2026-10-11T00:00:00Z',seconds:60,answers:10,correct:8,p_sushi_id:'otheruser'};assert.equal((await s.request({action:'usage_record',usage})).status,200);assert.equal(s.loginCalls.at(-1).args.p_sushi_id,'testuser');const before=s.loginCalls.length;assert.equal((await s.request({action:'usage_record',usage,pin:'0000'})).status,401);assert.equal(s.loginCalls.length,before)});
+test('usage identity is bound to the verified PIN account and cannot be client-selected (restoration fixture)',async()=>{const s=boot(true);const usage={session:'11111111-1111-4111-8111-111111111111',visitor:'22222222-2222-4222-8222-222222222222',game:'sushitalk',started:'2026-10-11T00:00:00Z',seconds:60,answers:10,correct:8,p_sushi_id:'otheruser'};assert.equal((await s.request({action:'usage_record',usage})).status,200);assert.equal(s.loginCalls.at(-1).args.p_sushi_id,'testuser');const before=s.loginCalls.length;assert.equal((await s.request({action:'usage_record',usage,pin:'0000'})).status,401);assert.equal(s.loginCalls.length,before)});

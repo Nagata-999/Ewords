@@ -15,6 +15,8 @@ jobs:
       - name: JavaScript syntax
         run: |
           for file in sushigacha/achievement-*.js sushigacha/achievements-ui.js sushigacha/site-taskbar.js; do node --check "$file"; done
+          node --check admin/feature.js
+          node --check admin/bootstrap.js
           node --check admin/admin.js
           node --check admin/rpg-lab.js
           node --check admin/avatar-lab.js
@@ -36,7 +38,7 @@ jobs:
       - name: Sushi Talk two-exchange regression tests
         run: node --test tests/sushitalk-*.test.cjs
       - name: Admin authorization and telemetry regression tests
-        run: node --test tests/admin-usage.test.cjs
+        run: node --test tests/admin-usage.test.cjs tests/admin-disabled.test.cjs
       - name: Idle RPG progression and loot regression tests
         run: node --test tests/idle-rpg.test.cjs
       - name: Reward RPC checks in disposable Postgres

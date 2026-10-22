@@ -3,6 +3,9 @@
  const paths=[[/sushitanjunior/,'sushitanjunior'],[/sushi-run3D/,'sushi_run3d'],[/sushiflow/i,'sushiflow'],[/sushian/,'sushian'],[/sushitype/,'sushitype'],[/sushishun/,'sushishun'],[/sushikome/,'sushikome'],[/sushikobun/,'sushikobun'],[/sharitan/,'sharitan'],[/spetan/,'spetan'],[/sushi_clock/,'sushi_clock'],[/sushi_hayaoshi/,'sushi_hayaoshi'],[/sushi_parts_learning/,'sushi_parts_learning'],[/sushi_parts/,'sushi_parts'],[/sushi-ondoku/,'sushi_ondoku']].concat([[/^\/$|^\/index\.html$/,'home'],[/sushitan(?:\.html)?$/,'sushitan'],[/shinotan/,'shinotan'],[/antonitan/,'antonitan'],[/sushi_idiom/,'sushi_idiom'],[/sushi_quiz/,'sushi_quiz'],[/sushitalk/,'sushitalk'],[/sukaishi/,'sukaishi'],[/sushi_run/,'sushi_run'],[/sushicross/,'sushicross'],[/sushi_blast/,'sushi_blast'],[/\/toeic(?:\/|$)/,'toeic'],[/sushigiri/,'sushigiri'],[/sushidungeon/,'sushidungeon']]);
  function gameFor(path){if(/^\/admin(?:\/|$)/.test(path))return null;return paths.find(([pattern])=>pattern.test(path))?.[1]||null}
  if(typeof module==='object'&&module.exports){module.exports={gameFor};return}
+ // Emergency egress seal: no storage, listeners, timers or queue replay while disabled.
+ const ADMIN_USAGE_ENABLED = false;
+ if (!ADMIN_USAGE_ENABLED) return;
  if(root.__sushiUsageLoaded)return;root.__sushiUsageLoaded=true;const game=gameFor(location.pathname);if(!game)return;
  const base='https://rxyoyveykxdfrpomkltl.supabase.co/functions/v1/',apikey='sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7',key='sushitan_usage_queue_v1',visitorKey='sushitan_usage_visitor_v1';
  try{

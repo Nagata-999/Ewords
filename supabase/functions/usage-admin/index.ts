@@ -1,7 +1,9 @@
+import { ADMIN_USAGE_ENABLED } from "../_shared/admin-feature.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.117.3";
 const headers={"Access-Control-Allow-Origin":"https://sushitan.net","Access-Control-Allow-Headers":"authorization,apikey,content-type","Access-Control-Allow-Methods":"POST,OPTIONS","Content-Type":"application/json","Cache-Control":"private,no-store","Vary":"Authorization,Origin"};
 const reply=(body:unknown,status=200)=>new Response(JSON.stringify(body),{status,headers});
 Deno.serve(async req=>{
+ if (!ADMIN_USAGE_ENABLED) return reply({ok:false,error:"admin_usage_disabled"},503);
  if(req.method==='OPTIONS')return new Response('ok',{headers});if(req.method!=='POST')return reply({error:'method_not_allowed'},405);
  try{
  const token=req.headers.get('authorization')?.match(/^Bearer (.+)$/)?.[1];if(!token)return reply({error:'unauthorized'},401);
