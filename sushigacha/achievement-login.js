@@ -45,12 +45,9 @@
       if(!force&&Date.now()-lastAttempt<60000)return;
       busy=true;lastAttempt=Date.now();
       inflight=(async()=>{try{
-        const response=await root.fetch('https://rxyoyveykxdfrpomkltl.supabase.co/functions/v1/sushi-id-sync',{
-          method:'POST',signal:root.AbortSignal?.timeout?.(15000),headers:{'Content-Type':'application/json',apikey:'sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7'},
-          body:JSON.stringify({action:'login_visit',sushi_id:c.id,pin:c.pin})
-        });
-        const data=await response.json();
-        if(!response.ok||data.ok!==true||!data.login)throw Error(data.error||'login_visit_failed');
+        if(!root.SushiProfileSync?.requestJSON)throw Error('profile_transport_missing');
+        const data=await root.SushiProfileSync.requestJSON({action:'login_visit',sushi_id:c.id,pin:c.pin});
+        if(data.ok!==true||!data.login)throw Error(data.error||'login_visit_failed');
         const now=credentials();if(now.id!==c.id||now.pin!==c.pin)return;
         store(data.login);lastHour=hour;
       }catch(error){root.console?.warn('Login achievement check deferred:',error.message);}

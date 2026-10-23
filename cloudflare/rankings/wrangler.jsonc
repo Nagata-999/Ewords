@@ -1,13 +1,14 @@
 {
   "name": "ewords",
   "account_id": "100ebca3da19b2822758fb5728b05b5b",
-  "main": "integrated.mjs",
+  "main": "../pin-sync/combined-worker.mjs",
   "compatibility_date": "2026-05-14",
   "workers_dev": true,
   "keep_vars": true,
   "vars": {
     "PUBLIC_ORIGIN": "https://sushitan.net",
-    "RANKINGS_READY": "true"
+    "RANKINGS_READY": "true",
+    "PIN_SYNC_READY": "true"
   },
   "d1_databases": [
     {
@@ -194,6 +195,27 @@
     {
       "pattern": "sushitan.net/sushidungeon/index*",
       "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/api/pin-sync/*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/shared/sushi-profile.js*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    },
+    {
+      "pattern": "sushitan.net/sushigacha/achievement-login.js*",
+      "zone_id": "8e0d3df2529be9dd9f8e8e6d68f2168e"
+    }
+  ],
+  "rules": [
+    {
+      "type": "Text",
+      "globs": [
+        "**/*.txt"
+      ],
+      "fallthrough": true
     }
   ]
 }
