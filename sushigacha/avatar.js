@@ -1,6 +1,9 @@
 'use strict';
 
 const ITEMS=[
+  {id:'fairy-red-hood',name:'赤ずきんの頭巾',rarity:'R',series:'fairytale',slot:'hat',kind:'redHood'},
+  {id:'fairy-red-robe',name:'赤ずきんのローブ',rarity:'R',series:'fairytale',slot:'top',kind:'redRobe',color:'#b63448',accent:'#f4deb0'},
+  {id:'fairy-basket',name:'森のおつかいかご',rarity:'N',series:'fairytale',slot:'hand',kind:'basket'},
   {"id":"bunny-hoodie","name":"ふわふわうさぎパーカー","rarity":"R","slot":"top","kind":"bunny","color":"#f4bace","accent":"#fff2f6"},
   {"id":"cat-hoodie","name":"ねこさんパーカー","rarity":"R","slot":"top","kind":"cat","color":"#c7b6ed","accent":"#eee6ff"},
   {"id":"panda-sweater","name":"ころころパンダニット","rarity":"SR","slot":"top","kind":"panda","color":"#fff9ec","accent":"#404653"},
@@ -161,6 +164,7 @@ function avatarSVG(value=DEFAULT_AVATAR,previewId){
   if(accessory==='star')accSvg='<path d="M120 162l5 10 11 2-8 8 2 11-10-5-10 5 2-11-8-8 11-2Z" fill="#e4bd55" stroke="#8b7233" stroke-width="2"/><path d="M120 131V162" stroke="#8b7233" stroke-width="2"/>';
   return `<svg viewBox="0 0 240 280" role="img" aria-label="アバター"><g>${wings}${backHair}${cape}${legs}${bottomSvg}${body}${detail}<ellipse cx="120" cy="90" rx="48" ry="47" fill="${skin}" stroke="#354b47" stroke-width="3"/>${eyes}${mouth}${frontHair}${hatSvg}${accSvg}</g></svg>`;
 }
+
 
 
 

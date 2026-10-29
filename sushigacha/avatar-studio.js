@@ -34,8 +34,10 @@
   }
   for(const [key,label] of Object.entries(A.slots)){const b=document.createElement('button');b.textContent=label;b.dataset.slot=key;b.setAttribute('aria-pressed',String(key===slot));b.onclick=()=>{slot=key;for(const x of $('slotTabs').children)x.setAttribute('aria-pressed',String(x===b));renderWardrobe();};$('slotTabs').append(b);}
   $('resetLook').onclick=()=>setAvatar({...state.avatar,...A.sets.basic});
+  $('styleControls').onclick=e=>{const b=e.target.closest('[data-render-style]');if(b)setAvatar({...state.avatar,renderStyle:b.dataset.renderStyle});};
   $('genderControls').onclick=e=>{const button=e.target.closest('[data-gender]');if(button)setAvatar({...state.avatar,gender:button.dataset.gender});};
   function renderAppearance(){
+    $('styleControls').querySelectorAll('[data-render-style]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.renderStyle===state.avatar.renderStyle)));
     $('genderControls').querySelectorAll('[data-gender]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.gender===state.avatar.gender))); $('hair').replaceChildren();
     HAIR_NAMES[state.avatar.gender].forEach((label,i)=>{const o=document.createElement('option');o.value=i;o.textContent=label;$('hair').append(o);});
     for(const k of ['hair','hairColor','skin','eyes','mouth','faceShape','expression','pet','aura'])$(k).value=state.avatar[k];
@@ -108,5 +110,6 @@
   renderWardrobe();renderLooks();syncSettings();
   window.SushiAvatarStudio={getState:()=>structuredClone(state),getMotion:()=>({hero:hero.getState(),walker:walker.getState(),x,mode}),destroy(){speech?.destroy();cancelAnimationFrame(raf);hero.destroy();walker.destroy();}};
 })();
+
 
 
