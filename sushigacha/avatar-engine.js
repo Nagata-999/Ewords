@@ -410,7 +410,7 @@ function renderPixel(a,o={}){
  if(o.action==='wave'||o.action==='celebrate'){body+=p('M34 38H37V33H40V27H37V29H35V34H33Z',ink)+r(36,29,3,5,skin);if(o.action==='celebrate')body+=r(10,29,3,9,skin);}
  body=legs+(o.action==='sit'?'<g transform="translate(0 5)">'+body+'</g>':body);
  s+=r(15,57,19,2,'#ddd4bc');if(o.direction==='left')body=`<g transform="translate(48 0) scale(-1 1)">${body}</g>`;
- return `<svg data-art-style="pixel" data-action="${o.action||'idle'}" data-direction="${o.direction||'front'}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 64" shape-rendering="crispEdges" role="img" aria-label="赤ずきんのドット版 ${o.direction||'front'}"><g transform="translate(0 ${o.action==='celebrate'&&!o.reduced?-(Math.floor(t*6)%2)*3:bob})">${parts.effects}${s}${body}${parts.pet}</g></svg>`;
+ return `<svg data-art-style="pixel" data-action="${o.action||'idle'}" data-direction="${o.direction||'front'}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 64" shape-rendering="crispEdges" role="img" aria-label="すし単アバター（ドット） ${o.direction||'front'}"><g transform="translate(0 ${o.action==='celebrate'&&!o.reduced?-(Math.floor(t*6)%2)*3:bob})">${parts.effects}${s}${body}${parts.pet}</g></svg>`;
 }
 
   function render(value={},options={}){
