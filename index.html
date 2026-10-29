@@ -409,7 +409,7 @@ if ("serviceWorker" in navigator) {
 <!-- Login rewards are handled by the shared taskbar; no automatic legacy writes. -->
 
 <script>function syncGemBalance(){try{document.getElementById('gemBalance').textContent=JSON.parse(localStorage.getItem('sushitan_login_bonus_v1')||'{}').gems||0;}catch{}}window.addEventListener('storage',syncGemBalance);window.addEventListener('pageshow',syncGemBalance);</script><script src="sushigacha/gem-system.js?v=20261010-1"></script>
-<script src="sushigacha/home-avatar-walker.js?v=20261010-personality1"></script>
+<script src="sushigacha/home-avatar-walker.js?v=20261029-fairy1"></script>
 <script src="sushigacha/site-taskbar-login-modal.js?v=20261011-1"></script>
 <script>
 (function(){
@@ -450,4 +450,5 @@ if ("serviceWorker" in navigator) {
 <footer style="text-align:center;margin:40px 0 100px;font-size:11px;color:#8c8c83"><a hidden inert aria-hidden="true" tabindex="-1" href="/admin/" style="display:none;margin-top:12px;color:#8c8c83;text-decoration:none">管理者用</a></footer>
 </body>
 </html>
+
 
