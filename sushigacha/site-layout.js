@@ -4,7 +4,14 @@
   window.__sushiSiteLayoutLoaded=true;
   const css=document.createElement('style');
   css.textContent=`
-    :root{--sushi-navigation-space:calc(76px + max(8px,env(safe-area-inset-bottom)));--sushi-taskbar-space:var(--sushi-navigation-space);--sushi-page-height:calc(100dvh - var(--sushi-taskbar-space))}
+    :root{--sushi-navigation-space:calc(76px + max(8px,env(safe-area-inset-bottom)));--sushi-taskbar-space:var(--sushi-navigation-space);--sushi-page-height:calc(100vh - var(--sushi-taskbar-space))}
+    @supports(height:100dvh){:root{--sushi-page-height:calc(100dvh - var(--sushi-taskbar-space))}}
+    .sushi-scroll-game> .topbar,.sushi-scroll-game> .question-card,.sushi-scroll-game> .feedback,.sushi-scroll-game> .bottom{flex-shrink:0}
+    .sushi-word-choices .arena{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:minmax(64px,auto);align-content:start;gap:14px;padding:14px;flex:1 0 auto;min-height:320px;overflow:visible}
+    .sushi-word-choices .arena .balloon{position:relative!important;left:auto!important;top:auto!important;min-width:0;max-width:none;width:100%;height:auto;min-height:64px;padding:12px 10px;white-space:normal;overflow-wrap:anywhere;word-break:normal;text-overflow:clip;line-height:1.4;box-sizing:border-box}
+    .sushi-word-choices .question-text{overflow-wrap:anywhere;line-height:1.4}
+    .sushi-word-choices .app{scroll-padding-bottom:20px}
+    @media(max-width:360px){.sushi-word-choices .arena{gap:10px;padding:10px}.sushi-word-choices .arena .balloon{font-size:16px}}
     html{scroll-padding-bottom:calc(var(--sushi-taskbar-space) + 16px)}
     body.sushi-taskbar-on{padding-bottom:var(--sushi-taskbar-space)}
     .sushi-viewport-root{height:var(--sushi-page-height)!important;min-height:0!important;box-sizing:border-box}
@@ -33,6 +40,7 @@
   const route=decodeURIComponent(location.pathname).replace(/\.html$/,'').toLowerCase();
   const roots={sushitan:'.app',shinotan:'.app',antonitan:'.app',sharitan:'.app',sushi_blast:'.app',sushigiri:'#game',sushi_run:'#game',sushi_survivor:'#app',sushicross:'#game, #hud','sushi-run3d':'#world'};
   const name=route.split('/').filter(Boolean).pop()||'index';
+  if(['sushitan','shinotan','antonitan'].includes(name))document.body.classList.add('sushi-word-choices');
   if(route!=='/index'&&route!=='/'&&!route.startsWith('/admin')){
     document.body.classList.add('sushi-utility-dock');document.documentElement.classList.add('sushi-utility-dock');
     const dock=document.createElement('div');dock.id='sushiUtilityDock';dock.setAttribute('aria-hidden','true');document.body.append(dock);
