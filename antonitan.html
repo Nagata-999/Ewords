@@ -2161,7 +2161,18 @@ html, body {
 </style>
 
 <link rel="canonical" href="https://sushitan.net/antonitan">
-<script defer src="/sushigacha/site-taskbar.js?v=20261010-1"></script></head>
+<script defer src="/sushigacha/site-taskbar.js?v=20261010-1"></script>
+<style id="word-choice-layout">
+/* Reflow choices without depending on the shared navigation loader. */
+body .app{height:calc(100vh - var(--sushi-taskbar-space,136px));min-height:0;overflow-y:auto!important}
+@supports(height:100dvh){body .app{height:calc(100dvh - var(--sushi-taskbar-space,136px))}}
+.app>.topbar,.app>.question-card,.app>.feedback,.app>.bottom{flex-shrink:0}
+.app .arena{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:minmax(64px,auto);align-content:start;gap:14px;padding:14px;flex:1 0 auto;min-height:320px;overflow:visible}
+.app .arena .balloon{position:relative!important;left:auto!important;top:auto!important;width:100%;min-width:0;max-width:none;height:auto;min-height:64px;padding:12px 10px;white-space:normal;overflow-wrap:anywhere;word-break:normal;text-overflow:clip;line-height:1.4;box-sizing:border-box}
+.app .question-text{overflow-wrap:anywhere;line-height:1.4}
+@media(max-width:360px){.app .arena{gap:10px;padding:10px}.app .arena .balloon{font-size:16px}}
+</style>
+</head>
 <body>
 
 <button class="hamburger-btn" id="hamburgerBtn" aria-label="サイトメニューを開く" aria-expanded="false">
@@ -3763,9 +3774,7 @@ html, body {
     if (rankingTabShino) rankingTabShino.addEventListener('click', () => openRankingScreen(MODE_SHINO));
     if (rankingTabAntoni) rankingTabAntoni.addEventListener('click', () => openRankingScreen(MODE_ANTONI));
 
-    window.addEventListener('resize', () => {
-      if (GAME.running) renderQuestion();
-    });
+    // CSS reflows existing choices on resize without changing the question.
 
     updateModeBadge();
     showHomeSubPanel('home');
