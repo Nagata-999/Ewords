@@ -719,7 +719,11 @@ const QUESTIONS = [{"cat":"Chemistry","q":"What is the chemical symbol for gold?
 const SUPABASE_URL = "https://rxyoyveykxdfrpomkltl.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_RmWOSxRfsV5YRwCDnKPPAQ_m3VzsUM7";
 const HAS_SUPABASE = !!(SUPABASE_URL && (typeof SUPABASE_ANON_KEY !== "undefined" ? SUPABASE_ANON_KEY : SUPABASE_PUBLISHABLE_KEY) && window.supabase);
-const sb = HAS_SUPABASE ? window.supabase.createClient(SUPABASE_URL, (typeof SUPABASE_ANON_KEY !== "undefined" ? SUPABASE_ANON_KEY : SUPABASE_PUBLISHABLE_KEY)) : null;
+// Public quiz rooms use the existing anon policies, independently of account sync.
+// Never consume or overwrite the shared account's persisted auth session.
+const sb = HAS_SUPABASE ? window.supabase.createClient(SUPABASE_URL, (typeof SUPABASE_ANON_KEY !== "undefined" ? SUPABASE_ANON_KEY : SUPABASE_PUBLISHABLE_KEY), {
+  auth: {persistSession:false,autoRefreshToken:false,detectSessionInUrl:false,storageKey:"sushi-quiz-public-room"}
+}) : null;
 const screens=["home","homeRanking","soloSetup","soloGame","soloOver","localSetup","localHost","localPad","localResult","localFinal","onlineMenu","onlineHostSetup","onlineLobby","onlineHostGame","onlineResult","onlineRanking","join","playerWait","playerGame","buzzerMenu","buzzerLobby","buzzerJoin","buzzerHostGame","buzzerPlayerWait","buzzerPlayerGame","buzzerResult","buzzerRanking"];
 let solo={}, local={players:[]}, online={}, timer=null;
 function hide(){screens.forEach(id=>document.getElementById(id).classList.add("hidden"))} function show(id){hide();document.getElementById(id).classList.remove("hidden")} function home(){stop(); if(typeof stopBuzzerTimer==='function') stopBuzzerTimer(); show("home")}
