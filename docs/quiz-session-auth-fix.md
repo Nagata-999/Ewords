@@ -1,0 +1,5 @@
+# すしクイズのセッション作成修正
+2026-11-04。public.sushi_quiz_sessions / sushi_quiz_players はRLS有効で、SELECT/INSERT/UPDATEポリシーはanonのみ。authenticatedにはテーブル権限はありますが、行ポリシーがありません。
+既定のSupabaseクライアントは共通アカウントの保存済みセッションを読み込みます。SQLでauthenticatedの作成が42501、anonの同一payloadが成功することを再現しました。テストのINSERTはROLLBACKし、データを残していません。
+クイズ部屋は公開・ログイン不要という現在の仕様を維持し、専用storageKey、persistSession:false、autoRefreshToken:false、detectSessionInUrl:falseで共通アカウントから分離します。ログアウト操作やDBポリシー変更はしません。通常対戦と早押しは同じクライアントを使います。
+公開部屋の既存ポリシーは広い匿名アクセスを許しています。この修正で権限を拡張していません。部屋の所有権・ホスト権限を厳密にする設計は別作業です。
