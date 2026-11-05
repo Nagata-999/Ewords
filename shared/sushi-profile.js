@@ -110,7 +110,9 @@
   }
   async function syncNow(){
     if(syncInFlight){syncAgain=true;return syncInFlight}
-    syncInFlight=withWalletTransaction(runSync).then(async result=>{await syncOutcomes().catch(error=>console.warn('Achievement outcome sync:',error));return result});
+    // Outcome-history transfer is disabled to prevent repeated full-history uploads/downloads.
+    // Keep normal profile, wallet and achievement synchronization active.
+    syncInFlight=withWalletTransaction(runSync);
     try{return await syncInFlight}
     finally{syncInFlight=null;if(syncAgain){syncAgain=false;queueMicrotask(()=>syncNow().catch(()=>{}))}}
   }
