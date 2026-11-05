@@ -4,8 +4,10 @@ on:
     paths:
       - 'cloudflare/quiz/**'
       - 'shared/quiz-d1.js'
+      - 'shared/quiz-poll.js'
       - 'sushi_quiz*.html'
       - 'tests/quiz-d1.test.mjs'
+      - 'tests/quiz-poll.test.mjs'
       - '.github/workflows/quiz-d1.yml'
   workflow_dispatch:
 jobs:
@@ -16,4 +18,4 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - run: node --test tests/quiz-d1.test.mjs
+      - run: node --test tests/quiz-d1.test.mjs tests/quiz-poll.test.mjs tests/quiz-public-client.cjs

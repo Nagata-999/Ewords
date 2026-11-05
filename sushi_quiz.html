@@ -2,7 +2,8 @@
 <html lang="ja">
 <head>
 <script src="/shared/ranking-d1.js?v=20261022-d1"></script>
-<script src="/shared/quiz-d1.js?v=20261105-1"></script>
+<script src="/shared/quiz-poll.js?v=20261106-1"></script>
+<script src="/shared/quiz-d1.js?v=20261106-1"></script>
 <script src="/sushigacha/achievement-ledger.js?v=20261010-1"></script>
 <script src="/sushigacha/achievement-events.js?v=20261010-1"></script>
 <script src="shared/player.js?v=20260923-1"></script>
@@ -826,8 +827,8 @@ function pick(cat, used=[]){
   if(!p.length) p=pool(cat);
   return shuffle(p)[0];
 }
-function code4(){return String(100000+crypto.getRandomValues(new Uint32Array(1))[0]%900000)} function key(c,t){return "sq_"+c+"_"+t} function setL(c,t,o){localStorage.setItem(key(c,t),JSON.stringify(o))} function getL(c,t){try{return JSON.parse(localStorage.getItem(key(c,t))||"null")}catch(e){return null}} let pollEpoch=0;function stop(){pollEpoch++;if(timer)clearTimeout(timer);timer=null}
-function startRoomPoll(fn){const epoch=pollEpoch;const run=async()=>{try{await fn()}catch(e){console.error('quiz poll failed',e)}finally{if(epoch===pollEpoch)timer=setTimeout(run,1000)}};run()}
+function code4(){return String(100000+crypto.getRandomValues(new Uint32Array(1))[0]%900000)} function key(c,t){return "sq_"+c+"_"+t} function setL(c,t,o){localStorage.setItem(key(c,t),JSON.stringify(o))} function getL(c,t){try{return JSON.parse(localStorage.getItem(key(c,t))||"null")}catch(e){return null}} let cancelRoomPoll=null;function stop(){if(cancelRoomPoll)cancelRoomPoll();cancelRoomPoll=null;if(timer)clearTimeout(timer);timer=null}
+function startRoomPoll(fn,code){cancelRoomPoll=window.SushiQuizPoll(fn,{isHost:()=>sb.isHost(code),delay:()=>sb.pollDelay(code)});}
 
 function cleanPlayerName(name){
   return String(name || "")
@@ -1036,9 +1037,9 @@ function pollHost(){stop();let f=async()=>{if(HAS_ONLINE){let {data,error}=await
   if(allPlayersAnswered(online.players, online.idx)){
     revealOnline();
   }
-}};startRoomPoll(f)}
+}};startRoomPoll(f,online.code)}
 async function startOnline(){if(!online.players.length)return alert("No players");runQuizCountdown(async()=>{online.idx=0;online.used=[];await setOnlineQ();show("onlineHostGame");renderOnlineHost();});}
-async function setOnlineQ(){online.revealing=false; let q=pick(online.cat,online.used);online.cur=q;online.used.push(q.q);onlineQuestionStart=Date.now();if(HAS_ONLINE){const qUpdate=await sb.from("sushi_quiz_sessions").update({status:"question",q_index:online.idx,current_question:{...q, started_at:onlineQuestionStart}}).eq("code",online.code); if(qUpdate.error){alert("問題の送信に失敗しました。"); console.error(qUpdate.error); return;} const pReset=await sb.from("sushi_quiz_players").update({last_answer:null,answered_q_index:-1}).eq("session_code",online.code); if(pReset.error){console.error("player reset failed", pReset.error);}}else{setL(online.code,"session",{code:online.code,status:"question",q_index:online.idx,current_question:{...q, started_at:onlineQuestionStart}});setL(online.code,"players",(getL(online.code,"players")||[]).map(p=>({...p,last_answer:null,answered_q_index:-1})))}}
+async function setOnlineQ(){online.revealing=false; let q=pick(online.cat,online.used);online.cur=q;online.used.push(q.q);onlineQuestionStart=Date.now();if(HAS_ONLINE){const qUpdate=await sb.from("sushi_quiz_sessions").update({status:"question",q_index:online.idx,current_question:{...q, started_at:onlineQuestionStart}}).eq("code",online.code); if(qUpdate.error){alert("問題の送信に失敗しました。"); console.error(qUpdate.error); return;}}else{setL(online.code,"session",{code:online.code,status:"question",q_index:online.idx,current_question:{...q, started_at:onlineQuestionStart}});setL(online.code,"players",(getL(online.code,"players")||[]).map(p=>({...p,last_answer:null,answered_q_index:-1})))}}
 function renderOnlineHost(){let c=online.cur; startHostTimer();ohBadge.textContent=`${c.cat}`;ohProg.textContent=`Session ${online.code}｜Question ${online.idx+1} / ${online.len}`;ohQ.textContent=c.q;ohChoices.innerHTML="";c.choices.forEach((x,i)=>{let d=document.createElement("div");d.className="choice";d.innerHTML=`<b>${["▲ A","◆ B","● C","■ D"][i]}.</b> ${x}`;ohChoices.appendChild(d)});ohStatus.textContent=`Answers: 0 / ${online.players.length}`; renderAnsweredBar("hostAnsweredBar", online.players, online.idx)}
 async function revealOnline(){
   if(online.revealing) return;
@@ -1186,7 +1187,7 @@ function pollPlayer(){
       renderAnsweredBar("playerAnsweredBar", players, s.q_index);
     }
   };
-  startRoomPoll(f);
+  startRoomPoll(f,online.code);
 }
 async function submitPlayer(a){
  const buttons=['pa','pb','pc','pd'].map(id=>document.getElementById(id));buttons.forEach(el=>el.disabled=true);
@@ -1247,7 +1248,7 @@ function pollBuzzerHost(){
       }
     }
   };
-  startRoomPoll(tick);
+  startRoomPoll(tick,buzzer.code);
 }
 
 async function joinBuzzer(){
@@ -1296,7 +1297,7 @@ async function setBuzzerQuestion(){
   const cq={...q, started_at:buzzer.start, mode:"buzzer"};
   if(HAS_ONLINE){
     await sb.from("sushi_quiz_sessions").update({status:"buzzer_question",q_index:buzzer.idx,current_question:cq}).eq("code",buzzer.code);
-    await sb.from("sushi_quiz_players").update({last_answer:null,answered_q_index:-1,meta:{current_streak:0}}).eq("session_code",buzzer.code);
+    // The D1 question transaction already resets all participants.
   }else{
     setL(buzzer.code,"session",{code:buzzer.code,status:"buzzer_question",q_index:buzzer.idx,current_question:cq});
     setL(buzzer.code,"players",(getL(buzzer.code,"players")||[]).map(p=>({...p,last_answer:null,answered_q_index:-1,meta:{...(p.meta||{}),buzzer_locked:false,buzzer_winner_q:null}})));
@@ -1395,7 +1396,7 @@ function pollBuzzerPlayer(){
       buzzerPlayerMsg.textContent="Result shown. Wait for next question.";
     }
   };
-  startRoomPoll(tick);
+  startRoomPoll(tick,buzzer.code);
 }
 
 async function submitBuzzer(ans){
