@@ -77,7 +77,7 @@ const sizes = [[1366, 768], [1024, 600], [800, 450], [640, 360], [390, 844], [32
           // Wrong answers disappear without rearranging surviving choices.
           const stationary = await page.evaluate(() => {
             const { GAME } = window.__wordLayout;
-            const positions = () => GAME.balloons.map(b => [b.el.textContent, b.el.style.left, b.el.style.top]);
+            const positions = () => GAME.balloons.map(b => { const r = b.el.getBoundingClientRect(); return [b.el.textContent, r.left, r.top, b.el.style.getPropertyValue('--word-choice-x'), b.el.style.getPropertyValue('--word-choice-y')]; });
             const wrong = GAME.balloons.splice(2, 1)[0];
             const before = positions();
             wrong.el.remove();
