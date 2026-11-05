@@ -500,6 +500,10 @@
       animation: comboBreakAnim 0.95s ease-out;
     }
 
+
+    .saved-review-details { margin-top: 10px; }
+    .saved-review-details summary { cursor: pointer; font-weight: 700; padding: 12px 14px; border-radius: 12px; background: rgba(255,255,255,.08); user-select: none; }
+    .saved-review-details[open] summary { margin-bottom: 10px; }
     .mistake-list {
       margin-top: 12px;
       padding: 12px;
@@ -2553,18 +2557,22 @@ body .app .arena .balloon{position:relative!important;left:auto!important;top:au
           </div>
 
           <p style="font-size:12px;opacity:.65;margin:8px 0">1,500点超で限定アバターゲット（全レベル共通）</p>
-          <section class="home-section" aria-label="復習リスト">
-            <h3>📝 間違えた単語 <span id="savedReviewCount">0</span>語</h3>
-            <div id="savedReviewList" class="mistake-list"></div>
-            <p class="small">このブラウザに自動保存。全レベルの苦手単語を、時間制限なしで復習できます。繰り返し正解でリストから外れます。</p>
-            <div class="menu-btns"><button class="btn green" id="startReviewBtn" disabled>復習する</button><button class="btn secondary" id="clearReviewBtn">リストを消去</button></div>
-            <p class="small" id="reviewStorageStatus" role="status"></p>
-          </section>
+
           <div class="menu-btns">
             <button class="btn primary" id="openSushiStartBtn">ゲームスタート</button>
             <button class="btn gold" id="openRankingBtn">ランキング</button>
             <a class="btn secondary" href="index.html" style="text-decoration:none;text-align:center;">トップページに戻る</a>
           </div>
+          <section class="home-section" aria-label="復習リスト">
+            <h3>📝 間違えた単語 <span id="savedReviewCount">0</span>語</h3>
+            <details id="savedReviewDetails" class="saved-review-details">
+              <summary>間違えた単語リストを表示・非表示</summary>
+              <div id="savedReviewList" class="mistake-list"></div>
+            </details>
+            <p class="small">このブラウザに自動保存。全レベルの苦手単語を、時間制限なしで復習できます。繰り返し正解でリストから外れます。</p>
+            <div class="menu-btns"><button class="btn green" id="startReviewBtn" disabled>復習する</button><button class="btn secondary" id="clearReviewBtn">リストを消去</button></div>
+            <p class="small" id="reviewStorageStatus" role="status"></p>
+          </section>
         </div>
 
         <div id="gameStartPanel" class="info-page hidden">
