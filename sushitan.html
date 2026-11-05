@@ -2331,7 +2331,7 @@ body .app{height:calc(100vh - var(--sushi-taskbar-space,136px));min-height:0;ove
 @supports(height:100dvh){body .app{height:calc(100dvh - var(--sushi-taskbar-space,136px))}}
 .app>.topbar,.app>.question-card,.app>.feedback,.app>.bottom{flex-shrink:0}
 body .app .arena{display:block!important;position:relative!important;flex:1 0 auto;min-height:320px;overflow:visible!important;padding:14px;box-sizing:border-box}
-body .app .arena .balloon{position:absolute!important;width:max-content!important;min-width:0;max-width:none;height:auto;min-height:64px;padding:12px 10px;white-space:normal;overflow-wrap:anywhere;word-break:normal;text-overflow:clip;line-height:1.4;box-sizing:border-box}
+body .app .arena .balloon{position:absolute!important;left:var(--word-choice-x,0px)!important;top:var(--word-choice-y,0px)!important;width:max-content!important;min-width:0;max-width:none;height:auto;min-height:64px;padding:12px 10px;white-space:normal;overflow-wrap:anywhere;word-break:normal;text-overflow:clip;line-height:1.4;box-sizing:border-box}
 .app .question-text{overflow-wrap:anywhere;line-height:1.4}
 @media(max-width:360px){body .app .arena .balloon{font-size:16px}}
 </style>
@@ -3574,8 +3574,8 @@ body .app .arena .balloon{position:absolute!important;width:max-content!importan
       active.forEach((balloon, index) => {
         const btn = balloon.el;
         btn.style.maxWidth = Math.max(90, Math.floor(cellWidth - 8)) + 'px';
-        btn.style.left = '0px';
-        btn.style.top = '0px';
+        btn.style.setProperty('--word-choice-x', '0px');
+        btn.style.setProperty('--word-choice-y', '0px');
         const rect = btn.getBoundingClientRect();
         balloon.w = Math.ceil(rect.width);
         balloon.h = Math.ceil(rect.height);
@@ -3592,8 +3592,8 @@ body .app .arena .balloon{position:absolute!important;width:max-content!importan
           const verticalSlack = Math.max(0, rowHeights[row] - balloon.h - 2);
           balloon.x = Math.round(padding + col * (cellWidth + gap) + Math.random() * horizontalSlack);
           balloon.y = Math.round(rowTop + Math.random() * verticalSlack);
-          balloon.el.style.left = balloon.x + 'px';
-          balloon.el.style.top = balloon.y + 'px';
+          balloon.el.style.setProperty('--word-choice-x', balloon.x + 'px');
+          balloon.el.style.setProperty('--word-choice-y', balloon.y + 'px');
         }
         rowTop += rowHeights[row] + gap;
       }
