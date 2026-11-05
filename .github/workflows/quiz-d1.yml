@@ -1,0 +1,19 @@
+name: Quiz D1
+on:
+  pull_request:
+    paths:
+      - 'cloudflare/quiz/**'
+      - 'shared/quiz-d1.js'
+      - 'sushi_quiz*.html'
+      - 'tests/quiz-d1.test.mjs'
+      - '.github/workflows/quiz-d1.yml'
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node --test tests/quiz-d1.test.mjs
