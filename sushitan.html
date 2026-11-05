@@ -2326,14 +2326,14 @@ html, body {
 <script defer src="/sushigacha/site-taskbar.js?v=20261010-personality1"></script><link rel="stylesheet" href="shared/learning-paths.css">
 
 <style id="word-choice-layout">
-/* Reflow choices without depending on the shared navigation loader. */
+/* Keep the original scattered, fixed-position choices while allowing scrolling on short viewports. */
 body .app{height:calc(100vh - var(--sushi-taskbar-space,136px));min-height:0;overflow-y:auto!important}
 @supports(height:100dvh){body .app{height:calc(100dvh - var(--sushi-taskbar-space,136px))}}
 .app>.topbar,.app>.question-card,.app>.feedback,.app>.bottom{flex-shrink:0}
-.app .arena{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:minmax(64px,auto);align-content:start;gap:14px;padding:14px;flex:1 0 auto;min-height:320px;overflow:visible}
-.app .arena .balloon{position:relative!important;left:auto!important;top:auto!important;width:100%;min-width:0;max-width:none;height:auto;min-height:64px;padding:12px 10px;white-space:normal;overflow-wrap:anywhere;word-break:normal;text-overflow:clip;line-height:1.4;box-sizing:border-box}
+body .app .arena{display:block!important;position:relative!important;flex:1 0 auto;min-height:320px;overflow:visible!important;padding:14px;box-sizing:border-box}
+body .app .arena .balloon{position:absolute!important;width:max-content!important;min-width:0;max-width:none;height:auto;min-height:64px;padding:12px 10px;white-space:normal;overflow-wrap:anywhere;word-break:normal;text-overflow:clip;line-height:1.4;box-sizing:border-box}
 .app .question-text{overflow-wrap:anywhere;line-height:1.4}
-@media(max-width:360px){.app .arena{gap:10px;padding:10px}.app .arena .balloon{font-size:16px}}
+@media(max-width:360px){body .app .arena .balloon{font-size:16px}}
 </style>
 </head>
 <body class="learning-game">
@@ -3560,74 +3560,54 @@ body .app{height:calc(100vh - var(--sushi-taskbar-space,136px));min-height:0;ove
       }, 520);
     }
 
+    // Positions are assigned only at question creation or viewport resize.
+    // Removing a wrong answer never changes the coordinates of remaining answers.
+    function layoutBalloons() {
+      const active = GAME.balloons.filter(b => b.el.isConnected && !b.el.classList.contains('deflate-fall') && !b.el.classList.contains('pop-out'));
+      const padding = 14;
+      const gap = 14;
+      const availableWidth = Math.max(1, arena.clientWidth - padding * 2);
+      const cols = availableWidth >= 500 ? 2 : 1;
+      const cellWidth = (availableWidth - (cols - 1) * gap) / cols;
+      const rowHeights = [];
+
+      active.forEach((balloon, index) => {
+        const btn = balloon.el;
+        btn.style.maxWidth = Math.max(90, Math.floor(cellWidth - 8)) + 'px';
+        btn.style.left = '0px';
+        btn.style.top = '0px';
+        const rect = btn.getBoundingClientRect();
+        balloon.w = Math.ceil(rect.width);
+        balloon.h = Math.ceil(rect.height);
+        const row = Math.floor(index / cols);
+        rowHeights[row] = Math.max(rowHeights[row] || 0, balloon.h + 10);
+      });
+
+      let rowTop = padding;
+      for (let row = 0; row < rowHeights.length; row++) {
+        for (let col = 0; col < cols; col++) {
+          const balloon = active[row * cols + col];
+          if (!balloon) continue;
+          const horizontalSlack = Math.max(0, cellWidth - balloon.w);
+          const verticalSlack = Math.max(0, rowHeights[row] - balloon.h - 2);
+          balloon.x = Math.round(padding + col * (cellWidth + gap) + Math.random() * horizontalSlack);
+          balloon.y = Math.round(rowTop + Math.random() * verticalSlack);
+          balloon.el.style.left = balloon.x + 'px';
+          balloon.el.style.top = balloon.y + 'px';
+        }
+        rowTop += rowHeights[row] + gap;
+      }
+      arena.style.minHeight = Math.max(320, Math.ceil(rowTop + padding - gap)) + 'px';
+    }
+
     function createBalloon(text, type, index, total) {
       const btn = document.createElement('button');
       btn.className = 'balloon';
       btn.textContent = text;
       btn.dataset.type = type;
       btn.dataset.value = text;
-
       arena.appendChild(btn);
-
-      const arenaRect = arena.getBoundingClientRect();
-      const btnRect = btn.getBoundingClientRect();
-      const padding = 12;
-      const gap = 14;
-      const balloonW = Math.ceil(btnRect.width);
-      const balloonH = Math.ceil(btnRect.height);
-
-      const cols = 2;
-      const rows = Math.ceil(total / cols);
-      const col = index % cols;
-      const row = Math.floor(index / cols);
-      const cellW = arenaRect.width / cols;
-      const cellH = arenaRect.height / Math.max(rows, 3);
-
-      let minX = Math.max(padding, col * cellW + 6);
-      let maxX = Math.min(arenaRect.width - balloonW - padding, (col + 1) * cellW - balloonW - 6);
-      let minY = Math.max(padding, row * cellH + 6);
-      let maxY = Math.min(arenaRect.height - balloonH - padding, (row + 1) * cellH - balloonH - 6);
-
-      if (maxX < minX) { minX = Math.max(padding, Math.min(minX, arenaRect.width - balloonW - padding)); maxX = minX; }
-      if (maxY < minY) { minY = Math.max(padding, Math.min(minY, arenaRect.height - balloonH - padding)); maxY = minY; }
-
-      let x = minX;
-      let y = minY;
-      let placed = false;
-
-      for (let attempt = 0; attempt < 60; attempt++) {
-        const testX = minX + Math.random() * Math.max(0, maxX - minX);
-        const testY = minY + Math.random() * Math.max(0, maxY - minY);
-
-        const overlaps = GAME.balloons.some(b => {
-          return !(
-            testX + balloonW + gap < b.x ||
-            testX > b.x + b.w + gap ||
-            testY + balloonH + gap < b.y ||
-            testY > b.y + b.h + gap
-          );
-        });
-
-        if (!overlaps) {
-          x = testX;
-          y = testY;
-          placed = true;
-          break;
-        }
-      }
-
-      if (!placed) {
-        const fallbackX = col * cellW + (cellW - balloonW) / 2;
-        const fallbackY = row * cellH + (cellH - balloonH) / 2;
-        x = Math.max(padding, Math.min(arenaRect.width - balloonW - padding, fallbackX));
-        y = Math.max(padding, Math.min(arenaRect.height - balloonH - padding, fallbackY));
-      }
-
-      btn.style.left = `${x}px`;
-      btn.style.top = `${y}px`;
-
-      const balloonObj = { el: btn, x, y, w: balloonW, h: balloonH };
-      GAME.balloons.push(balloonObj);
+      GAME.balloons.push({el: btn, x: 0, y: 0, w: 0, h: 0});
       btn.addEventListener('click', () => handleTap(btn));
     }
 
@@ -3672,6 +3652,7 @@ body .app{height:calc(100vh - var(--sushi-taskbar-space,136px));min-height:0;ove
         const type = choice === answer ? 'correct' : 'wrong';
         createBalloon(choice, type, index, choices.length);
       });
+      layoutBalloons();
     }
 
     function handleComboOnCorrect(now) {
@@ -4264,7 +4245,9 @@ body .app{height:calc(100vh - var(--sushi-taskbar-space,136px));min-height:0;ove
       });
     }
 
-    // CSS reflows existing choices on resize without changing the question.
+    window.addEventListener('resize', () => {
+      if (GAME.running) layoutBalloons();
+    });
 
     document.getElementById('startReviewBtn').addEventListener('click', () => startGame(MODE_SUSHI, SUSHI_LEVEL_ALL, true));
     document.getElementById('endReviewBtn').addEventListener('click', endReview);
