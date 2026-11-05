@@ -2159,14 +2159,14 @@ html, body {
 <script defer src="/shared/shino-thinking.js?v=20261016-2"></script>
 
 <style id="word-choice-layout">
-/* Keep the original scattered, fixed-position choices while allowing scrolling on short viewports. */
+/* Responsive grid: keep the original DOM slots after wrong answers disappear. */
 body .app{height:calc(100vh - var(--sushi-taskbar-space,136px));min-height:0;overflow-y:auto!important}
 @supports(height:100dvh){body .app{height:calc(100dvh - var(--sushi-taskbar-space,136px))}}
 .app>.topbar,.app>.question-card,.app>.feedback,.app>.bottom{flex-shrink:0}
-body .app .arena{display:block!important;position:relative!important;flex:1 0 auto;min-height:320px;overflow:visible!important;padding:14px;box-sizing:border-box}
-body .app .arena .balloon{position:absolute!important;left:var(--word-choice-x,0px)!important;top:var(--word-choice-y,0px)!important;width:max-content!important;min-width:0;max-width:none;height:auto;min-height:64px;padding:12px 10px;white-space:normal;overflow-wrap:anywhere;word-break:normal;text-overflow:clip;line-height:1.4;box-sizing:border-box}
+body .app .arena{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:minmax(64px,auto);align-content:start;gap:14px;padding:14px;flex:1 0 auto;min-height:320px;overflow:visible;box-sizing:border-box}
+body .app .arena .balloon{position:relative!important;left:auto!important;top:auto!important;width:100%!important;min-width:0;max-width:none!important;height:auto;min-height:64px;padding:12px 10px;white-space:normal;overflow-wrap:anywhere;word-break:normal;text-overflow:clip;line-height:1.4;box-sizing:border-box}
 .app .question-text{overflow-wrap:anywhere;line-height:1.4}
-@media(max-width:360px){body .app .arena .balloon{font-size:16px}}
+@media(max-width:360px){body .app .arena{gap:10px;padding:10px}body .app .arena .balloon{font-size:16px}}
 </style>
 </head>
 <body class="learning-game"><script>(()=>{const KEY='sushitan_login_bonus_v1',ACTIVE_KEY='sushitan_daily_active_v1',ALL=['sushitan','shino','antoni','idiom','quiz','talk','world','run'];const day=()=>{const d=new Date();d.setHours(d.getHours()-6);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}function pick(date){let seed=hash('sushitan-daily-'+date),a=[...ALL];for(let i=a.length-1;i>0;i--){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const j=seed%(i+1);[a[i],a[j]]=[a[j],a[i]]}return a.slice(0,4)}function activeFor(today){try{const s=JSON.parse(localStorage.getItem(ACTIVE_KEY)||'null');if(s&&s.day===today&&Array.isArray(s.active)&&s.active.length===4)return s.active}catch(e){}const a=pick(today);localStorage.setItem(ACTIVE_KEY,JSON.stringify({day:today,active:a}));return a}function flash(n){let x=document.getElementById('shinoDailyToast');if(!x){x=document.createElement('div');x.id='shinoDailyToast';x.style.cssText='position:fixed;left:50%;bottom:80px;transform:translateX(-50%);z-index:999999;background:#173f37;color:#fff;padding:9px 14px;border-radius:999px;font:900 12px system-ui;box-shadow:0 6px 18px #0003;pointer-events:none';document.body.appendChild(x)}x.textContent='デイリー しの単 '+n+'/20';clearTimeout(x._t);x._t=setTimeout(()=>x.remove(),1200)}function add(){const today=day(),active=activeFor(today);if(!active.includes('shino'))return;let l={};try{l=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){};let q=l.dailyQuests;if(!q||q.day!==today){q=l.dailyQuests={day:today,active:[...active],progress:{},claimed:{},chestClaimed:false,chestReward:0}}else{q.active=[...active]}q.progress=q.progress&&typeof q.progress==='object'?q.progress:{};q.claimed=q.claimed&&typeof q.claimed==='object'?q.claimed:{};if(q.claimed.shino)return;q.progress.shino=Math.min(20,(Number(q.progress.shino)||0)+1);if(q.progress.shino>=20){q.claimed.shino=true;l.gems=(Number.isSafeInteger(l.gems)?l.gems:0)+10}localStorage.setItem(KEY,JSON.stringify(l));window.dispatchEvent(new CustomEvent('sushi-daily-quest-change'));flash(q.progress.shino)}function hit(e){const b=e.target.closest?.('.balloon[data-type="correct"]');if(!b||b.dataset.shinoDailyCounted==='1')return;b.dataset.shinoDailyCounted='1';add()}document.addEventListener('pointerdown',hit,true);document.addEventListener('click',hit,true);const thinkingSeen=new Set();window.addEventListener('sushi-shino-thinking-correct',e=>{const id=e.detail?.id;if(typeof id!=='string'||thinkingSeen.has(id))return;thinkingSeen.add(id);try{add()}catch{}})})();</script>
@@ -3190,51 +3190,18 @@ body .app .arena .balloon{position:absolute!important;left:var(--word-choice-x,0
 
     function removeBalloon(button) {
       GAME.balloons = GAME.balloons.filter(b => b.el !== button);
+      // visibility:hidden preserves the grid cell; display:none/remove would reflow.
       setTimeout(() => {
-        if (button && button.parentNode) button.remove();
+        if (button && button.parentNode) {
+          button.style.visibility = 'hidden';
+          button.disabled = true;
+          button.setAttribute('aria-hidden', 'true');
+          button.tabIndex = -1;
+        }
       }, 520);
     }
 
-    // Positions are assigned only at question creation or viewport resize.
-    // Removing a wrong answer never changes the coordinates of remaining answers.
-    function layoutBalloons() {
-      const active = GAME.balloons.filter(b => b.el.isConnected && !b.el.classList.contains('deflate-fall') && !b.el.classList.contains('pop-out'));
-      const padding = 14;
-      const gap = 14;
-      const availableWidth = Math.max(1, arena.clientWidth - padding * 2);
-      const cols = availableWidth >= 500 ? 2 : 1;
-      const cellWidth = (availableWidth - (cols - 1) * gap) / cols;
-      const rowHeights = [];
-
-      active.forEach((balloon, index) => {
-        const btn = balloon.el;
-        btn.style.maxWidth = Math.max(90, Math.floor(cellWidth - 8)) + 'px';
-        btn.style.setProperty('--word-choice-x', '0px');
-        btn.style.setProperty('--word-choice-y', '0px');
-        const rect = btn.getBoundingClientRect();
-        balloon.w = Math.ceil(rect.width);
-        balloon.h = Math.ceil(rect.height);
-        const row = Math.floor(index / cols);
-        rowHeights[row] = Math.max(rowHeights[row] || 0, balloon.h + 10);
-      });
-
-      let rowTop = padding;
-      for (let row = 0; row < rowHeights.length; row++) {
-        for (let col = 0; col < cols; col++) {
-          const balloon = active[row * cols + col];
-          if (!balloon) continue;
-          const horizontalSlack = Math.max(0, cellWidth - balloon.w);
-          const verticalSlack = Math.max(0, rowHeights[row] - balloon.h - 2);
-          balloon.x = Math.round(padding + col * (cellWidth + gap) + Math.random() * horizontalSlack);
-          balloon.y = Math.round(rowTop + Math.random() * verticalSlack);
-          balloon.el.style.setProperty('--word-choice-x', balloon.x + 'px');
-          balloon.el.style.setProperty('--word-choice-y', balloon.y + 'px');
-        }
-        rowTop += rowHeights[row] + gap;
-      }
-      arena.style.minHeight = Math.max(320, Math.ceil(rowTop + padding - gap)) + 'px';
-    }
-
+    // Grid layout is handled by CSS. Keep each wrong choice's DOM slot in place.
     function createBalloon(text, type, index, total) {
       const btn = document.createElement('button');
       btn.className = 'balloon';
@@ -3242,7 +3209,7 @@ body .app .arena .balloon{position:absolute!important;left:var(--word-choice-x,0
       btn.dataset.type = type;
       btn.dataset.value = text;
       arena.appendChild(btn);
-      GAME.balloons.push({el: btn, x: 0, y: 0, w: 0, h: 0});
+      GAME.balloons.push({el: btn});
       btn.addEventListener('click', () => handleTap(btn));
     }
 
@@ -3286,7 +3253,6 @@ body .app .arena .balloon{position:absolute!important;left:var(--word-choice-x,0
         const type = choice === answer ? 'correct' : 'wrong';
         createBalloon(choice, type, index, choices.length);
       });
-      layoutBalloons();
     }
 
     function handleComboOnCorrect(now) {
@@ -3765,9 +3731,7 @@ body .app .arena .balloon{position:absolute!important;left:var(--word-choice-x,0
     if (rankingTabShino) rankingTabShino.addEventListener('click', () => openRankingScreen(MODE_SHINO));
     if (rankingTabAntoni) rankingTabAntoni.addEventListener('click', () => openRankingScreen(MODE_ANTONI));
 
-    window.addEventListener('resize', () => {
-      if (GAME.running) layoutBalloons();
-    });
+    // CSS grid responds to resizing without regenerating the question.
 
     updateModeBadge();
     showHomeSubPanel('home');
