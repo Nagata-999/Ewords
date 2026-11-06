@@ -6,11 +6,13 @@
  if(typeof module!=='undefined'&&module.exports)module.exports=api;
  if(root)root.SushiAchievementTransport=api;
 })(typeof window==='undefined'?null:window,function(){
- async function synchronize(ledger,request,{pageSize=500,maxPages=10000}={}){
+ async function synchronize(ledger,request,{pageSize=500,maxPages=10000,acknowledged={},onAcknowledged=()=>{}}={}){
    if(!ledger||typeof ledger.exportAllPages!=='function'||typeof ledger.importEvents!=='function')throw new TypeError('invalid_ledger');
    if(typeof request!=='function')throw new TypeError('invalid_request');
    if(!Number.isSafeInteger(pageSize)||pageSize<1||pageSize>500||!Number.isSafeInteger(maxPages)||maxPages<1||maxPages>10000)throw new RangeError('invalid_sync_limits');
-   const pages=ledger.exportAllPages(pageSize);
+   const signature=e=>JSON.stringify([e.id,e.version,e.game,e.correct,e.at]);
+   const pending=ledger.exportAllPages(pageSize).flatMap(page=>page.events).filter(e=>acknowledged[e.id]!==signature(e));
+   const pages=[];for(let i=0;i<pending.length;i+=pageSize)pages.push({events:pending.slice(i,i+pageSize)});
    if(pages.length>maxPages)throw new Error('too_many_local_pages');
    let sent=0,received=0,conflicts=0,rejected=0,rounds=0;
    let cursor=null,uploadIndex=0;
@@ -39,6 +41,9 @@
      if(response.achievements.events.some(e=>!e||e.version!==2||typeof e.id!=='string'||!/^[A-Za-z0-9:_-]{1,159}$/.test(e.id)||typeof e.game!=='string'||!/^[a-z0-9_-]{1,40}$/.test(e.game)||!Number.isSafeInteger(e.correct)||e.correct<1||e.correct>1000||!Number.isFinite(e.at)||e.at<0||e.at>8640000000000000))throw new Error('invalid_server_events');
      const imported=ledger.importEvents(response.achievements.events);
      if(imported.conflicts||imported.rejected)throw new Error('invalid_server_events');
+     // Persist acknowledgments only after the complete server page passed validation.
+     const confirmed={};for(const e of [...events,...response.achievements.events])confirmed[e.id]=signature(e);
+     onAcknowledged(confirmed);
      received+=imported.added;conflicts+=imported.conflicts;rejected+=imported.rejected;
      if(next!==null&&next!==undefined)visited.add(next);
      cursor=next??null;
