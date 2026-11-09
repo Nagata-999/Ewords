@@ -1,6 +1,6 @@
 'use strict';
 /* Transport-independent protocol. Caller must supply an authenticated request(payload)
- * implemented by the PIN-verified server endpoint. Not enabled in production. */
+ * implemented by the PIN-verified server endpoint. Supports legacy and delta sync. */
 (function(root,factory){
  const api=factory();
  if(typeof module!=='undefined'&&module.exports)module.exports=api;

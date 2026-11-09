@@ -20,6 +20,7 @@
  }
  function supported(){return !!(root.SushiAchievementTransport?.synchronize&&root.SushiAchievementLedger?.exportAllPages)}
  const ACK='sushitan_achievement_sync_ack_v1:';
+ const CURSOR='sushitan_achievement_cursor_v3:';
  const RECENT='sushitan_achievement_sync_recent_v1:';
  const signature=ledger=>JSON.stringify([ledger.baselineForSync(),ledger.exportAllPages(500).flatMap(page=>page.events).map(e=>[e.id,e.version,e.game,e.correct,e.at]).sort((a,b)=>a[0].localeCompare(b[0]))]);
  const readCache=key=>{try{const v=JSON.parse(localStorage.getItem(key)||'{}');return v&&typeof v==='object'&&!Array.isArray(v)?v:{}}catch{return {}}};
@@ -38,7 +39,10 @@
      const body=await request({...payload,sushi_id,pin});
      assertAccount(sushi_id,pin);
      return body;
-   },{acknowledged:readCache(ACK+sushi_id),onAcknowledged:confirmed=>{
+   },{after:(()=>{const n=readCache(CURSOR+sushi_id).after;return Number.isSafeInteger(n)&&n>=0?n:0})(),onCursor:after=>{
+     assertAccount(sushi_id,pin);
+     try{localStorage.setItem(CURSOR+sushi_id,JSON.stringify({after}))}catch{}
+   },acknowledged:readCache(ACK+sushi_id),onAcknowledged:confirmed=>{
      assertAccount(sushi_id,pin);
      // Quota failure only loses the optimization; the ledger remains untouched.
      try{localStorage.setItem(ACK+sushi_id,JSON.stringify({...readCache(ACK+sushi_id),...confirmed}))}catch{}
