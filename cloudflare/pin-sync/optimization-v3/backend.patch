@@ -1,0 +1,111 @@
+diff --git a/activity-store.mjs b/activity-store.mjs
+index 2e35041..d3e5b55 100644
+--- a/activity-store.mjs
++++ b/activity-store.mjs
+@@ -7,7 +7,7 @@ export function timestampOrder(value){
+  return date.toISOString().slice(0,19)+'.'+fraction.padEnd(6,'0').slice(0,6)+'Z';
+ }
+ export class ActivityStore {
+- constructor(database){this.database=database}
++ constructor(database,{optimized=false}={}){this.database=database;this.optimized=optimized}
+  async loginVisit(account,now=Date.now()){
+   const date=new Date(now+9*3600000),day=date.toISOString().slice(0,10),hour=date.getUTCHours(),previous=new Date(now+9*3600000-86400000).toISOString().slice(0,10);
+   const row=await this.database.prepare(`INSERT INTO pin_sync_login_activity(account,last_day,streak,best_streak,hour_03,hour_05,hour_23,updated_at)
+@@ -20,6 +20,8 @@ export class ActivityStore {
+  }
+  async achievementSync(account,input={}){
+   if(!input||typeof input!=='object'||Array.isArray(input))throw invalid('invalid_achievement_page');
++  const delta=this.optimized&&input.protocol===3;
++  if(delta&&(!Number.isSafeInteger(input.after)||input.after<0))throw invalid('invalid_delta_cursor');
+   const raw=input.events??[],limit=input.limit??500,cursor=input.cursor??null,baseline=input.baseline;
+   if(!Array.isArray(raw)||raw.length>500||!Number.isSafeInteger(limit)||limit<1||limit>500||(cursor!==null&&(typeof cursor!=='string'||!EVENT_ID.test(cursor))))throw invalid('invalid_achievement_page');
+   if(!Number.isSafeInteger(baseline)||baseline<0||baseline>1000000000)throw invalid('invalid_achievement_baseline');
+@@ -33,6 +35,11 @@ export class ActivityStore {
+   const rows=[...unique.values()],now=new Date().toISOString();
+   await this.insertAndVerify(account,'events',rows,['game_id','correct_count']);
+   const merged=await this.database.prepare('INSERT INTO pin_sync_baselines(account,baseline_total,updated_at) VALUES(?,?,?) ON CONFLICT(account) DO UPDATE SET baseline_total=MAX(baseline_total,excluded.baseline_total),updated_at=excluded.updated_at RETURNING baseline_total').bind(account,baseline,now).first();
++  if(delta){
++   const page=(await this.database.prepare('SELECT seq,event_id,game_id,correct_count,occurred_at FROM pin_sync_event_feed WHERE account=? AND seq>? ORDER BY seq LIMIT ?').bind(account,input.after,limit+1).all()).results;
++   const shown=page.slice(0,limit),after=shown.length?shown.at(-1).seq:input.after;
++   return {ok:true,sushi_id:account,achievements:{version:2,protocol:3,synced:true,accepted:rows.map(row=>row.event_id),events:shown.map(row=>({version:2,id:row.event_id,game:row.game_id,correct:row.correct_count,at:Date.parse(row.occurred_at)})),after,hasMore:page.length>limit,nextCursor:null,baseline:merged.baseline_total}};
++  }
+   const page=(await this.database.prepare('SELECT event_id,game_id,correct_count,occurred_at FROM pin_sync_events WHERE account=? AND event_id>? ORDER BY event_id LIMIT ?').bind(account,cursor??'',limit+1).all()).results;
+   const shown=page.slice(0,limit);
+   return {ok:true,sushi_id:account,achievements:{version:2,synced:true,accepted:rows.map(row=>row.event_id),events:shown.map(row=>({version:2,id:row.event_id,game:row.game_id,correct:row.correct_count,at:Date.parse(row.occurred_at)})),nextCursor:page.length>limit?shown.at(-1).event_id:null,baseline:merged.baseline_total}};
+@@ -59,10 +66,11 @@ export class ActivityStore {
+    const byId=new Map(canonical.map(row=>[row.event_id,row]));
+    for(const row of rows){const existing=byId.get(row.event_id);if((!existing&&requireAll)||(existing&&(fields.some(field=>existing[field]!==row[field])||Date.parse(existing.occurred_at)!==Date.parse(row.occurred_at))))throw conflict(kind==='events'?'event_id_conflict':'outcome_id_conflict')}
+   }
+-  verify((await read()).results,false);
++  const guarded=this.optimized&&kind==='events';
++  if(!guarded)verify((await read()).results,false);
+   const columns=['event_id',...fields,'occurred_at',...(kind==='outcomes'?['occurred_order']:[])];
+   await this.database.prepare('INSERT INTO '+table+'(account,'+columns.join(',')+',received_at) SELECT ?,'+columns.map(column=>"json_extract(value,'$."+column+"')").join(',')+',? FROM json_each(?) WHERE true ON CONFLICT(account,event_id) DO NOTHING').bind(account,new Date().toISOString(),document).run();
+-  verify((await read()).results,true);
++  if(!guarded)verify((await read()).results,true);
+  }
+ }
+ 
+diff --git a/profile-store.mjs b/profile-store.mjs
+index c868e99..ba2d478 100644
+--- a/profile-store.mjs
++++ b/profile-store.mjs
+@@ -7,7 +7,7 @@ export async function learningHash(serialized){
+ }
+ 
+ export class ProfileStore {
+- constructor(database){this.database=database}
++ constructor(database,{optimized=false}={}){this.database=database;this.optimized=optimized}
+  async ensureLearningIndex(account){
+   for(let attempt=0;attempt<5;attempt++){
+    const row=await this.database.prepare(`SELECT learning_indexed,revision,
+@@ -125,7 +125,8 @@ export class ProfileStore {
+   const evaluate=async snapshot=>{
+    const context={ledger:snapshot.ledger};
+    if(category==='all_correct')context.baseline=(await this.database.prepare('SELECT baseline_total FROM pin_sync_baselines WHERE account=?').bind(account).first())?.baseline_total||0;
+-   if(['all_correct','vocabulary','toeic','all_games_day'].includes(category))context.events=(await this.database.prepare('SELECT event_id,game_id,correct_count,occurred_at FROM pin_sync_events WHERE account=?').bind(account).all()).results;
++   if(this.optimized&&['all_correct','vocabulary','toeic','all_games_day'].includes(category))context.summary=await this.database.prepare('SELECT all_correct,vocabulary,toeic,all_games_day FROM pin_sync_event_totals WHERE account=?').bind(account).first()||{all_correct:0,vocabulary:0,toeic:0,all_games_day:0};
++   if(!this.optimized&&['all_correct','vocabulary','toeic','all_games_day'].includes(category))context.events=(await this.database.prepare('SELECT event_id,game_id,correct_count,occurred_at FROM pin_sync_events WHERE account=?').bind(account).all()).results;
+    if(['review','combo','resilience','comeback'].includes(category))context.outcomes=(await this.database.prepare('SELECT event_id,game_id,question_id,correct,review,occurred_at FROM pin_sync_outcomes WHERE account=?').bind(account).all()).results;
+    if(category==='practice'||category.startsWith('login_'))context.activity=await this.database.prepare('SELECT * FROM pin_sync_login_activity WHERE account=?').bind(account).first();
+    const eligible=rewardEligibility(category,threshold,context);
+diff --git a/rewards.mjs b/rewards.mjs
+index 87e150f..b6f92b5 100644
+--- a/rewards.mjs
++++ b/rewards.mjs
+@@ -37,7 +37,8 @@ export function rewardEligibility(category,threshold,context){
+  if(!Number.isSafeInteger(threshold)||!schedule||!Object.hasOwn(schedule,threshold))return {ok:false,error:'unknown_stage'};
+  const ledger=context.ledger||{},events=array(context.events),activity=context.activity||{},claimId='achievement:'+category+':'+threshold;
+  let value=0;
+- if(category==='all_correct')value=number(context.baseline)+events.reduce((total,row)=>total+number(row.correct_count),0);
++ if(context.summary&&['all_correct','vocabulary','toeic','all_games_day'].includes(category))value=number(context.summary[category])+(category==='all_correct'?number(context.baseline):0);
++ else if(category==='all_correct')value=number(context.baseline)+events.reduce((total,row)=>total+number(row.correct_count),0);
+  else if(category==='vocabulary'||category==='toeic')value=events.filter(row=>category==='toeic'?row.game_id==='toeic':['sushitan','shinotan','antonitan','idiom','sushi_idiom'].includes(row.game_id)).reduce((total,row)=>total+number(row.correct_count),0);
+  else if(category==='practice')value=number(activity.best_streak);
+  else if(category.startsWith('login_'))value=activity['hour_'+category.slice(6)]?1:0;
+diff --git a/pin-worker.mjs b/pin-worker.mjs
+index 569d4d1..2c3b922 100644
+--- a/pin-worker.mjs
++++ b/pin-worker.mjs
+@@ -26,7 +26,8 @@ export function createIntegratedWorker(fallback,assets){
+   const endpoint=url.pathname.slice(PREFIX.length);if(!endpoints.has(endpoint))return new Response('Not found',{status:404});
+   let key;try{key=unbase64(env.PIN_AUTH_FAKE_KEY);if(key.length!==32||!env.DB)throw Error()}catch{return unavailable()}
+   const store=new CredentialStore(env.DB),auth=new ScramAuth(store,account=>store.lookup(account),key);
+-  const handler=endpoint==='sync'?syncHandler(auth,new ProfileStore(env.DB),new ActivityStore(env.DB)):authHandler(auth,store);
++  const optimization={optimized:env.PIN_SYNC_OPTIMIZED==='true'};
++  const handler=endpoint==='sync'?syncHandler(auth,new ProfileStore(env.DB,optimization),new ActivityStore(env.DB,optimization)):authHandler(auth,store);
+   const target=new URL('/'+endpoint,ORIGIN);target.search=url.search;
+   return handler(new Request(target.toString(),request));
+  }};
+diff --git a/sync-http.mjs b/sync-http.mjs
+index c983182..8b7e5c7 100644
+--- a/sync-http.mjs
++++ b/sync-http.mjs
+@@ -37,6 +37,7 @@ export function syncHandler(auth,profiles,activity){return async request=>{
+  }catch(error){
+   if(error.status===400)return response({error:error.message},400);
+   if(error.status===401||error.status===429)return response({error:'auth_failed'},error.status);
++  if(String(error.message).includes('event_id_conflict'))return response({error:'event_id_conflict'},409);
+   if(error.status===409||['profile_sync_conflict','profile_claim_conflict','duplicate_legacy_event','invalid_gem_event','invalid_gem_total'].includes(error.message))return response({error:error.message},409);
+   return response({error:'temporarily_unavailable'},503);
+  }

@@ -1,0 +1,133 @@
+'use strict';
+/* PIN-authenticated automatic achievement sync. */
+(function(root){
+ if(root.SushiAchievementSyncBridge)return;
+ const request=payload=>{if(!root.SushiProfileSync?.requestJSON)throw new Error('profile_transport_missing');return root.SushiProfileSync.requestJSON(payload)};
+ function assertAccount(id,pin){if((localStorage.getItem(ID)||'').trim().toLowerCase()!==id||localStorage.getItem(PIN)!==pin)throw new Error('achievement_account_changed')}
+ const ID='sushitan_sync_id_v1',PIN='sushitan_sync_pin_v1';
+ let running=null,syncTimer=null,receiptsRunning=null,paused=false;const claims=new Map();
+ const RECEIPTS='sushitan_verified_achievement_receipts_v1:';
+ function cachedReceipts(){
+   const sushi_id=(localStorage.getItem(ID)||'').trim().toLowerCase();
+   try{const data=JSON.parse(localStorage.getItem(RECEIPTS+sushi_id)||'null');return data?.sushi_id===sushi_id&&Array.isArray(data.receipts?.ids)&&root.SushiAchievementReceipts?.parse(data)?data:null}catch{return null}
+ }
+ function rememberReceipts(data,sushi_id){
+   if((localStorage.getItem(ID)||'').trim().toLowerCase()!==sushi_id||!Array.isArray(data.receipts?.ids)||!root.SushiAchievementReceipts?.parse(data))return;
+   const previous=cachedReceipts();
+   const result={ok:true,sushi_id,receipts:{ids:[...new Set([...(previous?.receipts.ids||[]),...data.receipts.ids])]}};
+   localStorage.setItem(RECEIPTS+sushi_id,JSON.stringify(result));
+   root.dispatchEvent(new CustomEvent('sushi-achievement-receipts',{detail:{...result,sushiId:sushi_id}}));
+ }
+ function supported(){return !!(root.SushiAchievementTransport?.synchronize&&root.SushiAchievementLedger?.exportAllPages)}
+ const ACK='sushitan_achievement_sync_ack_v1:';
+ const CURSOR='sushitan_achievement_cursor_v3:';
+ const RECENT='sushitan_achievement_sync_recent_v1:';
+ const signature=ledger=>JSON.stringify([ledger.baselineForSync(),ledger.exportAllPages(500).flatMap(page=>page.events).map(e=>[e.id,e.version,e.game,e.correct,e.at]).sort((a,b)=>a[0].localeCompare(b[0]))]);
+ const readCache=key=>{try{const v=JSON.parse(localStorage.getItem(key)||'{}');return v&&typeof v==='object'&&!Array.isArray(v)?v:{}}catch{return {}}};
+ async function run({force=false}={}){
+   if(running)return running;
+   if(!supported())throw new Error('achievement_modules_missing');
+   const sushi_id=(localStorage.getItem(ID)||'').trim().toLowerCase();
+   const pin=localStorage.getItem(PIN)||'';
+   if(!/^[a-z0-9_-]{4,24}$/.test(sushi_id)||!/^\d{4}$/.test(pin))throw new Error('achievement_pin_not_connected');
+   const ledger=root.SushiAchievementLedger,before=signature(ledger),recent=readCache(RECENT+sushi_id);
+   if(!force&&recent.signature===before&&Date.now()-Number(recent.at)<300000)return {sent:0,received:0,skipped:true};
+   // A completed PIN profile sync triggers this, and the initial delayed
+   // run covers pages where profile sync happened before this module loaded.
+   running=root.SushiAchievementTransport.synchronize(root.SushiAchievementLedger,async payload=>{
+     assertAccount(sushi_id,pin);
+     const body=await request({...payload,sushi_id,pin});
+     assertAccount(sushi_id,pin);
+     return body;
+   },{after:(()=>{const n=readCache(CURSOR+sushi_id).after;return Number.isSafeInteger(n)&&n>=0?n:0})(),onCursor:after=>{
+     assertAccount(sushi_id,pin);
+     try{localStorage.setItem(CURSOR+sushi_id,JSON.stringify({after}))}catch{}
+   },acknowledged:readCache(ACK+sushi_id),onAcknowledged:confirmed=>{
+     assertAccount(sushi_id,pin);
+     // Quota failure only loses the optimization; the ledger remains untouched.
+     try{localStorage.setItem(ACK+sushi_id,JSON.stringify({...readCache(ACK+sushi_id),...confirmed}))}catch{}
+   }});
+   try{
+     const result=await running;paused=false;
+     assertAccount(sushi_id,pin);
+     // Save the pre-request signature: records arriving during I/O must not be skipped.
+     try{localStorage.setItem(RECENT+sushi_id,JSON.stringify({at:Date.now(),signature:before}))}catch{}
+     root.dispatchEvent(new CustomEvent('sushi-achievement-sync',{detail:{supported:true,...result}}));
+     return result;
+   }catch(error){
+     paused=true;root.dispatchEvent(new CustomEvent('sushi-achievement-sync',{detail:{supported:false,error:error.message}}));
+     throw error;
+   }finally{running=null}
+ }
+ async function fetchReceipts(){
+   const sushi_id=(localStorage.getItem(ID)||'').trim().toLowerCase(),pin=localStorage.getItem(PIN)||'';
+   if(!/^[a-z0-9_-]{4,24}$/.test(sushi_id)||!/^[0-9]{4}$/.test(pin))return null;
+   const data=await request({action:'achievement_claims',sushi_id,pin});
+   assertAccount(sushi_id,pin);
+   if(!root.SushiAchievementReceipts?.parse(data))throw new Error('invalid_achievement_receipts');
+   rememberReceipts(data,sushi_id);
+   return data;
+ }
+ function receipts(){
+   if(receiptsRunning)return receiptsRunning;
+   const id=(localStorage.getItem(ID)||'').trim().toLowerCase(),cache=cachedReceipts();
+   const key='sushitan_achievement_receipts_at_v1:'+id;
+   if(cache&&Date.now()-Number(localStorage.getItem(key)||0)<300000)return Promise.resolve(cache);
+   receiptsRunning=fetchReceipts().then(data=>{if(data)try{localStorage.setItem(key,String(Date.now()))}catch{}return data}).finally(()=>{receiptsRunning=null});return receiptsRunning;
+ }
+ function claim(threshold,category='all_correct'){
+   const key=[localStorage.getItem(ID),category,threshold].join(':');
+   if(claims.has(key))return claims.get(key);
+   const promise=claimOnce(threshold,category).finally(()=>claims.delete(key));claims.set(key,promise);return promise;
+ }
+ async function claimOnce(threshold,category='all_correct'){
+   const sushi_id=(localStorage.getItem(ID)||'').trim().toLowerCase(),pin=localStorage.getItem(PIN)||'';
+   if(!/^[a-z0-9_-]{4,24}$/.test(sushi_id)||!/^[0-9]{4}$/.test(pin))throw new Error('achievement_pin_not_connected');
+   if(!Number.isSafeInteger(threshold))throw new Error('invalid_threshold');
+   const stageId=`achievement:${category}:${threshold}`;
+   if(cachedReceipts()?.receipts.ids.includes(stageId))return {ok:true,already_claimed:true,claim_id:stageId,gems:0};
+   const transaction=root.SushiProfileSync?.withWalletTransaction;
+   if(!transaction)throw new Error('achievement_wallet_sync_missing');
+   const requestClaim=()=>transaction(async()=>{
+   if(localStorage.getItem(ID)?.trim().toLowerCase()!==sushi_id||localStorage.getItem(PIN)!==pin)throw new Error('achievement_account_changed');
+   const before=JSON.parse(localStorage.getItem('sushitan_login_bonus_v1')||'{}');
+   const data=await request({action:'achievement_claim',sushi_id,pin,threshold,category,wallet_event_ids:(before.gemEvents||[]).map(e=>e?.id).filter(Boolean)});
+   if(!data.wallet||!Number.isSafeInteger(data.wallet.gems)||data.wallet.gems<0||!Array.isArray(data.wallet.gemEvents)||data.claim_id!==stageId)throw new Error('invalid_claim_wallet');
+   if(localStorage.getItem(ID)?.trim().toLowerCase()!==sushi_id||localStorage.getItem(PIN)!==pin)throw new Error('achievement_account_changed');
+   // Use the server's authoritative wallet snapshot, including for a previously
+   // claimed reward. Do not add gems a second time on the client.
+   if(data.wallet&&Number.isSafeInteger(data.wallet.gems)&&Array.isArray(data.wallet.gemEvents)){
+     const key='sushitan_login_bonus_v1';
+     const ledger=JSON.parse(localStorage.getItem(key)||'{}');
+     // Retained history is not an acknowledgment: older accepted IDs may have
+     // been pruned. Preserve only events that the server has not acknowledged.
+     const wallet=root.SushiProfileSync.applyWalletSnapshot(ledger,data.wallet,before.gemAcknowledgedIds||[]);
+     localStorage.setItem(key,JSON.stringify({...ledger,...wallet}));
+     root.dispatchEvent(new CustomEvent('sushi-gem-change'));
+   }
+   return data;
+   });
+   let data;
+   try{data=await requestClaim()}catch(error){
+     if(error.code!=='not_reached')throw error;
+     // Only upload progress when the authoritative server needs fresh data.
+     if(['all_correct','vocabulary','toeic','all_games_day'].includes(category))await run({force:true});
+     if(['practice','login_03','login_05','login_23'].includes(category))await root.SushiLoginAchievements?.record?.(true);
+     else await root.SushiProfileSync?.syncNow?.();
+     data=await requestClaim();
+   }
+   root.dispatchEvent(new CustomEvent('sushi-gems-updated',{detail:{source:'achievement',claim_id:data.claim_id}}));
+   root.dispatchEvent(new CustomEvent('sushi-achievement-claimed',{detail:data}));
+   if(data.claim_id===stageId)rememberReceipts({ok:true,sushi_id,receipts:{ids:[stageId]}},sushi_id);
+   receipts().catch(()=>null);
+   return data;
+ }
+ root.SushiAchievementSyncBridge=Object.freeze({supported,run,claim,receipts,cachedReceipts});
+ // One scheduler owns automatic uploads; profile completion awaits run().
+ // The delayed request also covers pages that loaded this module after profile sync.
+ if(localStorage.getItem(ID)&&localStorage.getItem(PIN))setTimeout(()=>{
+   if(root.SushiProfileSync?.requestSync)root.SushiProfileSync.requestSync();
+   else run().catch(error=>console.warn('Achievement sync deferred:',error.message));
+   receipts().catch(()=>null);
+ },30000);
+})(window);
