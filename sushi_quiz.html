@@ -821,10 +821,24 @@ function actualPoolCount(cat){
   // Show the real number of questions, not the weighted draw count.
   return pool(cat).length;
 }
+// Shuffle each question's answer choices when it is drawn, not in the source bank.
+// Keep the original answer index attached to its text so all game modes score correctly.
+function randomizeQuestionChoices(question){
+  if(!question || !Array.isArray(question.choices)) return question;
+  const entries=question.choices.map((text,index)=>({text,index}));
+  // Fisher-Yates: unbiased random permutation, with a fresh order for each draw.
+  for(let i=entries.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [entries[i],entries[j]]=[entries[j],entries[i]];
+  }
+  return {...question,choices:entries.map(entry=>entry.text),
+    ans:entries.findIndex(entry=>entry.index===question.ans)};
+}
 function pick(cat, used=[]){
   let p=pool(cat).filter(q=>!used.includes(q.q));
   if(!p.length) p=pool(cat);
-  return shuffle(p)[0];
+  const question=shuffle(p)[0];
+  return randomizeQuestionChoices(question);
 }
 function code4(){return String(100000+crypto.getRandomValues(new Uint32Array(1))[0]%900000)} function key(c,t){return "sq_"+c+"_"+t} function setL(c,t,o){localStorage.setItem(key(c,t),JSON.stringify(o))} function getL(c,t){try{return JSON.parse(localStorage.getItem(key(c,t))||"null")}catch(e){return null}} let pollEpoch=0;function stop(){pollEpoch++;if(timer)clearTimeout(timer);timer=null}
 function startRoomPoll(fn){const epoch=pollEpoch;const run=async()=>{try{await fn()}catch(e){console.error('quiz poll failed',e)}finally{if(epoch===pollEpoch)timer=setTimeout(run,1000)}};run()}
