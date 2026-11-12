@@ -18,3 +18,12 @@
 - Refined question 028 to explicitly ask for the information stated as unrecorded, avoiding confusion with merely unmentioned records.
 - Added inline vocabulary glosses for the new topics. No API calls, database schema changes, or PIN changes.
 - Pending: manual IELTS editorial review, option-length audit, long-term next-day review vs sessionStorage limitation, and 70 more questions.
+
+## 2026-11-13, run 7
+- Added four original questions r60-031–034, reaching **34/100** (66 remaining).
+- Two new original passages, each reused for two different questions: Urban Heat Mapping (TFNG, Sentence Completion) and Library of Things (Summary Completion, Multiple Choice).
+- Updated format totals: TFNG 9; Summary 7; Multiple Choice 7; Sentence Completion 6; Matching Information 5.
+- New answer indices: 0, 0, 0, 1. Options are short and distinct; review full-bank position balance in subsequent batches.
+- Added ten context vocabulary glosses. No DB/PIN changes; sessionStorage remains in use.
+- Source-level ID audit: new IDs 031–034 are distinct from 001–030; four new answers within valid option bounds; all four have evidence focus, explanation, translation and paraphrase.
+- Pending: human editorial verification of semantic ambiguity; test execution in browser; next-day review requires persistence beyond sessionStorage, deferred under current guest-only policy.
