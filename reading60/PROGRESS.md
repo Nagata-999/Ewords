@@ -27,3 +27,9 @@
 - Added ten context vocabulary glosses. No DB/PIN changes; sessionStorage remains in use.
 - Source-level ID audit: new IDs 031–034 are distinct from 001–030; four new answers within valid option bounds; all four have evidence focus, explanation, translation and paraphrase.
 - Pending: human editorial verification of semantic ambiguity; test execution in browser; next-day review requires persistence beyond sessionStorage, deferred under current guest-only policy.
+
+## 2026-11-13 — batch 035–038
+- Added 4 original questions, total 38/100 (remaining 62): Wetland Boardwalks (TFNG, Matching Information) and Community Seed Exchange (Summary Completion, Sentence Completion).
+- Reused each original passage for two distinct questions. All four include a focused evidence passage, Japanese explanation, evidence translation, paraphrase, and distractor-specific explanation; added 10 vocabulary glosses.
+- QA (source-level): IDs 035–038 unique relative to existing 001–034; answers 1,1,0,0 within option bounds; correct option counts in this batch 0:2 / 1:2. Semantic review: wetland total visitors rose although direct trampling fell; seed labels are separate from storage conditions. No changes to sessionStorage, DB or PIN sync.
+- Remaining: browser execution, full-bank duplicate/option-length audit, human editorial review of ambiguity. Next-day review cannot persist after tab closure with current session-only policy.
