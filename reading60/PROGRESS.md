@@ -9,3 +9,12 @@
 - Correct option indices for new questions: 0,1,1,1. Balance needs review across the full bank.
 - Guest progress remains sessionStorage only; PIN sync and DB untouched.
 - Pending: manual semantic review, review-after-next-day policy vs session-only storage, answer position/length audits, and 74 questions to initial target.
+
+## 2026-11-12, run 6
+- Added four original questions r60-027–030; total 30/100 (remaining 70).
+- Two new passage themes, each with two distinct questions: Community Repair Cafés (TFNG, Multiple Choice) and Coastal Dune Restoration (Summary Completion, Matching Information).
+- Current type totals: TFNG 8; Summary 6; Multiple Choice 6; Sentence Completion 5; Matching Information 5.
+- New correct indices: 1, 2, 0, 0. All 30 question IDs unique and answer indices within the option lists (source-level check).
+- Refined question 028 to explicitly ask for the information stated as unrecorded, avoiding confusion with merely unmentioned records.
+- Added inline vocabulary glosses for the new topics. No API calls, database schema changes, or PIN changes.
+- Pending: manual IELTS editorial review, option-length audit, long-term next-day review vs sessionStorage limitation, and 70 more questions.
