@@ -45,3 +45,8 @@
 - Each question includes highlighted evidence, Japanese explanation, evidence translation, paraphrase and distractor discussion. New answer indices: 1,0,1,0.
 - Source inspection: 50 question IDs, 50 unique. No DB or PIN-sync edits. Existing session-only persistence unchanged.
 - Pending: browser runtime testing, full-bank semantic and option-length audits, next-day review persistence, and remaining 50 questions.
+
+## 2026-11-13 — queue safety fix
+- No new questions; total remains 50/100. Fixed normal-deck selection to exclude IDs pending in the delayed review queue, including after the normal deck is exhausted and reshuffled. This prevents early repetition before the five intervening questions.
+- Source-level review only; browser execution not yet verified. If every item is pending and no eligible item exists, fallback selects the earliest pending item; this edge case still needs an explicit policy/test.
+- No database, PIN sync, or main changes. Existing PR #112 remains open.
