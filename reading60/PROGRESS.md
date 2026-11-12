@@ -39,3 +39,9 @@
 - Each original passage supports two different questions. All four include highlighted evidence, Japanese explanation, translation and paraphrase; added 8 vocabulary glosses.
 - Source QA: unique IDs 039–042, four valid answer indexes (0,0,1,2), each question has 4 options except TFNG with 3; answer position batch 0:2, 1:1, 2:1. Museum question distinguishes text changes from object placement; air-monitoring question distinguishes particle readings from residents' health data.
 - Pending: browser test, complete bank option-length bias check and editorial ambiguity review. Next-day persistence is deferred while guest progress uses sessionStorage only. No PIN sync or DB changes. PR #112 remains unmerged.
+
+## 2026-11-13 — batch 047–050
+- Added 4 original questions, reaching **50/100** (50 remaining). Two passages reused for distinct questions: Urban Rainwater Harvesting (TFNG and Summary Completion) and Community Sound Archives (Multiple Choice and Sentence Completion).
+- Each question includes highlighted evidence, Japanese explanation, evidence translation, paraphrase and distractor discussion. New answer indices: 1,0,1,0.
+- Source inspection: 50 question IDs, 50 unique. No DB or PIN-sync edits. Existing session-only persistence unchanged.
+- Pending: browser runtime testing, full-bank semantic and option-length audits, next-day review persistence, and remaining 50 questions.
