@@ -33,3 +33,9 @@
 - Reused each original passage for two distinct questions. All four include a focused evidence passage, Japanese explanation, evidence translation, paraphrase, and distractor-specific explanation; added 10 vocabulary glosses.
 - QA (source-level): IDs 035–038 unique relative to existing 001–034; answers 1,1,0,0 within option bounds; correct option counts in this batch 0:2 / 1:2. Semantic review: wetland total visitors rose although direct trampling fell; seed labels are separate from storage conditions. No changes to sessionStorage, DB or PIN sync.
 - Remaining: browser execution, full-bank duplicate/option-length audit, human editorial review of ambiguity. Next-day review cannot persist after tab closure with current session-only policy.
+
+## 2026-11-13 — batch 039–042
+- Added 4 original questions, total 42/100 (remaining 58): Community Air Sensors (TFNG and Summary Completion), Museum Object Labels (Matching Information and Multiple Choice).
+- Each original passage supports two different questions. All four include highlighted evidence, Japanese explanation, translation and paraphrase; added 8 vocabulary glosses.
+- Source QA: unique IDs 039–042, four valid answer indexes (0,0,1,2), each question has 4 options except TFNG with 3; answer position batch 0:2, 1:1, 2:1. Museum question distinguishes text changes from object placement; air-monitoring question distinguishes particle readings from residents' health data.
+- Pending: browser test, complete bank option-length bias check and editorial ambiguity review. Next-day persistence is deferred while guest progress uses sessionStorage only. No PIN sync or DB changes. PR #112 remains unmerged.
