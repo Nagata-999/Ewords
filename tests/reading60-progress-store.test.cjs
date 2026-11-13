@@ -48,3 +48,20 @@ test('fourth consecutive correct review schedules 14 days, including after reloa
  assert.equal(due(restored,new Date('2026-12-08T23:59:59Z')),null);
  assert.equal(due(restored,new Date('2026-12-09T00:00:00Z')),'a');
 });
+
+test('a lapse resets spaced-review streak and a later correct answer clears the retry queue',()=>{
+ const p=blank(),t=new Date('2026-11-14T00:00:00Z');
+ p.presentations=1;record(p,'a',true,15,t);
+ record(p,'a',true,16,new Date('2026-11-15T00:00:00Z'));
+ assert.equal(p.items.a.streak,2);
+ p.presentations=3;record(p,'a',false,18,new Date('2026-11-18T00:00:00Z'));
+ assert.equal(p.items.a.streak,0);
+ assert.equal(p.items.a.lapses,1);
+ assert.equal(p.queue.length,1);
+ assert.equal(p.queue[0].notBeforePresentation,9);
+ p.presentations=9;record(p,'a',true,21,new Date('2026-11-18T01:00:00Z'));
+ assert.equal(p.queue.length,0);
+ assert.equal(p.items.a.streak,1);
+ assert.equal(p.items.a.nextReviewAt,'2026-11-19T01:00:00.000Z');
+ assert.deepEqual(p.history.map(x=>x.first),[true,false,false,false]);
+});
