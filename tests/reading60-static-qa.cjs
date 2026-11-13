@@ -26,6 +26,9 @@ const suspiciousAnswerLength = [];
 const fourChoicePositions = [0,0,0,0];
 const fourChoiceTypes = new Map();
 const issues = [];
+const passageReuse = new Map();
+const missingFocusInPassage = [];
+const emptyQuestionStems = [];
 const stems = new Map();
 const evidence = new Map();
 const normalize = s => s.normalize('NFKC').toLowerCase().replace(/\s+/g, ' ').trim();
@@ -38,7 +41,12 @@ for (const [i, q] of questions.entries()) {
     if (typeof q[field] !== 'string') issues.push(`${id}: invalid ${field}`);
   }
   if (typeof q.focus === 'string' && q.focus.trim().length < 30) issues.push(`${id}: evidence focus too short to review reliably`);
+  const passage = [q.before, q.focus, q.after].filter(v => typeof v === 'string').join(' ');
+  const passageKey = normalize(passage);
+  if (passageKey) passageReuse.set(passageKey, (passageReuse.get(passageKey) || 0) + 1);
+  if (typeof q.focus === 'string' && !normalize(passage).includes(normalize(q.focus))) missingFocusInPassage.push(id);
   const stem = normalize(q.question || '');
+  if (!stem) emptyQuestionStems.push(id);
   if (stems.has(stem)) issues.push(`${id}: duplicate question stem (${stems.get(stem)})`);
   else stems.set(stem, id);
   const evidenceKey = normalize(q.focus || '');
@@ -82,6 +90,6 @@ for (const q of questions) {
   }
 }
 const fourChoice = questions.filter(q => Array.isArray(q.options) && q.options.length === 4).length;
-console.log(JSON.stringify({total:questions.length,uniqueIds:ids.size,types:Object.fromEntries(types),answerPositions:Object.fromEntries(answerPositions),fourChoice,fourChoicePositions,fourChoicePositionsByType:Object.fromEntries(fourChoiceTypes),tfngAnswers,strictlyLongestCorrect:longest.length,longestIds:longest,longestRatios,suspiciousAnswerLength,issues}, null, 2));
+console.log(JSON.stringify({total:questions.length,uniqueIds:ids.size,types:Object.fromEntries(types),answerPositions:Object.fromEntries(answerPositions),fourChoice,fourChoicePositions,fourChoicePositionsByType:Object.fromEntries(fourChoiceTypes),tfngAnswers,strictlyLongestCorrect:longest.length,longestIds:longest,longestRatios,suspiciousAnswerLength,passageReuseCounts:[...passageReuse.values()].filter(n=>n>1).sort((a,b)=>b-a),emptyQuestionStems,missingFocusInPassage,issues}, null, 2));
 assert.deepEqual(issues, [], 'Static QA found blocking structural issues');
 console.log('Reading60 static QA: PASS (length bias is advisory, not a failure)');
