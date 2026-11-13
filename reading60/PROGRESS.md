@@ -50,3 +50,27 @@
 - No new questions; total remains 50/100. Fixed normal-deck selection to exclude IDs pending in the delayed review queue, including after the normal deck is exhausted and reshuffled. This prevents early repetition before the five intervening questions.
 - Source-level review only; browser execution not yet verified. If every item is pending and no eligible item exists, fallback selects the earliest pending item; this edge case still needs an explicit policy/test.
 - No database, PIN sync, or main changes. Existing PR #112 remains open.
+
+## 2026-11-13 — reconciliation and batch 069–070
+- Verified open PR #113 and its existing bank through r60-068 before editing; PR #112 was previously merged. Current bank: **70/100**, 30 remaining. This run: **2 added, 0 modified**.
+- Added an original seafood-market reusable-container passage with two distinct items: TFNG (r60-069; answer index 1) and Sentence Completion (r60-070; answer index 0). Each includes evidence in `focus`, Japanese explanation, evidence translation, paraphrase and distractor rationale.
+- Source checks: new IDs 069 and 070 absent before insertion; 70 question IDs now expected, no duplicated new IDs; answers are within option bounds. No PIN sync, DB or application runtime code changed.
+- QA limitations: full-bank editorial review, option-length distribution and live browser checks remain outstanding. The review queue still has a fallback when all items are pending, and sessionStorage cannot provide next-day persistence. Do not merge without user approval.
+
+## 2026-11-13 — batch 071–072
+- Reconciled open PR #113 and existing questions through r60-070 before writing. Added 2 original questions (r60-071 and r60-072), reaching **72/100** (28 remaining).
+- New original passage: Public Water Refill Stations; TFNG asks about explicitly unrecorded avoided purchases, while Sentence Completion asks about the planned summer/winter comparison. Each has its own evidence focus, Japanese explanation, evidence translation, paraphrase and distractor rationale.
+- Source-level audit: 72 IDs, 72 unique (including five initial JS object literals using unquoted id keys); new answer indices 1 and 0. Existing PIN/DB code untouched. Corrected the second item's evidence highlight during this run.
+- Pending: browser testing, full-bank option-length and editorial review, delayed-queue all-pending edge case, and next-day persistence beyond sessionStorage. Main remains unchanged pending approval.
+
+## 2026-11-13 — batch 075–076
+- Confirmed open PR #113 (head `feature/reading60-51-54`) and checked the existing bank through r60-074 before adding questions.
+- Added 2 original questions from one passage, Museum Photograph Identification: TFNG (answer 2) and Sentence Completion (answer 0). Total **76/100** (24 remaining).
+- Both items include explicit evidence focus, Japanese evidence translation, paraphrase, explanation and distractor rationale. Source-level check found 76 unique IDs after insertion.
+- Only `reading60/index.html` and this progress file changed; PIN/DB and main untouched. Browser runtime, full-bank semantic audit and option-length distribution remain pending. Session-only storage cannot provide next-day persistence.
+
+## 2026-11-13 — batch 077–078
+- Confirmed PR #113 remains open and checked the branch's existing 76 questions before editing.
+- Added two original items on borrowed air-quality monitors: TFNG (r60-077, answer index 1) and Multiple Choice (r60-078, answer index 2), reaching **78/100** (22 remaining).
+- Each question highlights its own direct evidence and includes Japanese explanation, evidence translation, paraphrase, and distractor rationale. 78 IDs unique in source-level audit; both answers within bounds.
+- Source file and progress log only; no changes to PIN sync, DB, or main. Browser execution, whole-bank answer-length and semantic audits, and next-day persistence beyond sessionStorage remain outstanding.
