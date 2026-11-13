@@ -60,5 +60,5 @@
 ## 2026-11-13 — batch 071–072
 - Reconciled open PR #113 and existing questions through r60-070 before writing. Added 2 original questions (r60-071 and r60-072), reaching **72/100** (28 remaining).
 - New original passage: Public Water Refill Stations; TFNG asks about explicitly unrecorded avoided purchases, while Sentence Completion asks about the planned summer/winter comparison. Each has its own evidence focus, Japanese explanation, evidence translation, paraphrase and distractor rationale.
-- Source-level audit: 67 IDs, 67 unique; new answer indices 1 and 0. Existing PIN/DB code untouched. Corrected the second item's evidence highlight during this run.
+- Source-level audit: 72 IDs, 72 unique (including five initial JS object literals using unquoted id keys); new answer indices 1 and 0. Existing PIN/DB code untouched. Corrected the second item's evidence highlight during this run.
 - Pending: browser testing, full-bank option-length and editorial review, delayed-queue all-pending edge case, and next-day persistence beyond sessionStorage. Main remains unchanged pending approval.
