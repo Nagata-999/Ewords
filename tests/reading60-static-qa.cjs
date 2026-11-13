@@ -21,10 +21,19 @@ const types = new Map();
 const answerPositions = new Map();
 const longest = [];
 const issues = [];
+const stems = new Map();
+const evidence = new Map();
+const normalize = s => s.normalize('NFKC').toLowerCase().replace(/\s+/g, ' ').trim();
 for (const [i, q] of questions.entries()) {
   const id = q.id || `index-${i}`;
   if (ids.has(id)) issues.push(`${id}: duplicate ID`);
   ids.add(id);
+  const stem = normalize(q.question || '');
+  if (stems.has(stem)) issues.push(`${id}: duplicate question stem (${stems.get(stem)})`);
+  else stems.set(stem, id);
+  const evidenceKey = normalize(q.focus || '');
+  if (evidenceKey && evidence.has(evidenceKey) && normalize(q.question || '') === normalize(evidence.get(evidenceKey).question)) issues.push(`${id}: repeated evidence and question`);
+  else evidence.set(evidenceKey, q);
   for (const field of ['id','type','title','focus','question','explanation','translation','paraphrase']) {
     if (typeof q[field] !== 'string' || !q[field].trim()) issues.push(`${id}: missing ${field}`);
   }
@@ -32,6 +41,8 @@ for (const [i, q] of questions.entries()) {
     issues.push(`${id}: invalid options`);
     continue;
   }
+  if (new Set(q.options.map(normalize)).size !== q.options.length) issues.push(`${id}: duplicate options`);
+  if (q.type === 'TRUE / FALSE / NOT GIVEN' && (q.options.length !== 3 || !['TRUE','FALSE','NOT GIVEN'].every(v => q.options.includes(v)))) issues.push(`${id}: invalid TFNG labels`);
   if (!Number.isInteger(q.answer) || q.answer < 0 || q.answer >= q.options.length) {
     issues.push(`${id}: invalid answer`);
     continue;
