@@ -50,3 +50,9 @@
 - No new questions; total remains 50/100. Fixed normal-deck selection to exclude IDs pending in the delayed review queue, including after the normal deck is exhausted and reshuffled. This prevents early repetition before the five intervening questions.
 - Source-level review only; browser execution not yet verified. If every item is pending and no eligible item exists, fallback selects the earliest pending item; this edge case still needs an explicit policy/test.
 - No database, PIN sync, or main changes. Existing PR #112 remains open.
+
+## 2026-11-13 — reconciliation and batch 069–070
+- Verified open PR #113 and its existing bank through r60-068 before editing; PR #112 was previously merged. Current bank: **70/100**, 30 remaining. This run: **2 added, 0 modified**.
+- Added an original seafood-market reusable-container passage with two distinct items: TFNG (r60-069; answer index 1) and Sentence Completion (r60-070; answer index 0). Each includes evidence in `focus`, Japanese explanation, evidence translation, paraphrase and distractor rationale.
+- Source checks: new IDs 069 and 070 absent before insertion; 70 question IDs now expected, no duplicated new IDs; answers are within option bounds. No PIN sync, DB or application runtime code changed.
+- QA limitations: full-bank editorial review, option-length distribution and live browser checks remain outstanding. The review queue still has a fallback when all items are pending, and sessionStorage cannot provide next-day persistence. Do not merge without user approval.
