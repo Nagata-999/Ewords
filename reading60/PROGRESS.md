@@ -56,3 +56,9 @@
 - Added an original seafood-market reusable-container passage with two distinct items: TFNG (r60-069; answer index 1) and Sentence Completion (r60-070; answer index 0). Each includes evidence in `focus`, Japanese explanation, evidence translation, paraphrase and distractor rationale.
 - Source checks: new IDs 069 and 070 absent before insertion; 70 question IDs now expected, no duplicated new IDs; answers are within option bounds. No PIN sync, DB or application runtime code changed.
 - QA limitations: full-bank editorial review, option-length distribution and live browser checks remain outstanding. The review queue still has a fallback when all items are pending, and sessionStorage cannot provide next-day persistence. Do not merge without user approval.
+
+## 2026-11-13 — batch 071–072
+- Reconciled open PR #113 and existing questions through r60-070 before writing. Added 2 original questions (r60-071 and r60-072), reaching **72/100** (28 remaining).
+- New original passage: Public Water Refill Stations; TFNG asks about explicitly unrecorded avoided purchases, while Sentence Completion asks about the planned summer/winter comparison. Each has its own evidence focus, Japanese explanation, evidence translation, paraphrase and distractor rationale.
+- Source-level audit: 67 IDs, 67 unique; new answer indices 1 and 0. Existing PIN/DB code untouched. Corrected the second item's evidence highlight during this run.
+- Pending: browser testing, full-bank option-length and editorial review, delayed-queue all-pending edge case, and next-day persistence beyond sessionStorage. Main remains unchanged pending approval.
