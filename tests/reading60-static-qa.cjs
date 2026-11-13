@@ -16,6 +16,7 @@ const arrayEnd = html.indexOf('];', arrayStart);
 assert(arrayEnd > arrayStart, 'Question bank closing delimiter not found');
 const questions = vm.runInNewContext(html.slice(arrayStart, arrayEnd + 1), Object.create(null), {timeout: 1000});
 assert(Array.isArray(questions) && questions.length > 0, 'Question bank empty');
+const allowedTypes = new Set(['TRUE / FALSE / NOT GIVEN','Summary Completion','Multiple Choice','Sentence Completion','Matching Information']);
 const ids = new Set();
 const types = new Map();
 const answerPositions = new Map();
@@ -28,6 +29,11 @@ for (const [i, q] of questions.entries()) {
   const id = q.id || `index-${i}`;
   if (ids.has(id)) issues.push(`${id}: duplicate ID`);
   ids.add(id);
+  if (!allowedTypes.has(q.type)) issues.push(`${id}: unknown question type`);
+  for (const field of ['before','after']) {
+    if (typeof q[field] !== 'string') issues.push(`${id}: invalid ${field}`);
+  }
+  if (typeof q.focus === 'string' && q.focus.trim().length < 30) issues.push(`${id}: evidence focus too short to review reliably`);
   const stem = normalize(q.question || '');
   if (stems.has(stem)) issues.push(`${id}: duplicate question stem (${stems.get(stem)})`);
   else stems.set(stem, id);
@@ -51,7 +57,14 @@ for (const [i, q] of questions.entries()) {
   answerPositions.set(q.answer, (answerPositions.get(q.answer) || 0) + 1);
   if (q.options.length === 4 && q.options[q.answer].length > Math.max(...q.options.filter((_,j) => j !== q.answer).map(v => v.length))) longest.push(id);
 }
+const tfngAnswers = {TRUE:0,FALSE:0,'NOT GIVEN':0};
+for (const q of questions) {
+  if (q.type === 'TRUE / FALSE / NOT GIVEN' && Array.isArray(q.options) && Number.isInteger(q.answer) && q.answer >= 0 && q.answer < q.options.length) {
+    const label = q.options[q.answer];
+    if (Object.hasOwn(tfngAnswers, label)) tfngAnswers[label]++;
+  }
+}
 const fourChoice = questions.filter(q => Array.isArray(q.options) && q.options.length === 4).length;
-console.log(JSON.stringify({total:questions.length,uniqueIds:ids.size,types:Object.fromEntries(types),answerPositions:Object.fromEntries(answerPositions),fourChoice,strictlyLongestCorrect:longest.length,longestIds:longest,issues}, null, 2));
+console.log(JSON.stringify({total:questions.length,uniqueIds:ids.size,types:Object.fromEntries(types),answerPositions:Object.fromEntries(answerPositions),fourChoice,tfngAnswers,strictlyLongestCorrect:longest.length,longestIds:longest,issues}, null, 2));
 assert.deepEqual(issues, [], 'Static QA found blocking structural issues');
 console.log('Reading60 static QA: PASS (length bias is advisory, not a failure)');
