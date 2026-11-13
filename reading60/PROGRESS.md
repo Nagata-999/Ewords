@@ -62,3 +62,9 @@
 - New original passage: Public Water Refill Stations; TFNG asks about explicitly unrecorded avoided purchases, while Sentence Completion asks about the planned summer/winter comparison. Each has its own evidence focus, Japanese explanation, evidence translation, paraphrase and distractor rationale.
 - Source-level audit: 72 IDs, 72 unique (including five initial JS object literals using unquoted id keys); new answer indices 1 and 0. Existing PIN/DB code untouched. Corrected the second item's evidence highlight during this run.
 - Pending: browser testing, full-bank option-length and editorial review, delayed-queue all-pending edge case, and next-day persistence beyond sessionStorage. Main remains unchanged pending approval.
+
+## 2026-11-13 — batch 075–076
+- Confirmed open PR #113 (head `feature/reading60-51-54`) and checked the existing bank through r60-074 before adding questions.
+- Added 2 original questions from one passage, Museum Photograph Identification: TFNG (answer 2) and Sentence Completion (answer 0). Total **76/100** (24 remaining).
+- Both items include explicit evidence focus, Japanese evidence translation, paraphrase, explanation and distractor rationale. Source-level check found 76 unique IDs after insertion.
+- Only `reading60/index.html` and this progress file changed; PIN/DB and main untouched. Browser runtime, full-bank semantic audit and option-length distribution remain pending. Session-only storage cannot provide next-day persistence.
