@@ -1,0 +1,37 @@
+'use strict';
+const test=require('node:test'),assert=require('node:assert/strict');
+const {KEY,blank,load,save,record,due}=require('../reading60/progress-store.cjs');
+const ids=new Set(['a','b','c','d','e','f']);
+function storage(){const map=new Map();return {getItem:k=>map.has(k)?map.get(k):null,setItem:(k,v)=>map.set(k,v),map};}
+test('durable history and first/review accuracy classification',()=>{
+ const s=storage(),p=blank(),now=new Date('2026-11-14T00:00:00Z');
+ p.presentations=1;record(p,'a',true,22,now);assert.equal(p.history[0].first,true);
+ assert.equal(due(p,new Date('2026-11-14T23:00:00Z')),null);
+ assert.equal(due(p,new Date('2026-11-15T00:00:00Z')),'a');
+ assert.equal(save(s,p),true);const restored=load(s,ids);assert.equal(restored.readOnly,false);
+ record(restored.state,'a',true,31,new Date('2026-11-15T00:00:00Z'));
+ assert.equal(restored.state.history[1].first,false);
+ assert.equal(restored.state.items.a.nextReviewAt,'2026-11-18T00:00:00.000Z');
+});
+test('wrong answer waits for five intervening presentations',()=>{
+ const p=blank();p.presentations=1;record(p,'a',false,12,new Date('2026-11-14T00:00:00Z'));
+ for(let n=1;n<=5;n++){p.presentations=1+n;assert.equal(due(p,new Date('2026-11-30T00:00:00Z')),null);}
+ p.presentations=7;assert.equal(due(p),'a');
+ record(p,'a',false,10);assert.equal(p.queue.length,1);assert.equal(p.queue[0].notBeforePresentation,13);
+});
+test('corrupt and future records remain untouched',()=>{
+ for(const value of ['{broken','{"version":2,"history":[]}']){
+  const s=storage();s.setItem(KEY,value);const result=load(s,ids);
+  assert.equal(result.readOnly,true);assert.equal(s.getItem(KEY),value);
+ }
+});
+test('unavailable storage does not throw or claim success',()=>{
+ const s={getItem(){throw Error('blocked')},setItem(){throw Error('blocked')}};
+ assert.equal(load(s,ids).readOnly,true);assert.equal(save(s,blank()),false);
+});
+test('unknown IDs are excluded and duplicate pending entries collapse',()=>{
+ const s=storage(),p=blank();p.history=[{id:'unknown',correct:true,first:true,seconds:4,date:'2026-11-14T00:00:00Z'}];
+ p.queue=[{id:'a',notBeforePresentation:6},{id:'a',notBeforePresentation:6},{id:'unknown',notBeforePresentation:7}];
+ s.setItem(KEY,JSON.stringify(p));const out=load(s,ids).state;
+ assert.equal(out.history.length,0);assert.deepEqual(out.queue,[{id:'a',notBeforePresentation:6}]);
+});
