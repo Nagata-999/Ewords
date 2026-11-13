@@ -22,3 +22,5 @@ jobs:
           node-version: '22'
       - name: Validate Reading60 question bank
         run: node tests/reading60-static-qa.cjs
+      - name: Validate isolated progress scheduler
+        run: node --test tests/reading60-progress-store.test.cjs
