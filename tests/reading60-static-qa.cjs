@@ -21,6 +21,9 @@ const ids = new Set();
 const types = new Map();
 const answerPositions = new Map();
 const longest = [];
+const longestRatios = [];
+const fourChoicePositions = [0,0,0,0];
+const fourChoiceTypes = new Map();
 const issues = [];
 const stems = new Map();
 const evidence = new Map();
@@ -55,7 +58,18 @@ for (const [i, q] of questions.entries()) {
   }
   types.set(q.type, (types.get(q.type) || 0) + 1);
   answerPositions.set(q.answer, (answerPositions.get(q.answer) || 0) + 1);
-  if (q.options.length === 4 && q.options[q.answer].length > Math.max(...q.options.filter((_,j) => j !== q.answer).map(v => v.length))) longest.push(id);
+  if (q.options.length === 4) {
+    fourChoicePositions[q.answer]++;
+    const counts = fourChoiceTypes.get(q.type) || [0,0,0,0];
+    counts[q.answer]++;
+    fourChoiceTypes.set(q.type, counts);
+    const others = q.options.filter((_,j) => j !== q.answer).map(v => v.trim().length);
+    const correctLength = q.options[q.answer].trim().length;
+    if (correctLength > Math.max(...others)) {
+      longest.push(id);
+      longestRatios.push({id, ratio: Number((correctLength / Math.max(1, Math.max(...others))).toFixed(2))});
+    }
+  }
 }
 const tfngAnswers = {TRUE:0,FALSE:0,'NOT GIVEN':0};
 for (const q of questions) {
@@ -65,6 +79,6 @@ for (const q of questions) {
   }
 }
 const fourChoice = questions.filter(q => Array.isArray(q.options) && q.options.length === 4).length;
-console.log(JSON.stringify({total:questions.length,uniqueIds:ids.size,types:Object.fromEntries(types),answerPositions:Object.fromEntries(answerPositions),fourChoice,tfngAnswers,strictlyLongestCorrect:longest.length,longestIds:longest,issues}, null, 2));
+console.log(JSON.stringify({total:questions.length,uniqueIds:ids.size,types:Object.fromEntries(types),answerPositions:Object.fromEntries(answerPositions),fourChoice,fourChoicePositions,fourChoicePositionsByType:Object.fromEntries(fourChoiceTypes),tfngAnswers,strictlyLongestCorrect:longest.length,longestIds:longest,longestRatios,issues}, null, 2));
 assert.deepEqual(issues, [], 'Static QA found blocking structural issues');
 console.log('Reading60 static QA: PASS (length bias is advisory, not a failure)');
