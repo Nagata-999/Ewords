@@ -22,6 +22,7 @@ const types = new Map();
 const answerPositions = new Map();
 const longest = [];
 const longestRatios = [];
+const suspiciousAnswerLength = [];
 const fourChoicePositions = [0,0,0,0];
 const fourChoiceTypes = new Map();
 const issues = [];
@@ -65,7 +66,9 @@ for (const [i, q] of questions.entries()) {
     fourChoiceTypes.set(q.type, counts);
     const others = q.options.filter((_,j) => j !== q.answer).map(v => v.trim().length);
     const correctLength = q.options[q.answer].trim().length;
-    if (correctLength > Math.max(...others)) {
+    const maxOtherLength = Math.max(...others);
+    if (correctLength >= maxOtherLength * 1.5 && correctLength - maxOtherLength >= 8) suspiciousAnswerLength.push({id, correctLength, maxOtherLength});
+    if (correctLength > maxOtherLength) {
       longest.push(id);
       longestRatios.push({id, ratio: Number((correctLength / Math.max(1, Math.max(...others))).toFixed(2))});
     }
@@ -79,6 +82,6 @@ for (const q of questions) {
   }
 }
 const fourChoice = questions.filter(q => Array.isArray(q.options) && q.options.length === 4).length;
-console.log(JSON.stringify({total:questions.length,uniqueIds:ids.size,types:Object.fromEntries(types),answerPositions:Object.fromEntries(answerPositions),fourChoice,fourChoicePositions,fourChoicePositionsByType:Object.fromEntries(fourChoiceTypes),tfngAnswers,strictlyLongestCorrect:longest.length,longestIds:longest,longestRatios,issues}, null, 2));
+console.log(JSON.stringify({total:questions.length,uniqueIds:ids.size,types:Object.fromEntries(types),answerPositions:Object.fromEntries(answerPositions),fourChoice,fourChoicePositions,fourChoicePositionsByType:Object.fromEntries(fourChoiceTypes),tfngAnswers,strictlyLongestCorrect:longest.length,longestIds:longest,longestRatios,suspiciousAnswerLength,issues}, null, 2));
 assert.deepEqual(issues, [], 'Static QA found blocking structural issues');
 console.log('Reading60 static QA: PASS (length bias is advisory, not a failure)');
