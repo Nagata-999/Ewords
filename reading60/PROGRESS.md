@@ -68,3 +68,9 @@
 - Added 2 original questions from one passage, Museum Photograph Identification: TFNG (answer 2) and Sentence Completion (answer 0). Total **76/100** (24 remaining).
 - Both items include explicit evidence focus, Japanese evidence translation, paraphrase, explanation and distractor rationale. Source-level check found 76 unique IDs after insertion.
 - Only `reading60/index.html` and this progress file changed; PIN/DB and main untouched. Browser runtime, full-bank semantic audit and option-length distribution remain pending. Session-only storage cannot provide next-day persistence.
+
+## 2026-11-13 — batch 077–078
+- Confirmed PR #113 remains open and checked the branch's existing 76 questions before editing.
+- Added two original items on borrowed air-quality monitors: TFNG (r60-077, answer index 1) and Multiple Choice (r60-078, answer index 2), reaching **78/100** (22 remaining).
+- Each question highlights its own direct evidence and includes Japanese explanation, evidence translation, paraphrase, and distractor rationale. 78 IDs unique in source-level audit; both answers within bounds.
+- Source file and progress log only; no changes to PIN sync, DB, or main. Browser execution, whole-bank answer-length and semantic audits, and next-day persistence beyond sessionStorage remain outstanding.
