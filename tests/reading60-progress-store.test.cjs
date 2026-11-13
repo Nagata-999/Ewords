@@ -35,3 +35,16 @@ test('unknown IDs are excluded and duplicate pending entries collapse',()=>{
  s.setItem(KEY,JSON.stringify(p));const out=load(s,ids).state;
  assert.equal(out.history.length,0);assert.deepEqual(out.queue,[{id:'a',notBeforePresentation:6}]);
 });
+
+test('fourth consecutive correct review schedules 14 days, including after reload',()=>{
+ const s=storage(),p=blank();
+ const dates=['2026-11-14','2026-11-15','2026-11-18','2026-11-25'];
+ for(const day of dates)record(p,'a',true,20,new Date(day+'T00:00:00Z'));
+ assert.equal(p.items.a.streak,4);
+ assert.equal(p.items.a.nextReviewAt,'2026-12-09T00:00:00.000Z');
+ assert.equal(save(s,p),true);
+ const restored=load(s,ids).state;
+ assert.equal(restored.items.a.streak,4);
+ assert.equal(due(restored,new Date('2026-12-08T23:59:59Z')),null);
+ assert.equal(due(restored,new Date('2026-12-09T00:00:00Z')),'a');
+});
