@@ -118,3 +118,15 @@ test('first and review accuracy and timing are independently calculated',()=>{
  assert.equal(statistics(blank()).initial.accuracy,null);
  assert.equal(statistics(blank()).review.averageSeconds,null);
 });
+
+test('an item with existing attempts is a review even when old history was pruned',()=>{
+ const p=blank(),s=storage(),t=new Date('2026-11-14T00:00:00Z');
+ p.items.a={attempts:10001,lapses:3,streak:2,lastAnsweredAt:'2026-11-11T00:00:00Z',nextReviewAt:'2026-11-14T00:00:00Z'};
+ assert.equal(save(s,p),true);
+ const restored=load(s,ids).state;
+ record(restored,'a',true,25,t);
+ assert.equal(restored.history[0].first,false);
+ assert.equal(restored.items.a.attempts,10002);
+ assert.equal(statistics(restored).review.attempts,1);
+ assert.equal(statistics(restored).initial.attempts,0);
+});
