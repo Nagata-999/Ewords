@@ -31,7 +31,9 @@ function record(state,id,correct,seconds,now=new Date()){
  state.history.push({id,correct,first,seconds,date:now.toISOString()});
  if(state.history.length>10000)state.history.splice(0,state.history.length-10000);
  state.queue=state.queue.filter(q=>q.id!==id);
- if(!correct)state.queue.push({id,notBeforePresentation:state.presentations+6});
+ // presented() has already counted the missed question. Five subsequent
+ // presentations must occur before the item is eligible again.
+ if(!correct)state.queue.push({id,notBeforePresentation:state.presentations+5});
  state.updatedAt=now.toISOString();
 }
 // Call once when a question is displayed, including retries; not when merely checking due().
