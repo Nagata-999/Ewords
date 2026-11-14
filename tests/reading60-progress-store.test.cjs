@@ -76,3 +76,15 @@ test('calendar reviews prioritize the oldest overdue item regardless of insertio
  p.presentations=10;
  assert.equal(due(p,new Date('2026-11-21T00:00:00Z')),'b');
 });
+
+test('invalid answer duration cannot create history that disappears after reload',()=>{
+ const p=blank(),s=storage();
+ for(const seconds of [NaN,Infinity,-1,86401]){
+  assert.throws(()=>record(p,'a',true,seconds),/invalid seconds/);
+ }
+ assert.equal(p.history.length,0);
+ assert.equal(Object.keys(p.items).length,0);
+ record(p,'a',true,86400,new Date('2026-11-14T00:00:00Z'));
+ assert.equal(save(s,p),true);
+ assert.equal(load(s,ids).state.history.length,1);
+});
