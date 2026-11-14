@@ -20,7 +20,7 @@ function load(storage,ids){
 }
 function save(storage,state){try{const value=JSON.stringify(state);storage.setItem(KEY,value);return storage.getItem(KEY)===value}catch{return false}}
 function record(state,id,correct,seconds,now=new Date()){
- if(!Number.isFinite(seconds)||seconds<0)throw Error('invalid seconds');
+ if(!Number.isFinite(seconds)||seconds<0||seconds>86400)throw Error('invalid seconds');
  const first=!state.history.some(h=>h.id===id),old=state.items[id]||{attempts:0,lapses:0,streak:0};
  const streak=correct?Math.min(4,old.streak+1):0,days=correct?[1,3,7,14][Math.max(0,streak-1)]:1;
  state.items[id]={attempts:old.attempts+1,lapses:old.lapses+Number(!correct),streak,lastAnsweredAt:now.toISOString(),nextReviewAt:new Date(now.getTime()+days*DAY).toISOString()};
