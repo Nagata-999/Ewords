@@ -20,6 +20,9 @@ function load(storage,ids){
 }
 function save(storage,state){try{const value=JSON.stringify(state);storage.setItem(KEY,value);return storage.getItem(KEY)===value}catch{return false}}
 function record(state,id,correct,seconds,now=new Date()){
+ if(typeof id!=='string'||!id||id==='__proto__'||id==='constructor'||id==='prototype')throw Error('invalid id');
+ if(typeof correct!=='boolean')throw Error('invalid correctness');
+ if(!(now instanceof Date)||!Number.isFinite(now.getTime()))throw Error('invalid date');
  if(!Number.isFinite(seconds)||seconds<0||seconds>86400)throw Error('invalid seconds');
  const old=state.items[id]||{attempts:0,lapses:0,streak:0};
  const first=old.attempts===0&&!state.history.some(h=>h.id===id);
