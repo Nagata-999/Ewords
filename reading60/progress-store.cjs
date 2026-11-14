@@ -32,8 +32,8 @@ function record(state,id,correct,seconds,now=new Date()){
  if(state.history.length>10000)state.history.splice(0,state.history.length-10000);
  state.queue=state.queue.filter(q=>q.id!==id);
  // presented() has already counted the missed question. Five subsequent
- // presentations must occur before the item is eligible again.
- if(!correct)state.queue.push({id,notBeforePresentation:state.presentations+5});
+ // presentations must occur before the item is eligible again. The next\n // presentation is the retry, so the eligibility threshold is current + 6.
+ if(!correct)state.queue.push({id,notBeforePresentation:state.presentations+6});
  state.updatedAt=now.toISOString();
 }
 // Call once when a question is displayed, including retries; not when merely checking due().
