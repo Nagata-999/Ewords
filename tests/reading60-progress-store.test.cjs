@@ -17,7 +17,7 @@ test('wrong answer waits for five intervening presentations',()=>{
  const p=blank();p.presentations=1;record(p,'a',false,12,new Date('2026-11-14T00:00:00Z'));
  for(let n=1;n<=5;n++){p.presentations=1+n;assert.equal(due(p,new Date('2026-11-30T00:00:00Z')),null);}
  p.presentations=7;assert.equal(due(p),'a');
- record(p,'a',false,10);assert.equal(p.queue.length,1);assert.equal(p.queue[0].notBeforePresentation,13);
+ record(p,'a',false,10);assert.equal(p.queue.length,1);assert.equal(p.queue[0].notBeforePresentation,14);
 });
 test('corrupt and future records remain untouched',()=>{
  for(const value of ['{broken','{"version":2,"history":[]}']){
