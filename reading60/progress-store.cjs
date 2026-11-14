@@ -40,4 +40,15 @@ function due(state,now=new Date()){
  }
  return oldestId;
 }
-module.exports={KEY,blank,load,save,record,due};
+function statistics(state){
+ const initial=state.history.filter(h=>h.first===true);
+ const review=state.history.filter(h=>h.first===false);
+ const summarize=rows=>({
+  attempts:rows.length,
+  correct:rows.filter(h=>h.correct===true).length,
+  accuracy:rows.length?rows.filter(h=>h.correct===true).length/rows.length:null,
+  averageSeconds:rows.length?rows.reduce((sum,h)=>sum+h.seconds,0)/rows.length:null
+ });
+ return {initial:summarize(initial),review:summarize(review),total:summarize(state.history)};
+}
+module.exports={KEY,blank,load,save,record,due,statistics};
