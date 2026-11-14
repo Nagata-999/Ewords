@@ -1,6 +1,6 @@
 'use strict';
 const test=require('node:test'),assert=require('node:assert/strict');
-const {KEY,blank,load,save,record,due}=require('../reading60/progress-store.cjs');
+const {KEY,blank,load,save,record,due,statistics}=require('../reading60/progress-store.cjs');
 const ids=new Set(['a','b','c','d','e','f']);
 function storage(){const map=new Map();return {getItem:k=>map.has(k)?map.get(k):null,setItem:(k,v)=>map.set(k,v),map};}
 test('durable history and first/review accuracy classification',()=>{
@@ -103,4 +103,18 @@ test('array-shaped items data is rejected without overwriting the original',()=>
  const raw=JSON.stringify(p);s.setItem(KEY,raw);
  assert.equal(load(s,ids).readOnly,true);
  assert.equal(s.getItem(KEY),raw);
+});
+
+test('first and review accuracy and timing are independently calculated',()=>{
+ const p=blank(),t=new Date('2026-11-14T00:00:00Z');
+ record(p,'a',false,20,t);
+ record(p,'b',true,40,t);
+ record(p,'a',true,60,t);
+ record(p,'b',false,80,t);
+ const s=statistics(p);
+ assert.deepEqual(s.initial,{attempts:2,correct:1,accuracy:0.5,averageSeconds:30});
+ assert.deepEqual(s.review,{attempts:2,correct:1,accuracy:0.5,averageSeconds:70});
+ assert.deepEqual(s.total,{attempts:4,correct:2,accuracy:0.5,averageSeconds:50});
+ assert.equal(statistics(blank()).initial.accuracy,null);
+ assert.equal(statistics(blank()).review.averageSeconds,null);
 });
