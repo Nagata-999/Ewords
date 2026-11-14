@@ -143,3 +143,12 @@ test('history stays within the same 10000-entry limit before and after reload',(
  assert.equal(restored.items.a.attempts,10005);
  assert.equal(statistics(restored).total.attempts,10000);
 });
+
+
+test('invalid answer input is rejected without changing progress',()=>{
+ const p=blank(),t=new Date('2026-11-14T00:00:00Z');
+ for(const id of ['', '__proto__', 'constructor', 'prototype'])assert.throws(()=>record(p,id,true,12,t),/invalid id/);
+ for(const correct of [undefined,1,'false',null])assert.throws(()=>record(p,'a',correct,12,t),/invalid correctness/);
+ for(const date of [new Date(NaN),'2026-11-14',null])assert.throws(()=>record(p,'a',true,12,date),/invalid date/);
+ assert.deepEqual(p,blank());
+});
