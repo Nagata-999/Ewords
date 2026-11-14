@@ -130,3 +130,16 @@ test('an item with existing attempts is a review even when old history was prune
  assert.equal(statistics(restored).review.attempts,1);
  assert.equal(statistics(restored).initial.attempts,0);
 });
+
+test('history stays within the same 10000-entry limit before and after reload',()=>{
+ const p=blank(),s=storage(),t=new Date('2026-11-14T00:00:00Z');
+ for(let n=0;n<10005;n++)record(p,'a',true,10,t);
+ assert.equal(p.history.length,10000);
+ assert.equal(p.items.a.attempts,10005);
+ assert.equal(p.history[0].first,false);
+ assert.equal(save(s,p),true);
+ const restored=load(s,ids).state;
+ assert.equal(restored.history.length,10000);
+ assert.equal(restored.items.a.attempts,10005);
+ assert.equal(statistics(restored).total.attempts,10000);
+});
