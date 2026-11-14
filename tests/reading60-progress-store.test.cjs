@@ -88,3 +88,19 @@ test('invalid answer duration cannot create history that disappears after reload
  assert.equal(save(s,p),true);
  assert.equal(load(s,ids).state.history.length,1);
 });
+
+test('large valid counters survive reload without signed 32-bit wraparound',()=>{
+ const s=storage(),p=blank();
+ p.items.a={attempts:2147483648,lapses:2147483648,streak:4,lastAnsweredAt:'2026-11-14T00:00:00Z',nextReviewAt:'2026-11-28T00:00:00Z'};
+ assert.equal(save(s,p),true);
+ const item=load(s,ids).state.items.a;
+ assert.equal(item.attempts,2147483648);
+ assert.equal(item.lapses,2147483648);
+ assert.equal(item.streak,4);
+});
+test('array-shaped items data is rejected without overwriting the original',()=>{
+ const s=storage(),p=blank();p.items=[];
+ const raw=JSON.stringify(p);s.setItem(KEY,raw);
+ assert.equal(load(s,ids).readOnly,true);
+ assert.equal(s.getItem(KEY),raw);
+});
