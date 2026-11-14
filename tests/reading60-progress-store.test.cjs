@@ -65,3 +65,14 @@ test('a lapse resets spaced-review streak and a later correct answer clears the 
  assert.equal(p.items.a.nextReviewAt,'2026-11-19T01:00:00.000Z');
  assert.deepEqual(p.history.map(x=>x.first),[true,false,false,false]);
 });
+
+test('calendar reviews prioritize the oldest overdue item regardless of insertion order',()=>{
+ const p=blank();p.items.a={nextReviewAt:'2026-11-20T00:00:00.000Z'};
+ p.items.b={nextReviewAt:'2026-11-15T00:00:00.000Z'};
+ p.items.c={nextReviewAt:'2026-11-17T00:00:00.000Z'};
+ assert.equal(due(p,new Date('2026-11-21T00:00:00Z')),'b');
+ p.queue.push({id:'b',notBeforePresentation:10});
+ assert.equal(due(p,new Date('2026-11-21T00:00:00Z')),'c');
+ p.presentations=10;
+ assert.equal(due(p,new Date('2026-11-21T00:00:00Z')),'b');
+});
