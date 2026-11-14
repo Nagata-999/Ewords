@@ -32,6 +32,12 @@ function record(state,id,correct,seconds,now=new Date()){
 function due(state,now=new Date()){
  const queued=state.queue.find(q=>q.notBeforePresentation<=state.presentations);
  if(queued)return queued.id;
- return Object.keys(state.items).find(id=>Date.parse(state.items[id].nextReviewAt)<=now.getTime()&&!state.queue.some(q=>q.id===id))||null;
+ const pending=new Set(state.queue.map(q=>q.id));
+ let oldestId=null,oldestAt=Infinity;
+ for(const [id,item] of Object.entries(state.items)){
+  const at=Date.parse(item.nextReviewAt);
+  if(!pending.has(id)&&Number.isFinite(at)&&at<=now.getTime()&&at<oldestAt){oldestId=id;oldestAt=at;}
+ }
+ return oldestId;
 }
 module.exports={KEY,blank,load,save,record,due};
