@@ -26,6 +26,7 @@ function record(state,id,correct,seconds,now=new Date()){
  const streak=correct?Math.min(4,old.streak+1):0,days=correct?[1,3,7,14][Math.max(0,streak-1)]:1;
  state.items[id]={attempts:old.attempts+1,lapses:old.lapses+Number(!correct),streak,lastAnsweredAt:now.toISOString(),nextReviewAt:new Date(now.getTime()+days*DAY).toISOString()};
  state.history.push({id,correct,first,seconds,date:now.toISOString()});
+ if(state.history.length>10000)state.history.splice(0,state.history.length-10000);
  state.queue=state.queue.filter(q=>q.id!==id);
  if(!correct)state.queue.push({id,notBeforePresentation:state.presentations+6});
  state.updatedAt=now.toISOString();
