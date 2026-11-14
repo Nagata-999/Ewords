@@ -7,11 +7,11 @@ function load(storage,ids){
  try{
   const raw=storage.getItem(KEY);if(raw===null)return {state:blank(),readOnly:false};
   const data=JSON.parse(raw);
-  if(!data||data.version!==1||!Array.isArray(data.history)||!data.items||typeof data.items!=='object'||!Array.isArray(data.queue))throw Error('invalid schema');
+  if(!data||data.version!==1||!Array.isArray(data.history)||!data.items||typeof data.items!=='object'||Array.isArray(data.items)||!Array.isArray(data.queue))throw Error('invalid schema');
   const state=blank();
   state.history=data.history.filter(h=>h&&ids.has(h.id)&&typeof h.correct==='boolean'&&typeof h.first==='boolean'&&Number.isFinite(h.seconds)&&h.seconds>=0&&h.seconds<=86400&&Number.isFinite(Date.parse(h.date))).slice(-10000);
   state.presentations=Number.isSafeInteger(data.presentations)&&data.presentations>=0?data.presentations:0;
-  for(const [id,item] of Object.entries(data.items))if(ids.has(id)&&item&&Number.isFinite(Date.parse(item.nextReviewAt)))state.items[id]={attempts:Math.max(0,item.attempts|0),lapses:Math.max(0,item.lapses|0),streak:Math.max(0,Math.min(4,item.streak|0)),lastAnsweredAt:item.lastAnsweredAt||null,nextReviewAt:item.nextReviewAt};
+  for(const [id,item] of Object.entries(data.items))if(ids.has(id)&&item&&Number.isFinite(Date.parse(item.nextReviewAt)))state.items[id]={attempts:Math.max(0,Number.isSafeInteger(item.attempts)?item.attempts:0),lapses:Math.max(0,Number.isSafeInteger(item.lapses)?item.lapses:0),streak:Math.max(0,Math.min(4,Number.isSafeInteger(item.streak)?item.streak:0)),lastAnsweredAt:item.lastAnsweredAt||null,nextReviewAt:item.nextReviewAt};
   const seen=new Set();
   state.queue=data.queue.filter(q=>q&&ids.has(q.id)&&!seen.has(q.id)&&Number.isSafeInteger(q.notBeforePresentation)&&q.notBeforePresentation>=0&&(seen.add(q.id),true)).map(q=>({id:q.id,notBeforePresentation:q.notBeforePresentation}));
   state.updatedAt=data.updatedAt||null;
