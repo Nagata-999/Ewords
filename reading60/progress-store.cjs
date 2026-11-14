@@ -31,6 +31,13 @@ function record(state,id,correct,seconds,now=new Date()){
  if(!correct)state.queue.push({id,notBeforePresentation:state.presentations+6});
  state.updatedAt=now.toISOString();
 }
+// Call once when a question is displayed, including retries; not when merely checking due().
+function presented(state,id){
+ if(typeof id!=='string'||!id)throw Error('invalid id');
+ if(!Number.isSafeInteger(state.presentations)||state.presentations<0||state.presentations>=Number.MAX_SAFE_INTEGER)throw Error('invalid presentation count');
+ state.presentations++;
+ return state.presentations;
+}
 function due(state,now=new Date()){
  const queued=state.queue.find(q=>q.notBeforePresentation<=state.presentations);
  if(queued)return queued.id;
@@ -53,4 +60,4 @@ function statistics(state){
  });
  return {initial:summarize(initial),review:summarize(review),total:summarize(state.history)};
 }
-module.exports={KEY,blank,load,save,record,due,statistics};
+module.exports={KEY,blank,load,save,record,presented,due,statistics};
