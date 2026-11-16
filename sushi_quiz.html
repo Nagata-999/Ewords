@@ -786,8 +786,82 @@ async function saveSoloScore(){
  document.getElementById('soloRankingWrap').classList.remove('hidden');
 }
 
-function categoryList(){return Array.from(new Set(QUESTIONS.map(q=>q.cat))).sort()}
-function categoryCount(cat){return QUESTIONS.filter(q=>q.cat===cat).length}
+// Display related topics together without rewriting the original question bank.
+// This keeps existing questions, answer keys and category-specific weighting intact.
+const QUIZ_CATEGORY_ALIASES = {
+  "Earth & Space": "Earth & Space",
+  "Space": "Earth & Space",
+  "Deep Sea": "Earth & Space",
+  "Dinosaurs": "Earth & Space",
+  "Extinct Animals": "Earth & Space",
+  "Mountains": "Earth & Space",
+  "Animals": "Earth & Space",
+  "Birds": "Earth & Space",
+  "Insects": "Earth & Space",
+  "Geography": "Geography & World",
+  "World Capitals": "Geography & World",
+  "Flags": "Geography & World",
+  "Population & Countries": "Geography & World",
+  "Straits & Canals": "Geography & World",
+  "World Heritage": "Geography & World",
+  "Castles": "Geography & World",
+  "World History": "History",
+  "Japanese History & Culture": "History",
+  "Historical Figures": "History",
+  "Science History": "History",
+  "Biology": "Science & Nature",
+  "Chemistry": "Science & Nature",
+  "Physics": "Science & Nature",
+  "Art": "Arts & Culture",
+  "Art History": "Arts & Culture",
+  "Arts & Culture": "Arts & Culture",
+  "Famous Paintings": "Arts & Culture",
+  "Music": "Music",
+  "Popular Music": "Music",
+  "Music History": "Music",
+  "Classical Music": "Music",
+  "Musical Instruments": "Music",
+  "Movies": "Movies & TV",
+  "TV & Streaming": "Movies & TV",
+  "Film History": "Movies & TV",
+  "Western Movies": "Movies & TV",
+  "Movies & Anime": "Movies & TV",
+  "Video Games": "Video Games",
+  "Games": "Video Games",
+  "Retro Games": "Video Games",
+  "Pokemon": "Video Games",
+  "Anime & Manga": "Anime & Manga",
+  "Gundam": "Anime & Manga",
+  "Sports": "Sports",
+  "Sports General": "Sports",
+  "Soccer": "Sports",
+  "Literature": "Literature",
+  "World Literature": "Literature",
+  "Shakespeare": "Literature",
+  "Harry Potter": "Literature",
+  "Mythology": "Mythology & Religion",
+  "Greek Mythology": "Mythology & Religion",
+  "Norse Mythology": "Mythology & Religion",
+  "Religion & Myth": "Mythology & Religion",
+  "General Knowledge": "General Knowledge",
+  "Trivia": "General Knowledge",
+  "Acronyms": "General Knowledge",
+  "World Records": "General Knowledge",
+  "IT & AI": "Technology",
+  "Economics": "Business & Economics",
+  "Current Companies": "Business & Economics",
+  "Food": "Food",
+  "Disney": "Disney",
+  "Marvel": "Marvel",
+  "Internet & Pop Culture": "Internet & Pop Culture",
+  "Math": "Math",
+  "Philosophy": "Philosophy",
+  "Railways": "Railways & Aircraft",
+  "Aircraft": "Railways & Aircraft"
+};
+function displayQuizCategory(cat){return QUIZ_CATEGORY_ALIASES[cat] || cat;}
+function categoryList(){return Array.from(new Set(QUESTIONS.map(q=>displayQuizCategory(q.cat)))).sort();}
+function categoryCount(cat){return QUESTIONS.filter(q=>displayQuizCategory(q.cat)===cat).length;}
 function renderCategoryCards(id){
   const wrap=document.getElementById(id);
   if(!wrap) return;
@@ -815,8 +889,8 @@ function requireSelectedCategories(id){
 function categoryKey(cat){ return Array.isArray(cat) ? cat.join("|") : String(cat||"Random"); }
 function setup(){["soloCatCards","localCatCards","onlineCatCards","buzzerCatCards"].forEach(renderCategoryCards)}
 function pool(cat){
-  if(Array.isArray(cat)) return QUESTIONS.filter(q => cat.includes(q.cat));
-  return QUESTIONS.filter(q => cat==="Random" || q.cat===cat);
+  if(Array.isArray(cat)) return QUESTIONS.filter(q => cat.includes(displayQuizCategory(q.cat)));
+  return QUESTIONS.filter(q => cat==="Random" || displayQuizCategory(q.cat)===cat);
 }
 function actualPoolCount(cat){
   // Show the real number of questions, not the weighted draw count.
