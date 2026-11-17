@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#fbf4ea"><title>すしSAT｜英語・数学の解説付き練習</title>
+<meta name="description" content="Digital SAT形式のオリジナル英語・数学問題。詳しい日本語解説、誤答選択肢の分析、途中式と苦手復習。">
+<link rel="icon" href="../icon-192.png">
+<style>
+:root{--bg:#fbf4ea;--line:#f1d7bc;--ink:#172033;--muted:#566579;--orange:#f4511e;--teal:#0f766e;--white:#fff;--soft:#fffaf2}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 8%,#ffe5ce,transparent 28%),var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.7}
+main{max-width:850px;margin:0 auto;padding:24px 16px 75px}.top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.back{font-weight:800;color:var(--teal);text-decoration:none}.muted{color:var(--muted)}.small{font-size:.86rem}.panel{background:var(--white);border:1px solid var(--line);border-radius:22px;padding:clamp(18px,4vw,30px);margin-top:18px;box-shadow:0 8px 24px #1720330a}
+h1{font-size:clamp(32px,7vw,52px);margin:14px 0 2px;line-height:1.2}h2{margin:0 0 12px;font-size:1.35rem}h3{margin:16px 0 5px;font-size:1.03rem}p{margin:8px 0 15px}.tag{display:inline-block;border-radius:999px;background:#fff0de;border:1px solid #ffd4ad;color:#ac4319;padding:3px 12px;font-weight:800;font-size:.78rem}
+.layout{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.mode{border:2px solid var(--line);background:var(--soft);border-radius:16px;text-align:left;padding:16px;cursor:pointer;color:var(--ink);font:inherit}.mode strong{display:block;font-size:1.1rem}.mode span{display:block;font-size:.8rem;color:var(--muted)}.mode.active{border-color:var(--teal);background:#ebfaf5}
+.controls{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin:16px 0}.controls label{font-weight:700}.controls select{background:white;border:1px solid #d5c5b0;padding:11px;border-radius:10px;font:inherit;max-width:100%}
+button.primary,button.secondary{border:0;border-radius:13px;padding:12px 20px;font:inherit;font-weight:800;cursor:pointer}button.primary{background:var(--orange);color:white}button.secondary{background:#e7f6f0;color:#07594f}button:disabled{opacity:.5;cursor:not-allowed}
+.meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px;font-weight:800}.bar{height:9px;background:#f0e8df;border-radius:10px;overflow:hidden;margin:8px 0 22px}.bar div{height:100%;background:var(--teal);transition:width .2s}
+.passage{white-space:pre-wrap;background:#f6f8fa;border-left:4px solid #98bdba;border-radius:10px;padding:18px;margin:14px 0;font-size:1.04rem}.prompt{font-size:1.1rem;font-weight:750;white-space:pre-wrap}
+.options{display:grid;gap:10px;margin:16px 0}.option{display:flex;gap:10px;text-align:left;align-items:start;width:100%;padding:15px;background:white;border:2px solid #dcdfe3;border-radius:13px;font:inherit;color:var(--ink);cursor:pointer}.option .letter{font-weight:900;min-width:24px;color:var(--teal)}.option.selected{border-color:var(--teal);background:#ecfbf4}.option.correct{border-color:#18885b;background:#e5faed}.option.incorrect{border-color:#c84c37;background:#fff0ed}
+.explain{border-radius:15px;border:1px solid #b9d5c9;background:#f5fcf8;padding:18px;margin:15px 0}.explain strong{color:#065f46}.explain ol{padding-left:22px}.wrong{margin:8px 0;padding:8px 12px;background:#fff;border-radius:9px;border:1px solid #dfe7df}.score{font-size:2.4rem;font-weight:900;color:var(--teal)}.stat{padding:12px;border-radius:12px;background:#faf3e9;margin:8px 0}.hidden{display:none!important}footer{font-size:.75rem;color:var(--muted);margin-top:24px}button:focus-visible,select:focus-visible{outline:3px solid #3c9e91;outline-offset:3px}
+@media(max-width:590px){.layout{grid-template-columns:1fr}.panel{padding:17px}.meta{font-size:.9rem}}
+</style>
+</head>
+<body><main>
+<div class="top"><a href="../index.html#games" class="back">← すし単のゲーム一覧</a><span class="tag">🍣 SAT Practice</span></div>
+<header><h1>すしSAT</h1><p class="muted">English · Math · Mixed｜正解の理由も、間違いの理由も学ぼう。</p></header>
+<section id="home" class="panel">
+<h2>今日は何を練習する？</h2>
+<div class="layout" role="group" aria-label="練習科目">
+<button class="mode active" data-mode="english" aria-pressed="true"><strong>📖 English</strong><span>Reading &amp; Writing</span></button>
+<button class="mode" data-mode="math" aria-pressed="false"><strong>🧮 Math</strong><span>Algebra・Geometry</span></button>
+<button class="mode" data-mode="mixed" aria-pressed="false"><strong>🔀 Mixed</strong><span>英語と数学を交互に</span></button>
+</div>
+<div class="controls"><label for="difficulty">難易度</label><select id="difficulty"><option value="all">すべて</option><option value="Easy">Easy</option><option value="Medium">Medium</option><option value="Hard">Hard</option></select>
+<label for="count">問題数</label><select id="count"><option value="5">5問</option><option value="10">10問</option><option value="all">全問</option></select></div>
+<p class="small muted">本番に似せたオリジナル問題です。初期版は英語5問・数学5問からスタート。出題文は英語、解説は日本語です。正解後も解説を表示します。</p>
+<button class="primary" id="start">練習スタート</button>
+<button class="secondary" id="review" hidden>苦手問題だけ復習</button>
+<div id="stats" class="stat small" aria-live="polite"></div>
+</section>
+<section id="quiz" class="panel hidden">
+<div class="meta"><span id="progress"></span><span id="clock" aria-label="経過時間">00:00</span></div>
+<div class="bar" aria-hidden="true"><div id="fill"></div></div>
+<div class="meta"><span id="topic" class="tag"></span><span id="level" class="muted"></span></div>
+<div id="passage" class="passage hidden"></div>
+<p id="prompt" class="prompt"></p>
+<div id="options" class="options" role="group" aria-label="回答選択肢"></div>
+<button class="primary" id="submit" disabled>答え合わせ</button>
+<div id="explanation" class="explain hidden" aria-live="polite"></div>
+<button class="primary hidden" id="next">次の問題 →</button>
+</section>
+<section id="result" class="panel hidden"><h2>今回の結果</h2><div id="resultBody"></div><button class="primary" id="backHome">別の練習を始める</button></section>
+<footer>この教材はSAT形式を参考にした独自作成問題です。College Boardによる承認・提携・公式スコア予測はありません。記録はこのブラウザ内に保存します。</footer>
+</main>
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const KEY="sushiSAT.v1";
+let bank=[], mode="english", queue=[], index=0, active=null, options=[], selected=null, locked=false, started=0, ticker=null, correct=0, firstCount=0, reviewMode=false, seen=new Set(), missed=new Set();
+function load(){try{const d=JSON.parse(localStorage.getItem(KEY)||"{}");return {attempts:d.attempts||[],missed:Array.isArray(d.missed)?d.missed:[]}}catch{return {attempts:[],missed:[]}}}
+function save(d){try{localStorage.setItem(KEY,JSON.stringify(d))}catch{/* private mode */}}
+function shuffle(a){let b=[...a];for(let i=b.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
+function html(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function show(id){["home","quiz","result"].forEach(k=>$(k).classList.toggle("hidden",k!==id))}
+function stats(){let d=load(), total=d.attempts.length, ok=d.attempts.filter(x=>x.correct).length;let by={};for(const x of d.attempts){const k=x.subject;by[k]??={a:0,c:0};by[k].a++;if(x.correct)by[k].c++}
+$("stats").textContent=total?("累計 "+total+"回答／正答率 "+Math.round(ok/total*100)+"%｜English "+(by.english?Math.round(by.english.c/by.english.a*100)+"%":"未実施")+"・Math "+(by.math?Math.round(by.math.c/by.math.a*100)+"%":"未実施")):"まだ解答記録はありません。";
+$("review").hidden=!d.missed.length;$("review").textContent="苦手問題を復習（"+d.missed.length+"問）"}
+function pick(list,n){return shuffle(list).slice(0,n==="all"?undefined:Number(n))}
+function start(isReview=false){
+let d=load(), filtered=bank.filter(q=>mode==="mixed"||q.subject===mode).filter(q=>$("difficulty").value==="all"||q.difficulty===$("difficulty").value);
+if(isReview)filtered=filtered.filter(q=>d.missed.includes(q.id));
+let n=$("count").value, result=[];
+if(mode==="mixed"){const en=shuffle(filtered.filter(q=>q.subject==="english")),ma=shuffle(filtered.filter(q=>q.subject==="math"));while(en.length||ma.length){if(en.length)result.push(en.shift());if(ma.length)result.push(ma.shift())}result=result.slice(0,n==="all"?undefined:Number(n))}
+else result=pick(filtered,n);
+if(!result.length){alert("この条件に合う問題がありません。難易度や科目を変更してください。");return}
+queue=result.map(q=>q.id);firstCount=queue.length; index=0;correct=0;reviewMode=isReview;seen=new Set();missed=new Set();started=Date.now();show("quiz");clearInterval(ticker);ticker=setInterval(timer,1000);timer();render()
+}
+function timer(){let s=Math.floor((Date.now()-started)/1000);$("clock").textContent=String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+function render(){
+let q=bank.find(x=>x.id===queue[index]);active=q;selected=null;locked=false;options=shuffle(q.choices.map((value,original)=>({value,original})));
+$("progress").textContent="問題 "+(index+1)+" / "+queue.length+(index>=firstCount?"（復習）":"");
+$("fill").style.width=(index/queue.length*100)+"%";$("topic").textContent=q.topic;$("level").textContent=q.subject.toUpperCase()+" / "+q.difficulty;
+$("passage").classList.toggle("hidden",!q.passage);$("passage").textContent=q.passage||"";$("prompt").textContent=q.prompt;
+$("options").replaceChildren();
+options.forEach((o,i)=>{let b=document.createElement("button");b.type="button";b.className="option";b.dataset.idx=i;b.setAttribute("aria-pressed","false");let letter=document.createElement("span");letter.className="letter";letter.textContent="ABCD"[i];let text=document.createElement("span");text.textContent=o.value;b.append(letter,text);b.addEventListener("click",()=>{if(locked)return;selected=i;document.querySelectorAll(".option").forEach((x,j)=>{x.classList.toggle("selected",j===i);x.setAttribute("aria-pressed",String(i===j))});$("submit").disabled=false});$("options").append(b)});
+$("explanation").classList.add("hidden");$("submit").classList.remove("hidden");$("submit").disabled=true;$("next").classList.add("hidden");$("next").textContent=index+1>=queue.length?"結果を見る":"次の問題 →"
+}
+function submit(){
+if(locked||selected===null)return;locked=true;let q=active, original=options[selected].original, good=original===q.answer, first=!seen.has(q.id);seen.add(q.id);
+if(good&&index<firstCount)correct++;
+if(!good){missed.add(q.id);if(first&&!reviewMode)queue.push(q.id)}
+let d=load();d.attempts.push({id:q.id,subject:q.subject,topic:q.topic,correct:good,at:new Date().toISOString()});d.attempts=d.attempts.slice(-3000);
+if(good)d.missed=d.missed.filter(id=>id!==q.id);else if(!d.missed.includes(q.id))d.missed.push(q.id);save(d);
+document.querySelectorAll(".option").forEach((b,i)=>{b.disabled=true;if(options[i].original===q.answer)b.classList.add("correct");else if(i===selected)b.classList.add("incorrect")});
+let ex=$("explanation");ex.replaceChildren();
+const heading=document.createElement("h2");heading.textContent=(good?"✅ 正解！":"❌ 不正解")+" 正解："+q.choices[q.answer];ex.append(heading);
+const p=document.createElement("p");p.textContent=q.explanation;ex.append(p);
+const title=document.createElement("h3");title.textContent="考え方を3ステップで";ex.append(title);
+const ol=document.createElement("ol");for(const step of q.steps){const li=document.createElement("li");li.textContent=step;ol.append(li)}ex.append(ol);
+const w=document.createElement("h3");w.textContent="選択肢を一つずつ検証";ex.append(w);
+q.choices.forEach((choice,i)=>{const div=document.createElement("div");div.className="wrong";const bold=document.createElement("b");bold.textContent=(i===q.answer?"✓ ":"× ")+choice+"：";div.append(bold,document.createTextNode(i===q.answer?"これが正解。":q.whyWrong[i]));ex.append(div)});
+const tip=document.createElement("p");const b=document.createElement("strong");b.textContent="💡 学習ポイント：";tip.append(b,document.createTextNode(q.tip));ex.append(tip);
+ex.classList.remove("hidden");$("submit").classList.add("hidden");$("next").classList.remove("hidden");$("next").textContent=index+1>=queue.length?"結果を見る":"次の問題 →";
+ex.scrollIntoView({behavior:"smooth",block:"nearest"})
+}
+function next(){index++;if(index>=queue.length){clearInterval(ticker);show("result");let pct=Math.round(correct/firstCount*100), duration=Math.floor((Date.now()-started)/1000);$("resultBody").replaceChildren();let d=document.createElement("div");d.className="score";d.textContent=correct+" / "+firstCount;let p=document.createElement("p");p.textContent="初回正答率 "+pct+"%｜所要時間 "+Math.floor(duration/60)+"分"+duration%60+"秒｜今回間違えた問題 "+missed.size+"問";let n=document.createElement("p");n.textContent="※復習で正解しても初回正答率には加算しません。成績はSAT公式スコア換算ではありません。";$("resultBody").append(d,p,n);stats()}else render()}
+document.querySelectorAll(".mode").forEach(btn=>btn.addEventListener("click",()=>{mode=btn.dataset.mode;document.querySelectorAll(".mode").forEach(b=>{b.classList.toggle("active",b===btn);b.setAttribute("aria-pressed",String(b===btn))})}));
+$("start").addEventListener("click",()=>start(false));$("review").addEventListener("click",()=>start(true));$("submit").addEventListener("click",submit);$("next").addEventListener("click",next);$("backHome").addEventListener("click",()=>{show("home");stats();window.scrollTo(0,0)});
+fetch("./questions.json").then(r=>{if(!r.ok)throw Error("HTTP "+r.status);return r.json()}).then(d=>{bank=d.questions;stats()}).catch(e=>{$("stats").textContent="問題の読み込みに失敗しました。再読み込みしてください。";$("start").disabled=true;console.error(e)});
+</script></body></html>

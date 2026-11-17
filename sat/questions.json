@@ -1,0 +1,286 @@
+{
+  "version": 1,
+  "source": "Original SAT-style practice questions; not affiliated with College Board.",
+  "questions": [
+    {
+      "id": "E01",
+      "subject": "english",
+      "difficulty": "Hard",
+      "topic": "Words in Context",
+      "passage": "Although the historian's interpretation initially seemed ______, newly discovered correspondence provided compelling evidence in its favor, prompting even her most skeptical colleagues to reconsider their objections.",
+      "prompt": "Which choice completes the text with the most logical and precise word?",
+      "choices": [
+        "untenable",
+        "self-evident",
+        "orthodox",
+        "inconsequential"
+      ],
+      "answer": 0,
+      "explanation": "当初は支持しにくい解釈だったが、新資料がその説を裏づけたという逆転関係を読む。untenable は「維持・擁護できない」。Although と後半の compelling evidence が決め手。",
+      "steps": [
+        "Although は譲歩。前半と後半の評価は対照的。",
+        "最初は疑問視されていたが、後で根拠が出た。",
+        "したがって「支持できないように見えた」が最適。"
+      ],
+      "whyWrong": [
+        "",
+        "self-evident（自明の）なら、後で証拠が出たという転換が弱い。",
+        "orthodox（正統的な）では懐疑的な反応を説明できない。",
+        "inconsequential（重要でない）は証拠の有無とずれる。"
+      ],
+      "tip": "語彙を単独で見ず、譲歩・対比の接続語から評価の向きを判断する。"
+    },
+    {
+      "id": "E02",
+      "subject": "english",
+      "difficulty": "Medium",
+      "topic": "Inferences",
+      "passage": "In a study of urban bird populations, researchers found that birds inhabiting neighborhoods with extensive artificial lighting began singing earlier in the morning than those in darker areas. However, when the researchers compared reproductive success across these populations, they found no consistent differences.",
+      "prompt": "Which conclusion is best supported by the text?",
+      "choices": [
+        "Artificial lighting improves birds' reproductive success by extending their active hours.",
+        "Changes in singing behavior do not necessarily correspond to changes in reproductive success.",
+        "Birds in darker neighborhoods are less capable of adapting to environmental changes.",
+        "Early morning singing is primarily determined by reproductive needs."
+      ],
+      "answer": 1,
+      "explanation": "人工照明と早朝のさえずりには関連があった。一方、繁殖成功率には一貫した差がなかった。行動の変化と繁殖の変化は必ずしも一致しない、という限定的な結論だけが言える。",
+      "steps": [
+        "観察結果①：明るい地域ほど歌い始めが早い。",
+        "観察結果②：繁殖成功率に一貫した差はない。",
+        "観察されていない原因や能力まで推測しない。"
+      ],
+      "whyWrong": [
+        "繁殖成功率の改善は確認されていない。",
+        "",
+        "暗い地域の適応能力は測定されていない。",
+        "歌い始める主因は本文に示されていない。"
+      ],
+      "tip": "推論問題では「必ず」「主に」「改善する」などの強すぎる主張に注意。"
+    },
+    {
+      "id": "E03",
+      "subject": "english",
+      "difficulty": "Hard",
+      "topic": "Command of Evidence",
+      "passage": "A literary critic argues that the narrator of a novel is not merely unreliable but deliberately manipulates readers' sympathies, selectively revealing information to make morally questionable actions appear justified.",
+      "prompt": "Which finding, if true, would most directly support the critic's argument?",
+      "choices": [
+        "The narrator frequently describes events that occurred before the narrator was born.",
+        "The novel's final chapter introduces a character whose motives remain ambiguous.",
+        "The narrator omits a crucial act of betrayal until after presenting extensive reasons to sympathize with its perpetrator.",
+        "Several characters offer contradictory accounts of events that the narrator never personally witnessed."
+      ],
+      "answer": 2,
+      "explanation": "論点は『信用できない語り手』ではなく『情報公開の順序を操作して読者の同情を誘導する語り手』。裏切りを隠し、先に加害者への共感を作るCが主張を直接裏づける。",
+      "steps": [
+        "主張を二つに分解：unreliable と deliberately manipulates。",
+        "必要な証拠は、意図的な情報の選別と読者への影響。",
+        "Cだけが情報の出す順序と共感の誘導を同時に示す。"
+      ],
+      "whyWrong": [
+        "知り得ない出来事を語るのは不確かさの証拠にはなるが、同情の操作ではない。",
+        "動機の曖昧さだけでは語り手の操作を示さない。",
+        "",
+        "証言の矛盾は信頼性に関係するが、意図的な同情の誘導は示さない。"
+      ],
+      "tip": "根拠問題では、主張の『強い部分』まで支えているかを確認する。"
+    },
+    {
+      "id": "E04",
+      "subject": "english",
+      "difficulty": "Easy",
+      "topic": "Transitions",
+      "passage": "Early models of language acquisition emphasized the importance of explicit instruction and correction. ______, more recent research has demonstrated that children can acquire complex grammatical patterns through exposure alone, even when adults rarely correct their speech.",
+      "prompt": "Which choice completes the text with the most logical transition?",
+      "choices": [
+        "Consequently",
+        "For example",
+        "Similarly",
+        "By contrast"
+      ],
+      "answer": 3,
+      "explanation": "古い理論は明示的指導・訂正を重視し、近年の研究は接触のみでも習得可能とする。二つの考え方を対比する By contrast が適切。",
+      "steps": [
+        "前半の主張：指導と訂正が重要。",
+        "後半の主張：接触だけでも習得できる。",
+        "同じ方向ではなく対照の関係。"
+      ],
+      "whyWrong": [
+        "Consequently は因果関係。",
+        "For example は例示。",
+        "Similarly は類似。",
+        ""
+      ],
+      "tip": "接続表現は意味の暗記より『前後の論理関係』で判断する。"
+    },
+    {
+      "id": "E05",
+      "subject": "english",
+      "difficulty": "Medium",
+      "topic": "Rhetorical Synthesis",
+      "passage": "A student has taken the following notes:\n• Scientist Laila Moreno studied two species of desert plants.\n• Species A has shallow roots that absorb water rapidly after rainfall.\n• Species B has deep roots that reach underground moisture reserves.\n• Both species survive prolonged periods of drought.",
+      "prompt": "The student wants to emphasize the different strategies by which the species achieve a similar outcome. Which choice best accomplishes this goal?",
+      "choices": [
+        "Although both species survive prolonged drought, Species A relies on rapid water absorption near the surface, whereas Species B accesses moisture deep underground.",
+        "Moreno studied two desert plant species, both of which can survive prolonged periods of drought.",
+        "Species A has shallow roots, and Species B has deep roots, making the two species interesting subjects for scientific research.",
+        "Desert plants have developed various adaptations, and Moreno's research contributes to our understanding of their environments."
+      ],
+      "answer": 0,
+      "explanation": "要求は『同じ結果（干ばつを生き延びる）に至る異なる戦略』の強調。Aは共通点と対照点を両方明示している。",
+      "steps": [
+        "設問が求める修辞的目的を先に抜き出す。",
+        "共通結果＝drought survival。",
+        "異なる手段＝shallow/rapid と deep/reserves。"
+      ],
+      "whyWrong": [
+        "",
+        "共通結果だけで違う戦略を示さない。",
+        "根の深さは比較するが、共通の結果がない。",
+        "一般論で具体的な対比がない。"
+      ],
+      "tip": "Notes問題は『情報が正しいか』だけでなく『指定された目的に合うか』で選ぶ。"
+    },
+    {
+      "id": "M01",
+      "subject": "math",
+      "difficulty": "Medium",
+      "topic": "Advanced Math",
+      "passage": "",
+      "prompt": "The quadratic equation x² − (k + 3)x + 3k = 0 has exactly one distinct real solution. What is the value of k?",
+      "choices": [
+        "−3",
+        "0",
+        "3",
+        "6"
+      ],
+      "answer": 2,
+      "explanation": "実数解が1つだけなので判別式 D=0。(k+3)²−4·1·3k=(k−3)²=0。よって k=3。",
+      "steps": [
+        "重解条件 D=b²−4ac=0 を使う。",
+        "D=(k+3)²−12k=k²−6k+9。",
+        "(k−3)²=0 より k=3。"
+      ],
+      "whyWrong": [
+        "k=−3 では D=36 で2解。",
+        "k=0 では D=9 で2解。",
+        "",
+        "k=6 では D=9 で2解。"
+      ],
+      "tip": "別解：x²−(k+3)x+3k=(x−3)(x−k)。同じ根になるには k=3。"
+    },
+    {
+      "id": "M02",
+      "subject": "math",
+      "difficulty": "Easy",
+      "topic": "Algebra",
+      "passage": "",
+      "prompt": "The system 3x + 2y = 12 and 6x + 4y = 2p has infinitely many solutions. What is p?",
+      "choices": [
+        "6",
+        "12",
+        "18",
+        "24"
+      ],
+      "answer": 1,
+      "explanation": "2本の直線が同一なら無数の解を持つ。第1式を2倍すると 6x+4y=24。したがって2p=24、p=12。",
+      "steps": [
+        "無数の解＝2式が同じ直線を表す。",
+        "3x+2y=12 を2倍する。",
+        "6x+4y=24 と 6x+4y=2p を比較。"
+      ],
+      "whyWrong": [
+        "p=6 だと右辺12で平行な別直線。",
+        "",
+        "p=18 だと右辺36で別直線。",
+        "p=24 だと右辺48で別直線。"
+      ],
+      "tip": "係数だけでなく定数項も同じ倍率か確かめる。"
+    },
+    {
+      "id": "M03",
+      "subject": "math",
+      "difficulty": "Medium",
+      "topic": "Problem Solving and Data Analysis",
+      "passage": "",
+      "prompt": "A population of bacteria increases by 20% every hour. After 3 hours, the population is 3,456. What was the initial population?",
+      "choices": [
+        "1,600",
+        "1,800",
+        "2,000",
+        "2,400"
+      ],
+      "answer": 2,
+      "explanation": "毎時20%増は毎時間×1.2。初期数をNとすると N×1.2³=3456。1.2³=1.728 より N=2000。",
+      "steps": [
+        "増加率20%は倍率1.20。",
+        "3時間後は N×(1.20)³。",
+        "3456÷1.728=2000。"
+      ],
+      "whyWrong": [
+        "1600×1.728=2764.8。",
+        "1800×1.728=3110.4。",
+        "",
+        "2400×1.728=4147.2。"
+      ],
+      "tip": "20%を3回足す（×1.6）のではなく、複利で×1.2³する。"
+    },
+    {
+      "id": "M04",
+      "subject": "math",
+      "difficulty": "Easy",
+      "topic": "Geometry and Trigonometry",
+      "passage": "",
+      "prompt": "A circle has center (2, −3) and passes through (6, 0). Which equation represents the circle?",
+      "choices": [
+        "(x − 2)² + (y + 3)² = 5",
+        "(x + 2)² + (y − 3)² = 25",
+        "(x − 2)² + (y + 3)² = 25",
+        "(x − 6)² + y² = 25"
+      ],
+      "answer": 2,
+      "explanation": "円の式は (x−h)²+(y−k)²=r²。中心(2,−3)から点(6,0)までの距離の2乗は 4²+3²=25。",
+      "steps": [
+        "中心(h,k)=(2,−3)を代入。",
+        "r²=(6−2)²+(0+3)²=25。",
+        "(x−2)²+(y+3)²=25。"
+      ],
+      "whyWrong": [
+        "右辺は半径5ではなく半径の2乗25。",
+        "中心が(−2,3)になる。",
+        "",
+        "中心が(6,0)になる。"
+      ],
+      "tip": "円の公式は符号が逆に現れる点と、右辺がr²である点に注意。"
+    },
+    {
+      "id": "M05",
+      "subject": "math",
+      "difficulty": "Hard",
+      "topic": "Advanced Math",
+      "passage": "",
+      "prompt": "For f(x)=(x−2)(x+4), f(a)=f(6). If a≠6, what is a?",
+      "choices": [
+        "−8",
+        "−6",
+        "−2",
+        "4"
+      ],
+      "answer": 0,
+      "explanation": "f(6)=4×10=40。f(a)=40 なので a²+2a−8=40、(a−6)(a+8)=0。a≠6よりa=−8。",
+      "steps": [
+        "最初にf(6)=40を求める。",
+        "(a−2)(a+4)=40 を展開し整理。",
+        "a²+2a−48=(a−6)(a+8)=0。"
+      ],
+      "whyWrong": [
+        "",
+        "f(−6)= (−8)(−2)=16。",
+        "f(−2)= (−4)(2)=−8。",
+        "f(4)=2×8=16。"
+      ],
+      "tip": "別解：放物線の対称軸はx=−1。6から軸まで7なので対称な点は−8。"
+    }
+  ]
+}
