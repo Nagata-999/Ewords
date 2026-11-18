@@ -1,6 +1,8 @@
 'use strict';
 
 const ITEMS=[
+  {id:'eyes-odd',name:'オッドアイ（青と金）',rarity:'SR',slot:'eyeStyle',kind:'oddEyes'},
+  {id:'hat-poop',name:'うんちの帽子',rarity:'R',slot:'hat',kind:'poopHat'},
   {"id":"fairy-wolf-hood","name":"森のオオカミフード","slot":"hat","kind":"wolfHood","rarity":"R","series":"fairytale"},
   {"id":"fairy-wolf-coat","name":"オオカミの毛皮コート","slot":"top","kind":"hoodie","color":"#707b86","accent":"#d4d7cf","rarity":"R","series":"fairytale"},
   {"id":"fairy-wolf-tail","name":"オオカミのしっぽ","slot":"back","kind":"wolfTail","rarity":"R","series":"fairytale"},
