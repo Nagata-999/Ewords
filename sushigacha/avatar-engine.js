@@ -69,7 +69,7 @@
     else if(kind==='sharp')art=path('M-7 -4L7 -1Q3 6 -4 3Z','#fff9ec','stroke-width="1.7"')+path('M-1 -2L3 -1L2 3H0Z','#538879','stroke="none"')+path('M-7 -4L7 -1','none','stroke-width="2.2"');
     else{
       const red=kind==='redEyes',starry=kind==='starEyes',ry=a.expression===3?8:kind==='anime'?7.5:6.5;
-      art=`<ellipse cx="0" cy="0" rx="6" ry="${ry}" fill="#fffdf5" stroke-width="1.3"/><ellipse cx="0" cy="1" rx="4.1" ry="${ry-1}" fill="${red?'#bb3b48':starry?'#655690':kind==='oddEyes'&&(side?direction!=='left':sign===-1)?'#d9a837':'#487d9e'}" stroke="none"/>`;
+      art=`<ellipse cx="0" cy="0" rx="6" ry="${ry}" fill="#fffdf5" stroke-width="1.3"/><ellipse cx="0" cy="1" rx="4.1" ry="${ry-1}" fill="${kind==='scarletEyes'?'#e32636':kind==='oddRedGreen'?((side?direction!=='left':sign===-1)?'#36a775':'#c83848'):red?'#bb3b48':starry?'#655690':kind==='oddEyes'&&(side?direction!=='left':sign===-1)?'#d9a837':'#487d9e'}" stroke="none"/>`;
       art+=starry?star(0,1,4.2,'#ffe294').replace('/>',' stroke="none"/>'):circle(0,1,2.1,red?'#522931':'#243e53','stroke="none"');
       art+=circle(-1.8,-2.7,1.8,'#fffdf5','stroke="none"')+circle(2,3.8,.85,'#fffdf5','stroke="none"')+path(`M-6 -3Q-2 -${ry+2} 5 -4L7 -5`,'none','stroke-width="1.8"');
     }
@@ -412,7 +412,7 @@ function renderPixel(a,o={}){
  for(const x of side?[31]:[18,28]){
    if(blink||a.expression===4||a.eyes===3&&!ek)head+=r(x-1,21,4,1,ink);
    else if(happy||a.eyes===2&&!ek)head+=p(`M${x-1} 21v-1h1v-1h2v1h1v1h-1v-1h-2v1Z`,ink);
-   else if(ek){const ec=ek==='redEyes'?'#bb3b48':ek==='starEyes'?'#655690':ek==='oddEyes'&&x>24&&o.direction!=='left'?'#d9a837':'#487d9e';head+=r(x-1,18,4,5,ink)+r(x,19,2,3,ec)+r(x,19,1,1,white);if(ek==='starEyes')head+=r(x,20,2,1,'#ffe294');if(ek==='sharp')head+=r(x-1,18,4,2,skin);}
+   else if(ek){const ec=ek==='scarletEyes'?'#e32636':ek==='oddRedGreen'?(x>24&&o.direction!=='left'?'#36a775':'#c83848'):ek==='redEyes'?'#bb3b48':ek==='starEyes'?'#655690':ek==='oddEyes'&&x>24&&o.direction!=='left'?'#d9a837':'#487d9e';head+=r(x-1,18,4,5,ink)+r(x,19,2,3,ec)+r(x,19,1,1,white);if(ek==='starEyes')head+=r(x,20,2,1,'#ffe294');if(ek==='sharp')head+=r(x-1,18,4,2,skin);}
    else if([1,4,6].includes(a.eyes))head+=p(a.eyes===4?`M${x-1} 19h2v1h2v1h-4Z`:`M${x-1} 20h2v-1h2v2h-4Z`,ink);else head+=r(x,19,a.eyes===5?1:2,a.expression===3?4:3,ink);
    if([2,5].includes(a.expression))head+=r(x-1,17,3,1,ink);
  }
