@@ -1,6 +1,23 @@
 'use strict';
 
 const ITEMS=[
+  {"id":"fairy-wolf-hood","name":"森のオオカミフード","slot":"hat","kind":"wolfHood","rarity":"R","series":"fairytale"},
+  {"id":"fairy-wolf-coat","name":"オオカミの毛皮コート","slot":"top","kind":"hoodie","color":"#707b86","accent":"#d4d7cf","rarity":"R","series":"fairytale"},
+  {"id":"fairy-wolf-tail","name":"オオカミのしっぽ","slot":"back","kind":"wolfTail","rarity":"R","series":"fairytale"},
+  {"id":"fairy-alice-bow","name":"アリスのリボン","slot":"hat","kind":"aliceBow","rarity":"R","series":"fairytale"},
+  {"id":"fairy-alice-dress","name":"アリスのエプロンドレス","slot":"top","kind":"chef","color":"#74b5d7","accent":"#fff4dd","rarity":"R","series":"fairytale"},
+  {"id":"fairy-rabbit-ears","name":"白うさぎの耳","slot":"hat","kind":"bunnyEars","rarity":"R","series":"fairytale"},
+  {"id":"fairy-rabbit-vest","name":"白うさぎの時計係ベスト","slot":"top","kind":"explorer","color":"#f7ecd3","accent":"#b45d59","rarity":"R","series":"fairytale"},
+  {"id":"fairy-pocket-watch","name":"白うさぎの懐中時計","slot":"hand","kind":"pocketWatch","rarity":"SR","series":"fairytale"},
+  {"id":"fairy-witch-hat","name":"月夜の魔女帽","slot":"hat","kind":"moonHat","rarity":"R","series":"fairytale"},
+  {"id":"fairy-witch-robe","name":"月夜の魔女ローブ","slot":"top","kind":"cosmic","color":"#453e69","accent":"#b8cda0","rarity":"R","series":"fairytale"},
+  {"id":"fairy-witch-broom","name":"月夜のほうき","slot":"hand","kind":"broom","rarity":"SR","series":"fairytale"},
+  {"id":"cinema-bronze-helmet","name":"青銅の守護者ヘルム","slot":"hat","kind":"bronzeHelm","rarity":"SR","series":"cinema"},
+  {"id":"cinema-bronze-armor","name":"青銅の守護者アーマー","slot":"top","kind":"apocalypse","color":"#aa7951","accent":"#52b6aa","rarity":"R","series":"cinema"},
+  {"id":"cinema-bronze-shield","name":"青銅の守護者シールド","slot":"hand","kind":"bronzeShield","rarity":"SR","series":"cinema"},
+  {"id":"cinema-thread-mask","name":"月糸の旅人マスク","slot":"hat","kind":"threadMask","rarity":"R","series":"cinema"},
+  {"id":"cinema-thread-suit","name":"月糸の旅人スーツ","slot":"top","kind":"sailor","color":"#76559c","accent":"#f2ecd9","rarity":"R","series":"cinema"},
+  {"id":"cinema-thread-spool","name":"月糸のリール","slot":"hand","kind":"threadSpool","rarity":"SR","series":"cinema"},
   {id:'fairy-red-hood',name:'赤ずきんの頭巾',rarity:'R',series:'fairytale',slot:'hat',kind:'redHood'},
   {id:'fairy-red-robe',name:'赤ずきんのローブ',rarity:'R',series:'fairytale',slot:'top',kind:'redRobe',color:'#b63448',accent:'#f4deb0'},
   {id:'fairy-basket',name:'森のおつかいかご',rarity:'N',series:'fairytale',slot:'hand',kind:'basket'},
@@ -164,6 +181,7 @@ function avatarSVG(value=DEFAULT_AVATAR,previewId){
   if(accessory==='star')accSvg='<path d="M120 162l5 10 11 2-8 8 2 11-10-5-10 5 2-11-8-8 11-2Z" fill="#e4bd55" stroke="#8b7233" stroke-width="2"/><path d="M120 131V162" stroke="#8b7233" stroke-width="2"/>';
   return `<svg viewBox="0 0 240 280" role="img" aria-label="アバター"><g>${wings}${backHair}${cape}${legs}${bottomSvg}${body}${detail}<ellipse cx="120" cy="90" rx="48" ry="47" fill="${skin}" stroke="#354b47" stroke-width="3"/>${eyes}${mouth}${frontHair}${hatSvg}${accSvg}</g></svg>`;
 }
+
 
 
 
