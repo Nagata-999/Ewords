@@ -60,7 +60,7 @@
   const group=(s,t='',attr='')=>`<g${t?` transform="${t}"`:''} ${attr}>${s}</g>`;
   const star=(x,y,r=8,fill='#e8b557')=>{let d='';for(let i=0;i<10;i++){let t=(i*36-90)*Math.PI/180,rr=i%2?r*.46:r;d+=(i?'L':'M')+(x+Math.cos(t)*rr).toFixed(2)+' '+(y+Math.sin(t)*rr).toFixed(2);}return path(d+'Z',fill);};
   const circle=(x,y,r,fill,extra='')=>{const m=material(fill);return `<circle cx="${x}" cy="${y}" r="${r}" fill="${m?`url(#${m.id})`:fill}" ${extra}/>`;};
-  function collectibleEye(a,x,sign,side,blink,happy){
+  function collectibleEye(a,x,sign,side,blink,happy,direction){
     const kind=item(a.eyeStyle)?.kind;
     let art='';
     if(blink)art=path('M-5 0H5','none','stroke-width="2"');
@@ -69,7 +69,7 @@
     else if(kind==='sharp')art=path('M-7 -4L7 -1Q3 6 -4 3Z','#fff9ec','stroke-width="1.7"')+path('M-1 -2L3 -1L2 3H0Z','#538879','stroke="none"')+path('M-7 -4L7 -1','none','stroke-width="2.2"');
     else{
       const red=kind==='redEyes',starry=kind==='starEyes',ry=a.expression===3?8:kind==='anime'?7.5:6.5;
-      art=`<ellipse cx="0" cy="0" rx="6" ry="${ry}" fill="#fffdf5" stroke-width="1.3"/><ellipse cx="0" cy="1" rx="4.1" ry="${ry-1}" fill="${red?'#bb3b48':starry?'#655690':'#487d9e'}" stroke="none"/>`;
+      art=`<ellipse cx="0" cy="0" rx="6" ry="${ry}" fill="#fffdf5" stroke-width="1.3"/><ellipse cx="0" cy="1" rx="4.1" ry="${ry-1}" fill="${red?'#bb3b48':starry?'#655690':kind==='oddEyes'&&(side?direction!=='left':sign===-1)?'#d9a837':'#487d9e'}" stroke="none"/>`;
       art+=starry?star(0,1,4.2,'#ffe294').replace('/>',' stroke="none"/>'):circle(0,1,2.1,red?'#522931':'#243e53','stroke="none"');
       art+=circle(-1.8,-2.7,1.8,'#fffdf5','stroke="none"')+circle(2,3.8,.85,'#fffdf5','stroke="none"')+path(`M-6 -3Q-2 -${ry+2} 5 -4L7 -5`,'none','stroke-width="1.8"');
     }
@@ -197,6 +197,7 @@
   }
 
   function hat(kind,back,side){
+    if(kind==='poopHat')return path('M42 38Q34 29 49 23Q43 13 65 9Q63 2 81 1Q91 2 85 0Q106 4 101 13Q119 16 112 26Q128 31 119 40Z','#925c38')+path('M51 24Q79 29 110 25M65 10Q81 16 100 13','none','stroke="#c9905c" stroke-width="3"');
     if(kind==='redHood')return path(back?'M37 70Q31 24 73 18L88 18Q127 29 123 72L127 102L108 110L80 102L52 110L34 100Z':side?'M39 95L36 54Q37 25 72 19Q102 20 115 46L119 60L106 57Q101 36 80 38Q58 41 58 67L65 92L82 101L64 108L39 104Z':'M34 96L38 49Q42 19 80 18Q118 19 122 49L126 96L108 107L100 96L108 72Q113 39 80 36Q47 39 52 72L60 96L52 107Z','#b63448')+path(back?'M79 27L79 91M45 95L63 99M99 99L116 94':side?'M43 87L44 54Q45 31 73 26':'M44 78L44 51Q49 25 80 25Q111 25 116 51L116 78','none','stroke="#e06462" stroke-width="3"');
     if(kind==='bunnyEars')return path('M48 43Q30 -1 48 3Q61 6 64 39M95 39Q100 -2 116 9Q124 26 110 48','#fff2f6')+path('M47 12Q43 26 55 39M111 16Q114 28 105 39','none','stroke="#efa5c2" stroke-width="7"')+path('M45 44Q80 32 114 45','none','stroke="#f4bace" stroke-width="8"');
     if(kind==='catEars')return path('M44 47L43 10L69 34M93 34L118 10L116 48','#c7b6ed')+path('M49 34L49 21L60 33M101 33L112 21L111 36','#efacd0');
@@ -369,6 +370,7 @@
     if(a.top==='fairy-alice-dress')art+=p('M17 42H31L35 51L30 53H18L13 51Z','#74b5d7')+p('M20 42H28L30 51H18Z','#fff4dd');
     if(item(a.back)?.kind==='wolfTail')art+=p(side?'M17 42L8 39L5 45L8 50L17 48Z':'M28 43L38 39L43 43L40 49L30 50Z','#707b86');
     if(hk==='wolfHood')art+=p(back?'M12 29V7L19 11L24 8L29 11L36 7V29L31 33H17Z':side?'M12 28V6L19 11H28L34 7V15L29 12H22L18 16V24L22 29L18 32Z':'M12 29V6L19 11H29L36 6V29L32 32L30 27L33 23V16L29 13H19L15 16V23L18 28L16 32Z','#707b86');
+    if(hk==='poopHat')art+=p('M11 12V10H14V7H19V4H23V1H26V3H28V6H32V9H35V13H11Z','#925c38')+r(15,9,16,1,'#c9905c')+r(20,6,8,1,'#c9905c');
     if(hk==='aliceBow')art+=p('M22 10L13 5V14L22 12L30 15V5Z','#354459')+r(21,9,3,4,'#f2ecd9');
     if(hk==='moonHat')art+=p('M8 15H39V12H33L29 3L22 1L16 12H8Z','#453e69')+p('M23 4H27V5H25V8H28V9H24V8H23Z','#e7cf8c');
     if(hk==='bronzeHelm')art+=p(back?'M15 8H32V12H35V27H31V30H17V27H13V13Z':side?'M15 8H30V12H34V17H29V15H21V20H19V26H25V29H17V27H13V13Z':'M15 8H32V12H35V27H31V30H28V25H32V17H16V25H20V30H17V27H13V13Z','#aa7951')+r(side?15:22,10,side?4:5,4,'#52b6aa');
@@ -410,7 +412,7 @@ function renderPixel(a,o={}){
  for(const x of side?[31]:[18,28]){
    if(blink||a.expression===4||a.eyes===3&&!ek)head+=r(x-1,21,4,1,ink);
    else if(happy||a.eyes===2&&!ek)head+=p(`M${x-1} 21v-1h1v-1h2v1h1v1h-1v-1h-2v1Z`,ink);
-   else if(ek){const ec=ek==='redEyes'?'#bb3b48':ek==='starEyes'?'#655690':'#487d9e';head+=r(x-1,18,4,5,ink)+r(x,19,2,3,ec)+r(x,19,1,1,white);if(ek==='starEyes')head+=r(x,20,2,1,'#ffe294');if(ek==='sharp')head+=r(x-1,18,4,2,skin);}
+   else if(ek){const ec=ek==='redEyes'?'#bb3b48':ek==='starEyes'?'#655690':ek==='oddEyes'&&x>24&&o.direction!=='left'?'#d9a837':'#487d9e';head+=r(x-1,18,4,5,ink)+r(x,19,2,3,ec)+r(x,19,1,1,white);if(ek==='starEyes')head+=r(x,20,2,1,'#ffe294');if(ek==='sharp')head+=r(x-1,18,4,2,skin);}
    else if([1,4,6].includes(a.eyes))head+=p(a.eyes===4?`M${x-1} 19h2v1h2v1h-4Z`:`M${x-1} 20h2v-1h2v2h-4Z`,ink);else head+=r(x,19,a.eyes===5?1:2,a.expression===3?4:3,ink);
    if([2,5].includes(a.expression))head+=r(x-1,17,3,1,ink);
  }
@@ -527,7 +529,7 @@ function renderPixel(a,o={}){
       let features='';
       for(const [index,x] of eyes.entries()){
         const sign=side?1:index===0?1:-1;
-        if(a.eyeStyle)features+=collectibleEye(a,x,sign,side,blink,happy);
+        if(a.eyeStyle)features+=collectibleEye(a,x,sign,side,blink,happy,direction);
         else if(blink)features+=path(`M${x-3} 70H${x+3}`,'none','stroke-width="2.2"');
         else if(happy||a.expression===1)features+=path(`M${x-4} 71Q${x} 64 ${x+4} 71`,'none','stroke-width="2.3"');
         else if(sleepy)features+=path(`M${x-3} 69Q${x} 73 ${x+3} 69`,'none','stroke-width="2.3"');
