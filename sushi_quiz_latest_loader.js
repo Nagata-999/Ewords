@@ -2,7 +2,7 @@
 (() => {
  if(window.__sushiQuizLatestLoaderStarted) return;
  window.__sushiQuizLatestLoaderStarted=true;
- const V='20261118-global-issues-50';
+ const V='20261118-global-issues-revised-50';
  const load=src=>new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src;s.async=false;s.onload=resolve;s.onerror=reject;document.head.appendChild(s);});
  (async()=>{
    for(const file of ['sushi_quiz_modern_world.js','sushi_quiz_modern_world_2.js','sushi_quiz_current_companies.js','sushi_quiz_movies.js','sushi_quiz_video_games.js','sushi_quiz_internet_pop_culture.js','sushi_quiz_tv_streaming.js','sushi_quiz_disney_extra.js','sushi_quiz_anime_manga_extra.js','sushi_quiz_language_idioms.js','sushi_quiz_global_issues_sdgs.js']){
