@@ -1,0 +1,19 @@
+name: Werewolf online
+on:
+  pull_request:
+    paths:
+      - 'werewolf.html'
+      - 'shared/werewolf-*'
+      - 'cloudflare/werewolf/**'
+      - 'tests/werewolf-online.test.mjs'
+      - '.github/workflows/werewolf-online.yml'
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: node --test tests/werewolf-online.test.mjs
