@@ -1,2 +1,116 @@
 <!doctype html><html lang="ja"><head>
-<meta name="robots" content="noindex,follow"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Teacher | すし単｜作文添削</title><link rel="stylesheet" href="styles.css"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/sushigacha/site-taskbar.js?v=20261008-11"></script></head><body><header><div><strong>すし単｜作文添削</strong><span>Teacher Dashboard</span></div><a href="index.html">Student</a><nav aria-label="サイト内ナビゲーション"><a href="../index.html">🍣 すし単へ戻る</a></nav></header><main class="wrap"><section id="loginCard" class="card"><p class="eyebrow">TEACHER LOGIN</p><h1>先生ログイン</h1><form id="loginForm"><label>Email<input id="loginEmail" type="email" autocomplete="username" required></label><label>Password<input id="loginPassword" type="password" autocomplete="current-password" required></label><button id="loginBtn" type="submit">ログイン</button><p id="loginMessage" class="message"></p></form></section><section id="dashboard" class="card hidden"><div class="row"><div><p class="eyebrow">TEACHER DASHBOARD</p><h1>作文管理</h1><p>自分が作成した課題と、その課題への提出作文を管理します。</p></div><div><span id="teacherEmail"></span> <button class="secondary" id="logout">ログアウト</button></div></div><section class="card" style="margin:18px 0"><p class="eyebrow">ASSIGNMENTS</p><div class="row"><h2>課題管理</h2><button id="toggleNewAssignment">＋ 新しい課題</button></div><form id="assignmentForm" class="hidden"><label>課題名<input id="newAssignmentTitle" required placeholder="例：IELTS Task 2 #1"></label><label>問題文<textarea id="newAssignmentPrompt" rows="5" placeholder="問題文・指示文を入力"></textarea></label><label><input id="newAssignmentActive" type="checkbox" checked> 生徒に公開する</label><div class="row"><button type="submit">課題を作成</button><span id="assignmentMessage"></span></div></form><div id="assignmentList"></div></section><div class="toolbar"><select id="assignmentFilter"><option value="">全課題</option></select><input id="classFilter" placeholder="クラス (例 2-M)"><select id="statusFilter"><option value="">全状態</option><option value="submitted">未添削</option><option value="reviewed">添削済</option><option value="returned">返却済</option></select><button id="reload">更新</button></div><div class="stats"><div class="stat">提出<b id="total">0</b></div><div class="stat">未添削<b id="pending">0</b></div><div class="stat">添削済<b id="reviewed">0</b></div><div class="stat">返却済<b id="returned">0</b></div></div><section class="card" style="margin:18px 0"><p class="eyebrow">BULK AI REVIEW</p><h2>AI一括添削</h2><p>現在の絞り込み条件のうち「未添削」の作文をまとめてChatGPTへ渡せます。</p><div class="row"><button id="copyAI">未添削をAI用にコピー</button><span id="copyMessage"></span></div><label style="margin-top:16px">ChatGPTから返ったJSONを貼り付け<textarea id="aiImport" rows="10"></textarea></label><div class="row"><button id="importAI">AI結果を一括反映</button><span id="importMessage"></span></div></section><div class="tablewrap"><table><thead><tr><th>課題</th><th>クラス</th><th>番号</th><th>氏名</th><th>Words</th><th>状態</th><th>提出日時</th></tr></thead><tbody id="rows"></tbody></table></div></section></main><div id="modal" class="modal hidden"><div class="modalbox"><div class="row"><h2 id="studentTitle"></h2><button class="secondary" id="close">閉じる</button></div><p id="meta"></p><h3>原文</h3><div id="essayView" class="essayview"></div><h3>修正版</h3><div id="correctedView" class="essayview"></div><h3>評価</h3><div class="rubric"><label>Content<input id="contentScore" type="number" min="0" max="9"></label><label>Organization<input id="organizationScore" type="number" min="0" max="9"></label><label>Vocabulary<input id="vocabularyScore" type="number" min="0" max="9"></label><label>Grammar<input id="grammarScore" type="number" min="0" max="9"></label></div><label>コメント<textarea id="feedback" rows="6"></textarea></label><div class="row"><span id="saveMessage"></span><div><button class="secondary" id="saveReview">添削を保存</button> <button id="returnReview">返却済みにする</button></div></div></div></div><script src="config.js"></script><script src="teacher.js"></script></body></html>
+<meta name="robots" content="noindex,follow"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Teacher | すし単｜作文添削</title><link rel="stylesheet" href="styles.css"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script defer src="/sushigacha/site-taskbar.js?v=20261008-11"></script></head><body><header><div><strong>すし単｜作文添削</strong><span>Teacher Dashboard</span></div><a href="index.html">Student</a><nav aria-label="サイト内ナビゲーション"><a href="../index.html">🍣 すし単へ戻る</a></nav></header><main class="wrap"><section id="loginCard" class="card"><p class="eyebrow">TEACHER LOGIN</p><h1>先生ログイン</h1><form id="loginForm"><label>Email<input id="loginEmail" type="email" autocomplete="username" required></label><label>Password<input id="loginPassword" type="password" autocomplete="current-password" required></label><button id="loginBtn" type="submit">ログイン</button><p id="loginMessage" class="message"></p></form>
+<details>
+  <summary>パスワードを忘れた場合</summary>
+  <form id="requestRecovery">
+    <label>登録済みメールアドレス<input name="email" type="email" autocomplete="email" required></label>
+    <button type="submit">再設定メールを送る</button>
+    <p class="message" role="status"></p>
+  </form>
+</details>
+</section>
+<section id="recoveryCard" class="card hidden">
+  <h1>教師パスワードの再設定</h1>
+  <p id="recoveryMessage" class="message" role="status">再設定リンクを確認しています…</p>
+  <form id="setPassword" class="hidden">
+    <label>新しいパスワード<input name="password" type="password" autocomplete="new-password" required></label>
+    <button type="submit">パスワードを変更</button>
+  </form>
+  <a href="/writing/teacher">先生ログインに戻る</a>
+</section><section id="dashboard" class="card hidden"><div class="row"><div><p class="eyebrow">TEACHER DASHBOARD</p><h1>作文管理</h1><p>自分が作成した課題と、その課題への提出作文を管理します。</p></div><div><span id="teacherEmail"></span> <button class="secondary" id="logout">ログアウト</button></div></div><section class="card" style="margin:18px 0"><p class="eyebrow">ASSIGNMENTS</p><div class="row"><h2>課題管理</h2><button id="toggleNewAssignment">＋ 新しい課題</button></div><form id="assignmentForm" class="hidden"><label>課題名<input id="newAssignmentTitle" required placeholder="例：IELTS Task 2 #1"></label><label>問題文<textarea id="newAssignmentPrompt" rows="5" placeholder="問題文・指示文を入力"></textarea></label><label><input id="newAssignmentActive" type="checkbox" checked> 生徒に公開する</label><div class="row"><button type="submit">課題を作成</button><span id="assignmentMessage"></span></div></form><div id="assignmentList"></div></section><div class="toolbar"><select id="assignmentFilter"><option value="">全課題</option></select><input id="classFilter" placeholder="クラス (例 2-M)"><select id="statusFilter"><option value="">全状態</option><option value="submitted">未添削</option><option value="reviewed">添削済</option><option value="returned">返却済</option></select><button id="reload">更新</button></div><div class="stats"><div class="stat">提出<b id="total">0</b></div><div class="stat">未添削<b id="pending">0</b></div><div class="stat">添削済<b id="reviewed">0</b></div><div class="stat">返却済<b id="returned">0</b></div></div><section class="card" style="margin:18px 0"><p class="eyebrow">BULK AI REVIEW</p><h2>AI一括添削</h2><p>現在の絞り込み条件のうち「未添削」の作文をまとめてChatGPTへ渡せます。</p><div class="row"><button id="copyAI">未添削をAI用にコピー</button><span id="copyMessage"></span></div><label style="margin-top:16px">ChatGPTから返ったJSONを貼り付け<textarea id="aiImport" rows="10"></textarea></label><div class="row"><button id="importAI">AI結果を一括反映</button><span id="importMessage"></span></div></section><div class="tablewrap"><table><thead><tr><th>課題</th><th>クラス</th><th>番号</th><th>氏名</th><th>Words</th><th>状態</th><th>提出日時</th></tr></thead><tbody id="rows"></tbody></table></div></section></main><div id="modal" class="modal hidden"><div class="modalbox"><div class="row"><h2 id="studentTitle"></h2><button class="secondary" id="close">閉じる</button></div><p id="meta"></p><h3>原文</h3><div id="essayView" class="essayview"></div><h3>修正版</h3><div id="correctedView" class="essayview"></div><h3>評価</h3><div class="rubric"><label>Content<input id="contentScore" type="number" min="0" max="9"></label><label>Organization<input id="organizationScore" type="number" min="0" max="9"></label><label>Vocabulary<input id="vocabularyScore" type="number" min="0" max="9"></label><label>Grammar<input id="grammarScore" type="number" min="0" max="9"></label></div><label>コメント<textarea id="feedback" rows="6"></textarea></label><div class="row"><span id="saveMessage"></span><div><button class="secondary" id="saveReview">添削を保存</button> <button id="returnReview">返却済みにする</button></div></div></div></div><script src="config.js"></script>
+<script>
+(() => {
+  const config = window.WRITING_MANAGER_CONFIG;
+  const params = new URLSearchParams(location.hash.slice(1));
+  const recovery = params.get('type') === 'recovery';
+  const linkError = params.has('error_code') || params.has('error');
+  const teacherUrl = 'https://sushitan.net/writing/teacher';
+  const createClient = detectSessionInUrl => supabase.createClient(config.supabaseUrl, config.supabaseAnonKey, {
+    auth: { detectSessionInUrl, persistSession: false, autoRefreshToken: false, storageKey: 'sushitan-writing-password-recovery' }
+  });
+
+  if (!recovery && !linkError) {
+    const script = document.createElement('script');
+    script.src = 'teacher.js';
+    document.body.append(script);
+    const form = document.querySelector('#requestRecovery');
+    const message = form.querySelector('[role="status"]');
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      const button = form.querySelector('button');
+      button.disabled = true;
+      message.textContent = '送信中…';
+      try {
+        const { error } = await createClient(false).auth.resetPasswordForEmail(
+          form.elements.email.value.trim(), { redirectTo: teacherUrl }
+        );
+        if (error) throw error;
+        message.textContent = '再設定メールをリクエストしました。登録済みのメールの受信箱を確認してください。';
+      } catch {
+        message.textContent = '送信できませんでした。時間をおいて再試行してください。';
+      } finally {
+        button.disabled = false;
+      }
+    });
+    return;
+  }
+
+  document.querySelector('#loginCard').classList.add('hidden');
+  document.querySelector('#recoveryCard').classList.remove('hidden');
+  const message = document.querySelector('#recoveryMessage');
+  const form = document.querySelector('#setPassword');
+  const invalidLink = '再設定リンクが無効か期限切れです。先生ログイン画面から再設定メールを送り直してください。';
+  if (linkError || !params.has('access_token') || !params.has('refresh_token')) {
+    history.replaceState(null, '', location.pathname + location.search);
+    message.textContent = invalidLink;
+    return;
+  }
+
+  const client = createClient(true);
+  let verified = false;
+  const clearLink = () => history.replaceState(null, '', location.pathname + location.search);
+  const { data: { subscription } } = client.auth.onAuthStateChange((event, session) => {
+    if (event !== 'PASSWORD_RECOVERY' || !session) return;
+    verified = true;
+    subscription.unsubscribe();
+    clearLink();
+    message.textContent = '新しいパスワードを入力してください。';
+    form.classList.remove('hidden');
+  });
+  client.auth.getSession().then(({ data, error }) => {
+    if (!error && data.session) return;
+    subscription.unsubscribe();
+    clearLink();
+    message.textContent = invalidLink;
+  }).catch(() => {
+    subscription.unsubscribe();
+    clearLink();
+    message.textContent = invalidLink;
+  });
+
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!verified) return;
+    const button = form.querySelector('button');
+    button.disabled = true;
+    try {
+      const { error } = await client.auth.updateUser({ password: form.elements.password.value });
+      if (error) {
+        message.textContent = error.code === 'weak_password' ? 'より推測されにくいパスワードを入力してください。'
+          : error.code === 'same_password' ? '現在とは異なるパスワードを入力してください。'
+          : '変更できませんでした。再設定リンクと入力内容を確認してください。';
+        return;
+      }
+      verified = false;
+      form.reset();
+      form.classList.add('hidden');
+      message.textContent = 'パスワードを変更しました。先生ログイン画面でログインしてください。';
+      await client.auth.signOut({ scope: 'local' });
+    } catch {
+      if (verified) message.textContent = '通信に失敗しました。もう一度お試しください。';
+    } finally {
+      button.disabled = false;
+    }
+  });
+})();
+</script></body></html>
